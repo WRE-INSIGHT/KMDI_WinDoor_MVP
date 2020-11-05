@@ -13,6 +13,14 @@ namespace PresentationLayer.Views
 {
     public partial class MainView : Form, IMainView
     {
+        public string Nickname
+        {
+            set
+            {
+                tsLbl_Welcome.Text = "Welcome, " + value;
+            }
+        }
+
         public event EventHandler MainViewLoadEventRaised;
         public MainView()
         {

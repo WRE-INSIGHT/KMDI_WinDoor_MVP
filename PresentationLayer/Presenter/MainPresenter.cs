@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ModelLayer.Model.User;
 
 namespace PresentationLayer.Presenter
 {
     public class MainPresenter : IMainPresenter
     {
         IMainView _mainView;
+        private IUserModel _userModel;
 
         public MainPresenter(IMainView mainView)
         {
@@ -20,7 +22,10 @@ namespace PresentationLayer.Presenter
         {
             return _mainView;
         }
-
+        public void SetUserModel(IUserModel userModel)
+        {
+            _userModel = userModel;
+        }
         private void SubscribeToEventsSetup()
         {
             _mainView.MainViewLoadEventRaised += new EventHandler(OnMainViewLoadEventRaised);
@@ -28,7 +33,8 @@ namespace PresentationLayer.Presenter
 
         public void OnMainViewLoadEventRaised(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Hello World");
+            _mainView.Nickname = _userModel.Nickname;
         }
+
     }
 }

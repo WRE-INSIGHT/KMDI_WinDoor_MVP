@@ -86,6 +86,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
@@ -107,11 +108,57 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\AddNew_Door.png" />
+    <Content Include="Resources\AddNew_Window.png" />
+    <Content Include="Resources\animat-cloudsync.gif" />
+    <Content Include="Resources\box_important_40px.png" />
+    <Content Include="Resources\cancel_30px.png" />
+    <Content Include="Resources\cancel_40px.png" />
+    <Content Include="Resources\checked_40px.png" />
+    <Content Include="Resources\cloud_checked_40px.png" />
+    <Content Include="Resources\cloud_checked_40px2.png" />
+    <Content Include="Resources\cloud_storage_30px.png" />
+    <Content Include="Resources\cloud_storage_40px.png" />
+    <Content Include="Resources\cloud_sync_40px.png" />
+    <Content Include="Resources\delete_file_30px.png" />
+    <Content Include="Resources\file_40px.png" />
+    <Content Include="Resources\file_80px.png" />
+    <Content Include="Resources\icons8_closed_window.ico" />
+    <Content Include="Resources\icons8_closed_window_64.png" />
+    <Content Include="Resources\K&amp;M_logo_official_2018-1.png" />
+    <Content Include="Resources\loading2.gif" />
+    <Content Include="Resources\loading_trans.gif" />
+    <Content Include="Resources\minus2_104px.png" />
+    <Content Include="Resources\minus_104px.png" />
+    <Content Include="Resources\Mullion.png" />
+    <Content Include="Resources\MultiplePanel.png" />
+    <Content Include="Resources\MultiplePanel1.png" />
+    <Content Include="Resources\MultiplePanelSliding.png" />
+    <Content Include="Resources\plus2_104px.png" />
+    <Content Include="Resources\plus_104px.png" />
+    <Content Include="Resources\redo_30px.png" />
+    <Content Include="Resources\refresh_30px.png" />
+    <Content Include="Resources\SinglePanel.png" />
+    <Content Include="Resources\Transom.png" />
+    <Content Include="Resources\undo_30px.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonComponents\CommonComponents.csproj">
       <Project>{2af3ca7c-6526-430e-99d8-cad6e29cb83b}</Project>
       <Name>CommonComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelLayer\ModelLayer.csproj">
+      <Project>{ba9438ac-96c8-4b54-9bc4-0422acb011d0}</Project>
+      <Name>ModelLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QueryLayer\QueryLayer.csproj">
+      <Project>{e0bedb22-7bd8-4ac5-a44c-f197d66cc4d3}</Project>
+      <Name>QueryLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
+      <Project>{f1988357-36f0-43b6-a1ea-ee16dfbbca03}</Project>
+      <Name>ServiceLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

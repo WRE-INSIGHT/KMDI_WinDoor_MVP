@@ -17,7 +17,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
             _sqlConString = sqlconstr;
         }
 
-        public UserModel Login(UserModel userModel)
+        public UserModel Login(IUserLoginModel userLoginModel)
         {
             UserModel user = new UserModel();
             try
@@ -33,19 +33,26 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
                             sqlcmd.Transaction = sqltrans;
                             sqlcmd.CommandText = "stp_Login";
                             sqlcmd.CommandType = CommandType.StoredProcedure;
-                            sqlcmd.Parameters.AddWithValue("@UserName", userModel.Username);
-                            sqlcmd.Parameters.AddWithValue("@Password", Encrypt(userModel.Password));
+                            sqlcmd.Parameters.AddWithValue("@UserName", userLoginModel.Username);
+                            sqlcmd.Parameters.AddWithValue("@Password", Encrypt(userLoginModel.Password));
                             using (SqlDataReader rdr = sqlcmd.ExecuteReader())
                             {
-                                while (rdr.Read())
+                                if (!rdr.HasRows)
                                 {
-                                    user.UserID = rdr.GetInt32(0);
-                                    user.Fullname = rdr.GetString(1);
-                                    user.Nickname = rdr.GetString(2);
-                                    user.AccountType = rdr.GetString(3);
-                                    user.Username = rdr.GetString(4);
-                                    user.Password = rdr.GetString(5);
-                                    user.ProfilePath = rdr.GetString(6);
+                                    user = null;
+                                }
+                                else
+                                {
+                                    while (rdr.Read())
+                                    {
+                                        user.UserID = rdr.GetInt32(0);
+                                        user.Fullname = rdr.GetString(1);
+                                        user.Nickname = rdr.GetString(2);
+                                        user.AccountType = rdr.GetString(3);
+                                        user.Username = rdr.GetString(4);
+                                        user.Password = rdr.GetString(5);
+                                        user.ProfilePath = rdr.GetString(6);
+                                    }
                                 }
                             }
                         }

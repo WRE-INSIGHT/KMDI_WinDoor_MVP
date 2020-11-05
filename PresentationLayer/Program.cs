@@ -7,6 +7,11 @@ using Unity;
 using Unity.Lifetime;
 using PresentationLayer.Presenter;
 using PresentationLayer.Views;
+using QueryLayer.DataAccess.Repositories.Specific.User;
+using ServiceLayer.Services.UserServices;
+using ServiceLayer.CommonServices;
+using ModelLayer.Model.User;
+using Unity.Injection;
 
 namespace PresentationLayer
 {
@@ -26,7 +31,13 @@ namespace PresentationLayer
                 .RegisterType<ILoginView, LoginView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ILoginPresenter, LoginPresenter>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMainView, MainView>(new ContainerControlledLifetimeManager())
-                .RegisterType<IMainPresenter, MainPresenter>(new ContainerControlledLifetimeManager());
+                .RegisterType<IMainPresenter, MainPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IUserModel, UserModel>(new ContainerControlledLifetimeManager())
+                .RegisterType<IUserLoginModel, UserLoginModel>(new ContainerControlledLifetimeManager())
+                .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
+                .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

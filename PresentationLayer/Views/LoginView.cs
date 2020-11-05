@@ -13,11 +13,63 @@ namespace PresentationLayer.Views
 {
     public partial class LoginView : Form, ILoginView
     {
+        public string username
+        {
+            get
+            {
+                return txtUser.Text;
+            }
+
+            set
+            {
+                txtUser.Text = value;
+            }
+        }
+
+        public string password
+        {
+            get
+            {
+                return txtPass.Text;
+            }
+
+            set
+            {
+                txtPass.Text = value;
+            }
+        }
+
+        public bool pboxVisibility
+        {
+            get
+            {
+                return pboxLoading.Visible;
+            }
+
+            set
+            {
+                pboxLoading.Visible = value;
+            }
+        }
+
+        public bool frmVisibility
+        {
+            set
+            {
+                this.Visible = false;
+            }
+        }
+
         public event EventHandler LoginBtnClickEventRaised;
+        public event EventHandler CancelBtnClickEventRaised;
 
         public void ShowLoginView()
         {
             this.Show();
+        }
+        public void CloseLoginView()
+        {
+            this.Close();
         }
         public LoginView()
         {
@@ -28,5 +80,11 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(this, LoginBtnClickEventRaised, e);
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, CancelBtnClickEventRaised, e);
+        }
+
     }
 }
