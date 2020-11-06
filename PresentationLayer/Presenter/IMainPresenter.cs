@@ -7,7 +7,7 @@ namespace PresentationLayer.Presenter
     public interface IMainPresenter
     {
         IMainView GetMainView();
-        void SetUserModel(IUserModel userModel);
+        void SetValues(IUserModel userModel, ILoginView loginView);
         void OnMainViewLoadEventRaised(object sender, EventArgs e);
     }
 }

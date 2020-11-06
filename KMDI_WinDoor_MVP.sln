@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLaye
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLayer", "PresentationLayer\PresentationLayer.csproj", "{F55051CE-5885-4AB8-B9AE-C4B6FD5DAC7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer.Tests", "ServiceLayer.Tests\ServiceLayer.Tests.csproj", "{2A177AC8-CE46-4AA1-8A7B-275677B27DD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F55051CE-5885-4AB8-B9AE-C4B6FD5DAC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F55051CE-5885-4AB8-B9AE-C4B6FD5DAC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F55051CE-5885-4AB8-B9AE-C4B6FD5DAC7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A177AC8-CE46-4AA1-8A7B-275677B27DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A177AC8-CE46-4AA1-8A7B-275677B27DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A177AC8-CE46-4AA1-8A7B-275677B27DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A177AC8-CE46-4AA1-8A7B-275677B27DD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

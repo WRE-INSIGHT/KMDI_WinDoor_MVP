@@ -22,6 +22,8 @@ namespace PresentationLayer.Views
         }
 
         public event EventHandler MainViewLoadEventRaised;
+        public event EventHandler MainViewClosingEventRaised;
+
         public MainView()
         {
             InitializeComponent();
@@ -31,10 +33,15 @@ namespace PresentationLayer.Views
         {
             this.Show();
         }
-
+        
         private void MainView_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(this, MainViewLoadEventRaised, e);
+        }
+
+        private void MainView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, MainViewClosingEventRaised, e);
         }
     }
 }

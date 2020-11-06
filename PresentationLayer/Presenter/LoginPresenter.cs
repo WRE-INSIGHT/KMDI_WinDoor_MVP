@@ -55,28 +55,20 @@ namespace PresentationLayer.Presenter
                 IUserModel userModel = await Task.Run(() => _userService.Login(_userLoginModel));
                 if (userModel != null)
                 {
-                    if (userModel.AccountType == "Admin" || userModel.AccountType == "Costing")
-                    {
-                        _mainPresenter.SetUserModel(userModel);
-                        _mainPresenter.GetMainView().ShowMainView();
-                        _loginView.frmVisibility = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Unauthorized access", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    
+                    _mainPresenter.SetValues(userModel, _loginView);
+                    _mainPresenter.GetMainView().ShowMainView();
+                    _loginView.frmVisibility = false;
                 }
                 else
                 {
                     MessageBox.Show("Login failed", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                _loginView.pboxVisibility = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message,"",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
+            _loginView.pboxVisibility = false;
         }
     }
 }

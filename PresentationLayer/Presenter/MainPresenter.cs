@@ -12,6 +12,7 @@ namespace PresentationLayer.Presenter
     {
         IMainView _mainView;
         private IUserModel _userModel;
+        private ILoginView _loginView;
 
         public MainPresenter(IMainView mainView)
         {
@@ -22,13 +23,20 @@ namespace PresentationLayer.Presenter
         {
             return _mainView;
         }
-        public void SetUserModel(IUserModel userModel)
+        public void SetValues(IUserModel userModel, ILoginView loginView)
         {
             _userModel = userModel;
+            _loginView = loginView;
         }
         private void SubscribeToEventsSetup()
         {
             _mainView.MainViewLoadEventRaised += new EventHandler(OnMainViewLoadEventRaised);
+            _mainView.MainViewClosingEventRaised += new EventHandler(OnMainViewClosingEventRaised);
+        }
+
+        private void OnMainViewClosingEventRaised(object sender, EventArgs e)
+        {
+            _loginView.CloseLoginView();
         }
 
         public void OnMainViewLoadEventRaised(object sender, EventArgs e)

@@ -45,13 +45,20 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
                                 {
                                     while (rdr.Read())
                                     {
-                                        user.UserID = rdr.GetInt32(0);
-                                        user.Fullname = rdr.GetString(1);
-                                        user.Nickname = rdr.GetString(2);
-                                        user.AccountType = rdr.GetString(3);
-                                        user.Username = rdr.GetString(4);
-                                        user.Password = rdr.GetString(5);
-                                        user.ProfilePath = rdr.GetString(6);
+                                        if (rdr.GetString(3) == "Admin" || rdr.GetString(3) == "Costing")
+                                        {
+                                            user.UserID = rdr.GetInt32(0);
+                                            user.Fullname = rdr.GetString(1);
+                                            user.Nickname = rdr.GetString(2);
+                                            user.AccountType = rdr.GetString(3);
+                                            user.Username = rdr.GetString(4);
+                                            user.Password = rdr.GetString(5);
+                                            user.ProfilePath = rdr.GetString(6);
+                                        }
+                                        else
+                                        {
+                                            user = null;
+                                        }
                                     }
                                 }
                             }
