@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ServiceLayer.Services.UserServices;
 using ModelLayer.Model.User;
+using CommonComponents;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Presenter
@@ -48,6 +49,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
+                Prompts msg = new Prompts();
                 _loginView.pboxVisibility = true;
                 _userLoginModel.Username = _loginView.username;
                 _userLoginModel.Password = _loginView.password;
@@ -61,7 +63,8 @@ namespace PresentationLayer.Presenter
                 }
                 else
                 {
-                    MessageBox.Show("Login failed", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    msg.Prompt("Login Failed", "", "", false, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //MessageBox.Show("Login failed", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

@@ -20,7 +20,7 @@ namespace ServiceLayer.Tests
         }
 
         [TestMethod]
-        public void Login_Admin()
+        public void AdminLogin_Test()
         {
             //arrange
             UserLoginModel admin = new UserLoginModel();
@@ -33,6 +33,22 @@ namespace ServiceLayer.Tests
 
             //assert
             Assert.AreEqual("Admin", expectedAdmin.AccountType);
+        }
+
+        [TestMethod]
+        public void CostingLogin_Test()
+        {
+            //arrange
+            UserLoginModel admin = new UserLoginModel();
+            admin.Username = "44";
+            admin.Password = "44";
+
+            //act
+            UserModel expectedAdmin = new UserModel();
+            expectedAdmin = _userService.Login(admin);
+
+            //assert
+            Assert.AreEqual("Costing", expectedAdmin.AccountType);
         }
     }
 }
