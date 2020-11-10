@@ -9,26 +9,13 @@ namespace CommonComponents
 {
     public class Prompts : Exception
     {
-        //public string promptCaption { get; set; }
-        //public string promptTitle { get; set; }
-        //public string stackTrace { get; set; }
-        //public bool logToFile { get; set; }
-        //public MessageBoxButtons promptBtn { get; set; }
-        //public MessageBoxIcon promptIcon { get; set; }
-        //public MessageBoxOptions promptOpt { get; set; }
-        //public MessageBoxDefaultButton promptDefault { get; set; }
-
-        public void Prompt(string content,
-                           string caption, 
-                           string stackTrace, 
-                           bool log, 
-                           MessageBoxButtons msgBtn, 
-                           MessageBoxIcon msgIcon,
-                           MessageBoxDefaultButton msgDef = MessageBoxDefaultButton.Button1)
+        public Prompts(Exception innerException,
+                       string content,
+                       string caption, 
+                       string stackTrace, 
+                       bool log) : base(content, innerException)
         {
-            //promptCaption = caption;
-            //promptTitle = title;
-            MessageBox.Show(content, caption, msgBtn, msgIcon, msgDef);
+            MessageBox.Show(content, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

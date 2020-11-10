@@ -45,33 +45,37 @@ namespace PresentationLayer.Presenter
             _loginView.CloseLoginView();
         }
 
-        private async void OnLoginBtnClickEventRaised(object sender, EventArgs e)
+        private void OnLoginBtnClickEventRaised(object sender, EventArgs e)
         {
             try
             {
-                Prompts msg = new Prompts();
-                _loginView.pboxVisibility = true;
-                _userLoginModel.Username = _loginView.username;
-                _userLoginModel.Password = _loginView.password;
-                _userService.ValidateModel(_userLoginModel);
-                IUserModel userModel = await Task.Run(() => _userService.Login(_userLoginModel));
-                if (userModel != null)
-                {
-                    _mainPresenter.SetValues(userModel, _loginView);
-                    _mainPresenter.GetMainView().ShowMainView();
-                    _loginView.frmVisibility = false;
-                }
-                else
-                {
-                    msg.Prompt("Login Failed", "", "", false, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //MessageBox.Show("Login failed", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                Login();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message,"",MessageBoxButtons.OK,MessageBoxIcon.Error);
+
             }
             _loginView.pboxVisibility = false;
+        }
+
+        private async void Login()
+        {
+            _loginView.pboxVisibility = true;
+            _userLoginModel.Username = _loginView.username;
+            _userLoginModel.Password = _loginView.password;
+            _userService.ValidateModel(_userLoginModel);
+            IUserModel userModel = await Task.Run(() => _userService.Login(_userLoginModel));
+
+            if (userModel != null)
+            {
+                _mainPresenter.SetValues(userModel, _loginView);
+                _mainPresenter.GetMainView().ShowMainView();
+                _loginView.frmVisibility = false;
+            }
+            else
+            {
+                throw new Prompts(new Exception(), "Login Failed", "", "", false);
+            }
         }
     }
 }

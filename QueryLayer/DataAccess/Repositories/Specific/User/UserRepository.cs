@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ServiceLayer.Services.UserServices;
 using ModelLayer.Model.User;
+using CommonComponents;
 
 namespace QueryLayer.DataAccess.Repositories.Specific.User
 {
@@ -68,7 +69,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
             }
             catch (SqlException sqlex)
             {
-                Console.WriteLine(sqlex.ToString());
+                throw new Prompts(sqlex.InnerException, sqlex.Message, "", sqlex.StackTrace, true);
             }
             return user;
         }
