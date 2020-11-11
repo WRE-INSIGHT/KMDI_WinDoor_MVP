@@ -19,14 +19,24 @@ namespace ServiceLayer.Services.UserServices
             _modelDataAnnotationCheck = modelcheck;
         }
 
-        public UserModel Login(IUserLoginModel userLoginModel)
-        {
-            return _userRepository.Login(userLoginModel);
-        }
-
         public void ValidateModel(IUserLoginModel userLoginModel)
         {
             _modelDataAnnotationCheck.ValidateModelDataAnnotations(userLoginModel);
+        }
+
+        public async Task<UserModel> Login_Prsntr(IUserLoginModel userLoginModel)
+        {
+            ValidateModel(userLoginModel);
+            UserModel userModel = await _userRepository.Login(userLoginModel);
+
+            if (userModel != null)
+            {
+                return userModel;
+            }
+            else
+            {
+                throw new Exception("Login Failed");
+            }
         }
     }
 }

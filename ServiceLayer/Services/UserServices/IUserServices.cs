@@ -1,10 +1,11 @@
 ﻿using ModelLayer.Model.User;
+using System.Threading.Tasks;
 
 namespace ServiceLayer.Services.UserServices
 {
     public interface IUserServices
     {
-        UserModel Login(IUserLoginModel userModel);
         void ValidateModel(IUserLoginModel userLoginModel);
+        Task<UserModel> Login_Prsntr(IUserLoginModel userLoginModel);
     }
 }

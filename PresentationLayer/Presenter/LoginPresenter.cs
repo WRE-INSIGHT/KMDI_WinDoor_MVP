@@ -45,36 +45,27 @@ namespace PresentationLayer.Presenter
             _loginView.CloseLoginView();
         }
 
-        private void OnLoginBtnClickEventRaised(object sender, EventArgs e)
+        private async void OnLoginBtnClickEventRaised(object sender, EventArgs e)
         {
             try
             {
-                Login();
-            }
-            catch (Exception)
-            {
+                _loginView.pboxVisibility = true;
+                _userLoginModel.Username = _loginView.username;
+                _userLoginModel.Password = _loginView.password;
+                IUserModel userModel =  await _userService.Login_Prsntr(_userLoginModel);
 
+                if (userModel != null)
+                {
+                    _mainPresenter.SetValues(userModel, _loginView);
+                    _mainPresenter.GetMainView().ShowMainView();
+                    _loginView.frmVisibility = false;
+                }
             }
-            _loginView.pboxVisibility = false;
-        }
-
-        private async void Login()
-        {
-            _loginView.pboxVisibility = true;
-            _userLoginModel.Username = _loginView.username;
-            _userLoginModel.Password = _loginView.password;
-            _userService.ValidateModel(_userLoginModel);
-            IUserModel userModel = await Task.Run(() => _userService.Login(_userLoginModel));
-
-            if (userModel != null)
+            catch (Exception ex)
             {
-                _mainPresenter.SetValues(userModel, _loginView);
-                _mainPresenter.GetMainView().ShowMainView();
-                _loginView.frmVisibility = false;
-            }
-            else
-            {
-                throw new Prompts(new Exception(), "Login Failed", "", "", false);
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show(ex.Message, ex.HResult.ToString() , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _loginView.pboxVisibility = false;
             }
         }
     }

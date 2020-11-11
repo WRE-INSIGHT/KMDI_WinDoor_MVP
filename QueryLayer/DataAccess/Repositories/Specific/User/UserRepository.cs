@@ -18,17 +18,17 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
             _sqlConString = sqlconstr;
         }
 
-        public UserModel Login(IUserLoginModel userLoginModel)
+        public async Task<UserModel> Login(IUserLoginModel userLoginModel)
         {
             UserModel user = new UserModel();
             try
             {
                 using (SqlConnection sqlcon = new SqlConnection(_sqlConString))
                 {
-                    sqlcon.Open();
+                    await sqlcon.OpenAsync();
                     using (SqlCommand sqlcmd = sqlcon.CreateCommand())
                     {
-                        using (SqlTransaction sqltrans = sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "stp_Login"))
+                        using (SqlTransaction sqltrans = await Task.Run(() => sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "stp_Login")))
                         {
                             sqlcmd.Connection = sqlcon;
                             sqlcmd.Transaction = sqltrans;
@@ -69,7 +69,8 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
             }
             catch (SqlException sqlex)
             {
-                throw new Prompts(sqlex.InnerException, sqlex.Message, "", sqlex.StackTrace, true);
+                Logger log = new Logger(sqlex.Message, sqlex.StackTrace);
+                throw new Exception("Error Number: " + sqlex.Number + "\nError Message: " + sqlex.Message);
             }
             return user;
         }

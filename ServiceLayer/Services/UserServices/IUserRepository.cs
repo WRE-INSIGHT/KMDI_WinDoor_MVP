@@ -1,8 +1,10 @@
 ﻿using ModelLayer.Model.User;
+using System.Threading.Tasks;
+
 namespace ServiceLayer.Services.UserServices
 {
     public interface IUserRepository
     {
-        UserModel Login(IUserLoginModel userModel);
+        Task<UserModel> Login(IUserLoginModel userModel);
     }
 }

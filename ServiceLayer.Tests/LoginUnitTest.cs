@@ -4,6 +4,7 @@ using ModelLayer.Model.User;
 using ServiceLayer.Services.UserServices;
 using ServiceLayer.CommonServices;
 using QueryLayer.DataAccess.Repositories.Specific.User;
+using System.Threading.Tasks;
 
 namespace ServiceLayer.Tests
 {
@@ -18,25 +19,24 @@ namespace ServiceLayer.Tests
             sqlconStr = "Data Source='121.58.229.248,49107';Network Library=DBMSSOCN;Initial Catalog='KMDIDATA';User ID='kmdiadmin';Password='kmdiadmin';";
             _userService = new UserServices(new UserRepository(sqlconStr), new ModelDataAnnotationCheck());
         }
-
         [TestMethod]
-        public void AdminLogin_Test()
+        public async Task AdminLogin_Test()
         {
             //arrange
             UserLoginModel admin = new UserLoginModel();
-            admin.Username = "e";
-            admin.Password = "z";
+            admin.Username = "201";
+            admin.Password = "201";
 
             //act
             UserModel expectedAdmin = new UserModel();
-            expectedAdmin = _userService.Login(admin);
+            expectedAdmin = await Task.Run(() => _userService.Login_Prsntr(admin));
 
             //assert
             Assert.AreEqual("Admin", expectedAdmin.AccountType);
         }
 
         [TestMethod]
-        public void CostingLogin_Test()
+        public async Task CostingLogin_Test()
         {
             //arrange
             UserLoginModel admin = new UserLoginModel();
@@ -45,10 +45,82 @@ namespace ServiceLayer.Tests
 
             //act
             UserModel expectedAdmin = new UserModel();
-            expectedAdmin = _userService.Login(admin);
+            expectedAdmin = await Task.Run(() => _userService.Login_Prsntr(admin));
 
             //assert
             Assert.AreEqual("Costing", expectedAdmin.AccountType);
+        }
+
+        [TestMethod]
+        public async Task Login_LoginFailed_ShouldReturnException()
+        {
+            //arrange
+            UserLoginModel admin = new UserLoginModel();
+            admin.Username = "qwe";
+            admin.Password = "asd";
+
+            try
+            {
+                //act
+                UserModel expectedAdmin = new UserModel();
+                expectedAdmin = await Task.Run(() => _userService.Login_Prsntr(admin));
+
+            }
+            catch (Exception ex)
+            {
+                // assert
+                StringAssert.Contains(ex.Message, "Login Failed");
+                return;
+            }
+            Assert.Fail("No exception was thrown.");
+        }
+
+        [TestMethod]
+        public async Task Login_UsernameRequired_ShouldReturnException()
+        {
+            //arrange
+            UserLoginModel admin = new UserLoginModel();
+            admin.Username = "";
+            admin.Password = "asd";
+
+            try
+            {
+                //act
+                UserModel expectedAdmin = new UserModel();
+                expectedAdmin = await Task.Run(() => _userService.Login_Prsntr(admin));
+
+            }
+            catch (Exception ex)
+            {
+                // assert
+                StringAssert.Contains(ex.Message, "Username is Required");
+                return;
+            }
+            Assert.Fail("No exception was thrown.");
+        }
+
+        [TestMethod]
+        public async Task Login_PasswordRequired_ShouldReturnException()
+        {
+            //arrange
+            UserLoginModel admin = new UserLoginModel();
+            admin.Username = "qwe";
+            admin.Password = "";
+
+            try
+            {
+                //act
+                UserModel expectedAdmin = new UserModel();
+                expectedAdmin = await Task.Run(() => _userService.Login_Prsntr(admin));
+
+            }
+            catch (Exception ex)
+            {
+                // assert
+                StringAssert.Contains(ex.Message, "Password is Required");
+                return;
+            }
+            Assert.Fail("No exception was thrown.");
         }
     }
 }
