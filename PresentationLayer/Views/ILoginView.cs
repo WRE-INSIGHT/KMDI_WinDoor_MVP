@@ -10,10 +10,13 @@ namespace PresentationLayer.Views
     {
         event EventHandler LoginBtnClickEventRaised;
         event EventHandler CancelBtnClickEventRaised;
+        event EventHandler OffLoginBtnClickEventRaised;
+        event EventHandler FormLoadEventRaised;
         string username { get; set; }
         string password { get; set; }
         bool pboxVisibility { get; set; }
         bool frmVisibility { set; }
+        bool chkRememberMe { get;  set; }
         void ShowLoginView();
         void CloseLoginView();
     }

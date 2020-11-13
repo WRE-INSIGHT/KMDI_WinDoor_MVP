@@ -10,10 +10,7 @@ namespace CommonComponents
     {
         public static void RaiseEvent(Object objectRaisingEvent, EventHandler eventHandlerRaised, EventArgs eventArgs)
         {
-            if (eventHandlerRaised != null) //Check if any subscribed to this event 
-            {
-                eventHandlerRaised(objectRaisingEvent, eventArgs); // Notify all subscribers
-            }
+            eventHandlerRaised?.Invoke(objectRaisingEvent, eventArgs); // Notify all subscribers
         }
     }
 }

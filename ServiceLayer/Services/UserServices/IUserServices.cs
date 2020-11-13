@@ -7,5 +7,6 @@ namespace ServiceLayer.Services.UserServices
     {
         void ValidateModel(IUserLoginModel userLoginModel);
         Task<UserModel> Login_Prsntr(IUserLoginModel userLoginModel);
+        UserModel Offline_Login();
     }
 }

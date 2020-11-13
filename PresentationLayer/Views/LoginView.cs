@@ -56,12 +56,35 @@ namespace PresentationLayer.Views
         {
             set
             {
-                this.Visible = false;
+                this.Visible = value;
+            }
+        }
+
+        public bool chkRememberMe
+        {
+            set
+            {
+                chk_Remember.Checked = value;
+            }
+        }
+
+        bool ILoginView.chkRememberMe
+        {
+            get
+            {
+                return chk_Remember.Checked;
+            }
+
+            set
+            {
+                chk_Remember.Checked = value;
             }
         }
 
         public event EventHandler LoginBtnClickEventRaised;
         public event EventHandler CancelBtnClickEventRaised;
+        public event EventHandler OffLoginBtnClickEventRaised;
+        public event EventHandler FormLoadEventRaised;
 
         public void ShowLoginView()
         {
@@ -86,5 +109,14 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(this, CancelBtnClickEventRaised, e);
         }
 
+        private void btn_OffLogin_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, OffLoginBtnClickEventRaised, e);
+        }
+
+        private void LoginView_Load(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, FormLoadEventRaised, e);
+        }
     }
 }

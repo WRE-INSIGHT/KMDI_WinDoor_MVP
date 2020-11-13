@@ -38,5 +38,18 @@ namespace ServiceLayer.Services.UserServices
                 throw new Exception("Login Failed");
             }
         }
+
+        public UserModel Offline_Login()
+        {
+            UserModel offline_model = new UserModel();
+            offline_model.AccountType = "";
+            offline_model.Fullname = "";
+            offline_model.Nickname = "";
+            offline_model.Password = "";
+            offline_model.ProfilePath = "";
+            offline_model.UserID = 0;
+            offline_model.Username = "";
+            return offline_model;
+        }
     }
 }

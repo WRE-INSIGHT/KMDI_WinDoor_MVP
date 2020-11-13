@@ -85,7 +85,7 @@
             this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnLogin.FlatAppearance.BorderSize = 0;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Location = new System.Drawing.Point(97, 3);
+            this.btnLogin.Location = new System.Drawing.Point(85, 3);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 28);
             this.btnLogin.TabIndex = 4;
@@ -97,9 +97,9 @@
             // 
             this.pnl_btnContainer.Controls.Add(this.btnLogin);
             this.pnl_btnContainer.Controls.Add(this.btnCancel);
-            this.pnl_btnContainer.Location = new System.Drawing.Point(138, 193);
+            this.pnl_btnContainer.Location = new System.Drawing.Point(153, 193);
             this.pnl_btnContainer.Name = "pnl_btnContainer";
-            this.pnl_btnContainer.Size = new System.Drawing.Size(178, 35);
+            this.pnl_btnContainer.Size = new System.Drawing.Size(163, 35);
             this.pnl_btnContainer.TabIndex = 17;
             // 
             // btnCancel
@@ -108,7 +108,7 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(16, 3);
+            this.btnCancel.Location = new System.Drawing.Point(4, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
             this.btnCancel.TabIndex = 5;
@@ -157,6 +157,7 @@
             this.btn_OffLogin.Text = "No internet, Offline use";
             this.btn_OffLogin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_OffLogin.UseVisualStyleBackColor = true;
+            this.btn_OffLogin.Click += new System.EventHandler(this.btn_OffLogin_Click);
             // 
             // pictureBox1
             // 
@@ -194,6 +195,7 @@
             this.Name = "LoginView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Costing Login";
+            this.Load += new System.EventHandler(this.LoginView_Load);
             this.pnl_btnContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pboxLoading)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

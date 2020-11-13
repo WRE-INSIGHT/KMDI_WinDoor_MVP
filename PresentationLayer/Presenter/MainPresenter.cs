@@ -36,6 +36,7 @@ namespace PresentationLayer.Presenter
 
         private void OnMainViewClosingEventRaised(object sender, EventArgs e)
         {
+            Properties.Settings.Default.Save();
             _loginView.CloseLoginView();
         }
 

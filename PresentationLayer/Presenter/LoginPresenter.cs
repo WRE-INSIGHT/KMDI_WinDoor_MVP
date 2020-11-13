@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using ServiceLayer.Services.UserServices;
 using ModelLayer.Model.User;
 using CommonComponents;
+using QueryLayer.DataAccess.Repositories.Specific;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Presenter
 {
-    class LoginPresenter : ILoginPresenter
+    class LoginPresenter : BaseSpecificRepository, ILoginPresenter
     {
         ILoginView _loginView;
         private IMainPresenter _mainPresenter;
@@ -36,8 +37,24 @@ namespace PresentationLayer.Presenter
 
         private void SubscribeToEventsSetup()
         {
+            _loginView.FormLoadEventRaised += new EventHandler(OnFormLoadEventRaised);
             _loginView.LoginBtnClickEventRaised += new EventHandler(OnLoginBtnClickEventRaised);
             _loginView.CancelBtnClickEventRaised += new EventHandler(OnCancelBtnClickEventRaised);
+            _loginView.OffLoginBtnClickEventRaised += new EventHandler(OnOffLoginBtnClickEventRaised);
+        }
+
+        private void OnFormLoadEventRaised(object sender, EventArgs e)
+        {
+            _loginView.username = Properties.Settings.Default.Username;
+            _loginView.password = Decrypt(Properties.Settings.Default.Password);
+            _loginView.chkRememberMe = Properties.Settings.Default.RememberMe;
+        }
+
+        private void OnOffLoginBtnClickEventRaised(object sender, EventArgs e)
+        {
+            IUserModel offline_model = _userService.Offline_Login();
+            _mainPresenter.SetValues(offline_model, _loginView);
+            _mainPresenter.GetMainView().ShowMainView();
         }
 
         private void OnCancelBtnClickEventRaised(object sender, EventArgs e)
@@ -58,6 +75,7 @@ namespace PresentationLayer.Presenter
                 {
                     _mainPresenter.SetValues(userModel, _loginView);
                     _mainPresenter.GetMainView().ShowMainView();
+                    setPropertiesSettings();
                     _loginView.frmVisibility = false;
                 }
             }
@@ -66,6 +84,22 @@ namespace PresentationLayer.Presenter
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message, ex.HResult.ToString() , MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _loginView.pboxVisibility = false;
+            }
+        }
+
+        private void setPropertiesSettings()
+        {
+            if (_loginView.chkRememberMe == true)
+            {
+                Properties.Settings.Default.Username = _loginView.username;
+                Properties.Settings.Default.Password = Encrypt(_loginView.password);
+                Properties.Settings.Default.RememberMe = _loginView.chkRememberMe;
+            }
+            else if (_loginView.chkRememberMe == false)
+            {
+                Properties.Settings.Default.Username = "";
+                Properties.Settings.Default.Password = Encrypt("");
+                Properties.Settings.Default.RememberMe = _loginView.chkRememberMe;
             }
         }
     }
