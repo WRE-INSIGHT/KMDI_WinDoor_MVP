@@ -21,8 +21,22 @@ namespace PresentationLayer.Views
             }
         }
 
+        public string ofd_InitialDirectory
+        {
+            get
+            {
+                return openFileDialog1.InitialDirectory;
+            }
+
+            set
+            {
+                openFileDialog1.InitialDirectory = value;
+            }
+        }
+
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
+        public event EventHandler OpenToolStripButtonClickEventRaised;
 
         public MainView()
         {
@@ -42,6 +56,15 @@ namespace PresentationLayer.Views
         private void MainView_FormClosed(object sender, FormClosedEventArgs e)
         {
             EventHelpers.RaiseEvent(this, MainViewClosingEventRaised, e);
+        }
+
+        private void openToolStripButton_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = Properties.Settings.Default.WndrDir;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                EventHelpers.RaiseEvent(this, OpenToolStripButtonClickEventRaised, e);
+            }
         }
     }
 }

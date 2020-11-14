@@ -83,6 +83,7 @@
             this.chkView = new System.Windows.Forms.CheckBox();
             this.pnlPropertiesBody = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.tsBot.SuspendLayout();
@@ -129,13 +130,13 @@
             this.QuotationToolStripMenuItem,
             this.ItemToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
             // 
             // QuotationToolStripMenuItem
             // 
             this.QuotationToolStripMenuItem.Name = "QuotationToolStripMenuItem";
-            this.QuotationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.QuotationToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.QuotationToolStripMenuItem.Text = "&Quotation";
             // 
             // ItemToolStripMenuItem
@@ -145,7 +146,7 @@
             this.PremiLineToolStripMenuItem});
             this.ItemToolStripMenuItem.Enabled = false;
             this.ItemToolStripMenuItem.Name = "ItemToolStripMenuItem";
-            this.ItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ItemToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.ItemToolStripMenuItem.Text = "I&tem";
             // 
             // C70ToolStripMenuItem
@@ -164,14 +165,14 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             // 
             // syncToolStripMenuItem
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // costingToolStripMenuItem
@@ -187,13 +188,13 @@
             // 
             this.itemsToolStripMenuItem.Enabled = false;
             this.itemsToolStripMenuItem.Name = "itemsToolStripMenuItem";
-            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.itemsToolStripMenuItem.Text = "Items";
             // 
             // defaultValuesToolStripMenuItem
             // 
             this.defaultValuesToolStripMenuItem.Name = "defaultValuesToolStripMenuItem";
-            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.defaultValuesToolStripMenuItem.Text = "Default values";
             this.defaultValuesToolStripMenuItem.Visible = false;
             // 
@@ -306,6 +307,7 @@
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(24, 29);
             this.openToolStripButton.Text = "&Open";
+            this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
             // CloudStoragetoolStripButton
             // 
@@ -652,6 +654,10 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Properties";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "WNDR files (*.wndr)|*.wndr";
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -747,5 +753,6 @@
         private System.Windows.Forms.CheckBox chkView;
         private System.Windows.Forms.Panel pnlPropertiesBody;
         internal System.Windows.Forms.Label label2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

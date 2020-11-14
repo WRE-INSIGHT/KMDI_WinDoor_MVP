@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace PresentationLayer.Views
 {
@@ -6,7 +7,9 @@ namespace PresentationLayer.Views
     {
         event EventHandler MainViewLoadEventRaised;
         event EventHandler MainViewClosingEventRaised;
+        event EventHandler OpenToolStripButtonClickEventRaised;
         string Nickname { set; }
+        string ofd_InitialDirectory { get; set; }
         void ShowMainView();
     }
 }
