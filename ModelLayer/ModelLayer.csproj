@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Quotation\IQuotationModel.cs" />
+    <Compile Include="Model\Quotation\QuotationModel.cs" />
+    <Compile Include="Model\Quotation\WinDoor\IWindoorModel.cs" />
+    <Compile Include="Model\Quotation\WinDoor\WindoorModel.cs" />
     <Compile Include="Model\User\IUserLoginModel.cs" />
     <Compile Include="Model\User\IUserModel.cs" />
     <Compile Include="Model\User\UserLoginModel.cs" />
