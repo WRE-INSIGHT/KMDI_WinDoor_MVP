@@ -42,7 +42,7 @@ namespace ServiceLayer.Services.WindoorServices
             wndr.WD_orientation = WD_orientation;
             wndr.WD_zoom = WD_zoom;
 
-            //ValidateModel(wndr);
+            ValidateModel(wndr);
             return wndr;
         }
 

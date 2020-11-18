@@ -78,7 +78,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnl_flpMain = new System.Windows.Forms.Panel();
-            this.flpMain = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlProperties = new System.Windows.Forms.Panel();
             this.chkView = new System.Windows.Forms.CheckBox();
             this.pnlPropertiesBody = new System.Windows.Forms.Panel();
@@ -95,7 +94,6 @@
             this.pnlControlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvControls)).BeginInit();
             this.pnlMain.SuspendLayout();
-            this.pnl_flpMain.SuspendLayout();
             this.pnlProperties.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -579,7 +577,6 @@
             // 
             // pnl_flpMain
             // 
-            this.pnl_flpMain.Controls.Add(this.flpMain);
             this.pnl_flpMain.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnl_flpMain.Location = new System.Drawing.Point(170, 85);
             this.pnl_flpMain.Name = "pnl_flpMain";
@@ -587,19 +584,6 @@
             this.pnl_flpMain.Size = new System.Drawing.Size(300, 325);
             this.pnl_flpMain.TabIndex = 2;
             this.pnl_flpMain.Visible = false;
-            // 
-            // flpMain
-            // 
-            this.flpMain.AccessibleDescription = "";
-            this.flpMain.AccessibleName = "";
-            this.flpMain.BackColor = System.Drawing.SystemColors.Control;
-            this.flpMain.Cursor = System.Windows.Forms.Cursors.Default;
-            this.flpMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpMain.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpMain.Location = new System.Drawing.Point(70, 35);
-            this.flpMain.Name = "flpMain";
-            this.flpMain.Size = new System.Drawing.Size(230, 290);
-            this.flpMain.TabIndex = 1;
             // 
             // pnlProperties
             // 
@@ -690,7 +674,6 @@
             this.pnlControlMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvControls)).EndInit();
             this.pnlMain.ResumeLayout(false);
-            this.pnl_flpMain.ResumeLayout(false);
             this.pnlProperties.ResumeLayout(false);
             this.pnlProperties.PerformLayout();
             this.ResumeLayout(false);
@@ -748,7 +731,6 @@
         internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Panel pnl_flpMain;
-        public System.Windows.Forms.FlowLayoutPanel flpMain;
         private System.Windows.Forms.Panel pnlProperties;
         private System.Windows.Forms.CheckBox chkView;
         private System.Windows.Forms.Panel pnlPropertiesBody;
