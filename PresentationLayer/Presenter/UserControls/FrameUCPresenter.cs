@@ -10,14 +10,14 @@ using System.Drawing.Drawing2D;
 
 namespace PresentationLayer.Presenter.UserControls
 {
-    public class FrameUCPresenter
+    public class FrameUCPresenter : IFrameUCPresenter
     {
         private IFrameUC _frameUC;
 
-        private float zoom = 1.0f;
+        //private float zoom = 1.0f;
         public FrameUCPresenter(IFrameUC frameUC)
         {
-            _frameUC = frameUC;
+            _frameUC = frameUC.GetNewFrame();
             SubscribeToEventsSetup();
         }
 
@@ -28,23 +28,23 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.innerFramePaintEventRaised += new PaintEventHandler(OnInnerFramePaintEventRaised);
         }
 
-        private void OnInnerFramePaintEventRaised(object sender, PaintEventArgs e)
+        public void OnInnerFramePaintEventRaised(object sender, PaintEventArgs e)
         {
             Panel pnl = (Panel)sender;
-            Panel frame = (Panel)pnl.Parent;
+            //Panel frame = (Panel)pnl.Parent;
             Graphics g = e.Graphics;
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            if (frame.Tag.ToString() == "0")
-            {
-                int cond = pnl.Width + pnl.Height;
+            //if (frame.Tag.ToString() == "0")
+            //{
+            //    int cond = pnl.Width + pnl.Height;
 
-                for (int i = 10; i < cond; i += 10)
-                {
-                    g.DrawLine(Pens.Black, new Point(0, i), new Point(i, 0));
-                }
-            }
+            //    for (int i = 10; i < cond; i += 10)
+            //    {
+            //        g.DrawLine(Pens.Black, new Point(0, i), new Point(i, 0));
+            //    }
+            //}
 
             //string accname_col = pnl.AccessibleName;
             Color col = Color.Black;
@@ -65,36 +65,36 @@ namespace PresentationLayer.Presenter.UserControls
                                                            pnl.ClientRectangle.Height - w));
         }
 
-        private void OnFrameLoadEventRaised(object sender, EventArgs e)
+        public void OnFrameLoadEventRaised(object sender, EventArgs e)
         {
             _frameUC.InvalidateThis();
         }
 
-        private void OnOuterFramePaintEventRaised(object sender, PaintEventArgs e)
+        public void OnOuterFramePaintEventRaised(object sender, PaintEventArgs e)
         {
             Pen blkPen = new Pen(Color.Black);
 
             Graphics g = e.Graphics;
             //g.ScaleTransform(zoom, zoom);
 
-            Panel pfr = (Panel)sender;
+            UserControl pfr = (UserControl)sender;
             Panel pnl_inner = (Panel)pfr.Controls[0];
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
 
-            if (pfr.AccessibleDescription == "viewmodeOn")
-            {
-                Font dmnsion_font = new Font("Segoe UI", 12 * zoom);
+            //if (pfr.AccessibleDescription == "viewmodeOn")
+            //{
+            //    Font dmnsion_font = new Font("Segoe UI", 12 * zoom);
 
-                Size s = TextRenderer.MeasureText(pfr.Name, dmnsion_font);
-                double mid = (pfr.Width) / 2;
-                TextRenderer.DrawText(g,
-                                      pfr.Name,
-                                      dmnsion_font,
-                                      new Point((int)(mid - (s.Width / 2)), 1),
-                                      Color.Blue);
-            }
+            //    Size s = TextRenderer.MeasureText(pfr.Name, dmnsion_font);
+            //    double mid = (pfr.Width) / 2;
+            //    TextRenderer.DrawText(g,
+            //                          pfr.Name,
+            //                          dmnsion_font,
+            //                          new Point((int)(mid - (s.Width / 2)), 1),
+            //                          Color.Blue);
+            //}
 
             int pInnerX = pnl_inner.Location.X,
             pInnerY = pnl_inner.Location.Y,
@@ -135,6 +135,11 @@ namespace PresentationLayer.Presenter.UserControls
                                                                    0,
                                                                    pfr.ClientRectangle.Width - w,
                                                                    pfr.ClientRectangle.Height - w));
+        }
+
+        public IFrameUC GetFrameUC()
+        {
+            return _frameUC;
         }
     }
 }

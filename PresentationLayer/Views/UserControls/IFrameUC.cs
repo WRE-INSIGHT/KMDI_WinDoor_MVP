@@ -17,5 +17,6 @@ namespace PresentationLayer.Views.UserControls
         int fHeight { get; set; }
 
         void InvalidateThis();
+        FrameUC GetNewFrame();
     }
 }

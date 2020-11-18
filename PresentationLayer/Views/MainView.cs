@@ -37,6 +37,7 @@ namespace PresentationLayer.Views
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
+        public event EventHandler NewFrameButtonClickEventRaised;
 
         public MainView()
         {
@@ -65,6 +66,16 @@ namespace PresentationLayer.Views
             {
                 EventHelpers.RaiseEvent(this, OpenToolStripButtonClickEventRaised, e);
             }
+        }
+
+        private void tsBtnNwin_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, NewFrameButtonClickEventRaised, e);
+        }
+
+        public Panel GetBasePlatform()
+        {
+            return flp_base;
         }
     }
 }

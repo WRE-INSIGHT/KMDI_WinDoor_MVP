@@ -63,6 +63,7 @@
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IFrameUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\ILoginView.cs" />

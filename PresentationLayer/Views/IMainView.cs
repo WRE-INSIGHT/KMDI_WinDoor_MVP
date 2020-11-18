@@ -8,8 +8,10 @@ namespace PresentationLayer.Views
         event EventHandler MainViewLoadEventRaised;
         event EventHandler MainViewClosingEventRaised;
         event EventHandler OpenToolStripButtonClickEventRaised;
+        event EventHandler NewFrameButtonClickEventRaised;
         string Nickname { set; }
         string ofd_InitialDirectory { get; set; }
         void ShowMainView();
+        Panel GetBasePlatform();
     }
 }

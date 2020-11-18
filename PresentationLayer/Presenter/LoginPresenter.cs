@@ -55,6 +55,7 @@ namespace PresentationLayer.Presenter
             IUserModel offline_model = _userService.Offline_Login();
             _mainPresenter.SetValues(offline_model, _loginView);
             _mainPresenter.GetMainView().ShowMainView();
+            _loginView.frmVisibility = false;
         }
 
         private void OnCancelBtnClickEventRaised(object sender, EventArgs e)

@@ -65,7 +65,12 @@ namespace PresentationLayer.Views.UserControls
 
         private void pnl_inner_Paint(object sender, PaintEventArgs e)
         {
-            EventHelpers.RaisePaintEvent(this, innerFramePaintEventRaised, e);
+            EventHelpers.RaisePaintEvent(sender, innerFramePaintEventRaised, e);
+        }
+
+        public FrameUC GetNewFrame()
+        {
+            return new FrameUC();
         }
     }
 }

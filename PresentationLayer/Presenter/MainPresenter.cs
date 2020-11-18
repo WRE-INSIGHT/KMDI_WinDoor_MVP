@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using ModelLayer.Model.User;
 using System.IO;
 using System.Windows.Forms;
+using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Views.UserControls;
+using Unity;
+using Unity.Lifetime;
 
 namespace PresentationLayer.Presenter
 {
@@ -15,10 +19,14 @@ namespace PresentationLayer.Presenter
         IMainView _mainView;
         private IUserModel _userModel;
         private ILoginView _loginView;
+        private IFrameUCPresenter _frameUCPresenter;
 
-        public MainPresenter(IMainView mainView)
+        Panel _basePlatform;
+
+        public MainPresenter(IMainView mainView, IFrameUCPresenter frameUCPresenter)
         {
             _mainView = mainView;
+            _frameUCPresenter = frameUCPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -29,12 +37,23 @@ namespace PresentationLayer.Presenter
         {
             _userModel = userModel;
             _loginView = loginView;
+            _basePlatform = _mainView.GetBasePlatform();
         }
         private void SubscribeToEventsSetup()
         {
             _mainView.MainViewLoadEventRaised += new EventHandler(OnMainViewLoadEventRaised);
             _mainView.MainViewClosingEventRaised += new EventHandler(OnMainViewClosingEventRaised);
             _mainView.OpenToolStripButtonClickEventRaised += new EventHandler(OnOpenToolStripButtonClickEventRaised);
+            _mainView.NewFrameButtonClickEventRaised += new EventHandler(OnNewFrameButtonClickEventRaised);
+        }
+
+        private void OnNewFrameButtonClickEventRaised(object sender, EventArgs e)
+        {
+            // FrameUC frame = new FrameUC();
+            //frame = (FrameUC)_frameUCPresenter.GetFrameUC();
+            _basePlatform.Controls.Add((FrameUC)_frameUCPresenter.GetFrameUC());
+            //IUnityContainer container = new UnityContainer();
+            //container.RegisterType<IFrameUC, FrameUC>();
         }
 
         private void OnOpenToolStripButtonClickEventRaised(object sender, EventArgs e)

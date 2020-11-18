@@ -6,7 +6,9 @@ using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
 using PresentationLayer.Presenter;
+using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
+using PresentationLayer.Views.UserControls;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.Services.UserServices;
 using ServiceLayer.CommonServices;
@@ -37,6 +39,8 @@ namespace PresentationLayer
                 .RegisterType<IUserLoginModel, UserLoginModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFrameUC, FrameUC>()
+                .RegisterType<IFrameUCPresenter, FrameUCPresenter>()
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();
