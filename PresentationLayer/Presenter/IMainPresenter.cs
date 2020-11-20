@@ -8,6 +8,6 @@ namespace PresentationLayer.Presenter
     {
         IMainView GetMainView();
         void SetValues(IUserModel userModel, ILoginView loginView);
-        void OnMainViewLoadEventRaised(object sender, EventArgs e);
+        void SetValues_flpBase(int wd, int ht);
     }
 }

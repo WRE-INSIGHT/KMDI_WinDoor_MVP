@@ -1,16 +1,12 @@
 ﻿using PresentationLayer.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ModelLayer.Model.User;
+using ModelLayer.Model.Quotation;
 using System.IO;
 using System.Windows.Forms;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views.UserControls;
-using Unity;
-using Unity.Lifetime;
+using Microsoft.VisualBasic;
 
 namespace PresentationLayer.Presenter
 {
@@ -20,13 +16,15 @@ namespace PresentationLayer.Presenter
         private IUserModel _userModel;
         private ILoginView _loginView;
         private IFrameUCPresenter _frameUCPresenter;
-
+        private IfrmDimensionPresenter _frmDimensionPresenter;
+        private IQuotationModel _quotationModel;
         Panel _basePlatform;
 
-        public MainPresenter(IMainView mainView, IFrameUCPresenter frameUCPresenter)
+        public MainPresenter(IMainView mainView, IFrameUCPresenter frameUCPresenter, IfrmDimensionPresenter frmDimensionPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
+            _frmDimensionPresenter = frmDimensionPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -45,15 +43,36 @@ namespace PresentationLayer.Presenter
             _mainView.MainViewClosingEventRaised += new EventHandler(OnMainViewClosingEventRaised);
             _mainView.OpenToolStripButtonClickEventRaised += new EventHandler(OnOpenToolStripButtonClickEventRaised);
             _mainView.NewFrameButtonClickEventRaised += new EventHandler(OnNewFrameButtonClickEventRaised);
+            _mainView.NewQuotationMenuItemClickEventRaised += new EventHandler(OnNewQuotationMenuItemClickEventRaised);
+        }
+
+        private void OnNewQuotationMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            // check if the _quotationModel is null or not.
+            //_quotationModel == null, then createNew()
+            //_quotationModel != null, then deleteExisting() and createNew()
+
+            string input = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
+            if (input != "" && input != "0")
+            {
+                //Clearing_Operation();
+                //pnl_flpMain.Visible = false;
+                //pnl_flpMain.Size = new Size(0, 0);
+                //paint_pnlMain = false;
+
+                //quotation_ref_no = input.ToUpper();
+                //Text = quotation_ref_no;
+
+                _frmDimensionPresenter.SetValues(this);
+                _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                //ProfileTypeToolStripMenuItem_Click(sender, e);
+            }
         }
 
         private void OnNewFrameButtonClickEventRaised(object sender, EventArgs e)
         {
-            // FrameUC frame = new FrameUC();
-            //frame = (FrameUC)_frameUCPresenter.GetFrameUC();
-            _basePlatform.Controls.Add((FrameUC)_frameUCPresenter.GetFrameUC());
-            //IUnityContainer container = new UnityContainer();
-            //container.RegisterType<IFrameUC, FrameUC>();
+            FrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance();
+            _basePlatform.Controls.Add((FrameUC)frameUCP.GetFrameUC());
         }
 
         private void OnOpenToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -67,7 +86,7 @@ namespace PresentationLayer.Presenter
             _loginView.CloseLoginView();
         }
 
-        public void OnMainViewLoadEventRaised(object sender, EventArgs e)
+        private void OnMainViewLoadEventRaised(object sender, EventArgs e)
         {
             if (Properties.Settings.Default.FirstTym == true)
             {
@@ -81,6 +100,13 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.FirstTym = false;
             }
             _mainView.Nickname = _userModel.Nickname;
+        }
+
+        public void SetValues_flpBase(int wd, int ht)
+        {
+            _mainView.flp_base_Wd = wd;
+            _mainView.flp_base_Ht = ht;
+            _mainView.flp_base_visibility = true;
         }
     }
 }

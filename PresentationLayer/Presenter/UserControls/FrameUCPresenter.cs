@@ -7,6 +7,7 @@ using PresentationLayer.Views.UserControls;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using Unity;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -17,7 +18,7 @@ namespace PresentationLayer.Presenter.UserControls
         //private float zoom = 1.0f;
         public FrameUCPresenter(IFrameUC frameUC)
         {
-            _frameUC = frameUC.GetNewFrame();
+            _frameUC = frameUC;
             SubscribeToEventsSetup();
         }
 
@@ -140,6 +141,18 @@ namespace PresentationLayer.Presenter.UserControls
         public IFrameUC GetFrameUC()
         {
             return _frameUC;
+        }
+
+        public IFrameUCPresenter GetNewInstance()
+        {
+            IUnityContainer unityC;
+            unityC =
+                new UnityContainer()
+                .RegisterType<IFrameUC, FrameUC>()
+                .RegisterType<IFrameUCPresenter, FrameUCPresenter>();
+            FrameUCPresenter framePresenter = unityC.Resolve<FrameUCPresenter>();
+
+            return framePresenter;
         }
     }
 }

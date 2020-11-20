@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mnsMainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,15 +77,12 @@
             this.DescCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.flp_base = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlProperties = new System.Windows.Forms.Panel();
             this.chkView = new System.Windows.Forms.CheckBox();
             this.pnlPropertiesBody = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.flp_base = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.tsBot.SuspendLayout();
@@ -98,7 +95,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvControls)).BeginInit();
             this.pnlMain.SuspendLayout();
             this.pnlProperties.SuspendLayout();
-            this.flp_base.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnsMainMenu
@@ -140,6 +136,7 @@
             this.QuotationToolStripMenuItem.Name = "QuotationToolStripMenuItem";
             this.QuotationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.QuotationToolStripMenuItem.Text = "&Quotation";
+            this.QuotationToolStripMenuItem.Click += new System.EventHandler(this.QuotationToolStripMenuItem_Click);
             // 
             // ItemToolStripMenuItem
             // 
@@ -154,13 +151,13 @@
             // C70ToolStripMenuItem
             // 
             this.C70ToolStripMenuItem.Name = "C70ToolStripMenuItem";
-            this.C70ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.C70ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.C70ToolStripMenuItem.Text = "&C70";
             // 
             // PremiLineToolStripMenuItem
             // 
             this.PremiLineToolStripMenuItem.Name = "PremiLineToolStripMenuItem";
-            this.PremiLineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.PremiLineToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.PremiLineToolStripMenuItem.Text = "P&remiLine";
             // 
             // saveAsToolStripMenuItem
@@ -519,14 +516,14 @@
             this.dgvControls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ImageCol,
             this.DescCol});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvControls.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvControls.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvControls.Location = new System.Drawing.Point(0, 29);
             this.dgvControls.MultiSelect = false;
@@ -578,6 +575,18 @@
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(640, 495);
             this.pnlMain.TabIndex = 3;
+            // 
+            // flp_base
+            // 
+            this.flp_base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flp_base.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flp_base.Location = new System.Drawing.Point(161, 97);
+            this.flp_base.Name = "flp_base";
+            this.flp_base.Size = new System.Drawing.Size(300, 300);
+            this.flp_base.TabIndex = 0;
+            this.flp_base.Visible = false;
             // 
             // pnlProperties
             // 
@@ -636,47 +645,6 @@
             // 
             this.openFileDialog1.Filter = "WNDR files (*.wndr)|*.wndr";
             // 
-            // flp_base
-            // 
-            this.flp_base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flp_base.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flp_base.Controls.Add(this.button1);
-            this.flp_base.Controls.Add(this.button2);
-            this.flp_base.Controls.Add(this.button3);
-            this.flp_base.Location = new System.Drawing.Point(161, 97);
-            this.flp_base.Name = "flp_base";
-            this.flp_base.Size = new System.Drawing.Size(300, 300);
-            this.flp_base.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(84, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(165, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -711,7 +679,6 @@
             this.pnlMain.ResumeLayout(false);
             this.pnlProperties.ResumeLayout(false);
             this.pnlProperties.PerformLayout();
-            this.flp_base.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -772,8 +739,5 @@
         internal System.Windows.Forms.Label label2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FlowLayoutPanel flp_base;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
     }
 }

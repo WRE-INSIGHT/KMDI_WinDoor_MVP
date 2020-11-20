@@ -34,10 +34,63 @@ namespace PresentationLayer.Views
             }
         }
 
+        public bool flp_base_visibility
+        {
+            get
+            {
+                return flp_base.Visible;
+            }
+
+            set
+            {
+                flp_base.Visible = value;
+            }
+        }
+
+        public string mainview_title
+        {
+            get
+            {
+                return this.Text;
+            }
+
+            set
+            {
+                this.Text = value;
+            }
+        }
+
+        public int flp_base_Wd
+        {
+            get
+            {
+                return flp_base.Width;
+            }
+
+            set
+            {
+                flp_base.Width = value;
+            }
+        }
+
+        public int flp_base_Ht
+        {
+            get
+            {
+                return flp_base.Height;
+            }
+
+            set
+            {
+                flp_base.Height = value;
+            }
+        }
+
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
         public event EventHandler NewFrameButtonClickEventRaised;
+        public event EventHandler NewQuotationMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -76,6 +129,11 @@ namespace PresentationLayer.Views
         public Panel GetBasePlatform()
         {
             return flp_base;
+        }
+
+        private void QuotationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, NewQuotationMenuItemClickEventRaised, e);
         }
     }
 }

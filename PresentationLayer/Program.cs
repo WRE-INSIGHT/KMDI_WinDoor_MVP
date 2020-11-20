@@ -39,8 +39,10 @@ namespace PresentationLayer
                 .RegisterType<IUserLoginModel, UserLoginModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
-                .RegisterType<IFrameUC, FrameUC>()
-                .RegisterType<IFrameUCPresenter, FrameUCPresenter>()
+                .RegisterType<IFrameUC, FrameUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFrameUCPresenter, FrameUCPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<IfrmDimensionView, frmDimensionView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IfrmDimensionPresenter, frmDimensionPresenter>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();

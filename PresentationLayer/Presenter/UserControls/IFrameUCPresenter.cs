@@ -10,5 +10,6 @@ namespace PresentationLayer.Presenter.UserControls
         void OnInnerFramePaintEventRaised(object sender, PaintEventArgs e);
         void OnOuterFramePaintEventRaised(object sender, PaintEventArgs e);
         IFrameUC GetFrameUC();
+        IFrameUCPresenter GetNewInstance();
     }
 }

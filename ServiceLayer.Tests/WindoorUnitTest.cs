@@ -50,6 +50,23 @@ namespace ServiceLayer.Tests
         }
 
         [TestMethod]
+        public void CreateWindoor_WindowIDValue0_ShouldReturnException()
+        {
+            try
+            {
+                WindoorModel wndr = new WindoorModel();
+                wndr = (WindoorModel)_windoorService.CreateWindoor(0, "Window1", "Desc", 900, 1200,
+                                                                   123456, 1, 10.00M, true, true, 10000);
+            }
+            catch (Exception ex)
+            {
+                StringAssert.Contains(ex.Message, "Please enter a value bigger than 1");
+                return;
+            }
+            Assert.Fail("No exception was thrown.");
+        }
+
+        [TestMethod]
         public void CreateWindoor_WindowNameRequired_ShouldReturnException()
         {
             try
@@ -78,6 +95,74 @@ namespace ServiceLayer.Tests
             catch (Exception ex)
             {
                 StringAssert.Contains(ex.Message, "The field WD_name must be a string with a minimum length of 6 and a maximum length of 15.");
+                return;
+            }
+            Assert.Fail("No exception was thrown.");
+        }
+
+        [TestMethod]
+        public void CreateWindoor_WindowWidthValueBelow400_ShouldReturnException()
+        {
+            try
+            {
+                WindoorModel wndr = new WindoorModel();
+                wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 399, 1200,
+                                                                   123456, 1, 10.00M, true, true, 10000);
+            }
+            catch (Exception ex)
+            {
+                StringAssert.Contains(ex.Message, "Please enter a value bigger than or equal to 400");
+                return;
+            }
+            Assert.Fail("No exception was thrown.");
+        }
+
+        [TestMethod]
+        public void CreateWindoor_WindowHeightValueBelow400_ShouldReturnException()
+        {
+            try
+            {
+                WindoorModel wndr = new WindoorModel();
+                wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 400, 399,
+                                                                   123456, 1, 10.00M, true, true, 10000);
+            }
+            catch (Exception ex)
+            {
+                StringAssert.Contains(ex.Message, "Please enter a value bigger than or equal to 400");
+                return;
+            }
+            Assert.Fail("No exception was thrown.");
+        }
+
+        [TestMethod]
+        public void CreateWindoor_WindowZoomValue0_ShouldReturnException()
+        {
+            try
+            {
+                WindoorModel wndr = new WindoorModel();
+                wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 400, 400,
+                                                                   123456, 1, 10.00M, true, true, 0);
+            }
+            catch (Exception ex)
+            {
+                StringAssert.Contains(ex.Message, "Please enter a value bigger than or equal to 1");
+                return;
+            }
+            Assert.Fail("No exception was thrown.");
+        }
+
+        [TestMethod]
+        public void CreateWindoor_WindowQtyValue0_ShouldReturnException()
+        {
+            try
+            {
+                WindoorModel wndr = new WindoorModel();
+                wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 400, 400,
+                                                                   123456, 0, 10.00M, true, true, 1);
+            }
+            catch (Exception ex)
+            {
+                StringAssert.Contains(ex.Message, "Please enter a value bigger than or equal to 1");
                 return;
             }
             Assert.Fail("No exception was thrown.");

@@ -67,10 +67,5 @@ namespace PresentationLayer.Views.UserControls
         {
             EventHelpers.RaisePaintEvent(sender, innerFramePaintEventRaised, e);
         }
-
-        public FrameUC GetNewFrame()
-        {
-            return new FrameUC();
-        }
     }
 }
