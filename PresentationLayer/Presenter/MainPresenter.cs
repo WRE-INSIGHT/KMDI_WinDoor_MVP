@@ -16,15 +16,21 @@ namespace PresentationLayer.Presenter
         private IUserModel _userModel;
         private ILoginView _loginView;
         private IFrameUCPresenter _frameUCPresenter;
+        private IBasePlatformPresenter _basePlatformPresenter;
         private IfrmDimensionPresenter _frmDimensionPresenter;
         private IQuotationModel _quotationModel;
-        Panel _basePlatform;
 
-        public MainPresenter(IMainView mainView, IFrameUCPresenter frameUCPresenter, IfrmDimensionPresenter frmDimensionPresenter)
+        Panel _pnlMain;
+
+        public MainPresenter(IMainView mainView, 
+                             IFrameUCPresenter frameUCPresenter, 
+                             IfrmDimensionPresenter frmDimensionPresenter,
+                             IBasePlatformPresenter basePlatformPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
             _frmDimensionPresenter = frmDimensionPresenter;
+            _basePlatformPresenter = basePlatformPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -35,7 +41,7 @@ namespace PresentationLayer.Presenter
         {
             _userModel = userModel;
             _loginView = loginView;
-            _basePlatform = _mainView.GetBasePlatform();
+            _pnlMain = _mainView.GetPanelMain();
         }
         private void SubscribeToEventsSetup()
         {
@@ -44,6 +50,13 @@ namespace PresentationLayer.Presenter
             _mainView.OpenToolStripButtonClickEventRaised += new EventHandler(OnOpenToolStripButtonClickEventRaised);
             _mainView.NewFrameButtonClickEventRaised += new EventHandler(OnNewFrameButtonClickEventRaised);
             _mainView.NewQuotationMenuItemClickEventRaised += new EventHandler(OnNewQuotationMenuItemClickEventRaised);
+            _mainView.PanelMainSizeChangedEventRaised += new EventHandler(OnPanelMainSizeChangedEventRaised);
+        }
+
+        private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)
+        {
+            Panel pnlMain = (Panel)sender;
+            pnlMain.PerformLayout();
         }
 
         private void OnNewQuotationMenuItemClickEventRaised(object sender, EventArgs e)
@@ -63,7 +76,7 @@ namespace PresentationLayer.Presenter
                 //quotation_ref_no = input.ToUpper();
                 //Text = quotation_ref_no;
 
-                _frmDimensionPresenter.SetValues(this);
+                _frmDimensionPresenter.SetPresenters(this, _basePlatformPresenter);
                 _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 //ProfileTypeToolStripMenuItem_Click(sender, e);
             }
@@ -72,7 +85,7 @@ namespace PresentationLayer.Presenter
         private void OnNewFrameButtonClickEventRaised(object sender, EventArgs e)
         {
             FrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance();
-            _basePlatform.Controls.Add((FrameUC)frameUCP.GetFrameUC());
+            _basePlatformPresenter.AddFrame(frameUCP.GetFrameUC());
         }
 
         private void OnOpenToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -102,11 +115,9 @@ namespace PresentationLayer.Presenter
             _mainView.Nickname = _userModel.Nickname;
         }
 
-        public void SetValues_flpBase(int wd, int ht)
+        public void AddBasePlatform(IBasePlatformUC basePlatform)
         {
-            _mainView.flp_base_Wd = wd;
-            _mainView.flp_base_Ht = ht;
-            _mainView.flp_base_visibility = true;
+            _pnlMain.Controls.Add((UserControl)basePlatform);
         }
     }
 }

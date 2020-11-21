@@ -65,7 +65,9 @@
     <Compile Include="Presenter\IMainPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFrameUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Views\UserControls\FrameUC.Designer.cs">
       <DependentUpon>FrameUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\IBasePlatformUC.cs" />
     <Compile Include="Views\UserControls\IFrameUC.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

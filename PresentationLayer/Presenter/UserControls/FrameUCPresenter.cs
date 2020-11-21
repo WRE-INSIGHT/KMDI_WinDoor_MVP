@@ -13,7 +13,7 @@ namespace PresentationLayer.Presenter.UserControls
 {
     public class FrameUCPresenter : IFrameUCPresenter
     {
-        private IFrameUC _frameUC;
+        IFrameUC _frameUC;
 
         //private float zoom = 1.0f;
         public FrameUCPresenter(IFrameUC frameUC)

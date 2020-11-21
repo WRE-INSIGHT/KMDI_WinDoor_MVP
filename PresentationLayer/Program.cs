@@ -32,17 +32,26 @@ namespace PresentationLayer
                 new UnityContainer()
                 .RegisterType<ILoginView, LoginView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ILoginPresenter, LoginPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IMainView, MainView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMainPresenter, MainPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserModel, UserModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserLoginModel, UserLoginModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IFrameUC, FrameUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFrameUCPresenter, FrameUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IfrmDimensionView, frmDimensionView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IfrmDimensionPresenter, frmDimensionPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IBasePlatformUC, BasePlatformUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IBasePlatformPresenter, BasePlatformPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();

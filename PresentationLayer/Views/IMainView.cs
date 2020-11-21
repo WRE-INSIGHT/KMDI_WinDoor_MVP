@@ -10,13 +10,11 @@ namespace PresentationLayer.Views
         event EventHandler OpenToolStripButtonClickEventRaised;
         event EventHandler NewFrameButtonClickEventRaised;
         event EventHandler NewQuotationMenuItemClickEventRaised;
+        event EventHandler PanelMainSizeChangedEventRaised;
         string Nickname { set; }
         string ofd_InitialDirectory { get; set; }
         string mainview_title { get; set; }
-        int flp_base_Wd { get; set; }
-        int flp_base_Ht { get; set; }
-        bool flp_base_visibility { get; set; }
         void ShowMainView();
-        Panel GetBasePlatform();
+        Panel GetPanelMain();
     }
 }

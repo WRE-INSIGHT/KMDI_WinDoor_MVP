@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PresentationLayer.Views;
+using PresentationLayer.Presenter.UserControls;
 
 namespace PresentationLayer.Presenter
 {
@@ -11,6 +12,7 @@ namespace PresentationLayer.Presenter
     {
         IfrmDimensionView _frmDimensionView;
         private IMainPresenter _mainPresenter;
+        private IBasePlatformPresenter _basePlatformPresenter;
 
         public frmDimensionPresenter(IfrmDimensionView frmDimensionView)
         {
@@ -36,7 +38,8 @@ namespace PresentationLayer.Presenter
 
         private void OnbtnOKClickedEventRaised(object sender, EventArgs e)
         {
-            _mainPresenter.SetValues_flpBase(_frmDimensionView.InumWidth, _frmDimensionView.InumHeight);
+            _mainPresenter.AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+            _basePlatformPresenter.SetBasePlatformSize(_frmDimensionView.InumWidth, _frmDimensionView.InumHeight);
             _frmDimensionView.ClosefrmDimension();
         }
 
@@ -46,9 +49,10 @@ namespace PresentationLayer.Presenter
             _frmDimensionView.InumHeight = 400;
         }
 
-        public void SetValues(IMainPresenter mainPresenter)
+        public void SetPresenters(IMainPresenter mainPresenter, IBasePlatformPresenter basePlatformPresenter)
         {
             _mainPresenter = mainPresenter;
+            _basePlatformPresenter = basePlatformPresenter;
         }
     }
 }

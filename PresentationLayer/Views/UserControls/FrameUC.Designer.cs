@@ -37,7 +37,7 @@
             this.pnl_inner.Location = new System.Drawing.Point(26, 26);
             this.pnl_inner.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_inner.Name = "pnl_inner";
-            this.pnl_inner.Size = new System.Drawing.Size(248, 248);
+            this.pnl_inner.Size = new System.Drawing.Size(48, 48);
             this.pnl_inner.TabIndex = 0;
             this.pnl_inner.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_inner_Paint);
             // 
@@ -49,7 +49,7 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "FrameUC";
             this.Padding = new System.Windows.Forms.Padding(26);
-            this.Size = new System.Drawing.Size(300, 300);
+            this.Size = new System.Drawing.Size(100, 100);
             this.Load += new System.EventHandler(this.FrameUC_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FrameUC_Paint);
             this.ResumeLayout(false);

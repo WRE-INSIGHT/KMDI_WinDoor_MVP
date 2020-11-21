@@ -1,4 +1,5 @@
 ﻿using PresentationLayer.Views;
+using PresentationLayer.Presenter.UserControls;
 using System;
 
 namespace PresentationLayer.Presenter
@@ -6,6 +7,6 @@ namespace PresentationLayer.Presenter
     public interface IfrmDimensionPresenter
     {
         IfrmDimensionView GetDimensionView();
-        void SetValues(IMainPresenter mainPresenter);
+        void SetPresenters(IMainPresenter mainPresenter, IBasePlatformPresenter basePlatformPresenter);
     }
 }

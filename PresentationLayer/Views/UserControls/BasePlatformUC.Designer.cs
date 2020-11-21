@@ -28,31 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnl_frameDragDrop = new System.Windows.Forms.Panel();
+            this.flp_frameDragDrop = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
-            // pnl_frameDragDrop
+            // flp_frameDragDrop
             // 
-            this.pnl_frameDragDrop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_frameDragDrop.Location = new System.Drawing.Point(70, 35);
-            this.pnl_frameDragDrop.Name = "pnl_frameDragDrop";
-            this.pnl_frameDragDrop.Size = new System.Drawing.Size(230, 265);
-            this.pnl_frameDragDrop.TabIndex = 0;
+            this.flp_frameDragDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flp_frameDragDrop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flp_frameDragDrop.Location = new System.Drawing.Point(70, 35);
+            this.flp_frameDragDrop.Name = "flp_frameDragDrop";
+            this.flp_frameDragDrop.Size = new System.Drawing.Size(300, 300);
+            this.flp_frameDragDrop.TabIndex = 0;
             // 
             // BasePlatformUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnl_frameDragDrop);
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.flp_frameDragDrop);
+            this.Location = new System.Drawing.Point(161, 97);
             this.Name = "BasePlatformUC";
             this.Padding = new System.Windows.Forms.Padding(70, 35, 0, 0);
-            this.Size = new System.Drawing.Size(300, 300);
+            this.Size = new System.Drawing.Size(370, 335);
+            this.SizeChanged += new System.EventHandler(this.BasePlatformUC_SizeChanged);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.BasePlatformUC_Paint);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnl_frameDragDrop;
+        private System.Windows.Forms.FlowLayoutPanel flp_frameDragDrop;
     }
 }
