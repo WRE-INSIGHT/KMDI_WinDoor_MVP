@@ -69,6 +69,8 @@
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFrameUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IItemInfoUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\frmDimensionView.cs">
@@ -106,6 +108,13 @@
     </Compile>
     <Compile Include="Views\UserControls\IBasePlatformUC.cs" />
     <Compile Include="Views\UserControls\IFrameUC.cs" />
+    <Compile Include="Views\UserControls\IItemInfoUC.cs" />
+    <Compile Include="Views\UserControls\ItemInfoUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ItemInfoUC.Designer.cs">
+      <DependentUpon>ItemInfoUC.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -130,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameUC.resx">
       <DependentUpon>FrameUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ItemInfoUC.resx">
+      <DependentUpon>ItemInfoUC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

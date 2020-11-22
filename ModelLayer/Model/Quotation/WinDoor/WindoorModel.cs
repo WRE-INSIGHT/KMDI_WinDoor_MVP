@@ -41,5 +41,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a value bigger than or equal to {1}")]
         public int WD_quantity { get; set; } //dapat hindi zero
         public decimal WD_discount { get; set; }
+
+        [Required(ErrorMessage = "Window Profile is Required")]
+        public string WD_profile { get; set; }
     }
 }

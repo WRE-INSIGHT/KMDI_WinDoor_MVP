@@ -70,7 +70,7 @@ namespace PresentationLayer.Presenter
                 _loginView.pboxVisibility = true;
                 _userLoginModel.Username = _loginView.username;
                 _userLoginModel.Password = _loginView.password;
-                IUserModel userModel =  await _userService.Login_Prsntr(_userLoginModel);
+                IUserModel userModel = await _userService.Login_Prsntr(_userLoginModel);
 
                 if (userModel != null)
                 {
@@ -83,7 +83,7 @@ namespace PresentationLayer.Presenter
             catch (Exception ex)
             {
                 Logger log = new Logger(ex.Message, ex.StackTrace);
-                MessageBox.Show(ex.Message, ex.HResult.ToString() , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _loginView.pboxVisibility = false;
             }
         }

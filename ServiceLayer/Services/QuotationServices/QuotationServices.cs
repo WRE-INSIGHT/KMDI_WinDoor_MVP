@@ -9,7 +9,7 @@ using ServiceLayer.CommonServices;
 
 namespace ServiceLayer.Services.QuotationServices
 {
-    public class QuotationServices
+    public class QuotationServices : IQuotationServices
     {
         private IModelDataAnnotationCheck _modelCheck;
         public QuotationServices(IModelDataAnnotationCheck modelCheck)

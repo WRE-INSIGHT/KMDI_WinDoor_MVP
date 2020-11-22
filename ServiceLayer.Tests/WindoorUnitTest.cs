@@ -31,10 +31,11 @@ namespace ServiceLayer.Tests
             expected_wndr.WD_visibility = true;
             expected_wndr.WD_orientation = true;
             expected_wndr.WD_zoom = 10000;
+            expected_wndr.WD_profile = "C70 Profile";
 
             WindoorModel wndr = new WindoorModel();
             wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Item 1", "Desc", 900, 1200,
-                                                               123456, 1, 10.00M, true, true, 10000);
+                                                               123456, 1, 10.00M, true, true, 10000, "C70 Profile");
 
             Assert.AreEqual(expected_wndr.WD_id, wndr.WD_id);
             Assert.AreEqual(expected_wndr.WD_name, wndr.WD_name);
@@ -47,6 +48,7 @@ namespace ServiceLayer.Tests
             Assert.AreEqual(expected_wndr.WD_visibility, wndr.WD_visibility);
             Assert.AreEqual(expected_wndr.WD_orientation, wndr.WD_orientation);
             Assert.AreEqual(expected_wndr.WD_zoom, wndr.WD_zoom);
+            Assert.AreEqual(expected_wndr.WD_profile, wndr.WD_profile);
         }
 
         [TestMethod]
@@ -56,7 +58,7 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(0, "Window1", "Desc", 900, 1200,
-                                                                   123456, 1, 10.00M, true, true, 10000);
+                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile");
             }
             catch (Exception ex)
             {
@@ -73,7 +75,7 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "", "Desc", 900, 1200,
-                                                                   123456, 1, 10.00M, true, true, 10000);
+                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile");
             }
             catch (Exception ex)
             {
@@ -90,7 +92,7 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "W1", "Desc", 900, 1200,
-                                                                   123456, 1, 10.00M, true, true, 10000);
+                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile");
             }
             catch (Exception ex)
             {
@@ -107,7 +109,7 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 399, 1200,
-                                                                   123456, 1, 10.00M, true, true, 10000);
+                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile");
             }
             catch (Exception ex)
             {
@@ -124,7 +126,7 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 400, 399,
-                                                                   123456, 1, 10.00M, true, true, 10000);
+                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile");
             }
             catch (Exception ex)
             {
@@ -141,7 +143,7 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 400, 400,
-                                                                   123456, 1, 10.00M, true, true, 0);
+                                                                   123456, 1, 10.00M, true, true, 0, "C70 Profile");
             }
             catch (Exception ex)
             {
@@ -158,7 +160,7 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 400, 400,
-                                                                   123456, 0, 10.00M, true, true, 1);
+                                                                   123456, 0, 10.00M, true, true, 1, "C70 Profile");
             }
             catch (Exception ex)
             {

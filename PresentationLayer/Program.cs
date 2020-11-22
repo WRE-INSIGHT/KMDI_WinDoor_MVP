@@ -11,8 +11,12 @@ using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.Services.UserServices;
+using ServiceLayer.Services.QuotationServices;
+using ServiceLayer.Services.WindoorServices;
 using ServiceLayer.CommonServices;
 using ModelLayer.Model.User;
+using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.WinDoor;
 using Unity.Injection;
 
 namespace PresentationLayer
@@ -39,12 +43,20 @@ namespace PresentationLayer
                 .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserModel, UserModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserLoginModel, UserLoginModel>(new ContainerControlledLifetimeManager())
-                .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IQuotationServices, QuotationServices>(new ContainerControlledLifetimeManager())
+                //.RegisterType<IQuotationModel, QuotationModel>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IWindoorServices, WindoorServices>(new ContainerControlledLifetimeManager())
+                //.RegisterType<IWindoorModel, WindoorModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IFrameUC, FrameUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFrameUCPresenter, FrameUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IItemInfoUC, ItemInfoUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IItemInfoUCPresenter, ItemInfoUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IfrmDimensionView, frmDimensionView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IfrmDimensionPresenter, frmDimensionPresenter>(new ContainerControlledLifetimeManager())

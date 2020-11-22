@@ -27,7 +27,8 @@ namespace ServiceLayer.Services.WindoorServices
                                            decimal WD_discount, 
                                            bool WD_visibility, 
                                            bool WD_orientation, 
-                                           int WD_zoom)
+                                           int WD_zoom,
+                                           string WD_Profile)
         {
             WindoorModel wndr = new WindoorModel();
             wndr.WD_id = WD_id;
@@ -41,6 +42,7 @@ namespace ServiceLayer.Services.WindoorServices
             wndr.WD_visibility = WD_visibility;
             wndr.WD_orientation = WD_orientation;
             wndr.WD_zoom = WD_zoom;
+            wndr.WD_profile = WD_Profile;
 
             ValidateModel(wndr);
             return wndr;

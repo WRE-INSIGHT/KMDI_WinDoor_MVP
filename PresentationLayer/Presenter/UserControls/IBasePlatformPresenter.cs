@@ -1,4 +1,5 @@
 ﻿using PresentationLayer.Views.UserControls;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Presenter.UserControls
@@ -10,5 +11,7 @@ namespace PresentationLayer.Presenter.UserControls
         void AddFrame(IFrameUC frame);
         void InvalidateBasePlatform();
         void PerformLayoutBasePlatform();
+        List<int> lst_wd_toPaint(int flpMain_width, List<int> lst_ctrlWds);
+        List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts);
     }
 }

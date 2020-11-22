@@ -14,7 +14,8 @@ namespace ServiceLayer.Services.WindoorServices
                                     decimal WD_discount,
                                     bool WD_visibility,
                                     bool WD_orientation,
-                                    int WD_zoom);
+                                    int WD_zoom,
+                                    string WD_Profile);
         void ValidateModel(IWindoorModel windoorModel);
     }
 }

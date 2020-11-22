@@ -56,13 +56,82 @@ namespace PresentationLayer.Presenter.UserControls
         private void OnbasePlatformPaintEventRaised(object sender, PaintEventArgs e)
         {
             //dito ilagay ang drawing ng red-arrowlines
-
-            int ctrl_Y = 35,
-                ctrl_Width = 0;
+            Graphics g = e.Graphics;
+            int ctrl_Y = 35;
             Pen redP = new Pen(Color.Red);
             redP.Width = 3.5f;
             Font dmnsion_font = new Font("Segoe UI", 20, FontStyle.Bold);
 
+            string dmnsion_w = _flpMain.Width.ToString();
+            Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
+            Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
+
+            Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
+            double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
+
+            //arrow for WIDTH
+            Point[] arrwhd_pnts_W1 =
+            {
+                new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
+                dmnsion_w_startP,
+                new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
+            };
+
+            Point[] arrwhd_pnts_W2 =
+            {
+                new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
+                dmnsion_w_endP,
+                new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
+            };
+
+            g.DrawLines(redP, arrwhd_pnts_W1);
+            g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
+            g.DrawLines(redP, arrwhd_pnts_W2);
+            TextRenderer.DrawText(g,
+                                  dmnsion_w,
+                                  dmnsion_font,
+                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
+                                                new Size(s.Width, s.Height)),
+                                  Color.Black,
+                                  SystemColors.Control,
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            //arrow for WIDTH
+
+
+            //arrow for HEIGHT
+            string dmnsion_h = _flpMain.Height.ToString();
+            Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
+            Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
+
+            Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
+            double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
+
+            Point[] arrwhd_pnts_H1 =
+            {
+                    new Point(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
+                    dmnsion_h_startP,
+                    new Point(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
+                };
+
+            Point[] arrwhd_pnts_H2 =
+            {
+                    new Point(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
+                    dmnsion_h_endP,
+                    new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
+                };
+
+            g.DrawLines(redP, arrwhd_pnts_H1);
+            g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
+            g.DrawLines(redP, arrwhd_pnts_H2);
+            TextRenderer.DrawText(g,
+                                  dmnsion_h,
+                                  dmnsion_font,
+                                  new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
+                                                new Size(s2.Width, s2.Height)),
+                                  Color.Black,
+                                  SystemColors.Control,
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            //arrow for HEIGHT
         }
 
         public IBasePlatformUC getBasePlatformViewUC()
@@ -89,6 +158,20 @@ namespace PresentationLayer.Presenter.UserControls
         public void PerformLayoutBasePlatform()
         {
             _basePlatfomrUC.PerformLayoutThis();
+        }
+
+        public List<int> lst_wd_toPaint(int flpMain_width, List<int> lst_ctrlWds)
+        {
+            List<int> lst_wd = new List<int>();
+
+            return lst_wd;
+        }
+
+        public List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts)
+        {
+            List<int> lst_ht = new List<int>();
+
+            return lst_ht;
         }
     }
 }

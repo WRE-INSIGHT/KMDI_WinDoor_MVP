@@ -57,9 +57,34 @@ namespace PresentationLayer.Views
             }
         }
 
+        public bool c70rRadBtn_CheckState
+        {
+            set
+            {
+                rad_c70.Checked = value;
+            }
+        }
+
+        public bool premiLineRadBtn_CheckState
+        {
+            set
+            {
+                rad_PremiLine.Checked = value;
+            }
+        }
+
+        public int thisHeight
+        {
+            set
+            {
+                this.Height = value;
+            }
+        }
+
         public event EventHandler btnCancelClickedEventRaised;
         public event EventHandler btnOKClickedEventRaised;
         public event EventHandler frmDimensionLoadEventRaised;
+        public event EventHandler radbtnCheckChangedEventRaised;
 
         public void ShowfrmDimension()
         {
@@ -72,17 +97,22 @@ namespace PresentationLayer.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(this, btnOKClickedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, btnOKClickedEventRaised, e);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(this, btnCancelClickedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, btnCancelClickedEventRaised, e);
         }
 
         public void ClosefrmDimension()
         {
             this.Hide();
+        }
+
+        private void radbtn_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, radbtnCheckChangedEventRaised, e);
         }
     }
 }

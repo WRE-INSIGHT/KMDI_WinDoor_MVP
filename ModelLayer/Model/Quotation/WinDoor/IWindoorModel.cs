@@ -3,6 +3,7 @@
     public interface IWindoorModel
     {
         string WD_description { get; set; }
+        string WD_profile { get; set; }
         decimal WD_discount { get; set; }
         int WD_height { get; set; }
         int WD_id { get; set; }

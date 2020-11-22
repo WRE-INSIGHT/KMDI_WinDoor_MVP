@@ -7,6 +7,10 @@ using System.Windows.Forms;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views.UserControls;
 using Microsoft.VisualBasic;
+using ModelLayer.Model.Quotation.WinDoor;
+using System.Collections.Generic;
+using ServiceLayer.Services.QuotationServices;
+using ServiceLayer.Services.WindoorServices;
 
 namespace PresentationLayer.Presenter
 {
@@ -15,22 +19,44 @@ namespace PresentationLayer.Presenter
         IMainView _mainView;
         private IUserModel _userModel;
         private ILoginView _loginView;
+        private IQuotationServices _quotationServices;
+        private IWindoorServices _windoorServices;
         private IFrameUCPresenter _frameUCPresenter;
         private IBasePlatformPresenter _basePlatformPresenter;
         private IfrmDimensionPresenter _frmDimensionPresenter;
+        private IItemInfoUCPresenter _itemInfoUCPresenter;
         private IQuotationModel _quotationModel;
 
-        Panel _pnlMain;
+        Panel _pnlMain, _pnlItems;
 
-        public MainPresenter(IMainView mainView, 
-                             IFrameUCPresenter frameUCPresenter, 
+        public string inputted_quotationRefNo
+        {
+            get
+            {
+                return input_qrefno;
+            }
+
+            set
+            {
+                input_qrefno = value;
+            }
+        }
+
+        public MainPresenter(IMainView mainView,
+                             IFrameUCPresenter frameUCPresenter,
                              IfrmDimensionPresenter frmDimensionPresenter,
-                             IBasePlatformPresenter basePlatformPresenter)
+                             IBasePlatformPresenter basePlatformPresenter,
+                             IQuotationServices quotationServices,
+                             IWindoorServices windoorServices,
+                             IItemInfoUCPresenter itemInfoUCPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
             _frmDimensionPresenter = frmDimensionPresenter;
             _basePlatformPresenter = basePlatformPresenter;
+            _quotationServices = quotationServices;
+            _windoorServices = windoorServices;
+            _itemInfoUCPresenter = itemInfoUCPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -42,6 +68,7 @@ namespace PresentationLayer.Presenter
             _userModel = userModel;
             _loginView = loginView;
             _pnlMain = _mainView.GetPanelMain();
+            _pnlItems = _mainView.GetPanelItems();
         }
         private void SubscribeToEventsSetup()
         {
@@ -51,6 +78,26 @@ namespace PresentationLayer.Presenter
             _mainView.NewFrameButtonClickEventRaised += new EventHandler(OnNewFrameButtonClickEventRaised);
             _mainView.NewQuotationMenuItemClickEventRaised += new EventHandler(OnNewQuotationMenuItemClickEventRaised);
             _mainView.PanelMainSizeChangedEventRaised += new EventHandler(OnPanelMainSizeChangedEventRaised);
+            _mainView.CreateNewFrameClickEventRaised += new EventHandler(OnCreateNewFrameClickEventRaised);
+        }
+
+        private void OnCreateNewFrameClickEventRaised(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmItem = (ToolStripMenuItem)sender;
+            _frmDimensionPresenter.SetPresenters(this, _basePlatformPresenter);
+            _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Frame;
+
+            if (tsmItem.Name == "C70ToolStripMenuItem")
+            {
+                _frmDimensionPresenter.SetProfileType("C70 Profile");
+            }
+            else if (tsmItem.Name == "PremiLineToolStripMenuItem")
+            {
+                _frmDimensionPresenter.SetProfileType("PremiLine");
+            }
+
+            _frmDimensionPresenter.SetHeight();
+            _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
         }
 
         private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)
@@ -59,14 +106,15 @@ namespace PresentationLayer.Presenter
             pnlMain.PerformLayout();
         }
 
+        private string input_qrefno;
         private void OnNewQuotationMenuItemClickEventRaised(object sender, EventArgs e)
         {
             // check if the _quotationModel is null or not.
             //_quotationModel == null, then createNew()
             //_quotationModel != null, then deleteExisting() and createNew()
 
-            string input = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
-            if (input != "" && input != "0")
+            input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
+            if (input_qrefno != "" && input_qrefno != "0")
             {
                 //Clearing_Operation();
                 //pnl_flpMain.Visible = false;
@@ -77,6 +125,9 @@ namespace PresentationLayer.Presenter
                 //Text = quotation_ref_no;
 
                 _frmDimensionPresenter.SetPresenters(this, _basePlatformPresenter);
+                _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
+                _frmDimensionPresenter.SetProfileType("C70 Profile");
+                _frmDimensionPresenter.SetHeight();
                 _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 //ProfileTypeToolStripMenuItem_Click(sender, e);
             }
@@ -118,6 +169,55 @@ namespace PresentationLayer.Presenter
         public void AddBasePlatform(IBasePlatformUC basePlatform)
         {
             _pnlMain.Controls.Add((UserControl)basePlatform);
+        }
+
+        public void AddQuotationModel(string quotation_ref_no)
+        {
+            _quotationModel = _quotationServices.CreateQuotationModel(quotation_ref_no, new List<IWindoorModel>());
+        }
+
+        public IWindoorModel AddWindoorModel(int WD_width, 
+                                             int WD_height,
+                                             string WD_Profile,
+                                             string WD_name = "",
+                                             string WD_description = "",
+                                             int WD_quantity = 1,
+                                             bool WD_visibility = true,
+                                             bool WD_orientation = true,
+                                             int WD_zoom = 1,
+                                             int WD_price = 0,
+                                             decimal WD_discount = 0.0M)
+        {
+            int wd_id = _quotationModel.Lst_Windoor.Count + 1;
+            if (WD_name == "")
+            {
+                WD_name = "Item " + wd_id;
+            }
+            IWindoorModel wndr = _windoorServices.CreateWindoor(wd_id, WD_name, WD_description, WD_width, WD_height, WD_price, WD_quantity, WD_discount, WD_visibility, WD_orientation, WD_zoom, WD_Profile);
+
+            return wndr;
+        }
+
+        public void AddWndrList_QuotationModel(IWindoorModel wndr)
+        {
+            _quotationModel.Lst_Windoor.Add(wndr);
+        }
+
+        public void AddItemInfoUC(IWindoorModel wndr)
+        {
+            ItemInfoUCPresenter ItemInfoUCP = (ItemInfoUCPresenter)_itemInfoUCPresenter.GetNewInstance(wndr);
+            _pnlItems.Controls.Add((UserControl)ItemInfoUCP.GetItemInfoUC());
+        }
+
+        public void ItemToolStrip_Enable()
+        {
+            _mainView.ItemToolStripEnabled = true;
+        }
+
+        public void SetMainViewTitle(string qrefno, string itemname, string profiletype, bool saved)
+        {
+            _mainView.mainview_title = qrefno.ToUpper() + " >> " + itemname + " (" + profiletype + ")";
+            _mainView.mainview_title = (saved == false) ? _mainView.mainview_title + "*" : _mainView.mainview_title.Replace("*", "");
         }
     }
 }

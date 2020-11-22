@@ -145,6 +145,7 @@
             this.rad_PremiLine.TabStop = true;
             this.rad_PremiLine.Text = "PremiLine";
             this.rad_PremiLine.UseVisualStyleBackColor = true;
+            this.rad_PremiLine.CheckedChanged += new System.EventHandler(this.radbtn_CheckedChanged);
             // 
             // rad_c70
             // 
@@ -157,6 +158,7 @@
             this.rad_c70.TabStop = true;
             this.rad_c70.Text = "C70";
             this.rad_c70.UseVisualStyleBackColor = true;
+            this.rad_c70.CheckedChanged += new System.EventHandler(this.radbtn_CheckedChanged);
             // 
             // frmDimensionView
             // 

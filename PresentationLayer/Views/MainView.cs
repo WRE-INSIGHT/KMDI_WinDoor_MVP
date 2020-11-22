@@ -47,12 +47,21 @@ namespace PresentationLayer.Views
             }
         }
 
+        public bool ItemToolStripEnabled
+        {
+            set
+            {
+                ItemToolStripMenuItem.Enabled = value;
+            }
+        }
+
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
         public event EventHandler NewFrameButtonClickEventRaised;
         public event EventHandler NewQuotationMenuItemClickEventRaised;
         public event EventHandler PanelMainSizeChangedEventRaised;
+        public event EventHandler CreateNewFrameClickEventRaised;
 
         public MainView()
         {
@@ -101,6 +110,16 @@ namespace PresentationLayer.Views
         private void pnlMain_SizeChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, PanelMainSizeChangedEventRaised, e);
+        }
+
+        public Panel GetPanelItems()
+        {
+            return pnlItems;
+        }
+
+        private void CreateNewFrame_Clicked(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CreateNewFrameClickEventRaised, e);
         }
     }
 }
