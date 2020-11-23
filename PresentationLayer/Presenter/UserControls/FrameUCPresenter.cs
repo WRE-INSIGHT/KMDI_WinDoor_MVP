@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ModelLayer.Model.Quotation.Frame;
 using PresentationLayer.Views.UserControls;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,6 +15,8 @@ namespace PresentationLayer.Presenter.UserControls
     public class FrameUCPresenter : IFrameUCPresenter
     {
         IFrameUC _frameUC;
+
+        private IFrameModel _frameModel;
 
         //private float zoom = 1.0f;
         public FrameUCPresenter(IFrameUC frameUC)
@@ -68,6 +71,12 @@ namespace PresentationLayer.Presenter.UserControls
 
         public void OnFrameLoadEventRaised(object sender, EventArgs e)
         {
+            _frameUC.fWidth = _frameModel.Frame_Width;
+            _frameUC.fHeight = _frameModel.Frame_Height;
+
+            Enum enum_frameType = _frameModel.Frame_Type;
+            _frameUC.fPadding = Convert.ToInt32(enum_frameType);
+
             _frameUC.InvalidateThis();
         }
 
@@ -143,7 +152,7 @@ namespace PresentationLayer.Presenter.UserControls
             return _frameUC;
         }
 
-        public IFrameUCPresenter GetNewInstance()
+        public IFrameUCPresenter GetNewInstance(IFrameModel frameModel)
         {
             IUnityContainer unityC;
             unityC =
@@ -151,8 +160,14 @@ namespace PresentationLayer.Presenter.UserControls
                 .RegisterType<IFrameUC, FrameUC>()
                 .RegisterType<IFrameUCPresenter, FrameUCPresenter>();
             FrameUCPresenter framePresenter = unityC.Resolve<FrameUCPresenter>();
+            framePresenter._frameModel = frameModel;
 
             return framePresenter;
+        }
+
+        public void SetValues(IFrameModel frameModel)
+        {
+            _frameModel = frameModel;
         }
     }
 }

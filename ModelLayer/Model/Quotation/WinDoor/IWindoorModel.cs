@@ -1,4 +1,7 @@
-﻿namespace ModelLayer.Model.Quotation.WinDoor
+﻿using ModelLayer.Model.Quotation.Frame;
+using System.Collections.Generic;
+
+namespace ModelLayer.Model.Quotation.WinDoor
 {
     public interface IWindoorModel
     {
@@ -14,5 +17,6 @@
         bool WD_visibility { get; set; }
         int WD_width { get; set; }
         int WD_zoom { get; set; }
+        List<IFrameModel> lst_frame { get; set; }
     }
 }

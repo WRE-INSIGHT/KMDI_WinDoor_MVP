@@ -55,13 +55,22 @@ namespace PresentationLayer.Views
             }
         }
 
+        public bool CreateNewWindoorBtnEnabled
+        {
+            set
+            {
+                tsBtnNwin.Enabled = value;
+                tsBtnNdoor.Enabled = value;
+            }
+        }
+
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
         public event EventHandler NewFrameButtonClickEventRaised;
         public event EventHandler NewQuotationMenuItemClickEventRaised;
         public event EventHandler PanelMainSizeChangedEventRaised;
-        public event EventHandler CreateNewFrameClickEventRaised;
+        public event EventHandler CreateNewItemClickEventRaised;
 
         public MainView()
         {
@@ -91,12 +100,7 @@ namespace PresentationLayer.Views
                 EventHelpers.RaiseEvent(this, OpenToolStripButtonClickEventRaised, e);
             }
         }
-
-        private void tsBtnNwin_Click(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(this, NewFrameButtonClickEventRaised, e);
-        }
-
+        
         private void QuotationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(this, NewQuotationMenuItemClickEventRaised, e);
@@ -116,10 +120,15 @@ namespace PresentationLayer.Views
         {
             return pnlItems;
         }
+        
+        private void CreateNewItem_Clicked(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CreateNewItemClickEventRaised, e);
+        }
 
         private void CreateNewFrame_Clicked(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, CreateNewFrameClickEventRaised, e);
+            EventHelpers.RaiseEvent(sender, NewFrameButtonClickEventRaised, e);
         }
     }
 }

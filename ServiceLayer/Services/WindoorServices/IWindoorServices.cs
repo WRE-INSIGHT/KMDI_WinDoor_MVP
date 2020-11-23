@@ -1,4 +1,6 @@
-﻿using ModelLayer.Model.Quotation.WinDoor;
+﻿using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.WinDoor;
+using System.Collections.Generic;
 
 namespace ServiceLayer.Services.WindoorServices
 {
@@ -15,7 +17,8 @@ namespace ServiceLayer.Services.WindoorServices
                                     bool WD_visibility,
                                     bool WD_orientation,
                                     int WD_zoom,
-                                    string WD_Profile);
+                                    string WD_Profile,
+                                    List<IFrameModel> lst_frame);
         void ValidateModel(IWindoorModel windoorModel);
     }
 }

@@ -39,6 +39,14 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public int fPadding
+        {
+            set
+            {
+                this.Padding = new Padding(value);
+            }
+        }
+
         public FrameUC()
         {
             InitializeComponent();

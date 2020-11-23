@@ -11,6 +11,7 @@ namespace PresentationLayer.Views.UserControls
     public interface IBasePlatformUC
     {
         event PaintEventHandler basePlatformPaintEventRaised;
+        event PaintEventHandler flpFrameDragDropPaintEventRaised;
         event EventHandler basePlatformSizeChangedEventRaised;
         int bp_Width { get; set; }
         int bp_Height { get; set; }

@@ -33,12 +33,12 @@
             // 
             // flp_frameDragDrop
             // 
-            this.flp_frameDragDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flp_frameDragDrop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_frameDragDrop.Location = new System.Drawing.Point(70, 35);
             this.flp_frameDragDrop.Name = "flp_frameDragDrop";
             this.flp_frameDragDrop.Size = new System.Drawing.Size(302, 302);
             this.flp_frameDragDrop.TabIndex = 0;
+            this.flp_frameDragDrop.Paint += new System.Windows.Forms.PaintEventHandler(this.flp_frameDragDrop_Paint);
             // 
             // BasePlatformUC
             // 

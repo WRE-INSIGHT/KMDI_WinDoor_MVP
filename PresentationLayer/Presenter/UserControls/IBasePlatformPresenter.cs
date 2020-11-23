@@ -11,6 +11,7 @@ namespace PresentationLayer.Presenter.UserControls
         void AddFrame(IFrameUC frame);
         void InvalidateBasePlatform();
         void PerformLayoutBasePlatform();
+        void Invalidate_flpMain();
         List<int> lst_wd_toPaint(int flpMain_width, List<int> lst_ctrlWds);
         List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts);
     }

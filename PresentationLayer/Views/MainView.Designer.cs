@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mnsMainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,14 +151,14 @@
             this.C70ToolStripMenuItem.Name = "C70ToolStripMenuItem";
             this.C70ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.C70ToolStripMenuItem.Text = "&C70";
-            this.C70ToolStripMenuItem.Click += new System.EventHandler(this.CreateNewFrame_Clicked);
+            this.C70ToolStripMenuItem.Click += new System.EventHandler(this.CreateNewItem_Clicked);
             // 
             // PremiLineToolStripMenuItem
             // 
             this.PremiLineToolStripMenuItem.Name = "PremiLineToolStripMenuItem";
             this.PremiLineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.PremiLineToolStripMenuItem.Text = "P&remiLine";
-            this.PremiLineToolStripMenuItem.Click += new System.EventHandler(this.CreateNewFrame_Clicked);
+            this.PremiLineToolStripMenuItem.Click += new System.EventHandler(this.CreateNewItem_Clicked);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -187,13 +187,13 @@
             // 
             this.CostingItemsToolStripMenuItem.Enabled = false;
             this.CostingItemsToolStripMenuItem.Name = "CostingItemsToolStripMenuItem";
-            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.CostingItemsToolStripMenuItem.Text = "Items";
             // 
             // defaultValuesToolStripMenuItem
             // 
             this.defaultValuesToolStripMenuItem.Name = "defaultValuesToolStripMenuItem";
-            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.defaultValuesToolStripMenuItem.Text = "Default values";
             this.defaultValuesToolStripMenuItem.Visible = false;
             // 
@@ -280,12 +280,13 @@
             // tsBtnNwin
             // 
             this.tsBtnNwin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsBtnNwin.Enabled = false;
             this.tsBtnNwin.Image = global::PresentationLayer.Properties.Resources.AddNew_Window;
             this.tsBtnNwin.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnNwin.Name = "tsBtnNwin";
             this.tsBtnNwin.Size = new System.Drawing.Size(24, 29);
             this.tsBtnNwin.Text = "New Window";
-            this.tsBtnNwin.Click += new System.EventHandler(this.tsBtnNwin_Click);
+            this.tsBtnNwin.Click += new System.EventHandler(this.CreateNewFrame_Clicked);
             // 
             // tsBtnNdoor
             // 
@@ -297,6 +298,7 @@
             this.tsBtnNdoor.Name = "tsBtnNdoor";
             this.tsBtnNdoor.Size = new System.Drawing.Size(24, 32);
             this.tsBtnNdoor.Text = "New Door";
+            this.tsBtnNdoor.Click += new System.EventHandler(this.CreateNewFrame_Clicked);
             // 
             // openToolStripButton
             // 
@@ -516,14 +518,14 @@
             this.dgvControls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ImageCol,
             this.DescCol});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvControls.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvControls.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvControls.Location = new System.Drawing.Point(0, 29);
             this.dgvControls.MultiSelect = false;

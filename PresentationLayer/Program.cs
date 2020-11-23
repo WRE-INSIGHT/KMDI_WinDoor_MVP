@@ -13,10 +13,11 @@ using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.Services.UserServices;
 using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
+using ServiceLayer.Services.FrameServices;
 using ServiceLayer.CommonServices;
 using ModelLayer.Model.User;
-using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.Quotation.Frame;
 using Unity.Injection;
 
 namespace PresentationLayer
@@ -45,10 +46,12 @@ namespace PresentationLayer
                 .RegisterType<IUserLoginModel, UserLoginModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IQuotationServices, QuotationServices>(new ContainerControlledLifetimeManager())
-                //.RegisterType<IQuotationModel, QuotationModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IWindoorServices, WindoorServices>(new ContainerControlledLifetimeManager())
-                //.RegisterType<IWindoorModel, WindoorModel>(new ContainerControlledLifetimeManager())
+                .RegisterType<IWindoorModel, WindoorModel>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IFrameServices, FrameServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFrameModel, FrameModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
 

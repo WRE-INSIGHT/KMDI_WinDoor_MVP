@@ -2,6 +2,8 @@
 using PresentationLayer.Presenter.UserControls;
 using System;
 using static PresentationLayer.Presenter.frmDimensionPresenter;
+using ModelLayer.Model.Quotation.Frame;
+using System.Windows.Forms;
 
 namespace PresentationLayer.Presenter
 {
@@ -9,7 +11,7 @@ namespace PresentationLayer.Presenter
     {
         Show_Purpose purpose { get; set; }
         IfrmDimensionView GetDimensionView();
-        void SetPresenters(IMainPresenter mainPresenter, IBasePlatformPresenter basePlatformPresenter);
+        void SetPresenters(IMainPresenter mainPresenter);
         void SetProfileType(string profileType);
         void SetHeight();
     }

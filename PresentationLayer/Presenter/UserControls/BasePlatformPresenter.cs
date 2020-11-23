@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PresentationLayer.Views.UserControls;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -25,6 +26,34 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _basePlatfomrUC.basePlatformPaintEventRaised += new PaintEventHandler(OnbasePlatformPaintEventRaised);
             _basePlatfomrUC.basePlatformSizeChangedEventRaised += new EventHandler(OnbasePlatformSizeChangedEventRaised);
+            _basePlatfomrUC.flpFrameDragDropPaintEventRaised += new PaintEventHandler(OnflpFrameDragDropPaintEventRaised);
+        }
+
+        private void OnflpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
+        {
+            Panel pnl = (Panel)sender;
+            Graphics g = e.Graphics;
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+
+            //string accname_col = pnl.AccessibleName;
+            Color col = Color.Black;
+            //if (accname_col == "Black")
+            //{
+            //    col = Color.Black;
+            //}
+            //else if (accname_col == "Blue")
+            //{
+            //    col = Color.Blue;
+            //}
+
+            int w = 1;
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+            g.DrawRectangle(new Pen(col, w), new Rectangle(0,
+                                                           0,
+                                                           pnl.ClientRectangle.Width - w,
+                                                           pnl.ClientRectangle.Height - w));
         }
 
         private void OnbasePlatformSizeChangedEventRaised(object sender, EventArgs e)
@@ -172,6 +201,11 @@ namespace PresentationLayer.Presenter.UserControls
             List<int> lst_ht = new List<int>();
 
             return lst_ht;
+        }
+
+        public void Invalidate_flpMain()
+        {
+            _flpMain.Invalidate();
         }
     }
 }

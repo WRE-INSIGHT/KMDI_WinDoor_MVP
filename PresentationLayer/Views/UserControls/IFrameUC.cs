@@ -15,6 +15,7 @@ namespace PresentationLayer.Views.UserControls
 
         int fWidth { get; set; }
         int fHeight { get; set; }
+        int fPadding { set; }
 
         void InvalidateThis();
     }

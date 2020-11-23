@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ModelLayer.Model.Quotation.Frame;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -44,5 +45,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         [Required(ErrorMessage = "Window Profile is Required")]
         public string WD_profile { get; set; }
+
+        public List<IFrameModel> lst_frame { get; set; }
     }
 }

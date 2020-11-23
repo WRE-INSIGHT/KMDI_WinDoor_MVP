@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PresentationLayer.Views;
 using PresentationLayer.Presenter.UserControls;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.Quotation.Frame;
 using CommonComponents;
 using System.Windows.Forms;
 
@@ -14,14 +15,15 @@ namespace PresentationLayer.Presenter
     public class frmDimensionPresenter : IfrmDimensionPresenter
     {
         IfrmDimensionView _frmDimensionView;
+
         private IMainPresenter _mainPresenter;
-        private IBasePlatformPresenter _basePlatformPresenter;
 
         private string profile_type;
         public enum Show_Purpose
         {
             Quotation = 1,
-            CreateNew_Frame = 2
+            CreateNew_Item = 2,
+            CreateNew_Frame = 3
         }
 
         private Show_Purpose this_purpose;
@@ -77,42 +79,25 @@ namespace PresentationLayer.Presenter
 
         private void OnbtnOKClickedEventRaised(object sender, EventArgs e)
         {
-            try
+            if (this_purpose == Show_Purpose.Quotation)
             {
-                if (this_purpose == Show_Purpose.Quotation)
-                {
-                    _mainPresenter.AddQuotationModel(_mainPresenter.inputted_quotationRefNo);
-                }
-
-                IWindoorModel wndr = _mainPresenter.AddWindoorModel(_frmDimensionView.InumWidth, _frmDimensionView.InumHeight, profile_type);
-                if (this_purpose == Show_Purpose.Quotation)
-                {
-                    _mainPresenter.AddWndrList_QuotationModel(wndr);
-
-                    _mainPresenter.AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-                    _mainPresenter.ItemToolStrip_Enable();
-                }
-                else if (this_purpose == Show_Purpose.CreateNew_Frame)
-                {
-                    _mainPresenter.AddWndrList_QuotationModel(wndr);
-                }
-                _basePlatformPresenter.SetBasePlatformSize(_frmDimensionView.InumWidth, _frmDimensionView.InumHeight);
-                _basePlatformPresenter.InvalidateBasePlatform();
-
-                _mainPresenter.SetMainViewTitle(_mainPresenter.inputted_quotationRefNo,
-                                                wndr.WD_name,
-                                                wndr.WD_profile,
-                                                false);
-                _mainPresenter.AddItemInfoUC(wndr); //add item information user control
-
-                //add item properties user control
-                _frmDimensionView.ClosefrmDimension();
+                _mainPresenter.Extends_frmDimensionOKClicked_Quotations(_frmDimensionView.InumWidth,
+                                                                        _frmDimensionView.InumHeight,
+                                                                        profile_type);
             }
-            catch (Exception ex)
+            else if (this_purpose == Show_Purpose.CreateNew_Item)
             {
-                Logger log = new Logger(ex.Message, ex.StackTrace);
-                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _mainPresenter.Extends_frmDimensionOKClicked_CreateNewItem(_frmDimensionView.InumWidth,
+                                                                           _frmDimensionView.InumHeight,
+                                                                           profile_type);
             }
+            else if (this_purpose == Show_Purpose.CreateNew_Frame)
+            {
+                _mainPresenter.Extends_frmDimensionOKClicked_CreateNewFrame(_frmDimensionView.InumWidth,
+                                                                            _frmDimensionView.InumHeight,
+                                                                            profile_type);
+            }
+            //_frmDimensionView.ClosefrmDimension();
         }
 
         private void OnfrmDimensionLoadEventRaised(object sender, EventArgs e)
@@ -121,10 +106,9 @@ namespace PresentationLayer.Presenter
             _frmDimensionView.InumHeight = 400;
         }
 
-        public void SetPresenters(IMainPresenter mainPresenter, IBasePlatformPresenter basePlatformPresenter)
+        public void SetPresenters(IMainPresenter mainPresenter)
         {
             _mainPresenter = mainPresenter;
-            _basePlatformPresenter = basePlatformPresenter;
         }
 
         public void SetProfileType(string profileType)
@@ -138,7 +122,7 @@ namespace PresentationLayer.Presenter
             {
                 _frmDimensionView.thisHeight = 193;
             }
-            else if (purpose == Show_Purpose.CreateNew_Frame)
+            else if (purpose == Show_Purpose.CreateNew_Item || purpose == Show_Purpose.CreateNew_Frame)
             {
                 _frmDimensionView.thisHeight = 156;
             }

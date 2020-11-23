@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.Quotation.Frame;
 using ServiceLayer.CommonServices;
 
 namespace ServiceLayer.Services.WindoorServices
@@ -28,7 +29,8 @@ namespace ServiceLayer.Services.WindoorServices
                                            bool WD_visibility, 
                                            bool WD_orientation, 
                                            int WD_zoom,
-                                           string WD_Profile)
+                                           string WD_Profile,
+                                           List<IFrameModel> lst_frame)
         {
             WindoorModel wndr = new WindoorModel();
             wndr.WD_id = WD_id;
@@ -43,6 +45,7 @@ namespace ServiceLayer.Services.WindoorServices
             wndr.WD_orientation = WD_orientation;
             wndr.WD_zoom = WD_zoom;
             wndr.WD_profile = WD_Profile;
+            wndr.lst_frame = lst_frame;
 
             ValidateModel(wndr);
             return wndr;

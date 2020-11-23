@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Quotation\Frame\FrameModel.cs" />
+    <Compile Include="Model\Quotation\Frame\IFrameModel.cs" />
     <Compile Include="Model\Quotation\IQuotationModel.cs" />
     <Compile Include="Model\Quotation\QuotationModel.cs" />
     <Compile Include="Model\Quotation\WinDoor\IWindoorModel.cs" />
@@ -51,6 +53,7 @@
     <Compile Include="Model\User\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
