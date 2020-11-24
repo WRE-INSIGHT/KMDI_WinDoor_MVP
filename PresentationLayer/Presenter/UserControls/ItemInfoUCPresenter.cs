@@ -35,12 +35,7 @@ namespace PresentationLayer.Presenter.UserControls
             _itemInfoUC.ItemVisibility = _windoorModel.WD_visibility;
             _itemInfoUC.BringToFrontThis();
         }
-
-        public void SetValues(IWindoorModel windoorModel)
-        {
-            _windoorModel = windoorModel;
-        }
-
+        
         public IItemInfoUCPresenter GetNewInstance(IWindoorModel wndr)
         {
             IUnityContainer unityC;

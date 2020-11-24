@@ -84,6 +84,7 @@ namespace PresentationLayer.Views
         
         private void MainView_Load(object sender, EventArgs e)
         {
+            pnlProperties.Size = new Size(185, 629);
             EventHelpers.RaiseEvent(this, MainViewLoadEventRaised, e);
         }
 
@@ -129,6 +130,11 @@ namespace PresentationLayer.Views
         private void CreateNewFrame_Clicked(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, NewFrameButtonClickEventRaised, e);
+        }
+
+        public Panel GetPanelPropertiesBody()
+        {
+            return pnlPropertiesBody;
         }
     }
 }

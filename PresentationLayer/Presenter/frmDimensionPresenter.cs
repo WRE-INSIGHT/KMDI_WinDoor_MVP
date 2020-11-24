@@ -79,25 +79,32 @@ namespace PresentationLayer.Presenter
 
         private void OnbtnOKClickedEventRaised(object sender, EventArgs e)
         {
-            if (this_purpose == Show_Purpose.Quotation)
+            try
             {
-                _mainPresenter.Extends_frmDimensionOKClicked_Quotations(_frmDimensionView.InumWidth,
-                                                                        _frmDimensionView.InumHeight,
-                                                                        profile_type);
-            }
-            else if (this_purpose == Show_Purpose.CreateNew_Item)
-            {
-                _mainPresenter.Extends_frmDimensionOKClicked_CreateNewItem(_frmDimensionView.InumWidth,
-                                                                           _frmDimensionView.InumHeight,
-                                                                           profile_type);
-            }
-            else if (this_purpose == Show_Purpose.CreateNew_Frame)
-            {
-                _mainPresenter.Extends_frmDimensionOKClicked_CreateNewFrame(_frmDimensionView.InumWidth,
+                if (this_purpose == Show_Purpose.Quotation)
+                {
+                    _mainPresenter.Extends_frmDimensionOKClicked_Quotations(_frmDimensionView.InumWidth,
                                                                             _frmDimensionView.InumHeight,
                                                                             profile_type);
+                }
+                else if (this_purpose == Show_Purpose.CreateNew_Item)
+                {
+                    _mainPresenter.Extends_frmDimensionOKClicked_CreateNewItem(_frmDimensionView.InumWidth,
+                                                                               _frmDimensionView.InumHeight,
+                                                                               profile_type);
+                }
+                else if (this_purpose == Show_Purpose.CreateNew_Frame)
+                {
+                    _mainPresenter.Extends_frmDimensionOKClicked_CreateNewFrame(_frmDimensionView.InumWidth,
+                                                                                _frmDimensionView.InumHeight,
+                                                                                profile_type);
+                }
             }
-            //_frmDimensionView.ClosefrmDimension();
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void OnfrmDimensionLoadEventRaised(object sender, EventArgs e)

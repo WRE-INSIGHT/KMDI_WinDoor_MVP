@@ -66,8 +66,10 @@
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IFramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
@@ -100,6 +102,12 @@
     <Compile Include="Views\UserControls\BasePlatformUC.Designer.cs">
       <DependentUpon>BasePlatformUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\FramePropertiesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\FramePropertiesUC.Designer.cs">
+      <DependentUpon>FramePropertiesUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\FrameUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,6 +115,7 @@
       <DependentUpon>FrameUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\IBasePlatformUC.cs" />
+    <Compile Include="Views\UserControls\IFramePropertiesUC.cs" />
     <Compile Include="Views\UserControls\IFrameUC.cs" />
     <Compile Include="Views\UserControls\IItemInfoUC.cs" />
     <Compile Include="Views\UserControls\ItemInfoUC.cs">
@@ -136,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\BasePlatformUC.resx">
       <DependentUpon>BasePlatformUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\FramePropertiesUC.resx">
+      <DependentUpon>FramePropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameUC.resx">
       <DependentUpon>FrameUC.cs</DependentUpon>

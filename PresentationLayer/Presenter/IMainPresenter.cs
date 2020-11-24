@@ -38,10 +38,9 @@ namespace PresentationLayer.Presenter
                                   string frame_name = "");
         void AddItemInfoUC(IWindoorModel wndr);
         void AddFrameUC(IFrameModel frameModel);
-        void ItemToolStrip_Enable();
-        void CreateNewWindoorBtn_Enable();
+        void AddFramePropertiesUC(IFrameModel frameModel);
         void Invalidate_pnlMain();
-        void SetMainViewTitle(string qrefno, string itemname, string profiletype, bool saved);
+        //void SetMainViewTitle(string qrefno, string itemname, string profiletype, bool saved);
         void Extends_frmDimensionOKClicked_Quotations(int numWidth, int numHeight, string profileType);
         void Extends_frmDimensionOKClicked_CreateNewItem(int numWidth, int numHeight, string profileType);
         void Extends_frmDimensionOKClicked_CreateNewFrame(int numWidth, int numHeight, string profileType);

@@ -35,7 +35,8 @@ namespace ServiceLayer.Tests
 
             WindoorModel wndr = new WindoorModel();
             wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Item 1", "Desc", 900, 1200,
-                                                               123456, 1, 10.00M, true, true, 10000, "C70 Profile");
+                                                               123456, 1, 10.00M, true, true, 10000, "C70 Profile",
+                                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Frame.IFrameModel>());
 
             Assert.AreEqual(expected_wndr.WD_id, wndr.WD_id);
             Assert.AreEqual(expected_wndr.WD_name, wndr.WD_name);
@@ -58,7 +59,8 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(0, "Window1", "Desc", 900, 1200,
-                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile");
+                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile",
+                                                                   new System.Collections.Generic.List<ModelLayer.Model.Quotation.Frame.IFrameModel>());
             }
             catch (Exception ex)
             {
@@ -75,7 +77,8 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "", "Desc", 900, 1200,
-                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile");
+                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile",
+                                                                   new System.Collections.Generic.List<ModelLayer.Model.Quotation.Frame.IFrameModel>());
             }
             catch (Exception ex)
             {
@@ -92,7 +95,8 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "W1", "Desc", 900, 1200,
-                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile");
+                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile",
+                                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Frame.IFrameModel>());
             }
             catch (Exception ex)
             {
@@ -109,11 +113,12 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 399, 1200,
-                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile");
+                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile",
+                                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Frame.IFrameModel>());
             }
             catch (Exception ex)
             {
-                StringAssert.Contains(ex.Message, "Please enter a value bigger than or equal to 400");
+                StringAssert.Contains(ex.Message, "Please enter a value for Window Width bigger than or equal to 400");
                 return;
             }
             Assert.Fail("No exception was thrown.");
@@ -126,11 +131,12 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 400, 399,
-                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile");
+                                                                   123456, 1, 10.00M, true, true, 10000, "C70 Profile",
+                                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Frame.IFrameModel>());
             }
             catch (Exception ex)
             {
-                StringAssert.Contains(ex.Message, "Please enter a value bigger than or equal to 400");
+                StringAssert.Contains(ex.Message, "Please enter a value for Window Height bigger than or equal to 400");
                 return;
             }
             Assert.Fail("No exception was thrown.");
@@ -143,11 +149,12 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 400, 400,
-                                                                   123456, 1, 10.00M, true, true, 0, "C70 Profile");
+                                                                   123456, 1, 10.00M, true, true, 0, "C70 Profile",
+                                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Frame.IFrameModel>());
             }
             catch (Exception ex)
             {
-                StringAssert.Contains(ex.Message, "Please enter a value bigger than or equal to 1");
+                StringAssert.Contains(ex.Message, "Please enter a zoom value bigger than or equal to 1");
                 return;
             }
             Assert.Fail("No exception was thrown.");
@@ -160,11 +167,12 @@ namespace ServiceLayer.Tests
             {
                 WindoorModel wndr = new WindoorModel();
                 wndr = (WindoorModel)_windoorService.CreateWindoor(1, "Window1", "Desc", 400, 400,
-                                                                   123456, 0, 10.00M, true, true, 1, "C70 Profile");
+                                                                   123456, 0, 10.00M, true, true, 1, "C70 Profile",
+                                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Frame.IFrameModel>());
             }
             catch (Exception ex)
             {
-                StringAssert.Contains(ex.Message, "Please enter a value bigger than or equal to 1");
+                StringAssert.Contains(ex.Message, "Please enter a value for Window Quantity bigger than or equal to 1");
                 return;
             }
             Assert.Fail("No exception was thrown.");

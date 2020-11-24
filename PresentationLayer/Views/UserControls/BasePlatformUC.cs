@@ -57,6 +57,14 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public bool thisVisibility
+        {
+            set
+            {
+                this.Visible = value;
+            }
+        }
+
         public event PaintEventHandler basePlatformPaintEventRaised;
         public event EventHandler basePlatformSizeChangedEventRaised;
         public event PaintEventHandler flpFrameDragDropPaintEventRaised;

@@ -24,13 +24,11 @@ namespace ServiceLayer.Services.FrameServices
                                        int frame_height, 
                                        FrameModel.Frame_Padding frame_type)
         {
-            FrameModel fr = new FrameModel();
-            fr.Frame_ID = frame_id;
-            fr.Frame_Name = frame_name;
-            fr.Frame_Width = frame_width;
-            fr.Frame_Height = frame_height;
-            fr.Frame_Type = frame_type;
-
+            IFrameModel fr = new FrameModel(frame_id,
+                                           frame_name,
+                                           frame_width,
+                                           frame_height,
+                                           frame_type);
             ValidateModel(fr);
 
             return fr;

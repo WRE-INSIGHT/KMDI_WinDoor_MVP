@@ -20,5 +20,6 @@ namespace PresentationLayer.Views
         void ShowMainView();
         Panel GetPanelMain();
         Panel GetPanelItems();
+        Panel GetPanelPropertiesBody();
     }
 }

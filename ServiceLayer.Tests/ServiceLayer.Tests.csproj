@@ -55,6 +55,7 @@
     <Compile Include="LoginUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuotationUnitTest.cs" />
+    <Compile Include="FrameUnitTest.cs" />
     <Compile Include="WindoorUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
