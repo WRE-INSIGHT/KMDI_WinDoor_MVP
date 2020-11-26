@@ -47,20 +47,25 @@ namespace PresentationLayer.Views
             }
         }
 
-        public bool ItemToolStripEnabled
-        {
-            set
-            {
-                ItemToolStripMenuItem.Enabled = value;
-            }
-        }
-
         public bool CreateNewWindoorBtnEnabled
         {
             set
             {
                 tsBtnNwin.Enabled = value;
                 tsBtnNdoor.Enabled = value;
+            }
+        }
+
+        public bool ItemToolStripEnabled
+        {
+            get
+            {
+                return ItemToolStripMenuItem.Enabled;
+            }
+
+            set
+            {
+                ItemToolStripMenuItem.Enabled = value;
             }
         }
 

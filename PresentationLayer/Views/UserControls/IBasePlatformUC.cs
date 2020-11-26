@@ -16,7 +16,7 @@ namespace PresentationLayer.Views.UserControls
         int bp_Width { get; set; }
         int bp_Height { get; set; }
         Point bp_Location { get; set; }
-        bool thisVisibility { set; }
+        bool thisVisibility { get; set; }
         void InvalidateThis();
         void PerformLayoutThis();
         FlowLayoutPanel GetFlpMain();

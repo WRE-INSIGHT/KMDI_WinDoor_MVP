@@ -81,6 +81,19 @@ namespace PresentationLayer.Views
             }
         }
 
+        public bool ThisVisibility
+        {
+            get
+            {
+                return this.Visible;
+            }
+
+            set
+            {
+                this.Visible = value;
+            }
+        }
+
         public event EventHandler btnCancelClickedEventRaised;
         public event EventHandler btnOKClickedEventRaised;
         public event EventHandler frmDimensionLoadEventRaised;

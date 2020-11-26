@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter
     public interface IfrmDimensionPresenter
     {
         Show_Purpose purpose { get; set; }
+        string profileType_frmDimensionPresenter { get; set; }
         IfrmDimensionView GetDimensionView();
         void SetPresenters(IMainPresenter mainPresenter);
         void SetProfileType(string profileType);

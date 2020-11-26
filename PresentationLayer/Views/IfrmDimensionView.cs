@@ -20,6 +20,7 @@ namespace PresentationLayer.Views
         int thisHeight { set; }
         bool c70rRadBtn_CheckState { set; }
         bool premiLineRadBtn_CheckState { set; }
+        bool ThisVisibility { get; set; }
         void ShowfrmDimension();
         void ClosefrmDimension();
     }

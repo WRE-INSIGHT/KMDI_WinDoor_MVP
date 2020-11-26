@@ -53,6 +53,45 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public IQuotationModel qoutationModel_MainPresenter
+        {
+            get
+            {
+                return _quotationModel;
+            }
+
+            set
+            {
+                _quotationModel = value;
+            }
+        }
+
+        public IBasePlatformPresenter basePlatform_MainPresenter
+        {
+            get
+            {
+                return _basePlatformPresenter;
+            }
+
+            set
+            {
+                _basePlatformPresenter = value;
+            }
+        }
+
+        public IfrmDimensionPresenter frmDimension_MainPresenter
+        {
+            get
+            {
+                return _frmDimensionPresenter;
+            }
+
+            set
+            {
+                _frmDimensionPresenter = value;
+            }
+        }
+
         public MainPresenter(IMainView mainView,
                              IFrameUCPresenter frameUCPresenter,
                              IfrmDimensionPresenter frmDimensionPresenter,
@@ -152,6 +191,7 @@ namespace PresentationLayer.Presenter
                     SetMainViewTitle(input_qrefno.ToUpper());
                     ItemToolStrip_Enable();
                     AddQuotationModel(input_qrefno);
+
                     _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
@@ -169,6 +209,7 @@ namespace PresentationLayer.Presenter
             //_quotationModel.Lst_Windoor.Clear();
             _pnlItems.Controls.Clear();
             _pnlPropertiesBody.Controls.Clear();
+            _pnlMain.Controls.Clear();
             SetMainViewTitle("");
             CreateNewWindoorBtn_Disable();
             ItemToolStrip_Disable();
@@ -370,7 +411,6 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                //AddQuotationModel(input_qrefno);
                 _windoorModel = AddWindoorModel(numWidth,
                                                 numHeight,
                                                 profileType);
@@ -407,10 +447,10 @@ namespace PresentationLayer.Presenter
             {
                 _windoorModel = AddWindoorModel(numWidth, numHeight, profileType);
                 AddWndrList_QuotationModel(_windoorModel);
-            AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-            _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
+                AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+                _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
 
-            _basePlatformPresenter.SetBasePlatformSize(numWidth, numHeight);
+                _basePlatformPresenter.SetBasePlatformSize(numWidth, numHeight);
                 AddItemInfoUC(_windoorModel); //add item information user control
 
                 _basePlatformPresenter.InvalidateBasePlatform();
@@ -454,5 +494,24 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public void Scenario_Quotation(bool QoutationInputBox_OkClicked, 
+                                       bool NewItem_OkClicked,
+                                       bool AddedFrame)
+        {
+            if (QoutationInputBox_OkClicked)
+            {
+                SetMainViewTitle(input_qrefno.ToUpper());
+                ItemToolStrip_Enable();
+                AddQuotationModel(input_qrefno);
+                _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
+
+                _frmDimensionPresenter.SetPresenters(this);
+                _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
+                _frmDimensionPresenter.SetProfileType("C70 Profile");
+                _frmDimensionPresenter.SetHeight();
+                _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+            }
+
+        }
     }
 }

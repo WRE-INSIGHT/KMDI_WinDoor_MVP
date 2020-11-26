@@ -59,6 +59,10 @@ namespace PresentationLayer.Views.UserControls
 
         public bool thisVisibility
         {
+            get
+            {
+                return this.Visible;
+            }
             set
             {
                 this.Visible = value;

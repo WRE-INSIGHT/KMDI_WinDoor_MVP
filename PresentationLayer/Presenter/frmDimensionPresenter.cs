@@ -41,6 +41,19 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public string profileType_frmDimensionPresenter
+        {
+            get
+            {
+                return profile_type;
+            }
+
+            set
+            {
+                profile_type = value;
+            }
+        }
+
         public frmDimensionPresenter(IfrmDimensionView frmDimensionView)
         {
             _frmDimensionView = frmDimensionView;

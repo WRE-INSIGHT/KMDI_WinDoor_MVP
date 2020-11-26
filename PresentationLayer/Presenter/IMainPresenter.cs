@@ -1,8 +1,10 @@
 ﻿using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Presenter.UserControls;
 using ModelLayer.Model.User;
 using System;
 using System.Collections.Generic;
+using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Frame;
 using System.Windows.Forms;
@@ -12,6 +14,9 @@ namespace PresentationLayer.Presenter
     public interface IMainPresenter
     {
         string inputted_quotationRefNo { get; set; }
+        IQuotationModel qoutationModel_MainPresenter { get; set; }
+        IBasePlatformPresenter basePlatform_MainPresenter { get; set; }
+        IfrmDimensionPresenter frmDimension_MainPresenter { get; set; }
         IMainView GetMainView();
         void SetValues(IUserModel userModel, ILoginView loginView);
         void AddBasePlatform(IBasePlatformUC basePlatform);
@@ -44,5 +49,8 @@ namespace PresentationLayer.Presenter
         void Extends_frmDimensionOKClicked_Quotations(int numWidth, int numHeight, string profileType);
         void Extends_frmDimensionOKClicked_CreateNewItem(int numWidth, int numHeight, string profileType);
         void Extends_frmDimensionOKClicked_CreateNewFrame(int numWidth, int numHeight, string profileType);
+        void Scenario_Quotation(bool QoutationInputBox_OkClicked,
+                                bool NewItem_OkClicked,
+                                bool AddedFrame);
     }
 }
