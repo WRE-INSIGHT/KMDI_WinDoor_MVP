@@ -54,6 +54,19 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public bool mainPresenter_qoutationInputBox_ClickedOK
+        {
+            get
+            {
+                return _mainPresenter_qoutationInputBox_ClickedOK;
+            }
+
+            set
+            {
+                _mainPresenter_qoutationInputBox_ClickedOK = value;
+            }
+        }
+
         public frmDimensionPresenter(IfrmDimensionView frmDimensionView)
         {
             _frmDimensionView = frmDimensionView;
@@ -90,34 +103,46 @@ namespace PresentationLayer.Presenter
             _frmDimensionView.ClosefrmDimension();
         }
 
+        private bool _mainPresenter_qoutationInputBox_ClickedOK;
         private void OnbtnOKClickedEventRaised(object sender, EventArgs e)
         {
-            try
-            {
-                if (this_purpose == Show_Purpose.Quotation)
-                {
-                    _mainPresenter.Extends_frmDimensionOKClicked_Quotations(_frmDimensionView.InumWidth,
-                                                                            _frmDimensionView.InumHeight,
-                                                                            profile_type);
-                }
-                else if (this_purpose == Show_Purpose.CreateNew_Item)
-                {
-                    _mainPresenter.Extends_frmDimensionOKClicked_CreateNewItem(_frmDimensionView.InumWidth,
-                                                                               _frmDimensionView.InumHeight,
-                                                                               profile_type);
-                }
-                else if (this_purpose == Show_Purpose.CreateNew_Frame)
-                {
-                    _mainPresenter.Extends_frmDimensionOKClicked_CreateNewFrame(_frmDimensionView.InumWidth,
-                                                                                _frmDimensionView.InumHeight,
-                                                                                profile_type);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger log = new Logger(ex.Message, ex.StackTrace);
-                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            _mainPresenter.Scenario_Quotation(_mainPresenter_qoutationInputBox_ClickedOK,
+                                              true, 
+                                              false, 
+                                              purpose, 
+                                              _frmDimensionView.InumWidth, 
+                                              _frmDimensionView.InumHeight, 
+                                              profile_type);
+
+            //try
+            //{
+            //if (this_purpose == Show_Purpose.Quotation)
+            //    {
+            //        _mainPresenter.frmDimension_SetValuesOnMainPresenter(_frmDimensionView.InumWidth,
+            //                                                             _frmDimensionView.InumHeight,
+            //                                                             profile_type);
+                    //_mainPresenter.Extends_frmDimensionOKClicked_Quotations(_frmDimensionView.InumWidth,
+                    //                                                        _frmDimensionView.InumHeight,
+                    //                                                        profile_type);
+                //}
+                //else if (this_purpose == Show_Purpose.CreateNew_Item)
+                //{
+                    //_mainPresenter.Extends_frmDimensionOKClicked_CreateNewItem(_frmDimensionView.InumWidth,
+                    //                                                           _frmDimensionView.InumHeight,
+                    //                                                           profile_type);
+                //}
+                //else if (this_purpose == Show_Purpose.CreateNew_Frame)
+                //{
+                    //_mainPresenter.Extends_frmDimensionOKClicked_CreateNewFrame(_frmDimensionView.InumWidth,
+                    //                                                            _frmDimensionView.InumHeight,
+                    //                                                            profile_type);
+                //}
+            //}
+            //catch (Exception ex)
+            //{
+            //    Logger log = new Logger(ex.Message, ex.StackTrace);
+            //    MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void OnfrmDimensionLoadEventRaised(object sender, EventArgs e)

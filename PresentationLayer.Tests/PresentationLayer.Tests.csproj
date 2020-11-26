@@ -36,8 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows.Forms" />
@@ -67,6 +67,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonComponents\CommonComponents.csproj">
+      <Project>{2af3ca7c-6526-430e-99d8-cad6e29cb83b}</Project>
+      <Name>CommonComponents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModelLayer\ModelLayer.csproj">
       <Project>{ba9438ac-96c8-4b54-9bc4-0422acb011d0}</Project>
       <Name>ModelLayer</Name>
@@ -75,12 +79,17 @@
       <Project>{f55051ce-5885-4ab8-b9ae-c4b6fd5dac7f}</Project>
       <Name>PresentationLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QueryLayer\QueryLayer.csproj">
+      <Project>{E0BEDB22-7BD8-4AC5-A44C-F197D66CC4D3}</Project>
+      <Name>QueryLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
       <Project>{F1988357-36F0-43B6-A1EA-EE16DFBBCA03}</Project>
       <Name>ServiceLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

@@ -9,17 +9,22 @@ using ModelLayer.Model.User;
 using CommonComponents;
 using QueryLayer.DataAccess.Repositories.Specific;
 using System.Windows.Forms;
+using Unity;
 
 namespace PresentationLayer.Presenter
 {
-    class LoginPresenter : BaseSpecificRepository, ILoginPresenter
+    public class LoginPresenter : BaseSpecificRepository, ILoginPresenter
     {
         ILoginView _loginView;
         private IMainPresenter _mainPresenter;
         private IUserServices _userService;
         private IUserLoginModel _userLoginModel;
+        private IUnityContainer _unityC;
 
-        public ILoginView GetLoginView() { return _loginView; }
+        public ILoginView GetLoginView(IUnityContainer unityC) {
+            _unityC = unityC;
+            return _loginView;
+        }
 
         public void SetMainView(ILoginView loginView)
         {
@@ -53,7 +58,7 @@ namespace PresentationLayer.Presenter
         private void OnOffLoginBtnClickEventRaised(object sender, EventArgs e)
         {
             IUserModel offline_model = _userService.Offline_Login();
-            _mainPresenter.SetValues(offline_model, _loginView);
+            _mainPresenter.SetValues(offline_model, _loginView, _unityC);
             _mainPresenter.GetMainView().ShowMainView();
             _loginView.frmVisibility = false;
         }
@@ -74,7 +79,7 @@ namespace PresentationLayer.Presenter
 
                 if (userModel != null)
                 {
-                    _mainPresenter.SetValues(userModel, _loginView);
+                    _mainPresenter.SetValues(userModel, _loginView, _unityC);
                     _mainPresenter.GetMainView().ShowMainView();
                     setPropertiesSettings();
                     _loginView.frmVisibility = false;

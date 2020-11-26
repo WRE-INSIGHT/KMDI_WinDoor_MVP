@@ -11,6 +11,7 @@ namespace PresentationLayer.Presenter
     {
         Show_Purpose purpose { get; set; }
         string profileType_frmDimensionPresenter { get; set; }
+        bool mainPresenter_qoutationInputBox_ClickedOK { get; set; }
         IfrmDimensionView GetDimensionView();
         void SetPresenters(IMainPresenter mainPresenter);
         void SetProfileType(string profileType);

@@ -16,7 +16,7 @@ namespace PresentationLayer.Views
         string ofd_InitialDirectory { get; set; }
         string mainview_title { get; set; }
         bool ItemToolStripEnabled { get;  set; }
-        bool CreateNewWindoorBtnEnabled { set; }
+        bool CreateNewWindoorBtnEnabled { get; set; }
         void ShowMainView();
         Panel GetPanelMain();
         Panel GetPanelItems();

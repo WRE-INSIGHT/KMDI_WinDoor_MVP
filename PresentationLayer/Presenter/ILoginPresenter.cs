@@ -1,10 +1,11 @@
 ﻿using PresentationLayer.Views;
+using Unity;
 
 namespace PresentationLayer.Presenter
 {
-    interface ILoginPresenter
+    public interface ILoginPresenter
     {
-        ILoginView GetLoginView();
+        ILoginView GetLoginView(IUnityContainer unityC);
         void SetMainView(ILoginView loginView);
     }
 }

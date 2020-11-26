@@ -49,6 +49,10 @@ namespace PresentationLayer.Views
 
         public bool CreateNewWindoorBtnEnabled
         {
+            get
+            {
+                return tsBtnNwin.Enabled = tsBtnNdoor.Enabled;
+            }
             set
             {
                 tsBtnNwin.Enabled = value;

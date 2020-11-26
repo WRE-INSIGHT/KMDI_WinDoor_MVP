@@ -14,18 +14,24 @@ using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
 using ServiceLayer.Services.FrameServices;
 using CommonComponents;
+using Unity;
 
 namespace PresentationLayer.Presenter
 {
     public class MainPresenter : IMainPresenter
     {
         IMainView _mainView;
+
+        private IUnityContainer _unityC;
+
         private IUserModel _userModel;
         private IQuotationModel _quotationModel;
         private IWindoorModel _windoorModel;
         private IFrameModel _frameModel;
 
         private ILoginView _loginView;
+        private IItemInfoUC _itemInfoUC;
+
         private IQuotationServices _quotationServices;
         private IWindoorServices _windoorServices;
         private IFrameServices _frameServices;
@@ -36,9 +42,12 @@ namespace PresentationLayer.Presenter
         private IItemInfoUCPresenter _itemInfoUCPresenter;
         private IFramePropertiesUCPresenter _framePropertiesUCPresenter;
 
+
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody;
 
         private FrameModel.Frame_Padding frameType;
+        
+        private string input_qrefno;
 
         public string inputted_quotationRefNo
         {
@@ -92,6 +101,58 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public IWindoorModel windoorModel_MainPresenter
+        {
+            get
+            {
+                return _windoorModel;
+            }
+
+            set
+            {
+                _windoorModel = value;
+            }
+        }
+
+        public Panel pnlMain_MainPresenter
+        {
+            get
+            {
+                return _pnlMain;
+            }
+
+            set
+            {
+                _pnlMain = value;
+            }
+        }
+
+        public Panel pnlItems_MainPresenter
+        {
+            get
+            {
+                return _pnlItems;
+            }
+
+            set
+            {
+                _pnlItems = value;
+            }
+        }
+
+        public IItemInfoUC itemInfoUC_MainPresenter
+        {
+            get
+            {
+                return _itemInfoUC;
+            }
+
+            set
+            {
+                _itemInfoUC = value;
+            }
+        }
+
         public MainPresenter(IMainView mainView,
                              IFrameUCPresenter frameUCPresenter,
                              IfrmDimensionPresenter frmDimensionPresenter,
@@ -117,13 +178,14 @@ namespace PresentationLayer.Presenter
         {
             return _mainView;
         }
-        public void SetValues(IUserModel userModel, ILoginView loginView)
+        public void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC)
         {
             _userModel = userModel;
             _loginView = loginView;
             _pnlMain = _mainView.GetPanelMain();
             _pnlItems = _mainView.GetPanelItems();
             _pnlPropertiesBody = _mainView.GetPanelPropertiesBody();
+            _unityC = unityC;
         }
         private void SubscribeToEventsSetup()
         {
@@ -139,20 +201,23 @@ namespace PresentationLayer.Presenter
         private void OnCreateNewItemClickEventRaised(object sender, EventArgs e)
         {
             ToolStripMenuItem tsmItem = (ToolStripMenuItem)sender;
-            _frmDimensionPresenter.SetPresenters(this);
-            _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Item;
+            //_frmDimensionPresenter.SetPresenters(this);
+            //_frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Item;
 
             if (tsmItem.Name == "C70ToolStripMenuItem")
             {
-                _frmDimensionPresenter.SetProfileType("C70 Profile");
+                Scenario_Quotation(false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile");
+                //_frmDimensionPresenter.SetProfileType("C70 Profile");
             }
             else if (tsmItem.Name == "PremiLineToolStripMenuItem")
             {
-                _frmDimensionPresenter.SetProfileType("PremiLine");
+                Scenario_Quotation(false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine");
+                //_frmDimensionPresenter.SetProfileType("PremiLine");
             }
 
-            _frmDimensionPresenter.SetHeight();
-            _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+            //_frmDimensionPresenter.SetHeight();
+            //_frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+
         }
 
         private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)
@@ -161,9 +226,9 @@ namespace PresentationLayer.Presenter
             pnlMain.PerformLayout();
         }
 
-        private string input_qrefno;
         private void OnNewQuotationMenuItemClickEventRaised(object sender, EventArgs e)
         {
+
             // check if the _quotationModel is null or not.
             //_quotationModel == null, then createNew()
             //_quotationModel != null, then deleteExisting() and createNew()
@@ -175,7 +240,7 @@ namespace PresentationLayer.Presenter
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     create_new = true;
-                    Clearing_Operation();
+                    Scenario_Quotation(false, false, false,frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
                 }
             }
             else
@@ -188,16 +253,7 @@ namespace PresentationLayer.Presenter
                 input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
                 if (input_qrefno != "" && input_qrefno != "0")
                 {
-                    SetMainViewTitle(input_qrefno.ToUpper());
-                    ItemToolStrip_Enable();
-                    AddQuotationModel(input_qrefno);
-
-                    _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
-                    _frmDimensionPresenter.SetPresenters(this);
-                    _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
-                    _frmDimensionPresenter.SetProfileType("C70 Profile");
-                    _frmDimensionPresenter.SetHeight();
-                    _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                    Scenario_Quotation(true, false, false,frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
                 }
             }
         }
@@ -330,8 +386,9 @@ namespace PresentationLayer.Presenter
 
         public void AddItemInfoUC(IWindoorModel wndr)
         {
-            IItemInfoUCPresenter ItemInfoUCP = (ItemInfoUCPresenter)_itemInfoUCPresenter.GetNewInstance(wndr);
-            _pnlItems.Controls.Add((UserControl)ItemInfoUCP.GetItemInfoUC());
+            IItemInfoUCPresenter itemInfoUCP = (ItemInfoUCPresenter)_itemInfoUCPresenter.GetNewInstance(wndr, _unityC);
+            _itemInfoUC = itemInfoUCP.GetItemInfoUC();
+            _pnlItems.Controls.Add((UserControl)itemInfoUCP.GetItemInfoUC());
         }
 
         public void AddFramePropertiesUC(IFrameModel frameModel)
@@ -496,22 +553,98 @@ namespace PresentationLayer.Presenter
 
         public void Scenario_Quotation(bool QoutationInputBox_OkClicked, 
                                        bool NewItem_OkClicked,
-                                       bool AddedFrame)
+                                       bool AddedFrame,
+                                       frmDimensionPresenter.Show_Purpose purpose,
+                                       int frmDimension_numWd,
+                                       int frmDimension_numHt,
+                                       string frmDimension_profileType)
         {
-            if (QoutationInputBox_OkClicked)
+            if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //Quotation Input box
             {
-                SetMainViewTitle(input_qrefno.ToUpper());
-                ItemToolStrip_Enable();
-                AddQuotationModel(input_qrefno);
-                _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
+                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame)
+                {
+                    Clearing_Operation();
+                }
+                else if (QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame)
+                {
+                    SetMainViewTitle(input_qrefno.ToUpper());
+                    ItemToolStrip_Enable();
+                    AddQuotationModel(input_qrefno);
+                    _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
 
-                _frmDimensionPresenter.SetPresenters(this);
-                _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
-                _frmDimensionPresenter.SetProfileType("C70 Profile");
-                _frmDimensionPresenter.SetHeight();
-                _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                    _frmDimensionPresenter.SetPresenters(this);
+                    _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
+                    _frmDimensionPresenter.SetProfileType("C70 Profile");
+                    _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = true;
+                    _frmDimensionPresenter.SetHeight();
+                    _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                }
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame)
+                {
+                    _frmDimensionPresenter.SetPresenters(this);
+                    _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Item;
+                    _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
+                    _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
+                    _frmDimensionPresenter.SetHeight();
+                    _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                }
             }
+            else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //frmDimension
+            {
+                if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame)
+                {
+                    if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
+                    {
+                        _windoorModel = AddWindoorModel(frmDimension_numWd,
+                                                        frmDimension_numHt,
+                                                        frmDimension_profileType);
+                        AddWndrList_QuotationModel(_windoorModel);
 
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+                        _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
+
+                        _basePlatformPresenter.SetBasePlatformSize(frmDimension_numWd,
+                                                                   frmDimension_numHt);
+                        AddItemInfoUC(_windoorModel);
+
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        _basePlatformPresenter.Invalidate_flpMain();
+                        SetMainViewTitle(input_qrefno,
+                                         _windoorModel.WD_name,
+                                         _windoorModel.WD_profile,
+                                         false);
+                        ItemToolStrip_Enable();
+                        CreateNewWindoorBtn_Enable();
+
+                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                    }
+                }
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame)
+                {
+                    if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
+                    {
+                        _windoorModel = AddWindoorModel(frmDimension_numWd, 
+                                                        frmDimension_numHt, 
+                                                        frmDimension_profileType);
+                        AddWndrList_QuotationModel(_windoorModel);
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+                        _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
+
+                        _basePlatformPresenter.SetBasePlatformSize(frmDimension_numWd, frmDimension_numHt);
+                        AddItemInfoUC(_windoorModel); //add item information user control
+
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        _basePlatformPresenter.Invalidate_flpMain();
+                        SetMainViewTitle(input_qrefno,
+                                         _windoorModel.WD_name,
+                                         _windoorModel.WD_profile,
+                                         false);
+
+                        CreateNewWindoorBtn_Enable();
+                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                    }
+                }
+            }
         }
     }
 }

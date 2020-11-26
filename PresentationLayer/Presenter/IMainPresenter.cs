@@ -8,6 +8,7 @@ using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Frame;
 using System.Windows.Forms;
+using Unity;
 
 namespace PresentationLayer.Presenter
 {
@@ -15,10 +16,14 @@ namespace PresentationLayer.Presenter
     {
         string inputted_quotationRefNo { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
+        IWindoorModel windoorModel_MainPresenter { get; set; }
         IBasePlatformPresenter basePlatform_MainPresenter { get; set; }
         IfrmDimensionPresenter frmDimension_MainPresenter { get; set; }
+        IItemInfoUC itemInfoUC_MainPresenter { get; set; }
+        Panel pnlMain_MainPresenter { get; set; }
+        Panel pnlItems_MainPresenter { get; set; }
         IMainView GetMainView();
-        void SetValues(IUserModel userModel, ILoginView loginView);
+        void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);
         void AddQuotationModel(string quotation_ref_no, List<IWindoorModel> lst_wndr = null);
         void AddWndrList_QuotationModel(IWindoorModel wndr);
@@ -51,6 +56,10 @@ namespace PresentationLayer.Presenter
         void Extends_frmDimensionOKClicked_CreateNewFrame(int numWidth, int numHeight, string profileType);
         void Scenario_Quotation(bool QoutationInputBox_OkClicked,
                                 bool NewItem_OkClicked,
-                                bool AddedFrame);
+                                bool AddedFrame,
+                                frmDimensionPresenter.Show_Purpose purpose,
+                                int frmDimension_numWd,
+                                int frmDimension_numHt,
+                                string frmDimension_profileType);
     }
 }

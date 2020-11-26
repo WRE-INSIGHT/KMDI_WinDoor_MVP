@@ -36,11 +36,9 @@ namespace PresentationLayer.Presenter.UserControls
             _itemInfoUC.BringToFrontThis();
         }
         
-        public IItemInfoUCPresenter GetNewInstance(IWindoorModel wndr)
+        public IItemInfoUCPresenter GetNewInstance(IWindoorModel wndr, IUnityContainer unityC)
         {
-            IUnityContainer unityC;
-            unityC =
-                new UnityContainer()
+            unityC
                 .RegisterType<IItemInfoUC, ItemInfoUC>()
                 .RegisterType<IItemInfoUCPresenter, ItemInfoUCPresenter>();
             ItemInfoUCPresenter itemInfoUCP = unityC.Resolve<ItemInfoUCPresenter>();

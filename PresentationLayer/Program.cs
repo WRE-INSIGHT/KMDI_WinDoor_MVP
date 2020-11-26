@@ -77,7 +77,7 @@ namespace PresentationLayer
 
             ILoginPresenter loginPresenter = UnityC.Resolve<LoginPresenter>();
 
-            ILoginView loginView = loginPresenter.GetLoginView();
+            ILoginView loginView = loginPresenter.GetLoginView(UnityC);
             Application.Run((LoginView)loginView);
         }
     }
