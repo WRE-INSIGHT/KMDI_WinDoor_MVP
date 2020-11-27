@@ -89,6 +89,13 @@ namespace PresentationLayer.Tests
         [TestMethod]
         public void ScenarioQuotation_ScenarioOne_Test()
         {
+            /*Dire-diretso hanggang paggawa ng isang frame.
+             * Total Width = 400
+             * Total Height = 400
+             * Frame Width = 400
+             * Frame Height = 400
+             */
+
             #region Scenario 1.1
             /*Scenario 1.1:
              Magcreate ng quotation: hanggang Click ok ng `Quotation Input Box`*/
@@ -128,12 +135,12 @@ namespace PresentationLayer.Tests
             _frmDimensionView.InumWidth = 400;
             _frmDimensionView.InumHeight = 400;
             _frmDimensionView.c70rRadBtn_CheckState = true;
-            _mainPresenter.Scenario_Quotation(true,
-                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
-                                              false,
+            _mainPresenter.Scenario_Quotation(_mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_newItem_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_AddedFrame_ClickedOK,
                                               frmDimensionPresenter.Show_Purpose.Quotation,
-                                              400,
-                                              400,
+                                              _mainPresenter.frmDimension_MainPresenter.GetDimensionView().InumWidth,
+                                              _mainPresenter.frmDimension_MainPresenter.GetDimensionView().InumHeight,
                                               _mainPresenter.frmDimension_MainPresenter.profileType_frmDimensionPresenter);
 
             //assert
@@ -161,6 +168,129 @@ namespace PresentationLayer.Tests
             Assert.AreEqual(true, _mainPresenter.GetMainView().ItemToolStripEnabled);
             Assert.AreEqual(true, _mainPresenter.GetMainView().CreateNewWindoorBtnEnabled);
             #endregion
+
+            #region Scenario 1.3
+            /*Scenario 1.3:
+             Magcreate ng quotation: 
+                Mag-Add ng Frame: Open ang frmDimension at click OK*/
+
+            //arrange
+            int exp_fWd = 400, exp_fHt = 400;
+            FrameModel.Frame_Padding exp_frameType = FrameModel.Frame_Padding.Window;
+
+            //act
+            _mainPresenter.frameType_MainPresenter = exp_frameType;
+            _mainPresenter.Scenario_Quotation(false, false, true,
+                                              frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
+                                              0,
+                                              0,
+                                              "");
+            _mainPresenter.Scenario_Quotation(_mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_newItem_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_AddedFrame_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.purpose,
+                                              exp_fWd,
+                                              exp_fHt,
+                                              _mainPresenter.frmDimension_MainPresenter.profileType_frmDimensionPresenter);
+            //assert
+            Assert.AreEqual(1, _mainPresenter.frameModel_MainPresenter.Frame_ID);
+            Assert.AreEqual(exp_fWd, _mainPresenter.frameModel_MainPresenter.Frame_Width);
+            Assert.AreEqual(exp_fHt, _mainPresenter.frameModel_MainPresenter.Frame_Height);
+            Assert.AreEqual("Frame 1", _mainPresenter.frameModel_MainPresenter.Frame_Name);
+            Assert.AreEqual(exp_frameType, _mainPresenter.frameModel_MainPresenter.Frame_Type);
+            CollectionAssert.Contains(_mainPresenter.windoorModel_MainPresenter.lst_frame, _mainPresenter.frameModel_MainPresenter);
+            CollectionAssert.Contains(_mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().GetFlpMain().Controls,
+                                      _mainPresenter.frameUC_MainPresenter);
+            CollectionAssert.Contains(_mainPresenter.pnlPropertiesBody_MainPresenter.Controls, 
+                                      _mainPresenter.framePropertiesUC_MainPresenter);
+            #endregion
+        }
+
+        [TestMethod]
+        public void ScenarioQuotation_ScenarioTwo_Test()
+        {
+            /*Dire-diretso hanggang paggawa ng 2 equal frames.
+             * Total Width = 800
+             * Total Height = 400
+             * Frame1 Width = 400
+             * Frame1 Height = 400
+             * Frame2 Width = 400
+             * Frame2 Height = 400
+             */
+
+            #region Scenario 2.1
+            /*Scenario 1.1:
+             Magcreate ng quotation: hanggang Click ok ng `Quotation Input Box`*/
+
+            //arrange
+            string expected_quotation = "SAMPLE123";
+            List<IWindoorModel> lst_wndr = new List<IWindoorModel>();
+
+            //act
+            _mainPresenter.inputted_quotationRefNo = "SAMPLE123";
+            _mainPresenter.Scenario_Quotation(true, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
+
+            //assert
+            Assert.AreEqual(expected_quotation, _mainView.mainview_title);
+            Assert.AreEqual(true, _mainView.ItemToolStripEnabled);
+            Assert.AreEqual(expected_quotation, _mainPresenter.qoutationModel_MainPresenter.Quotation_ref_no);
+            Assert.AreEqual(true, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().thisVisibility);
+            Assert.AreEqual(frmDimensionPresenter.Show_Purpose.Quotation, _mainPresenter.frmDimension_MainPresenter.purpose);
+            Assert.AreEqual("C70 Profile", _mainPresenter.frmDimension_MainPresenter.profileType_frmDimensionPresenter);
+            Assert.AreEqual(193, _frmDimensionView.dimension_height);
+            Assert.AreEqual(true, _frmDimensionView.ThisVisibility);
+            CollectionAssert.AreEqual(lst_wndr, _mainPresenter.qoutationModel_MainPresenter.Lst_Windoor);
+            #endregion
+
+            #region Scenario 2.2
+            /*Scenario 2.2:
+             I-Create ang frame 1: hanggang Click ok ng `frmDimension`*/
+
+            //arrange
+            int exp_Wd = 800, exp_Ht = 800, exp_id = 1, exp_qty = 1, exp_wdZoom = 1, exp_wdPrice = 0;
+            decimal exp_wdDiscount = 0.0M;
+            string exp_profileType = "PremiLine Profile", exp_wdName = "Item 1", exp_wdDesc = "PremiLine Profile";
+            bool exp_wdVisibility = true, exp_wdOrientation = true;
+            List<IFrameModel> lst_frame = new List<IFrameModel>();
+
+            //act
+            _frmDimensionView.InumWidth = 800;
+            _frmDimensionView.InumHeight = 800;
+            _frmDimensionView.premiLineRadBtn_CheckState = true;
+            _mainPresenter.Scenario_Quotation(_mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_newItem_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_AddedFrame_ClickedOK,
+                                              frmDimensionPresenter.Show_Purpose.Quotation,
+                                              _mainPresenter.frmDimension_MainPresenter.GetDimensionView().InumWidth,
+                                              _mainPresenter.frmDimension_MainPresenter.GetDimensionView().InumHeight,
+                                              _mainPresenter.frmDimension_MainPresenter.profileType_frmDimensionPresenter);
+
+            //assert
+            Assert.AreEqual(exp_id, _mainPresenter.windoorModel_MainPresenter.WD_id);
+            Assert.AreEqual(exp_Wd, _mainPresenter.windoorModel_MainPresenter.WD_width);
+            Assert.AreEqual(exp_Ht, _mainPresenter.windoorModel_MainPresenter.WD_height);
+            Assert.AreEqual(exp_profileType, _mainPresenter.windoorModel_MainPresenter.WD_profile);
+            Assert.AreEqual(exp_qty, _mainPresenter.windoorModel_MainPresenter.WD_quantity);
+            Assert.AreEqual(exp_wdZoom, _mainPresenter.windoorModel_MainPresenter.WD_zoom);
+            Assert.AreEqual(exp_wdPrice, _mainPresenter.windoorModel_MainPresenter.WD_price);
+            Assert.AreEqual(exp_wdDiscount, _mainPresenter.windoorModel_MainPresenter.WD_discount);
+            Assert.AreEqual(exp_wdName, _mainPresenter.windoorModel_MainPresenter.WD_name);
+            Assert.AreEqual(exp_wdDesc, _mainPresenter.windoorModel_MainPresenter.WD_description);
+            Assert.AreEqual(exp_wdVisibility, _mainPresenter.windoorModel_MainPresenter.WD_visibility);
+            Assert.AreEqual(exp_wdOrientation, _mainPresenter.windoorModel_MainPresenter.WD_orientation);
+            CollectionAssert.AreEqual(lst_frame, _mainPresenter.windoorModel_MainPresenter.lst_frame);
+
+            CollectionAssert.Contains(_mainPresenter.pnlMain_MainPresenter.Controls, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC());
+            CollectionAssert.Contains(_mainPresenter.pnlItems_MainPresenter.Controls, _mainPresenter.itemInfoUC_MainPresenter);
+            Assert.AreEqual(exp_Wd + 70, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().bp_Width);
+            Assert.AreEqual(exp_Ht + 35, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().bp_Height);
+
+            string exp_mainViewTitle = expected_quotation + " >> Item 1 (PremiLine Profile)*";
+            Assert.AreEqual(exp_mainViewTitle, _mainPresenter.GetMainView().mainview_title);
+            Assert.AreEqual(true, _mainPresenter.GetMainView().ItemToolStripEnabled);
+            Assert.AreEqual(true, _mainPresenter.GetMainView().CreateNewWindoorBtnEnabled);
+            #endregion
+
         }
     }
 }

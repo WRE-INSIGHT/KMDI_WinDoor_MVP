@@ -17,11 +17,16 @@ namespace PresentationLayer.Presenter
         string inputted_quotationRefNo { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }
+        IFrameModel frameModel_MainPresenter { get; set; }
         IBasePlatformPresenter basePlatform_MainPresenter { get; set; }
         IfrmDimensionPresenter frmDimension_MainPresenter { get; set; }
         IItemInfoUC itemInfoUC_MainPresenter { get; set; }
+        IFrameUC frameUC_MainPresenter { get; set; }
+        IFramePropertiesUC framePropertiesUC_MainPresenter { get; set; }
+        FrameModel.Frame_Padding frameType_MainPresenter { get; set; }
         Panel pnlMain_MainPresenter { get; set; }
         Panel pnlItems_MainPresenter { get; set; }
+        Panel pnlPropertiesBody_MainPresenter { get; set; }
         IMainView GetMainView();
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);

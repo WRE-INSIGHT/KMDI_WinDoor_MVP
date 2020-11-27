@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Frame;
 using PresentationLayer.Views.UserControls;
+using Unity;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -12,6 +13,6 @@ namespace PresentationLayer.Presenter.UserControls
         void OnOuterFramePaintEventRaised(object sender, PaintEventArgs e);
         void SetValues(IFrameModel frameModel);
         IFrameUC GetFrameUC();
-        IFrameUCPresenter GetNewInstance(IFrameModel frameModel);
+        IFrameUCPresenter GetNewInstance(IFrameModel frameModel, IUnityContainer unityC);
     }
 }

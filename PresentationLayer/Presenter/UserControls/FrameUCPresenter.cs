@@ -152,11 +152,9 @@ namespace PresentationLayer.Presenter.UserControls
             return _frameUC;
         }
 
-        public IFrameUCPresenter GetNewInstance(IFrameModel frameModel)
+        public IFrameUCPresenter GetNewInstance(IFrameModel frameModel, IUnityContainer unityC)
         {
-            IUnityContainer unityC;
-            unityC =
-                new UnityContainer()
+            unityC
                 .RegisterType<IFrameUC, FrameUC>()
                 .RegisterType<IFrameUCPresenter, FrameUCPresenter>();
             FrameUCPresenter framePresenter = unityC.Resolve<FrameUCPresenter>();
