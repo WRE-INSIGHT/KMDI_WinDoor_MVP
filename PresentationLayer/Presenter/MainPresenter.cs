@@ -454,7 +454,9 @@ namespace PresentationLayer.Presenter
 
         public void AddFrameUC(IFrameModel frameModel)
         {
-            IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(frameModel, _unityC);
+            IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, frameModel, this);
+            //IFrameUCPresenter _frameUCPresenter = new FrameUCPresenter(new FrameUC(), _basePlatformPresenter, this);
+            //IFrameUCPresenter frameUCP = _frameUCPresenter.GetNewInstance(_unityC, frameModel);
             _frameUC = frameUCP.GetFrameUC();
             _basePlatformPresenter.AddFrame(_frameUC);
         }
@@ -515,6 +517,11 @@ namespace PresentationLayer.Presenter
         public void AddFrameList_WindoorModel(IFrameModel frameModel)
         {
             _windoorModel.lst_frame.Add(frameModel);
+        }
+
+        public void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel)
+        {
+            _windoorModel.lst_frame.Remove(frameModel);
         }
 
         private void CreateNewWindoorBtn_Enable()

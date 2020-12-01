@@ -13,6 +13,10 @@ namespace CommonComponents
         {
             eventHandlerRaised?.Invoke(objectRaisingEvent, eventArgs); // Notify all subscribers
         }
+        public static void RaiseMouseEvent(Object objectRaisingEvent, MouseEventHandler mouseeventHandlerRaised, MouseEventArgs mouseeventArgs)
+        {
+            mouseeventHandlerRaised?.Invoke(objectRaisingEvent, mouseeventArgs); // Notify all subscribers
+        }
         public static void RaisePaintEvent(Object objectRaisingEvent, PaintEventHandler paintEventHandlerRaised, PaintEventArgs paintEventArgs)
         {
             paintEventHandlerRaised?.Invoke(objectRaisingEvent, paintEventArgs); // Notify all subscribers

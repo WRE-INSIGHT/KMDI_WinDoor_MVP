@@ -63,8 +63,10 @@
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
+    <Compile Include="Presenter\IpromptYesNoPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="Presenter\promptYesNoPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Views\IfrmDimensionView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IpromptYesNo.cs" />
     <Compile Include="Views\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +98,12 @@
     </Compile>
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\promptYesNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\promptYesNo.Designer.cs">
+      <DependentUpon>promptYesNo.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\BasePlatformUC.cs">
       <SubType>UserControl</SubType>
@@ -142,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\promptYesNo.resx">
+      <DependentUpon>promptYesNo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\BasePlatformUC.resx">
       <DependentUpon>BasePlatformUC.cs</DependentUpon>

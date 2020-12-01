@@ -17,50 +17,83 @@ namespace PresentationLayer.Presenter.UserControls
         IFrameUC _frameUC;
 
         private IFrameModel _frameModel;
+        private IBasePlatformPresenter _basePlatformPresenter;
+        private IMainPresenter _mainPresenter;
+        private IpromptYesNoPresenter _promptYesNoUCP;
+        private ContextMenuStrip _frameCmenu;
 
-        //private float zoom = 1.0f;
-        public FrameUCPresenter(IFrameUC frameUC)
+        public FrameUCPresenter(IFrameUC frameUC, 
+                                IBasePlatformPresenter basePlatformPresenter,
+                                IpromptYesNoPresenter promptYesNoUCP)
         {
             _frameUC = frameUC;
+            _basePlatformPresenter = basePlatformPresenter;
+            _promptYesNoUCP = promptYesNoUCP;
+            _frameCmenu = _frameUC.GetFrameCmenu();
             SubscribeToEventsSetup();
         }
-
         private void SubscribeToEventsSetup()
         {
             _frameUC.frameLoadEventRaised += new EventHandler(OnFrameLoadEventRaised);
+            _frameUC.deleteCmenuEventRaised += new EventHandler(OnDeleteCmenuEventRaised);
             _frameUC.outerFramePaintEventRaised += new PaintEventHandler(OnOuterFramePaintEventRaised);
             _frameUC.innerFramePaintEventRaised += new PaintEventHandler(OnInnerFramePaintEventRaised);
+            _frameUC.frameMouseClickEventRaised += new MouseEventHandler(OnFrameMouseClickEventRaised);
+            _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);
+            _frameUC.frameMouseLeaveEventRaised += new EventHandler(OnFrameMouseLeaveEventRaised);
+            _frameUC.panelInnerMouseEnterEventRaised += new EventHandler(OnPanelInnerMouseEnterEventRaised);
+            _frameUC.panelInnerMouseLeaveEventRaised += new EventHandler(OnPanelInnerMouseLeaveEventRaised);
+
+        }
+
+        private void OnPanelInnerMouseLeaveEventRaised(object sender, EventArgs e)
+        {
+            color = Color.Black;
+            _frameUC.InvalidateThis();
+        }
+
+        private void OnPanelInnerMouseEnterEventRaised(object sender, EventArgs e)
+        {
+            color = Color.Blue;
+            _frameUC.InvalidateThis();
+        }
+
+        private void OnFrameMouseLeaveEventRaised(object sender, EventArgs e)
+        {
+            color = Color.Black;
+            _frameUC.InvalidateThis();
+        }
+
+        private void OnFrameMouseEnterEventRaised(object sender, EventArgs e)
+        {
+            color = Color.Blue;
+            _frameUC.InvalidateThis();
+        }
+
+        private void OnDeleteCmenuEventRaised(object sender, EventArgs e)
+        {
+            _promptYesNoUCP.SetValues(this, _mainPresenter);
+           _promptYesNoUCP.GetPromptYesNo().PromptYesNo("Are you sure you want to DELETE?");
+        }
+
+        private void OnFrameMouseClickEventRaised(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                color = Color.Blue;
+                _frameUC.InvalidateThis();
+                _frameCmenu.Show(new Point(Control.MousePosition.X, Control.MousePosition.Y));
+            }
         }
 
         public void OnInnerFramePaintEventRaised(object sender, PaintEventArgs e)
         {
             Panel pnl = (Panel)sender;
-            //Panel frame = (Panel)pnl.Parent;
             Graphics g = e.Graphics;
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            //if (frame.Tag.ToString() == "0")
-            //{
-            //    int cond = pnl.Width + pnl.Height;
-
-            //    for (int i = 10; i < cond; i += 10)
-            //    {
-            //        g.DrawLine(Pens.Black, new Point(0, i), new Point(i, 0));
-            //    }
-            //}
-
-            //string accname_col = pnl.AccessibleName;
             Color col = Color.Black;
-            //if (accname_col == "Black")
-            //{
-            //    col = Color.Black;
-            //}
-            //else if (accname_col == "Blue")
-            //{
-            //    col = Color.Blue;
-            //}
-
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
             g.DrawRectangle(new Pen(col, w), new Rectangle(0,
@@ -80,31 +113,18 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.InvalidateThis();
         }
 
+        Color color = Color.Black;
         public void OnOuterFramePaintEventRaised(object sender, PaintEventArgs e)
         {
             Pen blkPen = new Pen(Color.Black);
 
             Graphics g = e.Graphics;
-            //g.ScaleTransform(zoom, zoom);
 
             UserControl pfr = (UserControl)sender;
             Panel pnl_inner = (Panel)pfr.Controls[0];
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-
-            //if (pfr.AccessibleDescription == "viewmodeOn")
-            //{
-            //    Font dmnsion_font = new Font("Segoe UI", 12 * zoom);
-
-            //    Size s = TextRenderer.MeasureText(pfr.Name, dmnsion_font);
-            //    double mid = (pfr.Width) / 2;
-            //    TextRenderer.DrawText(g,
-            //                          pfr.Name,
-            //                          dmnsion_font,
-            //                          new Point((int)(mid - (s.Width / 2)), 1),
-            //                          Color.Blue);
-            //}
 
             int pInnerX = pnl_inner.Location.X,
             pInnerY = pnl_inner.Location.Y,
@@ -128,20 +148,9 @@ namespace PresentationLayer.Presenter.UserControls
                 g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);
             }
 
-            //string accname_col = pfr.AccessibleName;
-            Color col = Color.Black;
-            //if (accname_col == "Black")
-            //{
-            //    col = Color.Black;
-            //}
-            //else if (accname_col == "Blue")
-            //{
-            //    col = Color.Blue;
-            //}
-
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(col, w), new Rectangle(0,
+            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                                    0,
                                                                    pfr.ClientRectangle.Width - w,
                                                                    pfr.ClientRectangle.Height - w));
@@ -152,20 +161,36 @@ namespace PresentationLayer.Presenter.UserControls
             return _frameUC;
         }
 
-        public IFrameUCPresenter GetNewInstance(IFrameModel frameModel, IUnityContainer unityC)
+        public IFrameUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel, IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IFrameUC, FrameUC>()
                 .RegisterType<IFrameUCPresenter, FrameUCPresenter>();
             FrameUCPresenter framePresenter = unityC.Resolve<FrameUCPresenter>();
             framePresenter._frameModel = frameModel;
+            framePresenter._mainPresenter = mainPresenter;
 
             return framePresenter;
         }
 
-        public void SetValues(IFrameModel frameModel)
+        public IFrameUCPresenter GetFrameUCPresenter()
         {
-            _frameModel = frameModel;
+            return this;
+        }
+
+        public void PromptYesNo_Results()
+        {
+            if (_promptYesNoUCP.result == promptYesNoPresenter.promptResult.Yes)
+            {
+                _basePlatformPresenter.DeleteFrameUC(_frameUC);
+                _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
+                //delete pati frame properties body
+            }
+            else if (_promptYesNoUCP.result == promptYesNoPresenter.promptResult.No)
+            {
+
+            }
+            _promptYesNoUCP.GetPromptYesNo().ClosePrompt();
         }
     }
 }

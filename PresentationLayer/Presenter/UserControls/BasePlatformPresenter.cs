@@ -207,5 +207,10 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _flpMain.Invalidate();
         }
+
+        public void DeleteFrameUC(IFrameUC frameUC)
+        {
+            _flpMain.Controls.Remove((UserControl)frameUC);
+        }
     }
 }

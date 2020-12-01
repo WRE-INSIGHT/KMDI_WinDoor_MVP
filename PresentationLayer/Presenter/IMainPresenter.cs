@@ -33,6 +33,7 @@ namespace PresentationLayer.Presenter
         void AddQuotationModel(string quotation_ref_no, List<IWindoorModel> lst_wndr = null);
         void AddWndrList_QuotationModel(IWindoorModel wndr);
         void AddFrameList_WindoorModel(IFrameModel frameModel);
+        void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel);
         IWindoorModel AddWindoorModel(int WD_width,
                                       int WD_height,
                                       string WD_Profile,

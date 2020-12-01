@@ -244,7 +244,7 @@ namespace PresentationLayer.Tests
 
             #region Scenario 2.2
             /*Scenario 2.2:
-             I-Create ang frame 1: hanggang Click ok ng `frmDimension`*/
+             I-Create ang editor: hanggang Click ok ng `frmDimension`*/
 
             //arrange
             int exp_Wd = 800, exp_Ht = 800, exp_id = 1, exp_qty = 1, exp_wdZoom = 1, exp_wdPrice = 0;
@@ -291,6 +291,91 @@ namespace PresentationLayer.Tests
             Assert.AreEqual(true, _mainPresenter.GetMainView().CreateNewWindoorBtnEnabled);
             #endregion
 
+            #region Scenario 2.3
+            /*Scenario 2.2:
+             I-Create ang frame 1: hanggang Click ok ng `frmDimension`*/
+
+            //arrange
+            int exp_fWd = 400, exp_fHt = 400;
+            FrameModel.Frame_Padding exp_frameType = FrameModel.Frame_Padding.Window;
+
+            //act
+            _mainPresenter.frameType_MainPresenter = exp_frameType;
+            _mainPresenter.Scenario_Quotation(false, false, true,
+                                              frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
+                                              0,
+                                              0,
+                                              "");
+            _mainPresenter.Scenario_Quotation(_mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_newItem_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_AddedFrame_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.purpose,
+                                              exp_fWd,
+                                              exp_fHt,
+                                              _mainPresenter.frmDimension_MainPresenter.profileType_frmDimensionPresenter);
+            //assert
+            Assert.AreEqual(1, _mainPresenter.frameModel_MainPresenter.Frame_ID);
+            Assert.AreEqual(exp_fWd, _mainPresenter.frameModel_MainPresenter.Frame_Width);
+            Assert.AreEqual(exp_fHt, _mainPresenter.frameModel_MainPresenter.Frame_Height);
+            Assert.AreEqual("Frame 1", _mainPresenter.frameModel_MainPresenter.Frame_Name);
+            Assert.AreEqual(exp_frameType, _mainPresenter.frameModel_MainPresenter.Frame_Type);
+            CollectionAssert.Contains(_mainPresenter.windoorModel_MainPresenter.lst_frame, _mainPresenter.frameModel_MainPresenter);
+            CollectionAssert.Contains(_mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().GetFlpMain().Controls,
+                                      _mainPresenter.frameUC_MainPresenter);
+            CollectionAssert.Contains(_mainPresenter.pnlPropertiesBody_MainPresenter.Controls,
+                                      _mainPresenter.framePropertiesUC_MainPresenter);
+            #endregion
+
+            #region Scenario 2.4
+            /*Scenario 2.2:
+             I-Create ang frame 2: hanggang Click ok ng `frmDimension`*/
+
+            //arrange
+            int exp_fWd2 = 400, exp_fHt2 = 400;
+            FrameModel.Frame_Padding exp_frameType2 = FrameModel.Frame_Padding.Door;
+
+            //act
+            _mainPresenter.frameType_MainPresenter = exp_frameType2;
+            _mainPresenter.Scenario_Quotation(false, false, true,
+                                              frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
+                                              0,
+                                              0,
+                                              "");
+            _mainPresenter.Scenario_Quotation(_mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_newItem_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.mainPresenter_AddedFrame_ClickedOK,
+                                              _mainPresenter.frmDimension_MainPresenter.purpose,
+                                              exp_fWd2,
+                                              exp_fHt2,
+                                              _mainPresenter.frmDimension_MainPresenter.profileType_frmDimensionPresenter);
+            //assert
+            Assert.AreEqual(2, _mainPresenter.frameModel_MainPresenter.Frame_ID);
+            Assert.AreEqual(exp_fWd2, _mainPresenter.frameModel_MainPresenter.Frame_Width);
+            Assert.AreEqual(exp_fHt2, _mainPresenter.frameModel_MainPresenter.Frame_Height);
+            Assert.AreEqual("Frame 2", _mainPresenter.frameModel_MainPresenter.Frame_Name);
+            Assert.AreEqual(exp_frameType2, _mainPresenter.frameModel_MainPresenter.Frame_Type);
+            CollectionAssert.Contains(_mainPresenter.windoorModel_MainPresenter.lst_frame, _mainPresenter.frameModel_MainPresenter);
+            CollectionAssert.Contains(_mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().GetFlpMain().Controls,
+                                      _mainPresenter.frameUC_MainPresenter);
+            CollectionAssert.Contains(_mainPresenter.pnlPropertiesBody_MainPresenter.Controls,
+                                      _mainPresenter.framePropertiesUC_MainPresenter);
+            #endregion
+
+            #region Overall Assertion
+            //assert the frames if it properly added
+            Assert.AreEqual(2, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Count);
+            Assert.AreEqual(2, _mainPresenter.windoorModel_MainPresenter.lst_frame.Count);
+            Assert.AreEqual(1, _mainPresenter.windoorModel_MainPresenter.lst_frame[0].Frame_ID);
+            Assert.AreEqual(2, _mainPresenter.windoorModel_MainPresenter.lst_frame[1].Frame_ID);
+            Assert.AreEqual("Frame 1", _mainPresenter.windoorModel_MainPresenter.lst_frame[0].Frame_Name);
+            Assert.AreEqual("Frame 2", _mainPresenter.windoorModel_MainPresenter.lst_frame[1].Frame_Name);
+            Assert.AreEqual(400, _mainPresenter.windoorModel_MainPresenter.lst_frame[0].Frame_Width);
+            Assert.AreEqual(400, _mainPresenter.windoorModel_MainPresenter.lst_frame[1].Frame_Width);
+            Assert.AreEqual(400, _mainPresenter.windoorModel_MainPresenter.lst_frame[0].Frame_Height);
+            Assert.AreEqual(400, _mainPresenter.windoorModel_MainPresenter.lst_frame[1].Frame_Height);
+            Assert.AreEqual(FrameModel.Frame_Padding.Window, _mainPresenter.windoorModel_MainPresenter.lst_frame[0].Frame_Type);
+            Assert.AreEqual(FrameModel.Frame_Padding.Door, _mainPresenter.windoorModel_MainPresenter.lst_frame[1].Frame_Type);
+            #endregion
         }
     }
 }
