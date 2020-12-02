@@ -51,7 +51,8 @@ namespace PresentationLayer.Presenter
                                   int frame_height,
                                   FrameModel.Frame_Padding frame_type,
                                   int frame_id = 0,
-                                  string frame_name = "");
+                                  string frame_name = "",
+                                  bool frame_visible = true);
         void AddItemInfoUC(IWindoorModel wndr);
         void AddFrameUC(IFrameModel frameModel);
         void AddFramePropertiesUC(IFrameModel frameModel);

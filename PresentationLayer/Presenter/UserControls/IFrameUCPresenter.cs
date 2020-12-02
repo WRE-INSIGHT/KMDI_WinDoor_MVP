@@ -11,7 +11,7 @@ namespace PresentationLayer.Presenter.UserControls
         void OnFrameLoadEventRaised(object sender, EventArgs e);
         void OnInnerFramePaintEventRaised(object sender, PaintEventArgs e);
         void OnOuterFramePaintEventRaised(object sender, PaintEventArgs e);
-        void PromptYesNo_Results();
+        void DeleteFrame();
         IFrameUC GetFrameUC();
         IFrameUCPresenter GetFrameUCPresenter();
         IFrameUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel, IMainPresenter mainPresenter);

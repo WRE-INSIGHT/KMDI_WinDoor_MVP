@@ -19,16 +19,13 @@ namespace PresentationLayer.Presenter.UserControls
         private IFrameModel _frameModel;
         private IBasePlatformPresenter _basePlatformPresenter;
         private IMainPresenter _mainPresenter;
-        private IpromptYesNoPresenter _promptYesNoUCP;
         private ContextMenuStrip _frameCmenu;
 
-        public FrameUCPresenter(IFrameUC frameUC, 
-                                IBasePlatformPresenter basePlatformPresenter,
-                                IpromptYesNoPresenter promptYesNoUCP)
+        public FrameUCPresenter(IFrameUC frameUC,
+                                IBasePlatformPresenter basePlatformPresenter)
         {
             _frameUC = frameUC;
             _basePlatformPresenter = basePlatformPresenter;
-            _promptYesNoUCP = promptYesNoUCP;
             _frameCmenu = _frameUC.GetFrameCmenu();
             SubscribeToEventsSetup();
         }
@@ -72,8 +69,15 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnDeleteCmenuEventRaised(object sender, EventArgs e)
         {
-            _promptYesNoUCP.SetValues(this, _mainPresenter);
-           _promptYesNoUCP.GetPromptYesNo().PromptYesNo("Are you sure you want to DELETE?");
+            if (MessageBox.Show("Are you sure you want to DELETE?",
+                                "Deletion",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                DeleteFrame();
+            }
+           // _promptYesNoUCP.SetValues(this, _mainPresenter);
+           //_promptYesNoUCP.GetPromptYesNo().PromptYesNo("Are you sure you want to DELETE?");
         }
 
         private void OnFrameMouseClickEventRaised(object sender, MouseEventArgs e)
@@ -178,19 +182,12 @@ namespace PresentationLayer.Presenter.UserControls
             return this;
         }
 
-        public void PromptYesNo_Results()
+        public void DeleteFrame()
         {
-            if (_promptYesNoUCP.result == promptYesNoPresenter.promptResult.Yes)
-            {
-                _basePlatformPresenter.DeleteFrameUC(_frameUC);
-                _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
-                //delete pati frame properties body
-            }
-            else if (_promptYesNoUCP.result == promptYesNoPresenter.promptResult.No)
-            {
-
-            }
-            _promptYesNoUCP.GetPromptYesNo().ClosePrompt();
+            _basePlatformPresenter.DeleteFrameUC(_frameUC);
+            _frameModel.Frame_Visible = false;
+            //_mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
+            //delete pati frame properties body
         }
     }
 }

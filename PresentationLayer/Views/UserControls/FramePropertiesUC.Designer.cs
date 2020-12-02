@@ -116,9 +116,20 @@
             // num_fWidth
             // 
             this.num_fWidth.Location = new System.Drawing.Point(3, 131);
+            this.num_fWidth.Maximum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
             this.num_fWidth.Name = "num_fWidth";
             this.num_fWidth.Size = new System.Drawing.Size(135, 22);
             this.num_fWidth.TabIndex = 5;
+            this.num_fWidth.Value = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.num_fWidth.ValueChanged += new System.EventHandler(this.num_fHeight_ValueChanged);
             // 
             // lbl_Height
             // 
@@ -132,9 +143,25 @@
             // num_fHeight
             // 
             this.num_fHeight.Location = new System.Drawing.Point(3, 172);
+            this.num_fHeight.Maximum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.num_fHeight.Minimum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
             this.num_fHeight.Name = "num_fHeight";
             this.num_fHeight.Size = new System.Drawing.Size(135, 22);
             this.num_fHeight.TabIndex = 7;
+            this.num_fHeight.Value = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.num_fHeight.ValueChanged += new System.EventHandler(this.num_fHeight_ValueChanged);
             // 
             // FramePropertiesUC
             // 

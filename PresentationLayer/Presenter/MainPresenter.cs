@@ -495,7 +495,8 @@ namespace PresentationLayer.Presenter
                                          int frame_height, 
                                          FrameModel.Frame_Padding frame_type, 
                                          int frame_id = 0, 
-                                         string frame_name = "")
+                                         string frame_name = "",
+                                         bool frame_visible = true)
         {
             if (frame_id == 0)
             {
@@ -509,7 +510,8 @@ namespace PresentationLayer.Presenter
                                                      frame_name,
                                                      frame_width,
                                                      frame_height,
-                                                     frame_type);
+                                                     frame_type,
+                                                     frame_visible);
 
             return _frameModel;
         }

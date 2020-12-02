@@ -51,14 +51,14 @@ namespace PresentationLayer.Presenter
         private void OnBtnNoClickedEventRaised(object sender, EventArgs e)
         {
             this_result = promptResult.No;
-            _frameUCP.PromptYesNo_Results();
+            //_frameUCP.PromptYesNo_Results();
            
         }
 
         private void OnBtnYesClickedEventRaised(object sender, EventArgs e)
         {
             this_result = promptResult.Yes;
-            _frameUCP.PromptYesNo_Results();
+            //_frameUCP.PromptYesNo_Results();
         }
 
         private void OnQuestionLblSizeChangeEventRaised(object sender, EventArgs e)

@@ -80,7 +80,21 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public bool ThisVisibility
+        {
+            get
+            {
+                return this.Visible;
+            }
+
+            set
+            {
+                this.Visible = value;
+            }
+        }
+
         public event EventHandler FramePropertiesLoadEventRaised;
+        public event EventHandler NumFHeightValueChangedEventRaised;
 
         public void BringToFrontThis()
         {
@@ -93,6 +107,22 @@ namespace PresentationLayer.Views.UserControls
             num_fHeight.Maximum = int.MaxValue;
             this.Dock = DockStyle.Top;
             EventHelpers.RaiseEvent(this, FramePropertiesLoadEventRaised, e);
+        }
+
+        public void ThisBinding(Dictionary<string, Binding> frameModelBinding)
+        {
+            lbl_frameName.DataBindings.Add(frameModelBinding["Frame_Name"]);
+            this.DataBindings.Add(frameModelBinding["Frame_Visible"]);
+            num_fWidth.DataBindings.Add(frameModelBinding["Frame_Width"]);
+            num_fHeight.DataBindings.Add(frameModelBinding["Frame_Height"]);
+            rdBtn_Window.DataBindings.Add(frameModelBinding["Frame_Type_Window"]);
+            rdBtn_Door.DataBindings.Add(frameModelBinding["Frame_Type_Door"]);
+            rdBtn_Concrete.DataBindings.Add(frameModelBinding["Frame_Type_Concrete"]);
+        }
+
+        private void num_fHeight_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, NumFHeightValueChangedEventRaised, e);
         }
     }
 }

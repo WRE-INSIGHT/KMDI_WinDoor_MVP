@@ -7,5 +7,6 @@
         string Frame_Name { get; set; }
         FrameModel.Frame_Padding Frame_Type { get; set; }
         int Frame_Width { get; set; }
+        bool Frame_Visible { get; set; }
     }
 }
