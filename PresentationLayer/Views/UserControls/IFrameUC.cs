@@ -18,10 +18,12 @@ namespace PresentationLayer.Views.UserControls
         event PaintEventHandler outerFramePaintEventRaised;
         event PaintEventHandler innerFramePaintEventRaised;
         event MouseEventHandler frameMouseClickEventRaised;
-        int fWidth { get; set; }
-        int fHeight { get; set; }
-        int fPadding { set; }
+        //int fWidth { get; set; }
+        //int fHeight { get; set; }
+        //int fPadding { set; }
         void InvalidateThis();
+        void InvalidatePanelInner();
+        void ThisBinding(Dictionary<string, Binding> binding);
         ContextMenuStrip GetFrameCmenu();
     }
 }

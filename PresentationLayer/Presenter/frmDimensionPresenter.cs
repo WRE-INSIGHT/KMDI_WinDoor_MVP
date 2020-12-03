@@ -134,13 +134,21 @@ namespace PresentationLayer.Presenter
         private bool _mainPresenter_AddedFrame_ClickedOK;
         private void OnbtnOKClickedEventRaised(object sender, EventArgs e)
         {
-            _mainPresenter.Scenario_Quotation(_mainPresenter_qoutationInputBox_ClickedOK,
-                                              _mainPresenter_newItem_ClickedOK,
-                                              _mainPresenter_AddedFrame_ClickedOK, 
-                                              purpose, 
-                                              _frmDimensionView.InumWidth, 
-                                              _frmDimensionView.InumHeight, 
-                                              profile_type);
+            try
+            {
+                _mainPresenter.Scenario_Quotation(_mainPresenter_qoutationInputBox_ClickedOK,
+                                                  _mainPresenter_newItem_ClickedOK,
+                                                  _mainPresenter_AddedFrame_ClickedOK,
+                                                  purpose,
+                                                  _frmDimensionView.InumWidth,
+                                                  _frmDimensionView.InumHeight,
+                                                  profile_type);
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void OnfrmDimensionLoadEventRaised(object sender, EventArgs e)

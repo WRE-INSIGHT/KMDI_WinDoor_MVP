@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -58,7 +59,17 @@ namespace ModelLayer.Model.Quotation.Frame
         public Frame_Padding Frame_Type
         {
             get { return _frameType; }
-            set { _frameType = value; NotifyPropertyChanged(); }
+            set { _frameType = value;
+                if (value == Frame_Padding.Window)
+                {
+                    Frame_Padding_int = new Padding(26);
+                }
+                else if (value == Frame_Padding.Door)
+                {
+                    Frame_Padding_int = new Padding(33);
+                }
+                NotifyPropertyChanged();
+            }
         }
 
         private bool _frameVisible;
@@ -66,6 +77,13 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             get { return _frameVisible; }
             set { _frameVisible = value; NotifyPropertyChanged(); }
+        }
+
+        private Padding _framePadding;
+        public Padding Frame_Padding_int
+        {
+            get { return _framePadding; }
+            set { _framePadding = value; NotifyPropertyChanged(); }
         }
 
         public FrameModel(int frameID,
@@ -81,6 +99,14 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Height = frameHt;
             Frame_Type = frameType;
             Frame_Visible = frameVisible;
+            if (frameType == Frame_Padding.Window)
+            {
+                Frame_Padding_int = new Padding(26);
+            }
+            else if (frameType == Frame_Padding.Door)
+            {
+                Frame_Padding_int = new Padding(33);
+            }
         }
     }
 }

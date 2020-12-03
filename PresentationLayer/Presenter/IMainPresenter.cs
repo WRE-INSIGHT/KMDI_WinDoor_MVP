@@ -58,9 +58,9 @@ namespace PresentationLayer.Presenter
         void AddFramePropertiesUC(IFrameModel frameModel);
         void Invalidate_pnlMain();
         //void SetMainViewTitle(string qrefno, string itemname, string profiletype, bool saved);
-        void Extends_frmDimensionOKClicked_Quotations(int numWidth, int numHeight, string profileType);
-        void Extends_frmDimensionOKClicked_CreateNewItem(int numWidth, int numHeight, string profileType);
-        void Extends_frmDimensionOKClicked_CreateNewFrame(int numWidth, int numHeight, string profileType);
+        //void Extends_frmDimensionOKClicked_Quotations(int numWidth, int numHeight, string profileType);
+        //void Extends_frmDimensionOKClicked_CreateNewItem(int numWidth, int numHeight, string profileType);
+        //void Extends_frmDimensionOKClicked_CreateNewFrame(int numWidth, int numHeight, string profileType);
         void Scenario_Quotation(bool QoutationInputBox_OkClicked,
                                 bool NewItem_OkClicked,
                                 bool AddedFrame,

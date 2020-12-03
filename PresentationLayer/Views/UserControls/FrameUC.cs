@@ -13,39 +13,39 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class FrameUC : UserControl, IFrameUC
     {
-        public int fWidth
-        {
-            get
-            {
-                return this.Width;
-            }
+        //public int fWidth
+        //{
+        //    get
+        //    {
+        //        return this.Width;
+        //    }
 
-            set
-            {
-                this.Width = value;
-            }
-        }
+        //    set
+        //    {
+        //        this.Width = value;
+        //    }
+        //}
 
-        public int fHeight
-        {
-            get
-            {
-                return this.Height;
-            }
+        //public int fHeight
+        //{
+        //    get
+        //    {
+        //        return this.Height;
+        //    }
 
-            set
-            {
-                this.Height = value;
-            }
-        }
+        //    set
+        //    {
+        //        this.Height = value;
+        //    }
+        //}
 
-        public int fPadding
-        {
-            set
-            {
-                this.Padding = new Padding(value);
-            }
-        }
+        //public int fPadding
+        //{
+        //    set
+        //    {
+        //        this.Padding = new Padding(value);
+        //    }
+        //}
 
         public FrameUC()
         {
@@ -115,6 +115,19 @@ namespace PresentationLayer.Views.UserControls
         private void pnl_inner_MouseLeave(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, panelInnerMouseLeaveEventRaised, e);
+        }
+
+        public void ThisBinding(Dictionary<string, Binding> binding)
+        {
+            this.DataBindings.Add(binding["Frame_Visible"]);
+            this.DataBindings.Add(binding["Frame_Width"]);
+            this.DataBindings.Add(binding["Frame_Height"]);
+            this.DataBindings.Add(binding["Frame_Padding"]);
+        }
+
+        public void InvalidatePanelInner()
+        {
+            pnl_inner.Invalidate();
         }
     }
 }

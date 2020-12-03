@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ModelLayer.Model.Quotation.Frame;
 using PresentationLayer.Views.UserControls;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using Unity;
+using System.Collections.Generic;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -108,13 +105,19 @@ namespace PresentationLayer.Presenter.UserControls
 
         public void OnFrameLoadEventRaised(object sender, EventArgs e)
         {
-            _frameUC.fWidth = _frameModel.Frame_Width;
-            _frameUC.fHeight = _frameModel.Frame_Height;
-
-            Enum enum_frameType = _frameModel.Frame_Type;
-            _frameUC.fPadding = Convert.ToInt32(enum_frameType);
-
+            _frameUC.ThisBinding(CreateBindingDictionary());
             _frameUC.InvalidateThis();
+        }
+
+        private Dictionary<string, Binding> CreateBindingDictionary()
+        {
+            Dictionary<string, Binding> frameBinding = new Dictionary<string, Binding>();
+            frameBinding.Add("Frame_Visible", new Binding("Visible", _frameModel, "Frame_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
+            frameBinding.Add("Frame_Width", new Binding("Width", _frameModel, "Frame_Width", true, DataSourceUpdateMode.OnPropertyChanged));
+            frameBinding.Add("Frame_Height", new Binding("Height", _frameModel, "Frame_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            frameBinding.Add("Frame_Padding", new Binding("Padding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            return frameBinding;
         }
 
         Color color = Color.Black;
@@ -184,7 +187,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         public void DeleteFrame()
         {
-            _basePlatformPresenter.DeleteFrameUC(_frameUC);
+            //_basePlatformPresenter.DeleteFrameUC(_frameUC);
             _frameModel.Frame_Visible = false;
             //_mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
             //delete pati frame properties body

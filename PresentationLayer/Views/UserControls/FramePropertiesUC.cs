@@ -19,82 +19,84 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
         }
 
-        public int fHeight
-        {
-            get
-            {
-                return (int)num_fHeight.Value;
-            }
+        //public int fHeight
+        //{
+        //    get
+        //    {
+        //        return (int)num_fHeight.Value;
+        //    }
 
-            set
-            {
-                num_fHeight.Value = value;
-            }
-        }
+        //    set
+        //    {
+        //        num_fHeight.Value = value;
+        //    }
+        //}
 
-        public string Frame_Name
-        {
-            set
-            {
-                lbl_frameName.Text = value;
-            }
-        }
+        //public string Frame_Name
+        //{
+        //    set
+        //    {
+        //        lbl_frameName.Text = value;
+        //    }
+        //}
 
-        public FrameModel.Frame_Padding Frame_Type
-        {
-            set
-            {
-                if (value == FrameModel.Frame_Padding.Window)
-                {
-                    rdBtn_Window.Checked = true;
-                }
-                else if (value == FrameModel.Frame_Padding.Door)
-                {
-                    rdBtn_Door.Checked = true;
-                }
-                else if (value == FrameModel.Frame_Padding.Concrete)
-                {
-                    rdBtn_Concrete.Checked = true;
-                }
-            }
-        }
+        //public FrameModel.Frame_Padding Frame_Type
+        //{
+        //    set
+        //    {
+        //        if (value == FrameModel.Frame_Padding.Window)
+        //        {
+        //            rdBtn_Window.Checked = true;
+        //        }
+        //        else if (value == FrameModel.Frame_Padding.Door)
+        //        {
+        //            rdBtn_Door.Checked = true;
+        //        }
+        //        else if (value == FrameModel.Frame_Padding.Concrete)
+        //        {
+        //            rdBtn_Concrete.Checked = true;
+        //        }
+        //    }
+        //}
 
-        public int fWidth
-        {
-            get
-            {
-                return (int)num_fWidth.Value;
-            }
+        //public int fWidth
+        //{
+        //    get
+        //    {
+        //        return (int)num_fWidth.Value;
+        //    }
 
-            set
-            {
-                num_fWidth.Value = value;
-            }
-        }
+        //    set
+        //    {
+        //        num_fWidth.Value = value;
+        //    }
+        //}
 
-        public int ThisHeight
-        {
-            set
-            {
-                this.Height = value;
-            }
-        }
+        //public int ThisHeight
+        //{
+        //    set
+        //    {
+        //        this.Height = value;
+        //    }
+        //}
 
-        public bool ThisVisibility
-        {
-            get
-            {
-                return this.Visible;
-            }
+        //public bool ThisVisibility
+        //{
+        //    get
+        //    {
+        //        return this.Visible;
+        //    }
 
-            set
-            {
-                this.Visible = value;
-            }
-        }
+        //    set
+        //    {
+        //        this.Visible = value;
+        //    }
+        //}
 
         public event EventHandler FramePropertiesLoadEventRaised;
         public event EventHandler NumFHeightValueChangedEventRaised;
+        public event EventHandler NumFWidthValueChangedEventRaised;
+        public event EventHandler RdBtnCheckedChangedEventRaised;
 
         public void BringToFrontThis()
         {
@@ -120,9 +122,19 @@ namespace PresentationLayer.Views.UserControls
             rdBtn_Concrete.DataBindings.Add(frameModelBinding["Frame_Type_Concrete"]);
         }
 
-        private void num_fHeight_ValueChanged(object sender, EventArgs e)
+        private void num_fWidth_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, NumFWidthValueChangedEventRaised, e);
+        }
+
+        private void num_fHeight_ValueChanged_1(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, NumFHeightValueChangedEventRaised, e);
+        }
+
+        private void rdBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, RdBtnCheckedChangedEventRaised, e);
         }
     }
 }

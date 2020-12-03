@@ -7,6 +7,6 @@ namespace PresentationLayer.Presenter.UserControls
     public interface IFramePropertiesUCPresenter
     {
         IFramePropertiesUC GetFramePropertiesUC();
-        IFramePropertiesUCPresenter GetNewInstance(IFrameModel frameModel, IUnityContainer unityC);
+        IFramePropertiesUCPresenter GetNewInstance(IFrameModel frameModel, IUnityContainer unityC, IFrameUC frameUC);
     }
 }

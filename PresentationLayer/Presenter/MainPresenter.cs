@@ -463,7 +463,7 @@ namespace PresentationLayer.Presenter
 
         public void AddFramePropertiesUC(IFrameModel frameModel)
         {
-            IFramePropertiesUCPresenter FramePropertiesUCP = _framePropertiesUCPresenter.GetNewInstance(frameModel,_unityC);
+            IFramePropertiesUCPresenter FramePropertiesUCP = _framePropertiesUCPresenter.GetNewInstance(frameModel,_unityC, _frameUC);
             _framePropertiesUC = FramePropertiesUCP.GetFramePropertiesUC();
             _pnlPropertiesBody.Controls.Add((UserControl)_framePropertiesUC);
         }
@@ -471,6 +471,7 @@ namespace PresentationLayer.Presenter
         {
             _mainView.ItemToolStripEnabled = true;
         }
+
         private void ItemToolStrip_Disable()
         {
             _mainView.ItemToolStripEnabled = false;
@@ -536,92 +537,92 @@ namespace PresentationLayer.Presenter
             _mainView.CreateNewWindoorBtnEnabled = false;
         }
 
-        public void Extends_frmDimensionOKClicked_Quotations(int numWidth, int numHeight, string profileType)
-        {
-            try
-            {
-                _windoorModel = AddWindoorModel(numWidth,
-                                                numHeight,
-                                                profileType);
-                AddWndrList_QuotationModel(_windoorModel);
+        //public void Extends_frmDimensionOKClicked_Quotations(int numWidth, int numHeight, string profileType)
+        //{
+        //    try
+        //    {
+        //        _windoorModel = AddWindoorModel(numWidth,
+        //                                        numHeight,
+        //                                        profileType);
+        //        AddWndrList_QuotationModel(_windoorModel);
 
-                AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-                _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
+        //        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+        //        _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
 
-                _basePlatformPresenter.SetBasePlatformSize(numWidth,
-                                                           numHeight);
-                AddItemInfoUC(_windoorModel);
+        //        _basePlatformPresenter.SetBasePlatformSize(numWidth,
+        //                                                   numHeight);
+        //        AddItemInfoUC(_windoorModel);
 
-                _basePlatformPresenter.InvalidateBasePlatform();
-                _basePlatformPresenter.Invalidate_flpMain();
-                SetMainViewTitle(input_qrefno,
-                                 _windoorModel.WD_name,
-                                 _windoorModel.WD_profile,
-                                 false);
-                ItemToolStrip_Enable();
-                CreateNewWindoorBtn_Enable();
+        //        _basePlatformPresenter.InvalidateBasePlatform();
+        //        _basePlatformPresenter.Invalidate_flpMain();
+        //        SetMainViewTitle(input_qrefno,
+        //                         _windoorModel.WD_name,
+        //                         _windoorModel.WD_profile,
+        //                         false);
+        //        ItemToolStrip_Enable();
+        //        CreateNewWindoorBtn_Enable();
 
-                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-            }
-            catch (Exception ex)
-            {
-                Logger log = new Logger(ex.Message, ex.StackTrace);
-                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger log = new Logger(ex.Message, ex.StackTrace);
+        //        MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
-        public void Extends_frmDimensionOKClicked_CreateNewItem(int numWidth, int numHeight, string profileType)
-        {
-            try
-            {
-                _windoorModel = AddWindoorModel(numWidth, numHeight, profileType);
-                AddWndrList_QuotationModel(_windoorModel);
-                AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-                _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
+        //public void Extends_frmDimensionOKClicked_CreateNewItem(int numWidth, int numHeight, string profileType)
+        //{
+        //    try
+        //    {
+        //        _windoorModel = AddWindoorModel(numWidth, numHeight, profileType);
+        //        AddWndrList_QuotationModel(_windoorModel);
+        //        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+        //        _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
 
-                _basePlatformPresenter.SetBasePlatformSize(numWidth, numHeight);
-                AddItemInfoUC(_windoorModel); //add item information user control
+        //        _basePlatformPresenter.SetBasePlatformSize(numWidth, numHeight);
+        //        AddItemInfoUC(_windoorModel); //add item information user control
 
-                _basePlatformPresenter.InvalidateBasePlatform();
-                _basePlatformPresenter.Invalidate_flpMain();
-                SetMainViewTitle(input_qrefno,
-                                 _windoorModel.WD_name,
-                                 _windoorModel.WD_profile,
-                                 false);
+        //        _basePlatformPresenter.InvalidateBasePlatform();
+        //        _basePlatformPresenter.Invalidate_flpMain();
+        //        SetMainViewTitle(input_qrefno,
+        //                         _windoorModel.WD_name,
+        //                         _windoorModel.WD_profile,
+        //                         false);
 
-                CreateNewWindoorBtn_Enable();
-                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-            }
-            catch (Exception ex)
-            {
-                Logger log = new Logger(ex.Message, ex.StackTrace);
-                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //        CreateNewWindoorBtn_Enable();
+        //        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger log = new Logger(ex.Message, ex.StackTrace);
+        //        MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
-        public void Extends_frmDimensionOKClicked_CreateNewFrame(int numWidth, int numHeight, string profileType)
-        {
-            try
-            {
-                _frameModel = AddFrameModel(numWidth, numHeight, frameType);
-                AddFrameList_WindoorModel(_frameModel);
-                AddFrameUC(_frameModel);
-                AddFramePropertiesUC(_frameModel);
+        //public void Extends_frmDimensionOKClicked_CreateNewFrame(int numWidth, int numHeight, string profileType)
+        //{
+        //    try
+        //    {
+        //        _frameModel = AddFrameModel(numWidth, numHeight, frameType);
+        //        AddFrameList_WindoorModel(_frameModel);
+        //        AddFrameUC(_frameModel);
+        //        AddFramePropertiesUC(_frameModel);
 
-                _basePlatformPresenter.InvalidateBasePlatform();
-                _basePlatformPresenter.Invalidate_flpMain();
-                SetMainViewTitle(input_qrefno,
-                                 _windoorModel.WD_name,
-                                 _windoorModel.WD_profile,
-                                 false);
-                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-            }
-            catch (Exception ex)
-            {
-                Logger log = new Logger(ex.Message, ex.StackTrace);
-                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //        _basePlatformPresenter.InvalidateBasePlatform();
+        //        _basePlatformPresenter.Invalidate_flpMain();
+        //        SetMainViewTitle(input_qrefno,
+        //                         _windoorModel.WD_name,
+        //                         _windoorModel.WD_profile,
+        //                         false);
+        //        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger log = new Logger(ex.Message, ex.StackTrace);
+        //        MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         public void Scenario_Quotation(bool QoutationInputBox_OkClicked, 
                                        bool NewItem_OkClicked,
@@ -710,8 +711,8 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
-                        _windoorModel = AddWindoorModel(frmDimension_numWd, 
-                                                        frmDimension_numHt, 
+                        _windoorModel = AddWindoorModel(frmDimension_numWd,
+                                                        frmDimension_numHt,
                                                         frmDimension_profileType);
                         AddWndrList_QuotationModel(_windoorModel);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
@@ -750,6 +751,7 @@ namespace PresentationLayer.Presenter
                     }
                 }
             }
+            
         }
     }
 }

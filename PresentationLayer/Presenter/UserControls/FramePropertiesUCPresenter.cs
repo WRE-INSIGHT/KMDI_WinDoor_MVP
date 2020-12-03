@@ -16,7 +16,7 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IFramePropertiesUC _framePropertiesUC;
         private IFrameModel _frameModel;
-
+        private IFrameUC _frameUC;
         private IFrameServices _frameServices;
 
         public FramePropertiesUCPresenter(IFramePropertiesUC framePropertiesUC,
@@ -31,12 +31,27 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _framePropertiesUC.FramePropertiesLoadEventRaised += new EventHandler(OnFramePropertiesLoadEventRaised);
             _framePropertiesUC.NumFHeightValueChangedEventRaised += new EventHandler(OnNumFHeightValueChangedEventRaised);
+            _framePropertiesUC.NumFWidthValueChangedEventRaised += new EventHandler(OnNumFWidthValueChangedEventRaised);
+            _framePropertiesUC.RdBtnCheckedChangedEventRaised += new EventHandler(OnRdBtnCheckedChangedEventRaised);
+        }
+
+        private void OnRdBtnCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            _frameUC.InvalidatePanelInner();
+        }
+
+        private void OnNumFWidthValueChangedEventRaised(object sender, EventArgs e)
+        {
+            NumericUpDown numW = (NumericUpDown)sender;
+            _frameModel.Frame_Width = Convert.ToInt32(numW.Value);
+            _frameUC.InvalidateThis();
         }
 
         private void OnNumFHeightValueChangedEventRaised(object sender, EventArgs e)
         {
             NumericUpDown numH = (NumericUpDown)sender;
             _frameModel.Frame_Height = Convert.ToInt32(numH.Value);
+            _frameUC.InvalidateThis();
         }
 
         private Dictionary<string, Binding> CreateBindingDictionary()
@@ -62,12 +77,6 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnFramePropertiesLoadEventRaised(object sender, EventArgs e)
         {
-            //_framePropertiesUC.Frame_Name = _frameModel.Frame_Name;
-            //_framePropertiesUC.Frame_Type = _frameModel.Frame_Type;
-            //_framePropertiesUC.fWidth = _frameModel.Frame_Width;
-            //_framePropertiesUC.fHeight = _frameModel.Frame_Height;
-            //_framePropertiesUC.ThisVisibility = _frameModel.Frame_Visible;
-
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
             _framePropertiesUC.BringToFrontThis();
         }
@@ -77,13 +86,16 @@ namespace PresentationLayer.Presenter.UserControls
             return _framePropertiesUC;
         }
 
-        public IFramePropertiesUCPresenter GetNewInstance(IFrameModel frameModel, IUnityContainer unityC)
+        public IFramePropertiesUCPresenter GetNewInstance(IFrameModel frameModel, 
+                                                          IUnityContainer unityC, 
+                                                          IFrameUC frameUC)
         {
             unityC
                 .RegisterType<IFramePropertiesUC, FramePropertiesUC>()
                 .RegisterType<IFramePropertiesUCPresenter, FramePropertiesUCPresenter>();
             FramePropertiesUCPresenter framePropertiesUCP = unityC.Resolve<FramePropertiesUCPresenter>();
             framePropertiesUCP._frameModel = frameModel;
+            framePropertiesUCP._frameUC = frameUC;
 
             return framePropertiesUCP;
         }
