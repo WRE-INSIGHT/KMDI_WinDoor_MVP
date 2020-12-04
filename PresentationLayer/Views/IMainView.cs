@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views
@@ -13,13 +14,17 @@ namespace PresentationLayer.Views
         event EventHandler PanelMainSizeChangedEventRaised;
         event EventHandler CreateNewItemClickEventRaised;
         string Nickname { set; }
-        string ofd_InitialDirectory { get; set; }
+        //string ofd_InitialDirectory { get; set; }
         string mainview_title { get; set; }
         bool ItemToolStripEnabled { get;  set; }
         bool CreateNewWindoorBtnEnabled { get; set; }
         void ShowMainView();
+        void ThisBinding(Dictionary<string, Binding> binding);
+        void RemoveBinding(Control ctrl);
         Panel GetPanelMain();
         Panel GetPanelItems();
         Panel GetPanelPropertiesBody();
+        Panel GetPanelBot();
+        Label GetLblSize();
     }
 }

@@ -17,22 +17,22 @@ namespace PresentationLayer.Views
         {
             set
             {
-                tsLbl_Welcome.Text = "Welcome, " + value;
+                lblWelcome.Text = "Welcome, " + value;
             }
         }
 
-        public string ofd_InitialDirectory
-        {
-            get
-            {
-                return openFileDialog1.InitialDirectory;
-            }
+        //public string ofd_InitialDirectory
+        //{
+        //    get
+        //    {
+        //        return openFileDialog1.InitialDirectory;
+        //    }
 
-            set
-            {
-                openFileDialog1.InitialDirectory = value;
-            }
-        }
+        //    set
+        //    {
+        //        openFileDialog1.InitialDirectory = value;
+        //    }
+        //}
 
         public string mainview_title
         {
@@ -97,6 +97,19 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(this, MainViewLoadEventRaised, e);
         }
 
+        public void ThisBinding(Dictionary<string, Binding> binding)
+        {
+            lblSize.DataBindings.Add(binding["WD_Dimension"]);
+            //this.DataBindings.Add(binding["Frame_Width"]);
+            //this.DataBindings.Add(binding["Frame_Height"]);
+            //this.DataBindings.Add(binding["Frame_Padding"]);
+        }
+
+        public void RemoveBinding(Control ctrl)
+        {
+            ctrl.DataBindings.Clear();
+        }
+
         private void MainView_FormClosed(object sender, FormClosedEventArgs e)
         {
             EventHelpers.RaiseEvent(this, MainViewClosingEventRaised, e);
@@ -144,6 +157,16 @@ namespace PresentationLayer.Views
         public Panel GetPanelPropertiesBody()
         {
             return pnlPropertiesBody;
+        }
+
+        public Label GetLblSize()
+        {
+            return lblSize;
+        }
+
+        public Panel GetPanelBot()
+        {
+            return pnlBot;
         }
     }
 }

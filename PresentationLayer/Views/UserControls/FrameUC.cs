@@ -13,40 +13,6 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class FrameUC : UserControl, IFrameUC
     {
-        //public int fWidth
-        //{
-        //    get
-        //    {
-        //        return this.Width;
-        //    }
-
-        //    set
-        //    {
-        //        this.Width = value;
-        //    }
-        //}
-
-        //public int fHeight
-        //{
-        //    get
-        //    {
-        //        return this.Height;
-        //    }
-
-        //    set
-        //    {
-        //        this.Height = value;
-        //    }
-        //}
-
-        //public int fPadding
-        //{
-        //    set
-        //    {
-        //        this.Padding = new Padding(value);
-        //    }
-        //}
-
         public FrameUC()
         {
             InitializeComponent();

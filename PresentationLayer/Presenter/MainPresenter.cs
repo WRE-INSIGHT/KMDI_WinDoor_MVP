@@ -274,7 +274,7 @@ namespace PresentationLayer.Presenter
             }
             else if (tsmItem.Name == "PremiLineToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine");
+                Scenario_Quotation(false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile");
             }
         }
 
@@ -319,11 +319,8 @@ namespace PresentationLayer.Presenter
         private void Clearing_Operation()
         {
             _quotationModel = null;
-            //_quotationModel.Quotation_ref_no = "";
-            //_quotationModel.Lst_Windoor.Clear();
             _pnlItems.Controls.Clear();
             _pnlPropertiesBody.Controls.Clear();
-            //_pnlMain.Controls.Clear();
             _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
             SetMainViewTitle("");
             CreateNewWindoorBtn_Disable();
@@ -375,6 +372,17 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.FirstTym = false;
             }
             _mainView.Nickname = _userModel.Nickname;
+        }
+
+        private Dictionary<string, Binding> CreateBindingDictionary_MainPresenter()
+        {
+            Dictionary<string, Binding> mainPresenterBinding = new Dictionary<string, Binding>();
+            mainPresenterBinding.Add("WD_Dimension", new Binding("Text", _windoorModel, "WD_Dimension", true, DataSourceUpdateMode.OnPropertyChanged));
+            //mainPresenterBinding.Add("Frame_Width", new Binding("Width", _frameModel, "Frame_Width", true, DataSourceUpdateMode.OnPropertyChanged));
+            //mainPresenterBinding.Add("Frame_Height", new Binding("Height", _frameModel, "Frame_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            //mainPresenterBinding.Add("Frame_Padding", new Binding("Padding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            return mainPresenterBinding;
         }
 
         public void AddBasePlatform(IBasePlatformUC basePlatform)
@@ -475,6 +483,16 @@ namespace PresentationLayer.Presenter
         private void ItemToolStrip_Disable()
         {
             _mainView.ItemToolStripEnabled = false;
+        }
+
+        private void BotToolStrip_Enable()
+        {
+            _mainView.GetPanelBot().Enabled = true;
+        }
+
+        private void BotToolStrip_Disable()
+        {
+            _mainView.GetPanelBot().Enabled = false;
         }
 
         private void SetMainViewTitle(string qrefno, string itemname, string profiletype, bool saved)
@@ -643,7 +661,6 @@ namespace PresentationLayer.Presenter
                     SetMainViewTitle(input_qrefno.ToUpper());
                     ItemToolStrip_Enable();
                     AddQuotationModel(input_qrefno);
-                    _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
 
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
@@ -703,7 +720,10 @@ namespace PresentationLayer.Presenter
                                          false);
                         ItemToolStrip_Enable();
                         CreateNewWindoorBtn_Enable();
+                        BotToolStrip_Enable();
 
+                        _mainView.RemoveBinding(_mainView.GetLblSize());
+                        _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
@@ -728,7 +748,11 @@ namespace PresentationLayer.Presenter
                                          _windoorModel.WD_profile,
                                          false);
 
+                        BotToolStrip_Enable();
                         CreateNewWindoorBtn_Enable();
+
+                        _mainView.RemoveBinding(_mainView.GetLblSize());
+                        _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
@@ -751,7 +775,6 @@ namespace PresentationLayer.Presenter
                     }
                 }
             }
-            
         }
     }
 }

@@ -187,10 +187,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         public void DeleteFrame()
         {
-            //_basePlatformPresenter.DeleteFrameUC(_frameUC);
             _frameModel.Frame_Visible = false;
-            //_mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
-            //delete pati frame properties body
         }
     }
 }

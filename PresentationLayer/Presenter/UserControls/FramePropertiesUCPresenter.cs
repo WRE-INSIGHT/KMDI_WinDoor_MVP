@@ -45,6 +45,7 @@ namespace PresentationLayer.Presenter.UserControls
             NumericUpDown numW = (NumericUpDown)sender;
             _frameModel.Frame_Width = Convert.ToInt32(numW.Value);
             _frameUC.InvalidateThis();
+            _frameUC.InvalidatePanelInner();
         }
 
         private void OnNumFHeightValueChangedEventRaised(object sender, EventArgs e)
@@ -52,6 +53,7 @@ namespace PresentationLayer.Presenter.UserControls
             NumericUpDown numH = (NumericUpDown)sender;
             _frameModel.Frame_Height = Convert.ToInt32(numH.Value);
             _frameUC.InvalidateThis();
+            _frameUC.InvalidatePanelInner();
         }
 
         private Dictionary<string, Binding> CreateBindingDictionary()
