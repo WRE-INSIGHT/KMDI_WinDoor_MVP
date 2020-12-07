@@ -13,6 +13,7 @@ namespace PresentationLayer.Views
         event EventHandler NewQuotationMenuItemClickEventRaised;
         event EventHandler PanelMainSizeChangedEventRaised;
         event EventHandler CreateNewItemClickEventRaised;
+        event EventHandler LabelSizeClickEventRaised;
         string Nickname { set; }
         //string ofd_InitialDirectory { get; set; }
         string mainview_title { get; set; }

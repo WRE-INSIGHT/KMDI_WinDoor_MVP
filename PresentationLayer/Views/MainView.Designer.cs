@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mnsMainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,9 +79,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pnlBot = new System.Windows.Forms.Panel();
-            this.lblSize = new System.Windows.Forms.Label();
-            this.lblZoom = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
+            this.lblZoom = new System.Windows.Forms.Label();
+            this.lblSize = new System.Windows.Forms.Label();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -483,14 +483,14 @@
             this.dgvControls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ImageCol,
             this.DescCol});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvControls.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvControls.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvControls.Location = new System.Drawing.Point(0, 29);
             this.dgvControls.MultiSelect = false;
@@ -614,17 +614,16 @@
             this.pnlBot.Size = new System.Drawing.Size(1084, 25);
             this.pnlBot.TabIndex = 8;
             // 
-            // lblSize
+            // lblWelcome
             // 
-            this.lblSize.AutoSize = true;
-            this.lblSize.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblSize.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSize.Location = new System.Drawing.Point(3, 3);
-            this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(64, 17);
-            this.lblSize.TabIndex = 0;
-            this.lblSize.Text = "400 x 400";
-            this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblWelcome.Location = new System.Drawing.Point(982, 3);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(99, 19);
+            this.lblWelcome.TabIndex = 2;
+            this.lblWelcome.Text = "Welcome, User";
+            this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblZoom
             // 
@@ -637,16 +636,19 @@
             this.lblZoom.Text = "100%";
             this.lblZoom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblWelcome
+            // lblSize
             // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblWelcome.Location = new System.Drawing.Point(982, 3);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(99, 19);
-            this.lblWelcome.TabIndex = 2;
-            this.lblWelcome.Text = "Welcome, User";
-            this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSize.AutoSize = true;
+            this.lblSize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblSize.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblSize.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSize.Location = new System.Drawing.Point(3, 3);
+            this.lblSize.Name = "lblSize";
+            this.lblSize.Size = new System.Drawing.Size(64, 17);
+            this.lblSize.TabIndex = 0;
+            this.lblSize.Text = "400 x 400";
+            this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSize.Click += new System.EventHandler(this.lblSize_Click);
             // 
             // MainView
             // 

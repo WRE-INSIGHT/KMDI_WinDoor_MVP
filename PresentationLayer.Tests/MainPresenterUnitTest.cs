@@ -146,7 +146,9 @@ namespace PresentationLayer.Tests
             //assert
             Assert.AreEqual(exp_id, _mainPresenter.windoorModel_MainPresenter.WD_id);
             Assert.AreEqual(exp_Wd, _mainPresenter.windoorModel_MainPresenter.WD_width);
+            Assert.AreEqual(exp_Wd + 70, _mainPresenter.windoorModel_MainPresenter.WD_width_4basePlatform);
             Assert.AreEqual(exp_Ht, _mainPresenter.windoorModel_MainPresenter.WD_height);
+            Assert.AreEqual(exp_Ht + 35, _mainPresenter.windoorModel_MainPresenter.WD_height_4basePlatform);
             Assert.AreEqual(exp_profileType, _mainPresenter.windoorModel_MainPresenter.WD_profile);
             Assert.AreEqual(exp_qty, _mainPresenter.windoorModel_MainPresenter.WD_quantity);
             Assert.AreEqual(exp_wdZoom, _mainPresenter.windoorModel_MainPresenter.WD_zoom);
@@ -160,8 +162,6 @@ namespace PresentationLayer.Tests
 
             CollectionAssert.Contains(_mainPresenter.pnlMain_MainPresenter.Controls, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC());
             CollectionAssert.Contains(_mainPresenter.pnlItems_MainPresenter.Controls, _mainPresenter.itemInfoUC_MainPresenter);
-            Assert.AreEqual(exp_Wd + 70, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().bp_Width);
-            Assert.AreEqual(exp_Ht + 35, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().bp_Height);
 
             string exp_mainViewTitle = expected_quotation + " >> Item 1 (C70 Profile)*";
             Assert.AreEqual(exp_mainViewTitle, _mainPresenter.GetMainView().mainview_title);
@@ -268,7 +268,9 @@ namespace PresentationLayer.Tests
             //assert
             Assert.AreEqual(exp_id, _mainPresenter.windoorModel_MainPresenter.WD_id);
             Assert.AreEqual(exp_Wd, _mainPresenter.windoorModel_MainPresenter.WD_width);
+            Assert.AreEqual(exp_Wd + 70, _mainPresenter.windoorModel_MainPresenter.WD_width_4basePlatform);
             Assert.AreEqual(exp_Ht, _mainPresenter.windoorModel_MainPresenter.WD_height);
+            Assert.AreEqual(exp_Ht + 35, _mainPresenter.windoorModel_MainPresenter.WD_height_4basePlatform);
             Assert.AreEqual(exp_profileType, _mainPresenter.windoorModel_MainPresenter.WD_profile);
             Assert.AreEqual(exp_qty, _mainPresenter.windoorModel_MainPresenter.WD_quantity);
             Assert.AreEqual(exp_wdZoom, _mainPresenter.windoorModel_MainPresenter.WD_zoom);
@@ -282,8 +284,6 @@ namespace PresentationLayer.Tests
 
             CollectionAssert.Contains(_mainPresenter.pnlMain_MainPresenter.Controls, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC());
             CollectionAssert.Contains(_mainPresenter.pnlItems_MainPresenter.Controls, _mainPresenter.itemInfoUC_MainPresenter);
-            Assert.AreEqual(exp_Wd + 70, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().bp_Width);
-            Assert.AreEqual(exp_Ht + 35, _mainPresenter.basePlatform_MainPresenter.getBasePlatformViewUC().bp_Height);
 
             string exp_mainViewTitle = expected_quotation + " >> Item 1 (PremiLine Profile)*";
             Assert.AreEqual(exp_mainViewTitle, _mainPresenter.GetMainView().mainview_title);

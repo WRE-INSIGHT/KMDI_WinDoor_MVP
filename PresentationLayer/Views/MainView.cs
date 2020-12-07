@@ -80,6 +80,7 @@ namespace PresentationLayer.Views
         public event EventHandler NewQuotationMenuItemClickEventRaised;
         public event EventHandler PanelMainSizeChangedEventRaised;
         public event EventHandler CreateNewItemClickEventRaised;
+        public event EventHandler LabelSizeClickEventRaised;
 
         public MainView()
         {
@@ -167,6 +168,11 @@ namespace PresentationLayer.Views
         public Panel GetPanelBot()
         {
             return pnlBot;
+        }
+
+        private void lblSize_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, LabelSizeClickEventRaised, e);
         }
     }
 }

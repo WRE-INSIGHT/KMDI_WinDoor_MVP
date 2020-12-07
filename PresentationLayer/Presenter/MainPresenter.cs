@@ -263,6 +263,16 @@ namespace PresentationLayer.Presenter
             _mainView.NewQuotationMenuItemClickEventRaised += new EventHandler(OnNewQuotationMenuItemClickEventRaised);
             _mainView.PanelMainSizeChangedEventRaised += new EventHandler(OnPanelMainSizeChangedEventRaised);
             _mainView.CreateNewItemClickEventRaised += new EventHandler(OnCreateNewItemClickEventRaised);
+            _mainView.LabelSizeClickEventRaised += new EventHandler(OnLabelSizeClickEventRaised);
+        }
+
+        private void OnLabelSizeClickEventRaised(object sender, EventArgs e)
+        {
+            _frmDimensionPresenter.SetPresenters(this);
+            _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.ChangeBasePlatformSize;
+            _frmDimensionPresenter.SetProfileType(_windoorModel.WD_profile);
+            _frmDimensionPresenter.SetHeight();
+            _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
         }
 
         private void OnCreateNewItemClickEventRaised(object sender, EventArgs e)
@@ -286,10 +296,6 @@ namespace PresentationLayer.Presenter
 
         private void OnNewQuotationMenuItemClickEventRaised(object sender, EventArgs e)
         {
-
-            // check if the _quotationModel is null or not.
-            //_quotationModel == null, then createNew()
-            //_quotationModel != null, then deleteExisting() and createNew()
             bool create_new = false;
 
             if (_quotationModel != null)
@@ -325,7 +331,7 @@ namespace PresentationLayer.Presenter
             SetMainViewTitle("");
             CreateNewWindoorBtn_Disable();
             ItemToolStrip_Disable();
-            _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
+            //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
         }
 
         private void OnNewFrameButtonClickEventRaised(object sender, EventArgs e)
@@ -340,11 +346,6 @@ namespace PresentationLayer.Presenter
                 frameType = FrameModel.Frame_Padding.Door;
             }
             Scenario_Quotation(false, false, true, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "");
-
-            //_frmDimensionPresenter.SetPresenters(this);
-            //_frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Frame;
-            //_frmDimensionPresenter.SetHeight();
-            //_frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
         }
 
         private void OnOpenToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -650,7 +651,7 @@ namespace PresentationLayer.Presenter
                                        int frmDimension_numHt,
                                        string frmDimension_profileType)
         {
-            if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //Quotation Input box
+            if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
                 if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame)
                 {
@@ -694,7 +695,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
             }
-            else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //frmDimension
+            else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //from frmDimension to here
             {
                 if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame)
                 {
@@ -705,11 +706,9 @@ namespace PresentationLayer.Presenter
                                                         frmDimension_profileType);
                         AddWndrList_QuotationModel(_windoorModel);
 
+                        _basePlatformPresenter.SetWindoorModel(_windoorModel);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-                        _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
 
-                        _basePlatformPresenter.SetBasePlatformSize(frmDimension_numWd,
-                                                                   frmDimension_numHt);
                         AddItemInfoUC(_windoorModel);
 
                         _basePlatformPresenter.InvalidateBasePlatform();
@@ -727,7 +726,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame)
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame) //Add new Item
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
@@ -735,10 +734,10 @@ namespace PresentationLayer.Presenter
                                                         frmDimension_numHt,
                                                         frmDimension_profileType);
                         AddWndrList_QuotationModel(_windoorModel);
-                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-                        _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
 
-                        _basePlatformPresenter.SetBasePlatformSize(frmDimension_numWd, frmDimension_numHt);
+                        _basePlatformPresenter.SetWindoorModel(_windoorModel);
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+
                         AddItemInfoUC(_windoorModel); //add item information user control
 
                         _basePlatformPresenter.InvalidateBasePlatform();
@@ -753,6 +752,12 @@ namespace PresentationLayer.Presenter
 
                         _mainView.RemoveBinding(_mainView.GetLblSize());
                         _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+
+                        _pnlPropertiesBody.Controls.Clear(); //Clearing Operation
+                        _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
+                        _pnlItems.VerticalScroll.Value = _pnlItems.VerticalScroll.Maximum;
+                        _pnlItems.PerformLayout();
+
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
@@ -774,6 +779,20 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
+            }
+        }
+
+        public void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
+                                       int frmDimension_numWd,
+                                       int frmDimension_numHt)
+        {
+            if (purpose == frmDimensionPresenter.Show_Purpose.ChangeBasePlatformSize)
+            {
+                _windoorModel.WD_width = frmDimension_numWd;
+                _windoorModel.WD_height = frmDimension_numHt;
+                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                _basePlatformPresenter.InvalidateBasePlatform();
+                _basePlatformPresenter.Invalidate_flpMain();
             }
         }
     }

@@ -24,11 +24,6 @@ namespace PresentationLayer.Views.UserControls
             {
                 return this.Height;
             }
-
-            set
-            {
-                this.Height = value + 35;
-            }
         }
 
         public int bp_Width
@@ -36,24 +31,6 @@ namespace PresentationLayer.Views.UserControls
             get
             {
                 return this.Width;
-            }
-
-            set
-            {
-                this.Width = value + 70;
-            }
-        }
-        
-        public Point bp_Location
-        {
-            get
-            {
-                return this.Location;
-            }
-
-            set
-            {
-                this.Location = value;
             }
         }
 
@@ -63,15 +40,12 @@ namespace PresentationLayer.Views.UserControls
             {
                 return this.Visible;
             }
-            set
-            {
-                this.Visible = value;
-            }
         }
 
         public event PaintEventHandler basePlatformPaintEventRaised;
         public event EventHandler basePlatformSizeChangedEventRaised;
         public event PaintEventHandler flpFrameDragDropPaintEventRaised;
+        public event EventHandler basePlatformLoadEventRaised;
 
         public FlowLayoutPanel GetFlpMain()
         {
@@ -101,6 +75,23 @@ namespace PresentationLayer.Views.UserControls
         private void flp_frameDragDrop_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(sender, flpFrameDragDropPaintEventRaised, e);
+        }
+
+        private void BasePlatformUC_Load(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, basePlatformLoadEventRaised, e);
+        }
+
+        public void ThisBinding(Dictionary<string, Binding> binding)
+        {
+            this.DataBindings.Add(binding["WD_width_4basePlatform"]);
+            this.DataBindings.Add(binding["WD_height_4basePlatform"]);
+            this.DataBindings.Add(binding["WD_visibility"]);
+        }
+
+        public void ClearBinding(Control ctrl)
+        {
+            ctrl.DataBindings.Clear();
         }
     }
 }

@@ -13,12 +13,15 @@ namespace PresentationLayer.Views.UserControls
         event PaintEventHandler basePlatformPaintEventRaised;
         event PaintEventHandler flpFrameDragDropPaintEventRaised;
         event EventHandler basePlatformSizeChangedEventRaised;
-        int bp_Width { get; set; }
-        int bp_Height { get; set; }
-        Point bp_Location { get; set; }
-        bool thisVisibility { get; set; }
+        event EventHandler basePlatformLoadEventRaised;
+        int bp_Width { get; }
+        int bp_Height { get; }
+        //Point bp_Location { get; set; }
+        bool thisVisibility { get; }
         void InvalidateThis();
         void PerformLayoutThis();
+        void ThisBinding(Dictionary<string, Binding> binding);
+        void ClearBinding(Control ctrl);
         FlowLayoutPanel GetFlpMain();
     }
 }

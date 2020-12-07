@@ -36,7 +36,7 @@
             this.flp_frameDragDrop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_frameDragDrop.Location = new System.Drawing.Point(70, 35);
             this.flp_frameDragDrop.Name = "flp_frameDragDrop";
-            this.flp_frameDragDrop.Size = new System.Drawing.Size(302, 302);
+            this.flp_frameDragDrop.Size = new System.Drawing.Size(300, 300);
             this.flp_frameDragDrop.TabIndex = 0;
             this.flp_frameDragDrop.Paint += new System.Windows.Forms.PaintEventHandler(this.flp_frameDragDrop_Paint);
             // 
@@ -49,7 +49,8 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "BasePlatformUC";
             this.Padding = new System.Windows.Forms.Padding(70, 35, 0, 0);
-            this.Size = new System.Drawing.Size(372, 337);
+            this.Size = new System.Drawing.Size(370, 335);
+            this.Load += new System.EventHandler(this.BasePlatformUC_Load);
             this.SizeChanged += new System.EventHandler(this.BasePlatformUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.BasePlatformUC_Paint);
             this.ResumeLayout(false);

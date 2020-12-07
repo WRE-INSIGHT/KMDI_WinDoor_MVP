@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PresentationLayer.Views.UserControls;
+using ModelLayer.Model.Quotation.WinDoor;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -14,6 +15,8 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IBasePlatformUC _basePlatfomrUC;
         FlowLayoutPanel _flpMain;
+
+        IWindoorModel _windoorModel;
 
         public BasePlatformPresenter(IBasePlatformUC basePlatformUC)
         {
@@ -27,6 +30,22 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatfomrUC.basePlatformPaintEventRaised += new PaintEventHandler(OnbasePlatformPaintEventRaised);
             _basePlatfomrUC.basePlatformSizeChangedEventRaised += new EventHandler(OnbasePlatformSizeChangedEventRaised);
             _basePlatfomrUC.flpFrameDragDropPaintEventRaised += new PaintEventHandler(OnflpFrameDragDropPaintEventRaised);
+            _basePlatfomrUC.basePlatformLoadEventRaised += new EventHandler(OnbasePlatformLoadEventRaised);
+        }
+
+        private void OnbasePlatformLoadEventRaised(object sender, EventArgs e)
+        {
+            //_basePlatfomrUC.ThisBinding(CreateBindingDictionary_basePlaform());
+        }
+
+        private Dictionary<string, Binding> CreateBindingDictionary_basePlaform()
+        {
+            Dictionary<string, Binding> basePlatformBinding = new Dictionary<string, Binding>();
+            basePlatformBinding.Add("WD_width_4basePlatform", new Binding("Width", _windoorModel, "WD_width_4basePlatform", true, DataSourceUpdateMode.OnPropertyChanged));
+            basePlatformBinding.Add("WD_height_4basePlatform", new Binding("Height", _windoorModel, "WD_height_4basePlatform", true, DataSourceUpdateMode.OnPropertyChanged));
+            basePlatformBinding.Add("WD_visibility", new Binding("Visible", _windoorModel, "WD_visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            return basePlatformBinding;
         }
 
         private void OnflpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
@@ -168,11 +187,11 @@ namespace PresentationLayer.Presenter.UserControls
             return _basePlatfomrUC;
         }
 
-        public void SetBasePlatformSize(int wd, int ht)
-        {
-            _basePlatfomrUC.bp_Width = wd;
-            _basePlatfomrUC.bp_Height = ht;
-        }
+        //public void SetBasePlatformSize(int wd, int ht)
+        //{
+        //    _basePlatfomrUC.bp_Width = wd;
+        //    _basePlatfomrUC.bp_Height = ht;
+        //}
 
         public void AddFrame(IFrameUC frame)
         {
@@ -211,6 +230,13 @@ namespace PresentationLayer.Presenter.UserControls
         public void DeleteFrameUC(IFrameUC frameUC)
         {
             _flpMain.Controls.Remove((UserControl)frameUC);
+        }
+
+        public void SetWindoorModel(IWindoorModel windoorModel)
+        {
+            _windoorModel = windoorModel;
+            _basePlatfomrUC.ClearBinding((UserControl)_basePlatfomrUC);
+            _basePlatfomrUC.ThisBinding(CreateBindingDictionary_basePlaform());
         }
     }
 }

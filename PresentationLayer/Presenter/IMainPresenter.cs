@@ -68,5 +68,8 @@ namespace PresentationLayer.Presenter
                                 int frmDimension_numWd,
                                 int frmDimension_numHt,
                                 string frmDimension_profileType);
+        void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
+                                 int frmDimension_numWd,
+                                 int frmDimension_numHt);
     }
 }

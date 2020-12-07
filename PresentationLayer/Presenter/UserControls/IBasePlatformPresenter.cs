@@ -1,4 +1,5 @@
-﻿using PresentationLayer.Views.UserControls;
+﻿using ModelLayer.Model.Quotation.WinDoor;
+using PresentationLayer.Views.UserControls;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -7,7 +8,8 @@ namespace PresentationLayer.Presenter.UserControls
     public interface IBasePlatformPresenter
     {
         IBasePlatformUC getBasePlatformViewUC();
-        void SetBasePlatformSize(int wd, int ht);
+        //void SetBasePlatformSize(int wd, int ht);
+        void SetWindoorModel(IWindoorModel windoorModel);
         void AddFrame(IFrameUC frame);
         void InvalidateBasePlatform();
         void PerformLayoutBasePlatform();

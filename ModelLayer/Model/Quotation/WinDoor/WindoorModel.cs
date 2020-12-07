@@ -45,6 +45,21 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 _wdWidth = value;
                 WD_Dimension = value.ToString() + " x " + WD_height.ToString();
+                WD_width_4basePlatform = value + 70;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _wdWidth2;
+        public int WD_width_4basePlatform
+        {
+            get
+            {
+                return _wdWidth2;
+            }
+            set
+            {
+                _wdWidth2 = value;
                 NotifyPropertyChanged();
             }
         }
@@ -62,6 +77,22 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 _wdHeight = value;
                 WD_Dimension = WD_width.ToString() + " x " + value.ToString();
+                WD_height_4basePlatform = value + 35;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private int _wdHeight2;
+        public int WD_height_4basePlatform
+        {
+            get
+            {
+                return _wdHeight2;
+            }
+            set
+            {
+                _wdHeight2 = value;
                 NotifyPropertyChanged();
             }
         }

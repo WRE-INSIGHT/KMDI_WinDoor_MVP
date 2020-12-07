@@ -23,7 +23,8 @@ namespace PresentationLayer.Presenter
         {
             Quotation = 1,
             CreateNew_Item = 2,
-            CreateNew_Frame = 3
+            CreateNew_Frame = 3,
+            ChangeBasePlatformSize = 4
         }
 
         private Show_Purpose this_purpose;
@@ -136,13 +137,20 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                _mainPresenter.Scenario_Quotation(_mainPresenter_qoutationInputBox_ClickedOK,
-                                                  _mainPresenter_newItem_ClickedOK,
-                                                  _mainPresenter_AddedFrame_ClickedOK,
-                                                  purpose,
-                                                  _frmDimensionView.InumWidth,
-                                                  _frmDimensionView.InumHeight,
-                                                  profile_type);
+                if (purpose == Show_Purpose.ChangeBasePlatformSize)
+                {
+                    _mainPresenter.frmDimensionResults(purpose, _frmDimensionView.InumWidth, _frmDimensionView.InumHeight);
+                }
+                else
+                {
+                    _mainPresenter.Scenario_Quotation(_mainPresenter_qoutationInputBox_ClickedOK,
+                                                      _mainPresenter_newItem_ClickedOK,
+                                                      _mainPresenter_AddedFrame_ClickedOK,
+                                                      purpose,
+                                                      _frmDimensionView.InumWidth,
+                                                      _frmDimensionView.InumHeight,
+                                                      profile_type);
+                }
             }
             catch (Exception ex)
             {
@@ -173,7 +181,9 @@ namespace PresentationLayer.Presenter
             {
                 _frmDimensionView.thisHeight = 193;
             }
-            else if (purpose == Show_Purpose.CreateNew_Item || purpose == Show_Purpose.CreateNew_Frame)
+            else if (purpose == Show_Purpose.CreateNew_Item || 
+                     purpose == Show_Purpose.CreateNew_Frame || 
+                     purpose == Show_Purpose.ChangeBasePlatformSize)
             {
                 _frmDimensionView.thisHeight = 156;
             }
