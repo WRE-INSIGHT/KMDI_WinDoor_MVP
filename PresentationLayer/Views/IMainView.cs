@@ -14,6 +14,7 @@ namespace PresentationLayer.Views
         event EventHandler PanelMainSizeChangedEventRaised;
         event EventHandler CreateNewItemClickEventRaised;
         event EventHandler LabelSizeClickEventRaised;
+        event MouseEventHandler CtrlUCfixedMouseDownEventRaised;
         string Nickname { set; }
         //string ofd_InitialDirectory { get; set; }
         string mainview_title { get; set; }

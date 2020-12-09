@@ -60,7 +60,7 @@
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(185, 206);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(185, 183);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // lbl_frameName
@@ -105,6 +105,7 @@
             this.rdBtn_Concrete.TabStop = true;
             this.rdBtn_Concrete.Text = "Concrete";
             this.rdBtn_Concrete.UseVisualStyleBackColor = true;
+            this.rdBtn_Concrete.Visible = false;
             this.rdBtn_Concrete.CheckedChanged += new System.EventHandler(this.rdBtn_CheckedChanged);
             // 
             // lbl_Width
@@ -177,7 +178,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "FramePropertiesUC";
-            this.Size = new System.Drawing.Size(185, 206);
+            this.Size = new System.Drawing.Size(185, 183);
             this.Load += new System.EventHandler(this.FramePropertiesUC_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();

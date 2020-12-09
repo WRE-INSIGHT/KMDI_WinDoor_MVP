@@ -7,8 +7,10 @@ using Unity;
 using Unity.Lifetime;
 using PresentationLayer.Presenter;
 using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.Services.UserServices;
 using ServiceLayer.Services.QuotationServices;
@@ -18,6 +20,7 @@ using ServiceLayer.CommonServices;
 using ModelLayer.Model.User;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.Panel;
 using Unity.Injection;
 
 namespace PresentationLayer
@@ -53,6 +56,9 @@ namespace PresentationLayer
                 .RegisterType<IFrameServices, FrameServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFrameModel, FrameModel>(new ContainerControlledLifetimeManager())
 
+
+                .RegisterType<IPanelModel, PanelModel>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IFrameUC, FrameUC>(new ContainerControlledLifetimeManager())
@@ -72,6 +78,9 @@ namespace PresentationLayer
 
                 .RegisterType<IpromptYesNo, promptYesNo>(new ContainerControlledLifetimeManager())
                 .RegisterType<IpromptYesNoPresenter, promptYesNoPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IFixedPanelUC, FixedPanelUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,6 +46,8 @@
     <Compile Include="Model\Quotation\Frame\FrameModel.cs" />
     <Compile Include="Model\Quotation\Frame\IFrameModel.cs" />
     <Compile Include="Model\Quotation\IQuotationModel.cs" />
+    <Compile Include="Model\Quotation\Panel\IPanelModel.cs" />
+    <Compile Include="Model\Quotation\Panel\PanelModel.cs" />
     <Compile Include="Model\Quotation\QuotationModel.cs" />
     <Compile Include="Model\Quotation\WinDoor\IWindoorModel.cs" />
     <Compile Include="Model\Quotation\WinDoor\WindoorModel.cs" />

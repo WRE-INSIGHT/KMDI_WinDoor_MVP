@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -19,6 +20,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int WD_width { get; set; }
         int WD_width_4basePlatform { get; set; }
         int WD_zoom { get; set; }
+        Image WD_image { get; set; }
         List<IFrameModel> lst_frame { get; set; }
     }
 }

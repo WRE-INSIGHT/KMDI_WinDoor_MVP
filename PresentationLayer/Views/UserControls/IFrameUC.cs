@@ -22,6 +22,8 @@ namespace PresentationLayer.Views.UserControls
         //int fHeight { get; set; }
         //int fPadding { set; }
         void InvalidateThis();
+        void InvalidateThisParent();
+        void InvalidateThisParentsParent();
         void InvalidatePanelInner();
         void ThisBinding(Dictionary<string, Binding> binding);
         ContextMenuStrip GetFrameCmenu();

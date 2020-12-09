@@ -81,6 +81,7 @@ namespace PresentationLayer.Views
         public event EventHandler PanelMainSizeChangedEventRaised;
         public event EventHandler CreateNewItemClickEventRaised;
         public event EventHandler LabelSizeClickEventRaised;
+        public event MouseEventHandler CtrlUCfixedMouseDownEventRaised;
 
         public MainView()
         {
@@ -173,6 +174,11 @@ namespace PresentationLayer.Views
         private void lblSize_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, LabelSizeClickEventRaised, e);
+        }
+
+        private void ctrlUC_fixed_MouseDown(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(sender, CtrlUCfixedMouseDownEventRaised, e);
         }
     }
 }

@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MetroFramework">
+      <HintPath>..\..\..\toolkit\MetroFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -75,6 +78,8 @@
     <Compile Include="Presenter\UserControls\IFrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\FixedPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\IFixedPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\frmDimensionView.cs">
@@ -111,6 +116,12 @@
     <Compile Include="Views\UserControls\BasePlatformUC.Designer.cs">
       <DependentUpon>BasePlatformUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\ControlsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ControlsUC.Designer.cs">
+      <DependentUpon>ControlsUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\FramePropertiesUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,6 +144,19 @@
     <Compile Include="Views\UserControls\ItemInfoUC.Designer.cs">
       <DependentUpon>ItemInfoUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelPropertiesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelPropertiesUC.Designer.cs">
+      <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\FixedPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\FixedPanelUC.Designer.cs">
+      <DependentUpon>FixedPanelUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\IFixedPanelUC.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -158,6 +182,9 @@
     <EmbeddedResource Include="Views\UserControls\BasePlatformUC.resx">
       <DependentUpon>BasePlatformUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ControlsUC.resx">
+      <DependentUpon>ControlsUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FramePropertiesUC.resx">
       <DependentUpon>FramePropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,6 +193,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ItemInfoUC.resx">
       <DependentUpon>ItemInfoUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelPropertiesUC.resx">
+      <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\FixedPanelUC.resx">
+      <DependentUpon>FixedPanelUC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -197,6 +230,8 @@
     <Content Include="Resources\delete_file_30px.png" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
+    <None Include="Resources\FixedPanel.png" />
+    <None Include="Resources\FixedPanel2.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <Content Include="Resources\K&amp;M_logo_official_2018-1.png" />

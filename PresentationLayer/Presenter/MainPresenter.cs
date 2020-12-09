@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
 using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls;
 using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
@@ -44,6 +45,7 @@ namespace PresentationLayer.Presenter
         private IItemInfoUCPresenter _itemInfoUCPresenter;
         private IFramePropertiesUCPresenter _framePropertiesUCPresenter;
 
+        private IFixedPanelUCPresenter _fixedPanelUCPresenter;
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody;
 
@@ -228,7 +230,8 @@ namespace PresentationLayer.Presenter
                              IWindoorServices windoorServices,
                              IItemInfoUCPresenter itemInfoUCPresenter,
                              IFrameServices frameServices,
-                             IFramePropertiesUCPresenter framePropertiesPresenter)
+                             IFramePropertiesUCPresenter framePropertiesPresenter,
+                             IFixedPanelUCPresenter fixedPanelUCPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -239,6 +242,7 @@ namespace PresentationLayer.Presenter
             _itemInfoUCPresenter = itemInfoUCPresenter;
             _frameServices = frameServices;
             _framePropertiesUCPresenter = framePropertiesPresenter;
+            _fixedPanelUCPresenter = fixedPanelUCPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -264,6 +268,15 @@ namespace PresentationLayer.Presenter
             _mainView.PanelMainSizeChangedEventRaised += new EventHandler(OnPanelMainSizeChangedEventRaised);
             _mainView.CreateNewItemClickEventRaised += new EventHandler(OnCreateNewItemClickEventRaised);
             _mainView.LabelSizeClickEventRaised += new EventHandler(OnLabelSizeClickEventRaised);
+            _mainView.CtrlUCfixedMouseDownEventRaised += new MouseEventHandler(OnCtrlUCfixedMouseDownEventRaised);
+        }
+
+        private void OnCtrlUCfixedMouseDownEventRaised(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+
+            }
         }
 
         private void OnLabelSizeClickEventRaised(object sender, EventArgs e)
@@ -379,9 +392,6 @@ namespace PresentationLayer.Presenter
         {
             Dictionary<string, Binding> mainPresenterBinding = new Dictionary<string, Binding>();
             mainPresenterBinding.Add("WD_Dimension", new Binding("Text", _windoorModel, "WD_Dimension", true, DataSourceUpdateMode.OnPropertyChanged));
-            //mainPresenterBinding.Add("Frame_Width", new Binding("Width", _frameModel, "Frame_Width", true, DataSourceUpdateMode.OnPropertyChanged));
-            //mainPresenterBinding.Add("Frame_Height", new Binding("Height", _frameModel, "Frame_Height", true, DataSourceUpdateMode.OnPropertyChanged));
-            //mainPresenterBinding.Add("Frame_Padding", new Binding("Padding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return mainPresenterBinding;
         }
@@ -555,94 +565,7 @@ namespace PresentationLayer.Presenter
         {
             _mainView.CreateNewWindoorBtnEnabled = false;
         }
-
-        //public void Extends_frmDimensionOKClicked_Quotations(int numWidth, int numHeight, string profileType)
-        //{
-        //    try
-        //    {
-        //        _windoorModel = AddWindoorModel(numWidth,
-        //                                        numHeight,
-        //                                        profileType);
-        //        AddWndrList_QuotationModel(_windoorModel);
-
-        //        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-        //        _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
-
-        //        _basePlatformPresenter.SetBasePlatformSize(numWidth,
-        //                                                   numHeight);
-        //        AddItemInfoUC(_windoorModel);
-
-        //        _basePlatformPresenter.InvalidateBasePlatform();
-        //        _basePlatformPresenter.Invalidate_flpMain();
-        //        SetMainViewTitle(input_qrefno,
-        //                         _windoorModel.WD_name,
-        //                         _windoorModel.WD_profile,
-        //                         false);
-        //        ItemToolStrip_Enable();
-        //        CreateNewWindoorBtn_Enable();
-
-        //        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger log = new Logger(ex.Message, ex.StackTrace);
-        //        MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
-        //public void Extends_frmDimensionOKClicked_CreateNewItem(int numWidth, int numHeight, string profileType)
-        //{
-        //    try
-        //    {
-        //        _windoorModel = AddWindoorModel(numWidth, numHeight, profileType);
-        //        AddWndrList_QuotationModel(_windoorModel);
-        //        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-        //        _basePlatformPresenter.getBasePlatformViewUC().thisVisibility = true;
-
-        //        _basePlatformPresenter.SetBasePlatformSize(numWidth, numHeight);
-        //        AddItemInfoUC(_windoorModel); //add item information user control
-
-        //        _basePlatformPresenter.InvalidateBasePlatform();
-        //        _basePlatformPresenter.Invalidate_flpMain();
-        //        SetMainViewTitle(input_qrefno,
-        //                         _windoorModel.WD_name,
-        //                         _windoorModel.WD_profile,
-        //                         false);
-
-        //        CreateNewWindoorBtn_Enable();
-        //        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger log = new Logger(ex.Message, ex.StackTrace);
-        //        MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
-        //public void Extends_frmDimensionOKClicked_CreateNewFrame(int numWidth, int numHeight, string profileType)
-        //{
-        //    try
-        //    {
-        //        _frameModel = AddFrameModel(numWidth, numHeight, frameType);
-        //        AddFrameList_WindoorModel(_frameModel);
-        //        AddFrameUC(_frameModel);
-        //        AddFramePropertiesUC(_frameModel);
-
-        //        _basePlatformPresenter.InvalidateBasePlatform();
-        //        _basePlatformPresenter.Invalidate_flpMain();
-        //        SetMainViewTitle(input_qrefno,
-        //                         _windoorModel.WD_name,
-        //                         _windoorModel.WD_profile,
-        //                         false);
-        //        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger log = new Logger(ex.Message, ex.StackTrace);
-        //        MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
+        
         public void Scenario_Quotation(bool QoutationInputBox_OkClicked, 
                                        bool NewItem_OkClicked,
                                        bool AddedFrame,
@@ -761,7 +684,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame)
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame) //add frame
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {

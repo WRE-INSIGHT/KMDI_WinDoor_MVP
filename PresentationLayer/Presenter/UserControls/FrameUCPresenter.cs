@@ -72,9 +72,10 @@ namespace PresentationLayer.Presenter.UserControls
                                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 DeleteFrame();
+                _frameUC.InvalidateThisParentsParent();
             }
-           // _promptYesNoUCP.SetValues(this, _mainPresenter);
-           //_promptYesNoUCP.GetPromptYesNo().PromptYesNo("Are you sure you want to DELETE?");
+            // _promptYesNoUCP.SetValues(this, _mainPresenter);
+            //_promptYesNoUCP.GetPromptYesNo().PromptYesNo("Are you sure you want to DELETE?");
         }
 
         private void OnFrameMouseClickEventRaised(object sender, MouseEventArgs e)

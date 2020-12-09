@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mnsMainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,9 +67,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pnlControlMain = new System.Windows.Forms.Panel();
-            this.dgvControls = new System.Windows.Forms.DataGridView();
-            this.ImageCol = new System.Windows.Forms.DataGridViewImageColumn();
-            this.DescCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ctrlUC_fixed = new PresentationLayer.Views.UserControls.ControlsUC();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlProperties = new System.Windows.Forms.Panel();
@@ -90,7 +87,6 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.pnlControlMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvControls)).BeginInit();
             this.pnlProperties.SuspendLayout();
             this.pnlBot.SuspendLayout();
             this.SuspendLayout();
@@ -459,66 +455,31 @@
             this.splitContainer1.Panel2.Controls.Add(this.pnlMain);
             this.splitContainer1.Panel2.Controls.Add(this.pnlProperties);
             this.splitContainer1.Size = new System.Drawing.Size(916, 497);
-            this.splitContainer1.SplitterDistance = 131;
+            this.splitContainer1.SplitterDistance = 132;
             this.splitContainer1.TabIndex = 7;
             // 
             // pnlControlMain
             // 
-            this.pnlControlMain.Controls.Add(this.dgvControls);
+            this.pnlControlMain.Controls.Add(this.ctrlUC_fixed);
             this.pnlControlMain.Controls.Add(this.label1);
             this.pnlControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlControlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlControlMain.Name = "pnlControlMain";
-            this.pnlControlMain.Size = new System.Drawing.Size(129, 495);
+            this.pnlControlMain.Size = new System.Drawing.Size(130, 495);
             this.pnlControlMain.TabIndex = 5;
             // 
-            // dgvControls
+            // ctrlUC_fixed
             // 
-            this.dgvControls.AllowUserToAddRows = false;
-            this.dgvControls.AllowUserToDeleteRows = false;
-            this.dgvControls.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvControls.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvControls.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvControls.ColumnHeadersVisible = false;
-            this.dgvControls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ImageCol,
-            this.DescCol});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvControls.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvControls.Location = new System.Drawing.Point(0, 29);
-            this.dgvControls.MultiSelect = false;
-            this.dgvControls.Name = "dgvControls";
-            this.dgvControls.ReadOnly = true;
-            this.dgvControls.RowHeadersVisible = false;
-            this.dgvControls.RowTemplate.Height = 55;
-            this.dgvControls.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvControls.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvControls.Size = new System.Drawing.Size(129, 466);
-            this.dgvControls.TabIndex = 5;
-            // 
-            // ImageCol
-            // 
-            this.ImageCol.HeaderText = "Image";
-            this.ImageCol.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.ImageCol.Name = "ImageCol";
-            this.ImageCol.ReadOnly = true;
-            this.ImageCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ImageCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ImageCol.Width = 5;
-            // 
-            // DescCol
-            // 
-            this.DescCol.HeaderText = "Description";
-            this.DescCol.Name = "DescCol";
-            this.DescCol.ReadOnly = true;
-            this.DescCol.Width = 5;
+            this.ctrlUC_fixed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ctrlUC_fixed.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ctrlUC_fixed.CustomImage = global::PresentationLayer.Properties.Resources.FixedPanel2;
+            this.ctrlUC_fixed.CustomText = "Fixed";
+            this.ctrlUC_fixed.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrlUC_fixed.Location = new System.Drawing.Point(0, 29);
+            this.ctrlUC_fixed.Name = "ctrlUC_fixed";
+            this.ctrlUC_fixed.Size = new System.Drawing.Size(130, 63);
+            this.ctrlUC_fixed.TabIndex = 5;
+            this.ctrlUC_fixed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ctrlUC_fixed_MouseDown);
             // 
             // label1
             // 
@@ -528,7 +489,7 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 29);
+            this.label1.Size = new System.Drawing.Size(130, 29);
             this.label1.TabIndex = 4;
             this.label1.Text = "Controls";
             // 
@@ -539,7 +500,7 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(139, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(640, 495);
+            this.pnlMain.Size = new System.Drawing.Size(639, 495);
             this.pnlMain.TabIndex = 3;
             this.pnlMain.SizeChanged += new System.EventHandler(this.pnlMain_SizeChanged);
             // 
@@ -678,7 +639,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.pnlControlMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvControls)).EndInit();
             this.pnlProperties.ResumeLayout(false);
             this.pnlProperties.PerformLayout();
             this.pnlBot.ResumeLayout(false);
@@ -728,9 +688,6 @@
         internal System.Windows.Forms.Label label6;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel pnlControlMain;
-        private System.Windows.Forms.DataGridView dgvControls;
-        private System.Windows.Forms.DataGridViewImageColumn ImageCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescCol;
         internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Panel pnlProperties;
@@ -742,5 +699,6 @@
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Label lblZoom;
         private System.Windows.Forms.Label lblSize;
+        private UserControls.ControlsUC ctrlUC_fixed;
     }
 }

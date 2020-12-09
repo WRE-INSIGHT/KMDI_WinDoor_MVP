@@ -29,11 +29,6 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnItemInfoUCLoadEventRaised(object sender, EventArgs e)
         {
-            //_itemInfoUC.dok = System.Windows.Forms.DockStyle.Top;
-            //_itemInfoUC.ItemName = _windoorModel.WD_name;
-            //_itemInfoUC.ItemDesc = _windoorModel.WD_description;
-            //_itemInfoUC.ItemDimension = _windoorModel.WD_width.ToString() + " x " + _windoorModel.WD_height.ToString();
-            //_itemInfoUC.ItemVisibility = _windoorModel.WD_visibility;
             _itemInfoUC.ThisBinding(CreateBindingDictionary_ItemInfoUCP());
             _itemInfoUC.BringToFrontThis();
         }
@@ -45,6 +40,7 @@ namespace PresentationLayer.Presenter.UserControls
             windoorBinding.Add("WD_Dimension", new Binding("Text", _windoorModel, "WD_Dimension", true, DataSourceUpdateMode.OnPropertyChanged));
             windoorBinding.Add("WD_description", new Binding("Text", _windoorModel, "WD_description", true, DataSourceUpdateMode.OnPropertyChanged));
             windoorBinding.Add("WD_visibility", new Binding("Visible", _windoorModel, "WD_visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            windoorBinding.Add("WD_image", new Binding("Image", _windoorModel, "WD_image", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return windoorBinding;
         }

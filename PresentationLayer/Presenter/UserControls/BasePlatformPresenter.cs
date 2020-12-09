@@ -103,8 +103,11 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnbasePlatformPaintEventRaised(object sender, PaintEventArgs e)
         {
+            UserControl basePL = (UserControl)sender;
             //dito ilagay ang drawing ng red-arrowlines
             Graphics g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
             int ctrl_Y = 35;
             Pen redP = new Pen(Color.Red);
             redP.Width = 3.5f;
@@ -132,17 +135,20 @@ namespace PresentationLayer.Presenter.UserControls
                 new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
             };
 
-            g.DrawLines(redP, arrwhd_pnts_W1);
-            g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
-            g.DrawLines(redP, arrwhd_pnts_W2);
-            TextRenderer.DrawText(g,
-                                  dmnsion_w,
-                                  dmnsion_font,
-                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
-                                                new Size(s.Width, s.Height)),
-                                  Color.Black,
-                                  SystemColors.Control,
-                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            if (_flpMain.Controls.Count > 0)
+            {
+                g.DrawLines(redP, arrwhd_pnts_W1);
+                g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
+                g.DrawLines(redP, arrwhd_pnts_W2);
+                TextRenderer.DrawText(g,
+                                      dmnsion_w,
+                                      dmnsion_font,
+                                      new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
+                                                    new Size(s.Width, s.Height)),
+                                      Color.Black,
+                                      SystemColors.Control,
+                                      TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            }
             //arrow for WIDTH
 
 
@@ -168,18 +174,34 @@ namespace PresentationLayer.Presenter.UserControls
                     new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
                 };
 
-            g.DrawLines(redP, arrwhd_pnts_H1);
-            g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
-            g.DrawLines(redP, arrwhd_pnts_H2);
-            TextRenderer.DrawText(g,
-                                  dmnsion_h,
-                                  dmnsion_font,
-                                  new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
-                                                new Size(s2.Width, s2.Height)),
-                                  Color.Black,
-                                  SystemColors.Control,
-                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            if (_flpMain.Controls.Count > 0)
+            {
+                g.DrawLines(redP, arrwhd_pnts_H1);
+                g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
+                g.DrawLines(redP, arrwhd_pnts_H2);
+                TextRenderer.DrawText(g,
+                                      dmnsion_h,
+                                      dmnsion_font,
+                                      new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
+                                                    new Size(s2.Width, s2.Height)),
+                                      Color.Black,
+                                      SystemColors.Control,
+                                      TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            }
             //arrow for HEIGHT
+
+            Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
+            basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
+            _windoorModel.WD_image = bm;
+            //Set_WDImage(g, basePL);
+        }
+
+        private void Set_WDImage(Graphics g, UserControl basePL)
+        {
+            
+            Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
+            basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
+            _windoorModel.WD_image = bm;
         }
 
         public IBasePlatformUC getBasePlatformViewUC()

@@ -85,6 +85,7 @@ namespace PresentationLayer.Views.UserControls
             lbl_dimension.DataBindings.Add(windoorModelBinding["WD_Dimension"]);
             lbl_desc.DataBindings.Add(windoorModelBinding["WD_description"]);
             this.DataBindings.Add(windoorModelBinding["WD_visibility"]);
+            pbox_itemImage.DataBindings.Add(windoorModelBinding["WD_image"]);
         }
 
     }

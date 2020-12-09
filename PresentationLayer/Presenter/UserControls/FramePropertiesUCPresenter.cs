@@ -38,6 +38,8 @@ namespace PresentationLayer.Presenter.UserControls
         private void OnRdBtnCheckedChangedEventRaised(object sender, EventArgs e)
         {
             _frameUC.InvalidatePanelInner();
+            _frameUC.InvalidateThisParent();
+            _frameUC.InvalidateThisParentsParent();
         }
 
         private void OnNumFWidthValueChangedEventRaised(object sender, EventArgs e)
@@ -46,6 +48,8 @@ namespace PresentationLayer.Presenter.UserControls
             _frameModel.Frame_Width = Convert.ToInt32(numW.Value);
             _frameUC.InvalidateThis();
             _frameUC.InvalidatePanelInner();
+            _frameUC.InvalidateThisParent();
+            _frameUC.InvalidateThisParentsParent();
         }
 
         private void OnNumFHeightValueChangedEventRaised(object sender, EventArgs e)
@@ -54,6 +58,8 @@ namespace PresentationLayer.Presenter.UserControls
             _frameModel.Frame_Height = Convert.ToInt32(numH.Value);
             _frameUC.InvalidateThis();
             _frameUC.InvalidatePanelInner();
+            _frameUC.InvalidateThisParent();
+            _frameUC.InvalidateThisParentsParent();
         }
 
         private Dictionary<string, Binding> CreateBindingDictionary()

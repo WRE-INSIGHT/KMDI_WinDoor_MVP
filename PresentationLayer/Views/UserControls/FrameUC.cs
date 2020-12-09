@@ -95,5 +95,15 @@ namespace PresentationLayer.Views.UserControls
         {
             pnl_inner.Invalidate();
         }
+
+        public void InvalidateThisParent()
+        {
+            this.Parent.Invalidate();
+        }
+
+        public void InvalidateThisParentsParent()
+        {
+            this.Parent.Parent.Invalidate();
+        }
     }
 }

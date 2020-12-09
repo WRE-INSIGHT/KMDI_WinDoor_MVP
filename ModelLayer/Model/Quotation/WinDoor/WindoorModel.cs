@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using ModelLayer.Model.Quotation.Frame;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Net.Mime;
+using System.Drawing;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -224,6 +226,21 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdDimension = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Image _wdImage;
+        public Image WD_image
+        {
+            get
+            {
+                return _wdImage;
+            }
+
+            set
+            {
+                _wdImage = value;
                 NotifyPropertyChanged();
             }
         }
