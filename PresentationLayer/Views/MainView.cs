@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommonComponents;
-
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 namespace PresentationLayer.Views
 {
     public partial class MainView : Form, IMainView
@@ -81,7 +81,7 @@ namespace PresentationLayer.Views
         public event EventHandler PanelMainSizeChangedEventRaised;
         public event EventHandler CreateNewItemClickEventRaised;
         public event EventHandler LabelSizeClickEventRaised;
-        public event MouseEventHandler CtrlUCfixedMouseDownEventRaised;
+        //public event MouseEventHandler CtrlUCfixedMouseDownEventRaised;
 
         public MainView()
         {
@@ -176,9 +176,21 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, LabelSizeClickEventRaised, e);
         }
 
-        private void ctrlUC_fixed_MouseDown(object sender, MouseEventArgs e)
+        public Panel GetPanelControlSub()
         {
-            EventHelpers.RaiseMouseEvent(sender, CtrlUCfixedMouseDownEventRaised, e);
+            return pnlControlSub;
         }
+
+        //private void ctrlUC_fixed_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    ctrlUC_fixed.DoDragDrop(new FixedPanelUC(), DragDropEffects.Move);
+        //    MessageBox.Show("Test");
+        //    EventHelpers.RaiseMouseEvent(sender, CtrlUCfixedMouseDownEventRaised, e);
+        //}
+
+        //private void ctrlUC_fixed_Click(object sender, EventArgs e)
+        //{
+        //    MessageBox.Show("Test");
+        //}
     }
 }

@@ -105,5 +105,19 @@ namespace PresentationLayer.Views.UserControls
         {
             this.Parent.Parent.Invalidate();
         }
+
+        private void pnl_inner_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void pnl_inner_DragDrop(object sender, DragEventArgs e)
+        {
+
+            Control c = e.Data.GetData(e.Data.GetFormats()[0]) as Control; //Control na babagsak
+            Control pnl = (Control)sender; //Control na babagsakan
+
+            pnl.Controls.Add(c);
+        }
     }
 }

@@ -16,6 +16,7 @@ using ServiceLayer.Services.UserServices;
 using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
 using ServiceLayer.Services.FrameServices;
+using ServiceLayer.Services.PanelServices;
 using ServiceLayer.CommonServices;
 using ModelLayer.Model.User;
 using ModelLayer.Model.Quotation.WinDoor;
@@ -56,7 +57,7 @@ namespace PresentationLayer
                 .RegisterType<IFrameServices, FrameServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFrameModel, FrameModel>(new ContainerControlledLifetimeManager())
 
-
+                .RegisterType<IPanelServices, PanelServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPanelModel, PanelModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
@@ -81,6 +82,9 @@ namespace PresentationLayer
 
                 .RegisterType<IFixedPanelUC, FixedPanelUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IControlsUC, ControlsUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IControlsUCPresenter, ControlsUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

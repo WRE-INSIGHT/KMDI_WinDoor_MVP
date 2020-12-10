@@ -67,7 +67,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pnlControlMain = new System.Windows.Forms.Panel();
-            this.ctrlUC_fixed = new PresentationLayer.Views.UserControls.ControlsUC();
+            this.pnlControlSub = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlProperties = new System.Windows.Forms.Panel();
@@ -460,7 +460,7 @@
             // 
             // pnlControlMain
             // 
-            this.pnlControlMain.Controls.Add(this.ctrlUC_fixed);
+            this.pnlControlMain.Controls.Add(this.pnlControlSub);
             this.pnlControlMain.Controls.Add(this.label1);
             this.pnlControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlControlMain.Location = new System.Drawing.Point(0, 0);
@@ -468,18 +468,13 @@
             this.pnlControlMain.Size = new System.Drawing.Size(130, 495);
             this.pnlControlMain.TabIndex = 5;
             // 
-            // ctrlUC_fixed
+            // pnlControlSub
             // 
-            this.ctrlUC_fixed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ctrlUC_fixed.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ctrlUC_fixed.CustomImage = global::PresentationLayer.Properties.Resources.FixedPanel2;
-            this.ctrlUC_fixed.CustomText = "Fixed";
-            this.ctrlUC_fixed.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrlUC_fixed.Location = new System.Drawing.Point(0, 29);
-            this.ctrlUC_fixed.Name = "ctrlUC_fixed";
-            this.ctrlUC_fixed.Size = new System.Drawing.Size(130, 63);
-            this.ctrlUC_fixed.TabIndex = 5;
-            this.ctrlUC_fixed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ctrlUC_fixed_MouseDown);
+            this.pnlControlSub.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlControlSub.Location = new System.Drawing.Point(0, 29);
+            this.pnlControlSub.Name = "pnlControlSub";
+            this.pnlControlSub.Size = new System.Drawing.Size(130, 466);
+            this.pnlControlSub.TabIndex = 5;
             // 
             // label1
             // 
@@ -699,6 +694,6 @@
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Label lblZoom;
         private System.Windows.Forms.Label lblSize;
-        private UserControls.ControlsUC ctrlUC_fixed;
+        private System.Windows.Forms.Panel pnlControlSub;
     }
 }

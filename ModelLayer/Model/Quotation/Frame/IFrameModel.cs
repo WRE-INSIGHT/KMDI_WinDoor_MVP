@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using ModelLayer.Model.Quotation.Panel;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -12,5 +14,6 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_Visible { get; set; }
         //int Frame_Padding_int { get; set; }
         Padding Frame_Padding_int { get; set; }
+        List<IPanelModel> lst_Panel { get; set; }
     }
 }

@@ -1,14 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ModelLayer.Model.Quotation.Panel
 {
-    public class PanelModel : IPanelModel
+    public class PanelModel : IPanelModel, INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
         private int _panelID;
         public int Panel_ID
         {
@@ -32,6 +42,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelName = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -45,6 +56,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelDock = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -58,6 +70,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelWidth = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -71,6 +84,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelHeight = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -84,6 +98,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelType = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -97,6 +112,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelOrient = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -110,6 +126,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelChkText = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -127,6 +144,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         private UserControl _panelFrameGroup;
+
         public UserControl Panel_FrameGroup
         {
             get
@@ -137,6 +155,27 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelFrameGroup = value;
             }
+        }
+
+        public PanelModel(int panelID,
+                          string panelName,
+                          int panelWd,
+                          int panelHt,
+                          DockStyle panelDock,
+                          string panelType,
+                          bool panelOrient,
+                          Control panelParent,
+                          UserControl panelFrameGroup)
+        {
+            Panel_ID = panelID;
+            Panel_Name = panelName;
+            Panel_Width = panelWd;
+            Panel_Height = panelHt;
+            Panel_Dock = panelDock;
+            Panel_Type = panelType;
+            Panel_Orient = panelOrient;
+            Panel_Parent = panelParent;
+            Panel_FrameGroup = panelFrameGroup;
         }
     }
 }

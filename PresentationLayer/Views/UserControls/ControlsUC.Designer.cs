@@ -64,6 +64,7 @@
             this.Controls.Add(this.pbox_Image);
             this.Name = "ControlsUC";
             this.Size = new System.Drawing.Size(128, 63);
+            this.Load += new System.EventHandler(this.ControlsUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Image)).EndInit();
             this.ResumeLayout(false);
 

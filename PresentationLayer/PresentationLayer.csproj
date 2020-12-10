@@ -71,9 +71,11 @@
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IItemInfoUCPresenter.cs" />
@@ -135,6 +137,7 @@
       <DependentUpon>FrameUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\IBasePlatformUC.cs" />
+    <Compile Include="Views\UserControls\IControlsUC.cs" />
     <Compile Include="Views\UserControls\IFramePropertiesUC.cs" />
     <Compile Include="Views\UserControls\IFrameUC.cs" />
     <Compile Include="Views\UserControls\IItemInfoUC.cs" />

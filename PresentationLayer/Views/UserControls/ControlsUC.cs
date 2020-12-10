@@ -9,14 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 using System.Drawing.Design;
+using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class ControlsUC : UserControl
+    public partial class ControlsUC : UserControl, IControlsUC
     {
         public ControlsUC()
         {
             InitializeComponent();
+            WireAllControls(this);
         }
 
         [Description("Text displayed"), Category("Data")]
@@ -43,6 +45,38 @@ namespace PresentationLayer.Views.UserControls
             {
                 pbox_Image.Image = value;
             }
+        }
+
+        public event MouseEventHandler controlsUCMouseDownEventRaised;
+
+        private void WireAllControls(Control cont)
+        {
+            foreach (Control ctl in cont.Controls)
+            {
+                ctl.Click += ctl_Click;
+                ctl.MouseDown += ControlsUC_MouseDown;
+                if (ctl.HasChildren)
+                {
+                    WireAllControls(ctl);
+                }
+            }
+        }
+        
+        private void ctl_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show("Test");
+            //this.InvokeOnClick(this, EventArgs.Empty);
+        }
+
+        private void ControlsUC_MouseDown(object sender, MouseEventArgs e)
+        {
+            //MessageBox.Show("Test");
+            EventHelpers.RaiseMouseEvent(this, controlsUCMouseDownEventRaised, e);
+        }
+
+        private void ControlsUC_Load(object sender, EventArgs e)
+        {
+            this.Dock = DockStyle.Top;
         }
     }
 }

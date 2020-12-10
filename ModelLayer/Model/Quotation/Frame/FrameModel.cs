@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -85,6 +86,8 @@ namespace ModelLayer.Model.Quotation.Frame
             get { return _framePadding; }
             set { _framePadding = value; NotifyPropertyChanged(); }
         }
+
+        public List<IPanelModel> lst_Panel { get; set; }
 
         public FrameModel(int frameID,
                           string frameName,

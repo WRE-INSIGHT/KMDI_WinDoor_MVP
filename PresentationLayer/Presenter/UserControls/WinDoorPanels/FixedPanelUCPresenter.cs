@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ModelLayer.Model.Quotation.Panel;
 using Unity;
+using System.Windows.Forms;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {

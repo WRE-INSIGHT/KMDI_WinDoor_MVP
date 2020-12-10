@@ -18,6 +18,10 @@ using ModelLayer.Model.User;
 using ServiceLayer.Services.UserServices;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using Unity.Injection;
+using ServiceLayer.Services.PanelServices;
+using ModelLayer.Model.Quotation.Panel;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 
 namespace PresentationLayer.Tests
 {
@@ -54,6 +58,9 @@ namespace PresentationLayer.Tests
                 .RegisterType<IFrameServices, FrameServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFrameModel, FrameModel>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPanelServices, PanelServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPanelModel, PanelModel>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IFrameUC, FrameUC>(new ContainerControlledLifetimeManager())
@@ -70,6 +77,9 @@ namespace PresentationLayer.Tests
 
                 .RegisterType<IFramePropertiesUC, FramePropertiesUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFramePropertiesUCPresenter, FramePropertiesUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IFixedPanelUC, FixedPanelUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

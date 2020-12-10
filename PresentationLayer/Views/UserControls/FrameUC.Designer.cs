@@ -37,6 +37,7 @@
             // 
             // pnl_inner
             // 
+            this.pnl_inner.AllowDrop = true;
             this.pnl_inner.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnl_inner.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_inner.Location = new System.Drawing.Point(26, 26);
@@ -44,6 +45,8 @@
             this.pnl_inner.Name = "pnl_inner";
             this.pnl_inner.Size = new System.Drawing.Size(48, 48);
             this.pnl_inner.TabIndex = 0;
+            this.pnl_inner.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnl_inner_DragDrop);
+            this.pnl_inner.DragOver += new System.Windows.Forms.DragEventHandler(this.pnl_inner_DragOver);
             this.pnl_inner.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_inner_Paint);
             this.pnl_inner.MouseClick += new System.Windows.Forms.MouseEventHandler(this.frame_MouseClick);
             this.pnl_inner.MouseEnter += new System.EventHandler(this.pnl_inner_MouseEnter);
