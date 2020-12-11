@@ -111,5 +111,11 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_Padding_int = new Padding(33);
             }
         }
+
+        public int CountVisiblePanels()
+        {
+            return lst_Panel.Count(pnl => pnl.Panel_Visibility == true);
+        }
+
     }
 }

@@ -16,6 +16,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private IPanelModel _panelModel;
 
+        private IUnityContainer _unityC;
+
         public FixedPanelUCPresenter(IFixedPanelUC fixedPanelUC)
         {
             _fixedPanelUC = fixedPanelUC;
@@ -31,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             
         }
+
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
         {
             unityC
@@ -44,6 +47,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public IFixedPanelUC GetFixedPanelUC()
         {
+            return _fixedPanelUC;
+        }
+
+        public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC)
+        {
+            unityC
+                .RegisterType<IFixedPanelUC, FixedPanelUC>()
+                .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>();
+            FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
+            fixedPanelUCP._unityC = unityC;
+
+            return fixedPanelUCP;
+        }
+
+        public IFixedPanelUC GetFixedPanelUCAsThumbnail()
+        {
+            _fixedPanelUC.thisdock = DockStyle.Fill;
             return _fixedPanelUC;
         }
     }

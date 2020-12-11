@@ -27,6 +27,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler frameMouseLeaveEventRaised;
         public event EventHandler panelInnerMouseEnterEventRaised;
         public event EventHandler panelInnerMouseLeaveEventRaised;
+        public event DragEventHandler panelInnerDragDropEventRaised;
 
         private void FrameUC_Paint(object sender, PaintEventArgs e)
         {
@@ -113,11 +114,7 @@ namespace PresentationLayer.Views.UserControls
 
         private void pnl_inner_DragDrop(object sender, DragEventArgs e)
         {
-
-            Control c = e.Data.GetData(e.Data.GetFormats()[0]) as Control; //Control na babagsak
-            Control pnl = (Control)sender; //Control na babagsakan
-
-            pnl.Controls.Add(c);
+            EventHelpers.RaiseDragEvent(sender, panelInnerDragDropEventRaised, e);
         }
     }
 }

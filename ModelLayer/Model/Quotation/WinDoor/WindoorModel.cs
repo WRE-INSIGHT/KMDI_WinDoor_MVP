@@ -253,5 +253,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public IEnumerable<IFrameModel> GetAllVisibleFrames()
+        {
+            return lst_frame.Where(frame => frame.Frame_Visible == true);
+        }
     }
 }

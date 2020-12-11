@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
 using ServiceLayer.Services.FrameServices;
@@ -287,18 +288,9 @@ namespace PresentationLayer.Presenter
             _mainView.PanelMainSizeChangedEventRaised += new EventHandler(OnPanelMainSizeChangedEventRaised);
             _mainView.CreateNewItemClickEventRaised += new EventHandler(OnCreateNewItemClickEventRaised);
             _mainView.LabelSizeClickEventRaised += new EventHandler(OnLabelSizeClickEventRaised);
-            //_mainView.CtrlUCfixedMouseDownEventRaised += new MouseEventHandler(OnCtrlUCfixedMouseDownEventRaised);
         }
         #region Events
-        //private void OnCtrlUCfixedMouseDownEventRaised(object sender, MouseEventArgs e)
-        //{
-        //    UserControl fix = (UserControl)sender;
-        //    if (e.Button == MouseButtons.Left)
-        //    {
-        //        fix.DoDragDrop(_fixedPanelUCPresenter.GetFixedPanelUC(), DragDropEffects.Move);
-        //    }
-        //}
-
+        
         private void OnLabelSizeClickEventRaised(object sender, EventArgs e)
         {
             _frmDimensionPresenter.SetPresenters(this);
@@ -395,7 +387,16 @@ namespace PresentationLayer.Presenter
             }
             _mainView.Nickname = _userModel.Nickname;
 
-            _pnlControlSub.Controls.Add((UserControl)_controlsUCP.GetNewInstance(_unityC, "Fixed", Properties.Resources.FixedPanel2).GetControlUC());
+            //IFixedPanelUC fixedUCP = _fixedPanelUCPresenter.GetNewInstance(_unityC).GetFixedPanelUCAsThumbnail();
+            //IControlsUCPresenter controlsUCP = _controlsUCP.GetNewInstance(_unityC, "Fixed", (UserControl)fixedUCP);
+            //IControlsUC controlsUC = controlsUCP.GetControlUC();
+            //_pnlControlSub.Controls.Add((UserControl)controlsUC);
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Fixed", (UserControl)_fixedPanelUCPresenter.GetNewInstance(_unityC).GetFixedPanelUCAsThumbnail())
+                .GetControlUC()
+                );
         }
 
         #endregion
@@ -596,6 +597,9 @@ namespace PresentationLayer.Presenter
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
                                          false);
+
+                         Console.WriteLine("Visible Frames: " + _windoorModel.GetAllVisibleFrames().Count());
+
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
@@ -748,45 +752,6 @@ namespace PresentationLayer.Presenter
         public void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel)
         {
             _windoorModel.lst_frame.Remove(frameModel);
-        }
-
-        public IPanelModel AddPanelModel(int panelWd,
-                                         int panelHt,
-                                         Control panelParent,
-                                         UserControl panelFrameGroup,
-                                         string panelType,
-                                         int panelID = 0,
-                                         string panelName = "",
-                                         DockStyle panelDock = DockStyle.Fill,
-                                         bool panelOrient = false)
-        {
-            int count = 0;
-            if (panelID == 0)
-            {
-                foreach (IFrameModel frame in _windoorModel.lst_frame)
-                {
-                    foreach (IPanelModel panel in frame.lst_Panel)
-                    {
-                        count++;
-                    }
-                }
-            }
-            if (panelName == "")
-            {
-                panelName = "Panel " + count;
-            }
-
-            _panelModel = _panelServices.CreatePanelModel(panelID,
-                                                          panelName,
-                                                          panelWd,
-                                                          panelHt,
-                                                          panelDock,
-                                                          panelType,
-                                                          panelOrient,
-                                                          panelParent,
-                                                          panelFrameGroup);
-
-            return _panelModel;
         }
 
         #endregion

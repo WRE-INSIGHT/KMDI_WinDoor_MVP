@@ -1,29 +1,44 @@
 ﻿using System;
 using ModelLayer.Model.Quotation.Frame;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using Unity;
 using System.Collections.Generic;
+using ModelLayer.Model.Quotation.Panel;
+using ServiceLayer.Services.PanelServices;
 
 namespace PresentationLayer.Presenter.UserControls
 {
     public class FrameUCPresenter : IFrameUCPresenter
     {
         IFrameUC _frameUC;
+        private IUnityContainer _unityC;
 
         private IFrameModel _frameModel;
+        private IPanelModel _panelModel;
+
         private IBasePlatformPresenter _basePlatformPresenter;
         private IMainPresenter _mainPresenter;
+        private IFixedPanelUCPresenter _fixedUCP;
+
+        private IPanelServices _panelServices;
+
         private ContextMenuStrip _frameCmenu;
 
         public FrameUCPresenter(IFrameUC frameUC,
-                                IBasePlatformPresenter basePlatformPresenter)
+                                IBasePlatformPresenter basePlatformPresenter,
+                                IFixedPanelUCPresenter fixedUCP,
+                                IPanelServices panelServices)
         {
             _frameUC = frameUC;
             _basePlatformPresenter = basePlatformPresenter;
             _frameCmenu = _frameUC.GetFrameCmenu();
+            _fixedUCP = fixedUCP;
+            _panelServices = panelServices;
             SubscribeToEventsSetup();
         }
         private void SubscribeToEventsSetup()
@@ -37,7 +52,25 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.frameMouseLeaveEventRaised += new EventHandler(OnFrameMouseLeaveEventRaised);
             _frameUC.panelInnerMouseEnterEventRaised += new EventHandler(OnPanelInnerMouseEnterEventRaised);
             _frameUC.panelInnerMouseLeaveEventRaised += new EventHandler(OnPanelInnerMouseLeaveEventRaised);
+            _frameUC.panelInnerDragDropEventRaised += new DragEventHandler(OnPanelInnerDragDropEventRaised);
+        }
 
+        private void OnPanelInnerDragDropEventRaised(object sender, DragEventArgs e)
+        {
+            Control pnl = (Control)sender; //Control na babagsakan
+            string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
+            if (data == "Fixed")
+            {
+                if (pnl.Name == "pnl_inner")
+                {
+                    _panelModel = AddPanelModel(pnl.Width, pnl.Height, pnl, (UserControl)pnl.Parent, data);
+
+                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel);
+                    IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+                    fixedUC.thisdock = DockStyle.Left;
+                    pnl.Controls.Add((UserControl)fixedUC);
+                }
+            }
         }
 
         private void OnPanelInnerMouseLeaveEventRaised(object sender, EventArgs e)
@@ -177,6 +210,8 @@ namespace PresentationLayer.Presenter.UserControls
             FrameUCPresenter framePresenter = unityC.Resolve<FrameUCPresenter>();
             framePresenter._frameModel = frameModel;
             framePresenter._mainPresenter = mainPresenter;
+            framePresenter._unityC = unityC;
+            
 
             return framePresenter;
         }
@@ -189,6 +224,48 @@ namespace PresentationLayer.Presenter.UserControls
         public void DeleteFrame()
         {
             _frameModel.Frame_Visible = false;
+        }
+
+        public IPanelModel AddPanelModel(int panelWd,
+                                         int panelHt,
+                                         Control panelParent,
+                                         UserControl panelFrameGroup,
+                                         string panelType,
+                                         int panelID = 0,
+                                         string panelName = "",
+                                         DockStyle panelDock = DockStyle.Fill,
+                                         bool panelOrient = false,
+                                         bool panelVisibility = false)
+        {
+            //int count = 0;
+            if (panelID == 0)
+            {
+                panelID++;
+                //foreach (IFrameModel frame in _windoorModel.lst_frame)
+                //{
+                //    foreach (IPanelModel panel in frame.lst_Panel)
+                //    {
+                //        count++;
+                //    }
+                //}
+            }
+            if (panelName == "")
+            {
+                panelName = "Panel " + panelID;
+            }
+
+            _panelModel = _panelServices.CreatePanelModel(panelID,
+                                                          panelName,
+                                                          panelWd,
+                                                          panelHt,
+                                                          panelDock,
+                                                          panelType,
+                                                          panelOrient,
+                                                          panelParent,
+                                                          panelFrameGroup,
+                                                          panelVisibility);
+
+            return _panelModel;
         }
     }
 }

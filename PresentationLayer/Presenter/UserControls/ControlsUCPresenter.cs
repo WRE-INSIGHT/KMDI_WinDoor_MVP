@@ -8,6 +8,7 @@ using PresentationLayer.Views.UserControls;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using Unity;
 using System.Drawing;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -15,22 +16,33 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IControlsUC _controlUC;
 
+        private IPanelModel _panelModel;
+
         private IFixedPanelUCPresenter _fixedUCP;
 
+        private IUnityContainer _unityC;
+
         private string customText;
-        private Image customImage;
+        private Panel _pnlWindoorPanel;
 
         public ControlsUCPresenter(IControlsUC controlUC,
                                    IFixedPanelUCPresenter fixedUCP)
         {
             _controlUC = controlUC;
             _fixedUCP = fixedUCP;
+            _pnlWindoorPanel = _controlUC.GetWinDoorPanel();
             SubscribeToEventsSetup();
         }
 
         private void SubscribeToEventsSetup()
         {
             _controlUC.controlsUCMouseDownEventRaised += new MouseEventHandler(OnControlsUCMouseDownEventRaised);
+            _controlUC.controlsUCLoadEventRaised += new EventHandler(OnControlsUCLoadEventRaised);
+        }
+
+        private void OnControlsUCLoadEventRaised(object sender, EventArgs e)
+        {
+            
         }
 
         private void OnControlsUCMouseDownEventRaised(object sender, MouseEventArgs e)
@@ -38,17 +50,22 @@ namespace PresentationLayer.Presenter.UserControls
             Control ctrl = (Control)sender;
             if (e.Button == MouseButtons.Left)
             {
-                ctrl.DoDragDrop(_fixedUCP.GetFixedPanelUC(), DragDropEffects.Move);
+                ctrl.DoDragDrop("Fixed", DragDropEffects.Move);
+                //ctrl.DoDragDrop(_fixedUCP.GetNewInstance(_unityC).GetFixedPanelUC(), DragDropEffects.Move);
             }
         }
-        public IControlsUCPresenter GetNewInstance(IUnityContainer unityC, string customtext, Image customimage)
+        public IControlsUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                   string customtext, 
+                                                   UserControl WinDoorPanel)
         {
             unityC
                 .RegisterType<IControlsUC, ControlsUC>()
                 .RegisterType<IControlsUCPresenter, ControlsUCPresenter>();
             ControlsUCPresenter controlUCP = unityC.Resolve<ControlsUCPresenter>();
             controlUCP.customText = customtext;
-            controlUCP.customImage = customimage;
+            controlUCP.AddWinDoorPanel(WinDoorPanel);
+            controlUCP.WireAllControls((UserControl)controlUCP.GetControlUC());
+            controlUCP._unityC = unityC;
 
             return controlUCP;
         }
@@ -56,8 +73,24 @@ namespace PresentationLayer.Presenter.UserControls
         public IControlsUC GetControlUC()
         {
             _controlUC.CustomText = customText;
-            _controlUC.CustomImage = customImage;
             return _controlUC;
+        }
+
+        private void AddWinDoorPanel(UserControl WindoorPanel)
+        {
+            _pnlWindoorPanel.Controls.Add(WindoorPanel);
+        }
+
+        private void WireAllControls(Control cont)
+        {
+            foreach (Control ctl in cont.Controls)
+            {
+                ctl.MouseDown += OnControlsUCMouseDownEventRaised;
+                if (ctl.HasChildren)
+                {
+                    WireAllControls(ctl);
+                }
+            }
         }
     }
 }

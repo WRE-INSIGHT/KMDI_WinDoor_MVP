@@ -14,5 +14,6 @@ namespace ModelLayer.Model.Quotation.Panel
         Control Panel_Parent { get; set; }
         string Panel_Type { get; set; }
         int Panel_Width { get; set; }
+        bool Panel_Visibility { get; set; }
     }
 }

@@ -21,5 +21,9 @@ namespace CommonComponents
         {
             paintEventHandlerRaised?.Invoke(objectRaisingEvent, paintEventArgs); // Notify all subscribers
         }
+        public static void RaiseDragEvent(Object objectRaisingEvent, DragEventHandler dragEventHandlerRaised, DragEventArgs dragEventArgs)
+        {
+            dragEventHandlerRaised?.Invoke(objectRaisingEvent, dragEventArgs); // Notify all subscribers
+        }
     }
 }

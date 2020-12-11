@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Frame;
 using PresentationLayer.Views.UserControls;
 using Unity;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -15,5 +16,16 @@ namespace PresentationLayer.Presenter.UserControls
         IFrameUC GetFrameUC();
         IFrameUCPresenter GetFrameUCPresenter();
         IFrameUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel, IMainPresenter mainPresenter);
+
+        IPanelModel AddPanelModel(int panelWd,
+                                         int panelHt,
+                                         Control panelParent,
+                                         UserControl panelFrameGroup,
+                                         string panelType,
+                                         int panelID = 0,
+                                         string panelName = "",
+                                         DockStyle panelDock = DockStyle.Fill,
+                                         bool panelOrient = false,
+                                         bool panelVisibility = false);
     }
 }

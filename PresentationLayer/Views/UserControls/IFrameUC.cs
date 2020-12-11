@@ -18,6 +18,7 @@ namespace PresentationLayer.Views.UserControls
         event PaintEventHandler outerFramePaintEventRaised;
         event PaintEventHandler innerFramePaintEventRaised;
         event MouseEventHandler frameMouseClickEventRaised;
+        event DragEventHandler panelInnerDragDropEventRaised;
         //int fWidth { get; set; }
         //int fHeight { get; set; }
         //int fPadding { set; }

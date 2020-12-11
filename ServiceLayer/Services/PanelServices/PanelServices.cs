@@ -27,7 +27,8 @@ namespace ServiceLayer.Services.PanelServices
                                             string panelType,
                                             bool panelOrient,
                                             Control panelParent,
-                                            UserControl panelFrameGroup)
+                                            UserControl panelFrameGroup,
+                                            bool panelVisibility)
         {
             PanelModel pnl = new PanelModel(panelID,
                                             panelName,
@@ -37,7 +38,8 @@ namespace ServiceLayer.Services.PanelServices
                                             panelType,
                                             panelOrient,
                                             panelParent,
-                                            panelFrameGroup);
+                                            panelFrameGroup,
+                                            panelVisibility);
 
             ValidateModel(pnl);
             return pnl;

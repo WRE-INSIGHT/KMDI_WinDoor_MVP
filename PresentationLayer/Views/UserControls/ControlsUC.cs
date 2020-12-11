@@ -18,7 +18,6 @@ namespace PresentationLayer.Views.UserControls
         public ControlsUC()
         {
             InitializeComponent();
-            WireAllControls(this);
         }
 
         [Description("Text displayed"), Category("Data")]
@@ -33,50 +32,24 @@ namespace PresentationLayer.Views.UserControls
                 lblControlText.Text = value;
             }
         }
-
-        [Description("Image displayed"), Category("Data")]
-        public Image CustomImage
-        {
-            get
-            {
-                return pbox_Image.Image;
-            }
-            set
-            {
-                pbox_Image.Image = value;
-            }
-        }
-
-        public event MouseEventHandler controlsUCMouseDownEventRaised;
-
-        private void WireAllControls(Control cont)
-        {
-            foreach (Control ctl in cont.Controls)
-            {
-                ctl.Click += ctl_Click;
-                ctl.MouseDown += ControlsUC_MouseDown;
-                if (ctl.HasChildren)
-                {
-                    WireAllControls(ctl);
-                }
-            }
-        }
         
-        private void ctl_Click(object sender, EventArgs e)
-        {
-            //MessageBox.Show("Test");
-            //this.InvokeOnClick(this, EventArgs.Empty);
-        }
+        public event MouseEventHandler controlsUCMouseDownEventRaised;
+        public event EventHandler controlsUCLoadEventRaised;
 
         private void ControlsUC_MouseDown(object sender, MouseEventArgs e)
         {
-            //MessageBox.Show("Test");
             EventHelpers.RaiseMouseEvent(this, controlsUCMouseDownEventRaised, e);
         }
 
         private void ControlsUC_Load(object sender, EventArgs e)
         {
             this.Dock = DockStyle.Top;
+            EventHelpers.RaiseEvent(this, controlsUCLoadEventRaised, e);
+        }
+
+        public Panel GetWinDoorPanel()
+        {
+            return pnl_WinDoorPanel;
         }
     }
 }

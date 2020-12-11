@@ -157,6 +157,21 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private bool _panelVisibility;
+        public bool Panel_Visibility
+        {
+            get
+            {
+                return _panelVisibility;
+            }
+
+            set
+            {
+                _panelVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public PanelModel(int panelID,
                           string panelName,
                           int panelWd,
@@ -165,7 +180,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           string panelType,
                           bool panelOrient,
                           Control panelParent,
-                          UserControl panelFrameGroup)
+                          UserControl panelFrameGroup,
+                          bool panelVisibility)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -176,6 +192,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_Orient = panelOrient;
             Panel_Parent = panelParent;
             Panel_FrameGroup = panelFrameGroup;
+            Panel_Visibility = panelVisibility;
         }
     }
 }
