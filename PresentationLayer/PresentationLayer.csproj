@@ -79,7 +79,9 @@
     <Compile Include="Presenter\UserControls\IFramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IItemInfoUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\FixedPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IFixedPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Views\UserControls\IFramePropertiesUC.cs" />
     <Compile Include="Views\UserControls\IFrameUC.cs" />
     <Compile Include="Views\UserControls\IItemInfoUC.cs" />
+    <Compile Include="Views\UserControls\IPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\ItemInfoUC.cs">
       <SubType>UserControl</SubType>
     </Compile>

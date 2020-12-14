@@ -34,11 +34,11 @@
             this.num_BladeCount = new System.Windows.Forms.NumericUpDown();
             this.lbl_Width = new System.Windows.Forms.Label();
             this.pnum_Width = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.pnum_Height = new System.Windows.Forms.NumericUpDown();
             this.lbl_Height = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnum_Height)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_pnlname
@@ -115,12 +115,12 @@
             this.pnum_Width.Size = new System.Drawing.Size(135, 20);
             this.pnum_Width.TabIndex = 5;
             // 
-            // numericUpDown1
+            // pnum_Height
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(7, 118);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(135, 20);
-            this.numericUpDown1.TabIndex = 7;
+            this.pnum_Height.Location = new System.Drawing.Point(7, 118);
+            this.pnum_Height.Name = "pnum_Height";
+            this.pnum_Height.Size = new System.Drawing.Size(135, 20);
+            this.pnum_Height.TabIndex = 7;
             // 
             // lbl_Height
             // 
@@ -138,7 +138,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.pnum_Height);
             this.Controls.Add(this.lbl_Height);
             this.Controls.Add(this.pnum_Width);
             this.Controls.Add(this.lbl_Width);
@@ -151,7 +151,7 @@
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnum_Height)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,7 +165,7 @@
         private System.Windows.Forms.NumericUpDown num_BladeCount;
         private System.Windows.Forms.Label lbl_Width;
         private System.Windows.Forms.NumericUpDown pnum_Width;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown pnum_Height;
         private System.Windows.Forms.Label lbl_Height;
     }
 }

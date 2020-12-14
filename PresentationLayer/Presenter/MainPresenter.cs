@@ -35,7 +35,7 @@ namespace PresentationLayer.Presenter
         private IQuotationModel _quotationModel;
         private IWindoorModel _windoorModel;
         private IFrameModel _frameModel;
-        private IPanelModel _panelModel;
+        //private IPanelModel _panelModel;
 
         private ILoginView _loginView;
         private IItemInfoUC _itemInfoUC;
@@ -752,6 +752,19 @@ namespace PresentationLayer.Presenter
         public void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel)
         {
             _windoorModel.lst_frame.Remove(frameModel);
+        }
+
+        public UserControl GetFrameProperties(int frameID)
+        {
+            return (UserControl)_pnlPropertiesBody.Controls.OfType<IFramePropertiesUC>().Where(ctrl => ctrl.FrameID == frameID);
+
+            //UserControl frameProp = new UserControl();
+            //foreach (UserControl frameProperties in _pnlPropertiesBody.Controls)
+            //{
+
+            //}
+
+            //return frameProp;
         }
 
         #endregion

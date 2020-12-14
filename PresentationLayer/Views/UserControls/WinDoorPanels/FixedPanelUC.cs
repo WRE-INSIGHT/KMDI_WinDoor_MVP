@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
@@ -41,6 +42,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
                                                            0,
                                                            this.ClientRectangle.Width - w,
                                                            this.ClientRectangle.Height - w));
+        }
+
+        private void FixedPanelUC_Load(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, fixedPanelUCLoadEventRaised, e);
+        }
+
+        public void ThisBinding(Dictionary<string, Binding> binding)
+        {
+            this.DataBindings.Add(binding["Panel_Dock"]);
+            this.DataBindings.Add(binding["Panel_Width"]);
+            this.DataBindings.Add(binding["Panel_Height"]);
+            this.DataBindings.Add(binding["Panel_Visibility"]);
         }
     }
 }

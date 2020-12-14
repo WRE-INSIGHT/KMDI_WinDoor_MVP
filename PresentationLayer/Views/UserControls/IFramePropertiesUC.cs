@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,9 @@ using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public interface IFramePropertiesUC
+    public interface IFramePropertiesUC: IViewCommon
     {
+        int FrameID { get; set; }
         event EventHandler FramePropertiesLoadEventRaised;
         event EventHandler NumFHeightValueChangedEventRaised;
         event EventHandler NumFWidthValueChangedEventRaised;
@@ -21,6 +23,6 @@ namespace PresentationLayer.Views.UserControls
         //int ThisHeight { set; }
         //bool ThisVisibility { get; set; }
         void BringToFrontThis();
-        void ThisBinding(Dictionary<string, Binding> frameModelBinding);
+        //void ThisBinding(Dictionary<string, Binding> frameModelBinding);
     }
 }

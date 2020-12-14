@@ -51,6 +51,7 @@
             this.Controls.Add(this.lbl_Fixed);
             this.Name = "FixedPanelUC";
             this.Padding = new System.Windows.Forms.Padding(5);
+            this.Load += new System.EventHandler(this.FixedPanelUC_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FixedPanelUC_Paint);
             this.ResumeLayout(false);
 

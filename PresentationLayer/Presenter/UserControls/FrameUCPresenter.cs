@@ -63,12 +63,14 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 if (pnl.Name == "pnl_inner")
                 {
-                    _panelModel = AddPanelModel(pnl.Width, pnl.Height, pnl, (UserControl)pnl.Parent, data);
+                    //_mainPresenter.GetFrameProperties(_frameModel.Frame_ID)
+                    _panelModel = AddPanelModel(pnl.Width, pnl.Height, pnl, (UserControl)pnl.Parent, (UserControl)pnl.Parent, data, true);
 
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
-                    fixedUC.thisdock = DockStyle.Left;
+                    //fixedUC.thisdock = DockStyle.Fill;
                     pnl.Controls.Add((UserControl)fixedUC);
+                    
                 }
             }
         }
@@ -230,12 +232,13 @@ namespace PresentationLayer.Presenter.UserControls
                                          int panelHt,
                                          Control panelParent,
                                          UserControl panelFrameGroup,
+                                         UserControl panelFramePropertiesGroup,
                                          string panelType,
+                                         bool panelVisibility,
                                          int panelID = 0,
                                          string panelName = "",
                                          DockStyle panelDock = DockStyle.Fill,
-                                         bool panelOrient = false,
-                                         bool panelVisibility = false)
+                                         bool panelOrient = false)
         {
             //int count = 0;
             if (panelID == 0)
@@ -263,7 +266,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                           panelOrient,
                                                           panelParent,
                                                           panelFrameGroup,
-                                                          panelVisibility);
+                                                          panelVisibility,
+                                                          panelFramePropertiesGroup);
 
             return _panelModel;
         }

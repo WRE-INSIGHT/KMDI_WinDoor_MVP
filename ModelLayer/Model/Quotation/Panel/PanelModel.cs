@@ -144,7 +144,6 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         private UserControl _panelFrameGroup;
-
         public UserControl Panel_FrameGroup
         {
             get
@@ -154,6 +153,19 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelFrameGroup = value;
+            }
+        }
+
+        private UserControl _panelFramePropertiesGroup;
+        public UserControl Panel_FramePropertiesGroup
+        {
+            get
+            {
+                return _panelFramePropertiesGroup;
+            }
+            set
+            {
+                _panelFramePropertiesGroup = value;
             }
         }
 
@@ -181,7 +193,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           bool panelOrient,
                           Control panelParent,
                           UserControl panelFrameGroup,
-                          bool panelVisibility)
+                          bool panelVisibility,
+                          UserControl panelFramePropertiesGroup)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -193,6 +206,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_Parent = panelParent;
             Panel_FrameGroup = panelFrameGroup;
             Panel_Visibility = panelVisibility;
+            Panel_FramePropertiesGroup = panelFramePropertiesGroup;
         }
     }
 }

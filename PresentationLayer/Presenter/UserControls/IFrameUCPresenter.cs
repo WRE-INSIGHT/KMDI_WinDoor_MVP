@@ -21,11 +21,12 @@ namespace PresentationLayer.Presenter.UserControls
                                          int panelHt,
                                          Control panelParent,
                                          UserControl panelFrameGroup,
+                                         UserControl panelFramePropertiesGroup,
                                          string panelType,
+                                         bool panelVisibility,
                                          int panelID = 0,
                                          string panelName = "",
                                          DockStyle panelDock = DockStyle.Fill,
-                                         bool panelOrient = false,
-                                         bool panelVisibility = false);
+                                         bool panelOrient = false);
     }
 }

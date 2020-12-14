@@ -16,8 +16,6 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IControlsUC _controlUC;
 
-        private IPanelModel _panelModel;
-
         private IFixedPanelUCPresenter _fixedUCP;
 
         private IUnityContainer _unityC;

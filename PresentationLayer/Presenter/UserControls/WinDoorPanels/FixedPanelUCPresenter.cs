@@ -31,7 +31,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void OnFixedPanelUCLoadEventRaised(object sender, EventArgs e)
         {
-            
+            //_fixedPanelUC.ThisBinding(CreateBindingDictionary());
+        }
+        private Dictionary<string, Binding> CreateBindingDictionary()
+        {
+            Dictionary<string, Binding> panelBinding = new Dictionary<string, Binding>();
+            panelBinding.Add("Panel_Dock", new Binding("Dock", _panelModel, "Panel_Dock", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Width", new Binding("Width", _panelModel, "Panel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            return panelBinding;
         }
 
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
@@ -47,6 +57,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public IFixedPanelUC GetFixedPanelUC()
         {
+            _fixedPanelUC.ThisBinding(CreateBindingDictionary());
             return _fixedPanelUC;
         }
 

@@ -14,6 +14,20 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class FramePropertiesUC : UserControl, IFramePropertiesUC
     {
+        private int frameID;
+        public int FrameID
+        {
+            get
+            {
+                return frameID;
+            }
+
+            set
+            {
+                frameID = value;
+            }
+        }
+
         public FramePropertiesUC()
         {
             InitializeComponent();
@@ -39,6 +53,7 @@ namespace PresentationLayer.Views.UserControls
 
         public void ThisBinding(Dictionary<string, Binding> frameModelBinding)
         {
+            this.DataBindings.Add(frameModelBinding["Frame_ID"]);
             lbl_frameName.DataBindings.Add(frameModelBinding["Frame_Name"]);
             this.DataBindings.Add(frameModelBinding["Frame_Visible"]);
             num_fWidth.DataBindings.Add(frameModelBinding["Frame_Width"]);

@@ -65,6 +65,7 @@ namespace PresentationLayer.Presenter.UserControls
         private Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> frameBinding = new Dictionary<string, Binding>();
+            frameBinding.Add("Frame_ID", new Binding("FrameID", _frameModel, "Frame_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Name", new Binding("Text", _frameModel, "Frame_Name", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Visible", new Binding("Visible", _frameModel, "Frame_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Width", new Binding("Value", _frameModel, "Frame_Width", true, DataSourceUpdateMode.OnPropertyChanged));
