@@ -21,9 +21,12 @@ namespace PresentationLayer.Presenter.UserControls
         private IFrameModel _frameModel;
         private IPanelModel _panelModel;
 
+
         private IBasePlatformPresenter _basePlatformPresenter;
         private IMainPresenter _mainPresenter;
         private IFixedPanelUCPresenter _fixedUCP;
+        private IFramePropertiesUCPresenter _framePropertiesUCP;
+        private IPanelPropertiesUCPresenter _panelPropertiesUCP;
 
         private IPanelServices _panelServices;
 
@@ -32,13 +35,15 @@ namespace PresentationLayer.Presenter.UserControls
         public FrameUCPresenter(IFrameUC frameUC,
                                 IBasePlatformPresenter basePlatformPresenter,
                                 IFixedPanelUCPresenter fixedUCP,
-                                IPanelServices panelServices)
+                                IPanelServices panelServices,
+                                IPanelPropertiesUCPresenter panelPropertiesUCP)
         {
             _frameUC = frameUC;
             _basePlatformPresenter = basePlatformPresenter;
             _frameCmenu = _frameUC.GetFrameCmenu();
             _fixedUCP = fixedUCP;
             _panelServices = panelServices;
+            _panelPropertiesUCP = panelPropertiesUCP;
             SubscribeToEventsSetup();
         }
         private void SubscribeToEventsSetup()
@@ -63,8 +68,15 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 if (pnl.Name == "pnl_inner")
                 {
-                    //_mainPresenter.GetFrameProperties(_frameModel.Frame_ID)
                     _panelModel = AddPanelModel(pnl.Width, pnl.Height, pnl, (UserControl)pnl.Parent, (UserControl)pnl.Parent, data, true);
+
+                    IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
+                    //_framePropertiesUCP = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
+                    IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel);
+                    framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+                    //_framePropertiesUCP
+                    //    .GetFramePropertiesUC()
+                    //    .GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
 
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();

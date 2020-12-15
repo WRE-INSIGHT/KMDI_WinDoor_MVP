@@ -23,6 +23,7 @@ namespace PresentationLayer.Views.UserControls
         //int ThisHeight { set; }
         //bool ThisVisibility { get; set; }
         void BringToFrontThis();
+        FlowLayoutPanel GetFramePropertiesFLP();
         //void ThisBinding(Dictionary<string, Binding> frameModelBinding);
     }
 }

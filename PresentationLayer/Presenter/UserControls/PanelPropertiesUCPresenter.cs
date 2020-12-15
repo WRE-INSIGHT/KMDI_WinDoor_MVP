@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PresentationLayer.Views.UserControls;
 using ModelLayer.Model.Quotation.Panel;
 using System.Windows.Forms;
+using Unity;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -28,7 +29,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
-            
+            _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
         }
 
         private Dictionary<string, Binding> CreateBindingDictionary()
@@ -48,6 +49,18 @@ namespace PresentationLayer.Presenter.UserControls
         public IPanelPropertiesUC GetPanelPropertiesUC()
         {
             return _panelPropertiesUC;
+        }
+
+
+        public IPanelPropertiesUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
+        {
+            unityC
+                .RegisterType<IPanelPropertiesUC, PanelPropertiesUC>()
+                .RegisterType<IPanelPropertiesUCPresenter, PanelPropertiesUCPresenter>();
+            PanelPropertiesUCPresenter panelPropUCP = unityC.Resolve<PanelPropertiesUCPresenter>();
+            panelPropUCP._panelModel = panelModel;
+
+            return panelPropUCP;
         }
 
     }

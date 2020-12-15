@@ -86,6 +86,9 @@ namespace PresentationLayer
                 .RegisterType<IControlsUC, ControlsUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IControlsUCPresenter, ControlsUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPanelPropertiesUC, PanelPropertiesUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPanelPropertiesUCPresenter, PanelPropertiesUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();

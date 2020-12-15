@@ -77,5 +77,10 @@ namespace PresentationLayer.Views.UserControls
         {
             EventHelpers.RaiseEvent(sender, RdBtnCheckedChangedEventRaised, e);
         }
+
+        public FlowLayoutPanel GetFramePropertiesFLP()
+        {
+            return flp_frameProperties;
+        }
     }
 }

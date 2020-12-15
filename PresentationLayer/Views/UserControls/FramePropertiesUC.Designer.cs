@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flp_frameProperties = new System.Windows.Forms.FlowLayoutPanel();
             this.lbl_frameName = new System.Windows.Forms.Label();
             this.rdBtn_Window = new System.Windows.Forms.RadioButton();
             this.rdBtn_Door = new System.Windows.Forms.RadioButton();
@@ -37,31 +37,31 @@
             this.num_fWidth = new System.Windows.Forms.NumericUpDown();
             this.lbl_Height = new System.Windows.Forms.Label();
             this.num_fHeight = new System.Windows.Forms.NumericUpDown();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flp_frameProperties.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_fWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_fHeight)).BeginInit();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // flp_frameProperties
             // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Controls.Add(this.lbl_frameName);
-            this.flowLayoutPanel1.Controls.Add(this.rdBtn_Window);
-            this.flowLayoutPanel1.Controls.Add(this.rdBtn_Door);
-            this.flowLayoutPanel1.Controls.Add(this.rdBtn_Concrete);
-            this.flowLayoutPanel1.Controls.Add(this.lbl_Width);
-            this.flowLayoutPanel1.Controls.Add(this.num_fWidth);
-            this.flowLayoutPanel1.Controls.Add(this.lbl_Height);
-            this.flowLayoutPanel1.Controls.Add(this.num_fHeight);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(185, 183);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.flp_frameProperties.AutoSize = true;
+            this.flp_frameProperties.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flp_frameProperties.Controls.Add(this.lbl_frameName);
+            this.flp_frameProperties.Controls.Add(this.rdBtn_Window);
+            this.flp_frameProperties.Controls.Add(this.rdBtn_Door);
+            this.flp_frameProperties.Controls.Add(this.rdBtn_Concrete);
+            this.flp_frameProperties.Controls.Add(this.lbl_Width);
+            this.flp_frameProperties.Controls.Add(this.num_fWidth);
+            this.flp_frameProperties.Controls.Add(this.lbl_Height);
+            this.flp_frameProperties.Controls.Add(this.num_fHeight);
+            this.flp_frameProperties.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flp_frameProperties.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.flp_frameProperties.Location = new System.Drawing.Point(0, 0);
+            this.flp_frameProperties.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flp_frameProperties.Name = "flp_frameProperties";
+            this.flp_frameProperties.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
+            this.flp_frameProperties.Size = new System.Drawing.Size(185, 331);
+            this.flp_frameProperties.TabIndex = 0;
             // 
             // lbl_frameName
             // 
@@ -176,12 +176,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.flp_frameProperties);
             this.Name = "FramePropertiesUC";
-            this.Size = new System.Drawing.Size(185, 183);
+            this.Size = new System.Drawing.Size(185, 331);
             this.Load += new System.EventHandler(this.FramePropertiesUC_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.flp_frameProperties.ResumeLayout(false);
+            this.flp_frameProperties.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_fWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_fHeight)).EndInit();
             this.ResumeLayout(false);
@@ -191,7 +191,7 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flp_frameProperties;
         private System.Windows.Forms.Label lbl_frameName;
         private System.Windows.Forms.RadioButton rdBtn_Window;
         private System.Windows.Forms.RadioButton rdBtn_Door;

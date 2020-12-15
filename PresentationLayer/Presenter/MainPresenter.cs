@@ -754,9 +754,9 @@ namespace PresentationLayer.Presenter
             _windoorModel.lst_frame.Remove(frameModel);
         }
 
-        public UserControl GetFrameProperties(int frameID)
+        public IFramePropertiesUC GetFrameProperties(int frameID)
         {
-            return (UserControl)_pnlPropertiesBody.Controls.OfType<IFramePropertiesUC>().Where(ctrl => ctrl.FrameID == frameID);
+            return _pnlPropertiesBody.Controls.OfType<IFramePropertiesUC>().First(ctrl => ctrl.FrameID == frameID);
 
             //UserControl frameProp = new UserControl();
             //foreach (UserControl frameProperties in _pnlPropertiesBody.Controls)
