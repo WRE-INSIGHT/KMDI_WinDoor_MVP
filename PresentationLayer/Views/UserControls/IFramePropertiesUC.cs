@@ -23,6 +23,7 @@ namespace PresentationLayer.Views.UserControls
         //int ThisHeight { set; }
         //bool ThisVisibility { get; set; }
         void BringToFrontThis();
+        void PanelPropInsert_AddHeight();
         FlowLayoutPanel GetFramePropertiesFLP();
         //void ThisBinding(Dictionary<string, Binding> frameModelBinding);
     }

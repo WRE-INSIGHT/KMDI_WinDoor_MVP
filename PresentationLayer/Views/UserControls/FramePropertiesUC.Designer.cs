@@ -60,7 +60,7 @@
             this.flp_frameProperties.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flp_frameProperties.Name = "flp_frameProperties";
             this.flp_frameProperties.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
-            this.flp_frameProperties.Size = new System.Drawing.Size(185, 331);
+            this.flp_frameProperties.Size = new System.Drawing.Size(154, 183);
             this.flp_frameProperties.TabIndex = 0;
             // 
             // lbl_frameName
@@ -178,7 +178,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flp_frameProperties);
             this.Name = "FramePropertiesUC";
-            this.Size = new System.Drawing.Size(185, 331);
+            this.Size = new System.Drawing.Size(154, 183);
             this.Load += new System.EventHandler(this.FramePropertiesUC_Load);
             this.flp_frameProperties.ResumeLayout(false);
             this.flp_frameProperties.PerformLayout();

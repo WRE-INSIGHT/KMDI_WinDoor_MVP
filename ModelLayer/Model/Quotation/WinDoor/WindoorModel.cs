@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Net.Mime;
 using System.Drawing;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -256,6 +257,20 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public IEnumerable<IFrameModel> GetAllVisibleFrames()
         {
             return lst_frame.Where(frame => frame.Frame_Visible == true);
+        }
+
+        public int GetPanelCount()
+        {
+            int panelCount = 0;
+            try
+            {
+                panelCount = lst_frame.SelectMany(pnl => pnl.lst_Panel).Count();
+            }
+            catch (Exception)
+            {
+                panelCount = 0;
+            }
+           return panelCount;
         }
     }
 }

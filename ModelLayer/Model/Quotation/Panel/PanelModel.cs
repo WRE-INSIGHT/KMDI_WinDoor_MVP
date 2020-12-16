@@ -97,6 +97,17 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             set
             {
+                if (value.Contains("Fixed"))
+                {
+                    if (_panelOrient == true)
+                    {
+                        _panelChkText = "dSash";
+                    }
+                    else if (_panelOrient == false)
+                    {
+                        _panelChkText = "Norm";
+                    }
+                }
                 _panelType = value;
                 NotifyPropertyChanged();
             }
@@ -111,6 +122,17 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             set
             {
+                if (_panelType.Contains("Fixed"))
+                {
+                    if (value == true)
+                    {
+                        _panelChkText = "dSash";
+                    }
+                    else if (value == false)
+                    {
+                        _panelChkText = "Norm";
+                    }
+                }
                 _panelOrient = value;
                 NotifyPropertyChanged();
             }
@@ -139,7 +161,16 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             set
             {
+                if (value.Name.Contains("pnl_inner"))
+                {
+                    _panelPNumEnable = false;
+                }
+                else
+                {
+                    _panelPNumEnable = true;
+                }
                 _panelParent = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -180,6 +211,20 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelPNumEnable;
+        public bool Panel_PNumEnable
+        {
+            get
+            {
+                return _panelPNumEnable;
+            }
+            set
+            {
+                _panelPNumEnable = value;
                 NotifyPropertyChanged();
             }
         }

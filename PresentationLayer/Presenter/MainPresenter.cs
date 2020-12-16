@@ -757,14 +757,11 @@ namespace PresentationLayer.Presenter
         public IFramePropertiesUC GetFrameProperties(int frameID)
         {
             return _pnlPropertiesBody.Controls.OfType<IFramePropertiesUC>().First(ctrl => ctrl.FrameID == frameID);
+        }
 
-            //UserControl frameProp = new UserControl();
-            //foreach (UserControl frameProperties in _pnlPropertiesBody.Controls)
-            //{
-
-            //}
-
-            //return frameProp;
+        public int GetPanelCount()
+        {
+            return _windoorModel.GetPanelCount();
         }
 
         #endregion

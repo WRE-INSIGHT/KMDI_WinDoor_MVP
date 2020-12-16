@@ -82,5 +82,10 @@ namespace PresentationLayer.Views.UserControls
         {
             return flp_frameProperties;
         }
+
+        public void PanelPropInsert_AddHeight()
+        {
+            this.Height += new PanelPropertiesUC().Height;
+        }
     }
 }

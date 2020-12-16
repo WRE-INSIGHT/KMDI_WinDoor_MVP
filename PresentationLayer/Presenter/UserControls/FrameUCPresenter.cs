@@ -25,7 +25,6 @@ namespace PresentationLayer.Presenter.UserControls
         private IBasePlatformPresenter _basePlatformPresenter;
         private IMainPresenter _mainPresenter;
         private IFixedPanelUCPresenter _fixedUCP;
-        private IFramePropertiesUCPresenter _framePropertiesUCP;
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
 
         private IPanelServices _panelServices;
@@ -64,23 +63,29 @@ namespace PresentationLayer.Presenter.UserControls
         {
             Control pnl = (Control)sender; //Control na babagsakan
             string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
-            if (data == "Fixed")
+            if (data == "Fixed Panel")
             {
                 if (pnl.Name == "pnl_inner")
                 {
-                    _panelModel = AddPanelModel(pnl.Width, pnl.Height, pnl, (UserControl)pnl.Parent, (UserControl)pnl.Parent, data, true);
+                    int panelID = _mainPresenter.GetPanelCount() + 1;
 
                     IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
-                    //_framePropertiesUCP = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
+                    _panelModel = AddPanelModel(pnl.Width,
+                                                pnl.Height, 
+                                                pnl, 
+                                                (UserControl)pnl.Parent, 
+                                                (UserControl)framePropUC, 
+                                                data, 
+                                                true,
+                                                panelID);
+                    _frameModel.lst_Panel.Add(_panelModel);
+
                     IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel);
                     framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
-                    //_framePropertiesUCP
-                    //    .GetFramePropertiesUC()
-                    //    .GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+                    framePropUC.PanelPropInsert_AddHeight();
 
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
-                    //fixedUC.thisdock = DockStyle.Fill;
                     pnl.Controls.Add((UserControl)fixedUC);
                     
                 }
@@ -252,18 +257,6 @@ namespace PresentationLayer.Presenter.UserControls
                                          DockStyle panelDock = DockStyle.Fill,
                                          bool panelOrient = false)
         {
-            //int count = 0;
-            if (panelID == 0)
-            {
-                panelID++;
-                //foreach (IFrameModel frame in _windoorModel.lst_frame)
-                //{
-                //    foreach (IPanelModel panel in frame.lst_Panel)
-                //    {
-                //        count++;
-                //    }
-                //}
-            }
             if (panelName == "")
             {
                 panelName = "Panel " + panelID;

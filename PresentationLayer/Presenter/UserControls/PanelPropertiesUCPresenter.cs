@@ -29,7 +29,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
-            _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
+            //_panelPropertiesUC.ThisBinding(CreateBindingDictionary());
         }
 
         private Dictionary<string, Binding> CreateBindingDictionary()
@@ -42,6 +42,8 @@ namespace PresentationLayer.Presenter.UserControls
             panelBinding.Add("Panel_ChkText", new Binding("Text", _panelModel, "Panel_ChkText", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("Checked", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_PNumEnable1", new Binding("Enabled", _panelModel, "Panel_PNumEnable", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_PNumEnable2", new Binding("Enabled", _panelModel, "Panel_PNumEnable", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }
@@ -59,6 +61,7 @@ namespace PresentationLayer.Presenter.UserControls
                 .RegisterType<IPanelPropertiesUCPresenter, PanelPropertiesUCPresenter>();
             PanelPropertiesUCPresenter panelPropUCP = unityC.Resolve<PanelPropertiesUCPresenter>();
             panelPropUCP._panelModel = panelModel;
+            panelPropUCP._panelPropertiesUC.ThisBinding(panelPropUCP.CreateBindingDictionary());
 
             return panelPropUCP;
         }
