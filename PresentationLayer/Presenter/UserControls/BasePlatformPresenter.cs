@@ -55,17 +55,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-
-            //string accname_col = pnl.AccessibleName;
             Color col = Color.Black;
-            //if (accname_col == "Black")
-            //{
-            //    col = Color.Black;
-            //}
-            //else if (accname_col == "Blue")
-            //{
-            //    col = Color.Blue;
-            //}
 
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
@@ -134,8 +124,9 @@ namespace PresentationLayer.Presenter.UserControls
                 dmnsion_w_endP,
                 new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
             };
+            ;
 
-            if (_flpMain.Controls.Count > 0)
+            if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
             {
                 g.DrawLines(redP, arrwhd_pnts_W1);
                 g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
@@ -174,7 +165,7 @@ namespace PresentationLayer.Presenter.UserControls
                     new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
                 };
 
-            if (_flpMain.Controls.Count > 0)
+            if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
             {
                 g.DrawLines(redP, arrwhd_pnts_H1);
                 g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);

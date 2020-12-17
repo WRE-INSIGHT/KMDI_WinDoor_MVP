@@ -93,6 +93,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CasementPanel {
+            get {
+                object obj = ResourceManager.GetObject("CasementPanel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cloud_checked_40px {
             get {
                 object obj = ResourceManager.GetObject("cloud_checked_40px", resourceCulture);

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.Panel;
 using ServiceLayer.CommonServices;
 
 namespace ServiceLayer.Services.FrameServices
@@ -23,14 +24,16 @@ namespace ServiceLayer.Services.FrameServices
                                        int frame_width, 
                                        int frame_height, 
                                        FrameModel.Frame_Padding frame_type,
-                                       bool frame_visible)
+                                       bool frame_visible,
+                                       List<IPanelModel> lst_panel)
         {
             IFrameModel fr = new FrameModel(frame_id,
                                            frame_name,
                                            frame_width,
                                            frame_height,
                                            frame_type,
-                                           frame_visible);
+                                           frame_visible,
+                                           lst_panel);
             ValidateModel(fr);
 
             return fr;

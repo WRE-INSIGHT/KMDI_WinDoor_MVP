@@ -1,6 +1,6 @@
-﻿namespace PresentationLayer.Views.UserControls.WinDoorPanels
+﻿namespace PresentationLayer.Views.UserControls.WinDoorPanels.Thumbs
 {
-    partial class FixedPanelUC
+    partial class Thumbs_FixedPanelUC
     {
         /// <summary> 
         /// Required designer variable.
@@ -38,22 +38,21 @@
             this.lbl_Fixed.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Fixed.Location = new System.Drawing.Point(5, 5);
             this.lbl_Fixed.Name = "lbl_Fixed";
-            this.lbl_Fixed.Size = new System.Drawing.Size(140, 140);
-            this.lbl_Fixed.TabIndex = 0;
+            this.lbl_Fixed.Size = new System.Drawing.Size(55, 53);
+            this.lbl_Fixed.TabIndex = 1;
             this.lbl_Fixed.Text = "F";
             this.lbl_Fixed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FixedPanelUC
+            // Thumbs_FixedPanelUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.Controls.Add(this.lbl_Fixed);
-            this.Name = "FixedPanelUC";
+            this.Name = "Thumbs_FixedPanelUC";
             this.Padding = new System.Windows.Forms.Padding(5);
-            this.Load += new System.EventHandler(this.FixedPanelUC_Load);
-            this.SizeChanged += new System.EventHandler(this.FixedPanelUC_SizeChanged);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.FixedPanelUC_Paint);
+            this.Size = new System.Drawing.Size(65, 63);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Thumbs_FixedPanelUC_Paint);
             this.ResumeLayout(false);
 
         }

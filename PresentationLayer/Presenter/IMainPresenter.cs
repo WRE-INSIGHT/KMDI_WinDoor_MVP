@@ -9,6 +9,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Frame;
 using System.Windows.Forms;
 using Unity;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace PresentationLayer.Presenter
 {
@@ -52,7 +53,8 @@ namespace PresentationLayer.Presenter
                                   FrameModel.Frame_Padding frame_type,
                                   int frame_id = 0,
                                   string frame_name = "",
-                                  bool frame_visible = true);
+                                  bool frame_visible = true,
+                                  List<IPanelModel> lst_Panel = null);
         IFramePropertiesUC GetFrameProperties(int frameID);
         void AddItemInfoUC(IWindoorModel wndr);
         void AddFrameUC(IFrameModel frameModel);

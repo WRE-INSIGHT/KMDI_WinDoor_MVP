@@ -10,6 +10,5 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC);
         IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
         IFixedPanelUC GetFixedPanelUC();
-        IFixedPanelUC GetFixedPanelUCAsThumbnail();
     }
 }

@@ -12,6 +12,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
     public class FixedPanelUCPresenter : IFixedPanelUCPresenter
     {
+
         IFixedPanelUC _fixedPanelUC;
 
         private IPanelModel _panelModel;
@@ -27,6 +28,31 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void SubscribeToEventsSetup()
         {
             _fixedPanelUC.fixedPanelUCLoadEventRaised += new EventHandler(OnFixedPanelUCLoadEventRaised);
+            _fixedPanelUC.fixedPanelUCSizeChangedEventRaised += new EventHandler(OnFixedPanelUCSizeChangedEventRaised);
+        }
+
+        private void OnFixedPanelUCSizeChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                int thisWd = ((UserControl)sender).Width,
+                    thisHt = ((UserControl)sender).Height,
+                    pnlModelWd = _panelModel.Panel_Width,
+                    pnlModelHt = _panelModel.Panel_Height;
+
+                if (thisWd != pnlModelWd)
+                {
+                    _panelModel.Panel_Width = thisWd;
+                }
+                if (thisHt != pnlModelHt)
+                {
+                    _panelModel.Panel_Height = thisHt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void OnFixedPanelUCLoadEventRaised(object sender, EventArgs e)
@@ -70,12 +96,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             fixedPanelUCP._unityC = unityC;
 
             return fixedPanelUCP;
-        }
-
-        public IFixedPanelUC GetFixedPanelUCAsThumbnail()
-        {
-            _fixedPanelUC.thisdock = DockStyle.Fill;
-            return _fixedPanelUC;
         }
     }
 }

@@ -14,7 +14,6 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_Visible { get; set; }
         //int Frame_Padding_int { get; set; }
         Padding Frame_Padding_int { get; set; }
-        List<IPanelModel> lst_Panel { get; set; }
-        int CountVisiblePanels();
+        List<IPanelModel> Lst_Panel { get; set; }
     }
 }

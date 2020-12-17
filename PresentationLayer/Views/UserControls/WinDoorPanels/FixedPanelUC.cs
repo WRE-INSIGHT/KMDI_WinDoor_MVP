@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
@@ -19,15 +18,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             InitializeComponent();
         }
 
-        public DockStyle thisdock
-        {
-            set
-            {
-                this.Dock = value;
-            }
-        }
-
         public event EventHandler fixedPanelUCLoadEventRaised;
+        public event EventHandler fixedPanelUCSizeChangedEventRaised;
 
         private void FixedPanelUC_Paint(object sender, PaintEventArgs e)
         {
@@ -55,6 +47,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(binding["Panel_Width"]);
             this.DataBindings.Add(binding["Panel_Height"]);
             this.DataBindings.Add(binding["Panel_Visibility"]);
+        }
+
+        private void FixedPanelUC_SizeChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, fixedPanelUCSizeChangedEventRaised, e);
         }
     }
 }

@@ -87,14 +87,15 @@ namespace ModelLayer.Model.Quotation.Frame
             set { _framePadding = value; NotifyPropertyChanged(); }
         }
 
-        public List<IPanelModel> lst_Panel { get; set; }
+        public List<IPanelModel> Lst_Panel { get; set; }
 
         public FrameModel(int frameID,
                           string frameName,
                           int frameWd,
                           int frameHt,
                           Frame_Padding frameType,
-                          bool frameVisible)
+                          bool frameVisible,
+                          List<IPanelModel> lst_panel)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -102,6 +103,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Height = frameHt;
             Frame_Type = frameType;
             Frame_Visible = frameVisible;
+            Lst_Panel = lst_panel;
             if (frameType == Frame_Padding.Window)
             {
                 Frame_Padding_int = new Padding(26);
@@ -111,11 +113,5 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_Padding_int = new Padding(33);
             }
         }
-
-        public int CountVisiblePanels()
-        {
-            return lst_Panel.Count(pnl => pnl.Panel_Visibility == true);
-        }
-
     }
 }

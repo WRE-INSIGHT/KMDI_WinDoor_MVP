@@ -8,6 +8,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
     public interface IFixedPanelUC: IViewCommon
     {
         event EventHandler fixedPanelUCLoadEventRaised;
-        DockStyle thisdock { set; }
+        event EventHandler fixedPanelUCSizeChangedEventRaised;
     }
 }

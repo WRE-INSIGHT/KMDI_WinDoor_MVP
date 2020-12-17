@@ -13,6 +13,14 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class FrameUC : UserControl, IFrameUC
     {
+        public bool thisVisible
+        {
+            get
+            {
+                return this.Visible;
+            }
+        }
+
         public FrameUC()
         {
             InitializeComponent();

@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
+using PresentationLayer.Views.UserControls.WinDoorPanels.Thumbs;
 using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
 using ServiceLayer.Services.FrameServices;
@@ -386,17 +386,15 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.FirstTym = false;
             }
             _mainView.Nickname = _userModel.Nickname;
-
-            //IFixedPanelUC fixedUCP = _fixedPanelUCPresenter.GetNewInstance(_unityC).GetFixedPanelUCAsThumbnail();
-            //IControlsUCPresenter controlsUCP = _controlsUCP.GetNewInstance(_unityC, "Fixed", (UserControl)fixedUCP);
-            //IControlsUC controlsUC = controlsUCP.GetControlUC();
-            //_pnlControlSub.Controls.Add((UserControl)controlsUC);
+            
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Casement", new Thumbs_CasementPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Fixed", (UserControl)_fixedPanelUCPresenter.GetNewInstance(_unityC).GetFixedPanelUCAsThumbnail())
-                .GetControlUC()
-                );
+                _unityC, "Fixed", new Thumbs_FixedPanelUC()).GetControlUC());
+
         }
 
         #endregion
@@ -724,7 +722,8 @@ namespace PresentationLayer.Presenter
                                          FrameModel.Frame_Padding frame_type,
                                          int frame_id = 0,
                                          string frame_name = "",
-                                         bool frame_visible = true)
+                                         bool frame_visible = true,
+                                         List<IPanelModel> lst_Panel = null)
         {
             if (frame_id == 0)
             {
@@ -734,12 +733,17 @@ namespace PresentationLayer.Presenter
             {
                 frame_name = "Frame " + frame_id;
             }
+            if (lst_Panel == null)
+            {
+                lst_Panel = new List<IPanelModel>();
+            }
             _frameModel = _frameServices.CreateFrame(frame_id,
                                                      frame_name,
                                                      frame_width,
                                                      frame_height,
                                                      frame_type,
-                                                     frame_visible);
+                                                     frame_visible,
+                                                     lst_Panel);
 
             return _frameModel;
         }

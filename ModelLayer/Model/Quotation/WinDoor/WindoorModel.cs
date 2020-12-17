@@ -264,7 +264,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             int panelCount = 0;
             try
             {
-                panelCount = lst_frame.SelectMany(pnl => pnl.lst_Panel).Count();
+                panelCount = lst_frame.SelectMany(pnl => pnl.Lst_Panel).Count();
             }
             catch (Exception)
             {

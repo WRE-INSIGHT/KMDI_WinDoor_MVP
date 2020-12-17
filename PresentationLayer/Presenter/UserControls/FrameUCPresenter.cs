@@ -71,14 +71,14 @@ namespace PresentationLayer.Presenter.UserControls
 
                     IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
                     _panelModel = AddPanelModel(pnl.Width,
-                                                pnl.Height, 
-                                                pnl, 
-                                                (UserControl)pnl.Parent, 
-                                                (UserControl)framePropUC, 
-                                                data, 
+                                                pnl.Height,
+                                                pnl,
+                                                (UserControl)pnl.Parent,
+                                                (UserControl)framePropUC,
+                                                data,
                                                 true,
                                                 panelID);
-                    _frameModel.lst_Panel.Add(_panelModel);
+                    _frameModel.Lst_Panel.Add(_panelModel);
 
                     IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel);
                     framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
@@ -87,7 +87,6 @@ namespace PresentationLayer.Presenter.UserControls
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     pnl.Controls.Add((UserControl)fixedUC);
-                    
                 }
             }
         }

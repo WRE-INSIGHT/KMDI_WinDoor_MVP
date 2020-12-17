@@ -9,6 +9,8 @@ namespace PresentationLayer.Views.UserControls
 {
     public interface IFrameUC
     {
+        bool thisVisible { get; }
+
         event EventHandler frameLoadEventRaised;
         event EventHandler deleteCmenuEventRaised;
         event EventHandler frameMouseEnterEventRaised;
