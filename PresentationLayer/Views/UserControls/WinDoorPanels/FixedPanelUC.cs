@@ -18,7 +18,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             InitializeComponent();
         }
 
-        public event EventHandler fixedPanelUCLoadEventRaised;
         public event EventHandler fixedPanelUCSizeChangedEventRaised;
 
         private void FixedPanelUC_Paint(object sender, PaintEventArgs e)
@@ -34,11 +33,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
                                                            0,
                                                            this.ClientRectangle.Width - w,
                                                            this.ClientRectangle.Height - w));
-        }
-
-        private void FixedPanelUC_Load(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(this, fixedPanelUCLoadEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> binding)

@@ -24,8 +24,9 @@ namespace PresentationLayer.Presenter.UserControls
 
         private IBasePlatformPresenter _basePlatformPresenter;
         private IMainPresenter _mainPresenter;
-        private IFixedPanelUCPresenter _fixedUCP;
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
+        private IFixedPanelUCPresenter _fixedUCP;
+        private ICasementPanelUCPresenter _casementUCP;
 
         private IPanelServices _panelServices;
 
@@ -35,7 +36,8 @@ namespace PresentationLayer.Presenter.UserControls
                                 IBasePlatformPresenter basePlatformPresenter,
                                 IFixedPanelUCPresenter fixedUCP,
                                 IPanelServices panelServices,
-                                IPanelPropertiesUCPresenter panelPropertiesUCP)
+                                IPanelPropertiesUCPresenter panelPropertiesUCP,
+                                ICasementPanelUCPresenter casementUCP)
         {
             _frameUC = frameUC;
             _basePlatformPresenter = basePlatformPresenter;
@@ -43,6 +45,7 @@ namespace PresentationLayer.Presenter.UserControls
             _fixedUCP = fixedUCP;
             _panelServices = panelServices;
             _panelPropertiesUCP = panelPropertiesUCP;
+            _casementUCP = casementUCP;
             SubscribeToEventsSetup();
         }
         private void SubscribeToEventsSetup()
@@ -63,30 +66,37 @@ namespace PresentationLayer.Presenter.UserControls
         {
             Control pnl = (Control)sender; //Control na babagsakan
             string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
-            if (data == "Fixed Panel")
+
+            int panelID = _mainPresenter.GetPanelCount() + 1;
+
+            IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
+            _panelModel = AddPanelModel(pnl.Width,
+                                        pnl.Height,
+                                        pnl,
+                                        (UserControl)pnl.Parent,
+                                        (UserControl)framePropUC,
+                                        data,
+                                        true,
+                                        panelID);
+            _frameModel.Lst_Panel.Add(_panelModel);
+
+            IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel);
+            framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+            framePropUC.PanelPropInsert_AddHeight();
+
+            if (pnl.Name == "pnl_inner")
             {
-                if (pnl.Name == "pnl_inner")
+                if (data == "Fixed Panel")
                 {
-                    int panelID = _mainPresenter.GetPanelCount() + 1;
-
-                    IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
-                    _panelModel = AddPanelModel(pnl.Width,
-                                                pnl.Height,
-                                                pnl,
-                                                (UserControl)pnl.Parent,
-                                                (UserControl)framePropUC,
-                                                data,
-                                                true,
-                                                panelID);
-                    _frameModel.Lst_Panel.Add(_panelModel);
-
-                    IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel);
-                    framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
-                    framePropUC.PanelPropInsert_AddHeight();
-
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     pnl.Controls.Add((UserControl)fixedUC);
+                }
+                else if (data == "Casement Panel")
+                {
+                    ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel);
+                    ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+                    pnl.Controls.Add((UserControl)casementUC);
                 }
             }
         }

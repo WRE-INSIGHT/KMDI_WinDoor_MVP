@@ -7,7 +7,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
     public interface IFixedPanelUCPresenter
     {
-        IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC);
         IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
         IFixedPanelUC GetFixedPanelUC();
     }

@@ -48,8 +48,7 @@ namespace PresentationLayer.Presenter.UserControls
             Control ctrl = (Control)sender;
             if (e.Button == MouseButtons.Left)
             {
-                ctrl.DoDragDrop("Fixed Panel", DragDropEffects.Move);
-                //ctrl.DoDragDrop(_fixedUCP.GetNewInstance(_unityC).GetFixedPanelUC(), DragDropEffects.Move);
+                ctrl.DoDragDrop(_controlUC.CustomText, DragDropEffects.Move);
             }
         }
         public IControlsUCPresenter GetNewInstance(IUnityContainer unityC, 

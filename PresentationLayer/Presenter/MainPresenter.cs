@@ -389,12 +389,11 @@ namespace PresentationLayer.Presenter
             
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Casement", new Thumbs_CasementPanelUC()).GetControlUC());
+                _unityC, "Casement Panel", new Thumbs_CasementPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Fixed", new Thumbs_FixedPanelUC()).GetControlUC());
-
+                _unityC, "Fixed Panel", new Thumbs_FixedPanelUC()).GetControlUC());
         }
 
         #endregion

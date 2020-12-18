@@ -7,7 +7,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
     public interface IFixedPanelUC: IViewCommon
     {
-        event EventHandler fixedPanelUCLoadEventRaised;
         event EventHandler fixedPanelUCSizeChangedEventRaised;
     }
 }

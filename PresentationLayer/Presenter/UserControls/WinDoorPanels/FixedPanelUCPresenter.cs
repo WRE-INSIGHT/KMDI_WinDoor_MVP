@@ -7,17 +7,16 @@ using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ModelLayer.Model.Quotation.Panel;
 using Unity;
 using System.Windows.Forms;
+using CommonComponents;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
-    public class FixedPanelUCPresenter : IFixedPanelUCPresenter
+    public class FixedPanelUCPresenter : IFixedPanelUCPresenter, IPresenterCommon
     {
 
         IFixedPanelUC _fixedPanelUC;
 
         private IPanelModel _panelModel;
-
-        private IUnityContainer _unityC;
 
         public FixedPanelUCPresenter(IFixedPanelUC fixedPanelUC)
         {
@@ -27,7 +26,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void SubscribeToEventsSetup()
         {
-            _fixedPanelUC.fixedPanelUCLoadEventRaised += new EventHandler(OnFixedPanelUCLoadEventRaised);
             _fixedPanelUC.fixedPanelUCSizeChangedEventRaised += new EventHandler(OnFixedPanelUCSizeChangedEventRaised);
         }
 
@@ -55,21 +53,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
         }
 
-        private void OnFixedPanelUCLoadEventRaised(object sender, EventArgs e)
-        {
-            //_fixedPanelUC.ThisBinding(CreateBindingDictionary());
-        }
-        private Dictionary<string, Binding> CreateBindingDictionary()
-        {
-            Dictionary<string, Binding> panelBinding = new Dictionary<string, Binding>();
-            panelBinding.Add("Panel_Dock", new Binding("Dock", _panelModel, "Panel_Dock", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Width", new Binding("Width", _panelModel, "Panel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
-
-            return panelBinding;
-        }
-
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
         {
             unityC
@@ -87,15 +70,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             return _fixedPanelUC;
         }
 
-        public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC)
+        public Dictionary<string, Binding> CreateBindingDictionary()
         {
-            unityC
-                .RegisterType<IFixedPanelUC, FixedPanelUC>()
-                .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>();
-            FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
-            fixedPanelUCP._unityC = unityC;
+            Dictionary<string, Binding> panelBinding = new Dictionary<string, Binding>();
+            panelBinding.Add("Panel_Dock", new Binding("Dock", _panelModel, "Panel_Dock", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Width", new Binding("Width", _panelModel, "Panel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
-            return fixedPanelUCP;
+            return panelBinding;
         }
     }
 }

@@ -133,6 +133,17 @@ namespace ModelLayer.Model.Quotation.Panel
                         _panelChkText = "Norm";
                     }
                 }
+                else if (_panelType.Contains("Casement"))
+                {
+                    if (value == true)
+                    {
+                        _panelChkText = "L";
+                    }
+                    else if (value == false)
+                    {
+                        _panelChkText = "R";
+                    }
+                }
                 _panelOrient = value;
                 NotifyPropertyChanged();
             }

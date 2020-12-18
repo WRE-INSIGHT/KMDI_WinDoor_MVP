@@ -58,19 +58,21 @@
             this.lbl_Type.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Type.Location = new System.Drawing.Point(7, 36);
             this.lbl_Type.Name = "lbl_Type";
-            this.lbl_Type.Size = new System.Drawing.Size(65, 13);
+            this.lbl_Type.Size = new System.Drawing.Size(87, 13);
             this.lbl_Type.TabIndex = 1;
-            this.lbl_Type.Text = "Fixed Panel";
+            this.lbl_Type.Text = "Tilt&Turn Panel";
+            this.lbl_Type.UseMnemonic = false;
             // 
             // chk_Orientation
             // 
+            this.chk_Orientation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_Orientation.Appearance = System.Windows.Forms.Appearance.Button;
             this.chk_Orientation.BackColor = System.Drawing.SystemColors.ControlDark;
             this.chk_Orientation.FlatAppearance.BorderSize = 0;
             this.chk_Orientation.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
             this.chk_Orientation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chk_Orientation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_Orientation.Location = new System.Drawing.Point(78, 32);
+            this.chk_Orientation.Location = new System.Drawing.Point(100, 32);
             this.chk_Orientation.Name = "chk_Orientation";
             this.chk_Orientation.Size = new System.Drawing.Size(50, 21);
             this.chk_Orientation.TabIndex = 2;
@@ -80,9 +82,10 @@
             // 
             // num_BladeCount
             // 
+            this.num_BladeCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.num_BladeCount.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.num_BladeCount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.num_BladeCount.Location = new System.Drawing.Point(78, 32);
+            this.num_BladeCount.Location = new System.Drawing.Point(100, 32);
             this.num_BladeCount.Minimum = new decimal(new int[] {
             2,
             0,
@@ -147,7 +150,7 @@
             this.Controls.Add(this.chk_Orientation);
             this.Controls.Add(this.num_BladeCount);
             this.Name = "PanelPropertiesUC";
-            this.Size = new System.Drawing.Size(148, 148);
+            this.Size = new System.Drawing.Size(159, 148);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();
