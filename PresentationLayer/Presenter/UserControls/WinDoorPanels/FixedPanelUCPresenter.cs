@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.Frame;
 using Unity;
 using System.Windows.Forms;
 using CommonComponents;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -17,6 +20,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         IFixedPanelUC _fixedPanelUC;
 
         private IPanelModel _panelModel;
+        private IFrameModel _frameModel;
 
         public FixedPanelUCPresenter(IFixedPanelUC fixedPanelUC)
         {
@@ -27,6 +31,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void SubscribeToEventsSetup()
         {
             _fixedPanelUC.fixedPanelUCSizeChangedEventRaised += new EventHandler(OnFixedPanelUCSizeChangedEventRaised);
+            _fixedPanelUC.deleteToolStripClickedEventRaised += new EventHandler(OnDeleteToolStripClickedEventRaised);
+        }
+
+        private void OnDeleteToolStripClickedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_Visibility = false;
+            _frameModel.FrameProp_Height -= 148;
         }
 
         private void OnFixedPanelUCSizeChangedEventRaised(object sender, EventArgs e)
@@ -53,13 +64,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
         }
 
-        public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
+        public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
         {
             unityC
                 .RegisterType<IFixedPanelUC, FixedPanelUC>()
                 .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>();
             FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
             fixedPanelUCP._panelModel = panelModel;
+            fixedPanelUCP._frameModel = frameModel;
 
             return fixedPanelUCP;
         }

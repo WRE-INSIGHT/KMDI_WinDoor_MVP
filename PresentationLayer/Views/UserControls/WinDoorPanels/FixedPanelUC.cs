@@ -19,17 +19,18 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         }
 
         public event EventHandler fixedPanelUCSizeChangedEventRaised;
+        public event EventHandler deleteToolStripClickedEventRaised;
 
+        Color color = Color.Black;
         private void FixedPanelUC_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            Color col = Color.Black;
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(col, w), new Rectangle(0,
+            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                            0,
                                                            this.ClientRectangle.Width - w,
                                                            this.ClientRectangle.Height - w));
@@ -46,6 +47,31 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         private void FixedPanelUC_SizeChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(this, fixedPanelUCSizeChangedEventRaised, e);
+        }
+
+        private void FixedPanelUC_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                cmenu_fxd.Show(new Point(MousePosition.X, MousePosition.Y));
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, deleteToolStripClickedEventRaised, e);
+        }
+
+        private void FixedPanelUC_MouseEnter(object sender, EventArgs e)
+        {
+            color = Color.Blue;
+            this.Invalidate();
+        }
+
+        private void FixedPanelUC_MouseLeave(object sender, EventArgs e)
+        {
+            color = Color.Black;
+            this.Invalidate();
         }
     }
 }

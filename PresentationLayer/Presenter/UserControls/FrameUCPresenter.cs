@@ -82,19 +82,19 @@ namespace PresentationLayer.Presenter.UserControls
 
             IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel);
             framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
-            framePropUC.PanelPropInsert_AddHeight();
+            _frameModel.FrameProp_Height += 148;
 
             if (pnl.Name == "pnl_inner")
             {
                 if (data == "Fixed Panel")
                 {
-                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel);
+                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     pnl.Controls.Add((UserControl)fixedUC);
                 }
                 else if (data == "Casement Panel")
                 {
-                    ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel);
+                    ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                     pnl.Controls.Add((UserControl)casementUC);
                 }
@@ -135,8 +135,6 @@ namespace PresentationLayer.Presenter.UserControls
                 DeleteFrame();
                 _frameUC.InvalidateThisParentsParent();
             }
-            // _promptYesNoUCP.SetValues(this, _mainPresenter);
-            //_promptYesNoUCP.GetPromptYesNo().PromptYesNo("Are you sure you want to DELETE?");
         }
 
         private void OnFrameMouseClickEventRaised(object sender, MouseEventArgs e)

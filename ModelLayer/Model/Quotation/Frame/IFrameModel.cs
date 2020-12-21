@@ -12,7 +12,7 @@ namespace ModelLayer.Model.Quotation.Frame
         FrameModel.Frame_Padding Frame_Type { get; set; }
         int Frame_Width { get; set; }
         bool Frame_Visible { get; set; }
-        //int Frame_Padding_int { get; set; }
+        int FrameProp_Height { get; set; }
         Padding Frame_Padding_int { get; set; }
         List<IPanelModel> Lst_Panel { get; set; }
     }

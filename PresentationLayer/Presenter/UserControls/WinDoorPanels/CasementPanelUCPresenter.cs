@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using CommonComponents;
+using ModelLayer.Model.Quotation.Frame;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -18,6 +19,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         ICasementPanelUC _casementUC;
 
         private IPanelModel _panelModel;
+        private IFrameModel _frameModel;
 
         public CasementPanelUCPresenter(ICasementPanelUC casementUC)
         {
@@ -29,7 +31,30 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _casementUC.casementPanelUCSizeChangedEventRaised += new EventHandler(OnCasementPanelUCSizeChangedEventRaised);
             _casementUC.casementPanelUCPaintEventRaised += new PaintEventHandler(OnCasementPanelUCPaintEventRaised);
+            _casementUC.casementPanelUCMouseEnterEventRaised += new EventHandler(OnCasementPanelUCMouseEnterEventRaised);
+            _casementUC.casementPanelUCMouseLeaveEventRaised += new EventHandler(OnCasementPanelUCMouseLeaveEventRaised);
+            _casementUC.deleteToolStripClickedEventRaised += new EventHandler(OnDeleteToolStripClickedEventRaised);
         }
+
+        private void OnDeleteToolStripClickedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_Visibility = false;
+            _frameModel.FrameProp_Height -= 148;
+        }
+
+        private void OnCasementPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
+        {
+            color = Color.Black;
+            _casementUC.InvalidateThis();
+        }
+
+        private void OnCasementPanelUCMouseEnterEventRaised(object sender, EventArgs e)
+        {
+            color = Color.Blue;
+            _casementUC.InvalidateThis();
+        }
+
+        Color color = Color.Black;
 
         private void OnCasementPanelUCPaintEventRaised(object sender, PaintEventArgs e)
         {
@@ -39,14 +64,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            Color col = Color.Black;
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(col, w), new Rectangle(0,
+            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                            0,
                                                            casement.ClientRectangle.Width - w,
                                                            casement.ClientRectangle.Height - w));
 
+            Color col = Color.Black;
             g.DrawRectangle(new Pen(col, w), new Rectangle(10,
                                                            10,
                                                            (casement.ClientRectangle.Width - 20) - w,
@@ -66,15 +91,44 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             int sashW = casement.Width,
                 sashH = casement.Height;
 
-            g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, sashPoint.Y),
-                                 new Point(sashPoint.X, (sashPoint.Y + (sashH / 2))));
-            g.DrawLine(dgrayPen, new Point(sashPoint.X, (sashPoint.Y + (sashH / 2))),
-                                 new Point(sashPoint.X + sashW, sashH + sashPoint.Y));
+            if (_panelModel.Panel_Orient == true)//(_casementUC.pnl_Orientation == true) //Left
+            {
+                g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, sashPoint.Y),
+                                         new Point(sashPoint.X, (sashPoint.Y + ( sashH / 2))));
+                g.DrawLine(dgrayPen, new Point(sashPoint.X, (sashPoint.Y + ( sashH/ 2))),
+                                     new Point(sashPoint.X + sashW, sashPoint.Y + sashH));
+            }
+            else if (_panelModel.Panel_Orient == false)//(_casementUC.pnl_Orientation == false) //Right
+            {
+                g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
+                                     new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))));
+                g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))),
+                                     new Point(sashPoint.X, sashH + sashPoint.Y));
+            }
         }
 
         private void OnCasementPanelUCSizeChangedEventRaised(object sender, EventArgs e)
         {
-            //
+            try
+            {
+                int thisWd = ((UserControl)sender).Width,
+                    thisHt = ((UserControl)sender).Height,
+                    pnlModelWd = _panelModel.Panel_Width,
+                    pnlModelHt = _panelModel.Panel_Height;
+
+                if (thisWd != pnlModelWd)
+                {
+                    _panelModel.Panel_Width = thisWd;
+                }
+                if (thisHt != pnlModelHt)
+                {
+                    _panelModel.Panel_Height = thisHt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         
         public ICasementPanelUC GetCasementPanelUC()
@@ -83,13 +137,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             return _casementUC;
         }
 
-        public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
+        public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
         {
             unityC
                 .RegisterType<ICasementPanelUC, CasementPanelUC>()
                 .RegisterType<ICasementPanelUCPresenter, CasementPanelUCPresenter>();
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
+            casementUCP._frameModel = frameModel;
 
             return casementUCP;
         }
@@ -101,6 +156,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Width", new Binding("Width", _panelModel, "Panel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

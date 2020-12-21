@@ -12,7 +12,7 @@ using CommonComponents;
 
 namespace PresentationLayer.Presenter.UserControls
 {
-    public class FramePropertiesUCPresenter : IFramePropertiesUCPresenter
+    public class FramePropertiesUCPresenter : IFramePropertiesUCPresenter, IPresenterCommon
     {
         IFramePropertiesUC _framePropertiesUC;
         private IFrameModel _frameModel;
@@ -62,7 +62,7 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.InvalidateThisParentsParent();
         }
 
-        private Dictionary<string, Binding> CreateBindingDictionary()
+        public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> frameBinding = new Dictionary<string, Binding>();
             frameBinding.Add("Frame_ID", new Binding("FrameID", _frameModel, "Frame_ID", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -70,6 +70,7 @@ namespace PresentationLayer.Presenter.UserControls
             frameBinding.Add("Frame_Visible", new Binding("Visible", _frameModel, "Frame_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Width", new Binding("Value", _frameModel, "Frame_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Height", new Binding("Value", _frameModel, "Frame_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            frameBinding.Add("FrameProp_Height", new Binding("Height", _frameModel, "FrameProp_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Type_Window", AddRadioCheckedBinding(_frameModel, "Frame_Type", FrameModel.Frame_Padding.Window));
             frameBinding.Add("Frame_Type_Door", AddRadioCheckedBinding(_frameModel, "Frame_Type", FrameModel.Frame_Padding.Door));
             frameBinding.Add("Frame_Type_Concrete", AddRadioCheckedBinding(_frameModel, "Frame_Type", FrameModel.Frame_Padding.Concrete));

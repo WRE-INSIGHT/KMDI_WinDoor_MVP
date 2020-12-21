@@ -16,15 +16,7 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler NumFHeightValueChangedEventRaised;
         event EventHandler NumFWidthValueChangedEventRaised;
         event EventHandler RdBtnCheckedChangedEventRaised;
-        //string Frame_Name { set; }
-        //Frame_Padding Frame_Type { set; }
-        //int fWidth { get; set; }
-        //int fHeight { get; set; }
-        //int ThisHeight { set; }
-        //bool ThisVisibility { get; set; }
         void BringToFrontThis();
-        void PanelPropInsert_AddHeight();
         FlowLayoutPanel GetFramePropertiesFLP();
-        //void ThisBinding(Dictionary<string, Binding> frameModelBinding);
     }
 }

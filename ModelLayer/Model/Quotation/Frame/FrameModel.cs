@@ -87,6 +87,13 @@ namespace ModelLayer.Model.Quotation.Frame
             set { _framePadding = value; NotifyPropertyChanged(); }
         }
 
+        private int _framePropHeight;
+        public int FrameProp_Height
+        {
+            get { return _framePropHeight; }
+            set { _framePropHeight = value; NotifyPropertyChanged(); }
+        }
+
         public List<IPanelModel> Lst_Panel { get; set; }
 
         public FrameModel(int frameID,
@@ -103,6 +110,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Height = frameHt;
             Frame_Type = frameType;
             Frame_Visible = frameVisible;
+            FrameProp_Height = 183;
             Lst_Panel = lst_panel;
             if (frameType == Frame_Padding.Window)
             {

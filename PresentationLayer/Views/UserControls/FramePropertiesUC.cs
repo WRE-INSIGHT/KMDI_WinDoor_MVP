@@ -54,6 +54,7 @@ namespace PresentationLayer.Views.UserControls
         public void ThisBinding(Dictionary<string, Binding> frameModelBinding)
         {
             this.DataBindings.Add(frameModelBinding["Frame_ID"]);
+            this.DataBindings.Add(frameModelBinding["FrameProp_Height"]);
             lbl_frameName.DataBindings.Add(frameModelBinding["Frame_Name"]);
             this.DataBindings.Add(frameModelBinding["Frame_Visible"]);
             num_fWidth.DataBindings.Add(frameModelBinding["Frame_Width"]);
@@ -81,11 +82,6 @@ namespace PresentationLayer.Views.UserControls
         public FlowLayoutPanel GetFramePropertiesFLP()
         {
             return flp_frameProperties;
-        }
-
-        public void PanelPropInsert_AddHeight()
-        {
-            this.Height += new PanelPropertiesUC().Height;
         }
     }
 }
