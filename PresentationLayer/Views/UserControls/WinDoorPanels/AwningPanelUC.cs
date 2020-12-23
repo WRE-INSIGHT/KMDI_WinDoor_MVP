@@ -80,5 +80,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             EventHelpers.RaiseEvent(sender, deleteToolStripClickedEventRaised, e);
         }
+
+        public void InvalidateThis()
+        {
+            this.Invalidate();
+        }
     }
 }

@@ -199,6 +199,12 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_FixedPanelUC.Designer.cs">
       <DependentUpon>Thumbs_FixedPanelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_SlidingPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_SlidingPanelUC.Designer.cs">
+      <DependentUpon>Thumbs_SlidingPanelUC.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -257,6 +263,9 @@
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_FixedPanelUC.resx">
       <DependentUpon>Thumbs_FixedPanelUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_SlidingPanelUC.resx">
+      <DependentUpon>Thumbs_SlidingPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -307,6 +316,7 @@
     <Content Include="Resources\redo_30px.png" />
     <Content Include="Resources\refresh_30px.png" />
     <Content Include="Resources\SinglePanel.png" />
+    <None Include="Resources\SlidingPanel.png" />
     <Content Include="Resources\Transom.png" />
     <Content Include="Resources\undo_30px.png" />
   </ItemGroup>

@@ -21,12 +21,12 @@ namespace PresentationLayer.Presenter.UserControls
         private IFrameModel _frameModel;
         private IPanelModel _panelModel;
 
-
         private IBasePlatformPresenter _basePlatformPresenter;
         private IMainPresenter _mainPresenter;
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IFixedPanelUCPresenter _fixedUCP;
         private ICasementPanelUCPresenter _casementUCP;
+        private IAwningPanelUCPresenter _awningUCP;
 
         private IPanelServices _panelServices;
 
@@ -37,7 +37,8 @@ namespace PresentationLayer.Presenter.UserControls
                                 IFixedPanelUCPresenter fixedUCP,
                                 IPanelServices panelServices,
                                 IPanelPropertiesUCPresenter panelPropertiesUCP,
-                                ICasementPanelUCPresenter casementUCP)
+                                ICasementPanelUCPresenter casementUCP,
+                                IAwningPanelUCPresenter awningUCP)
         {
             _frameUC = frameUC;
             _basePlatformPresenter = basePlatformPresenter;
@@ -46,6 +47,7 @@ namespace PresentationLayer.Presenter.UserControls
             _panelServices = panelServices;
             _panelPropertiesUCP = panelPropertiesUCP;
             _casementUCP = casementUCP;
+            _awningUCP = awningUCP;
             SubscribeToEventsSetup();
         }
         private void SubscribeToEventsSetup()
@@ -97,6 +99,12 @@ namespace PresentationLayer.Presenter.UserControls
                     ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                     pnl.Controls.Add((UserControl)casementUC);
+                }
+                else if (data == "Awning Panel")
+                {
+                    IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
+                    IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+                    pnl.Controls.Add((UserControl)awningUC);
                 }
             }
         }

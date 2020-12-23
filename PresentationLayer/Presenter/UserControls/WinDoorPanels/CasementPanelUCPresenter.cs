@@ -91,14 +91,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             int sashW = casement.Width,
                 sashH = casement.Height;
 
-            if (_panelModel.Panel_Orient == true)//(_casementUC.pnl_Orientation == true) //Left
+            if (_panelModel.Panel_Orient == true)//Left
             {
                 g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, sashPoint.Y),
                                          new Point(sashPoint.X, (sashPoint.Y + ( sashH / 2))));
                 g.DrawLine(dgrayPen, new Point(sashPoint.X, (sashPoint.Y + ( sashH/ 2))),
                                      new Point(sashPoint.X + sashW, sashPoint.Y + sashH));
             }
-            else if (_panelModel.Panel_Orient == false)//(_casementUC.pnl_Orientation == false) //Right
+            else if (_panelModel.Panel_Orient == false)//Right
             {
                 g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
                                      new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))));

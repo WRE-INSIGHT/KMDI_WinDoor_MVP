@@ -29,7 +29,53 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void SubscribeToEventsSetup()
         {
-            _awningPanelUC.awningPanelUCPaintEventRaised += new PaintEventHandler(OnAwningPanelUCPaintEventRaised);
+            _awningPanelUC.awningPanelUCPaintEventRaised += OnAwningPanelUCPaintEventRaised;
+            _awningPanelUC.awningPanelUCMouseEnterEventRaised += _awningPanelUC_awningPanelUCMouseEnterEventRaised;
+            _awningPanelUC.awningPanelUCMouseLeaveEventRaised += _awningPanelUC_awningPanelUCMouseLeaveEventRaised;
+            _awningPanelUC.awningPanelUCSizeChangedEventRaised += _awningPanelUC_awningPanelUCSizeChangedEventRaised;
+            _awningPanelUC.deleteToolStripClickedEventRaised += _awningPanelUC_deleteToolStripClickedEventRaised;
+        }
+
+        private void _awningPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_Visibility = false;
+            _frameModel.FrameProp_Height -= 148;
+        }
+
+        private void _awningPanelUC_awningPanelUCSizeChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                int thisWd = ((UserControl)sender).Width,
+                    thisHt = ((UserControl)sender).Height,
+                    pnlModelWd = _panelModel.Panel_Width,
+                    pnlModelHt = _panelModel.Panel_Height;
+
+                if (thisWd != pnlModelWd)
+                {
+                    _panelModel.Panel_Width = thisWd;
+                }
+                if (thisHt != pnlModelHt)
+                {
+                    _panelModel.Panel_Height = thisHt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void _awningPanelUC_awningPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
+        {
+            color = Color.Black;
+            _awningPanelUC.InvalidateThis();
+        }
+
+        private void _awningPanelUC_awningPanelUCMouseEnterEventRaised(object sender, EventArgs e)
+        {
+            color = Color.Blue;
+            _awningPanelUC.InvalidateThis();
         }
 
         Color color = Color.Black;
@@ -69,11 +115,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             int sashW = awning.Width,
                 sashH = awning.Height;
 
-            g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y + sashH),
+            if (_panelModel.Panel_Orient == true)
+            {
+                g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
+                                     new Point(sashPoint.X + (sashW / 2), sashPoint.Y + sashH));
+                g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW / 2), sashPoint.Y + sashH),
+                                     new Point(sashPoint.X + sashW, sashPoint.Y));
+            }
+            else if (_panelModel.Panel_Orient == false)
+            {
+                g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y + sashH),
                                  new Point(sashPoint.X + (sashW / 2), sashPoint.Y));
-            g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW / 2), sashPoint.Y),
-                                 new Point(sashPoint.X + sashW, sashH + sashPoint.Y));
-
+                g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW / 2), sashPoint.Y),
+                                     new Point(sashPoint.X + sashW, sashH + sashPoint.Y));
+            }
         }
 
         public IAwningPanelUC GetAwningPanelUC()

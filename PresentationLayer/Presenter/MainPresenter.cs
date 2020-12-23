@@ -389,6 +389,10 @@ namespace PresentationLayer.Presenter
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Sliding Panel", new Thumbs_SlidingPanelUC()).GetControlUC());
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, "Awning Panel", new Thumbs_AwningPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
