@@ -315,8 +315,8 @@ namespace PresentationLayer.Presenter
 
         private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)
         {
-            Panel pnlMain = (Panel)sender;
-            pnlMain.PerformLayout();
+            //Panel pnlMain = (Panel)sender;
+            //pnlMain.PerformLayout();
         }
 
         private void OnNewQuotationMenuItemClickEventRaised(object sender, EventArgs e)
@@ -386,7 +386,11 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.FirstTym = false;
             }
             _mainView.Nickname = _userModel.Nickname;
-            
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Awning Panel", new Thumbs_AwningPanelUC()).GetControlUC());
+
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, "Casement Panel", new Thumbs_CasementPanelUC()).GetControlUC());
@@ -530,7 +534,7 @@ namespace PresentationLayer.Presenter
                         AddItemInfoUC(_windoorModel);
 
                         _basePlatformPresenter.InvalidateBasePlatform();
-                        _basePlatformPresenter.Invalidate_flpMain();
+                        //_basePlatformPresenter.Invalidate_flpMain();
                         SetMainViewTitle(input_qrefno,
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
@@ -559,7 +563,7 @@ namespace PresentationLayer.Presenter
                         AddItemInfoUC(_windoorModel); //add item information user control
 
                         _basePlatformPresenter.InvalidateBasePlatform();
-                        _basePlatformPresenter.Invalidate_flpMain();
+                        //_basePlatformPresenter.Invalidate_flpMain();
                         SetMainViewTitle(input_qrefno,
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
@@ -589,7 +593,7 @@ namespace PresentationLayer.Presenter
                         AddFramePropertiesUC(_frameModel);
 
                         _basePlatformPresenter.InvalidateBasePlatform();
-                        _basePlatformPresenter.Invalidate_flpMain();
+                        //_basePlatformPresenter.Invalidate_flpMain();
                         SetMainViewTitle(input_qrefno,
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
@@ -613,7 +617,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_height = frmDimension_numHt;
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
-                _basePlatformPresenter.Invalidate_flpMain();
+                //_basePlatformPresenter.Invalidate_flpMain();
             }
         }
         #endregion

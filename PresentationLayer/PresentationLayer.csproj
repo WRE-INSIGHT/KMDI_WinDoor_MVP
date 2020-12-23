@@ -82,8 +82,10 @@
     <Compile Include="Presenter\UserControls\IPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\AwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\CasementPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\FixedPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\IAwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\ICasementPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IFixedPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
@@ -158,6 +160,12 @@
     <Compile Include="Views\UserControls\PanelPropertiesUC.Designer.cs">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\AwningPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\AwningPanelUC.Designer.cs">
+      <DependentUpon>AwningPanelUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\CasementPanelUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -170,8 +178,15 @@
     <Compile Include="Views\UserControls\WinDoorPanels\FixedPanelUC.Designer.cs">
       <DependentUpon>FixedPanelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\IAwningPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\ICasementPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\IFixedPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_AwningPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_AwningPanelUC.Designer.cs">
+      <DependentUpon>Thumbs_AwningPanelUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_CasementPanelUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -224,11 +239,17 @@
     <EmbeddedResource Include="Views\UserControls\PanelPropertiesUC.resx">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\AwningPanelUC.resx">
+      <DependentUpon>AwningPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\CasementPanelUC.resx">
       <DependentUpon>CasementPanelUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\FixedPanelUC.resx">
       <DependentUpon>FixedPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_AwningPanelUC.resx">
+      <DependentUpon>Thumbs_AwningPanelUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_CasementPanelUC.resx">
       <DependentUpon>Thumbs_CasementPanelUC.cs</DependentUpon>
@@ -254,6 +275,7 @@
     <Content Include="Resources\AddNew_Door.png" />
     <Content Include="Resources\AddNew_Window.png" />
     <Content Include="Resources\animat-cloudsync.gif" />
+    <None Include="Resources\AwningPanel.png" />
     <Content Include="Resources\box_important_40px.png" />
     <Content Include="Resources\cancel_30px.png" />
     <Content Include="Resources\cancel_40px.png" />

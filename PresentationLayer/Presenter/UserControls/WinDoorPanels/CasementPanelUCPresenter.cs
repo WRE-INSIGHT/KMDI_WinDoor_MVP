@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
-using ModelLayer.Model.Quotation.Panel;
-using Unity;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using CommonComponents;
 using ModelLayer.Model.Quotation.Frame;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
+using ModelLayer.Model.Quotation.Panel;
+using Unity;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
