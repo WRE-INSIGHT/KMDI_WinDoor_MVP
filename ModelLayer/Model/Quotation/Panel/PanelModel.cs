@@ -144,7 +144,6 @@ namespace ModelLayer.Model.Quotation.Panel
                         _panelChkText = "R";
                     }
                 }
-
                 else if (_panelType.Contains("Awning"))
                 {
                     if (value == true)
@@ -154,6 +153,17 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (value == false)
                     {
                         _panelChkText = "Norm";
+                    }
+                }
+                else if (_panelType.Contains("Sliding"))
+                {
+                    if (value == true)
+                    {
+                        _panelChkText = "L";
+                    }
+                    else if (value == false)
+                    {
+                        _panelChkText = "R";
                     }
                 }
                 _panelOrient = value;

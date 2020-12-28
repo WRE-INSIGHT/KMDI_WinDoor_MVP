@@ -21,19 +21,6 @@ namespace PresentationLayer.Views
             }
         }
 
-        //public string ofd_InitialDirectory
-        //{
-        //    get
-        //    {
-        //        return openFileDialog1.InitialDirectory;
-        //    }
-
-        //    set
-        //    {
-        //        openFileDialog1.InitialDirectory = value;
-        //    }
-        //}
-
         public string mainview_title
         {
             get
@@ -179,6 +166,11 @@ namespace PresentationLayer.Views
         public Panel GetPanelControlSub()
         {
             return pnlControlSub;
+        }
+
+        public Form GetThis()
+        {
+            return this;
         }
 
         //private void ctrlUC_fixed_MouseDown(object sender, MouseEventArgs e)

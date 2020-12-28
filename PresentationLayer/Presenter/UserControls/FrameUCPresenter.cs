@@ -27,6 +27,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IFixedPanelUCPresenter _fixedUCP;
         private ICasementPanelUCPresenter _casementUCP;
         private IAwningPanelUCPresenter _awningUCP;
+        private ISlidingPanelUCPresenter _slidingUCP;
 
         private IPanelServices _panelServices;
 
@@ -38,7 +39,8 @@ namespace PresentationLayer.Presenter.UserControls
                                 IPanelServices panelServices,
                                 IPanelPropertiesUCPresenter panelPropertiesUCP,
                                 ICasementPanelUCPresenter casementUCP,
-                                IAwningPanelUCPresenter awningUCP)
+                                IAwningPanelUCPresenter awningUCP,
+                                ISlidingPanelUCPresenter slidingUCP)
         {
             _frameUC = frameUC;
             _basePlatformPresenter = basePlatformPresenter;
@@ -48,6 +50,7 @@ namespace PresentationLayer.Presenter.UserControls
             _panelPropertiesUCP = panelPropertiesUCP;
             _casementUCP = casementUCP;
             _awningUCP = awningUCP;
+            _slidingUCP = slidingUCP;
             SubscribeToEventsSetup();
         }
         private void SubscribeToEventsSetup()
@@ -105,6 +108,12 @@ namespace PresentationLayer.Presenter.UserControls
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
                     IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
                     pnl.Controls.Add((UserControl)awningUC);
+                }
+                else if (data == "Sliding Panel")
+                {
+                    ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
+                    ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+                    pnl.Controls.Add((UserControl)slidingUC);
                 }
             }
         }

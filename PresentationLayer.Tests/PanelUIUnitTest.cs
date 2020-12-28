@@ -17,6 +17,7 @@ namespace PresentationLayer.Tests
     {
         ICasementPanelUCPresenter _casementUCP;
         IAwningPanelUCPresenter _awningUCP;
+        ISlidingPanelUCPresenter _slidingUCP;
         IUnityContainer UnityC;
 
         private IPanelModel _panelModel;
@@ -31,10 +32,14 @@ namespace PresentationLayer.Tests
                 .RegisterType<ICasementPanelUCPresenter, CasementPanelUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IAwningPanelUC, AwningPanelUC>(new ContainerControlledLifetimeManager())
-                .RegisterType<IAwningPanelUCPresenter, AwningPanelUCPresenter>(new ContainerControlledLifetimeManager());
+                .RegisterType<IAwningPanelUCPresenter, AwningPanelUCPresenter>(new ContainerControlledLifetimeManager())
+            
+                .RegisterType<ISlidingPanelUC, SlidingPanelUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISlidingPanelUCPresenter, SlidingPanelUCPresenter>(new ContainerControlledLifetimeManager());
 
             _casementUCP = UnityC.Resolve<CasementPanelUCPresenter>();
             _awningUCP = UnityC.Resolve<AwningPanelUCPresenter>();
+            _slidingUCP = UnityC.Resolve<SlidingPanelUCPresenter>();
 
             frmUITest frm = new frmUITest();
 
@@ -103,6 +108,18 @@ namespace PresentationLayer.Tests
             IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(UnityC, _panelModel, frame);
             IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
             frm.Controls.Add((UserControl)awningUC);
+            frm.ShowDialog();
+        }
+
+        [TestMethod]
+        public void SlidingUITest()
+        {
+            frmUITest frm = new frmUITest();
+            IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, new System.Collections.Generic.List<IPanelModel>());
+
+            ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(UnityC, _panelModel, frame);
+            ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+            frm.Controls.Add((UserControl)slidingUC);
             frm.ShowDialog();
         }
     }

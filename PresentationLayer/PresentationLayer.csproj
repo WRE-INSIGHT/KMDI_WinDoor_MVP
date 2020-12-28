@@ -88,6 +88,8 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\IAwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\ICasementPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IFixedPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\ISlidingPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\SlidingPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\frmDimensionView.cs">
@@ -181,6 +183,13 @@
     <Compile Include="Views\UserControls\WinDoorPanels\IAwningPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\ICasementPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\IFixedPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\ISlidingPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\SlidingPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\SlidingPanelUC.Designer.cs">
+      <DependentUpon>SlidingPanelUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_AwningPanelUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -253,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\FixedPanelUC.resx">
       <DependentUpon>FixedPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\SlidingPanelUC.resx">
+      <DependentUpon>SlidingPanelUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_AwningPanelUC.resx">
       <DependentUpon>Thumbs_AwningPanelUC.cs</DependentUpon>

@@ -8,6 +8,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using Unity;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -250,6 +251,17 @@ namespace PresentationLayer.Presenter.UserControls
             _windoorModel = windoorModel;
             _basePlatfomrUC.ClearBinding((UserControl)_basePlatfomrUC);
             _basePlatfomrUC.ThisBinding(CreateBindingDictionary_basePlaform());
+        }
+
+        public IBasePlatformPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel)
+        {
+            unityC
+                .RegisterType<IBasePlatformUC, BasePlatformUC>()
+                .RegisterType<IBasePlatformPresenter, BasePlatformPresenter>();
+            BasePlatformPresenter basePlatformUCP = unityC.Resolve<BasePlatformPresenter>();
+            basePlatformUCP._windoorModel = windoorModel;
+
+            return basePlatformUCP;
         }
     }
 }

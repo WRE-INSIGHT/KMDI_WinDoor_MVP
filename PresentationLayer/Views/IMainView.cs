@@ -29,5 +29,6 @@ namespace PresentationLayer.Views
         Panel GetPanelBot();
         Panel GetPanelControlSub();
         Label GetLblSize();
+        Form GetThis();
     }
 }

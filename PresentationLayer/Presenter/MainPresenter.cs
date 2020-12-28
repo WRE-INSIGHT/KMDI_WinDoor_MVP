@@ -535,10 +535,11 @@ namespace PresentationLayer.Presenter
                         _basePlatformPresenter.SetWindoorModel(_windoorModel);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
 
+                        _mainView.GetThis().Controls.Add((UserControl)_basePlatformPresenter.getBasePlatformViewUC());
+
                         AddItemInfoUC(_windoorModel);
 
                         _basePlatformPresenter.InvalidateBasePlatform();
-                        //_basePlatformPresenter.Invalidate_flpMain();
                         SetMainViewTitle(input_qrefno,
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
