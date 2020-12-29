@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public interface IItemInfoUC
+    public interface IItemInfoUC: IViewCommon
     {
         event EventHandler ItemInfoUCLoadEventRaised;
         //string ItemName { set; }
@@ -15,6 +16,6 @@ namespace PresentationLayer.Views.UserControls
         //bool ItemVisibility { set; }
         //DockStyle dok { set; }
         void BringToFrontThis();
-        void ThisBinding(Dictionary<string, Binding> windoorModelBinding);
+        //void ThisBinding(Dictionary<string, Binding> windoorModelBinding);
     }
 }

@@ -49,6 +49,7 @@ namespace PresentationLayer.Presenter
 
         private IFrameUCPresenter _frameUCPresenter;
         private IBasePlatformPresenter _basePlatformPresenter;
+        private IBasePlatformPresenter _basePlatformPresenter_willRenderImg;
         private IfrmDimensionPresenter _frmDimensionPresenter;
         private IItemInfoUCPresenter _itemInfoUCPresenter;
         private IFramePropertiesUCPresenter _framePropertiesUCPresenter;
@@ -231,6 +232,19 @@ namespace PresentationLayer.Presenter
             set
             {
                 _pnlPropertiesBody = value;
+            }
+        }
+
+        public IBasePlatformPresenter basePlatformWillRenderImg_MainPresenter
+        {
+            get
+            {
+                return _basePlatformPresenter_willRenderImg;
+            }
+
+            set
+            {
+                _basePlatformPresenter_willRenderImg = value;
             }
         }
 
@@ -532,13 +546,18 @@ namespace PresentationLayer.Presenter
                                                         frmDimension_profileType);
                         AddWndrList_QuotationModel(_windoorModel);
 
-                        _basePlatformPresenter.SetWindoorModel(_windoorModel);
-                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+                        //IBasePlatformPresenter bPlatformUCP = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
+                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
+                        //_basePlatformPresenter.SetWindoorModel(_windoorModel);
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC(false));
+                        //AddBasePlatform(bPlatformUCP.getBasePlatformViewUC());
 
-                        _mainView.GetThis().Controls.Add((UserControl)_basePlatformPresenter.getBasePlatformViewUC());
+                        _basePlatformPresenter_willRenderImg = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
+                        _mainView.GetThis().Controls.Add((UserControl)_basePlatformPresenter_willRenderImg.getBasePlatformViewUC(true));
 
                         AddItemInfoUC(_windoorModel);
 
+                        _basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
                         _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
                                          _windoorModel.WD_name,
@@ -562,11 +581,15 @@ namespace PresentationLayer.Presenter
                                                         frmDimension_profileType);
                         AddWndrList_QuotationModel(_windoorModel);
 
-                        _basePlatformPresenter.SetWindoorModel(_windoorModel);
-                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+                        //IBasePlatformPresenter bPlatformUCP = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
+                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
+                        //_basePlatformPresenter.SetWindoorModel(_windoorModel);
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC(false));
+                        //AddBasePlatform(bPlatformUCP.getBasePlatformViewUC());
 
                         AddItemInfoUC(_windoorModel); //add item information user control
 
+                        _basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
                         _basePlatformPresenter.InvalidateBasePlatform();
                         //_basePlatformPresenter.Invalidate_flpMain();
                         SetMainViewTitle(input_qrefno,
@@ -597,6 +620,7 @@ namespace PresentationLayer.Presenter
                         AddFrameUC(_frameModel);
                         AddFramePropertiesUC(_frameModel);
 
+                        _basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
                         _basePlatformPresenter.InvalidateBasePlatform();
                         //_basePlatformPresenter.Invalidate_flpMain();
                         SetMainViewTitle(input_qrefno,
@@ -621,6 +645,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_width = frmDimension_numWd;
                 _windoorModel.WD_height = frmDimension_numHt;
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                _basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
                 _basePlatformPresenter.InvalidateBasePlatform();
                 //_basePlatformPresenter.Invalidate_flpMain();
             }
@@ -716,6 +741,9 @@ namespace PresentationLayer.Presenter
             IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, frameModel, this);
             _frameUC = frameUCP.GetFrameUC();
             _basePlatformPresenter.AddFrame(_frameUC);
+
+            IFrameUCPresenter frameUCP2 = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, frameModel, this);
+            _basePlatformPresenter_willRenderImg.AddFrame(frameUCP2.GetFrameUC());
         }
 
         public void AddFramePropertiesUC(IFrameModel frameModel)
@@ -774,6 +802,12 @@ namespace PresentationLayer.Presenter
         public int GetPanelCount()
         {
             return _windoorModel.GetPanelCount();
+        }
+
+        public Panel GetFrameInnerPanel(int frameID)
+        {
+            IBasePlatformUC basePLUC = _mainView.GetThis().Controls.OfType<IBasePlatformUC>().First();
+            return basePLUC.GetFlpMain().Controls.OfType<IFrameUC>().First(fr => fr.frameID == frameID).GetInnerPanel();
         }
 
         #endregion

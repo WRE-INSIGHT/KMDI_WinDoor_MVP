@@ -89,6 +89,8 @@ namespace PresentationLayer.Presenter.UserControls
             framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
             _frameModel.FrameProp_Height += 148;
 
+            Panel pnl_inner_willRenderImg = _mainPresenter.GetFrameInnerPanel(_frameModel.Frame_ID);
+
             if (pnl.Name == "pnl_inner")
             {
                 if (data == "Fixed Panel")
@@ -96,6 +98,10 @@ namespace PresentationLayer.Presenter.UserControls
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     pnl.Controls.Add((UserControl)fixedUC);
+
+                    IFixedPanelUCPresenter fixedUCP2 = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
+                    IFixedPanelUC fixedUC2 = fixedUCP2.GetFixedPanelUC();
+                    pnl_inner_willRenderImg.Controls.Add((UserControl)fixedUC2);
                 }
                 else if (data == "Casement Panel")
                 {
@@ -193,6 +199,7 @@ namespace PresentationLayer.Presenter.UserControls
             frameBinding.Add("Frame_Width", new Binding("Width", _frameModel, "Frame_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Height", new Binding("Height", _frameModel, "Frame_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Padding", new Binding("Padding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
+            frameBinding.Add("Frame_ID", new Binding("frameID", _frameModel, "Frame_ID", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return frameBinding;
         }

@@ -19,6 +19,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         IWindoorModel _windoorModel;
 
+        private bool will_render_img;
+
         public BasePlatformPresenter(IBasePlatformUC basePlatformUC)
         {
             _basePlatfomrUC = basePlatformUC;
@@ -68,27 +70,30 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnbasePlatformSizeChangedEventRaised(object sender, EventArgs e)
         {
-            UserControl basePlatform = (UserControl)sender;
-            Panel pnlMain = (Panel)basePlatform.Parent;
-            int cX, cY;
-            cX = (pnlMain.Width - basePlatform.Width) / 2;
-            cY = (pnlMain.Height - basePlatform.Height) / 2;
+            if (will_render_img == false)
+            {
+                UserControl basePlatform = (UserControl)sender;
+                Panel pnlMain = (Panel)basePlatform.Parent;
+                int cX, cY;
+                cX = (pnlMain.Width - basePlatform.Width) / 2;
+                cY = (pnlMain.Height - basePlatform.Height) / 2;
 
-            if (cX <= 30 && cY <= 30)
-            {
-                basePlatform.Location = new Point(60, 60);
-            }
-            else if (cX <= 30)
-            {
-                basePlatform.Location = new Point(60, cY);
-            }
-            else if (cY <= 30)
-            {
-                basePlatform.Location = new Point(cX, 60);
-            }
-            else
-            {
-                basePlatform.Location = new Point(cX - 17, cY - 35);
+                if (cX <= 30 && cY <= 30)
+                {
+                    basePlatform.Location = new Point(60, 60);
+                }
+                else if (cX <= 30)
+                {
+                    basePlatform.Location = new Point(60, cY);
+                }
+                else if (cY <= 30)
+                {
+                    basePlatform.Location = new Point(cX, 60);
+                }
+                else
+                {
+                    basePlatform.Location = new Point(cX - 17, cY - 35);
+                }
             }
         }
 
@@ -182,9 +187,13 @@ namespace PresentationLayer.Presenter.UserControls
             }
             //arrow for HEIGHT
 
-            Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
-            basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
-            _windoorModel.WD_image = bm;
+            if (will_render_img)
+            {
+                Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
+                basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
+                _windoorModel.WD_image = bm;
+            }
+            
             //Set_WDImage(g, basePL);
         }
 
@@ -198,6 +207,13 @@ namespace PresentationLayer.Presenter.UserControls
 
         public IBasePlatformUC getBasePlatformViewUC()
         {
+            return _basePlatfomrUC;
+        }
+
+        public IBasePlatformUC getBasePlatformViewUC(bool willRenderImg)
+        {
+            _basePlatfomrUC.ThisBinding(CreateBindingDictionary_basePlaform());
+            will_render_img = willRenderImg;
             return _basePlatfomrUC;
         }
 
@@ -260,6 +276,8 @@ namespace PresentationLayer.Presenter.UserControls
                 .RegisterType<IBasePlatformPresenter, BasePlatformPresenter>();
             BasePlatformPresenter basePlatformUCP = unityC.Resolve<BasePlatformPresenter>();
             basePlatformUCP._windoorModel = windoorModel;
+            basePlatformUCP._basePlatfomrUC.ClearBinding((UserControl)_basePlatfomrUC);
+            //basePlatformUCP._basePlatfomrUC.ThisBinding(CreateBindingDictionary_basePlaform());
 
             return basePlatformUCP;
         }

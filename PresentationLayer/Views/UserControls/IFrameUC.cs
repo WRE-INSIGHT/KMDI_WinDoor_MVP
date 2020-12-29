@@ -10,7 +10,7 @@ namespace PresentationLayer.Views.UserControls
     public interface IFrameUC
     {
         bool thisVisible { get; }
-
+        int frameID { get; set; }
         event EventHandler frameLoadEventRaised;
         event EventHandler deleteCmenuEventRaised;
         event EventHandler frameMouseEnterEventRaised;
@@ -21,14 +21,12 @@ namespace PresentationLayer.Views.UserControls
         event PaintEventHandler innerFramePaintEventRaised;
         event MouseEventHandler frameMouseClickEventRaised;
         event DragEventHandler panelInnerDragDropEventRaised;
-        //int fWidth { get; set; }
-        //int fHeight { get; set; }
-        //int fPadding { set; }
         void InvalidateThis();
         void InvalidateThisParent();
         void InvalidateThisParentsParent();
         void InvalidatePanelInner();
         void ThisBinding(Dictionary<string, Binding> binding);
         ContextMenuStrip GetFrameCmenu();
+        Panel GetInnerPanel();
     }
 }

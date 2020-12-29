@@ -20,6 +20,7 @@ namespace PresentationLayer.Presenter
         IWindoorModel windoorModel_MainPresenter { get; set; }
         IFrameModel frameModel_MainPresenter { get; set; }
         IBasePlatformPresenter basePlatform_MainPresenter { get; set; }
+        IBasePlatformPresenter basePlatformWillRenderImg_MainPresenter { get; set; }
         IfrmDimensionPresenter frmDimension_MainPresenter { get; set; }
         IItemInfoUC itemInfoUC_MainPresenter { get; set; }
         IFrameUC frameUC_MainPresenter { get; set; }
@@ -56,6 +57,8 @@ namespace PresentationLayer.Presenter
                                   bool frame_visible = true,
                                   List<IPanelModel> lst_Panel = null);
         IFramePropertiesUC GetFrameProperties(int frameID);
+        Panel GetFrameInnerPanel(int frameID);
+        int GetPanelCount();
         void AddItemInfoUC(IWindoorModel wndr);
         void AddFrameUC(IFrameModel frameModel);
         void AddFramePropertiesUC(IFrameModel frameModel);
@@ -70,6 +73,5 @@ namespace PresentationLayer.Presenter
         void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
                                  int frmDimension_numWd,
                                  int frmDimension_numHt);
-        int GetPanelCount();
     }
 }

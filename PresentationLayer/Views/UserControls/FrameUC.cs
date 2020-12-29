@@ -21,6 +21,22 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        private int _frameID;
+        public int frameID
+        {
+            get
+            {
+                return _frameID;
+            }
+
+            set
+            {
+                _frameID = value;
+                this.Tag = value;
+                pnl_inner.Tag = value;
+            }
+        }
+
         public FrameUC()
         {
             InitializeComponent();
@@ -94,6 +110,7 @@ namespace PresentationLayer.Views.UserControls
 
         public void ThisBinding(Dictionary<string, Binding> binding)
         {
+            this.DataBindings.Add(binding["Frame_ID"]);
             this.DataBindings.Add(binding["Frame_Visible"]);
             this.DataBindings.Add(binding["Frame_Width"]);
             this.DataBindings.Add(binding["Frame_Height"]);
@@ -123,6 +140,11 @@ namespace PresentationLayer.Views.UserControls
         private void pnl_inner_DragDrop(object sender, DragEventArgs e)
         {
             EventHelpers.RaiseDragEvent(sender, panelInnerDragDropEventRaised, e);
+        }
+
+        public Panel GetInnerPanel()
+        {
+            return pnl_inner;
         }
     }
 }
