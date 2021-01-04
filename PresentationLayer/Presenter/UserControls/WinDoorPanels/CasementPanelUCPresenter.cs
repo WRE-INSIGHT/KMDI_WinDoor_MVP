@@ -18,6 +18,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     {
         ICasementPanelUC _casementUC;
 
+        private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
 
@@ -40,6 +41,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnCasementPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
@@ -137,7 +139,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             return _casementUC;
         }
 
-        public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
+        public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                        IPanelModel panelModel, 
+                                                        IFrameModel frameModel,
+                                                        IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<ICasementPanelUC, CasementPanelUC>()
@@ -145,6 +150,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
+            casementUCP._mainPresenter = mainPresenter;
 
             return casementUCP;
         }

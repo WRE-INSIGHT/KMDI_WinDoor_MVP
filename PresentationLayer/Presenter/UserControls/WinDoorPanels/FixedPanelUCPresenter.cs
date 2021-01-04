@@ -19,6 +19,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         IFixedPanelUC _fixedPanelUC;
 
+        private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
 
@@ -31,13 +32,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void SubscribeToEventsSetup()
         {
             _fixedPanelUC.fixedPanelUCSizeChangedEventRaised += new EventHandler(OnFixedPanelUCSizeChangedEventRaised);
-            _fixedPanelUC.deleteToolStripClickedEventRaised += new EventHandler(OnDeleteToolStripClickedEventRaised);
+            _fixedPanelUC.deleteToolStripClickedEventRaised += _fixedPanelUC_deleteToolStripClickedEventRaised;
         }
 
-        private void OnDeleteToolStripClickedEventRaised(object sender, EventArgs e)
+        private void _fixedPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
         {
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnFixedPanelUCSizeChangedEventRaised(object sender, EventArgs e)
@@ -64,7 +66,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
         }
 
-        public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
+        public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                     IPanelModel panelModel, 
+                                                     IFrameModel frameModel,
+                                                     IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IFixedPanelUC, FixedPanelUC>()
@@ -72,6 +77,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
             fixedPanelUCP._panelModel = panelModel;
             fixedPanelUCP._frameModel = frameModel;
+            fixedPanelUCP._mainPresenter = mainPresenter;
 
             return fixedPanelUCP;
         }

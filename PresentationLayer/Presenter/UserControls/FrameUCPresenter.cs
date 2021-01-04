@@ -85,7 +85,7 @@ namespace PresentationLayer.Presenter.UserControls
                                         panelID);
             _frameModel.Lst_Panel.Add(_panelModel);
 
-            IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel);
+            IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
             framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
             _frameModel.FrameProp_Height += 148;
 
@@ -95,32 +95,46 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 if (data == "Fixed Panel")
                 {
-                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
+                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     pnl.Controls.Add((UserControl)fixedUC);
 
-                    IFixedPanelUCPresenter fixedUCP2 = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
+                    IFixedPanelUCPresenter fixedUCP2 = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
                     IFixedPanelUC fixedUC2 = fixedUCP2.GetFixedPanelUC();
                     pnl_inner_willRenderImg.Controls.Add((UserControl)fixedUC2);
                 }
                 else if (data == "Casement Panel")
                 {
-                    ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
+                    ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                     pnl.Controls.Add((UserControl)casementUC);
+
+
+                    ICasementPanelUCPresenter casementUCP2 = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    ICasementPanelUC casementUC2 = casementUCP2.GetCasementPanelUC();
+                    pnl_inner_willRenderImg.Controls.Add((UserControl)casementUC2);
                 }
                 else if (data == "Awning Panel")
                 {
-                    IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
+                    IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
                     IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
                     pnl.Controls.Add((UserControl)awningUC);
+
+                    IAwningPanelUCPresenter awningUCP2 = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    IAwningPanelUC awningUC2 = awningUCP2.GetAwningPanelUC();
+                    pnl_inner_willRenderImg.Controls.Add((UserControl)awningUC2);
                 }
                 else if (data == "Sliding Panel")
                 {
-                    ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel);
+                    ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
                     ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
                     pnl.Controls.Add((UserControl)slidingUC);
+
+                    ISlidingPanelUCPresenter slidingUCP2 = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    ISlidingPanelUC slidingUC2 = slidingUCP2.GetSlidingPanelUC();
+                    pnl_inner_willRenderImg.Controls.Add((UserControl)slidingUC2);
                 }
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
         }
 
@@ -274,6 +288,7 @@ namespace PresentationLayer.Presenter.UserControls
         public void DeleteFrame()
         {
             _frameModel.Frame_Visible = false;
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         public IPanelModel AddPanelModel(int panelWd,

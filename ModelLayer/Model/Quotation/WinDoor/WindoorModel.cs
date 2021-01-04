@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ModelLayer.Model.Quotation.Frame;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Net.Mime;
 using System.Drawing;
-using ModelLayer.Model.Quotation.Panel;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -127,10 +123,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-        private int _wdZoom;
+        private float _wdZoom;
         [Required(ErrorMessage = "Zoom value is Required")]
-        [Range(1, int.MaxValue, ErrorMessage = "Please enter a zoom value bigger than or equal to {1}")]
-        public int WD_zoom
+        //[Range(1, int.MaxValue, ErrorMessage = "Please enter a zoom value bigger than or equal to {1}")]
+        public float WD_zoom
         {
             get
             {
@@ -138,7 +134,33 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
             set
             {
-                _wdZoom = value;
+                int area = _wdHeight * _wdWidth;
+                float zm = 0.0f;
+                if (area <= 360000)
+                {
+                    zm = 1.0f;
+                }
+                else if (area > 360000 && area <= 1000000)
+                {
+                    zm = 0.5f;
+                }
+                else if (area > 1000000 && area <= 4000000)
+                {
+                    zm = 0.28f;
+                }
+                else if (area > 4000000 && area <= 9000000)
+                {
+                    zm = 0.19f;
+                }
+                else if (area > 9000000 && area <= 16000000)
+                {
+                    zm = 0.14f;
+                }
+                else if (area > 16000000)
+                {
+                    zm = 0.10f;
+                }
+                _wdZoom = zm;
                 NotifyPropertyChanged();
             }
         }//multiply by 0.01 to decimal

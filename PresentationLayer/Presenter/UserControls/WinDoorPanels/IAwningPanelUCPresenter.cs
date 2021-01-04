@@ -8,6 +8,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     public interface IAwningPanelUCPresenter
     {
         IAwningPanelUC GetAwningPanelUC();
-        IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel);
+        IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel, IMainPresenter mainPresenter);
     }
 }

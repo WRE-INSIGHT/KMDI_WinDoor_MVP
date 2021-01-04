@@ -18,6 +18,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     {
         ISlidingPanelUC _slidingPanelUC;
 
+        private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
 
@@ -64,6 +65,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void _slidingPanelUC_slidingPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
@@ -155,7 +157,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
 
-        public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
+        public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                       IPanelModel panelModel, 
+                                                       IFrameModel frameModel,
+                                                       IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<ISlidingPanelUC, SlidingPanelUC>()
@@ -163,6 +168,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             SlidingPanelUCPresenter slidingUCP = unityC.Resolve<SlidingPanelUCPresenter>();
             slidingUCP._panelModel = panelModel;
             slidingUCP._frameModel = frameModel;
+            slidingUCP._mainPresenter = mainPresenter;
 
             return slidingUCP;
         }

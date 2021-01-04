@@ -19,7 +19,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         bool WD_visibility { get; set; }
         int WD_width { get; set; }
         int WD_width_4basePlatform { get; set; }
-        int WD_zoom { get; set; }
+        float WD_zoom { get; set; }
         Image WD_image { get; set; }
         List<IFrameModel> lst_frame { get; set; }
         IEnumerable<IFrameModel> GetAllVisibleFrames();

@@ -9,12 +9,17 @@ using ModelLayer.Model.Quotation.Panel;
 using ServiceLayer.Services.PanelServices;
 using ModelLayer.Model.Quotation.Frame;
 using ServiceLayer.CommonServices;
+using PresentationLayer.Presenter;
+using PresentationLayer.Views;
+using PresentationLayer.Presenter.UserControls;
 
 namespace PresentationLayer.Tests
 {
     [TestClass]
     public class PanelUIUnitTest
     {
+        IMainPresenter _mainPresenter;
+
         ICasementPanelUCPresenter _casementUCP;
         IAwningPanelUCPresenter _awningUCP;
         ISlidingPanelUCPresenter _slidingUCP;
@@ -26,6 +31,10 @@ namespace PresentationLayer.Tests
         public void SetUp()
         {
             UnityC = new UnityContainer()
+
+                .RegisterType<IMainView, MainView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMainPresenter, MainPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IPanelModel, PanelModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<ICasementPanelUC, CasementPanelUC>(new ContainerControlledLifetimeManager())
@@ -33,10 +42,11 @@ namespace PresentationLayer.Tests
 
                 .RegisterType<IAwningPanelUC, AwningPanelUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IAwningPanelUCPresenter, AwningPanelUCPresenter>(new ContainerControlledLifetimeManager())
-            
+                
                 .RegisterType<ISlidingPanelUC, SlidingPanelUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISlidingPanelUCPresenter, SlidingPanelUCPresenter>(new ContainerControlledLifetimeManager());
 
+            _mainPresenter = UnityC.Resolve<MainPresenter>();
             _casementUCP = UnityC.Resolve<CasementPanelUCPresenter>();
             _awningUCP = UnityC.Resolve<AwningPanelUCPresenter>();
             _slidingUCP = UnityC.Resolve<SlidingPanelUCPresenter>();
@@ -93,7 +103,7 @@ namespace PresentationLayer.Tests
             frmUITest frm = new frmUITest();
             IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, new System.Collections.Generic.List<IPanelModel>());
 
-            ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(UnityC, _panelModel, frame);
+            ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
             ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
             frm.Controls.Add((UserControl)casementUC);
             frm.ShowDialog();
@@ -105,7 +115,7 @@ namespace PresentationLayer.Tests
             frmUITest frm = new frmUITest();
             IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, new System.Collections.Generic.List<IPanelModel>());
 
-            IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(UnityC, _panelModel, frame);
+            IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
             IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
             frm.Controls.Add((UserControl)awningUC);
             frm.ShowDialog();
@@ -117,7 +127,7 @@ namespace PresentationLayer.Tests
             frmUITest frm = new frmUITest();
             IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, new System.Collections.Generic.List<IPanelModel>());
 
-            ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(UnityC, _panelModel, frame);
+            ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
             ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
             frm.Controls.Add((UserControl)slidingUC);
             frm.ShowDialog();

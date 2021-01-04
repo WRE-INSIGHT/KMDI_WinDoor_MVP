@@ -191,20 +191,11 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
                 basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
+
                 _windoorModel.WD_image = bm;
             }
-            
-            //Set_WDImage(g, basePL);
         }
-
-        private void Set_WDImage(Graphics g, UserControl basePL)
-        {
-            
-            Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
-            basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
-            _windoorModel.WD_image = bm;
-        }
-
+        
         public IBasePlatformUC getBasePlatformViewUC()
         {
             return _basePlatfomrUC;
@@ -216,12 +207,6 @@ namespace PresentationLayer.Presenter.UserControls
             will_render_img = willRenderImg;
             return _basePlatfomrUC;
         }
-
-        //public void SetBasePlatformSize(int wd, int ht)
-        //{
-        //    _basePlatfomrUC.bp_Width = wd;
-        //    _basePlatfomrUC.bp_Height = ht;
-        //}
 
         public void AddFrame(IFrameUC frame)
         {
@@ -261,14 +246,7 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _flpMain.Controls.Remove((UserControl)frameUC);
         }
-
-        public void SetWindoorModel(IWindoorModel windoorModel)
-        {
-            _windoorModel = windoorModel;
-            _basePlatfomrUC.ClearBinding((UserControl)_basePlatfomrUC);
-            _basePlatfomrUC.ThisBinding(CreateBindingDictionary_basePlaform());
-        }
-
+        
         public IBasePlatformPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel)
         {
             unityC
@@ -277,7 +255,6 @@ namespace PresentationLayer.Presenter.UserControls
             BasePlatformPresenter basePlatformUCP = unityC.Resolve<BasePlatformPresenter>();
             basePlatformUCP._windoorModel = windoorModel;
             basePlatformUCP._basePlatfomrUC.ClearBinding((UserControl)_basePlatfomrUC);
-            //basePlatformUCP._basePlatfomrUC.ThisBinding(CreateBindingDictionary_basePlaform());
 
             return basePlatformUCP;
         }

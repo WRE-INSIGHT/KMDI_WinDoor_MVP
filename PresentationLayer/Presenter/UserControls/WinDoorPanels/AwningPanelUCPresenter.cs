@@ -18,6 +18,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     {
         IAwningPanelUC _awningPanelUC;
 
+        private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
 
@@ -40,6 +41,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void _awningPanelUC_awningPanelUCSizeChangedEventRaised(object sender, EventArgs e)
@@ -138,7 +140,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
 
-        public IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
+        public IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                      IPanelModel panelModel, 
+                                                      IFrameModel frameModel,
+                                                      IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IAwningPanelUC, AwningPanelUC>()
@@ -146,6 +151,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             AwningPanelUCPresenter awningUCP = unityC.Resolve<AwningPanelUCPresenter>();
             awningUCP._panelModel = panelModel;
             awningUCP._frameModel = frameModel;
+            awningUCP._mainPresenter = mainPresenter;
 
             return awningUCP;
         }

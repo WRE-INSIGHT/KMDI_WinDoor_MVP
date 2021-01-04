@@ -79,6 +79,7 @@
             this.chk_Orientation.Text = "Norm";
             this.chk_Orientation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chk_Orientation.UseVisualStyleBackColor = false;
+            this.chk_Orientation.CheckedChanged += new System.EventHandler(this.chk_Orientation_CheckedChanged);
             // 
             // num_BladeCount
             // 

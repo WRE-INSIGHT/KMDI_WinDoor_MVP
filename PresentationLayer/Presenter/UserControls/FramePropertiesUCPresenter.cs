@@ -15,6 +15,8 @@ namespace PresentationLayer.Presenter.UserControls
     public class FramePropertiesUCPresenter : IFramePropertiesUCPresenter, IPresenterCommon
     {
         IFramePropertiesUC _framePropertiesUC;
+
+        private IMainPresenter _mainPresenter;
         private IFrameModel _frameModel;
         private IFrameUC _frameUC;
         private IFrameServices _frameServices;
@@ -40,6 +42,7 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.InvalidatePanelInner();
             _frameUC.InvalidateThisParent();
             _frameUC.InvalidateThisParentsParent();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnNumFWidthValueChangedEventRaised(object sender, EventArgs e)
@@ -50,6 +53,7 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.InvalidatePanelInner();
             _frameUC.InvalidateThisParent();
             _frameUC.InvalidateThisParentsParent();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnNumFHeightValueChangedEventRaised(object sender, EventArgs e)
@@ -60,6 +64,7 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.InvalidatePanelInner();
             _frameUC.InvalidateThisParent();
             _frameUC.InvalidateThisParentsParent();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()
@@ -98,7 +103,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         public IFramePropertiesUCPresenter GetNewInstance(IFrameModel frameModel, 
                                                           IUnityContainer unityC, 
-                                                          IFrameUC frameUC)
+                                                          IFrameUC frameUC,
+                                                          IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IFramePropertiesUC, FramePropertiesUC>()
@@ -106,6 +112,7 @@ namespace PresentationLayer.Presenter.UserControls
             FramePropertiesUCPresenter framePropertiesUCP = unityC.Resolve<FramePropertiesUCPresenter>();
             framePropertiesUCP._frameModel = frameModel;
             framePropertiesUCP._frameUC = frameUC;
+            framePropertiesUCP._mainPresenter = mainPresenter;
 
             return framePropertiesUCP;
         }

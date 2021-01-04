@@ -7,6 +7,6 @@ namespace PresentationLayer.Presenter.UserControls
     public interface IPanelPropertiesUCPresenter
     {
         IPanelPropertiesUC GetPanelPropertiesUC();
-        IPanelPropertiesUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
+        IPanelPropertiesUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter);
     }
 }

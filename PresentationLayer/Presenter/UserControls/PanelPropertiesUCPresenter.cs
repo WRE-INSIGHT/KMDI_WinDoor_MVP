@@ -14,6 +14,7 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IPanelPropertiesUC _panelPropertiesUC;
 
+        private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
 
         public PanelPropertiesUCPresenter(IPanelPropertiesUC panelPropertiesUC)
@@ -25,6 +26,12 @@ namespace PresentationLayer.Presenter.UserControls
         private void SubscribeToEventsSetup()
         {
             _panelPropertiesUC.PanelPropertiesLoadEventRaised += new EventHandler(OnPanelPropertiesLoadEventRaised);
+            _panelPropertiesUC.ChkOrientationCheckChangedEventRaised += _panelPropertiesUC_ChkOrientationCheckChangedEventRaised;
+        }
+
+        private void _panelPropertiesUC_ChkOrientationCheckChangedEventRaised(object sender, EventArgs e)
+        {
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
@@ -54,7 +61,7 @@ namespace PresentationLayer.Presenter.UserControls
         }
 
 
-        public IPanelPropertiesUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
+        public IPanelPropertiesUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IPanelPropertiesUC, PanelPropertiesUC>()
@@ -62,6 +69,7 @@ namespace PresentationLayer.Presenter.UserControls
             PanelPropertiesUCPresenter panelPropUCP = unityC.Resolve<PanelPropertiesUCPresenter>();
             panelPropUCP._panelModel = panelModel;
             panelPropUCP._panelPropertiesUC.ThisBinding(panelPropUCP.CreateBindingDictionary());
+            panelPropUCP._mainPresenter = mainPresenter;
 
             return panelPropUCP;
         }

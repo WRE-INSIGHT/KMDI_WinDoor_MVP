@@ -19,6 +19,7 @@ namespace PresentationLayer.Views.UserControls
         }
 
         public event EventHandler PanelPropertiesLoadEventRaised;
+        public event EventHandler ChkOrientationCheckChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -39,6 +40,11 @@ namespace PresentationLayer.Views.UserControls
             lbl_Type.DataBindings.Add(ModelBinding["Panel_Type"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_ChkText"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_Orient"]);
+        }
+
+        private void chk_Orientation_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ChkOrientationCheckChangedEventRaised, e);
         }
     }
 }
