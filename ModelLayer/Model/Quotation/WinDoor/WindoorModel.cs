@@ -125,7 +125,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         private float _wdZoom;
         [Required(ErrorMessage = "Zoom value is Required")]
-        //[Range(1, int.MaxValue, ErrorMessage = "Please enter a zoom value bigger than or equal to {1}")]
+        [Range(0.1, 200.0, ErrorMessage = "Please enter a zoom value bigger than or equal to {1}")]
         public float WD_zoom
         {
             get
@@ -134,15 +134,25 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
             set
             {
+                _wdZoom = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        public float WD_zoom_forImageRenderer
+        {
+            get
+            {
                 int area = _wdHeight * _wdWidth;
                 float zm = 0.0f;
                 if (area <= 360000)
                 {
-                    zm = 1.0f;
+                    zm = 1.00f;
                 }
                 else if (area > 360000 && area <= 1000000)
                 {
-                    zm = 0.5f;
+                    zm = 0.50f;
                 }
                 else if (area > 1000000 && area <= 4000000)
                 {
@@ -161,9 +171,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
                     zm = 0.10f;
                 }
                 _wdZoom = zm;
-                NotifyPropertyChanged();
+                return _wdZoom;
             }
-        }//multiply by 0.01 to decimal
+        }
+
 
         private string _wdDesc;
         public string WD_description

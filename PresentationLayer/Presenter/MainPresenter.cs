@@ -684,7 +684,7 @@ namespace PresentationLayer.Presenter
                                              int WD_quantity = 1,
                                              bool WD_visibility = true,
                                              bool WD_orientation = true,
-                                             int WD_zoom = 1,
+                                             float WD_zoom = 1.0f,
                                              int WD_price = 0,
                                              decimal WD_discount = 0.0M,
                                              List<IFrameModel> lst_frame = null)

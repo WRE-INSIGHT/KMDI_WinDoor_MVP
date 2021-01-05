@@ -27,8 +27,8 @@ namespace ServiceLayer.Services.WindoorServices
                                            int WD_quantity, 
                                            decimal WD_discount, 
                                            bool WD_visibility, 
-                                           bool WD_orientation, 
-                                           int WD_zoom,
+                                           bool WD_orientation,
+                                           float WD_zoom,
                                            string WD_Profile,
                                            List<IFrameModel> lst_frame)
         {
