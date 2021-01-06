@@ -9,17 +9,18 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using Unity;
+using CommonComponents;
 
 namespace PresentationLayer.Presenter.UserControls
 {
-    public class BasePlatformPresenter : IBasePlatformPresenter
+    public class BasePlatformPresenter : IBasePlatformPresenter, IPresenterCommon
     {
         IBasePlatformUC _basePlatfomrUC;
         FlowLayoutPanel _flpMain;
 
         IWindoorModel _windoorModel;
 
-        private bool will_render_img;
+        //private bool will_render_img;
 
         public BasePlatformPresenter(IBasePlatformUC basePlatformUC)
         {
@@ -33,24 +34,14 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatfomrUC.basePlatformPaintEventRaised += new PaintEventHandler(OnbasePlatformPaintEventRaised);
             _basePlatfomrUC.basePlatformSizeChangedEventRaised += new EventHandler(OnbasePlatformSizeChangedEventRaised);
             _basePlatfomrUC.flpFrameDragDropPaintEventRaised += new PaintEventHandler(OnflpFrameDragDropPaintEventRaised);
-            _basePlatfomrUC.basePlatformLoadEventRaised += new EventHandler(OnbasePlatformLoadEventRaised);
+            //_basePlatfomrUC.basePlatformLoadEventRaised += new EventHandler(OnbasePlatformLoadEventRaised);
         }
 
-        private void OnbasePlatformLoadEventRaised(object sender, EventArgs e)
-        {
-            //_basePlatfomrUC.ThisBinding(CreateBindingDictionary_basePlaform());
-        }
-
-        private Dictionary<string, Binding> CreateBindingDictionary_basePlaform()
-        {
-            Dictionary<string, Binding> basePlatformBinding = new Dictionary<string, Binding>();
-            basePlatformBinding.Add("WD_width_4basePlatform", new Binding("Width", _windoorModel, "WD_width_4basePlatform", true, DataSourceUpdateMode.OnPropertyChanged));
-            basePlatformBinding.Add("WD_height_4basePlatform", new Binding("Height", _windoorModel, "WD_height_4basePlatform", true, DataSourceUpdateMode.OnPropertyChanged));
-            basePlatformBinding.Add("WD_visibility", new Binding("Visible", _windoorModel, "WD_visibility", true, DataSourceUpdateMode.OnPropertyChanged));
-
-            return basePlatformBinding;
-        }
-
+        //private void OnbasePlatformLoadEventRaised(object sender, EventArgs e)
+        //{
+            
+        //}
+        
         private void OnflpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
         {
             Panel pnl = (Panel)sender;
@@ -70,31 +61,32 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnbasePlatformSizeChangedEventRaised(object sender, EventArgs e)
         {
-            if (will_render_img == false)
-            {
-                UserControl basePlatform = (UserControl)sender;
-                Panel pnlMain = (Panel)basePlatform.Parent;
-                int cX, cY;
-                cX = (pnlMain.Width - basePlatform.Width) / 2;
-                cY = (pnlMain.Height - basePlatform.Height) / 2;
+            UserControl basePlatform = (UserControl)sender;
+            Panel pnlMain = (Panel)basePlatform.Parent;
+            int cX, cY;
+            cX = (pnlMain.Width - basePlatform.Width) / 2;
+            cY = (pnlMain.Height - basePlatform.Height) / 2;
 
-                if (cX <= 30 && cY <= 30)
-                {
-                    basePlatform.Location = new Point(60, 60);
-                }
-                else if (cX <= 30)
-                {
-                    basePlatform.Location = new Point(60, cY);
-                }
-                else if (cY <= 30)
-                {
-                    basePlatform.Location = new Point(cX, 60);
-                }
-                else
-                {
-                    basePlatform.Location = new Point(cX - 17, cY - 35);
-                }
+            if (cX <= 30 && cY <= 30)
+            {
+                basePlatform.Location = new Point(60, 60);
             }
+            else if (cX <= 30)
+            {
+                basePlatform.Location = new Point(60, cY);
+            }
+            else if (cY <= 30)
+            {
+                basePlatform.Location = new Point(cX, 60);
+            }
+            else
+            {
+                basePlatform.Location = new Point(cX - 17, cY - 35);
+            }
+            //if (will_render_img == false)
+            //{
+                
+            //}
         }
 
         private void OnbasePlatformPaintEventRaised(object sender, PaintEventArgs e)
@@ -109,7 +101,7 @@ namespace PresentationLayer.Presenter.UserControls
             redP.Width = 3.5f;
             Font dmnsion_font = new Font("Segoe UI", 20, FontStyle.Bold);
 
-            string dmnsion_w = _flpMain.Width.ToString();
+            string dmnsion_w = _windoorModel.WD_width.ToString();
             Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
             Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
 
@@ -150,7 +142,7 @@ namespace PresentationLayer.Presenter.UserControls
 
 
             //arrow for HEIGHT
-            string dmnsion_h = _flpMain.Height.ToString();
+            string dmnsion_h = _windoorModel.WD_height.ToString();
             Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
             Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
 
@@ -187,26 +179,28 @@ namespace PresentationLayer.Presenter.UserControls
             }
             //arrow for HEIGHT
 
-            if (will_render_img)
-            {
-                Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
-                basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
+            //if (will_render_img)
+            //{
+            //    Bitmap bm = new Bitmap(_windoorModel.WD_width_4basePlatform_forImageRenderer,
+            //                           _windoorModel.WD_height_4basePlatform_forImageRenderer);
+            //    //Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
+            //    basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
 
-                _windoorModel.WD_image = bm;
-            }
+            //    _windoorModel.WD_image = bm;
+            //}
         }
         
         public IBasePlatformUC getBasePlatformViewUC()
         {
+            _basePlatfomrUC.ThisBinding(CreateBindingDictionary());
             return _basePlatfomrUC;
         }
 
-        public IBasePlatformUC getBasePlatformViewUC(bool willRenderImg)
-        {
-            _basePlatfomrUC.ThisBinding(CreateBindingDictionary_basePlaform());
-            will_render_img = willRenderImg;
-            return _basePlatfomrUC;
-        }
+        //public IBasePlatformUC getBasePlatformViewUC(bool willRenderImg)
+        //{
+        //    will_render_img = willRenderImg;
+        //    return _basePlatfomrUC;
+        //}
 
         public void AddFrame(IFrameUC frame)
         {
@@ -257,6 +251,16 @@ namespace PresentationLayer.Presenter.UserControls
             basePlatformUCP._basePlatfomrUC.ClearBinding((UserControl)_basePlatfomrUC);
 
             return basePlatformUCP;
+        }
+
+        public Dictionary<string, Binding> CreateBindingDictionary()
+        {
+            Dictionary<string, Binding> basePlatformBinding = new Dictionary<string, Binding>();
+            basePlatformBinding.Add("WD_width_4basePlatform", new Binding("Width", _windoorModel, "WD_width_4basePlatform", true, DataSourceUpdateMode.OnPropertyChanged));
+            basePlatformBinding.Add("WD_height_4basePlatform", new Binding("Height", _windoorModel, "WD_height_4basePlatform", true, DataSourceUpdateMode.OnPropertyChanged));
+            basePlatformBinding.Add("WD_visibility", new Binding("Visible", _windoorModel, "WD_visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            return basePlatformBinding;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public interface IBasePlatformUC
+    public interface IBasePlatformUC : IViewCommon
     {
         event PaintEventHandler basePlatformPaintEventRaised;
         event PaintEventHandler flpFrameDragDropPaintEventRaised;
@@ -16,11 +17,10 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler basePlatformLoadEventRaised;
         int bp_Width { get; }
         int bp_Height { get; }
-        //Point bp_Location { get; set; }
+        Color bp_bgColor { get; set; }
         bool thisVisibility { get; }
         void InvalidateThis();
         void PerformLayoutThis();
-        void ThisBinding(Dictionary<string, Binding> binding);
         void ClearBinding(Control ctrl);
         FlowLayoutPanel GetFlpMain();
     }

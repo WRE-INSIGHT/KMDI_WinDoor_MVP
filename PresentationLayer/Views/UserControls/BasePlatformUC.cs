@@ -42,6 +42,19 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public Color bp_bgColor
+        {
+            get
+            {
+                return this.BackColor;
+            }
+
+            set
+            {
+                this.BackColor = value;
+            }
+        }
+
         public event PaintEventHandler basePlatformPaintEventRaised;
         public event EventHandler basePlatformSizeChangedEventRaised;
         public event PaintEventHandler flpFrameDragDropPaintEventRaised;

@@ -49,7 +49,7 @@ namespace PresentationLayer.Presenter
 
         private IFrameUCPresenter _frameUCPresenter;
         private IBasePlatformPresenter _basePlatformPresenter;
-        private IBasePlatformPresenter _basePlatformPresenter_willRenderImg;
+        private IBasePlatformImagerUCPresenter _basePlatformImagerUCPresenter;
         private IfrmDimensionPresenter _frmDimensionPresenter;
         private IItemInfoUCPresenter _itemInfoUCPresenter;
         private IFramePropertiesUCPresenter _framePropertiesUCPresenter;
@@ -235,16 +235,16 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        public IBasePlatformPresenter basePlatformWillRenderImg_MainPresenter
+        public IBasePlatformImagerUCPresenter basePlatformWillRenderImg_MainPresenter
         {
             get
             {
-                return _basePlatformPresenter_willRenderImg;
+                return _basePlatformImagerUCPresenter;
             }
 
             set
             {
-                _basePlatformPresenter_willRenderImg = value;
+                _basePlatformImagerUCPresenter = value;
             }
         }
 
@@ -261,7 +261,8 @@ namespace PresentationLayer.Presenter
                              IFramePropertiesUCPresenter framePropertiesPresenter,
                              IFixedPanelUCPresenter fixedPanelUCPresenter,
                              IPanelServices panelServices,
-                             IControlsUCPresenter controlsUCP)
+                             IControlsUCPresenter controlsUCP,
+                             IBasePlatformImagerUCPresenter basePlatformImagerUCPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -275,6 +276,7 @@ namespace PresentationLayer.Presenter
             _fixedPanelUCPresenter = fixedPanelUCPresenter;
             _panelServices = panelServices;
             _controlsUCP = controlsUCP;
+            _basePlatformImagerUCPresenter = basePlatformImagerUCPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -546,17 +548,17 @@ namespace PresentationLayer.Presenter
                                                         frmDimension_profileType);
                         AddWndrList_QuotationModel(_windoorModel);
 
-                        _basePlatformPresenter_willRenderImg = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
-                        _mainView.GetThis().Controls.Add((UserControl)_basePlatformPresenter_willRenderImg.getBasePlatformViewUC(true));
-                        //UserControl bpUC = (UserControl)_basePlatformPresenter_willRenderImg.getBasePlatformViewUC();
-                        //bpUC.BringToFront();
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel);
+                        _mainView.GetThis().Controls.Add((UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC());
+                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                        bpUC.BringToFront();
 
                         _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
-                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC(false));
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
 
                         AddItemInfoUC(_windoorModel);
 
-                        _basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
+                        //_basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
                         _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
                                          _windoorModel.WD_name,
@@ -580,15 +582,15 @@ namespace PresentationLayer.Presenter
                                                         frmDimension_profileType);
                         AddWndrList_QuotationModel(_windoorModel);
 
-                        _basePlatformPresenter_willRenderImg = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
-                        _mainView.GetThis().Controls.Add((UserControl)_basePlatformPresenter_willRenderImg.getBasePlatformViewUC(true));
+                        //_basePlatformPresenter_willRenderImg = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
+                        //_mainView.GetThis().Controls.Add((UserControl)_basePlatformPresenter_willRenderImg.getBasePlatformViewUC(true));
 
                         _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
-                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC(false));
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
 
                         AddItemInfoUC(_windoorModel); //add item information user control
 
-                        _basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
+                        //_basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
                         _basePlatformPresenter.InvalidateBasePlatform();
                         //_basePlatformPresenter.Invalidate_flpMain();
                         SetMainViewTitle(input_qrefno,
@@ -619,7 +621,7 @@ namespace PresentationLayer.Presenter
                         AddFrameUC(_frameModel);
                         AddFramePropertiesUC(_frameModel);
 
-                        _basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
+                        //_basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
                         _basePlatformPresenter.InvalidateBasePlatform();
                         //_basePlatformPresenter.Invalidate_flpMain();
                         SetMainViewTitle(input_qrefno,
@@ -645,8 +647,8 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_height = frmDimension_numHt;
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
-                _basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
-                //_basePlatformPresenter.Invalidate_flpMain();
+                //_basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
+                //_basePlatformPresenter_willRenderImg.Invalidate_flpMain();
             }
         }
         #endregion
@@ -742,7 +744,7 @@ namespace PresentationLayer.Presenter
             _basePlatformPresenter.AddFrame(_frameUC);
 
             IFrameUCPresenter frameUCP2 = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, frameModel, this);
-            _basePlatformPresenter_willRenderImg.AddFrame(frameUCP2.GetFrameUC());
+            //_basePlatformPresenter_willRenderImg.AddFrame(frameUCP2.GetFrameUC());
         }
 
         public void AddFramePropertiesUC(IFrameModel frameModel)

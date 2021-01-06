@@ -70,10 +70,12 @@
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
+    <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IBasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\IControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFramePropertiesUCPresenter.cs" />
@@ -120,6 +122,12 @@
     <Compile Include="Views\promptYesNo.Designer.cs">
       <DependentUpon>promptYesNo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\BasePlatformImagerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\BasePlatformImagerUC.Designer.cs">
+      <DependentUpon>BasePlatformImagerUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\BasePlatformUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -144,6 +152,7 @@
     <Compile Include="Views\UserControls\FrameUC.Designer.cs">
       <DependentUpon>FrameUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\IBasePlatformImagerUC.cs" />
     <Compile Include="Views\UserControls\IBasePlatformUC.cs" />
     <Compile Include="Views\UserControls\IControlsUC.cs" />
     <Compile Include="Views\UserControls\IFramePropertiesUC.cs" />
@@ -235,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\promptYesNo.resx">
       <DependentUpon>promptYesNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\BasePlatformImagerUC.resx">
+      <DependentUpon>BasePlatformImagerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\BasePlatformUC.resx">
       <DependentUpon>BasePlatformUC.cs</DependentUpon>
