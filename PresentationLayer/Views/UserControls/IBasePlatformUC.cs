@@ -14,7 +14,7 @@ namespace PresentationLayer.Views.UserControls
         event PaintEventHandler basePlatformPaintEventRaised;
         event PaintEventHandler flpFrameDragDropPaintEventRaised;
         event EventHandler basePlatformSizeChangedEventRaised;
-        event EventHandler basePlatformLoadEventRaised;
+        //event EventHandler basePlatformLoadEventRaised;
         int bp_Width { get; }
         int bp_Height { get; }
         Color bp_bgColor { get; set; }

@@ -20,8 +20,6 @@ namespace PresentationLayer.Presenter.UserControls
 
         IWindoorModel _windoorModel;
 
-        //private bool will_render_img;
-
         public BasePlatformPresenter(IBasePlatformUC basePlatformUC)
         {
             _basePlatfomrUC = basePlatformUC;
@@ -34,13 +32,7 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatfomrUC.basePlatformPaintEventRaised += new PaintEventHandler(OnbasePlatformPaintEventRaised);
             _basePlatfomrUC.basePlatformSizeChangedEventRaised += new EventHandler(OnbasePlatformSizeChangedEventRaised);
             _basePlatfomrUC.flpFrameDragDropPaintEventRaised += new PaintEventHandler(OnflpFrameDragDropPaintEventRaised);
-            //_basePlatfomrUC.basePlatformLoadEventRaised += new EventHandler(OnbasePlatformLoadEventRaised);
         }
-
-        //private void OnbasePlatformLoadEventRaised(object sender, EventArgs e)
-        //{
-            
-        //}
         
         private void OnflpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
         {
@@ -83,10 +75,6 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 basePlatform.Location = new Point(cX - 17, cY - 35);
             }
-            //if (will_render_img == false)
-            //{
-                
-            //}
         }
 
         private void OnbasePlatformPaintEventRaised(object sender, PaintEventArgs e)
@@ -178,16 +166,7 @@ namespace PresentationLayer.Presenter.UserControls
                                       TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
             }
             //arrow for HEIGHT
-
-            //if (will_render_img)
-            //{
-            //    Bitmap bm = new Bitmap(_windoorModel.WD_width_4basePlatform_forImageRenderer,
-            //                           _windoorModel.WD_height_4basePlatform_forImageRenderer);
-            //    //Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
-            //    basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
-
-            //    _windoorModel.WD_image = bm;
-            //}
+            
         }
         
         public IBasePlatformUC getBasePlatformViewUC()
@@ -195,13 +174,7 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatfomrUC.ThisBinding(CreateBindingDictionary());
             return _basePlatfomrUC;
         }
-
-        //public IBasePlatformUC getBasePlatformViewUC(bool willRenderImg)
-        //{
-        //    will_render_img = willRenderImg;
-        //    return _basePlatfomrUC;
-        //}
-
+        
         public void AddFrame(IFrameUC frame)
         {
             _flpMain.Controls.Add((UserControl)frame);

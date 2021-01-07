@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public interface IFrameUC
+    public interface IFrameUC: IViewCommon
     {
         bool thisVisible { get; }
         int frameID { get; set; }
@@ -25,7 +26,6 @@ namespace PresentationLayer.Views.UserControls
         void InvalidateThisParent();
         void InvalidateThisParentsParent();
         void InvalidatePanelInner();
-        void ThisBinding(Dictionary<string, Binding> binding);
         ContextMenuStrip GetFrameCmenu();
         Panel GetInnerPanel();
     }

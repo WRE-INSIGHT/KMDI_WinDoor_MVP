@@ -65,6 +65,9 @@ namespace PresentationLayer
                 .RegisterType<IFrameUC, FrameUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFrameUCPresenter, FrameUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IFrameImagerUC, FrameImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFrameImagerUCPresenter, FrameImagerUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IItemInfoUC, ItemInfoUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IItemInfoUCPresenter, ItemInfoUCPresenter>(new ContainerControlledLifetimeManager())
 

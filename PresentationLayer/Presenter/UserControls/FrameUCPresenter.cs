@@ -10,10 +10,11 @@ using Unity;
 using System.Collections.Generic;
 using ModelLayer.Model.Quotation.Panel;
 using ServiceLayer.Services.PanelServices;
+using CommonComponents;
 
 namespace PresentationLayer.Presenter.UserControls
 {
-    public class FrameUCPresenter : IFrameUCPresenter
+    public class FrameUCPresenter : IFrameUCPresenter, IPresenterCommon
     {
         IFrameUC _frameUC;
         private IUnityContainer _unityC;
@@ -43,7 +44,7 @@ namespace PresentationLayer.Presenter.UserControls
                                 ISlidingPanelUCPresenter slidingUCP)
         {
             _frameUC = frameUC;
-            _basePlatformPresenter = basePlatformPresenter;
+            _basePlatformPresenter = basePlatformPresenter; //alisin to kung tapos na sa FrameImagerUCP
             _frameCmenu = _frameUC.GetFrameCmenu();
             _fixedUCP = fixedUCP;
             _panelServices = panelServices;
@@ -206,7 +207,7 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.InvalidateThis();
         }
 
-        private Dictionary<string, Binding> CreateBindingDictionary()
+        public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> frameBinding = new Dictionary<string, Binding>();
             frameBinding.Add("Frame_Visible", new Binding("Visible", _frameModel, "Frame_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -282,7 +283,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         public IFrameUCPresenter GetFrameUCPresenter()
         {
-            return this;
+            return this; //remove this after FrameImagerUC
         }
 
         public void DeleteFrame()

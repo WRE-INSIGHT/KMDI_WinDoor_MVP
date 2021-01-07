@@ -76,6 +76,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdWidthforBasePlatformImageRenderer = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -124,6 +125,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdHeightforBasePlatformImageRenderer = value;
+                NotifyPropertyChanged();
             }
         }
 

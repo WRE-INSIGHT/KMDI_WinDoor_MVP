@@ -8,10 +8,7 @@ namespace PresentationLayer.Presenter.UserControls
 {
     public interface IBasePlatformPresenter
     {
-        //IBasePlatformUC getBasePlatformViewUC(bool willRenderImg);
         IBasePlatformUC getBasePlatformViewUC();
-        //void SetBasePlatformSize(int wd, int ht);
-        //void SetWindoorModel(IWindoorModel windoorModel);
         void AddFrame(IFrameUC frame);
         void InvalidateBasePlatform();
         void PerformLayoutBasePlatform();

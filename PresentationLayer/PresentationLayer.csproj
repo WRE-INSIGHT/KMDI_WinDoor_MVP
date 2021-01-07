@@ -73,11 +73,13 @@
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FrameImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\IControlsUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IFrameImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IItemInfoUCPresenter.cs" />
@@ -140,6 +142,12 @@
     <Compile Include="Views\UserControls\ControlsUC.Designer.cs">
       <DependentUpon>ControlsUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\FrameImagerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameImagerUC.Designer.cs">
+      <DependentUpon>FrameImagerUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\FramePropertiesUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +163,7 @@
     <Compile Include="Views\UserControls\IBasePlatformImagerUC.cs" />
     <Compile Include="Views\UserControls\IBasePlatformUC.cs" />
     <Compile Include="Views\UserControls\IControlsUC.cs" />
+    <Compile Include="Views\UserControls\IFrameImagerUC.cs" />
     <Compile Include="Views\UserControls\IFramePropertiesUC.cs" />
     <Compile Include="Views\UserControls\IFrameUC.cs" />
     <Compile Include="Views\UserControls\IItemInfoUC.cs" />
@@ -253,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ControlsUC.resx">
       <DependentUpon>ControlsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\FrameImagerUC.resx">
+      <DependentUpon>FrameImagerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FramePropertiesUC.resx">
       <DependentUpon>FramePropertiesUC.cs</DependentUpon>

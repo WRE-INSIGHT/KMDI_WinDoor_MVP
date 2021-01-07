@@ -9,5 +9,6 @@ namespace PresentationLayer.Presenter.UserControls
         IBasePlatformImagerUC GetBasePlatformImagerUC();
         IBasePlatformImagerUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel);
         void InvalidateBasePlatform();
+        void AddFrame(IFrameImagerUC frameImagerUC);
     }
 }

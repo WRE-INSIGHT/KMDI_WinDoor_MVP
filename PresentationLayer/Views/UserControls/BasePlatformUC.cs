@@ -58,7 +58,6 @@ namespace PresentationLayer.Views.UserControls
         public event PaintEventHandler basePlatformPaintEventRaised;
         public event EventHandler basePlatformSizeChangedEventRaised;
         public event PaintEventHandler flpFrameDragDropPaintEventRaised;
-        public event EventHandler basePlatformLoadEventRaised;
 
         public FlowLayoutPanel GetFlpMain()
         {
@@ -88,11 +87,6 @@ namespace PresentationLayer.Views.UserControls
         private void flp_frameDragDrop_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(sender, flpFrameDragDropPaintEventRaised, e);
-        }
-
-        private void BasePlatformUC_Load(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(this, basePlatformLoadEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> binding)

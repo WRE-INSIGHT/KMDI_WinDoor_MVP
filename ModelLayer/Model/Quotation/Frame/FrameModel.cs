@@ -44,7 +44,12 @@ namespace ModelLayer.Model.Quotation.Frame
         public int Frame_Width
         {
             get { return _frameWidth; }
-            set { _frameWidth = value; NotifyPropertyChanged(); }
+            set
+            {
+                _frameWidth = value;
+                FrameImageRenderer_Width = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private int _frameHeight;
@@ -53,7 +58,12 @@ namespace ModelLayer.Model.Quotation.Frame
         public int Frame_Height
         {
             get { return _frameHeight; }
-            set { _frameHeight = value; NotifyPropertyChanged(); }
+            set
+            {
+                _frameHeight = value;
+                FrameImageRenderer_Height = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private Frame_Padding _frameType;
@@ -95,6 +105,53 @@ namespace ModelLayer.Model.Quotation.Frame
         }
 
         public List<IPanelModel> Lst_Panel { get; set; }
+
+        private int _frameImage_Height;
+        public int FrameImageRenderer_Height
+        {
+            get
+            {
+                return _frameImage_Height;
+            }
+
+            set
+            {
+                _frameImage_Height = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _frameImage_Width;
+        public int FrameImageRenderer_Width
+        {
+            get
+            {
+                return _frameImage_Width;
+            }
+
+            set
+            {
+                _frameImage_Width = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private float _frameImage_Zoom;
+        public float FrameImageRenderer_Zoom
+        {
+            get
+            {
+                return _frameImage_Zoom;
+            }
+
+            set
+            {
+                _frameImage_Zoom = value;
+                FrameImageRenderer_Width = Convert.ToInt32(Frame_Width * value);
+                FrameImageRenderer_Height = Convert.ToInt32(Frame_Height * value);
+                NotifyPropertyChanged();
+            }
+        }
 
         public FrameModel(int frameID,
                           string frameName,

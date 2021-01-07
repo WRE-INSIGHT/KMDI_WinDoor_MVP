@@ -50,7 +50,6 @@
             this.Name = "BasePlatformUC";
             this.Padding = new System.Windows.Forms.Padding(70, 35, 0, 0);
             this.Size = new System.Drawing.Size(370, 335);
-            this.Load += new System.EventHandler(this.BasePlatformUC_Load);
             this.SizeChanged += new System.EventHandler(this.BasePlatformUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.BasePlatformUC_Paint);
             this.ResumeLayout(false);
