@@ -20,8 +20,8 @@ namespace ServiceLayer.Tests
         [TestMethod]
         public void CreateFrame_Test()
         {
-            IFrameModel expected_fr = new FrameModel(1, "Frame_1", 400, 400, FrameModel.Frame_Padding.Window, true, new List<ModelLayer.Model.Quotation.Panel.IPanelModel>());
-            IFrameModel fr = _frameServices.CreateFrame(1, "Frame_1", 400, 400, FrameModel.Frame_Padding.Window, true, new List<ModelLayer.Model.Quotation.Panel.IPanelModel>());
+            IFrameModel expected_fr = new FrameModel(1, "Frame_1", 400, 400, FrameModel.Frame_Padding.Window, true, new List<ModelLayer.Model.Quotation.Panel.IPanelModel>(), 1.0f);
+            IFrameModel fr = _frameServices.CreateFrame(1, "Frame_1", 400, 400, FrameModel.Frame_Padding.Window, true, new List<ModelLayer.Model.Quotation.Panel.IPanelModel>(), 1.0f);
 
             Assert.AreEqual(expected_fr.Frame_ID, fr.Frame_ID);
             Assert.AreEqual(expected_fr.Frame_Name, fr.Frame_Name);
@@ -35,7 +35,7 @@ namespace ServiceLayer.Tests
         {
             try
             {
-                IFrameModel wndr = _frameServices.CreateFrame(0, "Frame_1", 400, 400, FrameModel.Frame_Padding.Window, true, new List<ModelLayer.Model.Quotation.Panel.IPanelModel>());
+                IFrameModel wndr = _frameServices.CreateFrame(0, "Frame_1", 400, 400, FrameModel.Frame_Padding.Window, true, new List<ModelLayer.Model.Quotation.Panel.IPanelModel>(), 1.0f);
             }
             catch (Exception ex)
             {
@@ -49,7 +49,7 @@ namespace ServiceLayer.Tests
         {
             try
             {
-                IFrameModel wndr = _frameServices.CreateFrame(1, "Frame_1", 399, 400, FrameModel.Frame_Padding.Window, true, new List<ModelLayer.Model.Quotation.Panel.IPanelModel>());
+                IFrameModel wndr = _frameServices.CreateFrame(1, "Frame_1", 399, 400, FrameModel.Frame_Padding.Window, true, new List<ModelLayer.Model.Quotation.Panel.IPanelModel>(), 1.0f);
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace ServiceLayer.Tests
         {
             try
             {
-                IFrameModel wndr = _frameServices.CreateFrame(1, "Frame_1", 400, 399, FrameModel.Frame_Padding.Window, true, new List<ModelLayer.Model.Quotation.Panel.IPanelModel>());
+                IFrameModel wndr = _frameServices.CreateFrame(1, "Frame_1", 400, 399, FrameModel.Frame_Padding.Window, true, new List<ModelLayer.Model.Quotation.Panel.IPanelModel>(), 1.0f);
             }
             catch (Exception ex)
             {

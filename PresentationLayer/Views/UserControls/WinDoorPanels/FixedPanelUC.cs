@@ -18,6 +18,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             InitializeComponent();
         }
 
+        private int _panelID;
+        public int Panel_ID
+        {
+            get
+            {
+                return _panelID;
+            }
+            set
+            {
+                _panelID = value;
+            }
+        }
+
         public event EventHandler fixedPanelUCSizeChangedEventRaised;
         public event EventHandler deleteToolStripClickedEventRaised;
 
@@ -38,6 +51,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         public void ThisBinding(Dictionary<string, Binding> binding)
         {
+            this.DataBindings.Add(binding["Panel_ID"]);
             this.DataBindings.Add(binding["Panel_Dock"]);
             this.DataBindings.Add(binding["Panel_Width"]);
             this.DataBindings.Add(binding["Panel_Height"]);

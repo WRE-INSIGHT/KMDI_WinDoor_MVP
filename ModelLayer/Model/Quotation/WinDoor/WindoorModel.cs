@@ -6,6 +6,7 @@ using ModelLayer.Model.Quotation.Frame;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Drawing;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -182,8 +183,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdZoomforImageRenderer = value;
-                WD_width_4basePlatform_forImageRenderer = Convert.ToInt32(WD_width_4basePlatform * value);
-                WD_height_4basePlatform_forImageRenderer = Convert.ToInt32(WD_height_4basePlatform * value);
+                WD_width_4basePlatform_forImageRenderer = Convert.ToInt32((WD_width_4basePlatform - 70) * value + 70);
+                WD_height_4basePlatform_forImageRenderer = Convert.ToInt32((WD_height_4basePlatform - 35) * value + 35);
+                SetFrameZoom();
                 NotifyPropertyChanged();
             }
         }
@@ -349,6 +351,22 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
 
             return zm;
+        }
+
+        public void SetFrameZoom()
+        {
+            if (lst_frame != null)
+            {
+                foreach (IFrameModel fr in lst_frame)
+                {
+                    fr.FrameImageRenderer_Zoom = WD_zoom_forImageRenderer;
+
+                    foreach (IPanelModel pnl in fr.Lst_Panel)
+                    {
+                        pnl.PanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                    }
+                }
+            }
         }
     }
 }

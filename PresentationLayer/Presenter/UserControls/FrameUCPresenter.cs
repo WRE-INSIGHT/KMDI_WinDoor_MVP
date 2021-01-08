@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using ModelLayer.Model.Quotation.Panel;
 using ServiceLayer.Services.PanelServices;
 using CommonComponents;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
+using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -22,12 +24,13 @@ namespace PresentationLayer.Presenter.UserControls
         private IFrameModel _frameModel;
         private IPanelModel _panelModel;
 
-        private IBasePlatformPresenter _basePlatformPresenter;
         private IMainPresenter _mainPresenter;
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IFixedPanelUCPresenter _fixedUCP;
+        private IFixedPanelImagerUCPresenter _fixedImagerUCP;
         private ICasementPanelUCPresenter _casementUCP;
         private IAwningPanelUCPresenter _awningUCP;
+        private IAwningPanelImagerUCPresenter _awningImagerUCP;
         private ISlidingPanelUCPresenter _slidingUCP;
 
         private IPanelServices _panelServices;
@@ -35,22 +38,24 @@ namespace PresentationLayer.Presenter.UserControls
         private ContextMenuStrip _frameCmenu;
 
         public FrameUCPresenter(IFrameUC frameUC,
-                                IBasePlatformPresenter basePlatformPresenter,
                                 IFixedPanelUCPresenter fixedUCP,
+                                IFixedPanelImagerUCPresenter fixedImagerUCP,
                                 IPanelServices panelServices,
                                 IPanelPropertiesUCPresenter panelPropertiesUCP,
                                 ICasementPanelUCPresenter casementUCP,
                                 IAwningPanelUCPresenter awningUCP,
+                                IAwningPanelImagerUCPresenter awningImagerUCP,
                                 ISlidingPanelUCPresenter slidingUCP)
         {
             _frameUC = frameUC;
-            _basePlatformPresenter = basePlatformPresenter; //alisin to kung tapos na sa FrameImagerUCP
             _frameCmenu = _frameUC.GetFrameCmenu();
             _fixedUCP = fixedUCP;
+            _fixedImagerUCP = fixedImagerUCP;
             _panelServices = panelServices;
             _panelPropertiesUCP = panelPropertiesUCP;
             _casementUCP = casementUCP;
             _awningUCP = awningUCP;
+            _awningImagerUCP = awningImagerUCP;
             _slidingUCP = slidingUCP;
             SubscribeToEventsSetup();
         }
@@ -90,7 +95,7 @@ namespace PresentationLayer.Presenter.UserControls
             framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
             _frameModel.FrameProp_Height += 148;
 
-            Panel pnl_inner_willRenderImg = _mainPresenter.GetFrameInnerPanel(_frameModel.Frame_ID);
+            Panel pnl_inner_willRenderImg = _mainPresenter.GetFrameImagerInnerPanel(_frameModel.Frame_ID);
 
             if (pnl.Name == "pnl_inner")
             {
@@ -100,9 +105,9 @@ namespace PresentationLayer.Presenter.UserControls
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     pnl.Controls.Add((UserControl)fixedUC);
 
-                    IFixedPanelUCPresenter fixedUCP2 = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                    IFixedPanelUC fixedUC2 = fixedUCP2.GetFixedPanelUC();
-                    pnl_inner_willRenderImg.Controls.Add((UserControl)fixedUC2);
+                    IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
+                    IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
+                    pnl_inner_willRenderImg.Controls.Add((UserControl)fixedImagerUC);
                 }
                 else if (data == "Casement Panel")
                 {
@@ -121,9 +126,9 @@ namespace PresentationLayer.Presenter.UserControls
                     IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
                     pnl.Controls.Add((UserControl)awningUC);
 
-                    IAwningPanelUCPresenter awningUCP2 = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                    IAwningPanelUC awningUC2 = awningUCP2.GetAwningPanelUC();
-                    pnl_inner_willRenderImg.Controls.Add((UserControl)awningUC2);
+                    IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel);
+                    IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
+                    pnl_inner_willRenderImg.Controls.Add((UserControl)awningImagerUC);
                 }
                 else if (data == "Sliding Panel")
                 {
@@ -277,15 +282,9 @@ namespace PresentationLayer.Presenter.UserControls
             framePresenter._mainPresenter = mainPresenter;
             framePresenter._unityC = unityC;
             
-
             return framePresenter;
         }
-
-        public IFrameUCPresenter GetFrameUCPresenter()
-        {
-            return this; //remove this after FrameImagerUC
-        }
-
+        
         public void DeleteFrame()
         {
             _frameModel.Frame_Visible = false;

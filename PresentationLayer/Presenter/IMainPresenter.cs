@@ -52,12 +52,13 @@ namespace PresentationLayer.Presenter
         IFrameModel AddFrameModel(int frame_width,
                                   int frame_height,
                                   FrameModel.Frame_Padding frame_type,
+                                  float frameImager_Zoom,
                                   int frame_id = 0,
                                   string frame_name = "",
                                   bool frame_visible = true,
                                   List<IPanelModel> lst_Panel = null);
         IFramePropertiesUC GetFrameProperties(int frameID);
-        Panel GetFrameInnerPanel(int frameID);
+        Panel GetFrameImagerInnerPanel(int frameID);
         int GetPanelCount();
         void AddItemInfoUC(IWindoorModel wndr);
         void AddFrameUC(IFrameModel frameModel);

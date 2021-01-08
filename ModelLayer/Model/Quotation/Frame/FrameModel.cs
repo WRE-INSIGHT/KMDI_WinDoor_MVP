@@ -47,7 +47,7 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameWidth = value;
-                FrameImageRenderer_Width = value;
+                FrameImageRenderer_Width = Convert.ToInt32(value * FrameImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -61,7 +61,7 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameHeight = value;
-                FrameImageRenderer_Height = value;
+                FrameImageRenderer_Height = Convert.ToInt32(value * FrameImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -159,7 +159,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           int frameHt,
                           Frame_Padding frameType,
                           bool frameVisible,
-                          List<IPanelModel> lst_panel)
+                          List<IPanelModel> lst_panel,
+                          float frameImagerZoom)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -169,6 +170,8 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Visible = frameVisible;
             FrameProp_Height = 183;
             Lst_Panel = lst_panel;
+            FrameImageRenderer_Zoom = frameImagerZoom;
+
             if (frameType == Frame_Padding.Window)
             {
                 Frame_Padding_int = new Padding(26);

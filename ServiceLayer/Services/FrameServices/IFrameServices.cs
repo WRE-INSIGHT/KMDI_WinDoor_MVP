@@ -12,7 +12,8 @@ namespace ServiceLayer.Services.FrameServices
                                 int frame_height, 
                                 FrameModel.Frame_Padding frame_type,
                                 bool frame_visible,
-                                List<IPanelModel> lst_panel);
+                                List<IPanelModel> lst_panel,
+                                float frameImager_Zoom);
         void ValidateModel(IFrameModel frameModel);
     }
 }

@@ -25,7 +25,8 @@ namespace ServiceLayer.Services.FrameServices
                                        int frame_height, 
                                        FrameModel.Frame_Padding frame_type,
                                        bool frame_visible,
-                                       List<IPanelModel> lst_panel)
+                                       List<IPanelModel> lst_panel,
+                                       float frameImager_Zoom)
         {
             IFrameModel fr = new FrameModel(frame_id,
                                            frame_name,
@@ -33,7 +34,8 @@ namespace ServiceLayer.Services.FrameServices
                                            frame_height,
                                            frame_type,
                                            frame_visible,
-                                           lst_panel);
+                                           lst_panel,
+                                           frameImager_Zoom);
             ValidateModel(fr);
 
             return fr;

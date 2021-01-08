@@ -7,6 +7,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
     public interface IFixedPanelUC: IViewCommon
     {
+        int Panel_ID { get; set; }
         event EventHandler fixedPanelUCSizeChangedEventRaised;
         event EventHandler deleteToolStripClickedEventRaised;
     }

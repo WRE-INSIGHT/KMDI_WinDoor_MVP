@@ -70,6 +70,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelWidth = value;
+                PanelImageRenderer_Width = Convert.ToInt32(value * PanelImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -84,6 +85,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelHeight = value;
+                PanelImageRenderer_Height = Convert.ToInt32(value * PanelImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -258,6 +260,53 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelPNumEnable = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private float _panelImage_Zoom;
+        public float PanelImageRenderer_Zoom
+        {
+            get
+            {
+                return _panelImage_Zoom;
+            }
+
+            set
+            {
+                _panelImage_Zoom = value;
+                PanelImageRenderer_Width = Convert.ToInt32(Panel_Width * value);
+                PanelImageRenderer_Height = Convert.ToInt32(Panel_Height * value);
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelImage_Height;
+        public int PanelImageRenderer_Height
+        {
+            get
+            {
+                return _panelImage_Height;
+            }
+
+            set
+            {
+                _panelImage_Height = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelImage_Width;
+        public int PanelImageRenderer_Width
+        {
+            get
+            {
+                return _panelImage_Width;
+            }
+
+            set
+            {
+                _panelImage_Width = value;
                 NotifyPropertyChanged();
             }
         }

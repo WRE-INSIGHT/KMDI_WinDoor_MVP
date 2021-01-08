@@ -28,5 +28,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
         IEnumerable<IFrameModel> GetAllVisibleFrames();
         int GetPanelCount();
         float GetZoom_forRendering();
+        void SetFrameZoom();
     }
 }

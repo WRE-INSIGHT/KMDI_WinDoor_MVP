@@ -101,7 +101,7 @@ namespace PresentationLayer.Tests
         public void CasementUITest()
         {
             frmUITest frm = new frmUITest();
-            IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, new System.Collections.Generic.List<IPanelModel>());
+            IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, new System.Collections.Generic.List<IPanelModel>(), 1.0f);
 
             ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
             ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
@@ -113,7 +113,7 @@ namespace PresentationLayer.Tests
         public void AwningUITest()
         {
             frmUITest frm = new frmUITest();
-            IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, new System.Collections.Generic.List<IPanelModel>());
+            IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, new System.Collections.Generic.List<IPanelModel>(), 1.0f);
 
             IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
             IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
@@ -125,7 +125,7 @@ namespace PresentationLayer.Tests
         public void SlidingUITest()
         {
             frmUITest frm = new frmUITest();
-            IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, new System.Collections.Generic.List<IPanelModel>());
+            IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, new System.Collections.Generic.List<IPanelModel>(), 1.0f);
 
             ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
             ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();

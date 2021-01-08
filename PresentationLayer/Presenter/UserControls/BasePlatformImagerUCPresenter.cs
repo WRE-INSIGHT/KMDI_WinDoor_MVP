@@ -189,5 +189,10 @@ namespace PresentationLayer.Presenter.UserControls
             FlowLayoutPanel _flpMain = _basePlatformImagerUC.GetFlpMain();
             _flpMain.Controls.Add((UserControl)frameImagerUC);
         }
+
+        public void Invalidate_flpMain()
+        {
+            _basePlatformImagerUC.GetFlpMain().Invalidate();
+        }
     }
 }

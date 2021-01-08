@@ -618,12 +618,13 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
-                        _frameModel = AddFrameModel(frmDimension_numWd, frmDimension_numHt, frameType);
+                        _frameModel = AddFrameModel(frmDimension_numWd, frmDimension_numHt, frameType, _windoorModel.WD_zoom_forImageRenderer);
                         AddFrameList_WindoorModel(_frameModel);
                         AddFrameUC(_frameModel);
                         AddFramePropertiesUC(_frameModel);
 
                         _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                        //_basePlatformImagerUCPresenter.Invalidate_flpMain();
                         _basePlatformPresenter.InvalidateBasePlatform();
                         //_basePlatformPresenter.Invalidate_flpMain();
                         SetMainViewTitle(input_qrefno,
@@ -759,6 +760,7 @@ namespace PresentationLayer.Presenter
         public IFrameModel AddFrameModel(int frame_width,
                                          int frame_height,
                                          FrameModel.Frame_Padding frame_type,
+                                         float frameImager_Zoom,
                                          int frame_id = 0,
                                          string frame_name = "",
                                          bool frame_visible = true,
@@ -782,7 +784,8 @@ namespace PresentationLayer.Presenter
                                                      frame_height,
                                                      frame_type,
                                                      frame_visible,
-                                                     lst_Panel);
+                                                     lst_Panel,
+                                                     frameImager_Zoom);
 
             return _frameModel;
         }
@@ -807,12 +810,12 @@ namespace PresentationLayer.Presenter
             return _windoorModel.GetPanelCount();
         }
 
-        public Panel GetFrameInnerPanel(int frameID)
+        public Panel GetFrameImagerInnerPanel(int frameID)
         {
-            IBasePlatformUC basePLUC = _mainView.GetThis().Controls.OfType<IBasePlatformUC>().First();
-            return basePLUC.GetFlpMain().Controls.OfType<IFrameUC>().First(fr => fr.frameID == frameID).GetInnerPanel();
+            IBasePlatformImagerUC basePLImagerUC = _mainView.GetThis().Controls.OfType<IBasePlatformImagerUC>().First();
+            return basePLImagerUC.GetFlpMain().Controls.OfType<IFrameImagerUC>().First(fr => fr.frameID == frameID).GetInnerPanel();
         }
-
+        
         #endregion
 
     }

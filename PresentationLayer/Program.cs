@@ -23,6 +23,8 @@ using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
 using Unity.Injection;
+using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 
 namespace PresentationLayer
 {
@@ -95,8 +97,14 @@ namespace PresentationLayer
                 .RegisterType<IFixedPanelUC, FixedPanelUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IFixedPanelImagerUC, FixedPanelImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFixedPanelImagerUCPresenter, FixedPanelImagerUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IAwningPanelUC, AwningPanelUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IAwningPanelUCPresenter, AwningPanelUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IAwningPanelImagerUC, AwningPanelImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IAwningPanelImagerUCPresenter, AwningPanelImagerUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<ICasementPanelUC, CasementPanelUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICasementPanelUCPresenter, CasementPanelUCPresenter>(new ContainerControlledLifetimeManager())
