@@ -203,6 +203,26 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MultiplePanelMullion {
+            get {
+                object obj = ResourceManager.GetObject("MultiplePanelMullion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MultiplePanelTransom {
+            get {
+                object obj = ResourceManager.GetObject("MultiplePanelTransom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap refresh_30px {
             get {
                 object obj = ResourceManager.GetObject("refresh_30px", resourceCulture);

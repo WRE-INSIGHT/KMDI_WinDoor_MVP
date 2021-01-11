@@ -93,9 +93,13 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\ICasementPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IFixedPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\AwningPanelImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\CasementPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\FixedPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\IAwningPanelImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\ICasementPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\IFixedPanelImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\ISlidingPanelImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\ISlidingPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\SlidingPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
@@ -202,6 +206,12 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\AwningPanelImagerUC.Designer.cs">
       <DependentUpon>AwningPanelImagerUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\CasementPanelImagerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\CasementPanelImagerUC.Designer.cs">
+      <DependentUpon>CasementPanelImagerUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\FixedPanelImagerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -217,9 +227,23 @@
     <Compile Include="Views\UserControls\WinDoorPanels\IAwningPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\ICasementPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IAwningPanelImagerUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\ICasementPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IFixedPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\IFixedPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\ISlidingPanelImagerUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUC.Designer.cs">
+      <DependentUpon>SlidingPanelImagerUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\ISlidingPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\MultiPanelMullionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\MultiPanelMullionUC.Designer.cs">
+      <DependentUpon>MultiPanelMullionUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\SlidingPanelUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -243,6 +267,18 @@
     </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_FixedPanelUC.Designer.cs">
       <DependentUpon>Thumbs_FixedPanelUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MultiPanelMullionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MultiPanelMullionUC.Designer.cs">
+      <DependentUpon>Thumbs_MultiPanelMullionUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MultiPanelTransomUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MultiPanelTransomUC.Designer.cs">
+      <DependentUpon>Thumbs_MultiPanelTransomUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_SlidingPanelUC.cs">
       <SubType>UserControl</SubType>
@@ -305,11 +341,20 @@
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Imagers\AwningPanelImagerUC.resx">
       <DependentUpon>AwningPanelImagerUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Imagers\CasementPanelImagerUC.resx">
+      <DependentUpon>CasementPanelImagerUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Imagers\FixedPanelImagerUC.resx">
       <DependentUpon>FixedPanelImagerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\FixedPanelUC.resx">
       <DependentUpon>FixedPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUC.resx">
+      <DependentUpon>SlidingPanelImagerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\MultiPanelMullionUC.resx">
+      <DependentUpon>MultiPanelMullionUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\SlidingPanelUC.resx">
       <DependentUpon>SlidingPanelUC.cs</DependentUpon>
@@ -322,6 +367,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_FixedPanelUC.resx">
       <DependentUpon>Thumbs_FixedPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MultiPanelMullionUC.resx">
+      <DependentUpon>Thumbs_MultiPanelMullionUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MultiPanelTransomUC.resx">
+      <DependentUpon>Thumbs_MultiPanelTransomUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_SlidingPanelUC.resx">
       <DependentUpon>Thumbs_SlidingPanelUC.cs</DependentUpon>

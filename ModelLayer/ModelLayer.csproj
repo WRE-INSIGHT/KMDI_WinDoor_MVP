@@ -46,6 +46,8 @@
     <Compile Include="Model\Quotation\Frame\FrameModel.cs" />
     <Compile Include="Model\Quotation\Frame\IFrameModel.cs" />
     <Compile Include="Model\Quotation\IQuotationModel.cs" />
+    <Compile Include="Model\Quotation\MultiPanel\IMultiPanelModel.cs" />
+    <Compile Include="Model\Quotation\MultiPanel\MultiPanelModel.cs" />
     <Compile Include="Model\Quotation\Panel\IPanelModel.cs" />
     <Compile Include="Model\Quotation\Panel\PanelModel.cs" />
     <Compile Include="Model\Quotation\QuotationModel.cs" />

@@ -8,7 +8,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
     public interface IFixedPanelUC: IViewCommon
     {
         int Panel_ID { get; set; }
+        bool pnl_Orientation { get; set; }
+
         event EventHandler fixedPanelUCSizeChangedEventRaised;
         event EventHandler deleteToolStripClickedEventRaised;
+        event PaintEventHandler lblFixedUCPaintEventRaised;
     }
 }

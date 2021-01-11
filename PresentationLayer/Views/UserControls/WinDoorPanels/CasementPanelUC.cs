@@ -9,6 +9,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
     public partial class CasementPanelUC : UserControl, ICasementPanelUC
     {
+        private int _panelID;
+        public int Panel_ID
+        {
+            get
+            {
+                return _panelID;
+            }
+            set
+            {
+                _panelID = value;
+            }
+        }
+
         private bool _pnlOrientation;
         public bool pnl_Orientation
         {
@@ -37,6 +50,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
+            this.DataBindings.Add(ModelBinding["Panel_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
             this.DataBindings.Add(ModelBinding["Panel_Width"]);
             this.DataBindings.Add(ModelBinding["Panel_Height"]);

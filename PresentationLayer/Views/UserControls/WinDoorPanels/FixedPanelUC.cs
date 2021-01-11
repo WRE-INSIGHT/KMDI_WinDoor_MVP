@@ -31,8 +31,24 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private bool _pnlOrientation;
+        public bool pnl_Orientation
+        {
+            get
+            {
+                return _pnlOrientation;
+            }
+
+            set
+            {
+                _pnlOrientation = value;
+                lbl_Fixed.Invalidate();
+            }
+        }
+
         public event EventHandler fixedPanelUCSizeChangedEventRaised;
         public event EventHandler deleteToolStripClickedEventRaised;
+        public event PaintEventHandler lblFixedUCPaintEventRaised;
 
         Color color = Color.Black;
         private void FixedPanelUC_Paint(object sender, PaintEventArgs e)
@@ -56,6 +72,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(binding["Panel_Width"]);
             this.DataBindings.Add(binding["Panel_Height"]);
             this.DataBindings.Add(binding["Panel_Visibility"]);
+            this.DataBindings.Add(binding["Panel_Orient"]);
         }
 
         private void FixedPanelUC_SizeChanged(object sender, EventArgs e)
@@ -86,6 +103,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             color = Color.Black;
             this.Invalidate();
+        }
+
+        private void lbl_Fixed_Paint(object sender, PaintEventArgs e)
+        {
+            EventHelpers.RaisePaintEvent(sender, lblFixedUCPaintEventRaised, e);
         }
     }
 }

@@ -47,6 +47,7 @@
             this.lbl_Fixed.TabIndex = 0;
             this.lbl_Fixed.Text = "F";
             this.lbl_Fixed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_Fixed.Paint += new System.Windows.Forms.PaintEventHandler(this.lbl_Fixed_Paint);
             this.lbl_Fixed.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseClick);
             this.lbl_Fixed.MouseEnter += new System.EventHandler(this.FixedPanelUC_MouseEnter);
             this.lbl_Fixed.MouseLeave += new System.EventHandler(this.FixedPanelUC_MouseLeave);

@@ -33,6 +33,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _fixedPanelUC.fixedPanelUCSizeChangedEventRaised += new EventHandler(OnFixedPanelUCSizeChangedEventRaised);
             _fixedPanelUC.deleteToolStripClickedEventRaised += _fixedPanelUC_deleteToolStripClickedEventRaised;
+            _fixedPanelUC.lblFixedUCPaintEventRaised += _fixedPanelUC_lblFixedUCPaintEventRaised;
+        }
+
+        private void _fixedPanelUC_lblFixedUCPaintEventRaised(object sender, PaintEventArgs e)
+        {
+            Label fixedpnl = (Label)sender;
+
+            Graphics g = e.Graphics;
+            int w = 1;
+
+            if (_panelModel.Panel_Orient == true)
+            {
+                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(5,
+                                                                       5,
+                                                                       (fixedpnl.ClientRectangle.Width - 10) - w,
+                                                                       (fixedpnl.ClientRectangle.Height - 10) - w));
+
+            }
         }
 
         private void _fixedPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
@@ -96,6 +114,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Width", new Binding("Width", _panelModel, "Panel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

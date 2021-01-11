@@ -11,9 +11,9 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 {
-    public partial class AwningPanelImagerUC : UserControl, IAwningPanelImagerUC
+    public partial class CasementPanelImagerUC : UserControl, ICasementPanelImagerUC
     {
-        public AwningPanelImagerUC()
+        public CasementPanelImagerUC()
         {
             InitializeComponent();
         }
@@ -45,8 +45,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
                 this.Invalidate();
             }
         }
-        
-        public event PaintEventHandler awningPanelImagerUCPaintEventRaised;
+
+        public event PaintEventHandler casementPanelImagerUCPaintEventRaised;
 
         public void InvalidateThis()
         {
@@ -63,9 +63,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
         }
 
-        private void AwningPanelImagerUC_Paint(object sender, PaintEventArgs e)
+        private void CasementPanelImagerUC_Paint(object sender, PaintEventArgs e)
         {
-            EventHelpers.RaisePaintEvent(this, awningPanelImagerUCPaintEventRaised, e);
+            EventHelpers.RaisePaintEvent(this, casementPanelImagerUCPaintEventRaised, e);
         }
     }
 }

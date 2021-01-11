@@ -18,7 +18,6 @@ namespace ModelLayer.Model.Quotation.Panel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
         private int _panelID;
         public int Panel_ID
         {

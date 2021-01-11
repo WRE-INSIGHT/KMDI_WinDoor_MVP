@@ -158,6 +158,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> panelBinding = new Dictionary<string, Binding>();
+            panelBinding.Add("Panel_ID", new Binding("Panel_ID", _panelModel, "Panel_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Dock", new Binding("Dock", _panelModel, "Panel_Dock", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Width", new Binding("Width", _panelModel, "Panel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));

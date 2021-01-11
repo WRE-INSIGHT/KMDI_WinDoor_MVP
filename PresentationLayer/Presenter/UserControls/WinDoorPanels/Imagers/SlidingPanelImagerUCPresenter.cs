@@ -1,87 +1,35 @@
-﻿using System;
+﻿using ModelLayer.Model.Quotation.Panel;
+using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
-using ModelLayer.Model.Quotation.Panel;
-using ModelLayer.Model.Quotation.Frame;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using Unity;
-using CommonComponents;
 
-namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
+namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 {
-    public class SlidingPanelUCPresenter : ISlidingPanelUCPresenter, IPresenterCommon
+    public class SlidingPanelImagerUCPresenter : ISlidingPanelImagerUCPresenter
     {
-        ISlidingPanelUC _slidingPanelUC;
+        ISlidingPanelImagerUC _slidingPanelImagerUC;
 
-        private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
-        private IFrameModel _frameModel;
 
-        public SlidingPanelUCPresenter(ISlidingPanelUC slidingPanelUC)
+        public SlidingPanelImagerUCPresenter(ISlidingPanelImagerUC slidingPanelImagerUC)
         {
-            _slidingPanelUC = slidingPanelUC;
+            _slidingPanelImagerUC = slidingPanelImagerUC;
             SubscribeToEventsSetup();
         }
 
         private void SubscribeToEventsSetup()
         {
-            _slidingPanelUC.slidingPanelUCPaintEventRaised += _slidingPanelUC_slidingPanelUCPaintEventRaised;
-            _slidingPanelUC.slidingPanelUCMouseEnterEventRaised += _slidingPanelUC_slidingPanelUCMouseEnterEventRaised;
-            _slidingPanelUC.slidingPanelUCMouseLeaveEventRaised += _slidingPanelUC_slidingPanelUCMouseLeaveEventRaised;
-            _slidingPanelUC.deleteToolStripClickedEventRaised += _slidingPanelUC_deleteToolStripClickedEventRaised;
-            _slidingPanelUC.slidingPanelUCSizeChangedEventRaised += _slidingPanelUC_slidingPanelUCSizeChangedEventRaised;
+            _slidingPanelImagerUC.slidingPanelImagerUCPaintEventRaised += _slidingPanelImagerUC_slidingPanelImagerUCPaintEventRaised;
         }
 
-        private void _slidingPanelUC_slidingPanelUCSizeChangedEventRaised(object sender, EventArgs e)
-        {
-            try
-            {
-                int thisWd = ((UserControl)sender).Width,
-                    thisHt = ((UserControl)sender).Height,
-                    pnlModelWd = _panelModel.Panel_Width,
-                    pnlModelHt = _panelModel.Panel_Height;
-
-                if (thisWd != pnlModelWd)
-                {
-                    _panelModel.Panel_Width = thisWd;
-                }
-                if (thisHt != pnlModelHt)
-                {
-                    _panelModel.Panel_Height = thisHt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void _slidingPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
-        {
-            _panelModel.Panel_Visibility = false;
-            _frameModel.FrameProp_Height -= 148;
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-        }
-
-        private void _slidingPanelUC_slidingPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
-        {
-            color = Color.Black;
-            _slidingPanelUC.InvalidateThis();
-        }
-
-        private void _slidingPanelUC_slidingPanelUCMouseEnterEventRaised(object sender, EventArgs e)
-        {
-            color = Color.Blue;
-            _slidingPanelUC.InvalidateThis();
-        }
-
-        Color color = Color.Black;
-        private void _slidingPanelUC_slidingPanelUCPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
+        private void _slidingPanelImagerUC_slidingPanelImagerUCPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             UserControl sliding = (UserControl)sender;
 
@@ -89,14 +37,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
+            Color col = Color.Black;
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
+            g.DrawRectangle(new Pen(col, w), new Rectangle(0,
                                                            0,
                                                            sliding.ClientRectangle.Width - w,
                                                            sliding.ClientRectangle.Height - w));
 
-            Color col = Color.Black;
             g.DrawRectangle(new Pen(col, w), new Rectangle(10,
                                                            10,
                                                            (sliding.ClientRectangle.Width - 20) - w,
@@ -150,27 +98,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                              new PointF(arwEnd_x2, center_y1));
         }
 
-        public ISlidingPanelUC GetSlidingPanelUC()
+        public ISlidingPanelImagerUC GetSlidingPanelImagerUC()
         {
-            _slidingPanelUC.ThisBinding(CreateBindingDictionary());
-            return _slidingPanelUC;
+            _slidingPanelImagerUC.ThisBinding(CreateBindingDictionary());
+            return _slidingPanelImagerUC;
         }
 
 
-        public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
-                                                       IPanelModel panelModel, 
-                                                       IFrameModel frameModel,
-                                                       IMainPresenter mainPresenter)
+        public ISlidingPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                             IPanelModel panelModel)
         {
             unityC
-                .RegisterType<ISlidingPanelUC, SlidingPanelUC>()
-                .RegisterType<ISlidingPanelUCPresenter, SlidingPanelUCPresenter>();
-            SlidingPanelUCPresenter slidingUCP = unityC.Resolve<SlidingPanelUCPresenter>();
-            slidingUCP._panelModel = panelModel;
-            slidingUCP._frameModel = frameModel;
-            slidingUCP._mainPresenter = mainPresenter;
+                .RegisterType<ISlidingPanelImagerUC, SlidingPanelImagerUC>()
+                .RegisterType<ISlidingPanelImagerUCPresenter, SlidingPanelImagerUCPresenter>();
+            SlidingPanelImagerUCPresenter slidingImagerUCP = unityC.Resolve<SlidingPanelImagerUCPresenter>();
+            slidingImagerUCP._panelModel = panelModel;
 
-            return slidingUCP;
+            return slidingImagerUCP;
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()
@@ -178,8 +122,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Dictionary<string, Binding> panelBinding = new Dictionary<string, Binding>();
             panelBinding.Add("Panel_ID", new Binding("Panel_ID", _panelModel, "Panel_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Dock", new Binding("Dock", _panelModel, "Panel_Dock", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Width", new Binding("Width", _panelModel, "Panel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("PanelImageRenderer_Width", new Binding("Width", _panelModel, "PanelImageRenderer_Width", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("PanelImageRenderer_Height", new Binding("Height", _panelModel, "PanelImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 

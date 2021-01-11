@@ -29,9 +29,11 @@ namespace PresentationLayer.Presenter.UserControls
         private IFixedPanelUCPresenter _fixedUCP;
         private IFixedPanelImagerUCPresenter _fixedImagerUCP;
         private ICasementPanelUCPresenter _casementUCP;
+        private ICasementPanelImagerUCPresenter _casementImagerUCP;
         private IAwningPanelUCPresenter _awningUCP;
         private IAwningPanelImagerUCPresenter _awningImagerUCP;
         private ISlidingPanelUCPresenter _slidingUCP;
+        private ISlidingPanelImagerUCPresenter _slidingImagerUCP;
 
         private IPanelServices _panelServices;
 
@@ -45,7 +47,9 @@ namespace PresentationLayer.Presenter.UserControls
                                 ICasementPanelUCPresenter casementUCP,
                                 IAwningPanelUCPresenter awningUCP,
                                 IAwningPanelImagerUCPresenter awningImagerUCP,
-                                ISlidingPanelUCPresenter slidingUCP)
+                                ISlidingPanelUCPresenter slidingUCP,
+                                ICasementPanelImagerUCPresenter casementImagerUCP,
+                                ISlidingPanelImagerUCPresenter slidingImagerUCP)
         {
             _frameUC = frameUC;
             _frameCmenu = _frameUC.GetFrameCmenu();
@@ -54,9 +58,11 @@ namespace PresentationLayer.Presenter.UserControls
             _panelServices = panelServices;
             _panelPropertiesUCP = panelPropertiesUCP;
             _casementUCP = casementUCP;
+            _casementImagerUCP = casementImagerUCP;
             _awningUCP = awningUCP;
             _awningImagerUCP = awningImagerUCP;
             _slidingUCP = slidingUCP;
+            _slidingImagerUCP = slidingImagerUCP;
             SubscribeToEventsSetup();
         }
         private void SubscribeToEventsSetup()
@@ -91,54 +97,61 @@ namespace PresentationLayer.Presenter.UserControls
                                         panelID);
             _frameModel.Lst_Panel.Add(_panelModel);
 
-            IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-            framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
-            _frameModel.FrameProp_Height += 148;
-
             Panel pnl_inner_willRenderImg = _mainPresenter.GetFrameImagerInnerPanel(_frameModel.Frame_ID);
 
             if (pnl.Name == "pnl_inner")
             {
-                if (data == "Fixed Panel")
+                if (data.Contains("Multi-Panel"))
                 {
-                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                    IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
-                    pnl.Controls.Add((UserControl)fixedUC);
 
-                    IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
-                    IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
-                    pnl_inner_willRenderImg.Controls.Add((UserControl)fixedImagerUC);
                 }
-                else if (data == "Casement Panel")
+                else
                 {
-                    ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                    ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
-                    pnl.Controls.Add((UserControl)casementUC);
+                    IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                    framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+                    _frameModel.FrameProp_Height += 148;
+
+                    if (data == "Fixed Panel")
+                    {
+                        IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                        IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+                        pnl.Controls.Add((UserControl)fixedUC);
+
+                        IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
+                        IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
+                        pnl_inner_willRenderImg.Controls.Add((UserControl)fixedImagerUC);
+                    }
+                    else if (data == "Casement Panel")
+                    {
+                        ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                        ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+                        pnl.Controls.Add((UserControl)casementUC);
 
 
-                    ICasementPanelUCPresenter casementUCP2 = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                    ICasementPanelUC casementUC2 = casementUCP2.GetCasementPanelUC();
-                    pnl_inner_willRenderImg.Controls.Add((UserControl)casementUC2);
-                }
-                else if (data == "Awning Panel")
-                {
-                    IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                    IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
-                    pnl.Controls.Add((UserControl)awningUC);
+                        ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel);
+                        ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
+                        pnl_inner_willRenderImg.Controls.Add((UserControl)casementImagerUC);
+                    }
+                    else if (data == "Awning Panel")
+                    {
+                        IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                        IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+                        pnl.Controls.Add((UserControl)awningUC);
 
-                    IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel);
-                    IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
-                    pnl_inner_willRenderImg.Controls.Add((UserControl)awningImagerUC);
-                }
-                else if (data == "Sliding Panel")
-                {
-                    ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                    ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
-                    pnl.Controls.Add((UserControl)slidingUC);
+                        IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel);
+                        IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
+                        pnl_inner_willRenderImg.Controls.Add((UserControl)awningImagerUC);
+                    }
+                    else if (data == "Sliding Panel")
+                    {
+                        ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                        ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+                        pnl.Controls.Add((UserControl)slidingUC);
 
-                    ISlidingPanelUCPresenter slidingUCP2 = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                    ISlidingPanelUC slidingUC2 = slidingUCP2.GetSlidingPanelUC();
-                    pnl_inner_willRenderImg.Controls.Add((UserControl)slidingUC2);
+                        ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC, _panelModel);
+                        ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
+                        pnl_inner_willRenderImg.Controls.Add((UserControl)slidingImagerUC);
+                    }
                 }
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
