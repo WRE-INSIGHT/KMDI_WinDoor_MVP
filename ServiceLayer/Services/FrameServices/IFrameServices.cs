@@ -1,4 +1,5 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
 
@@ -13,6 +14,7 @@ namespace ServiceLayer.Services.FrameServices
                                 FrameModel.Frame_Padding frame_type,
                                 bool frame_visible,
                                 List<IPanelModel> lst_panel,
+                                List<IMultiPanelModel> lst_mpanel,
                                 float frameImager_Zoom);
         void ValidateModel(IFrameModel frameModel);
     }

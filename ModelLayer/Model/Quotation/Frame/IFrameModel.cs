@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.Panel;
+﻿using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -18,5 +19,6 @@ namespace ModelLayer.Model.Quotation.Frame
         float FrameImageRenderer_Zoom { get; set; }
         Padding Frame_Padding_int { get; set; }
         List<IPanelModel> Lst_Panel { get; set; }
+        List<IMultiPanelModel> Lst_MultiPanel { get; set; }
     }
 }

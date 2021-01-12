@@ -33,7 +33,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackgroundImage = global::PresentationLayer.Properties.Resources.MultiplePanelMullion;
+            this.panel1.BackgroundImage = global::PresentationLayer.Properties.Resources.MultiplePanelTransom;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;

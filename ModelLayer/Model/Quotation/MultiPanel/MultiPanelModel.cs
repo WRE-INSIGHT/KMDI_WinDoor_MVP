@@ -89,6 +89,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        private string _mpanelType;
+        public string MPanel_Type
+        {
+            get
+            {
+                return _mpanelType;
+            }
+            set
+            {
+                _mpanelType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private FlowDirection _mpanelFlowDirection;
         public FlowDirection MPanel_FlowDirection
         {
@@ -100,6 +114,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             set
             {
                 _mpanelFlowDirection = value;
+                if (value == FlowDirection.LeftToRight)
+                {
+                    MPanel_Type = "Mullion";
+                }
+                else if (value == FlowDirection.TopDown)
+                {
+                    MPanel_Type = "Transom";
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -166,6 +188,47 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        private int _mpanelDiv;
+        public int MPanel_Divisions
+        {
+            get
+            {
+                return _mpanelDiv;
+            }
+
+            set
+            {
+                _mpanelDiv = value;
+            }
+        }
+
+        private Control _mpanelParent;
+        public Control MPanel_Parent
+        {
+            get
+            {
+                return _mpanelParent;
+            }
+            set
+            {
+                _mpanelParent = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private UserControl _mpanelFrameGroup;
+        public UserControl MPanel_FrameGroup
+        {
+            get
+            {
+                return _mpanelFrameGroup;
+            }
+            set
+            {
+                _mpanelFrameGroup = value;
+            }
+        }
+
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,
@@ -173,7 +236,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                DockStyle mpanelDock,
                                bool mpanelVisible,
                                FlowDirection mpanelFlowDirection,
-                               float mpanelImageRendererZoom)
+                               Control mpanelParent,
+                               UserControl mpanelFrameGroup,
+                               int mpanelDivisions)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -182,7 +247,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_Dock = mpanelDock;
             MPanel_Visibility = mpanelVisible;
             MPanel_FlowDirection = mpanelFlowDirection;
-            MPanelImageRenderer_Zoom = mpanelImageRendererZoom;
+            MPanel_Parent = mpanelParent;
+            MPanel_FrameGroup = mpanelFrameGroup;
+            MPanel_Divisions = mpanelDivisions;
         }
     }
 }

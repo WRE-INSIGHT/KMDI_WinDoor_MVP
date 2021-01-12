@@ -7,6 +7,7 @@ using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
 using ServiceLayer.CommonServices;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace ServiceLayer.Services.FrameServices
 {
@@ -26,6 +27,7 @@ namespace ServiceLayer.Services.FrameServices
                                        FrameModel.Frame_Padding frame_type,
                                        bool frame_visible,
                                        List<IPanelModel> lst_panel,
+                                       List<IMultiPanelModel> lst_mpanel,
                                        float frameImager_Zoom)
         {
             IFrameModel fr = new FrameModel(frame_id,
@@ -35,6 +37,7 @@ namespace ServiceLayer.Services.FrameServices
                                            frame_type,
                                            frame_visible,
                                            lst_panel,
+                                           lst_mpanel,
                                            frameImager_Zoom);
             ValidateModel(fr);
 

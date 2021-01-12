@@ -20,6 +20,7 @@ using ServiceLayer.Services.PanelServices;
 using CommonComponents;
 using Unity;
 using System.Linq;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace PresentationLayer.Presenter
 {
@@ -772,7 +773,8 @@ namespace PresentationLayer.Presenter
                                          int frame_id = 0,
                                          string frame_name = "",
                                          bool frame_visible = true,
-                                         List<IPanelModel> lst_Panel = null)
+                                         List<IPanelModel> lst_Panel = null,
+                                         List<IMultiPanelModel> lst_MPanel = null)
         {
             if (frame_id == 0)
             {
@@ -786,6 +788,10 @@ namespace PresentationLayer.Presenter
             {
                 lst_Panel = new List<IPanelModel>();
             }
+            if (lst_MPanel == null)
+            {
+                lst_MPanel = new List<IMultiPanelModel>();
+            }
             _frameModel = _frameServices.CreateFrame(frame_id,
                                                      frame_name,
                                                      frame_width,
@@ -793,6 +799,7 @@ namespace PresentationLayer.Presenter
                                                      frame_type,
                                                      frame_visible,
                                                      lst_Panel,
+                                                     lst_MPanel,
                                                      frameImager_Zoom);
 
             return _frameModel;
@@ -823,7 +830,12 @@ namespace PresentationLayer.Presenter
             IBasePlatformImagerUC basePLImagerUC = _mainView.GetThis().Controls.OfType<IBasePlatformImagerUC>().First();
             return basePLImagerUC.GetFlpMain().Controls.OfType<IFrameImagerUC>().First(fr => fr.frameID == frameID).GetInnerPanel();
         }
-        
+
+        public int GetMultiPanelCount()
+        {
+            return _windoorModel.GetMultiPanelCount();
+        }
+
         #endregion
 
     }

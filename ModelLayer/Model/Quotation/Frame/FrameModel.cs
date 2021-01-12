@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -105,6 +106,7 @@ namespace ModelLayer.Model.Quotation.Frame
         }
 
         public List<IPanelModel> Lst_Panel { get; set; }
+        public List<IMultiPanelModel> Lst_MultiPanel { get; set; }
 
         private int _frameImage_Height;
         public int FrameImageRenderer_Height
@@ -160,6 +162,7 @@ namespace ModelLayer.Model.Quotation.Frame
                           Frame_Padding frameType,
                           bool frameVisible,
                           List<IPanelModel> lst_panel,
+                          List<IMultiPanelModel> lst_mpanel,
                           float frameImagerZoom)
         {
             Frame_ID = frameID;
@@ -170,6 +173,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Visible = frameVisible;
             FrameProp_Height = 183;
             Lst_Panel = lst_panel;
+            Lst_MultiPanel = lst_mpanel;
             FrameImageRenderer_Zoom = frameImagerZoom;
 
             if (frameType == Frame_Padding.Window)

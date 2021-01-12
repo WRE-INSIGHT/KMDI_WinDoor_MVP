@@ -13,6 +13,8 @@ using ServiceLayer.Services.PanelServices;
 using CommonComponents;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ServiceLayer.Services.MultiPanelServices;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -23,6 +25,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private IFrameModel _frameModel;
         private IPanelModel _panelModel;
+        private IMultiPanelModel _multipanelModel;
 
         private IMainPresenter _mainPresenter;
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
@@ -34,8 +37,10 @@ namespace PresentationLayer.Presenter.UserControls
         private IAwningPanelImagerUCPresenter _awningImagerUCP;
         private ISlidingPanelUCPresenter _slidingUCP;
         private ISlidingPanelImagerUCPresenter _slidingImagerUCP;
+        private IMultiPanelMullionUCPresenter _multiUCP;
 
         private IPanelServices _panelServices;
+        private IMultiPanelServices _multipanelServices;
 
         private ContextMenuStrip _frameCmenu;
 
@@ -49,7 +54,9 @@ namespace PresentationLayer.Presenter.UserControls
                                 IAwningPanelImagerUCPresenter awningImagerUCP,
                                 ISlidingPanelUCPresenter slidingUCP,
                                 ICasementPanelImagerUCPresenter casementImagerUCP,
-                                ISlidingPanelImagerUCPresenter slidingImagerUCP)
+                                ISlidingPanelImagerUCPresenter slidingImagerUCP,
+                                IMultiPanelServices multipanelServices,
+                                IMultiPanelMullionUCPresenter multiUCP)
         {
             _frameUC = frameUC;
             _frameCmenu = _frameUC.GetFrameCmenu();
@@ -63,6 +70,8 @@ namespace PresentationLayer.Presenter.UserControls
             _awningImagerUCP = awningImagerUCP;
             _slidingUCP = slidingUCP;
             _slidingImagerUCP = slidingImagerUCP;
+            _multipanelServices = multipanelServices;
+            _multiUCP = multiUCP;
             SubscribeToEventsSetup();
         }
         private void SubscribeToEventsSetup()
@@ -85,28 +94,45 @@ namespace PresentationLayer.Presenter.UserControls
             string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
 
             int panelID = _mainPresenter.GetPanelCount() + 1;
+            int multiID = _mainPresenter.GetMultiPanelCount() + 1;
 
             IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
-            _panelModel = AddPanelModel(pnl.Width,
-                                        pnl.Height,
-                                        pnl,
-                                        (UserControl)pnl.Parent,
-                                        (UserControl)framePropUC,
-                                        data,
-                                        true,
-                                        panelID);
-            _frameModel.Lst_Panel.Add(_panelModel);
-
             Panel pnl_inner_willRenderImg = _mainPresenter.GetFrameImagerInnerPanel(_frameModel.Frame_ID);
 
             if (pnl.Name == "pnl_inner")
             {
                 if (data.Contains("Multi-Panel"))
                 {
+                    FlowDirection flow = FlowDirection.LeftToRight;
+                    if (data.Contains("Transom"))
+                    {
+                        flow = FlowDirection.TopDown;
+                    }
+                    _multipanelModel = AddMultiPanelModel(pnl.Width,
+                                                          pnl.Height,
+                                                          pnl,
+                                                          (UserControl)pnl.Parent,
+                                                          true,
+                                                          flow,
+                                                          multiID);
+                    _frameModel.Lst_MultiPanel.Add(_multipanelModel);
 
+                    IMultiPanelMullionUCPresenter multiUCP = _multiUCP.GetNewInstance(_unityC, _multipanelModel);
+                    IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
+                    pnl.Controls.Add((UserControl)multiUC);
                 }
                 else
                 {
+                    _panelModel = AddPanelModel(pnl.Width,
+                                                pnl.Height,
+                                                pnl,
+                                                (UserControl)pnl.Parent,
+                                                (UserControl)framePropUC,
+                                                data,
+                                                true,
+                                                panelID);
+                    _frameModel.Lst_Panel.Add(_panelModel);
+
                     IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
                     _frameModel.FrameProp_Height += 148;
@@ -334,6 +360,35 @@ namespace PresentationLayer.Presenter.UserControls
                                                           panelFramePropertiesGroup);
 
             return _panelModel;
+        }
+
+        public IMultiPanelModel AddMultiPanelModel(int mwidth,
+                                                   int mheight,
+                                                   Control mpanelParent,
+                                                   UserControl mpanelFrameGroup,
+                                                   bool mvisible,
+                                                   FlowDirection mflow,
+                                                   int mid = 0,
+                                                   string mname = "",
+                                                   DockStyle mdock = DockStyle.Fill,
+                                                   int mpanelDivisions = 1)
+        {
+            if (mname == "")
+            {
+                mname = "MultiPanel " + mid;
+            }
+            _multipanelModel = _multipanelServices.CreateMultiPanel(mid,
+                                                                    mname,
+                                                                    mwidth,
+                                                                    mheight,
+                                                                    mdock,
+                                                                    mvisible,
+                                                                    mflow,
+                                                                    mpanelParent,
+                                                                    mpanelFrameGroup,
+                                                                    mpanelDivisions);
+
+            return _multipanelModel;
         }
     }
 }

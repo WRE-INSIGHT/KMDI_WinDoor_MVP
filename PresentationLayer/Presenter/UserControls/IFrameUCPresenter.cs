@@ -16,16 +16,16 @@ namespace PresentationLayer.Presenter.UserControls
         IFrameUC GetFrameUC();
         IFrameUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel, IMainPresenter mainPresenter);
 
-        IPanelModel AddPanelModel(int panelWd,
-                                         int panelHt,
-                                         Control panelParent,
-                                         UserControl panelFrameGroup,
-                                         UserControl panelFramePropertiesGroup,
-                                         string panelType,
-                                         bool panelVisibility,
-                                         int panelID = 0,
-                                         string panelName = "",
-                                         DockStyle panelDock = DockStyle.Fill,
-                                         bool panelOrient = false);
+        //IPanelModel AddPanelModel(int panelWd,
+        //                                 int panelHt,
+        //                                 Control panelParent,
+        //                                 UserControl panelFrameGroup,
+        //                                 UserControl panelFramePropertiesGroup,
+        //                                 string panelType,
+        //                                 bool panelVisibility,
+        //                                 int panelID = 0,
+        //                                 string panelName = "",
+        //                                 DockStyle panelDock = DockStyle.Fill,
+        //                                 bool panelOrient = false);
     }
 }

@@ -321,6 +321,20 @@ namespace ModelLayer.Model.Quotation.WinDoor
            return panelCount;
         }
 
+        public int GetMultiPanelCount()
+        {
+            int multiCount = 0;
+            try
+            {
+                multiCount = lst_frame.SelectMany(mpnl => mpnl.Lst_MultiPanel).Count();
+            }
+            catch (Exception)
+            {
+                multiCount = 0;
+            }
+            return multiCount;
+        }
+
         public float GetZoom_forRendering()
         {
             int area = _wdHeight * _wdWidth;

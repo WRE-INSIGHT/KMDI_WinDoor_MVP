@@ -10,6 +10,7 @@ using ModelLayer.Model.Quotation.Frame;
 using System.Windows.Forms;
 using Unity;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace PresentationLayer.Presenter
 {
@@ -56,7 +57,8 @@ namespace PresentationLayer.Presenter
                                   int frame_id = 0,
                                   string frame_name = "",
                                   bool frame_visible = true,
-                                  List<IPanelModel> lst_Panel = null);
+                                  List<IPanelModel> lst_Panel = null,
+                                  List<IMultiPanelModel> lst_MPanel = null);
         IFramePropertiesUC GetFrameProperties(int frameID);
         Panel GetFrameImagerInnerPanel(int frameID);
         int GetPanelCount();
@@ -74,5 +76,6 @@ namespace PresentationLayer.Presenter
         void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
                                  int frmDimension_numWd,
                                  int frmDimension_numHt);
+        int GetMultiPanelCount();
     }
 }

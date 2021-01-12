@@ -27,6 +27,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         List<IFrameModel> lst_frame { get; set; }
         IEnumerable<IFrameModel> GetAllVisibleFrames();
         int GetPanelCount();
+        int GetMultiPanelCount();
         float GetZoom_forRendering();
         void SetFrameZoom();
     }

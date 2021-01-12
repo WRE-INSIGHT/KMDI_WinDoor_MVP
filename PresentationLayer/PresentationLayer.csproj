@@ -100,7 +100,9 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\IFixedPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\ISlidingPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\IMultiPanelMullionUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\ISlidingPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\MultiPanelMullionUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\SlidingPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -237,6 +239,7 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUC.Designer.cs">
       <DependentUpon>SlidingPanelImagerUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\IMultiPanelMullionUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\ISlidingPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\MultiPanelMullionUC.cs">
       <SubType>UserControl</SubType>

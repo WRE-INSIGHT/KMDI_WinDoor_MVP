@@ -47,6 +47,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FrameServices\FrameServices.cs" />
     <Compile Include="Services\FrameServices\IFrameServices.cs" />
+    <Compile Include="Services\MultiPanelServices\IMultiPanelServices.cs" />
+    <Compile Include="Services\MultiPanelServices\MultiPanelServices.cs" />
     <Compile Include="Services\PanelServices\IPanelServices.cs" />
     <Compile Include="Services\PanelServices\PanelServices.cs" />
     <Compile Include="Services\QuotationServices\IQuotationServices.cs" />

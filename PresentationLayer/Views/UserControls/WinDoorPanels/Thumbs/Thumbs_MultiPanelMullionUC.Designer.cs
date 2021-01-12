@@ -33,7 +33,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackgroundImage = global::PresentationLayer.Properties.Resources.MultiplePanelTransom;
+            this.panel1.BackgroundImage = global::PresentationLayer.Properties.Resources.MultiplePanelMullion;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -42,13 +42,13 @@
             this.panel1.Size = new System.Drawing.Size(55, 53);
             this.panel1.TabIndex = 2;
             // 
-            // Thumbs_MultiPanelUC
+            // Thumbs_MultiPanelMullionUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.Controls.Add(this.panel1);
-            this.Name = "Thumbs_MultiPanelUC";
+            this.Name = "Thumbs_MultiPanelMullionUC";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Size = new System.Drawing.Size(65, 63);
             this.ResumeLayout(false);

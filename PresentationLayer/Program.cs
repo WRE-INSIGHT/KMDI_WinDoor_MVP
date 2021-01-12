@@ -25,6 +25,8 @@ using ModelLayer.Model.Quotation.Panel;
 using Unity.Injection;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
+using ServiceLayer.Services.MultiPanelServices;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace PresentationLayer
 {
@@ -61,6 +63,9 @@ namespace PresentationLayer
 
                 .RegisterType<IPanelServices, PanelServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPanelModel, PanelModel>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IMultiPanelServices, MultiPanelServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMultiPanelModel, MultiPanelModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
 
@@ -117,6 +122,9 @@ namespace PresentationLayer
 
                 .RegisterType<ISlidingPanelImagerUC, SlidingPanelImagerUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISlidingPanelImagerUCPresenter, SlidingPanelImagerUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
