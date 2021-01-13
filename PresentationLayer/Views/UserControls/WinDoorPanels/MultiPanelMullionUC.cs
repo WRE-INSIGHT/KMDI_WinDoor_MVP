@@ -35,6 +35,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler flpMultiMouseLeaveEventRaised;
         public event EventHandler divCountClickedEventRaised;
         public event EventHandler deleteClickedEventRaised;
+        public event DragEventHandler flpMultiDragDropEventRaised;
 
         private void flp_Multi_Paint(object sender, PaintEventArgs e)
         {
@@ -46,7 +47,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["MPanel_ID"]);
             this.DataBindings.Add(ModelBinding["MPanel_Dock"]);
             this.DataBindings.Add(ModelBinding["MPanel_Width"]);
+            //flp_MultiMullion.DataBindings.Add(ModelBinding["MPanelFlp_Width"]);
             this.DataBindings.Add(ModelBinding["MPanel_Height"]);
+            //flp_MultiMullion.DataBindings.Add(ModelBinding["MPanelFlp_Height"]);
             this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
         }
 
@@ -81,6 +84,16 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, deleteClickedEventRaised, e);
+        }
+
+        private void flp_MultiMullion_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void flp_MultiMullion_DragDrop(object sender, DragEventArgs e)
+        {
+            EventHelpers.RaiseDragEvent(sender, flpMultiDragDropEventRaised, e);
         }
     }
 }

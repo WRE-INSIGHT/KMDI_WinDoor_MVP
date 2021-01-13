@@ -101,7 +101,7 @@ namespace PresentationLayer.Views
 
         public void ShowfrmDimension()
         {
-            this.Show();
+            this.ShowDialog();
         }
         private void frmDimensionView_Load(object sender, EventArgs e)
         {

@@ -4,6 +4,7 @@ using System;
 using static PresentationLayer.Presenter.frmDimensionPresenter;
 using ModelLayer.Model.Quotation.Frame;
 using System.Windows.Forms;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 
 namespace PresentationLayer.Presenter
 {
@@ -16,7 +17,9 @@ namespace PresentationLayer.Presenter
         bool mainPresenter_AddedFrame_ClickedOK { get; set; }
         IfrmDimensionView GetDimensionView();
         void SetPresenters(IMainPresenter mainPresenter);
+        void SetPresenters(IMultiPanelMullionUCPresenter multiUCP);
         void SetProfileType(string profileType);
         void SetHeight();
+        void SetValues(int numWD, int numHT);
     }
 }

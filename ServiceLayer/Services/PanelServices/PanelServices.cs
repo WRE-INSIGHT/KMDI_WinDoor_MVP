@@ -51,5 +51,38 @@ namespace ServiceLayer.Services.PanelServices
         {
             _modelCheck.ValidateModelDataAnnotations(panelModel);
         }
+
+        public IPanelModel AddPanelModel(int panelWd,
+                                         int panelHt,
+                                         Control panelParent,
+                                         UserControl panelFrameGroup,
+                                         UserControl panelFramePropertiesGroup,
+                                         string panelType,
+                                         bool panelVisibility,
+                                         int panelID = 0,
+                                         DockStyle panelDock = DockStyle.Fill,
+                                         string panelName = "",
+                                         bool panelOrient = false)
+        {
+            if (panelName == "")
+            {
+                panelName = "Panel " + panelID;
+            }
+
+            IPanelModel _panelModel = CreatePanelModel(panelID,
+                                                       panelName,
+                                                       panelWd,
+                                                       panelHt,
+                                                       panelDock,
+                                                       panelType,
+                                                       panelOrient,
+                                                       panelParent,
+                                                       panelFrameGroup,
+                                                       panelVisibility,
+                                                       panelFramePropertiesGroup);
+
+            return _panelModel;
+        }
+
     }
 }

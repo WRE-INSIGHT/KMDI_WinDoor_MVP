@@ -29,7 +29,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  UserControl mpanelFrameGroup,
                                                  int mpanelDivisions)
         {
-            IMultiPanelModel mp = new MultiPanelModel(mid,
+            MultiPanelModel mp = new MultiPanelModel(mid,
                                                       mname,
                                                       mwidth,
                                                       mheight,
@@ -46,6 +46,35 @@ namespace ServiceLayer.Services.MultiPanelServices
         public void ValidateModel(IMultiPanelModel multiPanelModel)
         {
             _modelCheck.ValidateModelDataAnnotations(multiPanelModel);
+        }
+
+        public IMultiPanelModel AddMultiPanelModel(int mwidth,
+                                                   int mheight,
+                                                   Control mpanelParent,
+                                                   UserControl mpanelFrameGroup,
+                                                   bool mvisible,
+                                                   FlowDirection mflow,
+                                                   int mid = 0,
+                                                   string mname = "",
+                                                   DockStyle mdock = DockStyle.Fill,
+                                                   int mpanelDivisions = 1)
+        {
+            if (mname == "")
+            {
+                mname = "MultiPanel " + mid;
+            }
+            IMultiPanelModel _multipanelModel = CreateMultiPanel(mid,
+                                                                 mname,
+                                                                 mwidth,
+                                                                 mheight,
+                                                                 mdock,
+                                                                 mvisible,
+                                                                 mflow,
+                                                                 mpanelParent,
+                                                                 mpanelFrameGroup,
+                                                                 mpanelDivisions);
+
+            return _multipanelModel;
         }
     }
 }

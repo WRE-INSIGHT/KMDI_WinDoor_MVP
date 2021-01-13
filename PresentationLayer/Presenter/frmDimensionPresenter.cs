@@ -9,6 +9,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Frame;
 using CommonComponents;
 using System.Windows.Forms;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 
 namespace PresentationLayer.Presenter
 {
@@ -17,6 +18,7 @@ namespace PresentationLayer.Presenter
         IfrmDimensionView _frmDimensionView;
 
         private IMainPresenter _mainPresenter;
+        private IMultiPanelMullionUCPresenter _multiUCP;
 
         private string profile_type;
         public enum Show_Purpose
@@ -24,11 +26,12 @@ namespace PresentationLayer.Presenter
             Quotation = 1,
             CreateNew_Item = 2,
             CreateNew_Frame = 3,
-            ChangeBasePlatformSize = 4
+            ChangeBasePlatformSize = 4,
+            AddPanelIntoMultiPanel = 5
         }
 
         private Show_Purpose this_purpose;
-
+        #region GetSet
         public Show_Purpose purpose
         {
             get
@@ -94,6 +97,8 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        #endregion
+
         public frmDimensionPresenter(IfrmDimensionView frmDimensionView)
         {
             _frmDimensionView = frmDimensionView;
@@ -141,6 +146,10 @@ namespace PresentationLayer.Presenter
                 {
                     _mainPresenter.frmDimensionResults(purpose, _frmDimensionView.InumWidth, _frmDimensionView.InumHeight);
                 }
+                else if (purpose == Show_Purpose.AddPanelIntoMultiPanel)
+                {
+                    _multiUCP.frmDimensionResults(_frmDimensionView.InumWidth, _frmDimensionView.InumHeight);
+                }
                 else
                 {
                     _mainPresenter.Scenario_Quotation(_mainPresenter_qoutationInputBox_ClickedOK,
@@ -170,6 +179,11 @@ namespace PresentationLayer.Presenter
             _mainPresenter = mainPresenter;
         }
 
+        public void SetPresenters(IMultiPanelMullionUCPresenter multiUCP)
+        {
+            _multiUCP = multiUCP;
+        }
+
         public void SetProfileType(string profileType)
         {
             profile_type = profileType;
@@ -183,10 +197,17 @@ namespace PresentationLayer.Presenter
             }
             else if (purpose == Show_Purpose.CreateNew_Item || 
                      purpose == Show_Purpose.CreateNew_Frame || 
-                     purpose == Show_Purpose.ChangeBasePlatformSize)
+                     purpose == Show_Purpose.ChangeBasePlatformSize ||
+                     purpose == Show_Purpose.AddPanelIntoMultiPanel)
             {
                 _frmDimensionView.thisHeight = 156;
             }
+        }
+
+        public void SetValues(int numWD, int numHT)
+        {
+            _frmDimensionView.InumWidth = numWD;
+            _frmDimensionView.InumHeight = numHT;
         }
     }
 }

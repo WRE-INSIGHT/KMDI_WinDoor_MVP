@@ -73,6 +73,7 @@
             this.BackColor = System.Drawing.Color.DarkGray;
             this.Controls.Add(this.lbl_Fixed);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "FixedPanelUC";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.SizeChanged += new System.EventHandler(this.FixedPanelUC_SizeChanged);

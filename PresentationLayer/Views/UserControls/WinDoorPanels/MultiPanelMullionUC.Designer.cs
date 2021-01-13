@@ -41,9 +41,12 @@
             this.flp_MultiMullion.AllowDrop = true;
             this.flp_MultiMullion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_MultiMullion.Location = new System.Drawing.Point(0, 0);
+            this.flp_MultiMullion.Margin = new System.Windows.Forms.Padding(0);
             this.flp_MultiMullion.Name = "flp_MultiMullion";
-            this.flp_MultiMullion.Size = new System.Drawing.Size(150, 150);
+            this.flp_MultiMullion.Size = new System.Drawing.Size(300, 300);
             this.flp_MultiMullion.TabIndex = 0;
+            this.flp_MultiMullion.DragDrop += new System.Windows.Forms.DragEventHandler(this.flp_MultiMullion_DragDrop);
+            this.flp_MultiMullion.DragOver += new System.Windows.Forms.DragEventHandler(this.flp_MultiMullion_DragOver);
             this.flp_MultiMullion.Paint += new System.Windows.Forms.PaintEventHandler(this.flp_Multi_Paint);
             this.flp_MultiMullion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.flp_MultiMullion_MouseDown);
             this.flp_MultiMullion.MouseEnter += new System.EventHandler(this.flp_MultiMullion_MouseEnter);
@@ -60,14 +63,14 @@
             // divCountToolStripMenuItem
             // 
             this.divCountToolStripMenuItem.Name = "divCountToolStripMenuItem";
-            this.divCountToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.divCountToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.divCountToolStripMenuItem.Text = "Div-Count";
             this.divCountToolStripMenuItem.Click += new System.EventHandler(this.divCountToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -78,6 +81,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.flp_MultiMullion);
             this.Name = "MultiPanelMullionUC";
+            this.Size = new System.Drawing.Size(300, 300);
             this.cmenu_mulltiP.ResumeLayout(false);
             this.ResumeLayout(false);
 

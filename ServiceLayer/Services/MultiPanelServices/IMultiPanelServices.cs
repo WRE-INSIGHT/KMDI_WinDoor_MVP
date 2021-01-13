@@ -10,5 +10,15 @@ namespace ServiceLayer.Services.MultiPanelServices
                                           UserControl mpanelFrameGroup,
                                           int mpanelDivisions);
         void ValidateModel(IMultiPanelModel multiPanelModel);
+        IMultiPanelModel AddMultiPanelModel(int mwidth,
+                                            int mheight,
+                                            Control mpanelParent,
+                                            UserControl mpanelFrameGroup,
+                                            bool mvisible,
+                                            FlowDirection mflow,
+                                            int mid = 0,
+                                            string mname = "",
+                                            DockStyle mdock = DockStyle.Fill,
+                                            int mpanelDivisions = 1);
     }
 }

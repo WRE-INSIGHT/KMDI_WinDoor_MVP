@@ -1,7 +1,12 @@
 ﻿using CommonComponents;
 using Microsoft.VisualBasic;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
+using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
+using ServiceLayer.Services.MultiPanelServices;
+using ServiceLayer.Services.PanelServices;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -18,11 +23,33 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     {
         IMultiPanelMullionUC _multiPanelMullionUC;
 
-        private IMultiPanelModel _multiPanelModel;
+        private IUnityContainer _unityC;
 
-        public MultiPanelMullionUCPresenter(IMultiPanelMullionUC multiPanelMullionUC)
+        private IMultiPanelModel _multiPanelModel;
+        private IPanelModel _panelModel;
+        private IFrameModel _frameModel;
+
+        private IMainPresenter _mainPresenter;
+        private IFixedPanelUCPresenter _fixedUCP;
+        private IPanelPropertiesUCPresenter _panelPropertiesUCP;
+        private IfrmDimensionPresenter _frmDimensionPresenter;
+
+        private IPanelServices _panelServices;
+        private IMultiPanelServices _multipanelServices;
+
+        public MultiPanelMullionUCPresenter(IMultiPanelMullionUC multiPanelMullionUC,
+                                            IFixedPanelUCPresenter fixedUCP,
+                                            IPanelServices panelServices,
+                                            IMultiPanelServices multipanelServices,
+                                            IPanelPropertiesUCPresenter panelPropertiesUCP,
+                                            IfrmDimensionPresenter frmDimensionPresenter)
         {
             _multiPanelMullionUC = multiPanelMullionUC;
+            _fixedUCP = fixedUCP;
+            _panelServices = panelServices;
+            _multipanelServices = multipanelServices;
+            _panelPropertiesUCP = panelPropertiesUCP;
+            _frmDimensionPresenter = frmDimensionPresenter;
             SubscribeToEventsSetup();
         }
 
@@ -33,6 +60,79 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiPanelMullionUC.flpMultiMouseLeaveEventRaised += _multiPanelMullionUC_flpMultiMouseLeaveEventRaised;
             _multiPanelMullionUC.divCountClickedEventRaised += _multiPanelMullionUC_divCountClickedEventRaised;
             _multiPanelMullionUC.deleteClickedEventRaised += _multiPanelMullionUC_deleteClickedEventRaised;
+            _multiPanelMullionUC.flpMultiDragDropEventRaised += _multiPanelMullionUC_flpMultiDragDropEventRaised;
+        }
+
+        private int _frmDmRes_Width;
+        private int _frmDmRes_Height;
+
+        private void _multiPanelMullionUC_flpMultiDragDropEventRaised(object sender, DragEventArgs e)
+        {
+            FlowLayoutPanel fpnl = (FlowLayoutPanel)sender; //Control na babagsakan
+            string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
+
+            int panelID = _mainPresenter.GetPanelCount() + 1;
+            int multiID = _mainPresenter.GetMultiPanelCount() + 1;
+
+            IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
+            if (data.Contains("Multi-Panel"))
+            {
+
+            }
+            else
+            {
+                int divSize = 0;
+                if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                {
+                    divSize = 10;
+                }
+                else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    divSize = 20;
+                }
+
+                int suggest_Wd = (fpnl.Width - (divSize * _multiPanelModel.MPanel_Divisions)) / (_multiPanelModel.MPanel_Divisions + 1);
+
+                //_frmDimensionPresenter.SetPresenters(this);
+                //_frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.AddPanelIntoMultiPanel;
+                //_frmDimensionPresenter.SetHeight();
+                //_frmDimensionPresenter.SetValues(suggest_Wd, fpnl.Height);
+                //_frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+
+                _panelModel = _panelServices.AddPanelModel(_multiPanelModel.MPanel_Width,
+                                                           _multiPanelModel.MPanel_Height,
+                                                           fpnl,
+                                                           (UserControl)fpnl.Parent,
+                                                           (UserControl)framePropUC,
+                                                           data,
+                                                           true,
+                                                           panelID,
+                                                           DockStyle.None);
+                //_panelModel = _panelServices.AddPanelModel(_frmDmRes_Width,
+                //                                           _frmDmRes_Height,
+                //                                           fpnl,
+                //                                           (UserControl)fpnl.Parent,
+                //                                           (UserControl)framePropUC,
+                //                                           data,
+                //                                           true,
+                //                                           panelID);
+                _frameModel.Lst_Panel.Add(_panelModel);
+
+                IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+                _frameModel.FrameProp_Height += 148;
+
+                if (data == "Fixed Panel")
+                {
+                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+                    fpnl.Controls.Add((UserControl)fixedUC);
+
+                    //IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
+                    //IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
+                    //pnl_inner_willRenderImg.Controls.Add((UserControl)fixedImagerUC);
+                }
+            }
         }
 
         private void _multiPanelMullionUC_deleteClickedEventRaised(object sender, EventArgs e)
@@ -113,13 +213,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
         public IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                            IMultiPanelModel multiPanelModel)
+                                                            IMultiPanelModel multiPanelModel,
+                                                            IFrameModel frameModel, 
+                                                            IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>()
                 .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>();
             MultiPanelMullionUCPresenter multiMullionUCP = unityC.Resolve<MultiPanelMullionUCPresenter>();
+            multiMullionUCP._unityC = unityC;
             multiMullionUCP._multiPanelModel = multiPanelModel;
+            multiMullionUCP._frameModel = frameModel;
+            multiMullionUCP._mainPresenter = mainPresenter;
 
             return multiMullionUCP;
         }
@@ -130,10 +235,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiPanelBinding.Add("MPanel_ID", new Binding("MPanel_ID", _multiPanelModel, "MPanel_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Dock", new Binding("Dock", _multiPanelModel, "MPanel_Dock", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Width", new Binding("Width", _multiPanelModel, "MPanel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
+            //multiPanelBinding.Add("MPanelFlp_Width", new Binding("Width", _multiPanelModel, "MPanel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Height", new Binding("Height", _multiPanelModel, "MPanel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            //multiPanelBinding.Add("MPanelFlp_Height", new Binding("Height", _multiPanelModel, "MPanel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return multiPanelBinding;
+        }
+
+        public void frmDimensionResults(int frmDimension_numWd, int frmDimension_numHt)
+        {
+            //_panelModel.Panel_Width = frmDimension_numWd;
+            //_panelModel.Panel_Height = frmDimension_numHt;
+            _frmDmRes_Width = frmDimension_numWd;
+            _frmDmRes_Height = frmDimension_numHt;
+            _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
         }
     }
 }

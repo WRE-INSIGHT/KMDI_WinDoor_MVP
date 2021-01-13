@@ -13,6 +13,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler flpMultiMouseLeaveEventRaised;
         event EventHandler divCountClickedEventRaised;
         event EventHandler deleteClickedEventRaised;
+        event DragEventHandler flpMultiDragDropEventRaised;
 
         void InvalidateFlp();
     }
