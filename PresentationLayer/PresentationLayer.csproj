@@ -73,6 +73,8 @@
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\Dividers\IMullionUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\Dividers\MullionUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
@@ -151,6 +153,13 @@
     </Compile>
     <Compile Include="Views\UserControls\ControlsUC.Designer.cs">
       <DependentUpon>ControlsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Dividers\IMullionUC.cs" />
+    <Compile Include="Views\UserControls\Dividers\MullionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\Dividers\MullionUC.Designer.cs">
+      <DependentUpon>MullionUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\FrameImagerUC.cs">
       <SubType>UserControl</SubType>
@@ -319,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ControlsUC.resx">
       <DependentUpon>ControlsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\Dividers\MullionUC.resx">
+      <DependentUpon>MullionUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameImagerUC.resx">
       <DependentUpon>FrameImagerUC.cs</DependentUpon>

@@ -77,6 +77,11 @@
             this.numWidth.Size = new System.Drawing.Size(81, 25);
             this.numWidth.TabIndex = 1;
             this.numWidth.ThousandsSeparator = true;
+            this.numWidth.Value = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
             // 
             // btnOK
             // 
@@ -111,6 +116,11 @@
             this.numHeight.Size = new System.Drawing.Size(81, 25);
             this.numHeight.TabIndex = 3;
             this.numHeight.ThousandsSeparator = true;
+            this.numHeight.Value = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
             // 
             // panel1
             // 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 {
@@ -32,6 +33,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
         }
 
         Color color = Color.Black;
+
+        public event PaintEventHandler lblFixedUCPaintEventRaised;
+
         private void FixedPanelImagerUC_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -53,6 +57,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
+        }
+
+        private void lbl_Fixed_Paint(object sender, PaintEventArgs e)
+        {
+            EventHelpers.RaisePaintEvent(sender, lblFixedUCPaintEventRaised, e);
         }
     }
 }

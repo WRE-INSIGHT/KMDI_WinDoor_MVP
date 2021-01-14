@@ -43,6 +43,7 @@
             this.lbl_Fixed.TabIndex = 1;
             this.lbl_Fixed.Text = "F";
             this.lbl_Fixed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_Fixed.Paint += new System.Windows.Forms.PaintEventHandler(this.lbl_Fixed_Paint);
             // 
             // FixedPanelImagerUC
             // 

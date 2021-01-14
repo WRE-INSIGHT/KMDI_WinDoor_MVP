@@ -8,6 +8,7 @@ using ModelLayer.Model.Quotation.Panel;
 using Unity;
 using CommonComponents;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 {
@@ -19,6 +20,29 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         public FixedPanelImagerUCPresenter(IFixedPanelImagerUC fixedPanelImagerUC)
         {
             _fixedPanelImagerUC = fixedPanelImagerUC;
+            SubscribeToEventsSetup();
+        }
+
+        private void SubscribeToEventsSetup()
+        {
+            _fixedPanelImagerUC.lblFixedUCPaintEventRaised += _fixedPanelImagerUC_lblFixedUCPaintEventRaised;
+        }
+
+        private void _fixedPanelImagerUC_lblFixedUCPaintEventRaised(object sender, PaintEventArgs e)
+        {
+            Label fixedpnl = (Label)sender;
+
+            Graphics g = e.Graphics;
+            int w = 1;
+
+            if (_panelModel.Panel_Orient == true)
+            {
+                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(5,
+                                                                       5,
+                                                                       (fixedpnl.ClientRectangle.Width - 10) - w,
+                                                                       (fixedpnl.ClientRectangle.Height - 10) - w));
+
+            }
         }
 
         public IFixedPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,

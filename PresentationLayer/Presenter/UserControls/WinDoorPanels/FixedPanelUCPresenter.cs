@@ -23,6 +23,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
 
+        bool _initialLoad;
+
         public FixedPanelUCPresenter(IFixedPanelUC fixedPanelUC)
         {
             _fixedPanelUC = fixedPanelUC;
@@ -64,18 +66,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
-                int thisWd = ((UserControl)sender).Width,
-                    thisHt = ((UserControl)sender).Height,
-                    pnlModelWd = _panelModel.Panel_Width,
-                    pnlModelHt = _panelModel.Panel_Height;
+                if (!_initialLoad)
+                {
+                    int thisWd = ((UserControl)sender).Width,
+                        thisHt = ((UserControl)sender).Height,
+                        pnlModelWd = _panelModel.Panel_Width,
+                        pnlModelHt = _panelModel.Panel_Height;
 
-                if (thisWd != pnlModelWd)
-                {
-                    _panelModel.Panel_Width = thisWd;
-                }
-                if (thisHt != pnlModelHt)
-                {
-                    _panelModel.Panel_Height = thisHt;
+                    if (thisWd != pnlModelWd)
+                    {
+                        _panelModel.Panel_Width = thisWd;
+                    }
+                    if (thisHt != pnlModelHt)
+                    {
+                        _panelModel.Panel_Height = thisHt;
+                    }
                 }
             }
             catch (Exception ex)
@@ -102,6 +107,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public IFixedPanelUC GetFixedPanelUC()
         {
+            _initialLoad = true;
             _fixedPanelUC.ThisBinding(CreateBindingDictionary());
             return _fixedPanelUC;
         }
@@ -117,6 +123,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
+        }
+
+        public void SetInitialLoadFalse()
+        {
+            _initialLoad = false;
         }
     }
 }

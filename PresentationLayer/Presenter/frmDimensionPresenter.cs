@@ -170,8 +170,9 @@ namespace PresentationLayer.Presenter
 
         private void OnfrmDimensionLoadEventRaised(object sender, EventArgs e)
         {
-            _frmDimensionView.InumWidth = 400;
-            _frmDimensionView.InumHeight = 400;
+            //kapag binalik mo to magagalaw yung sa line 99 ng MultiPanelMullionUCPresenter
+            //_frmDimensionView.InumWidth = 400;
+            //_frmDimensionView.InumHeight = 400;
         }
 
         public void SetPresenters(IMainPresenter mainPresenter)

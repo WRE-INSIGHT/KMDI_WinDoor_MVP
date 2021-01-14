@@ -145,6 +145,7 @@ namespace PresentationLayer.Presenter.UserControls
                         IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
                         IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                         pnl.Controls.Add((UserControl)fixedUC);
+                        fixedUCP.SetInitialLoadFalse();
 
                         IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
                         IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
