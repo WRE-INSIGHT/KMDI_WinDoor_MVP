@@ -129,5 +129,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _initialLoad = false;
         }
+
+        //public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
+        //{ //for Testing
+        //    unityC
+        //        .RegisterType<IFixedPanelUC, FixedPanelUC>()
+        //        .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>();
+        //    FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
+        //    fixedPanelUCP._panelModel = panelModel;
+        //    fixedPanelUCP._frameModel = frameModel;
+
+        //    return fixedPanelUCP;
+        //}
     }
 }

@@ -10,6 +10,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     public interface IFixedPanelUCPresenter
     {
         IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel, IMainPresenter mainPresenter);
+        //IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,
+        //                                      IPanelModel panelModel,
+        //                                      IFrameModel frameModel);
         IFixedPanelUC GetFixedPanelUC();
         void SetInitialLoadFalse();
     }

@@ -55,10 +55,19 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _mullionUC_mullionUCMouseMoveEventRaised(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && _mouseDown)
+            UserControl me = (UserControl)sender;
+            FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent;
+
+            int me_indx = flp.Controls.IndexOf(me);
+                                                             //dapat dito yung condition na di dapat siya lumagpas sa bounds
+            if (e.Button == MouseButtons.Left && _mouseDown) //&& me.Location.X <= flp.Width - me.Width)
             {
-                _mullionUC.Mullion_Left += (e.X - _point_of_origin.X);
-                
+                flp.Controls[me_indx - 1].Width += (e.X - _point_of_origin.X);
+                flp.Invalidate();
+                flp.Parent.Parent.Invalidate(); //invalidate frameUC
+                //_mullionUC.Mullion_Left += (e.X - _point_of_origin.X);
+
+                //dito ilagay yung calling ng function sa Frame para mag-create ng illusion sa OVERLAPPING
             }
         }
 
