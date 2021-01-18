@@ -27,7 +27,20 @@ namespace PresentationLayer.Views.UserControls
             {
                 _frameID = value;
                 this.Tag = value;
-                pnl_inner.Tag = value;
+            }
+        }
+
+        public Padding thisPadding
+        {
+            get
+            {
+                return this.Padding;
+            }
+
+            set
+            {
+                this.Padding = value;
+                this.Invalidate();
             }
         }
 
@@ -37,15 +50,17 @@ namespace PresentationLayer.Views.UserControls
         }
 
         public event EventHandler frameLoadEventRaised;
-        public event PaintEventHandler innerFramePaintEventRaised;
+        //public event PaintEventHandler innerFramePaintEventRaised;
         public event PaintEventHandler outerFramePaintEventRaised;
         public event MouseEventHandler frameMouseClickEventRaised;
         public event EventHandler deleteCmenuEventRaised;
         public event EventHandler frameMouseEnterEventRaised;
         public event EventHandler frameMouseLeaveEventRaised;
-        public event EventHandler panelInnerMouseEnterEventRaised;
-        public event EventHandler panelInnerMouseLeaveEventRaised;
-        public event DragEventHandler panelInnerDragDropEventRaised;
+        public event DragEventHandler frameDragDropEventRaised;
+
+        //public event EventHandler panelInnerMouseEnterEventRaised;
+        //public event EventHandler panelInnerMouseLeaveEventRaised;
+        //public event DragEventHandler panelInnerDragDropEventRaised;
 
         private void FrameUC_Paint(object sender, PaintEventArgs e)
         {
@@ -64,7 +79,7 @@ namespace PresentationLayer.Views.UserControls
 
         private void pnl_inner_Paint(object sender, PaintEventArgs e)
         {
-            EventHelpers.RaisePaintEvent(sender, innerFramePaintEventRaised, e);
+            //EventHelpers.RaisePaintEvent(sender, innerFramePaintEventRaised, e);
         }
 
         private void frame_MouseClick(object sender, MouseEventArgs e)
@@ -94,12 +109,12 @@ namespace PresentationLayer.Views.UserControls
 
         private void pnl_inner_MouseEnter(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, panelInnerMouseEnterEventRaised, e);
+            //EventHelpers.RaiseEvent(sender, panelInnerMouseEnterEventRaised, e);
         }
 
         private void pnl_inner_MouseLeave(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, panelInnerMouseLeaveEventRaised, e);
+            //EventHelpers.RaiseEvent(sender, panelInnerMouseLeaveEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> binding)
@@ -109,11 +124,6 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(binding["Frame_Width"]);
             this.DataBindings.Add(binding["Frame_Height"]);
             this.DataBindings.Add(binding["Frame_Padding"]);
-        }
-
-        public void InvalidatePanelInner()
-        {
-            pnl_inner.Invalidate();
         }
 
         public void InvalidateThisParent()
@@ -133,12 +143,27 @@ namespace PresentationLayer.Views.UserControls
 
         private void pnl_inner_DragDrop(object sender, DragEventArgs e)
         {
-            EventHelpers.RaiseDragEvent(sender, panelInnerDragDropEventRaised, e);
+            //EventHelpers.RaiseDragEvent(sender, panelInnerDragDropEventRaised, e);
         }
 
-        public Panel GetInnerPanel()
+        private void FrameUC_DragDrop(object sender, DragEventArgs e)
         {
-            return pnl_inner;
+            EventHelpers.RaiseDragEvent(this, frameDragDropEventRaised, e);
+        }
+
+        private void FrameUC_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void FrameUC_ControlAdded(object sender, ControlEventArgs e)
+        {
+            this.Invalidate();
+        }
+
+        private void FrameUC_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            this.Invalidate();
         }
     }
 }

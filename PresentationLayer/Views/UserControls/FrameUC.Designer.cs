@@ -1,4 +1,9 @@
-﻿namespace PresentationLayer.Views.UserControls
+﻿using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
+
+namespace PresentationLayer.Views.UserControls
 {
     partial class FrameUC
     {
@@ -29,28 +34,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pnl_inner = new System.Windows.Forms.Panel();
             this.cmenu_frame = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenu_frame.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnl_inner
-            // 
-            this.pnl_inner.AllowDrop = true;
-            this.pnl_inner.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnl_inner.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_inner.Location = new System.Drawing.Point(26, 26);
-            this.pnl_inner.Margin = new System.Windows.Forms.Padding(0);
-            this.pnl_inner.Name = "pnl_inner";
-            this.pnl_inner.Size = new System.Drawing.Size(48, 48);
-            this.pnl_inner.TabIndex = 0;
-            this.pnl_inner.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnl_inner_DragDrop);
-            this.pnl_inner.DragOver += new System.Windows.Forms.DragEventHandler(this.pnl_inner_DragOver);
-            this.pnl_inner.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_inner_Paint);
-            this.pnl_inner.MouseClick += new System.Windows.Forms.MouseEventHandler(this.frame_MouseClick);
-            this.pnl_inner.MouseEnter += new System.EventHandler(this.pnl_inner_MouseEnter);
-            this.pnl_inner.MouseLeave += new System.EventHandler(this.pnl_inner_MouseLeave);
             // 
             // cmenu_frame
             // 
@@ -68,15 +55,19 @@
             // 
             // FrameUC
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnl_inner);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "FrameUC";
             this.Padding = new System.Windows.Forms.Padding(26);
             this.Size = new System.Drawing.Size(100, 100);
             this.Load += new System.EventHandler(this.FrameUC_Load);
+            this.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.FrameUC_ControlAdded);
+            this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.FrameUC_ControlRemoved);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.FrameUC_DragDrop);
+            this.DragOver += new System.Windows.Forms.DragEventHandler(this.FrameUC_DragOver);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FrameUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.frame_MouseClick);
             this.MouseEnter += new System.EventHandler(this.FrameUC_MouseEnter);
@@ -87,8 +78,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnl_inner;
         private System.Windows.Forms.ContextMenuStrip cmenu_frame;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }

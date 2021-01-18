@@ -37,15 +37,44 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             UserControl mul = (UserControl)sender;
             Graphics g = e.Graphics;
 
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+            int lineHT = mul.ClientRectangle.Height - 6,
+                lineWd = mul.ClientRectangle.Width - 2;
 
-            Color col = Color.Black;
-            int w = 1;
-            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(col, w), new Rectangle(0,
-                                                           0,
-                                                           mul.ClientRectangle.Width - w,
-                                                           mul.ClientRectangle.Height - w));
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            GraphicsPath gpath = new GraphicsPath();
+
+            Point[] topCurve = {
+                                    new Point(lineWd, 5),
+                                    new Point(mul.ClientRectangle.Width / 2, 1),
+                                    new Point(0, 5)
+                               };
+
+            Point[] botCurve = {
+                                    new Point(0, lineHT),
+                                    new Point(mul.ClientRectangle.Width / 2, mul.ClientRectangle.Height - 3),
+                                    new Point(lineWd, lineHT)
+                               };
+
+            
+            gpath.AddLine(new Point(0, 5), new Point(0, lineHT));
+            gpath.AddCurve(botCurve);
+            gpath.AddLine(new Point(lineWd, 5), new Point(lineWd, lineHT));
+            gpath.AddCurve(topCurve);
+
+            Pen pen = new Pen(Color.Black, 2);
+
+            g.DrawPath(pen, gpath);
+            g.FillPath(Brushes.PowderBlue, gpath);
+
+
+            //Color col = Color.Black;
+            //int w = 1;
+            //int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+            //g.DrawRectangle(new Pen(col, w), new Rectangle(0,
+            //                                               0,
+            //                                               mul.ClientRectangle.Width - w,
+            //                                               mul.ClientRectangle.Height - w));
         }
 
         private void _mullionUC_mullionUCMouseUpEventRaised(object sender, System.Windows.Forms.MouseEventArgs e)

@@ -43,7 +43,7 @@ namespace PresentationLayer.Tests
             flp_multi.Dock = DockStyle.Fill;
             flp_multi.Margin = new Padding(0);
             flp_multi.Paint += new PaintEventHandler(Border_Paint);
-            frm.pnl_inner.Controls.Add(flp_multi);
+            frm.pnl_frame.Controls.Add(flp_multi);
 
             Panel pnl = new Panel();
             pnl.Size = new Size(180, 330);
@@ -53,14 +53,14 @@ namespace PresentationLayer.Tests
             pnl.Resize += Pnl_Resize;
 
             Panel pnl2 = new Panel();
-            pnl2.Size = new Size(180, 350);
+            pnl2.Size = new Size(180, 330);
             pnl2.BackColor = Color.DarkGray;
-            pnl2.Margin = new Padding(0);
+            pnl2.Margin = new Padding(0, 10, 10, 10);
             pnl2.Paint += new PaintEventHandler(Border_Paint);
 
             flp_multi.Controls.Add(pnl);
             flp_multi.Controls.Add((UserControl)mullionUC);
-            //frm.flp_multi.Controls.Add(pnl2);
+            flp_multi.Controls.Add(pnl2);
 
             frm.ShowDialog();
         }

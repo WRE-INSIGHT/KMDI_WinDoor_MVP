@@ -136,6 +136,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void _multiPanelMullionUC_deleteClickedEventRaised(object sender, EventArgs e)
         {
             _multiPanelModel.MPanel_Visibility = false;
+            if (_frameModel.Frame_Type.ToString().Contains("Window"))
+            {
+                _frameModel.Frame_Type = FrameModel.Frame_Padding.Window;
+            }
+            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
+            {
+                _frameModel.Frame_Type = FrameModel.Frame_Padding.Door;
+            }
         }
 
         private void _multiPanelMullionUC_divCountClickedEventRaised(object sender, EventArgs e)
@@ -185,22 +193,49 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void _multiPanelMullionUC_flpMulltiPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            FlowLayoutPanel pnl = (FlowLayoutPanel)sender;
+            FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            Font drawFont = new Font("Segoe UI", 12 ); //* zoom);
+            int pInnerX = 10,
+            pInnerY = 10,
+            pInnerWd = fpnl.ClientRectangle.Width - 20,
+            pInnerHt = fpnl.ClientRectangle.Height - 20;
+
+            Point[] corner_points = new[]
+            {
+                    new Point(0,0),
+                    new Point(pInnerX, pInnerY),
+                    new Point(fpnl.ClientRectangle.Width, 0),
+                    new Point(pInnerX + pInnerWd, pInnerY),
+                    new Point(0, fpnl.ClientRectangle.Height),
+                    new Point(pInnerX, pInnerY + pInnerHt),
+                    new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
+                    new Point(pInnerX + pInnerWd, pInnerY + pInnerHt)
+                };
+
+            for (int i = 0; i < corner_points.Length - 1; i += 2)
+            {
+                g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
+            }
+
+
+            Rectangle bounds = new Rectangle(new Point(10, 10),
+                                             new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 20));
+            g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), bounds);
+            g.DrawRectangle(new Pen(color, 1), bounds);
+
+            Font drawFont = new Font("Segoe UI", 12); //* zoom);
             StringFormat drawFormat = new StringFormat();
             drawFormat.Alignment = StringAlignment.Near;
             drawFormat.LineAlignment = StringAlignment.Near;
-            g.DrawString("Multi_Panel: " + _multiPanelModel.MPanel_Type + "(" + _multiPanelModel.MPanel_Divisions + ")", drawFont, new SolidBrush(Color.Black), 0, 0);
+            g.DrawString("Multi_Panel: " + _multiPanelModel.MPanel_Type + "(" + _multiPanelModel.MPanel_Divisions + ")", drawFont, new SolidBrush(Color.Black), 10, 10);
 
-
-            int w = 1;
-            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
-                                                                   0,
-                                                                   pnl.ClientRectangle.Width - w,
-                                                                   pnl.ClientRectangle.Height - w));
+            //int w = 1;
+            //int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+            //g.DrawRectangle(new Pen(color, w), new Rectangle(0,
+            //                                                 0,
+            //                                                 pnl.ClientRectangle.Width - w,
+            //                                                 pnl.ClientRectangle.Height - w));
 
         }
 

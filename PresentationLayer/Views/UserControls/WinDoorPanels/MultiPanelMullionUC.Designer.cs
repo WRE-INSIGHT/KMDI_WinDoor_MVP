@@ -78,8 +78,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.flp_MultiMullion);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "MultiPanelMullionUC";
             this.Size = new System.Drawing.Size(300, 300);
             this.cmenu_mulltiP.ResumeLayout(false);

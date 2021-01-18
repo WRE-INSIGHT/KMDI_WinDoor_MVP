@@ -53,6 +53,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        (fixedpnl.ClientRectangle.Height - 10) - w));
 
             }
+
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                   0,
+                                                                   fixedpnl.ClientRectangle.Width - w,
+                                                                   fixedpnl.ClientRectangle.Height - w));
         }
 
         private void _fixedPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
@@ -130,8 +136,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _initialLoad = false;
         }
 
+//for Testing
         //public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
-        //{ //for Testing
+        //{ 
         //    unityC
         //        .RegisterType<IFixedPanelUC, FixedPanelUC>()
         //        .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>();

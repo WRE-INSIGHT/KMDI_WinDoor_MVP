@@ -15,6 +15,7 @@ using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ServiceLayer.Services.MultiPanelServices;
+using System.Linq;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -79,13 +80,118 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.frameLoadEventRaised += new EventHandler(OnFrameLoadEventRaised);
             _frameUC.deleteCmenuEventRaised += new EventHandler(OnDeleteCmenuEventRaised);
             _frameUC.outerFramePaintEventRaised += new PaintEventHandler(OnOuterFramePaintEventRaised);
-            _frameUC.innerFramePaintEventRaised += new PaintEventHandler(OnInnerFramePaintEventRaised);
+            //_frameUC.innerFramePaintEventRaised += new PaintEventHandler(OnInnerFramePaintEventRaised);
             _frameUC.frameMouseClickEventRaised += new MouseEventHandler(OnFrameMouseClickEventRaised);
             _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);
             _frameUC.frameMouseLeaveEventRaised += new EventHandler(OnFrameMouseLeaveEventRaised);
-            _frameUC.panelInnerMouseEnterEventRaised += new EventHandler(OnPanelInnerMouseEnterEventRaised);
-            _frameUC.panelInnerMouseLeaveEventRaised += new EventHandler(OnPanelInnerMouseLeaveEventRaised);
-            _frameUC.panelInnerDragDropEventRaised += new DragEventHandler(OnPanelInnerDragDropEventRaised);
+            _frameUC.frameDragDropEventRaised += _frameUC_frameDragDropEventRaised;
+            //_frameUC.panelInnerMouseEnterEventRaised += new EventHandler(OnPanelInnerMouseEnterEventRaised);
+            //_frameUC.panelInnerMouseLeaveEventRaised += new EventHandler(OnPanelInnerMouseLeaveEventRaised);
+            //_frameUC.panelInnerDragDropEventRaised += new DragEventHandler(OnPanelInnerDragDropEventRaised);
+        }
+
+        private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)
+        {
+            UserControl frame = (UserControl)sender; //Control na babagsakan
+            string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
+
+            int panelID = _mainPresenter.GetPanelCount() + 1,
+                multiID = _mainPresenter.GetMultiPanelCount() + 1,
+                droped_objWD = frame.Width - _frameModel.Frame_Padding_int.All * 2,
+                droped_objHT = frame.Height - _frameModel.Frame_Padding_int.All * 2;
+
+            IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
+
+            if (data.Contains("Multi-Panel"))
+            {
+                FlowDirection flow = FlowDirection.LeftToRight;
+                if (data.Contains("Transom"))
+                {
+                    flow = FlowDirection.TopDown;
+                }
+                _multipanelModel = _multipanelServices.AddMultiPanelModel(droped_objWD,
+                                                                          droped_objHT,
+                                                                          frame,
+                                                                          frame,
+                                                                          true,
+                                                                          flow,
+                                                                          multiID);
+                _frameModel.Lst_MultiPanel.Add(_multipanelModel);
+
+                if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                {
+                    _frameModel.Frame_Type = FrameModel.Frame_Padding.Window_With_MultiPanel;
+                }
+                else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    _frameModel.Frame_Type = FrameModel.Frame_Padding.Door_With_MultiPanel;
+                }
+
+                if (data.Contains("Mullion"))
+                {
+                    IMultiPanelMullionUCPresenter multiUCP = _multiUCP.GetNewInstance(_unityC, _multipanelModel, _frameModel, _mainPresenter);
+                    IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
+                    frame.Controls.Add((UserControl)multiUC);
+                }
+            }
+            else
+            {
+                _panelModel = _panelServices.AddPanelModel(droped_objWD,
+                                                           frame.Height - _frameModel.Frame_Padding_int.All * 2,
+                                                           frame,
+                                                           frame,
+                                                           (UserControl)framePropUC,
+                                                           data,
+                                                           true,
+                                                           panelID);
+                _frameModel.Lst_Panel.Add(_panelModel);
+
+                IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+                _frameModel.FrameProp_Height += 148;
+
+                if (data == "Fixed Panel")
+                {
+                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+                    frame.Controls.Add((UserControl)fixedUC);
+                    fixedUCP.SetInitialLoadFalse();
+
+                    //IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
+                    //IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
+                    //pnl_inner_willRenderImg.Controls.Add((UserControl)fixedImagerUC);
+                }
+                else if (data == "Casement Panel")
+                {
+                    ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+                    frame.Controls.Add((UserControl)casementUC);
+
+                    //ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel);
+                    //ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
+                    //pnl_inner_willRenderImg.Controls.Add((UserControl)casementImagerUC);
+                }
+                else if (data == "Awning Panel")
+                {
+                    IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+                    frame.Controls.Add((UserControl)awningUC);
+
+                    //IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel);
+                    //IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
+                    //pnl_inner_willRenderImg.Controls.Add((UserControl)awningImagerUC);
+                }
+                else if (data == "Sliding Panel")
+                {
+                    ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+                    frame.Controls.Add((UserControl)slidingUC);
+
+                    //ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC, _panelModel);
+                    //ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
+                    //pnl_inner_willRenderImg.Controls.Add((UserControl)slidingImagerUC);
+                }
+            }
         }
 
         private void OnPanelInnerDragDropEventRaised(object sender, DragEventArgs e)
@@ -187,17 +293,17 @@ namespace PresentationLayer.Presenter.UserControls
             }
         }
 
-        private void OnPanelInnerMouseLeaveEventRaised(object sender, EventArgs e)
-        {
-            color = Color.Black;
-            _frameUC.InvalidateThis();
-        }
+        //private void OnPanelInnerMouseLeaveEventRaised(object sender, EventArgs e)
+        //{
+        //    color = Color.Black;
+        //    _frameUC.InvalidateThis();
+        //}
 
-        private void OnPanelInnerMouseEnterEventRaised(object sender, EventArgs e)
-        {
-            color = Color.Blue;
-            _frameUC.InvalidateThis();
-        }
+        //private void OnPanelInnerMouseEnterEventRaised(object sender, EventArgs e)
+        //{
+        //    color = Color.Blue;
+        //    _frameUC.InvalidateThis();
+        //}
 
         private void OnFrameMouseLeaveEventRaised(object sender, EventArgs e)
         {
@@ -233,21 +339,21 @@ namespace PresentationLayer.Presenter.UserControls
             }
         }
 
-        public void OnInnerFramePaintEventRaised(object sender, PaintEventArgs e)
-        {
-            Panel pnl = (Panel)sender;
-            Graphics g = e.Graphics;
+        //public void OnInnerFramePaintEventRaised(object sender, PaintEventArgs e)
+        //{
+        //    Panel pnl = (Panel)sender;
+        //    Graphics g = e.Graphics;
 
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+        //    g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            Color col = Color.Black;
-            int w = 1;
-            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(col, w), new Rectangle(0,
-                                                           0,
-                                                           pnl.ClientRectangle.Width - w,
-                                                           pnl.ClientRectangle.Height - w));
-        }
+        //    Color col = Color.Black;
+        //    int w = 1;
+        //    int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+        //    g.DrawRectangle(new Pen(col, w), new Rectangle(0,
+        //                                                   0,
+        //                                                   pnl.ClientRectangle.Width - w,
+        //                                                   pnl.ClientRectangle.Height - w));
+        //}
 
         public void OnFrameLoadEventRaised(object sender, EventArgs e)
         {
@@ -261,7 +367,7 @@ namespace PresentationLayer.Presenter.UserControls
             frameBinding.Add("Frame_Visible", new Binding("Visible", _frameModel, "Frame_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Width", new Binding("Width", _frameModel, "Frame_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Height", new Binding("Height", _frameModel, "Frame_Height", true, DataSourceUpdateMode.OnPropertyChanged));
-            frameBinding.Add("Frame_Padding", new Binding("Padding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
+            frameBinding.Add("Frame_Padding", new Binding("thisPadding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_ID", new Binding("frameID", _frameModel, "Frame_ID", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return frameBinding;
@@ -275,7 +381,22 @@ namespace PresentationLayer.Presenter.UserControls
             Graphics g = e.Graphics;
 
             UserControl pfr = (UserControl)sender;
-            Panel pnl_inner = (Panel)pfr.Controls[0];
+
+            int fr_pads = 0;
+            if (_frameModel.Frame_Type.ToString().Contains("Window"))
+            {
+                fr_pads = 26;
+            }
+            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
+            {
+                fr_pads = 33;
+            }
+
+            Rectangle pnl_inner = new Rectangle(new Point(fr_pads, fr_pads), 
+                                                new Size(pfr.ClientRectangle.Width - 1 - (fr_pads * 2), 
+                                                         pfr.ClientRectangle.Height - 1 - (fr_pads * 2)));
+
+            //Panel pnl_inner = (Panel)pfr.Controls[0];
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -301,6 +422,8 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);
             }
+            
+            g.DrawRectangle(blkPen, pnl_inner);
 
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));

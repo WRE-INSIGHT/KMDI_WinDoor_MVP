@@ -12,21 +12,22 @@ namespace PresentationLayer.Views.UserControls
     {
         bool thisVisible { get; }
         int frameID { get; set; }
+        Padding thisPadding { get; set; }
         event EventHandler frameLoadEventRaised;
         event EventHandler deleteCmenuEventRaised;
         event EventHandler frameMouseEnterEventRaised;
         event EventHandler frameMouseLeaveEventRaised;
-        event EventHandler panelInnerMouseEnterEventRaised;
-        event EventHandler panelInnerMouseLeaveEventRaised;
+        //event EventHandler panelInnerMouseEnterEventRaised;
+        //event EventHandler panelInnerMouseLeaveEventRaised;
         event PaintEventHandler outerFramePaintEventRaised;
-        event PaintEventHandler innerFramePaintEventRaised;
+        //event PaintEventHandler innerFramePaintEventRaised;
         event MouseEventHandler frameMouseClickEventRaised;
-        event DragEventHandler panelInnerDragDropEventRaised;
+        //event DragEventHandler panelInnerDragDropEventRaised;
+        event DragEventHandler frameDragDropEventRaised;
         void InvalidateThis();
         void InvalidateThisParent();
         void InvalidateThisParentsParent();
-        void InvalidatePanelInner();
         ContextMenuStrip GetFrameCmenu();
-        Panel GetInnerPanel();
+        //Panel GetInnerPanel();
     }
 }

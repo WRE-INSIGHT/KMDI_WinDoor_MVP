@@ -39,7 +39,6 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnRdBtnCheckedChangedEventRaised(object sender, EventArgs e)
         {
-            _frameUC.InvalidatePanelInner();
             _frameUC.InvalidateThisParent();
             _frameUC.InvalidateThisParentsParent();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
@@ -50,7 +49,6 @@ namespace PresentationLayer.Presenter.UserControls
             NumericUpDown numW = (NumericUpDown)sender;
             _frameModel.Frame_Width = Convert.ToInt32(numW.Value);
             _frameUC.InvalidateThis();
-            _frameUC.InvalidatePanelInner();
             _frameUC.InvalidateThisParent();
             _frameUC.InvalidateThisParentsParent();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
@@ -61,7 +59,6 @@ namespace PresentationLayer.Presenter.UserControls
             NumericUpDown numH = (NumericUpDown)sender;
             _frameModel.Frame_Height = Convert.ToInt32(numH.Value);
             _frameUC.InvalidateThis();
-            _frameUC.InvalidatePanelInner();
             _frameUC.InvalidateThisParent();
             _frameUC.InvalidateThisParentsParent();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
