@@ -8,12 +8,16 @@ using Unity;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using ModelLayer.Model.Quotation.Divider;
+using CommonComponents;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
-    public class MullionUCPresenter : IMullionUCPresenter
+    public class MullionUCPresenter : IMullionUCPresenter, IPresenterCommon
     {
         IMullionUC _mullionUC;
+
+        private IDividerModel _divModel;
 
         bool _mouseDown;
         private Point _point_of_origin;
@@ -92,8 +96,9 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             if (e.Button == MouseButtons.Left && _mouseDown) //&& me.Location.X <= flp.Width - me.Width)
             {
                 flp.Controls[me_indx - 1].Width += (e.X - _point_of_origin.X);
-                flp.Invalidate();
-                flp.Parent.Parent.Invalidate(); //invalidate frameUC
+                flp.Controls[me_indx + 1].Width -= (e.X - _point_of_origin.X);
+                //flp.Invalidate();
+                //flp.Parent.Parent.Invalidate(); //invalidate frameUC
                 //_mullionUC.Mullion_Left += (e.X - _point_of_origin.X);
 
                 //dito ilagay yung calling ng function sa Frame para mag-create ng illusion sa OVERLAPPING
@@ -111,10 +116,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         public IMullionUC GetMullion()
         {
+            _mullionUC.ThisBinding(CreateBindingDictionary());
             return _mullionUC;
         }
-     
-        public IMullionUCPresenter GetNewInstance(IUnityContainer unityC)
+
+        public IMullionUC GetMullion(string test) //for Testing
+        {
+            return _mullionUC;
+        }
+
+        public IMullionUCPresenter GetNewInstance(IUnityContainer unityC) //for Testing
         {
             unityC
                 .RegisterType<IMullionUC, MullionUC>()
@@ -122,6 +133,28 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             MullionUCPresenter mullionUCP = unityC.Resolve<MullionUCPresenter>();
 
             return mullionUCP;
-        }   
+        }
+
+        public IMullionUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel)
+        {
+            unityC
+                .RegisterType<IMullionUC, MullionUC>()
+                .RegisterType<IMullionUCPresenter, MullionUCPresenter>();
+            MullionUCPresenter mullionUCP = unityC.Resolve<MullionUCPresenter>();
+            mullionUCP._divModel = divModel;
+
+            return mullionUCP;
+        }
+
+        public Dictionary<string, Binding> CreateBindingDictionary()
+        {
+            Dictionary<string, Binding> divBinding = new Dictionary<string, Binding>();
+            divBinding.Add("Div_ID", new Binding("Div_ID", _divModel, "Div_ID", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_Visible", new Binding("Visible", _divModel, "Div_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_Width", new Binding("Width", _divModel, "Div_Width", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_Height", new Binding("Height", _divModel, "Div_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            return divBinding;
+        }
     }
 }

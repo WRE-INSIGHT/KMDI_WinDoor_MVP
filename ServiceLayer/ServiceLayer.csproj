@@ -45,6 +45,8 @@
     <Compile Include="CommonServices\IModelDataAnnotationCheck.cs" />
     <Compile Include="CommonServices\ModelDataAnnotationCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DividerServices\DividerServices.cs" />
+    <Compile Include="Services\DividerServices\IDividerServices.cs" />
     <Compile Include="Services\FrameServices\FrameServices.cs" />
     <Compile Include="Services\FrameServices\IFrameServices.cs" />
     <Compile Include="Services\MultiPanelServices\IMultiPanelServices.cs" />

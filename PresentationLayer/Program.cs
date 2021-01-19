@@ -27,6 +27,10 @@ using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using ServiceLayer.Services.MultiPanelServices;
 using ModelLayer.Model.Quotation.MultiPanel;
+using PresentationLayer.Views.UserControls.Dividers;
+using PresentationLayer.Presenter.UserControls.Dividers;
+using ServiceLayer.Services.DividerServices;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace PresentationLayer
 {
@@ -66,6 +70,9 @@ namespace PresentationLayer
 
                 .RegisterType<IMultiPanelServices, MultiPanelServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelModel, MultiPanelModel>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IDividerServices, DividerServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDividerModel, DividerModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
 
@@ -125,6 +132,9 @@ namespace PresentationLayer
 
                 .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IMullionUC, MullionUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMullionUCPresenter, MullionUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

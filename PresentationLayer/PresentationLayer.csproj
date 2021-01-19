@@ -280,6 +280,12 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_FixedPanelUC.Designer.cs">
       <DependentUpon>Thumbs_FixedPanelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MullionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MullionUC.Designer.cs">
+      <DependentUpon>Thumbs_MullionUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MultiPanelMullionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -382,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_FixedPanelUC.resx">
       <DependentUpon>Thumbs_FixedPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MullionUC.resx">
+      <DependentUpon>Thumbs_MullionUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MultiPanelMullionUC.resx">
       <DependentUpon>Thumbs_MultiPanelMullionUC.cs</DependentUpon>

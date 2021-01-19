@@ -120,16 +120,22 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                 {
-                    _frameModel.Frame_Type = FrameModel.Frame_Padding.Window_With_MultiPanel;
+                    _frameModel.Frame_Padding_int = new Padding(16);
+                    //_frameModel.Frame_Type = FrameModel.Frame_Padding.Window_With_MultiPanel;
                 }
                 else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
-                    _frameModel.Frame_Type = FrameModel.Frame_Padding.Door_With_MultiPanel;
+                    _frameModel.Frame_Padding_int = new Padding(26);
+                    //_frameModel.Frame_Type = FrameModel.Frame_Padding.Door_With_MultiPanel;
                 }
 
                 if (data.Contains("Mullion"))
                 {
-                    IMultiPanelMullionUCPresenter multiUCP = _multiUCP.GetNewInstance(_unityC, _multipanelModel, _frameModel, _mainPresenter);
+                    IMultiPanelMullionUCPresenter multiUCP = _multiUCP.GetNewInstance(_unityC, 
+                                                                                      _multipanelModel, 
+                                                                                      _frameModel, 
+                                                                                      _mainPresenter,
+                                                                                      (IFrameUC)frame);
                     IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
                 }
@@ -194,104 +200,107 @@ namespace PresentationLayer.Presenter.UserControls
             }
         }
 
-        private void OnPanelInnerDragDropEventRaised(object sender, DragEventArgs e)
-        {
-            Control pnl = (Control)sender; //Control na babagsakan
-            string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
+        //private void OnPanelInnerDragDropEventRaised(object sender, DragEventArgs e)
+        //{
+        //    Control pnl = (Control)sender; //Control na babagsakan
+        //    string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
 
-            int panelID = _mainPresenter.GetPanelCount() + 1;
-            int multiID = _mainPresenter.GetMultiPanelCount() + 1;
+        //    int panelID = _mainPresenter.GetPanelCount() + 1;
+        //    int multiID = _mainPresenter.GetMultiPanelCount() + 1;
 
-            IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
-            Panel pnl_inner_willRenderImg = _mainPresenter.GetFrameImagerInnerPanel(_frameModel.Frame_ID);
+        //    IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
+        //    Panel pnl_inner_willRenderImg = _mainPresenter.GetFrameImagerInnerPanel(_frameModel.Frame_ID);
 
-            if (pnl.Name == "pnl_inner")
-            {
-                if (data.Contains("Multi-Panel"))
-                {
-                    FlowDirection flow = FlowDirection.LeftToRight;
-                    if (data.Contains("Transom"))
-                    {
-                        flow = FlowDirection.TopDown;
-                    }
-                    _multipanelModel = _multipanelServices.AddMultiPanelModel(pnl.Width,
-                                                                              pnl.Height,
-                                                                              pnl,
-                                                                              (UserControl)pnl.Parent,
-                                                                              true,
-                                                                              flow,
-                                                                              multiID);
-                    _frameModel.Lst_MultiPanel.Add(_multipanelModel);
+        //    if (pnl.Name == "pnl_inner")
+        //    {
+        //        if (data.Contains("Multi-Panel"))
+        //        {
+        //            FlowDirection flow = FlowDirection.LeftToRight;
+        //            if (data.Contains("Transom"))
+        //            {
+        //                flow = FlowDirection.TopDown;
+        //            }
+        //            _multipanelModel = _multipanelServices.AddMultiPanelModel(pnl.Width,
+        //                                                                      pnl.Height,
+        //                                                                      pnl,
+        //                                                                      (UserControl)pnl.Parent,
+        //                                                                      true,
+        //                                                                      flow,
+        //                                                                      multiID);
+        //            _frameModel.Lst_MultiPanel.Add(_multipanelModel);
 
-                    if (data.Contains("Mullion"))
-                    {
-                        IMultiPanelMullionUCPresenter multiUCP = _multiUCP.GetNewInstance(_unityC, _multipanelModel, _frameModel, _mainPresenter);
-                        IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
-                        pnl.Controls.Add((UserControl)multiUC);
-                    }
-                }
-                else
-                {
-                    _panelModel = _panelServices.AddPanelModel(pnl.Width,
-                                                               pnl.Height,
-                                                               pnl,
-                                                               (UserControl)pnl.Parent,
-                                                               (UserControl)framePropUC,
-                                                               data,
-                                                               true,
-                                                               panelID);
-                    _frameModel.Lst_Panel.Add(_panelModel);
+        //            if (data.Contains("Mullion"))
+        //            {
+        //                IMultiPanelMullionUCPresenter multiUCP = _multiUCP.GetNewInstance(_unityC, 
+        //                    _multipanelModel, 
+        //                    _frameModel, 
+        //                    _mainPresenter);
+        //                IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
+        //                pnl.Controls.Add((UserControl)multiUC);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            _panelModel = _panelServices.AddPanelModel(pnl.Width,
+        //                                                       pnl.Height,
+        //                                                       pnl,
+        //                                                       (UserControl)pnl.Parent,
+        //                                                       (UserControl)framePropUC,
+        //                                                       data,
+        //                                                       true,
+        //                                                       panelID);
+        //            _frameModel.Lst_Panel.Add(_panelModel);
 
-                    IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                    framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
-                    _frameModel.FrameProp_Height += 148;
+        //            IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+        //            framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+        //            _frameModel.FrameProp_Height += 148;
 
-                    if (data == "Fixed Panel")
-                    {
-                        IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                        IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
-                        pnl.Controls.Add((UserControl)fixedUC);
-                        fixedUCP.SetInitialLoadFalse();
+        //            if (data == "Fixed Panel")
+        //            {
+        //                IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+        //                IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+        //                pnl.Controls.Add((UserControl)fixedUC);
+        //                fixedUCP.SetInitialLoadFalse();
 
-                        IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
-                        IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
-                        pnl_inner_willRenderImg.Controls.Add((UserControl)fixedImagerUC);
-                    }
-                    else if (data == "Casement Panel")
-                    {
-                        ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                        ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
-                        pnl.Controls.Add((UserControl)casementUC);
+        //                IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
+        //                IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
+        //                pnl_inner_willRenderImg.Controls.Add((UserControl)fixedImagerUC);
+        //            }
+        //            else if (data == "Casement Panel")
+        //            {
+        //                ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+        //                ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+        //                pnl.Controls.Add((UserControl)casementUC);
 
 
-                        ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel);
-                        ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
-                        pnl_inner_willRenderImg.Controls.Add((UserControl)casementImagerUC);
-                    }
-                    else if (data == "Awning Panel")
-                    {
-                        IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                        IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
-                        pnl.Controls.Add((UserControl)awningUC);
+        //                ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel);
+        //                ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
+        //                pnl_inner_willRenderImg.Controls.Add((UserControl)casementImagerUC);
+        //            }
+        //            else if (data == "Awning Panel")
+        //            {
+        //                IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+        //                IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+        //                pnl.Controls.Add((UserControl)awningUC);
 
-                        IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel);
-                        IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
-                        pnl_inner_willRenderImg.Controls.Add((UserControl)awningImagerUC);
-                    }
-                    else if (data == "Sliding Panel")
-                    {
-                        ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                        ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
-                        pnl.Controls.Add((UserControl)slidingUC);
+        //                IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel);
+        //                IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
+        //                pnl_inner_willRenderImg.Controls.Add((UserControl)awningImagerUC);
+        //            }
+        //            else if (data == "Sliding Panel")
+        //            {
+        //                ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+        //                ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+        //                pnl.Controls.Add((UserControl)slidingUC);
 
-                        ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC, _panelModel);
-                        ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
-                        pnl_inner_willRenderImg.Controls.Add((UserControl)slidingImagerUC);
-                    }
-                }
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-            }
-        }
+        //                ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC, _panelModel);
+        //                ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
+        //                pnl_inner_willRenderImg.Controls.Add((UserControl)slidingImagerUC);
+        //            }
+        //        }
+        //        _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+        //    }
+        //}
 
         //private void OnPanelInnerMouseLeaveEventRaised(object sender, EventArgs e)
         //{

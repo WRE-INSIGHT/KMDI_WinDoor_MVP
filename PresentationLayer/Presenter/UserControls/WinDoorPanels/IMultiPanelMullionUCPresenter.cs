@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using Unity;
 
@@ -11,7 +12,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
-                                                     IMainPresenter mainPresenter);
+                                                     IMainPresenter mainPresenter,
+                                                     IFrameUC frameUC);
         void frmDimensionResults(int frmDimension_numWd,
                                  int frmDimension_numHt);
     }

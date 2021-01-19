@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ServiceLayer.CommonServices;
 using System.Windows.Forms;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace ServiceLayer.Services.MultiPanelServices
 {
@@ -27,7 +28,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  FlowDirection mflow,
                                                  Control mpanelParent,
                                                  UserControl mpanelFrameGroup,
-                                                 int mpanelDivisions)
+                                                 int mpanelDivisions,
+                                                 List<IPanelModel> mpanelLstPanel)
         {
             MultiPanelModel mp = new MultiPanelModel(mid,
                                                       mname,
@@ -38,7 +40,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                       mflow,
                                                       mpanelParent,
                                                       mpanelFrameGroup,
-                                                      mpanelDivisions);
+                                                      mpanelDivisions,
+                                                      mpanelLstPanel);
 
             return mp;
         }
@@ -57,11 +60,16 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                    int mid = 0,
                                                    string mname = "",
                                                    DockStyle mdock = DockStyle.Fill,
-                                                   int mpanelDivisions = 1)
+                                                   int mpanelDivisions = 1,
+                                                   List<IPanelModel> mpanelLstPanel = null)
         {
             if (mname == "")
             {
                 mname = "MultiPanel " + mid;
+            }
+            if (mpanelLstPanel == null)
+            {
+                mpanelLstPanel = new List<IPanelModel>();
             }
             IMultiPanelModel _multipanelModel = CreateMultiPanel(mid,
                                                                  mname,
@@ -72,7 +80,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mflow,
                                                                  mpanelParent,
                                                                  mpanelFrameGroup,
-                                                                 mpanelDivisions);
+                                                                 mpanelDivisions,
+                                                                 mpanelLstPanel);
 
             return _multipanelModel;
         }

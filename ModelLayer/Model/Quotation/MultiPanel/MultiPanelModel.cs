@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace ModelLayer.Model.Quotation.MultiPanel
 {
@@ -229,6 +230,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        public List<IPanelModel> MPanelLst_Panel { get; set; }
+
+        public int GetVisiblePanel()
+        {
+            int visiblePanelCount = 0;
+            try
+            {
+                visiblePanelCount = MPanelLst_Panel.Count(pnl => pnl.Panel_Visibility == true);
+            }
+            catch (Exception)
+            {
+                visiblePanelCount = 0;
+            }
+            return visiblePanelCount;
+        }
+
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,
@@ -238,7 +255,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                FlowDirection mpanelFlowDirection,
                                Control mpanelParent,
                                UserControl mpanelFrameGroup,
-                               int mpanelDivisions)
+                               int mpanelDivisions,
+                               List<IPanelModel> mpanelLstPanel)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -250,6 +268,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_Parent = mpanelParent;
             MPanel_FrameGroup = mpanelFrameGroup;
             MPanel_Divisions = mpanelDivisions;
+            MPanelLst_Panel = mpanelLstPanel;
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace PresentationLayer.Views.UserControls.Dividers
+﻿namespace PresentationLayer.Views.UserControls.WinDoorPanels.Thumbs
 {
-    partial class MullionUC
+    partial class Thumbs_MullionUC
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,25 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // MullionUC
+            // panel1
+            // 
+            this.panel1.BackgroundImage = global::PresentationLayer.Properties.Resources.Mullion;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(5, 5);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(55, 53);
+            this.panel1.TabIndex = 2;
+            // 
+            // Thumbs_MullionUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "MullionUC";
-            this.Size = new System.Drawing.Size(26, 350);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MullionUC_Paint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseUp);
+            this.BackColor = System.Drawing.Color.DarkGray;
+            this.Controls.Add(this.panel1);
+            this.Name = "Thumbs_MullionUC";
+            this.Padding = new System.Windows.Forms.Padding(5);
+            this.Size = new System.Drawing.Size(65, 63);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel panel1;
     }
 }

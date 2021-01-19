@@ -45,6 +45,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Graphics g = e.Graphics;
             int w = 1;
 
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
             if (_panelModel.Panel_Orient == true)
             {
                 g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(5,
@@ -88,6 +90,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _panelModel.Panel_Height = thisHt;
                     }
                 }
+                ((UserControl)sender).Invalidate();
             }
             catch (Exception ex)
             {

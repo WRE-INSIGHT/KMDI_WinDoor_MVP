@@ -35,7 +35,7 @@ namespace PresentationLayer.Tests
             frmDividerTesting frm = new frmDividerTesting();
 
             IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(UnityC);
-            IMullionUC mullionUC = mullionUCP.GetMullion();
+            IMullionUC mullionUC = mullionUCP.GetMullion("test");
 
             FlowLayoutPanel flp_multi = new FlowLayoutPanel();
             flp_multi.Name = "multiPnl";
@@ -57,6 +57,7 @@ namespace PresentationLayer.Tests
             pnl2.BackColor = Color.DarkGray;
             pnl2.Margin = new Padding(0, 10, 10, 10);
             pnl2.Paint += new PaintEventHandler(Border_Paint);
+            pnl2.Resize += Pnl_Resize;
 
             flp_multi.Controls.Add(pnl);
             flp_multi.Controls.Add((UserControl)mullionUC);

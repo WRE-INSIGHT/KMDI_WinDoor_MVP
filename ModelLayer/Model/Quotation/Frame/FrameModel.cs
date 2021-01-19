@@ -18,8 +18,8 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             Window = 26,
             Door = 33,
-            Window_With_MultiPanel = 16,
-            Door_With_MultiPanel = 23,
+            //Window_With_MultiPanel = 16,
+            //Door_With_MultiPanel = 23,
             Concrete
         }
 
@@ -76,19 +76,33 @@ namespace ModelLayer.Model.Quotation.Frame
             set { _frameType = value;
                 if (value == Frame_Padding.Window)
                 {
-                    Frame_Padding_int = new Padding(26);
+                    if (Frame_Padding_int == new Padding(23)) //ibig sabihin nito galing Door
+                    {
+                        Frame_Padding_int = new Padding(16);
+                    }
+                    else
+                    {
+                        Frame_Padding_int = new Padding(26);
+                    }
                 }
-                else if (value == Frame_Padding.Window_With_MultiPanel)
-                {
-                    Frame_Padding_int = new Padding(16);
-                }
-                else if (value == Frame_Padding.Door_With_MultiPanel)
-                {
-                    Frame_Padding_int = new Padding(23);
-                }
+                //else if (value == Frame_Padding.Window_With_MultiPanel)
+                //{
+                //    Frame_Padding_int = new Padding(16);
+                //}
+                //else if (value == Frame_Padding.Door_With_MultiPanel)
+                //{
+                //    Frame_Padding_int = new Padding(23);
+                //}
                 else if (value == Frame_Padding.Door)
                 {
-                    Frame_Padding_int = new Padding(33);
+                    if (Frame_Padding_int == new Padding(16)) //ibig sabihin nito galing Window
+                    {
+                        Frame_Padding_int = new Padding(23);
+                    }
+                    else
+                    {
+                        Frame_Padding_int = new Padding(33);
+                    }
                 }
                 NotifyPropertyChanged();
             }
@@ -190,18 +204,18 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 Frame_Padding_int = new Padding(26);
             }
-            else if (frameType == Frame_Padding.Window_With_MultiPanel)
-            {
-                Frame_Padding_int = new Padding(16);
-            }
+            //else if (frameType == Frame_Padding.Window_With_MultiPanel)
+            //{
+            //    Frame_Padding_int = new Padding(16);
+            //}
             else if (frameType == Frame_Padding.Door)
             {
                 Frame_Padding_int = new Padding(33);
             }
-            else if (frameType == Frame_Padding.Door_With_MultiPanel)
-            {
-                Frame_Padding_int = new Padding(23);
-            }
+            //else if (frameType == Frame_Padding.Door_With_MultiPanel)
+            //{
+            //    Frame_Padding_int = new Padding(23);
+            //}
         }
     }
 }

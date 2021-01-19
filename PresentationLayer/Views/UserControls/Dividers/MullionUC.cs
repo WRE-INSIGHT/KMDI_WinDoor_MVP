@@ -16,6 +16,21 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public MullionUC()
         {
             InitializeComponent();
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.BackColor = Color.Transparent;
+        }
+
+        private int _divID;
+        public int Div_ID
+        {
+            get
+            {
+                return _divID;
+            }
+            set
+            {
+                _divID = value;
+            }
         }
 
         public int Mullion_Left
@@ -35,6 +50,14 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event MouseEventHandler mullionUCMouseMoveEventRaised;
         public event MouseEventHandler mullionUCMouseUpEventRaised;
         public event PaintEventHandler mullionUCPaintEventRaised;
+
+        public void ThisBinding(Dictionary<string, Binding> ModelBinding)
+        {
+            this.DataBindings.Add(ModelBinding["Div_ID"]);
+            this.DataBindings.Add(ModelBinding["Div_Visible"]);
+            this.DataBindings.Add(ModelBinding["Div_Width"]);
+            this.DataBindings.Add(ModelBinding["Div_Height"]);
+        }
 
         private void MullionUC_MouseDown(object sender, MouseEventArgs e)
         {

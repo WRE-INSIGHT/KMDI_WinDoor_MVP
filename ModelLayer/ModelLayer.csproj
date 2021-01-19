@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Quotation\Divider\DividerModel.cs" />
+    <Compile Include="Model\Quotation\Divider\IDividerModel.cs" />
     <Compile Include="Model\Quotation\Frame\FrameModel.cs" />
     <Compile Include="Model\Quotation\Frame\IFrameModel.cs" />
     <Compile Include="Model\Quotation\IQuotationModel.cs" />
