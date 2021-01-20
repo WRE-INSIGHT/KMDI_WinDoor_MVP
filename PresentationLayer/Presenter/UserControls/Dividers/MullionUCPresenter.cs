@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using ModelLayer.Model.Quotation.Divider;
 using CommonComponents;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -18,6 +19,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         IMullionUC _mullionUC;
 
         private IDividerModel _divModel;
+        private IMultiPanelModel _multiPanelModel;
 
         bool _mouseDown;
         private Point _point_of_origin;
@@ -36,7 +38,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _mullionUC.mullionUCPaintEventRaised += _mullionUC_mullionUCPaintEventRaised;
         }
 
-        private void _mullionUC_mullionUCPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
+        private void _mullionUC_mullionUCPaintEventRaised(object sender, PaintEventArgs e)
         {
             UserControl mul = (UserControl)sender;
             Graphics g = e.Graphics;
@@ -70,23 +72,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             g.DrawPath(pen, gpath);
             g.FillPath(Brushes.PowderBlue, gpath);
-
-
-            //Color col = Color.Black;
-            //int w = 1;
-            //int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            //g.DrawRectangle(new Pen(col, w), new Rectangle(0,
-            //                                               0,
-            //                                               mul.ClientRectangle.Width - w,
-            //                                               mul.ClientRectangle.Height - w));
         }
 
-        private void _mullionUC_mullionUCMouseUpEventRaised(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void _mullionUC_mullionUCMouseUpEventRaised(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
         }
 
-        private void _mullionUC_mullionUCMouseMoveEventRaised(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void _mullionUC_mullionUCMouseMoveEventRaised(object sender, MouseEventArgs e)
         {
             UserControl me = (UserControl)sender;
             FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent;
@@ -97,7 +90,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             {
                 flp.Controls[me_indx - 1].Width += (e.X - _point_of_origin.X);
                 flp.Controls[me_indx + 1].Width -= (e.X - _point_of_origin.X);
-                //flp.Invalidate();
+                flp.Invalidate();
                 //flp.Parent.Parent.Invalidate(); //invalidate frameUC
                 //_mullionUC.Mullion_Left += (e.X - _point_of_origin.X);
 
@@ -135,13 +128,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             return mullionUCP;
         }
 
-        public IMullionUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel)
+        public IMullionUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                  IDividerModel divModel,
+                                                  IMultiPanelModel multiPanelModel)
         {
             unityC
                 .RegisterType<IMullionUC, MullionUC>()
                 .RegisterType<IMullionUCPresenter, MullionUCPresenter>();
             MullionUCPresenter mullionUCP = unityC.Resolve<MullionUCPresenter>();
             mullionUCP._divModel = divModel;
+            mullionUCP._multiPanelModel = multiPanelModel;
 
             return mullionUCP;
         }

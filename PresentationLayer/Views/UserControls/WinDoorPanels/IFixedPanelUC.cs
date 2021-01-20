@@ -12,6 +12,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         event EventHandler fixedPanelUCSizeChangedEventRaised;
         event EventHandler deleteToolStripClickedEventRaised;
-        event PaintEventHandler lblFixedUCPaintEventRaised;
+        event PaintEventHandler fixedPanelUCPaintEventRaised;
+        event EventHandler fixedPanelMouseEnterEventRaised;
+        event EventHandler fixedPanelMouseLeaveEventRaised;
+
+        void InvalidateThis();
     }
 }

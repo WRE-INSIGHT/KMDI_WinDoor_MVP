@@ -18,8 +18,6 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             Window = 26,
             Door = 33,
-            //Window_With_MultiPanel = 16,
-            //Door_With_MultiPanel = 23,
             Concrete
         }
 
@@ -76,30 +74,30 @@ namespace ModelLayer.Model.Quotation.Frame
             set { _frameType = value;
                 if (value == Frame_Padding.Window)
                 {
-                    if (Frame_Padding_int == new Padding(23)) //ibig sabihin nito galing Door
+                    if (_framePadding == new Padding(23)) //ibig sabihin nito galing Door
                     {
                         Frame_Padding_int = new Padding(16);
                     }
-                    else
+                    else if(_framePadding == new Padding(33))
+                    {
+                        Frame_Padding_int = new Padding(26);
+                    }
+                    else if (_framePadding == new Padding(0))
                     {
                         Frame_Padding_int = new Padding(26);
                     }
                 }
-                //else if (value == Frame_Padding.Window_With_MultiPanel)
-                //{
-                //    Frame_Padding_int = new Padding(16);
-                //}
-                //else if (value == Frame_Padding.Door_With_MultiPanel)
-                //{
-                //    Frame_Padding_int = new Padding(23);
-                //}
                 else if (value == Frame_Padding.Door)
                 {
-                    if (Frame_Padding_int == new Padding(16)) //ibig sabihin nito galing Window
+                    if (_framePadding == new Padding(16)) //ibig sabihin nito galing Window
                     {
                         Frame_Padding_int = new Padding(23);
                     }
-                    else
+                    else if (_framePadding == new Padding(26))
+                    {
+                        Frame_Padding_int = new Padding(33);
+                    }
+                    else if (_framePadding == new Padding(0))
                     {
                         Frame_Padding_int = new Padding(33);
                     }
@@ -204,18 +202,10 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 Frame_Padding_int = new Padding(26);
             }
-            //else if (frameType == Frame_Padding.Window_With_MultiPanel)
-            //{
-            //    Frame_Padding_int = new Padding(16);
-            //}
             else if (frameType == Frame_Padding.Door)
             {
                 Frame_Padding_int = new Padding(33);
             }
-            //else if (frameType == Frame_Padding.Door_With_MultiPanel)
-            //{
-            //    Frame_Padding_int = new Padding(23);
-            //}
         }
     }
 }

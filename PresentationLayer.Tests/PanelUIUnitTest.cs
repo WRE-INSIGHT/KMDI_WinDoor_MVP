@@ -35,6 +35,7 @@ namespace PresentationLayer.Tests
         IUnityContainer UnityC;
 
         private IPanelModel _panelModel;
+        private IPanelServices _panelServices;
 
         [TestInitialize]
         public void SetUp()
@@ -125,52 +126,21 @@ namespace PresentationLayer.Tests
             _casementUCP = UnityC.Resolve<CasementPanelUCPresenter>();
             _awningUCP = UnityC.Resolve<AwningPanelUCPresenter>();
             _slidingUCP = UnityC.Resolve<SlidingPanelUCPresenter>();
+            _panelServices = UnityC.Resolve<PanelServices>();
 
             frmUITest frm = new frmUITest();
 
-            _panelModel = AddPanelModel(frm.Width,
-                                        frm.Height,
-                                        new UserControl(),
-                                        new UserControl(),
-                                        new UserControl(),
-                                        "Awning",
-                                        true,
-                                        1);
+            _panelModel = _panelServices.AddPanelModel(frm.Width,
+                                                       frm.Height,
+                                                       new UserControl(),
+                                                       new UserControl(),
+                                                       new UserControl(),
+                                                       new UserControl(),
+                                                       "Awning",
+                                                       true,
+                                                       1);
 
     }
-
-        public IPanelModel AddPanelModel(int panelWd,
-                                     int panelHt,
-                                     Control panelParent,
-                                     UserControl panelFrameGroup,
-                                     UserControl panelFramePropertiesGroup,
-                                     string panelType,
-                                     bool panelVisibility,
-                                     int panelID = 0,
-                                     string panelName = "",
-                                     DockStyle panelDock = DockStyle.Fill,
-                                     bool panelOrient = false)
-        {
-            if (panelName == "")
-            {
-                panelName = "Panel " + panelID;
-            }
-
-            IPanelServices _panelServices = new PanelServices(new ModelDataAnnotationCheck());
-            _panelModel = _panelServices.CreatePanelModel(panelID,
-                                                          panelName,
-                                                          panelWd,
-                                                          panelHt,
-                                                          panelDock,
-                                                          panelType,
-                                                          panelOrient,
-                                                          panelParent,
-                                                          panelFrameGroup,
-                                                          panelVisibility,
-                                                          panelFramePropertiesGroup);
-
-            return _panelModel;
-        }
 
         [TestMethod]
         public void CasementUITest()

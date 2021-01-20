@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using CommonComponents;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -22,6 +23,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+        private IMultiPanelModel _multiPanelModel;
 
         bool _initialLoad;
 
@@ -35,38 +37,69 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _fixedPanelUC.fixedPanelUCSizeChangedEventRaised += new EventHandler(OnFixedPanelUCSizeChangedEventRaised);
             _fixedPanelUC.deleteToolStripClickedEventRaised += _fixedPanelUC_deleteToolStripClickedEventRaised;
-            _fixedPanelUC.lblFixedUCPaintEventRaised += _fixedPanelUC_lblFixedUCPaintEventRaised;
+            _fixedPanelUC.fixedPanelUCPaintEventRaised += _fixedPanelUC_fixedPanelUCPaintEventRaised;
+            _fixedPanelUC.fixedPanelMouseLeaveEventRaised += _fixedPanelUC_fixedPanelMouseLeaveEventRaised;
+            _fixedPanelUC.fixedPanelMouseEnterEventRaised += _fixedPanelUC_fixedPanelMouseEnterEventRaised;
         }
 
-        private void _fixedPanelUC_lblFixedUCPaintEventRaised(object sender, PaintEventArgs e)
+        private void _fixedPanelUC_fixedPanelMouseEnterEventRaised(object sender, EventArgs e)
         {
-            Label fixedpnl = (Label)sender;
+            color = Color.Blue;
+            _fixedPanelUC.InvalidateThis();
+        }
+
+        private void _fixedPanelUC_fixedPanelMouseLeaveEventRaised(object sender, EventArgs e)
+        {
+            color = Color.Black;
+            _fixedPanelUC.InvalidateThis();
+        }
+
+        Color color = Color.Black;
+        private void _fixedPanelUC_fixedPanelUCPaintEventRaised(object sender, PaintEventArgs e)
+        {
+            UserControl fixedpnl = (UserControl)sender;
 
             Graphics g = e.Graphics;
             int w = 1;
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
 
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            Font drawFont = new Font("Times New Roman", 30);// * zoom);
+            StringFormat drawFormat = new StringFormat();
+            drawFormat.Alignment = StringAlignment.Center;
+            drawFormat.LineAlignment = StringAlignment.Center;
+            g.DrawString("F", drawFont, new SolidBrush(Color.Black), fixedpnl.ClientRectangle, drawFormat);
+
+            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
+                                                             0,
+                                                             fixedpnl.ClientRectangle.Width - w,
+                                                             fixedpnl.ClientRectangle.Height - w));
+
+            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(10,
+                                                                   10,
+                                                                   (fixedpnl.ClientRectangle.Width - 20) - w,
+                                                                   (fixedpnl.ClientRectangle.Height - 20) - w));
 
             if (_panelModel.Panel_Orient == true)
             {
-                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(5,
-                                                                       5,
-                                                                       (fixedpnl.ClientRectangle.Width - 10) - w,
-                                                                       (fixedpnl.ClientRectangle.Height - 10) - w));
+                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(15,
+                                                                       15,
+                                                                       (fixedpnl.ClientRectangle.Width - 30) - w,
+                                                                       (fixedpnl.ClientRectangle.Height - 30) - w));
 
             }
 
-            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
-                                                                   0,
-                                                                   fixedpnl.ClientRectangle.Width - w,
-                                                                   fixedpnl.ClientRectangle.Height - w));
         }
 
         private void _fixedPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
         {
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
+            if (_multiPanelModel != null)
+            {
+                _multiPanelModel.Reload_PanelMargin();
+            }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -114,6 +147,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             return fixedPanelUCP;
         }
 
+        public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                     IPanelModel panelModel,
+                                                     IFrameModel frameModel,
+                                                     IMainPresenter mainPresenter,
+                                                     IMultiPanelModel multiPanelModel)
+        {
+            unityC
+                .RegisterType<IFixedPanelUC, FixedPanelUC>()
+                .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>();
+            FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
+            fixedPanelUCP._panelModel = panelModel;
+            fixedPanelUCP._frameModel = frameModel;
+            fixedPanelUCP._mainPresenter = mainPresenter;
+            fixedPanelUCP._multiPanelModel = multiPanelModel;
+
+            return fixedPanelUCP;
+        }
+
         public IFixedPanelUC GetFixedPanelUC()
         {
             _initialLoad = true;
@@ -130,6 +181,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

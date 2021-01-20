@@ -7,6 +7,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ServiceLayer.CommonServices;
 using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace ServiceLayer.Services.MultiPanelServices
 {
@@ -29,7 +30,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  Control mpanelParent,
                                                  UserControl mpanelFrameGroup,
                                                  int mpanelDivisions,
-                                                 List<IPanelModel> mpanelLstPanel)
+                                                 List<IPanelModel> mpanelLstPanel,
+                                                 List<IDividerModel> mpanelLstDivider)
         {
             MultiPanelModel mp = new MultiPanelModel(mid,
                                                       mname,
@@ -41,7 +43,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                       mpanelParent,
                                                       mpanelFrameGroup,
                                                       mpanelDivisions,
-                                                      mpanelLstPanel);
+                                                      mpanelLstPanel,
+                                                      mpanelLstDivider);
 
             return mp;
         }
@@ -61,7 +64,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                    string mname = "",
                                                    DockStyle mdock = DockStyle.Fill,
                                                    int mpanelDivisions = 1,
-                                                   List<IPanelModel> mpanelLstPanel = null)
+                                                   List<IPanelModel> mpanelLstPanel = null,
+                                                   List<IDividerModel> mpanelLstDivider = null)
         {
             if (mname == "")
             {
@@ -70,6 +74,10 @@ namespace ServiceLayer.Services.MultiPanelServices
             if (mpanelLstPanel == null)
             {
                 mpanelLstPanel = new List<IPanelModel>();
+            }
+            if (mpanelLstDivider == null)
+            {
+                mpanelLstDivider = new List<IDividerModel>();
             }
             IMultiPanelModel _multipanelModel = CreateMultiPanel(mid,
                                                                  mname,
@@ -81,7 +89,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mpanelParent,
                                                                  mpanelFrameGroup,
                                                                  mpanelDivisions,
-                                                                 mpanelLstPanel);
+                                                                 mpanelLstPanel,
+                                                                 mpanelLstDivider);
 
             return _multipanelModel;
         }

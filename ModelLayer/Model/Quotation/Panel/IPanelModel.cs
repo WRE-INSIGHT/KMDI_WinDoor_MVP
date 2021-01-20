@@ -7,6 +7,7 @@ namespace ModelLayer.Model.Quotation.Panel
         string Panel_ChkText { get; set; }
         DockStyle Panel_Dock { get; set; }
         Control Panel_Parent { get; set; }
+        UserControl Panel_MultiPanelGroup { get; set; }
         UserControl Panel_FrameGroup { get; set; }
         UserControl Panel_FramePropertiesGroup { get; set; }
         int Panel_Height { get; set; }
@@ -19,5 +20,6 @@ namespace ModelLayer.Model.Quotation.Panel
         int PanelImageRenderer_Width { get; set; }
         bool Panel_Visibility { get; set; }
         float PanelImageRenderer_Zoom { get; set; }
+        Padding Panel_Margin { get; set; }
     }
 }

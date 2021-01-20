@@ -21,5 +21,6 @@ namespace PresentationLayer.Presenter
         void SetProfileType(string profileType);
         void SetHeight();
         void SetValues(int numWD, int numHT);
+        bool GetfrmResult();
     }
 }

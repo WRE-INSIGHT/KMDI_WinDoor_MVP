@@ -11,7 +11,6 @@ namespace ModelLayer.Model.Quotation.Panel
 {
     public class PanelModel : IPanelModel, INotifyPropertyChanged
     {
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -195,7 +194,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             set
             {
-                if (value.Name.Contains("pnl_inner"))
+                if (value.Name.Contains("Frame"))
                 {
                     _panelPNumEnable = false;
                 }
@@ -310,6 +309,36 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private Padding _panelMargin;
+        public Padding Panel_Margin
+        {
+            get
+            {
+                return _panelMargin;
+            }
+
+            set
+            {
+                _panelMargin = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private UserControl _panelMultiPanelGroup;
+        public UserControl Panel_MultiPanelGroup
+        {
+            get
+            {
+                return _panelMultiPanelGroup;
+            }
+
+            set
+            {
+                _panelMultiPanelGroup = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public PanelModel(int panelID,
                           string panelName,
                           int panelWd,
@@ -320,7 +349,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           Control panelParent,
                           UserControl panelFrameGroup,
                           bool panelVisibility,
-                          UserControl panelFramePropertiesGroup)
+                          UserControl panelFramePropertiesGroup,
+                          UserControl panelMultiPanelGroup)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -333,6 +363,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_FrameGroup = panelFrameGroup;
             Panel_Visibility = panelVisibility;
             Panel_FramePropertiesGroup = panelFramePropertiesGroup;
+            Panel_MultiPanelGroup = panelMultiPanelGroup;
         }
     }
 }

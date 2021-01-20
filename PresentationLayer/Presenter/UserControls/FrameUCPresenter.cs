@@ -80,14 +80,10 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.frameLoadEventRaised += new EventHandler(OnFrameLoadEventRaised);
             _frameUC.deleteCmenuEventRaised += new EventHandler(OnDeleteCmenuEventRaised);
             _frameUC.outerFramePaintEventRaised += new PaintEventHandler(OnOuterFramePaintEventRaised);
-            //_frameUC.innerFramePaintEventRaised += new PaintEventHandler(OnInnerFramePaintEventRaised);
             _frameUC.frameMouseClickEventRaised += new MouseEventHandler(OnFrameMouseClickEventRaised);
             _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);
             _frameUC.frameMouseLeaveEventRaised += new EventHandler(OnFrameMouseLeaveEventRaised);
             _frameUC.frameDragDropEventRaised += _frameUC_frameDragDropEventRaised;
-            //_frameUC.panelInnerMouseEnterEventRaised += new EventHandler(OnPanelInnerMouseEnterEventRaised);
-            //_frameUC.panelInnerMouseLeaveEventRaised += new EventHandler(OnPanelInnerMouseLeaveEventRaised);
-            //_frameUC.panelInnerDragDropEventRaised += new DragEventHandler(OnPanelInnerDragDropEventRaised);
         }
 
         private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)
@@ -121,12 +117,10 @@ namespace PresentationLayer.Presenter.UserControls
                 if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                 {
                     _frameModel.Frame_Padding_int = new Padding(16);
-                    //_frameModel.Frame_Type = FrameModel.Frame_Padding.Window_With_MultiPanel;
                 }
                 else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
                     _frameModel.Frame_Padding_int = new Padding(26);
-                    //_frameModel.Frame_Type = FrameModel.Frame_Padding.Door_With_MultiPanel;
                 }
 
                 if (data.Contains("Mullion"))
@@ -147,6 +141,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            frame,
                                                            frame,
                                                            (UserControl)framePropUC,
+                                                           null,
                                                            data,
                                                            true,
                                                            panelID);
@@ -348,22 +343,6 @@ namespace PresentationLayer.Presenter.UserControls
             }
         }
 
-        //public void OnInnerFramePaintEventRaised(object sender, PaintEventArgs e)
-        //{
-        //    Panel pnl = (Panel)sender;
-        //    Graphics g = e.Graphics;
-
-        //    g.SmoothingMode = SmoothingMode.AntiAlias;
-
-        //    Color col = Color.Black;
-        //    int w = 1;
-        //    int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-        //    g.DrawRectangle(new Pen(col, w), new Rectangle(0,
-        //                                                   0,
-        //                                                   pnl.ClientRectangle.Width - w,
-        //                                                   pnl.ClientRectangle.Height - w));
-        //}
-
         public void OnFrameLoadEventRaised(object sender, EventArgs e)
         {
             _frameUC.ThisBinding(CreateBindingDictionary());
@@ -378,6 +357,7 @@ namespace PresentationLayer.Presenter.UserControls
             frameBinding.Add("Frame_Height", new Binding("Height", _frameModel, "Frame_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Padding", new Binding("thisPadding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_ID", new Binding("frameID", _frameModel, "Frame_ID", true, DataSourceUpdateMode.OnPropertyChanged));
+            frameBinding.Add("Frame_Name", new Binding("Name", _frameModel, "Frame_Name", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return frameBinding;
         }
@@ -402,10 +382,8 @@ namespace PresentationLayer.Presenter.UserControls
             }
 
             Rectangle pnl_inner = new Rectangle(new Point(fr_pads, fr_pads), 
-                                                new Size(pfr.ClientRectangle.Width - 1 - (fr_pads * 2), 
-                                                         pfr.ClientRectangle.Height - 1 - (fr_pads * 2)));
-
-            //Panel pnl_inner = (Panel)pfr.Controls[0];
+                                                new Size(pfr.ClientRectangle.Width - (fr_pads * 2), 
+                                                         pfr.ClientRectangle.Height - (fr_pads * 2)));
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 

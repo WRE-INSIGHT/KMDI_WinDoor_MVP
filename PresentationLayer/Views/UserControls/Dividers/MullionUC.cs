@@ -16,8 +16,9 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public MullionUC()
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            this.BackColor = Color.Transparent;
+            //for mullion transparency
+            //this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            //this.BackColor = Color.Transparent;
         }
 
         private int _divID;
@@ -46,6 +47,14 @@ namespace PresentationLayer.Views.UserControls.Dividers
             }
         }
 
+        public Point Mullion_Location
+        {
+            get
+            {
+                return this.Location;
+            }
+        }
+        
         public event MouseEventHandler mullionUCMouseDownEventRaised;
         public event MouseEventHandler mullionUCMouseMoveEventRaised;
         public event MouseEventHandler mullionUCMouseUpEventRaised;
@@ -77,6 +86,18 @@ namespace PresentationLayer.Views.UserControls.Dividers
         private void MullionUC_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(this, mullionUCPaintEventRaised, e);
+        }
+
+        private void MullionUC_LocationChanged(object sender, EventArgs e)
+        {
+            if (this.Location.X == 0)
+            {
+                this.Margin = new Padding(10, 0, 0, 0);
+            }
+            else
+            {
+                this.Margin = new Padding(0, 0, 0, 0);
+            }
         }
     }
 }

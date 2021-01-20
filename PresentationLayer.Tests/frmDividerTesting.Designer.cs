@@ -36,7 +36,7 @@
             this.pnl_frame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_frame.Location = new System.Drawing.Point(30, 30);
             this.pnl_frame.Name = "pnl_frame";
-            this.pnl_frame.Padding = new System.Windows.Forms.Padding(16);
+            this.pnl_frame.Padding = new System.Windows.Forms.Padding(26);
             this.pnl_frame.Size = new System.Drawing.Size(442, 381);
             this.pnl_frame.TabIndex = 0;
             this.pnl_frame.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_frame_Paint);

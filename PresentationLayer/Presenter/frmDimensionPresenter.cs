@@ -21,6 +21,7 @@ namespace PresentationLayer.Presenter
         private IMultiPanelMullionUCPresenter _multiUCP;
 
         private string profile_type;
+        private bool _isFrmClosed;
         public enum Show_Purpose
         {
             Quotation = 1,
@@ -132,6 +133,7 @@ namespace PresentationLayer.Presenter
 
         private void OnbtnCancelClickedEventRaised(object sender, EventArgs e)
         {
+            _isFrmClosed = true;
             _frmDimensionView.ClosefrmDimension();
         }
 
@@ -142,6 +144,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
+                _isFrmClosed = false;
                 if (purpose == Show_Purpose.ChangeBasePlatformSize)
                 {
                     _mainPresenter.frmDimensionResults(purpose, _frmDimensionView.InumWidth, _frmDimensionView.InumHeight);
@@ -209,6 +212,11 @@ namespace PresentationLayer.Presenter
         {
             _frmDimensionView.InumWidth = numWD;
             _frmDimensionView.InumHeight = numHT;
+        }
+
+        public bool GetfrmResult()
+        {
+            return _isFrmClosed;
         }
     }
 }

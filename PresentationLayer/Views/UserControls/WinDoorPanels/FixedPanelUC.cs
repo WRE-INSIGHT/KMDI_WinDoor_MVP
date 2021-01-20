@@ -42,27 +42,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             set
             {
                 _pnlOrientation = value;
-                lbl_Fixed.Invalidate();
+                this.Invalidate();
             }
         }
 
         public event EventHandler fixedPanelUCSizeChangedEventRaised;
         public event EventHandler deleteToolStripClickedEventRaised;
-        public event PaintEventHandler lblFixedUCPaintEventRaised;
+        public event PaintEventHandler fixedPanelUCPaintEventRaised;
+        public event EventHandler fixedPanelMouseEnterEventRaised;
+        public event EventHandler fixedPanelMouseLeaveEventRaised;
 
-        Color color = Color.Black;
         private void FixedPanelUC_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            int w = 1;
-            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
-                                                           0,
-                                                           this.ClientRectangle.Width - w,
-                                                           this.ClientRectangle.Height - w));
+            EventHelpers.RaisePaintEvent(this, fixedPanelUCPaintEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> binding)
@@ -73,6 +65,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(binding["Panel_Height"]);
             this.DataBindings.Add(binding["Panel_Visibility"]);
             this.DataBindings.Add(binding["Panel_Orient"]);
+            this.DataBindings.Add(binding["Panel_Margin"]);
         }
 
         private void FixedPanelUC_SizeChanged(object sender, EventArgs e)
@@ -95,19 +88,17 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void FixedPanelUC_MouseEnter(object sender, EventArgs e)
         {
-            color = Color.Blue;
-            this.Invalidate();
+            EventHelpers.RaiseEvent(this, fixedPanelMouseEnterEventRaised, e);
         }
 
         private void FixedPanelUC_MouseLeave(object sender, EventArgs e)
         {
-            color = Color.Black;
-            this.Invalidate();
+            EventHelpers.RaiseEvent(this, fixedPanelMouseLeaveEventRaised, e);
         }
 
-        private void lbl_Fixed_Paint(object sender, PaintEventArgs e)
+        public void InvalidateThis()
         {
-            EventHelpers.RaisePaintEvent(sender, lblFixedUCPaintEventRaised, e);
+            this.Invalidate();
         }
     }
 }

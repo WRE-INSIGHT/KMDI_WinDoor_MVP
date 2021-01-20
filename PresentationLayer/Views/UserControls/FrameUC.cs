@@ -50,17 +50,12 @@ namespace PresentationLayer.Views.UserControls
         }
 
         public event EventHandler frameLoadEventRaised;
-        //public event PaintEventHandler innerFramePaintEventRaised;
         public event PaintEventHandler outerFramePaintEventRaised;
         public event MouseEventHandler frameMouseClickEventRaised;
         public event EventHandler deleteCmenuEventRaised;
         public event EventHandler frameMouseEnterEventRaised;
         public event EventHandler frameMouseLeaveEventRaised;
         public event DragEventHandler frameDragDropEventRaised;
-
-        //public event EventHandler panelInnerMouseEnterEventRaised;
-        //public event EventHandler panelInnerMouseLeaveEventRaised;
-        //public event DragEventHandler panelInnerDragDropEventRaised;
 
         private void FrameUC_Paint(object sender, PaintEventArgs e)
         {
@@ -75,11 +70,6 @@ namespace PresentationLayer.Views.UserControls
         public void InvalidateThis()
         {
             this.Invalidate();
-        }
-
-        private void pnl_inner_Paint(object sender, PaintEventArgs e)
-        {
-            //EventHelpers.RaisePaintEvent(sender, innerFramePaintEventRaised, e);
         }
 
         private void frame_MouseClick(object sender, MouseEventArgs e)
@@ -107,16 +97,6 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseEvent(sender, frameMouseLeaveEventRaised, e);
         }
 
-        private void pnl_inner_MouseEnter(object sender, EventArgs e)
-        {
-            //EventHelpers.RaiseEvent(sender, panelInnerMouseEnterEventRaised, e);
-        }
-
-        private void pnl_inner_MouseLeave(object sender, EventArgs e)
-        {
-            //EventHelpers.RaiseEvent(sender, panelInnerMouseLeaveEventRaised, e);
-        }
-
         public void ThisBinding(Dictionary<string, Binding> binding)
         {
             this.DataBindings.Add(binding["Frame_ID"]);
@@ -124,6 +104,7 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(binding["Frame_Width"]);
             this.DataBindings.Add(binding["Frame_Height"]);
             this.DataBindings.Add(binding["Frame_Padding"]);
+            this.DataBindings.Add(binding["Frame_Name"]);
         }
 
         public void InvalidateThisParent()
@@ -139,11 +120,6 @@ namespace PresentationLayer.Views.UserControls
         private void pnl_inner_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
-        }
-
-        private void pnl_inner_DragDrop(object sender, DragEventArgs e)
-        {
-            //EventHelpers.RaiseDragEvent(sender, panelInnerDragDropEventRaised, e);
         }
 
         private void FrameUC_DragDrop(object sender, DragEventArgs e)

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace ModelLayer.Model.Quotation.MultiPanel
 {
@@ -231,6 +232,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         }
 
         public List<IPanelModel> MPanelLst_Panel { get; set; }
+        public List<IDividerModel> MPanelLst_Divider { get; set; }
 
         public int GetVisiblePanel()
         {
@@ -246,6 +248,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return visiblePanelCount;
         }
 
+        public void Reload_PanelMargin()
+        {
+            List<IPanelModel> Lst_visiblePnl = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).ToList();
+            int visiblePnl_count = Lst_visiblePnl.Count();
+
+            for (int i = 0; i < Lst_visiblePnl.Count() ; i++)
+            {
+                Padding pnl_margin = new Padding(0);
+                if (i == 0)
+                {
+                    pnl_margin = new Padding(10, 10, 0, 10);
+                }
+                else if (i == visiblePnl_count)
+                {
+                    pnl_margin = new Padding(0, 10, 10, 10);
+                }
+                else
+                {
+                    pnl_margin = new Padding(0, 10, 0, 10);
+                }
+                Lst_visiblePnl[i].Panel_Margin = pnl_margin;
+            }
+        }
+        
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,
@@ -256,7 +282,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                Control mpanelParent,
                                UserControl mpanelFrameGroup,
                                int mpanelDivisions,
-                               List<IPanelModel> mpanelLstPanel)
+                               List<IPanelModel> mpanelLstPanel,
+                               List<IDividerModel> mpanelLstDivider)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -269,6 +296,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_FrameGroup = mpanelFrameGroup;
             MPanel_Divisions = mpanelDivisions;
             MPanelLst_Panel = mpanelLstPanel;
+            MPanelLst_Divider = mpanelLstDivider;
         }
     }
 }

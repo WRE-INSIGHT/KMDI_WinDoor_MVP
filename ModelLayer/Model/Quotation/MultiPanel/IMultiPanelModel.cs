@@ -1,6 +1,8 @@
-﻿using ModelLayer.Model.Quotation.Panel;
+﻿using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static ModelLayer.Model.Quotation.Divider.DividerModel;
 
 namespace ModelLayer.Model.Quotation.MultiPanel
 {
@@ -19,6 +21,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         Control MPanel_Parent { get; set; }
         UserControl MPanel_FrameGroup { get; set; }
         List<IPanelModel> MPanelLst_Panel { get; set; }
+        List<IDividerModel> MPanelLst_Divider { get; set; }
         int GetVisiblePanel();
+        void Reload_PanelMargin();
     }
 }

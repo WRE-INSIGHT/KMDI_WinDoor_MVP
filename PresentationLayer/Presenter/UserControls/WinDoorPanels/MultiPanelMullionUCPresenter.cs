@@ -118,7 +118,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                       DividerModel.DividerType.Mullion,
                                                                       true);
 
-                IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC, divModel);
+                _multiPanelModel.MPanelLst_Divider.Add(divModel);
+
+                IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC, divModel, _multiPanelModel);
                 IMullionUC mullionUC = mullionUCP.GetMullion();
                 fpnl.Controls.Add((UserControl)mullionUC);
             }
@@ -149,35 +151,43 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frmDimensionPresenter.SetHeight();
                 _frmDimensionPresenter.SetValues(suggest_Wd, suggest_HT);
                 _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                bool frmResult = _frmDimensionPresenter.GetfrmResult();
 
-                _panelModel = _panelServices.AddPanelModel(_frmDmRes_Width,
-                                                           _frmDmRes_Height,
-                                                           fpnl,
-                                                           (UserControl)fpnl.Parent,
-                                                           (UserControl)framePropUC,
-                                                           data,
-                                                           true,
-                                                           panelID,
-                                                           DockStyle.None);
-                _frameModel.Lst_Panel.Add(_panelModel);
-                _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
-
-                IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
-                _frameModel.FrameProp_Height += 148;
-
-                if (data == "Fixed Panel")
+                if (!frmResult)
                 {
-                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
-                    IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
-                    UserControl fxd = (UserControl)fixedUC;
-                    fxd.Margin = pnlPads;
-                    fpnl.Controls.Add(fxd);
-                    fixedUCP.SetInitialLoadFalse();
+                    _panelModel = _panelServices.AddPanelModel(_frmDmRes_Width,
+                                                               _frmDmRes_Height,
+                                                               fpnl,
+                                                               (UserControl)_frameUC,
+                                                               (UserControl)framePropUC,
+                                                               (UserControl)_multiPanelMullionUC,
+                                                               data,
+                                                               true,
+                                                               panelID,
+                                                               DockStyle.None);
+                    _frameModel.Lst_Panel.Add(_panelModel);
+                    _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
+                    _multiPanelModel.Reload_PanelMargin();
 
-                    //IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
-                    //IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
-                    //pnl_inner_willRenderImg.Controls.Add((UserControl)fixedImagerUC);
+                    IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                    framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+                    _frameModel.FrameProp_Height += 148;
+
+                    if (data == "Fixed Panel")
+                    {
+                        IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
+                                                                                   _panelModel,
+                                                                                   _frameModel,
+                                                                                   _mainPresenter,
+                                                                                   _multiPanelModel);
+                        IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+                        fpnl.Controls.Add((UserControl)fixedUC);
+                        fixedUCP.SetInitialLoadFalse();
+
+                        //IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
+                        //IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
+                        //pnl_inner_willRenderImg.Controls.Add((UserControl)fixedImagerUC);
+                    }
                 }
             }
         }

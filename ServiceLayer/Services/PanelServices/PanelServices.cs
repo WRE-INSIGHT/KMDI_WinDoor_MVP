@@ -29,7 +29,8 @@ namespace ServiceLayer.Services.PanelServices
                                             Control panelParent,
                                             UserControl panelFrameGroup,
                                             bool panelVisibility,
-                                            UserControl panelFramePropertiesGroup)
+                                            UserControl panelFramePropertiesGroup,
+                                            UserControl panelMultiPanelGroup)
         {
             PanelModel pnl = new PanelModel(panelID,
                                             panelName,
@@ -41,7 +42,8 @@ namespace ServiceLayer.Services.PanelServices
                                             panelParent,
                                             panelFrameGroup,
                                             panelVisibility,
-                                            panelFramePropertiesGroup);
+                                            panelFramePropertiesGroup,
+                                            panelMultiPanelGroup);
 
             ValidateModel(pnl);
             return pnl;
@@ -57,6 +59,7 @@ namespace ServiceLayer.Services.PanelServices
                                          Control panelParent,
                                          UserControl panelFrameGroup,
                                          UserControl panelFramePropertiesGroup,
+                                         UserControl panelMultiPanelGroup,
                                          string panelType,
                                          bool panelVisibility,
                                          int panelID = 0,
@@ -79,7 +82,8 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelParent,
                                                        panelFrameGroup,
                                                        panelVisibility,
-                                                       panelFramePropertiesGroup);
+                                                       panelFramePropertiesGroup,
+                                                       panelMultiPanelGroup);
 
             return _panelModel;
         }
