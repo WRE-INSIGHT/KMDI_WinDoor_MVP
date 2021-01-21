@@ -149,7 +149,8 @@ namespace PresentationLayer.Tests
             IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, 
                                                new System.Collections.Generic.List<IPanelModel>(),
                                                new System.Collections.Generic.List<IMultiPanelModel>(),
-                                               1.0f);
+                                               1.0f,
+                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
 
             ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
             ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
@@ -164,7 +165,8 @@ namespace PresentationLayer.Tests
             IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, 
                                                new System.Collections.Generic.List<IPanelModel>(), 
                                                new System.Collections.Generic.List<IMultiPanelModel>(),
-                                               1.0f);
+                                               1.0f,
+                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
 
             IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
             IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
@@ -179,7 +181,8 @@ namespace PresentationLayer.Tests
             IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, 
                                                new System.Collections.Generic.List<IPanelModel>(), 
                                                new System.Collections.Generic.List<IMultiPanelModel>(),
-                                               1.0f);
+                                               1.0f,
+                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
 
             ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
             ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();

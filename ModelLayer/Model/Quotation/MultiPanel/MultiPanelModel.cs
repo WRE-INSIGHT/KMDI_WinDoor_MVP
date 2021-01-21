@@ -271,7 +271,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 Lst_visiblePnl[i].Panel_Margin = pnl_margin;
             }
         }
-        
+
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,

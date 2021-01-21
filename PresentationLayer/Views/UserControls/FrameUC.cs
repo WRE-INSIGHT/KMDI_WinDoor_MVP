@@ -141,5 +141,10 @@ namespace PresentationLayer.Views.UserControls
         {
             this.Invalidate();
         }
+
+        public void DeleteControl(UserControl control)
+        {
+            this.Controls.Remove(control);
+        }
     }
 }

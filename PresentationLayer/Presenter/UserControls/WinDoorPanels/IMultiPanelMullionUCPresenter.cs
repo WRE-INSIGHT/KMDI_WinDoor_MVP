@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.MultiPanel;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
+using System.Windows.Forms;
 using Unity;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
@@ -13,8 +14,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
-                                                     IFrameUC frameUC);
+                                                     IFrameUCPresenter frameUCP);
         void frmDimensionResults(int frmDimension_numWd,
                                  int frmDimension_numHt);
+        void DeletePanel(UserControl panel);
+        void Invalidate_MultiPanelMullionUC();
     }
 }

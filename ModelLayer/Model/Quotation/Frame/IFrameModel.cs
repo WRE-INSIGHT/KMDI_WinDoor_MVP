@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.MultiPanel;
+﻿using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -20,5 +21,6 @@ namespace ModelLayer.Model.Quotation.Frame
         Padding Frame_Padding_int { get; set; }
         List<IPanelModel> Lst_Panel { get; set; }
         List<IMultiPanelModel> Lst_MultiPanel { get; set; }
+        List<IDividerModel> Lst_Divider { get; set; }
     }
 }

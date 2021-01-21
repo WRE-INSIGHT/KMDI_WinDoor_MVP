@@ -11,6 +11,7 @@ using System.Drawing.Drawing2D;
 using ModelLayer.Model.Quotation.Divider;
 using CommonComponents;
 using ModelLayer.Model.Quotation.MultiPanel;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -20,6 +21,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private IDividerModel _divModel;
         private IMultiPanelModel _multiPanelModel;
+
+        private IMultiPanelMullionUCPresenter _multiMultiUCP;
 
         bool _mouseDown;
         private Point _point_of_origin;
@@ -36,6 +39,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _mullionUC.mullionUCMouseMoveEventRaised += _mullionUC_mullionUCMouseMoveEventRaised;
             _mullionUC.mullionUCMouseUpEventRaised += _mullionUC_mullionUCMouseUpEventRaised;
             _mullionUC.mullionUCPaintEventRaised += _mullionUC_mullionUCPaintEventRaised;
+            _mullionUC.deleteToolStripMenuItemClickedEventRaised += _mullionUC_deleteToolStripMenuItemClickedEventRaised;
+        }
+
+        private void _mullionUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
+        {
+            _divModel.Div_Visible = false;
+            _multiMultiUCP.DeletePanel((UserControl)_mullionUC);
+            _multiMultiUCP.Invalidate_MultiPanelMullionUC();
         }
 
         private void _mullionUC_mullionUCPaintEventRaised(object sender, PaintEventArgs e)
@@ -81,20 +92,35 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _mullionUC_mullionUCMouseMoveEventRaised(object sender, MouseEventArgs e)
         {
-            UserControl me = (UserControl)sender;
-            FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent;
-
-            int me_indx = flp.Controls.IndexOf(me);
-                                                             //dapat dito yung condition na di dapat siya lumagpas sa bounds
-            if (e.Button == MouseButtons.Left && _mouseDown) //&& me.Location.X <= flp.Width - me.Width)
+            try
             {
-                flp.Controls[me_indx - 1].Width += (e.X - _point_of_origin.X);
-                flp.Controls[me_indx + 1].Width -= (e.X - _point_of_origin.X);
-                flp.Invalidate();
-                //flp.Parent.Parent.Invalidate(); //invalidate frameUC
-                //_mullionUC.Mullion_Left += (e.X - _point_of_origin.X);
+                UserControl me = (UserControl)sender;
+                FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
 
-                //dito ilagay yung calling ng function sa Frame para mag-create ng illusion sa OVERLAPPING
+                int me_indx = flp.Controls.IndexOf(me);
+                //dapat dito yung condition na di dapat siya lumagpas sa bounds
+                if (e.Button == MouseButtons.Left && _mouseDown) //&& me.Location.X <= flp.Width - me.Width)
+                {
+                    if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
+                    {
+                        if (flp.Controls[me_indx].Location.X >= 30)
+                        {
+                            flp.Controls[me_indx - 1].Width += (e.X - _point_of_origin.X);
+                            flp.Controls[me_indx + 1].Width -= (e.X - _point_of_origin.X);
+                        }
+                    }
+
+                    flp.Invalidate();
+                    //flp.Parent.Parent.Invalidate(); //invalidate frameUC
+                    //_mullionUC.Mullion_Left += (e.X - _point_of_origin.X);
+
+                    //dito ilagay yung calling ng function sa Frame para mag-create ng illusion sa OVERLAPPING
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -130,7 +156,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         public IMullionUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                   IDividerModel divModel,
-                                                  IMultiPanelModel multiPanelModel)
+                                                  IMultiPanelModel multiPanelModel,
+                                                  IMultiPanelMullionUCPresenter multiMullionUCP)
         {
             unityC
                 .RegisterType<IMullionUC, MullionUC>()
@@ -138,6 +165,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             MullionUCPresenter mullionUCP = unityC.Resolve<MullionUCPresenter>();
             mullionUCP._divModel = divModel;
             mullionUCP._multiPanelModel = multiPanelModel;
+            mullionUCP._multiMultiUCP = multiMullionUCP;
 
             return mullionUCP;
         }

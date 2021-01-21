@@ -16,5 +16,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event DragEventHandler flpMultiDragDropEventRaised;
 
         void InvalidateFlp();
+        void DeletePanel(UserControl panel);
     }
 }

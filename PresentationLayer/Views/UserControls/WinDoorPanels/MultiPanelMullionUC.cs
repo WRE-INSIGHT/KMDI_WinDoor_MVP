@@ -95,5 +95,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             EventHelpers.RaiseDragEvent(sender, flpMultiDragDropEventRaised, e);
         }
+
+        public void DeletePanel(UserControl panel)
+        {
+            flp_MultiMullion.Controls.Remove(panel);
+        }
     }
 }

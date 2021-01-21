@@ -41,9 +41,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IfrmDimensionPresenter _frmDimensionPresenter;
         private IMullionUCPresenter _mullionUCP;
-        private IDividerServices _divServices;
-        private IFrameUC _frameUC;
+        private IFrameUCPresenter _frameUCP;
 
+        private IDividerServices _divServices;
         private IPanelServices _panelServices;
         private IMultiPanelServices _multipanelServices;
 
@@ -87,8 +87,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender; //Control na babagsakan
             string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
 
-            int panelID = _mainPresenter.GetPanelCount() + 1;
-            int multiID = _mainPresenter.GetMultiPanelCount() + 1;
+            int panelID = _mainPresenter.GetPanelCount() + 1,
+                multiID = _mainPresenter.GetMultiPanelCount() + 1,
+                divID = _mainPresenter.GetDividerCount() + 1;
 
             int multiPanel_boundsWD = fpnl.Width - 20,
                 multiPanel_boundsHT = fpnl.Height - 20,
@@ -114,13 +115,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 IDividerModel divModel = _divServices.AddDividerModel(divSize,
                                                                       fpnl.Height,
                                                                       fpnl,
-                                                                      (UserControl)_frameUC,
+                                                                      (UserControl)_frameUCP.GetFrameUC(),
                                                                       DividerModel.DividerType.Mullion,
-                                                                      true);
+                                                                      true,
+                                                                      divID);
 
+                _frameModel.Lst_Divider.Add(divModel);
                 _multiPanelModel.MPanelLst_Divider.Add(divModel);
 
-                IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC, divModel, _multiPanelModel);
+                IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC, 
+                                                                            divModel, 
+                                                                            _multiPanelModel,
+                                                                            this);
                 IMullionUC mullionUC = mullionUCP.GetMullion();
                 fpnl.Controls.Add((UserControl)mullionUC);
             }
@@ -158,7 +164,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _panelModel = _panelServices.AddPanelModel(_frmDmRes_Width,
                                                                _frmDmRes_Height,
                                                                fpnl,
-                                                               (UserControl)_frameUC,
+                                                               (UserControl)_frameUCP.GetFrameUC(),
                                                                (UserControl)framePropUC,
                                                                (UserControl)_multiPanelMullionUC,
                                                                data,
@@ -179,7 +185,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                    _panelModel,
                                                                                    _frameModel,
                                                                                    _mainPresenter,
-                                                                                   _multiPanelModel);
+                                                                                   _multiPanelModel,
+                                                                                   this);
                         IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                         fpnl.Controls.Add((UserControl)fixedUC);
                         fixedUCP.SetInitialLoadFalse();
@@ -203,6 +210,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameModel.Frame_Type = FrameModel.Frame_Padding.Door;
             }
+            _frameUCP.ViewDeleteControl((UserControl)_multiPanelMullionUC);
         }
 
         private void _multiPanelMullionUC_divCountClickedEventRaised(object sender, EventArgs e)
@@ -277,7 +285,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
             }
 
-
             Rectangle bounds = new Rectangle(new Point(10, 10),
                                              new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 20));
             g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), bounds);
@@ -308,7 +315,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                             IMultiPanelModel multiPanelModel,
                                                             IFrameModel frameModel, 
                                                             IMainPresenter mainPresenter,
-                                                            IFrameUC frameUC)
+                                                            IFrameUCPresenter frameUCP)
         {
             unityC
                 .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>()
@@ -318,7 +325,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiMullionUCP._multiPanelModel = multiPanelModel;
             multiMullionUCP._frameModel = frameModel;
             multiMullionUCP._mainPresenter = mainPresenter;
-            multiMullionUCP._frameUC = frameUC;
+            multiMullionUCP._frameUCP = frameUCP;
 
             return multiMullionUCP;
         }
@@ -342,6 +349,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _frmDmRes_Width = frmDimension_numWd;
             _frmDmRes_Height = frmDimension_numHt;
             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+        }
+
+        public void DeletePanel(UserControl panel)
+        {
+            _multiPanelMullionUC.DeletePanel(panel);
+        }
+
+        public void Invalidate_MultiPanelMullionUC()
+        {
+            _multiPanelMullionUC.InvalidateFlp();
         }
     }
 }

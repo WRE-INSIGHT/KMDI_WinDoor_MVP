@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -74,15 +75,19 @@ namespace ModelLayer.Model.Quotation.Frame
             set { _frameType = value;
                 if (value == Frame_Padding.Window)
                 {
-                    if (_framePadding == new Padding(23)) //ibig sabihin nito galing Door
+                    if (_framePadding == new Padding(23)) //galing Door na deleted MultiPanel
                     {
                         Frame_Padding_int = new Padding(16);
                     }
-                    else if(_framePadding == new Padding(33))
+                    else if(_framePadding == new Padding(33)) //galing Door
                     {
                         Frame_Padding_int = new Padding(26);
                     }
-                    else if (_framePadding == new Padding(0))
+                    else if (_framePadding == new Padding(0)) //initial Load
+                    {
+                        Frame_Padding_int = new Padding(26);
+                    }
+                    else if (_framePadding == new Padding(16)) //galing Window na deleted MultiPanel
                     {
                         Frame_Padding_int = new Padding(26);
                     }
@@ -129,6 +134,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public List<IPanelModel> Lst_Panel { get; set; }
         public List<IMultiPanelModel> Lst_MultiPanel { get; set; }
+        public List<IDividerModel> Lst_Divider { get; set; }
 
         private int _frameImage_Height;
         public int FrameImageRenderer_Height
@@ -185,7 +191,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           bool frameVisible,
                           List<IPanelModel> lst_panel,
                           List<IMultiPanelModel> lst_mpanel,
-                          float frameImagerZoom)
+                          float frameImagerZoom,
+                          List<IDividerModel> lst_divider)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -197,7 +204,8 @@ namespace ModelLayer.Model.Quotation.Frame
             Lst_Panel = lst_panel;
             Lst_MultiPanel = lst_mpanel;
             FrameImageRenderer_Zoom = frameImagerZoom;
-            
+            Lst_Divider = lst_divider;
+
             if (frameType == Frame_Padding.Window)
             {
                 Frame_Padding_int = new Padding(26);

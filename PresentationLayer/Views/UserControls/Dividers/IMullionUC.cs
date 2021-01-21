@@ -14,5 +14,6 @@ namespace PresentationLayer.Views.UserControls.Dividers
         event MouseEventHandler mullionUCMouseMoveEventRaised;
         event MouseEventHandler mullionUCMouseUpEventRaised;
         event PaintEventHandler mullionUCPaintEventRaised;
+        event EventHandler deleteToolStripMenuItemClickedEventRaised;
     }
 }

@@ -11,7 +11,11 @@ namespace PresentationLayer.Presenter.UserControls
     {
         void DeleteFrame();
         IFrameUC GetFrameUC();
-        IFrameUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel, IMainPresenter mainPresenter);
+        IFrameUCPresenter GetNewInstance(IUnityContainer unityC,
+                                         IFrameModel frameModel,
+                                         IMainPresenter mainPresenter,
+                                         IBasePlatformPresenter basePlatformUCP);
+        void ViewDeleteControl(UserControl control);
 
         //IPanelModel AddPanelModel(int panelWd,
         //                                 int panelHt,

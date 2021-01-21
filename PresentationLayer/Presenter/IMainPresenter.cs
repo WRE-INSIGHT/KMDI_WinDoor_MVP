@@ -50,18 +50,11 @@ namespace PresentationLayer.Presenter
                                       int WD_price = 0,
                                       decimal WD_discount = 0.0M,
                                       List<IFrameModel> lst_frame = null);
-        IFrameModel AddFrameModel(int frame_width,
-                                  int frame_height,
-                                  FrameModel.Frame_Padding frame_type,
-                                  float frameImager_Zoom,
-                                  int frame_id = 0,
-                                  string frame_name = "",
-                                  bool frame_visible = true,
-                                  List<IPanelModel> lst_Panel = null,
-                                  List<IMultiPanelModel> lst_MPanel = null);
         IFramePropertiesUC GetFrameProperties(int frameID);
         Panel GetFrameImagerInnerPanel(int frameID);
         int GetPanelCount();
+        int GetMultiPanelCount();
+        int GetDividerCount();
         void AddItemInfoUC(IWindoorModel wndr);
         void AddFrameUC(IFrameModel frameModel);
         void AddFramePropertiesUC(IFrameModel frameModel);
@@ -76,6 +69,5 @@ namespace PresentationLayer.Presenter
         void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
                                  int frmDimension_numWd,
                                  int frmDimension_numHt);
-        int GetMultiPanelCount();
     }
 }

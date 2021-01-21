@@ -26,8 +26,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
         Image WD_image { get; set; }
         List<IFrameModel> lst_frame { get; set; }
         IEnumerable<IFrameModel> GetAllVisibleFrames();
+        int GetFrameCount();
         int GetPanelCount();
         int GetMultiPanelCount();
+        int GetDividerCount();
         float GetZoom_forRendering();
         void SetFrameZoom();
     }

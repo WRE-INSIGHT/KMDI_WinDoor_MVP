@@ -28,6 +28,7 @@ namespace PresentationLayer.Views.UserControls
         void InvalidateThisParent();
         void InvalidateThisParentsParent();
         ContextMenuStrip GetFrameCmenu();
+        void DeleteControl(UserControl control);
         //Panel GetInnerPanel();
     }
 }

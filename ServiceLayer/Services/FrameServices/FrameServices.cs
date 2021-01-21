@@ -8,6 +8,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
 using ServiceLayer.CommonServices;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace ServiceLayer.Services.FrameServices
 {
@@ -28,7 +29,8 @@ namespace ServiceLayer.Services.FrameServices
                                        bool frame_visible,
                                        List<IPanelModel> lst_panel,
                                        List<IMultiPanelModel> lst_mpanel,
-                                       float frameImager_Zoom)
+                                       float frameImager_Zoom,
+                                       List<IDividerModel> lst_divider)
         {
             IFrameModel fr = new FrameModel(frame_id,
                                            frame_name,
@@ -38,7 +40,8 @@ namespace ServiceLayer.Services.FrameServices
                                            frame_visible,
                                            lst_panel,
                                            lst_mpanel,
-                                           frameImager_Zoom);
+                                           frameImager_Zoom,
+                                           lst_divider);
             ValidateModel(fr);
 
             return fr;
@@ -48,5 +51,48 @@ namespace ServiceLayer.Services.FrameServices
         {
             _modelCheck.ValidateModelDataAnnotations(frameModel);
         }
+
+        public IFrameModel AddFrameModel(int frame_width,
+                                         int frame_height,
+                                         FrameModel.Frame_Padding frame_type,
+                                         float frameImager_Zoom,
+                                         int frame_id = 0,
+                                         string frame_name = "",
+                                         bool frame_visible = true,
+                                         List<IPanelModel> lst_Panel = null,
+                                         List<IMultiPanelModel> lst_MPanel = null,
+                                         List<IDividerModel> lst_Divider = null)
+        {
+            if (frame_name == "")
+            {
+                frame_name = "Frame " + frame_id;
+            }
+            if (lst_Panel == null)
+            {
+                lst_Panel = new List<IPanelModel>();
+            }
+            if (lst_MPanel == null)
+            {
+                lst_MPanel = new List<IMultiPanelModel>();
+            }
+            if (lst_Divider == null)
+            {
+                lst_Divider = new List<IDividerModel>();
+            }
+
+            IFrameModel _frameModel = CreateFrame(frame_id,
+                                                     frame_name,
+                                                     frame_width,
+                                                     frame_height,
+                                                     frame_type,
+                                                     frame_visible,
+                                                     lst_Panel,
+                                                     lst_MPanel,
+                                                     frameImager_Zoom,
+                                                     lst_Divider);
+
+            return _frameModel;
+        }
+
     }
 }

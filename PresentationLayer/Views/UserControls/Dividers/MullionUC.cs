@@ -59,6 +59,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event MouseEventHandler mullionUCMouseMoveEventRaised;
         public event MouseEventHandler mullionUCMouseUpEventRaised;
         public event PaintEventHandler mullionUCPaintEventRaised;
+        public event EventHandler deleteToolStripMenuItemClickedEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -97,6 +98,19 @@ namespace PresentationLayer.Views.UserControls.Dividers
             else
             {
                 this.Margin = new Padding(0, 0, 0, 0);
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickedEventRaised, e);
+        }
+
+        private void MullionUC_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                cmenu_mullion.Show(new Point(MousePosition.X, MousePosition.Y));
             }
         }
     }

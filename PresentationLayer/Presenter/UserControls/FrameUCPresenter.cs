@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter.UserControls
         private ISlidingPanelUCPresenter _slidingUCP;
         private ISlidingPanelImagerUCPresenter _slidingImagerUCP;
         private IMultiPanelMullionUCPresenter _multiUCP;
+        private IBasePlatformPresenter _basePlatformUCP;
 
         private IPanelServices _panelServices;
         private IMultiPanelServices _multipanelServices;
@@ -129,7 +130,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                       _multipanelModel, 
                                                                                       _frameModel, 
                                                                                       _mainPresenter,
-                                                                                      (IFrameUC)frame);
+                                                                                      this);
                     IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
                 }
@@ -153,7 +154,11 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (data == "Fixed Panel")
                 {
-                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, 
+                                                                               _panelModel, 
+                                                                               _frameModel, 
+                                                                               _mainPresenter,
+                                                                               this);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     frame.Controls.Add((UserControl)fixedUC);
                     fixedUCP.SetInitialLoadFalse();
@@ -329,7 +334,7 @@ namespace PresentationLayer.Presenter.UserControls
                                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 DeleteFrame();
-                _frameUC.InvalidateThisParentsParent();
+                //_frameUC.InvalidateThisParentsParent();
             }
         }
 
@@ -425,7 +430,10 @@ namespace PresentationLayer.Presenter.UserControls
             return _frameUC;
         }
 
-        public IFrameUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel, IMainPresenter mainPresenter)
+        public IFrameUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                IFrameModel frameModel, 
+                                                IMainPresenter mainPresenter,
+                                                IBasePlatformPresenter basePlatformUCP)
         {
             unityC
                 .RegisterType<IFrameUC, FrameUC>()
@@ -434,14 +442,23 @@ namespace PresentationLayer.Presenter.UserControls
             framePresenter._frameModel = frameModel;
             framePresenter._mainPresenter = mainPresenter;
             framePresenter._unityC = unityC;
-            
+            framePresenter._basePlatformUCP = basePlatformUCP;
+
             return framePresenter;
         }
         
         public void DeleteFrame()
         {
             _frameModel.Frame_Visible = false;
+            _basePlatformUCP.ViewDeleteControl((UserControl)_frameUC);
+            _basePlatformUCP.InvalidateBasePlatform();
+            _basePlatformUCP.Invalidate_flpMain();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+        }
+
+        public void ViewDeleteControl(UserControl control)
+        {
+            _frameUC.DeleteControl(control);
         }
     }
 }

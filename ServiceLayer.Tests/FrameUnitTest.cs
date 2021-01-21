@@ -23,11 +23,13 @@ namespace ServiceLayer.Tests
             IFrameModel expected_fr = new FrameModel(1, "Frame_1", 400, 400, FrameModel.Frame_Padding.Window, true, 
                                                      new List<ModelLayer.Model.Quotation.Panel.IPanelModel>(), 
                                                      new List<ModelLayer.Model.Quotation.MultiPanel.IMultiPanelModel>(), 
-                                                     1.0f);
+                                                     1.0f,
+                                                     new List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
             IFrameModel fr = _frameServices.CreateFrame(1, "Frame_1", 400, 400, FrameModel.Frame_Padding.Window, true, 
                                                         new List<ModelLayer.Model.Quotation.Panel.IPanelModel>(), 
                                                         new List<ModelLayer.Model.Quotation.MultiPanel.IMultiPanelModel>(),
-                                                        1.0f);
+                                                        1.0f,
+                                                        new List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
 
             Assert.AreEqual(expected_fr.Frame_ID, fr.Frame_ID);
             Assert.AreEqual(expected_fr.Frame_Name, fr.Frame_Name);
@@ -44,7 +46,8 @@ namespace ServiceLayer.Tests
                 IFrameModel wndr = _frameServices.CreateFrame(0, "Frame_1", 400, 400, FrameModel.Frame_Padding.Window, true,
                                                               new List<ModelLayer.Model.Quotation.Panel.IPanelModel>(),
                                                               new List<ModelLayer.Model.Quotation.MultiPanel.IMultiPanelModel>(),
-                                                              1.0f);
+                                                              1.0f,
+                                                              new List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
             }
             catch (Exception ex)
             {
@@ -61,7 +64,8 @@ namespace ServiceLayer.Tests
                 IFrameModel wndr = _frameServices.CreateFrame(1, "Frame_1", 399, 400, FrameModel.Frame_Padding.Window, true, 
                                                               new List<ModelLayer.Model.Quotation.Panel.IPanelModel>(), 
                                                               new List<ModelLayer.Model.Quotation.MultiPanel.IMultiPanelModel>(),
-                                                              1.0f);
+                                                              1.0f,
+                                                              new List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
             }
             catch (Exception ex)
             {
@@ -78,7 +82,8 @@ namespace ServiceLayer.Tests
                 IFrameModel wndr = _frameServices.CreateFrame(1, "Frame_1", 400, 399, FrameModel.Frame_Padding.Window, true,
                                                               new List<ModelLayer.Model.Quotation.Panel.IPanelModel>(),
                                                               new List<ModelLayer.Model.Quotation.MultiPanel.IMultiPanelModel>(),
-                                                              1.0f);
+                                                              1.0f,
+                                                              new List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
             }
             catch (Exception ex)
             {

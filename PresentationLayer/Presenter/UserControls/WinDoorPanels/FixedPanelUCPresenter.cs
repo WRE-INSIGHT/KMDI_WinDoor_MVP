@@ -25,6 +25,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IFrameModel _frameModel;
         private IMultiPanelModel _multiPanelModel;
 
+        private IMultiPanelMullionUCPresenter _multiPanelUCP;
+        private IFrameUCPresenter _frameUCP;
+
         bool _initialLoad;
 
         public FixedPanelUCPresenter(IFixedPanelUC fixedPanelUC)
@@ -89,7 +92,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        (fixedpnl.ClientRectangle.Height - 30) - w));
 
             }
-
         }
 
         private void _fixedPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
@@ -99,6 +101,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (_multiPanelModel != null)
             {
                 _multiPanelModel.Reload_PanelMargin();
+            }
+            if (_multiPanelUCP != null)
+            {
+                _multiPanelUCP.DeletePanel((UserControl)_fixedPanelUC);
+            }
+            if (_frameUCP != null)
+            {
+                _frameUCP.ViewDeleteControl((UserControl)_fixedPanelUC);
             }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
@@ -134,7 +144,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                      IPanelModel panelModel, 
                                                      IFrameModel frameModel,
-                                                     IMainPresenter mainPresenter)
+                                                     IMainPresenter mainPresenter,
+                                                     IFrameUCPresenter frameUCP)
         {
             unityC
                 .RegisterType<IFixedPanelUC, FixedPanelUC>()
@@ -143,6 +154,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             fixedPanelUCP._panelModel = panelModel;
             fixedPanelUCP._frameModel = frameModel;
             fixedPanelUCP._mainPresenter = mainPresenter;
+            fixedPanelUCP._frameUCP = frameUCP;
 
             return fixedPanelUCP;
         }
@@ -151,7 +163,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IPanelModel panelModel,
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
-                                                     IMultiPanelModel multiPanelModel)
+                                                     IMultiPanelModel multiPanelModel,
+                                                     IMultiPanelMullionUCPresenter multiPanelUCP)
         {
             unityC
                 .RegisterType<IFixedPanelUC, FixedPanelUC>()
@@ -161,6 +174,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             fixedPanelUCP._frameModel = frameModel;
             fixedPanelUCP._mainPresenter = mainPresenter;
             fixedPanelUCP._multiPanelModel = multiPanelModel;
+            fixedPanelUCP._multiPanelUCP = multiPanelUCP;
 
             return fixedPanelUCP;
         }

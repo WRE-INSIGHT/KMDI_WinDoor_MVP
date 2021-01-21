@@ -317,6 +317,7 @@ namespace PresentationLayer.Presenter
             _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.ChangeBasePlatformSize;
             _frmDimensionPresenter.SetProfileType(_windoorModel.WD_profile);
             _frmDimensionPresenter.SetHeight();
+            _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
             _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
         }
 
@@ -631,7 +632,12 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
-                        _frameModel = AddFrameModel(frmDimension_numWd, frmDimension_numHt, frameType, _windoorModel.WD_zoom_forImageRenderer);
+                        int frameID = _windoorModel.GetFrameCount() + 1;
+                        _frameModel = _frameServices.AddFrameModel(frmDimension_numWd, 
+                                                                   frmDimension_numHt, 
+                                                                   frameType, 
+                                                                   _windoorModel.WD_zoom_forImageRenderer,
+                                                                   frameID);
                         AddFrameList_WindoorModel(_frameModel);
                         AddFrameUC(_frameModel);
                         AddFramePropertiesUC(_frameModel);
@@ -755,7 +761,7 @@ namespace PresentationLayer.Presenter
 
         public void AddFrameUC(IFrameModel frameModel)
         {
-            IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, frameModel, this);
+            IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, frameModel, this, _basePlatformPresenter);
             _frameUC = frameUCP.GetFrameUC();
             _basePlatformPresenter.AddFrame(_frameUC);
 
@@ -768,45 +774,6 @@ namespace PresentationLayer.Presenter
             IFramePropertiesUCPresenter FramePropertiesUCP = _framePropertiesUCPresenter.GetNewInstance(frameModel, _unityC, _frameUC, this);
             _framePropertiesUC = FramePropertiesUCP.GetFramePropertiesUC();
             _pnlPropertiesBody.Controls.Add((UserControl)_framePropertiesUC);
-        }
-
-        public IFrameModel AddFrameModel(int frame_width,
-                                         int frame_height,
-                                         FrameModel.Frame_Padding frame_type,
-                                         float frameImager_Zoom,
-                                         int frame_id = 0,
-                                         string frame_name = "",
-                                         bool frame_visible = true,
-                                         List<IPanelModel> lst_Panel = null,
-                                         List<IMultiPanelModel> lst_MPanel = null)
-        {
-            if (frame_id == 0)
-            {
-                frame_id = _windoorModel.lst_frame.Count + 1;
-            }
-            if (frame_name == "")
-            {
-                frame_name = "Frame " + frame_id;
-            }
-            if (lst_Panel == null)
-            {
-                lst_Panel = new List<IPanelModel>();
-            }
-            if (lst_MPanel == null)
-            {
-                lst_MPanel = new List<IMultiPanelModel>();
-            }
-            _frameModel = _frameServices.CreateFrame(frame_id,
-                                                     frame_name,
-                                                     frame_width,
-                                                     frame_height,
-                                                     frame_type,
-                                                     frame_visible,
-                                                     lst_Panel,
-                                                     lst_MPanel,
-                                                     frameImager_Zoom);
-
-            return _frameModel;
         }
 
         public void AddFrameList_WindoorModel(IFrameModel frameModel)
@@ -838,6 +805,11 @@ namespace PresentationLayer.Presenter
         public int GetMultiPanelCount()
         {
             return _windoorModel.GetMultiPanelCount();
+        }
+
+        public int GetDividerCount()
+        {
+            return _windoorModel.GetDividerCount();
         }
 
         #endregion

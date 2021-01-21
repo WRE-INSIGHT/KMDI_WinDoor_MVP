@@ -209,11 +209,6 @@ namespace PresentationLayer.Presenter.UserControls
             _flpMain.Invalidate();
         }
 
-        public void DeleteFrameUC(IFrameUC frameUC)
-        {
-            _flpMain.Controls.Remove((UserControl)frameUC);
-        }
-        
         public IBasePlatformPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel)
         {
             unityC
@@ -234,6 +229,11 @@ namespace PresentationLayer.Presenter.UserControls
             basePlatformBinding.Add("WD_visibility", new Binding("Visible", _windoorModel, "WD_visibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return basePlatformBinding;
+        }
+
+        public void ViewDeleteControl(UserControl control)
+        {
+            _flpMain.Controls.Remove(control);
         }
     }
 }

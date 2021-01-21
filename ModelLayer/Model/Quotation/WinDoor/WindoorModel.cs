@@ -307,6 +307,21 @@ namespace ModelLayer.Model.Quotation.WinDoor
             return lst_frame.Where(frame => frame.Frame_Visible == true);
         }
 
+        public int GetFrameCount()
+        {
+            int frameCount = 0;
+            try
+            {
+                frameCount = lst_frame.Count();
+            }
+            catch (Exception)
+            {
+                frameCount = 0;
+            }
+
+            return frameCount;
+        }
+
         public int GetPanelCount()
         {
             int panelCount = 0;
@@ -333,6 +348,20 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 multiCount = 0;
             }
             return multiCount;
+        }
+
+        public int GetDividerCount()
+        {
+            int divCount = 0;
+            try
+            {
+                divCount = lst_frame.SelectMany(div => div.Lst_Divider).Count();
+            }
+            catch (Exception)
+            {
+                divCount = 0;
+            }
+            return divCount;
         }
 
         public float GetZoom_forRendering()

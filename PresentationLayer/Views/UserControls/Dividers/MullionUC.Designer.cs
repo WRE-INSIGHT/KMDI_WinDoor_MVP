@@ -28,7 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.cmenu_mullion = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmenu_mullion.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // cmenu_mullion
+            // 
+            this.cmenu_mullion.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.cmenu_mullion.Name = "cmenu_mullion";
+            this.cmenu_mullion.Size = new System.Drawing.Size(108, 26);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // MullionUC
             // 
@@ -41,13 +59,18 @@
             this.Size = new System.Drawing.Size(26, 350);
             this.LocationChanged += new System.EventHandler(this.MullionUC_LocationChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MullionUC_Paint);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseUp);
+            this.cmenu_mullion.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ContextMenuStrip cmenu_mullion;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

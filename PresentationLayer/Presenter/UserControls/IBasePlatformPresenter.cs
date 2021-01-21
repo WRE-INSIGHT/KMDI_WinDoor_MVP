@@ -13,9 +13,9 @@ namespace PresentationLayer.Presenter.UserControls
         void InvalidateBasePlatform();
         void PerformLayoutBasePlatform();
         void Invalidate_flpMain();
-        void DeleteFrameUC(IFrameUC frameUC);
         IBasePlatformPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel);
         List<int> lst_wd_toPaint(int flpMain_width, List<int> lst_ctrlWds);
         List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts);
+        void ViewDeleteControl(UserControl control);
     }
 }
