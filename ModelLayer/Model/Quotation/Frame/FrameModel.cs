@@ -87,10 +87,10 @@ namespace ModelLayer.Model.Quotation.Frame
                     {
                         Frame_Padding_int = new Padding(26);
                     }
-                    else if (_framePadding == new Padding(16)) //galing Window na deleted MultiPanel
-                    {
-                        Frame_Padding_int = new Padding(26);
-                    }
+                    //else if (_framePadding == new Padding(16)) //galing Window na deleted MultiPanel
+                    //{
+                    //    Frame_Padding_int = new Padding(26);
+                    //}
                 }
                 else if (value == Frame_Padding.Door)
                 {
@@ -102,7 +102,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     {
                         Frame_Padding_int = new Padding(33);
                     }
-                    else if (_framePadding == new Padding(0))
+                    else if (_framePadding == new Padding(0)) //initial Load
                     {
                         Frame_Padding_int = new Padding(33);
                     }

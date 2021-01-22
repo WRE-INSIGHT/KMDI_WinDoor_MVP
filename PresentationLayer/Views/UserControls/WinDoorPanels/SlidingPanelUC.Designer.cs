@@ -39,12 +39,12 @@
             this.cmenu_sliding.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.cmenu_sliding.Name = "cmenu_casement";
-            this.cmenu_sliding.Size = new System.Drawing.Size(153, 48);
+            this.cmenu_sliding.Size = new System.Drawing.Size(108, 26);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -53,6 +53,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "SlidingPanelUC";
             this.SizeChanged += new System.EventHandler(this.SlidingPanelUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.SlidingPanelUC_Paint);

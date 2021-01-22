@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using Unity;
 using CommonComponents;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -21,6 +22,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+
+        private IMultiPanelModel _multiPanelModel;
+        private IMultiPanelMullionUCPresenter _multiPanelUCP;
+
+        bool _initialLoad;
 
         public SlidingPanelUCPresenter(ISlidingPanelUC slidingPanelUC)
         {
@@ -41,19 +47,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
-                int thisWd = ((UserControl)sender).Width,
-                    thisHt = ((UserControl)sender).Height,
-                    pnlModelWd = _panelModel.Panel_Width,
-                    pnlModelHt = _panelModel.Panel_Height;
+                if (!_initialLoad)
+                {
+                    int thisWd = ((UserControl)sender).Width,
+                        thisHt = ((UserControl)sender).Height,
+                        pnlModelWd = _panelModel.Panel_Width,
+                        pnlModelHt = _panelModel.Panel_Height;
 
-                if (thisWd != pnlModelWd)
-                {
-                    _panelModel.Panel_Width = thisWd;
+                    if (thisWd != pnlModelWd)
+                    {
+                        _panelModel.Panel_Width = thisWd;
+                    }
+                    if (thisHt != pnlModelHt)
+                    {
+                        _panelModel.Panel_Height = thisHt;
+                    }
                 }
-                if (thisHt != pnlModelHt)
-                {
-                    _panelModel.Panel_Height = thisHt;
-                }
+                ((UserControl)sender).Invalidate();
             }
             catch (Exception ex)
             {
@@ -152,6 +162,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public ISlidingPanelUC GetSlidingPanelUC()
         {
+            _initialLoad = true;
             _slidingPanelUC.ThisBinding(CreateBindingDictionary());
             return _slidingPanelUC;
         }
@@ -173,6 +184,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             return slidingUCP;
         }
 
+        public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel, IMainPresenter mainPresenter, IMultiPanelModel multiPanelModel, IMultiPanelMullionUCPresenter multiPanelUCP)
+        {
+            unityC
+                .RegisterType<ISlidingPanelUC, SlidingPanelUC>()
+                .RegisterType<ISlidingPanelUCPresenter, SlidingPanelUCPresenter>();
+            SlidingPanelUCPresenter slidingUCP = unityC.Resolve<SlidingPanelUCPresenter>();
+            slidingUCP._panelModel = panelModel;
+            slidingUCP._frameModel = frameModel;
+            slidingUCP._mainPresenter = mainPresenter;
+            slidingUCP._multiPanelModel = multiPanelModel;
+            slidingUCP._multiPanelUCP = multiPanelUCP;
+
+            return slidingUCP;
+        }
+
         public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> panelBinding = new Dictionary<string, Binding>();
@@ -182,8 +208,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }
+
+        public void SetInitialLoadFalse()
+        {
+            _initialLoad = false;
+        }
+
     }
 }

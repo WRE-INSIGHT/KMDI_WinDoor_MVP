@@ -41,6 +41,7 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _frameUC.InvalidateThisParent();
             _frameUC.InvalidateThisParentsParent();
+            _frameUC.PerformLayoutThis();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -51,6 +52,7 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.InvalidateThis();
             _frameUC.InvalidateThisParent();
             _frameUC.InvalidateThisParentsParent();
+            _frameUC.PerformLayoutThis();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -61,6 +63,7 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.InvalidateThis();
             _frameUC.InvalidateThisParent();
             _frameUC.InvalidateThisParentsParent();
+            _frameUC.PerformLayoutThis();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 

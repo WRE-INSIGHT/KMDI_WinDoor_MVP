@@ -40,6 +40,20 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _mullionUC.mullionUCMouseUpEventRaised += _mullionUC_mullionUCMouseUpEventRaised;
             _mullionUC.mullionUCPaintEventRaised += _mullionUC_mullionUCPaintEventRaised;
             _mullionUC.deleteToolStripMenuItemClickedEventRaised += _mullionUC_deleteToolStripMenuItemClickedEventRaised;
+            _mullionUC.mullionUCMouseEnterEventRaised += _mullionUC_mullionUCMouseEnterEventRaised;
+            _mullionUC.mullionUCMouseLeaveEventRaised += _mullionUC_mullionUCMouseLeaveEventRaised;
+        }
+
+        private void _mullionUC_mullionUCMouseLeaveEventRaised(object sender, EventArgs e)
+        {
+            penColor = Color.Black;
+            _mullionUC.InvalidateThis();
+        }
+
+        private void _mullionUC_mullionUCMouseEnterEventRaised(object sender, EventArgs e)
+        {
+            penColor = Color.Blue;
+            _mullionUC.InvalidateThis();
         }
 
         private void _mullionUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
@@ -48,6 +62,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _multiMultiUCP.DeletePanel((UserControl)_mullionUC);
             _multiMultiUCP.Invalidate_MultiPanelMullionUC();
         }
+
+        Color penColor = Color.Black;
 
         private void _mullionUC_mullionUCPaintEventRaised(object sender, PaintEventArgs e)
         {
@@ -79,7 +95,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             gpath.AddLine(new Point(lineWd, 5), new Point(lineWd, lineHT));
             gpath.AddCurve(topCurve);
 
-            Pen pen = new Pen(Color.Black, 2);
+            Pen pen = new Pen(penColor, 2);
 
             g.DrawPath(pen, gpath);
             g.FillPath(Brushes.PowderBlue, gpath);
@@ -99,22 +115,21 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                 int me_indx = flp.Controls.IndexOf(me);
                 //dapat dito yung condition na di dapat siya lumagpas sa bounds
-                if (e.Button == MouseButtons.Left && _mouseDown) //&& me.Location.X <= flp.Width - me.Width)
+                if (e.Button == MouseButtons.Left && _mouseDown) 
                 {
                     if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
                     {
-                        if (flp.Controls[me_indx].Location.X >= 30)
+                        int expected_Panel1MinWD = flp.Controls[me_indx - 1].Width + (e.X - _point_of_origin.X),
+                            expected_Panel2MinWD = flp.Controls[me_indx + 1].Width - (e.X - _point_of_origin.X);
+                        if (expected_Panel1MinWD >= 30 && expected_Panel2MinWD >= 30)
                         {
                             flp.Controls[me_indx - 1].Width += (e.X - _point_of_origin.X);
                             flp.Controls[me_indx + 1].Width -= (e.X - _point_of_origin.X);
                         }
                     }
-
                     flp.Invalidate();
                     //flp.Parent.Parent.Invalidate(); //invalidate frameUC
                     //_mullionUC.Mullion_Left += (e.X - _point_of_origin.X);
-
-                    //dito ilagay yung calling ng function sa Frame para mag-create ng illusion sa OVERLAPPING
                 }
             }
             catch (Exception ex)

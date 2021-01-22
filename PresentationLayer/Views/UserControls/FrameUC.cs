@@ -146,5 +146,10 @@ namespace PresentationLayer.Views.UserControls
         {
             this.Controls.Remove(control);
         }
+
+        public void PerformLayoutThis()
+        {
+            this.PerformLayout();
+        }
     }
 }

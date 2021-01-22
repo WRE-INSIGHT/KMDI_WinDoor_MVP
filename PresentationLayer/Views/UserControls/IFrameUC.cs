@@ -17,18 +17,15 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler deleteCmenuEventRaised;
         event EventHandler frameMouseEnterEventRaised;
         event EventHandler frameMouseLeaveEventRaised;
-        //event EventHandler panelInnerMouseEnterEventRaised;
-        //event EventHandler panelInnerMouseLeaveEventRaised;
         event PaintEventHandler outerFramePaintEventRaised;
-        //event PaintEventHandler innerFramePaintEventRaised;
         event MouseEventHandler frameMouseClickEventRaised;
-        //event DragEventHandler panelInnerDragDropEventRaised;
         event DragEventHandler frameDragDropEventRaised;
         void InvalidateThis();
         void InvalidateThisParent();
         void InvalidateThisParentsParent();
         ContextMenuStrip GetFrameCmenu();
         void DeleteControl(UserControl control);
+        void PerformLayoutThis();
         //Panel GetInnerPanel();
     }
 }

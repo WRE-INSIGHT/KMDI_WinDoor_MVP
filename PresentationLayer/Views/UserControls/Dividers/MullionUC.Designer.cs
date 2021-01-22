@@ -44,7 +44,7 @@
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -61,6 +61,8 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MullionUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseDown);
+            this.MouseEnter += new System.EventHandler(this.MullionUC_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.MullionUC_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseUp);
             this.cmenu_mullion.ResumeLayout(false);

@@ -60,6 +60,8 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event MouseEventHandler mullionUCMouseUpEventRaised;
         public event PaintEventHandler mullionUCPaintEventRaised;
         public event EventHandler deleteToolStripMenuItemClickedEventRaised;
+        public event EventHandler mullionUCMouseEnterEventRaised;
+        public event EventHandler mullionUCMouseLeaveEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -112,6 +114,21 @@ namespace PresentationLayer.Views.UserControls.Dividers
             {
                 cmenu_mullion.Show(new Point(MousePosition.X, MousePosition.Y));
             }
+        }
+
+        private void MullionUC_MouseEnter(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, mullionUCMouseEnterEventRaised, e);
+        }
+
+        private void MullionUC_MouseLeave(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, mullionUCMouseLeaveEventRaised, e);
+        }
+
+        public void InvalidateThis()
+        {
+            this.Invalidate();
         }
     }
 }
