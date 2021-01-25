@@ -39,6 +39,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnRdBtnCheckedChangedEventRaised(object sender, EventArgs e)
         {
+            _frameUC.InvalidateThisControls();
+            _frameUC.InvalidateThis();
             _frameUC.InvalidateThisParent();
             _frameUC.InvalidateThisParentsParent();
             _frameUC.PerformLayoutThis();

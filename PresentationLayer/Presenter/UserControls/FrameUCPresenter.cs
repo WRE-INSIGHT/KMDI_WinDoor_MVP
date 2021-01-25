@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter.UserControls
         private ISlidingPanelUCPresenter _slidingUCP;
         private ISlidingPanelImagerUCPresenter _slidingImagerUCP;
         private IMultiPanelMullionUCPresenter _multiUCP;
+        private IMultiPanelTransomUCPresenter _multiTransomUCP;
         private IBasePlatformPresenter _basePlatformUCP;
 
         private IPanelServices _panelServices;
@@ -58,7 +59,8 @@ namespace PresentationLayer.Presenter.UserControls
                                 ICasementPanelImagerUCPresenter casementImagerUCP,
                                 ISlidingPanelImagerUCPresenter slidingImagerUCP,
                                 IMultiPanelServices multipanelServices,
-                                IMultiPanelMullionUCPresenter multiUCP)
+                                IMultiPanelMullionUCPresenter multiUCP,
+                                IMultiPanelTransomUCPresenter multiTransomUCP)
         {
             _frameUC = frameUC;
             _frameCmenu = _frameUC.GetFrameCmenu();
@@ -74,6 +76,7 @@ namespace PresentationLayer.Presenter.UserControls
             _slidingImagerUCP = slidingImagerUCP;
             _multipanelServices = multipanelServices;
             _multiUCP = multiUCP;
+            _multiTransomUCP = multiTransomUCP;
             SubscribeToEventsSetup();
         }
         private void SubscribeToEventsSetup()
@@ -121,7 +124,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
-                    _frameModel.Frame_Padding_int = new Padding(26);
+                    _frameModel.Frame_Padding_int = new Padding(23);
                 }
 
                 if (data.Contains("Mullion"))
@@ -132,6 +135,16 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                       _mainPresenter,
                                                                                       this);
                     IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
+                    frame.Controls.Add((UserControl)multiUC);
+                }
+                else if (data.Contains("Transom"))
+                {
+                    IMultiPanelTransomUCPresenter multiTransom = _multiTransomUCP.GetNewInstance(_unityC,
+                                                                                                 _multipanelModel,
+                                                                                                 _frameModel,
+                                                                                                 _mainPresenter,
+                                                                                                 this);
+                    IMultiPanelTransomUC multiUC = multiTransom.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
                 }
             }
@@ -151,6 +164,16 @@ namespace PresentationLayer.Presenter.UserControls
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
                 _frameModel.FrameProp_Height += 148;
+
+
+                if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                {
+                    _frameModel.Frame_Padding_int = new Padding(26);
+                }
+                else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    _frameModel.Frame_Padding_int = new Padding(33);
+                }
 
                 if (data == "Fixed Panel")
                 {

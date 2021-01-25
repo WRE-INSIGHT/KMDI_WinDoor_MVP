@@ -18,7 +18,8 @@ namespace PresentationLayer.Presenter
         IfrmDimensionView _frmDimensionView;
 
         private IMainPresenter _mainPresenter;
-        private IMultiPanelMullionUCPresenter _multiUCP;
+        private IMultiPanelMullionUCPresenter _multiMullionUCP;
+        private IMultiPanelTransomUCPresenter _multiTransomUCP;
 
         private string profile_type;
         private bool _isFrmClosed;
@@ -151,7 +152,14 @@ namespace PresentationLayer.Presenter
                 }
                 else if (purpose == Show_Purpose.AddPanelIntoMultiPanel)
                 {
-                    _multiUCP.frmDimensionResults(_frmDimensionView.InumWidth, _frmDimensionView.InumHeight);
+                    if (_multiMullionUCP != null)
+                    {
+                        _multiMullionUCP.frmDimensionResults(_frmDimensionView.InumWidth, _frmDimensionView.InumHeight);
+                    }
+                    else if (_multiTransomUCP != null)
+                    {
+                        _multiTransomUCP.frmDimensionResults(_frmDimensionView.InumWidth, _frmDimensionView.InumHeight);
+                    }
                 }
                 else
                 {
@@ -185,7 +193,12 @@ namespace PresentationLayer.Presenter
 
         public void SetPresenters(IMultiPanelMullionUCPresenter multiUCP)
         {
-            _multiUCP = multiUCP;
+            _multiMullionUCP = multiUCP;
+        }
+
+        public void SetPresenters(IMultiPanelTransomUCPresenter multiTransomUCP)
+        {
+            _multiTransomUCP = multiTransomUCP;
         }
 
         public void SetProfileType(string profileType)
@@ -218,5 +231,6 @@ namespace PresentationLayer.Presenter
         {
             return _isFrmClosed;
         }
+
     }
 }

@@ -25,7 +25,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IFrameModel _frameModel;
         private IMultiPanelModel _multiPanelModel;
 
-        private IMultiPanelMullionUCPresenter _multiPanelUCP;
+        private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
+        private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
         private IFrameUCPresenter _frameUCP;
 
         bool _initialLoad;
@@ -102,9 +103,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.Reload_PanelMargin();
             }
-            if (_multiPanelUCP != null)
+            if (_multiPanelMullionUCP != null)
             {
-                _multiPanelUCP.DeletePanel((UserControl)_fixedPanelUC);
+                _multiPanelMullionUCP.DeletePanel((UserControl)_fixedPanelUC);
             }
             if (_frameUCP != null)
             {
@@ -174,7 +175,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             fixedPanelUCP._frameModel = frameModel;
             fixedPanelUCP._mainPresenter = mainPresenter;
             fixedPanelUCP._multiPanelModel = multiPanelModel;
-            fixedPanelUCP._multiPanelUCP = multiPanelUCP;
+            fixedPanelUCP._multiPanelMullionUCP = multiPanelUCP;
 
             return fixedPanelUCP;
         }
@@ -205,7 +206,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _initialLoad = false;
         }
 
-//for Testing
+        public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                     IPanelModel panelModel, 
+                                                     IFrameModel frameModel, 
+                                                     IMainPresenter mainPresenter, 
+                                                     IMultiPanelModel multiPanelModel, 
+                                                     IMultiPanelTransomUCPresenter multiPanelTransomUCP)
+        {
+            unityC
+                .RegisterType<IFixedPanelUC, FixedPanelUC>()
+                .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>();
+            FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
+            fixedPanelUCP._panelModel = panelModel;
+            fixedPanelUCP._frameModel = frameModel;
+            fixedPanelUCP._mainPresenter = mainPresenter;
+            fixedPanelUCP._multiPanelModel = multiPanelModel;
+            fixedPanelUCP._multiPanelTransomUCP = multiPanelTransomUCP;
+
+            return fixedPanelUCP;
+        }
+
+        //for Testing
         //public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
         //{ 
         //    unityC

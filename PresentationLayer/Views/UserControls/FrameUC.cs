@@ -67,11 +67,6 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseEvent(this, frameLoadEventRaised, e);
         }
 
-        public void InvalidateThis()
-        {
-            this.Invalidate();
-        }
-
         private void frame_MouseClick(object sender, MouseEventArgs e)
         {
             EventHelpers.RaiseMouseEvent(sender, frameMouseClickEventRaised, e);
@@ -107,16 +102,6 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(binding["Frame_Name"]);
         }
 
-        public void InvalidateThisParent()
-        {
-            this.Parent.Invalidate();
-        }
-
-        public void InvalidateThisParentsParent()
-        {
-            this.Parent.Parent.Invalidate();
-        }
-
         private void pnl_inner_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
@@ -147,9 +132,32 @@ namespace PresentationLayer.Views.UserControls
             this.Controls.Remove(control);
         }
 
+        public void InvalidateThis()
+        {
+            this.Invalidate();
+        }
+
+        public void InvalidateThisParent()
+        {
+            this.Parent.Invalidate();
+        }
+
+        public void InvalidateThisParentsParent()
+        {
+            this.Parent.Parent.Invalidate();
+        }
+
         public void PerformLayoutThis()
         {
             this.PerformLayout();
+        }
+
+        public void InvalidateThisControls()
+        {
+            foreach (Control ctrl in this.Controls)
+            {
+                ctrl.Invalidate();
+            }
         }
     }
 }

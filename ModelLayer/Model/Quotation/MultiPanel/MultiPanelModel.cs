@@ -256,17 +256,35 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             for (int i = 0; i < Lst_visiblePnl.Count() ; i++)
             {
                 Padding pnl_margin = new Padding(0);
-                if (i == 0)
+                if (MPanel_Type == "Mullion")
                 {
-                    pnl_margin = new Padding(10, 10, 0, 10);
+                    if (i == 0)
+                    {
+                        pnl_margin = new Padding(10, 10, 0, 10);
+                    }
+                    else if (i == visiblePnl_count)
+                    {
+                        pnl_margin = new Padding(0, 10, 10, 10);
+                    }
+                    else
+                    {
+                        pnl_margin = new Padding(0, 10, 0, 10);
+                    }
                 }
-                else if (i == visiblePnl_count)
+                else if (MPanel_Type == "Transom")
                 {
-                    pnl_margin = new Padding(0, 10, 10, 10);
-                }
-                else
-                {
-                    pnl_margin = new Padding(0, 10, 0, 10);
+                    if (i == 0)
+                    {
+                        pnl_margin = new Padding(10, 10, 10, 0);
+                    }
+                    else if (i == visiblePnl_count)
+                    {
+                        pnl_margin = new Padding(10, 0, 10, 10);
+                    }
+                    else
+                    {
+                        pnl_margin = new Padding(10, 0, 10, 0);
+                    }
                 }
                 Lst_visiblePnl[i].Panel_Margin = pnl_margin;
             }

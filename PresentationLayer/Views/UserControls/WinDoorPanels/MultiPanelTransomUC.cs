@@ -11,9 +11,9 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
-    public partial class MultiPanelMullionUC : UserControl, IMultiPanelMullionUC
+    public partial class MultiPanelTransomUC : UserControl, IMultiPanelTransomUC
     {
-        public MultiPanelMullionUC()
+        public MultiPanelTransomUC()
         {
             InitializeComponent();
         }
@@ -37,9 +37,14 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler deleteClickedEventRaised;
         public event DragEventHandler flpMultiDragDropEventRaised;
 
-        private void flp_Multi_Paint(object sender, PaintEventArgs e)
+        public void InvalidateFlp()
         {
-            EventHelpers.RaisePaintEvent(sender, flpMulltiPaintEventRaised, e);
+            flp_MultiTransom.Invalidate();
+        }
+
+        public void DeletePanel(UserControl panel)
+        {
+            flp_MultiTransom.Controls.Remove(panel);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
@@ -51,22 +56,22 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
         }
 
-        private void flp_MultiMullion_MouseEnter(object sender, EventArgs e)
+        private void flp_MultiTransom_Paint(object sender, PaintEventArgs e)
+        {
+            EventHelpers.RaisePaintEvent(sender, flpMulltiPaintEventRaised, e);
+        }
+
+        private void flp_MultiTransom_MouseEnter(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, flpMultiMouseEnterEventRaised, e);
         }
 
-        private void flp_MultiMullion_MouseLeave(object sender, EventArgs e)
+        private void flp_MultiTransom_MouseLeave(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, flpMultiMouseLeaveEventRaised, e);
         }
 
-        public void InvalidateFlp()
-        {
-            flp_MultiMullion.Invalidate();
-        }
-
-        private void flp_MultiMullion_MouseDown(object sender, MouseEventArgs e)
+        private void flp_MultiTransom_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -84,19 +89,14 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             EventHelpers.RaiseEvent(sender, deleteClickedEventRaised, e);
         }
 
-        private void flp_MultiMullion_DragOver(object sender, DragEventArgs e)
+        private void flp_MultiTransom_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
 
-        private void flp_MultiMullion_DragDrop(object sender, DragEventArgs e)
+        private void flp_MultiTransom_DragDrop(object sender, DragEventArgs e)
         {
             EventHelpers.RaiseDragEvent(sender, flpMultiDragDropEventRaised, e);
-        }
-
-        public void DeletePanel(UserControl panel)
-        {
-            flp_MultiMullion.Controls.Remove(panel);
         }
     }
 }

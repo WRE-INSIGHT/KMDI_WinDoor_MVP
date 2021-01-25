@@ -18,6 +18,7 @@ namespace PresentationLayer.Presenter
         IfrmDimensionView GetDimensionView();
         void SetPresenters(IMainPresenter mainPresenter);
         void SetPresenters(IMultiPanelMullionUCPresenter multiUCP);
+        void SetPresenters(IMultiPanelTransomUCPresenter multiTransomUCP);
         void SetProfileType(string profileType);
         void SetHeight();
         void SetValues(int numWD, int numHT);

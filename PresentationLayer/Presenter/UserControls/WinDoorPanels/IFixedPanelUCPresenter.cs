@@ -21,9 +21,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                               IMainPresenter mainPresenter,
                                               IMultiPanelModel multiPanelModel,
                                               IMultiPanelMullionUCPresenter multiPanelUCP);
-        //IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,
-        //                                      IPanelModel panelModel,
-        //                                      IFrameModel frameModel);
+        IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,
+                                              IPanelModel panelModel,
+                                              IFrameModel frameModel,
+                                              IMainPresenter mainPresenter,
+                                              IMultiPanelModel multiPanelModel,
+                                              IMultiPanelTransomUCPresenter multiPanelTransomUCP);
         IFixedPanelUC GetFixedPanelUC();
         void SetInitialLoadFalse();
     }
