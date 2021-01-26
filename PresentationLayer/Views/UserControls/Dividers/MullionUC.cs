@@ -33,27 +33,6 @@ namespace PresentationLayer.Views.UserControls.Dividers
                 _divID = value;
             }
         }
-
-        public int Mullion_Left
-        {
-            get
-            {
-                return this.Left;
-            }
-
-            set
-            {
-                this.Left = value;
-            }
-        }
-
-        public Point Mullion_Location
-        {
-            get
-            {
-                return this.Location;
-            }
-        }
         
         public event MouseEventHandler mullionUCMouseDownEventRaised;
         public event MouseEventHandler mullionUCMouseMoveEventRaised;
@@ -89,18 +68,6 @@ namespace PresentationLayer.Views.UserControls.Dividers
         private void MullionUC_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(this, mullionUCPaintEventRaised, e);
-        }
-
-        private void MullionUC_LocationChanged(object sender, EventArgs e)
-        {
-            if (this.Location.X == 0)
-            {
-                this.Margin = new Padding(10, 0, 0, 0);
-            }
-            else
-            {
-                this.Margin = new Padding(0, 0, 0, 0);
-            }
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

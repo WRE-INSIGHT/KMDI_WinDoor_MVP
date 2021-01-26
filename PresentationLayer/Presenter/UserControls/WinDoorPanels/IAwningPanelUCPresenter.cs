@@ -9,13 +9,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     public interface IAwningPanelUCPresenter
     {
         IAwningPanelUC GetAwningPanelUC();
-        IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel, IMainPresenter mainPresenter);
+        IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                               IPanelModel panelModel, 
+                                               IFrameModel frameModel, 
+                                               IMainPresenter mainPresenter,
+                                               IFrameUCPresenter frameUCP);
         IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                IPanelModel panelModel,
                                                IFrameModel frameModel,
                                                IMainPresenter mainPresenter,
                                                IMultiPanelModel multiPanelModel,
                                                IMultiPanelMullionUCPresenter multiPanelUCP);
+        IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC,
+                                               IPanelModel panelModel,
+                                               IFrameModel frameModel,
+                                               IMainPresenter mainPresenter,
+                                               IMultiPanelModel multiPanelModel,
+                                               IMultiPanelTransomUCPresenter multiPanelTransomUCP);
         void SetInitialLoadFalse();
     }
 }

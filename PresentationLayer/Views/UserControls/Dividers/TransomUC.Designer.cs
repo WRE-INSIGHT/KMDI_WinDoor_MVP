@@ -1,6 +1,6 @@
 ﻿namespace PresentationLayer.Views.UserControls.Dividers
 {
-    partial class MullionUC
+    partial class TransomUC
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.cmenu_mullion = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmenu_transom = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmenu_mullion.SuspendLayout();
+            this.cmenu_transom.SuspendLayout();
             this.SuspendLayout();
             // 
-            // cmenu_mullion
+            // cmenu_transom
             // 
-            this.cmenu_mullion.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmenu_transom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
-            this.cmenu_mullion.Name = "cmenu_mullion";
-            this.cmenu_mullion.Size = new System.Drawing.Size(108, 26);
+            this.cmenu_transom.Name = "cmenu_mullion";
+            this.cmenu_transom.Size = new System.Drawing.Size(108, 26);
             // 
             // deleteToolStripMenuItem
             // 
@@ -48,30 +48,29 @@
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
-            // MullionUC
+            // TransomUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "MullionUC";
-            this.Size = new System.Drawing.Size(26, 350);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MullionUC_Paint);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseClick);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseDown);
-            this.MouseEnter += new System.EventHandler(this.MullionUC_MouseEnter);
-            this.MouseLeave += new System.EventHandler(this.MullionUC_MouseLeave);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseUp);
-            this.cmenu_mullion.ResumeLayout(false);
+            this.Name = "TransomUC";
+            this.Size = new System.Drawing.Size(350, 26);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.TransomUC_Paint);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseDown);
+            this.MouseEnter += new System.EventHandler(this.TransomUC_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.TransomUC_MouseLeave);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseUp);
+            this.cmenu_transom.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ContextMenuStrip cmenu_mullion;
+        private System.Windows.Forms.ContextMenuStrip cmenu_transom;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

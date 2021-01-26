@@ -139,6 +139,9 @@ namespace PresentationLayer
                 .RegisterType<IMultiPanelTransomUC, MultiPanelTransomUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelTransomUCPresenter, MultiPanelTransomUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ITransomUC, TransomUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ITransomUCPresenter, TransomUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();

@@ -410,6 +410,21 @@ namespace PresentationLayer.Presenter
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Transom", new Thumbs_TransomUC()).GetControlUC());
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Mullion", new Thumbs_MullionUC()).GetControlUC());
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Multi-Panel (Mullion)", new Thumbs_MultiPanelMullionUC()).GetControlUC());
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, "Sliding Panel", new Thumbs_SlidingPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
@@ -424,17 +439,6 @@ namespace PresentationLayer.Presenter
                 (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, "Fixed Panel", new Thumbs_FixedPanelUC()).GetControlUC());
 
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
-
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Mullion", new Thumbs_MullionUC()).GetControlUC());
-
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Multi-Panel (Mullion)", new Thumbs_MultiPanelMullionUC()).GetControlUC());
         }
 
         #endregion

@@ -9,13 +9,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     public interface ISlidingPanelUCPresenter
     {
         ISlidingPanelUC GetSlidingPanelUC();
-        ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel, IMainPresenter mainPresenter);
+        ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                IPanelModel panelModel,
+                                                IFrameModel frameModel,
+                                                IMainPresenter mainPresenter,
+                                                IFrameUCPresenter frameUCP);
         ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                 IPanelModel panelModel,
                                                 IFrameModel frameModel,
                                                 IMainPresenter mainPresenter,
                                                 IMultiPanelModel multiPanelModel,
                                                 IMultiPanelMullionUCPresenter multiPanelUCP);
+        ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                IPanelModel panelModel,
+                                                IFrameModel frameModel,
+                                                IMainPresenter mainPresenter,
+                                                IMultiPanelModel multiPanelModel,
+                                                IMultiPanelTransomUCPresenter multiPanelTransomUCP);
         void SetInitialLoadFalse();
     }
 }

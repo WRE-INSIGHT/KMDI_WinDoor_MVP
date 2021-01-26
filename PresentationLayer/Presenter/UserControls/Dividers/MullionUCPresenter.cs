@@ -22,7 +22,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         private IDividerModel _divModel;
         private IMultiPanelModel _multiPanelModel;
 
-        private IMultiPanelMullionUCPresenter _multiMultiUCP;
+        private IMultiPanelMullionUCPresenter _multiMullionUCP;
 
         bool _mouseDown;
         private Point _point_of_origin;
@@ -59,8 +59,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         private void _mullionUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
         {
             _divModel.Div_Visible = false;
-            _multiMultiUCP.DeletePanel((UserControl)_mullionUC);
-            _multiMultiUCP.Invalidate_MultiPanelMullionUC();
+            _multiMullionUCP.DeletePanel((UserControl)_mullionUC);
+            _multiMullionUCP.Invalidate_MultiPanelMullionUC();
         }
 
         Color penColor = Color.Black;
@@ -180,7 +180,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             MullionUCPresenter mullionUCP = unityC.Resolve<MullionUCPresenter>();
             mullionUCP._divModel = divModel;
             mullionUCP._multiPanelModel = multiPanelModel;
-            mullionUCP._multiMultiUCP = multiMullionUCP;
+            mullionUCP._multiMullionUCP = multiMullionUCP;
 
             return mullionUCP;
         }

@@ -22,9 +22,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
-
         private IMultiPanelModel _multiPanelModel;
-        private IMultiPanelMullionUCPresenter _multiPanelUCP;
+
+        private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
+        private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
+        private IFrameUCPresenter _frameUCP;
 
         bool _initialLoad;
 
@@ -47,6 +49,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
+            if (_multiPanelModel != null)
+            {
+                _multiPanelModel.Reload_PanelMargin();
+            }
+            if (_multiPanelMullionUCP != null)
+            {
+                _multiPanelMullionUCP.DeletePanel((UserControl)_casementUC);
+            }
+            if (_multiPanelTransomUCP != null)
+            {
+                _multiPanelTransomUCP.DeletePanel((UserControl)_casementUC);
+            }
+            if (_frameUCP != null)
+            {
+                _frameUCP.ViewDeleteControl((UserControl)_casementUC);
+            }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -153,7 +171,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                         IPanelModel panelModel, 
                                                         IFrameModel frameModel,
-                                                        IMainPresenter mainPresenter)
+                                                        IMainPresenter mainPresenter,
+                                                        IFrameUCPresenter frameUCP)
         {
             unityC
                 .RegisterType<ICasementPanelUC, CasementPanelUC>()
@@ -162,6 +181,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
             casementUCP._mainPresenter = mainPresenter;
+            casementUCP._frameUCP = frameUCP;
 
             return casementUCP;
         }
@@ -181,7 +201,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             casementUCP._frameModel = frameModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._multiPanelModel = multiPanelModel;
-            casementUCP._multiPanelUCP = multiPanelUCP;
+            casementUCP._multiPanelMullionUCP = multiPanelUCP;
+
+            return casementUCP;
+        }
+
+        public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                        IPanelModel panelModel,
+                                                        IFrameModel frameModel,
+                                                        IMainPresenter mainPresenter,
+                                                        IMultiPanelModel multiPanelModel,
+                                                        IMultiPanelTransomUCPresenter multiTransomUCP)
+        {
+            unityC
+                .RegisterType<ICasementPanelUC, CasementPanelUC>()
+                .RegisterType<ICasementPanelUCPresenter, CasementPanelUCPresenter>();
+            CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
+            casementUCP._panelModel = panelModel;
+            casementUCP._frameModel = frameModel;
+            casementUCP._mainPresenter = mainPresenter;
+            casementUCP._multiPanelModel = multiPanelModel;
+            casementUCP._multiPanelTransomUCP = multiTransomUCP;
 
             return casementUCP;
         }

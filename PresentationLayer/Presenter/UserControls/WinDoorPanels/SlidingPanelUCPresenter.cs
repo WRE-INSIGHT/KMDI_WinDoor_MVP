@@ -22,9 +22,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
-
         private IMultiPanelModel _multiPanelModel;
-        private IMultiPanelMullionUCPresenter _multiPanelUCP;
+
+        private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
+        private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
+        private IFrameUCPresenter _frameUCP;
 
         bool _initialLoad;
 
@@ -75,6 +77,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
+            if (_multiPanelModel != null)
+            {
+                _multiPanelModel.Reload_PanelMargin();
+            }
+            if (_multiPanelMullionUCP != null)
+            {
+                _multiPanelMullionUCP.DeletePanel((UserControl)_slidingPanelUC);
+            }
+            if (_multiPanelTransomUCP != null)
+            {
+                _multiPanelTransomUCP.DeletePanel((UserControl)_slidingPanelUC);
+            }
+            if (_frameUCP != null)
+            {
+                _frameUCP.ViewDeleteControl((UserControl)_slidingPanelUC);
+            }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -171,7 +189,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                        IPanelModel panelModel, 
                                                        IFrameModel frameModel,
-                                                       IMainPresenter mainPresenter)
+                                                       IMainPresenter mainPresenter,
+                                                       IFrameUCPresenter frameUCP)
         {
             unityC
                 .RegisterType<ISlidingPanelUC, SlidingPanelUC>()
@@ -180,11 +199,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             slidingUCP._panelModel = panelModel;
             slidingUCP._frameModel = frameModel;
             slidingUCP._mainPresenter = mainPresenter;
+            slidingUCP._frameUCP = frameUCP;
 
             return slidingUCP;
         }
 
-        public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel, IMainPresenter mainPresenter, IMultiPanelModel multiPanelModel, IMultiPanelMullionUCPresenter multiPanelUCP)
+        public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                       IPanelModel panelModel, 
+                                                       IFrameModel frameModel, 
+                                                       IMainPresenter mainPresenter, 
+                                                       IMultiPanelModel multiPanelModel, 
+                                                       IMultiPanelMullionUCPresenter multiPanelUCP)
         {
             unityC
                 .RegisterType<ISlidingPanelUC, SlidingPanelUC>()
@@ -194,7 +219,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             slidingUCP._frameModel = frameModel;
             slidingUCP._mainPresenter = mainPresenter;
             slidingUCP._multiPanelModel = multiPanelModel;
-            slidingUCP._multiPanelUCP = multiPanelUCP;
+            slidingUCP._multiPanelMullionUCP = multiPanelUCP;
+
+            return slidingUCP;
+        }
+
+        public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                       IPanelModel panelModel,
+                                                       IFrameModel frameModel,
+                                                       IMainPresenter mainPresenter,
+                                                       IMultiPanelModel multiPanelModel,
+                                                       IMultiPanelTransomUCPresenter multiPanelTransomUCP)
+        {
+            unityC
+                .RegisterType<ISlidingPanelUC, SlidingPanelUC>()
+                .RegisterType<ISlidingPanelUCPresenter, SlidingPanelUCPresenter>();
+            SlidingPanelUCPresenter slidingUCP = unityC.Resolve<SlidingPanelUCPresenter>();
+            slidingUCP._panelModel = panelModel;
+            slidingUCP._frameModel = frameModel;
+            slidingUCP._mainPresenter = mainPresenter;
+            slidingUCP._multiPanelModel = multiPanelModel;
+            slidingUCP._multiPanelTransomUCP = multiPanelTransomUCP;
 
             return slidingUCP;
         }

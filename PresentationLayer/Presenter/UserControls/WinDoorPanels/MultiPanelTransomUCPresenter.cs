@@ -7,6 +7,7 @@ using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ServiceLayer.Services.DividerServices;
 using ServiceLayer.Services.MultiPanelServices;
@@ -41,7 +42,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private ISlidingPanelUCPresenter _slidingUCP;
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IfrmDimensionPresenter _frmDimensionPresenter;
-        private IMullionUCPresenter _mullionUCP;
+        private ITransomUCPresenter _transomUCP;
         private IFrameUCPresenter _frameUCP;
 
         private IDividerServices _divServices;
@@ -58,7 +59,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             IPanelPropertiesUCPresenter panelPropertiesUCP,
                                             IfrmDimensionPresenter frmDimensionPresenter,
                                             IFixedPanelImagerUCPresenter fixedImagerUCP,
-                                            IMullionUCPresenter mullionUCP,
+                                            ITransomUCPresenter transomUCP,
                                             IDividerServices divServices)
         {
             _multiPanelTransomUC = multiPanelTransomUC;
@@ -71,7 +72,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _panelPropertiesUCP = panelPropertiesUCP;
             _frmDimensionPresenter = frmDimensionPresenter;
             _fixedImagerUCP = fixedImagerUCP;
-            _mullionUCP = mullionUCP;
+            _transomUCP = transomUCP;
             _divServices = divServices;
             SubscribeToEventsSetup();
         }
@@ -119,23 +120,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (data == "Transom")
             {
-                //IDividerModel divModel = _divServices.AddDividerModel(divSize,
-                //                                                      fpnl.Height,
-                //                                                      fpnl,
-                //                                                      (UserControl)_frameUCP.GetFrameUC(),
-                //                                                      DividerModel.DividerType.Mullion,
-                //                                                      true,
-                //                                                      divID);
+                IDividerModel divModel = _divServices.AddDividerModel(fpnl.Width,
+                                                                      divSize,
+                                                                      fpnl,
+                                                                      (UserControl)_frameUCP.GetFrameUC(),
+                                                                      DividerModel.DividerType.Mullion,
+                                                                      true,
+                                                                      divID);
 
-                //_frameModel.Lst_Divider.Add(divModel);
-                //_multiPanelModel.MPanelLst_Divider.Add(divModel);
+                _frameModel.Lst_Divider.Add(divModel);
+                _multiPanelModel.MPanelLst_Divider.Add(divModel);
 
-                //IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC,
-                //                                                            divModel,
-                //                                                            _multiPanelModel,
-                //                                                            this);
-                //IMullionUC mullionUC = mullionUCP.GetMullion();
-                //fpnl.Controls.Add((UserControl)mullionUC);
+                ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
+                                                                            divModel,
+                                                                            _multiPanelModel,
+                                                                            this);
+                ITransomUC transomUC = transomUCP.GetTransom();
+                fpnl.Controls.Add((UserControl)transomUC);
+            }
+            else if (data == "Mullion")
+            {
+                MessageBox.Show("Invalid object", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -187,15 +192,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else if (data == "Casement Panel")
                     {
-                        //ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC,
-                        //                                                                    _panelModel,
-                        //                                                                    _frameModel,
-                        //                                                                    _mainPresenter,
-                        //                                                                    _multiPanelModel,
-                        //                                                                    this);
-                        //ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
-                        //fpnl.Controls.Add((UserControl)casementUC);
-                        //casementUCP.SetInitialLoadFalse();
+                        ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC,
+                                                                                            _panelModel,
+                                                                                            _frameModel,
+                                                                                            _mainPresenter,
+                                                                                            _multiPanelModel,
+                                                                                            this);
+                        ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+                        fpnl.Controls.Add((UserControl)casementUC);
+                        casementUCP.SetInitialLoadFalse();
 
                         //ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel);
                         //ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
@@ -203,15 +208,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else if (data == "Awning Panel")
                     {
-                        //IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
-                        //                                                              _panelModel,
-                        //                                                              _frameModel,
-                        //                                                              _mainPresenter,
-                        //                                                              _multiPanelModel,
-                        //                                                              this);
-                        //IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
-                        //fpnl.Controls.Add((UserControl)awningUC);
-                        //awningUCP.SetInitialLoadFalse();
+                        IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
+                                                                                      _panelModel,
+                                                                                      _frameModel,
+                                                                                      _mainPresenter,
+                                                                                      _multiPanelModel,
+                                                                                      this);
+                        IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+                        fpnl.Controls.Add((UserControl)awningUC);
+                        awningUCP.SetInitialLoadFalse();
 
                         //IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel);
                         //IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
@@ -219,15 +224,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else if (data == "Sliding Panel")
                     {
-                        //ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC,
-                        //                                                                 _panelModel,
-                        //                                                                 _frameModel,
-                        //                                                                 _mainPresenter,
-                        //                                                                 _multiPanelModel,
-                        //                                                                 this);
-                        //ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
-                        //fpnl.Controls.Add((UserControl)slidingUC);
-                        //slidingUCP.SetInitialLoadFalse();
+                        ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC,
+                                                                                         _panelModel,
+                                                                                         _frameModel,
+                                                                                         _mainPresenter,
+                                                                                         _multiPanelModel,
+                                                                                         this);
+                        ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+                        fpnl.Controls.Add((UserControl)slidingUC);
+                        slidingUCP.SetInitialLoadFalse();
 
                         //ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC, _panelModel);
                         //ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
@@ -248,12 +253,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameModel.Frame_Type = FrameModel.Frame_Padding.Door;
             }
-            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
             {
                 pnl.Panel_Visibility = false;
                 _frameModel.FrameProp_Height -= 148;
             }
-            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
+            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider.Where(div => div.Div_Visible == true))
             {
                 div.Div_Visible = false;
             }

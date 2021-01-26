@@ -192,7 +192,11 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Casement Panel")
                 {
-                    ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, 
+                                                                                        _panelModel, 
+                                                                                        _frameModel, 
+                                                                                        _mainPresenter,
+                                                                                        this);
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                     frame.Controls.Add((UserControl)casementUC);
 
@@ -202,7 +206,11 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Awning Panel")
                 {
-                    IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, 
+                                                                                  _panelModel, 
+                                                                                  _frameModel, 
+                                                                                  _mainPresenter,
+                                                                                  this);
                     IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
                     frame.Controls.Add((UserControl)awningUC);
 
@@ -212,7 +220,11 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Sliding Panel")
                 {
-                    ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, _panelModel, _frameModel, _mainPresenter);
+                    ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, 
+                                                                                     _panelModel, 
+                                                                                     _frameModel, 
+                                                                                     _mainPresenter,
+                                                                                     this);
                     ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
                     frame.Controls.Add((UserControl)slidingUC);
 

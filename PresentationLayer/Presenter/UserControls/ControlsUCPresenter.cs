@@ -53,14 +53,14 @@ namespace PresentationLayer.Presenter.UserControls
         }
         public IControlsUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                    string customtext, 
-                                                   UserControl WinDoorPanel)
+                                                   UserControl usercontrol)
         {
             unityC
                 .RegisterType<IControlsUC, ControlsUC>()
                 .RegisterType<IControlsUCPresenter, ControlsUCPresenter>();
             ControlsUCPresenter controlUCP = unityC.Resolve<ControlsUCPresenter>();
             controlUCP.customText = customtext;
-            controlUCP.AddWinDoorPanel(WinDoorPanel);
+            controlUCP.AddWinDoorPanel(usercontrol);
             controlUCP.WireAllControls((UserControl)controlUCP.GetControlUC());
             controlUCP._unityC = unityC;
 
@@ -73,9 +73,9 @@ namespace PresentationLayer.Presenter.UserControls
             return _controlUC;
         }
 
-        private void AddWinDoorPanel(UserControl WindoorPanel)
+        private void AddWinDoorPanel(UserControl usercontrol)
         {
-            _pnlWindoorPanel.Controls.Add(WindoorPanel);
+            _pnlWindoorPanel.Controls.Add(usercontrol);
         }
 
         private void WireAllControls(Control cont)

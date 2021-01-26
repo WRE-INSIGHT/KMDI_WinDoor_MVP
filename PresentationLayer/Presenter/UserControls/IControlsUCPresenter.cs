@@ -9,6 +9,6 @@ namespace PresentationLayer.Presenter.UserControls
     public interface IControlsUCPresenter
     {
         IControlsUC GetControlUC();
-        IControlsUCPresenter GetNewInstance(IUnityContainer unityC, string customtext, UserControl WinDoorPanel);
+        IControlsUCPresenter GetNewInstance(IUnityContainer unityC, string customtext, UserControl usercontrol);
     }
 }

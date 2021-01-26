@@ -139,6 +139,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 IMullionUC mullionUC = mullionUCP.GetMullion();
                 fpnl.Controls.Add((UserControl)mullionUC);
             }
+            else if (data == "Transom")
+            {
+                MessageBox.Show("Invalid object", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else
             {
                 int suggest_Wd = ((multiPanel_boundsWD - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount),
@@ -250,12 +254,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameModel.Frame_Type = FrameModel.Frame_Padding.Door;
             }
-            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
             {
                 pnl.Panel_Visibility = false;
                 _frameModel.FrameProp_Height -= 148;
             }
-            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
+            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider.Where(div => div.Div_Visible == true))
             {
                 div.Div_Visible = false;
             }

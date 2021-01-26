@@ -16,6 +16,7 @@ namespace PresentationLayer.Tests
     public class DividerUIUnitTest
     {
         IMullionUCPresenter _mullionUCP;
+        ITransomUCPresenter _transomUCP;
 
         IUnityContainer UnityC;
 
@@ -25,9 +26,13 @@ namespace PresentationLayer.Tests
             UnityC = new UnityContainer()
                .RegisterType<IMullionUC, MullionUC>(new ContainerControlledLifetimeManager())
                .RegisterType<IMullionUCPresenter, MullionUCPresenter>(new ContainerControlledLifetimeManager())
+
+               .RegisterType<ITransomUC, TransomUC>(new ContainerControlledLifetimeManager())
+               .RegisterType<ITransomUCPresenter, TransomUCPresenter>(new ContainerControlledLifetimeManager())
                ;
 
             _mullionUCP = UnityC.Resolve<MullionUCPresenter>();
+            _transomUCP = UnityC.Resolve<TransomUCPresenter>();
         }
         [TestMethod]
         public void MullionUC_Testing()
@@ -61,6 +66,43 @@ namespace PresentationLayer.Tests
 
             flp_multi.Controls.Add(pnl);
             flp_multi.Controls.Add((UserControl)mullionUC);
+            flp_multi.Controls.Add(pnl2);
+
+            frm.ShowDialog();
+        }
+        [TestMethod]
+        public void TransomUC_Testing()
+        {
+            frmDividerTesting frm = new frmDividerTesting();
+
+            ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(UnityC);
+            ITransomUC transomUC = transomUCP.GetMullion("test");
+
+            FlowLayoutPanel flp_multi = new FlowLayoutPanel();
+            flp_multi.Name = "multiPnl";
+            flp_multi.FlowDirection = FlowDirection.TopDown;
+            flp_multi.BackColor = SystemColors.Control;
+            flp_multi.Dock = DockStyle.Fill;
+            flp_multi.Margin = new Padding(0);
+            flp_multi.Paint += new PaintEventHandler(Border_Paint);
+            frm.pnl_frame.Controls.Add(flp_multi);
+
+            Panel pnl = new Panel();
+            pnl.Size = new Size(330, 180);
+            pnl.BackColor = Color.DarkGray;
+            pnl.Margin = new Padding(10, 10, 10, 0);
+            pnl.Paint += new PaintEventHandler(Border_Paint);
+            pnl.Resize += Pnl_Resize;
+
+            Panel pnl2 = new Panel();
+            pnl2.Size = new Size(330, 180);
+            pnl2.BackColor = Color.DarkGray;
+            pnl2.Margin = new Padding(10, 0, 10, 0);
+            pnl2.Paint += new PaintEventHandler(Border_Paint);
+            pnl2.Resize += Pnl_Resize;
+
+            flp_multi.Controls.Add(pnl);
+            flp_multi.Controls.Add((UserControl)transomUC);
             flp_multi.Controls.Add(pnl2);
 
             frm.ShowDialog();

@@ -22,9 +22,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
-
         private IMultiPanelModel _multiPanelModel;
-        private IMultiPanelMullionUCPresenter _multiPanelUCP;
+
+        private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
+        private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
+        private IFrameUCPresenter _frameUCP;
 
         bool _initialLoad;
 
@@ -47,6 +49,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
+            if (_multiPanelModel != null)
+            {
+                _multiPanelModel.Reload_PanelMargin();
+            }
+            if (_multiPanelMullionUCP != null)
+            {
+                _multiPanelMullionUCP.DeletePanel((UserControl)_awningPanelUC);
+            }
+            if (_multiPanelTransomUCP != null)
+            {
+                _multiPanelTransomUCP.DeletePanel((UserControl)_awningPanelUC);
+            }
+            if (_frameUCP != null)
+            {
+                _frameUCP.ViewDeleteControl((UserControl)_awningPanelUC);
+            }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -154,7 +172,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                       IPanelModel panelModel, 
                                                       IFrameModel frameModel,
-                                                      IMainPresenter mainPresenter)
+                                                      IMainPresenter mainPresenter,
+                                                      IFrameUCPresenter frameUCP)
         {
             unityC
                 .RegisterType<IAwningPanelUC, AwningPanelUC>()
@@ -163,6 +182,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             awningUCP._panelModel = panelModel;
             awningUCP._frameModel = frameModel;
             awningUCP._mainPresenter = mainPresenter;
+            awningUCP._frameUCP = frameUCP;
 
             return awningUCP;
         }
@@ -182,7 +202,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             awningUCP._frameModel = frameModel;
             awningUCP._mainPresenter = mainPresenter;
             awningUCP._multiPanelModel = multiPanelModel;
-            awningUCP._multiPanelUCP = multiPanelUCP;
+            awningUCP._multiPanelMullionUCP = multiPanelUCP;
+
+            return awningUCP;
+        }
+
+        public IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                        IPanelModel panelModel,
+                                                        IFrameModel frameModel,
+                                                        IMainPresenter mainPresenter,
+                                                        IMultiPanelModel multiPanelModel,
+                                                        IMultiPanelTransomUCPresenter multiPanelTransomUCP)
+        {
+            unityC
+                .RegisterType<IAwningPanelUC, AwningPanelUC>()
+                .RegisterType<IAwningPanelUCPresenter, AwningPanelUCPresenter>();
+            AwningPanelUCPresenter awningUCP = unityC.Resolve<AwningPanelUCPresenter>();
+            awningUCP._panelModel = panelModel;
+            awningUCP._frameModel = frameModel;
+            awningUCP._mainPresenter = mainPresenter;
+            awningUCP._multiPanelModel = multiPanelModel;
+            awningUCP._multiPanelTransomUCP = multiPanelTransomUCP;
 
             return awningUCP;
         }
