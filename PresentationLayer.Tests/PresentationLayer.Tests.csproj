@@ -74,6 +74,12 @@
     <Compile Include="frmDividerTesting.Designer.cs">
       <DependentUpon>frmDividerTesting.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDraw2BmpTesting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDraw2BmpTesting.Designer.cs">
+      <DependentUpon>frmDraw2BmpTesting.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmUITest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PanelUIUnitTest.cs" />
     <Compile Include="DividerUIUnitTest.cs" />
+    <Compile Include="Draw2BmpUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonComponents\CommonComponents.csproj">
@@ -114,6 +121,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmDividerTesting.resx">
       <DependentUpon>frmDividerTesting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDraw2BmpTesting.resx">
+      <DependentUpon>frmDraw2BmpTesting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUITest.resx">
       <DependentUpon>frmUITest.cs</DependentUpon>

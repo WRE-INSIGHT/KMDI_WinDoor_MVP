@@ -152,9 +152,9 @@ namespace PresentationLayer.Tests
                                                1.0f,
                                                new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
 
-            ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
-            ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
-            frm.Controls.Add((UserControl)casementUC);
+            //ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
+            //ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+            //frm.Controls.Add((UserControl)casementUC);
             frm.ShowDialog();
         }
 
@@ -168,9 +168,9 @@ namespace PresentationLayer.Tests
                                                1.0f,
                                                new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
 
-            IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
-            IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
-            frm.Controls.Add((UserControl)awningUC);
+            //IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
+            //IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+            //frm.Controls.Add((UserControl)awningUC);
             frm.ShowDialog();
         }
 
@@ -184,9 +184,9 @@ namespace PresentationLayer.Tests
                                                1.0f,
                                                new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
 
-            ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
-            ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
-            frm.Controls.Add((UserControl)slidingUC);
+            //ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
+            //ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+            //frm.Controls.Add((UserControl)slidingUC);
             frm.ShowDialog();
         }
     }

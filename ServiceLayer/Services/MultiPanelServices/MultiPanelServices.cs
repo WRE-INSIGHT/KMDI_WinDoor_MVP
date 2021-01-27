@@ -69,7 +69,14 @@ namespace ServiceLayer.Services.MultiPanelServices
         {
             if (mname == "")
             {
-                mname = "MultiPanel " + mid;
+                if (mflow == FlowDirection.LeftToRight)
+                {
+                    mname = "Mullion_" + mid;
+                }
+                else if (mflow == FlowDirection.TopDown)
+                {
+                    mname = "Transom_" + mid;
+                }
             }
             if (mpanelLstPanel == null)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using CommonComponents;
 
@@ -158,6 +159,29 @@ namespace PresentationLayer.Views.UserControls
             {
                 ctrl.Invalidate();
             }
+        }
+
+        public Bitmap GetImageThis()
+        {
+            Bitmap bgThis = new Bitmap(this.Width, this.Height);
+            this.DrawToBitmap(bgThis, new Rectangle(10, 10, this.Width - 20, this.Height - 20));
+
+            Bitmap cropped = new Bitmap(280, 280);
+
+            //Load image from file
+            using (Bitmap image = new Bitmap(bgThis))
+            {
+                // Create a Graphics object to do the drawing, *with the new bitmap as the target*
+                using (Graphics g = Graphics.FromImage(cropped))
+                {
+                    // Draw the desired area of the original into the graphics object
+                    g.DrawImage(image, new Rectangle(0, 0, this.Width - 20, this.Height - 20), 
+                                       new Rectangle(10, 10, this.Width - 20, this.Height - 20), GraphicsUnit.Pixel);
+                    // Save the result
+                    //cropped.Save(@"C:\Users\KMDI\Documents\Windoor Maker files\img\2.png");
+                }
+            }
+            return cropped;
         }
     }
 }

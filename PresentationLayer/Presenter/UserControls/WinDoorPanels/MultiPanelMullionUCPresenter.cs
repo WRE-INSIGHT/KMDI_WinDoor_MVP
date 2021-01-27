@@ -347,7 +347,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             StringFormat drawFormat = new StringFormat();
             drawFormat.Alignment = StringAlignment.Near;
             drawFormat.LineAlignment = StringAlignment.Near;
-            g.DrawString("Multi_Panel: " + _multiPanelModel.MPanel_Type + "(" + _multiPanelModel.MPanel_Divisions + ")", drawFont, new SolidBrush(Color.Black), 10, 10);
+            g.DrawString(_multiPanelModel.MPanel_Name + " (" + _multiPanelModel.MPanel_Divisions + ")", drawFont, new SolidBrush(Color.Black), 10, 10);
         }
 
         public IMultiPanelMullionUC GetMultiPanel()

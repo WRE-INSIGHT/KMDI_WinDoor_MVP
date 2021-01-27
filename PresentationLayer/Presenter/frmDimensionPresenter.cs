@@ -193,11 +193,13 @@ namespace PresentationLayer.Presenter
 
         public void SetPresenters(IMultiPanelMullionUCPresenter multiUCP)
         {
+            _multiTransomUCP = null;
             _multiMullionUCP = multiUCP;
         }
 
         public void SetPresenters(IMultiPanelTransomUCPresenter multiTransomUCP)
         {
+            _multiMullionUCP = null;
             _multiTransomUCP = multiTransomUCP;
         }
 

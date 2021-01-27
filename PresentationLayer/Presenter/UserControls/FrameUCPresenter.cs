@@ -143,7 +143,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                                  _multipanelModel,
                                                                                                  _frameModel,
                                                                                                  _mainPresenter,
-                                                                                                 this);
+                                                                                                 this,
+                                                                                                 _frameUC.GetImageThis());
                     IMultiPanelTransomUC multiUC = multiTransom.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
                 }
