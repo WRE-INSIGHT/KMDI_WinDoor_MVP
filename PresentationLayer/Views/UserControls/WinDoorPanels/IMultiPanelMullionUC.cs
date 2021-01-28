@@ -1,5 +1,6 @@
 ﻿using CommonComponents;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
@@ -17,5 +18,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         void InvalidateFlp();
         void DeletePanel(UserControl panel);
+        Bitmap GetPartImageThis(int height);
     }
 }

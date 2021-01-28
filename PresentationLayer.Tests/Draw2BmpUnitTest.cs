@@ -20,7 +20,7 @@ namespace PresentationLayer.Tests
 
             //bgThis.Save(@"C:\Users\KMDI\Documents\Windoor Maker files\img\1.png", System.Drawing.Imaging.ImageFormat.Png);
 
-            Bitmap cropped = new Bitmap(280, 280);
+            Bitmap cropped = new Bitmap(pnl.Width - 20, pnl.Height - 20);
 
             //Load image from file
             using (Bitmap image = new Bitmap(bgThis))
@@ -29,7 +29,8 @@ namespace PresentationLayer.Tests
                 using (Graphics g = Graphics.FromImage(cropped))
                 {
                     // Draw the desired area of the original into the graphics object
-                    g.DrawImage(image, new Rectangle(0, 0, 280, 280), new Rectangle(10, 10, 280, 280), GraphicsUnit.Pixel);
+                    g.DrawImage(image, new Rectangle(0, 0, pnl.Width - 20, pnl.Height - 20), 
+                                       new Rectangle(10, 10, pnl.Width - 20, pnl.Height - 20), GraphicsUnit.Pixel);
                     // Save the result
                     //cropped.Save(@"C:\Users\KMDI\Documents\Windoor Maker files\img\2.png");
                 }

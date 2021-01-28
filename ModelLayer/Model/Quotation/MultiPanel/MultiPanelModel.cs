@@ -231,8 +231,24 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        private Padding _mpanelMargin;
+        public Padding MPanel_Margin
+        {
+            get
+            {
+                return _mpanelMargin;
+            }
+
+            set
+            {
+                _mpanelMargin = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public List<IPanelModel> MPanelLst_Panel { get; set; }
         public List<IDividerModel> MPanelLst_Divider { get; set; }
+        public List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
 
         public int GetVisiblePanel()
         {
@@ -290,6 +306,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        public void Reload_MultiPanelMargin()
+        {
+            throw new NotImplementedException();
+        }
+
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,
@@ -301,7 +322,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                UserControl mpanelFrameGroup,
                                int mpanelDivisions,
                                List<IPanelModel> mpanelLstPanel,
-                               List<IDividerModel> mpanelLstDivider)
+                               List<IDividerModel> mpanelLstDivider,
+                               List<IMultiPanelModel> mpanelLstMultiPanel)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -315,6 +337,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_Divisions = mpanelDivisions;
             MPanelLst_Panel = mpanelLstPanel;
             MPanelLst_Divider = mpanelLstDivider;
+            MPanelLst_MultiPanel = mpanelLstMultiPanel;
         }
     }
 }

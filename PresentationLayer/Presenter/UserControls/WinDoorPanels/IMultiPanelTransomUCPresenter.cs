@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IFrameModel frameModel, 
                                                      IMainPresenter mainPresenter, 
                                                      IFrameUCPresenter frameUCP,
-                                                     Bitmap frameImg);
+                                                     Bitmap bgImg);
         void Invalidate_MultiPanelMullionUC();
     }
 }

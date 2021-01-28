@@ -8,12 +8,6 @@ namespace ServiceLayer.Services.MultiPanelServices
 {
     public interface IMultiPanelServices
     {
-        IMultiPanelModel CreateMultiPanel(int mid, string mname, int mwidth, int mheight, DockStyle mdock, bool mvisible, FlowDirection mflow,
-                                          Control mpanelParent,
-                                          UserControl mpanelFrameGroup,
-                                          int mpanelDivisions,
-                                          List<IPanelModel> mpanelLstPanel,
-                                          List<IDividerModel> mpanelLstDivider);
         void ValidateModel(IMultiPanelModel multiPanelModel);
         IMultiPanelModel AddMultiPanelModel(int mwidth,
                                             int mheight,
@@ -22,10 +16,11 @@ namespace ServiceLayer.Services.MultiPanelServices
                                             bool mvisible,
                                             FlowDirection mflow,
                                             int mid = 0,
-                                            string mname = "",
                                             DockStyle mdock = DockStyle.Fill,
+                                            string mname = "",
                                             int mpanelDivisions = 1,
                                             List<IPanelModel> mpanelLstPanel = null,
-                                            List<IDividerModel> mpanelLstDivider = null);
+                                            List<IDividerModel> mpanelLstDivider = null,
+                                            List<IMultiPanelModel> mpanelLstMultiPanel = null);
     }
 }

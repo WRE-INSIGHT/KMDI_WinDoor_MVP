@@ -20,7 +20,7 @@ namespace ServiceLayer.Services.MultiPanelServices
             _modelCheck = modelCheck;
         }
 
-        public IMultiPanelModel CreateMultiPanel(int mid,
+        private IMultiPanelModel CreateMultiPanel(int mid,
                                                  string mname,
                                                  int mwidth,
                                                  int mheight,
@@ -31,7 +31,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  UserControl mpanelFrameGroup,
                                                  int mpanelDivisions,
                                                  List<IPanelModel> mpanelLstPanel,
-                                                 List<IDividerModel> mpanelLstDivider)
+                                                 List<IDividerModel> mpanelLstDivider,
+                                                 List<IMultiPanelModel> mpanelLstMultiPanel)
         {
             MultiPanelModel mp = new MultiPanelModel(mid,
                                                       mname,
@@ -44,7 +45,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                       mpanelFrameGroup,
                                                       mpanelDivisions,
                                                       mpanelLstPanel,
-                                                      mpanelLstDivider);
+                                                      mpanelLstDivider,
+                                                      mpanelLstMultiPanel);
 
             return mp;
         }
@@ -61,11 +63,12 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                    bool mvisible,
                                                    FlowDirection mflow,
                                                    int mid = 0,
-                                                   string mname = "",
                                                    DockStyle mdock = DockStyle.Fill,
+                                                   string mname = "",
                                                    int mpanelDivisions = 1,
                                                    List<IPanelModel> mpanelLstPanel = null,
-                                                   List<IDividerModel> mpanelLstDivider = null)
+                                                   List<IDividerModel> mpanelLstDivider = null,
+                                                   List<IMultiPanelModel> mpanelLstMultiPanel = null)
         {
             if (mname == "")
             {
@@ -86,6 +89,10 @@ namespace ServiceLayer.Services.MultiPanelServices
             {
                 mpanelLstDivider = new List<IDividerModel>();
             }
+            if (mpanelLstMultiPanel == null)
+            {
+                mpanelLstMultiPanel = new List<IMultiPanelModel>();
+            }
             IMultiPanelModel _multipanelModel = CreateMultiPanel(mid,
                                                                  mname,
                                                                  mwidth,
@@ -97,7 +104,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mpanelFrameGroup,
                                                                  mpanelDivisions,
                                                                  mpanelLstPanel,
-                                                                 mpanelLstDivider);
+                                                                 mpanelLstDivider,
+                                                                 mpanelLstMultiPanel);
 
             return _multipanelModel;
         }

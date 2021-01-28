@@ -34,7 +34,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelModel _multiPanelModel;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
-        private IMultiPanelModel _multipanelModel;
 
         private IMainPresenter _mainPresenter;
         private IFixedPanelUCPresenter _fixedUCP;
@@ -51,8 +50,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IPanelServices _panelServices;
         private IMultiPanelServices _multipanelServices;
 
-        private Bitmap _frameImage; //this is a cropped image of frame to be drawn into multi-Panel
-
+        //private Bitmap _bgImage; //this is a cropped image of the parent to be drawn into multi-Panel
+                                 //this is also a cropped image of this multi-panel object that
+                                 //contains an image within 10 pixels around this object
         public MultiPanelTransomUCPresenter(IMultiPanelTransomUC multiPanelTransomUC,
                                             IFixedPanelUCPresenter fixedUCP,
                                             ICasementPanelUCPresenter casementUCP,
@@ -134,20 +134,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (!frmResult)
                 {
-
                     FlowDirection flow = FlowDirection.LeftToRight;
                     if (data.Contains("Transom"))
                     {
                         flow = FlowDirection.TopDown;
                     }
-                    _multipanelModel = _multipanelServices.AddMultiPanelModel(_frmDmRes_Width,
-                                                                              _frmDmRes_Height,
-                                                                              fpnl,
-                                                                              (UserControl)_frameUCP.GetFrameUC(),
-                                                                              true,
-                                                                              flow,
-                                                                              multiID);
-                    _frameModel.Lst_MultiPanel.Add(_multipanelModel);
+
+                    IMultiPanelModel mPanelModel = _multipanelServices.AddMultiPanelModel(_frmDmRes_Width,
+                                                                                          _frmDmRes_Height,
+                                                                                          fpnl,
+                                                                                          (UserControl)_frameUCP.GetFrameUC(),
+                                                                                          true,
+                                                                                          flow,
+                                                                                          multiID,
+                                                                                          DockStyle.None);
+                    _frameModel.Lst_MultiPanel.Add(mPanelModel);
+                    _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
 
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                     {
@@ -158,28 +160,30 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _frameModel.Frame_Padding_int = new Padding(23);
                     }
 
+                    //_bgImage = _multiPanelTransomUC.GetPartImageThis(_frmDmRes_Height);
                     if (data.Contains("Mullion"))
                     {
                         IMultiPanelMullionUCPresenter multiUCP = _multiMullionUCP.GetNewInstance(_unityC,
-                                                                                                 _multipanelModel,
+                                                                                                 mPanelModel,
                                                                                                  _frameModel,
                                                                                                  _mainPresenter,
-                                                                                                 _frameUCP);
+                                                                                                 _frameUCP,
+                                                                                                 this);
                         IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
-                        fpnl.Controls.Add((UserControl)multiUC);
-                        fpnl.Invalidate();
-                        multiUC.InvalidateFlp();
+                        UserControl ctrl = (UserControl)multiUC;
+                        ctrl.Margin = new Padding(10, 10, 10, 0);
+                        fpnl.Controls.Add(ctrl);
                     }
                     else if (data.Contains("Transom"))
                     {
-                        IMultiPanelTransomUCPresenter multiTransom = GetNewInstance(_unityC,
-                                                                                    _multipanelModel,
-                                                                                    _frameModel,
-                                                                                    _mainPresenter,
-                                                                                    _frameUCP,
-                                                                                    _frameImage);
-                        IMultiPanelTransomUC multiUC = multiTransom.GetMultiPanel();
-                        fpnl.Controls.Add((UserControl)multiUC);
+                        //IMultiPanelTransomUCPresenter multiTransom = GetNewInstance(_unityC,
+                        //                                                            mPanelModel,
+                        //                                                            _frameModel,
+                        //                                                            _mainPresenter,
+                        //                                                            _frameUCP,
+                        //                                                            _bgImage);
+                        //IMultiPanelTransomUC multiUC = multiTransom.GetMultiPanel();
+                        //fpnl.Controls.Add((UserControl)multiUC);
                     }
                 }
             }
@@ -380,13 +384,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            int pInnerX = 10,
-            pInnerY = 10,
-            pInnerWd = fpnl.ClientRectangle.Width - 20,
-            pInnerHt = fpnl.ClientRectangle.Height - 20;
-
-            Point[] corner_points = new[]
+            if (_frameUCP != null)
             {
+                int pInnerX = 10,
+                    pInnerY = 10,
+                    pInnerWd = fpnl.ClientRectangle.Width - 20,
+                    pInnerHt = fpnl.ClientRectangle.Height - 20;
+
+                Point[] corner_points = new[]
+                {
                     new Point(0,0),
                     new Point(pInnerX, pInnerY),
                     new Point(fpnl.ClientRectangle.Width, 0),
@@ -395,17 +401,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     new Point(pInnerX, pInnerY + pInnerHt),
                     new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
                     new Point(pInnerX + pInnerWd, pInnerY + pInnerHt)
-                };
+            };
 
-            //for (int i = 0; i < corner_points.Length - 1; i += 2)
-            //{
-            //    g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
-            //}
-
-            g.DrawImage(_frameImage, new Point(0,0));
-
+                for (int i = 0; i < corner_points.Length - 1; i += 2)
+                {
+                    g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
+                }
+            }
             Rectangle bounds = new Rectangle(new Point(10, 10),
-                                             new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 20));
+                                             new Size(fpnl.ClientRectangle.Width - 20, 
+                                                      fpnl.ClientRectangle.Height - 20));
             g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), bounds);
             g.DrawRectangle(new Pen(color, 1), bounds);
 
@@ -427,7 +432,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                             IFrameModel frameModel,
                                                             IMainPresenter mainPresenter,
                                                             IFrameUCPresenter frameUCP,
-                                                            Bitmap frameImg)
+                                                            Bitmap bgImg)
         {
             unityC
                 .RegisterType<IMultiPanelTransomUC, MultiPanelTransomUC>()
@@ -438,7 +443,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiTransomUCP._frameModel = frameModel;
             multiTransomUCP._mainPresenter = mainPresenter;
             multiTransomUCP._frameUCP = frameUCP;
-            multiTransomUCP._frameImage = frameImg;
+            //multiTransomUCP._bgImage = bgImg;
 
             return multiTransomUCP;
         }
