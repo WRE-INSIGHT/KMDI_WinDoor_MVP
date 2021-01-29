@@ -246,39 +246,89 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        private int _mpanelIndexInsideMpanel;
+        public int MPanel_Index_Inside_MPanel
+        {
+            get
+            {
+                return _mpanelIndexInsideMpanel;
+            }
+
+            set
+            {
+                _mpanelIndexInsideMpanel = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public List<IPanelModel> MPanelLst_Panel { get; set; }
         public List<IDividerModel> MPanelLst_Divider { get; set; }
         public List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
-
-        public int GetVisiblePanel()
-        {
-            int visiblePanelCount = 0;
-            try
-            {
-                visiblePanelCount = MPanelLst_Panel.Count(pnl => pnl.Panel_Visibility == true);
-            }
-            catch (Exception)
-            {
-                visiblePanelCount = 0;
-            }
-            return visiblePanelCount;
-        }
 
         public void Reload_PanelMargin()
         {
             List<IPanelModel> Lst_visiblePnl = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).ToList();
             int visiblePnl_count = Lst_visiblePnl.Count();
 
-            for (int i = 0; i < Lst_visiblePnl.Count() ; i++)
+            foreach (IPanelModel pnl in Lst_visiblePnl)
             {
                 Padding pnl_margin = new Padding(0);
                 if (MPanel_Type == "Mullion")
                 {
-                    if (i == 0)
+                    if (pnl.Panel_Parent.Parent.Parent.GetType() == typeof(FlowLayoutPanel)) //if Parent.Parent multi-Panel
+                    {
+                        pnl_margin = new Padding(0, 10, 0, 10);
+                    }
+                    else if (pnl.Panel_Parent.Parent.Parent.GetType() == typeof(UserControl)) //if Parent.Parent Frame
+                    {
+                        if (pnl.Panel_Index_Inside_MPanel == 0)
+                        {
+                            pnl_margin = new Padding(10, 10, 0, 10);
+                        }
+                        else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions)
+                        {
+                            pnl_margin = new Padding(0, 10, 10, 10);
+                        }
+                        else
+                        {
+                            pnl_margin = new Padding(0, 10, 0, 10);
+                        }
+                    }
+                }
+                else if (MPanel_Type == "Transom")
+                {
+                    if (pnl.Panel_Index_Inside_MPanel == 0)
+                    {
+                        pnl_margin = new Padding(10, 10, 10, 0);
+                    }
+                    else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions)
+                    {
+                        pnl_margin = new Padding(10, 0, 10, 10);
+                    }
+                    else
+                    {
+                        pnl_margin = new Padding(10, 0, 10, 0);
+                    }
+                }
+                pnl.Panel_Margin = pnl_margin;
+            }
+        }
+
+        public void Reload_MultiPanelMargin()
+        {
+            List<IMultiPanelModel> Lst_visibleMPanel = MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).ToList();
+            int visibleMPnl_count = Lst_visibleMPanel.Count();
+
+            foreach (IMultiPanelModel mpnl in Lst_visibleMPanel)
+            {
+                Padding pnl_margin = new Padding(0);
+                if (MPanel_Type == "Mullion")
+                {
+                    if (mpnl.MPanel_Index_Inside_MPanel == 0)
                     {
                         pnl_margin = new Padding(10, 10, 0, 10);
                     }
-                    else if (i == visiblePnl_count)
+                    else if (mpnl.MPanel_Index_Inside_MPanel == MPanel_Divisions)
                     {
                         pnl_margin = new Padding(0, 10, 10, 10);
                     }
@@ -289,11 +339,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Type == "Transom")
                 {
-                    if (i == 0)
+                    if (mpnl.MPanel_Index_Inside_MPanel == 0)
                     {
-                        pnl_margin = new Padding(10, 10, 10, 0);
+                        pnl_margin = new Padding(10, 0, 10, 0);
                     }
-                    else if (i == visiblePnl_count)
+                    else if (mpnl.MPanel_Index_Inside_MPanel == MPanel_Divisions)
                     {
                         pnl_margin = new Padding(10, 0, 10, 10);
                     }
@@ -302,13 +352,16 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         pnl_margin = new Padding(10, 0, 10, 0);
                     }
                 }
-                Lst_visiblePnl[i].Panel_Margin = pnl_margin;
+                mpnl.MPanel_Margin = pnl_margin;
             }
         }
 
-        public void Reload_MultiPanelMargin()
+        public int GetNextIndex()
         {
-            throw new NotImplementedException();
+            int visiblePanelCount = MPanelLst_Panel.Count(pnl => pnl.Panel_Visibility == true),
+                visibleMPanelCount = MPanelLst_MultiPanel.Count(mpnl => mpnl.MPanel_Visibility == true);
+
+            return visiblePanelCount + visibleMPanelCount;
         }
 
         public MultiPanelModel(int mpanelID,
@@ -323,7 +376,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                int mpanelDivisions,
                                List<IPanelModel> mpanelLstPanel,
                                List<IDividerModel> mpanelLstDivider,
-                               List<IMultiPanelModel> mpanelLstMultiPanel)
+                               List<IMultiPanelModel> mpanelLstMultiPanel,
+                               int mpanelIndexInsideMPanel)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -338,6 +392,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanelLst_Panel = mpanelLstPanel;
             MPanelLst_Divider = mpanelLstDivider;
             MPanelLst_MultiPanel = mpanelLstMultiPanel;
+            MPanel_Index_Inside_MPanel = mpanelIndexInsideMPanel;
         }
     }
 }

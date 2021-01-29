@@ -113,7 +113,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
 
                 int me_indx = flp.Controls.IndexOf(me);
-                //dapat dito yung condition na di dapat siya lumagpas sa bounds
                 if (e.Button == MouseButtons.Left && _mouseDown)
                 {
                     if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
@@ -125,11 +124,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         {
                             flp.Controls[me_indx - 1].Height += (e.Y - _point_of_origin.Y);
                             flp.Controls[me_indx + 1].Height -= (e.Y - _point_of_origin.Y);
+
+                            flp.Controls[me_indx - 1].Invalidate();
+                            flp.Controls[me_indx + 1].Invalidate();
                         }
                     }
                     flp.Invalidate();
-                    //flp.Parent.Parent.Invalidate(); //invalidate frameUC
-                    //_mullionUC.Mullion_Left += (e.X - _point_of_origin.X);
                 }
             }
             catch (Exception ex)

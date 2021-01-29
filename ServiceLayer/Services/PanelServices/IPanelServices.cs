@@ -5,9 +5,6 @@ namespace ServiceLayer.Services.PanelServices
 {
     public interface IPanelServices
     {
-        IPanelModel CreatePanelModel(int panelID, string panelName, int panelWd, int panelHt, DockStyle panelDock, string panelType, bool panelOrient, 
-                                     Control panelParent, UserControl panelFrameGroup, bool panelVisibility, 
-                                     UserControl panelFramePropertiesGroup, UserControl panelMultiPanelGroup);
         void ValidateModel(IPanelModel panelModel);
         IPanelModel AddPanelModel(int panelWd,
                                   int panelHt,
@@ -18,6 +15,7 @@ namespace ServiceLayer.Services.PanelServices
                                   string panelType,
                                   bool panelVisibility,
                                   int panelID = 0,
+                                  int panelIndexInsideMPanel = 0,
                                   DockStyle panelDock = DockStyle.Fill,
                                   string panelName = "",
                                   bool panelOrient = false);

@@ -17,6 +17,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                             FlowDirection mflow,
                                             int mid = 0,
                                             DockStyle mdock = DockStyle.Fill,
+                                            int mpanelIndexInsideMPanel = 0,
                                             string mname = "",
                                             int mpanelDivisions = 1,
                                             List<IPanelModel> mpanelLstPanel = null,

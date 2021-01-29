@@ -339,6 +339,21 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private int _panelIndexInsideMPanel;
+        public int Panel_Index_Inside_MPanel //Always be 0 if its inside frame
+        {
+            get
+            {
+                return _panelIndexInsideMPanel;
+            }
+
+            set
+            {
+                _panelIndexInsideMPanel = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public PanelModel(int panelID,
                           string panelName,
                           int panelWd,
@@ -350,7 +365,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           UserControl panelFrameGroup,
                           bool panelVisibility,
                           UserControl panelFramePropertiesGroup,
-                          UserControl panelMultiPanelGroup)
+                          UserControl panelMultiPanelGroup,
+                          int panelIndexInsideMPanel)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -364,6 +380,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_Visibility = panelVisibility;
             Panel_FramePropertiesGroup = panelFramePropertiesGroup;
             Panel_MultiPanelGroup = panelMultiPanelGroup;
+            Panel_Index_Inside_MPanel = panelIndexInsideMPanel;
         }
     }
 }

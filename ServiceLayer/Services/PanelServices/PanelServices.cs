@@ -19,7 +19,7 @@ namespace ServiceLayer.Services.PanelServices
             _modelCheck = modelCheck;
         }
 
-        public IPanelModel CreatePanelModel(int panelID,
+        private IPanelModel CreatePanelModel(int panelID,
                                             string panelName,
                                             int panelWd,
                                             int panelHt,
@@ -30,7 +30,8 @@ namespace ServiceLayer.Services.PanelServices
                                             UserControl panelFrameGroup,
                                             bool panelVisibility,
                                             UserControl panelFramePropertiesGroup,
-                                            UserControl panelMultiPanelGroup)
+                                            UserControl panelMultiPanelGroup,
+                                            int panelIndexInsideMPanel)
         {
             PanelModel pnl = new PanelModel(panelID,
                                             panelName,
@@ -43,7 +44,8 @@ namespace ServiceLayer.Services.PanelServices
                                             panelFrameGroup,
                                             panelVisibility,
                                             panelFramePropertiesGroup,
-                                            panelMultiPanelGroup);
+                                            panelMultiPanelGroup,
+                                            panelIndexInsideMPanel);
 
             ValidateModel(pnl);
             return pnl;
@@ -63,6 +65,7 @@ namespace ServiceLayer.Services.PanelServices
                                          string panelType,
                                          bool panelVisibility,
                                          int panelID = 0,
+                                         int panelIndexInsideMPanel = 0,
                                          DockStyle panelDock = DockStyle.Fill,
                                          string panelName = "",
                                          bool panelOrient = false)
@@ -83,7 +86,8 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelFrameGroup,
                                                        panelVisibility,
                                                        panelFramePropertiesGroup,
-                                                       panelMultiPanelGroup);
+                                                       panelMultiPanelGroup,
+                                                       panelIndexInsideMPanel);
 
             return _panelModel;
         }

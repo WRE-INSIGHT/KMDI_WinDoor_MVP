@@ -17,6 +17,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         FlowDirection MPanel_FlowDirection { get; set; }
         bool MPanel_Visibility { get; set; }
         int MPanel_Divisions { get; set; }
+        int MPanel_Index_Inside_MPanel { get; set; }
 
         Control MPanel_Parent { get; set; }
         UserControl MPanel_FrameGroup { get; set; }
@@ -24,7 +25,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         List<IPanelModel> MPanelLst_Panel { get; set; }
         List<IDividerModel> MPanelLst_Divider { get; set; }
         List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
-        int GetVisiblePanel();
+        int GetNextIndex();
         void Reload_PanelMargin();
         void Reload_MultiPanelMargin();
     }

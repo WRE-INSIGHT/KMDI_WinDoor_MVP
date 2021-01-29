@@ -123,7 +123,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (data.Contains("Multi-Panel"))
             {
                 int suggest_Wd = multiPanel_boundsWD,
-                    suggest_HT = ((multiPanel_boundsHT - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                    suggest_HT = (((multiPanel_boundsHT + 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
 
                 _frmDimensionPresenter.SetPresenters(this);
                 _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.AddPanelIntoMultiPanel;
@@ -147,9 +147,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                           true,
                                                                                           flow,
                                                                                           multiID,
-                                                                                          DockStyle.None);
+                                                                                          DockStyle.None,
+                                                                                          _multiPanelModel.GetNextIndex());
                     _frameModel.Lst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
+                    _multiPanelModel.Reload_MultiPanelMargin();
 
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                     {
@@ -170,9 +172,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                  _frameUCP,
                                                                                                  this);
                         IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
-                        UserControl ctrl = (UserControl)multiUC;
-                        ctrl.Margin = new Padding(10, 10, 10, 0);
-                        fpnl.Controls.Add(ctrl);
+                        //UserControl ctrl = (UserControl)multiUC;
+                        //ctrl.Margin = new Padding(10, 10, 10, 0);
+                        fpnl.Controls.Add((UserControl)multiUC);
                     }
                     else if (data.Contains("Transom"))
                     {
@@ -234,6 +236,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                data,
                                                                true,
                                                                panelID,
+                                                               _multiPanelModel.GetNextIndex(),
                                                                DockStyle.None);
                     _frameModel.Lst_Panel.Add(_panelModel);
                     _multiPanelModel.MPanelLst_Panel.Add(_panelModel);

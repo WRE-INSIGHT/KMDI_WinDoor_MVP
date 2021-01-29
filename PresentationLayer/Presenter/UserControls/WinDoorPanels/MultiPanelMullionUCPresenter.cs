@@ -229,6 +229,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                data,
                                                                true,
                                                                panelID,
+                                                               _multiPanelModel.GetNextIndex(),
                                                                DockStyle.None);
                     _frameModel.Lst_Panel.Add(_panelModel);
                     _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -327,6 +328,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 div.Div_Visible = false;
             }
             _frameUCP.ViewDeleteControl((UserControl)_multiPanelMullionUC);
+            if (_multiPanelTransomUCP != null)
+            {
+                _multiPanelTransomUCP.DeletePanel((UserControl)_multiPanelMullionUC);
+            }
         }
 
         private void _multiPanelMullionUC_divCountClickedEventRaised(object sender, EventArgs e)
@@ -410,13 +415,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_frameUCP != null && _multiPanelTransomUCP != null)
             {
-                g.DrawRectangle(new Pen(color, 1), new Rectangle(new Point(0, fpnl.Height - 10),
-                                                                 new Size(fpnl.Width, 10)));
-                bounds = new Rectangle(new Point(0, 0),
+                bounds = new Rectangle(new Point(0, 10),
                                        new Size(fpnl.ClientRectangle.Width - 1, fpnl.ClientRectangle.Height - 1));
             }
 
-            g.FillRectangle(new SolidBrush(SystemColors.Control), bounds);
+            g.FillRectangle(new SolidBrush(Color.White), bounds);
             g.DrawRectangle(new Pen(color, 1), bounds);
 
             Font drawFont = new Font("Segoe UI", 12); //* zoom);
@@ -424,6 +427,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             drawFormat.Alignment = StringAlignment.Near;
             drawFormat.LineAlignment = StringAlignment.Near;
             g.DrawString(_multiPanelModel.MPanel_Name + " (" + _multiPanelModel.MPanel_Divisions + ")", drawFont, new SolidBrush(Color.Black), 10, 10);
+
+            if (_frameUCP != null && _multiPanelTransomUCP != null)
+            {
+                Rectangle topbounds = new Rectangle(new Point(0, 0),
+                                                    new Size(fpnl.Width, 10));
+                g.FillRectangle(new SolidBrush(SystemColors.Control), topbounds);
+
+                g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(new Point(0, fpnl.Height - 10),
+                                                                       new Size(fpnl.Width, 10)));
+            }
         }
 
         public IMultiPanelMullionUC GetMultiPanel()
@@ -460,8 +473,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiPanelBinding.Add("MPanel_Width", new Binding("Width", _multiPanelModel, "MPanel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Height", new Binding("Height", _multiPanelModel, "MPanel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            //multiPanelBinding.Add("MPanel_Margin", new Binding("Margin", _multiPanelModel, "MPanel_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
-            
+            multiPanelBinding.Add("MPanel_Margin", new Binding("Margin", _multiPanelModel, "MPanel_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
+
             return multiPanelBinding;
         }
 

@@ -32,21 +32,23 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  int mpanelDivisions,
                                                  List<IPanelModel> mpanelLstPanel,
                                                  List<IDividerModel> mpanelLstDivider,
-                                                 List<IMultiPanelModel> mpanelLstMultiPanel)
+                                                 List<IMultiPanelModel> mpanelLstMultiPanel,
+                                                 int mpanelIndexInsideMPanel)
         {
             MultiPanelModel mp = new MultiPanelModel(mid,
-                                                      mname,
-                                                      mwidth,
-                                                      mheight,
-                                                      mdock,
-                                                      mvisible,
-                                                      mflow,
-                                                      mpanelParent,
-                                                      mpanelFrameGroup,
-                                                      mpanelDivisions,
-                                                      mpanelLstPanel,
-                                                      mpanelLstDivider,
-                                                      mpanelLstMultiPanel);
+                                                     mname,
+                                                     mwidth,
+                                                     mheight,
+                                                     mdock,
+                                                     mvisible,
+                                                     mflow,
+                                                     mpanelParent,
+                                                     mpanelFrameGroup,
+                                                     mpanelDivisions,
+                                                     mpanelLstPanel,
+                                                     mpanelLstDivider,
+                                                     mpanelLstMultiPanel,
+                                                     mpanelIndexInsideMPanel);
 
             return mp;
         }
@@ -64,6 +66,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                    FlowDirection mflow,
                                                    int mid = 0,
                                                    DockStyle mdock = DockStyle.Fill,
+                                                   int mpanelIndexInsideMPanel = 0,
                                                    string mname = "",
                                                    int mpanelDivisions = 1,
                                                    List<IPanelModel> mpanelLstPanel = null,
@@ -74,11 +77,11 @@ namespace ServiceLayer.Services.MultiPanelServices
             {
                 if (mflow == FlowDirection.LeftToRight)
                 {
-                    mname = "Mullion_" + mid;
+                    mname = "MultiMullion_" + mid;
                 }
                 else if (mflow == FlowDirection.TopDown)
                 {
-                    mname = "Transom_" + mid;
+                    mname = "MultiTransom_" + mid;
                 }
             }
             if (mpanelLstPanel == null)
@@ -105,7 +108,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mpanelDivisions,
                                                                  mpanelLstPanel,
                                                                  mpanelLstDivider,
-                                                                 mpanelLstMultiPanel);
+                                                                 mpanelLstMultiPanel,
+                                                                 mpanelIndexInsideMPanel);
 
             return _multipanelModel;
         }
