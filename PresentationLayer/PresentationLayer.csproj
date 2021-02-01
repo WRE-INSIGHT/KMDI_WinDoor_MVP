@@ -87,8 +87,10 @@
     <Compile Include="Presenter\UserControls\IFramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IItemInfoUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IMultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\MultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\AwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\CasementPanelUCPresenter.cs" />
@@ -197,12 +199,19 @@
     <Compile Include="Views\UserControls\IFramePropertiesUC.cs" />
     <Compile Include="Views\UserControls\IFrameUC.cs" />
     <Compile Include="Views\UserControls\IItemInfoUC.cs" />
+    <Compile Include="Views\UserControls\IMultiPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\ItemInfoUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\UserControls\ItemInfoUC.Designer.cs">
       <DependentUpon>ItemInfoUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\MultiPanelPropertiesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\MultiPanelPropertiesUC.Designer.cs">
+      <DependentUpon>MultiPanelPropertiesUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelPropertiesUC.cs">
       <SubType>UserControl</SubType>
@@ -376,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ItemInfoUC.resx">
       <DependentUpon>ItemInfoUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\MultiPanelPropertiesUC.resx">
+      <DependentUpon>MultiPanelPropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelPropertiesUC.resx">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>

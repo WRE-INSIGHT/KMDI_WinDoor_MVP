@@ -41,6 +41,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IMultiPanelMullionUCPresenter _multiUCP;
         private IMultiPanelTransomUCPresenter _multiTransomUCP;
         private IBasePlatformPresenter _basePlatformUCP;
+        private IMultiPanelPropertiesUCPresenter _multiPropUCP;
 
         private IPanelServices _panelServices;
         private IMultiPanelServices _multipanelServices;
@@ -60,7 +61,8 @@ namespace PresentationLayer.Presenter.UserControls
                                 ISlidingPanelImagerUCPresenter slidingImagerUCP,
                                 IMultiPanelServices multipanelServices,
                                 IMultiPanelMullionUCPresenter multiUCP,
-                                IMultiPanelTransomUCPresenter multiTransomUCP)
+                                IMultiPanelTransomUCPresenter multiTransomUCP,
+                                IMultiPanelPropertiesUCPresenter multiPropUCP)
         {
             _frameUC = frameUC;
             _frameCmenu = _frameUC.GetFrameCmenu();
@@ -77,6 +79,7 @@ namespace PresentationLayer.Presenter.UserControls
             _multipanelServices = multipanelServices;
             _multiUCP = multiUCP;
             _multiTransomUCP = multiTransomUCP;
+            _multiPropUCP = multiPropUCP;
             SubscribeToEventsSetup();
         }
         private void SubscribeToEventsSetup()
@@ -109,14 +112,6 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     flow = FlowDirection.TopDown;
                 }
-                _multipanelModel = _multipanelServices.AddMultiPanelModel(droped_objWD,
-                                                                          droped_objHT,
-                                                                          frame,
-                                                                          frame,
-                                                                          true,
-                                                                          flow,
-                                                                          multiID);
-                _frameModel.Lst_MultiPanel.Add(_multipanelModel);
 
                 if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                 {
@@ -126,6 +121,22 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     _frameModel.Frame_Padding_int = new Padding(23);
                 }
+
+                int wd = frame.Width - _frameModel.Frame_Padding_int.All * 2,
+                    ht = frame.Height - _frameModel.Frame_Padding_int.All * 2;
+
+                _multipanelModel = _multipanelServices.AddMultiPanelModel(wd,
+                                                                          ht,
+                                                                          frame,
+                                                                          frame,
+                                                                          true,
+                                                                          flow,
+                                                                          multiID);
+                _frameModel.Lst_MultiPanel.Add(_multipanelModel);
+
+                IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP.GetNewInstance(_unityC, _multipanelModel, _mainPresenter);
+                framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)multiPropUCP.GetMultiPanelPropertiesUC());
+                _frameModel.FrameProp_Height += 129;
 
                 if (data.Contains("Mullion"))
                 {
@@ -144,7 +155,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                                  _frameModel,
                                                                                                  _mainPresenter,
                                                                                                  this,
-                                                                                                 _frameUC.GetImageThis());
+                                                                                                 multiPropUCP);
                     IMultiPanelTransomUC multiUC = multiTransom.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
                 }

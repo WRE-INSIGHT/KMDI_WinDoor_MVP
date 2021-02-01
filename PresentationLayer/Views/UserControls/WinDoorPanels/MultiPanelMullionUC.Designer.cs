@@ -83,6 +83,7 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "MultiPanelMullionUC";
             this.Size = new System.Drawing.Size(300, 300);
+            this.SizeChanged += new System.EventHandler(this.MultiPanelMullionUC_SizeChanged);
             this.cmenu_mulltiP.ResumeLayout(false);
             this.ResumeLayout(false);
 

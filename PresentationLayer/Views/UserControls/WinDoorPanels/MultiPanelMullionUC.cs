@@ -37,6 +37,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler divCountClickedEventRaised;
         public event EventHandler deleteClickedEventRaised;
         public event DragEventHandler flpMultiDragDropEventRaised;
+        public event EventHandler multiMullionSizeChangedEventRaised;
 
         private void flp_Multi_Paint(object sender, PaintEventArgs e)
         {
@@ -130,6 +131,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
             cropped.Save(@"C:\Users\KMDI\Documents\Windoor Maker files\img\8.png", System.Drawing.Imaging.ImageFormat.Jpeg);
             return cropped;
+        }
+
+        private void MultiPanelMullionUC_SizeChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, multiMullionSizeChangedEventRaised, e);
         }
     }
 }

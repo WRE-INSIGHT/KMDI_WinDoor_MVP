@@ -794,7 +794,7 @@ namespace PresentationLayer.Presenter
         {
             return _pnlPropertiesBody.Controls.OfType<IFramePropertiesUC>().First(ctrl => ctrl.FrameID == frameID);
         }
-
+    
         public int GetPanelCount()
         {
             return _windoorModel.GetPanelCount();

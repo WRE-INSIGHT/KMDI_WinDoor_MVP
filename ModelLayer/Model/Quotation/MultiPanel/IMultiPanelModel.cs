@@ -18,6 +18,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         bool MPanel_Visibility { get; set; }
         int MPanel_Divisions { get; set; }
         int MPanel_Index_Inside_MPanel { get; set; }
+        int MPanelProp_Height { get; set; }
+        bool MPanel_NumEnable { get; set; }
+        string MPanel_Placement { get; set; }
 
         Control MPanel_Parent { get; set; }
         UserControl MPanel_FrameGroup { get; set; }

@@ -27,5 +27,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                  int frmDimension_numHt);
         void DeletePanel(UserControl panel);
         void Invalidate_MultiPanelMullionUC();
+        void SetInitialLoadFalse();
     }
 }

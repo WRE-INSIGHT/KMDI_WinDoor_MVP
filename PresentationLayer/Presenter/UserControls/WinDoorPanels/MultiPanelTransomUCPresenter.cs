@@ -45,6 +45,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IfrmDimensionPresenter _frmDimensionPresenter;
         private ITransomUCPresenter _transomUCP;
         private IFrameUCPresenter _frameUCP;
+        private IMultiPanelPropertiesUCPresenter _multiPropUCP_orig;  //Original Instance
+        private IMultiPanelPropertiesUCPresenter _multiPropUCP2_given; //Given Instance
 
         private IDividerServices _divServices;
         private IPanelServices _panelServices;
@@ -65,7 +67,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             IFixedPanelImagerUCPresenter fixedImagerUCP,
                                             ITransomUCPresenter transomUCP,
                                             IDividerServices divServices,
-                                            IMultiPanelMullionUCPresenter multiMullionUCP)
+                                            IMultiPanelMullionUCPresenter multiMullionUCP,
+                                            IMultiPanelPropertiesUCPresenter multiPropUCP_orig)
         {
             _multiPanelTransomUC = multiPanelTransomUC;
             _fixedUCP = fixedUCP;
@@ -80,6 +83,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _transomUCP = transomUCP;
             _divServices = divServices;
             _multiMullionUCP = multiMullionUCP;
+            _multiPropUCP_orig = multiPropUCP_orig;
             SubscribeToEventsSetup();
         }
 
@@ -119,7 +123,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 divSize = 33;
             }
 
-            IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
             if (data.Contains("Multi-Panel"))
             {
                 int suggest_Wd = multiPanel_boundsWD,
@@ -139,7 +142,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         flow = FlowDirection.TopDown;
                     }
-
+                    
                     IMultiPanelModel mPanelModel = _multipanelServices.AddMultiPanelModel(_frmDmRes_Width,
                                                                                           _frmDmRes_Height,
                                                                                           fpnl,
@@ -152,6 +155,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _frameModel.Lst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.Reload_MultiPanelMargin();
+
+
+                    IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
+                    _multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)multiPropUCP.GetMultiPanelPropertiesUC());
+
+                    _frameModel.FrameProp_Height += 129;
+                    _multiPanelModel.MPanelProp_Height += 129;
 
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                     {
@@ -172,9 +182,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                  _frameUCP,
                                                                                                  this);
                         IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
-                        //UserControl ctrl = (UserControl)multiUC;
-                        //ctrl.Margin = new Padding(10, 10, 10, 0);
                         fpnl.Controls.Add((UserControl)multiUC);
+                        multiUCP.SetInitialLoadFalse();
                     }
                     else if (data.Contains("Transom"))
                     {
@@ -224,6 +233,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frmDimensionPresenter.SetValues(suggest_Wd, suggest_HT);
                 _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 bool frmResult = _frmDimensionPresenter.GetfrmResult();
+
+                IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
                 if (!frmResult)
                 {
@@ -435,7 +446,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                             IFrameModel frameModel,
                                                             IMainPresenter mainPresenter,
                                                             IFrameUCPresenter frameUCP,
-                                                            Bitmap bgImg)
+                                                            IMultiPanelPropertiesUCPresenter multiPropUCP)
         {
             unityC
                 .RegisterType<IMultiPanelTransomUC, MultiPanelTransomUC>()
@@ -446,7 +457,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiTransomUCP._frameModel = frameModel;
             multiTransomUCP._mainPresenter = mainPresenter;
             multiTransomUCP._frameUCP = frameUCP;
-            //multiTransomUCP._bgImage = bgImg;
+            multiTransomUCP._multiPropUCP2_given = multiPropUCP;
 
             return multiTransomUCP;
         }

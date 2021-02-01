@@ -213,6 +213,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             set
             {
+                if (value.Name.Contains("Frame"))
+                {
+                    _mpanelNumEnable = false;
+                }
+                else
+                {
+                    _mpanelNumEnable = true;
+                }
                 _mpanelParent = value;
                 NotifyPropertyChanged();
             }
@@ -264,6 +272,50 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public List<IPanelModel> MPanelLst_Panel { get; set; }
         public List<IDividerModel> MPanelLst_Divider { get; set; }
         public List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
+
+        private int _mpanelPropHeight;
+        public int MPanelProp_Height
+        {
+            get
+            {
+                return _mpanelPropHeight;
+            }
+
+            set
+            {
+                _mpanelPropHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _mpanelNumEnable;
+        public bool MPanel_NumEnable
+        {
+            get
+            {
+                return _mpanelNumEnable;
+            }
+
+            set
+            {
+                _mpanelNumEnable = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _mpanelPlacement;
+        public string MPanel_Placement
+        {
+            get
+            {
+                return _mpanelPlacement;
+            }
+
+            set
+            {
+                _mpanelPlacement = value;
+            }
+        }
 
         public void Reload_PanelMargin()
         {
@@ -327,14 +379,17 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     if (mpnl.MPanel_Index_Inside_MPanel == 0)
                     {
                         pnl_margin = new Padding(10, 10, 0, 10);
+                        mpnl.MPanel_Placement = "First";
                     }
                     else if (mpnl.MPanel_Index_Inside_MPanel == MPanel_Divisions)
                     {
                         pnl_margin = new Padding(0, 10, 10, 10);
+                        mpnl.MPanel_Placement = "Last";
                     }
                     else
                     {
                         pnl_margin = new Padding(0, 10, 0, 10);
+                        mpnl.MPanel_Placement = "Somewhere in Between";
                     }
                 }
                 else if (MPanel_Type == "Transom")
@@ -342,14 +397,17 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     if (mpnl.MPanel_Index_Inside_MPanel == 0)
                     {
                         pnl_margin = new Padding(10, 0, 10, 0);
+                        mpnl.MPanel_Placement = "First";
                     }
                     else if (mpnl.MPanel_Index_Inside_MPanel == MPanel_Divisions)
                     {
-                        pnl_margin = new Padding(10, 0, 10, 10);
+                        pnl_margin = new Padding(10, 0, 10, 0);
+                        mpnl.MPanel_Placement = "Last";
                     }
                     else
                     {
                         pnl_margin = new Padding(10, 0, 10, 0);
+                        mpnl.MPanel_Placement = "Somewhere in Between";
                     }
                 }
                 mpnl.MPanel_Margin = pnl_margin;
@@ -393,6 +451,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanelLst_Divider = mpanelLstDivider;
             MPanelLst_MultiPanel = mpanelLstMultiPanel;
             MPanel_Index_Inside_MPanel = mpanelIndexInsideMPanel;
+            MPanelProp_Height = 129;
         }
     }
 }
