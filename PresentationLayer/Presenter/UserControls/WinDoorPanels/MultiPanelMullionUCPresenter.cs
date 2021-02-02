@@ -52,6 +52,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelServices _multipanelServices;
         
         bool _initialLoad;
+        bool _heightIncreased;
 
         public MultiPanelMullionUCPresenter(IMultiPanelMullionUC multiPanelMullionUC,
                                             IFixedPanelUCPresenter fixedUCP,
@@ -407,8 +408,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         Color color = Color.Black;
         private void _multiPanelMullionUC_flpMulltiPaintEventRaised(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
+            Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             //g.DrawImage(_bgImage, new Point(0, 0));

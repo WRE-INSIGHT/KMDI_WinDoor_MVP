@@ -33,7 +33,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  List<IPanelModel> mpanelLstPanel,
                                                  List<IDividerModel> mpanelLstDivider,
                                                  List<IMultiPanelModel> mpanelLstMultiPanel,
-                                                 int mpanelIndexInsideMPanel)
+                                                 int mpanelIndexInsideMPanel,
+                                                 List<Control> mpanelLstObjects)
         {
             MultiPanelModel mp = new MultiPanelModel(mid,
                                                      mname,
@@ -48,7 +49,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                      mpanelLstPanel,
                                                      mpanelLstDivider,
                                                      mpanelLstMultiPanel,
-                                                     mpanelIndexInsideMPanel);
+                                                     mpanelIndexInsideMPanel,
+                                                     mpanelLstObjects);
 
             return mp;
         }
@@ -69,6 +71,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                    int mpanelIndexInsideMPanel = 0,
                                                    string mname = "",
                                                    int mpanelDivisions = 1,
+                                                   List<Control> mpanelLstObjects = null,
                                                    List<IPanelModel> mpanelLstPanel = null,
                                                    List<IDividerModel> mpanelLstDivider = null,
                                                    List<IMultiPanelModel> mpanelLstMultiPanel = null)
@@ -96,6 +99,10 @@ namespace ServiceLayer.Services.MultiPanelServices
             {
                 mpanelLstMultiPanel = new List<IMultiPanelModel>();
             }
+            if (mpanelLstObjects == null)
+            {
+                mpanelLstObjects = new List<Control>();
+            }
             IMultiPanelModel _multipanelModel = CreateMultiPanel(mid,
                                                                  mname,
                                                                  mwidth,
@@ -109,7 +116,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mpanelLstPanel,
                                                                  mpanelLstDivider,
                                                                  mpanelLstMultiPanel,
-                                                                 mpanelIndexInsideMPanel);
+                                                                 mpanelIndexInsideMPanel,
+                                                                 mpanelLstObjects);
 
             return _multipanelModel;
         }

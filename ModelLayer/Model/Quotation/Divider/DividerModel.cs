@@ -131,6 +131,21 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
+        private string _divFrameType;
+        public string Div_FrameType
+        {
+            get
+            {
+                return _divFrameType;
+            }
+
+            set
+            {
+                _divFrameType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public DividerModel(int divID,
                             string divName,
                             int divWD,
@@ -138,7 +153,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             bool divVisibility,
                             DividerType divType,
                             Control divParent,
-                            UserControl divFrameGroup)
+                            UserControl divFrameGroup,
+                            string divFrameType)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -148,6 +164,7 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_Type = divType;
             Div_Parent = divParent;
             Div_FrameGroup = divFrameGroup;
+            Div_FrameType = divFrameType;
         }
     }
 }

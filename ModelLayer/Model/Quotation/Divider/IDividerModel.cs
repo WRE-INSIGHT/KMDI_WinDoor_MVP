@@ -14,5 +14,6 @@ namespace ModelLayer.Model.Quotation.Divider
         DividerModel.DividerType Div_Type { get; set; }
         bool Div_Visible { get; set; }
         int Div_Width { get; set; }
+        string Div_FrameType { get; set; }
     }
 }

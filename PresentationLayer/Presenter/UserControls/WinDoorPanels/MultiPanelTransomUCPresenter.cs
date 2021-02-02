@@ -125,7 +125,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (data.Contains("Multi-Panel"))
             {
-                int suggest_Wd = multiPanel_boundsWD,
+                int suggest_Wd = multiPanel_boundsWD + 20,
                     suggest_HT = (((multiPanel_boundsHT + 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
 
                 _frmDimensionPresenter.SetPresenters(this);
@@ -184,6 +184,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                         fpnl.Controls.Add((UserControl)multiUC);
                         multiUCP.SetInitialLoadFalse();
+                        _multiPanelModel.MPanelLst_Objects.Add((UserControl)multiUC);
                     }
                     else if (data.Contains("Transom"))
                     {
@@ -206,7 +207,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                       (UserControl)_frameUCP.GetFrameUC(),
                                                                       DividerModel.DividerType.Mullion,
                                                                       true,
-                                                                      divID);
+                                                                      divID,
+                                                                      _frameModel.Frame_Type.ToString());
 
                 _frameModel.Lst_Divider.Add(divModel);
                 _multiPanelModel.MPanelLst_Divider.Add(divModel);
@@ -217,6 +219,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                             this);
                 ITransomUC transomUC = transomUCP.GetTransom();
                 fpnl.Controls.Add((UserControl)transomUC);
+                _multiPanelModel.MPanelLst_Objects.Add((UserControl)transomUC);
+
             }
             else if (data == "Mullion")
             {

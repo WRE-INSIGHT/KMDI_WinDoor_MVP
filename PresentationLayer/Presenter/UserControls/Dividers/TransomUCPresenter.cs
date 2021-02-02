@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Unity;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -66,11 +67,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _transomUC_transomUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            UserControl mul = (UserControl)sender;
+            UserControl transom = (UserControl)sender;
+
             Graphics g = e.Graphics;
 
-            int lineHT = mul.ClientRectangle.Height - 2,
-                lineWd = mul.ClientRectangle.Width - 6;
+            int lineHT = transom.ClientRectangle.Height - 2,
+                lineWd = transom.ClientRectangle.Width - 6;
 
             g.SmoothingMode = SmoothingMode.HighQuality;
 
@@ -84,7 +86,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             Point[] rightCurve = {
                                     new Point(lineWd, 1),
-                                    new Point(mul.ClientRectangle.Width - 2, lineHT / 2),
+                                    new Point(transom.ClientRectangle.Width - 2, lineHT / 2),
                                     new Point(lineWd, lineHT)
                                  };
 

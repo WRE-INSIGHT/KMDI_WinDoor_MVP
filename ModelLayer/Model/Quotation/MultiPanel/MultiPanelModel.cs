@@ -273,6 +273,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public List<IDividerModel> MPanelLst_Divider { get; set; }
         public List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
 
+        private List<Control> _mpanelLstObjects;
+        public List<Control> MPanelLst_Objects
+        {
+            get
+            {
+                return _mpanelLstObjects;
+            }
+            set
+            {
+                _mpanelLstObjects = value;
+                Resize_MyControls();
+            }
+        }
+
         private int _mpanelPropHeight;
         public int MPanelProp_Height
         {
@@ -316,6 +330,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 _mpanelPlacement = value;
             }
         }
+
 
         public void Reload_PanelMargin()
         {
@@ -396,12 +411,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (mpnl.MPanel_Index_Inside_MPanel == 0)
                     {
-                        pnl_margin = new Padding(10, 0, 10, 0);
+                        pnl_margin = new Padding(0, 0, 0, 0);
                         mpnl.MPanel_Placement = "First";
                     }
                     else if (mpnl.MPanel_Index_Inside_MPanel == MPanel_Divisions)
                     {
-                        pnl_margin = new Padding(10, 0, 10, 0);
+                        pnl_margin = new Padding(0, 0, 0, 0);
                         mpnl.MPanel_Placement = "Last";
                     }
                     else
@@ -422,6 +437,51 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return visiblePanelCount + visibleMPanelCount;
         }
 
+        public void Resize_MyControls()
+        {
+            if (MPanel_Type == "Transom")
+            {
+                for (int i = 0; i < MPanelLst_Objects.Count; i++)
+                {
+                    Control ctrl = MPanelLst_Objects[i];
+                    if (i == 0)
+                    {
+                        if (ctrl.Name.Contains("MultiPanel")) //predicting to be a MultiPanel
+                        {
+                            if (MPanelLst_Objects.Count > 1)
+                            {
+                                Control nxt_ctrl = MPanelLst_Objects[i + 1];
+                                if (nxt_ctrl.Name.Contains("Transom"))
+                                {
+                                    ctrl.Height += 5;
+                                }
+                            }
+                        }
+                    }
+                    else if (i == 1) //predicting to be a Transom
+                    {
+                        if (ctrl.Name.Contains("Transom"))
+                        {
+                            Control ctrl_before = MPanelLst_Objects[0];
+                            if (ctrl_before.Name.Contains("MultiPanel"))
+                            {
+                                ctrl.Height -= 5;
+                            }
+
+                            if (MPanelLst_Objects.Count > 2)
+                            {
+                                Control ctrl_nxt = MPanelLst_Objects[2];
+                                if (ctrl_before.Name.Contains("MultiPanel"))
+                                {
+                                    ctrl.Height -= 5;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,
@@ -435,7 +495,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                List<IPanelModel> mpanelLstPanel,
                                List<IDividerModel> mpanelLstDivider,
                                List<IMultiPanelModel> mpanelLstMultiPanel,
-                               int mpanelIndexInsideMPanel)
+                               int mpanelIndexInsideMPanel,
+                               List<Control> mpanelLstObjects)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -452,6 +513,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanelLst_MultiPanel = mpanelLstMultiPanel;
             MPanel_Index_Inside_MPanel = mpanelIndexInsideMPanel;
             MPanelProp_Height = 129;
+            MPanelLst_Objects = mpanelLstObjects;
         }
     }
 }

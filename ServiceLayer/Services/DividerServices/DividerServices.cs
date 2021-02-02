@@ -19,14 +19,15 @@ namespace ServiceLayer.Services.DividerServices
             _modelCheck = modelCheck;
         }
 
-        public IDividerModel CreateDividerModel(int divID,
+        private IDividerModel CreateDividerModel(int divID,
                                                 string divName,
                                                 int divWD,
                                                 int divHT,
                                                 bool divVisibility,
                                                 DividerType divType,
                                                 Control divParent,
-                                                UserControl divFrameGroup)
+                                                UserControl divFrameGroup,
+                                                string divFrameType)
         {
             DividerModel div = new DividerModel(divID,
                                                 divName,
@@ -35,7 +36,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 divVisibility,
                                                 divType,
                                                 divParent,
-                                                divFrameGroup);
+                                                divFrameGroup,
+                                                divFrameType);
 
             ValidateModel(div);
             return div;
@@ -53,6 +55,7 @@ namespace ServiceLayer.Services.DividerServices
                                              DividerType divType,
                                              bool divVisibility,
                                              int divID = 0,
+                                             string divFrameType = "",
                                              string divName = "")
         {
             if (divName == "")
@@ -67,7 +70,8 @@ namespace ServiceLayer.Services.DividerServices
                                                          divVisibility,
                                                          divType,
                                                          divParent,
-                                                         divFrameGroup);
+                                                         divFrameGroup,
+                                                         divFrameType);
 
             return _divModel;
         }
