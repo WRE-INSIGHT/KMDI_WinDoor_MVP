@@ -8,7 +8,6 @@ namespace PresentationLayer.Views.UserControls
     {
         int MPanelID { get; set; }
 
-        event EventHandler MultiPanelPropertiesSizeChangedEventRaised;
         event EventHandler MultiPanelPropertiesLoadEventRaised; 
         event EventHandler NumHeightValueChangedEventRaised;
         event EventHandler NumWidthValueChangedEventRaised;

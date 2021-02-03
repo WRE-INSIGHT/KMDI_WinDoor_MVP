@@ -20,7 +20,6 @@ namespace ServiceLayer.Services.MultiPanelServices
                                             int mpanelIndexInsideMPanel = 0,
                                             string mname = "",
                                             int mpanelDivisions = 1,
-                                            List<Control> mpanelLstObjects = null,
                                             List<IPanelModel> mpanelLstPanel = null,
                                             List<IDividerModel> mpanelLstDivider = null,
                                             List<IMultiPanelModel> mpanelLstMultiPanel = null);

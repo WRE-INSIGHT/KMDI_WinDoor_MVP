@@ -28,10 +28,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         List<IPanelModel> MPanelLst_Panel { get; set; }
         List<IDividerModel> MPanelLst_Divider { get; set; }
         List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
-        List<Control> MPanelLst_Objects { get; set; }
+        //List<Control> MPanelLst_Objects { get; set; }
         int GetNextIndex();
         void Reload_PanelMargin();
         void Reload_MultiPanelMargin();
-        void Resize_MyControls();
+        void Resize_MyControls(Control current_control);
+        void AddControl_MPanelLstObjects(Control control);
     }
 }

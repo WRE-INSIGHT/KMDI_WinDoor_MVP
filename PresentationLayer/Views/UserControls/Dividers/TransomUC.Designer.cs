@@ -56,6 +56,7 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "TransomUC";
             this.Size = new System.Drawing.Size(350, 26);
+            this.SizeChanged += new System.EventHandler(this.TransomUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TransomUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseDown);

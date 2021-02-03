@@ -130,7 +130,6 @@
             this.Name = "MultiPanelPropertiesUC";
             this.Size = new System.Drawing.Size(154, 129);
             this.Load += new System.EventHandler(this.MultiPanelPropertiesUC_Load);
-            this.SizeChanged += new System.EventHandler(this.MultiPanelPropertiesUC_SizeChanged);
             this.flp_MultiPanelProperties.ResumeLayout(false);
             this.flp_MultiPanelProperties.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_Width)).EndInit();

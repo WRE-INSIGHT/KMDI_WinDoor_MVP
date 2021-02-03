@@ -52,7 +52,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelServices _multipanelServices;
         
         bool _initialLoad;
-        bool _heightIncreased;
 
         public MultiPanelMullionUCPresenter(IMultiPanelMullionUC multiPanelMullionUC,
                                             IFixedPanelUCPresenter fixedUCP,
@@ -411,8 +410,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            //g.DrawImage(_bgImage, new Point(0, 0));
+            
             Rectangle bounds = new Rectangle();
             if (_frameUCP != null && _multiPanelTransomUCP == null)
             {
@@ -483,18 +481,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             drawFormat.Alignment = StringAlignment.Near;
             drawFormat.LineAlignment = StringAlignment.Near;
             g.DrawString(_multiPanelModel.MPanel_Name + " (" + _multiPanelModel.MPanel_Divisions + ")", drawFont, new SolidBrush(Color.Black), 10, 10);
-
-            if (_frameUCP != null && _multiPanelTransomUCP != null)
-            {
-                if (_multiPanelModel.MPanel_Placement == "First")
-                {
-                    
-                }
-                else if (_multiPanelModel.MPanel_Placement == "Last")
-                {
-                    
-                }
-            }
         }
 
         public IMultiPanelMullionUC GetMultiPanel()

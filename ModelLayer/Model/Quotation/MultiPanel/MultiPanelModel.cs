@@ -273,19 +273,19 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public List<IDividerModel> MPanelLst_Divider { get; set; }
         public List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
 
-        private List<Control> _mpanelLstObjects;
-        public List<Control> MPanelLst_Objects
-        {
-            get
-            {
-                return _mpanelLstObjects;
-            }
-            set
-            {
-                _mpanelLstObjects = value;
-                Resize_MyControls();
-            }
-        }
+        //private List<Control> _mpanelLstObjects;
+        public List<Control> MPanelLst_Objects { get; set; }
+        //{
+        //    get
+        //    {
+        //        return _mpanelLstObjects;
+        //    }
+        //    set
+        //    {
+        //        _mpanelLstObjects = value;
+        //        Resize_MyControls();
+        //    }
+        //}
 
         private int _mpanelPropHeight;
         public int MPanelProp_Height
@@ -437,49 +437,42 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return visiblePanelCount + visibleMPanelCount;
         }
 
-        public void Resize_MyControls()
+        public void Resize_MyControls(Control current_control)
         {
-            if (MPanel_Type == "Transom")
+            int indx = MPanelLst_Objects.IndexOf(current_control);
+            if (current_control.Name.Contains("MultiPanel")) //MultiPanel Block
             {
-                for (int i = 0; i < MPanelLst_Objects.Count; i++)
+                if (indx > 0 && indx % 2 == 0) //indx > 0 && indx == 'Even'
                 {
-                    Control ctrl = MPanelLst_Objects[i];
-                    if (i == 0)
+                    Control prev_ctrl = MPanelLst_Objects[indx - 1];
+                    if (!prev_ctrl.Name.Contains("MultiPanel") && prev_ctrl.Name.Contains(MPanel_Type)) //means Divider
                     {
-                        if (ctrl.Name.Contains("MultiPanel")) //predicting to be a MultiPanel
+                        prev_ctrl.Height -= 5;
+                        if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                         {
-                            if (MPanelLst_Objects.Count > 1)
-                            {
-                                Control nxt_ctrl = MPanelLst_Objects[i + 1];
-                                if (nxt_ctrl.Name.Contains("Transom"))
-                                {
-                                    ctrl.Height += 5;
-                                }
-                            }
-                        }
-                    }
-                    else if (i == 1) //predicting to be a Transom
-                    {
-                        if (ctrl.Name.Contains("Transom"))
-                        {
-                            Control ctrl_before = MPanelLst_Objects[0];
-                            if (ctrl_before.Name.Contains("MultiPanel"))
-                            {
-                                ctrl.Height -= 5;
-                            }
-
-                            if (MPanelLst_Objects.Count > 2)
-                            {
-                                Control ctrl_nxt = MPanelLst_Objects[2];
-                                if (ctrl_before.Name.Contains("MultiPanel"))
-                                {
-                                    ctrl.Height -= 5;
-                                }
-                            }
+                            current_control.Height += 5;
                         }
                     }
                 }
             }
+            else if (!current_control.Name.Contains("MultiPanel") && current_control.Name.Contains(MPanel_Type)) //Divider Block
+            {
+                if (indx % 2 != 0) //means Odd
+                {
+                    Control prev_ctrl = MPanelLst_Objects[indx - 1];
+                    if (prev_ctrl.Name.Contains("MultiPanel"))
+                    {
+                        prev_ctrl.Height += 5;
+                        current_control.Height -= 5;
+                    }
+                }
+            }
+        }
+
+        public void AddControl_MPanelLstObjects(Control control)
+        {
+            MPanelLst_Objects.Add(control);
+            Resize_MyControls(control);
         }
 
         public MultiPanelModel(int mpanelID,

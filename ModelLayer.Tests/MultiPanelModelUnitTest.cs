@@ -28,7 +28,8 @@ namespace ModelLayer.Tests
                                                new List<IPanelModel>(),
                                                new List<IDividerModel>(),
                                                new List<IMultiPanelModel>(),
-                                               1);
+                                               1,
+                                               new List<Control>());
         }
 
         [TestMethod]
@@ -56,7 +57,8 @@ namespace ModelLayer.Tests
                                                                 new List<IPanelModel>(),
                                                                 new List<IDividerModel>(),
                                                                 new List<IMultiPanelModel>(),
-                                                                1);
+                                                                1,
+                                                                new List<Control>());
             mpanelParent.MPanelLst_MultiPanel.Add(mpanelChild1);
             Assert.AreEqual(expected_index, mpanelParent.GetNextIndex());
         }
@@ -78,7 +80,8 @@ namespace ModelLayer.Tests
                                                                 new List<IPanelModel>(),
                                                                 new List<IDividerModel>(),
                                                                 new List<IMultiPanelModel>(),
-                                                                1);
+                                                                1,
+                                                                new List<Control>());
             IPanelModel panelChild1 = new PanelModel(1,
                                                     "Panel_1",
                                                     100,

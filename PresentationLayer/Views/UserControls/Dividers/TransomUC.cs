@@ -38,6 +38,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event EventHandler deleteToolStripMenuItemClickedEventRaised;
         public event EventHandler transomUCMouseEnterEventRaised;
         public event EventHandler transomUCMouseLeaveEventRaised;
+        public event EventHandler transomUCSizeChangedEventRaised;
 
         public void InvalidateThis()
         {
@@ -93,6 +94,11 @@ namespace PresentationLayer.Views.UserControls.Dividers
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickedEventRaised, e);
+        }
+
+        private void TransomUC_SizeChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, transomUCSizeChangedEventRaised, e);
         }
     }
 }

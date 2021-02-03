@@ -43,6 +43,32 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _transomUC.deleteToolStripMenuItemClickedEventRaised += _transomUC_deleteToolStripMenuItemClickedEventRaised;
             _transomUC.transomUCMouseEnterEventRaised += _transomUC_transomUCMouseEnterEventRaised;
             _transomUC.transomUCMouseLeaveEventRaised += _transomUC_transomUCMouseLeaveEventRaised;
+            _transomUC.transomUCSizeChangedEventRaised += _transomUC_transomUCSizeChangedEventRaised;
+        }
+
+        private void _transomUC_transomUCSizeChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                int thisWd = ((UserControl)sender).Width,
+                    thisHt = ((UserControl)sender).Height,
+                    divModelWd = _divModel.Div_Width,
+                    divModelHt = _divModel.Div_Height;
+
+                if (thisWd != divModelWd)
+                {
+                    _divModel.Div_Width = thisWd;
+                }
+                if (thisHt != divModelHt)
+                {
+                    _divModel.Div_Height = thisHt;
+                }
+                ((UserControl)sender).Invalidate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         Color penColor = Color.Black;

@@ -184,7 +184,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                         fpnl.Controls.Add((UserControl)multiUC);
                         multiUCP.SetInitialLoadFalse();
-                        _multiPanelModel.MPanelLst_Objects.Add((UserControl)multiUC);
+                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)multiUC);
                     }
                     else if (data.Contains("Transom"))
                     {
@@ -205,7 +205,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                       divSize,
                                                                       fpnl,
                                                                       (UserControl)_frameUCP.GetFrameUC(),
-                                                                      DividerModel.DividerType.Mullion,
+                                                                      DividerModel.DividerType.Transom,
                                                                       true,
                                                                       divID,
                                                                       _frameModel.Frame_Type.ToString());
@@ -219,7 +219,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                             this);
                 ITransomUC transomUC = transomUCP.GetTransom();
                 fpnl.Controls.Add((UserControl)transomUC);
-                _multiPanelModel.MPanelLst_Objects.Add((UserControl)transomUC);
+                _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC);
 
             }
             else if (data == "Mullion")

@@ -15,6 +15,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         event MouseEventHandler transomUCMouseMoveEventRaised;
         event MouseEventHandler transomUCMouseUpEventRaised;
         event PaintEventHandler transomUCPaintEventRaised;
+        event EventHandler transomUCSizeChangedEventRaised;
 
         void InvalidateThis();
     }

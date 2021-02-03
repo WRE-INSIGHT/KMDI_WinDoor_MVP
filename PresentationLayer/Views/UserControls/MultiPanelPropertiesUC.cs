@@ -29,7 +29,6 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler MultiPanelPropertiesLoadEventRaised;
         public event EventHandler NumHeightValueChangedEventRaised;
         public event EventHandler NumWidthValueChangedEventRaised;
-        public event EventHandler MultiPanelPropertiesSizeChangedEventRaised;
 
         public FlowLayoutPanel GetMultiPanelPropertiesFLP()
         {
@@ -73,11 +72,6 @@ namespace PresentationLayer.Views.UserControls
         public void BringToFrontThis()
         {
             this.BringToFront();
-        }
-
-        private void MultiPanelPropertiesUC_SizeChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(this, MultiPanelPropertiesSizeChangedEventRaised, e);
         }
     }
 }
