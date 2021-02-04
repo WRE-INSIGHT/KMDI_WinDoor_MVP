@@ -96,36 +96,77 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             UserControl transom = (UserControl)sender;
 
             Graphics g = e.Graphics;
-
-            int lineHT = transom.ClientRectangle.Height - 2,
-                lineWd = transom.ClientRectangle.Width - 6;
-
             g.SmoothingMode = SmoothingMode.HighQuality;
 
             GraphicsPath gpath = new GraphicsPath();
 
-            Point[] leftCurve = {
-                                    new Point(5, lineHT),
-                                    new Point(1, lineHT / 2),
-                                    new Point(5, 1),
-                                };
+            int lineHT = transom.ClientRectangle.Height - 2,
+                lineWd = transom.ClientRectangle.Width - 6;
+            Point[] upperLine = new Point[2];
+            Point[] botLine = new Point[2];
+            Point[] leftCurve = new Point[3];
+            Point[] rightCurve = new Point[3];
+            
 
-            Point[] rightCurve = {
-                                    new Point(lineWd, 1),
-                                    new Point(transom.ClientRectangle.Width - 2, lineHT / 2),
-                                    new Point(lineWd, lineHT)
-                                 };
+            if (_divModel.Div_FrameType == "Window")
+            {
+                if (_multiPanelModel.MPanel_Type == "Transom")
+                {
+                    if (_divModel.Div_Height == 16)
+                    {
+                        upperLine[0] = new Point(5, -6); //para lumagpas sa control
+                        upperLine[1] = new Point(lineWd, -6);
 
+                        rightCurve[0] = new Point(lineWd, -6);
+                        rightCurve[1] = new Point(transom.ClientRectangle.Width - 2, lineHT / 2);
+                        rightCurve[2] = new Point(lineWd, lineHT + 5);
 
-            gpath.AddLine(new Point(5, 1), new Point(lineWd, 1));
+                        botLine[0] = new Point(lineWd, lineHT + 5); //para lumagpas sa control
+                        botLine[1] = new Point(5, lineHT + 5);
+
+                        leftCurve[0] = new Point(5, lineHT + 5);
+                        leftCurve[1] = new Point(1, lineHT / 2);
+                        leftCurve[2] = new Point(5, -6);
+
+                    }
+                    else if (_divModel.Div_Height == 21)
+                    {
+                        
+                    }
+                    else if (_divModel.Div_Height == 26)
+                    {
+                        upperLine[0] = new Point(5, 1);
+                        upperLine[1] = new Point(lineWd, 1);
+
+                        rightCurve[0] = new Point(lineWd, 1);
+                        rightCurve[1] = new Point(transom.ClientRectangle.Width - 2, lineHT / 2);
+                        rightCurve[2] = new Point(lineWd, lineHT);
+
+                        botLine[0] = new Point(lineWd, lineHT);
+                        botLine[1] = new Point(5, lineHT);
+
+                        leftCurve[0] = new Point(5, lineHT);
+                        leftCurve[1] = new Point(1, lineHT / 2);
+                        leftCurve[2] = new Point(5, 1);
+
+                    }
+                }
+            }
+            else if (_divModel.Div_FrameType == "Door")
+            {
+
+            }
+            
+            gpath.AddLine(upperLine[0], upperLine[1]);
             gpath.AddCurve(rightCurve);
-            gpath.AddLine(new Point(lineWd, lineHT), new Point(5, lineHT));
+            gpath.AddLine(botLine[0], botLine[1]);
             gpath.AddCurve(leftCurve);
 
             Pen pen = new Pen(penColor, 2);
 
             g.DrawPath(pen, gpath);
             g.FillPath(Brushes.PowderBlue, gpath);
+
         }
 
         private void _transomUC_transomUCMouseUpEventRaised(object sender, MouseEventArgs e)

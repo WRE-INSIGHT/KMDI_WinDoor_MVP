@@ -409,18 +409,31 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
             Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            
-            Rectangle bounds = new Rectangle();
-            if (_frameUCP != null && _multiPanelTransomUCP == null)
-            {
-                int pInnerX = 10,
-                    pInnerY = 10,
-                    pInnerWd = fpnl.ClientRectangle.Width - 20,
-                    pInnerHt = fpnl.ClientRectangle.Height - 20;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            int pInnerX = 10,
+                pInnerY = 10,
+                pInnerWd = fpnl.ClientRectangle.Width - 20,
+                pInnerHt = fpnl.ClientRectangle.Height - 20;
 
-                Point[] corner_points = new[]
-                {
+            Point[] upperLine = new Point[2];
+            Point[] botLine = new Point[2];
+            Point[] leftCurve = new Point[3];
+            Point[] rightCurve = new Point[3];
+
+            GraphicsPath gpath = new GraphicsPath();
+
+            int divSize = 0; //used for drawing transom object 
+            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+            {
+                divSize = 24;
+            }
+            else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+            {
+                divSize = 31;
+            }
+
+            Point[] corner_points = new[]
+            {
                     new Point(0,0),
                     new Point(pInnerX, pInnerY),
                     new Point(fpnl.ClientRectangle.Width, 0),
@@ -429,8 +442,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     new Point(pInnerX, pInnerY + pInnerHt),
                     new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
                     new Point(pInnerX + pInnerWd, pInnerY + pInnerHt)
-                };
+            };
 
+            Rectangle bounds = new Rectangle();
+            if (_frameUCP != null && _multiPanelTransomUCP == null)
+            {
                 for (int i = 0; i < corner_points.Length - 1; i += 2)
                 {
                     g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
@@ -443,34 +459,80 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 if (_multiPanelModel.MPanel_Placement == "First")
                 {
+
                     Rectangle topbounds = new Rectangle(new Point(0, 0),
-                                                        new Size(fpnl.Width, 10)),
-                              botbounds = new Rectangle(new Point(0, fpnl.Height - 5),
-                                                        new Size(fpnl.Width, 5));
+                                                        new Size(fpnl.Width, 10));
 
                     g.FillRectangle(new SolidBrush(SystemColors.Control), topbounds);
 
-                    bounds = new Rectangle(new Point(0, 10),
-                                           new Size(fpnl.ClientRectangle.Width - 1, fpnl.ClientRectangle.Height - 15));
+                    for (int i = 0; i < corner_points.Length - 5; i += 2)
+                    {
+                        g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
+                    }
 
+                    bounds = new Rectangle(new Point(10, 10),
+                                           new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 15));
 
-                    g.DrawRectangle(new Pen(Color.Black, 1), botbounds);
+                    int lineHT = (fpnl.Height - 5) + divSize,
+                        lineWd = fpnl.ClientRectangle.Width - 6;
+
+                    upperLine[0] = new Point(5, fpnl.Height - 5);
+                    upperLine[1] = new Point(lineWd, fpnl.Height - 5);
+
+                    rightCurve[0] = new Point(lineWd, fpnl.Height - 5);
+                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, (fpnl.Height - 5) + (divSize / 2));
+                    rightCurve[2] = new Point(lineWd, lineHT);
+
+                    botLine[0] = new Point(lineWd, lineHT);
+                    botLine[1] = new Point(5, lineHT);
+
+                    leftCurve[0] = new Point(5, lineHT);
+                    leftCurve[1] = new Point(1, (fpnl.Height - 5) + (divSize / 2));
+                    leftCurve[2] = new Point(5, fpnl.Height - 5);
+
                 }
                 else if (_multiPanelModel.MPanel_Placement == "Last")
                 {
-                    Rectangle topbounds = new Rectangle(new Point(0, 0),
-                                                        new Size(fpnl.Width, 5)),
-                              botbounds = new Rectangle(new Point(0, fpnl.Height - 11),
+                    Rectangle botbounds = new Rectangle(new Point(0, fpnl.Height - 11),
                                                         new Size(fpnl.Width, 11));
-
+                              
                     g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
 
-                    g.DrawRectangle(new Pen(Color.Black, 1), topbounds);
+                    for (int i = 4; i < corner_points.Length - 1; i += 2)
+                    {
+                        g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
+                    }
 
-                    bounds = new Rectangle(new Point(0, 5),
-                                           new Size(fpnl.ClientRectangle.Width - 1, fpnl.ClientRectangle.Height - 15));
+                    bounds = new Rectangle(new Point(10, 5),
+                                           new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 15));
 
+                    int lineWd = fpnl.ClientRectangle.Width - 6,
+                        Point_y = 5 - divSize;
+
+                    upperLine[0] = new Point(5, Point_y);
+                    upperLine[1] = new Point(lineWd - 1, Point_y);
+
+                    rightCurve[0] = new Point(lineWd - 1, Point_y);
+                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, 5 - (divSize / 2));
+                    rightCurve[2] = new Point(lineWd - 1, 5);
+
+                    botLine[0] = new Point(lineWd - 1, 5);
+                    botLine[1] = new Point(5, 5);
+
+                    leftCurve[0] = new Point(6, 5);
+                    leftCurve[1] = new Point(1, 5 - (divSize / 2));
+                    leftCurve[2] = new Point(6, Point_y);
                 }
+
+                gpath.AddLine(upperLine[0], upperLine[1]);
+                gpath.AddCurve(rightCurve);
+                gpath.AddLine(botLine[0], botLine[1]);
+                gpath.AddCurve(leftCurve);
+
+                Pen pen = new Pen(Color.Black, 2);
+
+                g.DrawPath(pen, gpath);
+                g.FillPath(Brushes.PowderBlue, gpath);
             }
 
             g.FillRectangle(new SolidBrush(Color.White), bounds);
