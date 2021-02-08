@@ -46,6 +46,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMullionUCPresenter _mullionUCP;
         private IFrameUCPresenter _frameUCP;
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
+        private IMultiPanelPropertiesUCPresenter _multiPropUCP_orig;  //Original Instance
+        private IMultiPanelPropertiesUCPresenter _multiPropUCP2_given; //Given Instance
 
         private IDividerServices _divServices;
         private IPanelServices _panelServices;
@@ -64,7 +66,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             IfrmDimensionPresenter frmDimensionPresenter,
                                             IFixedPanelImagerUCPresenter fixedImagerUCP,
                                             IMullionUCPresenter mullionUCP,
-                                            IDividerServices divServices)
+                                            IDividerServices divServices,
+                                            IMultiPanelPropertiesUCPresenter multiPropUCP_orig)
         {
             _multiPanelMullionUC = multiPanelMullionUC;
             _fixedUCP = fixedUCP;
@@ -78,6 +81,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _fixedImagerUCP = fixedImagerUCP;
             _mullionUCP = mullionUCP;
             _divServices = divServices;
+            _multiPropUCP_orig = multiPropUCP_orig;
             SubscribeToEventsSetup();
         }
 
@@ -133,7 +137,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 divID = _mainPresenter.GetDividerCount() + 1;
 
             int multiPanel_boundsWD = fpnl.Width - 20,
-                multiPanel_boundsHT = fpnl.Height - 20,
+                multiPanel_boundsHT = fpnl.Height - 18,
                 divSize = 0,
                 totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
 
@@ -262,9 +266,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                     _multiPanelModel.Reload_PanelMargin();
 
+
                     IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                    framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+                    _multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+
                     _frameModel.FrameProp_Height += 148;
+                    _multiPanelModel.MPanelProp_Height += 148;
 
                     if (data == "Fixed Panel")
                     {
@@ -471,24 +478,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
 
                     bounds = new Rectangle(new Point(10, 10),
-                                           new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 15));
+                                           new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 18));
 
-                    int lineHT = (fpnl.Height - 5) + divSize,
+                    int lineHT = (fpnl.Height - 8) + divSize,
                         lineWd = fpnl.ClientRectangle.Width - 6;
 
-                    upperLine[0] = new Point(5, fpnl.Height - 5);
-                    upperLine[1] = new Point(lineWd, fpnl.Height - 5);
+                    upperLine[0] = new Point(5, fpnl.Height - 8);
+                    upperLine[1] = new Point(lineWd, fpnl.Height - 8);
 
-                    rightCurve[0] = new Point(lineWd, fpnl.Height - 5);
-                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, (fpnl.Height - 5) + (divSize / 2));
+                    rightCurve[0] = new Point(lineWd, fpnl.Height - 8);
+                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, (fpnl.Height - 8) + (divSize / 2));
                     rightCurve[2] = new Point(lineWd, lineHT);
 
                     botLine[0] = new Point(lineWd, lineHT);
                     botLine[1] = new Point(5, lineHT);
 
                     leftCurve[0] = new Point(5, lineHT);
-                    leftCurve[1] = new Point(1, (fpnl.Height - 5) + (divSize / 2));
-                    leftCurve[2] = new Point(5, fpnl.Height - 5);
+                    leftCurve[1] = new Point(1, (fpnl.Height - 8) + (divSize / 2));
+                    leftCurve[2] = new Point(5, fpnl.Height - 8);
 
                 }
                 else if (_multiPanelModel.MPanel_Placement == "Last")
@@ -503,24 +510,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                     }
 
-                    bounds = new Rectangle(new Point(10, 5),
-                                           new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 15));
+                    bounds = new Rectangle(new Point(10, 8),
+                                           new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 18));
 
                     int lineWd = fpnl.ClientRectangle.Width - 6,
-                        Point_y = 5 - divSize;
+                        Point_y = 8 - divSize;
 
-                    upperLine[0] = new Point(5, Point_y);
+                    upperLine[0] = new Point(6, Point_y);
                     upperLine[1] = new Point(lineWd - 1, Point_y);
 
                     rightCurve[0] = new Point(lineWd - 1, Point_y);
-                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, 5 - (divSize / 2));
-                    rightCurve[2] = new Point(lineWd - 1, 5);
+                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, 8 - (divSize / 2));
+                    rightCurve[2] = new Point(lineWd - 1, 8);
 
-                    botLine[0] = new Point(lineWd - 1, 5);
-                    botLine[1] = new Point(5, 5);
+                    botLine[0] = new Point(lineWd - 1, 8);
+                    botLine[1] = new Point(6, 8);
 
-                    leftCurve[0] = new Point(6, 5);
-                    leftCurve[1] = new Point(1, 5 - (divSize / 2));
+                    leftCurve[0] = new Point(6, 8);
+                    leftCurve[1] = new Point(1, 8 - (divSize / 2));
                     leftCurve[2] = new Point(6, Point_y);
                 }
 
@@ -576,7 +583,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                             IFrameModel frameModel,
                                                             IMainPresenter mainPresenter,
                                                             IFrameUCPresenter frameUCP,
-                                                            IMultiPanelTransomUCPresenter multiPanelTransomUCP)
+                                                            IMultiPanelTransomUCPresenter multiPanelTransomUCP,
+                                                            IMultiPanelPropertiesUCPresenter multiPropUCP)
         {
             unityC
                 .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>()
@@ -588,6 +596,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiMullionUCP._mainPresenter = mainPresenter;
             multiMullionUCP._frameUCP = frameUCP;
             multiMullionUCP._multiPanelTransomUCP = multiPanelTransomUCP;
+            multiMullionUCP._multiPropUCP2_given = multiPropUCP;
 
             return multiMullionUCP;
         }

@@ -180,7 +180,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                  _frameModel,
                                                                                                  _mainPresenter,
                                                                                                  _frameUCP,
-                                                                                                 this);
+                                                                                                 this,
+                                                                                                 _multiPropUCP2_given);
                         IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                         fpnl.Controls.Add((UserControl)multiUC);
                         multiUCP.SetInitialLoadFalse();

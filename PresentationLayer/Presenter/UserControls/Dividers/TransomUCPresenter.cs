@@ -112,24 +112,23 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             {
                 if (_multiPanelModel.MPanel_Type == "Transom")
                 {
-                    if (_divModel.Div_Height == 16)
+                    if (_divModel.Div_Height == 10)
                     {
-                        upperLine[0] = new Point(5, -6); //para lumagpas sa control
-                        upperLine[1] = new Point(lineWd, -6);
+                        upperLine[0] = new Point(5, -9); //para lumagpas sa control
+                        upperLine[1] = new Point(lineWd + 2, -9);
 
-                        rightCurve[0] = new Point(lineWd, -6);
+                        rightCurve[0] = new Point(lineWd + 2, -9);
                         rightCurve[1] = new Point(transom.ClientRectangle.Width - 2, lineHT / 2);
-                        rightCurve[2] = new Point(lineWd, lineHT + 5);
+                        rightCurve[2] = new Point(lineWd + 2, lineHT + 5);
 
-                        botLine[0] = new Point(lineWd, lineHT + 5); //para lumagpas sa control
-                        botLine[1] = new Point(5, lineHT + 5);
+                        botLine[0] = new Point(lineWd + 2, lineHT + 8); //para lumagpas sa control
+                        botLine[1] = new Point(5, lineHT + 8);
 
-                        leftCurve[0] = new Point(5, lineHT + 5);
+                        leftCurve[0] = new Point(5, lineHT + 8);
                         leftCurve[1] = new Point(1, lineHT / 2);
-                        leftCurve[2] = new Point(5, -6);
-
+                        leftCurve[2] = new Point(5, -9);
                     }
-                    else if (_divModel.Div_Height == 21)
+                    else if (_divModel.Div_Height == 18)
                     {
                         
                     }
@@ -148,7 +147,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         leftCurve[0] = new Point(5, lineHT);
                         leftCurve[1] = new Point(1, lineHT / 2);
                         leftCurve[2] = new Point(5, 1);
-
                     }
                 }
             }

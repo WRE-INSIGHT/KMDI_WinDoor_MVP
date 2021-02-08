@@ -344,7 +344,36 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (pnl.Panel_Parent.Parent.Parent.GetType() == typeof(FlowLayoutPanel)) //if Parent.Parent multi-Panel
                     {
-                        pnl_margin = new Padding(0, 10, 0, 10);
+                        if (MPanel_Placement == "First")
+                        {
+                            if (pnl.Panel_Index_Inside_MPanel == 0)
+                            {
+                                pnl_margin = new Padding(10, 10, 0, 10);
+                            }
+                            else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions)
+                            {
+                                pnl_margin = new Padding(0, 10, 10, 10);
+                            }
+                            else
+                            {
+                                pnl_margin = new Padding(0, 10, 0, 10);
+                            }
+                        }
+                        else if (MPanel_Placement == "Last")
+                        {
+                            if (pnl.Panel_Index_Inside_MPanel == 0)
+                            {
+                                pnl_margin = new Padding(10, 8, 0, 10);
+                            }
+                            else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions)
+                            {
+                                pnl_margin = new Padding(0, 8, 10, 10);
+                            }
+                            else
+                            {
+                                pnl_margin = new Padding(0, 8, 0, 10);
+                            }
+                        }
                     }
                     else if (pnl.Panel_Parent.Parent.Parent.GetType() == typeof(UserControl)) //if Parent.Parent Frame
                     {
@@ -447,10 +476,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     Control prev_ctrl = MPanelLst_Objects[indx - 1];
                     if (!prev_ctrl.Name.Contains("MultiPanel") && prev_ctrl.Name.Contains(MPanel_Type)) //means Divider
                     {
-                        prev_ctrl.Height -= 5;
+                        prev_ctrl.Height -= 8;
                         if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                         {
-                            current_control.Height += 5;
+                            current_control.Height += 8;
                         }
                     }
                 }
@@ -462,8 +491,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     Control prev_ctrl = MPanelLst_Objects[indx - 1];
                     if (prev_ctrl.Name.Contains("MultiPanel"))
                     {
-                        prev_ctrl.Height += 5;
-                        current_control.Height -= 5;
+                        prev_ctrl.Height += 8;
+                        current_control.Height -= 8;
                     }
                 }
             }
