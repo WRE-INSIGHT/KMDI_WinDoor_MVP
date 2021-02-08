@@ -18,6 +18,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                             int mid = 0,
                                             DockStyle mdock = DockStyle.Fill,
                                             int mpanelIndexInsideMPanel = 0,
+                                            IMultiPanelModel mpanelParentModel = null,
                                             string mname = "",
                                             int mpanelDivisions = 1,
                                             List<IPanelModel> mpanelLstPanel = null,

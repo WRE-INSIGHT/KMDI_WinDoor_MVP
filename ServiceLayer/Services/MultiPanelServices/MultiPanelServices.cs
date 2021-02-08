@@ -34,7 +34,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  List<IDividerModel> mpanelLstDivider,
                                                  List<IMultiPanelModel> mpanelLstMultiPanel,
                                                  int mpanelIndexInsideMPanel,
-                                                 List<Control> mpanelLstObjects)
+                                                 List<Control> mpanelLstObjects,
+                                                 IMultiPanelModel mpanelParentModel)
         {
             MultiPanelModel mp = new MultiPanelModel(mid,
                                                      mname,
@@ -50,7 +51,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                      mpanelLstDivider,
                                                      mpanelLstMultiPanel,
                                                      mpanelIndexInsideMPanel,
-                                                     mpanelLstObjects);
+                                                     mpanelLstObjects,
+                                                     mpanelParentModel);
 
             return mp;
         }
@@ -69,6 +71,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                    int mid = 0,
                                                    DockStyle mdock = DockStyle.Fill,
                                                    int mpanelIndexInsideMPanel = 0,
+                                                   IMultiPanelModel mpanelParentModel = null,
                                                    string mname = "",
                                                    int mpanelDivisions = 1,
                                                    List<IPanelModel> mpanelLstPanel = null,
@@ -116,7 +119,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mpanelLstDivider,
                                                                  mpanelLstMultiPanel,
                                                                  mpanelIndexInsideMPanel,
-                                                                 new List<Control>());
+                                                                 new List<Control>(),
+                                                                 mpanelParentModel);
 
             return _multipanelModel;
         }

@@ -273,19 +273,18 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public List<IDividerModel> MPanelLst_Divider { get; set; }
         public List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
 
-        //private List<Control> _mpanelLstObjects;
-        public List<Control> MPanelLst_Objects { get; set; }
-        //{
-        //    get
-        //    {
-        //        return _mpanelLstObjects;
-        //    }
-        //    set
-        //    {
-        //        _mpanelLstObjects = value;
-        //        Resize_MyControls();
-        //    }
-        //}
+        private List<Control> _mpanelLstObjects;
+        public List<Control> MPanelLst_Objects
+        {
+            get
+            {
+                return _mpanelLstObjects;
+            }
+            set
+            {
+                _mpanelLstObjects = value;
+            }
+        }
 
         private int _mpanelPropHeight;
         public int MPanelProp_Height
@@ -297,6 +296,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
             set
             {
+                int total = _mpanelPropHeight + value;
+                if (MPanel_ParentModel != null)
+                {
+                    MPanel_ParentModel.MPanelProp_Height -= total;
+                }
                 _mpanelPropHeight = value;
                 NotifyPropertyChanged();
             }
@@ -331,6 +335,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        public IMultiPanelModel MPanel_ParentModel { get; set; }
 
         public void Reload_PanelMargin()
         {
@@ -443,7 +448,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         pnl_margin = new Padding(0, 0, 0, 0);
                         mpnl.MPanel_Placement = "First";
                     }
-                    else if (mpnl.MPanel_Index_Inside_MPanel == MPanel_Divisions)
+                    else if (mpnl.MPanel_Index_Inside_MPanel == MPanel_Divisions * 2)
                     {
                         pnl_margin = new Padding(0, 0, 0, 0);
                         mpnl.MPanel_Placement = "Last";
@@ -461,9 +466,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public int GetNextIndex()
         {
             int visiblePanelCount = MPanelLst_Panel.Count(pnl => pnl.Panel_Visibility == true),
-                visibleMPanelCount = MPanelLst_MultiPanel.Count(mpnl => mpnl.MPanel_Visibility == true);
+                visibleMPanelCount = MPanelLst_MultiPanel.Count(mpnl => mpnl.MPanel_Visibility == true),
+                visibleDivider = MPanelLst_Divider.Count(div => div.Div_Visible == true);
 
-            return visiblePanelCount + visibleMPanelCount;
+            return visiblePanelCount + visibleMPanelCount + visibleDivider;
         }
 
         public void Resize_MyControls(Control current_control)
@@ -504,6 +510,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             Resize_MyControls(control);
         }
 
+        public int GetCount_MPanelLst_Object()
+        {
+            return MPanelLst_Objects.Count();
+        }
+
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,
@@ -518,7 +529,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                List<IDividerModel> mpanelLstDivider,
                                List<IMultiPanelModel> mpanelLstMultiPanel,
                                int mpanelIndexInsideMPanel,
-                               List<Control> mpanelLstObjects)
+                               List<Control> mpanelLstObjects,
+                               IMultiPanelModel mpanelParentModel)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -536,6 +548,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_Index_Inside_MPanel = mpanelIndexInsideMPanel;
             MPanelProp_Height = 129;
             MPanelLst_Objects = mpanelLstObjects;
+            MPanel_ParentModel = mpanelParentModel;
         }
     }
 }

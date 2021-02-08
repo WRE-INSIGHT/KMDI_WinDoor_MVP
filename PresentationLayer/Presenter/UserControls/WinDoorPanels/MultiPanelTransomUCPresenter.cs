@@ -151,7 +151,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                           flow,
                                                                                           multiID,
                                                                                           DockStyle.None,
-                                                                                          _multiPanelModel.GetNextIndex());
+                                                                                          _multiPanelModel.GetNextIndex(),
+                                                                                          _multiPanelModel);
                     _frameModel.Lst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.Reload_MultiPanelMargin();
@@ -181,7 +182,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                  _mainPresenter,
                                                                                                  _frameUCP,
                                                                                                  this,
-                                                                                                 _multiPropUCP2_given);
+                                                                                                 multiPropUCP);
                         IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                         fpnl.Controls.Add((UserControl)multiUC);
                         multiUCP.SetInitialLoadFalse();
@@ -328,6 +329,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                 }
             }
+            foreach (Control ctrl in fpnl.Controls)
+            {
+                if (ctrl.Name.Contains("Multi"))
+                {
+                    ctrl.Controls[0].Invalidate(); //Invalidate the fpnl inside
+                }
+                else
+                {
+                    ctrl.Invalidate(); //Divider
+                }
+            }
         }
 
         private void _multiPanelTransomUC_deleteClickedEventRaised(object sender, EventArgs e)
@@ -351,6 +363,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 div.Div_Visible = false;
             }
             _frameUCP.ViewDeleteControl((UserControl)_multiPanelTransomUC);
+
+            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+            {
+                mpnl.MPanel_Visibility = false;
+                _multiPanelModel.MPanelProp_Height -= 129;
+                _frameModel.FrameProp_Height -= 129;
+            }
+            if (_multiPanelModel.MPanel_Parent != null)
+            {
+                _multiPanelModel.MPanelProp_Height -= 129;
+                _frameModel.FrameProp_Height -= 129;
+            }
         }
 
         private void _multiPanelTransomUC_divCountClickedEventRaised(object sender, EventArgs e)

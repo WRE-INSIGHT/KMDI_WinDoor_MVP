@@ -130,7 +130,19 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     }
                     else if (_divModel.Div_Height == 18)
                     {
-                        
+                        upperLine[0] = new Point(5, -9); //para lumagpas sa control
+                        upperLine[1] = new Point(lineWd + 2, -9);
+
+                        rightCurve[0] = new Point(lineWd + 2, -9);
+                        rightCurve[1] = new Point(transom.ClientRectangle.Width - 2, lineHT / 2);
+                        rightCurve[2] = new Point(lineWd + 2, lineHT);
+
+                        botLine[0] = new Point(lineWd + 2, lineHT); //para lumagpas sa control
+                        botLine[1] = new Point(5, lineHT);
+
+                        leftCurve[0] = new Point(5, lineHT);
+                        leftCurve[1] = new Point(1, lineHT / 2);
+                        leftCurve[2] = new Point(5, -9);
                     }
                     else if (_divModel.Div_Height == 26)
                     {

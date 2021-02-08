@@ -51,10 +51,9 @@
             this.flp_MultiPanelProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_MultiPanelProperties.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.flp_MultiPanelProperties.Location = new System.Drawing.Point(0, 0);
-            this.flp_MultiPanelProperties.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flp_MultiPanelProperties.Name = "flp_MultiPanelProperties";
             this.flp_MultiPanelProperties.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
-            this.flp_MultiPanelProperties.Size = new System.Drawing.Size(154, 129);
+            this.flp_MultiPanelProperties.Size = new System.Drawing.Size(159, 129);
             this.flp_MultiPanelProperties.TabIndex = 1;
             // 
             // lbl_MultiPanelName
@@ -128,7 +127,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flp_MultiPanelProperties);
             this.Name = "MultiPanelPropertiesUC";
-            this.Size = new System.Drawing.Size(154, 129);
+            this.Size = new System.Drawing.Size(159, 129);
             this.Load += new System.EventHandler(this.MultiPanelPropertiesUC_Load);
             this.flp_MultiPanelProperties.ResumeLayout(false);
             this.flp_MultiPanelProperties.PerformLayout();

@@ -2,7 +2,6 @@
 using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using static ModelLayer.Model.Quotation.Divider.DividerModel;
 
 namespace ModelLayer.Model.Quotation.MultiPanel
 {
@@ -21,6 +20,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanelProp_Height { get; set; }
         bool MPanel_NumEnable { get; set; }
         string MPanel_Placement { get; set; }
+        IMultiPanelModel MPanel_ParentModel { get; set; }
 
         Control MPanel_Parent { get; set; }
         UserControl MPanel_FrameGroup { get; set; }
@@ -28,11 +28,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         List<IPanelModel> MPanelLst_Panel { get; set; }
         List<IDividerModel> MPanelLst_Divider { get; set; }
         List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
-        //List<Control> MPanelLst_Objects { get; set; }
+        List<Control> MPanelLst_Objects { get; set; }
+
         int GetNextIndex();
         void Reload_PanelMargin();
         void Reload_MultiPanelMargin();
         void Resize_MyControls(Control current_control);
         void AddControl_MPanelLstObjects(Control control);
+        int GetCount_MPanelLst_Object();
     }
 }
