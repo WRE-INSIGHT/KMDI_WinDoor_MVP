@@ -296,17 +296,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
             set
             {
-                int total = _mpanelPropHeight + value;
+                int total = value - _mpanelPropHeight;
                 if (MPanel_ParentModel != null)
                 {
-                    MPanel_ParentModel.MPanelProp_Height = total;
-                    //if (value > _mpanelPropHeight)
-                    //{
-                    //}
-                    //else if (value < _mpanelPropHeight)
-                    //{
-
-                    //}
+                    MPanel_ParentModel.MPanelProp_Height += total;
                 }
                 _mpanelPropHeight = value;
                 NotifyPropertyChanged();

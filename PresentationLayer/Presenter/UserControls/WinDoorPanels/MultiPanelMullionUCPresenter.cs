@@ -270,7 +270,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
 
                     _frameModel.FrameProp_Height += 148;
-                    //_multiPanelModel.MPanel_ParentModel.MPanelProp_Height += 148; 
                     _multiPanelModel.MPanelProp_Height += 148;
 
                     if (data == "Fixed Panel")
@@ -695,9 +694,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
         }
 
-        public void DeletePanel(UserControl panel)
+        public void DeletePanel(UserControl obj)
         {
-            _multiPanelMullionUC.DeletePanel(panel);
+            _multiPanelMullionUC.DeletePanel(obj);
+            if (obj.Name.Contains("Panel"))
+            {
+                _multiPanelModel.MPanelProp_Height -= 148;
+            }
         }
 
         public void Invalidate_MultiPanelMullionUC()
