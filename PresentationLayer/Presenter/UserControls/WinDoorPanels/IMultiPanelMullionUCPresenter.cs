@@ -15,7 +15,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
-                                                     IFrameUCPresenter frameUCP);
+                                                     IFrameUCPresenter frameUCP,
+                                                     IMultiPanelPropertiesUCPresenter multiPropUCP);
 
         IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IMultiPanelModel multiPanelModel,

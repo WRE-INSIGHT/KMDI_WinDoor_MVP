@@ -299,7 +299,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 int total = _mpanelPropHeight + value;
                 if (MPanel_ParentModel != null)
                 {
-                    MPanel_ParentModel.MPanelProp_Height -= total;
+                    MPanel_ParentModel.MPanelProp_Height = total;
+                    //if (value > _mpanelPropHeight)
+                    //{
+                    //}
+                    //else if (value < _mpanelPropHeight)
+                    //{
+
+                    //}
                 }
                 _mpanelPropHeight = value;
                 NotifyPropertyChanged();
@@ -347,7 +354,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 Padding pnl_margin = new Padding(0);
                 if (MPanel_Type == "Mullion")
                 {
-                    if (pnl.Panel_Parent.Parent.Parent.GetType() == typeof(FlowLayoutPanel)) //if Parent.Parent multi-Panel
+                    if (pnl.Panel_Parent.Parent.Parent.Name.Contains("Multi")) //if Parent.Parent multi-Panel
                     {
                         if (MPanel_Placement == "First")
                         {
@@ -380,13 +387,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
                     }
-                    else if (pnl.Panel_Parent.Parent.Parent.GetType() == typeof(UserControl)) //if Parent.Parent Frame
+                    else if (pnl.Panel_Parent.Parent.Parent.Name.Contains("Frame")) //if Parent.Parent Frame
                     {
                         if (pnl.Panel_Index_Inside_MPanel == 0)
                         {
                             pnl_margin = new Padding(10, 10, 0, 10);
                         }
-                        else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions)
+                        else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2)
                         {
                             pnl_margin = new Padding(0, 10, 10, 10);
                         }
@@ -402,7 +409,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         pnl_margin = new Padding(10, 10, 10, 0);
                     }
-                    else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions)
+                    else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2)
                     {
                         pnl_margin = new Padding(10, 0, 10, 10);
                     }

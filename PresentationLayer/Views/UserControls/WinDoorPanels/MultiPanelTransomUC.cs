@@ -44,9 +44,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             flp_MultiTransom.Invalidate();
         }
 
-        public void DeletePanel(UserControl panel)
+        public void DeletePanel(UserControl obj)
         {
-            flp_MultiTransom.Controls.Remove(panel);
+            flp_MultiTransom.Controls.Remove(obj);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)

@@ -266,11 +266,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                     _multiPanelModel.Reload_PanelMargin();
 
-
                     IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     _multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
 
                     _frameModel.FrameProp_Height += 148;
+                    //_multiPanelModel.MPanel_ParentModel.MPanelProp_Height += 148; 
                     _multiPanelModel.MPanelProp_Height += 148;
 
                     if (data == "Fixed Panel")
@@ -476,13 +476,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_frameUCP != null && _multiPanelTransomUCP != null)
             {
-
                 IMultiPanelModel parent_mpnl = _multiPanelModel.MPanel_ParentModel;
                 Pen pen = new Pen(Color.Black, 2);
 
                 if (_multiPanelModel.MPanel_Placement == "First")
                 {
-
                     Rectangle topbounds = new Rectangle(new Point(0, 0),
                                                         new Size(fpnl.Width, 10));
 
@@ -496,19 +494,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     bounds = new Rectangle(new Point(10, 10),
                                            new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 18));
 
-                    int lineHT = (fpnl.Height - 8) + divSize,
-                        lineWd = fpnl.ClientRectangle.Width - 6;
-
                     int indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1;
-                    Control nxt_obj = parent_mpnl.MPanelLst_Objects[indx_NxtObj]; //Either Mpanel or Divider
                                                                                   
                     if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
                     {
+                        Control nxt_obj = parent_mpnl.MPanelLst_Objects[indx_NxtObj]; //Either Mpanel or Divider
+                        int lineHT = (fpnl.Height - 8) + 18,
+                            lineWd = fpnl.ClientRectangle.Width - 6;
+
                         if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
                         {
                             if (nxt_obj.Name.Contains("Transom")) //Transom Divider
                             {
-                                if (nxt_obj.Height == 10)
+                                if (nxt_obj.Height == 10) //Transom.Height == 10
                                 {
                                     upperLine[0] = new Point(5, fpnl.Height - 8);
                                     upperLine[1] = new Point(lineWd, fpnl.Height - 8);
@@ -524,21 +522,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     leftCurve[1] = new Point(1, (fpnl.Height - 8) + (divSize / 2));
                                     leftCurve[2] = new Point(5, fpnl.Height - 8);
                                 }
-                                else if (nxt_obj.Height == 18) //Improve this algo.
+                                else if (nxt_obj.Height == 18) //Transom.Height == 18 //Improve this algo.
                                 {
-                                    upperLine[0] = new Point(5, fpnl.Height - 8); //para lumagpas sa control
+                                    upperLine[0] = new Point(5, fpnl.Height - 8);
                                     upperLine[1] = new Point(lineWd + 2, fpnl.Height - 8);
 
                                     rightCurve[0] = new Point(lineWd + 2, fpnl.Height - 8);
-                                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, lineHT / 2);
+                                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, (fpnl.Height - (8 / 2)) + (divSize / 2));
                                     rightCurve[2] = new Point(lineWd + 2, lineHT);
 
-                                    botLine[0] = new Point(lineWd + 2, lineHT); //para lumagpas sa control
+                                    botLine[0] = new Point(lineWd + 2, lineHT);
                                     botLine[1] = new Point(5, lineHT);
 
                                     leftCurve[0] = new Point(5, lineHT);
-                                    leftCurve[1] = new Point(1, lineHT / 2);
-                                    leftCurve[2] = new Point(5, -9);
+                                    leftCurve[1] = new Point(1, (fpnl.Height - (8 / 2)) + (divSize / 2));
+                                    leftCurve[2] = new Point(5, fpnl.Height - 8);
                                 }
                             }
                             else if (nxt_obj.Name.Contains("Mullion"))
@@ -637,7 +635,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                             IMultiPanelModel multiPanelModel,
                                                             IFrameModel frameModel, 
                                                             IMainPresenter mainPresenter,
-                                                            IFrameUCPresenter frameUCP)
+                                                            IFrameUCPresenter frameUCP,
+                                                            IMultiPanelPropertiesUCPresenter multiPropUCP)
         {
             unityC
                 .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>()
@@ -648,6 +647,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiMullionUCP._frameModel = frameModel;
             multiMullionUCP._mainPresenter = mainPresenter;
             multiMullionUCP._frameUCP = frameUCP;
+            multiMullionUCP._multiPropUCP2_given = multiPropUCP;
 
             return multiMullionUCP;
         }

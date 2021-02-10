@@ -144,7 +144,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                       _multipanelModel, 
                                                                                       _frameModel, 
                                                                                       _mainPresenter,
-                                                                                      this);
+                                                                                      this,
+                                                                                      multiPropUCP);
                     IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
                 }

@@ -498,9 +498,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
         }
 
-        public void DeletePanel(UserControl panel)
+        public void DeletePanel(UserControl obj)
         {
-            _multiPanelTransomUC.DeletePanel(panel);
+            _multiPanelTransomUC.DeletePanel(obj);
         }
 
         public void Invalidate_MultiPanelMullionUC()
