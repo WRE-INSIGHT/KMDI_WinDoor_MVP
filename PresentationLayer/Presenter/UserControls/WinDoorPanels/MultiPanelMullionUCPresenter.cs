@@ -98,6 +98,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelMullionUC_multiMullionSizeChangedEventRaised(object sender, EventArgs e)
         {
+
             try
             {
                 if (!_initialLoad)
@@ -129,6 +130,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelMullionUC_flpMultiDragDropEventRaised(object sender, DragEventArgs e)
         {
+
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender; //Control na babagsakan
             string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
 
@@ -423,6 +425,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         Color color = Color.Black;
         private void _multiPanelMullionUC_flpMulltiPaintEventRaised(object sender, PaintEventArgs e)
         {
+
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
             Control fpnlParent = fpnl.Parent.Parent; //Parent ng mismong usercontrol, Its either Frame or Multi-Panel
 

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Unity;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
+using System.Drawing;
 
 namespace PresentationLayer.Presenter
 {

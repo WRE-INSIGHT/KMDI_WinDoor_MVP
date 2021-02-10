@@ -344,6 +344,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelTransomUC_deleteClickedEventRaised(object sender, EventArgs e)
         {
+
             _multiPanelModel.MPanel_Visibility = false;
             if (_frameModel.Frame_Type.ToString().Contains("Window"))
             {
@@ -423,6 +424,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         Color color = Color.Black;
         private void _multiPanelTransomUC_flpMulltiPaintEventRaised(object sender, PaintEventArgs e)
         {
+
             Graphics g = e.Graphics;
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
             g.SmoothingMode = SmoothingMode.AntiAlias;

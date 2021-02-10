@@ -91,8 +91,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _multiTransomUCP.Invalidate_MultiPanelMullionUC();
         }
 
+        List<Point> GetTransomPoints()
+        {
+            List<Point> Transom_Points = new List<Point>();
+
+            return Transom_Points;
+        }
+
         private void _transomUC_transomUCPaintEventRaised(object sender, PaintEventArgs e)
         {
+
             UserControl transom = (UserControl)sender;
 
             Graphics g = e.Graphics;
@@ -186,6 +194,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _transomUC_transomUCMouseMoveEventRaised(object sender, MouseEventArgs e)
         {
+
             try
             {
                 UserControl me = (UserControl)sender;
