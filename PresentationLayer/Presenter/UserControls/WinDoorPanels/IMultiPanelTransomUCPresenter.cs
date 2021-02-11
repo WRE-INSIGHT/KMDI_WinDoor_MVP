@@ -19,5 +19,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IFrameUCPresenter frameUCP,
                                                      IMultiPanelPropertiesUCPresenter multiPropUCP);
         void Invalidate_MultiPanelMullionUC();
+        void SetInitialLoadFalse();
     }
 }

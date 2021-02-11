@@ -295,6 +295,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             set
             {
                 _mpanelLstObjects = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -525,6 +526,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public int GetCount_MPanelLst_Object()
         {
             return MPanelLst_Objects.Count();
+        }
+
+        public void DeleteControl_MPanelLstObjects(Control control)
+        {
+            MPanelLst_Objects.Remove(control);
         }
 
         public MultiPanelModel(int mpanelID,

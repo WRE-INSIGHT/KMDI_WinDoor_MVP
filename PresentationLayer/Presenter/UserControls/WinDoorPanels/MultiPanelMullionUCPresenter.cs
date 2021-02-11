@@ -98,7 +98,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelMullionUC_multiMullionSizeChangedEventRaised(object sender, EventArgs e)
         {
-
             try
             {
                 if (!_initialLoad)
@@ -345,6 +344,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void _multiPanelMullionUC_deleteClickedEventRaised(object sender, EventArgs e)
         {
             _multiPanelModel.MPanel_Visibility = false;
+            _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelMullionUC);
+
             if (_frameModel.Frame_Type.ToString().Contains("Window"))
             {
                 _frameModel.Frame_Type = FrameModel.Frame_Padding.Window;

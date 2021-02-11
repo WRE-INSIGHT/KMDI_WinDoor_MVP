@@ -15,9 +15,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event DragEventHandler flpMultiDragDropEventRaised;
         event EventHandler flpMultiMouseEnterEventRaised;
         event EventHandler flpMultiMouseLeaveEventRaised;
+        event EventHandler multiMullionSizeChangedEventRaised;
 
         void DeletePanel(UserControl obj);
         void InvalidateFlp();
-        Bitmap GetPartImageThis(int height);
     }
 }

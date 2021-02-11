@@ -52,9 +52,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IPanelServices _panelServices;
         private IMultiPanelServices _multipanelServices;
 
-        //private Bitmap _bgImage; //this is a cropped image of the parent to be drawn into multi-Panel
-                                 //this is also a cropped image of this multi-panel object that
-                                 //contains an image within 10 pixels around this object
+        bool _initialLoad;
+
         public MultiPanelTransomUCPresenter(IMultiPanelTransomUC multiPanelTransomUC,
                                             IFixedPanelUCPresenter fixedUCP,
                                             ICasementPanelUCPresenter casementUCP,
@@ -95,6 +94,35 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiPanelTransomUC.flpMultiMouseLeaveEventRaised += _multiPanelTransomUC_flpMultiMouseLeaveEventRaised;
             _multiPanelTransomUC.divCountClickedEventRaised += _multiPanelTransomUC_divCountClickedEventRaised;
             _multiPanelTransomUC.deleteClickedEventRaised += _multiPanelTransomUC_deleteClickedEventRaised;
+            _multiPanelTransomUC.multiMullionSizeChangedEventRaised += _multiPanelTransomUC_multiMullionSizeChangedEventRaised; ;
+        }
+
+        private void _multiPanelTransomUC_multiMullionSizeChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!_initialLoad)
+                {
+                    int thisWd = ((UserControl)sender).Width,
+                        thisHt = ((UserControl)sender).Height,
+                        mpnlModelWd = _multiPanelModel.MPanel_Width,
+                        mpnlModelHt = _multiPanelModel.MPanel_Height;
+
+                    if (thisWd != mpnlModelWd)
+                    {
+                        _multiPanelModel.MPanel_Width = thisWd;
+                    }
+                    if (thisHt != mpnlModelHt)
+                    {
+                        _multiPanelModel.MPanel_Height = thisHt;
+                    }
+                }
+                ((UserControl)sender).Invalidate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private int _frmDmRes_Width;
@@ -222,7 +250,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 ITransomUC transomUC = transomUCP.GetTransom();
                 fpnl.Controls.Add((UserControl)transomUC);
                 _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC);
-
+                transomUCP.SetInitialLoadFalse();
             }
             else if (data == "Mullion")
             {
@@ -468,6 +496,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public IMultiPanelTransomUC GetMultiPanel()
         {
+            _initialLoad = true;
             _multiPanelTransomUC.ThisBinding(CreateBindingDictionary());
             return _multiPanelTransomUC;
         }
@@ -520,6 +549,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return multiPanelBinding;
+        }
+
+        public void SetInitialLoadFalse()
+        {
+            _initialLoad = false;
         }
     }
 }

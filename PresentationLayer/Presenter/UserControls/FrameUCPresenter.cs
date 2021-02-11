@@ -148,17 +148,19 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                       multiPropUCP);
                     IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
+                    multiUCP.SetInitialLoadFalse();
                 }
                 else if (data.Contains("Transom"))
                 {
-                    IMultiPanelTransomUCPresenter multiTransom = _multiTransomUCP.GetNewInstance(_unityC,
+                    IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
                                                                                                  _multipanelModel,
                                                                                                  _frameModel,
                                                                                                  _mainPresenter,
                                                                                                  this,
                                                                                                  multiPropUCP);
-                    IMultiPanelTransomUC multiUC = multiTransom.GetMultiPanel();
+                    IMultiPanelTransomUC multiUC = multiTransomUCP.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
+                    multiTransomUCP.SetInitialLoadFalse();
                 }
             }
             else

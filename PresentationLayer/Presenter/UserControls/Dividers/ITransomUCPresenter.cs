@@ -13,7 +13,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                            IMultiPanelModel multiPanelModel,
                                            IMultiPanelTransomUCPresenter multiTransomUCP);
         ITransomUCPresenter GetNewInstance(IUnityContainer unityC); //for Testing
-        ITransomUC GetMullion(string test); //for Testing
+        ITransomUC GetTransom(string test); //for Testing
         ITransomUC GetTransom();
+        void SetInitialLoadFalse();
     }
 }

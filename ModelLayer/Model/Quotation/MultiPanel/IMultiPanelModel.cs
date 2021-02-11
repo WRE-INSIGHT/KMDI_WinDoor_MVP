@@ -35,6 +35,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         void Reload_MultiPanelMargin();
         void Resize_MyControls(Control current_control);
         void AddControl_MPanelLstObjects(Control control);
+        void DeleteControl_MPanelLstObjects(Control control);
         int GetCount_MPanelLst_Object();
     }
 }
