@@ -13,6 +13,7 @@ using Unity;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
+using ModelLayer.Model.Quotation.Frame;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -20,6 +21,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
     {
         ITransomUC _transomUC;
 
+        private IFrameModel _frameModel;
         private IDividerModel _divModel;
         private IMultiPanelModel _multiPanelModel;
 
@@ -95,10 +97,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _multiTransomUCP.Invalidate_MultiPanelMullionUC();
         }
 
-        List<Point[]> GetTransomPoints(int width, 
-                                       int height, 
-                                       string frame_type, 
-                                       string mpanel_type)
+        List<Point[]> GetTransomDrawingPoints(int width, 
+                                              int height)
         {
             List<Point[]> Transom_Points = new List<Point[]>();
 
@@ -111,15 +111,9 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             Point[] leftCurve = new Point[3];
             Point[] rightCurve = new Point[3];
 
-            if (height == 10)
-            {
+            int pointY_Mid = ((int)(_frameModel.Frame_Type) - 2) / 2;
 
-            }
-            else if (height == 18)
-            {
-
-            }
-            else if (height == 26 || height == 33)
+            if (height == 26 || height == 33)
             {
                 upperLine[0] = new Point(5, 1);
                 upperLine[1] = new Point(Wd_beforeCurve, 1);
@@ -135,38 +129,38 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 leftCurve[1] = new Point(1, accessible_Ht / 2);
                 leftCurve[2] = new Point(5, 1);
             }
+            else if (height == 18)
+            {
+                upperLine[0] = new Point(5, (height - 26) + 1);
+                upperLine[1] = new Point(Wd_beforeCurve, (height - 26) + 1);
 
-            //if (frame_type == "Window")
-            //{
-                
-            //}
-            //else if (frame_type == "Door")
-            //{
-            //    if (height == 17)
-            //    {
+                rightCurve[0] = new Point(Wd_beforeCurve, (height - 26) + 1);
+                rightCurve[1] = new Point(accessible_Wd, (height - 26) + pointY_Mid);
+                rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht);
 
-            //    }
-            //    else if (height == 25)
-            //    {
+                botLine[0] = new Point(Wd_beforeCurve, accessible_Ht);
+                botLine[1] = new Point(5, accessible_Ht);
 
-            //    }
-            //    else if (height == 33)
-            //    {
-            //        upperLine[0] = new Point(5, 1);
-            //        upperLine[1] = new Point(Wd_beforeCurve, 1);
+                leftCurve[0] = new Point(5, accessible_Ht);
+                leftCurve[1] = new Point(1, (height - 26) + pointY_Mid);
+                leftCurve[2] = new Point(5, (height - 26) + 1);
+            }
+            else if (height == 10)
+            {
+                upperLine[0] = new Point(5, (height - 18) + 1);
+                upperLine[1] = new Point(Wd_beforeCurve, (height - 18) + 1);
 
-            //        rightCurve[0] = new Point(Wd_beforeCurve, 1);
-            //        rightCurve[1] = new Point(accessible_Wd, accessible_Ht / 2);
-            //        rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht);
+                rightCurve[0] = new Point(Wd_beforeCurve, (height - 18) + 1);
+                rightCurve[1] = new Point(accessible_Wd, (height - 18) + pointY_Mid);
+                rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht + 8);
 
-            //        botLine[0] = new Point(Wd_beforeCurve, accessible_Ht);
-            //        botLine[1] = new Point(5, accessible_Ht);
+                botLine[0] = new Point(Wd_beforeCurve, accessible_Ht + 8);
+                botLine[1] = new Point(5, accessible_Ht + 8);
 
-            //        leftCurve[0] = new Point(5, accessible_Ht);
-            //        leftCurve[1] = new Point(1, accessible_Ht / 2);
-            //        leftCurve[2] = new Point(5, 1);
-            //    }
-            //}
+                leftCurve[0] = new Point(5, accessible_Ht + 8);
+                leftCurve[1] = new Point(1, (height - 18) + pointY_Mid);
+                leftCurve[2] = new Point(5, (height - 18) + 1);
+            }
 
             Transom_Points.Add(upperLine);
             Transom_Points.Add(rightCurve); 
@@ -181,80 +175,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             UserControl transom = (UserControl)sender;
 
             Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            //int lineHT = transom.ClientRectangle.Height - 2,
-            //    lineWd = transom.ClientRectangle.Width - 6;
-            //Point[] upperLine = new Point[2];
-            //Point[] botLine = new Point[2];
-            //Point[] leftCurve = new Point[3];
-            //Point[] rightCurve = new Point[3];
-
-
-            //if (_divModel.Div_FrameType == "Window")
-            //{
-            //    if (_multiPanelModel.MPanel_Type == "Transom")
-            //    {
-            //        if (_divModel.Div_Height == 10)
-            //        {
-            //            upperLine[0] = new Point(5, -9); //para lumagpas sa control
-            //            upperLine[1] = new Point(lineWd + 2, -9);
-
-            //            rightCurve[0] = new Point(lineWd + 2, -9);
-            //            rightCurve[1] = new Point(transom.ClientRectangle.Width - 2, lineHT / 2);
-            //            rightCurve[2] = new Point(lineWd + 2, lineHT + 5);
-
-            //            botLine[0] = new Point(lineWd + 2, lineHT + 8); //para lumagpas sa control
-            //            botLine[1] = new Point(5, lineHT + 8);
-
-            //            leftCurve[0] = new Point(5, lineHT + 8);
-            //            leftCurve[1] = new Point(1, lineHT / 2);
-            //            leftCurve[2] = new Point(5, -9);
-            //        }
-            //        else if (_divModel.Div_Height == 18)
-            //        {
-            //            upperLine[0] = new Point(5, -9);
-            //            upperLine[1] = new Point(lineWd + 2, -9);
-
-            //            rightCurve[0] = new Point(lineWd + 2, -9);
-            //            rightCurve[1] = new Point(transom.ClientRectangle.Width - 2, (lineHT / 2) + 9); //+9 Para makuha ang drawing Height
-            //            rightCurve[2] = new Point(lineWd + 2, lineHT);
-
-            //            botLine[0] = new Point(lineWd + 2, lineHT);
-            //            botLine[1] = new Point(5, lineHT);
-
-            //            leftCurve[0] = new Point(5, lineHT);
-            //            leftCurve[1] = new Point(1, lineHT / 2);
-            //            leftCurve[2] = new Point(5, -9);
-            //        }
-            //        else if (_divModel.Div_Height == 26)
-            //        {
-            //            upperLine[0] = new Point(5, 1);
-            //            upperLine[1] = new Point(lineWd, 1);
-
-            //            rightCurve[0] = new Point(lineWd, 1);
-            //            rightCurve[1] = new Point(transom.ClientRectangle.Width - 2, lineHT / 2);
-            //            rightCurve[2] = new Point(lineWd, lineHT);
-
-            //            botLine[0] = new Point(lineWd, lineHT);
-            //            botLine[1] = new Point(5, lineHT);
-
-            //            leftCurve[0] = new Point(5, lineHT);
-            //            leftCurve[1] = new Point(1, lineHT / 2);
-            //            leftCurve[2] = new Point(5, 1);
-            //        }
-            //    }
-            //}
-            //else if (_divModel.Div_FrameType == "Door")
-            //{
-
-            //}
             GraphicsPath gpath = new GraphicsPath();
 
-            List<Point[]> TPoints = GetTransomPoints(transom.Width, 
-                                                     transom.Height, 
-                                                     _divModel.Div_FrameType, 
-                                                     _multiPanelModel.MPanel_Type);
+            List<Point[]> TPoints = GetTransomDrawingPoints(transom.Width, 
+                                                            transom.Height);
             
             gpath.AddLine(TPoints[0][0], TPoints[0][1]);
             gpath.AddCurve(TPoints[1]);
@@ -342,7 +268,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         public ITransomUCPresenter GetNewInstance(IUnityContainer unityC,
                                                   IDividerModel divModel,
                                                   IMultiPanelModel multiPanelModel,
-                                                  IMultiPanelTransomUCPresenter multiTransomUCP)
+                                                  IMultiPanelTransomUCPresenter multiTransomUCP,
+                                                  IFrameModel frameModel)
         {
             unityC
                 .RegisterType<ITransomUC, TransomUC>()
@@ -351,6 +278,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             transomUCP._divModel = divModel;
             transomUCP._multiPanelModel = multiPanelModel;
             transomUCP._multiTransomUCP = multiTransomUCP;
+            transomUCP._frameModel = frameModel;
 
             return transomUCP;
         }

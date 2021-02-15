@@ -141,8 +141,8 @@ namespace PresentationLayer.Presenter.UserControls
                 if (data.Contains("Mullion"))
                 {
                     IMultiPanelMullionUCPresenter multiUCP = _multiUCP.GetNewInstance(_unityC, 
-                                                                                      _multipanelModel, 
-                                                                                      _frameModel, 
+                                                                                      _multipanelModel,
+                                                                                      _frameModel,
                                                                                       _mainPresenter,
                                                                                       this,
                                                                                       multiPropUCP);
@@ -153,11 +153,11 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (data.Contains("Transom"))
                 {
                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
-                                                                                                 _multipanelModel,
-                                                                                                 _frameModel,
-                                                                                                 _mainPresenter,
-                                                                                                 this,
-                                                                                                 multiPropUCP);
+                                                                                                    _multipanelModel,
+                                                                                                    _frameModel,
+                                                                                                    _mainPresenter,
+                                                                                                    this,
+                                                                                                    multiPropUCP);
                     IMultiPanelTransomUC multiUC = multiTransomUCP.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
                     multiTransomUCP.SetInitialLoadFalse();

@@ -422,7 +422,70 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             color = Color.Blue;
             _multiPanelMullionUC.InvalidateFlp();
         }
+        List<Point[]> GetMullionDrawingPoints(int width,
+                                              int height,
+                                              int nxtobj_wd,
+                                              int nxtobj_ht,
+                                              string nxtobj_name,
+                                              string placement)
+        {
+            List<Point[]> MullionDraw_Points = new List<Point[]>();
 
+            Point[] upperLine = new Point[2];
+            Point[] botLine = new Point[2];
+            Point[] leftCurve = new Point[3];
+            Point[] rightCurve = new Point[3];
+
+            int accessible_Wd = width - 2,
+                Wd_beforeCurve = width - 5;
+
+            if (placement == "First")
+            {
+                if (nxtobj_name.Contains("Transom"))
+                {
+                    int accessible_Ht_start = height - 8,
+                        midPoint = height + 4,
+                        bot_EndPoint = height + 16;
+
+                    upperLine[0] = new Point(5, accessible_Ht_start);
+                    upperLine[1] = new Point(Wd_beforeCurve, accessible_Ht_start);
+
+                    rightCurve[0] = new Point(Wd_beforeCurve, accessible_Ht_start);
+                    rightCurve[1] = new Point(accessible_Wd, midPoint); //midpoint = 12; (26 - 2) / 2; then 8 + 4 = 12; 8 is height allowance for transom divider on this code
+                    rightCurve[2] = new Point(Wd_beforeCurve, bot_EndPoint); //bottom endPoint is 24; then 8 + 16 = 24 
+
+                    botLine[0] = new Point(Wd_beforeCurve, bot_EndPoint);
+                    botLine[1] = new Point(5, bot_EndPoint);
+
+                    leftCurve[0] = new Point(5, bot_EndPoint);
+                    leftCurve[1] = new Point(1, midPoint);
+                    leftCurve[2] = new Point(5, accessible_Ht_start);
+                }
+            }
+            else if (placement == "Last")
+            {
+                upperLine[0] = new Point(5, -17); //-17 to fill the 18 units upward that is the height of divider
+                upperLine[1] = new Point(Wd_beforeCurve, -17);
+
+                rightCurve[0] = new Point(Wd_beforeCurve, -17);
+                rightCurve[1] = new Point(accessible_Wd, -4); //midpoint = -4 coz 4 units upward; then 8 + 4 = 12; 8 is height allowance for transom divider on this code
+                rightCurve[2] = new Point(Wd_beforeCurve, 6);
+
+                botLine[0] = new Point(Wd_beforeCurve, 6);
+                botLine[1] = new Point(5, 6);
+
+                leftCurve[0] = new Point(5, 6);
+                leftCurve[1] = new Point(1, -4);
+                leftCurve[2] = new Point(5, -17);
+            }
+
+            MullionDraw_Points.Add(upperLine);
+            MullionDraw_Points.Add(rightCurve);
+            MullionDraw_Points.Add(botLine);
+            MullionDraw_Points.Add(leftCurve);
+
+            return MullionDraw_Points;
+        }
         Color color = Color.Black;
         private void _multiPanelMullionUC_flpMulltiPaintEventRaised(object sender, PaintEventArgs e)
         {
@@ -431,7 +494,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Control fpnlParent = fpnl.Parent.Parent; //Parent ng mismong usercontrol, Its either Frame or Multi-Panel
 
             Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             int pInnerX = 10,
                 pInnerY = 10,
                 pInnerWd = fpnl.ClientRectangle.Width - 20,
@@ -505,55 +568,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         int lineHT = (fpnl.Height - 8) + 18,
                             lineWd = fpnl.ClientRectangle.Width - 6;
 
+                        List<Point[]> thisDrawingPoints = GetMullionDrawingPoints(fpnl.Width,
+                                                                                  fpnl.Height,
+                                                                                  nxt_obj.Width,
+                                                                                  nxt_obj.Height,
+                                                                                  nxt_obj.Name,
+                                                                                  _multiPanelModel.MPanel_Placement);
+
                         if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
                         {
-                            if (nxt_obj.Name.Contains("Transom")) //Transom Divider
-                            {
-                                if (nxt_obj.Height == 10) //Transom.Height == 10
-                                {
-                                    upperLine[0] = new Point(5, fpnl.Height - 8);
-                                    upperLine[1] = new Point(lineWd, fpnl.Height - 8);
-
-                                    rightCurve[0] = new Point(lineWd, fpnl.Height - 8);
-                                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, (fpnl.Height - 8) + (divSize / 2));
-                                    rightCurve[2] = new Point(lineWd, lineHT);
-
-                                    botLine[0] = new Point(lineWd, lineHT);
-                                    botLine[1] = new Point(5, lineHT);
-
-                                    leftCurve[0] = new Point(5, lineHT);
-                                    leftCurve[1] = new Point(1, (fpnl.Height - 8) + (divSize / 2));
-                                    leftCurve[2] = new Point(5, fpnl.Height - 8);
-                                }
-                                else if (nxt_obj.Height == 18) //Transom.Height == 18 //Improve this algo.
-                                {
-                                    upperLine[0] = new Point(5, fpnl.Height - 8);
-                                    upperLine[1] = new Point(lineWd + 2, fpnl.Height - 8);
-
-                                    rightCurve[0] = new Point(lineWd + 2, fpnl.Height - 8);
-                                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, (fpnl.Height - (8 / 2)) + (divSize / 2));
-                                    rightCurve[2] = new Point(lineWd + 2, lineHT);
-
-                                    botLine[0] = new Point(lineWd + 2, lineHT);
-                                    botLine[1] = new Point(5, lineHT);
-
-                                    leftCurve[0] = new Point(5, lineHT);
-                                    leftCurve[1] = new Point(1, (fpnl.Height - (8 / 2)) + (divSize / 2));
-                                    leftCurve[2] = new Point(5, fpnl.Height - 8);
-                                }
-                            }
-                            else if (nxt_obj.Name.Contains("Mullion"))
-                            {
-                                if (true)
-                                {
-
-                                }
-                            }
-
-                            gpath.AddLine(upperLine[0], upperLine[1]);
-                            gpath.AddCurve(rightCurve);
-                            gpath.AddLine(botLine[0], botLine[1]);
-                            gpath.AddCurve(leftCurve);
+                            gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
+                            gpath.AddCurve(thisDrawingPoints[1]);
+                            gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
+                            gpath.AddCurve(thisDrawingPoints[3]);
 
                             g.DrawPath(pen, gpath);
                             g.FillPath(Brushes.PowderBlue, gpath);
@@ -585,31 +612,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     int lineWd = fpnl.ClientRectangle.Width - 6,
                         Point_y = 8 - divSize;
 
-                    upperLine[0] = new Point(6, Point_y);
-                    upperLine[1] = new Point(lineWd - 1, Point_y);
-
-                    rightCurve[0] = new Point(lineWd - 1, Point_y);
-                    rightCurve[1] = new Point(fpnl.ClientRectangle.Width - 2, 8 - (divSize / 2));
-                    rightCurve[2] = new Point(lineWd - 1, 8);
-
-                    botLine[0] = new Point(lineWd - 1, 8);
-                    botLine[1] = new Point(6, 8);
-
-                    leftCurve[0] = new Point(6, 8);
-                    leftCurve[1] = new Point(1, 8 - (divSize / 2));
-                    leftCurve[2] = new Point(6, Point_y);
-
                     int indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
+                    Control prev_obj = parent_mpnl.MPanelLst_Objects[indx_PrevObj];
 
-                    if ((parent_mpnl.MPanelLst_Objects[indx_PrevObj].Name.Contains("Transom") ||
-                         parent_mpnl.MPanelLst_Objects[indx_PrevObj].Name.Contains("Mullion")) &&
-                         !parent_mpnl.MPanelLst_Objects[indx_PrevObj].Name.Contains("MultiPanel"))
+                    if ((prev_obj.Name.Contains("Transom") ||
+                         prev_obj.Name.Contains("Mullion")) &&
+                         !prev_obj.Name.Contains("MultiPanel")) //Divider
                     {
+                        List<Point[]> thisDrawingPoints = GetMullionDrawingPoints(fpnl.Width,
+                                                                                  fpnl.Height,
+                                                                                  prev_obj.Width,
+                                                                                  prev_obj.Height,
+                                                                                  prev_obj.Name,
+                                                                                  _multiPanelModel.MPanel_Placement);
 
-                        gpath.AddLine(upperLine[0], upperLine[1]);
-                        gpath.AddCurve(rightCurve);
-                        gpath.AddLine(botLine[0], botLine[1]);
-                        gpath.AddCurve(leftCurve);
+                        gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
+                        gpath.AddCurve(thisDrawingPoints[1]);
+                        gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
+                        gpath.AddCurve(thisDrawingPoints[3]);
 
                         g.DrawPath(pen, gpath);
                         g.FillPath(Brushes.PowderBlue, gpath);

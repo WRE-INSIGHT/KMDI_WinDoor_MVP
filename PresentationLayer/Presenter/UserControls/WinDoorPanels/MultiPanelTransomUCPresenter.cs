@@ -218,14 +218,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else if (data.Contains("Transom"))
                     {
-                        //IMultiPanelTransomUCPresenter multiTransom = GetNewInstance(_unityC,
-                        //                                                            mPanelModel,
-                        //                                                            _frameModel,
-                        //                                                            _mainPresenter,
-                        //                                                            _frameUCP,
-                        //                                                            _bgImage);
-                        //IMultiPanelTransomUC multiUC = multiTransom.GetMultiPanel();
-                        //fpnl.Controls.Add((UserControl)multiUC);
+                        IMultiPanelTransomUCPresenter multiTransom = GetNewInstance(_unityC,
+                                                                                    mPanelModel,
+                                                                                    _frameModel,
+                                                                                    _mainPresenter,
+                                                                                    _frameUCP,
+                                                                                    multiPropUCP);
+                        IMultiPanelTransomUC multiUC = multiTransom.GetMultiPanel();
+                        fpnl.Controls.Add((UserControl)multiUC);
+                        multiTransom.SetInitialLoadFalse();
+                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)multiUC);
                     }
                 }
             }
@@ -246,7 +248,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
                                                                             divModel,
                                                                             _multiPanelModel,
-                                                                            this);
+                                                                            this,
+                                                                            _frameModel);
                 ITransomUC transomUC = transomUCP.GetTransom();
                 fpnl.Controls.Add((UserControl)transomUC);
                 _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC);
