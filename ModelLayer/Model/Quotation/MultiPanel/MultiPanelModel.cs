@@ -85,6 +85,19 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             set
             {
+
+                int added_height_child_pnls = value - _mpanelHeight;
+                if (MPanel_Type == "Mullion")
+                {
+                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    {
+                        pnl.Panel_Height += added_height_child_pnls;
+                    }
+                    foreach (IDividerModel div in MPanelLst_Divider.Where(div => div.Div_Visible == true))
+                    {
+                        div.Div_Height += added_height_child_pnls;
+                    }
+                }
                 _mpanelHeight = value;
                 MPanelImageRenderer_Height = Convert.ToInt32(value * MPanelImageRenderer_Zoom);
                 NotifyPropertyChanged();
