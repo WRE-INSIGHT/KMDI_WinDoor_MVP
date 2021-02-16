@@ -458,20 +458,18 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (mpnl.MPanel_Index_Inside_MPanel == 0)
                     {
-                        pnl_margin = new Padding(0, 0, 0, 0);
                         mpnl.MPanel_Placement = "First";
                     }
                     else if (mpnl.MPanel_Index_Inside_MPanel == MPanel_Divisions * 2)
                     {
-                        pnl_margin = new Padding(0, 0, 0, 0);
                         mpnl.MPanel_Placement = "Last";
                     }
                     else
                     {
-                        pnl_margin = new Padding(10, 0, 10, 0);
                         mpnl.MPanel_Placement = "Somewhere in Between";
                     }
                 }
+                pnl_margin = new Padding(0, 0, 0, 0);
                 mpnl.MPanel_Margin = pnl_margin;
             }
         }
@@ -531,6 +529,27 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public void DeleteControl_MPanelLstObjects(Control control)
         {
             MPanelLst_Objects.Remove(control);
+        }
+
+        public void Fit_MyControls()
+        {
+            int totalHeight_Controls = MPanelLst_Objects.Sum(obj => obj.Height);
+            int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_Height - totalHeight_Controls;
+
+            while (diff_MPanelHt_VS_MyCtrlsHeight > 0)
+            {
+                foreach (Control ctrl in MPanelLst_Objects)
+                {
+                    if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
+                    {
+                        if (ctrl.Name.Contains("MultiPanel") || ctrl.Name.Contains("Panel"))
+                        {
+                            ctrl.Height++;
+                            diff_MPanelHt_VS_MyCtrlsHeight--;
+                        }
+                    }
+                }
+            }
         }
 
         public MultiPanelModel(int mpanelID,

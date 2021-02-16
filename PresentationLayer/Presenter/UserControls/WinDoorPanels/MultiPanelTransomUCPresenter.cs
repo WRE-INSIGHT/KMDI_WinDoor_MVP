@@ -215,6 +215,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         fpnl.Controls.Add((UserControl)multiUC);
                         multiUCP.SetInitialLoadFalse();
                         _multiPanelModel.AddControl_MPanelLstObjects((UserControl)multiUC);
+                        if (mPanelModel.MPanel_Placement == "Last")
+                        {
+                            _multiPanelModel.Fit_MyControls();
+                        }
                     }
                     else if (data.Contains("Transom"))
                     {
@@ -228,6 +232,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         fpnl.Controls.Add((UserControl)multiUC);
                         multiTransom.SetInitialLoadFalse();
                         _multiPanelModel.AddControl_MPanelLstObjects((UserControl)multiUC);
+                        if (mPanelModel.MPanel_Placement == "Last")
+                        {
+                            _multiPanelModel.Fit_MyControls();
+                        }
                     }
                 }
             }

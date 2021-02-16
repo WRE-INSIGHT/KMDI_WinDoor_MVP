@@ -18,7 +18,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanel_Divisions { get; set; }
         int MPanel_Index_Inside_MPanel { get; set; }
         int MPanelProp_Height { get; set; }
-        bool MPanel_NumEnable { get; set; }
+        //bool MPanel_NumEnable { get; set; }
         string MPanel_Placement { get; set; }
         IMultiPanelModel MPanel_ParentModel { get; set; }
 
@@ -31,11 +31,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         List<Control> MPanelLst_Objects { get; set; }
 
         int GetNextIndex();
+        int GetCount_MPanelLst_Object();
         void Reload_PanelMargin();
         void Reload_MultiPanelMargin();
         void Resize_MyControls(Control current_control);
         void AddControl_MPanelLstObjects(Control control);
         void DeleteControl_MPanelLstObjects(Control control);
-        int GetCount_MPanelLst_Object();
+        void Fit_MyControls();
     }
 }
