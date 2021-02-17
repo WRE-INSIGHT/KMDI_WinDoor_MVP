@@ -383,6 +383,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelTransomUC_deleteClickedEventRaised(object sender, EventArgs e)
         {
+            FlowLayoutPanel innerFlp = (FlowLayoutPanel)((UserControl)_multiPanelTransomUC).Controls[0];
+            var multiPanels = GetAll(innerFlp, "MultiPanel");
+            foreach (var mpnl in multiPanels)
+            {
+                _multiPanelModel.MPanelProp_Height -= 129;
+                _frameModel.FrameProp_Height -= 129;
+            }
+
+            var panels = GetAll(innerFlp, "PanelUC");
+            foreach (var pnl in panels)
+            {
+                _multiPanelModel.MPanelProp_Height -= 148;
+                _frameModel.FrameProp_Height -= 148;
+            }
 
             _multiPanelModel.MPanel_Visibility = false;
             if (_frameModel.Frame_Type.ToString().Contains("Window"))
@@ -396,7 +410,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
             {
                 pnl.Panel_Visibility = false;
-                _frameModel.FrameProp_Height -= 148;
+                //_frameModel.FrameProp_Height -= 148;
             }
             foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider.Where(div => div.Div_Visible == true))
             {
@@ -407,14 +421,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
             {
                 mpnl.MPanel_Visibility = false;
-                _multiPanelModel.MPanelProp_Height -= 129;
-                _frameModel.FrameProp_Height -= 129;
+                //_multiPanelModel.MPanelProp_Height -= 129;
+                //_frameModel.FrameProp_Height -= 129;
             }
             if (_multiPanelModel.MPanel_Parent != null)
             {
                 _multiPanelModel.MPanelProp_Height -= 129;
                 _frameModel.FrameProp_Height -= 129;
             }
+
+        }
+        public IEnumerable<UserControl> GetAll(Control control, string name)
+        {
+            var controls = control.Controls.Cast<UserControl>();
+
+            return controls.SelectMany(ctrl => GetAll(ctrl, name))
+                                      .Concat(controls)
+                                      .Where(c => c.GetType() == typeof(UserControl))
+                                      .Where(c => c.Name.Contains(name));
         }
 
         private void _multiPanelTransomUC_divCountClickedEventRaised(object sender, EventArgs e)
