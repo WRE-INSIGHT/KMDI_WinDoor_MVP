@@ -39,6 +39,7 @@
             // flp_MultiMullion
             // 
             this.flp_MultiMullion.AllowDrop = true;
+            this.flp_MultiMullion.BackColor = System.Drawing.SystemColors.Control;
             this.flp_MultiMullion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_MultiMullion.Location = new System.Drawing.Point(0, 0);
             this.flp_MultiMullion.Margin = new System.Windows.Forms.Padding(0);

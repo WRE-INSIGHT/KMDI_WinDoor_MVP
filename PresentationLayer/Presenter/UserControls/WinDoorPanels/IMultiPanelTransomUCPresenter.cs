@@ -18,6 +18,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IMainPresenter mainPresenter, 
                                                      IFrameUCPresenter frameUCP,
                                                      IMultiPanelPropertiesUCPresenter multiPropUCP);
+        IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                     IMultiPanelModel multiPanelModel,
+                                                     IFrameModel frameModel,
+                                                     IMainPresenter mainPresenter,
+                                                     IFrameUCPresenter frameUCP,
+                                                     IMultiPanelTransomUCPresenter multiPanelTransomUCP,
+                                                     IMultiPanelPropertiesUCPresenter multiPropUCP);
+        IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                     IMultiPanelModel multiPanelModel,
+                                                     IFrameModel frameModel,
+                                                     IMainPresenter mainPresenter,
+                                                     IFrameUCPresenter frameUCP,
+                                                     IMultiPanelMullionUCPresenter multiPanelMullionUCP,
+                                                     IMultiPanelPropertiesUCPresenter multiPropUCP);
         void Invalidate_MultiPanelMullionUC();
         void SetInitialLoadFalse();
     }

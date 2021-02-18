@@ -56,7 +56,17 @@ namespace PresentationLayer.Views.UserControls
         {
             num_Height.Maximum = int.MaxValue;
             num_Width.Maximum = int.MaxValue;
+            
             EventHelpers.RaiseEvent(this, MultiPanelPropertiesLoadEventRaised, e);
+
+            if (lbl_MultiPanelName.Text.Contains("Transom"))
+            {
+                this.BackColor = SystemColors.ActiveCaption;
+            }
+            else if (lbl_MultiPanelName.Text.Contains("Mullion"))
+            {
+                this.BackColor = Color.MistyRose;
+            }
         }
 
         private void num_Width_ValueChanged(object sender, EventArgs e)

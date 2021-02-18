@@ -141,6 +141,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pnum_Height);
             this.Controls.Add(this.lbl_Height);
@@ -150,7 +151,6 @@
             this.Controls.Add(this.lbl_pnlname);
             this.Controls.Add(this.chk_Orientation);
             this.Controls.Add(this.num_BladeCount);
-            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "PanelPropertiesUC";
             this.Size = new System.Drawing.Size(159, 148);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);

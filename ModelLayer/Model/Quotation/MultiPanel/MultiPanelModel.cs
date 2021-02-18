@@ -377,19 +377,34 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 pnl_margin = new Padding(0, 10, 0, 10);
                             }
                         }
-                        else if (MPanel_Placement == "Last")
+                        else if (MPanel_Placement == "Last") //top margin is 9 because of divider on top (8 + 1)
                         {
                             if (pnl.Panel_Index_Inside_MPanel == 0)
                             {
-                                pnl_margin = new Padding(10, 8, 0, 10);
+                                pnl_margin = new Padding(10, 9, 0, 10);
                             }
                             else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions)
                             {
-                                pnl_margin = new Padding(0, 8, 10, 10);
+                                pnl_margin = new Padding(0, 9, 10, 10);
                             }
                             else
                             {
-                                pnl_margin = new Padding(0, 8, 0, 10);
+                                pnl_margin = new Padding(0, 9, 0, 10);
+                            }
+                        }
+                        else if (MPanel_Placement == "Somewhere in Between") //top margin is 9 because of divider on top (8 + 1)
+                        {
+                            if (pnl.Panel_Index_Inside_MPanel == 0)
+                            {
+                                pnl_margin = new Padding(10, 9, 0, 0);
+                            }
+                            else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions)
+                            {
+                                pnl_margin = new Padding(0, 9, 0, 0);
+                            }
+                            else
+                            {
+                                pnl_margin = new Padding(0, 9, 0, 0);
                             }
                         }
                     }
