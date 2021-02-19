@@ -156,8 +156,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
             if (data.Contains("Multi-Panel"))
             {
-                int suggest_Wd = fpnl.Width,
-                    suggest_HT = ((fpnl.Height - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                int suggest_Wd = ((fpnl.Width - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount),
+                    suggest_HT = fpnl.Height;
 
                 _frmDimensionPresenter.SetPresenters(this);
                 _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.AddPanelIntoMultiPanel;
@@ -187,7 +187,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _frameModel.Lst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.Reload_MultiPanelMargin();
-
 
                     IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
                     _multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)multiPropUCP.GetMultiPanelPropertiesUC());
@@ -251,9 +250,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC, 
                                                                             divModel, 
                                                                             _multiPanelModel,
-                                                                            this);
+                                                                            this,
+                                                                            _frameModel);
                 IMullionUC mullionUC = mullionUCP.GetMullion();
                 fpnl.Controls.Add((UserControl)mullionUC);
+                _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC);
+                mullionUCP.SetInitialLoadFalse();
             }
             else if (data == "Transom")
             {

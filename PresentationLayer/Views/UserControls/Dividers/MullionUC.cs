@@ -41,6 +41,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event EventHandler deleteToolStripMenuItemClickedEventRaised;
         public event EventHandler mullionUCMouseEnterEventRaised;
         public event EventHandler mullionUCMouseLeaveEventRaised;
+        public event EventHandler mullionUCSizeChangedEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -96,6 +97,11 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public void InvalidateThis()
         {
             this.Invalidate();
+        }
+
+        private void MullionUC_SizeChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, mullionUCSizeChangedEventRaised, e);
         }
     }
 }

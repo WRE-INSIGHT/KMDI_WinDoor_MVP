@@ -458,7 +458,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         pnl_margin = new Padding(10, 10, 0, 10);
                         mpnl.MPanel_Placement = "First";
                     }
-                    else if (mpnl.MPanel_Index_Inside_MPanel == MPanel_Divisions)
+                    else if (mpnl.MPanel_Index_Inside_MPanel == MPanel_Divisions * 2)
                     {
                         pnl_margin = new Padding(0, 10, 10, 10);
                         mpnl.MPanel_Placement = "Last";
@@ -508,10 +508,21 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     Control prev_ctrl = MPanelLst_Objects[indx - 1];
                     if (!prev_ctrl.Name.Contains("MultiPanel") && prev_ctrl.Name.Contains(MPanel_Type)) //means Divider
                     {
-                        prev_ctrl.Height -= 8;
-                        if (indx == MPanel_Divisions * 2) //means LAST OBJECT
+                        if (prev_ctrl.Name.Contains("Transom"))
                         {
-                            current_control.Height += 8;
+                            prev_ctrl.Height -= 8;
+                            if (indx == MPanel_Divisions * 2) //means LAST OBJECT
+                            {
+                                current_control.Height += 8;
+                            }
+                        }
+                        else if (prev_ctrl.Name.Contains("Mullion"))
+                        {
+                            prev_ctrl.Width -= 8;
+                            if (indx == MPanel_Divisions * 2) //means LAST OBJECT
+                            {
+                                current_control.Width += 8;
+                            }
                         }
                     }
                 }
@@ -523,8 +534,16 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     Control prev_ctrl = MPanelLst_Objects[indx - 1];
                     if (prev_ctrl.Name.Contains("MultiPanel"))
                     {
-                        prev_ctrl.Height += 8;
-                        current_control.Height -= 8;
+                        if (current_control.Name.Contains("Transom"))
+                        {
+                            prev_ctrl.Height += 8;
+                            current_control.Height -= 8;
+                        }
+                        else if (current_control.Name.Contains("Mullion"))
+                        {
+                            prev_ctrl.Width += 8;
+                            current_control.Width -= 8;
+                        }
                     }
                 }
             }

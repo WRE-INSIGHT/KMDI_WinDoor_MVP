@@ -57,6 +57,7 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "MullionUC";
             this.Size = new System.Drawing.Size(26, 350);
+            this.SizeChanged += new System.EventHandler(this.MullionUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MullionUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseDown);

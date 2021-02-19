@@ -74,5 +74,86 @@ namespace CommonComponents
 
             return MullionDraw_Points;
         }
+
+        public List<Point[]> GetMullionDividerDrawingPoints(int width,
+                                                            int height,
+                                                            int nxtobj_wd,
+                                                            int nxtobj_ht,
+                                                            string nxtobj_name,
+                                                            string placement,
+                                                            bool allowed = false)
+        {
+            List<Point[]> MullionDraw_Points = new List<Point[]>();
+
+            Point[] leftLine = new Point[2];
+            Point[] botCurve = new Point[3];
+            Point[] rightLine = new Point[2];
+            Point[] upperCurve = new Point[3];
+
+            int accessible_Ht = height - 2,
+                HT_beforeCurve = height - 5;
+
+            if (placement == "First" || (placement == "Somewhere in Between" && allowed == true))
+            {
+                if (nxtobj_name.Contains("Mullion"))
+                {
+                    int accessible_Wd_start = width - 8,
+                        midPoint = width + 4,
+                        right_EndPoint = width + 16;
+
+                    leftLine[0] = new Point(accessible_Wd_start, 5);
+                    leftLine[1] = new Point(accessible_Wd_start, HT_beforeCurve);
+
+                    botCurve[0] = new Point(accessible_Wd_start, HT_beforeCurve);
+                    botCurve[1] = new Point(midPoint, accessible_Ht);
+                    botCurve[2] = new Point(right_EndPoint, HT_beforeCurve);
+
+                    rightLine[0] = new Point(right_EndPoint, HT_beforeCurve);
+                    rightLine[1] = new Point(right_EndPoint, 5);
+
+                    upperCurve[0] = new Point(right_EndPoint, 5);
+                    upperCurve[1] = new Point(midPoint, 1);
+                    upperCurve[2] = new Point(accessible_Wd_start, 5);
+                }
+            }
+            else if (placement == "Last" || placement == "Somewhere in Between")
+            {
+
+                leftLine[0] = new Point(-17, 5);
+                leftLine[1] = new Point(-17, HT_beforeCurve);
+
+                //upperLine[0] = new Point(5, -17); //-17 to fill the 18 units upward that is the height of divider
+                //upperLine[1] = new Point(Wd_beforeCurve, -17);
+
+                botCurve[0] = new Point(-17, HT_beforeCurve);
+                botCurve[1] = new Point(-4, accessible_Ht);
+                botCurve[2] = new Point(8, HT_beforeCurve);
+
+                //rightCurve[0] = new Point(Wd_beforeCurve, -17);
+                //rightCurve[1] = new Point(accessible_Wd, -4); //midpoint = -4 coz 4 units upward; then 8 + 4 = 12; 8 is height allowance for transom divider on this code
+                //rightCurve[2] = new Point(Wd_beforeCurve, 8);
+
+                rightLine[0] = new Point(8, HT_beforeCurve);
+                rightLine[1] = new Point(8, 5);
+
+                //botLine[0] = new Point(Wd_beforeCurve, 8);
+                //botLine[1] = new Point(5, 8);
+
+                upperCurve[0] = new Point(8, 5);
+                upperCurve[1] = new Point(-4, 1);
+                upperCurve[2] = new Point(-17, 5);
+
+                //leftCurve[0] = new Point(5, 8);
+                //leftCurve[1] = new Point(1, -4);
+                //leftCurve[2] = new Point(5, -17);
+            }
+
+            MullionDraw_Points.Add(leftLine);
+            MullionDraw_Points.Add(botCurve);
+            MullionDraw_Points.Add(rightLine);
+            MullionDraw_Points.Add(upperCurve);
+
+            return MullionDraw_Points;
+        }
     }
 }
