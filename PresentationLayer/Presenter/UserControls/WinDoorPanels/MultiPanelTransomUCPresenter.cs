@@ -141,7 +141,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 multiID = _mainPresenter.GetMultiPanelCount() + 1,
                 divID = _mainPresenter.GetDividerCount() + 1;
 
-            int multiPanel_boundsWD = fpnl.Width - 20,
+            int multiPanel_boundsWD = fpnl.Width - 18,
                 multiPanel_boundsHT = fpnl.Height - 20,
                 divSize = 0,
                 totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
