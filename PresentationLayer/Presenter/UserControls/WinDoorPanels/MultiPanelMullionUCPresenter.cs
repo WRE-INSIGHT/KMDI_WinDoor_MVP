@@ -362,10 +362,37 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                 }
             }
+            foreach (Control ctrl in fpnl.Controls)
+            {
+                if (ctrl.Name.Contains("Multi"))
+                {
+                    ctrl.Controls[0].Invalidate(); //Invalidate the fpnl inside
+                }
+                else
+                {
+                    ctrl.Invalidate(); //Divider
+                }
+            }
         }
 
         private void _multiPanelMullionUC_deleteClickedEventRaised(object sender, EventArgs e)
         {
+            FlowLayoutPanel innerFlp = (FlowLayoutPanel)((UserControl)_multiPanelMullionUC).Controls[0];
+            var multiPanels = _mpnlCommons.GetAll(innerFlp, "MultiPanel");
+            foreach (var mpnl in multiPanels)
+            {
+                _multiPanelModel.MPanelProp_Height -= (129 + 3);
+                _frameModel.FrameProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin
+            }
+
+            var panels = _mpnlCommons.GetAll(innerFlp, "PanelUC");
+            foreach (var pnl in panels)
+            {
+                _multiPanelModel.MPanelProp_Height -= 148;
+                _frameModel.FrameProp_Height -= 148;
+            }
+
+
             _multiPanelModel.MPanel_Visibility = false;
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
@@ -380,29 +407,31 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameModel.Frame_Type = FrameModel.Frame_Padding.Door;
             }
+
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
             {
                 pnl.Panel_Visibility = false;
-                _frameModel.FrameProp_Height -= 148;
             }
             foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider.Where(div => div.Div_Visible == true))
             {
                 div.Div_Visible = false;
             }
-            _frameUCP.ViewDeleteControl((UserControl)_multiPanelMullionUC);
+            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+            {
+                mpnl.MPanel_Visibility = false;
+            }
+
+            _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)_multiPanelMullionUC);
+
             if (_multiPanelTransomUCP != null)
             {
                 _multiPanelTransomUCP.DeletePanel((UserControl)_multiPanelMullionUC);
             }
-            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
-            {
-                mpnl.MPanel_Visibility = false;
-                _multiPanelModel.MPanelProp_Height -= 129;
-            }
+
             if (_multiPanelModel.MPanel_Parent != null)
             {
-                _multiPanelModel.MPanelProp_Height -= 129;
-                _frameModel.FrameProp_Height -= 129;
+                _multiPanelModel.MPanelProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin;;
+                _frameModel.FrameProp_Height -= (129 + 3);
             }
         }
 
@@ -452,7 +481,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         Color color = Color.Black;
         private void _multiPanelMullionUC_flpMulltiPaintEventRaised(object sender, PaintEventArgs e)
         {
-
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
             Control fpnlParent = fpnl.Parent.Parent; //Parent ng mismong usercontrol, Its either Frame or Multi-Panel
 
@@ -544,7 +572,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         Rectangle botbounds = new Rectangle(new Point(10, fpnl.Height - 18),
                                                             new Size(fpnl.Width - 20, 18));
                         g.DrawRectangle(new Pen(Color.Black, 1), botbounds);
-                        g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), botbounds);
+                        g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), new Rectangle(new Point(botbounds.X + 1, botbounds.Y),
+                                                                                                  new Size(botbounds.Size.Width - 2, botbounds.Height)));
                     }
                 }
                 else if (_multiPanelModel.MPanel_Placement == "Last")

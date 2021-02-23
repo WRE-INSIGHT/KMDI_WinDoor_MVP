@@ -70,6 +70,18 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             set
             {
+                int added_height_child_pnls = value - _mpanelWidth;
+                if (MPanel_Type == "Transom")
+                {
+                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    {
+                        pnl.Panel_Width += added_height_child_pnls;
+                    }
+                    foreach (IDividerModel div in MPanelLst_Divider.Where(div => div.Div_Visible == true))
+                    {
+                        div.Div_Width += added_height_child_pnls;
+                    }
+                }
                 _mpanelWidth = value;
                 MPanelImageRenderer_Width = Convert.ToInt32(value * MPanelImageRenderer_Zoom);
                 NotifyPropertyChanged();
@@ -96,7 +108,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         div.Div_Height += added_height_child_pnls;
                     }
-                }
+                }                
                 _mpanelHeight = value;
                 MPanelImageRenderer_Height = Convert.ToInt32(value * MPanelImageRenderer_Zoom);
                 NotifyPropertyChanged();
@@ -567,19 +579,42 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void Fit_MyControls()
         {
-            int totalHeight_Controls = MPanelLst_Objects.Sum(obj => obj.Height);
-            int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_Height - totalHeight_Controls;
-
-            while (diff_MPanelHt_VS_MyCtrlsHeight > 0)
+            if (MPanel_Type == "Transom")
             {
-                foreach (Control ctrl in MPanelLst_Objects)
+                int totalHeight_Controls = MPanelLst_Objects.Sum(obj => obj.Height);
+                int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_Height - totalHeight_Controls;
+
+                while (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                 {
-                    if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
+                    foreach (Control ctrl in MPanelLst_Objects)
                     {
-                        if (ctrl.Name.Contains("MultiPanel") || ctrl.Name.Contains("Panel"))
+                        if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                         {
-                            ctrl.Height++;
-                            diff_MPanelHt_VS_MyCtrlsHeight--;
+                            if (ctrl.Name.Contains("MultiPanel") || ctrl.Name.Contains("Panel"))
+                            {
+                                ctrl.Height++;
+                                diff_MPanelHt_VS_MyCtrlsHeight--;
+                            }
+                        }
+                    }
+                }
+            }
+            else if(MPanel_Type == "Mullion")
+            {
+                int totalWidth_Controls = MPanelLst_Objects.Sum(obj => obj.Width);
+                int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_Width - totalWidth_Controls;
+
+                while (diff_MPanelWd_VS_MyCtrlsWidth > 0)
+                {
+                    foreach (Control ctrl in MPanelLst_Objects)
+                    {
+                        if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
+                        {
+                            if (ctrl.Name.Contains("MultiPanel") || ctrl.Name.Contains("Panel"))
+                            {
+                                ctrl.Width++;
+                                diff_MPanelWd_VS_MyCtrlsWidth--;
+                            }
                         }
                     }
                 }

@@ -147,7 +147,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             }
             else if (height == 10)
             {
-                upperLine[0] = new Point(5, (height - 18) + 1);
+                upperLine[0] = new Point(4, (height - 18) + 1);
                 upperLine[1] = new Point(Wd_beforeCurve, (height - 18) + 1);
 
                 rightCurve[0] = new Point(Wd_beforeCurve, (height - 18) + 1);
@@ -155,11 +155,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht + 8);
 
                 botLine[0] = new Point(Wd_beforeCurve, accessible_Ht + 8);
-                botLine[1] = new Point(5, accessible_Ht + 8);
+                botLine[1] = new Point(4, accessible_Ht + 8);
 
-                leftCurve[0] = new Point(5, accessible_Ht + 8);
+                leftCurve[0] = new Point(4, accessible_Ht + 8);
                 leftCurve[1] = new Point(1, (height - 18) + pointY_Mid);
-                leftCurve[2] = new Point(5, (height - 18) + 1);
+                leftCurve[2] = new Point(4, (height - 18) + 1);
             }
 
             Transom_Points.Add(upperLine);

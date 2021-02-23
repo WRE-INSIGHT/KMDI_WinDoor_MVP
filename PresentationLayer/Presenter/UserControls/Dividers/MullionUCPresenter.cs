@@ -90,6 +90,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         private void _mullionUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
         {
             _divModel.Div_Visible = false;
+            _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_mullionUC);
             _multiMullionUCP.DeletePanel((UserControl)_mullionUC);
             _multiMullionUCP.Invalidate_MultiPanelMullionUC();
         }
@@ -146,7 +147,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             else if (width == 10)
             {
 
-                leftLine[0] = new Point((width - 18) + 1, 5);
+                leftLine[0] = new Point((width - 18) + 1, 4);
                 leftLine[1] = new Point((width - 18) + 1, Ht_beforeCurve);
 
                 botCurve[0] = new Point((width - 18) + 1, Ht_beforeCurve);
@@ -154,11 +155,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 botCurve[2] = new Point(accessible_Wd + 8, Ht_beforeCurve);
 
                 rightLine[0] = new Point(accessible_Wd + 8, Ht_beforeCurve);
-                rightLine[1] = new Point(accessible_Wd + 8, 5);
+                rightLine[1] = new Point(accessible_Wd + 8, 4);
 
-                upperCurve[0] = new Point(accessible_Wd + 8, 5);
+                upperCurve[0] = new Point(accessible_Wd + 8, 4);
                 upperCurve[1] = new Point((width - 18) + pointX_Mid, 1);
-                upperCurve[2] = new Point((width - 18) + 1, 5);
+                upperCurve[2] = new Point((width - 18) + 1, 4);
             }
 
             Mullion_Points.Add(leftLine);

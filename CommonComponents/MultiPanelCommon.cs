@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CommonComponents
 {
@@ -121,31 +122,17 @@ namespace CommonComponents
 
                 leftLine[0] = new Point(-17, 5);
                 leftLine[1] = new Point(-17, HT_beforeCurve);
-
-                //upperLine[0] = new Point(5, -17); //-17 to fill the 18 units upward that is the height of divider
-                //upperLine[1] = new Point(Wd_beforeCurve, -17);
-
+                
                 botCurve[0] = new Point(-17, HT_beforeCurve);
                 botCurve[1] = new Point(-4, accessible_Ht);
                 botCurve[2] = new Point(8, HT_beforeCurve);
-
-                //rightCurve[0] = new Point(Wd_beforeCurve, -17);
-                //rightCurve[1] = new Point(accessible_Wd, -4); //midpoint = -4 coz 4 units upward; then 8 + 4 = 12; 8 is height allowance for transom divider on this code
-                //rightCurve[2] = new Point(Wd_beforeCurve, 8);
-
+                
                 rightLine[0] = new Point(8, HT_beforeCurve);
                 rightLine[1] = new Point(8, 5);
-
-                //botLine[0] = new Point(Wd_beforeCurve, 8);
-                //botLine[1] = new Point(5, 8);
 
                 upperCurve[0] = new Point(8, 5);
                 upperCurve[1] = new Point(-4, 1);
                 upperCurve[2] = new Point(-17, 5);
-
-                //leftCurve[0] = new Point(5, 8);
-                //leftCurve[1] = new Point(1, -4);
-                //leftCurve[2] = new Point(5, -17);
             }
 
             MullionDraw_Points.Add(leftLine);
@@ -155,5 +142,15 @@ namespace CommonComponents
 
             return MullionDraw_Points;
         }
+        public IEnumerable<Control> GetAll(Control control, string name)
+        {
+            var controls = control.Controls.Cast<Control>();
+
+            return controls.SelectMany(ctrl => GetAll(ctrl, name))
+                                      .Concat(controls)
+                                      .Where(c => c.Visible == true)
+                                      .Where(c => c.Name.Contains(name));
+        }
+
     }
 }
