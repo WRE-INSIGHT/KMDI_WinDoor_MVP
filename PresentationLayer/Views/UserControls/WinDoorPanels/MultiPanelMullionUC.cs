@@ -137,5 +137,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             EventHelpers.RaiseEvent(this, multiMullionSizeChangedEventRaised, e);
         }
+
+        private void MultiPanelMullionUC_Paint(object sender, PaintEventArgs e)
+        {
+            flp_MultiMullion.Invalidate();
+        }
     }
 }

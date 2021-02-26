@@ -574,6 +574,29 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void DeleteControl_MPanelLstObjects(Control control)
         {
+            int prev_indx = MPanelLst_Objects.IndexOf(control) - 1; //get the index of previous control
+            if (prev_indx >= 0)
+            {
+                if (control.Name.Contains("MultiPanel"))
+                {
+                    if (MPanelLst_Objects[prev_indx].Name == "MullionUC")
+                    {
+                        MPanelLst_Objects[prev_indx].Width += 8;
+                    }
+                    else if (MPanelLst_Objects[prev_indx].Name == "TransomUC")
+                    {
+                        MPanelLst_Objects[prev_indx].Height += 8;
+                    }
+                }
+                else if (control.Name == "MullionUC")
+                {
+                    MPanelLst_Objects[prev_indx].Width -= 8;
+                }
+                else if (control.Name == "TransomUC")
+                {
+                    MPanelLst_Objects[prev_indx].Height -= 8;
+                }
+            }
             MPanelLst_Objects.Remove(control);
         }
 

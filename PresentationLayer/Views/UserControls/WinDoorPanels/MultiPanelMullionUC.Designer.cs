@@ -85,6 +85,7 @@
             this.Name = "MultiPanelMullionUC";
             this.Size = new System.Drawing.Size(300, 300);
             this.SizeChanged += new System.EventHandler(this.MultiPanelMullionUC_SizeChanged);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MultiPanelMullionUC_Paint);
             this.cmenu_mulltiP.ResumeLayout(false);
             this.ResumeLayout(false);
 

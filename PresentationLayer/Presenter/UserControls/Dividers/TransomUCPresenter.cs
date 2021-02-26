@@ -91,10 +91,21 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _transomUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
         {
+            Control parent_ctrl = ((UserControl)_transomUC).Parent;
+
             _divModel.Div_Visible = false;
             _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_transomUC);
             _multiTransomUCP.DeletePanel((UserControl)_transomUC);
             _multiTransomUCP.Invalidate_MultiPanelMullionUC();
+
+
+            if (parent_ctrl.Name.Contains("flp_Multi"))
+            {
+                foreach (Control ctrl in parent_ctrl.Controls)
+                {
+                    ctrl.Invalidate();
+                }
+            }
         }
 
         List<Point[]> GetTransomDrawingPoints(int width, 

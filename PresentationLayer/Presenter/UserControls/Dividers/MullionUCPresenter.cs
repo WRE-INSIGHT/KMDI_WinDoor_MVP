@@ -89,10 +89,20 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _mullionUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
         {
+            Control parent_ctrl = ((UserControl)_mullionUC).Parent;
+
             _divModel.Div_Visible = false;
             _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_mullionUC);
             _multiMullionUCP.DeletePanel((UserControl)_mullionUC);
             _multiMullionUCP.Invalidate_MultiPanelMullionUC();
+
+            if (parent_ctrl.Name.Contains("flp_Multi"))
+            {
+                foreach (Control ctrl in parent_ctrl.Controls)
+                {
+                    ctrl.Invalidate();
+                }
+            }
         }
 
         List<Point[]> GetMullionDrawingPoints(int width,
@@ -195,29 +205,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             g.DrawPath(pen, gpath);
             g.FillPath(Brushes.PowderBlue, gpath);
-
-            //Point[] topCurve = {
-            //                        new Point(lineWd, 5),
-            //                        new Point(mul.ClientRectangle.Width / 2, 1),
-            //                        new Point(0, 5)
-            //                   };
-
-            //Point[] botCurve = {
-            //                        new Point(0, lineHT),
-            //                        new Point(mul.ClientRectangle.Width / 2, mul.ClientRectangle.Height - 3),
-            //                        new Point(lineWd, lineHT)
-            //                   };
-
-            
-            //gpath.AddLine(new Point(0, 5), new Point(0, lineHT));
-            //gpath.AddCurve(botCurve);
-            //gpath.AddLine(new Point(lineWd, 5), new Point(lineWd, lineHT));
-            //gpath.AddCurve(topCurve);
-
-            //Pen pen = new Pen(penColor, 2);
-
-            //g.DrawPath(pen, gpath);
-            //g.FillPath(Brushes.PowderBlue, gpath);
         }
 
         private void _mullionUC_mullionUCMouseUpEventRaised(object sender, MouseEventArgs e)

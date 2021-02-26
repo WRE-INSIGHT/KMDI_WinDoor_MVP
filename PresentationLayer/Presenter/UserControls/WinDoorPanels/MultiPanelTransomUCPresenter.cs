@@ -390,6 +390,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void _multiPanelTransomUC_deleteClickedEventRaised(object sender, EventArgs e)
         {
             FlowLayoutPanel innerFlp = (FlowLayoutPanel)((UserControl)_multiPanelTransomUC).Controls[0];
+            Control parent_ctrl = ((UserControl)_multiPanelTransomUC).Parent;
+
             var multiPanels = _mpnlCommons.GetAll(innerFlp, "MultiPanel");
             foreach (var mpnl in multiPanels)
             {
@@ -438,6 +440,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.MPanelProp_Height -= (129 + 3);
                 _frameModel.FrameProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin;
+            }
+
+            if (parent_ctrl.Name.Contains("flp_Multi"))
+            {
+                foreach (Control ctrl in parent_ctrl.Controls)
+                {
+                    ctrl.Invalidate();
+                }
             }
         }
         
