@@ -21,6 +21,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_Visibility { get; set; }
         float PanelImageRenderer_Zoom { get; set; }
         int Panel_Index_Inside_MPanel { get; set; }
+        string Panel_Placement { get; set; }
         Padding Panel_Margin { get; set; }
     }
 }

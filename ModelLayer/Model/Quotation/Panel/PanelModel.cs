@@ -354,6 +354,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+
+            set
+            {
+                _panelPlacement = value;
+            }
+        }
+
         public PanelModel(int panelID,
                           string panelName,
                           int panelWd,

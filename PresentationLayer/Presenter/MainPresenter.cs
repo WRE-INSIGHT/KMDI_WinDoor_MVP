@@ -408,17 +408,17 @@ namespace PresentationLayer.Presenter
             }
             _mainView.Nickname = _userModel.Nickname;
 
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Transom", new Thumbs_TransomUC()).GetControlUC());
+            //_pnlControlSub.Controls.Add(
+            //    (UserControl)_controlsUCP.GetNewInstance(
+            //    _unityC, "Transom", new Thumbs_TransomUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
 
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Mullion", new Thumbs_MullionUC()).GetControlUC());
+            //_pnlControlSub.Controls.Add(
+            //    (UserControl)_controlsUCP.GetNewInstance(
+            //    _unityC, "Mullion", new Thumbs_MullionUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(

@@ -28,6 +28,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     public class MultiPanelMullionUCPresenter : IMultiPanelMullionUCPresenter, IPresenterCommon
     {
         IMultiPanelMullionUC _multiPanelMullionUC;
+        private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
 
         private IUnityContainer _unityC;
 
@@ -45,7 +46,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IfrmDimensionPresenter _frmDimensionPresenter;
         private IMullionUCPresenter _mullionUCP;
         private IFrameUCPresenter _frameUCP;
-        private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
+        private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
         private IMultiPanelPropertiesUCPresenter _multiPropUCP_orig;  //Original Instance
         private IMultiPanelPropertiesUCPresenter _multiPropUCP2_given; //Given Instance
 
@@ -140,7 +141,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 divID = _mainPresenter.GetDividerCount() + 1;
 
             int multiPanel_boundsWD = fpnl.Width - 20,
-                multiPanel_boundsHT = fpnl.Height - 18,
+                multiPanel_boundsHT = fpnl.Height - 20,
                 divSize = 0,
                 totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
 
@@ -204,15 +205,45 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     if (data.Contains("Mullion"))
                     {
-                        //IMultiPanelMullionUCPresenter multiUCP = _multiMullionUCP.GetNewInstance(_unityC,
-                        //                                                                         _multipanelModel,
-                        //                                                                         _frameModel,
-                        //                                                                         _mainPresenter,
-                        //                                                                         _frameUCP);
-                        //IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
-                        //fpnl.Controls.Add((UserControl)multiUC);
-                        //fpnl.Invalidate();
-                        //multiUC.InvalidateFlp();
+                        IMultiPanelMullionUCPresenter multiUCP = GetNewInstance(_unityC,
+                                                                                mPanelModel,
+                                                                                _frameModel,
+                                                                                _mainPresenter,
+                                                                                _frameUCP,
+                                                                                this,
+                                                                                multiPropUCP);
+                        IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
+                        fpnl.Controls.Add((UserControl)multiUC);
+                        multiUCP.SetInitialLoadFalse();
+                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)multiUC);
+
+                        if (mPanelModel.MPanel_Placement == "Last")
+                        {
+                            _multiPanelModel.Fit_MyControls();
+                        }
+                        else if (mPanelModel.MPanel_Placement != "Last")
+                        {
+                            IDividerModel divModel = _divServices.AddDividerModel(divSize,
+                                                                                  fpnl.Height,
+                                                                                  fpnl,
+                                                                                  (UserControl)_frameUCP.GetFrameUC(),
+                                                                                  DividerModel.DividerType.Mullion,
+                                                                                  true,
+                                                                                  divID);
+
+                            _frameModel.Lst_Divider.Add(divModel);
+                            _multiPanelModel.MPanelLst_Divider.Add(divModel);
+
+                            IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC,
+                                                                                        divModel,
+                                                                                        _multiPanelModel,
+                                                                                        this,
+                                                                                        _frameModel);
+                            IMullionUC mullionUC = mullionUCP.GetMullion();
+                            fpnl.Controls.Add((UserControl)mullionUC);
+                            mullionUCP.SetInitialLoadFalse();
+                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC);
+                        }
                     }
                     else if (data.Contains("Transom"))
                     {
@@ -227,16 +258,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         fpnl.Controls.Add((UserControl)multiUC);
                         multiTransom.SetInitialLoadFalse();
                         _multiPanelModel.AddControl_MPanelLstObjects((UserControl)multiUC);
+
                         if (mPanelModel.MPanel_Placement == "Last")
                         {
                             _multiPanelModel.Fit_MyControls();
                         }
-                    }
-                }
-            }
-            else if (data == "Mullion")
-            {
-                IDividerModel divModel = _divServices.AddDividerModel(divSize,
+                        else if (mPanelModel.MPanel_Placement != "Last")
+                        {
+                            IDividerModel divModel = _divServices.AddDividerModel(divSize,
                                                                       fpnl.Height,
                                                                       fpnl,
                                                                       (UserControl)_frameUCP.GetFrameUC(),
@@ -244,27 +273,58 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                       true,
                                                                       divID);
 
-                _frameModel.Lst_Divider.Add(divModel);
-                _multiPanelModel.MPanelLst_Divider.Add(divModel);
+                            _frameModel.Lst_Divider.Add(divModel);
+                            _multiPanelModel.MPanelLst_Divider.Add(divModel);
 
-                IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC, 
-                                                                            divModel, 
-                                                                            _multiPanelModel,
-                                                                            this,
-                                                                            _frameModel);
-                IMullionUC mullionUC = mullionUCP.GetMullion();
-                fpnl.Controls.Add((UserControl)mullionUC);
-                _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC);
-                mullionUCP.SetInitialLoadFalse();
+                            IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC,
+                                                                                        divModel,
+                                                                                        _multiPanelModel,
+                                                                                        this,
+                                                                                        _frameModel);
+                            IMullionUC mullionUC = mullionUCP.GetMullion();
+                            fpnl.Controls.Add((UserControl)mullionUC);
+                            mullionUCP.SetInitialLoadFalse();
+                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC);
+                        }
+                    }
+                }
             }
-            else if (data == "Transom")
-            {
-                MessageBox.Show("Invalid object", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //else if (data == "Mullion")
+            //{
+            //    IDividerModel divModel = _divServices.AddDividerModel(divSize,
+            //                                                          fpnl.Height,
+            //                                                          fpnl,
+            //                                                          (UserControl)_frameUCP.GetFrameUC(),
+            //                                                          DividerModel.DividerType.Mullion,
+            //                                                          true,
+            //                                                          divID);
+
+            //    _frameModel.Lst_Divider.Add(divModel);
+            //    _multiPanelModel.MPanelLst_Divider.Add(divModel);
+
+            //    IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC, 
+            //                                                                divModel, 
+            //                                                                _multiPanelModel,
+            //                                                                this,
+            //                                                                _frameModel);
+            //    IMullionUC mullionUC = mullionUCP.GetMullion();
+            //    fpnl.Controls.Add((UserControl)mullionUC);
+            //    _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC);
+            //    mullionUCP.SetInitialLoadFalse();
+            //}
+            //else if (data == "Transom")
+            //{
+            //    MessageBox.Show("Invalid object", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
             else
             {
                 int suggest_Wd = ((multiPanel_boundsWD - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount),
                     suggest_HT = multiPanel_boundsHT;
+
+                if (_multiPanelModel.MPanel_ParentModel != null)
+                {
+                    suggest_HT = multiPanel_boundsHT + 2;
+                }
 
                 _frmDimensionPresenter.SetPresenters(this);
                 _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.AddPanelIntoMultiPanel;
@@ -306,6 +366,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                    this);
                         IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                         fpnl.Controls.Add((UserControl)fixedUC);
+                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)fixedUC);
                         fixedUCP.SetInitialLoadFalse();
 
                         //IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, _panelModel);
@@ -322,6 +383,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                             this);
                         ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                         fpnl.Controls.Add((UserControl)casementUC);
+                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)casementUC);
                         casementUCP.SetInitialLoadFalse();
 
                         //ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel);
@@ -338,6 +400,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                       this);
                         IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
                         fpnl.Controls.Add((UserControl)awningUC);
+                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)awningUC);
                         awningUCP.SetInitialLoadFalse();
 
                         //IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel);
@@ -354,11 +417,40 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                          this);
                         ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
                         fpnl.Controls.Add((UserControl)slidingUC);
+                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)slidingUC);
                         slidingUCP.SetInitialLoadFalse();
 
                         //ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC, _panelModel);
                         //ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
                         //pnl_inner_willRenderImg.Controls.Add((UserControl)slidingImagerUC);
+                    }
+
+                    if (_panelModel.Panel_Placement == "Last")
+                    {
+                        _multiPanelModel.Fit_MyControls();
+                    }
+                    else if (_panelModel.Panel_Placement != "Last")
+                    {
+                        IDividerModel divModel = _divServices.AddDividerModel(divSize,
+                                                                              fpnl.Height,
+                                                                              fpnl,
+                                                                              (UserControl)_frameUCP.GetFrameUC(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              divID);
+
+                        _frameModel.Lst_Divider.Add(divModel);
+                        _multiPanelModel.MPanelLst_Divider.Add(divModel);
+
+                        IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC,
+                                                                                    divModel,
+                                                                                    _multiPanelModel,
+                                                                                    this,
+                                                                                    _frameModel);
+                        IMullionUC mullionUC = mullionUCP.GetMullion();
+                        fpnl.Controls.Add((UserControl)mullionUC);
+                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC);
+                        mullionUCP.SetInitialLoadFalse();
                     }
                 }
             }
@@ -534,77 +626,105 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
             {
-                IMultiPanelModel parent_mpnl = _multiPanelModel.MPanel_ParentModel;
-                Pen pen = new Pen(Color.Black, 2);
-
-                if (_multiPanelModel.MPanel_Placement == "First")
+                if (_multiPanelModel.MPanel_Parent.Name.Contains("MultiTransom"))
                 {
-                    Rectangle topbounds = new Rectangle(new Point(0, 0),
-                                                        new Size(fpnl.Width, 10));
+                    IMultiPanelModel parent_mpnl = _multiPanelModel.MPanel_ParentModel;
+                    Pen pen = new Pen(Color.Black, 2);
 
-                    g.FillRectangle(new SolidBrush(SystemColors.Control), topbounds);
-
-                    for (int i = 0; i < corner_points.Length - 5; i += 2)
+                    if (_multiPanelModel.MPanel_Placement == "First")
                     {
-                        g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
-                    }
+                        Rectangle topbounds = new Rectangle(new Point(0, 0),
+                                                            new Size(fpnl.Width, 10));
 
-                    bounds = new Rectangle(new Point(10, 10),
-                                           new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 19));
+                        g.FillRectangle(new SolidBrush(SystemColors.Control), topbounds);
 
-                    int indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1;
-
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
-                    {
-                        Control nxt_obj = parent_mpnl.MPanelLst_Objects[indx_NxtObj]; //Either Mpanel or Divider
-                        int lineHT = (fpnl.Height - 8) + 18,
-                            lineWd = fpnl.ClientRectangle.Width - 6;
-
-                        List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                                                                                                      fpnl.Height,
-                                                                                                      nxt_obj.Width,
-                                                                                                      nxt_obj.Height,
-                                                                                                      nxt_obj.Name,
-                                                                                                      _multiPanelModel.MPanel_Placement);
-
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
+                        for (int i = 0; i < corner_points.Length - 5; i += 2)
                         {
-                            gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                            gpath.AddCurve(thisDrawingPoints[1]);
-                            gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                            gpath.AddCurve(thisDrawingPoints[3]);
+                            g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
+                        }
 
-                            g.DrawPath(pen, gpath);
-                            g.FillPath(Brushes.PowderBlue, gpath);
+                        bounds = new Rectangle(new Point(10, 10),
+                                               new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 19));
+
+                        int indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1;
+
+                        if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
+                        {
+                            Control nxt_obj = parent_mpnl.MPanelLst_Objects[indx_NxtObj]; //Either Mpanel or Divider
+                            int lineHT = (fpnl.Height - 8) + 18,
+                                lineWd = fpnl.ClientRectangle.Width - 6;
+
+                            List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
+                                                                                                          fpnl.Height,
+                                                                                                          nxt_obj.Width,
+                                                                                                          nxt_obj.Height,
+                                                                                                          nxt_obj.Name,
+                                                                                                          _multiPanelModel.MPanel_Placement);
+
+                            if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
+                            {
+                                gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
+                                gpath.AddCurve(thisDrawingPoints[1]);
+                                gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
+                                gpath.AddCurve(thisDrawingPoints[3]);
+
+                                g.DrawPath(pen, gpath);
+                                g.FillPath(Brushes.PowderBlue, gpath);
+                            }
+                        }
+                        else
+                        {
+                            Rectangle botbounds = new Rectangle(new Point(10, fpnl.Height - 18),
+                                                                new Size(fpnl.Width - 20, 18));
+                            g.DrawRectangle(new Pen(Color.Black, 1), botbounds);
+                            g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), new Rectangle(new Point(botbounds.X + 1, botbounds.Y),
+                                                                                                      new Size(botbounds.Size.Width - 2, botbounds.Height)));
                         }
                     }
-                    else
+                    else if (_multiPanelModel.MPanel_Placement == "Last")
                     {
-                        Rectangle botbounds = new Rectangle(new Point(10, fpnl.Height - 18),
-                                                            new Size(fpnl.Width - 20, 18));
-                        g.DrawRectangle(new Pen(Color.Black, 1), botbounds);
-                        g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), new Rectangle(new Point(botbounds.X + 1, botbounds.Y),
-                                                                                                  new Size(botbounds.Size.Width - 2, botbounds.Height)));
+                        Rectangle botbounds = new Rectangle(new Point(0, fpnl.Height - 11),
+                                                            new Size(fpnl.Width, 11));
+
+                        g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
+
+                        for (int i = 4; i < corner_points.Length - 1; i += 2)
+                        {
+                            g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
+                        }
+
+                        bounds = new Rectangle(new Point(10, 10),
+                                               new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 20));
+
+                        int indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
+                        if (parent_mpnl.GetCount_MPanelLst_Object() > indx_PrevObj)
+                        {
+                            Control prev_obj = parent_mpnl.MPanelLst_Objects[indx_PrevObj];
+
+                            if ((prev_obj.Name.Contains("Transom") ||
+                                 prev_obj.Name.Contains("Mullion")) &&
+                                 !prev_obj.Name.Contains("MultiPanel")) //Divider
+                            {
+                                List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
+                                                                                                              fpnl.Height,
+                                                                                                              prev_obj.Width,
+                                                                                                              prev_obj.Height,
+                                                                                                              prev_obj.Name,
+                                                                                                              _multiPanelModel.MPanel_Placement);
+
+                                gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
+                                gpath.AddCurve(thisDrawingPoints[1]);
+                                gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
+                                gpath.AddCurve(thisDrawingPoints[3]);
+
+                                g.DrawPath(pen, gpath);
+                                g.FillPath(Brushes.PowderBlue, gpath);
+                            }
+                        }
                     }
-                }
-                else if (_multiPanelModel.MPanel_Placement == "Last")
-                {
-                    Rectangle botbounds = new Rectangle(new Point(0, fpnl.Height - 11),
-                                                        new Size(fpnl.Width, 11));
-
-                    g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
-
-                    for (int i = 4; i < corner_points.Length - 1; i += 2)
+                    else if (_multiPanelModel.MPanel_Placement == "Somewhere in Between")
                     {
-                        g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
-                    }
-
-                    bounds = new Rectangle(new Point(10, 10),
-                                           new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 20));
-
-                    int indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_PrevObj)
-                    {
+                        int indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
                         Control prev_obj = parent_mpnl.MPanelLst_Objects[indx_PrevObj];
 
                         if ((prev_obj.Name.Contains("Transom") ||
@@ -625,75 +745,54 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             g.DrawPath(pen, gpath);
                             g.FillPath(Brushes.PowderBlue, gpath);
+                            bounds = new Rectangle(new Point(10, 10),
+                                                   new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 11));
+                        }
+
+                        //Check if has nxt_obj to Draw the nxt transom Obj
+                        int indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1;
+                        if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
+                        {
+                            Control nxt_obj = parent_mpnl.MPanelLst_Objects[indx_NxtObj]; //Either Mpanel or Divider
+                            int lineHT = (fpnl.Height - 8) + 18,
+                                lineWd = fpnl.ClientRectangle.Width - 6;
+
+                            List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
+                                                                                                          fpnl.Height,
+                                                                                                          nxt_obj.Width,
+                                                                                                          nxt_obj.Height,
+                                                                                                          nxt_obj.Name,
+                                                                                                          _multiPanelModel.MPanel_Placement);
+
+                            if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
+                            {
+                                GraphicsPath gpath2 = new GraphicsPath();
+
+                                List<Point[]> thisDrawingPoints2 = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
+                                                                                                               fpnl.Height,
+                                                                                                               nxt_obj.Width,
+                                                                                                               nxt_obj.Height,
+                                                                                                               nxt_obj.Name,
+                                                                                                               _multiPanelModel.MPanel_Placement,
+                                                                                                               true);
+
+                                gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                                gpath2.AddCurve(thisDrawingPoints2[1]);
+                                gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                                gpath2.AddCurve(thisDrawingPoints2[3]);
+
+                                g.DrawPath(pen, gpath2);
+                                g.FillPath(Brushes.PowderBlue, gpath2);
+
+                                bounds = new Rectangle(new Point(10, 10),
+                                                       new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 20));
+                            }
                         }
                     }
                 }
-                else if (_multiPanelModel.MPanel_Placement == "Somewhere in Between")
+                else if (_multiPanelModel.MPanel_Parent.Name.Contains("MultiMullion"))
                 {
-                    int indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
-                    Control prev_obj = parent_mpnl.MPanelLst_Objects[indx_PrevObj];
 
-                    if ((prev_obj.Name.Contains("Transom") ||
-                         prev_obj.Name.Contains("Mullion")) &&
-                         !prev_obj.Name.Contains("MultiPanel")) //Divider
-                    {
-                        List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                                                                                                      fpnl.Height,
-                                                                                                      prev_obj.Width,
-                                                                                                      prev_obj.Height,
-                                                                                                      prev_obj.Name,
-                                                                                                      _multiPanelModel.MPanel_Placement);
-
-                        gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                        gpath.AddCurve(thisDrawingPoints[1]);
-                        gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                        gpath.AddCurve(thisDrawingPoints[3]);
-
-                        g.DrawPath(pen, gpath);
-                        g.FillPath(Brushes.PowderBlue, gpath);
-                        bounds = new Rectangle(new Point(10, 10),
-                                               new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 11));
-                    }
-
-                    //Check if has nxt_obj to Draw the nxt transom Obj
-                    int indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1;
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
-                    {
-                        Control nxt_obj = parent_mpnl.MPanelLst_Objects[indx_NxtObj]; //Either Mpanel or Divider
-                        int lineHT = (fpnl.Height - 8) + 18,
-                            lineWd = fpnl.ClientRectangle.Width - 6;
-
-                        List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                                                                                                      fpnl.Height,
-                                                                                                      nxt_obj.Width,
-                                                                                                      nxt_obj.Height,
-                                                                                                      nxt_obj.Name,
-                                                                                                      _multiPanelModel.MPanel_Placement);
-
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            GraphicsPath gpath2 = new GraphicsPath();
-
-                            List<Point[]> thisDrawingPoints2 = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                                                                                                           fpnl.Height,
-                                                                                                           nxt_obj.Width,
-                                                                                                           nxt_obj.Height,
-                                                                                                           nxt_obj.Name,
-                                                                                                           _multiPanelModel.MPanel_Placement,
-                                                                                                           true);
-
-                            gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[1]);
-                            gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[3]);
-
-                            g.DrawPath(pen, gpath2);
-                            g.FillPath(Brushes.PowderBlue, gpath2);
-
-                            bounds = new Rectangle(new Point(10, 10),
-                                                   new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 20));
-                        }
-                    }
                 }
             }
 
@@ -753,6 +852,29 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiMullionUCP._mainPresenter = mainPresenter;
             multiMullionUCP._frameUCP = frameUCP;
             multiMullionUCP._multiPanelTransomUCP = multiPanelTransomUCP;
+            multiMullionUCP._multiPropUCP2_given = multiPropUCP;
+
+            return multiMullionUCP;
+        }
+
+        public IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                            IMultiPanelModel multiPanelModel,
+                                                            IFrameModel frameModel,
+                                                            IMainPresenter mainPresenter,
+                                                            IFrameUCPresenter frameUCP,
+                                                            IMultiPanelMullionUCPresenter multiPanelMullionUCP,
+                                                            IMultiPanelPropertiesUCPresenter multiPropUCP)
+        {
+            unityC
+                .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>()
+                .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>();
+            MultiPanelMullionUCPresenter multiMullionUCP = unityC.Resolve<MultiPanelMullionUCPresenter>();
+            multiMullionUCP._unityC = unityC;
+            multiMullionUCP._multiPanelModel = multiPanelModel;
+            multiMullionUCP._frameModel = frameModel;
+            multiMullionUCP._mainPresenter = mainPresenter;
+            multiMullionUCP._frameUCP = frameUCP;
+            multiMullionUCP._multiPanelMullionUCP = multiPanelMullionUCP;
             multiMullionUCP._multiPropUCP2_given = multiPropUCP;
 
             return multiMullionUCP;
