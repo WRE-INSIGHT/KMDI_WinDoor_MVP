@@ -109,7 +109,9 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         }
 
         List<Point[]> GetTransomDrawingPoints(int width, 
-                                              int height)
+                                              int height,
+                                              string prev_obj,
+                                              string nxt_obj)
         {
             List<Point[]> Transom_Points = new List<Point[]>();
 
@@ -142,19 +144,39 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             }
             else if (height == 18)
             {
-                upperLine[0] = new Point(5, (height - 26) + 1);
-                upperLine[1] = new Point(Wd_beforeCurve, (height - 26) + 1);
+                if ((prev_obj.Contains("MultiPanel") && nxt_obj.Contains("PanelUC")) ||
+                    ((prev_obj.Contains("MultiPanel") && nxt_obj == "")))
+                {
+                    upperLine[0] = new Point(5, (height - 26) + 1);
+                    upperLine[1] = new Point(Wd_beforeCurve, (height - 26) + 1);
 
-                rightCurve[0] = new Point(Wd_beforeCurve, (height - 26) + 1);
-                rightCurve[1] = new Point(accessible_Wd, (height - 26) + pointY_Mid);
-                rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht);
+                    rightCurve[0] = new Point(Wd_beforeCurve, (height - 26) + 1);
+                    rightCurve[1] = new Point(accessible_Wd, (height - 26) + pointY_Mid);
+                    rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht);
 
-                botLine[0] = new Point(Wd_beforeCurve, accessible_Ht);
-                botLine[1] = new Point(5, accessible_Ht);
+                    botLine[0] = new Point(Wd_beforeCurve, accessible_Ht);
+                    botLine[1] = new Point(5, accessible_Ht);
 
-                leftCurve[0] = new Point(5, accessible_Ht);
-                leftCurve[1] = new Point(1, (height - 26) + pointY_Mid);
-                leftCurve[2] = new Point(5, (height - 26) + 1);
+                    leftCurve[0] = new Point(5, accessible_Ht);
+                    leftCurve[1] = new Point(1, (height - 26) + pointY_Mid);
+                    leftCurve[2] = new Point(5, (height - 26) + 1);
+                }
+                else if (prev_obj.Contains("PanelUC") && nxt_obj.Contains("MultiPanel"))
+                {
+                    upperLine[0] = new Point(5, 1);
+                    upperLine[1] = new Point(Wd_beforeCurve, 1);
+
+                    rightCurve[0] = new Point(Wd_beforeCurve, 1);
+                    rightCurve[1] = new Point(accessible_Wd, pointY_Mid);
+                    rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht + (26 - height));
+
+                    botLine[0] = new Point(Wd_beforeCurve, accessible_Ht + (26 - height));
+                    botLine[1] = new Point(5, accessible_Ht + (26 - height));
+
+                    leftCurve[0] = new Point(5, accessible_Ht + (26 - height));
+                    leftCurve[1] = new Point(1, pointY_Mid + 1);
+                    leftCurve[2] = new Point(5, 1);
+                }
             }
             else if (height == 10)
             {
@@ -190,9 +212,26 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             GraphicsPath gpath = new GraphicsPath();
 
-            List<Point[]> TPoints = GetTransomDrawingPoints(transom.Width, 
-                                                            transom.Height);
-            
+            int this_ndx  = _multiPanelModel.MPanelLst_Objects.IndexOf(transom);
+            int prev_obj_ndx = this_ndx - 1,
+                next_obj_ndx = this_ndx + 1;
+            string prev_obj_name = "",
+                   next_obj_name = "";
+
+            if (prev_obj_ndx >= 0)
+            {
+                prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
+            }
+            if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
+            {
+                next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
+            }
+
+            List<Point[]> TPoints = GetTransomDrawingPoints(transom.Width,
+                                                            transom.Height,
+                                                            prev_obj_name,
+                                                            next_obj_name);
+
             gpath.AddLine(TPoints[0][0], TPoints[0][1]);
             gpath.AddCurve(TPoints[1]);
             gpath.AddLine(TPoints[2][0], TPoints[2][1]);
@@ -202,7 +241,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             g.DrawPath(pen, gpath);
             g.FillPath(Brushes.PowderBlue, gpath);
-
         }
 
         private void _transomUC_transomUCMouseUpEventRaised(object sender, MouseEventArgs e)

@@ -1005,6 +1005,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public void DeletePanel(UserControl obj)
         {
             _multiPanelTransomUC.DeletePanel(obj);
+            if (obj.Name.Contains("PanelUC"))
+            {
+                _multiPanelModel.MPanelProp_Height -= 148;
+            }
         }
 
         public void Invalidate_MultiPanelMullionUC()

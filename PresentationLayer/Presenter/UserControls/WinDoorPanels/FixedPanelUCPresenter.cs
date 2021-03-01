@@ -99,8 +99,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
+
             if (_multiPanelModel != null)
             {
+                _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_fixedPanelUC);
                 _multiPanelModel.Reload_PanelMargin();
             }
             if (_multiPanelMullionUCP != null)
@@ -115,6 +117,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameUCP.ViewDeleteControl((UserControl)_fixedPanelUC);
             }
+
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 

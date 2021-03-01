@@ -419,7 +419,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                             else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2)
                             {
-                                pnl_margin = new Padding(0, 9, 0, 0);
+                                pnl_margin = new Padding(0, 9, 10, 0);
                                 pnl.Panel_Placement = "Last";
                             }
                             else
@@ -470,6 +470,42 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 pnl.Panel_Placement = "Somewhere in Between";
                             }
                         }
+                        else if (MPanel_Placement == "Last") //top margin is 9 because of divider on top (8 + 1)
+                        {
+                            if (pnl.Panel_Index_Inside_MPanel == 0)
+                            {
+                                pnl_margin = new Padding(10, 10, 0, 0);
+                                pnl.Panel_Placement = "First";
+                            }
+                            else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2)
+                            {
+                                pnl_margin = new Padding(10, 0, 10, 10);
+                                pnl.Panel_Placement = "Last";
+                            }
+                            else
+                            {
+                                pnl_margin = new Padding(10, 0, 10, 0);
+                                pnl.Panel_Placement = "Somewhere in Between";
+                            }
+                        }
+                        else if (MPanel_Placement == "Somewhere in Between") //top margin is 9 because of divider on top (8 + 1)
+                        {
+                            if (pnl.Panel_Index_Inside_MPanel == 0)
+                            {
+                                pnl_margin = new Padding(10, 10, 0, 0);
+                                pnl.Panel_Placement = "First";
+                            }
+                            else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2)
+                            {
+                                pnl_margin = new Padding(10, 0, 0, 10);
+                                pnl.Panel_Placement = "Last";
+                            }
+                            else
+                            {
+                                pnl_margin = new Padding(10, 0, 0, 0);
+                                pnl.Panel_Placement = "Somewhere in Between";
+                            }
+                        }
                     }
                     else if (pnl.Panel_Parent.Parent.Parent.Name.Contains("Frame")) //if Parent.Parent Frame
                     {
@@ -489,21 +525,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             pnl.Panel_Placement = "Somewhere in Between";
                         }
                     }
-                    //if (pnl.Panel_Index_Inside_MPanel == 0)
-                    //{
-                    //    pnl_margin = new Padding(10, 10, 10, 0);
-                    //    pnl.Panel_Placement = "First";
-                    //}
-                    //else if (pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2)
-                    //{
-                    //    pnl_margin = new Padding(10, 0, 10, 10);
-                    //    pnl.Panel_Placement = "Last";
-                    //}
-                    //else
-                    //{
-                    //    pnl_margin = new Padding(10, 0, 10, 0);
-                    //    pnl.Panel_Placement = "Somewhere in Between";
-                    //}
                 }
                 pnl.Panel_Margin = pnl_margin;
             }
