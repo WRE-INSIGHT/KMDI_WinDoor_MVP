@@ -618,8 +618,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                       fpnl.Height,
-                                                                                                      nxt_obj.Width,
-                                                                                                      nxt_obj.Height,
                                                                                                       nxt_obj.Name,
                                                                                                       _multiPanelModel.MPanel_Placement);
 
@@ -669,8 +667,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                           fpnl.Height,
-                                                                                                          prev_obj.Width,
-                                                                                                          prev_obj.Height,
                                                                                                           prev_obj.Name,
                                                                                                           _multiPanelModel.MPanel_Placement);
 
@@ -695,8 +691,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                       fpnl.Height,
-                                                                                                      prev_obj.Width,
-                                                                                                      prev_obj.Height,
                                                                                                       prev_obj.Name,
                                                                                                       _multiPanelModel.MPanel_Placement);
 
@@ -721,8 +715,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                       fpnl.Height,
-                                                                                                      nxt_obj.Width,
-                                                                                                      nxt_obj.Height,
                                                                                                       nxt_obj.Name,
                                                                                                       _multiPanelModel.MPanel_Placement);
 
@@ -732,8 +724,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             List<Point[]> thisDrawingPoints2 = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                            fpnl.Height,
-                                                                                                           nxt_obj.Width,
-                                                                                                           nxt_obj.Height,
                                                                                                            nxt_obj.Name,
                                                                                                            _multiPanelModel.MPanel_Placement,
                                                                                                            true);
@@ -777,8 +767,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                        
                         List<Point[]> thisDrawingPoints = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
                                                                                                       fpnl.Height,
-                                                                                                      nxt_obj.Width,
-                                                                                                      nxt_obj.Height,
                                                                                                       nxt_obj.Name,
                                                                                                       _multiPanelModel.MPanel_Placement);
 
@@ -828,8 +816,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
                                                                                                           fpnl.Height,
-                                                                                                          prev_obj.Width,
-                                                                                                          prev_obj.Height,
                                                                                                           prev_obj.Name,
                                                                                                           _multiPanelModel.MPanel_Placement);
 
@@ -853,8 +839,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         List<Point[]> thisDrawingPoints = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
                                                                                                       fpnl.Height,
-                                                                                                      prev_obj.Width,
-                                                                                                      prev_obj.Height,
                                                                                                       prev_obj.Name,
                                                                                                       _multiPanelModel.MPanel_Placement);
 
@@ -879,8 +863,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         List<Point[]> thisDrawingPoints = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
                                                                                                       fpnl.Height,
-                                                                                                      nxt_obj.Width,
-                                                                                                      nxt_obj.Height,
                                                                                                       nxt_obj.Name,
                                                                                                       _multiPanelModel.MPanel_Placement);
 
@@ -890,8 +872,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             List<Point[]> thisDrawingPoints2 = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
                                                                                                            fpnl.Height,
-                                                                                                           nxt_obj.Width,
-                                                                                                           nxt_obj.Height,
                                                                                                            nxt_obj.Name,
                                                                                                            _multiPanelModel.MPanel_Placement,
                                                                                                            true);

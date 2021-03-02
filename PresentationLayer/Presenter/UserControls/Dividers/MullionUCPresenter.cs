@@ -106,7 +106,9 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         }
 
         List<Point[]> GetMullionDrawingPoints(int width,
-                                              int height)
+                                              int height,
+                                              string prev_obj,
+                                              string nxt_obj)
         {
             List<Point[]> Mullion_Points = new List<Point[]>();
 
@@ -139,20 +141,39 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             }
             else if (width == 18)
             {
-                leftLine[0] = new Point((width - 26) + 1, 5);
-                leftLine[1] = new Point((width - 26) + 1, Ht_beforeCurve);
-                
-                botCurve[0] = new Point((width - 26) + 1, Ht_beforeCurve);
-                botCurve[1] = new Point((width - 26) + pointX_Mid, accessible_Ht);
-                botCurve[2] = new Point(accessible_Wd, Ht_beforeCurve);
-                
-                rightLine[0] = new Point(accessible_Wd, Ht_beforeCurve);
-                rightLine[1] = new Point(accessible_Wd, 5);
-                
-                upperCurve[0] = new Point(accessible_Wd, 5);
-                upperCurve[1] = new Point((width - 26) + pointX_Mid, 1);
-                upperCurve[2] = new Point((width - 26) + 1, 5);
-                
+                if ((prev_obj.Contains("MultiPanel") && nxt_obj.Contains("PanelUC")) ||
+                    ((prev_obj.Contains("MultiPanel") && nxt_obj == "")))
+                {
+                    leftLine[0] = new Point((width - 26) + 1, 5);
+                    leftLine[1] = new Point((width - 26) + 1, Ht_beforeCurve);
+
+                    botCurve[0] = new Point((width - 26) + 1, Ht_beforeCurve);
+                    botCurve[1] = new Point((width - 26) + pointX_Mid, accessible_Ht);
+                    botCurve[2] = new Point(accessible_Wd, Ht_beforeCurve);
+
+                    rightLine[0] = new Point(accessible_Wd, Ht_beforeCurve);
+                    rightLine[1] = new Point(accessible_Wd, 5);
+
+                    upperCurve[0] = new Point(accessible_Wd, 5);
+                    upperCurve[1] = new Point((width - 26) + pointX_Mid, 1);
+                    upperCurve[2] = new Point((width - 26) + 1, 5);
+                }
+                else if (prev_obj.Contains("PanelUC") && nxt_obj.Contains("MultiPanel"))
+                {
+                    leftLine[0] = new Point(1, 5);
+                    leftLine[1] = new Point(1, Ht_beforeCurve);
+
+                    botCurve[0] = new Point(1, Ht_beforeCurve);
+                    botCurve[1] = new Point(pointX_Mid, accessible_Ht);
+                    botCurve[2] = new Point(accessible_Wd + (26 - width), Ht_beforeCurve);
+
+                    rightLine[0] = new Point(accessible_Wd + (26 - width), Ht_beforeCurve);
+                    rightLine[1] = new Point(accessible_Wd + (26 - width), 5);
+
+                    upperCurve[0] = new Point(accessible_Wd + (26 - width), 5);
+                    upperCurve[1] = new Point(pointX_Mid + 1, 1);
+                    upperCurve[2] = new Point(1, 5);
+                }
             }
             else if (width == 10)
             {
@@ -193,8 +214,25 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             GraphicsPath gpath = new GraphicsPath();
 
+            int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mul);
+            int prev_obj_ndx = this_ndx - 1,
+                next_obj_ndx = this_ndx + 1;
+            string prev_obj_name = "",
+                   next_obj_name = "";
+
+            if (prev_obj_ndx >= 0)
+            {
+                prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
+            }
+            if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
+            {
+                next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
+            }
+
             List<Point[]> TPoints = GetMullionDrawingPoints(mul.Width,
-                                                            mul.Height);
+                                                            mul.Height,
+                                                            prev_obj_name,
+                                                            next_obj_name);
 
             gpath.AddLine(TPoints[0][0], TPoints[0][1]);
             gpath.AddCurve(TPoints[1]);

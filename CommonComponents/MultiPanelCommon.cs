@@ -12,8 +12,6 @@ namespace CommonComponents
     {
         public List<Point[]> GetTransomDividerDrawingPoints(int width,
                                                             int height,
-                                                            int nxtobj_wd,
-                                                            int nxtobj_ht,
                                                             string nxtobj_name,
                                                             string placement,
                                                             bool allowed = false)
@@ -78,8 +76,6 @@ namespace CommonComponents
 
         public List<Point[]> GetMullionDividerDrawingPoints(int width,
                                                             int height,
-                                                            int nxtobj_wd,
-                                                            int nxtobj_ht,
                                                             string nxtobj_name,
                                                             string placement,
                                                             bool allowed = false)

@@ -70,16 +70,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             set
             {
-                int added_height_child_pnls = value - _mpanelWidth;
+                int added_width_child_pnls = value - _mpanelWidth;
                 if (MPanel_Type == "Transom")
                 {
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    {
+                        mpnl.MPanel_Width += added_width_child_pnls;
+                    }
                     foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
                     {
-                        pnl.Panel_Width += added_height_child_pnls;
+                        pnl.Panel_Width += added_width_child_pnls;
                     }
                     foreach (IDividerModel div in MPanelLst_Divider.Where(div => div.Div_Visible == true))
                     {
-                        div.Div_Width += added_height_child_pnls;
+                        div.Div_Width += added_width_child_pnls;
                     }
                 }
                 _mpanelWidth = value;
@@ -100,6 +104,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 int added_height_child_pnls = value - _mpanelHeight;
                 if (MPanel_Type == "Mullion")
                 {
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    {
+                        mpnl.MPanel_Width += added_height_child_pnls;
+                    }
                     foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
                     {
                         pnl.Panel_Height += added_height_child_pnls;
