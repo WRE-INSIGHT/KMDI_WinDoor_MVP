@@ -548,7 +548,7 @@ namespace PresentationLayer.Presenter
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame)
                 {
-                    _frmDimensionPresenter.SetValues(400, 400);
+                    _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = purpose;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
