@@ -103,6 +103,11 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(binding["Frame_Name"]);
         }
 
+        private void pnl_inner_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
         private void FrameUC_DragDrop(object sender, DragEventArgs e)
         {
             EventHelpers.RaiseDragEvent(this, frameDragDropEventRaised, e);
@@ -110,14 +115,7 @@ namespace PresentationLayer.Views.UserControls
 
         private void FrameUC_DragOver(object sender, DragEventArgs e)
         {
-            if (this.Controls.Count == 0)
-            {
-                e.Effect = DragDropEffects.Move;
-            }
-            else if (this.Controls.Count > 0)
-            {
-                e.Effect = DragDropEffects.None;
-            }
+            e.Effect = DragDropEffects.Move;
         }
 
         private void FrameUC_ControlAdded(object sender, ControlEventArgs e)

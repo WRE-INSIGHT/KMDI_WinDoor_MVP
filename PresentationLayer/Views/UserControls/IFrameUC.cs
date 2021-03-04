@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ModelLayer.Model.Quotation.Frame;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -15,7 +14,6 @@ namespace PresentationLayer.Views.UserControls
         bool thisVisible { get; }
         int frameID { get; set; }
         Padding thisPadding { get; set; }
-
         event EventHandler frameLoadEventRaised;
         event EventHandler deleteCmenuEventRaised;
         event EventHandler frameMouseEnterEventRaised;
@@ -31,5 +29,6 @@ namespace PresentationLayer.Views.UserControls
         void DeleteControl(UserControl control);
         void PerformLayoutThis();
         Bitmap GetImageThis();
+        //Panel GetInnerPanel();
     }
 }
