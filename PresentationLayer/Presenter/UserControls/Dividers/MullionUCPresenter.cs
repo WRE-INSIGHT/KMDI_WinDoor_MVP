@@ -92,7 +92,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             Control parent_ctrl = ((UserControl)_mullionUC).Parent;
 
             _divModel.Div_Visible = false;
-            _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_mullionUC);
+            _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_mullionUC, _frameModel.Frame_Type.ToString());
             _multiMullionUCP.DeletePanel((UserControl)_mullionUC);
             _multiMullionUCP.Invalidate_MultiPanelMullionUC();
 
@@ -172,6 +172,22 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                     upperCurve[0] = new Point(accessible_Wd + (26 - width), 5);
                     upperCurve[1] = new Point(pointX_Mid + 1, 1);
+                    upperCurve[2] = new Point(1, 5);
+                }
+                else
+                {
+                    leftLine[0] = new Point(1, 5);
+                    leftLine[1] = new Point(1, Ht_beforeCurve);
+
+                    botCurve[0] = new Point(1, Ht_beforeCurve);
+                    botCurve[1] = new Point(accessible_Wd / 2, accessible_Ht);
+                    botCurve[2] = new Point(accessible_Wd, Ht_beforeCurve);
+
+                    rightLine[0] = new Point(accessible_Wd, Ht_beforeCurve);
+                    rightLine[1] = new Point(accessible_Wd, 5);
+
+                    upperCurve[0] = new Point(accessible_Wd, 5);
+                    upperCurve[1] = new Point(accessible_Wd / 2, 1);
                     upperCurve[2] = new Point(1, 5);
                 }
             }

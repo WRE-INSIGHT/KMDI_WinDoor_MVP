@@ -80,7 +80,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_multiPanelModel != null)
             {
-                _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_slidingPanelUC);
+                _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_slidingPanelUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
             }
             if (_multiPanelMullionUCP != null)

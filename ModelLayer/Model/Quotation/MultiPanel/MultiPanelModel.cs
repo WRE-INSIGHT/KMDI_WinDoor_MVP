@@ -590,9 +590,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return visiblePanelCount + visibleMPanelCount + visibleDivider;
         }
 
-        public void Resize_MyControls(Control current_control)
+        public void Resize_MyControls(Control current_control, string frameType)
         {
             int indx = MPanelLst_Objects.IndexOf(current_control);
+            int pixels_count = 0;
+
+            if (frameType == "Window")
+            {
+                pixels_count = 8;
+            }
+            else if (frameType == "Door")
+            {
+                pixels_count = 10;
+            }
+
             if (current_control.Name.Contains("MultiPanel")) //MultiPanel Block
             {
                 if (indx > 0 && indx % 2 == 0) //indx > 0 && indx == 'Even'
@@ -602,18 +613,18 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         if (prev_ctrl.Name.Contains("Transom"))
                         {
-                            prev_ctrl.Height -= 8;
+                            prev_ctrl.Height -= pixels_count;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                             {
-                                current_control.Height += 8;
+                                current_control.Height += pixels_count;
                             }
                         }
                         else if (prev_ctrl.Name.Contains("Mullion"))
                         {
-                            prev_ctrl.Width -= 8;
+                            prev_ctrl.Width -= pixels_count;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                             {
-                                current_control.Width += 8;
+                                current_control.Width += pixels_count;
                             }
                         }
                     }
@@ -628,23 +639,24 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         if (current_control.Name.Contains("Transom"))
                         {
-                            prev_ctrl.Height += 8;
-                            current_control.Height -= 8;
+                            prev_ctrl.Height += pixels_count;
+                            current_control.Height -= pixels_count;
                         }
                         else if (current_control.Name.Contains("Mullion"))
                         {
-                            prev_ctrl.Width += 8;
-                            current_control.Width -= 8;
+                            prev_ctrl.Width += pixels_count;
+                            current_control.Width -= pixels_count;
                         }
                     }
                 }
             }
+
         }
 
-        public void AddControl_MPanelLstObjects(Control control)
+        public void AddControl_MPanelLstObjects(Control control, string frameType)
         {
             MPanelLst_Objects.Add(control);
-            Resize_MyControls(control);
+            Resize_MyControls(control, frameType);
         }
 
         public int GetCount_MPanelLst_Object()
@@ -652,29 +664,40 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return MPanelLst_Objects.Count();
         }
 
-        public void DeleteControl_MPanelLstObjects(Control control)
+        public void DeleteControl_MPanelLstObjects(Control control, string frameType)
         {
             int prev_indx = MPanelLst_Objects.IndexOf(control) - 1; //get the index of previous control
+            int pixels_count = 0;
+
+            if (frameType == "Window")
+            {
+                pixels_count = 8;
+            }
+            else if (frameType == "Door")
+            {
+                pixels_count = 10;
+            }
+
             if (prev_indx >= 0)
             {
                 if (control.Name.Contains("MultiPanel"))
                 {
                     if (MPanelLst_Objects[prev_indx].Name == "MullionUC")
                     {
-                        MPanelLst_Objects[prev_indx].Width += 8;
+                        MPanelLst_Objects[prev_indx].Width += pixels_count;
                     }
                     else if (MPanelLst_Objects[prev_indx].Name == "TransomUC")
                     {
-                        MPanelLst_Objects[prev_indx].Height += 8;
+                        MPanelLst_Objects[prev_indx].Height += pixels_count;
                     }
                 }
                 else if (control.Name == "MullionUC")
                 {
-                    MPanelLst_Objects[prev_indx].Width -= 8;
+                    MPanelLst_Objects[prev_indx].Width -= pixels_count;
                 }
                 else if (control.Name == "TransomUC")
                 {
-                    MPanelLst_Objects[prev_indx].Height -= 8;
+                    MPanelLst_Objects[prev_indx].Height -= pixels_count;
                 }
             }
             MPanelLst_Objects.Remove(control);
