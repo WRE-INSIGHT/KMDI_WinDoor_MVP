@@ -52,7 +52,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_multiPanelModel != null)
             {
-                _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_casementUC);
+                _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_casementUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
             }
             if (_multiPanelMullionUCP != null)
