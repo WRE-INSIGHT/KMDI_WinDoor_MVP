@@ -14,6 +14,7 @@ namespace CommonComponents
                                                             int height,
                                                             string nxtobj_name,
                                                             string placement,
+                                                            string frameType,
                                                             bool allowed = false)
         {
             List<Point[]> MullionDraw_Points = new List<Point[]>();
@@ -25,12 +26,21 @@ namespace CommonComponents
 
             int accessible_Wd = width - 2,
                 Wd_beforeCurve = width - 5;
+            int pixels_count = 0;
+            if (frameType == "Window")
+            {
+                pixels_count = 8;
+            }
+            if (frameType == "Door")
+            {
+                pixels_count = 10;
+            }
 
             if (placement == "First" || (placement == "Somewhere in Between" && allowed == true))
             {
                 if (nxtobj_name.Contains("Transom"))
                 {
-                    int accessible_Ht_start = height - 8,
+                    int accessible_Ht_start = height - pixels_count,
                         midPoint = height + 4,
                         bot_EndPoint = height + 16;
 

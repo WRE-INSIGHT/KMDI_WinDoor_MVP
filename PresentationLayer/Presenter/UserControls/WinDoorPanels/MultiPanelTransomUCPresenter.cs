@@ -629,7 +629,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                   fpnl.Height,
                                                                                                                   nxt_obj.Name,
-                                                                                                                  _multiPanelModel.MPanel_Placement);
+                                                                                                                  _multiPanelModel.MPanel_Placement,
+                                                                                                                  _frameModel.Frame_Type.ToString());
 
                                     if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
                                     {
@@ -681,7 +682,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                       fpnl.Height,
                                                                                                                       prev_obj.Name,
-                                                                                                                      _multiPanelModel.MPanel_Placement);
+                                                                                                                      _multiPanelModel.MPanel_Placement,
+                                                                                                                      _frameModel.Frame_Type.ToString());
 
                                         gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
                                         gpath.AddCurve(thisDrawingPoints[1]);
@@ -708,7 +710,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                   fpnl.Height,
                                                                                                                   prev_obj.Name,
-                                                                                                                  _multiPanelModel.MPanel_Placement);
+                                                                                                                  _multiPanelModel.MPanel_Placement,
+                                                                                                                  _frameModel.Frame_Type.ToString());
 
                                     gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
                                     gpath.AddCurve(thisDrawingPoints[1]);
@@ -732,6 +735,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                   fpnl.Height,
                                                                                                                   nxt_obj.Name,
+                                                                                                                  _frameModel.Frame_Type.ToString(),
                                                                                                                   _multiPanelModel.MPanel_Placement);
 
                                     if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
@@ -741,6 +745,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         List<Point[]> thisDrawingPoints2 = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                        fpnl.Height,
                                                                                                                        nxt_obj.Name,
+                                                                                                                       _frameModel.Frame_Type.ToString(),
                                                                                                                        _multiPanelModel.MPanel_Placement,
                                                                                                                        true);
 
@@ -816,7 +821,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                           fpnl.Height,
                                                                                                                           nxt_obj.Name,
-                                                                                                                          _multiPanelModel.MPanel_Placement);
+                                                                                                                          _multiPanelModel.MPanel_Placement,
+                                                                                                                          _frameModel.Frame_Type.ToString());
 
                                             if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
                                             {
@@ -878,7 +884,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                 List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                               fpnl.Height,
                                                                                                                               prev_obj.Name,
-                                                                                                                              _multiPanelModel.MPanel_Placement);
+                                                                                                                              _multiPanelModel.MPanel_Placement,
+                                                                                                                              _frameModel.Frame_Type.ToString());
 
                                                 gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
                                                 gpath.AddCurve(thisDrawingPoints[1]);
@@ -931,7 +938,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                           fpnl.Height,
                                                                                                                           prev_obj.Name,
-                                                                                                                          _multiPanelModel.MPanel_Placement);
+                                                                                                                          _multiPanelModel.MPanel_Placement,
+                                                                                                                          _frameModel.Frame_Type.ToString());
 
                                             gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
                                             gpath.AddCurve(thisDrawingPoints[1]);
@@ -955,7 +963,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                           fpnl.Height,
                                                                                                                           nxt_obj.Name,
-                                                                                                                          _multiPanelModel.MPanel_Placement);
+                                                                                                                          _multiPanelModel.MPanel_Placement,
+                                                                                                                          _frameModel.Frame_Type.ToString());
 
                                             if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
                                             {
@@ -965,6 +974,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                                                fpnl.Height,
                                                                                                                                nxt_obj.Name,
                                                                                                                                _multiPanelModel.MPanel_Placement,
+                                                                                                                               _frameModel.Frame_Type.ToString(),
                                                                                                                                true);
 
                                                 gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
@@ -1053,7 +1063,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                           fpnl.Height,
                                                                                                                           nxt_obj.Name,
-                                                                                                                          _multiPanelModel.MPanel_Placement);
+                                                                                                                          _multiPanelModel.MPanel_Placement,
+                                                                                                                          _frameModel.Frame_Type.ToString());
 
                                             if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
                                             {
@@ -1132,7 +1143,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                 List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                               fpnl.Height,
                                                                                                                               prev_obj.Name,
-                                                                                                                              _multiPanelModel.MPanel_Placement);
+                                                                                                                              _multiPanelModel.MPanel_Placement,
+                                                                                                                              _frameModel.Frame_Type.ToString());
 
                                                 gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
                                                 gpath.AddCurve(thisDrawingPoints[1]);
@@ -1214,7 +1226,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                           fpnl.Height,
                                                                                                                           prev_obj.Name,
-                                                                                                                          _multiPanelModel.MPanel_Placement);
+                                                                                                                          _multiPanelModel.MPanel_Placement,
+                                                                                                                          _frameModel.Frame_Type.ToString());
 
                                             gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
                                             gpath.AddCurve(thisDrawingPoints[1]);
@@ -1238,7 +1251,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                           fpnl.Height,
                                                                                                                           nxt_obj.Name,
-                                                                                                                          _multiPanelModel.MPanel_Placement);
+                                                                                                                          _multiPanelModel.MPanel_Placement,
+                                                                                                                          _frameModel.Frame_Type.ToString());
 
                                             if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
                                             {
@@ -1248,6 +1262,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                                                fpnl.Height,
                                                                                                                                nxt_obj.Name,
                                                                                                                                _multiPanelModel.MPanel_Placement,
+                                                                                                                               _frameModel.Frame_Type.ToString(),
                                                                                                                                true);
 
                                                 gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
@@ -1314,7 +1329,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                           fpnl.Height,
                                                                                                                           nxt_obj.Name,
-                                                                                                                          _multiPanelModel.MPanel_Placement);
+                                                                                                                          _multiPanelModel.MPanel_Placement,
+                                                                                                                          _frameModel.Frame_Type.ToString());
 
                                             if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
                                             {
@@ -1377,6 +1393,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                 List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                               fpnl.Height,
                                                                                                                               prev_obj.Name,
+                                                                                                                              _frameModel.Frame_Type.ToString(),
                                                                                                                               _multiPanelModel.MPanel_Placement);
 
                                                 gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
@@ -1431,7 +1448,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                           fpnl.Height,
                                                                                                                           prev_obj.Name,
-                                                                                                                          _multiPanelModel.MPanel_Placement);
+                                                                                                                          _multiPanelModel.MPanel_Placement,
+                                                                                                                          _frameModel.Frame_Type.ToString());
 
                                             gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
                                             gpath.AddCurve(thisDrawingPoints[1]);
@@ -1455,6 +1473,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                           fpnl.Height,
                                                                                                                           nxt_obj.Name,
+                                                                                                                          _frameModel.Frame_Type.ToString(),
                                                                                                                           _multiPanelModel.MPanel_Placement);
 
                                             if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
@@ -1464,6 +1483,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                 List<Point[]> thisDrawingPoints2 = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                                fpnl.Height,
                                                                                                                                nxt_obj.Name,
+                                                                                                                               _frameModel.Frame_Type.ToString(),
                                                                                                                                _multiPanelModel.MPanel_Placement,
                                                                                                                                true);
 
@@ -1720,7 +1740,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     List<Point[]> thisDrawingPoints_forTransom_Bottom = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                                     fpnl.Height,
                                                                                                                                     "Transom",
-                                                                                                                                    _multiPanelModel.MPanel_ParentModel.MPanel_Placement);
+                                                                                                                                    _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
+                                                                                                                                    _frameModel.Frame_Type.ToString());
 
                                     if (_multiPanelModel.MPanel_Placement == "First")
                                     #region this control's Placement is "First"
@@ -1935,13 +1956,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     List<Point[]> thisDrawingPoints_forTransom_Top = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                                     fpnl.Height,
                                                                                                                                     "Transom",
-                                                                                                                                    _multiPanelModel.MPanel_ParentModel.MPanel_Placement);
+                                                                                                                                    _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
+                                                                                                                                    _frameModel.Frame_Type.ToString());
                                     GraphicsPath gpath_forTransom_Bottom = new GraphicsPath();
 
                                     List<Point[]> thisDrawingPoints_forTransom_Bottom = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                                     fpnl.Height,
                                                                                                                                     "Transom",
-                                                                                                                                    "First");
+                                                                                                                                    "First",
+                                                                                                                                    _frameModel.Frame_Type.ToString());
                                     if (_multiPanelModel.MPanel_Placement == "First")
                                     #region this control's Placement is "First"
                                     {
@@ -2209,7 +2232,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     List<Point[]> thisDrawingPoints_forTransom_Top = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
                                                                                                                                     fpnl.Height,
                                                                                                                                     "Transom",
-                                                                                                                                    _multiPanelModel.MPanel_ParentModel.MPanel_Placement);
+                                                                                                                                    _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
+                                                                                                                                    _frameModel.Frame_Type.ToString());
                                     if (_multiPanelModel.MPanel_Placement == "First")
                                     #region this control's Placement is "First"
                                     {

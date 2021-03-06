@@ -126,6 +126,24 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             int pointY_Mid = ((int)(_frameModel.Frame_Type) - 2) / 2;
 
+            int pixels_count = 0;
+            if (height == 18)
+            {
+                pixels_count = 26;
+            }
+            else if (height == 23)
+            {
+                pixels_count = 33;
+            }
+            else if (height == 10)
+            {
+                pixels_count = 18;
+            }
+            else if (height == 13)
+            {
+                pixels_count = 23;
+            }
+
             if (height == 26 || height == 33)
             {
                 upperLine[0] = new Point(5, 1);
@@ -142,24 +160,24 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 leftCurve[1] = new Point(1, accessible_Ht / 2);
                 leftCurve[2] = new Point(5, 1);
             }
-            else if (height == 18)
+            else if (height == 18 || height == 23)
             {
                 if ((prev_obj.Contains("MultiPanel") && nxt_obj.Contains("PanelUC")) ||
                     ((prev_obj.Contains("MultiPanel") && nxt_obj == "")))
                 {
-                    upperLine[0] = new Point(5, (height - 26) + 1);
-                    upperLine[1] = new Point(Wd_beforeCurve, (height - 26) + 1);
+                    upperLine[0] = new Point(5, (height - pixels_count) + 1);
+                    upperLine[1] = new Point(Wd_beforeCurve, (height - pixels_count) + 1);
 
-                    rightCurve[0] = new Point(Wd_beforeCurve, (height - 26) + 1);
-                    rightCurve[1] = new Point(accessible_Wd, (height - 26) + pointY_Mid);
+                    rightCurve[0] = new Point(Wd_beforeCurve, (height - pixels_count) + 1);
+                    rightCurve[1] = new Point(accessible_Wd, (height - pixels_count) + pointY_Mid);
                     rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht);
 
                     botLine[0] = new Point(Wd_beforeCurve, accessible_Ht);
                     botLine[1] = new Point(5, accessible_Ht);
 
                     leftCurve[0] = new Point(5, accessible_Ht);
-                    leftCurve[1] = new Point(1, (height - 26) + pointY_Mid);
-                    leftCurve[2] = new Point(5, (height - 26) + 1);
+                    leftCurve[1] = new Point(1, (height - pixels_count) + pointY_Mid);
+                    leftCurve[2] = new Point(5, (height - pixels_count) + 1);
                 }
                 else if (prev_obj.Contains("PanelUC") && nxt_obj.Contains("MultiPanel"))
                 {
@@ -168,12 +186,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                     rightCurve[0] = new Point(Wd_beforeCurve, 1);
                     rightCurve[1] = new Point(accessible_Wd, pointY_Mid);
-                    rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht + (26 - height));
+                    rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht + (pixels_count - height));
 
-                    botLine[0] = new Point(Wd_beforeCurve, accessible_Ht + (26 - height));
-                    botLine[1] = new Point(5, accessible_Ht + (26 - height));
+                    botLine[0] = new Point(Wd_beforeCurve, accessible_Ht + (pixels_count - height));
+                    botLine[1] = new Point(5, accessible_Ht + (pixels_count - height));
 
-                    leftCurve[0] = new Point(5, accessible_Ht + (26 - height));
+                    leftCurve[0] = new Point(5, accessible_Ht + (pixels_count - height));
                     leftCurve[1] = new Point(1, pointY_Mid + 1);
                     leftCurve[2] = new Point(5, 1);
                 }
@@ -194,21 +212,21 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     leftCurve[2] = new Point(5, 1);
                 }
             }
-            else if (height == 10)
+            else if (height == 10 || height == 13)
             {
-                upperLine[0] = new Point(4, (height - 18) + 1);
-                upperLine[1] = new Point(Wd_beforeCurve, (height - 18) + 1);
+                upperLine[0] = new Point(4, (height - pixels_count) + 1);
+                upperLine[1] = new Point(Wd_beforeCurve, (height - pixels_count) + 1);
 
-                rightCurve[0] = new Point(Wd_beforeCurve, (height - 18) + 1);
-                rightCurve[1] = new Point(accessible_Wd, (height - 18) + pointY_Mid);
+                rightCurve[0] = new Point(Wd_beforeCurve, (height - pixels_count) + 1);
+                rightCurve[1] = new Point(accessible_Wd, (height - pixels_count) + pointY_Mid);
                 rightCurve[2] = new Point(Wd_beforeCurve, accessible_Ht + 8);
 
                 botLine[0] = new Point(Wd_beforeCurve, accessible_Ht + 8);
                 botLine[1] = new Point(4, accessible_Ht + 8);
 
                 leftCurve[0] = new Point(4, accessible_Ht + 8);
-                leftCurve[1] = new Point(1, (height - 18) + pointY_Mid);
-                leftCurve[2] = new Point(4, (height - 18) + 1);
+                leftCurve[1] = new Point(1, (height - pixels_count) + pointY_Mid);
+                leftCurve[2] = new Point(4, (height - pixels_count) + 1);
             }
 
             Transom_Points.Add(upperLine);
