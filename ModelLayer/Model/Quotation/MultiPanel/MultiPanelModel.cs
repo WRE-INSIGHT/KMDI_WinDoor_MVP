@@ -106,7 +106,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
                     {
-                        mpnl.MPanel_Width += added_height_child_pnls;
+                        mpnl.MPanel_Height += added_height_child_pnls;
                     }
                     foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
                     {
