@@ -211,6 +211,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                 _mainPresenter,
                                                                                 _frameUCP,
                                                                                 this,
+                                                                                _multiPanelTransomUCP,
                                                                                 multiPropUCP);
                         IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                         fpnl.Controls.Add((UserControl)multiUC);
@@ -517,12 +518,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
 
             _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)_multiPanelMullionUC);
-
-            //if (_multiPanelTransomUCP != null)
-            //{
-            //    _multiPanelTransomUCP.DeletePanel((UserControl)_multiPanelMullionUC);
-            //}
-
+            
             if (_multiPanelModel.MPanel_Parent != null)
             {
                 _multiPanelModel.MPanelProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin;;
@@ -540,7 +536,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelMullionUC_divCountClickedEventRaised(object sender, EventArgs e)
         {
-            string input = Interaction.InputBox("Input no. of division", "WinDoor Maker", "1");
+            string input = Interaction.InputBox("Input no. of division for " + _multiPanelModel.MPanel_Name, "WinDoor Maker", "1");
             if (input != "" && input != "0")
             {
                 try
@@ -1550,9 +1546,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         #endregion
 
                         else if (_multiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Type == "Transom")
+                        #region checking of 2nd level ParentModel if "Transom"
                         {
 
                         }
+                        #endregion
                     }
                     #endregion
                 }
@@ -2533,6 +2531,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                             IMainPresenter mainPresenter,
                                                             IFrameUCPresenter frameUCP,
                                                             IMultiPanelMullionUCPresenter multiPanelMullionUCP,
+                                                            IMultiPanelTransomUCPresenter multiPanelTransomUCP,
                                                             IMultiPanelPropertiesUCPresenter multiPropUCP)
         {
             unityC
@@ -2545,6 +2544,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiMullionUCP._mainPresenter = mainPresenter;
             multiMullionUCP._frameUCP = frameUCP;
             multiMullionUCP._multiPanelMullionUCP = multiPanelMullionUCP;
+            multiMullionUCP._multiPanelTransomUCP = multiPanelTransomUCP;
             multiMullionUCP._multiPropUCP2_given = multiPropUCP;
 
             return multiMullionUCP;
