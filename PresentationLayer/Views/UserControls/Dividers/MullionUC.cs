@@ -46,6 +46,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Div_ID"]);
+            this.DataBindings.Add(ModelBinding["Div_Name"]);
             this.DataBindings.Add(ModelBinding["Div_Visible"]);
             this.DataBindings.Add(ModelBinding["Div_Width"]);
             this.DataBindings.Add(ModelBinding["Div_Height"]);

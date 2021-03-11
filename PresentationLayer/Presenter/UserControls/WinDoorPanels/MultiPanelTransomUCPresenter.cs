@@ -224,13 +224,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         else if (mPanelModel.MPanel_Placement != "Last")
                         {
                             IDividerModel divModel = _divServices.AddDividerModel(fpnl.Width,
-                                                                      divSize,
-                                                                      fpnl,
-                                                                      (UserControl)_frameUCP.GetFrameUC(),
-                                                                      DividerModel.DividerType.Transom,
-                                                                      true,
-                                                                      divID,
-                                                                      _frameModel.Frame_Type.ToString());
+                                                                                  divSize,
+                                                                                  fpnl,
+                                                                                  (UserControl)_frameUCP.GetFrameUC(),
+                                                                                  DividerModel.DividerType.Transom,
+                                                                                  true,
+                                                                                  divID,
+                                                                                  _frameModel.Frame_Type.ToString());
 
                             _frameModel.Lst_Divider.Add(divModel);
                             _multiPanelModel.MPanelLst_Divider.Add(divModel);
@@ -446,6 +446,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelTransomUC_deleteClickedEventRaised(object sender, EventArgs e)
         {
+            #region Delete TransomUC
+            if (_multiPanelModel.MPanel_ParentModel != null &&
+                _multiPanelModel.MPanel_Placement != "Last")
+            {
+                int this_indx = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.IndexOf((UserControl)_multiPanelTransomUC);
+
+                Control divUC = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects[this_indx + 1];
+                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)divUC, _frameModel.Frame_Type.ToString());
+                DeletePanel((UserControl)divUC);
+
+                IDividerModel div = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
+                div.Div_Visible = false;
+            }
+            #endregion
+
+            #region Delete MultiPanel Transom
             FlowLayoutPanel innerFlp = (FlowLayoutPanel)((UserControl)_multiPanelTransomUC).Controls[0];
             Control parent_ctrl = ((UserControl)_multiPanelTransomUC).Parent;
 
@@ -506,8 +522,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     ctrl.Invalidate();
                 }
             }
+            #endregion
         }
-        
+
         private void _multiPanelTransomUC_divCountClickedEventRaised(object sender, EventArgs e)
         {
             string input = Interaction.InputBox("Input no. of division for " + _multiPanelModel.MPanel_Name, "WinDoor Maker", "1");
@@ -580,6 +597,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Rectangle bounds = new Rectangle();
             Pen pen = new Pen(Color.Black, 2);
 
+            List<Point[]> thisDrawingPoints = null,
+                          thisDrawingPoints2 = null,
+                          thisDrawingPoints_forMullion_RightSide = null,
+                          thisDrawingPoints_forMullion_LeftSide = null;
+
             int pixels_count = 0;
             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
             {
@@ -616,13 +638,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
                 Control nxt_obj = null,
                         prev_obj = null;
-                
-                List<Point[]> thisDrawingPoints = null,
-                              thisDrawingPoints2 = null;
+
+                GraphicsPath gpath_forMullion_RightSide = new GraphicsPath();
+                GraphicsPath gpath_forMullion_LeftSide = new GraphicsPath();
+
 
                 #region Variable Declaration
-                if (parent_name.Contains("MultiTransom")) //&&
-                    //parent_doxtyle == DockStyle.Fill)
+
+                #region MAIN PLATFORM Parent_Type
+                if (parent_doxtyle == DockStyle.None)
+                {
+                    lvl2_parent_Type = _multiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Type;
+                }
+                #endregion
+
+                #region thisDrawingPoints and thisDrawingPoints2
+                if (parent_name.Contains("MultiTransom"))
                 {
                     if (parent_mpnl_childObj_count > indx_NxtObj)
                     {
@@ -633,6 +664,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                         nxt_obj.Name,
                                                                                         _multiPanelModel.MPanel_Placement,
                                                                                         _frameModel.Frame_Type.ToString());
+                        if (lvl2_parent_Type == "Transom" && thisObj_placement == "First")
+                        {
+                            string placement_str = (parentObj_placement == "Last") ? "Somewhere in Between" : parentObj_placement;
+                            thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
+                                                                                            fpnl.Height,
+                                                                                            "TransomUC",
+                                                                                            placement_str,
+                                                                                            _frameModel.Frame_Type.ToString());
+
+                            thisDrawingPoints2 = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
+                                                                                             fpnl.Height,
+                                                                                             nxt_obj.Name,
+                                                                                             _multiPanelModel.MPanel_Placement,
+                                                                                             _frameModel.Frame_Type.ToString(),
+                                                                                             true);
+                        }
                     }
                     if (thisObj_placement == "Last" || thisObj_placement == "Somewhere in Between")
                     {
@@ -651,10 +698,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                              _frameModel.Frame_Type.ToString(),
                                                                                              true);
                         }
+
+                        if ((thisObj_placement == "Last" && lvl2_parent_Type == "Transom") || 
+                             thisObj_placement == "Somewhere in Between")
+                        {
+                            thisDrawingPoints2 = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
+                                                                                             fpnl.Height,
+                                                                                             "TransomUC",
+                                                                                             "Somewhere in Between",
+                                                                                             _frameModel.Frame_Type.ToString(),
+                                                                                             true);
+                        }
                     }
                 }
-                else if (parent_name.Contains("MultiMullion")) // &&
-                         ///parent_doxtyle == DockStyle.Fill)
+                else if (parent_name.Contains("MultiMullion")) 
                 {
                     if (parent_mpnl_childObj_count > indx_NxtObj)
                     {
@@ -684,20 +741,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                     }
                 }
+                #endregion
 
-                if (parent_doxtyle == DockStyle.None)
-                {
-                    lvl2_parent_Type = _multiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Type;
-                }
-
+                #region bounds declaration
                 int wd_deduction = 0,
                     ht_deduction = 0,
                     bounds_PointX = 0,
                     bounds_PointY = 0;
                 Rectangle topbounds = new Rectangle();
                 Rectangle botbounds = new Rectangle();
+                Rectangle leftbounds = new Rectangle();
+                Rectangle rightbounds = new Rectangle();
 
                 if (parent_name.Contains("MultiTransom"))
+                #region Parent is MultiPanel Transom
                 {
                     wd_deduction = 20;
                     bounds_PointX = 10;
@@ -721,10 +778,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     else if (thisObj_placement == "Somewhere in Between")
                     {
                         bounds_PointY = pixels_count + 2;
-                        ht_deduction = (pixels_count + 3);
+                        ht_deduction = (pixels_count + 2) * 2;
+                        if (parent_doxtyle == DockStyle.None)
+                        {
+                            bounds_PointY = (pixels_count + 2 == 10) ? pixels_count + 2 : 10;
+                            ht_deduction = 10 + (pixels_count + 1);
+                        }
                     }
                 }
+                #endregion
+
                 else if (parent_name.Contains("MultiMullion"))
+                #region Parent is MultiPanel Mullion
                 {
                     bounds_PointY = 10;
                     ht_deduction = 20;
@@ -732,24 +797,61 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         bounds_PointX = 10;
                         wd_deduction = (10 + (pixels_count + 1));
+                        leftbounds = new Rectangle(new Point(0, 0),
+                                                   new Size(10, fpnl.Height));
+                        rightbounds = new Rectangle(new Point(fpnl.Width - 10, 11),
+                                                    new Size(18, fpnl.Height - 18));
                     }
                     else if (thisObj_placement == "Last")
                     {
                         bounds_PointX = pixels_count + 2;
                         wd_deduction = ((pixels_count + 2) * 2) - 1;
+                        leftbounds = new Rectangle(new Point(11, 0),
+                                                   new Size(11, fpnl.Height));
+
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
                         bounds_PointX = pixels_count + 2;
-                        wd_deduction = (pixels_count + 3);
+                        wd_deduction = (pixels_count + 2) * 2;
+                        //wd_deduction = (pixels_count + 3);
                     }
                 }
+                #endregion
 
                 bounds = new Rectangle(new Point(bounds_PointX, bounds_PointY),
                                        new Size(fpnl.Width - wd_deduction,
                                                 fpnl.Height - ht_deduction));
+                #endregion
+
+                #region 'thisDrawingPoints_for..' of this obj when the Parent obj has doxtyle.None
+
+                string placement_str_forMullion_RightSide = "";
+                if (parentObj_placement == "First")
+                {
+                    placement_str_forMullion_RightSide = _multiPanelModel.MPanel_ParentModel.MPanel_Placement;
+                }
+                else if (parentObj_placement == "Somewhere in Between")
+                {
+                    placement_str_forMullion_RightSide = "First";
+                }
+
+                thisDrawingPoints_forMullion_RightSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
+                                                                                                     fpnl.Height,
+                                                                                                     "Mullion",
+                                                                                                     placement_str_forMullion_RightSide,
+                                                                                                     _frameModel.Frame_Type.ToString()); //4th parameter must be the placement of the parent control
+
+                thisDrawingPoints_forMullion_LeftSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
+                                                                                                    fpnl.Height,
+                                                                                                    "Mullion",
+                                                                                                    _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
+                                                                                                    _frameModel.Frame_Type.ToString()); //4th parameter must be the placement of the parent control
+                #endregion
 
                 #endregion
+
+                #region MAIN GRAPHICS ALGORITHM
 
                 if (parent_name.Contains("MultiTransom") && 
                     parent_doxtyle == DockStyle.Fill &&
@@ -761,25 +863,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     for (int i = 0; i < corner_points.Length - 5; i += 2)
                     {
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
-                    }
-
-                    if (parent_mpnl_childObj_count > indx_NxtObj)
-                    {
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                            gpath.AddCurve(thisDrawingPoints[1]);
-                            gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                            gpath.AddCurve(thisDrawingPoints[3]);
-
-                            g.DrawPath(pen, gpath);
-                            g.FillPath(Brushes.PowderBlue, gpath);
-                        }
-                    }
-                    else
-                    {
-                        g.DrawRectangle(new Pen(Color.Black, 1), botbounds);
-                        g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), botbounds);
                     }
                 }
                 #endregion
@@ -795,24 +878,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                     }
-
-                    if (parent_mpnl_childObj_count > indx_PrevObj)
-                    {
-                        gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                        gpath.AddCurve(thisDrawingPoints[1]);
-                        gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                        gpath.AddCurve(thisDrawingPoints[3]);
-
-                        g.DrawPath(pen, gpath);
-                        g.FillPath(Brushes.PowderBlue, gpath);
-
-                        //if ((prev_obj.Name.Contains("Transom") ||
-                        //     prev_obj.Name.Contains("Mullion")) &&
-                        //     !prev_obj.Name.Contains("MultiPanel")) //Divider
-                        //{
-                            
-                        //}
-                    }
                 }
                 #endregion
 
@@ -821,36 +886,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a MAIN PLATFORM (MultiTransom)
                 {
-                    gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                    gpath.AddCurve(thisDrawingPoints[1]);
-                    gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                    gpath.AddCurve(thisDrawingPoints[3]);
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
 
-                    g.DrawPath(pen, gpath);
-                    g.FillPath(Brushes.PowderBlue, gpath);
-
-                    //bounds = new Rectangle(new Point(10, pixels_count + 2),
-                    //                       new Size(fpnl.Width - 20,
-                    //                                fpnl.Height - (pixels_count + 3)));
-
-                    //Check if has nxt_obj to Draw the nxt transom Obj
-                    if (parent_mpnl_childObj_count > indx_NxtObj)
-                    {
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[1]);
-                            gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[3]);
-
-                            g.DrawPath(pen, gpath2);
-                            g.FillPath(Brushes.PowderBlue, gpath2);
-
-                            bounds = new Rectangle(new Point(10, pixels_count + 2),
-                                                   new Size(fpnl.Width - 20,
-                                                            fpnl.Height - ((pixels_count + 2) * 2)));
-                        }
-                    }
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
                 }
                 #endregion
 
@@ -860,36 +902,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 #region First Multi-Panel in a MAIN PLATFORM (MultiMullion)
                 {
                     {
-                        Rectangle leftbounds = new Rectangle(new Point(0, 0),
-                                                             new Size(10, fpnl.Height));
                         g.FillRectangle(new SolidBrush(SystemColors.Control), leftbounds);
 
                         g.DrawLine(Pens.Black, new Point(0, 0),
                                                new Point(pInnerX, pInnerY));
                         g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
                                                new Point(pInnerX, pInnerY + pInnerHt));
-                        
-                        if (parent_mpnl_childObj_count > indx_NxtObj)
-                        {
-                            if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                            {
-                                gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                                gpath.AddCurve(thisDrawingPoints[1]);
-                                gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                                gpath.AddCurve(thisDrawingPoints[3]);
-
-                                g.DrawPath(pen, gpath);
-                                g.FillPath(Brushes.PowderBlue, gpath);
-                            }
-                        }
-                        else
-                        {
-                            Rectangle rightbounds = new Rectangle(new Point(fpnl.Width - 10, 10),
-                                                                  new Size(18, fpnl.Height - 20));
-                            g.DrawRectangle(new Pen(Color.Black, 1), rightbounds);
-                            g.FillRectangle(new SolidBrush(Color.MistyRose), new Rectangle(new Point(rightbounds.X, rightbounds.Y + 1),
-                                                                                           new Size(rightbounds.Width, rightbounds.Height - 2)));
-                        }
                     }
                 }
                 #endregion
@@ -899,33 +917,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last Multi-Panel in MAIN PLATFORM (MultiMullion)
                 {
-                    Rectangle leftbounds = new Rectangle(new Point(11, 0),
-                                                         new Size(11, fpnl.Height));
-
                     g.FillRectangle(new SolidBrush(SystemColors.Control), leftbounds);
 
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
                                            new Point(pInnerX + pInnerWd, pInnerY));
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
-
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_PrevObj)
-                    {
-                        gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                        gpath.AddCurve(thisDrawingPoints[1]);
-                        gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                        gpath.AddCurve(thisDrawingPoints[3]);
-
-                        g.DrawPath(pen, gpath);
-                        g.FillPath(Brushes.PowderBlue, gpath);
-
-                        //if ((prev_obj.Name.Contains("Transom") ||
-                        //     prev_obj.Name.Contains("Mullion")) &&
-                        //     !prev_obj.Name.Contains("MultiPanel")) //Divider
-                        //{
-                            
-                        //}
-                    }
                 }
                 #endregion
 
@@ -934,31 +931,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between Multi-Panel in MAIN PLATFORM (MultiMullion)
                 {
-                    gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                    gpath.AddCurve(thisDrawingPoints[1]);
-                    gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                    gpath.AddCurve(thisDrawingPoints[3]);
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
 
-                    g.DrawPath(pen, gpath);
-                    g.FillPath(Brushes.PowderBlue, gpath);
-                    
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
-                    {
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[1]);
-                            gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[3]);
-
-                            g.DrawPath(pen, gpath2);
-                            g.FillPath(Brushes.PowderBlue, gpath2);
-
-                            bounds = new Rectangle(new Point(pixels_count + 2, 10),
-                                                   new Size(fpnl.Width - ((pixels_count + 2) * 2),
-                                                            fpnl.Height - 20));
-                        }
-                    }
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
                 }
                 #endregion
 
@@ -973,15 +952,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     g.DrawLine(Pens.Black, new Point(0, 0), new Point(pInnerX, pInnerY));
 
-                    GraphicsPath gpath_forMullion_RightSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_RightSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
-                                                                                                                       _frameModel.Frame_Type.ToString()); //4th parameter must be the placement of the parent control
                     gpath_forMullion_RightSide.AddLine(thisDrawingPoints_forMullion_RightSide[0][0],
-                                                      new Point(thisDrawingPoints_forMullion_RightSide[0][1].X,
+                                                       new Point(thisDrawingPoints_forMullion_RightSide[0][1].X,
                                                                 thisDrawingPoints_forMullion_RightSide[0][1].Y + 20));
                     Point[] new_botCurve = new Point[3];
                     new_botCurve[0] = new Point(thisDrawingPoints_forMullion_RightSide[1][0].X,
@@ -996,25 +968,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     g.DrawPath(pen, gpath_forMullion_RightSide);
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_RightSide);
-
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
-                    { 
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                            gpath.AddCurve(thisDrawingPoints[1]);
-                            gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                            gpath.AddCurve(thisDrawingPoints[3]);
-
-                            g.DrawPath(pen, gpath);
-                            g.FillPath(Brushes.PowderBlue, gpath);
-                        }
-                    }
-                    else
-                    {
-                        g.DrawRectangle(new Pen(Color.Black, 1), botbounds);
-                        g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), botbounds);
-                    }
                 }
                 #endregion
 
@@ -1025,24 +978,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    //Rectangle botbounds = new Rectangle(new Point(0, fpnl.Height - 11),
-                    //                                    new Size(fpnl.Width, 11));
-
                     g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
 
                     g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height), new Point(pInnerX, pInnerY + pInnerHt));
 
-                    //bounds = new Rectangle(new Point(10, 10),
-                    //                       new Size(fpnl.Width - 20,
-                    //                                fpnl.Height - (10 + (pixels_count + 1))));
-
-                    GraphicsPath gpath_forMullion_RightSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_RightSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
-                                                                                                                       _frameModel.Frame_Type.ToString());//4th parameter must be the placement of the parent control
                     gpath_forMullion_RightSide.AddLine(thisDrawingPoints_forMullion_RightSide[0][0], thisDrawingPoints_forMullion_RightSide[0][1]);
                     gpath_forMullion_RightSide.AddCurve(thisDrawingPoints_forMullion_RightSide[1]);
                     gpath_forMullion_RightSide.AddLine(thisDrawingPoints_forMullion_RightSide[2][0], thisDrawingPoints_forMullion_RightSide[2][1]);
@@ -1052,32 +991,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_RightSide);
 
                     g.DrawCurve(new Pen(Color.PowderBlue, 2), thisDrawingPoints_forMullion_RightSide[3]);
-
-                    //indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_PrevObj)
-                    {
-                        //prev_obj = parent_mpnl.MPanelLst_Objects[indx_PrevObj];
-
-                        gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                        gpath.AddCurve(thisDrawingPoints[1]);
-                        gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                        gpath.AddCurve(thisDrawingPoints[3]);
-
-                        g.DrawPath(pen, gpath);
-                        g.FillPath(Brushes.PowderBlue, gpath);
-
-                        //if ((prev_obj.Name.Contains("Transom") ||
-                        //     prev_obj.Name.Contains("Mullion")) &&
-                        //     !prev_obj.Name.Contains("MultiPanel")) //Divider
-                        //{
-                        //    //List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                        //    //                                                                              fpnl.Height,
-                        //    //                                                                              prev_obj.Name,
-                        //    //                                                                              _multiPanelModel.MPanel_Placement,
-                        //    //                                                                              _frameModel.Frame_Type.ToString());
-
-                        //}
-                    }
                 }
                 #endregion
 
@@ -1085,16 +998,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          parent_doxtyle == DockStyle.None &&
                          lvl2_parent_Type == "Mullion" &&
                          parentObj_placement == "First" &&
-                         thisObj_placement == "Somewhere in Between") //may bounds declaration pa d2
+                         thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    GraphicsPath gpath_forMullion_RightSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_RightSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
-                                                                                                                       _frameModel.Frame_Type.ToString());//4th parameter must be the placement of the parent control
                     gpath_forMullion_RightSide.AddLine(thisDrawingPoints_forMullion_RightSide[0][0], thisDrawingPoints_forMullion_RightSide[0][1]);
                     Point[] new_botCurve = new Point[3];
                     new_botCurve[0] = new Point(thisDrawingPoints_forMullion_RightSide[1][0].X,
@@ -1117,35 +1023,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawPath(pen, gpath_forMullion_RightSide);
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_RightSide);
 
-                    gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                    gpath.AddCurve(thisDrawingPoints[1]);
-                    gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                    gpath.AddCurve(thisDrawingPoints[3]);
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
 
-                    g.DrawPath(pen, gpath);
-                    g.FillPath(Brushes.PowderBlue, gpath);
-                    bounds = new Rectangle(new Point(10, 10),
-                                           new Size(fpnl.Width - 20,
-                                                    fpnl.Height - (10 + (pixels_count + 1))));
-
-                    //Check if has nxt_obj to Draw the nxt transom Obj
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
-                    {
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[1]);
-                            gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[3]);
-
-                            g.DrawPath(pen, gpath2);
-                            g.FillPath(Brushes.PowderBlue, gpath2);
-
-                            bounds = new Rectangle(new Point(10, 10),
-                                                   new Size(fpnl.Width - 20,
-                                                            fpnl.Height - (10 + (pixels_count + 1))));
-                        }
-                    }
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
                 }
                 #endregion
 
@@ -1156,22 +1040,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    //Rectangle topbounds = new Rectangle(new Point(0, 0),
-                    //                                    new Size(fpnl.Width, 10));
-
                     g.FillRectangle(new SolidBrush(SystemColors.Control), topbounds);
 
-                    //bounds = new Rectangle(new Point(10, 10),
-                    //                       new Size(fpnl.Width - 20, 
-                    //                                fpnl.Height - 19));
-
-                    GraphicsPath gpath_forMullion_LeftSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_LeftSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
-                                                                                                                       _frameModel.Frame_Type.ToString()); //4th parameter must be the placement of the parent control
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[0][0],
                                                       new Point(thisDrawingPoints_forMullion_LeftSide[0][1].X,
                                                                 thisDrawingPoints_forMullion_LeftSide[0][1].Y + 20));
@@ -1189,16 +1059,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawPath(pen, gpath_forMullion_LeftSide);
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_LeftSide);
 
-                    GraphicsPath gpath_forMullion_RightSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_RightSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       "First",
-                                                                                                                       _frameModel.Frame_Type.ToString()); // Apply the string "First" on the 4th params to get the right side mullion
                     gpath_forMullion_RightSide.AddLine(thisDrawingPoints_forMullion_RightSide[0][0],
-                                                      new Point(thisDrawingPoints_forMullion_RightSide[0][1].X,
-                                                                thisDrawingPoints_forMullion_RightSide[0][1].Y + 20));
+                                                       new Point(thisDrawingPoints_forMullion_RightSide[0][1].X,
+                                                                 thisDrawingPoints_forMullion_RightSide[0][1].Y + 20));
                     Point[] new_botCurve2 = new Point[3];
                     new_botCurve2[0] = new Point(thisDrawingPoints_forMullion_RightSide[1][0].X,
                                                 thisDrawingPoints_forMullion_RightSide[1][0].Y + 20); // add 20 units to hide the curvature
@@ -1212,39 +1075,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     g.DrawPath(pen, gpath_forMullion_RightSide);
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_RightSide);
-
-                    //indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1;
-
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
-                    {
-                        //nxt_obj = parent_mpnl.MPanelLst_Objects[indx_NxtObj]; //Either Mpanel or Divider
-
-                        //List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                        //                                                                              fpnl.Height,
-                        //                                                                              nxt_obj.Name,
-                        //                                                                              _multiPanelModel.MPanel_Placement,
-                        //                                                                              _frameModel.Frame_Type.ToString());
-
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                            gpath.AddCurve(thisDrawingPoints[1]);
-                            gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                            gpath.AddCurve(thisDrawingPoints[3]);
-
-                            g.DrawPath(pen, gpath);
-                            g.FillPath(Brushes.PowderBlue, gpath);
-                        }
-                    }
-                    else
-                    {
-                        //Rectangle botbounds = new Rectangle(new Point(10, fpnl.Height - 18),
-                        //                                    new Size(fpnl.Width - 20, 18));
-                        g.DrawRectangle(new Pen(Color.Black, 1), botbounds);
-                        g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), botbounds);
-                        //g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), new Rectangle(new Point(botbounds.X + 1, botbounds.Y),
-                        //                                                                          new Size(botbounds.Size.Width - 2, botbounds.Height)));
-                    }
                 }
                 #endregion
 
@@ -1255,40 +1085,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    //Rectangle botbounds = new Rectangle(new Point(0, fpnl.Height - 11),
-                    //                                    new Size(fpnl.Width, 11));
-
                     g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
-
-                    //bounds = new Rectangle(new Point(10, 10),
-                    //                       new Size(fpnl.Width - 20, 
-                    //                                fpnl.Height - 20));
-
-                    GraphicsPath gpath_forMullion_LeftSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_LeftSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
-                                                                                                                       _frameModel.Frame_Type.ToString());//4th parameter must be the placement of the parent control
+                    
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[0][0], thisDrawingPoints_forMullion_LeftSide[0][1]);
                     gpath_forMullion_LeftSide.AddCurve(thisDrawingPoints_forMullion_LeftSide[1]);
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[2][0], thisDrawingPoints_forMullion_LeftSide[2][1]);
-                    gpath_forMullion_LeftSide.AddCurve(thisDrawingPoints_forMullion_LeftSide[3]);
+                    Point[] new_upperCurve = new Point[3];
+                    new_upperCurve[0] = new Point(thisDrawingPoints_forMullion_LeftSide[3][0].X, thisDrawingPoints_forMullion_LeftSide[3][0].Y - 20);
+                    new_upperCurve[1] = new Point(thisDrawingPoints_forMullion_LeftSide[3][1].X, thisDrawingPoints_forMullion_LeftSide[3][1].Y - 20);
+                    new_upperCurve[2] = new Point(thisDrawingPoints_forMullion_LeftSide[3][2].X, thisDrawingPoints_forMullion_LeftSide[3][2].Y - 20);
+                    gpath_forMullion_LeftSide.AddCurve(new_upperCurve);
 
                     g.DrawPath(pen, gpath_forMullion_LeftSide);
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_LeftSide);
 
                     g.DrawCurve(new Pen(Color.PowderBlue, 2), thisDrawingPoints_forMullion_LeftSide[3]);
 
-
-                    GraphicsPath gpath_forMullion_RightSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_RightSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       "First",
-                                                                                                                       _frameModel.Frame_Type.ToString());
                     gpath_forMullion_RightSide.AddLine(thisDrawingPoints_forMullion_RightSide[0][0], thisDrawingPoints_forMullion_RightSide[0][1]);
                     gpath_forMullion_LeftSide.AddCurve(thisDrawingPoints_forMullion_RightSide[1]);
                     gpath_forMullion_RightSide.AddCurve(thisDrawingPoints_forMullion_RightSide[1]);
@@ -1299,32 +1111,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_RightSide);
 
                     g.DrawCurve(new Pen(Color.PowderBlue, 2), thisDrawingPoints_forMullion_RightSide[3]);
-
-                    //indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_PrevObj)
-                    {
-                        //prev_obj = parent_mpnl.MPanelLst_Objects[indx_PrevObj];
-
-                        gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                        gpath.AddCurve(thisDrawingPoints[1]);
-                        gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                        gpath.AddCurve(thisDrawingPoints[3]);
-
-                        g.DrawPath(pen, gpath);
-                        g.FillPath(Brushes.PowderBlue, gpath);
-
-                        //if ((prev_obj.Name.Contains("Transom") ||
-                        //     prev_obj.Name.Contains("Mullion")) &&
-                        //     !prev_obj.Name.Contains("MultiPanel")) //Divider
-                        //{
-                        //    //List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                        //    //                                                                              fpnl.Height,
-                        //    //                                                                              prev_obj.Name,
-                        //    //                                                                              _multiPanelModel.MPanel_Placement,
-                        //    //                                                                              _frameModel.Frame_Type.ToString());
-
-                        //}
-                    }
                 }
                 #endregion
 
@@ -1332,16 +1118,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          parent_doxtyle == DockStyle.None &&
                          lvl2_parent_Type == "Mullion" &&
                          parentObj_placement == "Somewhere in Between" &&
-                         thisObj_placement == "Somewhere in Between") //may bounds declaration pa d2
+                         thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    GraphicsPath gpath_forMullion_LeftSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_LeftSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
-                                                                                                                       _frameModel.Frame_Type.ToString());//4th parameter must be the placement of the parent control
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[0][0], thisDrawingPoints_forMullion_LeftSide[0][1]);
                     Point[] new_botCurve = new Point[3];
                     new_botCurve[0] = new Point(thisDrawingPoints_forMullion_LeftSide[1][0].X,
@@ -1363,15 +1142,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     g.DrawPath(pen, gpath_forMullion_LeftSide);
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_LeftSide);
-
-
-                    GraphicsPath gpath_forMullion_RightSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_RightSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       "First",
-                                                                                                                       _frameModel.Frame_Type.ToString());// Apply the string "First" on the 4th params to get the right side mullion
+                    
                     gpath_forMullion_RightSide.AddLine(thisDrawingPoints_forMullion_RightSide[0][0], thisDrawingPoints_forMullion_RightSide[0][1]);
                     Point[] new_botCurve2 = new Point[3];
                     new_botCurve2[0] = new Point(thisDrawingPoints_forMullion_RightSide[1][0].X,
@@ -1394,67 +1165,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawPath(pen, gpath_forMullion_RightSide);
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_RightSide);
 
-                    //indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
-                    //prev_obj = parent_mpnl.MPanelLst_Objects[indx_PrevObj];
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
 
-                    if ((prev_obj.Name.Contains("Transom") ||
-                         prev_obj.Name.Contains("Mullion")) &&
-                         !prev_obj.Name.Contains("MultiPanel")) //Divider
-                    {
-                        //List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                        //                                                                              fpnl.Height,
-                        //                                                                              prev_obj.Name,
-                        //                                                                              _multiPanelModel.MPanel_Placement,
-                        //                                                                              _frameModel.Frame_Type.ToString());
-
-                        gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                        gpath.AddCurve(thisDrawingPoints[1]);
-                        gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                        gpath.AddCurve(thisDrawingPoints[3]);
-
-                        g.DrawPath(pen, gpath);
-                        g.FillPath(Brushes.PowderBlue, gpath);
-                        //bounds = new Rectangle(new Point(10, 10),
-                        //                       new Size(fpnl.Width - 20, 
-                        //                                fpnl.Height - 11));
-                    }
-
-                    //Check if has nxt_obj to Draw the nxt transom Obj
-                    indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1;
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
-                    {
-                        nxt_obj = parent_mpnl.MPanelLst_Objects[indx_NxtObj]; //Either Mpanel or Divider
-
-                        //List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                        //                                                                              fpnl.Height,
-                        //                                                                              nxt_obj.Name,
-                        //                                                                              _multiPanelModel.MPanel_Placement,
-                        //                                                                              _frameModel.Frame_Type.ToString());
-
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            //GraphicsPath gpath2 = new GraphicsPath();
-
-                            //List<Point[]> thisDrawingPoints2 = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                            //                                                                               fpnl.Height,
-                            //                                                                               nxt_obj.Name,
-                            //                                                                               _multiPanelModel.MPanel_Placement,
-                            //                                                                               _frameModel.Frame_Type.ToString(),
-                            //                                                                               true);
-
-                            gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[1]);
-                            gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[3]);
-
-                            g.DrawPath(pen, gpath2);
-                            g.FillPath(Brushes.PowderBlue, gpath2);
-
-                            bounds = new Rectangle(new Point(10, 10),
-                                                   new Size(fpnl.Width - 20,
-                                                            fpnl.Height - 20));
-                        }
-                    }
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
                 }
                 #endregion
 
@@ -1465,22 +1182,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First in a LAST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion) 
                 {
-                    //Rectangle topbounds = new Rectangle(new Point(0, 0),
-                    //                                    new Size(fpnl.Width, 10));
-
                     g.FillRectangle(new SolidBrush(SystemColors.Control), topbounds);
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0), new Point(pInnerX + pInnerWd, pInnerY));
-
-                    bounds = new Rectangle(new Point(10, 10),
-                                           new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 19));
-
-                    GraphicsPath gpath_forMullion_LeftSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_LeftSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
-                                                                                                                       _frameModel.Frame_Type.ToString()); //4th parameter must be the placement of the parent control
+                    
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[0][0],
                                                       new Point(thisDrawingPoints_forMullion_LeftSide[0][1].X,
                                                                 thisDrawingPoints_forMullion_LeftSide[0][1].Y + 20));
@@ -1497,39 +1201,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     g.DrawPath(pen, gpath_forMullion_LeftSide);
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_LeftSide);
-
-                    //indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1;
-
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
-                    {
-                        //nxt_obj = parent_mpnl.MPanelLst_Objects[indx_NxtObj]; //Either Mpanel or Divider
-
-                        //List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                        //                                                                              fpnl.Height,
-                        //                                                                              nxt_obj.Name,
-                        //                                                                              _multiPanelModel.MPanel_Placement,
-                        //                                                                              _frameModel.Frame_Type.ToString());
-
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                            gpath.AddCurve(thisDrawingPoints[1]);
-                            gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                            gpath.AddCurve(thisDrawingPoints[3]);
-
-                            g.DrawPath(pen, gpath);
-                            g.FillPath(Brushes.PowderBlue, gpath);
-                        }
-                    }
-                    else
-                    {
-                        //Rectangle botbounds = new Rectangle(new Point(10, fpnl.Height - 18),
-                        //                                    new Size(fpnl.Width - 20, 18));
-                        g.DrawRectangle(new Pen(Color.Black, 1), botbounds);
-                        g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), botbounds);
-                        //g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), new Rectangle(new Point(botbounds.X + 1, botbounds.Y),
-                        //                                                                          new Size(botbounds.Size.Width - 2, botbounds.Height)));
-                    }
                 }
                 #endregion
 
@@ -1540,21 +1211,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last in a LAST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    //Rectangle botbounds = new Rectangle(new Point(0, fpnl.Height - 11),
-                    //                                    new Size(fpnl.Width, 11));
-
                     g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
 
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
-
-                    GraphicsPath gpath_forMullion_LeftSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_LeftSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
-                                                                                                                       _frameModel.Frame_Type.ToString()); //4th parameter must be the placement of the parent control
+                    
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[0][0], thisDrawingPoints_forMullion_LeftSide[0][1]);
                     gpath_forMullion_LeftSide.AddCurve(thisDrawingPoints_forMullion_LeftSide[1]);
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[2][0], thisDrawingPoints_forMullion_LeftSide[2][1]);
@@ -1563,41 +1224,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     new_upperCurve[1] = new Point(thisDrawingPoints_forMullion_LeftSide[3][1].X, thisDrawingPoints_forMullion_LeftSide[3][1].Y - 20);
                     new_upperCurve[2] = new Point(thisDrawingPoints_forMullion_LeftSide[3][2].X, thisDrawingPoints_forMullion_LeftSide[3][2].Y - 20);
                     gpath_forMullion_LeftSide.AddCurve(new_upperCurve);
-                    //gpath_forMullion_LeftSide.AddCurve(thisDrawingPoints_forMullion_LeftSide[3]);
 
                     g.DrawPath(pen, gpath_forMullion_LeftSide);
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_LeftSide);
 
                     g.DrawCurve(new Pen(Color.PowderBlue, 2), thisDrawingPoints_forMullion_LeftSide[3]);
-
-                    //bounds = new Rectangle(new Point(10, 10),
-                    //                       new Size(fpnl.Width - 20, 
-                    //                                fpnl.Height - 20));
-
-                    //indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_PrevObj)
-                    {
-                        //prev_obj = parent_mpnl.MPanelLst_Objects[indx_PrevObj];
-
-                        if ((prev_obj.Name.Contains("Transom") ||
-                             prev_obj.Name.Contains("Mullion")) &&
-                             !prev_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            //List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                            //                                                                              fpnl.Height,
-                            //                                                                              prev_obj.Name,
-                            //                                                                              _frameModel.Frame_Type.ToString(),
-                            //                                                                              _multiPanelModel.MPanel_Placement);
-
-                            gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                            gpath.AddCurve(thisDrawingPoints[1]);
-                            gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                            gpath.AddCurve(thisDrawingPoints[3]);
-
-                            g.DrawPath(pen, gpath);
-                            g.FillPath(Brushes.PowderBlue, gpath);
-                        }
-                    }
                 }
                 #endregion
 
@@ -1608,13 +1239,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a LAST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    GraphicsPath gpath_forMullion_LeftSide = new GraphicsPath();
-
-                    List<Point[]> thisDrawingPoints_forMullion_LeftSide = _mpnlCommons.GetMullionDividerDrawingPoints(fpnl.Width,
-                                                                                                                       fpnl.Height,
-                                                                                                                       "Mullion",
-                                                                                                                       _multiPanelModel.MPanel_ParentModel.MPanel_Placement,
-                                                                                                                       _frameModel.Frame_Type.ToString()); //4th parameter must be the placement of the parent control
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[0][0],
                                                       new Point(thisDrawingPoints_forMullion_LeftSide[0][1].X,
                                                                 thisDrawingPoints_forMullion_LeftSide[0][1].Y + 20));
@@ -1639,69 +1263,182 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawPath(pen, gpath_forMullion_LeftSide);
                     g.FillPath(Brushes.PowderBlue, gpath_forMullion_LeftSide);
 
-                    indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
-                    prev_obj = parent_mpnl.MPanelLst_Objects[indx_PrevObj];
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
 
-                    if ((prev_obj.Name.Contains("Transom") ||
-                         prev_obj.Name.Contains("Mullion")) &&
-                         !prev_obj.Name.Contains("MultiPanel")) //Divider
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
+
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "First")
+                #region First in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    g.FillRectangle(new SolidBrush(SystemColors.Control), leftbounds);
+
+                    g.DrawLine(Pens.Black, new Point(0, 0),
+                                           new Point(pInnerX, pInnerY));
+
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
+                                           new Point(pInnerX + pInnerWd, pInnerY));
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "Last")
+                #region Last in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
+
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
+
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a FIRST SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
+
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "First")
+                #region First in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
+
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "Last")
+                #region Last in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
+
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
+
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
+
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "First")
+                #region First in a LAST SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
+
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "Last")
+                #region Last in a LAST SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
+
+                    for (int i = 4; i < corner_points.Length - 1; i += 2)
                     {
-                        //List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                        //                                                                              fpnl.Height,
-                        //                                                                              prev_obj.Name,
-                        //                                                                              _multiPanelModel.MPanel_Placement,
-                        //                                                                              _frameModel.Frame_Type.ToString());
-
-                        gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
-                        gpath.AddCurve(thisDrawingPoints[1]);
-                        gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
-                        gpath.AddCurve(thisDrawingPoints[3]);
-
-                        g.DrawPath(pen, gpath);
-                        g.FillPath(Brushes.PowderBlue, gpath);
-                        bounds = new Rectangle(new Point(10, 10),
-                                               new Size(fpnl.Width - 20, 
-                                                        fpnl.Height - 11));
-                    }
-
-                    //Check if has nxt_obj to Draw the nxt transom Obj
-                    indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1;
-                    if (parent_mpnl.GetCount_MPanelLst_Object() > indx_NxtObj)
-                    {
-                        nxt_obj = parent_mpnl.MPanelLst_Objects[indx_NxtObj]; //Either Mpanel or Divider
-
-                        //List<Point[]> thisDrawingPoints = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                        //                                                                              fpnl.Height,
-                        //                                                                              nxt_obj.Name,
-                        //                                                                              _frameModel.Frame_Type.ToString(),
-                        //                                                                              _multiPanelModel.MPanel_Placement);
-
-                        if (!nxt_obj.Name.Contains("MultiPanel")) //Divider
-                        {
-                            //GraphicsPath gpath2 = new GraphicsPath();
-
-                            //List<Point[]> thisDrawingPoints2 = _mpnlCommons.GetTransomDividerDrawingPoints(fpnl.Width,
-                            //                                                                               fpnl.Height,
-                            //                                                                               nxt_obj.Name,
-                            //                                                                               _frameModel.Frame_Type.ToString(),
-                            //                                                                               _multiPanelModel.MPanel_Placement,
-                            //                                                                               true);
-
-                            gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[1]);
-                            gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
-                            gpath2.AddCurve(thisDrawingPoints2[3]);
-
-                            g.DrawPath(pen, gpath2);
-                            g.FillPath(Brushes.PowderBlue, gpath2);
-
-                            bounds = new Rectangle(new Point(10, 10),
-                                                   new Size(fpnl.Width - 20, 
-                                                            fpnl.Height - 20));
-                        }
+                        g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                     }
                 }
                 #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a LAST SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    gpath2.AddLine(thisDrawingPoints2[0][0], thisDrawingPoints2[0][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[1]);
+                    gpath2.AddLine(thisDrawingPoints2[2][0], thisDrawingPoints2[2][1]);
+                    gpath2.AddCurve(thisDrawingPoints2[3]);
+
+                    g.DrawPath(pen, gpath2);
+                    g.FillPath(Brushes.PowderBlue, gpath2);
+                }
+                #endregion
+
+                #endregion
+
+                gpath.AddLine(thisDrawingPoints[0][0], thisDrawingPoints[0][1]);
+                gpath.AddCurve(thisDrawingPoints[1]);
+                gpath.AddLine(thisDrawingPoints[2][0], thisDrawingPoints[2][1]);
+                gpath.AddCurve(thisDrawingPoints[3]);
+
+                g.DrawPath(pen, gpath);
+                g.FillPath(Brushes.PowderBlue, gpath);
             }
 
             g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), bounds);

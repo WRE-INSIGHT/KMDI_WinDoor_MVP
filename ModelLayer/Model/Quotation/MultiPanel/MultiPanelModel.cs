@@ -682,20 +682,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (control.Name.Contains("MultiPanel"))
                 {
-                    if (MPanelLst_Objects[prev_indx].Name == "MullionUC")
+                    if (MPanelLst_Objects[prev_indx].Name.Contains("MullionUC"))
                     {
                         MPanelLst_Objects[prev_indx].Width += pixels_count;
                     }
-                    else if (MPanelLst_Objects[prev_indx].Name == "TransomUC")
+                    else if (MPanelLst_Objects[prev_indx].Name.Contains("TransomUC"))
                     {
                         MPanelLst_Objects[prev_indx].Height += pixels_count;
                     }
                 }
-                else if (control.Name == "MullionUC")
+                else if (control.Name.Contains("MullionUC"))
                 {
                     MPanelLst_Objects[prev_indx].Width -= pixels_count;
                 }
-                else if (control.Name == "TransomUC")
+                else if (control.Name.Contains("TransomUC"))
                 {
                     MPanelLst_Objects[prev_indx].Height -= pixels_count;
                 }

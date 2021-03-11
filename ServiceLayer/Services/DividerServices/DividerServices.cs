@@ -60,7 +60,7 @@ namespace ServiceLayer.Services.DividerServices
         {
             if (divName == "")
             {
-                divName = divType.ToString() + " " + divID;
+                divName = divType.ToString() + "UC_" + divID;
             }
 
             IDividerModel _divModel = CreateDividerModel(divID,
