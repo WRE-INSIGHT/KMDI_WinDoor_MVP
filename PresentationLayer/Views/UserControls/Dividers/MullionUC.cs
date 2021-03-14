@@ -38,7 +38,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event MouseEventHandler mullionUCMouseMoveEventRaised;
         public event MouseEventHandler mullionUCMouseUpEventRaised;
         public event PaintEventHandler mullionUCPaintEventRaised;
-        public event EventHandler deleteToolStripMenuItemClickedEventRaised;
+        //public event EventHandler deleteToolStripMenuItemClickedEventRaised;
         public event EventHandler mullionUCMouseEnterEventRaised;
         public event EventHandler mullionUCMouseLeaveEventRaised;
         public event EventHandler mullionUCSizeChangedEventRaised;
@@ -74,15 +74,15 @@ namespace PresentationLayer.Views.UserControls.Dividers
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickedEventRaised, e);
+            //EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickedEventRaised, e);
         }
 
         private void MullionUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                cmenu_mullion.Show(new Point(MousePosition.X, MousePosition.Y));
-            }
+            //if (e.Button == MouseButtons.Right)
+            //{
+            //    cmenu_mullion.Show(new Point(MousePosition.X, MousePosition.Y));
+            //}
         }
 
         private void MullionUC_MouseEnter(object sender, EventArgs e)

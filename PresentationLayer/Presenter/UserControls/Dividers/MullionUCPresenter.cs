@@ -41,7 +41,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _mullionUC.mullionUCMouseMoveEventRaised += _mullionUC_mullionUCMouseMoveEventRaised;
             _mullionUC.mullionUCMouseUpEventRaised += _mullionUC_mullionUCMouseUpEventRaised;
             _mullionUC.mullionUCPaintEventRaised += _mullionUC_mullionUCPaintEventRaised;
-            _mullionUC.deleteToolStripMenuItemClickedEventRaised += _mullionUC_deleteToolStripMenuItemClickedEventRaised;
+            //_mullionUC.deleteToolStripMenuItemClickedEventRaised += _mullionUC_deleteToolStripMenuItemClickedEventRaised;
             _mullionUC.mullionUCMouseEnterEventRaised += _mullionUC_mullionUCMouseEnterEventRaised;
             _mullionUC.mullionUCMouseLeaveEventRaised += _mullionUC_mullionUCMouseLeaveEventRaised;
             _mullionUC.mullionUCSizeChangedEventRaised += _mullionUC_mullionUCSizeChangedEventRaised;
@@ -87,23 +87,23 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _mullionUC.InvalidateThis();
         }
 
-        private void _mullionUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
-        {
-            Control parent_ctrl = ((UserControl)_mullionUC).Parent;
+        //private void _mullionUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
+        //{
+        //    Control parent_ctrl = ((UserControl)_mullionUC).Parent;
 
-            _divModel.Div_Visible = false;
-            _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_mullionUC, _frameModel.Frame_Type.ToString());
-            _multiMullionUCP.DeletePanel((UserControl)_mullionUC);
-            _multiMullionUCP.Invalidate_MultiPanelMullionUC();
+        //    _divModel.Div_Visible = false;
+        //    _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_mullionUC, _frameModel.Frame_Type.ToString());
+        //    _multiMullionUCP.DeletePanel((UserControl)_mullionUC);
+        //    _multiMullionUCP.Invalidate_MultiPanelMullionUC();
 
-            if (parent_ctrl.Name.Contains("flp_Multi"))
-            {
-                foreach (Control ctrl in parent_ctrl.Controls)
-                {
-                    ctrl.Invalidate();
-                }
-            }
-        }
+        //    if (parent_ctrl.Name.Contains("flp_Multi"))
+        //    {
+        //        foreach (Control ctrl in parent_ctrl.Controls)
+        //        {
+        //            ctrl.Invalidate();
+        //        }
+        //    }
+        //}
 
         List<Point[]> GetMullionDrawingPoints(int width,
                                               int height,

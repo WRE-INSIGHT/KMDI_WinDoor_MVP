@@ -37,7 +37,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event MouseEventHandler transomUCMouseMoveEventRaised;
         public event MouseEventHandler transomUCMouseUpEventRaised;
         public event PaintEventHandler transomUCPaintEventRaised;
-        public event EventHandler deleteToolStripMenuItemClickedEventRaised;
+        //public event EventHandler deleteToolStripMenuItemClickedEventRaised;
         public event EventHandler transomUCMouseEnterEventRaised;
         public event EventHandler transomUCMouseLeaveEventRaised;
         public event EventHandler transomUCSizeChangedEventRaised;
@@ -88,15 +88,15 @@ namespace PresentationLayer.Views.UserControls.Dividers
 
         private void TransomUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                cmenu_transom.Show(new Point(MousePosition.X, MousePosition.Y));
-            }
+            //if (e.Button == MouseButtons.Right)
+            //{
+            //    cmenu_transom.Show(new Point(MousePosition.X, MousePosition.Y));
+            //}
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickedEventRaised, e);
+            //EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickedEventRaised, e);
         }
 
         private void TransomUC_SizeChanged(object sender, EventArgs e)

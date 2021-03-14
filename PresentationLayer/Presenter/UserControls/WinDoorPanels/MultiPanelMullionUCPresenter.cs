@@ -470,9 +470,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelMullionUC_deleteClickedEventRaised(object sender, EventArgs e)
         {
+            #region Delete TransomUC
+            if (_multiPanelModel.MPanel_ParentModel != null &&
+                _multiPanelModel.MPanel_Placement != "Last")
+            {
+                int this_indx = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.IndexOf((UserControl)_multiPanelMullionUC);
+
+                Control divUC = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects[this_indx + 1];
+                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)divUC, _frameModel.Frame_Type.ToString());
+                DeletePanel((UserControl)divUC);
+
+                IDividerModel div = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
+                div.Div_Visible = false;
+            }
+            #endregion
+
+            #region Delete MultiPanel Mullion
             FlowLayoutPanel innerFlp = (FlowLayoutPanel)((UserControl)_multiPanelMullionUC).Controls[0];
             Control parent_ctrl = ((UserControl)_multiPanelMullionUC).Parent;
-
 
             var multiPanels = _mpnlCommons.GetAll(innerFlp, "MultiPanel");
             foreach (var mpnl in multiPanels)
@@ -531,6 +546,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     ctrl.Invalidate();
                 }
             }
+            #endregion
         }
 
         private void _multiPanelMullionUC_divCountClickedEventRaised(object sender, EventArgs e)

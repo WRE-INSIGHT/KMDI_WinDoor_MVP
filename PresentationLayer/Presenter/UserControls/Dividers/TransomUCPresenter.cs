@@ -42,7 +42,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _transomUC.transomUCMouseMoveEventRaised += _transomUC_transomUCMouseMoveEventRaised;
             _transomUC.transomUCMouseUpEventRaised += _transomUC_transomUCMouseUpEventRaised;
             _transomUC.transomUCPaintEventRaised += _transomUC_transomUCPaintEventRaised;
-            _transomUC.deleteToolStripMenuItemClickedEventRaised += _transomUC_deleteToolStripMenuItemClickedEventRaised;
+            //_transomUC.deleteToolStripMenuItemClickedEventRaised += _transomUC_deleteToolStripMenuItemClickedEventRaised;
             _transomUC.transomUCMouseEnterEventRaised += _transomUC_transomUCMouseEnterEventRaised;
             _transomUC.transomUCMouseLeaveEventRaised += _transomUC_transomUCMouseLeaveEventRaised;
             _transomUC.transomUCSizeChangedEventRaised += _transomUC_transomUCSizeChangedEventRaised;
@@ -89,24 +89,24 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _transomUC.InvalidateThis();
         }
 
-        private void _transomUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
-        {
-            Control parent_ctrl = ((UserControl)_transomUC).Parent;
+        //private void _transomUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
+        //{
+        //    Control parent_ctrl = ((UserControl)_transomUC).Parent;
 
-            _divModel.Div_Visible = false;
-            _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_transomUC, _frameModel.Frame_Type.ToString());
-            _multiTransomUCP.DeletePanel((UserControl)_transomUC);
-            _multiTransomUCP.Invalidate_MultiPanelMullionUC();
+        //    _divModel.Div_Visible = false;
+        //    _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_transomUC, _frameModel.Frame_Type.ToString());
+        //    _multiTransomUCP.DeletePanel((UserControl)_transomUC);
+        //    _multiTransomUCP.Invalidate_MultiPanelMullionUC();
 
 
-            if (parent_ctrl.Name.Contains("flp_Multi"))
-            {
-                foreach (Control ctrl in parent_ctrl.Controls)
-                {
-                    ctrl.Invalidate();
-                }
-            }
-        }
+        //    if (parent_ctrl.Name.Contains("flp_Multi"))
+        //    {
+        //        foreach (Control ctrl in parent_ctrl.Controls)
+        //        {
+        //            ctrl.Invalidate();
+        //        }
+        //    }
+        //}
 
         List<Point[]> GetTransomDrawingPoints(int width, 
                                               int height,

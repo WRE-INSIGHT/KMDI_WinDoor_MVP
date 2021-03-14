@@ -8,7 +8,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
     {
         int Div_ID { get; set; }
 
-        event EventHandler deleteToolStripMenuItemClickedEventRaised;
+        //event EventHandler deleteToolStripMenuItemClickedEventRaised;
         event MouseEventHandler transomUCMouseDownEventRaised;
         event EventHandler transomUCMouseEnterEventRaised;
         event EventHandler transomUCMouseLeaveEventRaised;
