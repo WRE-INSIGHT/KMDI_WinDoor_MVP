@@ -159,8 +159,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             }
             else if (width == 18 || width == 23)
             {
-                if ((prev_obj.Contains("MultiPanel") && nxt_obj.Contains("PanelUC")) ||
-                    ((prev_obj.Contains("MultiPanel") && nxt_obj == "")))
+                if (((prev_obj.Contains("MultiTransom") || prev_obj.Contains("MultiMullion")) && nxt_obj.Contains("PanelUC")) ||
+                    (((prev_obj.Contains("MultiTransom") || prev_obj.Contains("MultiMullion")) && nxt_obj == "")))
                 {
                     leftLine[0] = new Point((width - pixels_count) + 1, 5);
                     leftLine[1] = new Point((width - pixels_count) + 1, Ht_beforeCurve);
@@ -176,7 +176,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     upperCurve[1] = new Point((width - pixels_count) + pointX_Mid, 1);
                     upperCurve[2] = new Point((width - pixels_count) + 1, 5);
                 }
-                else if (prev_obj.Contains("PanelUC") && nxt_obj.Contains("MultiPanel"))
+                else if (prev_obj.Contains("PanelUC") && (nxt_obj.Contains("MultiTransom") || nxt_obj.Contains("MultiMullion")))
                 {
                     leftLine[0] = new Point(1, 5);
                     leftLine[1] = new Point(1, Ht_beforeCurve);

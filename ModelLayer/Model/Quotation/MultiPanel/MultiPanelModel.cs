@@ -604,14 +604,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 pixels_count = 10;
             }
 
-            if (current_control.Name.Contains("MultiPanel")) //MultiPanel Block
+            if (current_control.Name.Contains("MultiMullion") || current_control.Name.Contains("MultiTransom")) //MultiPanel Block
             {
                 if (indx > 0 && indx % 2 == 0) //indx > 0 && indx == 'Even'
                 {
                     Control prev_ctrl = MPanelLst_Objects[indx - 1];
                     if (!prev_ctrl.Name.Contains("MultiPanel") && prev_ctrl.Name.Contains(MPanel_Type)) //means Divider
                     {
-                        if (prev_ctrl.Name.Contains("Transom"))
+                        if (prev_ctrl.Name.Contains("TransomUC"))
                         {
                             prev_ctrl.Height -= pixels_count;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
@@ -619,7 +619,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 current_control.Height += pixels_count;
                             }
                         }
-                        else if (prev_ctrl.Name.Contains("Mullion"))
+                        else if (prev_ctrl.Name.Contains("MullionUC"))
                         {
                             prev_ctrl.Width -= pixels_count;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
@@ -630,19 +630,19 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     }
                 }
             }
-            else if (!current_control.Name.Contains("MultiPanel") && current_control.Name.Contains(MPanel_Type)) //Divider Block
+            else if (current_control.Name.Contains("TransomUC") || current_control.Name.Contains("MullionUC")) //Divider Block
             {
                 if (indx % 2 != 0) //means Odd
                 {
                     Control prev_ctrl = MPanelLst_Objects[indx - 1];
-                    if (prev_ctrl.Name.Contains("MultiPanel"))
+                    if (prev_ctrl.Name.Contains("MultiMullion") || prev_ctrl.Name.Contains("MultiTransom")) //if prev_ctrl is MultiPanel
                     {
-                        if (current_control.Name.Contains("Transom"))
+                        if (current_control.Name.Contains("TransomUC"))
                         {
                             prev_ctrl.Height += pixels_count;
                             current_control.Height -= pixels_count;
                         }
-                        else if (current_control.Name.Contains("Mullion"))
+                        else if (current_control.Name.Contains("MullionUC"))
                         {
                             prev_ctrl.Width += pixels_count;
                             current_control.Width -= pixels_count;
@@ -728,7 +728,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                         {
-                            if (ctrl.Name.Contains("MultiPanel") || ctrl.Name.Contains("Panel"))
+                            if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion") || ctrl.Name.Contains("Panel"))
                             {
                                 ctrl.Height++;
                                 diff_MPanelHt_VS_MyCtrlsHeight--;
@@ -760,13 +760,34 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                         {
-                            if (ctrl.Name.Contains("MultiPanel") || ctrl.Name.Contains("Panel"))
+                            if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion") || ctrl.Name.Contains("Panel"))
                             {
                                 ctrl.Width++;
                                 diff_MPanelWd_VS_MyCtrlsWidth--;
                             }
                         }
                     }
+                }
+            }
+        }
+
+        public void Object_Indexer()
+        {
+            List<Control> visible_obj = MPanelLst_Objects.Where(obj => obj.Visible == true).ToList();
+
+            for (int i = 0; i < visible_obj.Count() ; i++)
+            {
+                Control obj = MPanelLst_Objects[i];
+
+                if (obj.Name.Contains("MultiMullion_") || obj.Name.Contains("MultiTransom_")) //MultiPanel
+                {
+                    IMultiPanelModel mpnl_model = MPanelLst_MultiPanel.First(mpnl => mpnl.MPanel_Name == obj.Name);
+                    mpnl_model.MPanel_Index_Inside_MPanel = i;
+                }
+                else if (obj.Name.Contains("PanelUC")) //Panel
+                {
+                    IPanelModel pnl_model = MPanelLst_Panel.First(pnl => pnl.Panel_Name == obj.Name);
+                    pnl_model.Panel_Index_Inside_MPanel = i;
                 }
             }
         }

@@ -101,10 +101,6 @@ namespace ServiceLayer.Services.MultiPanelServices
             {
                 mpanelLstMultiPanel = new List<IMultiPanelModel>();
             }
-            //if (mpanelLstObjects == null)
-            //{
-            //    mpanelLstObjects = new List<Control>();
-            //}
             IMultiPanelModel _multipanelModel = CreateMultiPanel(mid,
                                                                  mname,
                                                                  mwidth,
