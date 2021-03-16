@@ -25,6 +25,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         private IMultiPanelModel _multiPanelModel;
 
         private IMultiPanelMullionUCPresenter _multiMullionUCP;
+        private IMultiPanelTransomUCPresenter _multiTransomUCP;
 
         bool _mouseDown, _initialLoad;
         private Point _point_of_origin;
@@ -361,6 +362,24 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             mullionUCP._divModel = divModel;
             mullionUCP._multiPanelModel = multiPanelModel;
             mullionUCP._multiMullionUCP = multiMullionUCP;
+            mullionUCP._frameModel = frameModel;
+
+            return mullionUCP;
+        }
+
+        public IMullionUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                  IDividerModel divModel, 
+                                                  IMultiPanelModel multiPanelModel, 
+                                                  IMultiPanelTransomUCPresenter multiTransomUCP, 
+                                                  IFrameModel frameModel)
+        {
+            unityC
+               .RegisterType<IMullionUC, MullionUC>()
+               .RegisterType<IMullionUCPresenter, MullionUCPresenter>();
+            MullionUCPresenter mullionUCP = unityC.Resolve<MullionUCPresenter>();
+            mullionUCP._divModel = divModel;
+            mullionUCP._multiPanelModel = multiPanelModel;
+            mullionUCP._multiTransomUCP = multiTransomUCP;
             mullionUCP._frameModel = frameModel;
 
             return mullionUCP;

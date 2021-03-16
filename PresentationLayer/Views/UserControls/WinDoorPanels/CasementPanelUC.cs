@@ -51,6 +51,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
+            this.DataBindings.Add(ModelBinding["Panel_Name"]);
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
             this.DataBindings.Add(ModelBinding["Panel_Width"]);
             this.DataBindings.Add(ModelBinding["Panel_Height"]);

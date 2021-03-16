@@ -45,6 +45,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IfrmDimensionPresenter _frmDimensionPresenter;
         private ITransomUCPresenter _transomUCP;
+        private IMullionUCPresenter _mullionUCP;
         private IFrameUCPresenter _frameUCP;
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
         private IMultiPanelPropertiesUCPresenter _multiPropUCP_orig;  //Original Instance
@@ -58,6 +59,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private MultiPanelCommon _mpnlCommons = new MultiPanelCommon();
 
+
         public MultiPanelTransomUCPresenter(IMultiPanelTransomUC multiPanelTransomUC,
                                             IFixedPanelUCPresenter fixedUCP,
                                             ICasementPanelUCPresenter casementUCP,
@@ -69,6 +71,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             IfrmDimensionPresenter frmDimensionPresenter,
                                             IFixedPanelImagerUCPresenter fixedImagerUCP,
                                             ITransomUCPresenter transomUCP,
+                                            IMullionUCPresenter mullionUCP,
                                             IDividerServices divServices,
                                             IMultiPanelMullionUCPresenter multiMullionUCP,
                                             IMultiPanelPropertiesUCPresenter multiPropUCP_orig)
@@ -84,6 +87,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _frmDimensionPresenter = frmDimensionPresenter;
             _fixedImagerUCP = fixedImagerUCP;
             _transomUCP = transomUCP;
+            _mullionUCP = mullionUCP;
             _divServices = divServices;
             _multiMullionUCP = multiMullionUCP;
             _multiPropUCP_orig = multiPropUCP_orig;
@@ -132,18 +136,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private int _frmDmRes_Width;
         private int _frmDmRes_Height;
 
+        private int divSize = 0,
+                    divID = 0;
         private void _multiPanelTransomUC_flpMultiDragDropEventRaised(object sender, DragEventArgs e)
         {
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender; //Control na babagsakan
             string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
 
             int panelID = _mainPresenter.GetPanelCount() + 1,
-                multiID = _mainPresenter.GetMultiPanelCount() + 1,
+                multiID = _mainPresenter.GetMultiPanelCount() + 1;
+
                 divID = _mainPresenter.GetDividerCount() + 1;
 
             int multiPanel_boundsWD = fpnl.Width - 20,
                 multiPanel_boundsHT = fpnl.Height - 20,
-                divSize = 0,
                 totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
 
             if (_frameModel.Frame_Type.ToString().Contains("Window"))
@@ -453,7 +459,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int this_indx = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.IndexOf((UserControl)_multiPanelTransomUC);
 
                 Control divUC = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects[this_indx + 1];
-                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)divUC, _frameModel.Frame_Type.ToString());
+                _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.Remove((UserControl)divUC);
                 DeletePanel((UserControl)divUC);
 
                 IDividerModel div = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
@@ -482,7 +488,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiPanelModel.MPanel_Visibility = false;
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
-                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelTransomUC, _frameModel.Frame_Type.ToString());
+                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelTransomUC, 
+                                                                                    _frameModel.Frame_Type.ToString(),
+                                                                                    _multiPanelModel.MPanel_Placement);
             }
 
             if (_frameModel.Frame_Type.ToString().Contains("Window"))
@@ -515,6 +523,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.FrameProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin;
             }
 
+            if (_multiPanelModel.MPanel_ParentModel != null)
+            {
+                _multiPanelModel.MPanel_ParentModel.Object_Indexer();
+                _multiPanelModel.MPanel_ParentModel.Reload_MultiPanelMargin();
+                Last_ChildObj_Checker();
+            }
+            
             if (parent_ctrl.Name.Contains("flp_Multi"))
             {
                 foreach (Control ctrl in parent_ctrl.Controls)
@@ -522,9 +537,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     ctrl.Invalidate();
                 }
             }
-
-            _multiPanelModel.MPanel_ParentModel.Object_Indexer();
-            _multiPanelModel.MPanel_ParentModel.Reload_MultiPanelMargin();
             #endregion
         }
 
@@ -671,10 +683,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     ht_deduction = 0,
                     bounds_PointX = 0,
                     bounds_PointY = 0;
-                Rectangle topbounds = new Rectangle();
-                Rectangle botbounds = new Rectangle();
-                Rectangle leftbounds = new Rectangle();
-                Rectangle rightbounds = new Rectangle();
 
                 if (parent_name.Contains("MultiTransom"))
                 #region Parent is MultiPanel Transom
@@ -685,18 +693,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         bounds_PointY = 10;
                         ht_deduction = (10 + (pixels_count + 1));
-                        topbounds = new Rectangle(new Point(0, 0),
-                                                  new Size(fpnl.Width, 10));
-                        botbounds = new Rectangle(new Point(11, fpnl.Height - (pixels_count + 10)),
-                                                  new Size(fpnl.Width - 18, pixels_count + 10));
                     }
                     else if (thisObj_placement == "Last")
                     {
                         bounds_PointY = pixels_count + 2;
                         ht_deduction = (((pixels_count + 2) * 2)) - 1;
-
-                        botbounds = new Rectangle(new Point(0, fpnl.Height - 11),
-                                                  new Size(fpnl.Width, 11));
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
@@ -720,24 +721,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         bounds_PointX = 10;
                         wd_deduction = (10 + (pixels_count + 1));
-                        leftbounds = new Rectangle(new Point(0, 0),
-                                                   new Size(10, fpnl.Height));
-                        rightbounds = new Rectangle(new Point(fpnl.Width - 10, 11),
-                                                    new Size(18, fpnl.Height - 18));
                     }
                     else if (thisObj_placement == "Last")
                     {
                         bounds_PointX = pixels_count + 2;
                         wd_deduction = ((pixels_count + 2) * 2) - 1;
-                        leftbounds = new Rectangle(new Point(11, 0),
-                                                   new Size(11, fpnl.Height));
 
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
                         bounds_PointX = pixels_count + 2;
                         wd_deduction = (pixels_count + 2) * 2;
-                        //wd_deduction = (pixels_count + 3);
                     }
                 }
                 #endregion
@@ -771,8 +765,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     thisObj_placement == "First")
                 #region First Multi-Panel in a MAIN PLATFORM (MultiTransom)
                 {
-                    g.FillRectangle(new SolidBrush(SystemColors.Control), topbounds);
-
                     for (int i = 0; i < corner_points.Length - 5; i += 2)
                     {
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
@@ -793,8 +785,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last Multi-Panel in a MAIN PLATFORM (MultiTransom)
                 {
-                    g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
-
                     for (int i = 4; i < corner_points.Length - 1; i += 2)
                     {
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
@@ -838,8 +828,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First Multi-Panel in a MAIN PLATFORM (MultiMullion)
                 {
-                    g.FillRectangle(new SolidBrush(SystemColors.Control), leftbounds);
-
                     g.DrawLine(Pens.Black, new Point(0, 0),
                                            new Point(pInnerX, pInnerY));
                     g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
@@ -860,8 +848,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last Multi-Panel in MAIN PLATFORM (MultiMullion)
                 {
-                    g.FillRectangle(new SolidBrush(SystemColors.Control), leftbounds);
-
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
                                            new Point(pInnerX + pInnerWd, pInnerY));
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
@@ -1056,8 +1042,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
-
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[0][0], thisDrawingPoints_forMullion_LeftSide[0][1]);
                     gpath_forMullion_LeftSide.AddCurve(thisDrawingPoints_forMullion_LeftSide[1]);
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[2][0], thisDrawingPoints_forMullion_LeftSide[2][1]);
@@ -1183,8 +1167,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last in a LAST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    g.FillRectangle(new SolidBrush(SystemColors.Control), botbounds);
-
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
 
@@ -1996,6 +1978,83 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public void SetInitialLoadFalse()
         {
             _initialLoad = false;
+        }
+
+        private void Last_ChildObj_Checker() //last child of PARENT of this control
+        {
+            FlowLayoutPanel parentfpnl = (FlowLayoutPanel)_multiPanelModel.MPanel_Parent;
+
+            if (_frameModel.Frame_Type.ToString().Contains("Window"))
+            {
+                divSize = 26;
+            }
+            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
+            {
+                divSize = 33;
+            }
+
+            divID = _mainPresenter.GetDividerCount() + 1;
+
+            Control last_ctrl = null;
+            if (_multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.Count() > 1)
+            {
+                last_ctrl = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.Last();
+            }
+
+            if (last_ctrl != null && !last_ctrl.Name.Contains("TransomUC"))
+            {
+                int divHT = 0, divWd = 0;
+                DividerModel.DividerType divType = DividerModel.DividerType.Mullion;
+                if (_multiPanelModel.MPanel_ParentModel.MPanel_Type == "Transom")
+                {
+                    divType = DividerModel.DividerType.Transom;
+                    divHT = divSize;
+                    divWd = parentfpnl.Width;
+                }
+                else if (_multiPanelModel.MPanel_ParentModel.MPanel_Type == "Mullion")
+                {
+                    divType = DividerModel.DividerType.Mullion;
+                    divHT = parentfpnl.Height;
+                    divWd = divSize;
+                }
+
+                IDividerModel divModel = _divServices.AddDividerModel(divWd,
+                                                                      divHT,
+                                                                      parentfpnl,
+                                                                      (UserControl)_frameUCP.GetFrameUC(),
+                                                                      divType,
+                                                                      true,
+                                                                      divID,
+                                                                      _frameModel.Frame_Type.ToString());
+
+                _frameModel.Lst_Divider.Add(divModel);
+                _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Add(divModel);
+
+                if (_multiPanelModel.MPanel_ParentModel.MPanel_Type == "Transom")
+                {
+                    ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
+                                                                                divModel,
+                                                                                _multiPanelModel.MPanel_ParentModel,
+                                                                                this,
+                                                                                _frameModel);
+                    ITransomUC transomUC = transomUCP.GetTransom();
+                    parentfpnl.Controls.Add((UserControl)transomUC);
+                    _multiPanelModel.MPanel_ParentModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
+                    transomUCP.SetInitialLoadFalse();
+                }
+                else if (_multiPanelModel.MPanel_ParentModel.MPanel_Type == "Mullion")
+                {
+                    IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC,
+                                                                                divModel,
+                                                                                _multiPanelModel.MPanel_ParentModel,
+                                                                                this,
+                                                                                _frameModel);
+                    IMullionUC mullionUC = mullionUCP.GetMullion();
+                    parentfpnl.Controls.Add((UserControl)mullionUC);
+                    _multiPanelModel.MPanel_ParentModel.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
+                    mullionUCP.SetInitialLoadFalse();
+                }
+            }
         }
     }
 }

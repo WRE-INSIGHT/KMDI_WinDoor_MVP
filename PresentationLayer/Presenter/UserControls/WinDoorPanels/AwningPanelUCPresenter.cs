@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -47,6 +48,29 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _awningPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
         {
+            #region Delete TransomUC
+            if (_multiPanelModel != null &&
+                _panelModel.Panel_Placement != "Last")
+            {
+                int this_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_awningPanelUC);
+
+                Control divUC = _multiPanelModel.MPanelLst_Objects[this_indx + 1];
+                _multiPanelModel.MPanelLst_Objects.Remove((UserControl)divUC);
+                if (_multiPanelMullionUCP != null)
+                {
+                    _multiPanelMullionUCP.DeletePanel((UserControl)divUC);
+                }
+                if (_multiPanelTransomUCP != null)
+                {
+                    _multiPanelTransomUCP.DeletePanel((UserControl)divUC);
+                }
+
+                IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
+                div.Div_Visible = false;
+            }
+            #endregion
+
+            #region Delete Awning
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
 
@@ -68,7 +92,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameUCP.ViewDeleteControl((UserControl)_awningPanelUC);
             }
 
+            if (_multiPanelModel != null)
+            {
+                _multiPanelModel.Object_Indexer();
+                _multiPanelModel.Reload_PanelMargin();
+            }
+
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            #endregion
         }
 
         private void _awningPanelUC_awningPanelUCSizeChangedEventRaised(object sender, EventArgs e)
@@ -234,6 +265,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             Dictionary<string, Binding> panelBinding = new Dictionary<string, Binding>();
             panelBinding.Add("Panel_ID", new Binding("Panel_ID", _panelModel, "Panel_ID", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Name", new Binding("Name", _panelModel, "Panel_Name", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Dock", new Binding("Dock", _panelModel, "Panel_Dock", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Width", new Binding("Width", _panelModel, "Panel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));

@@ -72,7 +72,7 @@ namespace ServiceLayer.Services.PanelServices
         {
             if (panelName == "")
             {
-                panelName = "Panel " + panelID;
+                panelName = panelType.Replace(" Panel", "") + "PanelUC_" + panelID;
             }
 
             IPanelModel _panelModel = CreatePanelModel(panelID,

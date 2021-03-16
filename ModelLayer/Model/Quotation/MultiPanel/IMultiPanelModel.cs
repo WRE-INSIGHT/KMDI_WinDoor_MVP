@@ -34,7 +34,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         void Reload_PanelMargin();
         void Reload_MultiPanelMargin();
         void AddControl_MPanelLstObjects(Control control, string frameType);
-        void DeleteControl_MPanelLstObjects(Control control, string frameType);
+        void DeleteControl_MPanelLstObjects(Control control, string frameType, string placement = "");
         void Fit_MyControls();
         void Object_Indexer();
     }

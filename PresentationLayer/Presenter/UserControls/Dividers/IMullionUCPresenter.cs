@@ -16,7 +16,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                            IDividerModel divModel,
                                            IMultiPanelModel multiPanelModel,
                                            IMultiPanelMullionUCPresenter multiMullionUCP,
-                                           IFrameModel _frameModel);
+                                           IFrameModel frameModel);
+        IMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+                                           IDividerModel divModel,
+                                           IMultiPanelModel multiPanelModel,
+                                           IMultiPanelTransomUCPresenter multiTransomUCP,
+                                           IFrameModel frameModel);
         void SetInitialLoadFalse();
     }
 }

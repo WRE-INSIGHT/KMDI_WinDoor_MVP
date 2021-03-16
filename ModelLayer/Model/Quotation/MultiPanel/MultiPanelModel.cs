@@ -664,7 +664,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return MPanelLst_Objects.Count();
         }
 
-        public void DeleteControl_MPanelLstObjects(Control control, string frameType)
+        public void DeleteControl_MPanelLstObjects(Control control, string frameType, string placement = "")
         {
             int prev_indx = MPanelLst_Objects.IndexOf(control) - 1; //get the index of previous control
             int pixels_count = 0;
@@ -678,29 +678,33 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 pixels_count = 10;
             }
 
-            if (prev_indx >= 0)
+            int next_indx = MPanelLst_Objects.IndexOf(control) + 1; //needed to check if the last object index hits the totalCount of MPanelLst_Objects
+                                                                    
+            if (prev_indx >= 0 &&
+                ((placement == "Somewhere in Between" && MPanelLst_Objects.Count() == next_indx) ||
+                  placement == "Last"))
             {
-                if (control.Name.Contains("MultiPanel"))
+                Adjust_prev_obj_dimension(control, prev_indx, pixels_count);
+            }
+
+            MPanelLst_Objects.Remove(control);
+        }
+
+        private void Adjust_prev_obj_dimension(Control control, 
+                                               int previous_indx, 
+                                               int pixel_count)
+        {
+            if (control.Name.Contains("MultiMullion") || control.Name.Contains("MultiTransom"))
+            {
+                if (MPanelLst_Objects[previous_indx].Name.Contains("MullionUC"))
                 {
-                    if (MPanelLst_Objects[prev_indx].Name.Contains("MullionUC"))
-                    {
-                        MPanelLst_Objects[prev_indx].Width += pixels_count;
-                    }
-                    else if (MPanelLst_Objects[prev_indx].Name.Contains("TransomUC"))
-                    {
-                        MPanelLst_Objects[prev_indx].Height += pixels_count;
-                    }
+                    MPanelLst_Objects[previous_indx].Width += pixel_count;
                 }
-                else if (control.Name.Contains("MullionUC"))
+                else if (MPanelLst_Objects[previous_indx].Name.Contains("TransomUC"))
                 {
-                    MPanelLst_Objects[prev_indx].Width -= pixels_count;
-                }
-                else if (control.Name.Contains("TransomUC"))
-                {
-                    MPanelLst_Objects[prev_indx].Height -= pixels_count;
+                    MPanelLst_Objects[previous_indx].Height += pixel_count;
                 }
             }
-            MPanelLst_Objects.Remove(control);
         }
 
         public void Fit_MyControls()
