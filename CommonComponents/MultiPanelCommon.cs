@@ -183,57 +183,5 @@ namespace CommonComponents
                                       .Where(c => c.Visible == true)
                                       .Where(c => c.Name.Contains(name));
         }
-
-
-        //private void Last_ChildObj_Checker(IMultiPanelModel _multiPanelModel,
-        //    IFrameModel _frameModel,
-        //    IDividerModel divModel,
-        //    int divSize,
-        //    int divID) //last child of PARENT of this control
-        //{
-        //    FlowLayoutPanel parentfpnl = (FlowLayoutPanel)_multiPanelModel.MPanel_Parent;
-
-        //    if (_frameModel.Frame_Type.ToString().Contains("Window"))
-        //    {
-        //        divSize = 26;
-        //    }
-        //    else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-        //    {
-        //        divSize = 33;
-        //    }
-
-        //    divID = _mainPresenter.GetDividerCount() + 1;
-
-        //    Control last_ctrl = null;
-        //    if (_multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.Count() > 1)
-        //    {
-        //        last_ctrl = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.Last();
-        //    }
-
-        //    if (last_ctrl != null && !last_ctrl.Name.Contains("TransomUC"))
-        //    {
-        //        IDividerModel divModel = _divServices.AddDividerModel(parentfpnl.Width,
-        //                                                              divSize,
-        //                                                              parentfpnl,
-        //                                                              (UserControl)_frameUCP.GetFrameUC(),
-        //                                                              DividerModel.DividerType.Transom,
-        //                                                              true,
-        //                                                              divID,
-        //                                                              _frameModel.Frame_Type.ToString());
-
-        //        _frameModel.Lst_Divider.Add(divModel);
-        //        _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Add(divModel);
-
-        //        ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
-        //                                                                    divModel,
-        //                                                                    _multiPanelModel.MPanel_ParentModel,
-        //                                                                    this,
-        //                                                                    _frameModel);
-        //        ITransomUC transomUC = transomUCP.GetTransom();
-        //        parentfpnl.Controls.Add((UserControl)transomUC);
-        //        _multiPanelModel.MPanel_ParentModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
-        //        transomUCP.SetInitialLoadFalse();
-        //    }
-        //}
     }
 }

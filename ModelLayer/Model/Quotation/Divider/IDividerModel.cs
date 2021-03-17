@@ -6,7 +6,7 @@ namespace ModelLayer.Model.Quotation.Divider
 {
     public interface IDividerModel
     {
-        UserControl Div_FrameGroup { get; set; }
+        //UserControl Div_FrameGroup { get; set; }
         int Div_Height { get; set; }
         int Div_ID { get; set; }
         string Div_Name { get; set; }

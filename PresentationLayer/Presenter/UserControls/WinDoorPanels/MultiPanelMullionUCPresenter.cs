@@ -4,6 +4,7 @@ using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls;
@@ -58,6 +59,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         bool _initialLoad;
 
         private MultiPanelCommon _mpnlCommons = new MultiPanelCommon();
+        private CommonFunctions _commonFunctions = new CommonFunctions();
 
         public MultiPanelMullionUCPresenter(IMultiPanelMullionUC multiPanelMullionUC,
                                             IFixedPanelUCPresenter fixedUCP,
@@ -232,7 +234,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             IDividerModel divModel = _divServices.AddDividerModel(divSize,
                                                                                   fpnl.Height,
                                                                                   fpnl,
-                                                                                  (UserControl)_frameUCP.GetFrameUC(),
+                                                                                  //(UserControl)_frameUCP.GetFrameUC(),
                                                                                   DividerModel.DividerType.Mullion,
                                                                                   true,
                                                                                   divID);
@@ -274,7 +276,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             IDividerModel divModel = _divServices.AddDividerModel(divSize,
                                                                       fpnl.Height,
                                                                       fpnl,
-                                                                      (UserControl)_frameUCP.GetFrameUC(),
+                                                                      //(UserControl)_frameUCP.GetFrameUC(),
                                                                       DividerModel.DividerType.Mullion,
                                                                       true,
                                                                       divID);
@@ -413,7 +415,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         IDividerModel divModel = _divServices.AddDividerModel(divSize,
                                                                               fpnl.Height,
                                                                               fpnl,
-                                                                              (UserControl)_frameUCP.GetFrameUC(),
+                                                                              //(UserControl)_frameUCP.GetFrameUC(),
                                                                               DividerModel.DividerType.Mullion,
                                                                               true,
                                                                               divID);
@@ -523,7 +525,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.MPanel_ParentModel.Object_Indexer();
                 _multiPanelModel.MPanel_ParentModel.Reload_MultiPanelMargin();
-                Last_ChildObj_Checker();
+                _commonFunctions.Automatic_Div_Addition(_frameModel,
+                                                        _divServices,
+                                                        //_frameUCP,
+                                                        _transomUCP,
+                                                        _unityC,
+                                                        _mullionUCP,
+                                                        _mainPresenter.GetDividerCount() + 1,
+                                                        _multiPanelModel,
+                                                        null,
+                                                        null,
+                                                        this);
             }
 
             if (parent_ctrl.Name.Contains("flp_Multi"))
@@ -1014,85 +1026,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public void SetInitialLoadFalse()
         {
             _initialLoad = false;
-        }
-
-
-        private void Last_ChildObj_Checker() //last child of PARENT of this control
-        {
-            FlowLayoutPanel parentfpnl = (FlowLayoutPanel)_multiPanelModel.MPanel_Parent;
-
-            if (_frameModel.Frame_Type.ToString().Contains("Window"))
-            {
-                divSize = 26;
-            }
-            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-            {
-                divSize = 33;
-            }
-
-            divID = _mainPresenter.GetDividerCount() + 1;
-
-            Control last_ctrl = null;
-            if (_multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.Count() > 1)
-            {
-                last_ctrl = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.Last();
-            }
-
-            if (last_ctrl != null && !last_ctrl.Name.Contains("MullionUC"))
-            {
-                int divHT = 0, divWd = 0;
-                DividerModel.DividerType divType = DividerModel.DividerType.Mullion;
-
-                if (_multiPanelModel.MPanel_ParentModel.MPanel_Type == "Transom")
-                {
-                    divType = DividerModel.DividerType.Transom;
-                    divHT = divSize;
-                    divWd = parentfpnl.Width;
-                }
-                else if (_multiPanelModel.MPanel_ParentModel.MPanel_Type == "Mullion")
-                {
-                    divType = DividerModel.DividerType.Mullion;
-                    divHT = parentfpnl.Height;
-                    divWd = divSize;
-                }
-
-                IDividerModel divModel = _divServices.AddDividerModel(divWd,
-                                                                      divHT,
-                                                                      parentfpnl,
-                                                                      (UserControl)_frameUCP.GetFrameUC(),
-                                                                      divType,
-                                                                      true,
-                                                                      divID,
-                                                                      _frameModel.Frame_Type.ToString());
-
-                _frameModel.Lst_Divider.Add(divModel);
-                _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Add(divModel);
-
-                if (_multiPanelModel.MPanel_ParentModel.MPanel_Type == "Transom")
-                {
-                    ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
-                                                                                divModel,
-                                                                                _multiPanelModel.MPanel_ParentModel,
-                                                                                this,
-                                                                                _frameModel);
-                    ITransomUC transomUC = transomUCP.GetTransom();
-                    parentfpnl.Controls.Add((UserControl)transomUC);
-                    _multiPanelModel.MPanel_ParentModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
-                    transomUCP.SetInitialLoadFalse();
-                }
-                else if (_multiPanelModel.MPanel_ParentModel.MPanel_Type == "Mullion")
-                {
-                    IMullionUCPresenter mullionUCP = _mullionUCP.GetNewInstance(_unityC,
-                                                                                divModel,
-                                                                                _multiPanelModel.MPanel_ParentModel,
-                                                                                this,
-                                                                                _frameModel);
-                    IMullionUC mullionUC = mullionUCP.GetMullion();
-                    parentfpnl.Controls.Add((UserControl)mullionUC);
-                    _multiPanelModel.MPanel_ParentModel.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
-                    mullionUCP.SetInitialLoadFalse();
-                }
-            }
         }
     }
 }

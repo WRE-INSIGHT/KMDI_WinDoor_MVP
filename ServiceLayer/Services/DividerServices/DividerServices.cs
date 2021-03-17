@@ -26,7 +26,7 @@ namespace ServiceLayer.Services.DividerServices
                                                 bool divVisibility,
                                                 DividerType divType,
                                                 Control divParent,
-                                                UserControl divFrameGroup,
+                                                //UserControl divFrameGroup,
                                                 string divFrameType)
         {
             DividerModel div = new DividerModel(divID,
@@ -36,7 +36,7 @@ namespace ServiceLayer.Services.DividerServices
                                                 divVisibility,
                                                 divType,
                                                 divParent,
-                                                divFrameGroup,
+                                                //divFrameGroup,
                                                 divFrameType);
 
             ValidateModel(div);
@@ -51,7 +51,7 @@ namespace ServiceLayer.Services.DividerServices
         public IDividerModel AddDividerModel(int divWD,
                                              int divHT,
                                              Control divParent,
-                                             UserControl divFrameGroup,
+                                             //UserControl divFrameGroup,
                                              DividerType divType,
                                              bool divVisibility,
                                              int divID = 0,
@@ -70,7 +70,7 @@ namespace ServiceLayer.Services.DividerServices
                                                          divVisibility,
                                                          divType,
                                                          divParent,
-                                                         divFrameGroup,
+                                                         //divFrameGroup,
                                                          divFrameType);
 
             return _divModel;

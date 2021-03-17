@@ -13,12 +13,17 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
+using PresentationLayer.CommonMethods;
+using ServiceLayer.Services.DividerServices;
+using PresentationLayer.Presenter.UserControls.Dividers;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
     public class AwningPanelUCPresenter : IAwningPanelUCPresenter, IPresenterCommon
     {
         IAwningPanelUC _awningPanelUC;
+
+        private IUnityContainer _unityC;
 
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
@@ -29,11 +34,25 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
         private IFrameUCPresenter _frameUCP;
 
+        private ITransomUCPresenter _transomUCP;
+        private IMullionUCPresenter _mullionUCP;
+
+        private IDividerServices _divServices;
+
         bool _initialLoad;
 
-        public AwningPanelUCPresenter(IAwningPanelUC awningPanelUC)
+        private CommonFunctions _commonFunctions = new CommonFunctions();
+
+        public AwningPanelUCPresenter(IAwningPanelUC awningPanelUC,
+                                      IDividerServices divServices,
+                                      ITransomUCPresenter transomUCP,
+                                      IMullionUCPresenter mullionUCP)
         {
             _awningPanelUC = awningPanelUC;
+            _divServices = divServices;
+            _transomUCP = transomUCP;
+            _mullionUCP = mullionUCP;
+
             SubscribeToEventsSetup();
         }
 
@@ -96,6 +115,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.Object_Indexer();
                 _multiPanelModel.Reload_PanelMargin();
+                _commonFunctions.Automatic_Div_Addition(_frameModel,
+                                                        _divServices,
+                                                        //_frameUCP,
+                                                        _transomUCP,
+                                                        _unityC,
+                                                        _mullionUCP,
+                                                        _mainPresenter.GetDividerCount() + 1,
+                                                        _multiPanelModel,
+                                                        _panelModel,
+                                                        _multiPanelTransomUCP,
+                                                        _multiPanelMullionUCP);
             }
 
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
@@ -217,6 +247,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             awningUCP._frameModel = frameModel;
             awningUCP._mainPresenter = mainPresenter;
             awningUCP._frameUCP = frameUCP;
+            awningUCP._unityC = unityC;
 
             return awningUCP;
         }
@@ -237,6 +268,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             awningUCP._mainPresenter = mainPresenter;
             awningUCP._multiPanelModel = multiPanelModel;
             awningUCP._multiPanelMullionUCP = multiPanelUCP;
+            awningUCP._unityC = unityC;
 
             return awningUCP;
         }
@@ -257,6 +289,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             awningUCP._mainPresenter = mainPresenter;
             awningUCP._multiPanelModel = multiPanelModel;
             awningUCP._multiPanelTransomUCP = multiPanelTransomUCP;
+            awningUCP._unityC = unityC;
 
             return awningUCP;
         }

@@ -7,7 +7,7 @@ namespace ServiceLayer.Services.DividerServices
     {
         IDividerModel AddDividerModel(int divWD, int divHT, 
                                       Control divParent, 
-                                      UserControl divFrameGroup, 
+                                      //UserControl divFrameGroup, 
                                       DividerModel.DividerType divType, 
                                       bool divVisibility, 
                                       int divID = 0, 

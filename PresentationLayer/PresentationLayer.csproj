@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonMethods\CommonFunctions.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />

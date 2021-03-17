@@ -12,12 +12,18 @@ using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ModelLayer.Model.Quotation.Panel;
 using Unity;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Divider;
+using PresentationLayer.CommonMethods;
+using PresentationLayer.Presenter.UserControls.Dividers;
+using ServiceLayer.Services.DividerServices;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
     public class CasementPanelUCPresenter : ICasementPanelUCPresenter, IPresenterCommon
     {
         ICasementPanelUC _casementUC;
+
+        private IUnityContainer _unityC;
 
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
@@ -28,11 +34,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
         private IFrameUCPresenter _frameUCP;
 
+
+        private ITransomUCPresenter _transomUCP;
+        private IMullionUCPresenter _mullionUCP;
+
+        private IDividerServices _divServices;
+
+
         bool _initialLoad;
 
-        public CasementPanelUCPresenter(ICasementPanelUC casementUC)
+        private CommonFunctions _commonFunctions = new CommonFunctions();
+
+        public CasementPanelUCPresenter(ICasementPanelUC casementUC,
+                                        IDividerServices divServices,
+                                        ITransomUCPresenter transomUCP,
+                                        IMullionUCPresenter mullionUCP)
         {
             _casementUC = casementUC;
+            _divServices = divServices;
+            _transomUCP = transomUCP;
+            _mullionUCP = mullionUCP;
             SubscribeToEventsSetup();
         }
 
@@ -47,6 +68,29 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void OnDeleteToolStripClickedEventRaised(object sender, EventArgs e)
         {
+            #region Delete TransomUC
+            if (_multiPanelModel != null &&
+                _panelModel.Panel_Placement != "Last")
+            {
+                int this_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_casementUC);
+
+                Control divUC = _multiPanelModel.MPanelLst_Objects[this_indx + 1];
+                _multiPanelModel.MPanelLst_Objects.Remove((UserControl)divUC);
+                if (_multiPanelMullionUCP != null)
+                {
+                    _multiPanelMullionUCP.DeletePanel((UserControl)divUC);
+                }
+                if (_multiPanelTransomUCP != null)
+                {
+                    _multiPanelTransomUCP.DeletePanel((UserControl)divUC);
+                }
+
+                IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
+                div.Div_Visible = false;
+            }
+            #endregion
+
+            #region Delete Casement
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
 
@@ -68,7 +112,25 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameUCP.ViewDeleteControl((UserControl)_casementUC);
             }
 
+            if (_multiPanelModel != null)
+            {
+                _multiPanelModel.Object_Indexer();
+                _multiPanelModel.Reload_PanelMargin();
+                _commonFunctions.Automatic_Div_Addition(_frameModel,
+                                                        _divServices,
+                                                        //_frameUCP,
+                                                        _transomUCP,
+                                                        _unityC,
+                                                        _mullionUCP,
+                                                        _mainPresenter.GetDividerCount() + 1,
+                                                        _multiPanelModel,
+                                                        _panelModel,
+                                                        _multiPanelTransomUCP,
+                                                        _multiPanelMullionUCP);
+            }
+
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            #endregion
         }
 
         private void OnCasementPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
@@ -185,6 +247,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             casementUCP._frameModel = frameModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._frameUCP = frameUCP;
+            casementUCP._unityC = unityC;
 
             return casementUCP;
         }
@@ -205,6 +268,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._multiPanelModel = multiPanelModel;
             casementUCP._multiPanelMullionUCP = multiPanelUCP;
+            casementUCP._unityC = unityC;
 
             return casementUCP;
         }
@@ -225,6 +289,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._multiPanelModel = multiPanelModel;
             casementUCP._multiPanelTransomUCP = multiTransomUCP;
+            casementUCP._unityC = unityC;
 
             return casementUCP;
         }
