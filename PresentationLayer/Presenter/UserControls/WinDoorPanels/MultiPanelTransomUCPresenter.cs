@@ -61,6 +61,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private MultiPanelCommon _mpnlCommons = new MultiPanelCommon();
         private CommonFunctions _commonFunctions = new CommonFunctions();
 
+        Timer _tmr = new Timer();
+
         public MultiPanelTransomUCPresenter(IMultiPanelTransomUC multiPanelTransomUC,
                                             IFixedPanelUCPresenter fixedUCP,
                                             ICasementPanelUCPresenter casementUCP,
@@ -92,6 +94,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _divServices = divServices;
             _multiMullionUCP = multiMullionUCP;
             _multiPropUCP_orig = multiPropUCP_orig;
+            _tmr = new Timer();
+            _tmr.Interval = 1000;
+
             SubscribeToEventsSetup();
         }
 
@@ -105,6 +110,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiPanelTransomUC.deleteClickedEventRaised += _multiPanelTransomUC_deleteClickedEventRaised;
             _multiPanelTransomUC.multiMullionSizeChangedEventRaised += _multiPanelTransomUC_multiMullionSizeChangedEventRaised;
             _multiPanelTransomUC.dividerEnabledCheckChangedEventRaised += _multiPanelTransomUC_dividerEnabledCheckChangedEventRaised;
+            _tmr.Tick += _tmr_Tick;
+        }
+
+        int _timer_count;
+
+        private void _tmr_Tick(object sender, EventArgs e)
+        {
+            _timer_count++;
+            _multiPanelTransomUC.InvalidateFlp();
         }
 
         private void _multiPanelTransomUC_dividerEnabledCheckChangedEventRaised(object sender, EventArgs e)
@@ -132,6 +146,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _multiPanelModel.MPanel_Height = thisHt;
                     }
                 }
+                _tmr.Start();
                 ((UserControl)sender).Invalidate();
             }
             catch (Exception ex)
@@ -487,7 +502,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             FlowLayoutPanel innerFlp = (FlowLayoutPanel)((UserControl)_multiPanelTransomUC).Controls[0];
             Control parent_ctrl = ((UserControl)_multiPanelTransomUC).Parent;
 
-            var multiPanels = _mpnlCommons.GetAll(innerFlp, "MultiPanel");
+            var multiPanels = _mpnlCommons.GetAll(innerFlp, "Multi", "flp");
             foreach (var mpnl in multiPanels)
             {
                 _multiPanelModel.MPanelProp_Height -= (129 + 3);
@@ -543,6 +558,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.MPanel_ParentModel.Object_Indexer();
                 _multiPanelModel.MPanel_ParentModel.Reload_MultiPanelMargin();
+                _multiPanelModel.MPanel_ParentModel.Reload_PanelMargin();
                 _commonFunctions.Automatic_Div_Addition(_frameModel, 
                                                         _divServices, 
                                                         //_frameUCP,
@@ -1890,6 +1906,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             drawFormat.Alignment = StringAlignment.Near;
             drawFormat.LineAlignment = StringAlignment.Near;
             g.DrawString(_multiPanelModel.MPanel_Name + " (" + _multiPanelModel.MPanel_Divisions + ")", drawFont, new SolidBrush(Color.Black), bounds);
+
+            if (_timer_count != 0 && _timer_count < 2)
+            {
+                _commonFunctions.Red_Arrow_Lines(g, _multiPanelModel);
+            }
+            else if (_timer_count == 2)
+            {
+                _tmr.Stop();
+                _timer_count = 0;
+            }
         }
 
         public IMultiPanelTransomUC GetMultiPanel()
@@ -1897,6 +1923,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _initialLoad = true;
             _multiPanelTransomUC.ThisBinding(CreateBindingDictionary());
             _multiPanelTransomUC.GetDivEnabler().Checked = _multiPanelModel.MPanel_DividerEnabled;
+
             return _multiPanelTransomUC;
         }
 

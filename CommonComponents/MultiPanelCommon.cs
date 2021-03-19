@@ -183,5 +183,15 @@ namespace CommonComponents
                                       .Where(c => c.Visible == true)
                                       .Where(c => c.Name.Contains(name));
         }
+        public IEnumerable<Control> GetAll(Control control, string name, string evadeCtrlWithName = "")
+        {
+            var controls = control.Controls.Cast<Control>();
+
+            return controls.SelectMany(ctrl => GetAll(ctrl, name, evadeCtrlWithName))
+                                      .Concat(controls)
+                                      .Where(c => c.Visible == true)
+                                      .Where(c => c.Name.Contains(name))
+                                      .Where(c => c.Name.Contains(evadeCtrlWithName) == false);
+        }
     }
 }

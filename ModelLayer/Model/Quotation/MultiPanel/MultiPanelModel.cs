@@ -86,6 +86,23 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         div.Div_Width += added_width_child_pnls;
                     }
                 }
+                else if (MPanel_Type == "Mullion")
+                {
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    {
+                        if (mpnl.MPanel_Placement == "Last")
+                        {
+                            mpnl.MPanel_Width += added_width_child_pnls;
+                        }
+                    }
+                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    {
+                        if (pnl.Panel_Placement == "Last")
+                        {
+                            pnl.Panel_Width += added_width_child_pnls;
+                        }
+                    }
+                }
                 _mpanelWidth = value;
                 MPanelImageRenderer_Width = Convert.ToInt32(value * MPanelImageRenderer_Zoom);
                 NotifyPropertyChanged();
@@ -116,7 +133,24 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         div.Div_Height += added_height_child_pnls;
                     }
-                }                
+                }
+                else if (MPanel_Type == "Transom")
+                {
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    {
+                        if (mpnl.MPanel_Placement == "Last")
+                        {
+                            mpnl.MPanel_Height += added_height_child_pnls;
+                        }
+                    }
+                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    {
+                        if (pnl.Panel_Placement == "Last")
+                        {
+                            pnl.Panel_Height += added_height_child_pnls;
+                        }
+                    }
+                }      
                 _mpanelHeight = value;
                 MPanelImageRenderer_Height = Convert.ToInt32(value * MPanelImageRenderer_Zoom);
                 NotifyPropertyChanged();
@@ -612,7 +646,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return visiblePanelCount + visibleMPanelCount + visibleDivider;
         }
 
-        public void Resize_MyControls(Control current_control, string frameType)
+        public void Resize_MyControls(Control current_control, 
+                                      string frameType,
+                                      bool if_auto_added = false)
         {
             int indx = MPanelLst_Objects.IndexOf(current_control);
             int pixels_count = 0;
@@ -661,12 +697,18 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         if (current_control.Name.Contains("TransomUC"))
                         {
-                            prev_ctrl.Height += pixels_count;
+                            if (!if_auto_added)
+                            {
+                                prev_ctrl.Height += pixels_count;
+                            }
                             current_control.Height -= pixels_count;
                         }
                         else if (current_control.Name.Contains("MullionUC"))
                         {
-                            prev_ctrl.Width += pixels_count;
+                            if (!if_auto_added)
+                            {
+                                prev_ctrl.Width += pixels_count;
+                            }
                             current_control.Width -= pixels_count;
                         }
                     }
@@ -675,10 +717,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         }
 
-        public void AddControl_MPanelLstObjects(Control control, string frameType)
+        public void AddControl_MPanelLstObjects(Control control, 
+                                                string frameType,
+                                                bool if_auto_added = false)
         {
             MPanelLst_Objects.Add(control);
-            Resize_MyControls(control, frameType);
+            Resize_MyControls(control, frameType, if_auto_added);
         }
 
         public int GetCount_MPanelLst_Object()

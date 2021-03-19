@@ -67,6 +67,7 @@ namespace PresentationLayer.Views.UserControls
         public void InvalidateThis()
         {
             this.Invalidate();
+            flp_frameDragDrop.Invalidate();
         }
 
         public void PerformLayoutThis()

@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
@@ -9,6 +10,7 @@ using PresentationLayer.Views.UserControls.Dividers;
 using ServiceLayer.Services.DividerServices;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,7 +116,9 @@ namespace PresentationLayer.CommonMethods
                     ITransomUC transomUC = transomUCP.GetTransom();
                     parentfpnl.Controls.Add((UserControl)transomUC);
                     transomUCP.SetInitialLoadFalse();//SetInitialLoadFalse para magresize yung div
-                    parentModel.AddControl_MPanelLstObjects((UserControl)transomUC, frameModel.Frame_Type.ToString());
+                    parentModel.AddControl_MPanelLstObjects((UserControl)transomUC, 
+                                                            frameModel.Frame_Type.ToString(),
+                                                            true);
                 }
                 else if (parentModel.MPanel_Type == "Mullion")
                 {
@@ -140,9 +144,55 @@ namespace PresentationLayer.CommonMethods
                     IMullionUC mullionUC = mullionUCP.GetMullion();
                     parentfpnl.Controls.Add((UserControl)mullionUC);
                     mullionUCP.SetInitialLoadFalse();//SetInitialLoadFalse para magresize yung div
-                    parentModel.AddControl_MPanelLstObjects((UserControl)mullionUC, frameModel.Frame_Type.ToString());
+                    parentModel.AddControl_MPanelLstObjects((UserControl)mullionUC, 
+                                                             frameModel.Frame_Type.ToString(),
+                                                             true);
                 }
             }
+        }
+
+        public void Red_Arrow_Lines(Graphics g,
+                                    IMultiPanelModel multiPanelModel)
+        {
+            Pen redP = new Pen(Color.Red);
+            redP.Width = 1.0f;
+            Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+            //arrow for HEIGHT
+            string dmnsion_h = multiPanelModel.MPanel_Height.ToString();
+            Point dmnsion_h_startP = new Point(multiPanelModel.MPanel_Width - 20, 10);
+            Point dmnsion_h_endP = new Point(multiPanelModel.MPanel_Width - 20, multiPanelModel.MPanel_Height - 10);
+
+            Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
+            double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
+
+            Point[] arrwhd_pnts_H1 =
+            {
+                    new Point(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
+                    dmnsion_h_startP,
+                    new Point(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
+            };
+
+            Point[] arrwhd_pnts_H2 =
+            {
+                    new Point(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
+                    dmnsion_h_endP,
+                    new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
+            };
+
+            g.DrawLines(redP, arrwhd_pnts_H1);
+            g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
+            g.DrawLines(redP, arrwhd_pnts_H2);
+            TextRenderer.DrawText(g,
+                                  dmnsion_h,
+                                  dmnsion_font,
+                                  new Rectangle(new Point(((multiPanelModel.MPanel_Width - 20) - s2.Width), (int)(mid2 - (s2.Height / 2))),
+                                                new Size(s2.Width, s2.Height)),
+                                  Color.Black,
+                                  Color.Transparent,
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+            //arrow for HEIGHT
         }
     }
 }

@@ -34,7 +34,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
         private IFrameUCPresenter _frameUCP;
 
-
         private ITransomUCPresenter _transomUCP;
         private IMullionUCPresenter _mullionUCP;
 
@@ -70,6 +69,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             #region Delete TransomUC
             if (_multiPanelModel != null &&
+                _multiPanelModel.MPanel_DividerEnabled &&
                 _panelModel.Panel_Placement != "Last")
             {
                 int this_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_casementUC);
@@ -112,10 +112,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameUCP.ViewDeleteControl((UserControl)_casementUC);
             }
 
-            if (_multiPanelModel != null)
+            if (_multiPanelModel != null && _multiPanelModel.MPanel_DividerEnabled)
             {
                 _multiPanelModel.Object_Indexer();
                 _multiPanelModel.Reload_PanelMargin();
+                _multiPanelModel.Reload_MultiPanelMargin();
                 _commonFunctions.Automatic_Div_Addition(_frameModel,
                                                         _divServices,
                                                         //_frameUCP,

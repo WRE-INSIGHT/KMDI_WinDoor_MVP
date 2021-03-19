@@ -68,7 +68,6 @@ namespace PresentationLayer.Views
         public event EventHandler PanelMainSizeChangedEventRaised;
         public event EventHandler CreateNewItemClickEventRaised;
         public event EventHandler LabelSizeClickEventRaised;
-        //public event MouseEventHandler CtrlUCfixedMouseDownEventRaised;
 
         public MainView()
         {
@@ -172,17 +171,5 @@ namespace PresentationLayer.Views
         {
             return this;
         }
-
-        //private void ctrlUC_fixed_MouseDown(object sender, MouseEventArgs e)
-        //{
-        //    ctrlUC_fixed.DoDragDrop(new FixedPanelUC(), DragDropEffects.Move);
-        //    MessageBox.Show("Test");
-        //    EventHelpers.RaiseMouseEvent(sender, CtrlUCfixedMouseDownEventRaised, e);
-        //}
-
-        //private void ctrlUC_fixed_Click(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("Test");
-        //}
     }
 }
