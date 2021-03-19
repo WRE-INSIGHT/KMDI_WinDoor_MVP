@@ -16,9 +16,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler divCountClickedEventRaised;
         event EventHandler deleteClickedEventRaised;
         event EventHandler multiMullionSizeChangedEventRaised;
+        event EventHandler dividerEnabledCheckedChangedEventRaised;
 
         void InvalidateFlp();
         void DeletePanel(UserControl panel);
-        Bitmap GetPartImageThis(int height);
+        ToolStripMenuItem GetDividerEnabler();
     }
 }

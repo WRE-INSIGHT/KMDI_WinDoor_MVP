@@ -20,6 +20,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanelProp_Height { get; set; }
         string MPanel_Placement { get; set; }
         IMultiPanelModel MPanel_ParentModel { get; set; }
+        bool MPanel_DividerEnabled { get; set; }
 
         Control MPanel_Parent { get; set; }
         UserControl MPanel_FrameGroup { get; set; }

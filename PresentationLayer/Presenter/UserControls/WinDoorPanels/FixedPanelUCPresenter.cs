@@ -12,6 +12,10 @@ using CommonComponents;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Divider;
+using PresentationLayer.CommonMethods;
+using PresentationLayer.Presenter.UserControls.Dividers;
+using ServiceLayer.Services.DividerServices;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -19,6 +23,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     {
 
         IFixedPanelUC _fixedPanelUC;
+
+        private IUnityContainer _unityC;
 
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
@@ -29,11 +35,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
         private IFrameUCPresenter _frameUCP;
 
+        private ITransomUCPresenter _transomUCP;
+        private IMullionUCPresenter _mullionUCP;
+
+        private IDividerServices _divServices;
+
         bool _initialLoad;
 
-        public FixedPanelUCPresenter(IFixedPanelUC fixedPanelUC)
+        private CommonFunctions _commonFunctions = new CommonFunctions();
+
+        public FixedPanelUCPresenter(IFixedPanelUC fixedPanelUC,
+                                     IDividerServices divServices,
+                                     ITransomUCPresenter transomUCP,
+                                     IMullionUCPresenter mullionUCP)
         {
             _fixedPanelUC = fixedPanelUC;
+            _divServices = divServices;
+            _transomUCP = transomUCP;
+            _mullionUCP = mullionUCP;
             SubscribeToEventsSetup();
         }
 
@@ -97,6 +116,29 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _fixedPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
         {
+            #region Delete TransomUC
+            if (_multiPanelModel != null &&
+                _panelModel.Panel_Placement != "Last")
+            {
+                int this_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_fixedPanelUC);
+
+                Control divUC = _multiPanelModel.MPanelLst_Objects[this_indx + 1];
+                _multiPanelModel.MPanelLst_Objects.Remove((UserControl)divUC);
+                if (_multiPanelMullionUCP != null)
+                {
+                    _multiPanelMullionUCP.DeletePanel((UserControl)divUC);
+                }
+                if (_multiPanelTransomUCP != null)
+                {
+                    _multiPanelTransomUCP.DeletePanel((UserControl)divUC);
+                }
+
+                IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
+                div.Div_Visible = false;
+            }
+            #endregion
+
+            #region Delete Fixed
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
 
@@ -119,6 +161,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
 
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+
+            if (_multiPanelModel != null)
+            {
+                _multiPanelModel.Object_Indexer();
+                _multiPanelModel.Reload_PanelMargin();
+                _commonFunctions.Automatic_Div_Addition(_frameModel,
+                                                        _divServices,
+                                                        //_frameUCP,
+                                                        _transomUCP,
+                                                        _unityC,
+                                                        _mullionUCP,
+                                                        _mainPresenter.GetDividerCount() + 1,
+                                                        _multiPanelModel,
+                                                        _panelModel,
+                                                        _multiPanelTransomUCP,
+                                                        _multiPanelMullionUCP);
+            }
+            #endregion
         }
 
         private void OnFixedPanelUCSizeChangedEventRaised(object sender, EventArgs e)
@@ -163,6 +223,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             fixedPanelUCP._frameModel = frameModel;
             fixedPanelUCP._mainPresenter = mainPresenter;
             fixedPanelUCP._frameUCP = frameUCP;
+            fixedPanelUCP._unityC = unityC;
 
             return fixedPanelUCP;
         }
@@ -183,6 +244,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             fixedPanelUCP._mainPresenter = mainPresenter;
             fixedPanelUCP._multiPanelModel = multiPanelModel;
             fixedPanelUCP._multiPanelMullionUCP = multiPanelUCP;
+            fixedPanelUCP._unityC = unityC;
 
             return fixedPanelUCP;
         }
@@ -203,6 +265,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             fixedPanelUCP._mainPresenter = mainPresenter;
             fixedPanelUCP._multiPanelModel = multiPanelModel;
             fixedPanelUCP._multiPanelTransomUCP = multiPanelTransomUCP;
+            fixedPanelUCP._unityC = unityC;
 
             return fixedPanelUCP;
         }

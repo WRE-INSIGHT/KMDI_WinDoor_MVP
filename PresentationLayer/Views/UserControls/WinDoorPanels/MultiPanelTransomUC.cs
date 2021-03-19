@@ -39,6 +39,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler deleteClickedEventRaised;
         public event DragEventHandler flpMultiDragDropEventRaised;
         public event EventHandler multiMullionSizeChangedEventRaised;
+        public event EventHandler dividerEnabledCheckChangedEventRaised;
 
         public void InvalidateFlp()
         {
@@ -112,5 +113,16 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             flp_MultiTransom.Invalidate();
         }
+
+        private void dividerEnabledToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, dividerEnabledCheckChangedEventRaised, e);
+        }
+
+        public ToolStripMenuItem GetDivEnabler()
+        {
+            return dividerEnabledToolStripMenuItem;
+        }
+
     }
 }

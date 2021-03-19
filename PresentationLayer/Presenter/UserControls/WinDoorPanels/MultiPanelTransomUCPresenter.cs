@@ -103,7 +103,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiPanelTransomUC.flpMultiMouseLeaveEventRaised += _multiPanelTransomUC_flpMultiMouseLeaveEventRaised;
             _multiPanelTransomUC.divCountClickedEventRaised += _multiPanelTransomUC_divCountClickedEventRaised;
             _multiPanelTransomUC.deleteClickedEventRaised += _multiPanelTransomUC_deleteClickedEventRaised;
-            _multiPanelTransomUC.multiMullionSizeChangedEventRaised += _multiPanelTransomUC_multiMullionSizeChangedEventRaised; ;
+            _multiPanelTransomUC.multiMullionSizeChangedEventRaised += _multiPanelTransomUC_multiMullionSizeChangedEventRaised;
+            _multiPanelTransomUC.dividerEnabledCheckChangedEventRaised += _multiPanelTransomUC_dividerEnabledCheckChangedEventRaised;
+        }
+
+        private void _multiPanelTransomUC_dividerEnabledCheckChangedEventRaised(object sender, EventArgs e)
+        {
+            _multiPanelModel.MPanel_DividerEnabled = ((ToolStripMenuItem)sender).Checked;
         }
 
         private void _multiPanelTransomUC_multiMullionSizeChangedEventRaised(object sender, EventArgs e)
@@ -300,7 +306,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             else
             {
                 int suggest_Wd = multiPanel_boundsWD,
+                    suggest_HT = 0;
+
+                if (_multiPanelModel.MPanel_DividerEnabled)
+                {
                     suggest_HT = ((multiPanel_boundsHT - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                }
+                else if (!_multiPanelModel.MPanel_DividerEnabled)
+                {
+                    suggest_HT = multiPanel_boundsHT / totalPanelCount;
+                }
 
                 if (_multiPanelModel.MPanel_ParentModel != null)
                 {
@@ -412,7 +427,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _multiPanelModel.Fit_MyControls();
                     }
-                    else if (_panelModel.Panel_Placement != "Last")
+                    else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                     {
                         IDividerModel divModel = _divServices.AddDividerModel(fpnl.Width,
                                                                               divSize,
@@ -1881,6 +1896,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _initialLoad = true;
             _multiPanelTransomUC.ThisBinding(CreateBindingDictionary());
+            _multiPanelTransomUC.GetDivEnabler().Checked = _multiPanelModel.MPanel_DividerEnabled;
             return _multiPanelTransomUC;
         }
 

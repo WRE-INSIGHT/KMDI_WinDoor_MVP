@@ -16,8 +16,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler flpMultiMouseEnterEventRaised;
         event EventHandler flpMultiMouseLeaveEventRaised;
         event EventHandler multiMullionSizeChangedEventRaised;
+        event EventHandler dividerEnabledCheckChangedEventRaised;
 
         void DeletePanel(UserControl obj);
         void InvalidateFlp();
+        ToolStripMenuItem GetDivEnabler();
     }
 }
