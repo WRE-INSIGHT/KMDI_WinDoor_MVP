@@ -13,12 +13,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                            IDividerModel divModel, 
                                            IMultiPanelModel multiPanelModel,
                                            IMultiPanelTransomUCPresenter multiTransomUCP,
-                                           IFrameModel frameModel);
+                                           IFrameModel frameModel,
+                                           IMainPresenter mainPresenter);
         ITransomUCPresenter GetNewInstance(IUnityContainer unityC,
                                            IDividerModel divModel,
                                            IMultiPanelModel multiPanelModel,
                                            IMultiPanelMullionUCPresenter multiMullionUCP,
-                                           IFrameModel frameModel);
+                                           IFrameModel frameModel,
+                                           IMainPresenter mainPresenter);
         ITransomUCPresenter GetNewInstance(IUnityContainer unityC); //for Testing
         ITransomUC GetTransom(string test); //for Testing
         ITransomUC GetTransom();

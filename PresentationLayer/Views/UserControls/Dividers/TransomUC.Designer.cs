@@ -59,6 +59,7 @@
             this.SizeChanged += new System.EventHandler(this.TransomUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TransomUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseDoubleClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseDown);
             this.MouseEnter += new System.EventHandler(this.TransomUC_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.TransomUC_MouseLeave);

@@ -61,6 +61,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private MultiPanelCommon _mpnlCommons = new MultiPanelCommon();
         private CommonFunctions _commonFunctions = new CommonFunctions();
 
+        Timer _tmr = new Timer();
+
         public MultiPanelMullionUCPresenter(IMultiPanelMullionUC multiPanelMullionUC,
                                             IFixedPanelUCPresenter fixedUCP,
                                             ICasementPanelUCPresenter casementUCP,
@@ -90,6 +92,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _transomUCP = transomUCP;
             _divServices = divServices;
             _multiPropUCP_orig = multiPropUCP_orig;
+            _tmr = new Timer();
+            _tmr.Interval = 200;
+
             SubscribeToEventsSetup();
         }
 
@@ -103,6 +108,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiPanelMullionUC.flpMultiDragDropEventRaised += _multiPanelMullionUC_flpMultiDragDropEventRaised;
             _multiPanelMullionUC.multiMullionSizeChangedEventRaised += _multiPanelMullionUC_multiMullionSizeChangedEventRaised;
             _multiPanelMullionUC.dividerEnabledCheckedChangedEventRaised += _multiPanelMullionUC_dividerEnabledCheckedChangedEventRaised;
+            _tmr.Tick += _tmr_Tick;
+        }
+
+        int _timer_count;
+        private void _tmr_Tick(object sender, EventArgs e)
+        {
+            _timer_count++;
+            if (_timer_count == 8 || _timer_count == 1)
+            {
+                _multiPanelMullionUC.InvalidateFlp();
+            }
         }
 
         private void _multiPanelMullionUC_dividerEnabledCheckedChangedEventRaised(object sender, EventArgs e)
@@ -110,6 +126,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiPanelModel.MPanel_DividerEnabled = ((ToolStripMenuItem)sender).Checked;
         }
 
+        int prev_Width = 0,
+            prev_Height = 0;
         private void _multiPanelMullionUC_multiMullionSizeChangedEventRaised(object sender, EventArgs e)
         {
             try
@@ -121,15 +139,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         mpnlModelWd = _multiPanelModel.MPanel_Width,
                         mpnlModelHt = _multiPanelModel.MPanel_Height;
 
-                    if (thisWd != mpnlModelWd)
+                    if (thisWd != mpnlModelWd || prev_Width != mpnlModelWd)
                     {
                         _multiPanelModel.MPanel_Width = thisWd;
+                        _WidthChange = true;
                     }
-                    if (thisHt != mpnlModelHt)
+                    if (thisHt != mpnlModelHt || prev_Height != mpnlModelHt)
                     {
                         _multiPanelModel.MPanel_Height = thisHt;
+                        _HeightChange = true;
                     }
                 }
+                prev_Width = _multiPanelModel.MPanel_Width;
+                prev_Height = _multiPanelModel.MPanel_Height;
+
+                _tmr.Start();
                 ((UserControl)sender).Invalidate();
             }
             catch (Exception ex)
@@ -541,7 +565,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanel_ParentModel.Object_Indexer();
                 _multiPanelModel.MPanel_ParentModel.Reload_MultiPanelMargin();
                 _multiPanelModel.MPanel_ParentModel.Reload_PanelMargin();
-                _commonFunctions.Automatic_Div_Addition(_frameModel,
+                _commonFunctions.Automatic_Div_Addition(_mainPresenter,
+                                                        _frameModel,
                                                         _divServices,
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -610,6 +635,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
         
         Color color = Color.Black;
+        bool _HeightChange = false,
+             _WidthChange = false;
         private void _multiPanelMullionUC_flpMulltiPaintEventRaised(object sender, PaintEventArgs e)
         {
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
@@ -1851,6 +1878,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             drawFormat.Alignment = StringAlignment.Near;
             drawFormat.LineAlignment = StringAlignment.Near;
             g.DrawString(_multiPanelModel.MPanel_Name + " (" + _multiPanelModel.MPanel_Divisions + ")", drawFont, new SolidBrush(Color.Black), bounds);
+
+            if (_timer_count != 0 && _timer_count < 8)
+            {
+                if (_HeightChange)
+                {
+                    _commonFunctions.Red_Arrow_Lines_forHeight(g, _multiPanelModel);
+                }
+
+                if (_WidthChange)
+                {
+                    _commonFunctions.Red_Arrow_Lines_forWidth(g, _multiPanelModel);
+                }
+            }
+            else if (_timer_count >= 8)
+            {
+                _tmr.Stop();
+                _timer_count = 0;
+                _HeightChange = false;
+                _WidthChange = false;
+            }
         }
 
         public IMultiPanelMullionUC GetMultiPanel()

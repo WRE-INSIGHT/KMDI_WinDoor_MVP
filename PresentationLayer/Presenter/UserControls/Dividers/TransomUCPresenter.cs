@@ -27,6 +27,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private IMultiPanelTransomUCPresenter _multiTransomUCP;
         private IMultiPanelMullionUCPresenter _multiMullionUCP;
+        private IMainPresenter _mainPresenter;
 
         bool _mouseDown, _initialLoad;
         private Point _point_of_origin;
@@ -43,10 +44,15 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _transomUC.transomUCMouseMoveEventRaised += _transomUC_transomUCMouseMoveEventRaised;
             _transomUC.transomUCMouseUpEventRaised += _transomUC_transomUCMouseUpEventRaised;
             _transomUC.transomUCPaintEventRaised += _transomUC_transomUCPaintEventRaised;
-            //_transomUC.deleteToolStripMenuItemClickedEventRaised += _transomUC_deleteToolStripMenuItemClickedEventRaised;
             _transomUC.transomUCMouseEnterEventRaised += _transomUC_transomUCMouseEnterEventRaised;
             _transomUC.transomUCMouseLeaveEventRaised += _transomUC_transomUCMouseLeaveEventRaised;
             _transomUC.transomUCSizeChangedEventRaised += _transomUC_transomUCSizeChangedEventRaised;
+            _transomUC.transomUCMouseDoubleClickedEventRaised += _transomUC_transomUCMouseDoubleClickedEventRaised;
+        }
+
+        private void _transomUC_transomUCMouseDoubleClickedEventRaised(object sender, MouseEventArgs e)
+        {
+            _mainPresenter.SetSelectedDivider(_divModel);
         }
 
         private void _transomUC_transomUCSizeChangedEventRaised(object sender, EventArgs e)
@@ -89,26 +95,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             penColor = Color.Blue;
             _transomUC.InvalidateThis();
         }
-
-        //private void _transomUC_deleteToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
-        //{
-        //    Control parent_ctrl = ((UserControl)_transomUC).Parent;
-
-        //    _divModel.Div_Visible = false;
-        //    _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_transomUC, _frameModel.Frame_Type.ToString());
-        //    _multiTransomUCP.DeletePanel((UserControl)_transomUC);
-        //    _multiTransomUCP.Invalidate_MultiPanelMullionUC();
-
-
-        //    if (parent_ctrl.Name.Contains("flp_Multi"))
-        //    {
-        //        foreach (Control ctrl in parent_ctrl.Controls)
-        //        {
-        //            ctrl.Invalidate();
-        //        }
-        //    }
-        //}
-
+        
         List<Point[]> GetTransomDrawingPoints(int width, 
                                               int height,
                                               string prev_obj,
@@ -276,6 +263,21 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             g.DrawPath(pen, gpath);
             g.FillPath(Brushes.PowderBlue, gpath);
+
+            Font drawFont = new Font("Segoe UI", 7, FontStyle.Bold); //* zoom);
+            Size s2 = TextRenderer.MeasureText(_divModel.Div_Name, drawFont);
+
+            int point_Y = (transom.Height / 2) - (s2.Height / 2); //0;
+
+            TextRenderer.DrawText(g,
+                                  _divModel.Div_Name,
+                                  drawFont,
+                                  new Rectangle(new Point(10, point_Y),
+                                                new Size(s2.Width,
+                                                         s2.Height)),
+                                  Color.Black,
+                                  Color.Transparent,
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
 
         private void _transomUC_transomUCMouseUpEventRaised(object sender, MouseEventArgs e)
@@ -285,7 +287,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _transomUC_transomUCMouseMoveEventRaised(object sender, MouseEventArgs e)
         {
-
             try
             {
                 UserControl me = (UserControl)sender;
@@ -353,7 +354,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                   IDividerModel divModel,
                                                   IMultiPanelModel multiPanelModel,
                                                   IMultiPanelTransomUCPresenter multiTransomUCP,
-                                                  IFrameModel frameModel)
+                                                  IFrameModel frameModel,
+                                                  IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<ITransomUC, TransomUC>()
@@ -363,6 +365,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             transomUCP._multiPanelModel = multiPanelModel;
             transomUCP._multiTransomUCP = multiTransomUCP;
             transomUCP._frameModel = frameModel;
+            transomUCP._mainPresenter = mainPresenter;
 
             return transomUCP;
         }
@@ -371,7 +374,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                   IDividerModel divModel, 
                                                   IMultiPanelModel multiPanelModel, 
                                                   IMultiPanelMullionUCPresenter multiMullionUCP, 
-                                                  IFrameModel frameModel)
+                                                  IFrameModel frameModel,
+                                                  IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<ITransomUC, TransomUC>()
@@ -381,6 +385,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             transomUCP._multiPanelModel = multiPanelModel;
             transomUCP._multiMullionUCP = multiMullionUCP;
             transomUCP._frameModel = frameModel;
+            transomUCP._mainPresenter = mainPresenter;
 
             return transomUCP;
         }

@@ -21,6 +21,7 @@ using CommonComponents;
 using Unity;
 using System.Linq;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace PresentationLayer.Presenter
 {
@@ -815,6 +816,12 @@ namespace PresentationLayer.Presenter
         public int GetDividerCount()
         {
             return _windoorModel.GetDividerCount();
+        }
+
+        public void SetSelectedDivider(IDividerModel divModel)
+        {
+            _mainView.GetLblSelectedDivider().Visible = true;
+            _mainView.GetLblSelectedDivider().Text = divModel.Div_Name + " Selected";
         }
 
         #endregion

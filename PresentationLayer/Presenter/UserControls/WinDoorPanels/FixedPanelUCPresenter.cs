@@ -43,6 +43,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         bool _initialLoad;
 
         private CommonFunctions _commonFunctions = new CommonFunctions();
+        Timer _tmr = new Timer();
 
         public FixedPanelUCPresenter(IFixedPanelUC fixedPanelUC,
                                      IDividerServices divServices,
@@ -53,6 +54,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _divServices = divServices;
             _transomUCP = transomUCP;
             _mullionUCP = mullionUCP;
+            _tmr = new Timer();
+            _tmr.Interval = 200;
+
             SubscribeToEventsSetup();
         }
 
@@ -63,6 +67,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _fixedPanelUC.fixedPanelUCPaintEventRaised += _fixedPanelUC_fixedPanelUCPaintEventRaised;
             _fixedPanelUC.fixedPanelMouseLeaveEventRaised += _fixedPanelUC_fixedPanelMouseLeaveEventRaised;
             _fixedPanelUC.fixedPanelMouseEnterEventRaised += _fixedPanelUC_fixedPanelMouseEnterEventRaised;
+            _tmr.Tick += _tmr_Tick;
+        }
+
+        int _timer_count;
+        private void _tmr_Tick(object sender, EventArgs e)
+        {
+            _timer_count++;
+            if (_timer_count == 8 || _timer_count == 1)
+            {
+                _fixedPanelUC.InvalidateThis();
+            }
         }
 
         private void _fixedPanelUC_fixedPanelMouseEnterEventRaised(object sender, EventArgs e)
@@ -78,6 +93,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
         Color color = Color.Black;
+
+        bool _HeightChange = false,
+             _WidthChange = false;
         private void _fixedPanelUC_fixedPanelUCPaintEventRaised(object sender, PaintEventArgs e)
         {
             UserControl fixedpnl = (UserControl)sender;
@@ -111,6 +129,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        (fixedpnl.ClientRectangle.Width - 30) - w,
                                                                        (fixedpnl.ClientRectangle.Height - 30) - w));
 
+            }
+
+            if (_timer_count != 0 && _timer_count < 8)
+            {
+                if (_HeightChange)
+                {
+                    _commonFunctions.Red_Arrow_Lines_forHeight(g, _panelModel);
+                }
+
+                if (_WidthChange)
+                {
+                    _commonFunctions.Red_Arrow_Lines_forWidth(g, _panelModel);
+                }
+            }
+            else if (_timer_count >= 8)
+            {
+                _tmr.Stop();
+                _timer_count = 0;
+                _HeightChange = false;
+                _WidthChange = false;
             }
         }
 
@@ -168,7 +206,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.Object_Indexer();
                 _multiPanelModel.Reload_PanelMargin();
                 _multiPanelModel.Reload_MultiPanelMargin();
-                _commonFunctions.Automatic_Div_Addition(_frameModel,
+                _commonFunctions.Automatic_Div_Addition(_mainPresenter,
+                                                        _frameModel,
                                                         _divServices,
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -183,6 +222,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
         }
 
+        int prev_Width = 0,
+            prev_Height = 0;
         private void OnFixedPanelUCSizeChangedEventRaised(object sender, EventArgs e)
         {
             try
@@ -194,15 +235,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         pnlModelWd = _panelModel.Panel_Width,
                         pnlModelHt = _panelModel.Panel_Height;
 
-                    if (thisWd != pnlModelWd)
+                    if (thisWd != pnlModelWd || prev_Width != pnlModelWd)
                     {
                         _panelModel.Panel_Width = thisWd;
+                        _WidthChange = true;
                     }
-                    if (thisHt != pnlModelHt)
+                    if (thisHt != pnlModelHt || prev_Height != pnlModelHt)
                     {
                         _panelModel.Panel_Height = thisHt;
+                        _HeightChange = true;
                     }
                 }
+
+                prev_Width = _panelModel.Panel_Width;
+                prev_Height = _panelModel.Panel_Height;
+
+                _tmr.Start();
                 ((UserControl)sender).Invalidate();
             }
             catch (Exception ex)

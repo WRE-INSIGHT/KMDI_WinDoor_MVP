@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using PresentationLayer.Presenter;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
@@ -21,7 +22,8 @@ namespace PresentationLayer.CommonMethods
 {
     public class CommonFunctions
     {
-        public void Automatic_Div_Addition(IFrameModel frameModel,
+        public void Automatic_Div_Addition(IMainPresenter mainPresenter,
+                                           IFrameModel frameModel,
                                            IDividerServices divServices,
                                            //IFrameUCPresenter frameUCP,
                                            ITransomUCPresenter _transomUCP,
@@ -102,7 +104,8 @@ namespace PresentationLayer.CommonMethods
                                                                 divModel,
                                                                 parentModel,
                                                                 multiTransomUCP,
-                                                                frameModel);
+                                                                frameModel,
+                                                                mainPresenter);
                     }
                     else if (multiMullionUCP != null)
                     {
@@ -110,7 +113,8 @@ namespace PresentationLayer.CommonMethods
                                                                 divModel,
                                                                 parentModel,
                                                                 multiMullionUCP,
-                                                                frameModel);
+                                                                frameModel,
+                                                                mainPresenter);
                     }
 
                     ITransomUC transomUC = transomUCP.GetTransom();
@@ -151,8 +155,8 @@ namespace PresentationLayer.CommonMethods
             }
         }
 
-        public void Red_Arrow_Lines(Graphics g,
-                                    IMultiPanelModel multiPanelModel)
+        public void Red_Arrow_Lines_forHeight(Graphics g,
+                                              IMultiPanelModel multiPanelModel)
         {
             Pen redP = new Pen(Color.Red);
             redP.Width = 1.0f;
@@ -191,8 +195,139 @@ namespace PresentationLayer.CommonMethods
                                   Color.Black,
                                   Color.Transparent,
                                   TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            //arrow for HEIGHT
+
+
+        }
+        public void Red_Arrow_Lines_forHeight(Graphics g,
+                                              IPanelModel panelModel)
+        {
+            Pen redP = new Pen(Color.Red);
+            redP.Width = 1.0f;
+            Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for HEIGHT
+            string dmnsion_h = panelModel.Panel_Height.ToString();
+            Point dmnsion_h_startP = new Point(panelModel.Panel_Width - 20, 1);
+            Point dmnsion_h_endP = new Point(panelModel.Panel_Width - 20, panelModel.Panel_Height - 1);
+
+            Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
+            double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
+
+            Point[] arrwhd_pnts_H1 =
+            {
+                    new Point(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
+                    dmnsion_h_startP,
+                    new Point(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
+            };
+
+            Point[] arrwhd_pnts_H2 =
+            {
+                    new Point(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
+                    dmnsion_h_endP,
+                    new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
+            };
+
+            g.DrawLines(redP, arrwhd_pnts_H1);
+            g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
+            g.DrawLines(redP, arrwhd_pnts_H2);
+            TextRenderer.DrawText(g,
+                                  dmnsion_h,
+                                  dmnsion_font,
+                                  new Rectangle(new Point(((panelModel.Panel_Width - 20) - s2.Width), (int)(mid2 - (s2.Height / 2))),
+                                                new Size(s2.Width, s2.Height)),
+                                  Color.Black,
+                                  Color.Transparent,
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            //arrow for HEIGHT
+
+
+        }
+
+        public void Red_Arrow_Lines_forWidth(Graphics g,
+                                             IMultiPanelModel multiPanelModel)
+        {
+            Pen redP = new Pen(Color.Red);
+            redP.Width = 1.0f;
+            Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+            //arrow for WIDTH
+            string dmnsion_w = multiPanelModel.MPanel_Width.ToString();
+            Point dmnsion_w_startP = new Point(10, multiPanelModel.MPanel_Height - 20);
+            Point dmnsion_w_endP = new Point(multiPanelModel.MPanel_Width - 10, multiPanelModel.MPanel_Height - 20);
+
+            Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
+            double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
+
+            Point[] arrwhd_pnts_W1 =
+            {
+                new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
+                dmnsion_w_startP,
+                new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
+            };
+
+            Point[] arrwhd_pnts_W2 =
+            {
+                new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
+                dmnsion_w_endP,
+                new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
+            };
+            ;
+            g.DrawLines(redP, arrwhd_pnts_W1);
+            g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
+            g.DrawLines(redP, arrwhd_pnts_W2);
+            TextRenderer.DrawText(g,
+                                  dmnsion_w,
+                                  dmnsion_font,
+                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), ((multiPanelModel.MPanel_Height - 20) - s.Height)),
+                                                new Size(s.Width, s.Height)),
+                                  Color.Black,
+                                  Color.Transparent,
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            //arrow for WIDTH
+        }
+
+        public void Red_Arrow_Lines_forWidth(Graphics g,
+                                             IPanelModel panelModel)
+        {
+            Pen redP = new Pen(Color.Red);
+            redP.Width = 1.0f;
+            Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+            //arrow for WIDTH
+            string dmnsion_w = panelModel.Panel_Width.ToString();
+            Point dmnsion_w_startP = new Point(1, panelModel.Panel_Height - 20);
+            Point dmnsion_w_endP = new Point(panelModel.Panel_Width - 1, panelModel.Panel_Height - 20);
+
+            Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
+            double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
+
+            Point[] arrwhd_pnts_W1 =
+            {
+                new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
+                dmnsion_w_startP,
+                new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
+            };
+
+            Point[] arrwhd_pnts_W2 =
+            {
+                new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
+                dmnsion_w_endP,
+                new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
+            };
+            ;
+            g.DrawLines(redP, arrwhd_pnts_W1);
+            g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
+            g.DrawLines(redP, arrwhd_pnts_W2);
+            TextRenderer.DrawText(g,
+                                  dmnsion_w,
+                                  dmnsion_font,
+                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), ((panelModel.Panel_Height - 20) - s.Height)),
+                                                new Size(s.Width, s.Height)),
+                                  Color.Black,
+                                  Color.Transparent,
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            //arrow for WIDTH
         }
     }
 }

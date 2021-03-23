@@ -12,6 +12,7 @@ using Unity;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using System.Drawing;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace PresentationLayer.Presenter
 {
@@ -70,5 +71,6 @@ namespace PresentationLayer.Presenter
         void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
                                  int frmDimension_numWd,
                                  int frmDimension_numHt);
+        void SetSelectedDivider(IDividerModel divModel);
     }
 }

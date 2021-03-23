@@ -62,6 +62,7 @@
             this.deleteItemToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tsp_Sync = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
+            this.tsLbl_SelectedDivider = new System.Windows.Forms.ToolStripLabel();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.pnlItems = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -103,7 +104,7 @@
             this.mnsMainMenu.Name = "mnsMainMenu";
             this.mnsMainMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.mnsMainMenu.Size = new System.Drawing.Size(1084, 24);
-            this.mnsMainMenu.TabIndex = 2;
+            this.mnsMainMenu.TabIndex = 0;
             this.mnsMainMenu.Text = "msMain";
             // 
             // fileToolStripMenuItem
@@ -265,12 +266,13 @@
             this.tsprogress_Loading,
             this.deleteItemToolStripButton1,
             this.tsp_Sync,
-            this.tsLbl_Loading});
+            this.tsLbl_Loading,
+            this.tsLbl_SelectedDivider});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.tsMain.Size = new System.Drawing.Size(1084, 32);
-            this.tsMain.TabIndex = 4;
+            this.tsMain.TabIndex = 1;
             this.tsMain.Text = "toolStrip1";
             // 
             // tsBtnNwin
@@ -408,6 +410,15 @@
             this.tsLbl_Loading.Text = "Initializing";
             this.tsLbl_Loading.Visible = false;
             // 
+            // tsLbl_SelectedDivider
+            // 
+            this.tsLbl_SelectedDivider.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsLbl_SelectedDivider.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tsLbl_SelectedDivider.Name = "tsLbl_SelectedDivider";
+            this.tsLbl_SelectedDivider.Size = new System.Drawing.Size(134, 29);
+            this.tsLbl_SelectedDivider.Text = "TransomUC_1 Selected";
+            this.tsLbl_SelectedDivider.Visible = false;
+            // 
             // pnlRight
             // 
             this.pnlRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -426,7 +437,7 @@
             this.pnlItems.Location = new System.Drawing.Point(0, 29);
             this.pnlItems.Name = "pnlItems";
             this.pnlItems.Size = new System.Drawing.Size(166, 466);
-            this.pnlItems.TabIndex = 3;
+            this.pnlItems.TabIndex = 1;
             // 
             // label6
             // 
@@ -436,7 +447,7 @@
             this.label6.Location = new System.Drawing.Point(0, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(166, 29);
-            this.label6.TabIndex = 2;
+            this.label6.TabIndex = 0;
             this.label6.Text = "Items";
             // 
             // splitContainer1
@@ -474,7 +485,7 @@
             this.pnlControlSub.Location = new System.Drawing.Point(0, 29);
             this.pnlControlSub.Name = "pnlControlSub";
             this.pnlControlSub.Size = new System.Drawing.Size(130, 466);
-            this.pnlControlSub.TabIndex = 5;
+            this.pnlControlSub.TabIndex = 1;
             // 
             // label1
             // 
@@ -485,7 +496,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 29);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Controls";
             // 
             // pnlMain
@@ -496,7 +507,7 @@
             this.pnlMain.Location = new System.Drawing.Point(139, 0);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(639, 495);
-            this.pnlMain.TabIndex = 3;
+            this.pnlMain.TabIndex = 0;
             this.pnlMain.SizeChanged += new System.EventHandler(this.pnlMain_SizeChanged);
             // 
             // pnlProperties
@@ -538,7 +549,7 @@
             this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPropertiesBody.Name = "pnlPropertiesBody";
             this.pnlPropertiesBody.Size = new System.Drawing.Size(137, 464);
-            this.pnlPropertiesBody.TabIndex = 6;
+            this.pnlPropertiesBody.TabIndex = 1;
             // 
             // label2
             // 
@@ -623,6 +634,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainView_FormClosed);
             this.Load += new System.EventHandler(this.MainView_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainView_KeyDown);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.MainView_PreviewKeyDown);
             this.mnsMainMenu.ResumeLayout(false);
             this.mnsMainMenu.PerformLayout();
             this.tsMain.ResumeLayout(false);
@@ -695,5 +708,6 @@
         private System.Windows.Forms.Label lblZoom;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Panel pnlControlSub;
+        private System.Windows.Forms.ToolStripLabel tsLbl_SelectedDivider;
     }
 }

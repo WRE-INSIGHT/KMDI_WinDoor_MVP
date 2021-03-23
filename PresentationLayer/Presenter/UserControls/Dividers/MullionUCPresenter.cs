@@ -278,6 +278,23 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             g.DrawPath(pen, gpath);
             g.FillPath(Brushes.PowderBlue, gpath);
+
+            Font drawFont = new Font("Segoe UI", 7, FontStyle.Bold); //* zoom);
+            Size s2 = TextRenderer.MeasureText(_divModel.Div_Name, drawFont);
+
+            //int point_Y = (mul.Height / 2) - (s2.Height / 2); //0;
+
+            SizeF sz = e.Graphics.VisibleClipBounds.Size;
+
+            StringFormat format = new StringFormat();
+            format.Alignment = StringAlignment.Center;
+
+            //90 degrees
+            g.TranslateTransform(sz.Width, 0);
+            g.RotateTransform(90);
+            g.DrawString(_divModel.Div_Name, drawFont, Brushes.Black, new RectangleF(10, 0, s2.Width, s2.Height), format);
+            g.ResetTransform();
+
         }
 
         private void _mullionUC_mullionUCMouseUpEventRaised(object sender, MouseEventArgs e)

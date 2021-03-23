@@ -95,7 +95,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiMullionUCP = multiMullionUCP;
             _multiPropUCP_orig = multiPropUCP_orig;
             _tmr = new Timer();
-            _tmr.Interval = 1000;
+            _tmr.Interval = 200;
 
             SubscribeToEventsSetup();
         }
@@ -118,7 +118,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void _tmr_Tick(object sender, EventArgs e)
         {
             _timer_count++;
-            _multiPanelTransomUC.InvalidateFlp();
+            if (_timer_count == 8 || _timer_count == 1)
+            {
+                _multiPanelTransomUC.InvalidateFlp();
+            }
         }
 
         private void _multiPanelTransomUC_dividerEnabledCheckChangedEventRaised(object sender, EventArgs e)
@@ -126,6 +129,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiPanelModel.MPanel_DividerEnabled = ((ToolStripMenuItem)sender).Checked;
         }
 
+        int prev_Width = 0,
+            prev_Height = 0;
         private void _multiPanelTransomUC_multiMullionSizeChangedEventRaised(object sender, EventArgs e)
         {
             try
@@ -137,15 +142,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         mpnlModelWd = _multiPanelModel.MPanel_Width,
                         mpnlModelHt = _multiPanelModel.MPanel_Height;
 
-                    if (thisWd != mpnlModelWd)
+                    if (thisWd != mpnlModelWd || prev_Width != mpnlModelWd)
                     {
                         _multiPanelModel.MPanel_Width = thisWd;
+                        _WidthChange = true;
                     }
-                    if (thisHt != mpnlModelHt)
+                    if (thisHt != mpnlModelHt || prev_Height != mpnlModelHt)
                     {
                         _multiPanelModel.MPanel_Height = thisHt;
+                        _HeightChange = true;
                     }
                 }
+                prev_Width = _multiPanelModel.MPanel_Width;
+                prev_Height = _multiPanelModel.MPanel_Height;
+
                 _tmr.Start();
                 ((UserControl)sender).Invalidate();
             }
@@ -267,7 +277,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                         divModel,
                                                                                         _multiPanelModel,
                                                                                         this,
-                                                                                        _frameModel);
+                                                                                        _frameModel,
+                                                                                        _mainPresenter);
                             ITransomUC transomUC = transomUCP.GetTransom();
                             fpnl.Controls.Add((UserControl)transomUC);
                             transomUCP.SetInitialLoadFalse();
@@ -309,11 +320,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                         divModel,
                                                                                         _multiPanelModel,
                                                                                         this,
-                                                                                        _frameModel);
+                                                                                        _frameModel,
+                                                                                        _mainPresenter);
                             ITransomUC transomUC = transomUCP.GetTransom();
                             fpnl.Controls.Add((UserControl)transomUC);
-                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
                             transomUCP.SetInitialLoadFalse();
+                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
                         }
                     }
                 }
@@ -460,7 +472,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                     divModel,
                                                                                     _multiPanelModel,
                                                                                     this,
-                                                                                    _frameModel);
+                                                                                    _frameModel,
+                                                                                    _mainPresenter);
                         ITransomUC transomUC = transomUCP.GetTransom();
                         fpnl.Controls.Add((UserControl)transomUC);
                         _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
@@ -559,7 +572,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanel_ParentModel.Object_Indexer();
                 _multiPanelModel.MPanel_ParentModel.Reload_MultiPanelMargin();
                 _multiPanelModel.MPanel_ParentModel.Reload_PanelMargin();
-                _commonFunctions.Automatic_Div_Addition(_frameModel, 
+                _commonFunctions.Automatic_Div_Addition(_mainPresenter,
+                                                        _frameModel, 
                                                         _divServices, 
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -626,6 +640,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
         Color color = Color.Black;
+        bool _HeightChange = false,
+             _WidthChange = false;
         private void _multiPanelTransomUC_flpMulltiPaintEventRaised(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -668,6 +684,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 pixels_count = 10;
             }
 
+
+            Font drawFont = new Font("Segoe UI", 12); //* zoom);
+            StringFormat drawFormat = new StringFormat();
+            drawFormat.Alignment = StringAlignment.Near;
+            drawFormat.LineAlignment = StringAlignment.Near;
 
             IMultiPanelModel parent_mpnl = _multiPanelModel.MPanel_ParentModel;
 
@@ -1901,20 +1922,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), bounds);
             g.DrawRectangle(new Pen(color, 1), bounds);
 
-            Font drawFont = new Font("Segoe UI", 12); //* zoom);
-            StringFormat drawFormat = new StringFormat();
-            drawFormat.Alignment = StringAlignment.Near;
-            drawFormat.LineAlignment = StringAlignment.Near;
             g.DrawString(_multiPanelModel.MPanel_Name + " (" + _multiPanelModel.MPanel_Divisions + ")", drawFont, new SolidBrush(Color.Black), bounds);
 
-            if (_timer_count != 0 && _timer_count < 2)
+            if (_timer_count != 0 && _timer_count < 8)
             {
-                _commonFunctions.Red_Arrow_Lines(g, _multiPanelModel);
+                if (_HeightChange)
+                {
+                    _commonFunctions.Red_Arrow_Lines_forHeight(g, _multiPanelModel);
+                }
+
+                if (_WidthChange)
+                {
+                    _commonFunctions.Red_Arrow_Lines_forWidth(g, _multiPanelModel);
+                }
             }
-            else if (_timer_count == 2)
+            else if (_timer_count >= 8)
             {
                 _tmr.Stop();
                 _timer_count = 0;
+                _HeightChange = false;
+                _WidthChange = false;
             }
         }
 
