@@ -26,9 +26,18 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private IMultiPanelMullionUCPresenter _multiMullionUCP;
         private IMultiPanelTransomUCPresenter _multiTransomUCP;
+        private IMainPresenter _mainPresenter;
 
-        bool _mouseDown, _initialLoad;
+        bool _mouseDown, _initialLoad, _keydown;
         private Point _point_of_origin;
+
+        public bool boolKeyDown
+        {
+            set
+            {
+                _keydown = value;
+            }
+        }
 
         public MullionUCPresenter(IMullionUC mullionUC)
         {
@@ -46,6 +55,52 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _mullionUC.mullionUCMouseEnterEventRaised += _mullionUC_mullionUCMouseEnterEventRaised;
             _mullionUC.mullionUCMouseLeaveEventRaised += _mullionUC_mullionUCMouseLeaveEventRaised;
             _mullionUC.mullionUCSizeChangedEventRaised += _mullionUC_mullionUCSizeChangedEventRaised;
+            _mullionUC.mullionUCKeyDownEventRaised += _mullionUC_mullionUCKeyDownEventRaised;
+            _mullionUC.mullionUCMouseDoubleClickedEventRaised += _mullionUC_mullionUCMouseDoubleClickedEventRaised;
+        }
+
+        private void _mullionUC_mullionUCKeyDownEventRaised(object sender, KeyEventArgs e)
+        {
+            UserControl me = (UserControl)sender;
+            FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
+
+            int me_indx = flp.Controls.IndexOf(me);
+
+            if (_keydown)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:
+                        _mainPresenter.DeselectDivider();
+                        _keydown = false;
+                        break;
+
+                    case Keys.Up:
+                        flp.Controls[me_indx - 1].Width++;
+                        flp.Controls[me_indx + 1].Width--;
+
+                        flp.Controls[me_indx - 1].Invalidate();
+                        flp.Controls[me_indx + 1].Invalidate();
+                        break;
+
+                    case Keys.Down:
+                        flp.Controls[me_indx - 1].Width--;
+                        flp.Controls[me_indx + 1].Width++;
+
+                        flp.Controls[me_indx - 1].Invalidate();
+                        flp.Controls[me_indx + 1].Invalidate();
+                        break;
+                }
+            }
+        }
+
+        private void _mullionUC_mullionUCMouseDoubleClickedEventRaised(object sender, MouseEventArgs e)
+        {
+            int thisIndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_mullionUC);
+            if (thisIndx > 0 && thisIndx < _multiPanelModel.MPanelLst_Objects.Count() - 1)
+            {
+                _mainPresenter.SetSelectedDivider(_divModel, null, this);
+            }
         }
 
         private void _mullionUC_mullionUCSizeChangedEventRaised(object sender, EventArgs e)
@@ -237,6 +292,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         }
 
         Color penColor = Color.Black;
+
         private void _mullionUC_mullionUCPaintEventRaised(object sender, PaintEventArgs e)
         {
             UserControl mul = (UserControl)sender;
@@ -370,7 +426,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                   IDividerModel divModel,
                                                   IMultiPanelModel multiPanelModel,
                                                   IMultiPanelMullionUCPresenter multiMullionUCP,
-                                                  IFrameModel frameModel)
+                                                  IFrameModel frameModel,
+                                                  IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IMullionUC, MullionUC>()
@@ -380,6 +437,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             mullionUCP._multiPanelModel = multiPanelModel;
             mullionUCP._multiMullionUCP = multiMullionUCP;
             mullionUCP._frameModel = frameModel;
+            mullionUCP._mainPresenter = mainPresenter;
 
             return mullionUCP;
         }
@@ -388,7 +446,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                   IDividerModel divModel, 
                                                   IMultiPanelModel multiPanelModel, 
                                                   IMultiPanelTransomUCPresenter multiTransomUCP, 
-                                                  IFrameModel frameModel)
+                                                  IFrameModel frameModel,
+                                                  IMainPresenter mainPresenter)
         {
             unityC
                .RegisterType<IMullionUC, MullionUC>()
@@ -398,6 +457,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             mullionUCP._multiPanelModel = multiPanelModel;
             mullionUCP._multiTransomUCP = multiTransomUCP;
             mullionUCP._frameModel = frameModel;
+            mullionUCP._mainPresenter = mainPresenter;
 
             return mullionUCP;
         }
@@ -417,6 +477,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         public void SetInitialLoadFalse()
         {
             _initialLoad = false;
+        }
+
+        public void FocusOnThisMullionDiv()
+        {
+            _mullionUC.FocusOnThis();
         }
     }
 }

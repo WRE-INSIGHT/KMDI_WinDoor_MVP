@@ -42,6 +42,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event EventHandler transomUCMouseLeaveEventRaised;
         public event EventHandler transomUCSizeChangedEventRaised;
         public event MouseEventHandler transomUCMouseDoubleClickedEventRaised;
+        public event KeyEventHandler transomUCKeyDownEventRaised;
 
         public void InvalidateThis()
         {
@@ -109,5 +110,27 @@ namespace PresentationLayer.Views.UserControls.Dividers
         {
             EventHelpers.RaiseMouseEvent(sender, transomUCMouseDoubleClickedEventRaised, e);
         }
+
+        private void TransomUC_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseKeyEvent(this, transomUCKeyDownEventRaised, e);
+        }
+        
+        private void TransomUC_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                case Keys.Up:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        public void FocusOnThis()
+        {
+            this.Focus();
+        }
+
     }
 }

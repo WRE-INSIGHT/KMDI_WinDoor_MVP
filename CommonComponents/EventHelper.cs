@@ -25,5 +25,9 @@ namespace CommonComponents
         {
             dragEventHandlerRaised?.Invoke(objectRaisingEvent, dragEventArgs); // Notify all subscribers
         }
+        public static void RaiseKeyEvent(Object objectRaisingEvent, KeyEventHandler keyEventHandlerRaised, KeyEventArgs keyEventArgs)
+        {
+            keyEventHandlerRaised?.Invoke(objectRaisingEvent, keyEventArgs); // Notify all subscribers
+        }
     }
 }

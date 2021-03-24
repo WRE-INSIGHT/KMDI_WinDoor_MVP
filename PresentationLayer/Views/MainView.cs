@@ -176,36 +176,5 @@ namespace PresentationLayer.Views
         {
             return tsLbl_SelectedDivider;
         }
-
-        int count = 0;
-        private void MainView_KeyDown(object sender, KeyEventArgs e)
-        {
-            //if (tsLbl_SelectedDivider.Visible)
-            //{
-            //    count++;
-            //}
-
-            //switch (e.KeyCode)
-            //{
-            //    case Keys.Escape:
-            //        tsLbl_SelectedDivider.Visible = false;
-            //        break;
-            //    case Keys.Up:
-            //    case Keys.Down:
-            //        tsLbl_SelectedDivider.Text += " +" + count;
-            //        break;
-            //}
-        }
-
-        private void MainView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            //switch (e.KeyCode)
-            //{
-            //    case Keys.Down:
-            //    case Keys.Up:
-            //        e.IsInputKey = true;
-            //        break;
-            //}
-        }
     }
 }

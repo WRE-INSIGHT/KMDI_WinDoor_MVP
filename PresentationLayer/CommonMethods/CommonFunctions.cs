@@ -134,7 +134,8 @@ namespace PresentationLayer.CommonMethods
                                                                 divModel,
                                                                 parentModel,
                                                                 multiTransomUCP,
-                                                                frameModel);
+                                                                frameModel,
+                                                                mainPresenter);
                     }
                     else if (multiMullionUCP != null)
                     {
@@ -142,7 +143,8 @@ namespace PresentationLayer.CommonMethods
                                                                 divModel,
                                                                 parentModel,
                                                                 multiMullionUCP,
-                                                                frameModel);
+                                                                frameModel,
+                                                                mainPresenter);
                     }
 
                     IMullionUC mullionUC = mullionUCP.GetMullion();

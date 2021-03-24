@@ -58,6 +58,7 @@
             this.Size = new System.Drawing.Size(350, 26);
             this.SizeChanged += new System.EventHandler(this.TransomUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TransomUC_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TransomUC_KeyDown);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseClick);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseDoubleClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseDown);
@@ -65,6 +66,7 @@
             this.MouseLeave += new System.EventHandler(this.TransomUC_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TransomUC_MouseUp);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TransomUC_PreviewKeyDown);
             this.cmenu_transom.ResumeLayout(false);
             this.ResumeLayout(false);
 

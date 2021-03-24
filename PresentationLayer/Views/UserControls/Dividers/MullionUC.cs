@@ -37,11 +37,13 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event MouseEventHandler mullionUCMouseDownEventRaised;
         public event MouseEventHandler mullionUCMouseMoveEventRaised;
         public event MouseEventHandler mullionUCMouseUpEventRaised;
+        public event MouseEventHandler mullionUCMouseDoubleClickedEventRaised;
         public event PaintEventHandler mullionUCPaintEventRaised;
         //public event EventHandler deleteToolStripMenuItemClickedEventRaised;
         public event EventHandler mullionUCMouseEnterEventRaised;
         public event EventHandler mullionUCMouseLeaveEventRaised;
         public event EventHandler mullionUCSizeChangedEventRaised;
+        public event KeyEventHandler mullionUCKeyDownEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -103,6 +105,32 @@ namespace PresentationLayer.Views.UserControls.Dividers
         private void MullionUC_SizeChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(this, mullionUCSizeChangedEventRaised, e);
+        }
+
+        private void MullionUC_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseKeyEvent(this, mullionUCKeyDownEventRaised, e);
+        }
+
+        private void MullionUC_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                case Keys.Up:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void MullionUC_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, mullionUCMouseDoubleClickedEventRaised, e);
+        }
+
+        public void FocusOnThis()
+        {
+            this.Focus();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 {
     public interface ITransomUCPresenter
     {
+        bool boolKeyDown { set; }
         ITransomUCPresenter GetNewInstance(IUnityContainer unityC, 
                                            IDividerModel divModel, 
                                            IMultiPanelModel multiPanelModel,
@@ -25,5 +26,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         ITransomUC GetTransom(string test); //for Testing
         ITransomUC GetTransom();
         void SetInitialLoadFalse();
+        void FocusOnThisTransomDiv();
     }
 }

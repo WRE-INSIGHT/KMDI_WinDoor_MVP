@@ -276,7 +276,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                         divModel,
                                                                                         _multiPanelModel,
                                                                                         this,
-                                                                                        _frameModel);
+                                                                                        _frameModel,
+                                                                                        _mainPresenter);
                             IMullionUC mullionUC = mullionUCP.GetMullion();
                             fpnl.Controls.Add((UserControl)mullionUC);
                             mullionUCP.SetInitialLoadFalse();
@@ -318,7 +319,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                         divModel,
                                                                                         _multiPanelModel,
                                                                                         this,
-                                                                                        _frameModel);
+                                                                                        _frameModel,
+                                                                                        _mainPresenter);
                             IMullionUC mullionUC = mullionUCP.GetMullion();
                             fpnl.Controls.Add((UserControl)mullionUC);
                             mullionUCP.SetInitialLoadFalse();
@@ -466,7 +468,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                     divModel,
                                                                                     _multiPanelModel,
                                                                                     this,
-                                                                                    _frameModel);
+                                                                                    _frameModel,
+                                                                                    _mainPresenter);
                         IMullionUC mullionUC = mullionUCP.GetMullion();
                         fpnl.Controls.Add((UserControl)mullionUC);
                         _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());

@@ -11,12 +11,15 @@ namespace PresentationLayer.Views.UserControls.Dividers
         event MouseEventHandler mullionUCMouseDownEventRaised;
         event MouseEventHandler mullionUCMouseMoveEventRaised;
         event MouseEventHandler mullionUCMouseUpEventRaised;
+        event MouseEventHandler mullionUCMouseDoubleClickedEventRaised;
         event PaintEventHandler mullionUCPaintEventRaised;
         //event EventHandler deleteToolStripMenuItemClickedEventRaised;
         event EventHandler mullionUCMouseEnterEventRaised;
         event EventHandler mullionUCMouseLeaveEventRaised;
         event EventHandler mullionUCSizeChangedEventRaised;
+        event KeyEventHandler mullionUCKeyDownEventRaised;
 
         void InvalidateThis();
+        void FocusOnThis();
     }
 }

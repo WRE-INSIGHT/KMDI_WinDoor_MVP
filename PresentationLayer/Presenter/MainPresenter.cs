@@ -22,6 +22,7 @@ using Unity;
 using System.Linq;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
+using PresentationLayer.Presenter.UserControls.Dividers;
 
 namespace PresentationLayer.Presenter
 {
@@ -409,17 +410,9 @@ namespace PresentationLayer.Presenter
             }
             _mainView.Nickname = _userModel.Nickname;
 
-            //_pnlControlSub.Controls.Add(
-            //    (UserControl)_controlsUCP.GetNewInstance(
-            //    _unityC, "Transom", new Thumbs_TransomUC()).GetControlUC());
-
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
-
-            //_pnlControlSub.Controls.Add(
-            //    (UserControl)_controlsUCP.GetNewInstance(
-            //    _unityC, "Mullion", new Thumbs_MullionUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
@@ -818,10 +811,54 @@ namespace PresentationLayer.Presenter
             return _windoorModel.GetDividerCount();
         }
 
-        public void SetSelectedDivider(IDividerModel divModel)
+        ITransomUCPresenter current_transom;
+        IMullionUCPresenter current_mullion;
+
+        public void SetSelectedDivider(IDividerModel divModel,
+                                       ITransomUCPresenter transomUCP = null,
+                                       IMullionUCPresenter mullionUCP = null)
         {
             _mainView.GetLblSelectedDivider().Visible = true;
             _mainView.GetLblSelectedDivider().Text = divModel.Div_Name + " Selected";
+            if (transomUCP != null)
+            {
+                if (current_transom != null)
+                {
+                    current_transom.boolKeyDown = false;
+                    current_transom = null;
+                }
+                else if (current_mullion != null)
+                {
+                    current_mullion.boolKeyDown = false;
+                    current_mullion = null;
+                }
+                transomUCP.boolKeyDown = true;
+                transomUCP.FocusOnThisTransomDiv();
+                current_transom = transomUCP;
+            }
+            else if (mullionUCP != null)
+            {
+                if (current_transom != null)
+                {
+                    current_transom.boolKeyDown = false;
+                    current_transom = null;
+                }
+                else if (current_mullion != null)
+                {
+                    current_mullion.boolKeyDown = false;
+                    current_mullion = null;
+                }
+                mullionUCP.boolKeyDown = true;
+                mullionUCP.FocusOnThisMullionDiv();
+                current_mullion = mullionUCP;
+            }
+
+        }
+
+        public void DeselectDivider()
+        {
+            _mainView.GetLblSelectedDivider().Visible = false;
+            _mainView.GetLblSelectedDivider().Text = "";
         }
 
         #endregion

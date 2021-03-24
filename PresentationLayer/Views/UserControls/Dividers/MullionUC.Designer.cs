@@ -59,12 +59,15 @@
             this.Size = new System.Drawing.Size(26, 350);
             this.SizeChanged += new System.EventHandler(this.MullionUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MullionUC_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MullionUC_KeyDown);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseDoubleClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseDown);
             this.MouseEnter += new System.EventHandler(this.MullionUC_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.MullionUC_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MullionUC_MouseUp);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.MullionUC_PreviewKeyDown);
             this.cmenu_mullion.ResumeLayout(false);
             this.ResumeLayout(false);
 

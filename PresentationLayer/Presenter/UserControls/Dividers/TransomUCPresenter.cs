@@ -29,8 +29,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         private IMultiPanelMullionUCPresenter _multiMullionUCP;
         private IMainPresenter _mainPresenter;
 
-        bool _mouseDown, _initialLoad;
+        bool _mouseDown, _initialLoad, _keydown;
         private Point _point_of_origin;
+
+        public bool boolKeyDown
+        {
+            set
+            {
+                _keydown = value;
+            }
+        }
 
         public TransomUCPresenter(ITransomUC transomUC)
         {
@@ -48,11 +56,51 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             _transomUC.transomUCMouseLeaveEventRaised += _transomUC_transomUCMouseLeaveEventRaised;
             _transomUC.transomUCSizeChangedEventRaised += _transomUC_transomUCSizeChangedEventRaised;
             _transomUC.transomUCMouseDoubleClickedEventRaised += _transomUC_transomUCMouseDoubleClickedEventRaised;
+            _transomUC.transomUCKeyDownEventRaised += _transomUC_transomUCKeyDownEventRaised;
+        }
+
+        private void _transomUC_transomUCKeyDownEventRaised(object sender, KeyEventArgs e)
+        {
+            UserControl me = (UserControl)sender;
+            FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
+
+            int me_indx = flp.Controls.IndexOf(me);
+
+            if (_keydown)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:
+                        _mainPresenter.DeselectDivider();
+                        _keydown = false;
+                        break;
+
+                    case Keys.Up:
+                        flp.Controls[me_indx - 1].Height ++;
+                        flp.Controls[me_indx + 1].Height --;
+
+                        flp.Controls[me_indx - 1].Invalidate();
+                        flp.Controls[me_indx + 1].Invalidate();
+                        break;
+
+                    case Keys.Down:
+                        flp.Controls[me_indx - 1].Height--;
+                        flp.Controls[me_indx + 1].Height++;
+
+                        flp.Controls[me_indx - 1].Invalidate();
+                        flp.Controls[me_indx + 1].Invalidate();
+                        break;
+                }
+            }
         }
 
         private void _transomUC_transomUCMouseDoubleClickedEventRaised(object sender, MouseEventArgs e)
         {
-            _mainPresenter.SetSelectedDivider(_divModel);
+            int thisIndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_transomUC);
+            if (thisIndx > 0 && thisIndx < _multiPanelModel.MPanelLst_Objects.Count() - 1)
+            {
+                _mainPresenter.SetSelectedDivider(_divModel, this);
+            }
         }
 
         private void _transomUC_transomUCSizeChangedEventRaised(object sender, EventArgs e)
@@ -84,6 +132,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         }
 
         Color penColor = Color.Black;
+
         private void _transomUC_transomUCMouseLeaveEventRaised(object sender, EventArgs e)
         {
             penColor = Color.Black;
@@ -405,6 +454,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         public void SetInitialLoadFalse()
         {
             _initialLoad = false;
+        }
+
+        public void FocusOnThisTransomDiv()
+        {
+            _transomUC.FocusOnThis();
         }
     }
 }
