@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -407,6 +408,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
                     foreach (IPanelModel pnl in fr.Lst_Panel)
                     {
                         pnl.PanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                    }
+                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                    {
+                        mpnl.MPanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
                     }
                 }
             }

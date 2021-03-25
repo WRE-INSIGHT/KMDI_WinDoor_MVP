@@ -7,6 +7,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
     {
         int Panel_ID { get; set; }
 
-        event PaintEventHandler lblFixedUCPaintEventRaised;
+        event PaintEventHandler fixedPanelImagerUCPaintEventRaised;
     }
 }

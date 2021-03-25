@@ -760,11 +760,17 @@ namespace PresentationLayer.Presenter
 
         public void AddFrameUC(IFrameModel frameModel)
         {
-            IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, frameModel, this, _basePlatformPresenter);
+            IFrameImagerUCPresenter frameImagerUCP = (FrameImagerUCPresenter)_frameImagerUCPresenter.GetNewInstance(_unityC, frameModel);
+
+            IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, 
+                                                                                            frameModel, 
+                                                                                            this,
+                                                                                            _basePlatformPresenter, 
+                                                                                            frameImagerUCP,
+                                                                                            _basePlatformImagerUCPresenter);
             _frameUC = frameUCP.GetFrameUC();
             _basePlatformPresenter.AddFrame(_frameUC);
 
-            IFrameImagerUCPresenter frameImagerUCP = (FrameImagerUCPresenter)_frameImagerUCPresenter.GetNewInstance(_unityC, frameModel);
             _basePlatformImagerUCPresenter.AddFrame(frameImagerUCP.GetFrameImagerUC());
         }
 
@@ -793,12 +799,6 @@ namespace PresentationLayer.Presenter
         public int GetPanelCount()
         {
             return _windoorModel.GetPanelCount();
-        }
-
-        public Panel GetFrameImagerInnerPanel(int frameID)
-        {
-            IBasePlatformImagerUC basePLImagerUC = _mainView.GetThis().Controls.OfType<IBasePlatformImagerUC>().First();
-            return basePLImagerUC.GetFlpMain().Controls.OfType<IFrameImagerUC>().First(fr => fr.frameID == frameID).GetInnerPanel();
         }
 
         public int GetMultiPanelCount()

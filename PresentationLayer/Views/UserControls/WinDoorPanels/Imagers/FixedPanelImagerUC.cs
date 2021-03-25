@@ -34,20 +34,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 
         Color color = Color.Black;
 
-        public event PaintEventHandler lblFixedUCPaintEventRaised;
+        public event PaintEventHandler fixedPanelImagerUCPaintEventRaised;
 
         private void FixedPanelImagerUC_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            int w = 1;
-            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
-                                                           0,
-                                                           this.ClientRectangle.Width - w,
-                                                           this.ClientRectangle.Height - w));
+            EventHelpers.RaisePaintEvent(this, fixedPanelImagerUCPaintEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
@@ -57,11 +48,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
-        }
-
-        private void lbl_Fixed_Paint(object sender, PaintEventArgs e)
-        {
-            EventHelpers.RaisePaintEvent(sender, lblFixedUCPaintEventRaised, e);
         }
     }
 }

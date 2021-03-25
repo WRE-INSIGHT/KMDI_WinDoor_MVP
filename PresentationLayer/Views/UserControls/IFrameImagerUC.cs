@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using System;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
@@ -7,14 +8,11 @@ namespace PresentationLayer.Views.UserControls
     {
         int frameID { get; set; }
         bool thisVisible { get; }
+        Padding thisPadding { get; set; }
 
-        //event PaintEventHandler innerFramePaintEventRaised;
-        //event PaintEventHandler outerFramePaintEventRaised;
-
-        Panel GetInnerPanel();
-        void InvalidatePanelInner();
-        void InvalidateThis();
-        void InvalidateThisParent();
-        void InvalidateThisParentsParent();
+        event EventHandler frameLoadEventRaised;
+        event PaintEventHandler outerFramePaintEventRaised;
+        
+        void AddImagerControl(Control ctrlObj);
     }
 }

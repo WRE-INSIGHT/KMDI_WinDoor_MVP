@@ -9,5 +9,6 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IFrameImagerUC GetFrameImagerUC();
         IFrameImagerUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel);
+        void AddControl(UserControl userctrlObj);
     }
 }

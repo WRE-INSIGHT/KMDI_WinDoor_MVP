@@ -23,6 +23,7 @@ namespace PresentationLayer.Views.UserControls
         event PaintEventHandler outerFramePaintEventRaised;
         event MouseEventHandler frameMouseClickEventRaised;
         event DragEventHandler frameDragDropEventRaised;
+
         void InvalidateThisControls();
         void InvalidateThis();
         void InvalidateThisParent();
@@ -30,6 +31,5 @@ namespace PresentationLayer.Views.UserControls
         ContextMenuStrip GetFrameCmenu();
         void DeleteControl(UserControl control);
         void PerformLayoutThis();
-        Bitmap GetImageThis();
     }
 }

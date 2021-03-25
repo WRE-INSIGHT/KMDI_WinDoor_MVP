@@ -9,6 +9,7 @@ using Unity;
 using CommonComponents;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 {
@@ -25,22 +26,41 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
         private void SubscribeToEventsSetup()
         {
-            _fixedPanelImagerUC.lblFixedUCPaintEventRaised += _fixedPanelImagerUC_lblFixedUCPaintEventRaised;
+            _fixedPanelImagerUC.fixedPanelImagerUCPaintEventRaised += _fixedPanelImagerUC_fixedPanelImagerUCPaintEventRaised;
         }
 
-        private void _fixedPanelImagerUC_lblFixedUCPaintEventRaised(object sender, PaintEventArgs e)
+        private void _fixedPanelImagerUC_fixedPanelImagerUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            Label fixedpnl = (Label)sender;
+            UserControl fixedpnl = (UserControl)sender;
 
             Graphics g = e.Graphics;
             int w = 1;
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            Font drawFont = new Font("Times New Roman", 30);// * zoom);
+            StringFormat drawFormat = new StringFormat();
+            drawFormat.Alignment = StringAlignment.Center;
+            drawFormat.LineAlignment = StringAlignment.Center;
+            g.DrawString("F", drawFont, new SolidBrush(Color.Black), fixedpnl.ClientRectangle, drawFormat);
+
+            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                   0,
+                                                                   fixedpnl.ClientRectangle.Width - w,
+                                                                   fixedpnl.ClientRectangle.Height - w));
+
+            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(10,
+                                                                   10,
+                                                                   (fixedpnl.ClientRectangle.Width - 20) - w,
+                                                                   (fixedpnl.ClientRectangle.Height - 20) - w));
 
             if (_panelModel.Panel_Orient == true)
             {
-                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(5,
-                                                                       5,
-                                                                       (fixedpnl.ClientRectangle.Width - 10) - w,
-                                                                       (fixedpnl.ClientRectangle.Height - 10) - w));
+                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(15,
+                                                                       15,
+                                                                       (fixedpnl.ClientRectangle.Width - 30) - w,
+                                                                       (fixedpnl.ClientRectangle.Height - 30) - w));
 
             }
         }

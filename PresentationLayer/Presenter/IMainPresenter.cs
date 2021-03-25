@@ -54,7 +54,6 @@ namespace PresentationLayer.Presenter
                                       decimal WD_discount = 0.0M,
                                       List<IFrameModel> lst_frame = null);
         IFramePropertiesUC GetFrameProperties(int frameID);
-        Panel GetFrameImagerInnerPanel(int frameID); 
         int GetPanelCount();
         int GetMultiPanelCount();
         int GetDividerCount();
