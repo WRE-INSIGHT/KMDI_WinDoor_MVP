@@ -127,6 +127,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameUCP.ViewDeleteControl((UserControl)_casementUC);
             }
 
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+
             if (_multiPanelModel != null && _multiPanelModel.MPanel_DividerEnabled)
             {
                 _multiPanelModel.Object_Indexer();
@@ -145,8 +147,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _multiPanelTransomUCP,
                                                         _multiPanelMullionUCP);
             }
-
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             #endregion
         }
 

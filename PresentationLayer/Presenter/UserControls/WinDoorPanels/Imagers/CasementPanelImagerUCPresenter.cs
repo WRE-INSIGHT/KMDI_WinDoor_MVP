@@ -18,6 +18,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
         private IPanelModel _panelModel;
 
+        private IFrameImagerUCPresenter _frameImagerUCP;
+
         public CasementPanelImagerUCPresenter(ICasementPanelImagerUC casementImagerUC)
         {
             _casementImagerUC = casementImagerUC;
@@ -27,6 +29,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         private void SubscribeToEventsSetup()
         {
             _casementImagerUC.casementPanelImagerUCPaintEventRaised += _casementImagerUC_casementPanelImagerUCPaintEventRaised;
+            _casementImagerUC.casementPanelImagerUCVisibleChangedEventRaised += _casementImagerUC_casementPanelImagerUCVisibleChangedEventRaised;
+        }
+
+        private void _casementImagerUC_casementPanelImagerUCVisibleChangedEventRaised(object sender, EventArgs e)
+        {
+            if (((UserControl)sender).Visible == false)
+            {
+                if (_frameImagerUCP != null)
+                {
+                    _frameImagerUCP.DeleteControl((UserControl)_casementImagerUC);
+                }
+            }
         }
 
         private void _casementImagerUC_casementPanelImagerUCPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -87,13 +101,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         }
 
         public ICasementPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                              IPanelModel panelModel)
+                                                              IPanelModel panelModel,
+                                                              IFrameImagerUCPresenter frameImagerUCP)
         {
             unityC
                 .RegisterType<ICasementPanelImagerUC, CasementPanelImagerUC>()
                 .RegisterType<ICasementPanelImagerUCPresenter, CasementPanelImagerUCPresenter>();
             CasementPanelImagerUCPresenter casementImagerUCP = unityC.Resolve<CasementPanelImagerUCPresenter>();
             casementImagerUCP._panelModel = panelModel;
+            casementImagerUCP._frameImagerUCP = frameImagerUCP;
 
             return casementImagerUCP;
         }
@@ -106,7 +122,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             panelBinding.Add("PanelImageRenderer_Width", new Binding("Width", _panelModel, "PanelImageRenderer_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelImageRenderer_Height", new Binding("Height", _panelModel, "PanelImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
+            //panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

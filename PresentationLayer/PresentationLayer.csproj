@@ -120,7 +120,9 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\IAwningPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\ICasementPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\IFixedPanelImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\IMultiPanelMullionImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\ISlidingPanelImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\MultiPanelMullionImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IMultiPanelMullionUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IMultiPanelTransomUCPresenter.cs" />

@@ -35,6 +35,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
         Color color = Color.Black;
 
         public event PaintEventHandler fixedPanelImagerUCPaintEventRaised;
+        public event EventHandler fixedPanelImagerUCVisibleChangedEventRaised;
 
         private void FixedPanelImagerUC_Paint(object sender, PaintEventArgs e)
         {
@@ -48,6 +49,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
+        }
+
+        private void FixedPanelImagerUC_VisibleChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, fixedPanelImagerUCVisibleChangedEventRaised, e);
         }
     }
 }

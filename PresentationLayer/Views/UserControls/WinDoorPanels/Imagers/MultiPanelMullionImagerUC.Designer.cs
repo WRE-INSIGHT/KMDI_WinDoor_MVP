@@ -41,6 +41,7 @@
             this.flp_MultiMullionImager.Name = "flp_MultiMullionImager";
             this.flp_MultiMullionImager.Size = new System.Drawing.Size(300, 300);
             this.flp_MultiMullionImager.TabIndex = 1;
+            this.flp_MultiMullionImager.Paint += new System.Windows.Forms.PaintEventHandler(this.flp_MultiMullionImager_Paint);
             // 
             // MultiPanelMullionImagerUC
             // 
@@ -49,7 +50,7 @@
             this.Controls.Add(this.flp_MultiMullionImager);
             this.Name = "MultiPanelMullionImagerUC";
             this.Size = new System.Drawing.Size(300, 300);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MultiPanelMullionImagerUC_Paint);
+            this.VisibleChanged += new System.EventHandler(this.MultiPanelMullionImagerUC_VisibleChanged);
             this.ResumeLayout(false);
 
         }

@@ -14,5 +14,6 @@ namespace PresentationLayer.Views.UserControls
         event PaintEventHandler outerFramePaintEventRaised;
         
         void AddImagerControl(Control ctrlObj);
+        void DeleteImagerControl(UserControl userctrlObj);
     }
 }

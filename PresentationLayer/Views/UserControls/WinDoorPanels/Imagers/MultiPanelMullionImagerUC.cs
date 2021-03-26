@@ -31,10 +31,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             }
         }
         public event PaintEventHandler flpMulltiPaintEventRaised;
+        public event EventHandler flpMulltiVisibleChangedEventRaised;
 
-        private void MultiPanelMullionImagerUC_Paint(object sender, PaintEventArgs e)
+        private void flp_MultiMullionImager_Paint(object sender, PaintEventArgs e)
         {
-            EventHelpers.RaisePaintEvent(this, flpMulltiPaintEventRaised, e);
+            EventHelpers.RaisePaintEvent(sender, flpMulltiPaintEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
@@ -42,10 +43,15 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["MPanel_ID"]);
             this.DataBindings.Add(ModelBinding["MPanel_Name"]);
             this.DataBindings.Add(ModelBinding["MPanel_Dock"]);
-            this.DataBindings.Add(ModelBinding["MPanel_Width"]);
-            this.DataBindings.Add(ModelBinding["MPanel_Height"]);
+            this.DataBindings.Add(ModelBinding["MPanelImageRenderer_Width"]);
+            this.DataBindings.Add(ModelBinding["MPanelImageRenderer_Height"]);
             this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
             this.DataBindings.Add(ModelBinding["MPanel_Margin"]);
+        }
+
+        private void MultiPanelMullionImagerUC_VisibleChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, flpMulltiVisibleChangedEventRaised, e);
         }
     }
 }

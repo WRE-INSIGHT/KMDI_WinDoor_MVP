@@ -129,5 +129,10 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _frameImagerUC.AddImagerControl(userctrlObj);
         }
+
+        public void DeleteControl(UserControl userctrlObj)
+        {
+            _frameImagerUC.DeleteImagerControl(userctrlObj);
+        }
     }
 }

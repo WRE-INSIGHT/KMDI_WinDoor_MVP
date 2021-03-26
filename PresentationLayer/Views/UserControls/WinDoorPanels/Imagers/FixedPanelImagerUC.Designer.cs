@@ -38,6 +38,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "FixedPanelImagerUC";
             this.Padding = new System.Windows.Forms.Padding(5);
+            this.VisibleChanged += new System.EventHandler(this.FixedPanelImagerUC_VisibleChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FixedPanelImagerUC_Paint);
             this.ResumeLayout(false);
 

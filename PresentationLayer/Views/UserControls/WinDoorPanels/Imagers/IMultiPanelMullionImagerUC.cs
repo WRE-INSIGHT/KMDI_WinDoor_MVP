@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using System;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
@@ -8,5 +9,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
         int MPanel_ID { get; set; }
 
         event PaintEventHandler flpMulltiPaintEventRaised;
+        event EventHandler flpMulltiVisibleChangedEventRaised;
     }
 }

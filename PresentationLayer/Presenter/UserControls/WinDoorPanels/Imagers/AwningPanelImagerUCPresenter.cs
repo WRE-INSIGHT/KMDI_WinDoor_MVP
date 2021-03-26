@@ -18,6 +18,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
         private IPanelModel _panelModel;
 
+        private IFrameImagerUCPresenter _frameImagerUCP;
+
         public AwningPanelImagerUCPresenter(IAwningPanelImagerUC awningPanelImagerUC)
         {
             _awningPanelImagerUC = awningPanelImagerUC;
@@ -27,6 +29,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         private void SubscribeToEventsSetup()
         {
             _awningPanelImagerUC.awningPanelImagerUCPaintEventRaised += _awningPanelImagerUC_awningPanelImagerUCPaintEventRaised;
+            _awningPanelImagerUC.awningPanelImagerUCVisibleChangedEventRaised += _awningPanelImagerUC_awningPanelImagerUCVisibleChangedEventRaised;
+        }
+
+        private void _awningPanelImagerUC_awningPanelImagerUCVisibleChangedEventRaised(object sender, EventArgs e)
+        {
+            if (((UserControl)sender).Visible == false)
+            {
+                if (_frameImagerUCP != null)
+                {
+                    _frameImagerUCP.DeleteControl((UserControl)_awningPanelImagerUC);
+                }
+            }
         }
 
         private void _awningPanelImagerUC_awningPanelImagerUCPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -89,13 +103,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
 
         public IAwningPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                            IPanelModel panelModel)
+                                                            IPanelModel panelModel,
+                                                            IFrameImagerUCPresenter frameImagerUCP)
         {
             unityC
                 .RegisterType<IAwningPanelImagerUC, AwningPanelImagerUC>()
                 .RegisterType<IAwningPanelImagerUCPresenter, AwningPanelImagerUCPresenter>();
             AwningPanelImagerUCPresenter awningImagerUCP = unityC.Resolve<AwningPanelImagerUCPresenter>();
             awningImagerUCP._panelModel = panelModel;
+            awningImagerUCP._frameImagerUCP = frameImagerUCP;
 
             return awningImagerUCP;
         }
@@ -108,7 +124,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             panelBinding.Add("PanelImageRenderer_Width", new Binding("Width", _panelModel, "PanelImageRenderer_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelImageRenderer_Height", new Binding("Height", _panelModel, "PanelImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
+            //panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

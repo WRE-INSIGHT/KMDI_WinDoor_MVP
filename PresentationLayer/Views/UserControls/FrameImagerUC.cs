@@ -78,5 +78,10 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(ModelBinding["Frame_Padding"]);
             this.DataBindings.Add(ModelBinding["Frame_Name"]);
         }
+
+        public void DeleteImagerControl(UserControl userctrlObj)
+        {
+            this.Controls.Remove(userctrlObj);
+        }
     }
 }

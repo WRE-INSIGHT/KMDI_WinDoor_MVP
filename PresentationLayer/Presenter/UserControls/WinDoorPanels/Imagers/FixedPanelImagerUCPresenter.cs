@@ -16,7 +16,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
     public class FixedPanelImagerUCPresenter : IFixedPanelImagerUCPresenter, IPresenterCommon
     {
         IFixedPanelImagerUC _fixedPanelImagerUC;
+
         private IPanelModel _panelModel;
+
+        private IFrameImagerUCPresenter _frameImagerUCP;
 
         public FixedPanelImagerUCPresenter(IFixedPanelImagerUC fixedPanelImagerUC)
         {
@@ -27,6 +30,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         private void SubscribeToEventsSetup()
         {
             _fixedPanelImagerUC.fixedPanelImagerUCPaintEventRaised += _fixedPanelImagerUC_fixedPanelImagerUCPaintEventRaised;
+            _fixedPanelImagerUC.fixedPanelImagerUCVisibleChangedEventRaised += _fixedPanelImagerUC_fixedPanelImagerUCVisibleChangedEventRaised;
+        }
+
+        private void _fixedPanelImagerUC_fixedPanelImagerUCVisibleChangedEventRaised(object sender, EventArgs e)
+        {
+            if (((UserControl)sender).Visible == false)
+            {
+                if (_frameImagerUCP != null)
+                {
+                    _frameImagerUCP.DeleteControl((UserControl)_fixedPanelImagerUC);
+                }
+            }
         }
 
         private void _fixedPanelImagerUC_fixedPanelImagerUCPaintEventRaised(object sender, PaintEventArgs e)
@@ -66,13 +81,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         }
 
         public IFixedPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                           IPanelModel panelModel)
+                                                           IPanelModel panelModel,
+                                                           IFrameImagerUCPresenter frameImagerUCP)
         {
             unityC
                 .RegisterType<IFixedPanelImagerUC, FixedPanelImagerUC>()
                 .RegisterType<IFixedPanelImagerUCPresenter, FixedPanelImagerUCPresenter>();
             FixedPanelImagerUCPresenter imagerUCP = unityC.Resolve<FixedPanelImagerUCPresenter>();
             imagerUCP._panelModel = panelModel;
+            imagerUCP._frameImagerUCP = frameImagerUCP;
 
             return imagerUCP;
         }

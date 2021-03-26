@@ -7,6 +7,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
     public interface IFixedPanelImagerUCPresenter
     {
         IFixedPanelImagerUC GetFixedPanelImagerUC();
-        IFixedPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
+        IFixedPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                    IPanelModel panelModel,
+                                                    IFrameImagerUCPresenter frameImagerUCP);
     }
 }

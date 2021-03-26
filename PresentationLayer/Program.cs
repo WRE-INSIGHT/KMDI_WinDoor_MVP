@@ -133,6 +133,9 @@ namespace PresentationLayer
                 .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IMultiPanelMullionImagerUC, MultiPanelMullionImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMultiPanelMullionImagerUCPresenter, MultiPanelMullionImagerUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IMullionUC, MullionUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMullionUCPresenter, MullionUCPresenter>(new ContainerControlledLifetimeManager())
 

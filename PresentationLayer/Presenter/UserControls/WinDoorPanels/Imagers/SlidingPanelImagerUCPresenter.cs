@@ -18,6 +18,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
         private IPanelModel _panelModel;
 
+        private IFrameImagerUCPresenter _frameImagerUCP;
+
         public SlidingPanelImagerUCPresenter(ISlidingPanelImagerUC slidingPanelImagerUC)
         {
             _slidingPanelImagerUC = slidingPanelImagerUC;
@@ -27,6 +29,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         private void SubscribeToEventsSetup()
         {
             _slidingPanelImagerUC.slidingPanelImagerUCPaintEventRaised += _slidingPanelImagerUC_slidingPanelImagerUCPaintEventRaised;
+            _slidingPanelImagerUC.slidingPanelImagerUCVisibleChangedEventRaised += _slidingPanelImagerUC_slidingPanelImagerUCVisibleChangedEventRaised;
+        }
+
+        private void _slidingPanelImagerUC_slidingPanelImagerUCVisibleChangedEventRaised(object sender, EventArgs e)
+        {
+            if (((UserControl)sender).Visible == false)
+            {
+                if (_frameImagerUCP != null)
+                {
+                    _frameImagerUCP.DeleteControl((UserControl)_slidingPanelImagerUC);
+                }
+            }
         }
 
         private void _slidingPanelImagerUC_slidingPanelImagerUCPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -106,13 +120,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
 
         public ISlidingPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                             IPanelModel panelModel)
+                                                             IPanelModel panelModel,
+                                                             IFrameImagerUCPresenter frameImagerUCP)
         {
             unityC
                 .RegisterType<ISlidingPanelImagerUC, SlidingPanelImagerUC>()
                 .RegisterType<ISlidingPanelImagerUCPresenter, SlidingPanelImagerUCPresenter>();
             SlidingPanelImagerUCPresenter slidingImagerUCP = unityC.Resolve<SlidingPanelImagerUCPresenter>();
             slidingImagerUCP._panelModel = panelModel;
+            slidingImagerUCP._frameImagerUCP = frameImagerUCP;
 
             return slidingImagerUCP;
         }
@@ -125,7 +141,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             panelBinding.Add("PanelImageRenderer_Width", new Binding("Width", _panelModel, "PanelImageRenderer_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelImageRenderer_Height", new Binding("Height", _panelModel, "PanelImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
+            //panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

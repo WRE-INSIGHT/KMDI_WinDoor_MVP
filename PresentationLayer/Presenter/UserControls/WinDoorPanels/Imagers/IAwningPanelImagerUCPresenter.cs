@@ -8,6 +8,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
     public interface IAwningPanelImagerUCPresenter: IPresenterCommon
     {
         IAwningPanelImagerUC GetAwningPanelUC();
-        IAwningPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
+        IAwningPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                     IPanelModel panelModel,
+                                                     IFrameImagerUCPresenter frameImagerUCP);
     }
 }
