@@ -23,10 +23,6 @@ namespace PresentationLayer.CommonMethods
 {
     public class CommonFunctions
     {
-        public CommonFunctions()
-        {
-
-        }
         public void Automatic_Div_Addition(IMainPresenter mainPresenter,
                                            IFrameModel frameModel,
                                            IDividerServices divServices,
