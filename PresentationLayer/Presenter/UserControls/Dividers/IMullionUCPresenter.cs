@@ -13,18 +13,20 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         IMullionUC GetMullion();
         IMullionUC GetMullion(string test); //for Testing
         IMullionUCPresenter GetNewInstance(IUnityContainer unityC); //for Testing
-        IMullionUCPresenter GetNewInstance(IUnityContainer unityC, 
+        IMullionUCPresenter GetNewInstance(IUnityContainer unityC,
                                            IDividerModel divModel,
                                            IMultiPanelModel multiPanelModel,
                                            IMultiPanelMullionUCPresenter multiMullionUCP,
                                            IFrameModel frameModel,
-                                           IMainPresenter mainPresenter);
+                                           IMainPresenter mainPresenter);//,
+                                           //IBasePlatformImagerUCPresenter basePlatformImagerUCP);
         IMullionUCPresenter GetNewInstance(IUnityContainer unityC,
                                            IDividerModel divModel,
                                            IMultiPanelModel multiPanelModel,
                                            IMultiPanelTransomUCPresenter multiTransomUCP,
                                            IFrameModel frameModel,
-                                           IMainPresenter mainPresenter);
+                                           IMainPresenter mainPresenter);//,
+                                           //IBasePlatformImagerUCPresenter basePlatformImagerUCP);
         void SetInitialLoadFalse();
         void FocusOnThisMullionDiv();
     }

@@ -26,8 +26,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 bool divVisibility,
                                                 DividerType divType,
                                                 Control divParent,
-                                                //UserControl divFrameGroup,
-                                                string divFrameType)
+                                                string divFrameType,
+                                                float divImageRendererZoom)
         {
             DividerModel div = new DividerModel(divID,
                                                 divName,
@@ -36,8 +36,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 divVisibility,
                                                 divType,
                                                 divParent,
-                                                //divFrameGroup,
-                                                divFrameType);
+                                                divFrameType,
+                                                divImageRendererZoom);
 
             ValidateModel(div);
             return div;
@@ -51,10 +51,10 @@ namespace ServiceLayer.Services.DividerServices
         public IDividerModel AddDividerModel(int divWD,
                                              int divHT,
                                              Control divParent,
-                                             //UserControl divFrameGroup,
                                              DividerType divType,
                                              bool divVisibility,
                                              int divID = 0,
+                                             float divImageRendererZoom = 1,
                                              string divFrameType = "",
                                              string divName = "")
         {
@@ -70,8 +70,8 @@ namespace ServiceLayer.Services.DividerServices
                                                          divVisibility,
                                                          divType,
                                                          divParent,
-                                                         //divFrameGroup,
-                                                         divFrameType);
+                                                         divFrameType,
+                                                         divImageRendererZoom);
 
             return _divModel;
         }

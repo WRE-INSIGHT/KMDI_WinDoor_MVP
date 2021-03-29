@@ -18,6 +18,19 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
         }
 
+        private int _panelID;
+        public int Panel_ID
+        {
+            get
+            {
+                return _panelID;
+            }
+            set
+            {
+                _panelID = value;
+            }
+        }
+
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler ChkOrientationCheckChangedEventRaised;
 
@@ -31,7 +44,6 @@ namespace PresentationLayer.Views.UserControls
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
-            this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
             pnum_Width.DataBindings.Add(ModelBinding["Panel_Width"]);
             pnum_Height.DataBindings.Add(ModelBinding["Panel_Height"]);
             pnum_Width.DataBindings.Add(ModelBinding["Panel_PNumEnable1"]);
@@ -40,6 +52,7 @@ namespace PresentationLayer.Views.UserControls
             lbl_Type.DataBindings.Add(ModelBinding["Panel_Type"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_ChkText"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_Orient"]);
+            this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)

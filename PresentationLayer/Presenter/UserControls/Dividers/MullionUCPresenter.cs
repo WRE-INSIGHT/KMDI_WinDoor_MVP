@@ -13,6 +13,7 @@ using CommonComponents;
 using ModelLayer.Model.Quotation.MultiPanel;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using ModelLayer.Model.Quotation.Frame;
+using PresentationLayer.CommonMethods;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -27,9 +28,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         private IMultiPanelMullionUCPresenter _multiMullionUCP;
         private IMultiPanelTransomUCPresenter _multiTransomUCP;
         private IMainPresenter _mainPresenter;
+        //private IBasePlatformImagerUCPresenter _basePlatformImagerUCP;
 
         bool _mouseDown, _initialLoad, _keydown;
         private Point _point_of_origin;
+
+        CommonFunctions _commonfunc = new CommonFunctions();
 
         public bool boolKeyDown
         {
@@ -161,136 +165,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         //    }
         //}
 
-        List<Point[]> GetMullionDrawingPoints(int width,
-                                              int height,
-                                              string prev_obj,
-                                              string nxt_obj)
-        {
-            List<Point[]> Mullion_Points = new List<Point[]>();
-
-            int accessible_Wd = width - 2,
-                accessible_Ht = height - 2,
-                Ht_beforeCurve = height - 5;
-
-            Point[] leftLine = new Point[2];
-            Point[] botCurve = new Point[3];
-            Point[] rightLine = new Point[2];
-            Point[] upperCurve = new Point[3];
-
-            int pointX_Mid = ((int)(_frameModel.Frame_Type) - 2) / 2;
-
-            int pixels_count = 0;
-            if (width == 18)
-            {
-                pixels_count = 26;
-            }
-            else if (width == 23)
-            {
-                pixels_count = 33;
-            }
-            else if (width == 10)
-            {
-                pixels_count = 18;
-            }
-            else if (width == 13)
-            {
-                pixels_count = 23;
-            }
-
-            if (width == 26 || width == 33)
-            {
-                leftLine[0] = new Point(1, 5);
-                leftLine[1] = new Point(1, Ht_beforeCurve);
-
-                botCurve[0] = new Point(1, Ht_beforeCurve);
-                botCurve[1] = new Point(accessible_Wd / 2, accessible_Ht);
-                botCurve[2] = new Point(accessible_Wd, Ht_beforeCurve);
-
-                rightLine[0] = new Point(accessible_Wd, Ht_beforeCurve);
-                rightLine[1] = new Point(accessible_Wd, 5);
-
-                upperCurve[0] = new Point(accessible_Wd, 5);
-                upperCurve[1] = new Point(accessible_Wd / 2, 1);
-                upperCurve[2] = new Point(1, 5);
-            }
-            else if (width == 18 || width == 23)
-            {
-                if (((prev_obj.Contains("MultiTransom") || prev_obj.Contains("MultiMullion")) && nxt_obj.Contains("PanelUC")) ||
-                    (((prev_obj.Contains("MultiTransom") || prev_obj.Contains("MultiMullion")) && nxt_obj == "")))
-                {
-                    leftLine[0] = new Point((width - pixels_count) + 1, 5);
-                    leftLine[1] = new Point((width - pixels_count) + 1, Ht_beforeCurve);
-
-                    botCurve[0] = new Point((width - pixels_count) + 1, Ht_beforeCurve);
-                    botCurve[1] = new Point((width - pixels_count) + pointX_Mid, accessible_Ht);
-                    botCurve[2] = new Point(accessible_Wd, Ht_beforeCurve);
-
-                    rightLine[0] = new Point(accessible_Wd, Ht_beforeCurve);
-                    rightLine[1] = new Point(accessible_Wd, 5);
-
-                    upperCurve[0] = new Point(accessible_Wd, 5);
-                    upperCurve[1] = new Point((width - pixels_count) + pointX_Mid, 1);
-                    upperCurve[2] = new Point((width - pixels_count) + 1, 5);
-                }
-                else if (prev_obj.Contains("PanelUC") && (nxt_obj.Contains("MultiTransom") || nxt_obj.Contains("MultiMullion")))
-                {
-                    leftLine[0] = new Point(1, 5);
-                    leftLine[1] = new Point(1, Ht_beforeCurve);
-
-                    botCurve[0] = new Point(1, Ht_beforeCurve);
-                    botCurve[1] = new Point(pointX_Mid, accessible_Ht);
-                    botCurve[2] = new Point(accessible_Wd + (pixels_count - width), Ht_beforeCurve);
-
-                    rightLine[0] = new Point(accessible_Wd + (pixels_count - width), Ht_beforeCurve);
-                    rightLine[1] = new Point(accessible_Wd + (pixels_count - width), 5);
-
-                    upperCurve[0] = new Point(accessible_Wd + (pixels_count - width), 5);
-                    upperCurve[1] = new Point(pointX_Mid + 1, 1);
-                    upperCurve[2] = new Point(1, 5);
-                }
-                else
-                {
-                    leftLine[0] = new Point(1, 5);
-                    leftLine[1] = new Point(1, Ht_beforeCurve);
-
-                    botCurve[0] = new Point(1, Ht_beforeCurve);
-                    botCurve[1] = new Point(accessible_Wd / 2, accessible_Ht);
-                    botCurve[2] = new Point(accessible_Wd, Ht_beforeCurve);
-
-                    rightLine[0] = new Point(accessible_Wd, Ht_beforeCurve);
-                    rightLine[1] = new Point(accessible_Wd, 5);
-
-                    upperCurve[0] = new Point(accessible_Wd, 5);
-                    upperCurve[1] = new Point(accessible_Wd / 2, 1);
-                    upperCurve[2] = new Point(1, 5);
-                }
-            }
-            else if (width == 10 || width == 13)
-            {
-
-                leftLine[0] = new Point((width - pixels_count) + 1, 4);
-                leftLine[1] = new Point((width - pixels_count) + 1, Ht_beforeCurve);
-
-                botCurve[0] = new Point((width - pixels_count) + 1, Ht_beforeCurve);
-                botCurve[1] = new Point((width - pixels_count) + pointX_Mid, accessible_Ht);
-                botCurve[2] = new Point(accessible_Wd + 8, Ht_beforeCurve);
-
-                rightLine[0] = new Point(accessible_Wd + 8, Ht_beforeCurve);
-                rightLine[1] = new Point(accessible_Wd + 8, 4);
-
-                upperCurve[0] = new Point(accessible_Wd + 8, 4);
-                upperCurve[1] = new Point((width - pixels_count) + pointX_Mid, 1);
-                upperCurve[2] = new Point((width - pixels_count) + 1, 4);
-            }
-
-            Mullion_Points.Add(leftLine);
-            Mullion_Points.Add(botCurve);
-            Mullion_Points.Add(rightLine);
-            Mullion_Points.Add(upperCurve);
-
-            return Mullion_Points;
-        }
-
         Color penColor = Color.Black;
 
         private void _mullionUC_mullionUCPaintEventRaised(object sender, PaintEventArgs e)
@@ -320,10 +194,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
             }
 
-            List<Point[]> TPoints = GetMullionDrawingPoints(mul.Width,
-                                                            mul.Height,
-                                                            prev_obj_name,
-                                                            next_obj_name);
+            List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints(mul.Width,
+                                                                        mul.Height,
+                                                                        prev_obj_name,
+                                                                        next_obj_name,
+                                                                        _frameModel);
 
             gpath.AddLine(TPoints[0][0], TPoints[0][1]);
             gpath.AddCurve(TPoints[1]);
@@ -380,6 +255,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         }
                     }
                     flp.Invalidate();
+                    //_basePlatformImagerUCP.InvalidateBasePlatform();
                     //flp.Parent.Parent.Invalidate(); //invalidate frameUC
                     //_mullionUC.Mullion_Left += (e.X - _point_of_origin.X);
                 }
@@ -427,7 +303,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                   IMultiPanelModel multiPanelModel,
                                                   IMultiPanelMullionUCPresenter multiMullionUCP,
                                                   IFrameModel frameModel,
-                                                  IMainPresenter mainPresenter)
+                                                  IMainPresenter mainPresenter)//,
+                                                  //IBasePlatformImagerUCPresenter basePlatformImagerUCP)
         {
             unityC
                 .RegisterType<IMullionUC, MullionUC>()
@@ -438,6 +315,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             mullionUCP._multiMullionUCP = multiMullionUCP;
             mullionUCP._frameModel = frameModel;
             mullionUCP._mainPresenter = mainPresenter;
+            //mullionUCP._basePlatformImagerUCP = basePlatformImagerUCP;
 
             return mullionUCP;
         }
@@ -447,7 +325,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                   IMultiPanelModel multiPanelModel, 
                                                   IMultiPanelTransomUCPresenter multiTransomUCP, 
                                                   IFrameModel frameModel,
-                                                  IMainPresenter mainPresenter)
+                                                  IMainPresenter mainPresenter)//,
+                                                  //IBasePlatformImagerUCPresenter basePlatformImagerUCP)
         {
             unityC
                .RegisterType<IMullionUC, MullionUC>()
@@ -458,6 +337,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             mullionUCP._multiTransomUCP = multiTransomUCP;
             mullionUCP._frameModel = frameModel;
             mullionUCP._mainPresenter = mainPresenter;
+            //mullionUCP._basePlatformImagerUCP = basePlatformImagerUCP;
 
             return mullionUCP;
         }

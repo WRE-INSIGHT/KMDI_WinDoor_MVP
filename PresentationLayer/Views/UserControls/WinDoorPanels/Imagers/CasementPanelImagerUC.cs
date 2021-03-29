@@ -31,20 +31,20 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             }
         }
 
-        //private bool _pnlOrientation;
-        //public bool pnl_Orientation
-        //{
-        //    get
-        //    {
-        //        return _pnlOrientation;
-        //    }
+        private bool _pnlOrientation;
+        public bool pnl_Orientation
+        {
+            get
+            {
+                return _pnlOrientation;
+            }
 
-        //    set
-        //    {
-        //        _pnlOrientation = value;
-        //        this.Invalidate();
-        //    }
-        //}
+            set
+            {
+                _pnlOrientation = value;
+                this.Invalidate();
+            }
+        }
 
         public event PaintEventHandler casementPanelImagerUCPaintEventRaised;
         public event EventHandler casementPanelImagerUCVisibleChangedEventRaised;
@@ -60,8 +60,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
+            this.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
-            //this.DataBindings.Add(ModelBinding["Panel_Orient"]);
         }
 
         private void CasementPanelImagerUC_Paint(object sender, PaintEventArgs e)

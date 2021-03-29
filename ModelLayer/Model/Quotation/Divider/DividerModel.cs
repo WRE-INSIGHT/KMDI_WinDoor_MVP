@@ -75,6 +75,7 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divWd = value;
+                DivImageRenderer_Width = Convert.ToInt32(value * DivImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -89,6 +90,7 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divHt = value;
+                DivImageRenderer_Height = Convert.ToInt32(value * DivImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -119,18 +121,6 @@ namespace ModelLayer.Model.Quotation.Divider
                 _divParent = value;
             }
         }
-        //private UserControl _divFrameGroup;
-        //public UserControl Div_FrameGroup
-        //{
-        //    get
-        //    {
-        //        return _divFrameGroup;
-        //    }
-        //    set
-        //    {
-        //        _divFrameGroup = value;
-        //    }
-        //}
 
         private string _divFrameType;
         public string Div_FrameType
@@ -147,6 +137,53 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
+        private float _divImageRenderedZoom;
+        public float DivImageRenderer_Zoom
+        {
+            get
+            {
+                return _divImageRenderedZoom;
+            }
+
+            set
+            {
+                _divImageRenderedZoom = value;
+                DivImageRenderer_Width = Convert.ToInt32(Div_Width * value);
+                DivImageRenderer_Height = Convert.ToInt32(Div_Height * value);
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _divImageRendererHt;
+        public int DivImageRenderer_Height
+        {
+            get
+            {
+                return _divImageRendererHt;
+            }
+
+            set
+            {
+                _divImageRendererHt = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _divImagerendererWd;
+        public int DivImageRenderer_Width
+        {
+            get
+            {
+                return _divImagerendererWd;
+            }
+
+            set
+            {
+                _divImagerendererWd = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public DividerModel(int divID,
                             string divName,
                             int divWD,
@@ -154,8 +191,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             bool divVisibility,
                             DividerType divType,
                             Control divParent,
-                            //UserControl divFrameGroup,
-                            string divFrameType)
+                            string divFrameType,
+                            float divImageRendererZoom)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -164,8 +201,8 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_Visible = divVisibility;
             Div_Type = divType;
             Div_Parent = divParent;
-            //Div_FrameGroup = divFrameGroup;
             Div_FrameType = divFrameType;
+            DivImageRenderer_Zoom = divImageRendererZoom;
         }
     }
 }

@@ -31,6 +31,8 @@ using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using ServiceLayer.Services.DividerServices;
 using ModelLayer.Model.Quotation.Divider;
+using PresentationLayer.Views.UserControls.Dividers.Imagers;
+using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 
 namespace PresentationLayer
 {
@@ -139,8 +141,14 @@ namespace PresentationLayer
                 .RegisterType<IMullionUC, MullionUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMullionUCPresenter, MullionUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IMullionImagerUC, MullionImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMullionImagerUCPresenter, MullionImagerUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IMultiPanelTransomUC, MultiPanelTransomUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelTransomUCPresenter, MultiPanelTransomUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IMultiPanelTransomImagerUC, MultiPanelTransomImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMultiPanelTransomImagerUCPresenter, MultiPanelTransomImagerUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<ITransomUC, TransomUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ITransomUCPresenter, TransomUCPresenter>(new ContainerControlledLifetimeManager())

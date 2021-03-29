@@ -17,21 +17,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IFrameModel frameModel, 
                                                      IMainPresenter mainPresenter, 
                                                      IFrameUCPresenter frameUCP,
-                                                     IMultiPanelPropertiesUCPresenter multiPropUCP);
+                                                     IMultiPanelPropertiesUCPresenter multiPropUCP,
+                                                     IFrameImagerUCPresenter frameImagerUCP,
+                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP);
         IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
                                                      IFrameUCPresenter frameUCP,
                                                      IMultiPanelTransomUCPresenter multiPanelTransomUCP,
-                                                     IMultiPanelPropertiesUCPresenter multiPropUCP);
+                                                     IMultiPanelPropertiesUCPresenter multiPropUCP,
+                                                     IFrameImagerUCPresenter frameImagerUCP,
+                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP);
         IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
                                                      IFrameUCPresenter frameUCP,
                                                      IMultiPanelMullionUCPresenter multiPanelMullionUCP,
-                                                     IMultiPanelPropertiesUCPresenter multiPropUCP);
+                                                     IMultiPanelPropertiesUCPresenter multiPropUCP,
+                                                     IFrameImagerUCPresenter frameImagerUCP,
+                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP);
         void Invalidate_MultiPanelMullionUC();
         void SetInitialLoadFalse();
     }

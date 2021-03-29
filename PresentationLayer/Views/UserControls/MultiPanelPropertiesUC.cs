@@ -42,9 +42,7 @@ namespace PresentationLayer.Views.UserControls
             lbl_MultiPanelName.DataBindings.Add(ModelBinding["MPanel_Name"]);
             this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
             num_Width.DataBindings.Add(ModelBinding["MPanel_Width"]);
-            //num_Width.DataBindings.Add(ModelBinding["MPanel_PNumEnable1"]);
             num_Height.DataBindings.Add(ModelBinding["MPanel_Height"]);
-            //num_Height.DataBindings.Add(ModelBinding["MPanel_PNumEnable2"]);
         }
 
         public MultiPanelPropertiesUC()

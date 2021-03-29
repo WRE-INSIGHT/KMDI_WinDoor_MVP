@@ -32,6 +32,21 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             }
         }
 
+        private bool _pnlOrientation;
+        public bool pnl_Orientation
+        {
+            get
+            {
+                return _pnlOrientation;
+            }
+
+            set
+            {
+                _pnlOrientation = value;
+                this.Invalidate();
+            }
+        }
+
         Color color = Color.Black;
 
         public event PaintEventHandler fixedPanelImagerUCPaintEventRaised;
@@ -48,6 +63,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
+            this.DataBindings.Add(ModelBinding["Panel_Orient"]);
+            this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
         }
 

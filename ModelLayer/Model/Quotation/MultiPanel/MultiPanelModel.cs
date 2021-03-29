@@ -205,7 +205,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             set
             {
                 _mpanelVisible = value;
-                NotifyPropertyChanged();
+                //NotifyPropertyChanged();
             }
         }
 

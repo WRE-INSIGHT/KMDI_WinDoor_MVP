@@ -11,9 +11,9 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 {
-    public partial class MultiPanelMullionImagerUC : UserControl, IMultiPanelMullionImagerUC
+    public partial class MultiPanelTransomImagerUC : UserControl, IMultiPanelTransomImagerUC
     {
-        public MultiPanelMullionImagerUC()
+        public MultiPanelTransomImagerUC()
         {
             InitializeComponent();
         }
@@ -31,37 +31,27 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             }
         }
         public event PaintEventHandler flpMulltiPaintEventRaised;
-        public event EventHandler flpMulltiVisibleChangedEventRaised;
+        public event EventHandler flpMultiVisibleChangedEventRaised;
 
-        private void flp_MultiMullionImager_Paint(object sender, PaintEventArgs e)
+        private void flp_MultiTransomImager_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(sender, flpMulltiPaintEventRaised, e);
+        }
+
+        private void MultiPanelTransomImagerUC_VisibleChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, flpMultiVisibleChangedEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["MPanel_ID"]);
-            //this.DataBindings.Add(ModelBinding["MPanel_Name"]);
+            this.DataBindings.Add(ModelBinding["MPanel_Name"]);
             this.DataBindings.Add(ModelBinding["MPanel_Dock"]);
             this.DataBindings.Add(ModelBinding["MPanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["MPanelImageRenderer_Height"]);
             this.DataBindings.Add(ModelBinding["MPanel_Margin"]);
             this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
-        }
-
-        private void MultiPanelMullionImagerUC_VisibleChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, flpMulltiVisibleChangedEventRaised, e);
-        }
-
-        public void AddImagerControl(UserControl userctrlObj)
-        {
-            flp_MultiMullionImager.Controls.Add(userctrlObj);
-        }
-
-        public void DeleteImagerControl(UserControl userctrlObj)
-        {
-            flp_MultiMullionImager.Controls.Remove(userctrlObj);
         }
     }
 }

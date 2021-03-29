@@ -178,8 +178,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
             #region Delete Fixed
-            _panelModel.Panel_Visibility = false;
-            _frameModel.FrameProp_Height -= 148;
 
             if (_multiPanelModel != null)
             {
@@ -219,6 +217,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _multiPanelTransomUCP,
                                                         _multiPanelMullionUCP);
             }
+
+            _panelModel.Panel_Visibility = false;
+            _frameModel.FrameProp_Height -= 148;
+
             #endregion
         }
 
@@ -252,6 +254,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 _tmr.Start();
                 ((UserControl)sender).Invalidate();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
             catch (Exception ex)
             {

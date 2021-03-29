@@ -36,12 +36,13 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
-            //_panelPropertiesUC.ThisBinding(CreateBindingDictionary());
+            _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
         }
 
         private Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> panelBinding = new Dictionary<string, Binding>();
+            panelBinding.Add("Panel_ID", new Binding("Panel_ID", _panelModel, "Panel_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Width", new Binding("Value", _panelModel, "Panel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Height", new Binding("Value", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Name", new Binding("Text", _panelModel, "Panel_Name", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -68,7 +69,6 @@ namespace PresentationLayer.Presenter.UserControls
                 .RegisterType<IPanelPropertiesUCPresenter, PanelPropertiesUCPresenter>();
             PanelPropertiesUCPresenter panelPropUCP = unityC.Resolve<PanelPropertiesUCPresenter>();
             panelPropUCP._panelModel = panelModel;
-            panelPropUCP._panelPropertiesUC.ThisBinding(panelPropUCP.CreateBindingDictionary());
             panelPropUCP._mainPresenter = mainPresenter;
 
             return panelPropUCP;

@@ -4,14 +4,11 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 {
-    public interface IMultiPanelMullionImagerUC: IViewCommon
+    public interface IMultiPanelTransomImagerUC : IViewCommon
     {
         int MPanel_ID { get; set; }
 
         event PaintEventHandler flpMulltiPaintEventRaised;
-        event EventHandler flpMulltiVisibleChangedEventRaised;
-
-        void AddImagerControl(UserControl userctrlObj);
-        void DeleteImagerControl(UserControl userctrlObj);
+        event EventHandler flpMultiVisibleChangedEventRaised;
     }
 }

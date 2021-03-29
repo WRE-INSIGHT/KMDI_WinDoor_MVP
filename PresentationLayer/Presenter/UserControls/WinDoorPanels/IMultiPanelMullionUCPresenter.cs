@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using System.Drawing;
@@ -11,12 +12,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     public interface IMultiPanelMullionUCPresenter
     {
         IMultiPanelMullionUC GetMultiPanel();
-        IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                     IMultiPanelModel multiPanelModel,
-                                                     IFrameModel frameModel,
-                                                     IMainPresenter mainPresenter,
-                                                     IFrameUCPresenter frameUCP,
-                                                     IMultiPanelPropertiesUCPresenter multiPropUCP);
+        //IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+        //                                             IMultiPanelModel multiPanelModel,
+        //                                             IFrameModel frameModel,
+        //                                             IMainPresenter mainPresenter,
+        //                                             IFrameUCPresenter frameUCP,
+        //                                             IMultiPanelPropertiesUCPresenter multiPropUCP,
+        //                                             IFrameImagerUCPresenter frameImagerUCP,
+        //                                             IBasePlatformImagerUCPresenter basePlatformImagerUCP);
 
         IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IMultiPanelModel multiPanelModel,
@@ -24,7 +27,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IMainPresenter mainPresenter,
                                                      IFrameUCPresenter frameUCP,
                                                      IMultiPanelTransomUCPresenter multiPanelTransomUCP,
-                                                     IMultiPanelPropertiesUCPresenter multiPropUCP);
+                                                     IMultiPanelPropertiesUCPresenter multiPropUCP,
+                                                     IFrameImagerUCPresenter frameImagerUCP,
+                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP,
+                                                     IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP);
         void frmDimensionResults(int frmDimension_numWd,
                                  int frmDimension_numHt);
         void DeletePanel(UserControl panel);

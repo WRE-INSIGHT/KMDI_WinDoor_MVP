@@ -380,7 +380,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           bool panelVisibility,
                           UserControl panelFramePropertiesGroup,
                           UserControl panelMultiPanelGroup,
-                          int panelIndexInsideMPanel)
+                          int panelIndexInsideMPanel,
+                          float panelImageRendererZoom)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -395,6 +396,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_FramePropertiesGroup = panelFramePropertiesGroup;
             Panel_MultiPanelGroup = panelMultiPanelGroup;
             Panel_Index_Inside_MPanel = panelIndexInsideMPanel;
+            PanelImageRenderer_Zoom = panelImageRendererZoom;
         }
     }
 }
