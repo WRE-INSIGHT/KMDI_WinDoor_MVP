@@ -16,6 +16,8 @@ using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using ServiceLayer.Services.DividerServices;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
+using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -34,12 +36,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
         private IFrameUCPresenter _frameUCP;
+        private IMultiPanelMullionImagerUCPresenter _multiPanelMullionImagerUCP;
+        private IMultiPanelTransomImagerUCPresenter _multiPanelTransomImagerUCP;
 
         private ITransomUCPresenter _transomUCP;
         private IMullionUCPresenter _mullionUCP;
+        private IMullionImagerUCPresenter _mullionImagerUCP;
+        private ITransomImagerUCPresenter _transomImagerUCP;
 
         private IDividerServices _divServices;
-
+        
         bool _initialLoad;
 
         private CommonFunctions _commonFunctions = new CommonFunctions();
@@ -48,12 +54,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public FixedPanelUCPresenter(IFixedPanelUC fixedPanelUC,
                                      IDividerServices divServices,
                                      ITransomUCPresenter transomUCP,
-                                     IMullionUCPresenter mullionUCP)
+                                     IMullionUCPresenter mullionUCP,
+                                     IMullionImagerUCPresenter mullionImagerUCP,
+                                     ITransomImagerUCPresenter transomImagerUCP)
         {
             _fixedPanelUC = fixedPanelUC;
             _divServices = divServices;
             _transomUCP = transomUCP;
             _mullionUCP = mullionUCP;
+            _mullionImagerUCP = mullionImagerUCP;
+            _transomImagerUCP = transomImagerUCP;
+
             _tmr = new Timer();
             _tmr.Interval = 200;
 
@@ -197,8 +208,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameUCP.ViewDeleteControl((UserControl)_fixedPanelUC);
             }
 
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-
             if (_multiPanelModel != null && _multiPanelModel.MPanel_DividerEnabled)
             {
                 _multiPanelModel.Object_Indexer();
@@ -211,12 +220,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _transomUCP,
                                                         _unityC,
                                                         _mullionUCP,
+                                                        _mullionImagerUCP,
+                                                        _transomImagerUCP,
                                                         _mainPresenter.GetDividerCount() + 1,
                                                         _multiPanelModel,
                                                         _panelModel,
                                                         _multiPanelTransomUCP,
-                                                        _multiPanelMullionUCP);
+                                                        _multiPanelMullionUCP,
+                                                        _multiPanelMullionImagerUCP,
+                                                        _multiPanelTransomImagerUCP);
             }
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
             _panelModel.Panel_Visibility = false;
             _frameModel.FrameProp_Height -= 148;
@@ -286,7 +300,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
                                                      IMultiPanelModel multiPanelModel,
-                                                     IMultiPanelMullionUCPresenter multiPanelUCP)
+                                                     IMultiPanelMullionUCPresenter multiPanelUCP,
+                                                     IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP)
         {
             unityC
                 .RegisterType<IFixedPanelUC, FixedPanelUC>()
@@ -298,6 +313,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             fixedPanelUCP._multiPanelModel = multiPanelModel;
             fixedPanelUCP._multiPanelMullionUCP = multiPanelUCP;
             fixedPanelUCP._unityC = unityC;
+            fixedPanelUCP._multiPanelMullionImagerUCP = multiPanelMullionImagerUCP;
 
             return fixedPanelUCP;
         }
@@ -307,7 +323,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
                                                      IMultiPanelModel multiPanelModel,
-                                                     IMultiPanelTransomUCPresenter multiPanelTransomUCP)
+                                                     IMultiPanelTransomUCPresenter multiPanelTransomUCP,
+                                                     IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP)
         {
             unityC
                 .RegisterType<IFixedPanelUC, FixedPanelUC>()
@@ -319,6 +336,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             fixedPanelUCP._multiPanelModel = multiPanelModel;
             fixedPanelUCP._multiPanelTransomUCP = multiPanelTransomUCP;
             fixedPanelUCP._unityC = unityC;
+            fixedPanelUCP._multiPanelTransomImagerUCP = multiPanelTransomImagerUCP;
 
             return fixedPanelUCP;
         }

@@ -90,7 +90,9 @@
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\Imagers\IMullionImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\Dividers\Imagers\ITransomImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\Imagers\MullionImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\Dividers\Imagers\TransomImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\IMullionUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\ITransomUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\MullionUCPresenter.cs" />
@@ -183,11 +185,18 @@
       <DependentUpon>ControlsUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\Dividers\Imagers\IMullionImagerUC.cs" />
+    <Compile Include="Views\UserControls\Dividers\Imagers\ITransomImagerUC.cs" />
     <Compile Include="Views\UserControls\Dividers\Imagers\MullionImagerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\UserControls\Dividers\Imagers\MullionImagerUC.Designer.cs">
       <DependentUpon>MullionImagerUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Dividers\Imagers\TransomImagerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\Dividers\Imagers\TransomImagerUC.Designer.cs">
+      <DependentUpon>TransomImagerUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\Dividers\IMullionUC.cs" />
     <Compile Include="Views\UserControls\Dividers\ITransomUC.cs" />
@@ -413,6 +422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\Dividers\Imagers\MullionImagerUC.resx">
       <DependentUpon>MullionImagerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\Dividers\Imagers\TransomImagerUC.resx">
+      <DependentUpon>TransomImagerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\Dividers\MullionUC.resx">
       <DependentUpon>MullionUC.cs</DependentUpon>

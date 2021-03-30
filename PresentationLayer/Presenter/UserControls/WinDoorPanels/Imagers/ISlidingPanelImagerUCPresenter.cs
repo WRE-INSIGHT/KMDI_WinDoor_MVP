@@ -7,9 +7,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 {
     public interface ISlidingPanelImagerUCPresenter: IPresenterCommon
     {
+        ISlidingPanelImagerUC GetSlidingPanelImagerUC();
         ISlidingPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                       IPanelModel panelModel,
                                                       IFrameImagerUCPresenter frameImagerUCP);
-        ISlidingPanelImagerUC GetSlidingPanelImagerUC();
+        ISlidingPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                      IPanelModel panelModel,
+                                                      IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP);
+        ISlidingPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                      IPanelModel panelModel,
+                                                      IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP);
     }
 }

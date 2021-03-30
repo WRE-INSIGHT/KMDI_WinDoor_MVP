@@ -172,18 +172,6 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data.Contains("Transom"))
                 {
-                    IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
-                                                                                                    _multipanelModel,
-                                                                                                    _frameModel,
-                                                                                                    _mainPresenter,
-                                                                                                    this,
-                                                                                                    multiPropUCP,
-                                                                                                    _frameImagerUCP,
-                                                                                                    _basePlatformImagerUCP);
-                    IMultiPanelTransomUC multiUC = multiTransomUCP.GetMultiPanel();
-                    frame.Controls.Add((UserControl)multiUC);
-                    multiTransomUCP.SetInitialLoadFalse();
-
                     IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = _multiTransomImagerUCP.GetNewInstance(_unityC,
                                                                                                                       _multipanelModel,
                                                                                                                       _frameModel,
@@ -191,6 +179,20 @@ namespace PresentationLayer.Presenter.UserControls
                     IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
                     _frameImagerUCP.AddControl((UserControl)multiTransomImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
+
+                    IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
+                                                                                                    _multipanelModel,
+                                                                                                    _frameModel,
+                                                                                                    _mainPresenter,
+                                                                                                    this,
+                                                                                                    multiPropUCP,
+                                                                                                    _frameImagerUCP,
+                                                                                                    _basePlatformImagerUCP,
+                                                                                                    multiTransomImagerUCP);
+                    IMultiPanelTransomUC multiUC = multiTransomUCP.GetMultiPanel();
+                    frame.Controls.Add((UserControl)multiUC);
+                    multiTransomUCP.SetInitialLoadFalse();
+
                 }
             }
             else

@@ -21,13 +21,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         IFixedPanelImagerUC _fixedPanelImagerUC;
 
         private IPanelModel _panelModel;
-        private IMultiPanelModel _multiPanelModel;
-        private IFrameModel _frameModel;
 
         private IFrameImagerUCPresenter _frameImagerUCP;
         private IMultiPanelMullionImagerUCPresenter _multiPanelMullionImagerUCP;
-
-        CommonFunctions _commonFunctions = new CommonFunctions();
+        private IMultiPanelTransomImagerUCPresenter _multiPanelTransomImagerUCP;
 
         public FixedPanelImagerUCPresenter(IFixedPanelImagerUC fixedPanelImagerUC)
         {
@@ -43,27 +40,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
         private void _fixedPanelImagerUC_fixedPanelImagerUCVisibleChangedEventRaised(object sender, EventArgs e)
         {
-            bool ifdeleted = false;
             if (((UserControl)sender).Visible == false)
             {
                 if (_frameImagerUCP != null)
                 {
                     _frameImagerUCP.DeleteControl((UserControl)_fixedPanelImagerUC);
-                    ifdeleted = true;
                 }
                 else if (_multiPanelMullionImagerUCP != null)
                 {
                     _multiPanelMullionImagerUCP.DeleteControl((UserControl)_fixedPanelImagerUC);
-                    ifdeleted = true;
                 }
-            }
-
-            if (ifdeleted)
-            {
-                //_commonFunctions.Automatic_ImagerDiv_Addition(_panelModel,
-                //                                              _multiPanelModel,
-                //                                              _frameImagerUCP,
-                //                                              _multiPanelMullionImagerUCP);
+                else if (_multiPanelTransomImagerUCP != null)
+                {
+                    _multiPanelTransomImagerUCP.DeleteControl((UserControl)_fixedPanelImagerUC);
+                }
             }
         }
 
@@ -105,9 +95,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
         public IFixedPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
                                                            IPanelModel panelModel,
-                                                           IFrameImagerUCPresenter frameImagerUCP)//,
-                                                           //IMultiPanelModel multiPanelModel,
-                                                           //IFrameModel frameModel)
+                                                           IFrameImagerUCPresenter frameImagerUCP)
         {
             unityC
                 .RegisterType<IFixedPanelImagerUC, FixedPanelImagerUC>()
@@ -115,17 +103,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             FixedPanelImagerUCPresenter imagerUCP = unityC.Resolve<FixedPanelImagerUCPresenter>();
             imagerUCP._panelModel = panelModel;
             imagerUCP._frameImagerUCP = frameImagerUCP;
-            //imagerUCP._multiPanelModel = multiPanelModel;
-            //imagerUCP._frameModel = frameModel;
 
             return imagerUCP;
         }
 
         public IFixedPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
                                                            IPanelModel panelModel,
-                                                           IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP)//,
-                                                           //IMultiPanelModel multiPanelModel,
-                                                           //IFrameModel frameModel)
+                                                           IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP)
         {
             unityC
                 .RegisterType<IFixedPanelImagerUC, FixedPanelImagerUC>()
@@ -133,8 +117,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             FixedPanelImagerUCPresenter imagerUCP = unityC.Resolve<FixedPanelImagerUCPresenter>();
             imagerUCP._panelModel = panelModel;
             imagerUCP._multiPanelMullionImagerUCP = multiPanelMullionImagerUCP;
-            //imagerUCP._multiPanelModel = multiPanelModel;
-            //imagerUCP._frameModel = frameModel;
+
+            return imagerUCP;
+        }
+
+        public IFixedPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                           IPanelModel panelModel, 
+                                                           IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP)
+        {
+            unityC
+                .RegisterType<IFixedPanelImagerUC, FixedPanelImagerUC>()
+                .RegisterType<IFixedPanelImagerUCPresenter, FixedPanelImagerUCPresenter>();
+            FixedPanelImagerUCPresenter imagerUCP = unityC.Resolve<FixedPanelImagerUCPresenter>();
+            imagerUCP._panelModel = panelModel;
+            imagerUCP._multiPanelTransomImagerUCP = multiPanelTransomImagerUCP;
 
             return imagerUCP;
         }

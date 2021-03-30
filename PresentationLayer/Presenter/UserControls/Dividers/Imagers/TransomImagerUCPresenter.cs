@@ -17,55 +17,51 @@ using Unity;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
 {
-    public class MullionImagerUCPresenter : IMullionImagerUCPresenter, IPresenterCommon
+    public class TransomImagerUCPresenter : ITransomImagerUCPresenter, IPresenterCommon
     {
-        IMullionImagerUC _mullionImagerUC;
+        ITransomImagerUC _transomImagerUC;
 
         private IFrameModel _frameModel;
         private IDividerModel _divModel;
         private IMultiPanelModel _multiPanelModel;
 
-        private IMultiPanelMullionImagerUCPresenter _multiMullionImagerUCP;
+        private IMultiPanelTransomImagerUCPresenter _multiTransomImagerUCP;
 
         CommonFunctions _commonfunc = new CommonFunctions();
 
-        public MullionImagerUCPresenter(IMullionImagerUC mullionImagerUC)
+        public TransomImagerUCPresenter(ITransomImagerUC transomImagerUC)
         {
-            _mullionImagerUC = mullionImagerUC;
-
+            _transomImagerUC = transomImagerUC;
             SubscribeToEventsSetup();
         }
 
         private void SubscribeToEventsSetup()
         {
-            _mullionImagerUC.mullionUCPaintEventRaised += _mullionImagerUC_mullionUCPaintEventRaised;
-            _mullionImagerUC.mullionVisibleChangedEventRaised += _mullionImagerUC_mullionVisibleChangedEventRaised;
+            _transomImagerUC.transomUCPaintEventRaised += _transomImagerUC_transomUCPaintEventRaised;
+            _transomImagerUC.transomUCVisibleChangedEventRaised += _transomImagerUC_transomUCVisibleChangedEventRaised;
         }
 
-        private void _mullionImagerUC_mullionVisibleChangedEventRaised(object sender, EventArgs e)
+        private void _transomImagerUC_transomUCVisibleChangedEventRaised(object sender, EventArgs e)
         {
             if (((UserControl)sender).Visible == false)
             {
-                if (_multiMullionImagerUCP != null)
+                if (_multiTransomImagerUCP != null)
                 {
-                    _multiMullionImagerUCP.DeleteControl((UserControl)_mullionImagerUC);
+                    _multiTransomImagerUCP.DeleteControl((UserControl)_transomImagerUC);
                 }
             }
         }
 
-        private void _mullionImagerUC_mullionUCPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
+        private void _transomImagerUC_transomUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            UserControl mul = (UserControl)sender;
+            UserControl transom = (UserControl)sender;
+
             Graphics g = e.Graphics;
-
-            int lineHT = mul.ClientRectangle.Height - 6,
-                lineWd = mul.ClientRectangle.Width - 2;
-
-            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
 
             GraphicsPath gpath = new GraphicsPath();
 
-            int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mul);
+            int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(transom);
             int prev_obj_ndx = this_ndx - 1,
                 next_obj_ndx = this_ndx + 1;
             string prev_obj_name = "",
@@ -80,8 +76,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
                 next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
             }
 
-            List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints(mul.Width,
-                                                                        mul.Height,
+            List<Point[]> TPoints = _commonfunc.GetTransomDrawingPoints(transom.Width,
+                                                                        transom.Height,
                                                                         prev_obj_name,
                                                                         next_obj_name,
                                                                         _frameModel);
@@ -97,28 +93,27 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
             g.FillPath(Brushes.PowderBlue, gpath);
         }
 
-        public IMullionImagerUC GetMullionImager()
+        public ITransomImagerUC GetTransomImager()
         {
-            _mullionImagerUC.ThisBinding(CreateBindingDictionary());
-            return _mullionImagerUC;
+            _transomImagerUC.ThisBinding(CreateBindingDictionary());
+            return _transomImagerUC;
         }
-
-        public IMullionImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+        public ITransomImagerUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IDividerModel divModel,
                                                         IMultiPanelModel multiPanelModel,
                                                         IFrameModel frameModel,
-                                                        IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP)
+                                                        IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP)
         {
             unityC
-                .RegisterType<IMullionImagerUC, MullionImagerUC>()
-                .RegisterType<IMullionImagerUCPresenter, MullionImagerUCPresenter>();
-            MullionImagerUCPresenter mullionImagerUCP = unityC.Resolve<MullionImagerUCPresenter>();
-            mullionImagerUCP._divModel = divModel;
-            mullionImagerUCP._multiPanelModel = multiPanelModel;
-            mullionImagerUCP._frameModel = frameModel;
-            mullionImagerUCP._multiMullionImagerUCP = multiMullionImagerUCP;
+                .RegisterType<ITransomImagerUC, TransomImagerUC>()
+                .RegisterType<ITransomImagerUCPresenter, TransomImagerUCPresenter>();
+            TransomImagerUCPresenter transomImagerUCP = unityC.Resolve<TransomImagerUCPresenter>();
+            transomImagerUCP._divModel = divModel;
+            transomImagerUCP._multiPanelModel = multiPanelModel;
+            transomImagerUCP._frameModel = frameModel;
+            transomImagerUCP._multiTransomImagerUCP = multiTransomImagerUCP;
 
-            return mullionImagerUCP;
+            return transomImagerUCP;
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()

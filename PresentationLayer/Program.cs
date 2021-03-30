@@ -33,6 +33,7 @@ using ServiceLayer.Services.DividerServices;
 using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
+using PresentationLayer.CommonMethods;
 
 namespace PresentationLayer
 {
@@ -152,6 +153,9 @@ namespace PresentationLayer
 
                 .RegisterType<ITransomUC, TransomUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ITransomUCPresenter, TransomUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ITransomImagerUC, TransomImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ITransomImagerUCPresenter, TransomImagerUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IMultiPanelPropertiesUC, MultiPanelPropertiesUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelPropertiesUCPresenter, MultiPanelPropertiesUCPresenter>(new ContainerControlledLifetimeManager())

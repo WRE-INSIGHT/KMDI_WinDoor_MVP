@@ -53,5 +53,15 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["MPanel_Margin"]);
             this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
         }
+
+        public void AddImagerControl(UserControl userctrlObj)
+        {
+            flp_MultiTransomImager.Controls.Add(userctrlObj);
+        }
+
+        public void DeleteImagerControl(UserControl userctrlObj)
+        {
+            flp_MultiTransomImager.Controls.Remove(userctrlObj);
+        }
     }
 }

@@ -11,13 +11,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         IFixedPanelImagerUC GetFixedPanelImagerUC();
         IFixedPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
                                                     IPanelModel panelModel,
-                                                    IFrameImagerUCPresenter frameImagerUCP);//,
-                                                                                            //IMultiPanelModel multiPanelModel,
-                                                                                            //IFrameModel frameModel);
+                                                    IFrameImagerUCPresenter frameImagerUCP);
         IFixedPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
                                                     IPanelModel panelModel,
-                                                    IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP);//,
-                                                    //IMultiPanelModel multiPanelModel,
-                                                    //IFrameModel frameModel);
+                                                    IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP);
+        IFixedPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                    IPanelModel panelModel,
+                                                    IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP);
+        
     }
 }

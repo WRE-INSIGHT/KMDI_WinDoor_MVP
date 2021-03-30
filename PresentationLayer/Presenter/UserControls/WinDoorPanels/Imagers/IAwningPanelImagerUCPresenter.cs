@@ -11,5 +11,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         IAwningPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                      IPanelModel panelModel,
                                                      IFrameImagerUCPresenter frameImagerUCP);
+        IAwningPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                       IPanelModel panelModel,
+                                                       IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP);
+        IAwningPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                       IPanelModel panelModel,
+                                                       IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP);
     }
 }

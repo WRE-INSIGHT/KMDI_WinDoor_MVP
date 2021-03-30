@@ -1368,5 +1368,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
             return multiPanelBinding;
         }
+
+        public void AddControl(UserControl userctrlObj)
+        {
+            _multiTransomImagerUC.AddImagerControl(userctrlObj);
+        }
+
+        public void DeleteControl(UserControl userctrlObj)
+        {
+            _multiTransomImagerUC.DeleteImagerControl(userctrlObj);
+        }
     }
 }

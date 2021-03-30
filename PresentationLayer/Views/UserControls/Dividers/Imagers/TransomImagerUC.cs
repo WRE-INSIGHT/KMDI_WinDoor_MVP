@@ -11,13 +11,12 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.Dividers.Imagers
 {
-    public partial class MullionImagerUC : UserControl, IMullionImagerUC
+    public partial class TransomImagerUC : UserControl, ITransomImagerUC
     {
-        public MullionImagerUC()
+        public TransomImagerUC()
         {
             InitializeComponent();
         }
-
         private int _divID;
         public int Div_ID
         {
@@ -30,13 +29,17 @@ namespace PresentationLayer.Views.UserControls.Dividers.Imagers
                 _divID = value;
             }
         }
+        public event PaintEventHandler transomUCPaintEventRaised;
+        public event EventHandler transomUCVisibleChangedEventRaised;
 
-        public event PaintEventHandler mullionUCPaintEventRaised;
-        public event EventHandler mullionVisibleChangedEventRaised;
-
-        private void MullionImagerUC_Paint(object sender, PaintEventArgs e)
+        private void TransomImagerUC_Paint(object sender, PaintEventArgs e)
         {
-            EventHelpers.RaisePaintEvent(sender, mullionUCPaintEventRaised, e);
+            EventHelpers.RaisePaintEvent(sender, transomUCPaintEventRaised, e);
+        }
+
+        private void TransomImagerUC_VisibleChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, transomUCVisibleChangedEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
@@ -45,11 +48,6 @@ namespace PresentationLayer.Views.UserControls.Dividers.Imagers
             this.DataBindings.Add(ModelBinding["DivImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["DivImageRenderer_Height"]);
             this.DataBindings.Add(ModelBinding["Div_Visible"]);
-        }
-
-        private void MullionImagerUC_VisibleChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, mullionVisibleChangedEventRaised, e);
         }
     }
 }

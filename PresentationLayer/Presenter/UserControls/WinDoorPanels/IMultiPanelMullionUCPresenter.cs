@@ -12,15 +12,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     public interface IMultiPanelMullionUCPresenter
     {
         IMultiPanelMullionUC GetMultiPanel();
-        //IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
-        //                                             IMultiPanelModel multiPanelModel,
-        //                                             IFrameModel frameModel,
-        //                                             IMainPresenter mainPresenter,
-        //                                             IFrameUCPresenter frameUCP,
-        //                                             IMultiPanelPropertiesUCPresenter multiPropUCP,
-        //                                             IFrameImagerUCPresenter frameImagerUCP,
-        //                                             IBasePlatformImagerUCPresenter basePlatformImagerUCP);
-
         IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,

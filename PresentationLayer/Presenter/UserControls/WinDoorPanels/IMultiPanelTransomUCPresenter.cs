@@ -4,6 +4,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using Unity;
 using System.Drawing;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -19,16 +20,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IFrameUCPresenter frameUCP,
                                                      IMultiPanelPropertiesUCPresenter multiPropUCP,
                                                      IFrameImagerUCPresenter frameImagerUCP,
-                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP);
-        IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                     IMultiPanelModel multiPanelModel,
-                                                     IFrameModel frameModel,
-                                                     IMainPresenter mainPresenter,
-                                                     IFrameUCPresenter frameUCP,
-                                                     IMultiPanelTransomUCPresenter multiPanelTransomUCP,
-                                                     IMultiPanelPropertiesUCPresenter multiPropUCP,
-                                                     IFrameImagerUCPresenter frameImagerUCP,
-                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP);
+                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP,
+                                                     IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP);
         IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,

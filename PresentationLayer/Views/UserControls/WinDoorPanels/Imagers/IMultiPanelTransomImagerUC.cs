@@ -10,5 +10,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 
         event PaintEventHandler flpMulltiPaintEventRaised;
         event EventHandler flpMultiVisibleChangedEventRaised;
+
+        void AddImagerControl(UserControl userctrlObj);
+        void DeleteImagerControl(UserControl userctrlObj);
     }
 }
