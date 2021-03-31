@@ -877,7 +877,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                List<IMultiPanelModel> mpanelLstMultiPanel,
                                int mpanelIndexInsideMPanel,
                                List<Control> mpanelLstObjects,
-                               IMultiPanelModel mpanelParentModel)
+                               IMultiPanelModel mpanelParentModel,
+                               float mpanelImageRendererZoom)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -897,6 +898,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanelLst_Objects = mpanelLstObjects;
             MPanel_ParentModel = mpanelParentModel;
             MPanel_DividerEnabled = true;
+            MPanelImageRenderer_Zoom = mpanelImageRendererZoom;
         }
     }
 }

@@ -35,7 +35,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  List<IMultiPanelModel> mpanelLstMultiPanel,
                                                  int mpanelIndexInsideMPanel,
                                                  List<Control> mpanelLstObjects,
-                                                 IMultiPanelModel mpanelParentModel)
+                                                 IMultiPanelModel mpanelParentModel,
+                                                 float mpanelImageRendererZoom)
         {
             MultiPanelModel mp = new MultiPanelModel(mid,
                                                      mname,
@@ -52,7 +53,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                      mpanelLstMultiPanel,
                                                      mpanelIndexInsideMPanel,
                                                      mpanelLstObjects,
-                                                     mpanelParentModel);
+                                                     mpanelParentModel,
+                                                     mpanelImageRendererZoom);
 
             return mp;
         }
@@ -72,6 +74,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                    DockStyle mdock = DockStyle.Fill,
                                                    int mpanelIndexInsideMPanel = 0,
                                                    IMultiPanelModel mpanelParentModel = null,
+                                                   float mpanelImageRendererZoom = 1,
                                                    string mname = "",
                                                    int mpanelDivisions = 1,
                                                    List<IPanelModel> mpanelLstPanel = null,
@@ -116,7 +119,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mpanelLstMultiPanel,
                                                                  mpanelIndexInsideMPanel,
                                                                  new List<Control>(),
-                                                                 mpanelParentModel);
+                                                                 mpanelParentModel, 
+                                                                 mpanelImageRendererZoom);
 
             return _multipanelModel;
         }

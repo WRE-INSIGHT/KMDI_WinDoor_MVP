@@ -25,6 +25,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         private IFrameModel _frameModel;
 
         private IFrameImagerUCPresenter _frameImagerUCP;
+        private IMultiPanelMullionImagerUCPresenter _multiPanelMullionImagerUCP;
+        private IMultiPanelTransomImagerUCPresenter _multiPanelTransomImagerUCP;
 
         private MultiPanelCommon _mpnlCommons = new MultiPanelCommon();
 
@@ -47,6 +49,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                 if (_frameImagerUCP != null)
                 {
                     _frameImagerUCP.DeleteControl((UserControl)_multiTransomImagerUC);
+                }
+                else if (_multiPanelMullionImagerUCP != null)
+                {
+                    _multiPanelMullionImagerUCP.DeleteControl((UserControl)_multiTransomImagerUC);
+                }
+                else if (_multiPanelTransomImagerUCP != null)
+                {
+                    _multiPanelTransomImagerUCP.DeleteControl((UserControl)_multiTransomImagerUC);
                 }
             }
         }
@@ -1351,6 +1361,40 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             multiTransomImagerUCP._multiPanelModel = multiPanelModel;
             multiTransomImagerUCP._frameModel = frameModel;
             multiTransomImagerUCP._frameImagerUCP = frameImagerUCP;
+
+            return multiTransomImagerUCP;
+        }
+
+        public IMultiPanelTransomImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                                   IMultiPanelModel multiPanelModel,
+                                                                   IFrameModel frameModel,
+                                                                   IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP)
+        {
+            unityC
+                .RegisterType<IMultiPanelTransomImagerUC, MultiPanelTransomImagerUC>()
+                .RegisterType<IMultiPanelTransomImagerUCPresenter, MultiPanelTransomImagerUCPresenter>();
+            MultiPanelTransomImagerUCPresenter multiTransomImagerUCP = unityC.Resolve<MultiPanelTransomImagerUCPresenter>();
+            multiTransomImagerUCP._unityC = unityC;
+            multiTransomImagerUCP._multiPanelModel = multiPanelModel;
+            multiTransomImagerUCP._frameModel = frameModel;
+            multiTransomImagerUCP._multiPanelMullionImagerUCP = multiPanelMullionImagerUCP;
+
+            return multiTransomImagerUCP;
+        }
+
+        public IMultiPanelTransomImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                                  IMultiPanelModel multiPanelModel, 
+                                                                  IFrameModel frameModel, 
+                                                                  IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP)
+        {
+            unityC
+                .RegisterType<IMultiPanelTransomImagerUC, MultiPanelTransomImagerUC>()
+                .RegisterType<IMultiPanelTransomImagerUCPresenter, MultiPanelTransomImagerUCPresenter>();
+            MultiPanelTransomImagerUCPresenter multiTransomImagerUCP = unityC.Resolve<MultiPanelTransomImagerUCPresenter>();
+            multiTransomImagerUCP._unityC = unityC;
+            multiTransomImagerUCP._multiPanelModel = multiPanelModel;
+            multiTransomImagerUCP._frameModel = frameModel;
+            multiTransomImagerUCP._multiPanelTransomImagerUCP = multiPanelTransomImagerUCP;
 
             return multiTransomImagerUCP;
         }

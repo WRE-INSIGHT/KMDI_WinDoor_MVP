@@ -139,7 +139,11 @@ namespace PresentationLayer.Presenter.UserControls
                                                                           frame,
                                                                           true,
                                                                           flow,
-                                                                          multiID);
+                                                                          multiID,
+                                                                          DockStyle.Fill,
+                                                                          0,
+                                                                          null,
+                                                                          _frameModel.FrameImageRenderer_Zoom);
                 _frameModel.Lst_MultiPanel.Add(_multipanelModel);
 
                 IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP.GetNewInstance(_unityC, _multipanelModel, _mainPresenter);

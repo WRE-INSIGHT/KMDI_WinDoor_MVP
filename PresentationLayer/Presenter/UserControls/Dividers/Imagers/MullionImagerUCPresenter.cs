@@ -4,6 +4,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
+using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
         private IMultiPanelModel _multiPanelModel;
 
         private IMultiPanelMullionImagerUCPresenter _multiMullionImagerUCP;
+        private IMullionUC _mullionUC; //mullion counterpart on editor
 
         CommonFunctions _commonfunc = new CommonFunctions();
 
@@ -65,7 +67,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
 
             GraphicsPath gpath = new GraphicsPath();
 
-            int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mul);
+            int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_mullionUC);
             int prev_obj_ndx = this_ndx - 1,
                 next_obj_ndx = this_ndx + 1;
             string prev_obj_name = "",
@@ -107,7 +109,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
                                                         IDividerModel divModel,
                                                         IMultiPanelModel multiPanelModel,
                                                         IFrameModel frameModel,
-                                                        IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP)
+                                                        IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP,
+                                                        IMullionUC mullionUC)
         {
             unityC
                 .RegisterType<IMullionImagerUC, MullionImagerUC>()
@@ -117,6 +120,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
             mullionImagerUCP._multiPanelModel = multiPanelModel;
             mullionImagerUCP._frameModel = frameModel;
             mullionImagerUCP._multiMullionImagerUCP = multiMullionImagerUCP;
+            mullionImagerUCP._mullionUC = mullionUC;
 
             return mullionImagerUCP;
         }

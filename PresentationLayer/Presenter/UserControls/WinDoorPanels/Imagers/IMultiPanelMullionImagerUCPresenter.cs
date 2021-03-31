@@ -13,6 +13,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                                                            IMultiPanelModel multiPanelModel, 
                                                            IFrameModel frameModel,
                                                            IFrameImagerUCPresenter frameImagerUCP);
+        IMultiPanelMullionImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                           IMultiPanelModel multiPanelModel,
+                                                           IFrameModel frameModel,
+                                                           IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP);
+        IMultiPanelMullionImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                           IMultiPanelModel multiPanelModel,
+                                                           IFrameModel frameModel,
+                                                           IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP);
         void AddControl(UserControl userctrlObj);
         void DeleteControl(UserControl userctrlObj);
     }

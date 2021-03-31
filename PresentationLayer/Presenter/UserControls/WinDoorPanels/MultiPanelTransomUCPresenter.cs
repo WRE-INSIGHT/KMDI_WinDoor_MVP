@@ -59,8 +59,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelPropertiesUCPresenter _multiPropUCP2_given; //Given Instance
         private IBasePlatformImagerUCPresenter _basePlatformImagerUCP;
         private IFrameImagerUCPresenter _frameImagerUCP;
-        private IMultiPanelMullionImagerUCPresenter _multiMullionImagerUCP;
-        private IMultiPanelTransomImagerUCPresenter _multiPanelTransomImagerUCP;
+        private IMultiPanelMullionImagerUCPresenter _multiMullionImagerUCP; //Injected Instance
+        private IMultiPanelMullionImagerUCPresenter _multiMullionImagerUCP_Given; //Given Instance
+        private IMultiPanelTransomImagerUCPresenter _multiPanelTransomImagerUCP; //Given Instance
+        private IMultiPanelTransomImagerUCPresenter _multiPanelTransomImagerUCP_Injected; //Injected Instance
         private IMullionImagerUCPresenter _mullionImagerUCP;
         private ITransomImagerUCPresenter _transomImagerUCP;
 
@@ -95,7 +97,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             IMultiPanelPropertiesUCPresenter multiPropUCP_orig,
                                             IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP,
                                             IMullionImagerUCPresenter mullionImagerUCP,
-                                            ITransomImagerUCPresenter transomImagerUCP)
+                                            ITransomImagerUCPresenter transomImagerUCP,
+                                            IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP_Injected)
         {
             _multiPanelTransomUC = multiPanelTransomUC;
             _fixedUCP = fixedUCP;
@@ -118,6 +121,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiMullionImagerUCP = multiMullionImagerUCP;
             _mullionImagerUCP = mullionImagerUCP;
             _transomImagerUCP = transomImagerUCP;
+            _multiPanelTransomImagerUCP_Injected = multiPanelTransomImagerUCP_Injected;
 
             _tmr = new Timer();
             _tmr.Interval = 200;
@@ -183,6 +187,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 _tmr.Start();
                 ((UserControl)sender).Invalidate();
+                _basePlatformImagerUCP.InvalidateBasePlatform();
             }
             catch (Exception ex)
             {
@@ -247,7 +252,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                           multiID,
                                                                                           DockStyle.None,
                                                                                           _multiPanelModel.GetNextIndex(),
-                                                                                          _multiPanelModel);
+                                                                                          _multiPanelModel,
+                                                                                          _frameModel.FrameImageRenderer_Zoom);
                     _frameModel.Lst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.Reload_MultiPanelMargin();
@@ -269,12 +275,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (data.Contains("Mullion"))
                     {
+
                         IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = _multiMullionImagerUCP.GetNewInstance(_unityC,
                                                                                                                          mPanelModel,
                                                                                                                          _frameModel,
-                                                                                                                         _frameImagerUCP);
+                                                                                                                         _multiPanelTransomImagerUCP);
                         IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
-                        _frameImagerUCP.AddControl((UserControl)multiMullionImagerUC);
+                        _multiPanelTransomImagerUCP.AddControl((UserControl)multiMullionImagerUC);
                         _basePlatformImagerUCP.InvalidateBasePlatform();
 
                         IMultiPanelMullionUCPresenter multiUCP = _multiMullionUCP.GetNewInstance(_unityC,
@@ -291,6 +298,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         fpnl.Controls.Add((UserControl)multiUC);
                         multiUCP.SetInitialLoadFalse();
                         _multiPanelModel.AddControl_MPanelLstObjects((UserControl)multiUC , _frameModel.Frame_Type.ToString());
+
                         if (mPanelModel.MPanel_Placement == "Last")
                         {
                             _multiPanelModel.Fit_MyControls();
@@ -320,23 +328,42 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             fpnl.Controls.Add((UserControl)transomUC);
                             transomUCP.SetInitialLoadFalse();
                             _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
+
+                            ITransomImagerUCPresenter transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
+                                                                                                          divModel,
+                                                                                                          _multiPanelModel,
+                                                                                                          _frameModel,
+                                                                                                          _multiPanelTransomImagerUCP,
+                                                                                                          transomUC);
+                            ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
+                            _multiPanelTransomImagerUCP.AddControl((UserControl)transomImagerUC);
+                            _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                     }
                     else if (data.Contains("Transom"))
                     {
+                        IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = _multiPanelTransomImagerUCP_Injected.GetNewInstance(_unityC,
+                                                                                                                                        mPanelModel,
+                                                                                                                                        _frameModel,
+                                                                                                                                        _multiPanelTransomImagerUCP);
+                        IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
+                        _multiPanelTransomImagerUCP.AddControl((UserControl)multiTransomImagerUC);
+                        _basePlatformImagerUCP.InvalidateBasePlatform();
+
                         IMultiPanelTransomUCPresenter multiTransom = GetNewInstance(_unityC,
                                                                                     mPanelModel,
                                                                                     _frameModel,
                                                                                     _mainPresenter,
                                                                                     _frameUCP,
-                                                                                    this,
                                                                                     multiPropUCP,
                                                                                     _frameImagerUCP,
-                                                                                    _basePlatformImagerUCP);
+                                                                                    _basePlatformImagerUCP,
+                                                                                    multiTransomImagerUCP);
                         IMultiPanelTransomUC multiUC = multiTransom.GetMultiPanel();
                         fpnl.Controls.Add((UserControl)multiUC);
                         multiTransom.SetInitialLoadFalse();
                         _multiPanelModel.AddControl_MPanelLstObjects((UserControl)multiUC, _frameModel.Frame_Type.ToString());
+
                         if (mPanelModel.MPanel_Placement == "Last")
                         {
                             _multiPanelModel.Fit_MyControls();
@@ -366,6 +393,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             fpnl.Controls.Add((UserControl)transomUC);
                             transomUCP.SetInitialLoadFalse();
                             _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
+
+                            ITransomImagerUCPresenter transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
+                                                                                                          divModel,
+                                                                                                          _multiPanelModel,
+                                                                                                          _frameModel,
+                                                                                                          _multiPanelTransomImagerUCP,
+                                                                                                          transomUC);
+                            ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
+                            _multiPanelTransomImagerUCP.AddControl((UserControl)transomImagerUC);
+                            _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                     }
                 }
@@ -541,7 +578,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                       divModel,
                                                                                                       _multiPanelModel,
                                                                                                       _frameModel,
-                                                                                                      _multiPanelTransomImagerUCP);
+                                                                                                      _multiPanelTransomImagerUCP,
+                                                                                                      transomUC);
                         ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
                         _multiPanelTransomImagerUCP.AddControl((UserControl)transomImagerUC);
                         _basePlatformImagerUCP.InvalidateBasePlatform();
@@ -571,7 +609,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 Control divUC = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects[this_indx + 1];
                 _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.Remove((UserControl)divUC);
-                DeletePanel((UserControl)divUC);
+                _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)divUC);
 
                 IDividerModel div = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
                 div.Div_Visible = false;
@@ -596,7 +634,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.FrameProp_Height -= 148;
             }
 
-            _multiPanelModel.MPanel_Visibility = false;
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
                 _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelTransomUC, 
@@ -634,7 +671,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.FrameProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin;
             }
 
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _multiPanelModel.MPanel_Visibility = false;
 
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
@@ -652,7 +689,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _mainPresenter.GetDividerCount() + 1,
                                                         _multiPanelModel,
                                                         null,
-                                                        this);
+                                                        this,
+                                                        null,
+                                                        _multiMullionImagerUCP_Given,
+                                                        _multiPanelTransomImagerUCP);
             }
             
             if (parent_ctrl.Name.Contains("flp_Multi"))
@@ -662,6 +702,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     ctrl.Invalidate();
                 }
             }
+
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+
             #endregion
         }
 
@@ -2059,7 +2102,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                             IMultiPanelMullionUCPresenter multiPanelMullionUCP,
                                                             IMultiPanelPropertiesUCPresenter multiPropUCP,
                                                             IFrameImagerUCPresenter frameImagerUCP,
-                                                            IBasePlatformImagerUCPresenter basePlatformImagerUCP)
+                                                            IBasePlatformImagerUCPresenter basePlatformImagerUCP,
+                                                            IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP)
         {
             unityC
                 .RegisterType<IMultiPanelTransomUC, MultiPanelTransomUC>()
@@ -2074,6 +2118,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiTransomUCP._multiPropUCP2_given = multiPropUCP;
             multiTransomUCP._frameImagerUCP = frameImagerUCP;
             multiTransomUCP._basePlatformImagerUCP = basePlatformImagerUCP;
+            multiTransomUCP._multiMullionImagerUCP_Given = multiMullionImagerUCP;
 
             return multiTransomUCP;
         }

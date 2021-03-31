@@ -30,7 +30,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IMultiPanelMullionUCPresenter multiPanelMullionUCP,
                                                      IMultiPanelPropertiesUCPresenter multiPropUCP,
                                                      IFrameImagerUCPresenter frameImagerUCP,
-                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP);
+                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP,
+                                                     IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP);
         void Invalidate_MultiPanelMullionUC();
         void SetInitialLoadFalse();
     }

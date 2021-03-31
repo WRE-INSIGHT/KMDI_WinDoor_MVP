@@ -4,6 +4,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
+using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
         private IMultiPanelModel _multiPanelModel;
 
         private IMultiPanelTransomImagerUCPresenter _multiTransomImagerUCP;
+        private ITransomUC _transomUC; //transom counterpart on editor
 
         CommonFunctions _commonfunc = new CommonFunctions();
 
@@ -61,7 +63,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
 
             GraphicsPath gpath = new GraphicsPath();
 
-            int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(transom);
+            int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_transomUC);
             int prev_obj_ndx = this_ndx - 1,
                 next_obj_ndx = this_ndx + 1;
             string prev_obj_name = "",
@@ -102,7 +104,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
                                                         IDividerModel divModel,
                                                         IMultiPanelModel multiPanelModel,
                                                         IFrameModel frameModel,
-                                                        IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP)
+                                                        IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP,
+                                                        ITransomUC transomUC)
         {
             unityC
                 .RegisterType<ITransomImagerUC, TransomImagerUC>()
@@ -112,6 +115,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
             transomImagerUCP._multiPanelModel = multiPanelModel;
             transomImagerUCP._frameModel = frameModel;
             transomImagerUCP._multiTransomImagerUCP = multiTransomImagerUCP;
+            transomImagerUCP._transomUC = transomUC;
 
             return transomImagerUCP;
         }

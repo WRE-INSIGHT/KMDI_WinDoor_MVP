@@ -136,7 +136,8 @@ namespace PresentationLayer.CommonMethods
                                                                         divModel,
                                                                         parentModel,
                                                                         frameModel,
-                                                                        multiTransomImagerUCP);
+                                                                        multiTransomImagerUCP,
+                                                                        transomUC);
                     ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
                     multiTransomImagerUCP.AddControl((UserControl)transomImagerUC);
                 }
@@ -176,7 +177,8 @@ namespace PresentationLayer.CommonMethods
                                                                         divModel,
                                                                         parentModel,
                                                                         frameModel,
-                                                                        multiMullionImagerUCP);
+                                                                        multiMullionImagerUCP,
+                                                                        mullionUC);
 
                     IMullionImagerUC mullionImagerUC = mullionImagerUCP.GetMullionImager();
                     multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
