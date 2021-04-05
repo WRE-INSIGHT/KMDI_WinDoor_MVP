@@ -21,7 +21,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IMultiPanelPropertiesUCPresenter multiPropUCP,
                                                      IFrameImagerUCPresenter frameImagerUCP,
                                                      IBasePlatformImagerUCPresenter basePlatformImagerUCP,
-                                                     IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP);
+                                                     IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP,
+                                                     IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP_parent);
         IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
@@ -31,7 +32,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IMultiPanelPropertiesUCPresenter multiPropUCP,
                                                      IFrameImagerUCPresenter frameImagerUCP,
                                                      IBasePlatformImagerUCPresenter basePlatformImagerUCP,
-                                                     IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP);
+                                                     IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP);
         void frmDimensionResults(int frmDimension_numWd,
                                  int frmDimension_numHt);
         void DeletePanel(UserControl panel);

@@ -13,6 +13,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         void DeletePanel(UserControl obj);
         void frmDimensionResults(int frmDimension_numWd, int frmDimension_numHt);
         IMultiPanelTransomUC GetMultiPanel();
+        IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                     IMultiPanelModel multiPanelModel,
+                                                     IFrameModel frameModel,
+                                                     IMainPresenter mainPresenter,
+                                                     IFrameUCPresenter frameUCP,
+                                                     IMultiPanelPropertiesUCPresenter multiPropUCP,
+                                                     IFrameImagerUCPresenter frameImagerUCP,
+                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP,
+                                                     IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP);
         IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                      IMultiPanelModel multiPanelModel, 
                                                      IFrameModel frameModel, 
@@ -21,7 +30,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IMultiPanelPropertiesUCPresenter multiPropUCP,
                                                      IFrameImagerUCPresenter frameImagerUCP,
                                                      IBasePlatformImagerUCPresenter basePlatformImagerUCP,
-                                                     IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP);
+                                                     IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP,
+                                                     IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP_parent);
+        IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                     IMultiPanelModel multiPanelModel,
+                                                     IFrameModel frameModel,
+                                                     IMainPresenter mainPresenter,
+                                                     IFrameUCPresenter frameUCP,
+                                                     IMultiPanelPropertiesUCPresenter multiPropUCP,
+                                                     IFrameImagerUCPresenter frameImagerUCP,
+                                                     IBasePlatformImagerUCPresenter basePlatformImagerUCP,
+                                                     IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP,
+                                                     IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP_parent);
         IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
