@@ -118,7 +118,22 @@ namespace ModelLayer.Model.Quotation.Frame
         public Padding Frame_Padding_int
         {
             get { return _framePadding; }
-            set { _framePadding = value; NotifyPropertyChanged(); }
+            set
+            {
+                _framePadding = value;
+
+                Padding pads = new Padding(Convert.ToInt32(value.All * FrameImageRenderer_Zoom));
+                FrameImageRenderer_Padding_int = pads;
+
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Padding _frameImagePadding;
+        public Padding FrameImageRenderer_Padding_int
+        {
+            get { return _frameImagePadding; }
+            set { _frameImagePadding = value; NotifyPropertyChanged(); }
         }
 
         private int _framePropHeight;
@@ -175,6 +190,9 @@ namespace ModelLayer.Model.Quotation.Frame
                 _frameImage_Zoom = value;
                 FrameImageRenderer_Width = Convert.ToInt32(Frame_Width * value);
                 FrameImageRenderer_Height = Convert.ToInt32(Frame_Height * value);
+
+                Padding pads = new Padding(Convert.ToInt32(Frame_Padding_int.All * value));
+                FrameImageRenderer_Padding_int = pads;
                 NotifyPropertyChanged();
             }
         }

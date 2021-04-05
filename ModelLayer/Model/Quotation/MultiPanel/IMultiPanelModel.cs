@@ -26,6 +26,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         Control MPanel_Parent { get; set; }
         UserControl MPanel_FrameGroup { get; set; }
         Padding MPanel_Margin { get; set; }
+        Padding MPanelImageRenderer_Margin { get; set; }
         List<IPanelModel> MPanelLst_Panel { get; set; }
         List<IDividerModel> MPanelLst_Divider { get; set; }
         List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }

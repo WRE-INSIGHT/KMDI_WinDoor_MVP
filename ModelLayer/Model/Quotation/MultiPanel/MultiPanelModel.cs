@@ -222,6 +222,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 _mpanelImage_Zoom = value;
                 MPanelImageRenderer_Width = Convert.ToInt32(MPanel_Width * value);
                 MPanelImageRenderer_Height = Convert.ToInt32(MPanel_Height * value);
+
+                Padding pads = new Padding(Convert.ToInt32(MPanel_Margin.All * value));
+                MPanelImageRenderer_Margin = pads;
                 NotifyPropertyChanged();
             }
         }
@@ -316,6 +319,24 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             set
             {
                 _mpanelMargin = value;
+
+                Padding pads = new Padding(Convert.ToInt32(value.All * MPanelImageRenderer_Zoom));
+                MPanelImageRenderer_Margin = pads;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Padding _mpanelImageMargin;
+        public Padding MPanelImageRenderer_Margin
+        {
+            get
+            {
+                return _mpanelImageMargin;
+            }
+
+            set
+            {
+                _mpanelImageMargin = value;
                 NotifyPropertyChanged();
             }
         }

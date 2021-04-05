@@ -75,7 +75,14 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divWd = value;
-                DivImageRenderer_Width = Convert.ToInt32(value * DivImageRenderer_Zoom);
+                if (Div_Type == DividerType.Transom)
+                {
+                    DivImageRenderer_Width = Convert.ToInt32(value * DivImageRenderer_Zoom);
+                }
+                else if (Div_Type == DividerType.Mullion)
+                {
+                    DivImageRenderer_Width = value;
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -90,7 +97,14 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divHt = value;
-                DivImageRenderer_Height = Convert.ToInt32(value * DivImageRenderer_Zoom);
+                if (Div_Type == DividerType.Transom)
+                {
+                    DivImageRenderer_Height = value;
+                }
+                else if (Div_Type == DividerType.Mullion)
+                {
+                    DivImageRenderer_Height = Convert.ToInt32(value * DivImageRenderer_Zoom);
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -148,8 +162,16 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divImageRenderedZoom = value;
-                DivImageRenderer_Width = Convert.ToInt32(Div_Width * value);
-                DivImageRenderer_Height = Convert.ToInt32(Div_Height * value);
+                if (Div_Type == DividerType.Transom)
+                {
+                    DivImageRenderer_Width = Convert.ToInt32(Div_Width * value);
+                    DivImageRenderer_Height = Div_Height;
+                }
+                else if (Div_Type == DividerType.Mullion)
+                {
+                    DivImageRenderer_Width = Div_Width;
+                    DivImageRenderer_Height = Convert.ToInt32(Div_Height * value);
+                }
                 NotifyPropertyChanged();
             }
         }

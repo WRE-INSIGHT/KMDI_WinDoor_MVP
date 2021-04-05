@@ -118,7 +118,7 @@ namespace PresentationLayer.Presenter.UserControls
             frameBinding.Add("Frame_Visible", new Binding("Visible", _frameModel, "Frame_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("FrameImageRenderer_Width", new Binding("Width", _frameModel, "FrameImageRenderer_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("FrameImageRenderer_Height", new Binding("Height", _frameModel, "FrameImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
-            frameBinding.Add("Frame_Padding", new Binding("Padding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
+            frameBinding.Add("Frame_Padding", new Binding("Padding", _frameModel, "FrameImageRenderer_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_ID", new Binding("frameID", _frameModel, "Frame_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Name", new Binding("Name", _frameModel, "Frame_Name", true, DataSourceUpdateMode.OnPropertyChanged));
 
