@@ -149,6 +149,7 @@ namespace PresentationLayer.Presenter.UserControls
             basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
 
             _windoorModel.WD_image = bm;
+            //bm.Save(@"C:\Users\KMDI\Pictures\Saved Pictures\2.png");
         }
 
         public IBasePlatformImagerUC GetBasePlatformImagerUC()

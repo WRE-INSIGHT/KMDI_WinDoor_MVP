@@ -23,5 +23,6 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_Index_Inside_MPanel { get; set; }
         string Panel_Placement { get; set; }
         Padding Panel_Margin { get; set; }
+        float Panel_Zoom { get; set; }
     }
 }

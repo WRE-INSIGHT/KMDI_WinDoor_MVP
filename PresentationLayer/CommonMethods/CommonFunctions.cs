@@ -381,25 +381,27 @@ namespace PresentationLayer.CommonMethods
 
             int pointX_Mid = ((int)(frameModel.Frame_Type) - 2) / 2;
 
-            int pixels_count = 0;
-            if (width == 18)
+            int pixels_count = 0,
+                wd_formula = width; //(int)(width + (width * frameModel.FrameImageRenderer_Zoom));
+
+            if (wd_formula == 18)
             {
                 pixels_count = 26;
             }
-            else if (width == 23)
+            else if (wd_formula == 23)
             {
                 pixels_count = 33;
             }
-            else if (width == 10)
+            else if (wd_formula == 10)
             {
                 pixels_count = 18;
             }
-            else if (width == 13)
+            else if (wd_formula == 13)
             {
                 pixels_count = 23;
             }
 
-            if (width == 26 || width == 33)
+            if (wd_formula == 26 || wd_formula == 33)
             {
                 leftLine[0] = new Point(1, 5);
                 leftLine[1] = new Point(1, Ht_beforeCurve);
@@ -415,7 +417,7 @@ namespace PresentationLayer.CommonMethods
                 upperCurve[1] = new Point(accessible_Wd / 2, 1);
                 upperCurve[2] = new Point(1, 5);
             }
-            else if (width == 18 || width == 23)
+            else if (wd_formula == 18 || wd_formula == 23)
             {
                 if (((prev_obj.Contains("MultiTransom") || prev_obj.Contains("MultiMullion")) && nxt_obj.Contains("PanelUC")) ||
                     (((prev_obj.Contains("MultiTransom") || prev_obj.Contains("MultiMullion")) && nxt_obj == "")))
@@ -467,7 +469,7 @@ namespace PresentationLayer.CommonMethods
                     upperCurve[2] = new Point(1, 5);
                 }
             }
-            else if (width == 10 || width == 13)
+            else if (wd_formula == 10 || wd_formula == 13)
             {
 
                 leftLine[0] = new Point((width - pixels_count) + 1, 4);

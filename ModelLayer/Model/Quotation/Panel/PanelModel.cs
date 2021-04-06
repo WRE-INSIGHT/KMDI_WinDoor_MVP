@@ -69,6 +69,21 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelWidth = value;
                 PanelImageRenderer_Width = Convert.ToInt32(value * PanelImageRenderer_Zoom);
+                Panel_WidthToBind = (int)(value * Panel_Zoom);
+                //NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelWidthToBind;
+        public int Panel_WidthToBind
+        {
+            get
+            {
+                return _panelWidthToBind;
+            }
+            set
+            {
+                _panelWidthToBind = value;
                 NotifyPropertyChanged();
             }
         }
@@ -84,6 +99,21 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelHeight = value;
                 PanelImageRenderer_Height = Convert.ToInt32(value * PanelImageRenderer_Zoom);
+                Panel_HeightToBind = (int)(value * Panel_Zoom);
+                //NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelHeightToBind;
+        public int Panel_HeightToBind
+        {
+            get
+            {
+                return _panelHeightToBind;
+            }
+            set
+            {
+                _panelHeightToBind = value;
                 NotifyPropertyChanged();
             }
         }
@@ -368,6 +398,22 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private float _panelZoom;
+        public float Panel_Zoom
+        {
+            get
+            {
+                return _panelZoom;
+            }
+
+            set
+            {
+                _panelZoom = value;
+                Panel_WidthToBind = (int)(Panel_Width * value);
+                Panel_HeightToBind = (int)(Panel_Height * value);
+            }
+        }
+
         public PanelModel(int panelID,
                           string panelName,
                           int panelWd,
@@ -381,7 +427,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           UserControl panelFramePropertiesGroup,
                           UserControl panelMultiPanelGroup,
                           int panelIndexInsideMPanel,
-                          float panelImageRendererZoom)
+                          float panelImageRendererZoom,
+                          float panelZoom)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -397,6 +444,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_MultiPanelGroup = panelMultiPanelGroup;
             Panel_Index_Inside_MPanel = panelIndexInsideMPanel;
             PanelImageRenderer_Zoom = panelImageRendererZoom;
+            Panel_Zoom = panelZoom;
         }
     }
 }

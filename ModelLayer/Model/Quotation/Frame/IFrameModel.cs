@@ -22,5 +22,6 @@ namespace ModelLayer.Model.Quotation.Frame
         List<IPanelModel> Lst_Panel { get; set; }
         List<IMultiPanelModel> Lst_MultiPanel { get; set; }
         List<IDividerModel> Lst_Divider { get; set; }
+        float Frame_Zoom { get; set; }
     }
 }

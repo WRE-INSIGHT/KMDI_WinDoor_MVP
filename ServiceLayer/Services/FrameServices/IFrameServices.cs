@@ -17,11 +17,13 @@ namespace ServiceLayer.Services.FrameServices
                                 List<IPanelModel> lst_panel,
                                 List<IMultiPanelModel> lst_mpanel,
                                 float frameImager_Zoom,
-                                List<IDividerModel> lst_divider);
+                                List<IDividerModel> lst_divider,
+                                float frameZoom);
         IFrameModel AddFrameModel(int frame_width,
                                   int frame_height,
                                   FrameModel.Frame_Padding frame_type,
                                   float frameImager_Zoom,
+                                  float frameZoom,
                                   int frame_id = 0,
                                   string frame_name = "",
                                   bool frame_visible = true,

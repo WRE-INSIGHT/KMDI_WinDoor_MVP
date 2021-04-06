@@ -310,9 +310,31 @@ namespace PresentationLayer.Presenter
             _mainView.PanelMainSizeChangedEventRaised += new EventHandler(OnPanelMainSizeChangedEventRaised);
             _mainView.CreateNewItemClickEventRaised += new EventHandler(OnCreateNewItemClickEventRaised);
             _mainView.LabelSizeClickEventRaised += new EventHandler(OnLabelSizeClickEventRaised);
+            _mainView.ButtonMinusZoomClickEventRaised += _mainView_ButtonMinusZoomClickEventRaised;
+            _mainView.ButtonPlusZoomClickEventRaised += _mainView_ButtonPlusZoomClickEventRaised;
+        }
+
+        private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
+        {
+            if (_windoorModel.WD_zoom < 1 && _windoorModel.WD_zoom >= 0.25)
+            {
+                _windoorModel.WD_zoom += 0.25f;
+                _mainView.Zoom = _windoorModel.WD_zoom;
+                _basePlatformPresenter.InvalidateBasePlatform();
+            }
+        }
+
+        private void _mainView_ButtonMinusZoomClickEventRaised(object sender, EventArgs e)
+        {
+            if (_windoorModel.WD_zoom <= 1 && _windoorModel.WD_zoom > 0.25)
+            {
+                _windoorModel.WD_zoom -= 0.25f;
+                _mainView.Zoom = _windoorModel.WD_zoom;
+                _basePlatformPresenter.InvalidateBasePlatform();
+            }
         }
         #region Events
-        
+
         private void OnLabelSizeClickEventRaised(object sender, EventArgs e)
         {
             _frmDimensionPresenter.SetPresenters(this);
@@ -564,6 +586,8 @@ namespace PresentationLayer.Presenter
                                                         frmDimension_profileType);
                         AddWndrList_QuotationModel(_windoorModel);
 
+                        _mainView.Zoom = _windoorModel.WD_zoom;
+
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);
@@ -636,6 +660,7 @@ namespace PresentationLayer.Presenter
                                                                    frmDimension_numHt, 
                                                                    frameType, 
                                                                    _windoorModel.WD_zoom_forImageRenderer,
+                                                                   _windoorModel.WD_zoom,
                                                                    frameID);
                         AddFrameList_WindoorModel(_frameModel);
                         AddFrameUC(_frameModel);

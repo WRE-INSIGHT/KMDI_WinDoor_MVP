@@ -60,6 +60,14 @@ namespace PresentationLayer.Views
             }
         }
 
+        public float Zoom
+        {
+            set
+            {
+                lblZoom.Text = Convert.ToInt32(value * 100).ToString() + "%";
+            }
+        }
+
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
@@ -68,6 +76,8 @@ namespace PresentationLayer.Views
         public event EventHandler PanelMainSizeChangedEventRaised;
         public event EventHandler CreateNewItemClickEventRaised;
         public event EventHandler LabelSizeClickEventRaised;
+        public event EventHandler ButtonPlusZoomClickEventRaised;
+        public event EventHandler ButtonMinusZoomClickEventRaised;
 
         public MainView()
         {
@@ -175,6 +185,16 @@ namespace PresentationLayer.Views
         public ToolStripLabel GetLblSelectedDivider()
         {
             return tsLbl_SelectedDivider;
+        }
+
+        private void btnMinusZoom_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ButtonMinusZoomClickEventRaised, e);
+        }
+
+        private void btnPlusZoom_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ButtonPlusZoomClickEventRaised, e);
         }
     }
 }

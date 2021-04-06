@@ -32,7 +32,8 @@ namespace ServiceLayer.Services.PanelServices
                                             UserControl panelFramePropertiesGroup,
                                             UserControl panelMultiPanelGroup,
                                             int panelIndexInsideMPanel,
-                                            float panelImageRendererZoom)
+                                            float panelImageRendererZoom,
+                                            float panelZoom)
         {
             PanelModel pnl = new PanelModel(panelID,
                                             panelName,
@@ -47,7 +48,8 @@ namespace ServiceLayer.Services.PanelServices
                                             panelFramePropertiesGroup,
                                             panelMultiPanelGroup,
                                             panelIndexInsideMPanel,
-                                            panelImageRendererZoom);
+                                            panelImageRendererZoom,
+                                            panelZoom);
 
             ValidateModel(pnl);
             return pnl;
@@ -66,6 +68,7 @@ namespace ServiceLayer.Services.PanelServices
                                          UserControl panelMultiPanelGroup,
                                          string panelType,
                                          bool panelVisibility,
+                                         float panelZoom,
                                          int panelID = 0,
                                          float panelImageRendererZoom = 1,
                                          int panelIndexInsideMPanel = 0,
@@ -91,7 +94,8 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelFramePropertiesGroup,
                                                        panelMultiPanelGroup,
                                                        panelIndexInsideMPanel,
-                                                       panelImageRendererZoom);
+                                                       panelImageRendererZoom,
+                                                       panelZoom);
 
             return _panelModel;
         }

@@ -50,6 +50,21 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 _frameWidth = value;
                 FrameImageRenderer_Width = Convert.ToInt32(value * FrameImageRenderer_Zoom);
+                Frame_WidthToBind = (int)(value * Frame_Zoom);
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _frameWidth_toBind;
+        public int Frame_WidthToBind
+        {
+            get
+            {
+                return _frameWidth_toBind;
+            }
+            set
+            {
+                _frameWidth_toBind = value;
                 NotifyPropertyChanged();
             }
         }
@@ -64,6 +79,21 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 _frameHeight = value;
                 FrameImageRenderer_Height = Convert.ToInt32(value * FrameImageRenderer_Zoom);
+                Frame_HeightToBind = (int)(value * Frame_Zoom);
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _frameHeight_toBind;
+        public int Frame_HeightToBind
+        {
+            get
+            {
+                return _frameHeight_toBind;
+            }
+            set
+            {
+                _frameHeight_toBind = value;
                 NotifyPropertyChanged();
             }
         }
@@ -197,6 +227,22 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private float _frameZoom;
+        public float Frame_Zoom
+        {
+            get
+            {
+                return _frameZoom;
+            }
+
+            set
+            {
+                _frameZoom = value;
+                Frame_WidthToBind = (int)(Frame_Width * value);
+                Frame_HeightToBind = (int)(Frame_Height * value);
+            }
+        }
+
         public FrameModel(int frameID,
                           string frameName,
                           int frameWd,
@@ -206,7 +252,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           List<IPanelModel> lst_panel,
                           List<IMultiPanelModel> lst_mpanel,
                           float frameImagerZoom,
-                          List<IDividerModel> lst_divider)
+                          List<IDividerModel> lst_divider,
+                          float frameZoom)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -219,6 +266,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Lst_MultiPanel = lst_mpanel;
             FrameImageRenderer_Zoom = frameImagerZoom;
             Lst_Divider = lst_divider;
+            Frame_Zoom = frameZoom;
 
             if (frameType == Frame_Padding.Window)
             {

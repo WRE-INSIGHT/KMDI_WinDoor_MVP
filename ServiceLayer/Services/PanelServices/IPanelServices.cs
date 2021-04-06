@@ -14,6 +14,7 @@ namespace ServiceLayer.Services.PanelServices
                                   UserControl panelMultiPanelGroup,
                                   string panelType,
                                   bool panelVisibility,
+                                  float panelZoom,
                                   int panelID = 0,
                                   float panelImageRendererZoom = 1,
                                   int panelIndexInsideMPanel = 0,

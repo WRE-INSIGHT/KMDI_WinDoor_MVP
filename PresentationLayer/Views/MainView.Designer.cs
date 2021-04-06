@@ -77,8 +77,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pnlBot = new System.Windows.Forms.Panel();
-            this.lblWelcome = new System.Windows.Forms.Label();
+            this.btnPlusZoom = new System.Windows.Forms.Button();
+            this.btnMinusZoom = new System.Windows.Forms.Button();
             this.lblZoom = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
@@ -569,39 +571,75 @@
             // 
             // pnlBot
             // 
-            this.pnlBot.Controls.Add(this.lblWelcome);
+            this.pnlBot.Controls.Add(this.btnPlusZoom);
+            this.pnlBot.Controls.Add(this.btnMinusZoom);
             this.pnlBot.Controls.Add(this.lblZoom);
+            this.pnlBot.Controls.Add(this.lblWelcome);
             this.pnlBot.Controls.Add(this.lblSize);
             this.pnlBot.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBot.Enabled = false;
             this.pnlBot.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlBot.Location = new System.Drawing.Point(0, 553);
             this.pnlBot.Name = "pnlBot";
-            this.pnlBot.Padding = new System.Windows.Forms.Padding(3);
+            this.pnlBot.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlBot.Size = new System.Drawing.Size(1084, 25);
             this.pnlBot.TabIndex = 8;
             // 
-            // lblWelcome
+            // btnPlusZoom
             // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblWelcome.Location = new System.Drawing.Point(982, 3);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(99, 19);
-            this.lblWelcome.TabIndex = 2;
-            this.lblWelcome.Text = "Welcome, User";
-            this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnPlusZoom.BackgroundImage = global::PresentationLayer.Properties.Resources.plus2_104px;
+            this.btnPlusZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPlusZoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPlusZoom.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPlusZoom.FlatAppearance.BorderSize = 0;
+            this.btnPlusZoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlusZoom.Location = new System.Drawing.Point(121, 1);
+            this.btnPlusZoom.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPlusZoom.Name = "btnPlusZoom";
+            this.btnPlusZoom.Size = new System.Drawing.Size(25, 23);
+            this.btnPlusZoom.TabIndex = 4;
+            this.btnPlusZoom.UseVisualStyleBackColor = true;
+            this.btnPlusZoom.Click += new System.EventHandler(this.btnPlusZoom_Click);
+            // 
+            // btnMinusZoom
+            // 
+            this.btnMinusZoom.BackgroundImage = global::PresentationLayer.Properties.Resources.minus2_104px;
+            this.btnMinusZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMinusZoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMinusZoom.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMinusZoom.FlatAppearance.BorderSize = 0;
+            this.btnMinusZoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinusZoom.Location = new System.Drawing.Point(96, 1);
+            this.btnMinusZoom.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMinusZoom.Name = "btnMinusZoom";
+            this.btnMinusZoom.Size = new System.Drawing.Size(25, 23);
+            this.btnMinusZoom.TabIndex = 3;
+            this.btnMinusZoom.UseVisualStyleBackColor = true;
+            this.btnMinusZoom.Click += new System.EventHandler(this.btnMinusZoom_Click);
             // 
             // lblZoom
             // 
             this.lblZoom.AutoSize = true;
             this.lblZoom.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblZoom.Location = new System.Drawing.Point(67, 3);
+            this.lblZoom.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZoom.Location = new System.Drawing.Point(67, 1);
+            this.lblZoom.Margin = new System.Windows.Forms.Padding(3);
             this.lblZoom.Name = "lblZoom";
-            this.lblZoom.Size = new System.Drawing.Size(44, 19);
+            this.lblZoom.Size = new System.Drawing.Size(29, 19);
             this.lblZoom.TabIndex = 1;
-            this.lblZoom.Text = "100%";
+            this.lblZoom.Text = "0%";
             this.lblZoom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblWelcome.Location = new System.Drawing.Point(982, 1);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(99, 19);
+            this.lblWelcome.TabIndex = 2;
+            this.lblWelcome.Text = "Welcome, User";
+            this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblSize
             // 
@@ -609,7 +647,7 @@
             this.lblSize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblSize.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblSize.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSize.Location = new System.Drawing.Point(3, 3);
+            this.lblSize.Location = new System.Drawing.Point(3, 1);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(64, 17);
             this.lblSize.TabIndex = 0;
@@ -707,5 +745,7 @@
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Panel pnlControlSub;
         private System.Windows.Forms.ToolStripLabel tsLbl_SelectedDivider;
+        private System.Windows.Forms.Button btnMinusZoom;
+        private System.Windows.Forms.Button btnPlusZoom;
     }
 }
