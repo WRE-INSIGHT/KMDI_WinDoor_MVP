@@ -105,6 +105,21 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 _mpanelWidth = value;
                 MPanelImageRenderer_Width = Convert.ToInt32(value * MPanelImageRenderer_Zoom);
+                MPanel_WidthToBind = (int)(value * MPanel_Zoom);
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _mpanelWidthToBind;
+        public int MPanel_WidthToBind
+        {
+            get
+            {
+                return _mpanelWidthToBind;
+            }
+            set
+            {
+                _mpanelWidthToBind = value;
                 NotifyPropertyChanged();
             }
         }
@@ -153,6 +168,21 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }      
                 _mpanelHeight = value;
                 MPanelImageRenderer_Height = Convert.ToInt32(value * MPanelImageRenderer_Zoom);
+                MPanel_HeightToBind = (int)(value * MPanel_Zoom);
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _mpanelHeightToBind;
+        public int MPanel_HeightToBind
+        {
+            get
+            {
+                return _mpanelHeightToBind;
+            }
+            set
+            {
+                _mpanelHeightToBind = value;
                 NotifyPropertyChanged();
             }
         }
@@ -436,6 +466,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             set
             {
                 _mpanelDividerEnabled = value;
+            }
+        }
+
+        private float _mpanelZoom;
+        public float MPanel_Zoom
+        {
+            get
+            {
+                return _mpanelZoom;
+            }
+
+            set
+            {
+                _mpanelZoom = value;
+                MPanel_WidthToBind = (int)(MPanel_Width * value);
+                MPanel_HeightToBind = (int)(MPanel_Height * value);
             }
         }
 
@@ -899,7 +945,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                int mpanelIndexInsideMPanel,
                                List<Control> mpanelLstObjects,
                                IMultiPanelModel mpanelParentModel,
-                               float mpanelImageRendererZoom)
+                               float mpanelImageRendererZoom,
+                               float mpanelZoom)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -920,6 +967,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_ParentModel = mpanelParentModel;
             MPanel_DividerEnabled = true;
             MPanelImageRenderer_Zoom = mpanelImageRendererZoom;
+            MPanel_Zoom = mpanelZoom;
         }
     }
 }

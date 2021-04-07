@@ -236,10 +236,10 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         }
                     }
                     flp.Invalidate();
-                    //_basePlatformImagerUCP.InvalidateBasePlatform();
-                    //flp.Parent.Parent.Invalidate(); //invalidate frameUC
-                    //_mullionUC.Mullion_Left += (e.X - _point_of_origin.X);
                 }
+
+
+
             }
             catch (Exception ex)
             {

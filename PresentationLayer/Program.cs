@@ -46,7 +46,7 @@ namespace PresentationLayer
         static void Main()
         {
             IUnityContainer UnityC;
-            string _sqlconStr = "Data Source='121.58.229.248,49107';Network Library=DBMSSOCN;Initial Catalog='KMDIDATA';User ID='kmdiadmin';Password='kmdiadmin';";
+            string _sqlconStr = Properties.Settings.Default.slqcon;
 
             UnityC =
                 new UnityContainer()

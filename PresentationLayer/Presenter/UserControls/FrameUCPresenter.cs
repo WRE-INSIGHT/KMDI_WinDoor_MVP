@@ -139,6 +139,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                           frame,
                                                                           true,
                                                                           flow,
+                                                                          _frameModel.Frame_Zoom,
                                                                           multiID,
                                                                           DockStyle.Fill,
                                                                           0,
@@ -172,7 +173,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                       multiMullionImagerUCP);
                     IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
-                    multiUCP.SetInitialLoadFalse();
+                    //multiUCP.SetInitialLoadFalse();
                 }
                 else if (data.Contains("Transom"))
                 {
@@ -195,8 +196,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                                     multiTransomImagerUCP);
                     IMultiPanelTransomUC multiUC = multiTransomUCP.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
-                    multiTransomUCP.SetInitialLoadFalse();
-
+                    //multiTransomUCP.SetInitialLoadFalse();
                 }
             }
             else

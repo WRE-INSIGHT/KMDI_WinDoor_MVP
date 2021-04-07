@@ -82,5 +82,18 @@ namespace PresentationLayer.Properties {
                 this["FirstTym"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=\'121.58.229.248,49107\';Network Library=DBMSSOCN;Initial Catalog=\'KMDI" +
+            "DATA\';User ID=\'kmdiadmin\';Password=\'kmdiadmin\';")]
+        public string slqcon {
+            get {
+                return ((string)(this["slqcon"]));
+            }
+            set {
+                this["slqcon"] = value;
+            }
+        }
     }
 }

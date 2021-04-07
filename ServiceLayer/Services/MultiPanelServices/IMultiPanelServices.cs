@@ -15,6 +15,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                             UserControl mpanelFrameGroup,
                                             bool mvisible,
                                             FlowDirection mflow,
+                                            float mpanelZoom,
                                             int mid = 0,
                                             DockStyle mdock = DockStyle.Fill,
                                             int mpanelIndexInsideMPanel = 0,
