@@ -59,6 +59,26 @@ namespace PresentationLayer.Presenter.UserControls
             cX = (pnlMain.Width - basePlatform.Width) / 2;
             cY = (pnlMain.Height - basePlatform.Height) / 2;
 
+            //if (basePlatform.Width > pnlMain.Width)
+            //{
+            //    cX = 5;
+            //}
+            //else
+            //{
+            //    cX -= 17;
+            //}
+
+            //if (basePlatform.Height > pnlMain.Height)
+            //{
+            //    cY = 5;
+            //}
+            //else
+            //{
+            //    cY -= 35;
+            //}
+
+            //basePlatform.Location = new Point(cX, cY);
+
             if (cX <= 30 && cY <= 30)
             {
                 basePlatform.Location = new Point(60, 60);

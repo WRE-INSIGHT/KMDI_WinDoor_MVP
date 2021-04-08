@@ -46,9 +46,11 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 _wdWidth = value;
                 WD_Dimension = value.ToString() + " x " + WD_height.ToString();
-                WD_width_4basePlatform = (int)(value * WD_zoom) + 70;
                 WD_width_4basePlatform_forImageRenderer = value + 70;
-                WD_zoom_forImageRenderer = GetZoom_forRendering();
+                WD_zoom_forImageRenderer = GetZoom_forRendering();//1.0f; //GetZoom_forRendering();
+
+                WD_width_4basePlatform = value + 70; //(int)(value * WD_zoom) + 70;
+                WD_zoom = GetZoom_forRendering();
                 NotifyPropertyChanged();
             }
         }
@@ -95,9 +97,11 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 _wdHeight = value;
                 WD_Dimension = WD_width.ToString() + " x " + value.ToString();
-                WD_height_4basePlatform = (int)(value * WD_zoom) + 35;
                 WD_height_4basePlatform_forImageRenderer = value + 35;
-                WD_zoom_forImageRenderer = GetZoom_forRendering();
+                WD_zoom_forImageRenderer = GetZoom_forRendering(); //1.0f; //GetZoom_forRendering();
+
+                WD_height_4basePlatform = value + 35; // (int)(value * WD_zoom) + 35;
+                WD_zoom = GetZoom_forRendering();
                 NotifyPropertyChanged();
             }
         }
@@ -173,6 +177,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 WD_width_4basePlatform = (int)((WD_width * value) + 70);
                 WD_height_4basePlatform = (int)((WD_height * value) + 35);
                 SetZoom();
+                NotifyPropertyChanged();
             }
         }
 
@@ -371,30 +376,30 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             int area = _wdHeight * _wdWidth;
             float zm = 1.0f;
-            //if (area <= 360000)
-            //{
-            //    zm = 1.00f;
-            //}
-            //else if (area > 360000 && area <= 1000000)
-            //{
-            //    zm = 0.50f;
-            //}
-            //else if (area > 1000000 && area <= 4000000)
-            //{
-            //    zm = 0.28f;
-            //}
-            //else if (area > 4000000 && area <= 9000000)
-            //{
-            //    zm = 0.19f;
-            //}
-            //else if (area > 9000000 && area <= 16000000)
-            //{
-            //    zm = 0.14f;
-            //}
-            //else if (area > 16000000)
-            //{
-            //    zm = 0.10f;
-            //}
+            if (area <= 360000)
+            {
+                zm = 1.00f;
+            }
+            else if (area > 360000 && area <= 1000000)
+            {
+                zm = 0.50f;
+            }
+            else if (area > 1000000 && area <= 4000000)
+            {
+                zm = 0.28f;
+            }
+            else if (area > 4000000 && area <= 9000000)
+            {
+                zm = 0.19f;
+            }
+            else if (area > 9000000 && area <= 16000000)
+            {
+                zm = 0.14f;
+            }
+            else if (area > 16000000)
+            {
+                zm = 0.10f;
+            }
 
             return zm;
         }

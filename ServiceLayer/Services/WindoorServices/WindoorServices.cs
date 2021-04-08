@@ -43,7 +43,7 @@ namespace ServiceLayer.Services.WindoorServices
             wndr.WD_discount = WD_discount;
             wndr.WD_visibility = WD_visibility;
             wndr.WD_orientation = WD_orientation;
-            wndr.WD_zoom = WD_zoom;
+            //wndr.WD_zoom = WD_zoom;
             wndr.WD_profile = WD_Profile;
             wndr.lst_frame = lst_frame;
 

@@ -240,6 +240,21 @@ namespace ModelLayer.Model.Quotation.Frame
                 _frameZoom = value;
                 Frame_WidthToBind = (int)(Frame_Width * value);
                 Frame_HeightToBind = (int)(Frame_Height * value);
+                if (Frame_Type == Frame_Padding.Window)
+                {
+                    if (value == 1.0f)
+                    {
+                        Frame_Padding_int = new Padding(26);
+                    }
+                    else if (value == 0.14f)
+                    {
+                        Frame_Padding_int = new Padding(13);
+                    }
+                    else
+                    {
+                        Frame_Padding_int = new Padding(20);
+                    }
+                }
             }
         }
 
