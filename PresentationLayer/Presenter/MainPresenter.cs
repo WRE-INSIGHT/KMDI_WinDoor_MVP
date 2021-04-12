@@ -316,22 +316,22 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
-            if (_windoorModel.WD_zoom < 1 && _windoorModel.WD_zoom >= 0.25)
-            {
-                _windoorModel.WD_zoom += 0.25f;
-                _mainView.Zoom = _windoorModel.WD_zoom;
-                _basePlatformPresenter.InvalidateBasePlatform();
-            }
+            //if (_windoorModel.WD_zoom < 1 && _windoorModel.WD_zoom >= 0.25)
+            //{
+            //    _windoorModel.WD_zoom += 0.25f;
+            //    _mainView.Zoom = _windoorModel.WD_zoom;
+            //    _basePlatformPresenter.InvalidateBasePlatform();
+            //}
         }
 
         private void _mainView_ButtonMinusZoomClickEventRaised(object sender, EventArgs e)
         {
-            if (_windoorModel.WD_zoom <= 1 && _windoorModel.WD_zoom > 0.25)
-            {
-                _windoorModel.WD_zoom -= 0.25f;
-                _mainView.Zoom = _windoorModel.WD_zoom;
-                _basePlatformPresenter.InvalidateBasePlatform();
-            }
+            //if (_windoorModel.WD_zoom <= 1 && _windoorModel.WD_zoom > 0.25)
+            //{
+            //    _windoorModel.WD_zoom -= 0.25f;
+            //    _mainView.Zoom = _windoorModel.WD_zoom;
+            //    _basePlatformPresenter.InvalidateBasePlatform();
+            //}
         }
         #region Events
 
@@ -667,9 +667,7 @@ namespace PresentationLayer.Presenter
                         AddFramePropertiesUC(_frameModel);
 
                         _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                        //_basePlatformImagerUCPresenter.Invalidate_flpMain();
                         _basePlatformPresenter.InvalidateBasePlatform();
-                        //_basePlatformPresenter.Invalidate_flpMain();
                         SetMainViewTitle(input_qrefno,
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
@@ -704,6 +702,7 @@ namespace PresentationLayer.Presenter
         {
             Dictionary<string, Binding> mainPresenterBinding = new Dictionary<string, Binding>();
             mainPresenterBinding.Add("WD_Dimension", new Binding("Text", _windoorModel, "WD_Dimension", true, DataSourceUpdateMode.OnPropertyChanged));
+            mainPresenterBinding.Add("WD_zoom", new Binding("Zoom", _windoorModel, "WD_zoom", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return mainPresenterBinding;
         }

@@ -98,41 +98,45 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private int[] _arr_padding = {26, 33, 16, 23, 8, 11 }; //even index means window, odd index means door
         private Frame_Padding _frameType;
         public Frame_Padding Frame_Type
         {
             get { return _frameType; }
-            set { _frameType = value;
-                if (value == Frame_Padding.Window)
+            set
+            {
+                _frameType = value;
+                
+                int ndx_padding = 0;
+
+                if (_framePadding != new Padding(0))
                 {
-                    if (_framePadding == new Padding(23)) //galing Door na deleted MultiPanel
+                    ndx_padding = Array.IndexOf(_arr_padding, _framePadding.All);
+
+                    if (value == Frame_Padding.Door && ndx_padding % 2 == 0) //Even
                     {
-                        Frame_Padding_int = new Padding(16);
+                        ndx_padding++;
+                        Frame_Padding_int = new Padding(_arr_padding[ndx_padding]);
                     }
-                    else if(_framePadding == new Padding(33)) //galing Door
+                    else if (value == Frame_Padding.Window && ndx_padding % 2 != 0) //Odd
+                    {
+                        ndx_padding--;
+                        Frame_Padding_int = new Padding(_arr_padding[ndx_padding]);
+                    }
+
+                }
+                else if (_framePadding == new Padding(0))
+                {
+                    if (value == Frame_Padding.Window)
                     {
                         Frame_Padding_int = new Padding(26);
                     }
-                    else if (_framePadding == new Padding(0)) //initial Load
-                    {
-                        Frame_Padding_int = new Padding(26);
-                    }
-                }
-                else if (value == Frame_Padding.Door)
-                {
-                    if (_framePadding == new Padding(16)) //ibig sabihin nito galing Window
-                    {
-                        Frame_Padding_int = new Padding(23);
-                    }
-                    else if (_framePadding == new Padding(26))
-                    {
-                        Frame_Padding_int = new Padding(33);
-                    }
-                    else if (_framePadding == new Padding(0)) //initial Load
+                    else if (value == Frame_Padding.Door)
                     {
                         Frame_Padding_int = new Padding(33);
                     }
                 }
+
                 NotifyPropertyChanged();
             }
         }
@@ -240,19 +244,36 @@ namespace ModelLayer.Model.Quotation.Frame
                 _frameZoom = value;
                 Frame_WidthToBind = (int)(Frame_Width * value);
                 Frame_HeightToBind = (int)(Frame_Height * value);
+
+                int ndx_padding = 0;
+                if (_framePadding != new Padding(0))
+                {
+                    ndx_padding = Array.IndexOf(_arr_padding, _framePadding.All);
+
+                }
+
                 if (Frame_Type == Frame_Padding.Window)
                 {
-                    if (value == 1.0f)
+                    //if (value == 1.0f || value == 0.50f)
+                    //{
+                    //    Frame_Padding_int = new Padding(26);
+                    //}
+                    //else 
+                    if (value == 0.28f)
                     {
-                        Frame_Padding_int = new Padding(26);
+                        Frame_Padding_int = new Padding(8);
                     }
-                    else if (value == 0.14f)
+                }
+                else if (Frame_Type == Frame_Padding.Door)
+                {
+                    //if (value == 1.0f || value == 0.50f)
+                    //{
+                    //    Frame_Padding_int = new Padding(33);
+                    //}
+                    //else 
+                    if (value == 0.28f)
                     {
-                        Frame_Padding_int = new Padding(13);
-                    }
-                    else
-                    {
-                        Frame_Padding_int = new Padding(20);
+                        Frame_Padding_int = new Padding(11);
                     }
                 }
             }

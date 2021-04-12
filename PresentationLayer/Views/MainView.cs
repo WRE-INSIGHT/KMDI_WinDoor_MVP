@@ -60,10 +60,16 @@ namespace PresentationLayer.Views
             }
         }
 
+        private float _zoom;
         public float Zoom
         {
+            get
+            {
+                return _zoom;
+            }
             set
             {
+                _zoom = value;
                 lblZoom.Text = Convert.ToInt32(value * 100).ToString() + "%";
             }
         }
@@ -98,9 +104,7 @@ namespace PresentationLayer.Views
         public void ThisBinding(Dictionary<string, Binding> binding)
         {
             lblSize.DataBindings.Add(binding["WD_Dimension"]);
-            //this.DataBindings.Add(binding["Frame_Width"]);
-            //this.DataBindings.Add(binding["Frame_Height"]);
-            //this.DataBindings.Add(binding["Frame_Padding"]);
+            this.DataBindings.Add(binding["WD_zoom"]);
         }
 
         public void RemoveBinding(Control ctrl)

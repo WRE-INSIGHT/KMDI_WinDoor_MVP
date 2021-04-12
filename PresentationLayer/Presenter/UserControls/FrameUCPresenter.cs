@@ -121,14 +121,30 @@ namespace PresentationLayer.Presenter.UserControls
                     flow = FlowDirection.TopDown;
                 }
 
-                //if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                //{
-                //    _frameModel.Frame_Padding_int = new Padding(16);
-                //}
-                //else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                //{
-                //    _frameModel.Frame_Padding_int = new Padding(23);
-                //}
+                if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                {
+                    if (_frameModel.Frame_Zoom == 1.00f ||
+                        _frameModel.Frame_Zoom == 0.50f)
+                    {
+                        _frameModel.Frame_Padding_int = new Padding(16);
+                    }
+                    else if (_frameModel.Frame_Zoom == 0.28f)
+                    {
+                        _frameModel.Frame_Padding_int = new Padding(8);
+                    }
+                }
+                else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    if (_frameModel.Frame_Zoom == 1.0f ||
+                        _frameModel.Frame_Zoom == 0.50f)
+                    {
+                        _frameModel.Frame_Padding_int = new Padding(23);
+                    }
+                    else if (_frameModel.Frame_Zoom == 0.28f)
+                    {
+                        _frameModel.Frame_Padding_int = new Padding(11);
+                    }
+                }
 
                 int wd = frame.Width - _frameModel.Frame_Padding_int.All * 2,
                     ht = frame.Height - _frameModel.Frame_Padding_int.All * 2;
@@ -356,27 +372,29 @@ namespace PresentationLayer.Presenter.UserControls
 
             UserControl pfr = (UserControl)sender;
 
-            int fr_pads = 0;
-            if (_frameModel.Frame_Type.ToString().Contains("Window"))
-            {
-                //fr_pads = (int)(26 * _frameModel.Frame_Zoom);
-                if (_frameModel.Frame_Zoom == 1.0f)
-                {
-                    fr_pads = 26;
-                }
-                else if (_frameModel.Frame_Zoom == 0.14f)
-                {
-                    fr_pads = 13;
-                }
-                else
-                {
-                    fr_pads = 20;
-                }
-            }
-            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-            {
-                fr_pads = (int)(33 * _frameModel.Frame_Zoom);
-            }
+            int fr_pads = _frameModel.Frame_Padding_int.All;
+            //if (_frameModel.Frame_Type.ToString().Contains("Window"))
+            //{
+            //    fr_pads = 26;
+            //    //fr_pads = (int)(26 * _frameModel.Frame_Zoom);
+            //    //if (_frameModel.Frame_Zoom == 1.0f)
+            //    //{
+            //    //    fr_pads = 26;
+            //    //}
+            //    //else if (_frameModel.Frame_Zoom == 0.14f)
+            //    //{
+            //    //    fr_pads = 13;
+            //    //}
+            //    //else
+            //    //{
+            //    //    fr_pads = 20;
+            //    //}
+            //}
+            //else if (_frameModel.Frame_Type.ToString().Contains("Door"))
+            //{
+            //    fr_pads = 33;
+            //    //fr_pads = (int)(33 * _frameModel.Frame_Zoom);
+            //}
 
             Rectangle pnl_inner = new Rectangle(new Point(fr_pads , fr_pads), 
                                                 new Size(pfr.ClientRectangle.Width - (fr_pads * 2), 

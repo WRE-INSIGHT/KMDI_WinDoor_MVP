@@ -18,7 +18,7 @@ namespace PresentationLayer.Views
         event EventHandler ButtonMinusZoomClickEventRaised;
         string Nickname { set; }
         string mainview_title { get; set; }
-        float Zoom { set; }
+        float Zoom { get; set; }
         bool ItemToolStripEnabled { get;  set; }
         bool CreateNewWindoorBtnEnabled { get; set; }
         void ShowMainView();
