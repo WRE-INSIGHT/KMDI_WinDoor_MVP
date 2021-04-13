@@ -117,7 +117,34 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             g.SmoothingMode = SmoothingMode.HighQuality;
 
-            Font drawFont = new Font("Times New Roman", 30);// * zoom);
+            int font_size = 30,
+                outer_line = 10,
+                inner_line = 15;
+
+            if (_frameModel.Frame_Zoom == 0.28f)
+            {
+                font_size = 25;
+            }
+            else if (_frameModel.Frame_Zoom == 0.19f)
+            {
+                font_size = 15;
+                outer_line = 5;
+                inner_line = 8;
+            }
+            else if (_frameModel.Frame_Zoom == 0.14f)
+            {
+                font_size = 13;
+                outer_line = 3;
+                inner_line = 7;
+            }
+            else if (_frameModel.Frame_Zoom == 0.10f)
+            {
+                font_size = 8;
+                outer_line = 3;
+                inner_line = 7;
+            }
+
+            Font drawFont = new Font("Times New Roman", font_size);
             StringFormat drawFormat = new StringFormat();
             drawFormat.Alignment = StringAlignment.Center;
             drawFormat.LineAlignment = StringAlignment.Center;
@@ -128,17 +155,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                              fixedpnl.ClientRectangle.Width - w,
                                                              fixedpnl.ClientRectangle.Height - w));
 
-            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(10,
-                                                                   10,
-                                                                   (fixedpnl.ClientRectangle.Width - 20) - w,
-                                                                   (fixedpnl.ClientRectangle.Height - 20) - w));
+            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(outer_line,
+                                                                   outer_line,
+                                                                   (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                                   (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
 
             if (_panelModel.Panel_Orient == true)
             {
-                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(15,
-                                                                       15,
-                                                                       (fixedpnl.ClientRectangle.Width - 30) - w,
-                                                                       (fixedpnl.ClientRectangle.Height - 30) - w));
+                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(inner_line,
+                                                                       inner_line,
+                                                                       (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                                       (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
 
             }
 

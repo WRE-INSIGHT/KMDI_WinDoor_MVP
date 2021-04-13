@@ -23,5 +23,9 @@ namespace ModelLayer.Model.Quotation.Frame
         List<IMultiPanelModel> Lst_MultiPanel { get; set; }
         List<IDividerModel> Lst_Divider { get; set; }
         float Frame_Zoom { get; set; }
+        int[] Arr_padding_norm { get; }
+        int[] Arr_padding_withmpnl { get; }
+
+        void SetFramePadding(bool has_deleteMpnl = false);
     }
 }

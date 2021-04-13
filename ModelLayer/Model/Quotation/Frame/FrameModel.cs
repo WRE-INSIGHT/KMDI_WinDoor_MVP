@@ -98,7 +98,25 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
-        private int[] _arr_padding = {26, 33, 16, 23, 8, 11 }; //even index means window, odd index means door
+        private int[] _arr_padding_norm = {26, 33, 13, 15, 8, 10, 5, 7 }; //even index means window, odd index means door
+        private int[] _arr_padding_withmpnl = {16, 23}; //even index means window, odd index means door
+
+        public int[] Arr_padding_norm
+        {
+            get
+            {
+                return _arr_padding_norm;
+            }
+        }
+
+        public int[] Arr_padding_withmpnl
+        {
+            get
+            {
+                return _arr_padding_withmpnl;
+            }
+        }
+
         private Frame_Padding _frameType;
         public Frame_Padding Frame_Type
         {
@@ -106,37 +124,7 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameType = value;
-                
-                int ndx_padding = 0;
-
-                if (_framePadding != new Padding(0))
-                {
-                    ndx_padding = Array.IndexOf(_arr_padding, _framePadding.All);
-
-                    if (value == Frame_Padding.Door && ndx_padding % 2 == 0) //Even
-                    {
-                        ndx_padding++;
-                        Frame_Padding_int = new Padding(_arr_padding[ndx_padding]);
-                    }
-                    else if (value == Frame_Padding.Window && ndx_padding % 2 != 0) //Odd
-                    {
-                        ndx_padding--;
-                        Frame_Padding_int = new Padding(_arr_padding[ndx_padding]);
-                    }
-
-                }
-                else if (_framePadding == new Padding(0))
-                {
-                    if (value == Frame_Padding.Window)
-                    {
-                        Frame_Padding_int = new Padding(26);
-                    }
-                    else if (value == Frame_Padding.Door)
-                    {
-                        Frame_Padding_int = new Padding(33);
-                    }
-                }
-
+                SetFramePadding();
                 NotifyPropertyChanged();
             }
         }
@@ -245,36 +233,115 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_WidthToBind = (int)(Frame_Width * value);
                 Frame_HeightToBind = (int)(Frame_Height * value);
 
-                int ndx_padding = 0;
-                if (_framePadding != new Padding(0))
-                {
-                    ndx_padding = Array.IndexOf(_arr_padding, _framePadding.All);
-
-                }
-
                 if (Frame_Type == Frame_Padding.Window)
                 {
-                    //if (value == 1.0f || value == 0.50f)
-                    //{
-                    //    Frame_Padding_int = new Padding(26);
-                    //}
-                    //else 
-                    if (value == 0.28f)
+                    if (value == 1.0f || value == 0.50f)
                     {
-                        Frame_Padding_int = new Padding(8);
+                        Frame_Padding_int = new Padding(_arr_padding_norm[0]);
+                    }
+                    else if (value == 0.28f || value == 0.19f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[2]);
+                    }
+                    else if (value == 0.14f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[4]);
+                    }
+                    else if (value == 0.10f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[6]);
                     }
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
-                    //if (value == 1.0f || value == 0.50f)
-                    //{
-                    //    Frame_Padding_int = new Padding(33);
-                    //}
-                    //else 
-                    if (value == 0.28f)
+                    if (value == 1.0f || value == 0.50f)
                     {
-                        Frame_Padding_int = new Padding(11);
+                        Frame_Padding_int = new Padding(_arr_padding_norm[1]);
                     }
+                    else if (value == 0.28f || value == 0.19f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[3]);
+                    }
+                    else if (value == 0.14f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[5]);
+                    }
+                    else if (value == 0.10f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[7]);
+                    }
+                }
+            }
+        }
+
+        public void SetFramePadding(bool has_deleteMpnl = false)
+        {
+            int ndx_padding_norm = -1, // -1 meaning index was not found on array
+                ndx_padding_withmpnl = -1,
+                ndx_padding_toBeUsed = -1;
+
+            if (!has_deleteMpnl)
+            {
+                if (_framePadding != new Padding(0))
+                {
+                    ndx_padding_norm = Array.IndexOf(_arr_padding_norm, _framePadding.All);
+                    ndx_padding_withmpnl = Array.IndexOf(_arr_padding_withmpnl, _framePadding.All);
+
+                    if (ndx_padding_norm != -1 && ndx_padding_withmpnl == -1)
+                    {
+                        ndx_padding_toBeUsed = ndx_padding_norm;
+                    }
+                    else if (ndx_padding_norm == -1 && ndx_padding_withmpnl != -1)
+                    {
+                        ndx_padding_toBeUsed = ndx_padding_withmpnl;
+                    }
+
+                    if (Frame_Type == Frame_Padding.Door && ndx_padding_toBeUsed % 2 == 0) //Even
+                    {
+                        ndx_padding_toBeUsed++;
+                        if (ndx_padding_norm != -1 && ndx_padding_withmpnl == -1)
+                        {
+                            Frame_Padding_int = new Padding(_arr_padding_norm[ndx_padding_toBeUsed]);
+                        }
+                        else if (ndx_padding_norm == -1 && ndx_padding_withmpnl != -1)
+                        {
+                            Frame_Padding_int = new Padding(_arr_padding_withmpnl[ndx_padding_toBeUsed]);
+                        }
+                    }
+                    else if (Frame_Type == Frame_Padding.Window && ndx_padding_toBeUsed % 2 != 0) //Odd
+                    {
+                        ndx_padding_toBeUsed--;
+                        if (ndx_padding_norm != -1 && ndx_padding_withmpnl == -1)
+                        {
+                            Frame_Padding_int = new Padding(_arr_padding_norm[ndx_padding_toBeUsed]);
+                        }
+                        else if (ndx_padding_norm == -1 && ndx_padding_withmpnl != -1)
+                        {
+                            Frame_Padding_int = new Padding(_arr_padding_withmpnl[ndx_padding_toBeUsed]);
+                        }
+                    }
+                }
+                else if (_framePadding == new Padding(0))
+                {
+                    if (Frame_Type == Frame_Padding.Window)
+                    {
+                        Frame_Padding_int = new Padding(26);
+                    }
+                    else if (Frame_Type == Frame_Padding.Door)
+                    {
+                        Frame_Padding_int = new Padding(33);
+                    }
+                }
+            }
+            else if (has_deleteMpnl)
+            {
+                if (Frame_Type == Frame_Padding.Window)
+                {
+                    Frame_Padding_int = new Padding(26);
+                }
+                else if (Frame_Type == Frame_Padding.Door)
+                {
+                    Frame_Padding_int = new Padding(33);
                 }
             }
         }
@@ -304,14 +371,14 @@ namespace ModelLayer.Model.Quotation.Frame
             Lst_Divider = lst_divider;
             Frame_Zoom = frameZoom;
 
-            if (frameType == Frame_Padding.Window)
-            {
-                Frame_Padding_int = new Padding(26);
-            }
-            else if (frameType == Frame_Padding.Door)
-            {
-                Frame_Padding_int = new Padding(33);
-            }
+            //if (frameType == Frame_Padding.Window)
+            //{
+            //    Frame_Padding_int = new Padding(26);
+            //}
+            //else if (frameType == Frame_Padding.Door)
+            //{
+            //    Frame_Padding_int = new Padding(33);
+            //}
         }
     }
 }

@@ -140,7 +140,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiPanelTransomUC.divCountClickedEventRaised += _multiPanelTransomUC_divCountClickedEventRaised;
             _multiPanelTransomUC.deleteClickedEventRaised += _multiPanelTransomUC_deleteClickedEventRaised;
             _multiPanelTransomUC.multiMullionSizeChangedEventRaised += _multiPanelTransomUC_multiMullionSizeChangedEventRaised;
-            _multiPanelTransomUC.dividerEnabledCheckChangedEventRaised += _multiPanelTransomUC_dividerEnabledCheckChangedEventRaised;
+            _multiPanelTransomUC.dividerEnabledCheckedChangedEventRaised += _multiPanelTransomUC_dividerEnabledCheckChangedEventRaised;
             _tmr.Tick += _tmr_Tick;
         }
 
@@ -151,7 +151,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _timer_count++;
             if (_timer_count == 8 || _timer_count == 1)
             {
-                _multiPanelTransomUC.InvalidateFlp();
+                ((IMultiPanelUC)_multiPanelTransomUC).InvalidateFlp();
             }
         }
 
@@ -749,13 +749,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void _multiPanelTransomUC_flpMultiMouseLeaveEventRaised(object sender, EventArgs e)
         {
             color = Color.Black;
-            _multiPanelTransomUC.InvalidateFlp();
+            ((IMultiPanelUC)_multiPanelTransomUC).InvalidateFlp();
         }
 
         private void _multiPanelTransomUC_flpMultiMouseEnterEventRaised(object sender, EventArgs e)
         {
             color = Color.Blue;
-            _multiPanelTransomUC.InvalidateFlp();
+            ((IMultiPanelUC)_multiPanelTransomUC).InvalidateFlp();
         }
 
         Color color = Color.Black;
@@ -2068,7 +2068,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _initialLoad = true;
             _multiPanelTransomUC.ThisBinding(CreateBindingDictionary());
-            _multiPanelTransomUC.GetDivEnabler().Checked = _multiPanelModel.MPanel_DividerEnabled;
+            ((IMultiPanelUC)_multiPanelTransomUC).GetDivEnabler().Checked = _multiPanelModel.MPanel_DividerEnabled;
 
             return _multiPanelTransomUC;
         }
@@ -2223,7 +2223,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public void DeletePanel(UserControl obj)
         {
-            _multiPanelTransomUC.DeletePanel(obj);
+            ((IMultiPanelUC)_multiPanelTransomUC).DeletePanel(obj);
             if (obj.Name.Contains("PanelUC"))
             {
                 _multiPanelModel.MPanelProp_Height -= 148;
@@ -2232,7 +2232,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public void Invalidate_MultiPanelMullionUC()
         {
-            _multiPanelTransomUC.InvalidateFlp();
+            ((IMultiPanelUC)_multiPanelTransomUC).InvalidateFlp();
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()

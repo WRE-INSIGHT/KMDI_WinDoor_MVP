@@ -147,7 +147,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _timer_count++;
             if (_timer_count == 8 || _timer_count == 1)
             {
-                _multiPanelMullionUC.InvalidateFlp();
+                ((IMultiPanelUC)_multiPanelMullionUC).InvalidateFlp();
             }
         }
 
@@ -637,14 +637,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                    _multiPanelModel.MPanel_Placement);
             }
 
-            if (_frameModel.Frame_Type.ToString().Contains("Window"))
-            {
-                _frameModel.Frame_Type = FrameModel.Frame_Padding.Window;
-            }
-            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-            {
-                _frameModel.Frame_Type = FrameModel.Frame_Padding.Door;
-            }
+            //if (_frameModel.Frame_Type.ToString().Contains("Window"))
+            //{
+            //    _frameModel.Frame_Type = FrameModel.Frame_Padding.Window;
+            //}
+            //else if (_frameModel.Frame_Type.ToString().Contains("Door"))
+            //{
+            //    _frameModel.Frame_Type = FrameModel.Frame_Padding.Door;
+            //}
+
+            _frameModel.SetFramePadding(true);
 
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
             {
@@ -739,13 +741,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void _multiPanelMullionUC_flpMultiMouseLeaveEventRaised(object sender, EventArgs e)
         {
             color = Color.Black;
-            _multiPanelMullionUC.InvalidateFlp();
+            ((IMultiPanelUC)_multiPanelMullionUC).InvalidateFlp();
         }
 
         private void _multiPanelMullionUC_flpMultiMouseEnterEventRaised(object sender, EventArgs e)
         {
             color = Color.Blue;
-            _multiPanelMullionUC.InvalidateFlp();
+            ((IMultiPanelUC)_multiPanelMullionUC).InvalidateFlp();
         }
         
         Color color = Color.Black;
@@ -2018,7 +2020,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _initialLoad = true;
             _multiPanelMullionUC.ThisBinding(CreateBindingDictionary());
-            _multiPanelMullionUC.GetDividerEnabler().Checked = _multiPanelModel.MPanel_DividerEnabled;
+            ((IMultiPanelUC)_multiPanelMullionUC).GetDivEnabler().Checked = _multiPanelModel.MPanel_DividerEnabled;
             return _multiPanelMullionUC;
         }
         
@@ -2136,7 +2138,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public void DeletePanel(UserControl obj)
         {
-            _multiPanelMullionUC.DeletePanel(obj);
+            ((IMultiPanelUC)_multiPanelMullionUC).DeletePanel(obj);
             if (obj.Name.Contains("Panel"))
             {
                 _multiPanelModel.MPanelProp_Height -= 148;
@@ -2145,7 +2147,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public void Invalidate_MultiPanelMullionUC()
         {
-            _multiPanelMullionUC.InvalidateFlp();
+            ((IMultiPanelUC)_multiPanelMullionUC).InvalidateFlp();
         }
 
         public void SetInitialLoadFalse()

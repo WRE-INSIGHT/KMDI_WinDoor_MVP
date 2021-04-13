@@ -233,15 +233,14 @@ namespace PresentationLayer.Presenter.UserControls
                 framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
                 _frameModel.FrameProp_Height += 148;
 
-
-                if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                {
-                    _frameModel.Frame_Padding_int = new Padding(26);
-                }
-                else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                {
-                    _frameModel.Frame_Padding_int = new Padding(33);
-                }
+                //if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                //{
+                //    _frameModel.Frame_Padding_int = new Padding(26);
+                //}
+                //else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                //{
+                //    _frameModel.Frame_Padding_int = new Padding(33);
+                //}
 
                 if (data == "Fixed Panel")
                 {
@@ -372,29 +371,29 @@ namespace PresentationLayer.Presenter.UserControls
 
             UserControl pfr = (UserControl)sender;
 
-            int fr_pads = _frameModel.Frame_Padding_int.All;
-            //if (_frameModel.Frame_Type.ToString().Contains("Window"))
-            //{
-            //    fr_pads = 26;
-            //    //fr_pads = (int)(26 * _frameModel.Frame_Zoom);
-            //    //if (_frameModel.Frame_Zoom == 1.0f)
-            //    //{
-            //    //    fr_pads = 26;
-            //    //}
-            //    //else if (_frameModel.Frame_Zoom == 0.14f)
-            //    //{
-            //    //    fr_pads = 13;
-            //    //}
-            //    //else
-            //    //{
-            //    //    fr_pads = 20;
-            //    //}
-            //}
-            //else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-            //{
-            //    fr_pads = 33;
-            //    //fr_pads = (int)(33 * _frameModel.Frame_Zoom);
-            //}
+            int fr_pads = 0;
+            if (pfr.Controls.Count == 1)
+            {
+                if (pfr.Controls[0] is IMultiPanelUC)
+                {
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    {
+                        fr_pads = _frameModel.Arr_padding_norm[0];
+                    }
+                    else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        fr_pads = _frameModel.Arr_padding_norm[1];
+                    }
+                }
+                else
+                {
+                    fr_pads = _frameModel.Frame_Padding_int.All;
+                }
+            }
+            else
+            {
+                fr_pads = _frameModel.Frame_Padding_int.All;
+            }
 
             Rectangle pnl_inner = new Rectangle(new Point(fr_pads , fr_pads), 
                                                 new Size(pfr.ClientRectangle.Width - (fr_pads * 2), 

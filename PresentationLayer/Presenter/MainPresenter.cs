@@ -314,24 +314,29 @@ namespace PresentationLayer.Presenter
             _mainView.ButtonPlusZoomClickEventRaised += _mainView_ButtonPlusZoomClickEventRaised;
         }
 
+        private float[] _arr_zoomPercentage = { 0.10f, 0.14f, 0.19f, 0.28f, 0.50f, 1.0f };
         private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
-            //if (_windoorModel.WD_zoom < 1 && _windoorModel.WD_zoom >= 0.25)
-            //{
-            //    _windoorModel.WD_zoom += 0.25f;
-            //    _mainView.Zoom = _windoorModel.WD_zoom;
-            //    _basePlatformPresenter.InvalidateBasePlatform();
-            //}
+            int ndx_zoomPercentage = Array.IndexOf(_arr_zoomPercentage, _windoorModel.WD_zoom);
+
+            if (ndx_zoomPercentage < _arr_zoomPercentage.Count() - 1)
+            {
+                ndx_zoomPercentage++;
+                _windoorModel.WD_zoom = _arr_zoomPercentage[ndx_zoomPercentage];
+            }
+            _basePlatformPresenter.InvalidateBasePlatform();
         }
 
         private void _mainView_ButtonMinusZoomClickEventRaised(object sender, EventArgs e)
         {
-            //if (_windoorModel.WD_zoom <= 1 && _windoorModel.WD_zoom > 0.25)
-            //{
-            //    _windoorModel.WD_zoom -= 0.25f;
-            //    _mainView.Zoom = _windoorModel.WD_zoom;
-            //    _basePlatformPresenter.InvalidateBasePlatform();
-            //}
+            int ndx_zoomPercentage = Array.IndexOf(_arr_zoomPercentage, _windoorModel.WD_zoom);
+
+            if (ndx_zoomPercentage > 0)
+            {
+                ndx_zoomPercentage--;
+                _windoorModel.WD_zoom = _arr_zoomPercentage[ndx_zoomPercentage];
+            }
+            _basePlatformPresenter.InvalidateBasePlatform();
         }
         #region Events
 

@@ -13,7 +13,7 @@ using System.Drawing.Drawing2D;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
-    public partial class MultiPanelTransomUC : UserControl, IMultiPanelTransomUC
+    public partial class MultiPanelTransomUC : UserControl, IMultiPanelTransomUC, IMultiPanelUC
     {
         public MultiPanelTransomUC()
         {
@@ -39,7 +39,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler deleteClickedEventRaised;
         public event DragEventHandler flpMultiDragDropEventRaised;
         public event EventHandler multiMullionSizeChangedEventRaised;
-        public event EventHandler dividerEnabledCheckChangedEventRaised;
+        public event EventHandler dividerEnabledCheckedChangedEventRaised;
 
         public void InvalidateFlp()
         {
@@ -116,7 +116,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void dividerEnabledToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, dividerEnabledCheckChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, dividerEnabledCheckedChangedEventRaised, e);
         }
 
         public ToolStripMenuItem GetDivEnabler()

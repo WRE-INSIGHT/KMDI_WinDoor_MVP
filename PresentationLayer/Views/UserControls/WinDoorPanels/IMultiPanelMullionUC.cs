@@ -7,8 +7,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
     public interface IMultiPanelMullionUC: IViewCommon
     {
-        int MPanel_ID { get; set; }
-
         event PaintEventHandler flpMulltiPaintEventRaised;
         event DragEventHandler flpMultiDragDropEventRaised;
         event EventHandler flpMultiMouseEnterEventRaised;
@@ -17,9 +15,5 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler deleteClickedEventRaised;
         event EventHandler multiMullionSizeChangedEventRaised;
         event EventHandler dividerEnabledCheckedChangedEventRaised;
-
-        void InvalidateFlp();
-        void DeletePanel(UserControl panel);
-        ToolStripMenuItem GetDividerEnabler();
     }
 }

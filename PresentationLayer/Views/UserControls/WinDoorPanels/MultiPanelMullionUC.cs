@@ -12,7 +12,7 @@ using System.Drawing.Drawing2D;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
-    public partial class MultiPanelMullionUC : UserControl, IMultiPanelMullionUC
+    public partial class MultiPanelMullionUC : UserControl, IMultiPanelMullionUC, IMultiPanelUC
     {
         public MultiPanelMullionUC()
         {
@@ -119,7 +119,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             EventHelpers.RaiseEvent(sender, dividerEnabledCheckedChangedEventRaised, e);
         }
 
-        public ToolStripMenuItem GetDividerEnabler()
+        public ToolStripMenuItem GetDivEnabler()
         {
             return dividerEnabledToolStripMenuItem;
         }
