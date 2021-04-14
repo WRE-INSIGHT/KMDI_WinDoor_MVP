@@ -323,6 +323,7 @@
     <Compile Include="Views\UserControls\WinDoorPanels\IMultiPanelMullionUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\IMultiPanelTransomUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\IMultiPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\IPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\ISlidingPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\MultiPanelMullionUC.cs">
       <SubType>UserControl</SubType>

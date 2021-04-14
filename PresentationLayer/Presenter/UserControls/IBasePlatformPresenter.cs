@@ -17,5 +17,6 @@ namespace PresentationLayer.Presenter.UserControls
         List<int> lst_wd_toPaint(int flpMain_width, List<int> lst_ctrlWds);
         List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts);
         void ViewDeleteControl(UserControl control);
+        void Invalidate_flpMainControls();
     }
 }

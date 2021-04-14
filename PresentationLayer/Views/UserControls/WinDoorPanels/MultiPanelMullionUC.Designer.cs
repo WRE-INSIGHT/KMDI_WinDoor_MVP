@@ -61,7 +61,7 @@
             this.deleteToolStripMenuItem,
             this.dividerEnabledToolStripMenuItem});
             this.cmenu_mulltiP.Name = "cmenu_mulltiP";
-            this.cmenu_mulltiP.Size = new System.Drawing.Size(157, 92);
+            this.cmenu_mulltiP.Size = new System.Drawing.Size(157, 70);
             // 
             // divCountToolStripMenuItem
             // 

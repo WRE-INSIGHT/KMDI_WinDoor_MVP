@@ -99,7 +99,7 @@ namespace ModelLayer.Model.Quotation.Frame
         }
 
         private int[] _arr_padding_norm = {26, 33, 13, 15, 8, 10, 5, 7 }; //even index means window, odd index means door
-        private int[] _arr_padding_withmpnl = {16, 23}; //even index means window, odd index means door
+        private int[] _arr_padding_withmpnl = {16, 23, 8, 12}; //even index means window, odd index means door
 
         public int[] Arr_padding_norm
         {
@@ -232,45 +232,6 @@ namespace ModelLayer.Model.Quotation.Frame
                 _frameZoom = value;
                 Frame_WidthToBind = (int)(Frame_Width * value);
                 Frame_HeightToBind = (int)(Frame_Height * value);
-
-                if (Frame_Type == Frame_Padding.Window)
-                {
-                    if (value == 1.0f || value == 0.50f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[0]);
-                    }
-                    else if (value == 0.28f || value == 0.19f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[2]);
-                    }
-                    else if (value == 0.14f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[4]);
-                    }
-                    else if (value == 0.10f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[6]);
-                    }
-                }
-                else if (Frame_Type == Frame_Padding.Door)
-                {
-                    if (value == 1.0f || value == 0.50f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[1]);
-                    }
-                    else if (value == 0.28f || value == 0.19f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[3]);
-                    }
-                    else if (value == 0.14f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[5]);
-                    }
-                    else if (value == 0.10f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[7]);
-                    }
-                }
             }
         }
 
@@ -325,11 +286,11 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     if (Frame_Type == Frame_Padding.Window)
                     {
-                        Frame_Padding_int = new Padding(26);
+                        Frame_Padding_int = new Padding(_arr_padding_norm[0]);
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
-                        Frame_Padding_int = new Padding(33);
+                        Frame_Padding_int = new Padding(_arr_padding_norm[1]);
                     }
                 }
             }
@@ -337,11 +298,82 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 if (Frame_Type == Frame_Padding.Window)
                 {
-                    Frame_Padding_int = new Padding(26);
+                    Frame_Padding_int = new Padding(_arr_padding_norm[0]);
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
-                    Frame_Padding_int = new Padding(33);
+                    Frame_Padding_int = new Padding(_arr_padding_norm[1]);
+                }
+            }
+        }
+
+        private string _array_Used = "";
+        public void SetFramePadding(string controlType)
+        {
+            if (controlType == "IMultiPanelUC")
+            {
+                if (Frame_Type == Frame_Padding.Window)
+                {
+                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[0]);
+                    }
+                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[2]);
+                    }
+                }
+                else if (Frame_Type == Frame_Padding.Door)
+                {
+                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[1]);
+                    }
+                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[3]);
+                    }
+                }
+            }
+            else if (controlType == "IPanelUC")
+            {
+                if (Frame_Type == Frame_Padding.Window)
+                {
+                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[0]);
+                    }
+                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[2]);
+                    }
+                    else if (Frame_Zoom == 0.14f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[4]);
+                    }
+                    else if (Frame_Zoom == 0.10f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[6]);
+                    }
+                }
+                else if (Frame_Type == Frame_Padding.Door)
+                {
+                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[1]);
+                    }
+                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[3]);
+                    }
+                    else if (Frame_Zoom == 0.14f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[5]);
+                    }
+                    else if (Frame_Zoom == 0.10f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_norm[7]);
+                    }
                 }
             }
         }

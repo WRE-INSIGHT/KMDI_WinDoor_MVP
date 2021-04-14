@@ -11,7 +11,7 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
-    public partial class SlidingPanelUC : UserControl, ISlidingPanelUC
+    public partial class SlidingPanelUC : UserControl, ISlidingPanelUC, IPanelUC
     {
         public SlidingPanelUC()
         {

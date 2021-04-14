@@ -371,29 +371,34 @@ namespace PresentationLayer.Presenter.UserControls
 
             UserControl pfr = (UserControl)sender;
 
+
             int fr_pads = 0;
             if (pfr.Controls.Count == 1)
             {
                 if (pfr.Controls[0] is IMultiPanelUC)
                 {
-                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                    {
-                        fr_pads = _frameModel.Arr_padding_norm[0];
-                    }
-                    else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                    {
-                        fr_pads = _frameModel.Arr_padding_norm[1];
-                    }
+                    _frameModel.SetFramePadding("IMultiPanelUC");
+                    //if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    //{
+                    //    fr_pads = _frameModel.Arr_padding_norm[0];
+                    //}
+                    //else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    //{
+                    //    fr_pads = _frameModel.Arr_padding_norm[1];
+                    //}
                 }
-                else
+                else if (pfr.Controls[0] is IPanelUC)
                 {
-                    fr_pads = _frameModel.Frame_Padding_int.All;
+                    _frameModel.SetFramePadding("IPanelUC");
+                    //fr_pads = _frameModel.Frame_Padding_int.All;
                 }
             }
-            else
-            {
-                fr_pads = _frameModel.Frame_Padding_int.All;
-            }
+            //else
+            //{
+            //    fr_pads = _frameModel.Frame_Padding_int.All;
+            //}
+
+            fr_pads = _frameModel.Frame_Padding_int.All;
 
             Rectangle pnl_inner = new Rectangle(new Point(fr_pads , fr_pads), 
                                                 new Size(pfr.ClientRectangle.Width - (fr_pads * 2), 
@@ -423,15 +428,18 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);
             }
-            
-            g.DrawRectangle(blkPen, pnl_inner);
+
+            if (pfr.Controls.Count == 0)
+            {
+                g.DrawRectangle(blkPen, pnl_inner);
+            }
 
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
-                                                                   0,
-                                                                   pfr.ClientRectangle.Width - w,
-                                                                   pfr.ClientRectangle.Height - w));
+                                                             0,
+                                                             pfr.ClientRectangle.Width - w,
+                                                             pfr.ClientRectangle.Height - w));
         }
 
         public IFrameUC GetFrameUC()

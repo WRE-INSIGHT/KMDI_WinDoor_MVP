@@ -11,7 +11,7 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
-    public partial class FixedPanelUC : UserControl, IFixedPanelUC
+    public partial class FixedPanelUC : UserControl, IFixedPanelUC, IPanelUC
     {
         public FixedPanelUC()
         {

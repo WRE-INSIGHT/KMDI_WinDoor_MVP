@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
-    public partial class CasementPanelUC : UserControl, ICasementPanelUC
+    public partial class CasementPanelUC : UserControl, ICasementPanelUC, IPanelUC
     {
         private int _panelID;
         public int Panel_ID

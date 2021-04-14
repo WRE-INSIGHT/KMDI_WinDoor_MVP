@@ -11,7 +11,7 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
-    public partial class AwningPanelUC : UserControl, IAwningPanelUC
+    public partial class AwningPanelUC : UserControl, IAwningPanelUC, IPanelUC
     {
         public AwningPanelUC()
         {

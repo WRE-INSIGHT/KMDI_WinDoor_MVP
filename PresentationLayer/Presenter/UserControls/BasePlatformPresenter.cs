@@ -255,5 +255,13 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _flpMain.Controls.Remove(control);
         }
+
+        public void Invalidate_flpMainControls()
+        {
+            foreach (IFrameUC frames in _flpMain.Controls)
+            {
+                frames.InvalidateThisControls();
+            }
+        }
     }
 }

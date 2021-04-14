@@ -87,20 +87,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _timer_count++;
             if (_timer_count == 8 || _timer_count == 1)
             {
-                _fixedPanelUC.InvalidateThis();
+                ((IPanelUC)_fixedPanelUC).InvalidateThis();
             }
         }
 
         private void _fixedPanelUC_fixedPanelMouseEnterEventRaised(object sender, EventArgs e)
         {
             color = Color.Blue;
-            _fixedPanelUC.InvalidateThis();
+            ((IPanelUC)_fixedPanelUC).InvalidateThis();
         }
 
         private void _fixedPanelUC_fixedPanelMouseLeaveEventRaised(object sender, EventArgs e)
         {
             color = Color.Black;
-            _fixedPanelUC.InvalidateThis();
+            ((IPanelUC)_fixedPanelUC).InvalidateThis();
         }
 
         Color color = Color.Black;

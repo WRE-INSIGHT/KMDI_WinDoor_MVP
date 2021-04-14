@@ -87,7 +87,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _timer_count++;
             if (_timer_count == 8 || _timer_count == 1)
             {
-                _casementUC.InvalidateThis();
+                ((IPanelUC)_casementUC).InvalidateThis();
             }
         }
 
@@ -171,13 +171,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void OnCasementPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
         {
             color = Color.Black;
-            _casementUC.InvalidateThis();
+            ((IPanelUC)_casementUC).InvalidateThis();
         }
 
         private void OnCasementPanelUCMouseEnterEventRaised(object sender, EventArgs e)
         {
             color = Color.Blue;
-            _casementUC.InvalidateThis();
+            ((IPanelUC)_casementUC).InvalidateThis();
         }
 
         Color color = Color.Black;
