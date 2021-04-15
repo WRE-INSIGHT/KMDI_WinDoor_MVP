@@ -58,8 +58,6 @@ namespace PresentationLayer.Presenter
         int GetMultiPanelCount();
         int GetDividerCount();
         void AddItemInfoUC(IWindoorModel wndr);
-        void AddFrameUC(IFrameModel frameModel);
-        void AddFramePropertiesUC(IFrameModel frameModel);
         void Invalidate_pnlMain();
         void Scenario_Quotation(bool QoutationInputBox_OkClicked,
                                 bool NewItem_OkClicked,
@@ -75,5 +73,6 @@ namespace PresentationLayer.Presenter
                                 ITransomUCPresenter transomUCP = null,
                                 IMullionUCPresenter mullionUCP = null);
         void DeselectDivider();
+        void DeletePropertiesUC(int multiPanelID);
     }
 }

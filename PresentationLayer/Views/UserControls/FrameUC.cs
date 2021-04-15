@@ -57,6 +57,8 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler frameMouseEnterEventRaised;
         public event EventHandler frameMouseLeaveEventRaised;
         public event DragEventHandler frameDragDropEventRaised;
+        public event ControlEventHandler frameControlAddedEventRaised;
+        public event ControlEventHandler frameControlRemovedEventRaised;
 
         private void FrameUC_Paint(object sender, PaintEventArgs e)
         {
@@ -122,11 +124,13 @@ namespace PresentationLayer.Views.UserControls
 
         private void FrameUC_ControlAdded(object sender, ControlEventArgs e)
         {
+            EventHelpers.RaiseControlEvent(sender, frameControlAddedEventRaised, e);
             this.Invalidate();
         }
 
         private void FrameUC_ControlRemoved(object sender, ControlEventArgs e)
         {
+            EventHelpers.RaiseControlEvent(sender, frameControlRemovedEventRaised, e);
             this.Invalidate();
         }
 

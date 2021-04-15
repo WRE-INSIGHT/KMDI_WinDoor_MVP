@@ -83,5 +83,12 @@ namespace PresentationLayer.Views.UserControls
         {
             return flp_frameProperties;
         }
+
+        public void SetFrameTypeRadioBtnEnabled(bool frameTypeEnabled)
+        {
+            rdBtn_Window.Enabled = frameTypeEnabled;
+            rdBtn_Door.Enabled = frameTypeEnabled;
+            rdBtn_Concrete.Enabled = frameTypeEnabled;
+        }
     }
 }

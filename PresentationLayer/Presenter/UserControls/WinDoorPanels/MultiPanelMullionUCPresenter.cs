@@ -630,23 +630,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.FrameProp_Height -= 148;
             }
 
+            _mainPresenter.DeletePropertiesUC(_multiPanelModel.MPanel_ID);
+
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
                 _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelMullionUC, 
                                                                                    _frameModel.Frame_Type.ToString(),
                                                                                    _multiPanelModel.MPanel_Placement);
             }
-
-            //if (_frameModel.Frame_Type.ToString().Contains("Window"))
-            //{
-            //    _frameModel.Frame_Type = FrameModel.Frame_Padding.Window;
-            //}
-            //else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-            //{
-            //    _frameModel.Frame_Type = FrameModel.Frame_Padding.Door;
-            //}
-
-            _frameModel.SetFramePadding(true);
+            
+            _frameModel.SetArrayUsed("_arr_padding_norm");
+            _frameModel.SetFramePadding();
 
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
             {
@@ -668,7 +662,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanelProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin;;
                 _frameModel.FrameProp_Height -= (129 + 3);
             }
-
 
             _multiPanelModel.MPanel_Visibility = false;
 
@@ -810,8 +803,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                 }
 
-                bounds = new Rectangle(new Point(10, 10),
-                                       new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 20));
+                int ndx_padding_withmpnl = Array.IndexOf(_frameModel.Arr_padding_withmpnl, _frameModel.Frame_Padding_int.All);
+                int px_bounds = _frameModel.Arr_padding_norm[ndx_padding_withmpnl] - _frameModel.Arr_padding_withmpnl[ndx_padding_withmpnl];
+
+                bounds = new Rectangle(new Point(px_bounds, px_bounds),
+                                       new Size(fpnl.ClientRectangle.Width - (px_bounds * 2), fpnl.ClientRectangle.Height - (px_bounds * 2)));
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
             {

@@ -23,6 +23,8 @@ namespace PresentationLayer.Views.UserControls
         event PaintEventHandler outerFramePaintEventRaised;
         event MouseEventHandler frameMouseClickEventRaised;
         event DragEventHandler frameDragDropEventRaised;
+        event ControlEventHandler frameControlAddedEventRaised;
+        event ControlEventHandler frameControlRemovedEventRaised;
 
         void InvalidateThisControls();
         void InvalidateThis();

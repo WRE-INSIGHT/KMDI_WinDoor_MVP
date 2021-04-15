@@ -625,5 +625,14 @@ namespace PresentationLayer.CommonMethods
             return Transom_Points;
         }
 
+        public IEnumerable<Control> GetAll(Control control, string name)
+        {
+            var controls = control.Controls.Cast<Control>();
+
+            return controls.SelectMany(ctrl => GetAll(ctrl, name))
+                                      .Concat(controls)
+                                      .Where(c => c.Visible == true)
+                                      .Where(c => c.Name.Contains(name));
+        }
     }
 }

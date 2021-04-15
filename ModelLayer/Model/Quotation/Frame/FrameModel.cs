@@ -98,8 +98,8 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
-        private int[] _arr_padding_norm = {26, 33, 13, 15, 8, 10, 5, 7 }; //even index means window, odd index means door
-        private int[] _arr_padding_withmpnl = {16, 23, 8, 12}; //even index means window, odd index means door
+        private int[] _arr_padding_norm     = { 26, 33, 13, 15, 08, 10, 05, 07 }; //even index means window, odd index means door
+        private int[] _arr_padding_withmpnl = { 16, 23, 08, 12, 05, 07, 03, 06}; //even index means window, odd index means door
 
         public int[] Arr_padding_norm
         {
@@ -124,7 +124,7 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameType = value;
-                SetFramePadding();
+                SetFramePadding(false);
                 NotifyPropertyChanged();
             }
         }
@@ -232,10 +232,11 @@ namespace ModelLayer.Model.Quotation.Frame
                 _frameZoom = value;
                 Frame_WidthToBind = (int)(Frame_Width * value);
                 Frame_HeightToBind = (int)(Frame_Height * value);
+                SetFramePadding();
             }
         }
 
-        public void SetFramePadding(bool has_deleteMpnl = false)
+        public void SetFramePadding(bool has_deleteMpnl)
         {
             int ndx_padding_norm = -1, // -1 meaning index was not found on array
                 ndx_padding_withmpnl = -1,
@@ -248,23 +249,25 @@ namespace ModelLayer.Model.Quotation.Frame
                     ndx_padding_norm = Array.IndexOf(_arr_padding_norm, _framePadding.All);
                     ndx_padding_withmpnl = Array.IndexOf(_arr_padding_withmpnl, _framePadding.All);
 
-                    if (ndx_padding_norm != -1 && ndx_padding_withmpnl == -1)
+                    if (_array_Used == "_arr_padding_norm")
                     {
                         ndx_padding_toBeUsed = ndx_padding_norm;
+                        //_array_Used = "_arr_padding_norm";
                     }
-                    else if (ndx_padding_norm == -1 && ndx_padding_withmpnl != -1)
+                    else if (_array_Used == "_arr_padding_withmpnl")
                     {
                         ndx_padding_toBeUsed = ndx_padding_withmpnl;
+                        //_array_Used = "_arr_padding_withmpnl";
                     }
 
                     if (Frame_Type == Frame_Padding.Door && ndx_padding_toBeUsed % 2 == 0) //Even
                     {
                         ndx_padding_toBeUsed++;
-                        if (ndx_padding_norm != -1 && ndx_padding_withmpnl == -1)
+                        if (_array_Used == "_arr_padding_norm")
                         {
                             Frame_Padding_int = new Padding(_arr_padding_norm[ndx_padding_toBeUsed]);
                         }
-                        else if (ndx_padding_norm == -1 && ndx_padding_withmpnl != -1)
+                        else if (_array_Used == "_arr_padding_withmpnl")
                         {
                             Frame_Padding_int = new Padding(_arr_padding_withmpnl[ndx_padding_toBeUsed]);
                         }
@@ -272,11 +275,11 @@ namespace ModelLayer.Model.Quotation.Frame
                     else if (Frame_Type == Frame_Padding.Window && ndx_padding_toBeUsed % 2 != 0) //Odd
                     {
                         ndx_padding_toBeUsed--;
-                        if (ndx_padding_norm != -1 && ndx_padding_withmpnl == -1)
+                        if (_array_Used == "_arr_padding_norm")
                         {
                             Frame_Padding_int = new Padding(_arr_padding_norm[ndx_padding_toBeUsed]);
                         }
-                        else if (ndx_padding_norm == -1 && ndx_padding_withmpnl != -1)
+                        else if (_array_Used == "_arr_padding_withmpnl")
                         {
                             Frame_Padding_int = new Padding(_arr_padding_withmpnl[ndx_padding_toBeUsed]);
                         }
@@ -292,6 +295,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     {
                         Frame_Padding_int = new Padding(_arr_padding_norm[1]);
                     }
+                    _array_Used = "_arr_padding_norm";
                 }
             }
             else if (has_deleteMpnl)
@@ -304,13 +308,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_Padding_int = new Padding(_arr_padding_norm[1]);
                 }
+                _array_Used = "_arr_padding_norm";
             }
         }
 
         private string _array_Used = "";
-        public void SetFramePadding(string controlType)
+        public void SetFramePadding()
         {
-            if (controlType == "IMultiPanelUC")
+            if (_array_Used == "_arr_padding_withmpnl")
             {
                 if (Frame_Type == Frame_Padding.Window)
                 {
@@ -321,6 +326,14 @@ namespace ModelLayer.Model.Quotation.Frame
                     else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
                     {
                         Frame_Padding_int = new Padding(_arr_padding_withmpnl[2]);
+                    }
+                    else if (Frame_Zoom == 0.14f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[4]);
+                    }
+                    else if (Frame_Zoom == 0.10f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[6]);
                     }
                 }
                 else if (Frame_Type == Frame_Padding.Door)
@@ -333,9 +346,17 @@ namespace ModelLayer.Model.Quotation.Frame
                     {
                         Frame_Padding_int = new Padding(_arr_padding_withmpnl[3]);
                     }
+                    else if (Frame_Zoom == 0.14f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[5]);
+                    }
+                    else if (Frame_Zoom == 0.10f)
+                    {
+                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[7]);
+                    }
                 }
             }
-            else if (controlType == "IPanelUC")
+            else if (_array_Used == "_arr_padding_norm")
             {
                 if (Frame_Type == Frame_Padding.Window)
                 {
@@ -376,6 +397,11 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                 }
             }
+        }
+
+        public void SetArrayUsed(string arrayUsed)
+        {
+            _array_Used = arrayUsed;
         }
 
         public FrameModel(int frameID,

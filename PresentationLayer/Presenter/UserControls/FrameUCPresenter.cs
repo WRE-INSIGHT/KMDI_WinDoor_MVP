@@ -46,6 +46,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IBasePlatformImagerUCPresenter _basePlatformImagerUCP;
         private IMultiPanelPropertiesUCPresenter _multiPropUCP;
         private IFrameImagerUCPresenter _frameImagerUCP;
+        private IFramePropertiesUCPresenter _framePropertiesUCP;
 
         private IPanelServices _panelServices;
         private IMultiPanelServices _multipanelServices;
@@ -99,6 +100,27 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);
             _frameUC.frameMouseLeaveEventRaised += new EventHandler(OnFrameMouseLeaveEventRaised);
             _frameUC.frameDragDropEventRaised += _frameUC_frameDragDropEventRaised;
+            _frameUC.frameControlAddedEventRaised += _frameUC_frameControlAddedEventRaised;
+            _frameUC.frameControlRemovedEventRaised += _frameUC_frameControlRemovedEventRaised;
+        }
+
+        private void _frameUC_frameControlRemovedEventRaised(object sender, ControlEventArgs e)
+        {
+            _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
+        }
+
+        private void _frameUC_frameControlAddedEventRaised(object sender, ControlEventArgs e)
+        {
+            UserControl pfr = (UserControl)sender;
+
+            if (pfr.Controls[0] is IMultiPanelUC)
+            {
+                _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(false);
+            }
+            else if (pfr.Controls[0] is IPanelUC)
+            {
+                _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
+            }
         }
 
         private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)
@@ -121,31 +143,9 @@ namespace PresentationLayer.Presenter.UserControls
                     flow = FlowDirection.TopDown;
                 }
 
-                if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                {
-                    if (_frameModel.Frame_Zoom == 1.00f ||
-                        _frameModel.Frame_Zoom == 0.50f)
-                    {
-                        _frameModel.Frame_Padding_int = new Padding(16);
-                    }
-                    else if (_frameModel.Frame_Zoom == 0.28f)
-                    {
-                        _frameModel.Frame_Padding_int = new Padding(8);
-                    }
-                }
-                else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                {
-                    if (_frameModel.Frame_Zoom == 1.0f ||
-                        _frameModel.Frame_Zoom == 0.50f)
-                    {
-                        _frameModel.Frame_Padding_int = new Padding(23);
-                    }
-                    else if (_frameModel.Frame_Zoom == 0.28f)
-                    {
-                        _frameModel.Frame_Padding_int = new Padding(11);
-                    }
-                }
-
+                _frameModel.SetArrayUsed("_arr_padding_withmpnl");
+                _frameModel.SetFramePadding();
+                
                 int wd = frame.Width - _frameModel.Frame_Padding_int.All * 2,
                     ht = frame.Height - _frameModel.Frame_Padding_int.All * 2;
 
@@ -377,7 +377,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 if (pfr.Controls[0] is IMultiPanelUC)
                 {
-                    _frameModel.SetFramePadding("IMultiPanelUC");
+                    //_frameModel.SetFramePadding("IMultiPanelUC");
                     //if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                     //{
                     //    fr_pads = _frameModel.Arr_padding_norm[0];
@@ -389,7 +389,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (pfr.Controls[0] is IPanelUC)
                 {
-                    _frameModel.SetFramePadding("IPanelUC");
+                    //_frameModel.SetFramePadding("IPanelUC");
                     //fr_pads = _frameModel.Frame_Padding_int.All;
                 }
             }
@@ -452,7 +452,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                 IMainPresenter mainPresenter,
                                                 IBasePlatformPresenter basePlatformUCP,
                                                 IFrameImagerUCPresenter frameImagerUCP,
-                                                IBasePlatformImagerUCPresenter basePlatformImagerUCP)
+                                                IBasePlatformImagerUCPresenter basePlatformImagerUCP,
+                                                IFramePropertiesUCPresenter framePropertiesUCP)
         {
             unityC
                 .RegisterType<IFrameUC, FrameUC>()
@@ -464,6 +465,7 @@ namespace PresentationLayer.Presenter.UserControls
             framePresenter._basePlatformUCP = basePlatformUCP;
             framePresenter._frameImagerUCP = frameImagerUCP;
             framePresenter._basePlatformImagerUCP = basePlatformImagerUCP;
+            framePresenter._framePropertiesUCP = framePropertiesUCP;
 
             return framePresenter;
         }

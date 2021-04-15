@@ -16,7 +16,8 @@ namespace PresentationLayer.Presenter.UserControls
                                          IMainPresenter mainPresenter,
                                          IBasePlatformPresenter basePlatformUCP,
                                          IFrameImagerUCPresenter frameImagerUCP,
-                                         IBasePlatformImagerUCPresenter basePlatformImagerUCP);
+                                         IBasePlatformImagerUCPresenter basePlatformImagerUCP,
+                                         IFramePropertiesUCPresenter framePropertiesUCP);
         void ViewDeleteControl(UserControl control);
 
         //IPanelModel AddPanelModel(int panelWd,

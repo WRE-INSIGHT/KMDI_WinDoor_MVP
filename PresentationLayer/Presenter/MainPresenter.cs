@@ -23,6 +23,7 @@ using System.Linq;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.Presenter.UserControls.Dividers;
+using PresentationLayer.CommonMethods;
 
 namespace PresentationLayer.Presenter
 {
@@ -66,6 +67,8 @@ namespace PresentationLayer.Presenter
         private FrameModel.Frame_Padding frameType;
         
         private string input_qrefno;
+
+        CommonFunctions _commonfunc = new CommonFunctions();
 
         #endregion
 
@@ -670,8 +673,8 @@ namespace PresentationLayer.Presenter
                                                                    _windoorModel.WD_zoom,
                                                                    frameID);
                         AddFrameList_WindoorModel(_frameModel);
-                        AddFrameUC(_frameModel);
-                        AddFramePropertiesUC(_frameModel);
+                        IFramePropertiesUCPresenter framePropUCP =  AddFramePropertiesUC(_frameModel);
+                        AddFrameUC(_frameModel, framePropUCP);
 
                         _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                         _basePlatformPresenter.InvalidateBasePlatform();
@@ -790,7 +793,7 @@ namespace PresentationLayer.Presenter
             _pnlItems.Controls.Add((UserControl)_itemInfoUC);
         }
 
-        public void AddFrameUC(IFrameModel frameModel)
+        public void AddFrameUC(IFrameModel frameModel, IFramePropertiesUCPresenter framePropertiesUCP)
         {
             IFrameImagerUCPresenter frameImagerUCP = (FrameImagerUCPresenter)_frameImagerUCPresenter.GetNewInstance(_unityC, frameModel);
 
@@ -799,18 +802,21 @@ namespace PresentationLayer.Presenter
                                                                                             this,
                                                                                             _basePlatformPresenter, 
                                                                                             frameImagerUCP,
-                                                                                            _basePlatformImagerUCPresenter);
+                                                                                            _basePlatformImagerUCPresenter,
+                                                                                            framePropertiesUCP);
             _frameUC = frameUCP.GetFrameUC();
             _basePlatformPresenter.AddFrame(_frameUC);
 
             _basePlatformImagerUCPresenter.AddFrame(frameImagerUCP.GetFrameImagerUC());
         }
 
-        public void AddFramePropertiesUC(IFrameModel frameModel)
+        public IFramePropertiesUCPresenter AddFramePropertiesUC(IFrameModel frameModel)
         {
-            IFramePropertiesUCPresenter FramePropertiesUCP = _framePropertiesUCPresenter.GetNewInstance(frameModel, _unityC, _frameUC, this);
+            IFramePropertiesUCPresenter FramePropertiesUCP = _framePropertiesUCPresenter.GetNewInstance(frameModel, _unityC, this);
             _framePropertiesUC = FramePropertiesUCP.GetFramePropertiesUC();
             _pnlPropertiesBody.Controls.Add((UserControl)_framePropertiesUC);
+
+            return FramePropertiesUCP;
         }
 
         public void AddFrameList_WindoorModel(IFrameModel frameModel)
@@ -891,6 +897,18 @@ namespace PresentationLayer.Presenter
         {
             _mainView.GetLblSelectedDivider().Visible = false;
             _mainView.GetLblSelectedDivider().Text = "";
+        }
+
+        public void DeletePropertiesUC(int multiPanelID)
+        {
+            var propertiesUC = _commonfunc.GetAll(_pnlPropertiesBody, "MultiPanelPropertiesUC");
+            foreach (IMultiPanelPropertiesUC mpnlProperties in propertiesUC)
+            {
+                if (mpnlProperties.MPanelID == multiPanelID)
+                {
+                    ((UserControl)mpnlProperties).Parent.Controls.Remove((UserControl)mpnlProperties);
+                }
+            }
         }
 
         #endregion

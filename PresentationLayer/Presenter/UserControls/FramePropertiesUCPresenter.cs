@@ -18,7 +18,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private IMainPresenter _mainPresenter;
         private IFrameModel _frameModel;
-        private IFrameUC _frameUC;
+        //private IFrameUC _frameUC;
         private IFrameServices _frameServices;
 
         public FramePropertiesUCPresenter(IFramePropertiesUC framePropertiesUC,
@@ -39,11 +39,6 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnRdBtnCheckedChangedEventRaised(object sender, EventArgs e)
         {
-            _frameUC.InvalidateThisControls();
-            _frameUC.InvalidateThis();
-            _frameUC.InvalidateThisParent();
-            _frameUC.InvalidateThisParentsParent();
-            _frameUC.PerformLayoutThis();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -51,22 +46,12 @@ namespace PresentationLayer.Presenter.UserControls
         {
             NumericUpDown numW = (NumericUpDown)sender;
             _frameModel.Frame_Width = Convert.ToInt32(numW.Value);
-            _frameUC.InvalidateThis();
-            _frameUC.InvalidateThisParent();
-            _frameUC.InvalidateThisParentsParent();
-            _frameUC.PerformLayoutThis();
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnNumFHeightValueChangedEventRaised(object sender, EventArgs e)
         {
             NumericUpDown numH = (NumericUpDown)sender;
             _frameModel.Frame_Height = Convert.ToInt32(numH.Value);
-            _frameUC.InvalidateThis();
-            _frameUC.InvalidateThisParent();
-            _frameUC.InvalidateThisParentsParent();
-            _frameUC.PerformLayoutThis();
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()
@@ -105,7 +90,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         public IFramePropertiesUCPresenter GetNewInstance(IFrameModel frameModel, 
                                                           IUnityContainer unityC, 
-                                                          IFrameUC frameUC,
+                                                          //IFrameUC frameUC,
                                                           IMainPresenter mainPresenter)
         {
             unityC
@@ -113,10 +98,15 @@ namespace PresentationLayer.Presenter.UserControls
                 .RegisterType<IFramePropertiesUCPresenter, FramePropertiesUCPresenter>();
             FramePropertiesUCPresenter framePropertiesUCP = unityC.Resolve<FramePropertiesUCPresenter>();
             framePropertiesUCP._frameModel = frameModel;
-            framePropertiesUCP._frameUC = frameUC;
+            //framePropertiesUCP._frameUC = frameUC;
             framePropertiesUCP._mainPresenter = mainPresenter;
 
             return framePropertiesUCP;
+        }
+
+        public void SetFrameTypeRadioBtnEnabled(bool frameTypeEnabled)
+        {
+            _framePropertiesUC.SetFrameTypeRadioBtnEnabled(frameTypeEnabled);
         }
     }
 }
