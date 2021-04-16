@@ -407,20 +407,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             else
             {
                 int suggest_Wd = 0,
-                    suggest_HT = multiPanel_boundsHT;
+                    suggest_HT = _multiPanelModel.MPanel_Height - 20; //multiPanel_boundsHT;
 
                 if (_multiPanelModel.MPanel_DividerEnabled)
                 {
-                    suggest_Wd = ((multiPanel_boundsWD - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                    suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                    //suggest_Wd = ((multiPanel_boundsWD - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                 }
                 else if (!_multiPanelModel.MPanel_DividerEnabled)
                 {
-                    suggest_Wd = multiPanel_boundsWD / totalPanelCount;
+                    suggest_Wd = (_multiPanelModel.MPanel_Width - 20) / totalPanelCount;
                 }
 
                 if (_multiPanelModel.MPanel_ParentModel != null)
                 {
-                    suggest_HT = multiPanel_boundsHT + 2;
+                    suggest_HT = (_multiPanelModel.MPanel_Height - 20) + 2;
                 }
 
                 _frmDimensionPresenter.SetPresenters(this);
@@ -803,8 +804,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                 }
 
-                int ndx_padding_withmpnl = Array.IndexOf(_frameModel.Arr_padding_withmpnl, _frameModel.Frame_Padding_int.All);
-                int px_bounds = _frameModel.Arr_padding_norm[ndx_padding_withmpnl] - _frameModel.Arr_padding_withmpnl[ndx_padding_withmpnl];
+                int ndx_padding_withmpnl = Array.IndexOf(_frameModel.Arr_padding_withmpnl, _frameModel.Frame_Padding_int.All),
+                    px_bounds = 0;
+                if (ndx_padding_withmpnl != -1)
+                {
+                    px_bounds = _frameModel.Arr_padding_norm[ndx_padding_withmpnl] - _frameModel.Arr_padding_withmpnl[ndx_padding_withmpnl];
+                }
 
                 bounds = new Rectangle(new Point(px_bounds, px_bounds),
                                        new Size(fpnl.ClientRectangle.Width - (px_bounds * 2), fpnl.ClientRectangle.Height - (px_bounds * 2)));

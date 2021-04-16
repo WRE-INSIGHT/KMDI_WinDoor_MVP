@@ -69,7 +69,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelWidth = value;
                 PanelImageRenderer_Width = Convert.ToInt32(value * PanelImageRenderer_Zoom);
-                Panel_WidthToBind = (int)(value * Panel_Zoom);
+                //Panel_WidthToBind = (int)(value * Panel_Zoom);
                 //NotifyPropertyChanged();
             }
         }
@@ -99,7 +99,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelHeight = value;
                 PanelImageRenderer_Height = Convert.ToInt32(value * PanelImageRenderer_Zoom);
-                Panel_HeightToBind = (int)(value * Panel_Zoom);
+                //Panel_HeightToBind = (int)(value * Panel_Zoom);
                 //NotifyPropertyChanged();
             }
         }

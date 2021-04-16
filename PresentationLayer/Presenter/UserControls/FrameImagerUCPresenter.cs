@@ -40,15 +40,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             UserControl pfr = (UserControl)sender;
 
-            int fr_pads = 0;
-            if (_frameModel.Frame_Type.ToString().Contains("Window"))
-            {
-                fr_pads = 26;
-            }
-            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-            {
-                fr_pads = 33;
-            }
+            int fr_pads = _frameModel.FrameImageRenderer_Padding_int.All;
 
             Rectangle pnl_inner = new Rectangle(new Point(fr_pads, fr_pads),
                                                 new Size(pfr.ClientRectangle.Width - (fr_pads * 2),
@@ -79,7 +71,10 @@ namespace PresentationLayer.Presenter.UserControls
                 g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);
             }
 
-            g.DrawRectangle(blkPen, pnl_inner);
+            if (pfr.Controls.Count == 0)
+            {
+                g.DrawRectangle(blkPen, pnl_inner);
+            }
 
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));

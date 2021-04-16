@@ -372,34 +372,8 @@ namespace PresentationLayer.Presenter.UserControls
             UserControl pfr = (UserControl)sender;
 
 
-            int fr_pads = 0;
-            if (pfr.Controls.Count == 1)
-            {
-                if (pfr.Controls[0] is IMultiPanelUC)
-                {
-                    //_frameModel.SetFramePadding("IMultiPanelUC");
-                    //if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                    //{
-                    //    fr_pads = _frameModel.Arr_padding_norm[0];
-                    //}
-                    //else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                    //{
-                    //    fr_pads = _frameModel.Arr_padding_norm[1];
-                    //}
-                }
-                else if (pfr.Controls[0] is IPanelUC)
-                {
-                    //_frameModel.SetFramePadding("IPanelUC");
-                    //fr_pads = _frameModel.Frame_Padding_int.All;
-                }
-            }
-            //else
-            //{
-            //    fr_pads = _frameModel.Frame_Padding_int.All;
-            //}
-
-            fr_pads = _frameModel.Frame_Padding_int.All;
-
+            int fr_pads = _frameModel.Frame_Padding_int.All;
+            
             Rectangle pnl_inner = new Rectangle(new Point(fr_pads , fr_pads), 
                                                 new Size(pfr.ClientRectangle.Width - (fr_pads * 2), 
                                                          pfr.ClientRectangle.Height - (fr_pads * 2)));

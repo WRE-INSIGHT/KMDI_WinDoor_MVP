@@ -18,6 +18,7 @@ using PresentationLayer.Presenter.UserControls.Dividers;
 using ServiceLayer.Services.DividerServices;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
+using PresentationLayer.Views.UserControls;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -119,7 +120,35 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             int font_size = 30,
                 outer_line = 10,
-                inner_line = 15;
+                inner_line = 15;//,
+                //panel_area = _panelModel.Panel_Width * _panelModel.Panel_Height,
+                //frame_area = _frameModel.Frame_Width * _frameModel.Frame_Height;
+
+            //if (_panelModel.Panel_Parent is IFrameUC)
+            //{
+            //    if (frame_area > 1000000 && frame_area <= 4000000)
+            //    {
+            //        font_size = 25;
+            //    }
+            //    else if (frame_area > 4000000 && frame_area <= 9000000)
+            //    {
+            //        font_size = 15;
+            //        outer_line = 5;
+            //        inner_line = 8;
+            //    }
+            //    else if (frame_area > 9000000 && frame_area <= 16000000)
+            //    {
+            //        font_size = 13;
+            //        outer_line = 3;
+            //        inner_line = 7;
+            //    }
+            //    else if (frame_area > 16000000)
+            //    {
+            //        font_size = 8;
+            //        outer_line = 3;
+            //        inner_line = 7;
+            //    }
+            //}
 
             if (_frameModel.Frame_Zoom == 0.28f)
             {
@@ -273,17 +302,36 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 if (!_initialLoad)
                 {
-                    int thisWd = ((UserControl)sender).Width,
-                        thisHt = ((UserControl)sender).Height,
+                    int thisWd = 0,
+                        thisHt = 0,
                         pnlModelWd = _panelModel.Panel_Width,
                         pnlModelHt = _panelModel.Panel_Height;
 
-                    if (thisWd != pnlModelWd || prev_Width != pnlModelWd)
+                    if (_multiPanelModel != null) 
+                    {
+                        if (_multiPanelModel.MPanel_Type == "Mullion")
+                        {
+                            thisWd = (int)(((UserControl)sender).Width / _panelModel.Panel_Zoom);
+                            thisHt = (int)(pnlModelHt * _panelModel.Panel_Zoom);
+                        }
+                        else if (_multiPanelModel.MPanel_Type == "Transom")
+                        {
+                            thisWd = (int)(pnlModelWd * _panelModel.Panel_Zoom);
+                            thisHt = (int)(((UserControl)sender).Height / _panelModel.Panel_Zoom);
+                        }
+                    }
+                    else
+                    {
+                        thisWd = (int)((UserControl)sender).Width;
+                        thisHt = (int)((UserControl)sender).Height;
+                    }
+
+                    if (prev_Width != pnlModelWd || thisWd != pnlModelWd)
                     {
                         _panelModel.Panel_Width = thisWd;
                         _WidthChange = true;
                     }
-                    if (thisHt != pnlModelHt || prev_Height != pnlModelHt)
+                    if (prev_Height != pnlModelHt || thisHt != pnlModelHt)
                     {
                         _panelModel.Panel_Height = thisHt;
                         _HeightChange = true;

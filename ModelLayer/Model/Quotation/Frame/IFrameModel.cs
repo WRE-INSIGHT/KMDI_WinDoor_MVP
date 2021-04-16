@@ -19,6 +19,7 @@ namespace ModelLayer.Model.Quotation.Frame
         int FrameProp_Height { get; set; }
         float FrameImageRenderer_Zoom { get; set; }
         Padding Frame_Padding_int { get; set; }
+        Padding FrameImageRenderer_Padding_int { get; set; }
         List<IPanelModel> Lst_Panel { get; set; }
         List<IMultiPanelModel> Lst_MultiPanel { get; set; }
         List<IDividerModel> Lst_Divider { get; set; }

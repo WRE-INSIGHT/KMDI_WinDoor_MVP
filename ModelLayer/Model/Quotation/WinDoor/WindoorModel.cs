@@ -432,13 +432,13 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 {
                     fr.Frame_Zoom = WD_zoom;
 
-                    foreach (IPanelModel pnl in fr.Lst_Panel)
-                    {
-                        pnl.Panel_Zoom = WD_zoom;
-                    }
                     foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                     {
                         mpnl.MPanel_Zoom = WD_zoom;
+                    }
+                    foreach (IPanelModel pnl in fr.Lst_Panel)
+                    {
+                        pnl.Panel_Zoom = WD_zoom;
                     }
                 }
             }
