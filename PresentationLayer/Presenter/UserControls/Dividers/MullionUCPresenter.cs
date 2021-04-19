@@ -108,30 +108,30 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _mullionUC_mullionUCSizeChangedEventRaised(object sender, EventArgs e)
         {
-            try
-            {
-                if (!_initialLoad)
-                {
-                    int thisWd = ((UserControl)sender).Width,
-                    thisHt = ((UserControl)sender).Height,
-                    divModelWd = _divModel.Div_Width,
-                    divModelHt = _divModel.Div_Height;
+            //try
+            //{
+            //    if (!_initialLoad)
+            //    {
+            //        int thisWd = ((UserControl)sender).Width,
+            //        thisHt = ((UserControl)sender).Height,
+            //        divModelWd = _divModel.Div_Width,
+            //        divModelHt = _divModel.Div_Height;
 
-                    if (thisWd != divModelWd)
-                    {
-                        _divModel.Div_Width = thisWd;
-                    }
-                    if (thisHt != divModelHt)
-                    {
-                        _divModel.Div_Height = thisHt;
-                    }
-                    ((UserControl)sender).Invalidate();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //        if (thisWd != divModelWd)
+            //        {
+            //            _divModel.Div_Width = thisWd;
+            //        }
+            //        if (thisHt != divModelHt)
+            //        {
+            //            _divModel.Div_Height = thisHt;
+            //        }
+            //        ((UserControl)sender).Invalidate();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void _mullionUC_mullionUCMouseLeaveEventRaised(object sender, EventArgs e)
@@ -329,8 +329,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             divBinding.Add("Div_ID", new Binding("Div_ID", _divModel, "Div_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_Name", new Binding("Name", _divModel, "Div_Name", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_Visible", new Binding("Visible", _divModel, "Div_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
-            divBinding.Add("Div_Width", new Binding("Width", _divModel, "Div_Width", true, DataSourceUpdateMode.OnPropertyChanged));
-            divBinding.Add("Div_Height", new Binding("Height", _divModel, "Div_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_Width", new Binding("Width", _divModel, "Div_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_Height", new Binding("Height", _divModel, "Div_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return divBinding;
         }

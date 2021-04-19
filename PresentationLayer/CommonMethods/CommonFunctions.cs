@@ -94,6 +94,7 @@ namespace PresentationLayer.CommonMethods
                                                                      parentfpnl,
                                                                      divType,
                                                                      true,
+                                                                     frameModel.Frame_Zoom,
                                                                      divID,
                                                                      frameModel.FrameImageRenderer_Zoom,
                                                                      frameModel.Frame_Type.ToString());
@@ -382,7 +383,7 @@ namespace PresentationLayer.CommonMethods
             int pointX_Mid = ((int)(frameModel.Frame_Type) - 2) / 2;
 
             int pixels_count = 0,
-                wd_formula = width; //(int)(width + (width * frameModel.FrameImageRenderer_Zoom));
+                wd_formula = (int)(width / frameModel.Frame_Zoom); //(int)(width + (width * frameModel.FrameImageRenderer_Zoom));
 
             if (wd_formula == 18)
             {

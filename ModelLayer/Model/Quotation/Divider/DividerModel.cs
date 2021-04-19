@@ -83,6 +83,8 @@ namespace ModelLayer.Model.Quotation.Divider
                 {
                     DivImageRenderer_Width = value;
                 }
+
+                Div_WidthToBind = (int)(value * Div_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -105,6 +107,8 @@ namespace ModelLayer.Model.Quotation.Divider
                 {
                     DivImageRenderer_Height = Convert.ToInt32(value * DivImageRenderer_Zoom);
                 }
+
+                Div_HeightToBind = (int)(value * Div_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -206,6 +210,52 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
+        private float _divZoom;
+        public float Div_Zoom
+        {
+            get
+            {
+                return _divZoom;
+            }
+
+            set
+            {
+                _divZoom = value;
+                Div_HeightToBind = (int)(value * Div_Height);
+                Div_WidthToBind = (int)(value * Div_Width);
+            }
+        }
+
+        private int _divWidthToBind;
+        public int Div_WidthToBind
+        {
+            get
+            {
+                return _divWidthToBind;
+            }
+
+            set
+            {
+                _divWidthToBind = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _divHeightToBind;
+        public int Div_HeightToBind
+        {
+            get
+            {
+                return _divHeightToBind;
+            }
+
+            set
+            {
+                _divHeightToBind = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public DividerModel(int divID,
                             string divName,
                             int divWD,
@@ -214,7 +264,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             DividerType divType,
                             Control divParent,
                             string divFrameType,
-                            float divImageRendererZoom)
+                            float divImageRendererZoom,
+                            float divZoom)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -225,6 +276,7 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_Parent = divParent;
             Div_FrameType = divFrameType;
             DivImageRenderer_Zoom = divImageRendererZoom;
+            Div_Zoom = divZoom;
         }
     }
 }

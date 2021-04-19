@@ -298,57 +298,57 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             prev_Height = 0;
         private void OnFixedPanelUCSizeChangedEventRaised(object sender, EventArgs e)
         {
-            try
-            {
-                if (!_initialLoad)
-                {
-                    int thisWd = 0,
-                        thisHt = 0,
-                        pnlModelWd = _panelModel.Panel_Width,
-                        pnlModelHt = _panelModel.Panel_Height;
+            //try
+            //{
+            //    if (!_initialLoad)
+            //    {
+            //        int thisWd = 0,
+            //            thisHt = 0,
+            //            pnlModelWd = _panelModel.Panel_Width,
+            //            pnlModelHt = _panelModel.Panel_Height;
 
-                    if (_multiPanelModel != null) 
-                    {
-                        if (_multiPanelModel.MPanel_Type == "Mullion")
-                        {
-                            thisWd = (int)(((UserControl)sender).Width / _panelModel.Panel_Zoom);
-                            thisHt = (int)(pnlModelHt * _panelModel.Panel_Zoom);
-                        }
-                        else if (_multiPanelModel.MPanel_Type == "Transom")
-                        {
-                            thisWd = (int)(pnlModelWd * _panelModel.Panel_Zoom);
-                            thisHt = (int)(((UserControl)sender).Height / _panelModel.Panel_Zoom);
-                        }
-                    }
-                    else
-                    {
-                        thisWd = (int)((UserControl)sender).Width;
-                        thisHt = (int)((UserControl)sender).Height;
-                    }
+            //        if (_multiPanelModel != null) 
+            //        {
+            //            if (_multiPanelModel.MPanel_Type == "Mullion")
+            //            {
+            //                thisWd = (int)(((UserControl)sender).Width / _panelModel.Panel_Zoom);
+            //                thisHt = (int)(pnlModelHt * _panelModel.Panel_Zoom);
+            //            }
+            //            else if (_multiPanelModel.MPanel_Type == "Transom")
+            //            {
+            //                thisWd = (int)(pnlModelWd * _panelModel.Panel_Zoom);
+            //                thisHt = (int)(((UserControl)sender).Height / _panelModel.Panel_Zoom);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            thisWd = (int)((UserControl)sender).Width;
+            //            thisHt = (int)((UserControl)sender).Height;
+            //        }
 
-                    if (prev_Width != pnlModelWd || thisWd != pnlModelWd)
-                    {
-                        _panelModel.Panel_Width = thisWd;
-                        _WidthChange = true;
-                    }
-                    if (prev_Height != pnlModelHt || thisHt != pnlModelHt)
-                    {
-                        _panelModel.Panel_Height = thisHt;
-                        _HeightChange = true;
-                    }
-                }
+            //        if (prev_Width != pnlModelWd || thisWd != pnlModelWd)
+            //        {
+            //            _panelModel.Panel_Width = thisWd;
+            //            _WidthChange = true;
+            //        }
+            //        if (prev_Height != pnlModelHt || thisHt != pnlModelHt)
+            //        {
+            //            _panelModel.Panel_Height = thisHt;
+            //            _HeightChange = true;
+            //        }
+            //    }
 
-                prev_Width = _panelModel.Panel_Width;
-                prev_Height = _panelModel.Panel_Height;
+            //    prev_Width = _panelModel.Panel_Width;
+            //    prev_Height = _panelModel.Panel_Height;
 
-                _tmr.Start();
-                ((UserControl)sender).Invalidate();
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //    _tmr.Start();
+            //    ((UserControl)sender).Invalidate();
+            //    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, 

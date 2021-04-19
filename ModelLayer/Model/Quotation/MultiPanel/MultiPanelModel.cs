@@ -480,8 +480,23 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             set
             {
                 _mpanelZoom = value;
-                MPanel_WidthToBind = (int)(MPanel_Width * value);
-                MPanel_HeightToBind = (int)(MPanel_Height * value);
+
+                if (MPanel_Parent.Name.Contains("Frame"))
+                {
+                    int topbot_FrameMargin = 32; //16 * 2 ; frame's top and bot padding
+
+                    MPanel_WidthToBind = (int)(MPanel_Width * value);
+                    MPanel_HeightToBind = (int)(((MPanel_Height + topbot_FrameMargin) * value) - topbot_FrameMargin);
+                }
+                SetZoomDivider();
+            }
+        }
+
+        private void SetZoomDivider()
+        {
+            foreach (IDividerModel div in MPanelLst_Divider)
+            {
+                div.Div_Zoom = MPanel_Zoom;
             }
         }
 

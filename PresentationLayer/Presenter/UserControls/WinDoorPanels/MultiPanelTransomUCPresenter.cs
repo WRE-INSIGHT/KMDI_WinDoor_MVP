@@ -315,6 +315,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                   //(UserControl)_frameUCP.GetFrameUC(),
                                                                                   DividerModel.DividerType.Transom,
                                                                                   true,
+                                                                                  _frameModel.Frame_Zoom,
                                                                                   divID,
                                                                                   _frameModel.FrameImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString());
@@ -381,6 +382,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                   //(UserControl)_frameUCP.GetFrameUC(),
                                                                                   DividerModel.DividerType.Transom,
                                                                                   true,
+                                                                                  _frameModel.Frame_Zoom,
                                                                                   divID,
                                                                                   _frameModel.FrameImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString());
@@ -562,6 +564,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                               //(UserControl)_frameUCP.GetFrameUC(),
                                                                               DividerModel.DividerType.Transom,
                                                                               true,
+                                                                              _frameModel.Frame_Zoom,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
                                                                               _frameModel.Frame_Type.ToString());

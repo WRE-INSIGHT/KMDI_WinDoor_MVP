@@ -17,5 +17,8 @@ namespace ModelLayer.Model.Quotation.Divider
         int DivImageRenderer_Width { get; set; }
         string Div_FrameType { get; set; }
         float DivImageRenderer_Zoom { get; set; }
+        float Div_Zoom { get; set; }
+        int Div_WidthToBind { get; set; }
+        int Div_HeightToBind { get; set; }
     }
 }

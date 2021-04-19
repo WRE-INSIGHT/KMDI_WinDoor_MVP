@@ -310,6 +310,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                   fpnl,
                                                                                   DividerModel.DividerType.Mullion,
                                                                                   true,
+                                                                                  _frameModel.Frame_Zoom,
                                                                                   divID,
                                                                                   _frameModel.FrameImageRenderer_Zoom);
 
@@ -374,6 +375,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                       fpnl,
                                                                       DividerModel.DividerType.Mullion,
                                                                       true,
+                                                                      _frameModel.Frame_Zoom,
                                                                       divID,
                                                                       _frameModel.FrameImageRenderer_Zoom);
 
@@ -553,6 +555,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                               //(UserControl)_frameUCP.GetFrameUC(),
                                                                               DividerModel.DividerType.Mullion,
                                                                               true,
+                                                                              _frameModel.Frame_Zoom,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom);
 

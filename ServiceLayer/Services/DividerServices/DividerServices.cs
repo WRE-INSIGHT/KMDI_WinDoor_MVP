@@ -27,7 +27,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 DividerType divType,
                                                 Control divParent,
                                                 string divFrameType,
-                                                float divImageRendererZoom)
+                                                float divImageRendererZoom,
+                                                float divZoom)
         {
             DividerModel div = new DividerModel(divID,
                                                 divName,
@@ -37,7 +38,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 divType,
                                                 divParent,
                                                 divFrameType,
-                                                divImageRendererZoom);
+                                                divImageRendererZoom,
+                                                divZoom);
 
             ValidateModel(div);
             return div;
@@ -53,6 +55,7 @@ namespace ServiceLayer.Services.DividerServices
                                              Control divParent,
                                              DividerType divType,
                                              bool divVisibility,
+                                             float divZoom,
                                              int divID = 0,
                                              float divImageRendererZoom = 1,
                                              string divFrameType = "",
@@ -71,7 +74,8 @@ namespace ServiceLayer.Services.DividerServices
                                                          divType,
                                                          divParent,
                                                          divFrameType,
-                                                         divImageRendererZoom);
+                                                         divImageRendererZoom,
+                                                         divZoom);
 
             return _divModel;
         }

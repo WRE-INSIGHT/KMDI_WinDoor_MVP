@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
