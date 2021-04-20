@@ -175,7 +175,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
             }
 
-            List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints(mul.Width,
+            List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints(_divModel.Div_Width,
                                                                         mul.Height,
                                                                         prev_obj_name,
                                                                         next_obj_name,

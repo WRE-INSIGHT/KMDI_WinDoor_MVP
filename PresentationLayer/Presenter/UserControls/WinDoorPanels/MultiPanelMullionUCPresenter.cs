@@ -312,7 +312,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                   true,
                                                                                   _frameModel.Frame_Zoom,
                                                                                   divID,
-                                                                                  _frameModel.FrameImageRenderer_Zoom);
+                                                                                  _frameModel.FrameImageRenderer_Zoom,
+                                                                                  _frameModel.Frame_Type.ToString());
 
                             _frameModel.Lst_Divider.Add(divModel);
                             _multiPanelModel.MPanelLst_Divider.Add(divModel);
@@ -377,7 +378,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                       true,
                                                                       _frameModel.Frame_Zoom,
                                                                       divID,
-                                                                      _frameModel.FrameImageRenderer_Zoom);
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      _frameModel.Frame_Type.ToString());
 
                             _frameModel.Lst_Divider.Add(divModel);
                             _multiPanelModel.MPanelLst_Divider.Add(divModel);
@@ -557,7 +559,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                               true,
                                                                               _frameModel.Frame_Zoom,
                                                                               divID,
-                                                                              _frameModel.FrameImageRenderer_Zoom);
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString());
 
                         _frameModel.Lst_Divider.Add(divModel);
                         _multiPanelModel.MPanelLst_Divider.Add(divModel);

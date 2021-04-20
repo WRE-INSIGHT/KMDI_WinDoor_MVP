@@ -69,7 +69,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelWidth = value;
                 PanelImageRenderer_Width = Convert.ToInt32(value * PanelImageRenderer_Zoom);
-                Panel_WidthToBind = (int)(value * Panel_Zoom);
+                //Panel_WidthToBind = (int)(value * Panel_Zoom);
                 //NotifyPropertyChanged();
             }
         }
@@ -99,7 +99,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelHeight = value;
                 PanelImageRenderer_Height = Convert.ToInt32(value * PanelImageRenderer_Zoom);
-                Panel_HeightToBind = (int)(value * Panel_Zoom);
+                //Panel_HeightToBind = (int)(value * Panel_Zoom);
                 //NotifyPropertyChanged();
             }
         }
@@ -421,8 +421,20 @@ namespace ModelLayer.Model.Quotation.Panel
                     int topbot_Margin = Panel_Margin.Top + Panel_Margin.Bottom,
                         parent_height = Panel_Parent.Height;
 
-                    Panel_WidthToBind = (int)(Panel_Width * value);
-                    Panel_HeightToBind = (int)(parent_height - topbot_Margin);
+                    if (Panel_Parent is FlowLayoutPanel) // means multi-panel
+                    {
+                        if (Panel_Parent.Name.Contains("Mullion"))
+                        {
+                            Panel_WidthToBind = (int)(Panel_Width * value);
+                            Panel_HeightToBind = (int)(parent_height - topbot_Margin);
+                        }
+                    }
+                    else if (Panel_Parent is UserControl) //means frame
+                    {
+                        Panel_WidthToBind = (int)(Panel_Width * value);
+                        Panel_HeightToBind = (int)(Panel_Height * value);
+
+                    }
                 }
             }
         }
