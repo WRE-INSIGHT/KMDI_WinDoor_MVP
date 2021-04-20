@@ -40,6 +40,7 @@ namespace PresentationLayer.Presenter.UserControls
         private void OnRdBtnCheckedChangedEventRaised(object sender, EventArgs e)
         {
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
         }
 
         private void OnNumFWidthValueChangedEventRaised(object sender, EventArgs e)

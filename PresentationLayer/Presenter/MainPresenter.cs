@@ -328,7 +328,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_zoom = _arr_zoomPercentage[ndx_zoomPercentage];
             }
             _basePlatformPresenter.InvalidateBasePlatform();
-            //_basePlatformPresenter.Invalidate_flpMainControls();
+            _basePlatformPresenter.Invalidate_flpMainControls();
         }
 
         private void _mainView_ButtonMinusZoomClickEventRaised(object sender, EventArgs e)
@@ -341,7 +341,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_zoom = _arr_zoomPercentage[ndx_zoomPercentage];
             }
             _basePlatformPresenter.InvalidateBasePlatform();
-            //_basePlatformPresenter.Invalidate_flpMainControls();
+            _basePlatformPresenter.Invalidate_flpMainControls();
         }
         #region Events
 

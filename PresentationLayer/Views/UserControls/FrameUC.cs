@@ -31,19 +31,19 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        public Padding thisPadding
-        {
-            get
-            {
-                return this.Padding;
-            }
+        //public Padding thisPadding
+        //{
+        //    get
+        //    {
+        //        return this.Padding;
+        //    }
 
-            set
-            {
-                this.Padding = value;
-                this.Invalidate();
-            }
-        }
+        //    set
+        //    {
+        //        this.Padding = value;
+        //        this.Invalidate();
+        //    }
+        //}
 
         public FrameUC()
         {
@@ -165,6 +165,11 @@ namespace PresentationLayer.Views.UserControls
             {
                 ctrl.Invalidate();
             }
+        }
+
+        private void FrameUC_PaddingChanged(object sender, EventArgs e)
+        {
+            this.Invalidate();
         }
     }
 }

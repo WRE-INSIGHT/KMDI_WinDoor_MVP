@@ -14,7 +14,7 @@ namespace PresentationLayer.Views.UserControls
     {
         bool thisVisible { get; }
         int frameID { get; set; }
-        Padding thisPadding { get; set; }
+        //Padding thisPadding { get; set; }
 
         event EventHandler frameLoadEventRaised;
         event EventHandler deleteCmenuEventRaised;
