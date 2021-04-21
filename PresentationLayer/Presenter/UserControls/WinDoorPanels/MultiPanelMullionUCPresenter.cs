@@ -642,9 +642,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                    _frameModel.Frame_Type.ToString(),
                                                                                    _multiPanelModel.MPanel_Placement);
             }
-            
-            _frameModel.SetArrayUsed("_arr_padding_norm");
-            _frameModel.SetFramePadding();
+
+            _frameModel.SetDeductFramePadding(false);
 
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
             {
@@ -758,10 +757,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            int pInnerX = 10,
-                pInnerY = 10,
-                pInnerWd = fpnl.ClientRectangle.Width - 20,
-                pInnerHt = fpnl.ClientRectangle.Height - 20;
+            int pInnerX = _frameModel.Frame_Deduction,
+                pInnerY = _frameModel.Frame_Deduction,
+                pInnerWd = fpnl.ClientRectangle.Width - (_frameModel.Frame_Deduction * 2),
+                pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction * 2);
 
             Point[] upperLine = new Point[2];
             Point[] botLine = new Point[2];

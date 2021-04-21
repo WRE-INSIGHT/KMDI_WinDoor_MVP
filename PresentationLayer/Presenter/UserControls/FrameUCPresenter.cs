@@ -143,8 +143,7 @@ namespace PresentationLayer.Presenter.UserControls
                     flow = FlowDirection.TopDown;
                 }
 
-                _frameModel.SetArrayUsed("_arr_padding_withmpnl");
-                _frameModel.SetFramePadding();
+                _frameModel.SetDeductFramePadding(true);
                 
                 int wd = frame.Width - _frameModel.Frame_Padding_int.All * 2,
                     ht = frame.Height - _frameModel.Frame_Padding_int.All * 2;

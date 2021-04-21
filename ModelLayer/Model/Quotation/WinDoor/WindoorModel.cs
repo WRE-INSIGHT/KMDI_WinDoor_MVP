@@ -48,7 +48,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _wdWidth = value;
                 WD_Dimension = value.ToString() + " x " + WD_height.ToString();
                 WD_width_4basePlatform_forImageRenderer = value + 70;
-                WD_zoom_forImageRenderer = GetZoom_forRendering();//1.0f; //GetZoom_forRendering();
+                WD_zoom_forImageRenderer = GetZoom_forRendering();
 
                 WD_width_4basePlatform = value + 70; //(int)(value * WD_zoom) + 70;
                 WD_zoom = GetZoom_forRendering();
@@ -194,7 +194,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _wdZoomforImageRenderer = value;
                 WD_width_4basePlatform_forImageRenderer = Convert.ToInt32((WD_width * value) + 70);
                 WD_height_4basePlatform_forImageRenderer = Convert.ToInt32((WD_height * value) + 35);
-                SetFrameZoom();
+                SetImageRenderingZoom();
                 NotifyPropertyChanged();
             }
         }
@@ -405,7 +405,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             return zm;
         }
 
-        public void SetFrameZoom()
+        public void SetImageRenderingZoom()
         {
             if (lst_frame != null)
             {

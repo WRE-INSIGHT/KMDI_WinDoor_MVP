@@ -31,6 +31,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int GetMultiPanelCount();
         int GetDividerCount();
         float GetZoom_forRendering();
-        void SetFrameZoom();
+        void SetImageRenderingZoom();
     }
 }

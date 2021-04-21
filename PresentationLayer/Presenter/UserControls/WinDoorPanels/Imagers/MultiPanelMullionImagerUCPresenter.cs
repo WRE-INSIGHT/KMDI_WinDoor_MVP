@@ -118,8 +118,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                     g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                 }
 
-                bounds = new Rectangle(new Point(10, 10),
-                                       new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - 20));
+
+                int ndx_padding_withmpnl = Array.IndexOf(_frameModel.Arr_padding_withmpnl, _frameModel.Frame_Padding_int.All),
+                    px_bounds = 0;
+                if (ndx_padding_withmpnl != -1)
+                {
+                    px_bounds = _frameModel.Arr_padding_norm[ndx_padding_withmpnl] - _frameModel.Arr_padding_withmpnl[ndx_padding_withmpnl];
+                }
+
+                bounds = new Rectangle(new Point(px_bounds, px_bounds),
+                                       new Size(fpnl.ClientRectangle.Width - (px_bounds * 2), fpnl.ClientRectangle.Height - (px_bounds * 2)));
+
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
             {

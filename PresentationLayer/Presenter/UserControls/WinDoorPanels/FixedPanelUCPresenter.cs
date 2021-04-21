@@ -120,35 +120,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             int font_size = 30,
                 outer_line = 10,
-                inner_line = 15;//,
-                //panel_area = _panelModel.Panel_Width * _panelModel.Panel_Height,
-                //frame_area = _frameModel.Frame_Width * _frameModel.Frame_Height;
-
-            //if (_panelModel.Panel_Parent is IFrameUC)
-            //{
-            //    if (frame_area > 1000000 && frame_area <= 4000000)
-            //    {
-            //        font_size = 25;
-            //    }
-            //    else if (frame_area > 4000000 && frame_area <= 9000000)
-            //    {
-            //        font_size = 15;
-            //        outer_line = 5;
-            //        inner_line = 8;
-            //    }
-            //    else if (frame_area > 9000000 && frame_area <= 16000000)
-            //    {
-            //        font_size = 13;
-            //        outer_line = 3;
-            //        inner_line = 7;
-            //    }
-            //    else if (frame_area > 16000000)
-            //    {
-            //        font_size = 8;
-            //        outer_line = 3;
-            //        inner_line = 7;
-            //    }
-            //}
+                inner_line = 15;
 
             if (_frameModel.Frame_Zoom == 0.28f)
             {
@@ -433,7 +405,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_MarginToBind", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

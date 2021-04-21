@@ -305,6 +305,11 @@ namespace ModelLayer.Model.Quotation.Panel
                 _panelImage_Zoom = value;
                 PanelImageRenderer_Width = Convert.ToInt32(Panel_Width * value);
                 PanelImageRenderer_Height = Convert.ToInt32(Panel_Height * value);
+
+                PanelImageRenderer_Margin = new Padding((int)(Panel_Margin.Left * PanelImageRenderer_Zoom),
+                                                        (int)(Panel_Margin.Top * PanelImageRenderer_Zoom),
+                                                        (int)(Panel_Margin.Right * PanelImageRenderer_Zoom),
+                                                        (int)(Panel_Margin.Bottom * PanelImageRenderer_Zoom));
                 NotifyPropertyChanged();
             }
         }
@@ -339,6 +344,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private Padding _paneImage_Margin;
+        public Padding PanelImageRenderer_Margin
+        {
+            get
+            {
+                return _paneImage_Margin;
+            }
+            set
+            {
+                _paneImage_Margin = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private Padding _panelMargin;
         public Padding Panel_Margin
         {
@@ -350,6 +369,30 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelMargin = value;
+                Panel_MarginToBind = new Padding((int)(Panel_Margin.Left * Panel_Zoom),
+                                                 (int)(Panel_Margin.Top * Panel_Zoom),
+                                                 (int)(Panel_Margin.Right * Panel_Zoom),
+                                                 (int)(Panel_Margin.Bottom * Panel_Zoom));
+
+                PanelImageRenderer_Margin = new Padding((int)(Panel_Margin.Left * PanelImageRenderer_Zoom),
+                                                        (int)(Panel_Margin.Top * PanelImageRenderer_Zoom),
+                                                        (int)(Panel_Margin.Right * PanelImageRenderer_Zoom),
+                                                        (int)(Panel_Margin.Bottom * PanelImageRenderer_Zoom));
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Padding _panelMarginToBind;
+        public Padding Panel_MarginToBind
+        {
+            get
+            {
+                return _panelMarginToBind;
+            }
+
+            set
+            {
+                _panelMarginToBind = value;
                 NotifyPropertyChanged();
             }
         }
@@ -411,19 +454,12 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelZoom = value;
 
-                if (value == 1.0f)
-                {
-                    Panel_WidthToBind = (int)(Panel_Width * value);
-                    Panel_HeightToBind = (int)(Panel_Height * value);
-                }
-                else
-                {
-                    int topbot_Margin = Panel_Margin.Top + Panel_Margin.Bottom,
-                        parent_height = Panel_Parent.Height;
-
-                    Panel_WidthToBind = (int)(Panel_Width * value);
-                    Panel_HeightToBind = (int)(parent_height - topbot_Margin);
-                }
+                Panel_WidthToBind = (int)(Panel_Width * value);
+                Panel_HeightToBind = (int)(Panel_Height * value);
+                Panel_MarginToBind = new Padding((int)(Panel_Margin.Left * Panel_Zoom),
+                                                 (int)(Panel_Margin.Top * Panel_Zoom),
+                                                 (int)(Panel_Margin.Right * Panel_Zoom),
+                                                 (int)(Panel_Margin.Bottom * Panel_Zoom));
             }
         }
 

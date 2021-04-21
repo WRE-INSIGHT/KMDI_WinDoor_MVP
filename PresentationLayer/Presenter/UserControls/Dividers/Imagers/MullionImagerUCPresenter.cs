@@ -86,7 +86,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
                                                                         mul.Height,
                                                                         prev_obj_name,
                                                                         next_obj_name,
-                                                                        _frameModel);
+                                                                        _frameModel,
+                                                                        _divModel.DivImageRenderer_Zoom);
 
             gpath.AddLine(TPoints[0][0], TPoints[0][1]);
             gpath.AddCurve(TPoints[1]);

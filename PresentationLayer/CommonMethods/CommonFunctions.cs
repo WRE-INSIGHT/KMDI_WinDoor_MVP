@@ -367,7 +367,8 @@ namespace PresentationLayer.CommonMethods
                                                      int height,
                                                      string prev_obj,
                                                      string nxt_obj,
-                                                     IFrameModel frameModel)
+                                                     IFrameModel frameModel,
+                                                     float zoom)
         {
             List<Point[]> Mullion_Points = new List<Point[]>();
 
@@ -383,7 +384,7 @@ namespace PresentationLayer.CommonMethods
             int pointX_Mid = ((int)(frameModel.Frame_Type) - 2) / 2;
 
             int pixels_count = 0,
-                wd_formula = (int)(width / frameModel.Frame_Zoom); //(int)(width + (width * frameModel.FrameImageRenderer_Zoom));
+                wd_formula = (int)(width / zoom); //(int)(width + (width * frameModel.FrameImageRenderer_Zoom));
 
             if (wd_formula == 18)
             {

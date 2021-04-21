@@ -8,7 +8,7 @@ namespace PresentationLayer.Views.UserControls
     {
         int frameID { get; set; }
         bool thisVisible { get; }
-        Padding thisPadding { get; set; }
+        //Padding thisPadding { get; set; }
 
         event EventHandler frameLoadEventRaised;
         event PaintEventHandler outerFramePaintEventRaised;

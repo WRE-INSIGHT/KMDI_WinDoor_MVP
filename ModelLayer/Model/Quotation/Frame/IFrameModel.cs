@@ -30,5 +30,8 @@ namespace ModelLayer.Model.Quotation.Frame
         void SetFramePadding();
         void SetFramePadding(bool has_deleteMpnl);
         void SetArrayUsed(string arrayUsed);
+
+        void SetDeductFramePadding(bool mode);
+        int Frame_Deduction { get; }
     }
 }
