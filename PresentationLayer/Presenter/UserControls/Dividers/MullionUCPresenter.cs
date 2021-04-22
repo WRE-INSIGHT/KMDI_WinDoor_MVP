@@ -166,13 +166,18 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             string prev_obj_name = "",
                    next_obj_name = "";
 
+            UserControl prev_obj = null, 
+                        nxt_obj = null;
+
             if (prev_obj_ndx >= 0)
             {
                 prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
+                prev_obj = (UserControl)_multiPanelModel.MPanelLst_Objects[prev_obj_ndx];
             }
             if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
             {
                 next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
+                nxt_obj = (UserControl)_multiPanelModel.MPanelLst_Objects[next_obj_ndx];
             }
 
             List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints(mul.Width,
@@ -181,6 +186,13 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                                         next_obj_name,
                                                                         _frameModel,
                                                                         _divModel.Div_Zoom);
+
+            //List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints2(mul.Width,
+            //                                                             mul.Height,
+            //                                                             prev_obj,
+            //                                                             nxt_obj,
+            //                                                             _frameModel.Frame_Type,
+            //                                                             _divModel.Div_Zoom);
 
             gpath.AddLine(TPoints[0][0], TPoints[0][1]);
             gpath.AddCurve(TPoints[1]);
