@@ -318,6 +318,19 @@ namespace PresentationLayer.Presenter
         }
 
         private float[] _arr_zoomPercentage = { 0.10f, 0.14f, 0.19f, 0.28f, 0.50f, 1.0f };
+        private void FitControls_InsideMultiPanel()
+        {
+            foreach (IFrameModel frames in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
+                {
+                    if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
+                    {
+                        mpanel.Fit_MyControls();
+                    }
+                }
+            }
+        }
         private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
             int ndx_zoomPercentage = Array.IndexOf(_arr_zoomPercentage, _windoorModel.WD_zoom);
@@ -326,6 +339,7 @@ namespace PresentationLayer.Presenter
             {
                 ndx_zoomPercentage++;
                 _windoorModel.WD_zoom = _arr_zoomPercentage[ndx_zoomPercentage];
+                FitControls_InsideMultiPanel();
             }
             _basePlatformPresenter.InvalidateBasePlatform();
             _basePlatformPresenter.Invalidate_flpMainControls();
@@ -339,6 +353,7 @@ namespace PresentationLayer.Presenter
             {
                 ndx_zoomPercentage--;
                 _windoorModel.WD_zoom = _arr_zoomPercentage[ndx_zoomPercentage];
+                FitControls_InsideMultiPanel();
             }
             _basePlatformPresenter.InvalidateBasePlatform();
             _basePlatformPresenter.Invalidate_flpMainControls();

@@ -550,7 +550,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                     {
                         IDividerModel divModel = _divServices.AddDividerModel(divSize,
-                                                                              fpnl.Height,
+                                                                              _multiPanelModel.MPanel_Height,
                                                                               fpnl,
                                                                               //(UserControl)_frameUCP.GetFrameUC(),
                                                                               DividerModel.DividerType.Mullion,
@@ -806,15 +806,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                 }
 
-                int ndx_padding_withmpnl = Array.IndexOf(_frameModel.Arr_padding_withmpnl, _frameModel.Frame_Padding_int.All),
-                    px_bounds = 0;
-                if (ndx_padding_withmpnl != -1)
-                {
-                    px_bounds = _frameModel.Arr_padding_norm[ndx_padding_withmpnl] - _frameModel.Arr_padding_withmpnl[ndx_padding_withmpnl];
-                }
+                int bPoints = (int)(10 * _frameModel.Frame_Zoom),
+                    bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom);
 
-                bounds = new Rectangle(new Point(px_bounds, px_bounds),
-                                       new Size(fpnl.ClientRectangle.Width - (px_bounds * 2), fpnl.ClientRectangle.Height - (px_bounds * 2)));
+                bounds = new Rectangle(new Point(bPoints, bPoints),
+                                       new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
             {

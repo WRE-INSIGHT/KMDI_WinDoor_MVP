@@ -377,6 +377,20 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             int area = _wdHeight * _wdWidth;
             float zm = 1.0f;
+
+            //if (area <= 1500000)
+            //{
+            //    zm = 1.00f;
+            //}
+            //else if (area > 1500000 && area <= 2500000)
+            //{
+            //    zm = 0.50f;
+            //}
+            //else if (area > 2500000)
+            //{
+            //    zm = 0.28f;
+            //}
+
             if (area <= 360000)
             {
                 zm = 1.00f;

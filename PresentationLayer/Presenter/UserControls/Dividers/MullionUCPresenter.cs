@@ -150,42 +150,42 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _mullionUC_mullionUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            UserControl mul = (UserControl)sender;
+            //UserControl mul = (UserControl)sender;
             Graphics g = e.Graphics;
 
-            int lineHT = mul.ClientRectangle.Height - 6,
-                lineWd = mul.ClientRectangle.Width - 2;
+            //int lineHT = mul.ClientRectangle.Height - 6,
+            //    lineWd = mul.ClientRectangle.Width - 2;
 
             g.SmoothingMode = SmoothingMode.HighQuality;
 
-            GraphicsPath gpath = new GraphicsPath();
+            //GraphicsPath gpath = new GraphicsPath();
 
-            int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mul);
-            int prev_obj_ndx = this_ndx - 1,
-                next_obj_ndx = this_ndx + 1;
-            string prev_obj_name = "",
-                   next_obj_name = "";
+            //int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mul);
+            //int prev_obj_ndx = this_ndx - 1,
+            //    next_obj_ndx = this_ndx + 1;
+            //string prev_obj_name = "",
+            //       next_obj_name = "";
 
-            UserControl prev_obj = null, 
-                        nxt_obj = null;
+            //UserControl prev_obj = null, 
+            //            nxt_obj = null;
 
-            if (prev_obj_ndx >= 0)
-            {
-                prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
-                prev_obj = (UserControl)_multiPanelModel.MPanelLst_Objects[prev_obj_ndx];
-            }
-            if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
-            {
-                next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
-                nxt_obj = (UserControl)_multiPanelModel.MPanelLst_Objects[next_obj_ndx];
-            }
+            //if (prev_obj_ndx >= 0)
+            //{
+            //    prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
+            //    prev_obj = (UserControl)_multiPanelModel.MPanelLst_Objects[prev_obj_ndx];
+            //}
+            //if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
+            //{
+            //    next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
+            //    nxt_obj = (UserControl)_multiPanelModel.MPanelLst_Objects[next_obj_ndx];
+            //}
 
-            List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints(mul.Width,
-                                                                        mul.Height,
-                                                                        prev_obj_name,
-                                                                        next_obj_name,
-                                                                        _frameModel,
-                                                                        _divModel.Div_Zoom);
+            //List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints(mul.Width,
+            //                                                            mul.Height,
+            //                                                            prev_obj_name,
+            //                                                            next_obj_name,
+            //                                                            _frameModel,
+            //                                                            _divModel.Div_Zoom);
 
             //List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints2(mul.Width,
             //                                                             mul.Height,
@@ -194,15 +194,15 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             //                                                             _frameModel.Frame_Type,
             //                                                             _divModel.Div_Zoom);
 
-            gpath.AddLine(TPoints[0][0], TPoints[0][1]);
-            gpath.AddCurve(TPoints[1]);
-            gpath.AddLine(TPoints[2][0], TPoints[2][1]);
-            gpath.AddCurve(TPoints[3]);
+            //gpath.AddLine(TPoints[0][0], TPoints[0][1]);
+            //gpath.AddCurve(TPoints[1]);
+            //gpath.AddLine(TPoints[2][0], TPoints[2][1]);
+            //gpath.AddCurve(TPoints[3]);
 
-            Pen pen = new Pen(penColor, 2);
+            //Pen pen = new Pen(penColor, 2);
 
-            g.DrawPath(pen, gpath);
-            g.FillPath(Brushes.PowderBlue, gpath);
+            //g.DrawPath(pen, gpath);
+            //g.FillPath(Brushes.PowderBlue, gpath);
 
             Font drawFont = new Font("Segoe UI", 7, FontStyle.Bold); //* zoom);
             Size s2 = TextRenderer.MeasureText(_divModel.Div_Name, drawFont);

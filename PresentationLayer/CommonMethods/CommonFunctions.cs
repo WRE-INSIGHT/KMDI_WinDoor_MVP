@@ -511,6 +511,11 @@ namespace PresentationLayer.CommonMethods
                 accessible_Ht = height - 2,
                 Ht_beforeCurve = height - 5;
 
+            int start_wd = 1,
+                end_wd = width - 1,
+                start_ht = 1,
+                end_ht = height - 1;
+
             Point[] leftLine = new Point[2];
             Point[] botCurve = new Point[3];
             Point[] rightLine = new Point[2];

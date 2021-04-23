@@ -22,7 +22,14 @@ namespace ModelLayer.Model.Quotation.Frame
             Concrete
         }
 
-        private static int Frame_basicDeduction = 10;
+        private static int _frame_basicDeduction = 10;
+        public int Frame_BasicDeduction
+        {
+            get
+            {
+                return _frame_basicDeduction;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -223,7 +230,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
                 if (_deductFramePadding_bool)
                 {
-                    FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - Frame_basicDeduction) * FrameImageRenderer_Zoom));
+                    FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
                 }
                 else
                 {
@@ -255,9 +262,6 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FramePadding_Default();
                 }
-                //Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom) - _frameDeduction);
-                //Frame_Padding_int = new Padding((int)((int)Frame_Type * value));
-                //SetFramePadding();
             }
         }
 
@@ -526,9 +530,9 @@ namespace ModelLayer.Model.Quotation.Frame
 
         private void FramePadding_Deduct()
         {
-            _frameDeduction = (int)(Frame_basicDeduction * Frame_Zoom);
+            _frameDeduction = (int)(_frame_basicDeduction * Frame_Zoom);
             Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom) - _frameDeduction);
-            FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - Frame_basicDeduction) * FrameImageRenderer_Zoom));
+            FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
         }
 
         private void FramePadding_Default()

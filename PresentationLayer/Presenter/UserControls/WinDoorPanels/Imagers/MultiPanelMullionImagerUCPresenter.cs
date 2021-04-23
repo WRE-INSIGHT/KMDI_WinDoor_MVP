@@ -69,10 +69,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            int pInnerX = 10,
-                pInnerY = 10,
-                pInnerWd = fpnl.ClientRectangle.Width - 20,
-                pInnerHt = fpnl.ClientRectangle.Height - 20;
+            int pInnerX = _frameModel.FrameImageRenderer_Padding_int.All,
+                pInnerY = _frameModel.FrameImageRenderer_Padding_int.All,
+                pInnerWd = fpnl.ClientRectangle.Width - (_frameModel.FrameImageRenderer_Padding_int.All * 2),
+                pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.FrameImageRenderer_Padding_int.All * 2);
 
             Point[] upperLine = new Point[2];
             Point[] botLine = new Point[2];
@@ -118,16 +118,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                     g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                 }
 
+                int bPoints = (int)(10 * _frameModel.FrameImageRenderer_Zoom),
+                    bSizeDeduction = (int)(20 * _frameModel.FrameImageRenderer_Zoom);
 
-                int ndx_padding_withmpnl = Array.IndexOf(_frameModel.Arr_padding_withmpnl, _frameModel.Frame_Padding_int.All),
-                    px_bounds = 0;
-                if (ndx_padding_withmpnl != -1)
-                {
-                    px_bounds = _frameModel.Arr_padding_norm[ndx_padding_withmpnl] - _frameModel.Arr_padding_withmpnl[ndx_padding_withmpnl];
-                }
-
-                bounds = new Rectangle(new Point(px_bounds, px_bounds),
-                                       new Size(fpnl.ClientRectangle.Width - (px_bounds * 2), fpnl.ClientRectangle.Height - (px_bounds * 2)));
+                bounds = new Rectangle(new Point(bPoints, bPoints),
+                                       new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
 
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel

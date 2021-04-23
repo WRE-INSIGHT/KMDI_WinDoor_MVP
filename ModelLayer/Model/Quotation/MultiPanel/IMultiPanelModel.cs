@@ -13,6 +13,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         DockStyle MPanel_Dock { get; set; }
         int MPanel_Width { get; set; }
         int MPanel_Height { get; set; }
+        int MPanel_HeightToBind { get; set; }
         FlowDirection MPanel_FlowDirection { get; set; }
         bool MPanel_Visibility { get; set; }
         int MPanel_Divisions { get; set; }
@@ -32,6 +33,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
         List<Control> MPanelLst_Objects { get; set; }
         float MPanel_Zoom { get; set; }
+        int MPanel_WidthToBind { get; set; }
 
         int GetNextIndex();
         int GetCount_MPanelLst_Object();

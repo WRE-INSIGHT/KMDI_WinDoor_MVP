@@ -145,8 +145,8 @@ namespace PresentationLayer.Presenter.UserControls
 
                 _frameModel.SetDeductFramePadding(true);
                 
-                int wd = frame.Width - _frameModel.Frame_Padding_int.All * 2,
-                    ht = frame.Height - _frameModel.Frame_Padding_int.All * 2;
+                int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                    ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
                 _multipanelModel = _multipanelServices.AddMultiPanelModel(wd,
                                                                           ht,
@@ -231,15 +231,6 @@ namespace PresentationLayer.Presenter.UserControls
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
                 _frameModel.FrameProp_Height += 148;
-
-                //if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                //{
-                //    _frameModel.Frame_Padding_int = new Padding(26);
-                //}
-                //else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                //{
-                //    _frameModel.Frame_Padding_int = new Padding(33);
-                //}
 
                 if (data == "Fixed Panel")
                 {

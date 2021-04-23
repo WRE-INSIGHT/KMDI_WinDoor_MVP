@@ -17,8 +17,8 @@ namespace PresentationLayer.Views.UserControls.Dividers
         {
             InitializeComponent();
             //for mullion transparency
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            this.BackColor = Color.Transparent;
+            //this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            //this.BackColor = Color.Transparent;
         }
 
         private int _divID;
