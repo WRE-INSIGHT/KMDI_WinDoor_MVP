@@ -37,6 +37,15 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+        }
+
         public CasementPanelUC()
         {
             InitializeComponent();

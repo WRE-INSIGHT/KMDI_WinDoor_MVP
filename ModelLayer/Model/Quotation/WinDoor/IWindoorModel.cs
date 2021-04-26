@@ -6,6 +6,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
 {
     public interface IWindoorModel
     {
+        float[] Arr_ZoomPercentage { get; }
         string WD_description { get; set; }
         string WD_profile { get; set; }
         decimal WD_discount { get; set; }

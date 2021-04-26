@@ -46,6 +46,15 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+        }
+
         public event EventHandler deleteToolStripClickedEventRaised;
         public event EventHandler awningPanelUCMouseEnterEventRaised;
         public event EventHandler awningPanelUCMouseLeaveEventRaised;

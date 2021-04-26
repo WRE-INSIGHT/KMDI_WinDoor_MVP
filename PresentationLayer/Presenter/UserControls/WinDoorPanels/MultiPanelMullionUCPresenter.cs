@@ -36,7 +36,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IUnityContainer _unityC;
 
         private IMultiPanelModel _multiPanelModel;
-        private IPanelModel _panelModel;
         private IFrameModel _frameModel;
 
         private IMainPresenter _mainPresenter;
@@ -301,7 +300,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         if (mPanelModel.MPanel_Placement == "Last")
                         {
-                            _multiPanelModel.Fit_MyControls();
+                            _multiPanelModel.Fit_MyControls_byChangingDimension();
                         }
                         else if (mPanelModel.MPanel_Placement != "Last")
                         {
@@ -366,7 +365,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         if (mPanelModel.MPanel_Placement == "Last")
                         {
-                            _multiPanelModel.Fit_MyControls();
+                            _multiPanelModel.Fit_MyControls_byChangingDimension();
                         }
                         else if (mPanelModel.MPanel_Placement != "Last")
                         {
@@ -435,19 +434,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (!frmResult)
                 {
-                    _panelModel = _panelServices.AddPanelModel(_frmDmRes_Width,
-                                                               _frmDmRes_Height,
-                                                               fpnl,
-                                                               (UserControl)_frameUCP.GetFrameUC(),
-                                                               (UserControl)framePropUC,
-                                                               (UserControl)_multiPanelMullionUC,
-                                                               data,
-                                                               true,
-                                                               _frameModel.Frame_Zoom,
-                                                               panelID,
-                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                               _multiPanelModel.GetNextIndex(),
-                                                               DockStyle.None);
+                    IPanelModel _panelModel = _panelServices.AddPanelModel(_frmDmRes_Width,
+                                                                           _frmDmRes_Height,
+                                                                           fpnl,
+                                                                           (UserControl)_frameUCP.GetFrameUC(),
+                                                                           (UserControl)framePropUC,
+                                                                           (UserControl)_multiPanelMullionUC,
+                                                                           data,
+                                                                           true,
+                                                                           _frameModel.Frame_Zoom,
+                                                                           panelID,
+                                                                           _frameModel.FrameImageRenderer_Zoom,
+                                                                           _multiPanelModel.GetNextIndex(),
+                                                                           DockStyle.None);
                     _frameModel.Lst_Panel.Add(_panelModel);
                     _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                     _multiPanelModel.Reload_PanelMargin();
@@ -545,7 +544,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_panelModel.Panel_Placement == "Last")
                     {
-                        _multiPanelModel.Fit_MyControls();
+                        _multiPanelModel.Fit_MyControls_byChangingDimension();
                     }
                     else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                     {

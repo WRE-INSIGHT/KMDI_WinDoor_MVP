@@ -855,7 +855,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
-        public void Fit_MyControls()
+        public void Fit_MyControls_byChangingDimension()
         {
             if (MPanelLst_Objects.Count() > 0)
             {
@@ -896,19 +896,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     int totalWidth_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) + 
                                               MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_WidthToBind) +
                                               MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).Sum(mpnl => mpnl.MPanel_WidthToBind);
-
-                    //foreach (Control ctrl in MPanelLst_Objects)
-                    //{
-                    //    if (ctrl.Name.Contains("PanelUC"))
-                    //    {
-                    //        totalWidth_Controls += ctrl.Width + ctrl.Margin.Right + ctrl.Margin.Left;
-                    //    }
-                    //    else
-                    //    {
-                    //        totalWidth_Controls += ctrl.Width;
-                    //    }
-                    //}
-
                     int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
 
                     while (diff_MPanelWd_VS_MyCtrlsWidth > 0)
@@ -929,17 +916,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 diff_MPanelWd_VS_MyCtrlsWidth--;
                             }
                         }
-                        //foreach (Control ctrl in MPanelLst_Objects)
-                        //{
-                        //    if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
-                        //    {
-                        //        if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion") || ctrl.Name.Contains("Panel"))
-                        //        {
-                        //            ctrl.Width++;
-                        //            diff_MPanelWd_VS_MyCtrlsWidth--;
-                        //        }
-                        //    }
-                        //}
                     }
 
                     totalWidth_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) +
@@ -948,7 +924,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
             }
         }
-
+        
         public void Object_Indexer()
         {
             List<Control> visible_obj = MPanelLst_Objects.Where(obj => obj.Visible == true).ToList();

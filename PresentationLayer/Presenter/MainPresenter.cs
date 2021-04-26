@@ -24,6 +24,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.CommonMethods;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 
 namespace PresentationLayer.Presenter
 {
@@ -315,9 +316,81 @@ namespace PresentationLayer.Presenter
             _mainView.LabelSizeClickEventRaised += new EventHandler(OnLabelSizeClickEventRaised);
             _mainView.ButtonMinusZoomClickEventRaised += _mainView_ButtonMinusZoomClickEventRaised;
             _mainView.ButtonPlusZoomClickEventRaised += _mainView_ButtonPlusZoomClickEventRaised;
+            _mainView.DeleteToolStripButtonClickEventRaised += _mainView_DeleteToolStripButtonClickEventRaised;
         }
 
-        private float[] _arr_zoomPercentage = { 0.10f, 0.14f, 0.19f, 0.28f, 0.50f, 1.0f };
+        private void _mainView_DeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            //FitControls_InsideMultiPanel();
+
+            //foreach (IFrameModel fr in _windoorModel.lst_frame)
+            //{
+            //    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+            //    {
+            //        Console.WriteLine(mpnl.MPanel_Name + " WD:" + mpnl.MPanel_WidthToBind);
+            //        Console.WriteLine("Margin:" + mpnl.MPanel_Margin.ToString());
+
+            //        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+            //        {
+            //            Console.WriteLine(pnl.Panel_Name + " WD:" + pnl.Panel_WidthToBind);
+            //            Console.WriteLine("Margin:" + pnl.Panel_MarginToBind.ToString());
+            //        }
+            //        foreach (IDividerModel div in mpnl.MPanelLst_Divider)
+            //        {
+            //            Console.WriteLine(div.Div_Name + " WD:" + div.Div_WidthToBind);
+            //        }
+
+            //        Console.WriteLine();
+
+            //        foreach (Control item in mpnl.MPanelLst_Objects)
+            //        {
+            //            Console.WriteLine(item.Name + " WD:" + item.Width);
+            //            Console.WriteLine("Margin:" + item.Margin.ToString());
+            //        }
+            //    }
+            //}
+        }
+
+        private void Fit_MyControls_byControlsLocation()
+        {
+            foreach (IFrameModel frames in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
+                {
+                    foreach (Control ctrl in mpanel.MPanelLst_Objects)
+                    {
+                        if (ctrl is IPanelUC)
+                        {
+                            IPanelUC panel = (IPanelUC)ctrl;
+                            if (panel.Panel_Placement == "Last")
+                            {
+                                IPanelModel pnlModel = mpanel.MPanelLst_Panel.Find(pnl => pnl.Panel_ID == panel.Panel_ID);
+                                if (mpanel.MPanel_Type == "Mullion")
+                                {
+                                    while (ctrl.Location.Y > ctrl.Margin.Top)
+                                    {
+                                        pnlModel.Panel_WidthToBind--;
+                                        if (ctrl.Location.Y == ctrl.Margin.Top)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (mpanel.MPanel_Type == "Transom")
+                                {
+
+                                }
+                            }
+                        }
+                        else if (ctrl is IMultiPanelUC)
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
+
         private void FitControls_InsideMultiPanel()
         {
             foreach (IFrameModel frames in _windoorModel.lst_frame)
@@ -326,20 +399,21 @@ namespace PresentationLayer.Presenter
                 {
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {
-                        mpanel.Fit_MyControls();
+                        mpanel.Fit_MyControls_byChangingDimension();
                     }
                 }
             }
         }
         private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
-            int ndx_zoomPercentage = Array.IndexOf(_arr_zoomPercentage, _windoorModel.WD_zoom);
+            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
 
-            if (ndx_zoomPercentage < _arr_zoomPercentage.Count() - 1)
+            if (ndx_zoomPercentage < _windoorModel.Arr_ZoomPercentage.Count() - 1)
             {
                 ndx_zoomPercentage++;
-                _windoorModel.WD_zoom = _arr_zoomPercentage[ndx_zoomPercentage];
+                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
                 FitControls_InsideMultiPanel();
+                Fit_MyControls_byControlsLocation();
             }
             _basePlatformPresenter.InvalidateBasePlatform();
             _basePlatformPresenter.Invalidate_flpMainControls();
@@ -347,13 +421,14 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_ButtonMinusZoomClickEventRaised(object sender, EventArgs e)
         {
-            int ndx_zoomPercentage = Array.IndexOf(_arr_zoomPercentage, _windoorModel.WD_zoom);
+            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
 
             if (ndx_zoomPercentage > 0)
             {
                 ndx_zoomPercentage--;
-                _windoorModel.WD_zoom = _arr_zoomPercentage[ndx_zoomPercentage];
+                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
                 FitControls_InsideMultiPanel();
+                Fit_MyControls_byControlsLocation();
             }
             _basePlatformPresenter.InvalidateBasePlatform();
             _basePlatformPresenter.Invalidate_flpMainControls();

@@ -373,6 +373,15 @@ namespace ModelLayer.Model.Quotation.WinDoor
             return divCount;
         }
 
+        private float[] _arr_zoomPercentage = { 0.10f, 0.13f, 0.17f, 0.26f, 0.50f, 1.0f };
+        public float[] Arr_ZoomPercentage
+        {
+            get
+            {
+                return _arr_zoomPercentage;
+            }
+        }
+
         public float GetZoom_forRendering()
         {
             int area = _wdHeight * _wdWidth;
@@ -393,27 +402,27 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
             if (area <= 360000)
             {
-                zm = 1.00f;
+                zm = _arr_zoomPercentage[5];
             }
             else if (area > 360000 && area <= 1000000)
             {
-                zm = 0.50f;
+                zm = _arr_zoomPercentage[4];
             }
             else if (area > 1000000 && area <= 4000000)
             {
-                zm = 0.28f;
+                zm = _arr_zoomPercentage[3];
             }
             else if (area > 4000000 && area <= 9000000)
             {
-                zm = 0.19f;
+                zm = _arr_zoomPercentage[2];
             }
             else if (area > 9000000 && area <= 16000000)
             {
-                zm = 0.14f;
+                zm = _arr_zoomPercentage[1];
             }
             else if (area > 16000000)
             {
-                zm = 0.10f;
+                zm = _arr_zoomPercentage[0];
             }
 
             return zm;

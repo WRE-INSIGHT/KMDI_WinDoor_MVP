@@ -305,7 +305,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         if (mPanelModel.MPanel_Placement == "Last")
                         {
-                            _multiPanelModel.Fit_MyControls();
+                            _multiPanelModel.Fit_MyControls_byChangingDimension();
                         }
                         else if (mPanelModel.MPanel_Placement != "Last")
                         {
@@ -372,7 +372,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         if (mPanelModel.MPanel_Placement == "Last")
                         {
-                            _multiPanelModel.Fit_MyControls();
+                            _multiPanelModel.Fit_MyControls_byChangingDimension();
                         }
                         else if (mPanelModel.MPanel_Placement != "Last")
                         {
@@ -554,7 +554,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_panelModel.Panel_Placement == "Last")
                     {
-                        _multiPanelModel.Fit_MyControls();
+                        _multiPanelModel.Fit_MyControls_byChangingDimension();
                     }
                     else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                     {

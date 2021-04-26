@@ -16,6 +16,7 @@ namespace PresentationLayer.Views
         event EventHandler LabelSizeClickEventRaised;
         event EventHandler ButtonPlusZoomClickEventRaised;
         event EventHandler ButtonMinusZoomClickEventRaised;
+        event EventHandler DeleteToolStripButtonClickEventRaised;
         string Nickname { set; }
         string mainview_title { get; set; }
         float Zoom { get; set; }
