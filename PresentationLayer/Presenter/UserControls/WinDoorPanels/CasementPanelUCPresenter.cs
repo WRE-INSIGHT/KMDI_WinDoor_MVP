@@ -190,25 +190,45 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             Graphics g = e.Graphics;
 
+            int w = 1;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            int w = 1;
-            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+            int outer_line = 10,
+                inner_line = 15;
+
+            int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
+
+            if (ndx_zoomPercentage == 2)
+            {
+                outer_line = 5;
+                inner_line = 8;
+            }
+            else if (ndx_zoomPercentage == 1)
+            {
+                outer_line = 3;
+                inner_line = 7;
+            }
+            else if (ndx_zoomPercentage == 0)
+            {
+                outer_line = 3;
+                inner_line = 7;
+            }
+
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                            0,
                                                            casement.ClientRectangle.Width - w,
                                                            casement.ClientRectangle.Height - w));
 
             Color col = Color.Black;
-            g.DrawRectangle(new Pen(col, w), new Rectangle(10,
-                                                           10,
-                                                           (casement.ClientRectangle.Width - 20) - w,
-                                                           (casement.ClientRectangle.Height - 20) - w));
+            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                           outer_line,
+                                                           (casement.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                           (casement.ClientRectangle.Height - (outer_line * 2)) - w));
 
-            g.DrawRectangle(new Pen(col, 3), new Rectangle(15,
-                                                           15,
-                                                           (casement.ClientRectangle.Width - 30) - w,
-                                                           (casement.ClientRectangle.Height - 30) - w));
+            g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                           inner_line,
+                                                           (casement.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                           (casement.ClientRectangle.Height - (inner_line * 2)) - w));
 
             Point sashPoint = new Point(casement.ClientRectangle.X, casement.ClientRectangle.Y);
 
@@ -259,38 +279,38 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             prev_Height = 0;
         private void OnCasementPanelUCSizeChangedEventRaised(object sender, EventArgs e)
         {
-            try
-            {
-                if (!_initialLoad)
-                {
-                    int thisWd = ((UserControl)sender).Width,
-                        thisHt = ((UserControl)sender).Height,
-                        pnlModelWd = _panelModel.Panel_Width,
-                        pnlModelHt = _panelModel.Panel_Height;
+            //try
+            //{
+            //    if (!_initialLoad)
+            //    {
+            //        int thisWd = ((UserControl)sender).Width,
+            //            thisHt = ((UserControl)sender).Height,
+            //            pnlModelWd = _panelModel.Panel_Width,
+            //            pnlModelHt = _panelModel.Panel_Height;
 
-                    if (thisWd != pnlModelWd || prev_Width != pnlModelWd)
-                    {
-                        _panelModel.Panel_Width = thisWd;
-                        _WidthChange = true;
-                    }
-                    if (thisHt != pnlModelHt || prev_Height != pnlModelHt)
-                    {
-                        _panelModel.Panel_Height = thisHt;
-                        _HeightChange = true;
-                    }
-                }
+            //        if (thisWd != pnlModelWd || prev_Width != pnlModelWd)
+            //        {
+            //            _panelModel.Panel_Width = thisWd;
+            //            _WidthChange = true;
+            //        }
+            //        if (thisHt != pnlModelHt || prev_Height != pnlModelHt)
+            //        {
+            //            _panelModel.Panel_Height = thisHt;
+            //            _HeightChange = true;
+            //        }
+            //    }
 
-                prev_Width = _panelModel.Panel_Width;
-                prev_Height = _panelModel.Panel_Height;
+            //    prev_Width = _panelModel.Panel_Width;
+            //    prev_Height = _panelModel.Panel_Height;
 
-                _tmr.Start();
-                ((UserControl)sender).Invalidate();
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //    _tmr.Start();
+            //    ((UserControl)sender).Invalidate();
+            //    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
         
         public ICasementPanelUC GetCasementPanelUC()
@@ -375,7 +395,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_MarginToBind", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

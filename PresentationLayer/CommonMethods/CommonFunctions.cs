@@ -82,12 +82,12 @@ namespace PresentationLayer.CommonMethods
                 {
                     divType = DividerModel.DividerType.Transom;
                     divHT = divSize;
-                    divWd = parentfpnl.Width;
+                    divWd = parentModel.MPanel_Width;
                 }
                 else if (parentModel.MPanel_Type == "Mullion")
                 {
                     divType = DividerModel.DividerType.Mullion;
-                    divHT = parentfpnl.Height;
+                    divHT = parentModel.MPanel_Height;
                     divWd = divSize;
                 }
 

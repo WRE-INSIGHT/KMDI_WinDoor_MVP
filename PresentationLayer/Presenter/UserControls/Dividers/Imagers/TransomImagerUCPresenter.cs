@@ -56,43 +56,43 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
 
         private void _transomImagerUC_transomUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            UserControl transom = (UserControl)sender;
+            //UserControl transom = (UserControl)sender;
 
-            Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+            //Graphics g = e.Graphics;
+            //g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            GraphicsPath gpath = new GraphicsPath();
+            //GraphicsPath gpath = new GraphicsPath();
 
-            int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_transomUC);
-            int prev_obj_ndx = this_ndx - 1,
-                next_obj_ndx = this_ndx + 1;
-            string prev_obj_name = "",
-                   next_obj_name = "";
+            //int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_transomUC);
+            //int prev_obj_ndx = this_ndx - 1,
+            //    next_obj_ndx = this_ndx + 1;
+            //string prev_obj_name = "",
+            //       next_obj_name = "";
 
-            if (prev_obj_ndx >= 0)
-            {
-                prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
-            }
-            if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
-            {
-                next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
-            }
+            //if (prev_obj_ndx >= 0)
+            //{
+            //    prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
+            //}
+            //if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
+            //{
+            //    next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
+            //}
 
-            List<Point[]> TPoints = _commonfunc.GetTransomDrawingPoints(transom.Width,
-                                                                        transom.Height,
-                                                                        prev_obj_name,
-                                                                        next_obj_name,
-                                                                        _frameModel);
+            //List<Point[]> TPoints = _commonfunc.GetTransomDrawingPoints(transom.Width,
+            //                                                            transom.Height,
+            //                                                            prev_obj_name,
+            //                                                            next_obj_name,
+            //                                                            _frameModel);
 
-            gpath.AddLine(TPoints[0][0], TPoints[0][1]);
-            gpath.AddCurve(TPoints[1]);
-            gpath.AddLine(TPoints[2][0], TPoints[2][1]);
-            gpath.AddCurve(TPoints[3]);
+            //gpath.AddLine(TPoints[0][0], TPoints[0][1]);
+            //gpath.AddCurve(TPoints[1]);
+            //gpath.AddLine(TPoints[2][0], TPoints[2][1]);
+            //gpath.AddCurve(TPoints[3]);
 
-            Pen pen = new Pen(Color.Black, 2);
+            //Pen pen = new Pen(Color.Black, 2);
 
-            g.DrawPath(pen, gpath);
-            g.FillPath(Brushes.PowderBlue, gpath);
+            //g.DrawPath(pen, gpath);
+            //g.FillPath(Brushes.PowderBlue, gpath);
         }
 
         public ITransomImagerUC GetTransomImager()

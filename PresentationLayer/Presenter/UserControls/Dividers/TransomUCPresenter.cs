@@ -108,30 +108,30 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _transomUC_transomUCSizeChangedEventRaised(object sender, EventArgs e)
         {
-            try
-            {
-                if (!_initialLoad)
-                {
-                    int thisWd = ((UserControl)sender).Width,
-                    thisHt = ((UserControl)sender).Height,
-                    divModelWd = _divModel.Div_Width,
-                    divModelHt = _divModel.Div_Height;
+            //try
+            //{
+            //    if (!_initialLoad)
+            //    {
+            //        int thisWd = ((UserControl)sender).Width,
+            //        thisHt = ((UserControl)sender).Height,
+            //        divModelWd = _divModel.Div_Width,
+            //        divModelHt = _divModel.Div_Height;
 
-                    if (thisWd != divModelWd)
-                    {
-                        _divModel.Div_Width = thisWd;
-                    }
-                    if (thisHt != divModelHt)
-                    {
-                        _divModel.Div_Height = thisHt;
-                    }
-                    ((UserControl)sender).Invalidate();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //        if (thisWd != divModelWd)
+            //        {
+            //            _divModel.Div_Width = thisWd;
+            //        }
+            //        if (thisHt != divModelHt)
+            //        {
+            //            _divModel.Div_Height = thisHt;
+            //        }
+            //        ((UserControl)sender).Invalidate();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         Color penColor = Color.Black;
@@ -150,53 +150,53 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         
         private void _transomUC_transomUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            UserControl transom = (UserControl)sender;
+            //UserControl transom = (UserControl)sender;
 
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            GraphicsPath gpath = new GraphicsPath();
+            //GraphicsPath gpath = new GraphicsPath();
 
-            int this_ndx  = _multiPanelModel.MPanelLst_Objects.IndexOf(transom);
-            int prev_obj_ndx = this_ndx - 1,
-                next_obj_ndx = this_ndx + 1;
-            string prev_obj_name = "",
-                   next_obj_name = "";
+            //int this_ndx  = _multiPanelModel.MPanelLst_Objects.IndexOf(transom);
+            //int prev_obj_ndx = this_ndx - 1,
+            //    next_obj_ndx = this_ndx + 1;
+            //string prev_obj_name = "",
+            //       next_obj_name = "";
 
-            if (prev_obj_ndx >= 0)
-            {
-                prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
-            }
-            if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
-            {
-                next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
-            }
+            //if (prev_obj_ndx >= 0)
+            //{
+            //    prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
+            //}
+            //if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
+            //{
+            //    next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
+            //}
 
-            List<Point[]> TPoints = _commonfunc.GetTransomDrawingPoints(transom.Width,
-                                                                        transom.Height,
-                                                                        prev_obj_name,
-                                                                        next_obj_name,
-                                                                        _frameModel);
+            //List<Point[]> TPoints = _commonfunc.GetTransomDrawingPoints(transom.Width,
+            //                                                            transom.Height,
+            //                                                            prev_obj_name,
+            //                                                            next_obj_name,
+            //                                                            _frameModel);
 
-            gpath.AddLine(TPoints[0][0], TPoints[0][1]);
-            gpath.AddCurve(TPoints[1]);
-            gpath.AddLine(TPoints[2][0], TPoints[2][1]);
-            gpath.AddCurve(TPoints[3]);
+            //gpath.AddLine(TPoints[0][0], TPoints[0][1]);
+            //gpath.AddCurve(TPoints[1]);
+            //gpath.AddLine(TPoints[2][0], TPoints[2][1]);
+            //gpath.AddCurve(TPoints[3]);
 
-            Pen pen = new Pen(penColor, 2);
+            //Pen pen = new Pen(penColor, 2);
 
-            g.DrawPath(pen, gpath);
-            g.FillPath(Brushes.PowderBlue, gpath);
+            //g.DrawPath(pen, gpath);
+            //g.FillPath(Brushes.PowderBlue, gpath);
 
             Font drawFont = new Font("Segoe UI", 7, FontStyle.Bold); //* zoom);
             Size s2 = TextRenderer.MeasureText(_divModel.Div_Name, drawFont);
 
-            int point_Y = (transom.Height / 2) - (s2.Height / 2); //0;
+            //int point_Y = (transom.Height / 2) - (s2.Height / 2); //0;
 
             TextRenderer.DrawText(g,
                                   _divModel.Div_Name,
                                   drawFont,
-                                  new Rectangle(new Point(10, point_Y),
+                                  new Rectangle(new Point(10, 0),
                                                 new Size(s2.Width,
                                                          s2.Height)),
                                   Color.Black,
@@ -320,8 +320,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             divBinding.Add("Div_ID", new Binding("Div_ID", _divModel, "Div_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_Name", new Binding("Name", _divModel, "Div_Name", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_Visible", new Binding("Visible", _divModel, "Div_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
-            divBinding.Add("Div_Width", new Binding("Width", _divModel, "Div_Width", true, DataSourceUpdateMode.OnPropertyChanged));
-            divBinding.Add("Div_Height", new Binding("Height", _divModel, "Div_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_Width", new Binding("Width", _divModel, "Div_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_Height", new Binding("Height", _divModel, "Div_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return divBinding;
         }

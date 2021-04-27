@@ -47,12 +47,16 @@ namespace PresentationLayer.Presenter.UserControls
         {
             NumericUpDown numW = (NumericUpDown)sender;
             _frameModel.Frame_Width = Convert.ToInt32(numW.Value);
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
         }
 
         private void OnNumFHeightValueChangedEventRaised(object sender, EventArgs e)
         {
             NumericUpDown numH = (NumericUpDown)sender;
             _frameModel.Frame_Height = Convert.ToInt32(numH.Value);
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()

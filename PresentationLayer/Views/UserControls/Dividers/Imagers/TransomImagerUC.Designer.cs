@@ -34,10 +34,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.PowderBlue;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "TransomImagerUC";
-            this.Size = new System.Drawing.Size(350, 26);
+            this.Size = new System.Drawing.Size(348, 24);
             this.VisibleChanged += new System.EventHandler(this.TransomImagerUC_VisibleChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TransomImagerUC_Paint);
             this.ResumeLayout(false);

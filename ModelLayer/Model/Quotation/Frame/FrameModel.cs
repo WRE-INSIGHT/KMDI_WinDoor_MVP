@@ -159,9 +159,14 @@ namespace ModelLayer.Model.Quotation.Frame
             get { return _framePadding; }
             set
             {
-                _framePadding = value;
-
-                //SetFramePadding_ImageRenderer();
+                if (value.All == 1)
+                {
+                    _framePadding = new Padding(2);
+                }
+                else
+                {
+                    _framePadding = value;
+                }
                 NotifyPropertyChanged();
             }
         }

@@ -416,12 +416,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else
             {
-                int suggest_Wd = multiPanel_boundsWD,
+                int suggest_Wd = _multiPanelModel.MPanel_Width - 20,
                     suggest_HT = 0;
 
                 if (_multiPanelModel.MPanel_DividerEnabled)
                 {
-                    suggest_HT = ((multiPanel_boundsHT - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                    suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                    //suggest_HT = ((multiPanel_boundsHT - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                 }
                 else if (!_multiPanelModel.MPanel_DividerEnabled)
                 {
@@ -558,7 +559,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                     {
-                        IDividerModel divModel = _divServices.AddDividerModel(fpnl.Width,
+                        IDividerModel divModel = _divServices.AddDividerModel(_multiPanelModel.MPanel_Width,
                                                                               divSize,
                                                                               fpnl,
                                                                               //(UserControl)_frameUCP.GetFrameUC(),
@@ -651,9 +652,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                     _frameModel.Frame_Type.ToString(),
                                                                                     _multiPanelModel.MPanel_Placement);
             }
-            
-            _frameModel.SetArrayUsed("_arr_padding_norm");
-            _frameModel.SetFramePadding();
+
+            _frameModel.SetDeductFramePadding(false);
 
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
             {
@@ -818,11 +818,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
 
 
-                int ndx_padding_withmpnl = Array.IndexOf(_frameModel.Arr_padding_withmpnl, _frameModel.Frame_Padding_int.All);
-                int px_bounds = _frameModel.Arr_padding_norm[ndx_padding_withmpnl] - _frameModel.Arr_padding_withmpnl[ndx_padding_withmpnl];
+                int bPoints = (int)(10 * _frameModel.Frame_Zoom),
+                    bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom);
 
-                bounds = new Rectangle(new Point(px_bounds, px_bounds),
-                                       new Size(fpnl.ClientRectangle.Width - (px_bounds * 2), fpnl.ClientRectangle.Height - (px_bounds * 2)));
+                bounds = new Rectangle(new Point(bPoints, bPoints),
+                                       new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
 
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel

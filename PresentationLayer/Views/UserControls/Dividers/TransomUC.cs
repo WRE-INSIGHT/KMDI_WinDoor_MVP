@@ -16,8 +16,8 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public TransomUC()
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            this.BackColor = Color.Transparent;
+            //this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            //this.BackColor = Color.Transparent;
         }
 
         private int _divID;

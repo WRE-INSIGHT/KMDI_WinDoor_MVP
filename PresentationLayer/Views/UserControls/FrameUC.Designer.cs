@@ -64,6 +64,7 @@ namespace PresentationLayer.Views.UserControls
             this.Padding = new System.Windows.Forms.Padding(26);
             this.Size = new System.Drawing.Size(100, 100);
             this.Load += new System.EventHandler(this.FrameUC_Load);
+            this.SizeChanged += new System.EventHandler(this.FrameUC_SizeChanged);
             this.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.FrameUC_ControlAdded);
             this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.FrameUC_ControlRemoved);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.FrameUC_DragDrop);

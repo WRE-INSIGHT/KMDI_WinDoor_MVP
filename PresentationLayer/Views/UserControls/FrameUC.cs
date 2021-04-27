@@ -171,5 +171,10 @@ namespace PresentationLayer.Views.UserControls
         {
             this.Invalidate();
         }
+
+        private void FrameUC_SizeChanged(object sender, EventArgs e)
+        {
+            InvalidateThis();
+        }
     }
 }

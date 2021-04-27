@@ -378,7 +378,14 @@ namespace PresentationLayer.Presenter
                                 }
                                 else if (mpanel.MPanel_Type == "Transom")
                                 {
-
+                                    while (ctrl.Location.X > ctrl.Margin.Left)
+                                    {
+                                        pnlModel.Panel_HeightToBind--;
+                                        if (ctrl.Location.X == ctrl.Margin.Left)
+                                        {
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                         }
