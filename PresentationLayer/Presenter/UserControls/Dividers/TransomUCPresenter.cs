@@ -150,7 +150,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         
         private void _transomUC_transomUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            //UserControl transom = (UserControl)sender;
+            UserControl transom = (UserControl)sender;
 
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -188,7 +188,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             //g.DrawPath(pen, gpath);
             //g.FillPath(Brushes.PowderBlue, gpath);
 
-            Font drawFont = new Font("Segoe UI", 7, FontStyle.Bold); //* zoom);
+            Font drawFont = new Font("Segoe UI", 6.5f, FontStyle.Bold); //* zoom);
             Size s2 = TextRenderer.MeasureText(_divModel.Div_Name, drawFont);
 
             //int point_Y = (transom.Height / 2) - (s2.Height / 2); //0;
@@ -202,6 +202,31 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                   Color.Black,
                                   Color.Transparent,
                                   TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+            int w = 1;
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+
+            if (_divModel.Div_Height == (int)_frameModel.Frame_Type)
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                       0,
+                                                                       transom.ClientRectangle.Width - w,
+                                                                       transom.ClientRectangle.Height - w));
+            }
+            else if (_divModel.Div_Height == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                       -1,
+                                                                       transom.ClientRectangle.Width - w,
+                                                                       (transom.ClientRectangle.Height - w) + 1));
+            }
+            else if (_divModel.Div_Height == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                       -1,
+                                                                       transom.ClientRectangle.Width - w,
+                                                                       (transom.ClientRectangle.Height - w) + 2));
+            }
         }
 
         private void _transomUC_transomUCMouseUpEventRaised(object sender, MouseEventArgs e)
@@ -214,26 +239,55 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             try
             {
                 UserControl me = (UserControl)sender;
+                int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)sender);
+
+                Control prev_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx - 1];
+                Control nxt_ctrl = null;
+
+                if (_multiPanelModel.MPanelLst_Objects.Count() > me_indx + 1)
+                {
+                    nxt_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx + 1];
+                }
+
+                int expected_Panel1MinHT = 0,
+                    expected_Panel2MinHT = 0;
+
+                IMultiPanelModel prev_mpanel = null, 
+                                 nxt_mpnl = null;
+
+                if (prev_ctrl is IMultiPanelUC)
+                {
+                    prev_mpanel = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prev_ctrl.Name);
+                    expected_Panel1MinHT = prev_mpanel.MPanel_Height + (e.Y - _point_of_origin.Y);
+                }
+
+                if (nxt_ctrl is IMultiPanelUC)
+                {
+                    nxt_mpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == nxt_ctrl.Name);
+                    expected_Panel2MinHT = nxt_mpnl.MPanel_Height - (e.Y - _point_of_origin.Y);
+                }
+
                 FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
 
-                int me_indx = flp.Controls.IndexOf(me);
                 if (e.Button == MouseButtons.Left && _mouseDown)
                 {
                     if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
                     {
-                        int expected_Panel1MinHT = flp.Controls[me_indx - 1].Height + (e.Y - _point_of_origin.Y),
-                            expected_Panel2MinHT = flp.Controls[me_indx + 1].Height - (e.Y - _point_of_origin.Y);
-
                         if (expected_Panel1MinHT >= 30 && expected_Panel2MinHT >= 30)
                         {
-                            flp.Controls[me_indx - 1].Height += (e.Y - _point_of_origin.Y);
-                            flp.Controls[me_indx + 1].Height -= (e.Y - _point_of_origin.Y);
+                            if (prev_ctrl is IMultiPanelUC)
+                            {
+                                prev_mpanel.MPanel_Height += (e.Y - _point_of_origin.Y);
+                            }
 
-                            flp.Controls[me_indx - 1].Invalidate();
-                            flp.Controls[me_indx + 1].Invalidate();
+                            if (nxt_ctrl is IMultiPanelUC)
+                            {
+                                nxt_mpnl.MPanel_Height -= (e.Y - _point_of_origin.Y);
+                            }
+                            //flp.Controls[me_indx - 1].Invalidate();
+                            //flp.Controls[me_indx + 1].Invalidate();
                         }
                     }
-                    flp.Invalidate();
                 }
             }
             catch (Exception ex)

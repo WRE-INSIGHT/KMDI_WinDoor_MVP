@@ -246,6 +246,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                           _frmDmRes_Height,
                                                                                           fpnl,
                                                                                           (UserControl)_frameUCP.GetFrameUC(),
+                                                                                          _frameModel,
                                                                                           true,
                                                                                           flow,
                                                                                           _frameModel.Frame_Zoom,

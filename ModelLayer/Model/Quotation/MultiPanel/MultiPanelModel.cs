@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
 
 namespace ModelLayer.Model.Quotation.MultiPanel
 {
@@ -344,6 +345,19 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             set
             {
                 _mpanelFrameGroup = value;
+            }
+        }
+
+        private IFrameModel _mpanelFrameModelParent;
+        public IFrameModel MPanel_FrameModelParent
+        {
+            get
+            {
+                return _mpanelFrameModelParent;
+            }
+            set
+            {
+                _mpanelFrameModelParent = value;
             }
         }
 
@@ -728,43 +742,49 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return visiblePanelCount + visibleMPanelCount + visibleDivider;
         }
 
+        private int _mpnl_add;
+        public int MPanel_AddPixel
+        {
+            get
+            {
+                return _mpnl_add;
+            }
+        }
+
         public void Resize_MyControls(Control current_control, 
                                       string frameType,
                                       bool if_auto_added = false)
         {
             int indx = MPanelLst_Objects.IndexOf(current_control);
-            int pixels_count = 0;
-
-            if (frameType == "Window")
-            {
-                pixels_count = 8;
-            }
-            else if (frameType == "Door")
-            {
-                pixels_count = 10;
-            }
 
             if (current_control.Name.Contains("MultiMullion") || current_control.Name.Contains("MultiTransom")) //MultiPanel Block
             {
                 if (indx > 0 && indx % 2 == 0) //indx > 0 && indx == 'Even'
                 {
                     Control prev_ctrl = MPanelLst_Objects[indx - 1];
+                    IDividerModel divModel = MPanelLst_Divider.Find(div => div.Div_Name == prev_ctrl.Name);
+                    IMultiPanelModel multiModel = MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == current_control.Name);
+
                     if (!prev_ctrl.Name.Contains("MultiPanel") && prev_ctrl.Name.Contains(MPanel_Type)) //means Divider
                     {
                         if (prev_ctrl.Name.Contains("TransomUC"))
                         {
-                            prev_ctrl.Height -= pixels_count;
+                            divModel.Div_Height -= _mpnl_add;
+                            //prev_ctrl.Height -= pixels_count;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                             {
-                                current_control.Height += pixels_count;
+                                //current_control.Height += pixels_count;
+                                multiModel.MPanel_Height += _mpnl_add;
                             }
                         }
                         else if (prev_ctrl.Name.Contains("MullionUC"))
                         {
-                            prev_ctrl.Width -= pixels_count;
+                            divModel.Div_Width -= _mpnl_add;
+                            //prev_ctrl.Width -= pixels_count;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                             {
-                                current_control.Width += pixels_count;
+                                //current_control.Width += pixels_count;
+                                multiModel.MPanel_Width += _mpnl_add;
                             }
                         }
                     }
@@ -775,23 +795,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 if (indx % 2 != 0) //means Odd
                 {
                     Control prev_ctrl = MPanelLst_Objects[indx - 1];
+                    IDividerModel divModel = MPanelLst_Divider.Find(div => div.Div_Name == current_control.Name);
+                    IMultiPanelModel multiModel = MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prev_ctrl.Name);
+
                     if (prev_ctrl.Name.Contains("MultiMullion") || prev_ctrl.Name.Contains("MultiTransom")) //if prev_ctrl is MultiPanel
                     {
                         if (current_control.Name.Contains("TransomUC"))
                         {
                             if (!if_auto_added)
                             {
-                                prev_ctrl.Height += pixels_count;
+                                multiModel.MPanel_Height += _mpnl_add;
+                                //prev_ctrl.Height += pixels_count;
                             }
-                            current_control.Height -= pixels_count;
+                            divModel.Div_Height -= _mpnl_add;
+                            //current_control.Height -= pixels_count;
                         }
                         else if (current_control.Name.Contains("MullionUC"))
                         {
                             if (!if_auto_added)
                             {
-                                prev_ctrl.Width += pixels_count;
+                                multiModel.MPanel_Width += _mpnl_add;
+                                //prev_ctrl.Width += pixels_count;
                             }
-                            current_control.Width -= pixels_count;
+                            divModel.Div_Width -= _mpnl_add;
+                            //current_control.Width -= pixels_count;
                         }
                     }
                 }
@@ -954,7 +981,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                List<Control> mpanelLstObjects,
                                IMultiPanelModel mpanelParentModel,
                                float mpanelImageRendererZoom,
-                               float mpanelZoom)
+                               float mpanelZoom,
+                               IFrameModel mpanelFrameModelParent)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -976,6 +1004,16 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_DividerEnabled = true;
             MPanelImageRenderer_Zoom = mpanelImageRendererZoom;
             MPanel_Zoom = mpanelZoom;
+            MPanel_FrameModelParent = mpanelFrameModelParent;
+
+            if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
+            {
+                _mpnl_add = 8;
+            }
+            else if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+            {
+                _mpnl_add = 10;
+            }
         }
     }
 }

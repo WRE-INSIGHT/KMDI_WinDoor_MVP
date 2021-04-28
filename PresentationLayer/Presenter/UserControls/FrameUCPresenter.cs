@@ -152,6 +152,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                           ht,
                                                                           frame,
                                                                           frame,
+                                                                          _frameModel,
                                                                           true,
                                                                           flow,
                                                                           _frameModel.Frame_Zoom,

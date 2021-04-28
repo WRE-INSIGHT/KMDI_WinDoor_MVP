@@ -53,11 +53,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PowderBlue;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "TransomUC";
-            this.Size = new System.Drawing.Size(348, 24);
+            this.Size = new System.Drawing.Size(350, 26);
             this.SizeChanged += new System.EventHandler(this.TransomUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TransomUC_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TransomUC_KeyDown);
