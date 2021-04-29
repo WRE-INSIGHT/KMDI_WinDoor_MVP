@@ -406,7 +406,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {
-                        mpanel.Fit_MyControls_byChangingDimension();
+                        mpanel.Fit_MyControls_ToBindDimensions();
                     }
                 }
             }

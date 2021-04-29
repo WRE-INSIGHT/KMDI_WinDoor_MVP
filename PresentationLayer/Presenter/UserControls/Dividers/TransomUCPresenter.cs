@@ -284,8 +284,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             {
                                 nxt_mpnl.MPanel_Height -= (e.Y - _point_of_origin.Y);
                             }
-                            //flp.Controls[me_indx - 1].Invalidate();
-                            //flp.Controls[me_indx + 1].Invalidate();
                         }
                     }
                 }

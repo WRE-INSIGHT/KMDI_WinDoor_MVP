@@ -14,6 +14,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using ModelLayer.Model.Quotation.Frame;
 using PresentationLayer.CommonMethods;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -150,7 +151,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         private void _mullionUC_mullionUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            //UserControl mul = (UserControl)sender;
+            UserControl mul = (UserControl)sender;
             Graphics g = e.Graphics;
 
             //int lineHT = mul.ClientRectangle.Height - 6,
@@ -204,7 +205,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             //g.DrawPath(pen, gpath);
             //g.FillPath(Brushes.PowderBlue, gpath);
 
-            Font drawFont = new Font("Segoe UI", 7, FontStyle.Bold); //* zoom);
+            Font drawFont = new Font("Segoe UI", 6.5f, FontStyle.Bold); //* zoom);
             Size s2 = TextRenderer.MeasureText(_divModel.Div_Name, drawFont);
 
             //int point_Y = (mul.Height / 2) - (s2.Height / 2); //0;
@@ -220,6 +221,30 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             g.DrawString(_divModel.Div_Name, drawFont, Brushes.Black, new RectangleF(10, 0, s2.Width, s2.Height), format);
             g.ResetTransform();
 
+            int w = 1;
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+
+            if (_divModel.Div_Width == (int)_frameModel.Frame_Type)
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                       0,
+                                                                       mul.ClientRectangle.Width - w,
+                                                                       mul.ClientRectangle.Height - w));
+            }
+            else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(-1,
+                                                                       0,
+                                                                       (mul.ClientRectangle.Width - w) + 1,
+                                                                       mul.ClientRectangle.Height - w));
+            }
+            else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(-1,
+                                                                       0,
+                                                                       (mul.ClientRectangle.Width - w) + 2,
+                                                                       mul.ClientRectangle.Height - w));
+            }
         }
 
         private void _mullionUC_mullionUCMouseUpEventRaised(object sender, MouseEventArgs e)
@@ -232,27 +257,52 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             try
             {
                 UserControl me = (UserControl)sender;
+                int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)sender);
+
+                Control prev_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx - 1];
+                Control nxt_ctrl = null;
+
+
+                if (_multiPanelModel.MPanelLst_Objects.Count() > me_indx + 1)
+                {
+                    nxt_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx + 1];
+                }
+
+                int expected_Panel1MinWD = 0,
+                    expected_Panel2MinWD = 0;
+
+                IMultiPanelModel prev_mpanel = null,
+                                 nxt_mpnl = null;
+
+                if (prev_ctrl is IMultiPanelUC)
+                {
+                    prev_mpanel = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prev_ctrl.Name);
+                    expected_Panel1MinWD = prev_mpanel.MPanel_Width + (e.X - _point_of_origin.X);
+                }
+
+                if (nxt_ctrl is IMultiPanelUC)
+                {
+                    nxt_mpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == nxt_ctrl.Name);
+                    expected_Panel2MinWD = nxt_mpnl.MPanel_Width - (e.X - _point_of_origin.X);
+                }
+
                 FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
 
-                int me_indx = flp.Controls.IndexOf(me);
-                //dapat dito yung condition na di dapat siya lumagpas sa bounds
                 if (e.Button == MouseButtons.Left && _mouseDown) 
                 {
                     if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
                     {
-                        int expected_Panel1MinWD = flp.Controls[me_indx - 1].Width + (e.X - _point_of_origin.X),
-                            expected_Panel2MinWD = flp.Controls[me_indx + 1].Width - (e.X - _point_of_origin.X);
-                        if (expected_Panel1MinWD >= 30 && expected_Panel2MinWD >= 30)
+                        if (prev_ctrl is IMultiPanelUC)
                         {
-                            flp.Controls[me_indx - 1].Width += (e.X - _point_of_origin.X);
-                            flp.Controls[me_indx + 1].Width -= (e.X - _point_of_origin.X);
+                            prev_mpanel.MPanel_Width += (e.X - _point_of_origin.X);
+                        }
+
+                        if (nxt_ctrl is IMultiPanelUC)
+                        {
+                            nxt_mpnl.MPanel_Width -= (e.X - _point_of_origin.X);
                         }
                     }
-                    flp.Invalidate();
                 }
-
-
-
             }
             catch (Exception ex)
             {

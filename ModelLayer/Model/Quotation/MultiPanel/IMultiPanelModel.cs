@@ -45,7 +45,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                          string frameType,
                                          bool if_auto_added = false);
         void DeleteControl_MPanelLstObjects(Control control, string frameType, string placement = "");
-        void Fit_MyControls_byChangingDimension();
+        void Fit_MyControls_ToBindDimensions();
+        void Fit_MyControls_Dimensions();
         void Object_Indexer();
     }
 }

@@ -306,7 +306,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         if (mPanelModel.MPanel_Placement == "Last")
                         {
-                            _multiPanelModel.Fit_MyControls_byChangingDimension();
+                            _multiPanelModel.Fit_MyControls_Dimensions();
                         }
                         else if (mPanelModel.MPanel_Placement != "Last")
                         {
@@ -373,7 +373,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         if (mPanelModel.MPanel_Placement == "Last")
                         {
-                            _multiPanelModel.Fit_MyControls_byChangingDimension();
+                            _multiPanelModel.Fit_MyControls_Dimensions();
                         }
                         else if (mPanelModel.MPanel_Placement != "Last")
                         {
@@ -556,7 +556,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_panelModel.Panel_Placement == "Last")
                     {
-                        _multiPanelModel.Fit_MyControls_byChangingDimension();
+                        _multiPanelModel.Fit_MyControls_Dimensions();
                     }
                     else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                     {
@@ -777,6 +777,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 pInnerWd = fpnl.ClientRectangle.Width - (int)(20 * zoom),
                 pInnerHt = fpnl.ClientRectangle.Height - (int)(20 * zoom);
 
+            int ht_ToBind = _multiPanelModel.MPanel_HeightToBind,
+                wd_ToBind = _multiPanelModel.MPanel_WidthToBind;
+
             Point[] corner_points = new[]
             {
                 new Point(0,0),
@@ -792,8 +795,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             GraphicsPath gpath = new GraphicsPath();
             GraphicsPath gpath2 = new GraphicsPath();
             Rectangle bounds = new Rectangle();
-            Rectangle divider_bounds_Bot = new Rectangle();
-            Rectangle divider_bounds_Top = new Rectangle();
             Pen pen = new Pen(Color.Black, 2);
 
             List<Point[]> thisDrawingPoints_bot = null, //botTransom
@@ -811,6 +812,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 pixels_count = 10;
             }
 
+            Rectangle[] divs_bounds_values = { new Rectangle(new Point(0, ht_ToBind - (int)(pixels_count * zoom)), new Size(wd_ToBind - 1, (int)(pixels_count * zoom))) , //bot
+                                               new Rectangle(new Point(0, -1), new Size(wd_ToBind - 1, (int)(pixels_count * zoom))), //top
+                                               new Rectangle(new Point(wd_ToBind - (int)(pixels_count * zoom), 0), new Size((int)(pixels_count * zoom), ht_ToBind - 1)), //right
+                                               new Rectangle(new Point(-1, 0), new Size((int)(pixels_count * zoom), ht_ToBind - 1)) //left
+                                             };
+
+            Rectangle divider_bounds_Bot = new Rectangle();
+            Rectangle divider_bounds_Top = new Rectangle();
+            Rectangle divider_bounds_Right = new Rectangle();
+            Rectangle divider_bounds_Left = new Rectangle();
 
             Font drawFont = new Font("Segoe UI", 12); //* zoom);
             StringFormat drawFormat = new StringFormat();
@@ -843,9 +854,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 DockStyle parent_doxtyle = _multiPanelModel.MPanel_ParentModel.MPanel_Dock;
                 int indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1,
                     parent_mpnl_childObj_count = parent_mpnl.GetCount_MPanelLst_Object(),
-                    indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1,
-                    ht_ToBind = _multiPanelModel.MPanel_HeightToBind,
-                    wd_ToBind = _multiPanelModel.MPanel_WidthToBind;
+                    indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
 
 
                 GraphicsPath gpath_forMullion_RightSide = new GraphicsPath();
@@ -885,15 +894,37 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     wd_deduction = (int)(20 * zoom);
                     bounds_PointX = (int)(10 * zoom);
+
+                    if (parentObj_placement == "First")
+                    {
+                        wd_deduction = (int)(18 * zoom);
+                    }
+                    else if (parentObj_placement == "Somewhere in Between" || parentObj_placement == "Last")
+                    {
+                        wd_deduction = (int)(16 * zoom);
+                        bounds_PointX = (int)(7 * zoom);
+                    }
+
                     if (thisObj_placement == "First")
                     {
                         bounds_PointY = (int)(10 * zoom);
                         ht_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+
+                        if (parent_doxtyle == DockStyle.None)
+                        {
+                            bounds_PointY = (int)(8 * zoom);
+                            ht_deduction = (int)((8 + pixels_count) * zoom);
+                        }
                     }
                     else if (thisObj_placement == "Last")
                     {
                         bounds_PointY = (int)(pixels_count * zoom);
                         ht_deduction = (int)(((((pixels_count + 2) * 2)) - 1) * zoom);
+
+                        if (parent_doxtyle == DockStyle.None)
+                        {
+                            ht_deduction = (int)(((((pixels_count + 1) * 2)) - 1) * zoom);
+                        }
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
@@ -901,9 +932,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         ht_deduction = (int)((pixels_count  * 2) * zoom);
                         if (parent_doxtyle == DockStyle.None)
                         {
-                            bounds_PointY = (int)(10 * zoom);
+                            bounds_PointY = (int)(pixels_count * zoom);
                             //bounds_PointY = (pixels_count + 2 == 10) ? pixels_count + 2 : 10;
-                            ht_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                            ht_deduction = (int)(((pixels_count * 2) + 1) * zoom);
                         }
                     }
                 }
@@ -912,23 +943,33 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (parent_name.Contains("MultiMullion"))
                 #region Parent is MultiPanel Mullion
                 {
-                    bounds_PointY = 10;
-                    ht_deduction = 20;
+                    bounds_PointY = (int)(10 * zoom);
+                    ht_deduction = (int)(20 * zoom);
                     if (thisObj_placement == "First")
                     {
-                        bounds_PointX = 10;
-                        wd_deduction = (10 + (pixels_count + 1));
+                        bounds_PointX = (int)(10 * zoom);
+                        wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+
+                        if (parent_doxtyle == DockStyle.None)
+                        {
+                            bounds_PointX = (int)(10 * zoom);
+                            //wd_deduction = (int)((9 + pixels_count) * zoom);
+                        }
                     }
                     else if (thisObj_placement == "Last")
                     {
-                        bounds_PointX = pixels_count + 2;
-                        wd_deduction = ((pixels_count + 2) * 2) - 1;
+                        bounds_PointX = (int)(pixels_count * zoom);
+                        wd_deduction = (int)((((pixels_count + 2) * 2) - 1) * zoom);
 
+                        if (parent_doxtyle == DockStyle.None)
+                        {
+                            wd_deduction = (int)((((pixels_count + 1) * 2) - 1) * zoom);
+                        }
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
-                        bounds_PointX = pixels_count + 2;
-                        wd_deduction = (pixels_count + 2) * 2;
+                        bounds_PointX = (int)(pixels_count * zoom);
+                        wd_deduction = (int)((pixels_count * 2) * zoom);
                     }
                 }
                 #endregion
@@ -2065,8 +2106,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                     }
 
-                    divider_bounds_Bot = new Rectangle(new Point(0, ht_ToBind - (int)(pixels_count * zoom)),
-                                                       new Size(wd_ToBind - 1, (int)(pixels_count * zoom)));
+                    divider_bounds_Bot = divs_bounds_values[0];
 
                 }
                 #endregion
@@ -2081,8 +2121,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                     }
 
-                    divider_bounds_Top = new Rectangle(new Point(0, -1),
-                                                       new Size(wd_ToBind - 1, (int)(pixels_count * zoom)));
+                    divider_bounds_Top = divs_bounds_values[1];
                 }
                 #endregion
 
@@ -2091,16 +2130,493 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a MAIN PLATFORM (MultiTransom)
                 {
-                    divider_bounds_Top = new Rectangle(new Point(0, -1),
-                                                       new Size(wd_ToBind - 1, (int)(pixels_count * zoom)));
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Top = divs_bounds_values[1];
+                }
+                #endregion
 
-                    divider_bounds_Bot = new Rectangle(new Point(0, ht_ToBind - (int)(pixels_count * zoom)),
-                                                       new Size(wd_ToBind - 1, (int)(pixels_count * zoom)));
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.Fill &&
+                         thisObj_placement == "First")
+                #region First Multi-Panel in a MAIN PLATFORM (MultiMullion)
+                {
+                    g.DrawLine(Pens.Black, new Point(0, 0),
+                                           new Point(pInnerX, pInnerY));
+                    g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
+                                           new Point(pInnerX, pInnerY + pInnerHt));
+
+                    divider_bounds_Right = divs_bounds_values[2];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.Fill &&
+                         thisObj_placement == "Last")
+                #region Last Multi-Panel in MAIN PLATFORM (MultiMullion)
+                {
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
+                                           new Point(pInnerX + pInnerWd, pInnerY));
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
+                                           new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
+
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.Fill &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between Multi-Panel in MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                #region Pattern (M-T-T)
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "First")
+                #region First in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    g.DrawLine(Pens.Black, new Point(0, 0), new Point(pInnerX, pInnerY));
+
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Bot = divs_bounds_values[0];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "Last")
+                #region Last in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height), new Point(pInnerX, pInnerY + pInnerHt));
+
+                    divider_bounds_Top = divs_bounds_values[1];
+                    divider_bounds_Right = divs_bounds_values[2];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Top = divs_bounds_values[1];
+                    divider_bounds_Bot = divs_bounds_values[0];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "First")
+                #region First in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "Last")
+                #region Last in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Bot = divs_bounds_values[1];
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Top = divs_bounds_values[0];
+                    divider_bounds_Bot = divs_bounds_values[1];
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "First")
+                #region First in a LAST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion) 
+                {
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
+                                           new Point(pInnerX + pInnerWd, pInnerY));
+
+                    divider_bounds_Left = divs_bounds_values[3];
+                    divider_bounds_Top = divs_bounds_values[0];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "Last")
+                #region Last in a LAST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
+                                           new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
+
+                    divider_bounds_Bot = divs_bounds_values[1];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a LAST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[0][0],
+                                                      new Point(thisDrawingPoints_forMullion_LeftSide[0][1].X,
+                                                                thisDrawingPoints_forMullion_LeftSide[0][1].Y + 20));
+                    divider_bounds_Top = divs_bounds_values[0];
+                    divider_bounds_Bot = divs_bounds_values[1];
+                    divider_bounds_Left = divs_bounds_values[3];
                 }
                 #endregion
 
                 #endregion
+
+                #region Pattern (T-T-T)
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "First")
+                #region First in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    g.DrawLine(Pens.Black, new Point(0, 0),
+                                           new Point(pInnerX, pInnerY));
+
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
+                                           new Point(pInnerX + pInnerWd, pInnerY));
+
+                    divider_bounds_Bot = divs_bounds_values[0];
+                }
+                #endregion
+
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "First" &&
+                         (thisObj_placement == "Last" || thisObj_placement == "Somewhere in Between"))
+                #region (Last or Somewhere in Between) in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Top = divs_bounds_values[1];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         (thisObj_placement == "First" || thisObj_placement == "Somewhere in Between" || thisObj_placement == "Last"))
+                #region (First or Somewhere in Between or Last) in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Top = divs_bounds_values[1];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Last" &&
+                         (thisObj_placement == "First" || thisObj_placement == "Somewhere in Between"))
+                #region (First or Somewhere in Between) in a LAST SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Top = divs_bounds_values[1];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "Last")
+                #region Last in a LAST SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    for (int i = 4; i < corner_points.Length - 1; i += 2)
+                    {
+                        g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
+                    }
+
+                    divider_bounds_Top = divs_bounds_values[1];
+                }
+                #endregion
+
+                #endregion
+
+                #region Pattern (M-M-T)
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "First")
+                #region First in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                {
+                    g.DrawLine(Pens.Black, new Point(0, 0),
+                                           new Point(pInnerX, pInnerY));
+                    g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
+                                           new Point(pInnerX, pInnerY + pInnerHt));
+
+                    divider_bounds_Right = divs_bounds_values[2];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "First" &&
+                         (thisObj_placement == "Last" || thisObj_placement == "Somewhere in Between"))
+                #region (Somewhere in Between && Last) in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "First")
+                #region First in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divs_bounds_values[3].Width += 2;
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         (thisObj_placement == "Last" || thisObj_placement == "Somewhere in Between"))
+                #region (Last or Somewhere in Between) in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "First")
+                #region First in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                {
+                    //divs_bounds_values[3].Width += 2;
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                {
+                    //divs_bounds_values[2]
+                    //divs_bounds_values[3].Width += 2;
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "Last")
+                #region Last in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                {
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
+                                           new Point(pInnerX + pInnerWd, pInnerY));
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
+                                           new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                #endregion
+
+                #region Pattern (T-M-T)
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "First")
+                #region First in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
+                {
+                    g.DrawLine(Pens.Black, new Point(0, 0),
+                                           new Point(pInnerX, pInnerY));
+
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Right = divs_bounds_values[2];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "Last")
+                #region Last in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
+                {
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
+                                           new Point(pInnerX + pInnerWd, pInnerY));
+
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
+                {
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
+                                           new Point(pInnerX + pInnerWd, pInnerY));
+
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Left = divs_bounds_values[3];
+                    divider_bounds_Right = divs_bounds_values[2];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "First")
+                #region First in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
+                {
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Top = divs_bounds_values[1];
+                    divider_bounds_Right = divs_bounds_values[2];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "Last")
+                #region Last in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
+                {
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Top = divs_bounds_values[1];
+                    divider_bounds_Right = divs_bounds_values[2];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
+                {
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Top = divs_bounds_values[1];
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "First")
+                #region First in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
+                {
+                    g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
+                                           new Point(pInnerX, pInnerY + pInnerHt));
+
+                    divider_bounds_Top = divs_bounds_values[1];
+                    divider_bounds_Right = divs_bounds_values[2];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "Last")
+                #region Last in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
+                {
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
+                                           new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
+                    divider_bounds_Top = divs_bounds_values[1];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
+                {
+                    divider_bounds_Top = divs_bounds_values[1];
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                #endregion
+
+                #endregion
             }
+
+            g.FillRectangle(Brushes.PowderBlue, divider_bounds_Left);
+            g.DrawRectangle(Pens.Black, divider_bounds_Left);
+
+            g.FillRectangle(Brushes.PowderBlue, divider_bounds_Right);
+            g.DrawRectangle(Pens.Black, divider_bounds_Right);
 
             g.FillRectangle(Brushes.PowderBlue, divider_bounds_Top);
             g.DrawRectangle(Pens.Black, divider_bounds_Top);
