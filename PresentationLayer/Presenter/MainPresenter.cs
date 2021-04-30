@@ -353,9 +353,9 @@ namespace PresentationLayer.Presenter
 
         private void Fit_MyControls_byControlsLocation()
         {
-            foreach (IFrameModel frames in _windoorModel.lst_frame)
+            foreach (IFrameModel frames in _windoorModel.lst_frame.Where(fr => fr.Frame_Visible == true))
             {
-                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
+                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
                 {
                     foreach (Control ctrl in mpanel.MPanelLst_Objects)
                     {
@@ -400,9 +400,9 @@ namespace PresentationLayer.Presenter
 
         private void FitControls_InsideMultiPanel()
         {
-            foreach (IFrameModel frames in _windoorModel.lst_frame)
+            foreach (IFrameModel frames in _windoorModel.lst_frame.Where(fr => fr.Frame_Visible == true))
             {
-                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
+                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
                 {
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {
@@ -923,7 +923,8 @@ namespace PresentationLayer.Presenter
 
         public void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel)
         {
-            _windoorModel.lst_frame.Remove(frameModel);
+            frameModel.Frame_Visible = false;
+            //_windoorModel.lst_frame.Remove(frameModel);
         }
 
         public IFramePropertiesUC GetFrameProperties(int frameID)

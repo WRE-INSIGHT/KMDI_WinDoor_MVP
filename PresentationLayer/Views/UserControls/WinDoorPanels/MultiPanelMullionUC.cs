@@ -53,7 +53,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["MPanel_Width"]);
             this.DataBindings.Add(ModelBinding["MPanel_Height"]);
             this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
-            this.DataBindings.Add(ModelBinding["MPanel_Margin"]);
+            //this.DataBindings.Add(ModelBinding["MPanel_Margin"]);
         }
 
         private void flp_MultiMullion_MouseEnter(object sender, EventArgs e)

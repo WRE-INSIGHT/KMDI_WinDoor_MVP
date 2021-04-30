@@ -276,10 +276,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             //{
             //    if (!_initialLoad)
             //    {
-            //        int thisWd = 0,
-            //            thisHt = 0,
-            //            pnlModelWd = _panelModel.Panel_Width,
-            //            pnlModelHt = _panelModel.Panel_Height;
+            //int thisWd = 0,
+            //    thisHt = 0,
+            //    pnlModelWd = _panelModel.Panel_Width,
+            //    pnlModelHt = _panelModel.Panel_Height;
 
             //        if (_multiPanelModel != null) 
             //        {

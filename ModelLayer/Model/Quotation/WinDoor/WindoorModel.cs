@@ -452,15 +452,15 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             if (lst_frame != null)
             {
-                foreach (IFrameModel fr in lst_frame)
+                foreach (IFrameModel fr in lst_frame.Where(fr => fr.Frame_Visible == true))
                 {
                     fr.Frame_Zoom = WD_zoom;
 
-                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
                     {
                         mpnl.MPanel_Zoom = WD_zoom;
                     }
-                    foreach (IPanelModel pnl in fr.Lst_Panel)
+                    foreach (IPanelModel pnl in fr.Lst_Panel.Where(pnl => pnl.Panel_Visibility == true))
                     {
                         pnl.Panel_Zoom = WD_zoom;
                     }

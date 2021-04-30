@@ -212,8 +212,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 divID = _mainPresenter.GetDividerCount() + 1;
 
-            int multiPanel_boundsWD = fpnl.Width - 20,
-                multiPanel_boundsHT = fpnl.Height - 20,
+            int multiPanel_boundsWD = _multiPanelModel.MPanel_Width - 20,
+                multiPanel_boundsHT = _multiPanelModel.MPanel_Height - 20,
                 totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
 
             if (_frameModel.Frame_Type.ToString().Contains("Window"))
@@ -227,8 +227,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (data.Contains("Multi-Panel")) //if Multi-Panel
             {
-                int suggest_Wd = fpnl.Width,
-                    suggest_HT = ((fpnl.Height - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                int suggest_Wd = _multiPanelModel.MPanel_Width,
+                    suggest_HT = (((_multiPanelModel.MPanel_Height) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
 
                 _frmDimensionPresenter.SetPresenters(this);
                 _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.AddPanelIntoMultiPanel;
@@ -310,7 +310,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         else if (mPanelModel.MPanel_Placement != "Last")
                         {
-                            IDividerModel divModel = _divServices.AddDividerModel(fpnl.Width,
+                            IDividerModel divModel = _divServices.AddDividerModel(_multiPanelModel.MPanel_Width,
                                                                                   divSize,
                                                                                   fpnl,
                                                                                   //(UserControl)_frameUCP.GetFrameUC(),
@@ -413,6 +413,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                     }
+                    _mainPresenter.windoorModel_MainPresenter.WD_zoom = _frameModel.Frame_Zoom;
                 }
             }
             else
@@ -830,6 +831,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             IMultiPanelModel parent_mpnl = _multiPanelModel.MPanel_ParentModel;
 
+            string parent_name = _multiPanelModel.MPanel_Parent.Name,
+                       lvl2_parent_Type = "",
+                       thisObj_placement = _multiPanelModel.MPanel_Placement;
+            DockStyle parent_doxtyle = DockStyle.None;
+            
             if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FrameUC)) //if inside Frame
             {
                 for (int i = 0; i < corner_points.Length - 1; i += 2)
@@ -847,15 +853,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
             {
-                string parent_name = _multiPanelModel.MPanel_Parent.Name,
-                       lvl2_parent_Type = "",
-                       thisObj_placement = _multiPanelModel.MPanel_Placement,
-                       parentObj_placement = _multiPanelModel.MPanel_ParentModel.MPanel_Placement;
-                DockStyle parent_doxtyle = _multiPanelModel.MPanel_ParentModel.MPanel_Dock;
+                string parentObj_placement = _multiPanelModel.MPanel_ParentModel.MPanel_Placement;
                 int indx_NxtObj = _multiPanelModel.MPanel_Index_Inside_MPanel + 1,
                     parent_mpnl_childObj_count = parent_mpnl.GetCount_MPanelLst_Object(),
                     indx_PrevObj = _multiPanelModel.MPanel_Index_Inside_MPanel - 1;
 
+                parent_doxtyle = _multiPanelModel.MPanel_ParentModel.MPanel_Dock;
 
                 GraphicsPath gpath_forMullion_RightSide = new GraphicsPath();
                 GraphicsPath gpath_forMullion_LeftSide = new GraphicsPath();
@@ -894,48 +897,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     wd_deduction = (int)(20 * zoom);
                     bounds_PointX = (int)(10 * zoom);
-
-                    if (parentObj_placement == "First")
-                    {
-                        wd_deduction = (int)(18 * zoom);
-                    }
-                    else if (parentObj_placement == "Somewhere in Between" || parentObj_placement == "Last")
-                    {
-                        wd_deduction = (int)(16 * zoom);
-                        bounds_PointX = (int)(7 * zoom);
-                    }
-
+                    
                     if (thisObj_placement == "First")
                     {
                         bounds_PointY = (int)(10 * zoom);
                         ht_deduction = (int)((10 + (pixels_count + 1)) * zoom);
-
-                        if (parent_doxtyle == DockStyle.None)
-                        {
-                            bounds_PointY = (int)(8 * zoom);
-                            ht_deduction = (int)((8 + pixels_count) * zoom);
-                        }
                     }
                     else if (thisObj_placement == "Last")
                     {
                         bounds_PointY = (int)(pixels_count * zoom);
                         ht_deduction = (int)(((((pixels_count + 2) * 2)) - 1) * zoom);
-
-                        if (parent_doxtyle == DockStyle.None)
-                        {
-                            ht_deduction = (int)(((((pixels_count + 1) * 2)) - 1) * zoom);
-                        }
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
                         bounds_PointY = (int)(pixels_count * zoom);
                         ht_deduction = (int)((pixels_count  * 2) * zoom);
-                        if (parent_doxtyle == DockStyle.None)
-                        {
-                            bounds_PointY = (int)(pixels_count * zoom);
-                            //bounds_PointY = (pixels_count + 2 == 10) ? pixels_count + 2 : 10;
-                            ht_deduction = (int)(((pixels_count * 2) + 1) * zoom);
-                        }
                     }
                 }
                 #endregion
@@ -945,26 +921,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     bounds_PointY = (int)(10 * zoom);
                     ht_deduction = (int)(20 * zoom);
+
                     if (thisObj_placement == "First")
                     {
                         bounds_PointX = (int)(10 * zoom);
                         wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
-
-                        if (parent_doxtyle == DockStyle.None)
-                        {
-                            bounds_PointX = (int)(10 * zoom);
-                            //wd_deduction = (int)((9 + pixels_count) * zoom);
-                        }
                     }
                     else if (thisObj_placement == "Last")
                     {
                         bounds_PointX = (int)(pixels_count * zoom);
                         wd_deduction = (int)((((pixels_count + 2) * 2) - 1) * zoom);
-
-                        if (parent_doxtyle == DockStyle.None)
-                        {
-                            wd_deduction = (int)((((pixels_count + 1) * 2) - 1) * zoom);
-                        }
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
@@ -2184,6 +2150,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     g.DrawLine(Pens.Black, new Point(0, 0), new Point(pInnerX, pInnerY));
 
+                    divs_bounds_values[2].X -= 2;
+                    divs_bounds_values[2].Width += 2;
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Bot = divs_bounds_values[0];
                 }
@@ -2198,6 +2167,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height), new Point(pInnerX, pInnerY + pInnerHt));
 
+                    divs_bounds_values[2].X -= 2;
+                    divs_bounds_values[2].Width += 2;
+
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Right = divs_bounds_values[2];
                 }
@@ -2210,6 +2182,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
+                    divs_bounds_values[2].X -= 2;
+                    divs_bounds_values[2].Width += 2;
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Bot = divs_bounds_values[0];
@@ -2223,6 +2198,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
+                    divs_bounds_values[2].X -= 2;
+                    divs_bounds_values[2].Width += 2;
+                    divs_bounds_values[3].Width += 2;
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2236,6 +2215,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
+                    divs_bounds_values[2].X -= 2;
+                    divs_bounds_values[2].Width += 2;
+                    divs_bounds_values[3].Width += 2;
+
                     divider_bounds_Bot = divs_bounds_values[1];
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2249,6 +2232,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
+                    divs_bounds_values[2].X -= 2;
+                    divs_bounds_values[2].Width += 2;
+                    divs_bounds_values[3].Width += 2;
+
                     divider_bounds_Top = divs_bounds_values[0];
                     divider_bounds_Bot = divs_bounds_values[1];
                     divider_bounds_Right = divs_bounds_values[2];
@@ -2266,6 +2253,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
                                            new Point(pInnerX + pInnerWd, pInnerY));
 
+                    divs_bounds_values[3].Width += 2;
+
                     divider_bounds_Left = divs_bounds_values[3];
                     divider_bounds_Top = divs_bounds_values[0];
                 }
@@ -2280,6 +2269,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
+
+                    divs_bounds_values[3].Width += 2;
 
                     divider_bounds_Bot = divs_bounds_values[1];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2296,6 +2287,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     gpath_forMullion_LeftSide.AddLine(thisDrawingPoints_forMullion_LeftSide[0][0],
                                                       new Point(thisDrawingPoints_forMullion_LeftSide[0][1].X,
                                                                 thisDrawingPoints_forMullion_LeftSide[0][1].Y + 20));
+
+                    divs_bounds_values[3].Width += 2;
+
                     divider_bounds_Top = divs_bounds_values[0];
                     divider_bounds_Bot = divs_bounds_values[1];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2323,13 +2317,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 #endregion
 
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "Last")
+                #region Last in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divs_bounds_values[0].Y -= 2;
+                    divs_bounds_values[0].Height += 2;
+
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Top = divs_bounds_values[1];
+                }
+                #endregion
 
                 else if (parent_name.Contains("MultiTransom") &&
                          parent_doxtyle == DockStyle.None &&
                          lvl2_parent_Type == "Transom" &&
                          parentObj_placement == "First" &&
-                         (thisObj_placement == "Last" || thisObj_placement == "Somewhere in Between"))
-                #region (Last or Somewhere in Between) in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a FIRST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
@@ -2340,8 +2348,37 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          parent_doxtyle == DockStyle.None &&
                          lvl2_parent_Type == "Transom" &&
                          parentObj_placement == "Somewhere in Between" &&
-                         (thisObj_placement == "First" || thisObj_placement == "Somewhere in Between" || thisObj_placement == "Last"))
-                #region (First or Somewhere in Between or Last) in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                         thisObj_placement == "First")
+                #region First in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    divs_bounds_values[1].Height += 2;
+
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Top = divs_bounds_values[1];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "Last")
+                #region Last in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    divs_bounds_values[0].Y -= 2;
+                    divs_bounds_values[0].Height += 2;
+
+                    divider_bounds_Bot = divs_bounds_values[0];
+                    divider_bounds_Top = divs_bounds_values[1];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
                 {
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
@@ -2352,9 +2389,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          parent_doxtyle == DockStyle.None &&
                          lvl2_parent_Type == "Transom" &&
                          parentObj_placement == "Last" &&
-                         (thisObj_placement == "First" || thisObj_placement == "Somewhere in Between"))
-                #region (First or Somewhere in Between) in a LAST SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                         thisObj_placement == "First")
+                #region First in a LAST SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
                 {
+                    divs_bounds_values[1].Height += 2;
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
                 }
@@ -2372,6 +2411,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                     }
 
+                    divider_bounds_Top = divs_bounds_values[1];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiTransom") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Transom" &&
+                         parentObj_placement == "Last" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between) in a LAST SUB-PLATFORM (MultiTransom) in MAIN PLATFORM (MultiMullion)
+                {
+                    divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
                 }
                 #endregion
@@ -2400,8 +2451,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          parent_doxtyle == DockStyle.None &&
                          lvl2_parent_Type == "Mullion" &&
                          parentObj_placement == "First" &&
-                         (thisObj_placement == "Last" || thisObj_placement == "Somewhere in Between"))
-                #region (Somewhere in Between && Last) in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                         thisObj_placement == "Last")
+                #region Last in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divs_bounds_values[2].X -=2;
+                    divs_bounds_values[2].Width +=2;
+
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "First" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
                 {
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2425,8 +2491,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          parent_doxtyle == DockStyle.None &&
                          lvl2_parent_Type == "Mullion" &&
                          parentObj_placement == "Somewhere in Between" &&
-                         (thisObj_placement == "Last" || thisObj_placement == "Somewhere in Between"))
-                #region (Last or Somewhere in Between) in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                         thisObj_placement == "Last")
+                #region Last in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
+                {
+                    divs_bounds_values[2].X -= 2;
+                    divs_bounds_values[2].Width += 2;
+
+                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
+                }
+                #endregion
+
+                else if (parent_name.Contains("MultiMullion") &&
+                         parent_doxtyle == DockStyle.None &&
+                         lvl2_parent_Type == "Mullion" &&
+                         parentObj_placement == "Somewhere in Between" &&
+                         thisObj_placement == "Somewhere in Between")
+                #region Somewhere in Between in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
                 {
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2440,7 +2521,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
                 {
-                    //divs_bounds_values[3].Width += 2;
+                    divs_bounds_values[3].Width += 2;
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
                 }
@@ -2453,8 +2534,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
                 {
-                    //divs_bounds_values[2]
-                    //divs_bounds_values[3].Width += 2;
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
                 }
@@ -2488,7 +2567,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     g.DrawLine(Pens.Black, new Point(0, 0),
                                            new Point(pInnerX, pInnerY));
-
+                    divs_bounds_values[0].Y -= 2;
+                    divs_bounds_values[0].Height += 2;
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Right = divs_bounds_values[2];
                 }
@@ -2503,7 +2583,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
                                            new Point(pInnerX + pInnerWd, pInnerY));
-
+                    divs_bounds_values[0].Y -= 2;
+                    divs_bounds_values[0].Height += 2;
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Left = divs_bounds_values[3];
                 }
@@ -2518,7 +2599,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
                                            new Point(pInnerX + pInnerWd, pInnerY));
-
+                    divs_bounds_values[0].Y -= 2;
+                    divs_bounds_values[0].Height += 2;
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Left = divs_bounds_values[3];
                     divider_bounds_Right = divs_bounds_values[2];
@@ -2532,6 +2614,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
                 {
+                    divs_bounds_values[0].Y -= 2;
+                    divs_bounds_values[0].Height += 2;
+                    divs_bounds_values[1].Height += 2;
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Right = divs_bounds_values[2];
@@ -2545,9 +2631,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
                 {
+                    divs_bounds_values[0].Y -= 2;
+                    divs_bounds_values[0].Height += 2;
+                    divs_bounds_values[1].Height += 2;
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
-                    divider_bounds_Right = divs_bounds_values[2];
+                    divider_bounds_Left = divs_bounds_values[3];
                 }
                 #endregion
 
@@ -2558,6 +2648,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
                 {
+                    divs_bounds_values[0].Y -= 2;
+                    divs_bounds_values[0].Height += 2;
+                    divs_bounds_values[1].Height += 2;
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Right = divs_bounds_values[2];
@@ -2575,6 +2669,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX, pInnerY + pInnerHt));
 
+                    divs_bounds_values[1].Height += 2;
+
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Right = divs_bounds_values[2];
                 }
@@ -2589,6 +2685,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
+
+                    divs_bounds_values[1].Height += 2;
+
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Left = divs_bounds_values[3];
                 }
@@ -2601,6 +2700,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
                 {
+                    divs_bounds_values[1].Height += 2;
+
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2612,17 +2713,36 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 #endregion
             }
 
-            g.FillRectangle(Brushes.PowderBlue, divider_bounds_Left);
-            g.DrawRectangle(Pens.Black, divider_bounds_Left);
+            if (parent_name.Contains("MultiMullion") &&
+                parent_doxtyle == DockStyle.None &&
+                lvl2_parent_Type == "Transom")
+            {
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Top);
+                g.DrawRectangle(Pens.Black, divider_bounds_Top);
 
-            g.FillRectangle(Brushes.PowderBlue, divider_bounds_Right);
-            g.DrawRectangle(Pens.Black, divider_bounds_Right);
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Bot);
+                g.DrawRectangle(Pens.Black, divider_bounds_Bot);
 
-            g.FillRectangle(Brushes.PowderBlue, divider_bounds_Top);
-            g.DrawRectangle(Pens.Black, divider_bounds_Top);
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Left);
+                g.DrawRectangle(Pens.Black, divider_bounds_Left);
 
-            g.FillRectangle(Brushes.PowderBlue, divider_bounds_Bot);
-            g.DrawRectangle(Pens.Black, divider_bounds_Bot);
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Right);
+                g.DrawRectangle(Pens.Black, divider_bounds_Right);
+            }
+            else
+            {
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Left);
+                g.DrawRectangle(Pens.Black, divider_bounds_Left);
+
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Right);
+                g.DrawRectangle(Pens.Black, divider_bounds_Right);
+
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Top);
+                g.DrawRectangle(Pens.Black, divider_bounds_Top);
+
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Bot);
+                g.DrawRectangle(Pens.Black, divider_bounds_Bot);
+            }
 
             g.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), bounds);
             g.DrawRectangle(new Pen(color, 1), bounds);

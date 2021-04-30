@@ -166,7 +166,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             pnl.Panel_Height += added_height_child_pnls;
                         }
                     }
-                }      
+                }
                 _mpanelHeight = value;
                 MPanelImageRenderer_Height = Convert.ToInt32(value * MPanelImageRenderer_Zoom);
                 MPanel_HeightToBind = (int)(value * MPanel_Zoom);

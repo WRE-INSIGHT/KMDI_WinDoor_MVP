@@ -442,6 +442,7 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatformUCP.InvalidateBasePlatform();
             _basePlatformUCP.Invalidate_flpMain();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
         }
 
         public void ViewDeleteControl(UserControl control)
