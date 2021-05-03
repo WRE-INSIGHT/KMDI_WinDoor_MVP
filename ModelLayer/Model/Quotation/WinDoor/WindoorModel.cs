@@ -48,7 +48,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _wdWidth = value;
                 WD_Dimension = value.ToString() + " x " + WD_height.ToString();
                 WD_width_4basePlatform_forImageRenderer = value + 70;
-                WD_zoom_forImageRenderer = GetZoom_forRendering();//1.0f; //GetZoom_forRendering();
+                WD_zoom_forImageRenderer = GetZoom_forRendering();
 
                 WD_width_4basePlatform = value + 70; //(int)(value * WD_zoom) + 70;
                 WD_zoom = GetZoom_forRendering();
@@ -194,7 +194,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _wdZoomforImageRenderer = value;
                 WD_width_4basePlatform_forImageRenderer = Convert.ToInt32((WD_width * value) + 70);
                 WD_height_4basePlatform_forImageRenderer = Convert.ToInt32((WD_height * value) + 35);
-                SetFrameZoom();
+                SetImageRenderingZoom();
                 NotifyPropertyChanged();
             }
         }
@@ -373,39 +373,62 @@ namespace ModelLayer.Model.Quotation.WinDoor
             return divCount;
         }
 
+        private float[] _arr_zoomPercentage = { 0.10f, 0.13f, 0.17f, 0.26f, 0.50f, 1.0f };
+        public float[] Arr_ZoomPercentage
+        {
+            get
+            {
+                return _arr_zoomPercentage;
+            }
+        }
+
         public float GetZoom_forRendering()
         {
             int area = _wdHeight * _wdWidth;
             float zm = 1.0f;
+
+            //if (area <= 1500000)
+            //{
+            //    zm = 1.00f;
+            //}
+            //else if (area > 1500000 && area <= 2500000)
+            //{
+            //    zm = 0.50f;
+            //}
+            //else if (area > 2500000)
+            //{
+            //    zm = 0.28f;
+            //}
+
             if (area <= 360000)
             {
-                zm = 1.00f;
+                zm = _arr_zoomPercentage[5];
             }
             else if (area > 360000 && area <= 1000000)
             {
-                zm = 0.50f;
+                zm = _arr_zoomPercentage[4];
             }
             else if (area > 1000000 && area <= 4000000)
             {
-                zm = 0.28f;
+                zm = _arr_zoomPercentage[3];
             }
             else if (area > 4000000 && area <= 9000000)
             {
-                zm = 0.19f;
+                zm = _arr_zoomPercentage[2];
             }
             else if (area > 9000000 && area <= 16000000)
             {
-                zm = 0.14f;
+                zm = _arr_zoomPercentage[1];
             }
             else if (area > 16000000)
             {
-                zm = 0.10f;
+                zm = _arr_zoomPercentage[0];
             }
 
             return zm;
         }
 
-        public void SetFrameZoom()
+        public void SetImageRenderingZoom()
         {
             if (lst_frame != null)
             {
@@ -429,15 +452,15 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             if (lst_frame != null)
             {
-                foreach (IFrameModel fr in lst_frame)
+                foreach (IFrameModel fr in lst_frame.Where(fr => fr.Frame_Visible == true))
                 {
                     fr.Frame_Zoom = WD_zoom;
 
-                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
                     {
                         mpnl.MPanel_Zoom = WD_zoom;
                     }
-                    foreach (IPanelModel pnl in fr.Lst_Panel)
+                    foreach (IPanelModel pnl in fr.Lst_Panel.Where(pnl => pnl.Panel_Visibility == true))
                     {
                         pnl.Panel_Zoom = WD_zoom;
                     }

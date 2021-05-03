@@ -6,6 +6,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
 {
     public interface IWindoorModel
     {
+        float[] Arr_ZoomPercentage { get; }
         string WD_description { get; set; }
         string WD_profile { get; set; }
         decimal WD_discount { get; set; }
@@ -31,6 +32,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int GetMultiPanelCount();
         int GetDividerCount();
         float GetZoom_forRendering();
-        void SetFrameZoom();
+        void SetImageRenderingZoom();
     }
 }

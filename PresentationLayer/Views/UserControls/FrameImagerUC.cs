@@ -37,19 +37,19 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        public Padding thisPadding
-        {
-            get
-            {
-                return this.Padding;
-            }
+        //public Padding thisPadding
+        //{
+        //    get
+        //    {
+        //        return this.Padding;
+        //    }
 
-            set
-            {
-                this.Padding = value;
-                this.Invalidate();
-            }
-        }
+        //    set
+        //    {
+        //        this.Padding = value;
+        //        this.Invalidate();
+        //    }
+        //}
 
         public event EventHandler frameLoadEventRaised;
         public event PaintEventHandler outerFramePaintEventRaised;
@@ -82,6 +82,11 @@ namespace PresentationLayer.Views.UserControls
         public void DeleteImagerControl(UserControl userctrlObj)
         {
             this.Controls.Remove(userctrlObj);
+        }
+
+        private void FrameImagerUC_PaddingChanged(object sender, EventArgs e)
+        {
+            this.Invalidate();
         }
     }
 }

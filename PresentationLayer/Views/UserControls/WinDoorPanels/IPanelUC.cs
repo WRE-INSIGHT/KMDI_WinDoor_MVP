@@ -10,6 +10,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
     {
         int Panel_ID { get; set; }
         bool pnl_Orientation { get; set; }
+        string Panel_Placement { get; }
 
         void InvalidateThis();
     }

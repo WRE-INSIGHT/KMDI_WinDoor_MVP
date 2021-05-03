@@ -31,6 +31,21 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
                 _mpanelID = value;
             }
         }
+
+        private string _mpanelPlacement;
+        public string MPanel_Placement
+        {
+            get
+            {
+                return _mpanelPlacement;
+            }
+
+            set
+            {
+                _mpanelPlacement = value;
+            }
+        }
+
         public event PaintEventHandler flpMulltiPaintEventRaised;
         public event EventHandler flpMultiMouseEnterEventRaised;
         public event EventHandler flpMultiMouseLeaveEventRaised;
@@ -53,7 +68,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["MPanel_Width"]);
             this.DataBindings.Add(ModelBinding["MPanel_Height"]);
             this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
-            this.DataBindings.Add(ModelBinding["MPanel_Margin"]);
+            this.DataBindings.Add(ModelBinding["MPanel_Placement"]);
+            //this.DataBindings.Add(ModelBinding["MPanel_Margin"]);
         }
 
         private void flp_MultiMullion_MouseEnter(object sender, EventArgs e)

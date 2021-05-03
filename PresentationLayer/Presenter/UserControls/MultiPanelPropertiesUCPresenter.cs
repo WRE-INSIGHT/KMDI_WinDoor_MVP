@@ -75,6 +75,8 @@ namespace PresentationLayer.Presenter.UserControls
             multiPanelBinding.Add("MPanel_ID", new Binding("MPanelID", _multiPanelModel, "MPanel_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Width", new Binding("Value", _multiPanelModel, "MPanel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Height", new Binding("Value", _multiPanelModel, "MPanel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            //multiPanelBinding.Add("MPanel_Width", new Binding("Value", _multiPanelModel, "MPanel_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
+            //multiPanelBinding.Add("MPanel_Height", new Binding("Value", _multiPanelModel, "MPanel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Name", new Binding("Text", _multiPanelModel, "MPanel_Name", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanelProp_Height", new Binding("Height", _multiPanelModel, "MPanelProp_Height", true, DataSourceUpdateMode.OnPropertyChanged));

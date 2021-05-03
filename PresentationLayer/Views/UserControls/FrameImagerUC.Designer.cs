@@ -40,6 +40,7 @@
             this.Padding = new System.Windows.Forms.Padding(26);
             this.Size = new System.Drawing.Size(100, 100);
             this.Load += new System.EventHandler(this.FrameImagerUC_Load);
+            this.PaddingChanged += new System.EventHandler(this.FrameImagerUC_PaddingChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FrameImagerUC_Paint);
             this.ResumeLayout(false);
 

@@ -84,6 +84,7 @@ namespace PresentationLayer.Views
         public event EventHandler LabelSizeClickEventRaised;
         public event EventHandler ButtonPlusZoomClickEventRaised;
         public event EventHandler ButtonMinusZoomClickEventRaised;
+        public event EventHandler DeleteToolStripButtonClickEventRaised;
 
         public MainView()
         {
@@ -199,6 +200,11 @@ namespace PresentationLayer.Views
         private void btnPlusZoom_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, ButtonPlusZoomClickEventRaised, e);
+        }
+
+        private void deleteItemToolStripButton1_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, DeleteToolStripButtonClickEventRaised, e);
         }
     }
 }

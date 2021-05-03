@@ -65,20 +65,40 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             Color col = Color.Black;
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+
+            int outer_line = 10,
+                inner_line = 15;
+
+            if (_panelModel.Panel_Zoom == 0.19f)
+            {
+                outer_line = 5;
+                inner_line = 8;
+            }
+            else if (_panelModel.Panel_Zoom == 0.14f)
+            {
+                outer_line = 3;
+                inner_line = 7;
+            }
+            else if (_panelModel.Panel_Zoom == 0.10f)
+            {
+                outer_line = 3;
+                inner_line = 7;
+            }
+
             g.DrawRectangle(new Pen(col, w), new Rectangle(0,
                                                            0,
                                                            sliding.ClientRectangle.Width - w,
                                                            sliding.ClientRectangle.Height - w));
 
-            g.DrawRectangle(new Pen(col, w), new Rectangle(10,
-                                                           10,
-                                                           (sliding.ClientRectangle.Width - 20) - w,
-                                                           (sliding.ClientRectangle.Height - 20) - w));
+            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                           outer_line,
+                                                           (sliding.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                           (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
 
-            g.DrawRectangle(new Pen(col, 3), new Rectangle(15,
-                                                           15,
-                                                           (sliding.ClientRectangle.Width - 30) - w,
-                                                           (sliding.ClientRectangle.Height - 30) - w));
+            g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                           inner_line,
+                                                           (sliding.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                           (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
 
             Point sashPoint = new Point(sliding.ClientRectangle.X + 25, sliding.ClientRectangle.Y);
 
@@ -180,7 +200,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             panelBinding.Add("PanelImageRenderer_Width", new Binding("Width", _panelModel, "PanelImageRenderer_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelImageRenderer_Height", new Binding("Height", _panelModel, "PanelImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "PanelImageRenderer_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;

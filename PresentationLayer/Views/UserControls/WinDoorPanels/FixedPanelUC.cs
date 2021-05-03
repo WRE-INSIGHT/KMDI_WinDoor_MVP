@@ -46,6 +46,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+            set
+            {
+                _panelPlacement = value;
+            }
+        }
+
         public event EventHandler fixedPanelUCSizeChangedEventRaised;
         public event EventHandler deleteToolStripClickedEventRaised;
         public event PaintEventHandler fixedPanelUCPaintEventRaised;
@@ -67,6 +80,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(binding["Panel_Visibility"]);
             this.DataBindings.Add(binding["Panel_Orient"]);
             this.DataBindings.Add(binding["Panel_Margin"]);
+            this.DataBindings.Add(binding["Panel_Placement"]);
         }
 
         private void FixedPanelUC_SizeChanged(object sender, EventArgs e)

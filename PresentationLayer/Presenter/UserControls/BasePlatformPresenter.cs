@@ -260,6 +260,7 @@ namespace PresentationLayer.Presenter.UserControls
         {
             foreach (IFrameUC frames in _flpMain.Controls)
             {
+                frames.InvalidateThis();
                 frames.InvalidateThisControls();
             }
         }

@@ -81,7 +81,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _fixedPanelUC.fixedPanelMouseEnterEventRaised += _fixedPanelUC_fixedPanelMouseEnterEventRaised;
             _tmr.Tick += _tmr_Tick;
         }
-
+        
         int _timer_count;
         private void _tmr_Tick(object sender, EventArgs e)
         {
@@ -120,53 +120,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             int font_size = 30,
                 outer_line = 10,
-                inner_line = 15;//,
-                //panel_area = _panelModel.Panel_Width * _panelModel.Panel_Height,
-                //frame_area = _frameModel.Frame_Width * _frameModel.Frame_Height;
+                inner_line = 15;
 
-            //if (_panelModel.Panel_Parent is IFrameUC)
-            //{
-            //    if (frame_area > 1000000 && frame_area <= 4000000)
-            //    {
-            //        font_size = 25;
-            //    }
-            //    else if (frame_area > 4000000 && frame_area <= 9000000)
-            //    {
-            //        font_size = 15;
-            //        outer_line = 5;
-            //        inner_line = 8;
-            //    }
-            //    else if (frame_area > 9000000 && frame_area <= 16000000)
-            //    {
-            //        font_size = 13;
-            //        outer_line = 3;
-            //        inner_line = 7;
-            //    }
-            //    else if (frame_area > 16000000)
-            //    {
-            //        font_size = 8;
-            //        outer_line = 3;
-            //        inner_line = 7;
-            //    }
-            //}
+            int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
 
-            if (_frameModel.Frame_Zoom == 0.28f)
+            if (ndx_zoomPercentage == 3)
             {
                 font_size = 25;
             }
-            else if (_frameModel.Frame_Zoom == 0.19f)
+            else if (ndx_zoomPercentage == 2)
             {
                 font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
             }
-            else if (_frameModel.Frame_Zoom == 0.14f)
+            else if (ndx_zoomPercentage == 1)
             {
                 font_size = 13;
                 outer_line = 3;
                 inner_line = 7;
             }
-            else if (_frameModel.Frame_Zoom == 0.10f)
+            else if (ndx_zoomPercentage == 0)
             {
                 font_size = 8;
                 outer_line = 3;
@@ -302,10 +276,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             //{
             //    if (!_initialLoad)
             //    {
-            //        int thisWd = 0,
-            //            thisHt = 0,
-            //            pnlModelWd = _panelModel.Panel_Width,
-            //            pnlModelHt = _panelModel.Panel_Height;
+            //int thisWd = 0,
+            //    thisHt = 0,
+            //    pnlModelWd = _panelModel.Panel_Width,
+            //    pnlModelHt = _panelModel.Panel_Height;
 
             //        if (_multiPanelModel != null) 
             //        {
@@ -433,8 +407,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
-
+            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_MarginToBind", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
+            
             return panelBinding;
         }
 

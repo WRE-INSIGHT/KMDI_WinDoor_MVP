@@ -75,16 +75,8 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divWd = value;
-                if (Div_Type == DividerType.Transom)
-                {
-                    DivImageRenderer_Width = Convert.ToInt32(value * DivImageRenderer_Zoom);
-                }
-                else if (Div_Type == DividerType.Mullion)
-                {
-                    DivImageRenderer_Width = value;
-                }
-
                 Div_WidthToBind = (int)(value * Div_Zoom);
+                DivImageRenderer_Width = (int)(value * DivImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -99,16 +91,8 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divHt = value;
-                if (Div_Type == DividerType.Transom)
-                {
-                    DivImageRenderer_Height = value;
-                }
-                else if (Div_Type == DividerType.Mullion)
-                {
-                    DivImageRenderer_Height = Convert.ToInt32(value * DivImageRenderer_Zoom);
-                }
-
                 Div_HeightToBind = (int)(value * Div_Zoom);
+                DivImageRenderer_Height = (int)(value * DivImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -166,16 +150,9 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divImageRenderedZoom = value;
-                if (Div_Type == DividerType.Transom)
-                {
-                    DivImageRenderer_Width = Convert.ToInt32(Div_Width * value);
-                    DivImageRenderer_Height = Div_Height;
-                }
-                else if (Div_Type == DividerType.Mullion)
-                {
-                    DivImageRenderer_Width = Div_Width;
-                    DivImageRenderer_Height = Convert.ToInt32(Div_Height * value);
-                }
+                DivImageRenderer_Width = (int)(Div_Width * value);
+                DivImageRenderer_Height = (int)(Div_Height * value);
+
                 NotifyPropertyChanged();
             }
         }

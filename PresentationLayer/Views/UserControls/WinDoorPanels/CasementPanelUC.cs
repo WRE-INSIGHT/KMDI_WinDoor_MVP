@@ -37,6 +37,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+            set
+            {
+                _panelPlacement = value;
+            }
+        }
+
         public CasementPanelUC()
         {
             InitializeComponent();
@@ -58,6 +71,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
+            this.DataBindings.Add(ModelBinding["Panel_Placement"]);
         }
 
         private void CasementPanelUC_Paint(object sender, PaintEventArgs e)

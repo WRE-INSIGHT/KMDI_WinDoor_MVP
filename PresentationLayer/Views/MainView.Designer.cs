@@ -387,6 +387,7 @@
             this.deleteItemToolStripButton1.Size = new System.Drawing.Size(24, 29);
             this.deleteItemToolStripButton1.Text = "Delete item";
             this.deleteItemToolStripButton1.ToolTipText = "Delete item";
+            this.deleteItemToolStripButton1.Click += new System.EventHandler(this.deleteItemToolStripButton1_Click);
             // 
             // tsp_Sync
             // 

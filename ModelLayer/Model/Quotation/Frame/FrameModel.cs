@@ -22,6 +22,15 @@ namespace ModelLayer.Model.Quotation.Frame
             Concrete
         }
 
+        private static int _frame_basicDeduction = 10;
+        public int Frame_BasicDeduction
+        {
+            get
+            {
+                return _frame_basicDeduction;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -124,7 +133,15 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameType = value;
-                SetFramePadding(false);
+
+                if (_deductFramePadding_bool)
+                {
+                    FramePadding_Deduct();
+                }
+                else
+                {
+                    FramePadding_Default();
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -142,12 +159,14 @@ namespace ModelLayer.Model.Quotation.Frame
             get { return _framePadding; }
             set
             {
-                _framePadding = value;
-
-                SetFramePadding_ImageRenderer();
-                //Padding pads = new Padding(Convert.ToInt32(value.All * FrameImageRenderer_Zoom));
-                //FrameImageRenderer_Padding_int = pads;
-
+                if (value.All == 1)
+                {
+                    _framePadding = new Padding(2);
+                }
+                else
+                {
+                    _framePadding = value;
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -214,8 +233,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 FrameImageRenderer_Width = Convert.ToInt32(Frame_Width * value);
                 FrameImageRenderer_Height = Convert.ToInt32(Frame_Height * value);
 
-                Padding pads = new Padding(Convert.ToInt32(Frame_Padding_int.All * value));
-                FrameImageRenderer_Padding_int = pads;
+                if (_deductFramePadding_bool)
+                {
+                    FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
+                }
+                else
+                {
+                    FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type) * FrameImageRenderer_Zoom));
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -233,7 +258,15 @@ namespace ModelLayer.Model.Quotation.Frame
                 _frameZoom = value;
                 Frame_WidthToBind = (int)(Frame_Width * value);
                 Frame_HeightToBind = (int)(Frame_Height * value);
-                SetFramePadding();
+
+                if (_deductFramePadding_bool)
+                {
+                    FramePadding_Deduct();
+                }
+                else
+                {
+                    FramePadding_Default();
+                }
             }
         }
 
@@ -489,6 +522,42 @@ namespace ModelLayer.Model.Quotation.Frame
         public void SetArrayUsed(string arrayUsed)
         {
             _array_Used = arrayUsed;
+        }
+
+        private int _frameDeduction = 0;
+        public int Frame_Deduction
+        {
+            get
+            {
+                return _frameDeduction;
+            }
+        }
+
+        private void FramePadding_Deduct()
+        {
+            _frameDeduction = (int)(_frame_basicDeduction * Frame_Zoom);
+            Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom) - _frameDeduction);
+            FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
+        }
+
+        private void FramePadding_Default()
+        {
+            Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom));
+            FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type) * FrameImageRenderer_Zoom));
+        }
+
+        private bool _deductFramePadding_bool;
+        public void SetDeductFramePadding(bool mode)
+        {
+            _deductFramePadding_bool = mode;
+            if (mode == true)
+            {
+                FramePadding_Deduct();
+            }
+            else if (mode == false)
+            {
+                FramePadding_Default();
+            }
         }
 
         public FrameModel(int frameID,

@@ -143,16 +143,16 @@ namespace PresentationLayer.Presenter.UserControls
                     flow = FlowDirection.TopDown;
                 }
 
-                _frameModel.SetArrayUsed("_arr_padding_withmpnl");
-                _frameModel.SetFramePadding();
+                _frameModel.SetDeductFramePadding(true);
                 
-                int wd = frame.Width - _frameModel.Frame_Padding_int.All * 2,
-                    ht = frame.Height - _frameModel.Frame_Padding_int.All * 2;
+                int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                    ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
                 _multipanelModel = _multipanelServices.AddMultiPanelModel(wd,
                                                                           ht,
                                                                           frame,
                                                                           frame,
+                                                                          _frameModel,
                                                                           true,
                                                                           flow,
                                                                           _frameModel.Frame_Zoom,
@@ -232,15 +232,6 @@ namespace PresentationLayer.Presenter.UserControls
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
                 _frameModel.FrameProp_Height += 148;
-
-                //if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                //{
-                //    _frameModel.Frame_Padding_int = new Padding(26);
-                //}
-                //else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                //{
-                //    _frameModel.Frame_Padding_int = new Padding(33);
-                //}
 
                 if (data == "Fixed Panel")
                 {
@@ -355,7 +346,7 @@ namespace PresentationLayer.Presenter.UserControls
             frameBinding.Add("Frame_Visible", new Binding("Visible", _frameModel, "Frame_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Width", new Binding("Width", _frameModel, "Frame_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Height", new Binding("Height", _frameModel, "Frame_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
-            frameBinding.Add("Frame_Padding", new Binding("thisPadding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
+            frameBinding.Add("Frame_Padding", new Binding("Padding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_ID", new Binding("frameID", _frameModel, "Frame_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Name", new Binding("Name", _frameModel, "Frame_Name", true, DataSourceUpdateMode.OnPropertyChanged));
 
@@ -451,6 +442,7 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatformUCP.InvalidateBasePlatform();
             _basePlatformUCP.Invalidate_flpMain();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
         }
 
         public void ViewDeleteControl(UserControl control)

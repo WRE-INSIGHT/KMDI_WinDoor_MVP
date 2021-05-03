@@ -8,6 +8,8 @@ namespace ModelLayer.Model.Quotation.Frame
 {
     public interface IFrameModel
     {
+        int Frame_BasicDeduction { get; }
+
         int Frame_Height { get; set; }
         int FrameImageRenderer_Height { get; set; }
         int Frame_ID { get; set; }
@@ -30,5 +32,8 @@ namespace ModelLayer.Model.Quotation.Frame
         void SetFramePadding();
         void SetFramePadding(bool has_deleteMpnl);
         void SetArrayUsed(string arrayUsed);
+
+        void SetDeductFramePadding(bool mode);
+        int Frame_Deduction { get; }
     }
 }
