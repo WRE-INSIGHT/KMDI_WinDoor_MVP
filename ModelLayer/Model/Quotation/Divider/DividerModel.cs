@@ -200,28 +200,8 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divZoom = value;
-
-                if (Div_Type == DividerType.Mullion)
-                {
-                    Div_HeightToBind = Div_Parent.Height; //(int)(value * Div_Height);
-
-                    if (Div_FrameType == "Window")
-                    {
-                        if (value == 1.0f)
-                        {
-                            Div_WidthToBind = _arr_divSizes[0];
-                        }
-                        else if (value == 0.5f)
-                        {
-                            Div_WidthToBind = _arr_divSizes[2];
-                        }
-                    }
-                    else if (Div_FrameType == "Door")
-                    {
-                        Div_WidthToBind = _arr_divSizes[1];
-                    }
-                }
-
+                Div_HeightToBind = (int)(value * Div_Height);
+                Div_WidthToBind = (int)(value * Div_Width);
             }
         }
 
