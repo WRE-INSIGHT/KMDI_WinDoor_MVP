@@ -391,7 +391,33 @@ namespace PresentationLayer.Presenter
                         }
                         else if (ctrl is IMultiPanelUC)
                         {
-
+                            IMultiPanelUC multi = (IMultiPanelUC)ctrl;
+                            if (multi.MPanel_Placement == "Last")
+                            {
+                                IMultiPanelModel mpnlModel = mpanel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_ID == multi.MPanel_ID);
+                                if (mpanel.MPanel_Type == "Mullion")
+                                {
+                                    while (ctrl.Location.Y > ctrl.Margin.Top)
+                                    {
+                                        mpnlModel.MPanel_WidthToBind--;
+                                        if (ctrl.Location.Y == ctrl.Margin.Top)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (mpanel.MPanel_Type == "Transom")
+                                {
+                                    while (ctrl.Location.X > ctrl.Margin.Left)
+                                    {
+                                        mpnlModel.MPanel_HeightToBind--;
+                                        if (ctrl.Location.X == ctrl.Margin.Left)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

@@ -268,15 +268,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _frameModel.FrameProp_Height += (129 + 3); // +3 for MultiPanelProperties' Margin
                     _multiPanelModel.MPanelProp_Height += (129 + 3);
 
-                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                    {
-                        _frameModel.Frame_Padding_int = new Padding(16);
-                    }
-                    else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                    {
-                        _frameModel.Frame_Padding_int = new Padding(23);
-                    }
-
                     if (data.Contains("Mullion"))
                     {
 
@@ -413,7 +404,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                     }
-                    _mainPresenter.windoorModel_MainPresenter.WD_zoom = _frameModel.Frame_Zoom;
                 }
             }
             else
@@ -2950,6 +2940,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiPanelBinding.Add("MPanel_Width", new Binding("Width", _multiPanelModel, "MPanel_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Height", new Binding("Height", _multiPanelModel, "MPanel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            multiPanelBinding.Add("MPanel_Placement", new Binding("MPanel_Placement", _multiPanelModel, "MPanel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return multiPanelBinding;
         }
