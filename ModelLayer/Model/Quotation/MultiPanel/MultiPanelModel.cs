@@ -62,6 +62,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        [Description("Virtual Width that represents the definite given value and used by the program only. (not intended for user to use)")]
         private int _mpanelWidth;
         public int MPanel_Width
         {
@@ -111,6 +112,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        [Description("Virtual Width that is dependent on MPanel_Width and MPanel_Zoomand varies accordingly. (not intended for user to use)")]
         private int _mpanelWidthToBind;
         public int MPanel_WidthToBind
         {
@@ -125,6 +127,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        [Description("Virtual Width that is used for user's output")]
+        private int _mpanelDisplayWidth;
+        public int MPanel_DisplayWidth
+        {
+            get
+            {
+                return _mpanelDisplayWidth;
+            }
+            set
+            {
+                _mpanelDisplayWidth = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        [Description("Virtual Height that represents the definite given value and used by the program only. (not intended for user to use)")]
         private int _mpanelHeight;
         public int MPanel_Height
         {
@@ -174,6 +192,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        [Description("Virtual Height that is dependent on MPanel_Height and MPanel_Zoom and varies accordingly. (not intended for user to use)")]
         private int _mpanelHeightToBind;
         public int MPanel_HeightToBind
         {
@@ -184,6 +203,21 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             set
             {
                 _mpanelHeightToBind = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        [Description("Virtual Height that is used for user's output")]
+        private int _mpanelDisplayHeight;
+        public int MPanel_DisplayHeight
+        {
+            get
+            {
+                return _mpanelDisplayHeight;
+            }
+            set
+            {
+                _mpanelDisplayHeight = value;
                 NotifyPropertyChanged();
             }
         }
