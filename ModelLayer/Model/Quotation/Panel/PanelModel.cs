@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -58,6 +60,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        [Description("Virtual Width that represents the definite given value and used by the program only. (not intended for user to use)")]
         private int _panelWidth;
         public int Panel_Width
         {
@@ -69,11 +72,12 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelWidth = value;
                 PanelImageRenderer_Width = Convert.ToInt32(value * PanelImageRenderer_Zoom);
-                //Panel_WidthToBind = (int)(value * Panel_Zoom);
+                Panel_WidthToBind = (int)(value * Panel_Zoom);
                 //NotifyPropertyChanged();
             }
         }
 
+        [Description("Virtual Width that is dependent on Panel_Width and Panel_Zoomand varies accordingly. (not intended for user to use)")]
         private int _panelWidthToBind;
         public int Panel_WidthToBind
         {
@@ -88,6 +92,22 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        [Description("Virtual Width that is used for user's output")]
+        private int _panelDisplayWidth;
+        public int Panel_DisplayWidth
+        {
+            get
+            {
+                return _panelDisplayWidth;
+            }
+            set
+            {
+                _panelDisplayWidth = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        [Description("Virtual Height that represents the definite given value and used by the program only. (not intended for user to use)")]
         private int _panelHeight;
         public int Panel_Height
         {
@@ -99,11 +119,12 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelHeight = value;
                 PanelImageRenderer_Height = Convert.ToInt32(value * PanelImageRenderer_Zoom);
-                //Panel_HeightToBind = (int)(value * Panel_Zoom);
+                Panel_HeightToBind = (int)(value * Panel_Zoom);
                 //NotifyPropertyChanged();
             }
         }
 
+        [Description("Virtual Height that is dependent on Panel_Height and Panel_Zoom and varies accordingly. (not intended for user to use)")]
         private int _panelHeightToBind;
         public int Panel_HeightToBind
         {
@@ -114,6 +135,21 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelHeightToBind = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        [Description("Virtual Height that is used for user's output")]
+        private int _panelDisplayHeight;
+        public int Panel_DisplayHeight
+        {
+            get
+            {
+                return _panelDisplayHeight;
+            }
+            set
+            {
+                _panelDisplayHeight = value;
                 NotifyPropertyChanged();
             }
         }
@@ -463,6 +499,9 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public IFrameModel Panel_ParentFrameModel { get; set; }
+        public IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
+
         public PanelModel(int panelID,
                           string panelName,
                           int panelWd,
@@ -477,7 +516,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           UserControl panelMultiPanelGroup,
                           int panelIndexInsideMPanel,
                           float panelImageRendererZoom,
-                          float panelZoom)
+                          float panelZoom,
+                          IFrameModel panelFrameModelParent,
+                          IMultiPanelModel panelMultiPanelParent)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -494,6 +535,28 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_Index_Inside_MPanel = panelIndexInsideMPanel;
             PanelImageRenderer_Zoom = panelImageRendererZoom;
             Panel_Zoom = panelZoom;
+            Panel_ParentFrameModel = panelFrameModelParent;
+            Panel_ParentMultiPanelModel = panelMultiPanelParent;
+
+
+            if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel == null) //parent == frame
+            {
+                Panel_DisplayWidth = Panel_ParentFrameModel.Frame_Width;
+                Panel_DisplayHeight = Panel_ParentFrameModel.Frame_Height;
+            }
+            else if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel != null) //parent == multipanel
+            {
+                if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                {
+                    Panel_DisplayWidth = Panel_ParentMultiPanelModel.MPanel_DisplayWidth / (Panel_ParentMultiPanelModel.MPanel_Divisions + 1);
+                    Panel_DisplayHeight = Panel_ParentMultiPanelModel.MPanel_DisplayHeight;
+                }
+                else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
+                {
+                    Panel_DisplayWidth = Panel_ParentMultiPanelModel.MPanel_DisplayWidth;
+                    Panel_DisplayHeight = Panel_ParentMultiPanelModel.MPanel_DisplayHeight / (Panel_ParentMultiPanelModel.MPanel_Divisions + 1);
+                }
+            }
         }
     }
 }

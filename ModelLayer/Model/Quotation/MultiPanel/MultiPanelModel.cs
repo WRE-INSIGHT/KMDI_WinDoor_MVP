@@ -382,18 +382,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
-        private IFrameModel _mpanelFrameModelParent;
-        public IFrameModel MPanel_FrameModelParent
-        {
-            get
-            {
-                return _mpanelFrameModelParent;
-            }
-            set
-            {
-                _mpanelFrameModelParent = value;
-            }
-        }
+        public IFrameModel MPanel_FrameModelParent { get; set; }
 
         private Padding _mpanelMargin;
         public Padding MPanel_Margin
@@ -1110,6 +1099,25 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             else if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
             {
                 _mpnl_add = 10;
+            }
+
+            if (MPanel_FrameModelParent != null && MPanel_ParentModel == null) //parent == frame
+            {
+                MPanel_DisplayWidth = MPanel_FrameModelParent.Frame_Width;
+                MPanel_DisplayHeight = MPanel_FrameModelParent.Frame_Height;
+            }
+            else if (MPanel_FrameModelParent != null && MPanel_ParentModel != null) //parent == multipanel
+            {
+                if (MPanel_ParentModel.MPanel_Type == "Mullion")
+                {
+                    MPanel_DisplayWidth = MPanel_ParentModel.MPanel_DisplayWidth / (MPanel_ParentModel.MPanel_Divisions + 1);
+                    MPanel_DisplayHeight = MPanel_ParentModel.MPanel_DisplayHeight;
+                }
+                else if (MPanel_ParentModel.MPanel_Type == "Transom")
+                {
+                    MPanel_DisplayWidth = MPanel_ParentModel.MPanel_DisplayWidth;
+                    MPanel_DisplayHeight = MPanel_ParentModel.MPanel_DisplayHeight / (MPanel_ParentModel.MPanel_Divisions + 1);
+                }
             }
         }
     }

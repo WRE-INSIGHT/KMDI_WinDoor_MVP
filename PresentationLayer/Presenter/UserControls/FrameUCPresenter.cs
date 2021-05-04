@@ -226,6 +226,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                            data,
                                                            true,
                                                            _frameModel.Frame_Zoom,
+                                                           _frameModel,
+                                                           null,
                                                            panelID);
                 _frameModel.Lst_Panel.Add(_panelModel);
 

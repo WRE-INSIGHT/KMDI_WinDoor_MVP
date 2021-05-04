@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ServiceLayer.CommonServices;
 using ModelLayer.Model.Quotation.Panel;
 using System.Windows.Forms;
+using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace ServiceLayer.Services.PanelServices
 {
@@ -33,7 +35,9 @@ namespace ServiceLayer.Services.PanelServices
                                             UserControl panelMultiPanelGroup,
                                             int panelIndexInsideMPanel,
                                             float panelImageRendererZoom,
-                                            float panelZoom)
+                                            float panelZoom,
+                                            IFrameModel panelFrameModelParent,
+                                            IMultiPanelModel panelMultiPanelParent)
         {
             PanelModel pnl = new PanelModel(panelID,
                                             panelName,
@@ -49,7 +53,9 @@ namespace ServiceLayer.Services.PanelServices
                                             panelMultiPanelGroup,
                                             panelIndexInsideMPanel,
                                             panelImageRendererZoom,
-                                            panelZoom);
+                                            panelZoom,
+                                            panelFrameModelParent,
+                                            panelMultiPanelParent);
 
             ValidateModel(pnl);
             return pnl;
@@ -69,6 +75,8 @@ namespace ServiceLayer.Services.PanelServices
                                          string panelType,
                                          bool panelVisibility,
                                          float panelZoom,
+                                         IFrameModel panelFrameModelParent,
+                                         IMultiPanelModel panelMultiPanelParent,
                                          int panelID = 0,
                                          float panelImageRendererZoom = 1,
                                          int panelIndexInsideMPanel = 0,
@@ -95,7 +103,9 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelMultiPanelGroup,
                                                        panelIndexInsideMPanel,
                                                        panelImageRendererZoom,
-                                                       panelZoom);
+                                                       panelZoom,
+                                                       panelFrameModelParent,
+                                                       panelMultiPanelParent);
 
             return _panelModel;
         }

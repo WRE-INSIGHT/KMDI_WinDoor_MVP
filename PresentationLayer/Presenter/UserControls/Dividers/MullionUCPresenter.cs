@@ -306,22 +306,29 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 {
                     if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
                     {
-                        if (prev_ctrl is IMultiPanelUC)
+                        if (expected_Panel1MinWD >= 30 && expected_Panel2MinWD >= 30)
                         {
-                            prev_mpanel.MPanel_Width += (e.X - _point_of_origin.X);
-                        }
-                        else if (prev_ctrl is IPanelUC)
-                        {
-                            prev_pnl.Panel_Width += (e.X - _point_of_origin.X);
-                        }
+                            if (prev_ctrl is IMultiPanelUC)
+                            {
+                                prev_mpanel.MPanel_Width += (e.X - _point_of_origin.X);
+                                prev_mpanel.MPanel_DisplayWidth += (e.X - _point_of_origin.X);
+                            }
+                            else if (prev_ctrl is IPanelUC)
+                            {
+                                prev_pnl.Panel_Width += (e.X - _point_of_origin.X);
+                                prev_pnl.Panel_DisplayWidth += (e.X - _point_of_origin.X);
+                            }
 
-                        if (nxt_ctrl is IMultiPanelUC)
-                        {
-                            nxt_mpnl.MPanel_Width -= (e.X - _point_of_origin.X);
-                        }
-                        else if (nxt_ctrl is IPanelUC)
-                        {
-                            nxt_pnl.Panel_Width -= (e.X - _point_of_origin.X);
+                            if (nxt_ctrl is IMultiPanelUC)
+                            {
+                                nxt_mpnl.MPanel_Width -= (e.X - _point_of_origin.X);
+                                nxt_mpnl.MPanel_DisplayWidth -= (e.X - _point_of_origin.X);
+                            }
+                            else if (nxt_ctrl is IPanelUC)
+                            {
+                                nxt_pnl.Panel_Width -= (e.X - _point_of_origin.X);
+                                nxt_pnl.Panel_DisplayWidth -= (e.X - _point_of_origin.X);
+                            }
                         }
                     }
                 }

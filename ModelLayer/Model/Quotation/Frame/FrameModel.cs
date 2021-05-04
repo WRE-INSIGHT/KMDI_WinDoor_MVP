@@ -560,6 +560,23 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        #region Explosion
+
+        private int _frameExplosionWidth;
+        public int Frame_ExplosionWidth
+        {
+            get
+            {
+                return _frameExplosionWidth;
+            }
+            set
+            {
+                _frameExplosionWidth = value;
+            }
+        }
+
+        #endregion
+
         public FrameModel(int frameID,
                           string frameName,
                           int frameWd,

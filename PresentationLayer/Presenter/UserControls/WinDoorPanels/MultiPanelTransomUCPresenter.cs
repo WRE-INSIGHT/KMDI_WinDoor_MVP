@@ -446,6 +446,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                data,
                                                                true,
                                                                _frameModel.Frame_Zoom,
+                                                               _frameModel,
+                                                               _multiPanelModel,
                                                                panelID,
                                                                _frameModel.FrameImageRenderer_Zoom,
                                                                _multiPanelModel.GetNextIndex(),

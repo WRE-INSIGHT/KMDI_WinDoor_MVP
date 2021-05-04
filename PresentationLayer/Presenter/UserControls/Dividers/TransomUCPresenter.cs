@@ -15,6 +15,7 @@ using System.Drawing.Drawing2D;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ModelLayer.Model.Quotation.Frame;
 using PresentationLayer.CommonMethods;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -255,16 +256,29 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 IMultiPanelModel prev_mpanel = null, 
                                  nxt_mpnl = null;
 
+                IPanelModel prev_pnl = null,
+                            nxt_pnl = null;
+
                 if (prev_ctrl is IMultiPanelUC)
                 {
                     prev_mpanel = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prev_ctrl.Name);
                     expected_Panel1MinHT = prev_mpanel.MPanel_Height + (e.Y - _point_of_origin.Y);
+                }
+                else if (prev_ctrl is IPanelUC)
+                {
+                    prev_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_ctrl.Name);
+                    expected_Panel1MinHT = prev_pnl.Panel_Height + (e.Y - _point_of_origin.Y);
                 }
 
                 if (nxt_ctrl is IMultiPanelUC)
                 {
                     nxt_mpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == nxt_ctrl.Name);
                     expected_Panel2MinHT = nxt_mpnl.MPanel_Height - (e.Y - _point_of_origin.Y);
+                }
+                else if (nxt_ctrl is IPanelUC)
+                {
+                    nxt_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == nxt_ctrl.Name);
+                    expected_Panel2MinHT = nxt_pnl.Panel_Height - (e.Y - _point_of_origin.Y);
                 }
 
                 FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
@@ -279,10 +293,18 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             {
                                 prev_mpanel.MPanel_Height += (e.Y - _point_of_origin.Y);
                             }
+                            else if (prev_ctrl is IPanelUC)
+                            {
+                                prev_pnl.Panel_Height += (e.Y - _point_of_origin.Y);
+                            }
 
                             if (nxt_ctrl is IMultiPanelUC)
                             {
                                 nxt_mpnl.MPanel_Height -= (e.Y - _point_of_origin.Y);
+                            }
+                            else if (nxt_ctrl is IPanelUC)
+                            {
+                                nxt_pnl.Panel_Height -= (e.Y - _point_of_origin.Y);
                             }
                         }
                     }

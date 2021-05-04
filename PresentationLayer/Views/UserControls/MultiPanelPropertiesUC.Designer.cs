@@ -78,6 +78,7 @@
             // 
             // num_Width
             // 
+            this.num_Width.Enabled = false;
             this.num_Width.Location = new System.Drawing.Point(3, 54);
             this.num_Width.Maximum = new decimal(new int[] {
             400,
@@ -105,6 +106,7 @@
             // 
             // num_Height
             // 
+            this.num_Height.Enabled = false;
             this.num_Height.Location = new System.Drawing.Point(3, 95);
             this.num_Height.Maximum = new decimal(new int[] {
             400,

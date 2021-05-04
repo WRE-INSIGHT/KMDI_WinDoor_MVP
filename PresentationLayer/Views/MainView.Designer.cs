@@ -82,6 +82,7 @@
             this.lblZoom = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
+            this.listOfMaterialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -125,7 +126,7 @@
             this.QuotationToolStripMenuItem,
             this.ItemToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
             // 
             // QuotationToolStripMenuItem
@@ -163,14 +164,14 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             // 
             // syncToolStripMenuItem
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // costingToolStripMenuItem
@@ -186,13 +187,13 @@
             // 
             this.CostingItemsToolStripMenuItem.Enabled = false;
             this.CostingItemsToolStripMenuItem.Name = "CostingItemsToolStripMenuItem";
-            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.CostingItemsToolStripMenuItem.Text = "Items";
             // 
             // defaultValuesToolStripMenuItem
             // 
             this.defaultValuesToolStripMenuItem.Name = "defaultValuesToolStripMenuItem";
-            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.defaultValuesToolStripMenuItem.Text = "Default values";
             this.defaultValuesToolStripMenuItem.Visible = false;
             // 
@@ -218,7 +219,8 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeSyncDirectoryToolStripMenuItem,
             this.syncLocalToCloudToolStripMenuItem,
-            this.editorToolStripMenuItem});
+            this.editorToolStripMenuItem,
+            this.listOfMaterialsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -656,6 +658,12 @@
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblSize.Click += new System.EventHandler(this.lblSize_Click);
             // 
+            // listOfMaterialsToolStripMenuItem
+            // 
+            this.listOfMaterialsToolStripMenuItem.Name = "listOfMaterialsToolStripMenuItem";
+            this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.listOfMaterialsToolStripMenuItem.Text = "List of Materials";
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -748,5 +756,6 @@
         private System.Windows.Forms.ToolStripLabel tsLbl_SelectedDivider;
         private System.Windows.Forms.Button btnMinusZoom;
         private System.Windows.Forms.Button btnPlusZoom;
+        private System.Windows.Forms.ToolStripMenuItem listOfMaterialsToolStripMenuItem;
     }
 }

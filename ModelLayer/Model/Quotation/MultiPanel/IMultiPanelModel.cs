@@ -36,6 +36,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         float MPanel_Zoom { get; set; }
         int MPanel_WidthToBind { get; set; }
         int MPanel_AddPixel { get; }
+        int MPanel_DisplayWidth { get; set; }
+        int MPanel_DisplayHeight { get; set; }
 
         int GetNextIndex();
         int GetCount_MPanelLst_Object();

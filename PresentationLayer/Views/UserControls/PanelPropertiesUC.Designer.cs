@@ -114,6 +114,7 @@
             // 
             // pnum_Width
             // 
+            this.pnum_Width.Enabled = false;
             this.pnum_Width.Location = new System.Drawing.Point(7, 75);
             this.pnum_Width.Name = "pnum_Width";
             this.pnum_Width.Size = new System.Drawing.Size(135, 20);
@@ -121,6 +122,7 @@
             // 
             // pnum_Height
             // 
+            this.pnum_Height.Enabled = false;
             this.pnum_Height.Location = new System.Drawing.Point(7, 118);
             this.pnum_Height.Name = "pnum_Height";
             this.pnum_Height.Size = new System.Drawing.Size(135, 20);

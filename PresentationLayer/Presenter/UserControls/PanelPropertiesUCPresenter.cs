@@ -27,7 +27,30 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _panelPropertiesUC.PanelPropertiesLoadEventRaised += new EventHandler(OnPanelPropertiesLoadEventRaised);
             _panelPropertiesUC.ChkOrientationCheckChangedEventRaised += _panelPropertiesUC_ChkOrientationCheckChangedEventRaised;
+            //_panelPropertiesUC.PnumWidthValueChangedEventRaised += _panelPropertiesUC_PnumWidthValueChangedEventRaised;
+            //_panelPropertiesUC.PnumHeightValueChangedEventRaised += _panelPropertiesUC_PnumHeightValueChangedEventRaised;
         }
+
+        //int prev_Width, prev_Height;
+        //private void _panelPropertiesUC_PnumHeightValueChangedEventRaised(object sender, EventArgs e)
+        //{
+        //    NumericUpDown numH = (NumericUpDown)sender;
+        //    if (numH.Enabled)
+        //    {
+        //        _panelModel.Panel_Height += (prev_Height - (int)numH.Value);
+        //        prev_Height = (int)numH.Value;
+        //    }
+        //}
+
+        //private void _panelPropertiesUC_PnumWidthValueChangedEventRaised(object sender, EventArgs e)
+        //{
+        //    NumericUpDown numW = (NumericUpDown)sender;
+        //    if (numW.Enabled)
+        //    {
+        //        _panelModel.Panel_Width += (prev_Width - (int)numW.Value);
+        //        prev_Width = (int)numW.Value;
+        //    }
+        //}
 
         private void _panelPropertiesUC_ChkOrientationCheckChangedEventRaised(object sender, EventArgs e)
         {
@@ -43,8 +66,10 @@ namespace PresentationLayer.Presenter.UserControls
         {
             Dictionary<string, Binding> panelBinding = new Dictionary<string, Binding>();
             panelBinding.Add("Panel_ID", new Binding("Panel_ID", _panelModel, "Panel_ID", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Width", new Binding("Value", _panelModel, "Panel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Height", new Binding("Value", _panelModel, "Panel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Width", new Binding("Value", _panelModel, "Panel_DisplayWidth", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Height", new Binding("Value", _panelModel, "Panel_DisplayHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            //panelBinding.Add("Panel_Width", new Binding("Value", _panelModel, "Panel_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
+            //panelBinding.Add("Panel_Height", new Binding("Value", _panelModel, "Panel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Name", new Binding("Text", _panelModel, "Panel_Name", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Type", new Binding("Text", _panelModel, "Panel_Type", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_ChkText", new Binding("Text", _panelModel, "Panel_ChkText", true, DataSourceUpdateMode.OnPropertyChanged));

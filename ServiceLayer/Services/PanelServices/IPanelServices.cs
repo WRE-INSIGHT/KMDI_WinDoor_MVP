@@ -1,5 +1,7 @@
 ﻿using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace ServiceLayer.Services.PanelServices
 {
@@ -15,6 +17,8 @@ namespace ServiceLayer.Services.PanelServices
                                   string panelType,
                                   bool panelVisibility,
                                   float panelZoom,
+                                  IFrameModel panelFrameModelParent,
+                                  IMultiPanelModel panelMultiPanelParent,
                                   int panelID = 0,
                                   float panelImageRendererZoom = 1,
                                   int panelIndexInsideMPanel = 0,

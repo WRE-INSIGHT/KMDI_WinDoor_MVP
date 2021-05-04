@@ -46,8 +46,8 @@ namespace PresentationLayer.Views.UserControls
         {
             pnum_Width.DataBindings.Add(ModelBinding["Panel_Width"]);
             pnum_Height.DataBindings.Add(ModelBinding["Panel_Height"]);
-            pnum_Width.DataBindings.Add(ModelBinding["Panel_PNumEnable1"]);
-            pnum_Height.DataBindings.Add(ModelBinding["Panel_PNumEnable2"]);
+            //pnum_Width.DataBindings.Add(ModelBinding["Panel_PNumEnable1"]);
+            //pnum_Height.DataBindings.Add(ModelBinding["Panel_PNumEnable2"]);
             lbl_pnlname.DataBindings.Add(ModelBinding["Panel_Name"]);
             lbl_Type.DataBindings.Add(ModelBinding["Panel_Type"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_ChkText"]);
