@@ -15,6 +15,7 @@ using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using ModelLayer.Model.Quotation.Frame;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -274,16 +275,29 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 IMultiPanelModel prev_mpanel = null,
                                  nxt_mpnl = null;
 
+                IPanelModel prev_pnl = null,
+                            nxt_pnl = null;
+
                 if (prev_ctrl is IMultiPanelUC)
                 {
                     prev_mpanel = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prev_ctrl.Name);
                     expected_Panel1MinWD = prev_mpanel.MPanel_Width + (e.X - _point_of_origin.X);
+                }
+                else if (prev_ctrl is IPanelUC)
+                {
+                    prev_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_ctrl.Name);
+                    expected_Panel1MinWD = prev_pnl.Panel_Width + (e.X - _point_of_origin.X);
                 }
 
                 if (nxt_ctrl is IMultiPanelUC)
                 {
                     nxt_mpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == nxt_ctrl.Name);
                     expected_Panel2MinWD = nxt_mpnl.MPanel_Width - (e.X - _point_of_origin.X);
+                }
+                else if (nxt_ctrl is IPanelUC)
+                {
+                    nxt_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == nxt_ctrl.Name);
+                    expected_Panel2MinWD = nxt_pnl.Panel_Width - (e.X - _point_of_origin.X);
                 }
 
                 FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
@@ -296,10 +310,18 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         {
                             prev_mpanel.MPanel_Width += (e.X - _point_of_origin.X);
                         }
+                        else if (prev_ctrl is IPanelUC)
+                        {
+                            prev_pnl.Panel_Width += (e.X - _point_of_origin.X);
+                        }
 
                         if (nxt_ctrl is IMultiPanelUC)
                         {
                             nxt_mpnl.MPanel_Width -= (e.X - _point_of_origin.X);
+                        }
+                        else if (nxt_ctrl is IPanelUC)
+                        {
+                            nxt_pnl.Panel_Width -= (e.X - _point_of_origin.X);
                         }
                     }
                 }
