@@ -36,23 +36,9 @@ namespace PresentationLayer.Presenter
         IMainView GetMainView();
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);
-        void AddQuotationModel(string quotation_ref_no, List<IWindoorModel> lst_wndr = null);
         void AddWndrList_QuotationModel(IWindoorModel wndr);
         void AddFrameList_WindoorModel(IFrameModel frameModel);
         void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel);
-        IWindoorModel AddWindoorModel(int WD_width,
-                                      int WD_height,
-                                      string WD_Profile,
-                                      int WD_ID = 0,
-                                      string WD_name = "",
-                                      string WD_description = "",
-                                      int WD_quantity = 1,
-                                      bool WD_visibility = true,
-                                      bool WD_orientation = true,
-                                      float WD_zoom = 1.0f,
-                                      int WD_price = 0,
-                                      decimal WD_discount = 0.0M,
-                                      List<IFrameModel> lst_frame = null);
         IFramePropertiesUC GetFrameProperties(int frameID);
         int GetPanelCount();
         int GetMultiPanelCount();

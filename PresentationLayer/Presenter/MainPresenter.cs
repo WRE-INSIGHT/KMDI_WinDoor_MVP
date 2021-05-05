@@ -673,7 +673,7 @@ namespace PresentationLayer.Presenter
                 {
                     SetMainViewTitle(input_qrefno.ToUpper());
                     ItemToolStrip_Enable();
-                    AddQuotationModel(input_qrefno);
+                    _quotationModel = _quotationServices.AddQuotationModel(input_qrefno);
 
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
@@ -714,9 +714,10 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
                     {
-                        _windoorModel = AddWindoorModel(frmDimension_numWd,
-                                                        frmDimension_numHt,
-                                                        frmDimension_profileType);
+                        _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
+                                                                         frmDimension_numHt,
+                                                                         frmDimension_profileType,
+                                                                         _quotationModel.Lst_Windoor.Count() + 1);
                         AddWndrList_QuotationModel(_windoorModel);
 
                         _mainView.Zoom = _windoorModel.WD_zoom;
@@ -749,9 +750,10 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
-                        _windoorModel = AddWindoorModel(frmDimension_numWd,
-                                                        frmDimension_numHt,
-                                                        frmDimension_profileType);
+                        _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
+                                                                         frmDimension_numHt,
+                                                                         frmDimension_profileType,
+                                                                         _quotationModel.Lst_Windoor.Count() + 1);
                         AddWndrList_QuotationModel(_windoorModel);
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel);
@@ -844,64 +846,6 @@ namespace PresentationLayer.Presenter
         public void AddBasePlatform(IBasePlatformUC basePlatform)
         {
             _pnlMain.Controls.Add((UserControl)basePlatform);
-        }
-
-        public void AddQuotationModel(string quotation_ref_no,
-                                      List<IWindoorModel> lst_wndr = null)
-        {
-            if (lst_wndr == null)
-            {
-                lst_wndr = new List<IWindoorModel>();
-            }
-            _quotationModel = _quotationServices.CreateQuotationModel(quotation_ref_no, lst_wndr);
-        }
-
-        public IWindoorModel AddWindoorModel(int WD_width,
-                                             int WD_height,
-                                             string WD_Profile,
-                                             int WD_ID = 0,
-                                             string WD_name = "",
-                                             string WD_description = "",
-                                             int WD_quantity = 1,
-                                             bool WD_visibility = true,
-                                             bool WD_orientation = true,
-                                             float WD_zoom = 1.0f,
-                                             int WD_price = 0,
-                                             decimal WD_discount = 0.0M,
-                                             List<IFrameModel> lst_frame = null)
-        {
-            if (WD_ID == 0)
-            {
-                WD_ID = _quotationModel.Lst_Windoor.Count + 1;
-            }
-            if (WD_name == "")
-            {
-                WD_name = "Item " + WD_ID;
-            }
-            if (WD_description == "")
-            {
-                WD_description = WD_Profile;
-            }
-            if (lst_frame == null)
-            {
-                lst_frame = new List<IFrameModel>();
-            }
-
-            _windoorModel = _windoorServices.CreateWindoor(WD_ID,
-                                                           WD_name,
-                                                           WD_description,
-                                                           WD_width,
-                                                           WD_height,
-                                                           WD_price,
-                                                           WD_quantity,
-                                                           WD_discount,
-                                                           WD_visibility,
-                                                           WD_orientation,
-                                                           WD_zoom,
-                                                           WD_Profile,
-                                                           lst_frame);
-
-            return _windoorModel;
         }
 
         public void AddWndrList_QuotationModel(IWindoorModel wndr)

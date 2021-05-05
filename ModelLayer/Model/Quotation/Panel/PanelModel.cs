@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Panel
 {
@@ -502,6 +503,76 @@ namespace ModelLayer.Model.Quotation.Panel
         public IFrameModel Panel_ParentFrameModel { get; set; }
         public IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
 
+        #region Explosion
+
+        private string _panelGlassThickness;
+        public string Panel_GlassThickness
+        {
+            get
+            {
+                return _panelGlassThickness;
+            }
+            set
+            {
+                _panelGlassThickness = value;
+                if (value == "6-8mm")
+                {
+                    PanelGlass_ArtNo = Glass_ArticleNo._2452;
+                }
+                else if (value == "10mm")
+                {
+                    PanelGlass_ArtNo = Glass_ArticleNo._2451;
+                }
+                else if (value == "10.76-14mm")
+                {
+                    PanelGlass_ArtNo = Glass_ArticleNo._2453;
+                }
+                else if (value == "16mm")
+                {
+                    PanelGlass_ArtNo = Glass_ArticleNo._2436;
+                }
+                else if (value == "18mm")
+                {
+                    PanelGlass_ArtNo = Glass_ArticleNo._2438;
+                }
+                else if (value == "20mm")
+                {
+                    PanelGlass_ArtNo = Glass_ArticleNo._2437;
+                }
+                else if (value == "22mm")
+                {
+                    PanelGlass_ArtNo = Glass_ArticleNo._2434;
+                }
+                else if (value == "25mm")
+                {
+                    PanelGlass_ArtNo = Glass_ArticleNo._2435;
+                }
+            }
+        }
+        public Glass_ArticleNo PanelGlass_ArtNo { get; set; }
+        public int Panel_GlazingBeadWidth { get; set; }
+        public int Panel_GlazingBeadHeight { get; set; }
+        public int Panel_GlassWidth { get; set; }
+        public int Panel_GlassHeight { get; set; }
+        public int Panel_GlazingSpacerQty { get; set; }
+        public int Panel_SealantWHQty { get; set; }
+
+        private void SetPanelExplosionValues_Panel()
+        {
+            Panel_GlazingBeadWidth = Panel_DisplayWidth - (33 * 2);
+            Panel_GlazingBeadHeight = Panel_DisplayHeight - (33 * 2);
+
+            Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
+            Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
+
+            Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
+            Panel_GlazingSpacerQty = 1;
+
+            Panel_SealantWHQty = ((Panel_DisplayWidth + Panel_DisplayHeight) * 2) / 6842;
+        }
+
+        #endregion
+
         public PanelModel(int panelID,
                           string panelName,
                           int panelWd,
@@ -543,6 +614,8 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_DisplayWidth = Panel_ParentFrameModel.Frame_Width;
                 Panel_DisplayHeight = Panel_ParentFrameModel.Frame_Height;
+
+                SetPanelExplosionValues_Panel();
             }
             else if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel != null) //parent == multipanel
             {

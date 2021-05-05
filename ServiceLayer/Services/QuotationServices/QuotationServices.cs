@@ -20,12 +20,22 @@ namespace ServiceLayer.Services.QuotationServices
         public IQuotationModel CreateQuotationModel(string quotation_ref_no,
                                                     List<IWindoorModel> lst_wndr)
         {
-            QuotationModel qModel = new QuotationModel();
-            qModel.Quotation_ref_no = quotation_ref_no;
-            qModel.Lst_Windoor = lst_wndr;
+            QuotationModel qModel = new QuotationModel(quotation_ref_no, lst_wndr);
 
             ValidateModel(qModel);
             return qModel;
+        }
+
+        public IQuotationModel AddQuotationModel(string quotation_ref_no,
+                                                 List<IWindoorModel> lst_wndr = null)
+        {
+            if (lst_wndr == null)
+            {
+                lst_wndr = new List<IWindoorModel>();
+            }
+            IQuotationModel _quotationModel = CreateQuotationModel(quotation_ref_no, lst_wndr);
+
+            return _quotationModel;
         }
 
         public void ValidateModel(IQuotationModel quotationModel)

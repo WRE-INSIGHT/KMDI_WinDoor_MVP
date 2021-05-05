@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using System.Collections.Generic;
 using System.Drawing;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {

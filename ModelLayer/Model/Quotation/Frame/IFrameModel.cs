@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -35,5 +36,23 @@ namespace ModelLayer.Model.Quotation.Frame
 
         void SetDeductFramePadding(bool mode);
         int Frame_Deduction { get; }
+        //IEnumerable<IPanelModel> GetVisiblePanels();
+
+        #region Explosion
+
+        FrameProfile_ArticleNo Frame_ArtNo { get; set; }
+        int Frame_ExplosionWidth { get; set; }
+        int Frame_ExplosionHeight { get; set; }
+
+        FrameReinf_ArticleNo Frame_ReinfArtNo { get; set; }
+        int Frame_ReinfWidth { get; set; }
+        int Frame_ReinfHeight { get; set; }
+
+        int Frame_PUFoamingQty { get; set; }
+        int Frame_SealantWHQty { get; set; }
+
+        IEnumerable<IPanelModel> GetVisiblePanels();
+
+        #endregion
     }
 }

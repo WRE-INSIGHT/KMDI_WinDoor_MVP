@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -107,8 +108,8 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
-        private int[] _arr_padding_norm     = { 26, 33, 13, 15, 08, 10, 05, 07 }; //even index means window, odd index means door
-        private int[] _arr_padding_withmpnl = { 16, 23, 08, 12, 05, 07, 03, 06}; //even index means window, odd index means door
+        private int[] _arr_padding_norm = { 26, 33, 13, 15, 08, 10, 05, 07 }; //even index means window, odd index means door
+        private int[] _arr_padding_withmpnl = { 16, 23, 08, 12, 05, 07, 03, 06 }; //even index means window, odd index means door
 
         public int[] Arr_padding_norm
         {
@@ -560,19 +561,33 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        public IEnumerable<IPanelModel> GetVisiblePanels()
+        {
+            return Lst_Panel.Where(pnl => pnl.Panel_Visibility == true);
+        }
+
         #region Explosion
 
-        private int _frameExplosionWidth;
-        public int Frame_ExplosionWidth
+        public FrameProfile_ArticleNo Frame_ArtNo { get; set; }
+        public int Frame_ExplosionWidth { get; set; }
+        public int Frame_ExplosionHeight { get; set; }
+
+        public FrameReinf_ArticleNo Frame_ReinfArtNo { get; set; }
+        public int Frame_ReinfWidth { get; set; }
+        public int Frame_ReinfHeight { get; set; }
+
+        public int Frame_PUFoamingQty { get; set; }
+        public int Frame_SealantWHQty { get; set; }
+
+        private void SetExplosionValues_Frame()
         {
-            get
-            {
-                return _frameExplosionWidth;
-            }
-            set
-            {
-                _frameExplosionWidth = value;
-            }
+            Frame_ExplosionWidth = _frameWidth + 5;
+            Frame_ExplosionHeight = _frameHeight + 5;
+            Frame_ReinfWidth = _frameWidth - (29 * 2) - 10;
+            Frame_ReinfHeight = _frameHeight - (29 * 2) - 10;
+
+            Frame_PUFoamingQty = ((_frameWidth + _frameHeight) * 2) / 29694;
+            Frame_SealantWHQty = ((_frameWidth + _frameHeight) * 2) / 3570;
         }
 
         #endregion
@@ -602,14 +617,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Lst_Divider = lst_divider;
             Frame_Zoom = frameZoom;
 
-            //if (frameType == Frame_Padding.Window)
-            //{
-            //    Frame_Padding_int = new Padding(26);
-            //}
-            //else if (frameType == Frame_Padding.Door)
-            //{
-            //    Frame_Padding_int = new Padding(33);
-            //}
+            SetExplosionValues_Frame();
         }
     }
 }

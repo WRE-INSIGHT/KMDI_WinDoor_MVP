@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Panel
 {
@@ -29,5 +30,18 @@ namespace ModelLayer.Model.Quotation.Panel
         Padding Panel_Margin { get; set; }
         Padding Panel_MarginToBind { get; set; }
         float Panel_Zoom { get; set; }
+
+        #region Explosion
+
+        string Panel_GlassThickness { get; set; }
+        Glass_ArticleNo PanelGlass_ArtNo { get; set; }
+        int Panel_GlazingBeadWidth { get; set; }
+        int Panel_GlazingBeadHeight { get; set; }
+        int Panel_GlassWidth { get; set; }
+        int Panel_GlassHeight { get; set; }
+        int Panel_GlazingSpacerQty { get; set; }
+        int Panel_SealantWHQty { get; set; }
+
+        #endregion
     }
 }
