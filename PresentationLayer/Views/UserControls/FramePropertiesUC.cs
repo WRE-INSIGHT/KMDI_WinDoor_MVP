@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommonComponents;
 using ModelLayer.Model.Quotation.Frame;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -48,6 +49,7 @@ namespace PresentationLayer.Views.UserControls
             num_fWidth.Maximum = int.MaxValue;
             num_fHeight.Maximum = int.MaxValue;
             this.Dock = DockStyle.Top;
+            cmb_FrameProfile.DataSource = Enum.GetValues(typeof(FrameProfile_ArticleNo));
             EventHelpers.RaiseEvent(this, FramePropertiesLoadEventRaised, e);
         }
 
@@ -62,6 +64,8 @@ namespace PresentationLayer.Views.UserControls
             rdBtn_Window.DataBindings.Add(frameModelBinding["Frame_Type_Window"]);
             rdBtn_Door.DataBindings.Add(frameModelBinding["Frame_Type_Door"]);
             rdBtn_Concrete.DataBindings.Add(frameModelBinding["Frame_Type_Concrete"]);
+            cmb_FrameProfile.DataBindings.Add(frameModelBinding["Frame_ArtNo"]);
+            txt_FrameReinf.DataBindings.Add(frameModelBinding["Frame_ReinfArtNo"]);
         }
 
         private void num_fWidth_ValueChanged(object sender, EventArgs e)

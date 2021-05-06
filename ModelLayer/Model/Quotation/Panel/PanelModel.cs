@@ -517,45 +517,50 @@ namespace ModelLayer.Model.Quotation.Panel
                 _panelGlassThickness = value;
                 if (value == "6-8mm")
                 {
-                    PanelGlass_ArtNo = Glass_ArticleNo._2452;
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452;
                 }
                 else if (value == "10mm")
                 {
-                    PanelGlass_ArtNo = Glass_ArticleNo._2451;
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2451;
                 }
                 else if (value == "10.76-14mm")
                 {
-                    PanelGlass_ArtNo = Glass_ArticleNo._2453;
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2453;
                 }
                 else if (value == "16mm")
                 {
-                    PanelGlass_ArtNo = Glass_ArticleNo._2436;
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436;
                 }
                 else if (value == "18mm")
                 {
-                    PanelGlass_ArtNo = Glass_ArticleNo._2438;
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2438;
                 }
                 else if (value == "20mm")
                 {
-                    PanelGlass_ArtNo = Glass_ArticleNo._2437;
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2437;
                 }
                 else if (value == "22mm")
                 {
-                    PanelGlass_ArtNo = Glass_ArticleNo._2434;
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434;
                 }
                 else if (value == "25mm")
                 {
-                    PanelGlass_ArtNo = Glass_ArticleNo._2435;
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2435;
                 }
             }
         }
-        public Glass_ArticleNo PanelGlass_ArtNo { get; set; }
+        public GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
         public int Panel_GlazingBeadWidth { get; set; }
         public int Panel_GlazingBeadHeight { get; set; }
         public int Panel_GlassWidth { get; set; }
         public int Panel_GlassHeight { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
         public int Panel_SealantWHQty { get; set; }
+
+        public void Assign_GlassThickness(string glassThickness)
+        {
+            Panel_GlassThickness = glassThickness;
+        }
 
         private void SetPanelExplosionValues_Panel()
         {
@@ -565,10 +570,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
             Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
 
-            Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
             Panel_GlazingSpacerQty = 1;
-
-            Panel_SealantWHQty = ((Panel_DisplayWidth + Panel_DisplayHeight) * 2) / 6842;
+            Panel_SealantWHQty = (int)(Math.Ceiling((decimal)((Panel_GlassWidth + Panel_GlassHeight) * 2) / 6842));
         }
 
         #endregion

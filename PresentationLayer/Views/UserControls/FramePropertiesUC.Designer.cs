@@ -37,9 +37,17 @@
             this.num_fWidth = new System.Windows.Forms.NumericUpDown();
             this.lbl_Height = new System.Windows.Forms.Label();
             this.num_fHeight = new System.Windows.Forms.NumericUpDown();
+            this.pbl_specs = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_Specs = new System.Windows.Forms.Label();
+            this.lbl_FrameProfile = new System.Windows.Forms.Label();
+            this.txt_FrameReinf = new System.Windows.Forms.TextBox();
+            this.lbl_FrameReinf = new System.Windows.Forms.Label();
+            this.cmb_FrameProfile = new System.Windows.Forms.ComboBox();
             this.flp_frameProperties.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_fWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_fHeight)).BeginInit();
+            this.pbl_specs.SuspendLayout();
             this.SuspendLayout();
             // 
             // flp_frameProperties
@@ -54,13 +62,14 @@
             this.flp_frameProperties.Controls.Add(this.num_fWidth);
             this.flp_frameProperties.Controls.Add(this.lbl_Height);
             this.flp_frameProperties.Controls.Add(this.num_fHeight);
+            this.flp_frameProperties.Controls.Add(this.pbl_specs);
             this.flp_frameProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_frameProperties.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.flp_frameProperties.Location = new System.Drawing.Point(0, 0);
             this.flp_frameProperties.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flp_frameProperties.Name = "flp_frameProperties";
             this.flp_frameProperties.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
-            this.flp_frameProperties.Size = new System.Drawing.Size(154, 183);
+            this.flp_frameProperties.Size = new System.Drawing.Size(154, 306);
             this.flp_frameProperties.TabIndex = 0;
             // 
             // lbl_frameName
@@ -172,18 +181,98 @@
             0});
             this.num_fHeight.ValueChanged += new System.EventHandler(this.num_fHeight_ValueChanged_1);
             // 
+            // pbl_specs
+            // 
+            this.pbl_specs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbl_specs.Controls.Add(this.label1);
+            this.pbl_specs.Controls.Add(this.lbl_Specs);
+            this.pbl_specs.Controls.Add(this.lbl_FrameProfile);
+            this.pbl_specs.Controls.Add(this.txt_FrameReinf);
+            this.pbl_specs.Controls.Add(this.lbl_FrameReinf);
+            this.pbl_specs.Controls.Add(this.cmb_FrameProfile);
+            this.pbl_specs.Location = new System.Drawing.Point(3, 200);
+            this.pbl_specs.Name = "pbl_specs";
+            this.pbl_specs.Size = new System.Drawing.Size(147, 102);
+            this.pbl_specs.TabIndex = 12;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.label1.Location = new System.Drawing.Point(3, 28);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 15);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Article No.";
+            // 
+            // lbl_Specs
+            // 
+            this.lbl_Specs.AutoSize = true;
+            this.lbl_Specs.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.lbl_Specs.Location = new System.Drawing.Point(3, 4);
+            this.lbl_Specs.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.lbl_Specs.Name = "lbl_Specs";
+            this.lbl_Specs.Size = new System.Drawing.Size(129, 17);
+            this.lbl_Specs.TabIndex = 12;
+            this.lbl_Specs.Text = "Frame Specification";
+            // 
+            // lbl_FrameProfile
+            // 
+            this.lbl_FrameProfile.AutoSize = true;
+            this.lbl_FrameProfile.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lbl_FrameProfile.Location = new System.Drawing.Point(3, 51);
+            this.lbl_FrameProfile.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.lbl_FrameProfile.Name = "lbl_FrameProfile";
+            this.lbl_FrameProfile.Size = new System.Drawing.Size(41, 15);
+            this.lbl_FrameProfile.TabIndex = 9;
+            this.lbl_FrameProfile.Text = "Profile";
+            // 
+            // txt_FrameReinf
+            // 
+            this.txt_FrameReinf.Location = new System.Drawing.Point(47, 75);
+            this.txt_FrameReinf.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.txt_FrameReinf.Name = "txt_FrameReinf";
+            this.txt_FrameReinf.ReadOnly = true;
+            this.txt_FrameReinf.Size = new System.Drawing.Size(92, 22);
+            this.txt_FrameReinf.TabIndex = 11;
+            // 
+            // lbl_FrameReinf
+            // 
+            this.lbl_FrameReinf.AutoSize = true;
+            this.lbl_FrameReinf.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lbl_FrameReinf.Location = new System.Drawing.Point(3, 78);
+            this.lbl_FrameReinf.Margin = new System.Windows.Forms.Padding(3, 6, 7, 3);
+            this.lbl_FrameReinf.Name = "lbl_FrameReinf";
+            this.lbl_FrameReinf.Size = new System.Drawing.Size(34, 15);
+            this.lbl_FrameReinf.TabIndex = 10;
+            this.lbl_FrameReinf.Text = "Reinf";
+            // 
+            // cmb_FrameProfile
+            // 
+            this.cmb_FrameProfile.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_FrameProfile.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_FrameProfile.FormattingEnabled = true;
+            this.cmb_FrameProfile.Location = new System.Drawing.Point(47, 48);
+            this.cmb_FrameProfile.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
+            this.cmb_FrameProfile.Name = "cmb_FrameProfile";
+            this.cmb_FrameProfile.Size = new System.Drawing.Size(91, 21);
+            this.cmb_FrameProfile.TabIndex = 8;
+            // 
             // FramePropertiesUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flp_frameProperties);
             this.Name = "FramePropertiesUC";
-            this.Size = new System.Drawing.Size(154, 183);
+            this.Size = new System.Drawing.Size(154, 306);
             this.Load += new System.EventHandler(this.FramePropertiesUC_Load);
             this.flp_frameProperties.ResumeLayout(false);
             this.flp_frameProperties.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_fWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_fHeight)).EndInit();
+            this.pbl_specs.ResumeLayout(false);
+            this.pbl_specs.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,5 +289,12 @@
         private System.Windows.Forms.NumericUpDown num_fWidth;
         private System.Windows.Forms.Label lbl_Height;
         private System.Windows.Forms.NumericUpDown num_fHeight;
+        private System.Windows.Forms.ComboBox cmb_FrameProfile;
+        private System.Windows.Forms.Label lbl_FrameProfile;
+        private System.Windows.Forms.Label lbl_FrameReinf;
+        private System.Windows.Forms.TextBox txt_FrameReinf;
+        private System.Windows.Forms.Panel pbl_specs;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_Specs;
     }
 }

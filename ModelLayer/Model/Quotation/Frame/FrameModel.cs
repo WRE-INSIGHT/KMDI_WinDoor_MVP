@@ -271,260 +271,6 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
-        public void SetFramePadding(bool has_deleteMpnl)
-        {
-            int ndx_padding_norm = -1, // -1 meaning index was not found on array
-                ndx_padding_withmpnl = -1,
-                ndx_padding_toBeUsed = -1;
-
-            if (!has_deleteMpnl)
-            {
-                if (_framePadding != new Padding(0))
-                {
-                    ndx_padding_norm = Array.IndexOf(_arr_padding_norm, _framePadding.All);
-                    ndx_padding_withmpnl = Array.IndexOf(_arr_padding_withmpnl, _framePadding.All);
-
-                    if (_array_Used == "_arr_padding_norm")
-                    {
-                        ndx_padding_toBeUsed = ndx_padding_norm;
-                        //_array_Used = "_arr_padding_norm";
-                    }
-                    else if (_array_Used == "_arr_padding_withmpnl")
-                    {
-                        ndx_padding_toBeUsed = ndx_padding_withmpnl;
-                        //_array_Used = "_arr_padding_withmpnl";
-                    }
-
-                    if (Frame_Type == Frame_Padding.Door && ndx_padding_toBeUsed % 2 == 0) //Even
-                    {
-                        ndx_padding_toBeUsed++;
-                        if (_array_Used == "_arr_padding_norm")
-                        {
-                            Frame_Padding_int = new Padding(_arr_padding_norm[ndx_padding_toBeUsed]);
-                        }
-                        else if (_array_Used == "_arr_padding_withmpnl")
-                        {
-                            Frame_Padding_int = new Padding(_arr_padding_withmpnl[ndx_padding_toBeUsed]);
-                        }
-                    }
-                    else if (Frame_Type == Frame_Padding.Window && ndx_padding_toBeUsed % 2 != 0) //Odd
-                    {
-                        ndx_padding_toBeUsed--;
-                        if (_array_Used == "_arr_padding_norm")
-                        {
-                            Frame_Padding_int = new Padding(_arr_padding_norm[ndx_padding_toBeUsed]);
-                        }
-                        else if (_array_Used == "_arr_padding_withmpnl")
-                        {
-                            Frame_Padding_int = new Padding(_arr_padding_withmpnl[ndx_padding_toBeUsed]);
-                        }
-                    }
-                }
-                else if (_framePadding == new Padding(0))
-                {
-                    if (Frame_Type == Frame_Padding.Window)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[0]);
-                    }
-                    else if (Frame_Type == Frame_Padding.Door)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[1]);
-                    }
-                    _array_Used = "_arr_padding_norm";
-                }
-            }
-            else if (has_deleteMpnl)
-            {
-                if (Frame_Type == Frame_Padding.Window)
-                {
-                    Frame_Padding_int = new Padding(_arr_padding_norm[0]);
-                }
-                else if (Frame_Type == Frame_Padding.Door)
-                {
-                    Frame_Padding_int = new Padding(_arr_padding_norm[1]);
-                }
-                _array_Used = "_arr_padding_norm";
-            }
-        }
-
-        private string _array_Used = "";
-        public void SetFramePadding()
-        {
-            if (_array_Used == "_arr_padding_withmpnl")
-            {
-                if (Frame_Type == Frame_Padding.Window)
-                {
-                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[0]);
-                    }
-                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[2]);
-                    }
-                    else if (Frame_Zoom == 0.14f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[4]);
-                    }
-                    else if (Frame_Zoom == 0.10f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[6]);
-                    }
-                }
-                else if (Frame_Type == Frame_Padding.Door)
-                {
-                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[1]);
-                    }
-                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[3]);
-                    }
-                    else if (Frame_Zoom == 0.14f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[5]);
-                    }
-                    else if (Frame_Zoom == 0.10f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_withmpnl[7]);
-                    }
-                }
-            }
-            else if (_array_Used == "_arr_padding_norm")
-            {
-                if (Frame_Type == Frame_Padding.Window)
-                {
-                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[0]);
-                    }
-                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[2]);
-                    }
-                    else if (Frame_Zoom == 0.14f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[4]);
-                    }
-                    else if (Frame_Zoom == 0.10f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[6]);
-                    }
-                }
-                else if (Frame_Type == Frame_Padding.Door)
-                {
-                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[1]);
-                    }
-                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[3]);
-                    }
-                    else if (Frame_Zoom == 0.14f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[5]);
-                    }
-                    else if (Frame_Zoom == 0.10f)
-                    {
-                        Frame_Padding_int = new Padding(_arr_padding_norm[7]);
-                    }
-                }
-            }
-        }
-
-        private void SetFramePadding_ImageRenderer()
-        {
-            if (_array_Used == "_arr_padding_withmpnl")
-            {
-                if (Frame_Type == Frame_Padding.Window)
-                {
-                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_withmpnl[0]);
-                    }
-                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_withmpnl[2]);
-                    }
-                    else if (Frame_Zoom == 0.14f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_withmpnl[4]);
-                    }
-                    else if (Frame_Zoom == 0.10f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_withmpnl[6]);
-                    }
-                }
-                else if (Frame_Type == Frame_Padding.Door)
-                {
-                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_withmpnl[1]);
-                    }
-                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_withmpnl[3]);
-                    }
-                    else if (Frame_Zoom == 0.14f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_withmpnl[5]);
-                    }
-                    else if (Frame_Zoom == 0.10f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_withmpnl[7]);
-                    }
-                }
-            }
-            else if (_array_Used == "_arr_padding_norm")
-            {
-                if (Frame_Type == Frame_Padding.Window)
-                {
-                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_norm[0]);
-                    }
-                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_norm[2]);
-                    }
-                    else if (Frame_Zoom == 0.14f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_norm[4]);
-                    }
-                    else if (Frame_Zoom == 0.10f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_norm[6]);
-                    }
-                }
-                else if (Frame_Type == Frame_Padding.Door)
-                {
-                    if (Frame_Zoom == 1.0f || Frame_Zoom == 0.50f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_norm[1]);
-                    }
-                    else if (Frame_Zoom == 0.28f || Frame_Zoom == 0.19f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_norm[3]);
-                    }
-                    else if (Frame_Zoom == 0.14f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_norm[5]);
-                    }
-                    else if (Frame_Zoom == 0.10f)
-                    {
-                        FrameImageRenderer_Padding_int = new Padding(_arr_padding_norm[7]);
-                    }
-                }
-            }
-        }
-
-        public void SetArrayUsed(string arrayUsed)
-        {
-            _array_Used = arrayUsed;
-        }
-
         private int _frameDeduction = 0;
         public int Frame_Deduction
         {
@@ -586,8 +332,8 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_ReinfWidth = _frameWidth - (29 * 2) - 10;
             Frame_ReinfHeight = _frameHeight - (29 * 2) - 10;
 
-            Frame_PUFoamingQty = ((_frameWidth + _frameHeight) * 2) / 29694;
-            Frame_SealantWHQty = ((_frameWidth + _frameHeight) * 2) / 3570;
+            Frame_PUFoamingQty = (int)Math.Ceiling((decimal)((_frameWidth + _frameHeight) * 2) / 29694);
+            Frame_SealantWHQty = (int)Math.Ceiling((decimal)((_frameWidth + _frameHeight) * 2) / 3570);
         }
 
         #endregion
@@ -602,7 +348,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           List<IMultiPanelModel> lst_mpanel,
                           float frameImagerZoom,
                           List<IDividerModel> lst_divider,
-                          float frameZoom)
+                          float frameZoom,
+                          FrameProfile_ArticleNo frameArtNo)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -610,12 +357,13 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Height = frameHt;
             Frame_Type = frameType;
             Frame_Visible = frameVisible;
-            FrameProp_Height = 183;
+            FrameProp_Height = 283;
             Lst_Panel = lst_panel;
             Lst_MultiPanel = lst_mpanel;
             FrameImageRenderer_Zoom = frameImagerZoom;
             Lst_Divider = lst_divider;
             Frame_Zoom = frameZoom;
+            Frame_ArtNo = frameArtNo;
 
             SetExplosionValues_Frame();
         }

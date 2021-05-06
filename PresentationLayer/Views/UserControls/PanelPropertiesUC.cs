@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommonComponents;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -39,6 +40,7 @@ namespace PresentationLayer.Views.UserControls
             pnum_Width.Maximum = decimal.MaxValue;
             pnum_Height.Maximum = decimal.MaxValue;
             num_BladeCount.Maximum = decimal.MaxValue;
+            cmb_GlazingArtNo.DataSource = Enum.GetValues(typeof(GlazingBead_ArticleNo));
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 
@@ -53,6 +55,8 @@ namespace PresentationLayer.Views.UserControls
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_ChkText"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
+            cmb_GlassThick.DataBindings.Add(ModelBinding["Panel_GlassThickness"]);
+            cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)

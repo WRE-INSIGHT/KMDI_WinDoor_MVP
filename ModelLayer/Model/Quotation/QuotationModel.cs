@@ -13,12 +13,12 @@ namespace ModelLayer.Model.Quotation
     {
         public enum FrameProfile_ArticleNo
         {
-            _7502 = 0,
+            _7502 = 0
         }
 
         public enum FrameReinf_ArticleNo
         {
-            _R676 = 0,
+            _R676 = 0
         }
 
         public enum Divider_ArticleNo
@@ -34,7 +34,7 @@ namespace ModelLayer.Model.Quotation
             _R686 = 1
         }
 
-        public enum Glass_ArticleNo
+        public enum GlazingBead_ArticleNo
         {
             _2452 = 0,
             _2451 = 1,
@@ -69,49 +69,62 @@ namespace ModelLayer.Model.Quotation
         public DataTable GetListOfMaterials()
         {
             DataTable Material_List = new DataTable();
-            Material_List.Columns.Add(CreateColumn("Description", "Description", "System.Text"));
+            Material_List.Columns.Add(CreateColumn("Description", "Description", "System.String"));
             Material_List.Columns.Add(CreateColumn("Qty", "Qty", "System.Int32"));
-            Material_List.Columns.Add(CreateColumn("Unit", "Unit", "System.Text"));
-            Material_List.Columns.Add(CreateColumn("Size", "Size", "System.Int32"));
+            Material_List.Columns.Add(CreateColumn("Unit", "Unit", "System.String"));
+            Material_List.Columns.Add(CreateColumn("Size", "Size", "System.String"));
 
             foreach (IWindoorModel item in Lst_Windoor.Where(wndr => wndr.WD_visibility == true))
             {
                 foreach (IFrameModel frame in item.GetAllVisibleFrames())
                 {
+                    Material_List.Rows.Add("Frame Width " + frame.Frame_ArtNo.ToString(),
+                                           2, "pcs",
+                                           frame.Frame_ExplosionHeight.ToString());
+
                     Material_List.Rows.Add("Frame Height " + frame.Frame_ArtNo.ToString(),
                                            2, "pcs",
                                            frame.Frame_ExplosionWidth);
-                    Material_List.Rows.Add("Frame Width " + frame.Frame_ArtNo.ToString(),
-                                           2, "pcs",
-                                           frame.Frame_ExplosionHeight);
+
                     Material_List.Rows.Add("Frame Reinf Width " + frame.Frame_ReinfArtNo.ToString(),
                                            2, "pcs",
-                                           frame.Frame_ReinfWidth);
+                                           frame.Frame_ReinfWidth.ToString());
+
                     Material_List.Rows.Add("Frame Reinf Height " + frame.Frame_ReinfArtNo.ToString(),
                                            2, "pcs",
-                                           frame.Frame_ReinfHeight);
+                                           frame.Frame_ReinfHeight.ToString());
 
                     foreach (IPanelModel pnl in frame.GetVisiblePanels())
                     {
-                        Material_List.Rows.Add("Glazing Bead Width " + pnl.PanelGlass_ArtNo.ToString(), 
+                        Material_List.Rows.Add("Glazing Bead Width " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                                2, "pcs",
-                                               pnl.Panel_GlazingBeadWidth);
-                        Material_List.Rows.Add("Glazing Bead Height " + pnl.PanelGlass_ArtNo.ToString(),
+                                               pnl.Panel_GlazingBeadWidth.ToString());
+
+                        Material_List.Rows.Add("Glazing Bead Height " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                                2, "pcs",
-                                               pnl.Panel_GlazingBeadHeight);
+                                               pnl.Panel_GlazingBeadHeight.ToString());
+
                         Material_List.Rows.Add("Glass Width (" + pnl.Panel_GlassThickness + ")",
                                                1, "pcs",
-                                               pnl.Panel_GlassWidth);
+                                               pnl.Panel_GlassWidth.ToString());
+
                         Material_List.Rows.Add("Glass Height (" + pnl.Panel_GlassThickness + ")",
                                                1, "pcs",
-                                               pnl.Panel_GlassHeight);
+                                               pnl.Panel_GlassHeight.ToString());
+
                         Material_List.Rows.Add("Glazing Spacer (KBC70)",
-                                               1, "pcs");
+                                               1, "pcs", "");
+
+                        Material_List.Rows.Add("Sealant-WH",
+                                               pnl.Panel_SealantWHQty, 
+                                               "pcs", 
+                                               "");
                     }
 
                     Material_List.Rows.Add("PU Foaming",
-                                           2, "pcs",
-                                           frame.Frame_ReinfHeight);
+                                           frame.Frame_PUFoamingQty, "can", "");
+                    Material_List.Rows.Add("Sealant-WH",
+                                           frame.Frame_SealantWHQty, "pcs", "");
                 }
             }
 

@@ -34,7 +34,7 @@ namespace ModelLayer.Model.Quotation.Panel
         #region Explosion
 
         string Panel_GlassThickness { get; set; }
-        Glass_ArticleNo PanelGlass_ArtNo { get; set; }
+        GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
         int Panel_GlazingBeadWidth { get; set; }
         int Panel_GlazingBeadHeight { get; set; }
         int Panel_GlassWidth { get; set; }
@@ -42,6 +42,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_GlazingSpacerQty { get; set; }
         int Panel_SealantWHQty { get; set; }
 
+        void Assign_GlassThickness(string glassThickness);
         #endregion
     }
 }

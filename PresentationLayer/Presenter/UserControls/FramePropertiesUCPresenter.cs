@@ -71,6 +71,8 @@ namespace PresentationLayer.Presenter.UserControls
             frameBinding.Add("Frame_Type_Window", AddRadioCheckedBinding(_frameModel, "Frame_Type", FrameModel.Frame_Padding.Window));
             frameBinding.Add("Frame_Type_Door", AddRadioCheckedBinding(_frameModel, "Frame_Type", FrameModel.Frame_Padding.Door));
             frameBinding.Add("Frame_Type_Concrete", AddRadioCheckedBinding(_frameModel, "Frame_Type", FrameModel.Frame_Padding.Concrete));
+            frameBinding.Add("Frame_ArtNo", new Binding("Text", _frameModel, "Frame_ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            frameBinding.Add("Frame_ReinfArtNo", new Binding("Text", _frameModel, "Frame_ReinfArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return frameBinding;
         }

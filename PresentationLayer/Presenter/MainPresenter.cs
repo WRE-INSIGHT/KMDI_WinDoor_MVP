@@ -796,6 +796,7 @@ namespace PresentationLayer.Presenter
                                                                    frameType, 
                                                                    _windoorModel.WD_zoom_forImageRenderer,
                                                                    _windoorModel.WD_zoom,
+                                                                   QuotationModel.FrameProfile_ArticleNo._7502,
                                                                    frameID);
                         AddFrameList_WindoorModel(_frameModel);
                         IFramePropertiesUCPresenter framePropUCP =  AddFramePropertiesUC(_frameModel);

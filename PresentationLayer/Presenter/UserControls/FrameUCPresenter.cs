@@ -129,9 +129,12 @@ namespace PresentationLayer.Presenter.UserControls
             string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
 
             int panelID = _mainPresenter.GetPanelCount() + 1,
-                multiID = _mainPresenter.GetMultiPanelCount() + 1,
-                droped_objWD = frame.Width - _frameModel.Frame_Padding_int.All * 2,
-                droped_objHT = frame.Height - _frameModel.Frame_Padding_int.All * 2;
+                multiID = _mainPresenter.GetMultiPanelCount() + 1;//,
+                //droped_objWD = frame.Width - _frameModel.Frame_Padding_int.All * 2,
+                //droped_objHT = frame.Height - _frameModel.Frame_Padding_int.All * 2;
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
             IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
@@ -145,9 +148,6 @@ namespace PresentationLayer.Presenter.UserControls
 
                 _frameModel.SetDeductFramePadding(true);
                 
-                int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
-                    ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
-
                 _multipanelModel = _multipanelServices.AddMultiPanelModel(wd,
                                                                           ht,
                                                                           frame,
@@ -217,8 +217,8 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else
             {
-                _panelModel = _panelServices.AddPanelModel(droped_objWD,
-                                                           frame.Height - _frameModel.Frame_Padding_int.All * 2,
+                _panelModel = _panelServices.AddPanelModel(wd,
+                                                           ht,
                                                            frame,
                                                            frame,
                                                            (UserControl)framePropUC,
@@ -233,7 +233,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
-                _frameModel.FrameProp_Height += 148;
+                _frameModel.FrameProp_Height += 228;
 
                 if (data == "Fixed Panel")
                 {

@@ -30,9 +30,6 @@ namespace ModelLayer.Model.Quotation.Frame
         int[] Arr_padding_norm { get; }
         int[] Arr_padding_withmpnl { get; }
 
-        void SetFramePadding();
-        void SetFramePadding(bool has_deleteMpnl);
-        void SetArrayUsed(string arrayUsed);
 
         void SetDeductFramePadding(bool mode);
         int Frame_Deduction { get; }
