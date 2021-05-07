@@ -312,6 +312,11 @@ namespace ModelLayer.Model.Quotation.Frame
             return Lst_Panel.Where(pnl => pnl.Panel_Visibility == true);
         }
 
+        public IEnumerable<IMultiPanelModel> GetVisibleMultiPanels()
+        {
+            return Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true);
+        }
+
         #region Explosion
 
         public FrameProfile_ArticleNo Frame_ArtNo { get; set; }

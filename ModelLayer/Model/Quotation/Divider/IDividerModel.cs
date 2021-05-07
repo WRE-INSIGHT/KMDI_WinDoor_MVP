@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Divider
 {
@@ -20,5 +21,16 @@ namespace ModelLayer.Model.Quotation.Divider
         float Div_Zoom { get; set; }
         int Div_WidthToBind { get; set; }
         int Div_HeightToBind { get; set; }
+
+        #region Explosion
+
+        Divider_ArticleNo Div_ArtNo { get; set; }
+        DividerReinf_ArticleNo Div_ReinfArtNo { get; set; }
+
+        int Div_ExplosionWidth { get; set; }
+        int Div_ExplosionHeight { get; set; }
+        int Div_ReinfHeight { get; set; }
+
+        #endregion
     }
 }

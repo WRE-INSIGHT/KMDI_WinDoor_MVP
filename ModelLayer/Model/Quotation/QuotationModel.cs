@@ -1,4 +1,6 @@
-﻿using ModelLayer.Model.Quotation.Frame;
+﻿using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using System;
@@ -24,8 +26,8 @@ namespace ModelLayer.Model.Quotation
         public enum Divider_ArticleNo
         {
             _7536 = 0,
-            _7538 = 1,
-            _6502 = 2,
+            _7538 = 1//,
+            //_6052 = 2,
         }
 
         public enum DividerReinf_ArticleNo
@@ -79,46 +81,78 @@ namespace ModelLayer.Model.Quotation
                 foreach (IFrameModel frame in item.GetAllVisibleFrames())
                 {
                     Material_List.Rows.Add("Frame Width " + frame.Frame_ArtNo.ToString(),
-                                           2, "pcs",
+                                           2, "pc(s)",
                                            frame.Frame_ExplosionHeight.ToString());
 
                     Material_List.Rows.Add("Frame Height " + frame.Frame_ArtNo.ToString(),
-                                           2, "pcs",
+                                           2, "pc(s)",
                                            frame.Frame_ExplosionWidth);
 
                     Material_List.Rows.Add("Frame Reinf Width " + frame.Frame_ReinfArtNo.ToString(),
-                                           2, "pcs",
+                                           2, "pc(s)",
                                            frame.Frame_ReinfWidth.ToString());
 
                     Material_List.Rows.Add("Frame Reinf Height " + frame.Frame_ReinfArtNo.ToString(),
-                                           2, "pcs",
+                                           2, "pc(s)",
                                            frame.Frame_ReinfHeight.ToString());
 
-                    foreach (IPanelModel pnl in frame.GetVisiblePanels())
+                    if (frame.GetVisibleMultiPanels().Count() > 0 && frame.GetVisiblePanels().Count() == 0)
                     {
-                        Material_List.Rows.Add("Glazing Bead Width " + pnl.PanelGlazingBead_ArtNo.ToString(),
-                                               2, "pcs",
-                                               pnl.Panel_GlazingBeadWidth.ToString());
+                        foreach (IMultiPanelModel mpnl in frame.GetVisibleMultiPanels())
+                        {
+                            foreach (IDividerModel div in mpnl.GetVisibleDividers())
+                            {
+                                string htORwd = "";
+                                if (div.Div_Type == DividerModel.DividerType.Mullion)
+                                {
+                                    htORwd = "Height";
+                                }
+                                else if (div.Div_Type == DividerModel.DividerType.Transom)
+                                {
+                                    htORwd = "Width";
+                                }
+                                Material_List.Rows.Add(div.Div_Type.ToString() + " " + htORwd + " " + div.Div_ArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       div.Div_ExplosionHeight.ToString());
+                                Material_List.Rows.Add(div.Div_Type.ToString() + " " + htORwd + " " + div.Div_ReinfArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       div.Div_ReinfHeight.ToString());
+                            }
+                            foreach (IPanelModel pnl in mpnl.GetVisiblePanels())
+                            {
 
-                        Material_List.Rows.Add("Glazing Bead Height " + pnl.PanelGlazingBead_ArtNo.ToString(),
-                                               2, "pcs",
-                                               pnl.Panel_GlazingBeadHeight.ToString());
+                            }
+                        }
 
-                        Material_List.Rows.Add("Glass Width (" + pnl.Panel_GlassThickness + ")",
-                                               1, "pcs",
-                                               pnl.Panel_GlassWidth.ToString());
+                    }
+                    else if (frame.GetVisiblePanels().Count() > 0 && frame.GetVisibleMultiPanels().Count() == 0)
+                    {
+                        foreach (IPanelModel pnl in frame.GetVisiblePanels())
+                        {
+                            Material_List.Rows.Add("Glazing Bead Width " + pnl.PanelGlazingBead_ArtNo.ToString(),
+                                                   2, "pc(s)",
+                                                   pnl.Panel_GlazingBeadWidth.ToString());
 
-                        Material_List.Rows.Add("Glass Height (" + pnl.Panel_GlassThickness + ")",
-                                               1, "pcs",
-                                               pnl.Panel_GlassHeight.ToString());
+                            Material_List.Rows.Add("Glazing Bead Height " + pnl.PanelGlazingBead_ArtNo.ToString(),
+                                                   2, "pc(s)",
+                                                   pnl.Panel_GlazingBeadHeight.ToString());
 
-                        Material_List.Rows.Add("Glazing Spacer (KBC70)",
-                                               1, "pcs", "");
+                            Material_List.Rows.Add("Glass Width (" + pnl.Panel_GlassThickness + ")",
+                                                   1, "pc(s)",
+                                                   pnl.Panel_GlassWidth.ToString());
 
-                        Material_List.Rows.Add("Sealant-WH",
-                                               pnl.Panel_SealantWHQty, 
-                                               "pcs", 
-                                               "");
+                            Material_List.Rows.Add("Glass Height (" + pnl.Panel_GlassThickness + ")",
+                                                   1, "pc(s)",
+                                                   pnl.Panel_GlassHeight.ToString());
+
+                            Material_List.Rows.Add("Glazing Spacer (KBC70)",
+                                                   1, "pc(s)", "");
+
+                            Material_List.Rows.Add("Sealant-WH",
+                                                   pnl.Panel_SealantWHQty,
+                                                   "pc(s)",
+                                                   "");
+                        }
                     }
 
                     Material_List.Rows.Add("PU Foaming",

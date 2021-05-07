@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static ModelLayer.Model.Quotation.Frame.FrameModel;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace PresentationLayer.CommonMethods
 {
@@ -97,6 +98,9 @@ namespace PresentationLayer.CommonMethods
                                                                      divType,
                                                                      true,
                                                                      frameModel.Frame_Zoom,
+                                                                     Divider_ArticleNo._7536,
+                                                                     parentModel.MPanel_DisplayWidth,
+                                                                     parentModel.MPanel_DisplayHeight,
                                                                      divID,
                                                                      frameModel.FrameImageRenderer_Zoom,
                                                                      frameModel.Frame_Type.ToString());

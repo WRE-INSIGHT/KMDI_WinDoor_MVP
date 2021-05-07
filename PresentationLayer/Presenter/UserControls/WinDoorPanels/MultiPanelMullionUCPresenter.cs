@@ -25,6 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -301,6 +302,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                   DividerModel.DividerType.Mullion,
                                                                                   true,
                                                                                   _frameModel.Frame_Zoom,
+                                                                                  Divider_ArticleNo._7536,
+                                                                                  _multiPanelModel.MPanel_DisplayWidth,
+                                                                                  _multiPanelModel.MPanel_DisplayHeight,
                                                                                   divID,
                                                                                   _frameModel.FrameImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString());
@@ -367,6 +371,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                  DividerModel.DividerType.Mullion,
                                                                                  true,
                                                                                  _frameModel.Frame_Zoom,
+                                                                                 Divider_ArticleNo._7536,
+                                                                                 _multiPanelModel.MPanel_DisplayWidth,
+                                                                                 _multiPanelModel.MPanel_DisplayHeight,
                                                                                  divID,
                                                                                  _frameModel.FrameImageRenderer_Zoom);
 
@@ -434,11 +441,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                            _frameModel.Frame_Zoom,
                                                                            _frameModel,
                                                                            _multiPanelModel,
+                                                                           "6-8mm",
+                                                                           GlazingBead_ArticleNo._2452,
                                                                            panelID,
                                                                            _frameModel.FrameImageRenderer_Zoom,
                                                                            _multiPanelModel.GetNextIndex(),
                                                                            DockStyle.None);
-                _frameModel.Lst_Panel.Add(_panelModel);
+                //_frameModel.Lst_Panel.Add(_panelModel);
                 _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                 _multiPanelModel.Reload_PanelMargin();
 
@@ -546,6 +555,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                           DividerModel.DividerType.Mullion,
                                                                           true,
                                                                           _frameModel.Frame_Zoom,
+                                                                          Divider_ArticleNo._7536,
+                                                                          _multiPanelModel.MPanel_DisplayWidth,
+                                                                          _multiPanelModel.MPanel_DisplayHeight,
                                                                           divID,
                                                                           _frameModel.FrameImageRenderer_Zoom,
                                                                           _frameModel.Frame_Type.ToString());

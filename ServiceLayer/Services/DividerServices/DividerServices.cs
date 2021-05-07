@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ServiceLayer.Services.DividerServices
 {
@@ -28,7 +29,10 @@ namespace ServiceLayer.Services.DividerServices
                                                 Control divParent,
                                                 string divFrameType,
                                                 float divImageRendererZoom,
-                                                float divZoom)
+                                                float divZoom,
+                                                Divider_ArticleNo divArtNo,
+                                                int divDisplayWidth,
+                                                int divDisplayHeight)
         {
             DividerModel div = new DividerModel(divID,
                                                 divName,
@@ -39,7 +43,10 @@ namespace ServiceLayer.Services.DividerServices
                                                 divParent,
                                                 divFrameType,
                                                 divImageRendererZoom,
-                                                divZoom);
+                                                divZoom,
+                                                divArtNo,
+                                                divDisplayWidth,
+                                                divDisplayHeight);
 
             ValidateModel(div);
             return div;
@@ -56,6 +63,9 @@ namespace ServiceLayer.Services.DividerServices
                                              DividerType divType,
                                              bool divVisibility,
                                              float divZoom,
+                                             Divider_ArticleNo divArtNo,
+                                             int divDisplayWidth,
+                                             int divDisplayHeight,
                                              int divID = 0,
                                              float divImageRendererZoom = 1,
                                              string divFrameType = "",
@@ -64,6 +74,15 @@ namespace ServiceLayer.Services.DividerServices
             if (divName == "")
             {
                 divName = divType.ToString() + "UC_" + divID;
+            }
+
+            if (divType == DividerType.Mullion)
+            {
+                divDisplayWidth = 0;
+            }
+            else if (divType == DividerType.Transom)
+            {
+                divDisplayHeight = 0;
             }
 
             IDividerModel _divModel = CreateDividerModel(divID,
@@ -75,7 +94,10 @@ namespace ServiceLayer.Services.DividerServices
                                                          divParent,
                                                          divFrameType,
                                                          divImageRendererZoom,
-                                                         divZoom);
+                                                         divZoom,
+                                                         divArtNo,
+                                                         divDisplayWidth,
+                                                         divDisplayHeight);
 
             return _divModel;
         }

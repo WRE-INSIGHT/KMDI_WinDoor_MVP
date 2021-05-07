@@ -16,6 +16,7 @@ using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ServiceLayer.Services.MultiPanelServices;
 using System.Linq;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -228,6 +229,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                            _frameModel.Frame_Zoom,
                                                            _frameModel,
                                                            null,
+                                                           "6-8mm",
+                                                           GlazingBead_ArticleNo._2452,
                                                            panelID);
                 _frameModel.Lst_Panel.Add(_panelModel);
 

@@ -49,6 +49,7 @@ namespace ModelLayer.Model.Quotation.Frame
         int Frame_SealantWHQty { get; set; }
 
         IEnumerable<IPanelModel> GetVisiblePanels();
+        IEnumerable<IMultiPanelModel> GetVisibleMultiPanels();
 
         #endregion
     }

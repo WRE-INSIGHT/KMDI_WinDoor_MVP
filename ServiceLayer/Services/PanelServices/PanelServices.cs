@@ -8,6 +8,7 @@ using ModelLayer.Model.Quotation.Panel;
 using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ServiceLayer.Services.PanelServices
 {
@@ -37,7 +38,9 @@ namespace ServiceLayer.Services.PanelServices
                                             float panelImageRendererZoom,
                                             float panelZoom,
                                             IFrameModel panelFrameModelParent,
-                                            IMultiPanelModel panelMultiPanelParent)
+                                            IMultiPanelModel panelMultiPanelParent,
+                                            string panelGlassThickness,
+                                            GlazingBead_ArticleNo panelGlazingBeadArtNo)
         {
             PanelModel pnl = new PanelModel(panelID,
                                             panelName,
@@ -55,7 +58,9 @@ namespace ServiceLayer.Services.PanelServices
                                             panelImageRendererZoom,
                                             panelZoom,
                                             panelFrameModelParent,
-                                            panelMultiPanelParent);
+                                            panelMultiPanelParent,
+                                            panelGlassThickness,
+                                            panelGlazingBeadArtNo);
 
             ValidateModel(pnl);
             return pnl;
@@ -77,6 +82,8 @@ namespace ServiceLayer.Services.PanelServices
                                          float panelZoom,
                                          IFrameModel panelFrameModelParent,
                                          IMultiPanelModel panelMultiPanelParent,
+                                         string panelGlassThickness,
+                                         GlazingBead_ArticleNo panelGlazingBeadArtNo = GlazingBead_ArticleNo._2452,
                                          int panelID = 0,
                                          float panelImageRendererZoom = 1,
                                          int panelIndexInsideMPanel = 0,
@@ -105,7 +112,9 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelImageRendererZoom,
                                                        panelZoom,
                                                        panelFrameModelParent,
-                                                       panelMultiPanelParent);
+                                                       panelMultiPanelParent,
+                                                       panelGlassThickness,
+                                                       panelGlazingBeadArtNo);
 
             return _panelModel;
         }

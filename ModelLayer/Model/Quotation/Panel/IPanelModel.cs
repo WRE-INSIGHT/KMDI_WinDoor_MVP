@@ -42,7 +42,6 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_GlazingSpacerQty { get; set; }
         int Panel_SealantWHQty { get; set; }
 
-        void Assign_GlassThickness(string glassThickness);
         #endregion
     }
 }

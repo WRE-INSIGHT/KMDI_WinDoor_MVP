@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Divider
 {
@@ -81,6 +82,21 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
+        [Description("Virtual Width that is used for user's output")]
+        private int _divDisplayWidth;
+        public int Div_DisplayWidth
+        {
+            get
+            {
+                return _divDisplayWidth;
+            }
+            set
+            {
+                _divDisplayWidth = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private int _divHt;
         public int Div_Height
         {
@@ -93,6 +109,21 @@ namespace ModelLayer.Model.Quotation.Divider
                 _divHt = value;
                 Div_HeightToBind = (int)(value * Div_Zoom);
                 DivImageRenderer_Height = (int)(value * DivImageRenderer_Zoom);
+                NotifyPropertyChanged();
+            }
+        }
+
+        [Description("Virtual Height that is used for user's output")]
+        private int _divDisplayHeight;
+        public int Div_DisplayHeight
+        {
+            get
+            {
+                return _divDisplayHeight;
+            }
+            set
+            {
+                _divDisplayHeight = value;
                 NotifyPropertyChanged();
             }
         }
@@ -235,6 +266,60 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
+        #region Explosion
+
+        private Divider_ArticleNo _divArtNo;
+        public Divider_ArticleNo Div_ArtNo
+        {
+            get
+            {
+                return _divArtNo;
+            }
+            set
+            {
+                _divArtNo = value;
+                if (value == Divider_ArticleNo._7536)
+                {
+                    Div_ReinfArtNo = DividerReinf_ArticleNo._R677;
+                }
+                else if (value == Divider_ArticleNo._7538)
+                {
+                    Div_ReinfArtNo = DividerReinf_ArticleNo._R686;
+                }
+            }
+        }
+
+        public DividerReinf_ArticleNo Div_ReinfArtNo { get; set; }
+
+        public int Div_ExplosionWidth { get; set; }
+        public int Div_ExplosionHeight { get; set; }
+        public int Div_ReinfHeight { get; set; }
+
+        private void SetPanelExplosionValues_Div()
+        {
+            if (Div_Type == DividerType.Mullion)
+            {
+                if (Div_ArtNo == Divider_ArticleNo._7536)
+                {
+                    Div_ExplosionHeight = (Div_DisplayHeight - (33 * 2)) + 3; //3 = (1.5 * 2)
+                }
+                else if (Div_ArtNo == Divider_ArticleNo._7538)
+                {
+                    Div_ExplosionHeight = (Div_DisplayHeight - (33 * 2)) + (4 * 2);
+                }
+
+                if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
+                {
+                    Div_ReinfHeight = (Div_ExplosionHeight - (35 * 2)) - (5 * 2);
+                }
+                else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
+                {
+                    Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
+                }
+            }
+        }
+        #endregion
+
         public DividerModel(int divID,
                             string divName,
                             int divWD,
@@ -244,7 +329,10 @@ namespace ModelLayer.Model.Quotation.Divider
                             Control divParent,
                             string divFrameType,
                             float divImageRendererZoom,
-                            float divZoom)
+                            float divZoom,
+                            Divider_ArticleNo divArtNo,
+                            int divDisplayWidth,
+                            int divDisplayHeight)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -256,6 +344,11 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_FrameType = divFrameType;
             DivImageRenderer_Zoom = divImageRendererZoom;
             Div_Zoom = divZoom;
+            Div_ArtNo = divArtNo;
+            Div_DisplayWidth = divDisplayWidth;
+            Div_DisplayHeight = Div_DisplayHeight;
+
+            SetPanelExplosionValues_Div();
         }
     }
 }

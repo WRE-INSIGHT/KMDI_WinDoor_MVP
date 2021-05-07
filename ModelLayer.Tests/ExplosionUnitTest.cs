@@ -12,6 +12,7 @@ using ServiceLayer.Services.PanelServices;
 using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
 using System.Data;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Tests
 {
@@ -65,9 +66,10 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    _frameModel,
                                                                    null,
+                                                                   "6-8mm",
+                                                                   GlazingBead_ArticleNo._2452,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
-            _panelModel.Assign_GlassThickness("6-8mm");
 
             DataTable dt = _qouteModel.GetListOfMaterials();
             Assert.AreEqual("Description", dt.Columns[0].ColumnName);
@@ -150,7 +152,7 @@ namespace ModelLayer.Tests
                                                                    FrameModel.Frame_Padding.Window,
                                                                    1.0f,
                                                                    1.0f,
-                                                                   QuotationModel.FrameProfile_ArticleNo._7502,
+                                                                   FrameProfile_ArticleNo._7502,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -168,19 +170,20 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    _frameModel,
                                                                    null,
+                                                                   "10mm",
+                                                                   GlazingBead_ArticleNo._2451,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
-            _panelModel.Assign_GlassThickness("10mm");
 
-            Assert.AreEqual(QuotationModel.FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(705, _frameModel.Frame_ExplosionWidth);
             Assert.AreEqual(2005, _frameModel.Frame_ExplosionHeight);
-            Assert.AreEqual(QuotationModel.FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(632, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
             Assert.AreEqual(2, _frameModel.Frame_SealantWHQty);
 
-            Assert.AreEqual(QuotationModel.GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(634, _panelModel.Panel_GlazingBeadWidth);
             Assert.AreEqual(1934, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(628, _panelModel.Panel_GlassWidth);

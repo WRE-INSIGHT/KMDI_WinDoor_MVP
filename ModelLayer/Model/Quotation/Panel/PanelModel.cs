@@ -557,11 +557,6 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_GlazingSpacerQty { get; set; }
         public int Panel_SealantWHQty { get; set; }
 
-        public void Assign_GlassThickness(string glassThickness)
-        {
-            Panel_GlassThickness = glassThickness;
-        }
-
         private void SetPanelExplosionValues_Panel()
         {
             Panel_GlazingBeadWidth = Panel_DisplayWidth - (33 * 2);
@@ -592,7 +587,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           float panelImageRendererZoom,
                           float panelZoom,
                           IFrameModel panelFrameModelParent,
-                          IMultiPanelModel panelMultiPanelParent)
+                          IMultiPanelModel panelMultiPanelParent,
+                          string panelGlassThickness,
+                          GlazingBead_ArticleNo panelGlazingBeadArtNo)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -611,7 +608,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_Zoom = panelZoom;
             Panel_ParentFrameModel = panelFrameModelParent;
             Panel_ParentMultiPanelModel = panelMultiPanelParent;
-
+            Panel_GlassThickness = panelGlassThickness;
+            PanelGlazingBead_ArtNo = panelGlazingBeadArtNo;
 
             if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel == null) //parent == frame
             {

@@ -1050,6 +1050,16 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        public IEnumerable<IDividerModel> GetVisibleDividers()
+        {
+            return MPanelLst_Divider.Where(div => div.Div_Visible == true);
+        }
+
+        public IEnumerable<IPanelModel> GetVisiblePanels()
+        {
+            return MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true);
+        }
+
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,

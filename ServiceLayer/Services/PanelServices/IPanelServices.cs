@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ServiceLayer.Services.PanelServices
 {
@@ -19,6 +20,8 @@ namespace ServiceLayer.Services.PanelServices
                                   float panelZoom,
                                   IFrameModel panelFrameModelParent,
                                   IMultiPanelModel panelMultiPanelParent,
+                                  string panelGlassThickness,
+                                  GlazingBead_ArticleNo panelGlazingBeadArtNo = GlazingBead_ArticleNo._2452,
                                   int panelID = 0,
                                   float panelImageRendererZoom = 1,
                                   int panelIndexInsideMPanel = 0,
