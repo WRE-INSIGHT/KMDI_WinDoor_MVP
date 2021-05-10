@@ -260,7 +260,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                           _multiPanelModel.GetNextIndex(),
                                                                                           _multiPanelModel,
                                                                                           _frameModel.FrameImageRenderer_Zoom);
-                    _frameModel.Lst_MultiPanel.Add(mPanelModel);
+                    //_frameModel.Lst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
                     _multiPanelModel.Reload_MultiPanelMargin();
 

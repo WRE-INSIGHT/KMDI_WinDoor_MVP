@@ -557,12 +557,26 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_GlazingSpacerQty { get; set; }
         public int Panel_SealantWHQty { get; set; }
 
-        private void SetPanelExplosionValues_Panel()
+        public void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo)
         {
-            Panel_GlazingBeadWidth = Panel_DisplayWidth - (33 * 2);
+            if (div_artNo == Divider_ArticleNo.None)
+            {
+                Panel_GlazingBeadWidth = Panel_DisplayWidth - (33 * 2);
+                Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
+            }
+            else if (div_artNo == Divider_ArticleNo._7536)
+            {
+                Panel_GlazingBeadWidth = (Panel_DisplayWidth - (33 * 2)) - (42 / 2);
+                Panel_GlassWidth = ((Panel_DisplayWidth - (33 * 2)) - (42 / 2)) - 6;
+            }
+            else if (div_artNo == Divider_ArticleNo._7538)
+            {
+                Panel_GlazingBeadWidth = (Panel_DisplayWidth - (33 * 2)) - (72 / 2);
+                Panel_GlassWidth = ((Panel_DisplayWidth - (33 * 2)) - (72 / 2)) - 6;
+            }
+
             Panel_GlazingBeadHeight = Panel_DisplayHeight - (33 * 2);
 
-            Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
             Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
 
             Panel_GlazingSpacerQty = 1;
@@ -615,8 +629,6 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_DisplayWidth = Panel_ParentFrameModel.Frame_Width;
                 Panel_DisplayHeight = Panel_ParentFrameModel.Frame_Height;
-
-                SetPanelExplosionValues_Panel();
             }
             else if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel != null) //parent == multipanel
             {

@@ -57,6 +57,7 @@
     <Compile Include="MultiPanelModelUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExplosionUnitTest.cs" />
+    <Compile Include="Explosion2UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ModelLayer\ModelLayer.csproj">

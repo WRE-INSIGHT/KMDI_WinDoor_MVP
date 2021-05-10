@@ -1060,6 +1060,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true);
         }
 
+        public IEnumerable<Control> GetVisibleObjects()
+        {
+            return MPanelLst_Objects.Where(obj => obj.Visible == true);
+        }
+
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,
