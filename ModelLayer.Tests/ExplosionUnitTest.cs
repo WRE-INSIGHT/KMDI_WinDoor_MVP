@@ -13,6 +13,8 @@ using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
 using System.Data;
 using static ModelLayer.Model.Quotation.QuotationModel;
+using ServiceLayer.Services.MultiPanelServices;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace ModelLayer.Tests
 {
@@ -24,6 +26,7 @@ namespace ModelLayer.Tests
         IWindoorServices _windoorServices;
         IFrameServices _frameServices;
         IPanelServices _panelServices;
+        IMultiPanelServices _multiPanelServices;
         [TestInitialize]
         public void SetUp()
         {
@@ -33,6 +36,7 @@ namespace ModelLayer.Tests
             _windoorServices = new WindoorServices(new ModelDataAnnotationCheck());
             _frameServices = new FrameServices(new ModelDataAnnotationCheck());
             _panelServices = new PanelServices(new ModelDataAnnotationCheck());
+            _multiPanelServices = new MultiPanelServices(new ModelDataAnnotationCheck());
         }
 
         [TestMethod]
@@ -251,27 +255,71 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
         }
 
-        //[TestMethod]
-        //public void ChkVar_2EQualPanelFW_WithMullion()
-        //{
-        //    int total_wd = 900, total_height = 1300;
+        [TestMethod]
+        public void ChkVar_2EQualPanelFW_WithMullion()
+        {
+            int total_wd = 900, total_height = 1300;
 
-        //    IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
-        //    _qouteModel.Lst_Windoor.Add(_windoorModel);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
 
 
-        //    IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
-        //                                                           total_height,
-        //                                                           FrameModel.Frame_Padding.Window,
-        //                                                           1.0f,
-        //                                                           1.0f,
-        //                                                           FrameProfile_ArticleNo._7502,
-        //                                                           1);
-        //    _windoorModel.lst_frame.Add(_frameModel);
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_height,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
 
-        //    int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
-        //        ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
-        //}
+            IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                       ht,
+                                                                                       new Control(),
+                                                                                       new UserControl(),
+                                                                                       _frameModel,
+                                                                                       true,
+                                                                                       FlowDirection.LeftToRight,
+                                                                                       _frameModel.Frame_Zoom,
+                                                                                       1,
+                                                                                       DockStyle.Fill,
+                                                                                       0,
+                                                                                       null,
+                                                                                       _frameModel.FrameImageRenderer_Zoom);
+            _frameModel.Lst_MultiPanel.Add(_multipanelModel);
+
+            int divSize = 0;
+            int totalPanelCount = _multipanelModel.MPanel_Divisions + 1;
+
+            if (_frameModel.Frame_Type.ToString().Contains("Window"))
+            {
+                divSize = 26;
+            }
+            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
+            {
+                divSize = 33;
+            }
+            int suggest_Wd = (((_multipanelModel.MPanel_Width) - (divSize * _multipanelModel.MPanel_Divisions)) / totalPanelCount),
+                suggest_HT = _multipanelModel.MPanel_Height;
+
+            IPanelModel _panelModel = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Fixed Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   null,
+                                                                   "6-8mm",
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   1);
+
+        }
     }
 }
