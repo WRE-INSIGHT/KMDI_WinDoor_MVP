@@ -407,7 +407,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             else
             {
                 int suggest_Wd = 0,
-                    suggest_HT = _multiPanelModel.MPanel_Height - 20;
+                    suggest_HT = _multiPanelModel.MPanel_Height - 20,
+                    suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth / totalPanelCount,
+                    suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight;
 
                 if (_multiPanelModel.MPanel_DividerEnabled)
                 {
@@ -441,6 +443,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                            _frameModel.Frame_Zoom,
                                                                            _frameModel,
                                                                            _multiPanelModel,
+                                                                           suggest_DisplayWD,
+                                                                           suggest_DisplayHT,
                                                                            "6-8mm",
                                                                            GlazingBead_ArticleNo._2452,
                                                                            panelID,

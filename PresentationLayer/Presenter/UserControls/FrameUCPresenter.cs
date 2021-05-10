@@ -229,6 +229,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                            _frameModel.Frame_Zoom,
                                                            _frameModel,
                                                            null,
+                                                           _frameModel.Frame_Width,
+                                                           _frameModel.Frame_Height,
                                                            "6-8mm",
                                                            GlazingBead_ArticleNo._2452,
                                                            panelID);

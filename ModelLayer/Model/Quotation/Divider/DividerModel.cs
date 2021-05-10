@@ -346,7 +346,7 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_Zoom = divZoom;
             Div_ArtNo = divArtNo;
             Div_DisplayWidth = divDisplayWidth;
-            Div_DisplayHeight = Div_DisplayHeight;
+            Div_DisplayHeight = divDisplayHeight;
 
             SetPanelExplosionValues_Div();
         }

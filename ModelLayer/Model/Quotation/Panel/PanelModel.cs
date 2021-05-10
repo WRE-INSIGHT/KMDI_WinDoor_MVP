@@ -566,13 +566,13 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (div_artNo == Divider_ArticleNo._7536)
             {
-                Panel_GlazingBeadWidth = (Panel_DisplayWidth - (33 * 2)) - (42 / 2);
-                Panel_GlassWidth = ((Panel_DisplayWidth - (33 * 2)) - (42 / 2)) - 6;
+                Panel_GlazingBeadWidth = (Panel_DisplayWidth - 33) - (42 / 2);
+                Panel_GlassWidth = ((Panel_DisplayWidth - 33) - (42 / 2)) - 6;
             }
             else if (div_artNo == Divider_ArticleNo._7538)
             {
-                Panel_GlazingBeadWidth = (Panel_DisplayWidth - (33 * 2)) - (72 / 2);
-                Panel_GlassWidth = ((Panel_DisplayWidth - (33 * 2)) - (72 / 2)) - 6;
+                Panel_GlazingBeadWidth = (Panel_DisplayWidth - 33) - (72 / 2);
+                Panel_GlassWidth = ((Panel_DisplayWidth - 33) - (72 / 2)) - 6;
             }
 
             Panel_GlazingBeadHeight = Panel_DisplayHeight - (33 * 2);
@@ -603,7 +603,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           IFrameModel panelFrameModelParent,
                           IMultiPanelModel panelMultiPanelParent,
                           string panelGlassThickness,
-                          GlazingBead_ArticleNo panelGlazingBeadArtNo)
+                          GlazingBead_ArticleNo panelGlazingBeadArtNo,
+                          int panelDisplayWidth,
+                          int panelDisplayHeight)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -624,25 +626,27 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_ParentMultiPanelModel = panelMultiPanelParent;
             Panel_GlassThickness = panelGlassThickness;
             PanelGlazingBead_ArtNo = panelGlazingBeadArtNo;
+            Panel_DisplayWidth = panelDisplayWidth;
+            Panel_DisplayHeight = panelDisplayHeight;
 
-            if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel == null) //parent == frame
-            {
-                Panel_DisplayWidth = Panel_ParentFrameModel.Frame_Width;
-                Panel_DisplayHeight = Panel_ParentFrameModel.Frame_Height;
-            }
-            else if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel != null) //parent == multipanel
-            {
-                if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-                {
-                    Panel_DisplayWidth = Panel_ParentMultiPanelModel.MPanel_DisplayWidth / (Panel_ParentMultiPanelModel.MPanel_Divisions + 1);
-                    Panel_DisplayHeight = Panel_ParentMultiPanelModel.MPanel_DisplayHeight;
-                }
-                else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
-                {
-                    Panel_DisplayWidth = Panel_ParentMultiPanelModel.MPanel_DisplayWidth;
-                    Panel_DisplayHeight = Panel_ParentMultiPanelModel.MPanel_DisplayHeight / (Panel_ParentMultiPanelModel.MPanel_Divisions + 1);
-                }
-            }
+            //if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel == null) //parent == frame
+            //{
+            //    Panel_DisplayWidth = Panel_ParentFrameModel.Frame_Width;
+            //    Panel_DisplayHeight = Panel_ParentFrameModel.Frame_Height;
+            //}
+            //else if (Panel_ParentMultiPanelModel != null && Panel_ParentFrameModel == null) //parent == multipanel
+            //{
+            //    if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+            //    {
+            //        Panel_DisplayWidth = Panel_ParentMultiPanelModel.MPanel_DisplayWidth / (Panel_ParentMultiPanelModel.MPanel_Divisions + 1);
+            //        Panel_DisplayHeight = Panel_ParentMultiPanelModel.MPanel_DisplayHeight;
+            //    }
+            //    else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
+            //    {
+            //        Panel_DisplayWidth = Panel_ParentMultiPanelModel.MPanel_DisplayWidth;
+            //        Panel_DisplayHeight = Panel_ParentMultiPanelModel.MPanel_DisplayHeight / (Panel_ParentMultiPanelModel.MPanel_Divisions + 1);
+            //    }
+            //}
         }
     }
 }

@@ -113,9 +113,9 @@ namespace ModelLayer.Model.Quotation
                                     Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
                                     IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
 
-                                    if (i++ < obj_count)
+                                    if (i+1 < obj_count)
                                     {
-                                        Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i++];
+                                        Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i+1];
                                         IDividerModel div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
 
                                         Material_List.Rows.Add(div_nxtCtrl.Div_Type.ToString() + " " + mpnl.MPanel_Type + " " + div_nxtCtrl.Div_ArtNo.ToString(),
@@ -125,6 +125,12 @@ namespace ModelLayer.Model.Quotation
                                                                1, "pc(s)",
                                                                div_nxtCtrl.Div_ReinfHeight.ToString());
 
+                                        pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo);
+                                    }
+                                    else if (i+1 == obj_count)
+                                    {
+                                        Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i-1];
+                                        IDividerModel div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
                                         pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo);
                                     }
 

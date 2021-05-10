@@ -20,6 +20,8 @@ namespace ServiceLayer.Services.PanelServices
                                   float panelZoom,
                                   IFrameModel panelFrameModelParent,
                                   IMultiPanelModel panelMultiPanelParent,
+                                  int panelDisplayWidth,
+                                  int panelDisplayHeight,
                                   string panelGlassThickness,
                                   GlazingBead_ArticleNo panelGlazingBeadArtNo = GlazingBead_ArticleNo._2452,
                                   int panelID = 0,

@@ -40,7 +40,9 @@ namespace ServiceLayer.Services.PanelServices
                                             IFrameModel panelFrameModelParent,
                                             IMultiPanelModel panelMultiPanelParent,
                                             string panelGlassThickness,
-                                            GlazingBead_ArticleNo panelGlazingBeadArtNo)
+                                            GlazingBead_ArticleNo panelGlazingBeadArtNo,
+                                            int panelDisplayWidth,
+                                            int panelDisplayHeight)
         {
             PanelModel pnl = new PanelModel(panelID,
                                             panelName,
@@ -60,7 +62,9 @@ namespace ServiceLayer.Services.PanelServices
                                             panelFrameModelParent,
                                             panelMultiPanelParent,
                                             panelGlassThickness,
-                                            panelGlazingBeadArtNo);
+                                            panelGlazingBeadArtNo,
+                                            panelDisplayWidth,
+                                            panelDisplayHeight);
 
             ValidateModel(pnl);
             return pnl;
@@ -82,6 +86,8 @@ namespace ServiceLayer.Services.PanelServices
                                          float panelZoom,
                                          IFrameModel panelFrameModelParent,
                                          IMultiPanelModel panelMultiPanelParent,
+                                         int panelDisplayWidth,
+                                         int panelDisplayHeight,
                                          string panelGlassThickness,
                                          GlazingBead_ArticleNo panelGlazingBeadArtNo = GlazingBead_ArticleNo._2452,
                                          int panelID = 0,
@@ -114,7 +120,9 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelFrameModelParent,
                                                        panelMultiPanelParent,
                                                        panelGlassThickness,
-                                                       panelGlazingBeadArtNo);
+                                                       panelGlazingBeadArtNo,
+                                                       panelDisplayWidth,
+                                                       panelDisplayHeight);
 
             return _panelModel;
         }

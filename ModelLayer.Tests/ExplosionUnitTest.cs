@@ -15,6 +15,8 @@ using System.Data;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using ServiceLayer.Services.MultiPanelServices;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ServiceLayer.Services.DividerServices;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace ModelLayer.Tests
 {
@@ -27,6 +29,7 @@ namespace ModelLayer.Tests
         IFrameServices _frameServices;
         IPanelServices _panelServices;
         IMultiPanelServices _multiPanelServices;
+        IDividerServices _dividerServices;
         [TestInitialize]
         public void SetUp()
         {
@@ -37,6 +40,7 @@ namespace ModelLayer.Tests
             _frameServices = new FrameServices(new ModelDataAnnotationCheck());
             _panelServices = new PanelServices(new ModelDataAnnotationCheck());
             _multiPanelServices = new MultiPanelServices(new ModelDataAnnotationCheck());
+            _dividerServices = new DividerServices(new ModelDataAnnotationCheck());
         }
 
         [TestMethod]
@@ -70,6 +74,8 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    _frameModel,
                                                                    null,
+                                                                   total_wd,
+                                                                   total_height,
                                                                    "6-8mm",
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
@@ -174,6 +180,8 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    _frameModel,
                                                                    null,
+                                                                   total_wd,
+                                                                   total_height,
                                                                    "10mm",
                                                                    GlazingBead_ArticleNo._2451,
                                                                    1);
@@ -230,6 +238,8 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    _frameModel,
                                                                    null,
+                                                                   total_wd,
+                                                                   total_height,
                                                                    "6-8mm",
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
@@ -258,7 +268,8 @@ namespace ModelLayer.Tests
         [TestMethod]
         public void ChkVar_2EQualPanelFW_WithMullion()
         {
-            int total_wd = 900, total_height = 1300;
+            int total_wd = 900, total_height = 1300,
+                eqpanelWD = 450, eqpanelHT = 1300;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -314,12 +325,87 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   _frameModel,
                                                                    null,
+                                                                   _multipanelModel,
+                                                                   eqpanelWD,
+                                                                   eqpanelHT,
                                                                    "6-8mm",
-                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlazingBead_ArticleNo._2451,
                                                                    1);
+            _multipanelModel.MPanelLst_Panel.Add(_panelModel);
+            Control fw1 = new Control();
+            fw1.Name = "FixedPanelUC_1";
+            _multipanelModel.MPanelLst_Objects.Add(fw1);
 
+            IDividerModel divModel = _dividerServices.AddDividerModel(divSize,
+                                                                      _multipanelModel.MPanel_Height,
+                                                                      new Control(),
+                                                                      DividerModel.DividerType.Mullion,
+                                                                      true,
+                                                                      _frameModel.Frame_Zoom,
+                                                                      Divider_ArticleNo._7538,
+                                                                      _multipanelModel.MPanel_DisplayWidth,
+                                                                      _multipanelModel.MPanel_DisplayHeight,
+                                                                      1,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      _frameModel.Frame_Type.ToString());
+            _multipanelModel.MPanelLst_Divider.Add(divModel);
+            Control div1 = new Control();
+            div1.Name = "MullionUC_1";
+            _multipanelModel.MPanelLst_Objects.Add(div1);
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Fixed Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   null,
+                                                                   _multipanelModel,
+                                                                   eqpanelWD,
+                                                                   eqpanelHT,
+                                                                   "6-8mm",
+                                                                   GlazingBead_ArticleNo._2451,
+                                                                   2);
+            _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
+            Control fw2 = new Control();
+            fw2.Name = "FixedPanelUC_2";
+            _multipanelModel.MPanelLst_Objects.Add(fw2);
+
+            _qouteModel.GetListOfMaterials();
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(905, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1305, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(832, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1232, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
+            Assert.AreEqual(2, _frameModel.Frame_SealantWHQty);
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(381, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1234, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(375, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(1228, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
+            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+
+            Assert.AreEqual(Divider_ArticleNo._7538, divModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, divModel.Div_ReinfArtNo);
+            Assert.AreEqual(1242, divModel.Div_ExplosionHeight);
+            Assert.AreEqual(1132, divModel.Div_ReinfHeight);
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(381, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1234, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(375, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1228, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
+            Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
         }
     }
 }
