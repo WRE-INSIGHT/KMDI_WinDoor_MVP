@@ -62,6 +62,8 @@ namespace PresentationLayer.Presenter
         private IControlsUCPresenter _controlsUCP;
 
         private IFixedPanelUCPresenter _fixedPanelUCPresenter;
+        private IExplosionPresenter _explosionPresenter;
+        private IDividerPropertiesUCPresenter _divPropertiesUCP;
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
@@ -256,6 +258,14 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public IDividerPropertiesUCPresenter divPropertiesUCP
+        {
+            get
+            {
+                return _divPropertiesUCP;
+            }
+        }
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -271,7 +281,9 @@ namespace PresentationLayer.Presenter
                              IPanelServices panelServices,
                              IControlsUCPresenter controlsUCP,
                              IBasePlatformImagerUCPresenter basePlatformImagerUCPresenter,
-                             IFrameImagerUCPresenter frameImagerUCPresenter)
+                             IFrameImagerUCPresenter frameImagerUCPresenter,
+                             IExplosionPresenter explosionPresenter,
+                             IDividerPropertiesUCPresenter divPropertiesUCP)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -287,6 +299,8 @@ namespace PresentationLayer.Presenter
             _panelServices = panelServices;
             _controlsUCP = controlsUCP;
             _basePlatformImagerUCPresenter = basePlatformImagerUCPresenter;
+            _explosionPresenter = explosionPresenter;
+            _divPropertiesUCP = divPropertiesUCP;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -317,6 +331,13 @@ namespace PresentationLayer.Presenter
             _mainView.ButtonMinusZoomClickEventRaised += _mainView_ButtonMinusZoomClickEventRaised;
             _mainView.ButtonPlusZoomClickEventRaised += _mainView_ButtonPlusZoomClickEventRaised;
             _mainView.DeleteToolStripButtonClickEventRaised += _mainView_DeleteToolStripButtonClickEventRaised;
+            _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised;
+        }
+
+        private void _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            IExplosionPresenter explosionPresenter = _explosionPresenter.GetNewInstance(_unityC, _quotationModel, this);
+            explosionPresenter.ShowExplosionView();
         }
 
         private void _mainView_DeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -790,7 +811,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
-                        int frameID = _windoorModel.GetFrameCount() + 1;
+                        int frameID = _windoorModel.frameIDCounter += 1;
                         _frameModel = _frameServices.AddFrameModel(frmDimension_numWd, 
                                                                    frmDimension_numHt, 
                                                                    frameType, 
@@ -905,17 +926,17 @@ namespace PresentationLayer.Presenter
     
         public int GetPanelCount()
         {
-            return _windoorModel.GetPanelCount();
+            return _windoorModel.panelIDCounter += 1;
         }
 
         public int GetMultiPanelCount()
         {
-            return _windoorModel.GetMultiPanelCount();
+            return _windoorModel.mpanelIDCounter += 1;
         }
 
         public int GetDividerCount()
         {
-            return _windoorModel.GetDividerCount();
+            return _windoorModel.divIDCounter += 1;
         }
 
         ITransomUCPresenter current_transom;

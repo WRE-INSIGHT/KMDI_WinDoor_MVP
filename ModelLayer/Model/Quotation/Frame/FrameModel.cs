@@ -268,6 +268,21 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FramePadding_Default();
                 }
+
+                SetZoom();
+            }
+        }
+
+        private void SetZoom()
+        {
+            foreach (IMultiPanelModel mpnl in Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+            {
+                mpnl.MPanel_Zoom = Frame_Zoom;
+            }
+
+            foreach (IPanelModel pnl in Lst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+            {
+                pnl.Panel_Zoom = Frame_Zoom;
             }
         }
 

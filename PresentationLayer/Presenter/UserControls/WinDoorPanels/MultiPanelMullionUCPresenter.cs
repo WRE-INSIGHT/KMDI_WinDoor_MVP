@@ -79,6 +79,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         Timer _tmr = new Timer();
 
+        public IMultiPanelPropertiesUCPresenter multiPropUCP2_given
+        {
+            get
+            {
+                return _multiPropUCP2_given;
+            }
+        }
+
         public MultiPanelMullionUCPresenter(IMultiPanelMullionUC multiPanelMullionUC,
                                             IFixedPanelUCPresenter fixedUCP,
                                             ICasementPanelUCPresenter casementUCP,
@@ -207,11 +215,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender; //Control na babagsakan
             string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
 
-            int panelID = _mainPresenter.GetPanelCount() + 1,
-                multiID = _mainPresenter.GetMultiPanelCount() + 1;
-
-                divID = _mainPresenter.GetDividerCount() + 1;
-
             int totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
 
             if (_frameModel.Frame_Type.ToString().Contains("Window"))
@@ -252,7 +255,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                           true,
                                                                                           flow,
                                                                                           _frameModel.Frame_Zoom,
-                                                                                          multiID,
+                                                                                          _mainPresenter.GetMultiPanelCount(),
                                                                                           DockStyle.None,
                                                                                           _multiPanelModel.GetNextIndex(),
                                                                                           _multiPanelModel,
@@ -308,7 +311,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                   Divider_ArticleNo._7536,
                                                                                   _multiPanelModel.MPanel_DisplayWidth,
                                                                                   _multiPanelModel.MPanel_DisplayHeight,
-                                                                                  divID,
+                                                                                  _mainPresenter.GetDividerCount(),
                                                                                   _frameModel.FrameImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString());
 
@@ -377,7 +380,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                  Divider_ArticleNo._7536,
                                                                                  _multiPanelModel.MPanel_DisplayWidth,
                                                                                  _multiPanelModel.MPanel_DisplayHeight,
-                                                                                 divID,
+                                                                                 _mainPresenter.GetDividerCount(),
                                                                                  _frameModel.FrameImageRenderer_Zoom);
 
                             _frameModel.Lst_Divider.Add(divModel);
@@ -436,24 +439,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 //bool frmResult = _frmDimensionPresenter.GetfrmResult();
 
                 IPanelModel _panelModel = _panelServices.AddPanelModel(suggest_Wd,
-                                                                           suggest_HT,
-                                                                           fpnl,
-                                                                           (UserControl)_frameUCP.GetFrameUC(),
-                                                                           (UserControl)framePropUC,
-                                                                           (UserControl)_multiPanelMullionUC,
-                                                                           data,
-                                                                           true,
-                                                                           _frameModel.Frame_Zoom,
-                                                                           _frameModel,
-                                                                           _multiPanelModel,
-                                                                           suggest_DisplayWD,
-                                                                           suggest_DisplayHT,
-                                                                           "6-8mm",
-                                                                           GlazingBead_ArticleNo._2452,
-                                                                           panelID,
-                                                                           _frameModel.FrameImageRenderer_Zoom,
-                                                                           _multiPanelModel.GetNextIndex(),
-                                                                           DockStyle.None);
+                                                                       suggest_HT,
+                                                                       fpnl,
+                                                                       (UserControl)_frameUCP.GetFrameUC(),
+                                                                       (UserControl)framePropUC,
+                                                                       (UserControl)_multiPanelMullionUC,
+                                                                       data,
+                                                                       true,
+                                                                       _frameModel.Frame_Zoom,
+                                                                       _frameModel,
+                                                                       _multiPanelModel,
+                                                                       suggest_DisplayWD,
+                                                                       suggest_DisplayHT,
+                                                                       "6-8mm",
+                                                                       GlazingBead_ArticleNo._2452,
+                                                                       _mainPresenter.GetPanelCount(),
+                                                                       _frameModel.FrameImageRenderer_Zoom,
+                                                                       _multiPanelModel.GetNextIndex(),
+                                                                       DockStyle.None);
                 //_frameModel.Lst_Panel.Add(_panelModel);
                 _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                 _multiPanelModel.Reload_PanelMargin();
@@ -565,7 +568,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                           Divider_ArticleNo._7536,
                                                                           _multiPanelModel.MPanel_DisplayWidth,
                                                                           _multiPanelModel.MPanel_DisplayHeight,
-                                                                          divID,
+                                                                          _mainPresenter.GetDividerCount(),
                                                                           _frameModel.FrameImageRenderer_Zoom,
                                                                           _frameModel.Frame_Type.ToString());
 
@@ -704,7 +707,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _mullionUCP,
                                                         _mullionImagerUCP,
                                                         _transomImagerUCP,
-                                                        _mainPresenter.GetDividerCount() + 1,
+                                                        _mainPresenter.GetDividerCount(),
                                                         _multiPanelModel,
                                                         null,
                                                         null,
@@ -772,6 +775,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         Color color = Color.Black;
         bool _HeightChange = false,
              _WidthChange = false;
+
         private void _multiPanelMullionUC_flpMulltiPaintEventRaised(object sender, PaintEventArgs e)
         {
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;

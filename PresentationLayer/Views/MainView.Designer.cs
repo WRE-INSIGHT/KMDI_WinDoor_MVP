@@ -48,6 +48,7 @@
             this.syncLocalToCloudToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invertOrientationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listOfMaterialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsBtnNwin = new System.Windows.Forms.ToolStripButton();
             this.tsBtnNdoor = new System.Windows.Forms.ToolStripButton();
@@ -82,7 +83,6 @@
             this.lblZoom = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
-            this.listOfMaterialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -126,7 +126,7 @@
             this.QuotationToolStripMenuItem,
             this.ItemToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
             // 
             // QuotationToolStripMenuItem
@@ -164,14 +164,14 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             // 
             // syncToolStripMenuItem
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // costingToolStripMenuItem
@@ -187,13 +187,13 @@
             // 
             this.CostingItemsToolStripMenuItem.Enabled = false;
             this.CostingItemsToolStripMenuItem.Name = "CostingItemsToolStripMenuItem";
-            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.CostingItemsToolStripMenuItem.Text = "Items";
             // 
             // defaultValuesToolStripMenuItem
             // 
             this.defaultValuesToolStripMenuItem.Name = "defaultValuesToolStripMenuItem";
-            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.defaultValuesToolStripMenuItem.Text = "Default values";
             this.defaultValuesToolStripMenuItem.Visible = false;
             // 
@@ -251,6 +251,13 @@
             this.invertOrientationToolStripMenuItem.Name = "invertOrientationToolStripMenuItem";
             this.invertOrientationToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.invertOrientationToolStripMenuItem.Text = "Invert Orientation";
+            // 
+            // listOfMaterialsToolStripMenuItem
+            // 
+            this.listOfMaterialsToolStripMenuItem.Name = "listOfMaterialsToolStripMenuItem";
+            this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.listOfMaterialsToolStripMenuItem.Text = "List of Materials";
+            this.listOfMaterialsToolStripMenuItem.Click += new System.EventHandler(this.listOfMaterialsToolStripMenuItem_Click);
             // 
             // tsMain
             // 
@@ -657,12 +664,6 @@
             this.lblSize.Text = "400 x 400";
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblSize.Click += new System.EventHandler(this.lblSize_Click);
-            // 
-            // listOfMaterialsToolStripMenuItem
-            // 
-            this.listOfMaterialsToolStripMenuItem.Name = "listOfMaterialsToolStripMenuItem";
-            this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.listOfMaterialsToolStripMenuItem.Text = "List of Materials";
             // 
             // MainView
             // 

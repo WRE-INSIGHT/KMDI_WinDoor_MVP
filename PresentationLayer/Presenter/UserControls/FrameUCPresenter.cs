@@ -129,11 +129,6 @@ namespace PresentationLayer.Presenter.UserControls
             UserControl frame = (UserControl)sender; //Control na babagsakan
             string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
 
-            int panelID = _mainPresenter.GetPanelCount() + 1,
-                multiID = _mainPresenter.GetMultiPanelCount() + 1;//,
-                //droped_objWD = frame.Width - _frameModel.Frame_Padding_int.All * 2,
-                //droped_objHT = frame.Height - _frameModel.Frame_Padding_int.All * 2;
-
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
@@ -157,7 +152,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                           true,
                                                                           flow,
                                                                           _frameModel.Frame_Zoom,
-                                                                          multiID,
+                                                                          _mainPresenter.GetMultiPanelCount(),
                                                                           DockStyle.Fill,
                                                                           0,
                                                                           null,
@@ -233,7 +228,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            _frameModel.Frame_Height,
                                                            "6-8mm",
                                                            GlazingBead_ArticleNo._2452,
-                                                           panelID);
+                                                           _mainPresenter.GetPanelCount());
                 _frameModel.Lst_Panel.Add(_panelModel);
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);

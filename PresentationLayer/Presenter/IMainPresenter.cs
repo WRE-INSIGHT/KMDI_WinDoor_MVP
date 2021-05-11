@@ -33,13 +33,16 @@ namespace PresentationLayer.Presenter
         Panel pnlMain_MainPresenter { get; set; }
         Panel pnlItems_MainPresenter { get; set; }
         Panel pnlPropertiesBody_MainPresenter { get; set; }
+        IDividerPropertiesUCPresenter divPropertiesUCP { get; }
+
         IMainView GetMainView();
+        IFramePropertiesUC GetFrameProperties(int frameID);
+
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);
         void AddWndrList_QuotationModel(IWindoorModel wndr);
         void AddFrameList_WindoorModel(IFrameModel frameModel);
         void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel);
-        IFramePropertiesUC GetFrameProperties(int frameID);
         int GetPanelCount();
         int GetMultiPanelCount();
         int GetDividerCount();

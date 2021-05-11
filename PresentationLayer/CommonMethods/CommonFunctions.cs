@@ -108,6 +108,15 @@ namespace PresentationLayer.CommonMethods
                 frameModel.Lst_Divider.Add(divModel);
                 parentModel.MPanelLst_Divider.Add(divModel);
 
+                if (divType == DividerModel.DividerType.Mullion)
+                {
+                    IDividerPropertiesUCPresenter divPropUCP = mainPresenter.divPropertiesUCP.GetNewInstance(_unityC, divModel, mainPresenter);
+                    multiMullionUCP.multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)divPropUCP.GetDivProperties());
+                }
+                frameModel.FrameProp_Height += (173 + 1); //+1 on margin
+                parentModel.MPanelProp_Height += (173 + 1); //+1 on margin
+
+
                 if (parentModel.MPanel_Type == "Transom")
                 {
                     ITransomUCPresenter transomUCP = null;

@@ -224,6 +224,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_fixedPanelUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
+                _multiPanelModel.MPanelProp_Height += (173 + 1); //+1 on margin
             }
             if (_multiPanelMullionUCP != null)
             {
@@ -252,7 +253,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _mullionUCP,
                                                         _mullionImagerUCP,
                                                         _transomImagerUCP,
-                                                        _mainPresenter.GetDividerCount() + 1,
+                                                        _mainPresenter.GetDividerCount(),
                                                         _multiPanelModel,
                                                         _panelModel,
                                                         _multiPanelTransomUCP,
@@ -263,7 +264,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
             _panelModel.Panel_Visibility = false;
-            _frameModel.FrameProp_Height -= 148;
+            _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
+            _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
 
             #endregion
         }

@@ -316,69 +316,64 @@ namespace ModelLayer.Model.Quotation.WinDoor
             return lst_frame.Where(frame => frame.Frame_Visible == true);
         }
 
-        public int GetFrameCount()
-        {
-            int frameCount = 0;
-            try
-            {
-                frameCount = lst_frame.Count();
-            }
-            catch (Exception)
-            {
-                frameCount = 0;
-            }
-
-            return frameCount;
-        }
-
-        public int GetPanelCount()
-        {
-            int panelCount = 0;
-            try
-            {
-                panelCount = lst_frame.SelectMany(pnl => pnl.Lst_Panel).Count();
-            }
-            catch (Exception)
-            {
-                panelCount = 0;
-            }
-           return panelCount;
-        }
-
-        public int GetMultiPanelCount()
-        {
-            int multiCount = 0;
-            try
-            {
-                multiCount = lst_frame.SelectMany(mpnl => mpnl.Lst_MultiPanel).Count();
-            }
-            catch (Exception)
-            {
-                multiCount = 0;
-            }
-            return multiCount;
-        }
-
-        public int GetDividerCount()
-        {
-            int divCount = 0;
-            try
-            {
-                divCount = lst_frame.SelectMany(div => div.Lst_Divider).Count();
-            }
-            catch (Exception)
-            {
-                divCount = 0;
-            }
-            return divCount;
-        }
-
         private float[] _arr_zoomPercentage = { 0.10f, 0.13f, 0.17f, 0.26f, 0.50f, 1.0f };
         public float[] Arr_ZoomPercentage
         {
             get
             {
                 return _arr_zoomPercentage;
+            }
+        }
+
+        private int _frameIDCounter;
+        public int frameIDCounter
+        {
+            get
+            {
+                return _frameIDCounter;
+            }
+            set
+            {
+                _frameIDCounter = value;
+            }
+        }
+
+        private int _panelIDCounter;
+        public int panelIDCounter
+        {
+            get
+            {
+                return _panelIDCounter;
+            }
+            set
+            {
+                _panelIDCounter = value;
+            }
+        }
+
+        private int _mpanelIDCounter;
+        public int mpanelIDCounter
+        {
+            get
+            {
+                return _mpanelIDCounter;
+            }
+            set
+            {
+                _mpanelIDCounter = value;
+            }
+        }
+
+        private int _divIDCounter;
+        public int divIDCounter
+        {
+            get
+            {
+                return _divIDCounter;
+            }
+            set
+            {
+                _divIDCounter = value;
             }
         }
 
@@ -455,15 +450,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 foreach (IFrameModel fr in lst_frame.Where(fr => fr.Frame_Visible == true))
                 {
                     fr.Frame_Zoom = WD_zoom;
-
-                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
-                    {
-                        mpnl.MPanel_Zoom = WD_zoom;
-                    }
-                    foreach (IPanelModel pnl in fr.Lst_Panel.Where(pnl => pnl.Panel_Visibility == true))
-                    {
-                        pnl.Panel_Zoom = WD_zoom;
-                    }
                 }
             }
         }

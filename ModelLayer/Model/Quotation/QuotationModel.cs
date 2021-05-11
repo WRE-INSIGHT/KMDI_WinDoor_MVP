@@ -107,9 +107,11 @@ namespace ModelLayer.Model.Quotation
 
                             if (mpnl.MPanel_Type == "Mullion")
                             {
-                                int obj_count = mpnl.GetVisibleObjects().Count();
+                                int obj_count = mpnl.GetVisibleObjects().Count(),
+                                    loop_counter = 1;
                                 for (int i = 0; i < obj_count; i+=2)
                                 {
+
                                     Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
                                     IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
 
@@ -118,10 +120,10 @@ namespace ModelLayer.Model.Quotation
                                         Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i+1];
                                         IDividerModel div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
 
-                                        Material_List.Rows.Add(div_nxtCtrl.Div_Type.ToString() + " " + mpnl.MPanel_Type + " " + div_nxtCtrl.Div_ArtNo.ToString(),
+                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                                1, "pc(s)",
                                                                div_nxtCtrl.Div_ExplosionHeight.ToString());
-                                        Material_List.Rows.Add(div_nxtCtrl.Div_Type.ToString() + " " + mpnl.MPanel_Type + " " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
+                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
                                                                1, "pc(s)",
                                                                div_nxtCtrl.Div_ReinfHeight.ToString());
 
@@ -134,19 +136,19 @@ namespace ModelLayer.Model.Quotation
                                         pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo);
                                     }
 
-                                    Material_List.Rows.Add("Glazing Bead Width (P" + i + ")" + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
+                                    Material_List.Rows.Add("Glazing Bead Width (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                                2, "pc(s)",
                                                                pnl_curCtrl.Panel_GlazingBeadWidth.ToString());
 
-                                    Material_List.Rows.Add("Glazing Bead Height " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
+                                    Material_List.Rows.Add("Glazing Bead Height (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                            2, "pc(s)",
                                                            pnl_curCtrl.Panel_GlazingBeadHeight.ToString());
 
-                                    Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThickness + "-P " + i +")",
+                                    Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
                                                            1, "pc(s)",
                                                            pnl_curCtrl.Panel_GlassWidth.ToString());
 
-                                    Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + ")",
+                                    Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
                                                            1, "pc(s)",
                                                            pnl_curCtrl.Panel_GlassHeight.ToString());
 
@@ -157,6 +159,7 @@ namespace ModelLayer.Model.Quotation
                                                            pnl_curCtrl.Panel_SealantWHQty,
                                                            "pc(s)",
                                                            "");
+                                    loop_counter++;
                                 }
                             }
                         }

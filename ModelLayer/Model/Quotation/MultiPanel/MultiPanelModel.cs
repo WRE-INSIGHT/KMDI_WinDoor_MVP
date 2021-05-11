@@ -525,7 +525,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 _mpanelZoom = value;
                 MPanel_WidthToBind = (int)(MPanel_Width * value);
                 MPanel_HeightToBind = (int)(MPanel_Height * value);
+                SetZoomPanels();
                 SetZoomDivider();
+                SetZoomMPanels();
             }
         }
 
@@ -534,6 +536,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             foreach (IDividerModel div in MPanelLst_Divider)
             {
                 div.Div_Zoom = MPanel_Zoom;
+            }
+        }
+        private void SetZoomPanels()
+        {
+            foreach (IPanelModel pnl in MPanelLst_Panel)
+            {
+                pnl.Panel_Zoom = MPanel_Zoom;
+            }
+        }
+        private void SetZoomMPanels()
+        {
+            foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
+            {
+                mpnl.MPanel_Zoom = MPanel_Zoom;
             }
         }
 
@@ -974,10 +990,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_Type == "Transom")
                 {
-                    int totalHeight_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_Height + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
-                                               MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_Height) +
-                                               MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).Sum(mpnl => mpnl.MPanel_Height);
-                    int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_Height - totalHeight_Controls;
+                    int totalHeight_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
+                                               MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_HeightToBind) +
+                                               MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).Sum(mpnl => mpnl.MPanel_HeightToBind);
+                    int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
 
                     while (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                     {
@@ -1001,10 +1017,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Type == "Mullion")
                 {
-                    int totalWidth_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_Width + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) +
-                                              MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_Width) +
-                                              MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).Sum(mpnl => mpnl.MPanel_Width);
-                    int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_Width - totalWidth_Controls;
+                    int totalWidth_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) +
+                                              MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_WidthToBind) +
+                                              MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).Sum(mpnl => mpnl.MPanel_WidthToBind);
+                    int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
 
                     while (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                     {

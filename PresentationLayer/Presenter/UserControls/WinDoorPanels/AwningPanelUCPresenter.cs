@@ -149,7 +149,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _mullionUCP,
                                                         _mullionImagerUCP,
                                                         _transomImagerUCP,
-                                                        _mainPresenter.GetDividerCount() + 1,
+                                                        _mainPresenter.GetDividerCount(),
                                                         _multiPanelModel,
                                                         _panelModel,
                                                         _multiPanelTransomUCP,

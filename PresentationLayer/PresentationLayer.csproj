@@ -78,7 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonMethods\CommonFunctions.cs" />
+    <Compile Include="Presenter\ExplosionPresenter.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
+    <Compile Include="Presenter\IExplosionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="Views\frmDimensionView.Designer.cs">
       <DependentUpon>frmDimensionView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\IExplosionView.cs" />
     <Compile Include="Views\IfrmDimensionView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />

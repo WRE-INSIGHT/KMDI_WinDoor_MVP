@@ -138,7 +138,7 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divVisibility = value;
-                //NotifyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
