@@ -90,12 +90,12 @@ namespace ModelLayer.Tests
             Assert.AreEqual("Frame Width _7502", dt.Rows[0]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[0]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[0]["Unit"].ToString());
-            Assert.AreEqual("1505", dt.Rows[0]["Size"]);
+            Assert.AreEqual("505", dt.Rows[0]["Size"]);
 
             Assert.AreEqual("Frame Height _7502", dt.Rows[1]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[1]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[1]["Unit"].ToString());
-            Assert.AreEqual("505", dt.Rows[1]["Size"]);
+            Assert.AreEqual("1505", dt.Rows[1]["Size"]);
 
             Assert.AreEqual("Frame Reinf Width _R676", dt.Rows[2]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[2]["Qty"]);
@@ -403,6 +403,148 @@ namespace ModelLayer.Tests
             Assert.AreEqual(381, _panelModel2.Panel_GlazingBeadWidth);
             Assert.AreEqual(1234, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(375, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1228, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
+            Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
+        }
+
+        [TestMethod]
+        public void ChkVar_2UnequalPanelFW_WithMullion()
+        {
+            int total_wd = 900, total_height = 1300,
+                uneqpanelWD1 = 400, uneqpanelWD2 = 500, eqpanelHT = 1300;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_height,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                       ht,
+                                                                                       new Control(),
+                                                                                       new UserControl(),
+                                                                                       _frameModel,
+                                                                                       true,
+                                                                                       FlowDirection.LeftToRight,
+                                                                                       _frameModel.Frame_Zoom,
+                                                                                       1,
+                                                                                       DockStyle.Fill,
+                                                                                       0,
+                                                                                       null,
+                                                                                       _frameModel.FrameImageRenderer_Zoom);
+            _frameModel.Lst_MultiPanel.Add(_multipanelModel);
+
+            int divSize = 0;
+            int totalPanelCount = _multipanelModel.MPanel_Divisions + 1;
+
+            if (_frameModel.Frame_Type.ToString().Contains("Window"))
+            {
+                divSize = 26;
+            }
+            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
+            {
+                divSize = 33;
+            }
+            int suggest_Wd = (((_multipanelModel.MPanel_Width) - (divSize * _multipanelModel.MPanel_Divisions)) / totalPanelCount),
+                suggest_HT = _multipanelModel.MPanel_Height;
+
+            IPanelModel _panelModel = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Fixed Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   null,
+                                                                   _multipanelModel,
+                                                                   uneqpanelWD1,
+                                                                   eqpanelHT,
+                                                                   "6-8mm",
+                                                                   GlazingBead_ArticleNo._2451,
+                                                                   1);
+            _multipanelModel.MPanelLst_Panel.Add(_panelModel);
+            Control fw1 = new Control();
+            fw1.Name = "FixedPanelUC_1";
+            _multipanelModel.MPanelLst_Objects.Add(fw1);
+
+            IDividerModel divModel = _dividerServices.AddDividerModel(divSize,
+                                                                      _multipanelModel.MPanel_Height,
+                                                                      new Control(),
+                                                                      DividerModel.DividerType.Mullion,
+                                                                      true,
+                                                                      _frameModel.Frame_Zoom,
+                                                                      Divider_ArticleNo._7538,
+                                                                      _multipanelModel.MPanel_DisplayWidth,
+                                                                      _multipanelModel.MPanel_DisplayHeight,
+                                                                      1,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      _frameModel.Frame_Type.ToString());
+            _multipanelModel.MPanelLst_Divider.Add(divModel);
+            Control div1 = new Control();
+            div1.Name = "MullionUC_1";
+            _multipanelModel.MPanelLst_Objects.Add(div1);
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Fixed Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   null,
+                                                                   _multipanelModel,
+                                                                   uneqpanelWD2,
+                                                                   eqpanelHT,
+                                                                   "6-8mm",
+                                                                   GlazingBead_ArticleNo._2451,
+                                                                   2);
+            _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
+            Control fw2 = new Control();
+            fw2.Name = "FixedPanelUC_2";
+            _multipanelModel.MPanelLst_Objects.Add(fw2);
+
+            _qouteModel.GetListOfMaterials();
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(905, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1305, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(832, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1232, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
+            Assert.AreEqual(2, _frameModel.Frame_SealantWHQty);
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(331, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1234, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(325, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(1228, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
+            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+
+            Assert.AreEqual(Divider_ArticleNo._7538, divModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, divModel.Div_ReinfArtNo);
+            Assert.AreEqual(1242, divModel.Div_ExplosionHeight);
+            Assert.AreEqual(1132, divModel.Div_ReinfHeight);
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(431, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1234, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(425, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
             Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);

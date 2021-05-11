@@ -84,11 +84,11 @@ namespace ModelLayer.Model.Quotation
                 {
                     Material_List.Rows.Add("Frame Width " + frame.Frame_ArtNo.ToString(),
                                            2, "pc(s)",
-                                           frame.Frame_ExplosionHeight.ToString());
+                                           frame.Frame_ExplosionWidth.ToString());
 
                     Material_List.Rows.Add("Frame Height " + frame.Frame_ArtNo.ToString(),
                                            2, "pc(s)",
-                                           frame.Frame_ExplosionWidth);
+                                           frame.Frame_ExplosionHeight);
 
                     Material_List.Rows.Add("Frame Reinf Width " + frame.Frame_ReinfArtNo.ToString(),
                                            2, "pc(s)",

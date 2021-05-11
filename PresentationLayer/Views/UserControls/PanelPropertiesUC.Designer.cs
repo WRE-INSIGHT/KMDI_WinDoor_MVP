@@ -37,11 +37,11 @@
             this.pnum_Height = new System.Windows.Forms.NumericUpDown();
             this.lbl_Height = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lbl_pnlSpecs = new System.Windows.Forms.Label();
-            this.lbl_glassthick = new System.Windows.Forms.Label();
-            this.cmb_GlassThick = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.cmb_GlazingArtNo = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmb_GlassThick = new System.Windows.Forms.ComboBox();
+            this.lbl_glassthick = new System.Windows.Forms.Label();
+            this.lbl_pnlSpecs = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Height)).BeginInit();
@@ -158,25 +158,31 @@
             this.panel1.Size = new System.Drawing.Size(147, 84);
             this.panel1.TabIndex = 8;
             // 
-            // lbl_pnlSpecs
+            // cmb_GlazingArtNo
             // 
-            this.lbl_pnlSpecs.AutoSize = true;
-            this.lbl_pnlSpecs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_pnlSpecs.Location = new System.Drawing.Point(-1, 4);
-            this.lbl_pnlSpecs.Name = "lbl_pnlSpecs";
-            this.lbl_pnlSpecs.Size = new System.Drawing.Size(112, 15);
-            this.lbl_pnlSpecs.TabIndex = 7;
-            this.lbl_pnlSpecs.Text = "Panel Specification";
+            this.cmb_GlazingArtNo.FormattingEnabled = true;
+            this.cmb_GlazingArtNo.Items.AddRange(new object[] {
+            "6-8mm",
+            "10mm",
+            "10.76-14mm",
+            "16mm",
+            "18mm",
+            "20mm",
+            "22mm",
+            "25mm"});
+            this.cmb_GlazingArtNo.Location = new System.Drawing.Point(70, 53);
+            this.cmb_GlazingArtNo.Name = "cmb_GlazingArtNo";
+            this.cmb_GlazingArtNo.Size = new System.Drawing.Size(72, 21);
+            this.cmb_GlazingArtNo.TabIndex = 11;
             // 
-            // lbl_glassthick
+            // label1
             // 
-            this.lbl_glassthick.AutoSize = true;
-            this.lbl_glassthick.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_glassthick.Location = new System.Drawing.Point(0, 27);
-            this.lbl_glassthick.Name = "lbl_glassthick";
-            this.lbl_glassthick.Size = new System.Drawing.Size(64, 13);
-            this.lbl_glassthick.TabIndex = 8;
-            this.lbl_glassthick.Text = "Glass Thick";
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 33);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Glazing Art.No";
             // 
             // cmb_GlassThick
             // 
@@ -195,31 +201,25 @@
             this.cmb_GlassThick.Size = new System.Drawing.Size(72, 21);
             this.cmb_GlassThick.TabIndex = 9;
             // 
-            // label1
+            // lbl_glassthick
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 33);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Glazing Art.No";
+            this.lbl_glassthick.AutoSize = true;
+            this.lbl_glassthick.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_glassthick.Location = new System.Drawing.Point(0, 27);
+            this.lbl_glassthick.Name = "lbl_glassthick";
+            this.lbl_glassthick.Size = new System.Drawing.Size(64, 13);
+            this.lbl_glassthick.TabIndex = 8;
+            this.lbl_glassthick.Text = "Glass Thick";
             // 
-            // cmb_GlazingArtNo
+            // lbl_pnlSpecs
             // 
-            this.cmb_GlazingArtNo.FormattingEnabled = true;
-            this.cmb_GlazingArtNo.Items.AddRange(new object[] {
-            "6-8mm",
-            "10mm",
-            "10.76-14mm",
-            "16mm",
-            "18mm",
-            "20mm",
-            "22mm",
-            "25mm"});
-            this.cmb_GlazingArtNo.Location = new System.Drawing.Point(70, 53);
-            this.cmb_GlazingArtNo.Name = "cmb_GlazingArtNo";
-            this.cmb_GlazingArtNo.Size = new System.Drawing.Size(72, 21);
-            this.cmb_GlazingArtNo.TabIndex = 11;
+            this.lbl_pnlSpecs.AutoSize = true;
+            this.lbl_pnlSpecs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_pnlSpecs.Location = new System.Drawing.Point(-1, 4);
+            this.lbl_pnlSpecs.Name = "lbl_pnlSpecs";
+            this.lbl_pnlSpecs.Size = new System.Drawing.Size(112, 15);
+            this.lbl_pnlSpecs.TabIndex = 7;
+            this.lbl_pnlSpecs.Text = "Panel Specification";
             // 
             // PanelPropertiesUC
             // 
@@ -237,6 +237,7 @@
             this.Controls.Add(this.lbl_pnlname);
             this.Controls.Add(this.chk_Orientation);
             this.Controls.Add(this.num_BladeCount);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "PanelPropertiesUC";
             this.Size = new System.Drawing.Size(159, 228);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);

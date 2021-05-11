@@ -7,10 +7,11 @@ using PresentationLayer.Views.UserControls;
 using ModelLayer.Model.Quotation.Panel;
 using System.Windows.Forms;
 using Unity;
+using CommonComponents;
 
 namespace PresentationLayer.Presenter.UserControls
 {
-    public class PanelPropertiesUCPresenter : IPanelPropertiesUCPresenter
+    public class PanelPropertiesUCPresenter : IPanelPropertiesUCPresenter, IPresenterCommon
     {
         IPanelPropertiesUC _panelPropertiesUC;
 
@@ -62,7 +63,7 @@ namespace PresentationLayer.Presenter.UserControls
             _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
         }
 
-        private Dictionary<string, Binding> CreateBindingDictionary()
+        public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> panelBinding = new Dictionary<string, Binding>();
             panelBinding.Add("Panel_ID", new Binding("Panel_ID", _panelModel, "Panel_ID", true, DataSourceUpdateMode.OnPropertyChanged));
