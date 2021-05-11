@@ -39,11 +39,11 @@
             this.cmb_divArtNo = new System.Windows.Forms.ComboBox();
             this.lbl_divArtNo = new System.Windows.Forms.Label();
             this.lbl_divSpecs = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flp_divProp = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).BeginInit();
             this.panel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flp_divProp.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_divname
@@ -170,29 +170,29 @@
             this.lbl_divSpecs.TabIndex = 7;
             this.lbl_divSpecs.Text = "Article No.";
             // 
-            // flowLayoutPanel1
+            // flp_divProp
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.lbl_divname);
-            this.flowLayoutPanel1.Controls.Add(this.lbl_Width);
-            this.flowLayoutPanel1.Controls.Add(this.num_divWidth);
-            this.flowLayoutPanel1.Controls.Add(this.lbl_Height);
-            this.flowLayoutPanel1.Controls.Add(this.num_divHeight);
-            this.flowLayoutPanel1.Controls.Add(this.panel1);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(3, 5, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(157, 173);
-            this.flowLayoutPanel1.TabIndex = 13;
+            this.flp_divProp.BackColor = System.Drawing.Color.White;
+            this.flp_divProp.Controls.Add(this.lbl_divname);
+            this.flp_divProp.Controls.Add(this.lbl_Width);
+            this.flp_divProp.Controls.Add(this.num_divWidth);
+            this.flp_divProp.Controls.Add(this.lbl_Height);
+            this.flp_divProp.Controls.Add(this.num_divHeight);
+            this.flp_divProp.Controls.Add(this.panel1);
+            this.flp_divProp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flp_divProp.Location = new System.Drawing.Point(0, 0);
+            this.flp_divProp.Name = "flp_divProp";
+            this.flp_divProp.Padding = new System.Windows.Forms.Padding(3, 5, 0, 0);
+            this.flp_divProp.Size = new System.Drawing.Size(157, 173);
+            this.flp_divProp.TabIndex = 13;
             // 
             // DividerPropertiesUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PowderBlue;
+            this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.flp_divProp);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "DividerPropertiesUC";
             this.Size = new System.Drawing.Size(157, 173);
@@ -201,8 +201,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.flp_divProp.ResumeLayout(false);
+            this.flp_divProp.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -220,6 +220,6 @@
         private System.Windows.Forms.ComboBox cmb_divArtNo;
         private System.Windows.Forms.Label lbl_divArtNo;
         private System.Windows.Forms.Label lbl_divSpecs;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flp_divProp;
     }
 }

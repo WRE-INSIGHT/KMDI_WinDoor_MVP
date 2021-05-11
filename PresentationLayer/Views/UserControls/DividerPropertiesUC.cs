@@ -49,13 +49,13 @@ namespace PresentationLayer.Views.UserControls
                 {
                     lbl_Width.Visible = false;
                     num_divWidth.Visible = false;
-                    this.BackColor = Color.PowderBlue;
+                    flp_divProp.BackColor = Color.PowderBlue;
                 }
                 else if (value == DividerType.Transom)
                 {
                     lbl_Height.Visible = false;
                     num_divHeight.Visible = false;
-                    this.BackColor = Color.RosyBrown;
+                    flp_divProp.BackColor = Color.RosyBrown;
                 }
             }
         }

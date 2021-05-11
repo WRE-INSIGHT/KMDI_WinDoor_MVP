@@ -65,6 +65,8 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    _frameModel,
                                                                    null,
+                                                                   total_wd,
+                                                                   total_height,
                                                                    "6-8mm",
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
@@ -124,6 +126,8 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    _frameModel,
                                                                    null,
+                                                                   total_wd,
+                                                                   total_height,
                                                                    "6-8mm",
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
@@ -183,6 +187,8 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    _frameModel,
                                                                    null,
+                                                                   total_wd,
+                                                                   total_height,
                                                                    "6-8mm",
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
@@ -288,6 +294,8 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    _frameModel,
                                                                    null,
+                                                                   total_wd,
+                                                                   total_height,
                                                                    "6-8mm",
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
