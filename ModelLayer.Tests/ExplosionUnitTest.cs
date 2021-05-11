@@ -1,17 +1,17 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModelLayer.Model.Quotation;
-using ServiceLayer.Services.QuotationServices;
-using ServiceLayer.CommonServices;
-using System.Collections.Generic;
-using ModelLayer.Model.Quotation.WinDoor;
-using ServiceLayer.Services.WindoorServices;
 using ModelLayer.Model.Quotation.Frame;
-using ServiceLayer.Services.FrameServices;
-using ServiceLayer.Services.PanelServices;
-using System.Windows.Forms;
+using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
+using ServiceLayer.CommonServices;
+using ServiceLayer.Services.FrameServices;
+using ServiceLayer.Services.MultiPanelServices;
+using ServiceLayer.Services.PanelServices;
+using ServiceLayer.Services.QuotationServices;
+using ServiceLayer.Services.WindoorServices;
 using System.Data;
+using System.Windows.Forms;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using ServiceLayer.Services.MultiPanelServices;
 using ModelLayer.Model.Quotation.MultiPanel;
@@ -51,12 +51,12 @@ namespace ModelLayer.Tests
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
-            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd, 
-                                                                   total_height, 
-                                                                   FrameModel.Frame_Padding.Window, 
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_height,
+                                                                   FrameModel.Frame_Padding.Window,
                                                                    1.0f,
-                                                                   1.0f, 
-                                                                   QuotationModel.FrameProfile_ArticleNo._7502, 
+                                                                   1.0f,
+                                                                   QuotationModel.FrameProfile_ArticleNo._7502,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
