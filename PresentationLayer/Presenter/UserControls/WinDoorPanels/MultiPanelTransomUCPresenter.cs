@@ -464,7 +464,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                _multiPanelModel,
                                                                suggest_DisplayWD,
                                                                suggest_DisplayHT,
-                                                               "6-8mm",
+                                                               Glass_Thickness._6mm,
                                                                GlazingBead_ArticleNo._2452,
                                                                _mainPresenter.GetPanelCount(),
                                                                _frameModel.FrameImageRenderer_Zoom,

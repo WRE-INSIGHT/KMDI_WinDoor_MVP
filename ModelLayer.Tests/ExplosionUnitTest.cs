@@ -76,7 +76,7 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -182,7 +182,7 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   "10mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -240,7 +240,7 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -329,7 +329,7 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    1);
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -367,7 +367,7 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    2);
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
@@ -471,7 +471,7 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    uneqpanelWD1,
                                                                    eqpanelHT,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    1);
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -509,7 +509,7 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    uneqpanelWD2,
                                                                    eqpanelHT,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    2);
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);

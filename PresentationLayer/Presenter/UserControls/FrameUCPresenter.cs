@@ -226,7 +226,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            null,
                                                            _frameModel.Frame_Width,
                                                            _frameModel.Frame_Height,
-                                                           "6-8mm",
+                                                           Glass_Thickness._6mm,
                                                            GlazingBead_ArticleNo._2452,
                                                            _mainPresenter.GetPanelCount());
                 _frameModel.Lst_Panel.Add(_panelModel);

@@ -38,6 +38,30 @@ namespace ModelLayer.Model.Quotation
             _R686 = 1
         }
 
+        public enum Divider_MechJointArticleNo
+        {
+            _9U18 = 0,
+            _AV585 = 1
+        }
+
+        public enum Glass_Thickness
+        {
+            _6mm = 0,
+            _7mm = 1,
+            _8mm = 2,
+            _10mm = 3,
+            _11mm = 4,
+            _12mm = 5,
+            _13mm = 6,
+            _14mm = 7,
+            _16mm = 8,
+            _18mm = 9,
+            _20mm = 10,
+            _22mm = 11,
+            _24mm = 12,
+            _25mm = 13
+        }
+
         public enum GlazingBead_ArticleNo
         {
             _2452 = 0,
@@ -98,6 +122,8 @@ namespace ModelLayer.Model.Quotation
                                            2, "pc(s)",
                                            frame.Frame_ReinfHeight.ToString());
 
+                    int glazing_seal = 0;
+
                     if (frame.GetVisibleMultiPanels().Count() == 1 && frame.GetVisiblePanels().Count() == 0)
                     {
                         foreach (IMultiPanelModel mpnl in frame.GetVisibleMultiPanels())
@@ -106,7 +132,7 @@ namespace ModelLayer.Model.Quotation
                             List<IDividerModel> divs = mpnl.GetVisibleDividers().ToList();
 
                             int obj_count = mpnl.GetVisibleObjects().Count(),
-                                    loop_counter = 1;
+                                loop_counter = 1;
                             for (int i = 0; i < obj_count; i += 2)
                             {
                                 Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
@@ -135,8 +161,9 @@ namespace ModelLayer.Model.Quotation
                                                                1, "pc(s)",
                                                                div_nxtCtrl.Div_ReinfWidth.ToString());
                                     }
+                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
+                                                           2, "pc(s)", "");
 
-                                    
                                     pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo, div_nxtCtrl.Div_Type);
                                 }
                                 else if (i + 1 == obj_count)
@@ -144,6 +171,13 @@ namespace ModelLayer.Model.Quotation
                                     Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i - 1];
                                     IDividerModel div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
                                     pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo, div_nxtCtrl.Div_Type);
+                                }
+
+                                if (pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._13mm ||
+                                    pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._14mm ||
+                                    pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._24mm)
+                                {
+                                    glazing_seal += pnl_curCtrl.Panel_GlazingBeadWidth + pnl_curCtrl.Panel_GlazingBeadHeight;
                                 }
 
                                 Material_List.Rows.Add("Glazing Bead Width (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
@@ -208,6 +242,8 @@ namespace ModelLayer.Model.Quotation
                                            frame.Frame_PUFoamingQty, "can", "");
                     Material_List.Rows.Add("Sealant-WH (Frame)",
                                            frame.Frame_SealantWHQty, "pc(s)", "");
+                    Material_List.Rows.Add("Glazing Seal",
+                                           glazing_seal, "mm","");
                 }
             }
 

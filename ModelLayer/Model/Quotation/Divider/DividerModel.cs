@@ -281,10 +281,12 @@ namespace ModelLayer.Model.Quotation.Divider
                 if (value == Divider_ArticleNo._7536)
                 {
                     Div_ReinfArtNo = DividerReinf_ArticleNo._R677;
+                    Div_MechJoinArtNo = Divider_MechJointArticleNo._9U18;
                 }
                 else if (value == Divider_ArticleNo._7538)
                 {
                     Div_ReinfArtNo = DividerReinf_ArticleNo._R686;
+                    Div_MechJoinArtNo = Divider_MechJointArticleNo._AV585;
                 }
                 SetPanelExplosionValues_Div();
             }
@@ -296,6 +298,8 @@ namespace ModelLayer.Model.Quotation.Divider
         public int Div_ExplosionHeight { get; set; }
         public int Div_ReinfWidth { get; set; }
         public int Div_ReinfHeight { get; set; }
+
+        public Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
 
         private void SetPanelExplosionValues_Div()
         {

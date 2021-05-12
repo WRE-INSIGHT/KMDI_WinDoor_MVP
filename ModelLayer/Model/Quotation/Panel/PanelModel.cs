@@ -506,8 +506,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
         #region Explosion
 
-        private string _panelGlassThickness;
-        public string Panel_GlassThickness
+        private Glass_Thickness _panelGlassThickness;
+        public Glass_Thickness Panel_GlassThickness
         {
             get
             {
@@ -516,35 +516,41 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelGlassThickness = value;
-                if (value == "6-8mm")
+                if (value == Glass_Thickness._6mm ||
+                    value == Glass_Thickness._7mm ||
+                    value == Glass_Thickness._8mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452;
                 }
-                else if (value == "10mm")
+                else if (value == Glass_Thickness._10mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2451;
                 }
-                else if (value == "10.76-14mm")
+                else if (value == Glass_Thickness._11mm ||
+                         value == Glass_Thickness._12mm ||
+                         value == Glass_Thickness._13mm ||
+                         value == Glass_Thickness._14mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2453;
                 }
-                else if (value == "16mm")
+                else if (value == Glass_Thickness._16mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436;
                 }
-                else if (value == "18mm")
+                else if (value == Glass_Thickness._18mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2438;
                 }
-                else if (value == "20mm")
+                else if (value == Glass_Thickness._20mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2437;
                 }
-                else if (value == "22mm")
+                else if (value == Glass_Thickness._22mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434;
                 }
-                else if (value == "25mm")
+                else if (value == Glass_Thickness._24mm ||
+                         value == Glass_Thickness._25mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2435;
                 }
@@ -626,7 +632,7 @@ namespace ModelLayer.Model.Quotation.Panel
                           float panelZoom,
                           IFrameModel panelFrameModelParent,
                           IMultiPanelModel panelMultiPanelParent,
-                          string panelGlassThickness,
+                          Glass_Thickness panelGlassThickness,
                           GlazingBead_ArticleNo panelGlazingBeadArtNo,
                           int panelDisplayWidth,
                           int panelDisplayHeight)

@@ -41,6 +41,7 @@ namespace PresentationLayer.Views.UserControls
             pnum_Height.Maximum = decimal.MaxValue;
             num_BladeCount.Maximum = decimal.MaxValue;
             cmb_GlazingArtNo.DataSource = Enum.GetValues(typeof(GlazingBead_ArticleNo));
+            cmb_GlassThick.DataSource = Enum.GetValues(typeof(Glass_Thickness));
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 

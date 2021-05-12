@@ -26,6 +26,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         Divider_ArticleNo Div_ArtNo { get; set; }
         DividerReinf_ArticleNo Div_ReinfArtNo { get; set; }
+        Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
 
         int Div_ExplosionWidth { get; set; }
         int Div_ExplosionHeight { get; set; }

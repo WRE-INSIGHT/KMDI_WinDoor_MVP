@@ -187,15 +187,6 @@
             // cmb_GlassThick
             // 
             this.cmb_GlassThick.FormattingEnabled = true;
-            this.cmb_GlassThick.Items.AddRange(new object[] {
-            "6-8mm",
-            "10mm",
-            "10.76-14mm",
-            "16mm",
-            "18mm",
-            "20mm",
-            "22mm",
-            "25mm"});
             this.cmb_GlassThick.Location = new System.Drawing.Point(70, 23);
             this.cmb_GlassThick.Name = "cmb_GlassThick";
             this.cmb_GlassThick.Size = new System.Drawing.Size(72, 21);

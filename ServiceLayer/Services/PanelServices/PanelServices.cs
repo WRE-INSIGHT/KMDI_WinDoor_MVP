@@ -39,7 +39,7 @@ namespace ServiceLayer.Services.PanelServices
                                             float panelZoom,
                                             IFrameModel panelFrameModelParent,
                                             IMultiPanelModel panelMultiPanelParent,
-                                            string panelGlassThickness,
+                                            Glass_Thickness panelGlassThickness,
                                             GlazingBead_ArticleNo panelGlazingBeadArtNo,
                                             int panelDisplayWidth,
                                             int panelDisplayHeight)
@@ -88,7 +88,7 @@ namespace ServiceLayer.Services.PanelServices
                                          IMultiPanelModel panelMultiPanelParent,
                                          int panelDisplayWidth,
                                          int panelDisplayHeight,
-                                         string panelGlassThickness,
+                                         Glass_Thickness panelGlassThickness,
                                          GlazingBead_ArticleNo panelGlazingBeadArtNo = GlazingBead_ArticleNo._2452,
                                          int panelID = 0,
                                          float panelImageRendererZoom = 1,
