@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Panel
@@ -557,27 +558,50 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_GlazingSpacerQty { get; set; }
         public int Panel_SealantWHQty { get; set; }
 
-        public void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo)
+        public void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo, DividerType div_type)
         {
-            if (div_artNo == Divider_ArticleNo.None)
+            if (div_type == DividerType.Mullion)
             {
+                if (div_artNo == Divider_ArticleNo.None)
+                {
+                    Panel_GlazingBeadWidth = Panel_DisplayWidth - (33 * 2);
+                    Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
+                }
+                else if (div_artNo == Divider_ArticleNo._7536)
+                {
+                    Panel_GlazingBeadWidth = (Panel_DisplayWidth - 33) - (42 / 2);
+                    Panel_GlassWidth = ((Panel_DisplayWidth - 33) - (42 / 2)) - 6;
+                }
+                else if (div_artNo == Divider_ArticleNo._7538)
+                {
+                    Panel_GlazingBeadWidth = (Panel_DisplayWidth - 33) - (72 / 2);
+                    Panel_GlassWidth = ((Panel_DisplayWidth - 33) - (72 / 2)) - 6;
+                }
+
+                Panel_GlazingBeadHeight = Panel_DisplayHeight - (33 * 2);
+                Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
+            }
+            else if (div_type == DividerType.Transom)
+            {
+                if (div_artNo == Divider_ArticleNo.None)
+                {
+                    Panel_GlazingBeadHeight = Panel_DisplayHeight - (33 * 2);
+                    Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
+                }
+                else if (div_artNo == Divider_ArticleNo._7536)
+                {
+                    Panel_GlazingBeadHeight = (Panel_DisplayHeight - 33) - (42 / 2);
+                    Panel_GlassHeight = ((Panel_DisplayHeight - 33) - (42 / 2)) - 6;
+                }
+                else if (div_artNo == Divider_ArticleNo._7538)
+                {
+                    Panel_GlazingBeadHeight = (Panel_DisplayHeight - 33) - (72 / 2);
+                    Panel_GlassHeight = ((Panel_DisplayHeight - 33) - (72 / 2)) - 6;
+                }
+
                 Panel_GlazingBeadWidth = Panel_DisplayWidth - (33 * 2);
                 Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
             }
-            else if (div_artNo == Divider_ArticleNo._7536)
-            {
-                Panel_GlazingBeadWidth = (Panel_DisplayWidth - 33) - (42 / 2);
-                Panel_GlassWidth = ((Panel_DisplayWidth - 33) - (42 / 2)) - 6;
-            }
-            else if (div_artNo == Divider_ArticleNo._7538)
-            {
-                Panel_GlazingBeadWidth = (Panel_DisplayWidth - 33) - (72 / 2);
-                Panel_GlassWidth = ((Panel_DisplayWidth - 33) - (72 / 2)) - 6;
-            }
-
-            Panel_GlazingBeadHeight = Panel_DisplayHeight - (33 * 2);
-
-            Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
 
             Panel_GlazingSpacerQty = 1;
             Panel_SealantWHQty = (int)(Math.Ceiling((decimal)((Panel_GlassWidth + Panel_GlassHeight) * 2) / 6842));

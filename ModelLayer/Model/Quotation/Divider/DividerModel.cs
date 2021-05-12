@@ -286,6 +286,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 {
                     Div_ReinfArtNo = DividerReinf_ArticleNo._R686;
                 }
+                SetPanelExplosionValues_Div();
             }
         }
 
@@ -293,6 +294,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public int Div_ExplosionWidth { get; set; }
         public int Div_ExplosionHeight { get; set; }
+        public int Div_ReinfWidth { get; set; }
         public int Div_ReinfHeight { get; set; }
 
         private void SetPanelExplosionValues_Div()
@@ -315,6 +317,26 @@ namespace ModelLayer.Model.Quotation.Divider
                 else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
                 {
                     Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
+                }
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                if (Div_ArtNo == Divider_ArticleNo._7536)
+                {
+                    Div_ExplosionWidth = (Div_DisplayWidth - (33 * 2)) + 3; //3 = (1.5 * 2)
+                }
+                else if (Div_ArtNo == Divider_ArticleNo._7538)
+                {
+                    Div_ExplosionWidth = (Div_DisplayWidth - (33 * 2)) + (4 * 2);
+                }
+
+                if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
+                {
+                    Div_ReinfWidth = (Div_ExplosionWidth - (35 * 2)) - (5 * 2);
+                }
+                else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
+                {
+                    Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
                 }
             }
         }

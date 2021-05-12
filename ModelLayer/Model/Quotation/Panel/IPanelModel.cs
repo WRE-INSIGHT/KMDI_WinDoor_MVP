@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Panel
@@ -42,7 +43,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_GlazingSpacerQty { get; set; }
         int Panel_SealantWHQty { get; set; }
 
-        void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo);
+        void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo, DividerType div_type);
 
         #endregion
     }

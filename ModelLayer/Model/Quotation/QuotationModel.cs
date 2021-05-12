@@ -105,62 +105,71 @@ namespace ModelLayer.Model.Quotation
                             List<IPanelModel> panels = mpnl.GetVisiblePanels().ToList();
                             List<IDividerModel> divs = mpnl.GetVisibleDividers().ToList();
 
-                            if (mpnl.MPanel_Type == "Mullion")
-                            {
-                                int obj_count = mpnl.GetVisibleObjects().Count(),
+                            int obj_count = mpnl.GetVisibleObjects().Count(),
                                     loop_counter = 1;
-                                for (int i = 0; i < obj_count; i+=2)
+                            for (int i = 0; i < obj_count; i += 2)
+                            {
+                                Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
+                                IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
+
+                                if (i + 1 < obj_count)
                                 {
+                                    Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i + 1];
+                                    IDividerModel div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
 
-                                    Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
-                                    IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
-
-                                    if (i+1 < obj_count)
+                                    if (mpnl.MPanel_Type == "Mullion")
                                     {
-                                        Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i+1];
-                                        IDividerModel div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
-
                                         Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
-                                                               1, "pc(s)",
-                                                               div_nxtCtrl.Div_ExplosionHeight.ToString());
-                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           div_nxtCtrl.Div_ExplosionHeight.ToString());
+                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Height" + div_nxtCtrl.Div_ReinfArtNo.ToString(),
                                                                1, "pc(s)",
                                                                div_nxtCtrl.Div_ReinfHeight.ToString());
-
-                                        pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo);
                                     }
-                                    else if (i+1 == obj_count)
+                                    else if (mpnl.MPanel_Type == "Transom")
                                     {
-                                        Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i-1];
-                                        IDividerModel div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
-                                        pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo);
+                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Width " + div_nxtCtrl.Div_ArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           div_nxtCtrl.Div_ExplosionWidth.ToString());
+                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Width" + div_nxtCtrl.Div_ReinfArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               div_nxtCtrl.Div_ReinfWidth.ToString());
                                     }
 
-                                    Material_List.Rows.Add("Glazing Bead Width (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
-                                                               2, "pc(s)",
-                                                               pnl_curCtrl.Panel_GlazingBeadWidth.ToString());
-
-                                    Material_List.Rows.Add("Glazing Bead Height (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
-                                                           2, "pc(s)",
-                                                           pnl_curCtrl.Panel_GlazingBeadHeight.ToString());
-
-                                    Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
-                                                           1, "pc(s)",
-                                                           pnl_curCtrl.Panel_GlassWidth.ToString());
-
-                                    Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
-                                                           1, "pc(s)",
-                                                           pnl_curCtrl.Panel_GlassHeight.ToString());
-
-                                    Material_List.Rows.Add("Glazing Spacer (KBC70)",
-                                                           1, "pc(s)", "");
-
-                                    Material_List.Rows.Add("Sealant-WH",
-                                                           pnl_curCtrl.Panel_SealantWHQty,
-                                                           "pc(s)",
-                                                           "");
-                                    loop_counter++;
+                                    
+                                    pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo, div_nxtCtrl.Div_Type);
                                 }
+                                else if (i + 1 == obj_count)
+                                {
+                                    Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i - 1];
+                                    IDividerModel div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
+                                    pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo, div_nxtCtrl.Div_Type);
+                                }
+
+                                Material_List.Rows.Add("Glazing Bead Width (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
+                                                           2, "pc(s)",
+                                                           pnl_curCtrl.Panel_GlazingBeadWidth.ToString());
+
+                                Material_List.Rows.Add("Glazing Bead Height (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
+                                                       2, "pc(s)",
+                                                       pnl_curCtrl.Panel_GlazingBeadHeight.ToString());
+
+                                Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
+                                                       1, "pc(s)",
+                                                       pnl_curCtrl.Panel_GlassWidth.ToString());
+
+                                Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
+                                                       1, "pc(s)",
+                                                       pnl_curCtrl.Panel_GlassHeight.ToString());
+
+                                Material_List.Rows.Add("Glazing Spacer (KBC70)",
+                                                       1, "pc(s)", "");
+
+                                Material_List.Rows.Add("Sealant-WH (Glass)",
+                                                       pnl_curCtrl.Panel_SealantWHQty,
+                                                       "pc(s)",
+                                                       "");
+                                loop_counter++;
                             }
                         }
 
@@ -168,7 +177,7 @@ namespace ModelLayer.Model.Quotation
                     else if (frame.GetVisiblePanels().Count() == 1 && frame.GetVisibleMultiPanels().Count() == 0)
                     {
                         IPanelModel pnl = frame.GetVisiblePanels().ToList()[0];
-                        pnl.SetPanelExplosionValues_Panel(Divider_ArticleNo.None);
+                        pnl.SetPanelExplosionValues_Panel(Divider_ArticleNo.None, DividerModel.DividerType.Mullion);
 
                         Material_List.Rows.Add("Glazing Bead Width " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                                    2, "pc(s)",
@@ -189,7 +198,7 @@ namespace ModelLayer.Model.Quotation
                         Material_List.Rows.Add("Glazing Spacer (KBC70)",
                                                1, "pc(s)", "");
 
-                        Material_List.Rows.Add("Sealant-WH",
+                        Material_List.Rows.Add("Sealant-WH (Glass)",
                                                pnl.Panel_SealantWHQty,
                                                "pc(s)",
                                                "");
@@ -197,7 +206,7 @@ namespace ModelLayer.Model.Quotation
 
                     Material_List.Rows.Add("PU Foaming",
                                            frame.Frame_PUFoamingQty, "can", "");
-                    Material_List.Rows.Add("Sealant-WH",
+                    Material_List.Rows.Add("Sealant-WH (Frame)",
                                            frame.Frame_SealantWHQty, "pc(s)", "");
                 }
             }

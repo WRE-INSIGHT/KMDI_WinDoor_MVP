@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
     public interface IMultiPanelTransomUCPresenter
     {
+        IMultiPanelPropertiesUCPresenter multiPropUCP2_given { get; }
         void DeletePanel(UserControl obj);
         void frmDimensionResults(int frmDimension_numWd, int frmDimension_numHt);
         IMultiPanelTransomUC GetMultiPanel();
