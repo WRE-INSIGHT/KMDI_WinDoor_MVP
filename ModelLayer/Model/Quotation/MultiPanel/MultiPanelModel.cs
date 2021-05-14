@@ -137,6 +137,39 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             set
             {
+                int added_displaywidth_child_pnls = value - _mpanelDisplayWidth;
+                if (MPanel_Type == "Transom")
+                {
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    {
+                        mpnl.MPanel_DisplayWidth += added_displaywidth_child_pnls;
+                    }
+                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    {
+                        pnl.Panel_DisplayWidth += added_displaywidth_child_pnls;
+                    }
+                    foreach (IDividerModel div in MPanelLst_Divider.Where(div => div.Div_Visible == true))
+                    {
+                        div.Div_DisplayWidth += added_displaywidth_child_pnls;
+                    }
+                }
+                else if (MPanel_Type == "Mullion")
+                {
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    {
+                        if (mpnl.MPanel_Placement == "Last")
+                        {
+                            mpnl.MPanel_DisplayWidth += added_displaywidth_child_pnls;
+                        }
+                    }
+                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    {
+                        if (pnl.Panel_Placement == "Last")
+                        {
+                            pnl.Panel_DisplayWidth += added_displaywidth_child_pnls;
+                        }
+                    }
+                }
                 _mpanelDisplayWidth = value;
                 NotifyPropertyChanged();
             }
@@ -217,6 +250,39 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             set
             {
+                int added_displayheight_child_pnls = value - _mpanelDisplayHeight;
+                if (MPanel_Type == "Mullion")
+                {
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    {
+                        mpnl.MPanel_DisplayHeight += added_displayheight_child_pnls;
+                    }
+                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    {
+                        pnl.Panel_DisplayHeight += added_displayheight_child_pnls;
+                    }
+                    foreach (IDividerModel div in MPanelLst_Divider.Where(div => div.Div_Visible == true))
+                    {
+                        div.Div_DisplayHeight += added_displayheight_child_pnls;
+                    }
+                }
+                else if (MPanel_Type == "Transom")
+                {
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    {
+                        if (mpnl.MPanel_Placement == "Last")
+                        {
+                            mpnl.MPanel_DisplayHeight += added_displayheight_child_pnls;
+                        }
+                    }
+                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    {
+                        if (pnl.Panel_Placement == "Last")
+                        {
+                            pnl.Panel_DisplayHeight += added_displayheight_child_pnls;
+                        }
+                    }
+                }
                 _mpanelDisplayHeight = value;
                 NotifyPropertyChanged();
             }
@@ -666,17 +732,17 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 pnl.Panel_Placement = "Somewhere in Between";
                             }
                         }
-                        else if (MPanel_Placement == "Last") //top margin is 9 because of divider on top (8 + 1)
+                        else if (MPanel_Placement == "Last")
                         {
                             if (pnl.Panel_Index_Inside_MPanel == 0)
                             {
-                                pnl_margin = new Padding(10, 10, 0, 0);
+                                pnl_margin = new Padding(8, 10, 0, 0);
                                 pnl.Panel_Placement = "First";
                             }
                             else if ((!MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions) ||
                                      (MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2))
                             {
-                                pnl_margin = new Padding(10, 0, 10, 10);
+                                pnl_margin = new Padding(8, 0, 10, 10);
                                 pnl.Panel_Placement = "Last";
                             }
                             else
@@ -685,7 +751,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 pnl.Panel_Placement = "Somewhere in Between";
                             }
                         }
-                        else if (MPanel_Placement == "Somewhere in Between") //top margin is 9 because of divider on top (8 + 1)
+                        else if (MPanel_Placement == "Somewhere in Between")
                         {
                             if (pnl.Panel_Index_Inside_MPanel == 0)
                             {
@@ -1079,6 +1145,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public IEnumerable<Control> GetVisibleObjects()
         {
             return MPanelLst_Objects.Where(obj => obj.Visible == true);
+        }
+
+        public IEnumerable<IMultiPanelModel> GetVisibleMultiPanels()
+        {
+            return MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true);
         }
 
         public MultiPanelModel(int mpanelID,

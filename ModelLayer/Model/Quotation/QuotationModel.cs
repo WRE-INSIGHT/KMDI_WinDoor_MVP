@@ -124,24 +124,27 @@ namespace ModelLayer.Model.Quotation
 
                     int glazing_seal = 0;
 
-                    if (frame.GetVisibleMultiPanels().Count() == 1 && frame.GetVisiblePanels().Count() == 0)
+                    if (frame.GetVisibleMultiPanels().Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
                     {
+                        int loop_counter = 1;
                         foreach (IMultiPanelModel mpnl in frame.GetVisibleMultiPanels())
                         {
                             List<IPanelModel> panels = mpnl.GetVisiblePanels().ToList();
                             List<IDividerModel> divs = mpnl.GetVisibleDividers().ToList();
+                            List<IMultiPanelModel> mpanels = mpnl.GetVisibleMultiPanels().ToList();
 
-                            int obj_count = mpnl.GetVisibleObjects().Count(),
-                                loop_counter = 1;
+                            int obj_count = mpnl.GetVisibleObjects().Count();
                             for (int i = 0; i < obj_count; i += 2)
                             {
                                 Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
                                 IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
+                                IMultiPanelModel mpnl_curCtrl = mpanels.Find(mpanel => mpanel.MPanel_Name == cur_ctrl.Name);
 
                                 if (i + 1 < obj_count)
                                 {
                                     Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i + 1];
                                     IDividerModel div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
+                                    div_nxtCtrl.SetPanelExplosionValues_Div();
 
                                     if (mpnl.MPanel_Type == "Mullion")
                                     {
@@ -164,46 +167,55 @@ namespace ModelLayer.Model.Quotation
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                            2, "pc(s)", "");
 
-                                    pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo, div_nxtCtrl.Div_Type);
+                                    if (pnl_curCtrl != null)
+                                    {
+                                        pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo, div_nxtCtrl.Div_Type);
+                                    }
                                 }
                                 else if (i + 1 == obj_count)
                                 {
                                     Control nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i - 1];
                                     IDividerModel div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
-                                    pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo, div_nxtCtrl.Div_Type);
+                                    if (pnl_curCtrl != null)
+                                    {
+                                        pnl_curCtrl.SetPanelExplosionValues_Panel(div_nxtCtrl.Div_ArtNo, div_nxtCtrl.Div_Type);
+                                    }
                                 }
 
-                                if (pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._13mm ||
-                                    pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._14mm ||
-                                    pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._24mm)
+                                if (pnl_curCtrl != null)
                                 {
-                                    glazing_seal += pnl_curCtrl.Panel_GlazingBeadWidth + pnl_curCtrl.Panel_GlazingBeadHeight;
-                                }
+                                    if (pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._13mm ||
+                                        pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._14mm ||
+                                        pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._24mm)
+                                    {
+                                        glazing_seal += pnl_curCtrl.Panel_GlazingBeadWidth + pnl_curCtrl.Panel_GlazingBeadHeight;
+                                    }
 
-                                Material_List.Rows.Add("Glazing Bead Width (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
+                                    Material_List.Rows.Add("Glazing Bead Width (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
+                                                               2, "pc(s)",
+                                                               pnl_curCtrl.Panel_GlazingBeadWidth.ToString());
+
+                                    Material_List.Rows.Add("Glazing Bead Height (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                            2, "pc(s)",
-                                                           pnl_curCtrl.Panel_GlazingBeadWidth.ToString());
+                                                           pnl_curCtrl.Panel_GlazingBeadHeight.ToString());
 
-                                Material_List.Rows.Add("Glazing Bead Height (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
-                                                       2, "pc(s)",
-                                                       pnl_curCtrl.Panel_GlazingBeadHeight.ToString());
+                                    Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
+                                                           1, "pc(s)",
+                                                           pnl_curCtrl.Panel_GlassWidth.ToString());
 
-                                Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
-                                                       1, "pc(s)",
-                                                       pnl_curCtrl.Panel_GlassWidth.ToString());
+                                    Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
+                                                           1, "pc(s)",
+                                                           pnl_curCtrl.Panel_GlassHeight.ToString());
 
-                                Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
-                                                       1, "pc(s)",
-                                                       pnl_curCtrl.Panel_GlassHeight.ToString());
+                                    Material_List.Rows.Add("Glazing Spacer (KBC70)",
+                                                           1, "pc(s)", "");
 
-                                Material_List.Rows.Add("Glazing Spacer (KBC70)",
-                                                       1, "pc(s)", "");
-
-                                Material_List.Rows.Add("Sealant-WH (Glass)",
-                                                       pnl_curCtrl.Panel_SealantWHQty,
-                                                       "pc(s)",
-                                                       "");
-                                loop_counter++;
+                                    Material_List.Rows.Add("Sealant-WH (Glass)",
+                                                           pnl_curCtrl.Panel_SealantWHQty,
+                                                           "pc(s)",
+                                                           "");
+                                    loop_counter++;
+                                }
                             }
                         }
 
@@ -246,6 +258,22 @@ namespace ModelLayer.Model.Quotation
                                            glazing_seal, "mm","");
                 }
             }
+
+
+            var query = from r in Material_List.AsEnumerable()
+                        group r by new
+                        {
+                            Description = r.Field<string>("Description"),
+                            Unit = r.Field<string>("Unit"),
+                            Size = r.Field<string>("Size")
+                        } into g
+                        select new
+                        {
+                            Description = g.Key.Description,
+                            Qty = g.Sum(r => r.Field<int>("Qty")),
+                            Unit = g.Key.Unit,
+                            Size = g.Key.Size
+                        };
 
             return Material_List;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelLayer.Model.Quotation.MultiPanel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -266,6 +267,8 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
+        public IMultiPanelModel Div_MPanelParent { get; set; }
+
         #region Explosion
 
         private Divider_ArticleNo _divArtNo;
@@ -288,7 +291,6 @@ namespace ModelLayer.Model.Quotation.Divider
                     Div_ReinfArtNo = DividerReinf_ArticleNo._R686;
                     Div_MechJoinArtNo = Divider_MechJointArticleNo._AV585;
                 }
-                SetPanelExplosionValues_Div();
             }
         }
 
@@ -301,48 +303,233 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
 
-        private void SetPanelExplosionValues_Div()
+        public void SetPanelExplosionValues_Div()
         {
-            if (Div_Type == DividerType.Mullion)
+            if (Div_MPanelParent.MPanel_Parent.Name.Contains("Frame"))
             {
-                if (Div_ArtNo == Divider_ArticleNo._7536)
+                if (Div_Type == DividerType.Mullion)
                 {
-                    Div_ExplosionHeight = (Div_DisplayHeight - (33 * 2)) + 3; //3 = (1.5 * 2)
-                }
-                else if (Div_ArtNo == Divider_ArticleNo._7538)
-                {
-                    Div_ExplosionHeight = (Div_DisplayHeight - (33 * 2)) + (4 * 2);
-                }
+                    if (Div_ArtNo == Divider_ArticleNo._7536)
+                    {
+                        Div_ExplosionHeight = (Div_DisplayHeight - (33 * 2)) + 3; //3 = (1.5 * 2)
+                    }
+                    else if (Div_ArtNo == Divider_ArticleNo._7538)
+                    {
+                        Div_ExplosionHeight = (Div_DisplayHeight - (33 * 2)) + (4 * 2);
+                    }
 
-                if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
-                {
-                    Div_ReinfHeight = (Div_ExplosionHeight - (35 * 2)) - (5 * 2);
+                    if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
+                    {
+                        Div_ReinfHeight = (Div_ExplosionHeight - (35 * 2)) - (5 * 2);
+                    }
+                    else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
+                    {
+                        Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
+                    }
                 }
-                else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
+                else if (Div_Type == DividerType.Transom)
                 {
-                    Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
+                    if (Div_ArtNo == Divider_ArticleNo._7536)
+                    {
+                        Div_ExplosionWidth = (Div_DisplayWidth - (33 * 2)) + 3; //3 = (1.5 * 2)
+                    }
+                    else if (Div_ArtNo == Divider_ArticleNo._7538)
+                    {
+                        Div_ExplosionWidth = (Div_DisplayWidth - (33 * 2)) + (4 * 2);
+                    }
+
+                    if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
+                    {
+                        Div_ReinfWidth = (Div_ExplosionWidth - (35 * 2)) - (5 * 2);
+                    }
+                    else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
+                    {
+                        Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
+                    }
                 }
             }
-            else if (Div_Type == DividerType.Transom)
+            else if (Div_MPanelParent.MPanel_Parent.Name.Contains("Multi"))
             {
-                if (Div_ArtNo == Divider_ArticleNo._7536)
+                IMultiPanelModel parent_mpanelParent = Div_MPanelParent.MPanel_ParentModel; //div.Parent.Parent 2nd level Parent
+                if (parent_mpanelParent.MPanel_Type == "Transom")
                 {
-                    Div_ExplosionWidth = (Div_DisplayWidth - (33 * 2)) + 3; //3 = (1.5 * 2)
-                }
-                else if (Div_ArtNo == Divider_ArticleNo._7538)
-                {
-                    Div_ExplosionWidth = (Div_DisplayWidth - (33 * 2)) + (4 * 2);
-                }
+                    IDividerModel div_top = null,
+                                  div_bot = null;
 
-                if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
-                {
-                    Div_ReinfWidth = (Div_ExplosionWidth - (35 * 2)) - (5 * 2);
+                    int parent_ndx = Div_MPanelParent.MPanel_Index_Inside_MPanel,
+                        top_deduction = 0,
+                        bot_deduction = 0;
+                    string nxtctrl_name = "",
+                           prevctrl_name = "";
+                    if (Div_MPanelParent.MPanel_Placement == "First")
+                    {
+                        nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
+                        div_bot = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
+
+                        top_deduction = 0;
+                        if (div_bot.Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            bot_deduction = 42 / 2;
+                        }
+                        else if (div_bot.Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            bot_deduction = 72 / 2;
+                        }
+                    }
+                    else if (Div_MPanelParent.MPanel_Placement == "Somewhere in Between")
+                    {
+                        nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
+                        prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
+
+                        div_top = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
+                        div_bot = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
+
+                        if (div_top.Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            top_deduction = 42 / 2;
+                        }
+                        else if (div_top.Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            top_deduction = 72 / 2;
+                        }
+
+                        if (div_bot.Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            bot_deduction = 42 / 2;
+                        }
+                        else if (div_bot.Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            bot_deduction = 72 / 2;
+                        }
+                    }
+                    else if (Div_MPanelParent.MPanel_Placement == "Last")
+                    {
+                        prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
+                        div_top = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
+                        bot_deduction = 0;
+
+                        if (div_top.Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            top_deduction = 42 / 2;
+                        }
+                        else if (div_top.Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            top_deduction = 72 / 2;
+                        }
+                    }
+
+                    if (Div_Type == DividerType.Mullion)
+                    {
+                        if (Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            Div_ExplosionHeight = ((Div_DisplayHeight - 33) - (top_deduction + bot_deduction)) + 3; //3 = (1.5 * 2)
+                        }
+                        else if (Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            Div_ExplosionHeight = ((Div_DisplayHeight - 33) - (top_deduction + bot_deduction)) + (4 * 2);
+                        }
+
+                        if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
+                        {
+                            Div_ReinfHeight = (Div_ExplosionHeight - (35 * 2)) - (5 * 2);
+                        }
+                        else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
+                        {
+                            Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
+                        }
+                    }
                 }
-                else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
+                else if (parent_mpanelParent.MPanel_Type == "Mullion")
                 {
-                    Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
+                    IDividerModel div_left = null,
+                                  div_right = null;
+
+                    int parent_ndx = parent_mpanelParent.MPanel_Index_Inside_MPanel,
+                        left_deduction = 0,
+                        right_deduction = 0;
+                    string nxtctrl_name = "",
+                           prevctrl_name = "";
+
+                    if (parent_mpanelParent.MPanel_Placement == "First")
+                    {
+                        nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
+                        div_right = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
+                        left_deduction = 0;
+
+                        if (div_right.Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            right_deduction = 42 / 2;
+                        }
+                        else if (div_right.Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            right_deduction = 72 / 2;
+                        }
+                    }
+                    else if (parent_mpanelParent.MPanel_Placement == "Somewhere in Between")
+                    {
+                        nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
+                        div_right = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
+
+                        prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
+                        div_left = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
+
+                        if (div_right.Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            right_deduction = 42 / 2;
+                        }
+                        else if (div_right.Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            right_deduction = 72 / 2;
+                        }
+
+                        if (div_left.Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            left_deduction = 42 / 2;
+                        }
+                        else if (div_left.Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            left_deduction = 72 / 2;
+                        }
+                    }
+                    else if (parent_mpanelParent.MPanel_Placement == "Last")
+                    {
+                        prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
+                        div_left = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
+                        right_deduction = 0;
+
+                        if (div_left.Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            left_deduction = 42 / 2;
+                        }
+                        else if (div_left.Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            left_deduction = 72 / 2;
+                        }
+                    }
+
+                    if (Div_Type == DividerType.Transom)
+                    {
+                        if (Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            Div_ExplosionWidth = ((Div_DisplayWidth - 33) - (left_deduction + right_deduction)) + 3; //3 = (1.5 * 2)
+                        }
+                        else if (Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            Div_ExplosionWidth = ((Div_DisplayWidth - 33) - (left_deduction + right_deduction)) + (4 * 2);
+                        }
+
+                        if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
+                        {
+                            Div_ReinfWidth = (Div_ExplosionWidth - (35 * 2)) - (5 * 2);
+                        }
+                        else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
+                        {
+                            Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
+                        }
+                    }
                 }
             }
+
         }
         #endregion
 
@@ -358,7 +545,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             float divZoom,
                             Divider_ArticleNo divArtNo,
                             int divDisplayWidth,
-                            int divDisplayHeight)
+                            int divDisplayHeight,
+                            IMultiPanelModel divMPanelParent)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -373,8 +561,7 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_ArtNo = divArtNo;
             Div_DisplayWidth = divDisplayWidth;
             Div_DisplayHeight = divDisplayHeight;
-
-            SetPanelExplosionValues_Div();
+            Div_MPanelParent = divMPanelParent;
         }
     }
 }

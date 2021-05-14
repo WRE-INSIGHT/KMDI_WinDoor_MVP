@@ -101,6 +101,7 @@ namespace PresentationLayer.CommonMethods
                                                                      Divider_ArticleNo._7536,
                                                                      parentModel.MPanel_DisplayWidth,
                                                                      parentModel.MPanel_DisplayHeight,
+                                                                     parentModel,
                                                                      divID,
                                                                      frameModel.FrameImageRenderer_Zoom,
                                                                      frameModel.Frame_Type.ToString());

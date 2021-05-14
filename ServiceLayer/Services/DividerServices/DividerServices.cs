@@ -1,4 +1,5 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.MultiPanel;
 using ServiceLayer.CommonServices;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 float divZoom,
                                                 Divider_ArticleNo divArtNo,
                                                 int divDisplayWidth,
-                                                int divDisplayHeight)
+                                                int divDisplayHeight,
+                                                IMultiPanelModel divMPanelParent)
         {
             DividerModel div = new DividerModel(divID,
                                                 divName,
@@ -46,7 +48,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 divZoom,
                                                 divArtNo,
                                                 divDisplayWidth,
-                                                divDisplayHeight);
+                                                divDisplayHeight,
+                                                divMPanelParent);
 
             ValidateModel(div);
             return div;
@@ -66,6 +69,7 @@ namespace ServiceLayer.Services.DividerServices
                                              Divider_ArticleNo divArtNo,
                                              int divDisplayWidth,
                                              int divDisplayHeight,
+                                             IMultiPanelModel divMPanelParent,
                                              int divID = 0,
                                              float divImageRendererZoom = 1,
                                              string divFrameType = "",
@@ -97,7 +101,8 @@ namespace ServiceLayer.Services.DividerServices
                                                          divZoom,
                                                          divArtNo,
                                                          divDisplayWidth,
-                                                         divDisplayHeight);
+                                                         divDisplayHeight,
+                                                         divMPanelParent);
 
             return _divModel;
         }

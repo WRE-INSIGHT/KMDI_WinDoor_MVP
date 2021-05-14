@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using ModelLayer.Model.Quotation.MultiPanel;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using static ModelLayer.Model.Quotation.QuotationModel;
@@ -21,6 +22,9 @@ namespace ModelLayer.Model.Quotation.Divider
         float Div_Zoom { get; set; }
         int Div_WidthToBind { get; set; }
         int Div_HeightToBind { get; set; }
+        int Div_DisplayWidth { get; set; }
+        int Div_DisplayHeight { get; set; }
+        IMultiPanelModel Div_MPanelParent { get; set; }
 
         #region Explosion
 
@@ -32,6 +36,8 @@ namespace ModelLayer.Model.Quotation.Divider
         int Div_ExplosionHeight { get; set; }
         int Div_ReinfWidth { get; set; }
         int Div_ReinfHeight { get; set; }
+
+        void SetPanelExplosionValues_Div();
 
         #endregion
     }

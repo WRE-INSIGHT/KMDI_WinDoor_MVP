@@ -346,6 +346,7 @@ namespace ModelLayer.Tests
                                                                       Divider_ArticleNo._7538,
                                                                       _multipanelModel.MPanel_DisplayWidth,
                                                                       _multipanelModel.MPanel_DisplayHeight,
+                                                                      _multipanelModel,
                                                                       1,
                                                                       _frameModel.FrameImageRenderer_Zoom,
                                                                       _frameModel.Frame_Type.ToString());
@@ -488,6 +489,7 @@ namespace ModelLayer.Tests
                                                                       Divider_ArticleNo._7538,
                                                                       _multipanelModel.MPanel_DisplayWidth,
                                                                       _multipanelModel.MPanel_DisplayHeight,
+                                                                      _multipanelModel,
                                                                       1,
                                                                       _frameModel.FrameImageRenderer_Zoom,
                                                                       _frameModel.Frame_Type.ToString());

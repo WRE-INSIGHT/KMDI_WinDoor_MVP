@@ -292,19 +292,23 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             if (prev_ctrl is IMultiPanelUC)
                             {
                                 prev_mpanel.MPanel_Height += (e.Y - _point_of_origin.Y);
+                                prev_mpanel.MPanel_DisplayHeight += (e.Y - _point_of_origin.Y);
                             }
                             else if (prev_ctrl is IPanelUC)
                             {
                                 prev_pnl.Panel_Height += (e.Y - _point_of_origin.Y);
+                                prev_pnl.Panel_DisplayHeight += (e.Y - _point_of_origin.Y);
                             }
 
                             if (nxt_ctrl is IMultiPanelUC)
                             {
                                 nxt_mpnl.MPanel_Height -= (e.Y - _point_of_origin.Y);
+                                nxt_mpnl.MPanel_DisplayHeight -= (e.Y - _point_of_origin.Y);
                             }
                             else if (nxt_ctrl is IPanelUC)
                             {
                                 nxt_pnl.Panel_Height -= (e.Y - _point_of_origin.Y);
+                                nxt_pnl.Panel_DisplayHeight -= (e.Y - _point_of_origin.Y);
                             }
                         }
                     }

@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Divider;
 using static ModelLayer.Model.Quotation.QuotationModel;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace ServiceLayer.Services.DividerServices
 {
@@ -14,6 +15,7 @@ namespace ServiceLayer.Services.DividerServices
                                       Divider_ArticleNo divArtNo,
                                       int divDisplayWidth,
                                       int divDisplayHeight,
+                                      IMultiPanelModel divMPanelParent,
                                       int divID = 0,
                                       float divImageRendererZoom = 1,
                                       string divFrameType = "",

@@ -67,7 +67,7 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -128,7 +128,7 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -189,7 +189,7 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -296,7 +296,7 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
