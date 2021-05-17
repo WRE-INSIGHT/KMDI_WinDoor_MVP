@@ -2763,18 +2763,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 g.FillRectangle(Brushes.PowderBlue, divider_bounds_Bot);
                 g.DrawRectangle(Pens.Black, divider_bounds_Bot);
 
-                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Left);
+                g.FillRectangle(Brushes.RosyBrown, divider_bounds_Left);
                 g.DrawRectangle(Pens.Black, divider_bounds_Left);
 
-                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Right);
+                g.FillRectangle(Brushes.RosyBrown, divider_bounds_Right);
                 g.DrawRectangle(Pens.Black, divider_bounds_Right);
             }
             else
             {
-                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Left);
+                g.FillRectangle(Brushes.RosyBrown, divider_bounds_Left);
                 g.DrawRectangle(Pens.Black, divider_bounds_Left);
 
-                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Right);
+                g.FillRectangle(Brushes.RosyBrown, divider_bounds_Right);
                 g.DrawRectangle(Pens.Black, divider_bounds_Right);
 
                 g.FillRectangle(Brushes.PowderBlue, divider_bounds_Top);

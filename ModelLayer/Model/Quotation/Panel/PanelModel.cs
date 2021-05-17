@@ -564,50 +564,97 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_GlazingSpacerQty { get; set; }
         public int Panel_SealantWHQty { get; set; }
 
-        public void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo, DividerType div_type)
+        public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
+            Panel_GlazingBeadWidth = Panel_DisplayWidth - (33 * 2);
+            Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
+
+            Panel_GlazingBeadHeight = Panel_DisplayHeight - (33 * 2);
+            Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
+
+            Panel_GlazingSpacerQty = 1;
+            Panel_SealantWHQty = (int)(Math.Ceiling((decimal)((Panel_GlassWidth + Panel_GlassHeight) * 2) / 6842));
+        }
+
+        public void SetPanelExplosionValues_Panel(Divider_ArticleNo divNxt_artNo,
+                                                  Divider_ArticleNo divPrev_artNo,
+                                                  DividerType div_type, 
+                                                  Divider_ArticleNo divArtNo_LeftorTop = Divider_ArticleNo.None,
+                                                  Divider_ArticleNo divArtNo_RightorBot = Divider_ArticleNo.None)
+        {
+            int GB_deduction_forLeftorTopRightorBot = 0,
+                GB_deduction_forNxtPrev = 0,
+                deduction_for_wd = 0,
+                deduction_for_ht = 0;
+
+            if (divNxt_artNo == Divider_ArticleNo._7536)
+            {
+                GB_deduction_forNxtPrev += (42 / 2);
+            }
+            else if (divNxt_artNo == Divider_ArticleNo._7538)
+            {
+                GB_deduction_forNxtPrev += (72 / 2);
+            }
+            else if (divNxt_artNo == Divider_ArticleNo.None)
+            {
+                GB_deduction_forNxtPrev += 33;
+            }
+
+            if (divPrev_artNo == Divider_ArticleNo._7536)
+            {
+                GB_deduction_forNxtPrev += (42 / 2);
+            }
+            else if (divPrev_artNo == Divider_ArticleNo._7538)
+            {
+                GB_deduction_forNxtPrev += (72 / 2);
+            }
+            else if (divPrev_artNo == Divider_ArticleNo.None)
+            {
+                GB_deduction_forNxtPrev += 33;
+            }
+
+            if (divArtNo_LeftorTop == Divider_ArticleNo._7536)
+            {
+                GB_deduction_forLeftorTopRightorBot += (42 / 2);
+            }
+            else if (divArtNo_LeftorTop == Divider_ArticleNo._7538)
+            {
+                GB_deduction_forLeftorTopRightorBot += (72 / 2);
+            }
+            else if (divArtNo_LeftorTop == Divider_ArticleNo.None)
+            {
+                GB_deduction_forLeftorTopRightorBot += 33;
+            }
+
+            if (divArtNo_RightorBot == Divider_ArticleNo._7536)
+            {
+                GB_deduction_forLeftorTopRightorBot += (42 / 2);
+            }
+            else if (divArtNo_RightorBot == Divider_ArticleNo._7538)
+            {
+                GB_deduction_forLeftorTopRightorBot += (72 / 2);
+            }
+            else if (divArtNo_RightorBot == Divider_ArticleNo.None)
+            {
+                GB_deduction_forLeftorTopRightorBot += 33;
+            }
+
             if (div_type == DividerType.Mullion)
             {
-                if (div_artNo == Divider_ArticleNo.None)
-                {
-                    Panel_GlazingBeadWidth = Panel_DisplayWidth - (33 * 2);
-                    Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
-                }
-                else if (div_artNo == Divider_ArticleNo._7536)
-                {
-                    Panel_GlazingBeadWidth = (Panel_DisplayWidth - 33) - (42 / 2);
-                    Panel_GlassWidth = ((Panel_DisplayWidth - 33) - (42 / 2)) - 6;
-                }
-                else if (div_artNo == Divider_ArticleNo._7538)
-                {
-                    Panel_GlazingBeadWidth = (Panel_DisplayWidth - 33) - (72 / 2);
-                    Panel_GlassWidth = ((Panel_DisplayWidth - 33) - (72 / 2)) - 6;
-                }
-
-                Panel_GlazingBeadHeight = Panel_DisplayHeight - (33 * 2);
-                Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
+                deduction_for_wd = GB_deduction_forNxtPrev;
+                deduction_for_ht = GB_deduction_forLeftorTopRightorBot;
             }
             else if (div_type == DividerType.Transom)
             {
-                if (div_artNo == Divider_ArticleNo.None)
-                {
-                    Panel_GlazingBeadHeight = Panel_DisplayHeight - (33 * 2);
-                    Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
-                }
-                else if (div_artNo == Divider_ArticleNo._7536)
-                {
-                    Panel_GlazingBeadHeight = (Panel_DisplayHeight - 33) - (42 / 2);
-                    Panel_GlassHeight = ((Panel_DisplayHeight - 33) - (42 / 2)) - 6;
-                }
-                else if (div_artNo == Divider_ArticleNo._7538)
-                {
-                    Panel_GlazingBeadHeight = (Panel_DisplayHeight - 33) - (72 / 2);
-                    Panel_GlassHeight = ((Panel_DisplayHeight - 33) - (72 / 2)) - 6;
-                }
-
-                Panel_GlazingBeadWidth = Panel_DisplayWidth - (33 * 2);
-                Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
+                deduction_for_wd = GB_deduction_forLeftorTopRightorBot;
+                deduction_for_ht = GB_deduction_forNxtPrev;
             }
+
+            Panel_GlazingBeadWidth = Panel_DisplayWidth - deduction_for_wd;
+            Panel_GlazingBeadHeight = Panel_DisplayHeight - deduction_for_ht;
+
+            Panel_GlassWidth = (Panel_DisplayWidth - deduction_for_wd) - 6;
+            Panel_GlassHeight = (Panel_DisplayHeight - deduction_for_ht) - 6;
 
             Panel_GlazingSpacerQty = 1;
             Panel_SealantWHQty = (int)(Math.Ceiling((decimal)((Panel_GlassWidth + Panel_GlassHeight) * 2) / 6842));

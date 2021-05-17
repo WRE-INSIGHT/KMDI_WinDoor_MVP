@@ -444,13 +444,13 @@ namespace ModelLayer.Model.Quotation.Divider
                     IDividerModel div_left = null,
                                   div_right = null;
 
-                    int parent_ndx = parent_mpanelParent.MPanel_Index_Inside_MPanel,
+                    int parent_ndx = Div_MPanelParent.MPanel_Index_Inside_MPanel,
                         left_deduction = 0,
                         right_deduction = 0;
                     string nxtctrl_name = "",
                            prevctrl_name = "";
 
-                    if (parent_mpanelParent.MPanel_Placement == "First")
+                    if (Div_MPanelParent.MPanel_Placement == "First")
                     {
                         nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
                         div_right = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
@@ -465,7 +465,7 @@ namespace ModelLayer.Model.Quotation.Divider
                             right_deduction = 72 / 2;
                         }
                     }
-                    else if (parent_mpanelParent.MPanel_Placement == "Somewhere in Between")
+                    else if (Div_MPanelParent.MPanel_Placement == "Somewhere in Between")
                     {
                         nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
                         div_right = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
@@ -491,7 +491,7 @@ namespace ModelLayer.Model.Quotation.Divider
                             left_deduction = 72 / 2;
                         }
                     }
-                    else if (parent_mpanelParent.MPanel_Placement == "Last")
+                    else if (Div_MPanelParent.MPanel_Placement == "Last")
                     {
                         prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
                         div_left = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);

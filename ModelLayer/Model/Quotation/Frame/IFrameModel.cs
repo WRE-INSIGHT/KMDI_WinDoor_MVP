@@ -50,7 +50,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
         IEnumerable<IPanelModel> GetVisiblePanels();
         IEnumerable<IMultiPanelModel> GetVisibleMultiPanels();
-
+        void SetExplosionValues_Frame();
         #endregion
     }
 }

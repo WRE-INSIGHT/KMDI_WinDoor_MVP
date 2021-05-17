@@ -117,12 +117,12 @@ namespace ModelLayer.Tests
             Assert.AreEqual("pc(s)", dt.Rows[5]["Unit"].ToString());
             Assert.AreEqual("1434", dt.Rows[5]["Size"]);
 
-            Assert.AreEqual("Glass Width (6-8mm)", dt.Rows[6]["Description"].ToString());
+            Assert.AreEqual("Glass Width (_6mm)", dt.Rows[6]["Description"].ToString());
             Assert.AreEqual(1, dt.Rows[6]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[6]["Unit"].ToString());
             Assert.AreEqual("428", dt.Rows[6]["Size"]);
 
-            Assert.AreEqual("Glass Height (6-8mm)", dt.Rows[7]["Description"].ToString());
+            Assert.AreEqual("Glass Height (_6mm)", dt.Rows[7]["Description"].ToString());
             Assert.AreEqual(1, dt.Rows[7]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[7]["Unit"].ToString());
             Assert.AreEqual("1428", dt.Rows[7]["Size"]);
@@ -132,7 +132,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("pc(s)", dt.Rows[8]["Unit"].ToString());
             Assert.AreEqual("", dt.Rows[8]["Size"]);
 
-            Assert.AreEqual("Sealant-WH", dt.Rows[9]["Description"].ToString());
+            Assert.AreEqual("Sealant-WH (Glass)", dt.Rows[9]["Description"].ToString());
             Assert.AreEqual(1, dt.Rows[9]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[9]["Unit"].ToString());
             Assert.AreEqual("", dt.Rows[9]["Size"]);
@@ -142,7 +142,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("can", dt.Rows[10]["Unit"].ToString());
             Assert.AreEqual("", dt.Rows[10]["Size"]);
 
-            Assert.AreEqual("Sealant-WH", dt.Rows[11]["Description"].ToString());
+            Assert.AreEqual("Sealant-WH (Frame)", dt.Rows[11]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[11]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[11]["Unit"].ToString());
             Assert.AreEqual("", dt.Rows[11]["Size"]);
@@ -287,9 +287,12 @@ namespace ModelLayer.Tests
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
             IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
-                                                                                       new Control(),
+                                                                                       frame,
                                                                                        new UserControl(),
                                                                                        _frameModel,
                                                                                        true,
@@ -332,6 +335,7 @@ namespace ModelLayer.Tests
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    1);
+            _panelModel.Panel_Placement = "First";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -371,6 +375,7 @@ namespace ModelLayer.Tests
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    2);
+            _panelModel2.Panel_Placement = "Last";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -430,9 +435,12 @@ namespace ModelLayer.Tests
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
             IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
-                                                                                       new Control(),
+                                                                                       frame,
                                                                                        new UserControl(),
                                                                                        _frameModel,
                                                                                        true,
@@ -475,6 +483,7 @@ namespace ModelLayer.Tests
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    1);
+            _panelModel.Panel_Placement = "First";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -514,6 +523,7 @@ namespace ModelLayer.Tests
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    2);
+            _panelModel2.Panel_Placement = "Last";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";

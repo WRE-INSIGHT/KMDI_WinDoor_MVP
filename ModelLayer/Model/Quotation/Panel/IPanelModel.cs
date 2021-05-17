@@ -43,7 +43,12 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_GlazingSpacerQty { get; set; }
         int Panel_SealantWHQty { get; set; }
 
-        void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo, DividerType div_type);
+        void SetPanelExplosionValues_Panel(bool parentIsFrame);
+        void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo, 
+                                           Divider_ArticleNo divPrev_artNo,
+                                           DividerType div_type,
+                                           Divider_ArticleNo divArtNo_LeftorTop = Divider_ArticleNo.None,
+                                           Divider_ArticleNo divArtNo_RightorBot = Divider_ArticleNo.None);
 
         #endregion
     }

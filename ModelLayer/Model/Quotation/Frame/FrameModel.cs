@@ -345,7 +345,7 @@ namespace ModelLayer.Model.Quotation.Frame
         public int Frame_PUFoamingQty { get; set; }
         public int Frame_SealantWHQty { get; set; }
 
-        private void SetExplosionValues_Frame()
+        public void SetExplosionValues_Frame()
         {
             Frame_ExplosionWidth = _frameWidth + 5;
             Frame_ExplosionHeight = _frameHeight + 5;
@@ -384,8 +384,6 @@ namespace ModelLayer.Model.Quotation.Frame
             Lst_Divider = lst_divider;
             Frame_Zoom = frameZoom;
             Frame_ArtNo = frameArtNo;
-
-            SetExplosionValues_Frame();
         }
     }
 }

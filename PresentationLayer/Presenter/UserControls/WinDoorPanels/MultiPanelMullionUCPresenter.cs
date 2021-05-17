@@ -2706,10 +2706,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 parent_doxtyle == DockStyle.None &&
                 lvl2_parent_Type == "Transom")
             {
-                g.FillRectangle(Brushes.RosyBrown, divider_bounds_Top);
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Top);
                 g.DrawRectangle(Pens.Black, divider_bounds_Top);
 
-                g.FillRectangle(Brushes.RosyBrown, divider_bounds_Bot);
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Bot);
                 g.DrawRectangle(Pens.Black, divider_bounds_Bot);
 
                 g.FillRectangle(Brushes.RosyBrown, divider_bounds_Left);
@@ -2726,12 +2726,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 g.FillRectangle(Brushes.RosyBrown, divider_bounds_Right);
                 g.DrawRectangle(Pens.Black, divider_bounds_Right);
 
-                g.FillRectangle(Brushes.RosyBrown, divider_bounds_Top);
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Top);
                 g.DrawRectangle(Pens.Black, divider_bounds_Top);
 
-                g.FillRectangle(Brushes.RosyBrown, divider_bounds_Bot);
+                g.FillRectangle(Brushes.PowderBlue, divider_bounds_Bot);
                 g.DrawRectangle(Pens.Black, divider_bounds_Bot);
-
             }
 
 
