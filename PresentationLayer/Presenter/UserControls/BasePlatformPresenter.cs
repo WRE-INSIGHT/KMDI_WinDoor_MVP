@@ -218,11 +218,12 @@ namespace PresentationLayer.Presenter.UserControls
 
             for (int WD = lst_wd[0]; 0 < lst_wd.Count; WD++)
             {
+                TotalSumWD += WD;
                 if (flpMain_width == TotalSumWD)
                 {
                     break;
                 }
-                TotalSumWD += WD;
+
             }
             return lst_wd;
         }
