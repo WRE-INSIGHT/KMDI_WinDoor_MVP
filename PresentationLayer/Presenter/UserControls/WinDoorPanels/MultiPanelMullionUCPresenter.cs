@@ -360,6 +360,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                       _frameModel,
                                                                                                       _mainPresenter,
                                                                                                       _frameUCP,
+                                                                                                      this,
                                                                                                       multiPropUCP,
                                                                                                       _frameImagerUCP,
                                                                                                       _basePlatformImagerUCP,
@@ -653,6 +654,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 IDividerModel div = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
                 div.Div_Visible = false;
+                _multiPanelModel.MPanel_ParentModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
             }
             #endregion
 
@@ -672,6 +675,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.MPanelProp_Height -= (228 + 1); //+1 on margin;
                 _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin;
+            }
+
+            var mullions = _mpnlCommons.GetAll(innerFlp, "MullionUC");
+            foreach (var mul in mullions)
+            {
+                _multiPanelModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+            }
+
+            var transoms = _mpnlCommons.GetAll(innerFlp, "TransomUC");
+            foreach (var transom in transoms)
+            {
+                _multiPanelModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
             }
 
             _mainPresenter.DeletePropertiesUC(_multiPanelModel.MPanel_ID);
@@ -727,8 +744,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _mainPresenter.GetDividerCount(),
                                                         _multiPanelModel,
                                                         null,
-                                                        null,
-                                                        this,
+                                                        _multiPanelTransomUCP,
+                                                        _multiPanelMullionUCP,
                                                         _multiMullionImagerUCP_parent,
                                                         _multiPanelTransomImagerUCP_parent);
             }
@@ -2890,7 +2907,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             ((IMultiPanelUC)_multiPanelMullionUC).DeletePanel(obj);
             if (obj.Name.Contains("Panel"))
             {
-                _multiPanelModel.MPanelProp_Height -= 148;
+                _multiPanelModel.MPanelProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
             }
         }
 

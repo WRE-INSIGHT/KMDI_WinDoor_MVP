@@ -123,7 +123,6 @@ namespace PresentationLayer.CommonMethods
                 frameModel.FrameProp_Height += (173 + 1); //+1 on margin
                 parentModel.MPanelProp_Height += (173 + 1); //+1 on margin
 
-
                 if (parentModel.MPanel_Type == "Transom")
                 {
                     ITransomUCPresenter transomUCP = null;
