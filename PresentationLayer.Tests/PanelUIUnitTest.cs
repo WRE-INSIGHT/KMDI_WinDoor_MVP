@@ -130,64 +130,64 @@ namespace PresentationLayer.Tests
 
             frmUITest frm = new frmUITest();
 
-            _panelModel = _panelServices.AddPanelModel(frm.Width,
-                                                       frm.Height,
-                                                       new UserControl(),
-                                                       new UserControl(),
-                                                       new UserControl(),
-                                                       new UserControl(),
-                                                       "Awning",
-                                                       true,
-                                                       1);
+            //_panelModel = _panelServices.AddPanelModel(frm.Width,
+            //                                           frm.Height,
+            //                                           new Control(),
+            //                                           new UserControl(),
+            //                                           new UserControl(),
+            //                                           new UserControl(),
+            //                                           "Awning",
+            //                                           true,
+            //                                           1);
 
     }
 
-        [TestMethod]
-        public void CasementUITest()
-        {
-            frmUITest frm = new frmUITest();
-            IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, 
-                                               new System.Collections.Generic.List<IPanelModel>(),
-                                               new System.Collections.Generic.List<IMultiPanelModel>(),
-                                               1.0f,
-                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
+        //[TestMethod]
+        //public void CasementUITest()
+        //{
+        //    frmUITest frm = new frmUITest();
+        //    IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, 
+        //                                       new System.Collections.Generic.List<IPanelModel>(),
+        //                                       new System.Collections.Generic.List<IMultiPanelModel>(),
+        //                                       1.0f,
+        //                                       new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
 
-            //ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
-            //ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
-            //frm.Controls.Add((UserControl)casementUC);
-            frm.ShowDialog();
-        }
+        //    //ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
+        //    //ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+        //    //frm.Controls.Add((UserControl)casementUC);
+        //    frm.ShowDialog();
+        //}
 
-        [TestMethod]
-        public void AwningUITest()
-        {
-            frmUITest frm = new frmUITest();
-            IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, 
-                                               new System.Collections.Generic.List<IPanelModel>(), 
-                                               new System.Collections.Generic.List<IMultiPanelModel>(),
-                                               1.0f,
-                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
+        //[TestMethod]
+        //public void AwningUITest()
+        //{
+        //    frmUITest frm = new frmUITest();
+        //    IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, 
+        //                                       new System.Collections.Generic.List<IPanelModel>(), 
+        //                                       new System.Collections.Generic.List<IMultiPanelModel>(),
+        //                                       1.0f,
+        //                                       new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
 
-            //IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
-            //IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
-            //frm.Controls.Add((UserControl)awningUC);
-            frm.ShowDialog();
-        }
+        //    //IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
+        //    //IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+        //    //frm.Controls.Add((UserControl)awningUC);
+        //    frm.ShowDialog();
+        //}
 
-        [TestMethod]
-        public void SlidingUITest()
-        {
-            frmUITest frm = new frmUITest();
-            IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, 
-                                               new System.Collections.Generic.List<IPanelModel>(), 
-                                               new System.Collections.Generic.List<IMultiPanelModel>(),
-                                               1.0f,
-                                               new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
+        //[TestMethod]
+        //public void SlidingUITest()
+        //{
+        //    frmUITest frm = new frmUITest();
+        //    IFrameModel frame = new FrameModel(1, "Frame 1", 400, 400, FrameModel.Frame_Padding.Door, true, 
+        //                                       new System.Collections.Generic.List<IPanelModel>(), 
+        //                                       new System.Collections.Generic.List<IMultiPanelModel>(),
+        //                                       1.0f,
+        //                                       new System.Collections.Generic.List<ModelLayer.Model.Quotation.Divider.IDividerModel>());
 
-            //ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
-            //ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
-            //frm.Controls.Add((UserControl)slidingUC);
-            frm.ShowDialog();
-        }
+        //    //ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(UnityC, _panelModel, frame, _mainPresenter);
+        //    //ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+        //    //frm.Controls.Add((UserControl)slidingUC);
+        //    frm.ShowDialog();
+        //}
     }
 }

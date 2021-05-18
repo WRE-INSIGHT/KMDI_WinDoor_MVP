@@ -76,7 +76,7 @@ namespace PresentationLayer.Tests
             frmDividerTesting frm = new frmDividerTesting();
 
             ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(UnityC);
-            ITransomUC transomUC = transomUCP.GetMullion("test");
+            ITransomUC transomUC = transomUCP.GetTransom("test");
 
             FlowLayoutPanel flp_multi = new FlowLayoutPanel();
             flp_multi.Name = "multiPnl";

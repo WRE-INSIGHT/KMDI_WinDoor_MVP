@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PresentationLayer.Views.UserControls;
+﻿using CommonComponents;
 using ModelLayer.Model.Quotation.WinDoor;
-using System.Windows.Forms;
+using PresentationLayer.Views.UserControls;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Windows.Forms;
 using Unity;
-using CommonComponents;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -33,7 +31,7 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatfomrUC.basePlatformSizeChangedEventRaised += new EventHandler(OnbasePlatformSizeChangedEventRaised);
             _basePlatfomrUC.flpFrameDragDropPaintEventRaised += new PaintEventHandler(OnflpFrameDragDropPaintEventRaised);
         }
-        
+
         private void OnflpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
         {
             Panel pnl = (Panel)sender;
@@ -186,15 +184,15 @@ namespace PresentationLayer.Presenter.UserControls
                                       TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
             }
             //arrow for HEIGHT
-            
+
         }
-        
+
         public IBasePlatformUC getBasePlatformViewUC()
         {
             _basePlatfomrUC.ThisBinding(CreateBindingDictionary());
             return _basePlatfomrUC;
         }
-        
+
         public void AddFrame(IFrameUC frame)
         {
             _flpMain.Controls.Add((UserControl)frame);
@@ -212,7 +210,39 @@ namespace PresentationLayer.Presenter.UserControls
 
         public List<int> lst_wd_toPaint(int flpMain_width, List<int> lst_ctrlWds)
         {
+            //List<int> lst_wd = new List<int>();
+
+            //lst_wd = lst_wd.OrderByDescending(x => x).ToList();
+
+
+            //foreach (var WD in lst_wd)
+            //{
+            //    int LowestNumberInList = lst_wd[0];
+            //    int ResultWD;
+            //    while (LowestNumberInList == WD)
+            //    {
+            //        ResultWD = LowestNumberInList + LowestNumberInList;
+            //    }
+            //}
+
+
             List<int> lst_wd = new List<int>();
+
+            lst_wd = lst_ctrlWds.OrderByDescending(x => x).ToList();
+
+
+            foreach (var WD in lst_ctrlWds)
+            {
+
+                int TotalSumWD = lst_wd.Sum();
+
+
+                if (flpMain_width == TotalSumWD)
+                {
+                    return lst_wd;
+                }
+            }
+
 
             return lst_wd;
         }
@@ -220,6 +250,9 @@ namespace PresentationLayer.Presenter.UserControls
         public List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts)
         {
             List<int> lst_ht = new List<int>();
+
+
+
 
             return lst_ht;
         }
