@@ -214,18 +214,25 @@ namespace PresentationLayer.Presenter.UserControls
         {
 
             List<int> lst_wd = new List<int>();
-            lst_wd = lst_ctrlWds.OrderBy(x => x).ToList();
+            List<int> Arrange_lst_wd = new List<int>();
+            Arrange_lst_wd = lst_ctrlWds.OrderBy(x => x).ToList();
 
-            for (int WD = lst_wd[0]; 0 < lst_wd.Count; WD++)
+            for (int i = 0; i < Arrange_lst_wd.Count; i++)
             {
-                TotalSumWD += WD;
+                TotalSumWD += Arrange_lst_wd[0];
+       
+                lst_wd.Add(TotalSumWD);
+        
                 if (flpMain_width == TotalSumWD)
                 {
                     break;
                 }
-
             }
+
+
             return lst_wd;
+
+
         }
 
         public List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts)
