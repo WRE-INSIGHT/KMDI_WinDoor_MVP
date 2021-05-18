@@ -208,42 +208,22 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatfomrUC.PerformLayoutThis();
         }
 
+
+        int TotalSumWD;
         public List<int> lst_wd_toPaint(int flpMain_width, List<int> lst_ctrlWds)
         {
-            //List<int> lst_wd = new List<int>();
-
-            //lst_wd = lst_wd.OrderByDescending(x => x).ToList();
-
-
-            //foreach (var WD in lst_wd)
-            //{
-            //    int LowestNumberInList = lst_wd[0];
-            //    int ResultWD;
-            //    while (LowestNumberInList == WD)
-            //    {
-            //        ResultWD = LowestNumberInList + LowestNumberInList;
-            //    }
-            //}
-
 
             List<int> lst_wd = new List<int>();
+            lst_wd = lst_ctrlWds.OrderBy(x => x).ToList();
 
-            lst_wd = lst_ctrlWds.OrderByDescending(x => x).ToList();
-
-
-            foreach (var WD in lst_ctrlWds)
+            for (int WD = lst_wd[0]; 0 < lst_wd.Count; WD++)
             {
-
-                int TotalSumWD = lst_wd.Sum();
-
-
                 if (flpMain_width == TotalSumWD)
                 {
-                    return lst_wd;
+                    break;
                 }
+                TotalSumWD += WD;
             }
-
-
             return lst_wd;
         }
 

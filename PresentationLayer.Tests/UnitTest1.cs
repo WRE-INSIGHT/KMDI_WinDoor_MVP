@@ -32,7 +32,12 @@ namespace PresentationLayer.Tests
 
             List<int> actual_lst_wd = _basePlatformPresenter.lst_wd_toPaint(400, lst_wd);
 
-            Assert.AreEqual(200, actual_lst_wd[0]);
+            Assert.AreEqual(100, actual_lst_wd[0]);
+            Assert.AreEqual(100, actual_lst_wd[1]);
+            Assert.AreEqual(100, actual_lst_wd[2]);
+            Assert.AreEqual(100, actual_lst_wd[3]);
+
+
         }
 
     }
