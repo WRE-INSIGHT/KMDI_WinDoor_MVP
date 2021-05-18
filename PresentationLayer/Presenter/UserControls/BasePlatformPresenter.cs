@@ -239,6 +239,20 @@ namespace PresentationLayer.Presenter.UserControls
         {
             List<int> lst_ht = new List<int>();
 
+            List<int> Arrange_lst_wd = new List<int>();
+            Arrange_lst_wd = lst_ctrlHts.OrderBy(x => x).ToList();
+
+            for (int i = 0; i < Arrange_lst_wd.Count; i++)
+            {
+                TotalSumWD += Arrange_lst_wd[0];
+
+                lst_ht.Add(TotalSumWD);
+
+                if (flpMain_height == TotalSumWD)
+                {
+                    break;
+                }
+            }
 
 
 
