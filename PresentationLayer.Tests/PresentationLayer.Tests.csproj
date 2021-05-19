@@ -91,7 +91,7 @@
     <Compile Include="PanelUIUnitTest.cs" />
     <Compile Include="DividerUIUnitTest.cs" />
     <Compile Include="Draw2BmpUnitTest.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="BasePlatformUCPresenterPaintUITest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonComponents\CommonComponents.csproj">
