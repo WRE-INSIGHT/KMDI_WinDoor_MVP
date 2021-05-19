@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PresentationLayer.Views.UserControls;
+﻿using CommonComponents;
 using ModelLayer.Model.Quotation.WinDoor;
-using System.Windows.Forms;
+using PresentationLayer.Views.UserControls;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Windows.Forms;
 using Unity;
-using CommonComponents;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -33,7 +31,7 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatfomrUC.basePlatformSizeChangedEventRaised += new EventHandler(OnbasePlatformSizeChangedEventRaised);
             _basePlatfomrUC.flpFrameDragDropPaintEventRaised += new PaintEventHandler(OnflpFrameDragDropPaintEventRaised);
         }
-        
+
         private void OnflpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
         {
             Panel pnl = (Panel)sender;
@@ -186,15 +184,15 @@ namespace PresentationLayer.Presenter.UserControls
                                       TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
             }
             //arrow for HEIGHT
-            
+
         }
-        
+
         public IBasePlatformUC getBasePlatformViewUC()
         {
             _basePlatfomrUC.ThisBinding(CreateBindingDictionary());
             return _basePlatfomrUC;
         }
-        
+
         public void AddFrame(IFrameUC frame)
         {
             _flpMain.Controls.Add((UserControl)frame);
@@ -210,16 +208,64 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatfomrUC.PerformLayoutThis();
         }
 
+
+        int TotalSumWD;
         public List<int> lst_wd_toPaint(int flpMain_width, List<int> lst_ctrlWds)
         {
+
             List<int> lst_wd = new List<int>();
-            
+            List<int> Arrange_lst_wd = new List<int>();
+            Arrange_lst_wd = lst_ctrlWds.OrderBy(x => x).ToList();
+
+            for (int i = 0; i < lst_ctrlWds.Count; i++)
+            {
+                TotalSumWD += Arrange_lst_wd[i];
+
+
+
+                if (flpMain_width < TotalSumWD)
+                {
+                    break;
+                }
+                else
+                {
+                    lst_wd.Add(Arrange_lst_wd[i]);
+                }
+            }
+
+
             return lst_wd;
+
+
         }
 
+
+        int TotalSumHeight;
         public List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts)
         {
             List<int> lst_ht = new List<int>();
+            List<int> Arrange_lst_Height = new List<int>();
+            Arrange_lst_Height = lst_ctrlHts.OrderBy(x => x).ToList();
+
+
+
+            for (int i = 0; i < Arrange_lst_Height.Count; i++)
+            {
+                TotalSumHeight += Arrange_lst_Height[i];
+
+
+
+                if (flpMain_height < TotalSumHeight)
+                {
+                    break;
+                }
+                else
+                {
+                    lst_ht.Add(Arrange_lst_Height[i]);
+                }
+            }
+
+
 
             return lst_ht;
         }
