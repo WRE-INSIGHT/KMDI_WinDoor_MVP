@@ -217,17 +217,20 @@ namespace PresentationLayer.Presenter.UserControls
             List<int> Arrange_lst_wd = new List<int>();
             Arrange_lst_wd = lst_ctrlWds.OrderBy(x => x).ToList();
 
-            for (int i = 0; i < Arrange_lst_wd.Count; i++)
+            for (int i = 0; i < lst_ctrlWds.Count; i++)
             {
                 TotalSumWD += Arrange_lst_wd[i];
 
-                lst_wd.Add(Arrange_lst_wd[i]); 
 
-                if (flpMain_width == TotalSumWD)
+
+                if (flpMain_width < TotalSumWD)
                 {
                     break;
                 }
-
+                else
+                {
+                    lst_wd.Add(Arrange_lst_wd[i]);
+                }
             }
 
 
@@ -236,22 +239,30 @@ namespace PresentationLayer.Presenter.UserControls
 
         }
 
+
+        int TotalSumHeight;
         public List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts)
         {
             List<int> lst_ht = new List<int>();
+            List<int> Arrange_lst_Height = new List<int>();
+            Arrange_lst_Height = lst_ctrlHts.OrderBy(x => x).ToList();
 
-            List<int> Arrange_lst_wd = new List<int>();
-            Arrange_lst_wd = lst_ctrlHts.OrderBy(x => x).ToList();
 
-            for (int i = 0; i < Arrange_lst_wd.Count; i++)
+
+            for (int i = 0; i < Arrange_lst_Height.Count; i++)
             {
-                TotalSumWD += Arrange_lst_wd[i];
-                lst_ht.Add(Arrange_lst_wd[i]);
-                if (flpMain_height == TotalSumWD)
+                TotalSumHeight += Arrange_lst_Height[i];
+
+
+
+                if (flpMain_height < TotalSumHeight)
                 {
                     break;
                 }
-               
+                else
+                {
+                    lst_ht.Add(Arrange_lst_Height[i]);
+                }
             }
 
 
