@@ -32,17 +32,15 @@ namespace PresentationLayer.Tests
 
             List<int> actual_lst_wd = _basePlatformPresenter.lst_wd_toPaint(total_wd, lst_wd);
 
-            Assert.AreEqual(100, actual_lst_wd[0]);
-            Assert.AreEqual(200, actual_lst_wd[1]);
-            Assert.AreEqual(300, actual_lst_wd[2]);
-            Assert.AreEqual(400, actual_lst_wd[3]);
+            //Assert.AreEqual(100, actual_lst_wd[0]);
+            //Assert.AreEqual(200, actual_lst_wd[1]);
+            //Assert.AreEqual(300, actual_lst_wd[2]);
+            //Assert.AreEqual(400, actual_lst_wd[3]);
 
-            Assert.AreEqual(200, lst_wd[0]);
-            Assert.AreEqual(200, lst_wd[1]);
-            Assert.AreEqual(100, lst_wd[2]);
-            Assert.AreEqual(100, lst_wd[3]);
-            Assert.AreEqual(100, lst_wd[4]);
-            Assert.AreEqual(100, lst_wd[5]);
+            Assert.AreEqual(100, actual_lst_wd[0]);
+            Assert.AreEqual(100, actual_lst_wd[1]);
+            Assert.AreEqual(100, actual_lst_wd[2]);
+            Assert.AreEqual(100, actual_lst_wd[3]);
 
             Assert.AreEqual(4, actual_lst_wd.Count);
             Assert.AreEqual(6, lst_wd.Count);
@@ -65,9 +63,7 @@ namespace PresentationLayer.Tests
             List<int> actual_lst_ht = _basePlatformPresenter.lst_ht_toPaint(total_ht, lst_ht);
 
             Assert.AreEqual(200, actual_lst_ht[0]);
-            Assert.AreEqual(400, actual_lst_ht[1]);
-            //Assert.AreEqual(300, actual_lst_ht[2]);
-            //Assert.AreEqual(400, actual_lst_ht[3]);
+            Assert.AreEqual(200, actual_lst_ht[1]);
 
             Assert.AreEqual(2, actual_lst_ht.Count);
             Assert.AreEqual(6, lst_ht.Count);

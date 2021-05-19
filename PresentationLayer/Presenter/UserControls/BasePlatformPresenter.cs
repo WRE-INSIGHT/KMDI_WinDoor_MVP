@@ -219,14 +219,15 @@ namespace PresentationLayer.Presenter.UserControls
 
             for (int i = 0; i < Arrange_lst_wd.Count; i++)
             {
-                TotalSumWD += Arrange_lst_wd[0];
-       
-                lst_wd.Add(TotalSumWD);
-        
+                TotalSumWD += Arrange_lst_wd[i];
+
+                lst_wd.Add(Arrange_lst_wd[i]); 
+
                 if (flpMain_width == TotalSumWD)
                 {
                     break;
                 }
+
             }
 
 
@@ -244,14 +245,13 @@ namespace PresentationLayer.Presenter.UserControls
 
             for (int i = 0; i < Arrange_lst_wd.Count; i++)
             {
-                TotalSumWD += Arrange_lst_wd[0];
-
-                lst_ht.Add(TotalSumWD);
-
+                TotalSumWD += Arrange_lst_wd[i];
+                lst_ht.Add(Arrange_lst_wd[i]);
                 if (flpMain_height == TotalSumWD)
                 {
                     break;
                 }
+               
             }
 
 
