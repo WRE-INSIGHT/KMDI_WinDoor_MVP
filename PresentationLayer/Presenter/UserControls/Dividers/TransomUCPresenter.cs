@@ -66,9 +66,45 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         private void _transomUC_transomUCKeyDownEventRaised(object sender, KeyEventArgs e)
         {
             UserControl me = (UserControl)sender;
+            int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)sender);
             FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
 
-            int me_indx = flp.Controls.IndexOf(me);
+            //int me_indx = flp.Controls.IndexOf(me);
+
+            Control prev_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx - 1];
+            Control nxt_ctrl = null;
+
+            if (_multiPanelModel.MPanelLst_Objects.Count() > me_indx + 1)
+            {
+                nxt_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx + 1];
+            }
+
+            int expected_Panel1MinHT = 0,
+                expected_Panel2MinHT = 0;
+
+            IMultiPanelModel prev_mpanel = null,
+                             nxt_mpnl = null;
+
+            IPanelModel prev_pnl = null,
+                        nxt_pnl = null;
+
+            if (prev_ctrl is IMultiPanelUC)
+            {
+                prev_mpanel = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prev_ctrl.Name);
+            }
+            else if (prev_ctrl is IPanelUC)
+            {
+                prev_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_ctrl.Name);
+            }
+
+            if (nxt_ctrl is IMultiPanelUC)
+            {
+                nxt_mpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == nxt_ctrl.Name);
+            }
+            else if (nxt_ctrl is IPanelUC)
+            {
+                nxt_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == nxt_ctrl.Name);
+            }
 
             if (_keydown)
             {
@@ -80,19 +116,93 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         break;
 
                     case Keys.Up:
-                        flp.Controls[me_indx - 1].Height ++;
-                        flp.Controls[me_indx + 1].Height --;
+                        if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
+                        {
+                            if (nxt_ctrl is IMultiPanelUC)
+                            {
+                                expected_Panel2MinHT = nxt_mpnl.MPanel_Height - 1;
+                            }
+                            else if (nxt_ctrl is IPanelUC)
+                            {
+                                expected_Panel2MinHT = nxt_pnl.Panel_Height - 1;
+                            }
 
-                        flp.Controls[me_indx - 1].Invalidate();
-                        flp.Controls[me_indx + 1].Invalidate();
+                            if (expected_Panel2MinHT >= 30)
+                            {
+                                if (prev_ctrl is IMultiPanelUC)
+                                {
+                                    prev_mpanel.MPanel_Height++;
+                                    prev_mpanel.MPanel_DisplayHeight++;
+                                }
+                                else if (prev_ctrl is IPanelUC)
+                                {
+                                    prev_pnl.Panel_Height++;
+                                    prev_pnl.Panel_DisplayHeight++;
+                                }
+
+                                if (nxt_ctrl is IMultiPanelUC)
+                                {
+                                    nxt_mpnl.MPanel_Height--;
+                                    nxt_mpnl.MPanel_DisplayHeight--;
+                                }
+                                else if (nxt_ctrl is IPanelUC)
+                                {
+                                    nxt_pnl.Panel_Height--;
+                                    nxt_pnl.Panel_DisplayHeight--;
+                                }
+                            }
+                        }
+
+                        //flp.Controls[me_indx - 1].Height ++;
+                        //flp.Controls[me_indx + 1].Height --;
+
+                        //flp.Controls[me_indx - 1].Invalidate();
+                        //flp.Controls[me_indx + 1].Invalidate();
                         break;
 
                     case Keys.Down:
-                        flp.Controls[me_indx - 1].Height--;
-                        flp.Controls[me_indx + 1].Height++;
+                        if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
+                        {
+                            if (prev_ctrl is IMultiPanelUC)
+                            {
+                                expected_Panel1MinHT = prev_mpanel.MPanel_Height - 1;
+                            }
+                            else if (prev_ctrl is IPanelUC)
+                            {
+                                expected_Panel1MinHT = prev_pnl.Panel_Height - 1;
+                            }
 
-                        flp.Controls[me_indx - 1].Invalidate();
-                        flp.Controls[me_indx + 1].Invalidate();
+                            if (expected_Panel1MinHT >= 30)
+                            {
+                                if (prev_ctrl is IMultiPanelUC)
+                                {
+                                    prev_mpanel.MPanel_Height--;
+                                    prev_mpanel.MPanel_DisplayHeight--;
+                                }
+                                else if (prev_ctrl is IPanelUC)
+                                {
+                                    prev_pnl.Panel_Height--;
+                                    prev_pnl.Panel_DisplayHeight--;
+                                }
+
+                                if (nxt_ctrl is IMultiPanelUC)
+                                {
+                                    nxt_mpnl.MPanel_Height++;
+                                    nxt_mpnl.MPanel_DisplayHeight++;
+                                }
+                                else if (nxt_ctrl is IPanelUC)
+                                {
+                                    nxt_pnl.Panel_Height++;
+                                    nxt_pnl.Panel_DisplayHeight++;
+                                }
+                            }
+                        }
+
+                        //flp.Controls[me_indx - 1].Height--;
+                        //flp.Controls[me_indx + 1].Height++;
+
+                        //flp.Controls[me_indx - 1].Invalidate();
+                        //flp.Controls[me_indx + 1].Invalidate();
                         break;
                 }
             }
@@ -207,6 +317,19 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
 
+            int ctrl_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(transom);
+            bool prevCtrl_isPanel = false;
+
+            if (!_multiPanelModel.MPanelLst_Objects[ctrl_ndx - 1].Name.Contains("Multi"))
+            {
+                prevCtrl_isPanel = true;
+            }
+            else
+            {
+                prevCtrl_isPanel = false;
+            }
+
+
             if (_divModel.Div_Height == (int)_frameModel.Frame_Type)
             {
                 g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
@@ -216,10 +339,21 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             }
             else if (_divModel.Div_Height == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
             {
-                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
-                                                                       -1,
-                                                                       transom.ClientRectangle.Width - w,
-                                                                       (transom.ClientRectangle.Height - w) + 1));
+                if (prevCtrl_isPanel == true)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                           0,
+                                                                           transom.ClientRectangle.Width - w,
+                                                                           (transom.ClientRectangle.Height - w) + 2));
+                }
+                else if (prevCtrl_isPanel == false)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                          -1,
+                                                                          transom.ClientRectangle.Width - w,
+                                                                          (transom.ClientRectangle.Height - w) + 1));
+                }
+                    
             }
             else if (_divModel.Div_Height == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
             {
