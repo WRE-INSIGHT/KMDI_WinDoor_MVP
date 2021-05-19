@@ -79,6 +79,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExplosionView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "List of Materials";
             this.Load += new System.EventHandler(this.ExplosionView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ExplosionMaterialList)).EndInit();
             this.ResumeLayout(false);

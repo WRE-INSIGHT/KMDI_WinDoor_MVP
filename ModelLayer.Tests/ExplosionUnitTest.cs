@@ -125,23 +125,23 @@ namespace ModelLayer.Tests
             Assert.AreEqual("pc(s)", dt.Rows[7]["Unit"].ToString());
             Assert.AreEqual("1428", dt.Rows[7]["Size"]);
 
-            Assert.AreEqual("Glazing Spacer (KBC70)", dt.Rows[8]["Description"].ToString());
+            Assert.AreEqual("PU Foaming", dt.Rows[8]["Description"].ToString());
             Assert.AreEqual(1, dt.Rows[8]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[8]["Unit"].ToString());
+            Assert.AreEqual("can", dt.Rows[8]["Unit"].ToString());
             Assert.AreEqual("", dt.Rows[8]["Size"]);
 
-            Assert.AreEqual("Sealant-WH (Glass)", dt.Rows[9]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[9]["Qty"]);
+            Assert.AreEqual("Sealant-WH (Frame)", dt.Rows[9]["Description"].ToString());
+            Assert.AreEqual(2, dt.Rows[9]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[9]["Unit"].ToString());
             Assert.AreEqual("", dt.Rows[9]["Size"]);
 
-            Assert.AreEqual("PU Foaming", dt.Rows[10]["Description"].ToString());
+            Assert.AreEqual("Sealant-WH (Glass)", dt.Rows[10]["Description"].ToString());
             Assert.AreEqual(1, dt.Rows[10]["Qty"]);
-            Assert.AreEqual("can", dt.Rows[10]["Unit"].ToString());
+            Assert.AreEqual("pc(s)", dt.Rows[9]["Unit"].ToString());
             Assert.AreEqual("", dt.Rows[10]["Size"]);
 
-            Assert.AreEqual("Sealant-WH (Frame)", dt.Rows[11]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[11]["Qty"]);
+            Assert.AreEqual("Glazing Spacer (KBC70)", dt.Rows[11]["Description"].ToString());
+            Assert.AreEqual(1, dt.Rows[11]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[11]["Unit"].ToString());
             Assert.AreEqual("", dt.Rows[11]["Size"]);
 
@@ -597,6 +597,7 @@ namespace ModelLayer.Tests
                                                                                        0,
                                                                                        null,
                                                                                        _frameModel.FrameImageRenderer_Zoom);
+            _multiTransomModel.MPanel_Index_Inside_MPanel = 0;
             _frameModel.Lst_MultiPanel.Add(_multiTransomModel);
             Control multiTransom = new Control();
             multiTransom.Name = _multiTransomModel.MPanel_Name;
@@ -623,6 +624,7 @@ namespace ModelLayer.Tests
                                                                                           _multiTransomModel,
                                                                                           _frameModel.FrameImageRenderer_Zoom);
             _multiMullionModel1.MPanel_Placement = "First";
+            _multiMullionModel1.MPanel_Index_Inside_MPanel = 0;
             _multiTransomModel.MPanelLst_MultiPanel.Add(_multiMullionModel1);
             Control multiMullion1 = new Control();
             multiMullion1.Name = "MultiMullion_2";
@@ -660,6 +662,7 @@ namespace ModelLayer.Tests
                                                                                           _multiTransomModel,
                                                                                           _frameModel.FrameImageRenderer_Zoom);
             _multiMullionModel2.MPanel_Placement = "Last";
+            _multiMullionModel2.MPanel_Index_Inside_MPanel = 2;
             _multiTransomModel.MPanelLst_MultiPanel.Add(_multiMullionModel2);
             Control multiMullion2 = new Control();
             multiMullion2.Name = "MultiMullion_3";
@@ -834,7 +837,42 @@ namespace ModelLayer.Tests
             Assert.AreEqual(215, _panelModel1.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel1.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
-            Assert.AreEqual(2, _panelModel1.Panel_SealantWHQty);
+            Assert.AreEqual(1, _panelModel1.Panel_SealantWHQty);
+
+            Assert.AreEqual(Divider_ArticleNo._7536, divModel_mullion.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel_mullion.Div_ReinfArtNo);
+            Assert.AreEqual(549, divModel_mullion.Div_ExplosionHeight);
+            Assert.AreEqual(469, divModel_mullion.Div_ReinfHeight);
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(221, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(546, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(215, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(540, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
+            Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel3.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(221, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(546, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(215, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(540, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(1, _panelModel3.Panel_GlazingSpacerQty);
+            Assert.AreEqual(1, _panelModel3.Panel_SealantWHQty);
+
+            Assert.AreEqual(Divider_ArticleNo._7536, divModel_mullion2.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel_mullion2.Div_ReinfArtNo);
+            Assert.AreEqual(549, divModel_mullion2.Div_ExplosionHeight);
+            Assert.AreEqual(469, divModel_mullion2.Div_ReinfHeight);
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel4.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(221, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(546, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(215, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(540, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(1, _panelModel4.Panel_GlazingSpacerQty);
+            Assert.AreEqual(1, _panelModel4.Panel_SealantWHQty);
+
         }
     }
 }

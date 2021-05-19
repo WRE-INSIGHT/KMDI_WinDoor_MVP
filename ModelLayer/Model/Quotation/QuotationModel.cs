@@ -124,7 +124,9 @@ namespace ModelLayer.Model.Quotation
                                            2, "pc(s)",
                                            frame.Frame_ReinfHeight.ToString());
 
-                    int glazing_seal = 0;
+                    int glazing_seal = 0,
+                        sealantWH_glass = 0,
+                        glazing_spacer = 0;
 
                     if (frame.GetVisibleMultiPanels().Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
                     {
@@ -333,14 +335,10 @@ namespace ModelLayer.Model.Quotation
                                     Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
                                                            1, "pc(s)",
                                                            pnl_curCtrl.Panel_GlassHeight.ToString());
+                                    glazing_spacer++;
 
-                                    Material_List.Rows.Add("Glazing Spacer (KBC70)",
-                                                           1, "pc(s)", "");
+                                    sealantWH_glass += pnl_curCtrl.Panel_SealantWHQty;
 
-                                    Material_List.Rows.Add("Sealant-WH (Glass)",
-                                                           pnl_curCtrl.Panel_SealantWHQty,
-                                                           "pc(s)",
-                                                           "");
                                     loop_counter++;
                                 }
                             }
@@ -366,14 +364,9 @@ namespace ModelLayer.Model.Quotation
                         Material_List.Rows.Add("Glass Height (" + pnl.Panel_GlassThickness + ")",
                                                1, "pc(s)",
                                                pnl.Panel_GlassHeight.ToString());
+                        glazing_spacer++;
 
-                        Material_List.Rows.Add("Glazing Spacer (KBC70)",
-                                               1, "pc(s)", "");
-
-                        Material_List.Rows.Add("Sealant-WH (Glass)",
-                                               pnl.Panel_SealantWHQty,
-                                               "pc(s)",
-                                               "");
+                        sealantWH_glass += pnl.Panel_SealantWHQty;
 
                         if (pnl.Panel_GlassThickness == Glass_Thickness._13mm ||
                             pnl.Panel_GlassThickness == Glass_Thickness._14mm ||
@@ -385,13 +378,22 @@ namespace ModelLayer.Model.Quotation
 
                     Material_List.Rows.Add("PU Foaming",
                                            frame.Frame_PUFoamingQty, "can", "");
+
                     Material_List.Rows.Add("Sealant-WH (Frame)",
                                            frame.Frame_SealantWHQty, "pc(s)", "");
+
+                    Material_List.Rows.Add("Sealant-WH (Glass)",
+                                           sealantWH_glass,
+                                           "pc(s)",
+                                           "");
+
+                    Material_List.Rows.Add("Glazing Spacer (KBC70)",
+                                           glazing_spacer, "pc(s)", "");
+
                     Material_List.Rows.Add("Glazing Seal",
                                            glazing_seal, "mm","");
                 }
             }
-
 
             var query = from r in Material_List.AsEnumerable()
                         group r by new
@@ -407,6 +409,25 @@ namespace ModelLayer.Model.Quotation
                             Unit = g.Key.Unit,
                             Size = g.Key.Size
                         };
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(CreateColumn("Description", "Description", "System.String"));
+            dt.Columns.Add(CreateColumn("Qty", "Qty", "System.Int32"));
+            dt.Columns.Add(CreateColumn("Unit", "Unit", "System.String"));
+            dt.Columns.Add(CreateColumn("Size", "Size", "System.String"));
+
+            foreach (var item in query)
+            {
+                DataRow row = dt.NewRow();
+                row["Description"] = item.Description;
+                row["Qty"] = item.Qty;
+                row["Unit"] = item.Unit;
+                row["Size"] = item.Size;
+
+                dt.Rows.Add(row);
+            }
+
+            Material_List = dt;
 
             return Material_List;
         }
