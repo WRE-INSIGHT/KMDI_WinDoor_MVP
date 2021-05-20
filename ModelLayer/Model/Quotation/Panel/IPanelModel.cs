@@ -41,7 +41,6 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_GlassWidth { get; set; }
         int Panel_GlassHeight { get; set; }
         int Panel_GlazingSpacerQty { get; set; }
-        int Panel_SealantWHQty { get; set; }
 
         void SetPanelExplosionValues_Panel(bool parentIsFrame);
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo, 

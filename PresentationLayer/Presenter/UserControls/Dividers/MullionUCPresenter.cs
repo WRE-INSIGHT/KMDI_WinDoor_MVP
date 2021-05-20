@@ -225,6 +225,19 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
 
+            int ctrl_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mul);
+            bool prevCtrl_isPanel = false;
+
+            if (!_multiPanelModel.MPanelLst_Objects[ctrl_ndx - 1].Name.Contains("Multi"))
+            {
+                prevCtrl_isPanel = true;
+            }
+            else
+            {
+                prevCtrl_isPanel = false;
+            }
+            
+
             if (_divModel.Div_Width == (int)_frameModel.Frame_Type)
             {
                 g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
@@ -234,10 +247,20 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             }
             else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
             {
-                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(-1,
-                                                                       0,
-                                                                       (mul.ClientRectangle.Width - w) + 1,
-                                                                       mul.ClientRectangle.Height - w));
+                if (prevCtrl_isPanel == false)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(-1,
+                                                                           0,
+                                                                           (mul.ClientRectangle.Width - w) + 1,
+                                                                           mul.ClientRectangle.Height - w));
+                }
+                else if (prevCtrl_isPanel == true)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                           0,
+                                                                           (mul.ClientRectangle.Width - w) + 2,
+                                                                           mul.ClientRectangle.Height - w));
+                }
             }
             else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
             {

@@ -128,7 +128,6 @@ namespace PresentationLayer.Presenter.UserControls
                 dmnsion_w_endP,
                 new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
             };
-            ;
 
             if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
             {
