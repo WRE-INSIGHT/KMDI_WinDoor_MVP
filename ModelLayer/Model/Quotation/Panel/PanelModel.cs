@@ -562,7 +562,6 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_GlassWidth { get; set; }
         public int Panel_GlassHeight { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
-        public int Panel_SealantWHQty { get; set; }
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
@@ -573,7 +572,6 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
 
             Panel_GlazingSpacerQty = 1;
-            Panel_SealantWHQty = (int)(Math.Ceiling((decimal)((Panel_GlassWidth + Panel_GlassHeight) * 2) / 6842));
         }
 
         public void SetPanelExplosionValues_Panel(Divider_ArticleNo divNxt_artNo,
@@ -657,7 +655,6 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GlassHeight = (Panel_DisplayHeight - deduction_for_ht) - 6;
 
             Panel_GlazingSpacerQty = 1;
-            Panel_SealantWHQty = (int)(Math.Ceiling((decimal)((Panel_GlassWidth + Panel_GlassHeight) * 2) / 6842));
         }
 
         #endregion

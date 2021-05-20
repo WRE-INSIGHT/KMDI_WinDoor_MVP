@@ -125,8 +125,9 @@ namespace ModelLayer.Model.Quotation
                                            frame.Frame_ReinfHeight.ToString());
 
                     int glazing_seal = 0,
-                        sealantWH_glass = 0,
-                        glazing_spacer = 0;
+                        glazing_spacer = 0,
+                        total_glassWidth = 0,
+                        total_glassHeight = 0;
 
                     if (frame.GetVisibleMultiPanels().Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
                     {
@@ -337,7 +338,8 @@ namespace ModelLayer.Model.Quotation
                                                            pnl_curCtrl.Panel_GlassHeight.ToString());
                                     glazing_spacer++;
 
-                                    sealantWH_glass += pnl_curCtrl.Panel_SealantWHQty;
+                                    total_glassWidth += (pnl_curCtrl.Panel_GlassWidth * 2);
+                                    total_glassHeight += (pnl_curCtrl.Panel_GlassHeight * 2);
 
                                     loop_counter++;
                                 }
@@ -366,7 +368,8 @@ namespace ModelLayer.Model.Quotation
                                                pnl.Panel_GlassHeight.ToString());
                         glazing_spacer++;
 
-                        sealantWH_glass += pnl.Panel_SealantWHQty;
+                        total_glassWidth += (pnl.Panel_GlassWidth * 2);
+                        total_glassHeight += (pnl.Panel_GlassHeight * 2);
 
                         if (pnl.Panel_GlassThickness == Glass_Thickness._13mm ||
                             pnl.Panel_GlassThickness == Glass_Thickness._14mm ||
@@ -381,6 +384,8 @@ namespace ModelLayer.Model.Quotation
 
                     Material_List.Rows.Add("Sealant-WH (Frame)",
                                            frame.Frame_SealantWHQty, "pc(s)", "");
+
+                    int sealantWH_glass = (int)(Math.Ceiling((decimal)(total_glassWidth + total_glassHeight) / 6842));
 
                     Material_List.Rows.Add("Sealant-WH (Glass)",
                                            sealantWH_glass,
