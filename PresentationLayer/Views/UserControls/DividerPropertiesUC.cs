@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using CommonComponents;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -60,13 +61,14 @@ namespace PresentationLayer.Views.UserControls
             }
         }
         public event EventHandler PanelPropertiesLoadEventRaised;
+        public event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
 
         private void DividerPropertiesUC_Load(object sender, EventArgs e)
         {
             num_divWidth.Maximum = decimal.MaxValue;
             num_divHeight.Maximum = decimal.MaxValue;
-            cmb_divArtNo.DataSource = Enum.GetValues(typeof(Divider_ArticleNo));
-            cmb_divReinf.DataSource = Enum.GetValues(typeof(DividerReinf_ArticleNo));
+            cmb_divArtNo.DataSource = Divider_ArticleNo.GetAll();
+            cmb_divReinf.DataSource = DividerReinf_ArticleNo.GetAll();
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 
@@ -80,6 +82,11 @@ namespace PresentationLayer.Views.UserControls
             cmb_divArtNo.DataBindings.Add(ModelBinding["Div_ArtNo"]);
             cmb_divReinf.DataBindings.Add(ModelBinding["Div_ReinfArtNo"]);
             this.DataBindings.Add(ModelBinding["Divider_Type"]);
+        }
+
+        private void cmb_divArtNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbdivArtNoSelectedValueChangedEventRaised, e);
         }
     }
 }

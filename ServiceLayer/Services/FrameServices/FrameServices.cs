@@ -10,6 +10,7 @@ using ServiceLayer.CommonServices;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
 using static ModelLayer.Model.Quotation.QuotationModel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ServiceLayer.Services.FrameServices
 {

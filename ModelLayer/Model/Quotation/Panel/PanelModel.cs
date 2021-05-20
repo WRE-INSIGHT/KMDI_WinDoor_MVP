@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
@@ -577,8 +578,8 @@ namespace ModelLayer.Model.Quotation.Panel
         public void SetPanelExplosionValues_Panel(Divider_ArticleNo divNxt_artNo,
                                                   Divider_ArticleNo divPrev_artNo,
                                                   DividerType div_type, 
-                                                  Divider_ArticleNo divArtNo_LeftorTop = Divider_ArticleNo.None,
-                                                  Divider_ArticleNo divArtNo_RightorBot = Divider_ArticleNo.None)
+                                                  Divider_ArticleNo divArtNo_LeftorTop = null,
+                                                  Divider_ArticleNo divArtNo_RightorBot = null)
         {
             int GB_deduction_forLeftorTopRightorBot = 0,
                 GB_deduction_forNxtPrev = 0,
@@ -593,7 +594,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 GB_deduction_forNxtPrev += (72 / 2);
             }
-            else if (divNxt_artNo == Divider_ArticleNo.None)
+            else if (divNxt_artNo == Divider_ArticleNo._None)
             {
                 GB_deduction_forNxtPrev += 33;
             }
@@ -606,7 +607,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 GB_deduction_forNxtPrev += (72 / 2);
             }
-            else if (divPrev_artNo == Divider_ArticleNo.None)
+            else if (divPrev_artNo == Divider_ArticleNo._None)
             {
                 GB_deduction_forNxtPrev += 33;
             }
@@ -619,7 +620,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 GB_deduction_forLeftorTopRightorBot += (72 / 2);
             }
-            else if (divArtNo_LeftorTop == Divider_ArticleNo.None)
+            else if (divArtNo_LeftorTop == Divider_ArticleNo._None)
             {
                 GB_deduction_forLeftorTopRightorBot += 33;
             }
@@ -632,7 +633,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 GB_deduction_forLeftorTopRightorBot += (72 / 2);
             }
-            else if (divArtNo_RightorBot == Divider_ArticleNo.None)
+            else if (divArtNo_RightorBot == Divider_ArticleNo._None)
             {
                 GB_deduction_forLeftorTopRightorBot += 33;
             }

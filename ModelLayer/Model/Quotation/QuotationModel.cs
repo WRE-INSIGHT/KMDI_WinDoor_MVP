@@ -9,41 +9,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation
 {
     public class QuotationModel : IQuotationModel
     {
-        public enum FrameProfile_ArticleNo
-        {
-            _7502 = 0
-        }
-
-        public enum FrameReinf_ArticleNo
-        {
-            _R676 = 0
-        }
-
-        public enum Divider_ArticleNo
-        {
-            None = 0,
-            _7536 = 1,
-            _7538 = 2//,
-            //_6052 = 2,
-        }
-
-        public enum DividerReinf_ArticleNo
-        {
-            _R677 = 0,
-            _R686 = 1
-        }
-
-        public enum Divider_MechJointArticleNo
-        {
-            _9U18 = 0,
-            _AV585 = 1
-        }
-
         public enum Glass_Thickness
         {
             _6mm = 0,
@@ -251,10 +222,10 @@ namespace ModelLayer.Model.Quotation
 
                                     if (pnl_curCtrl != null)
                                     {
-                                        Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo.None,
-                                                          divArtNo_prevCtrl = Divider_ArticleNo.None,
-                                                          divArtNo_LeftOrTop = Divider_ArticleNo.None,
-                                                          divArtNo_RightOrBot = Divider_ArticleNo.None;
+                                        Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
+                                                          divArtNo_prevCtrl = Divider_ArticleNo._None,
+                                                          divArtNo_LeftOrTop = Divider_ArticleNo._None,
+                                                          divArtNo_RightOrBot = Divider_ArticleNo._None;
                                         if (div_nxtCtrl != null)
                                         {
                                             divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
@@ -283,10 +254,10 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     if (pnl_curCtrl != null)
                                     {
-                                        Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo.None,
-                                                          divArtNo_prevCtrl = Divider_ArticleNo.None,
-                                                          divArtNo_LeftOrTop = Divider_ArticleNo.None,
-                                                          divArtNo_RightOrBot = Divider_ArticleNo.None;
+                                        Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
+                                                          divArtNo_prevCtrl = Divider_ArticleNo._None,
+                                                          divArtNo_LeftOrTop = Divider_ArticleNo._None,
+                                                          divArtNo_RightOrBot = Divider_ArticleNo._None;
                                         if (div_nxtCtrl != null)
                                         {
                                             divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;

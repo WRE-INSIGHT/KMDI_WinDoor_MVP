@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommonComponents;
 using ModelLayer.Model.Quotation.Frame;
-using static ModelLayer.Model.Quotation.QuotationModel;
+using ModelLayer;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -49,7 +50,7 @@ namespace PresentationLayer.Views.UserControls
             num_fWidth.Maximum = int.MaxValue;
             num_fHeight.Maximum = int.MaxValue;
             this.Dock = DockStyle.Top;
-            cmb_FrameProfile.DataSource = Enum.GetValues(typeof(FrameProfile_ArticleNo));
+            cmb_FrameProfile.DataSource = FrameProfile_ArticleNo.GetAll();
             EventHelpers.RaiseEvent(this, FramePropertiesLoadEventRaised, e);
         }
 

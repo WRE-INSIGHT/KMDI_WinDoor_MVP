@@ -10,5 +10,6 @@ namespace PresentationLayer.Views.UserControls
         DividerModel.DividerType Divider_Type { get;  set; }
 
         event EventHandler PanelPropertiesLoadEventRaised;
+        event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
@@ -46,8 +47,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo, 
                                            Divider_ArticleNo divPrev_artNo,
                                            DividerType div_type,
-                                           Divider_ArticleNo divArtNo_LeftorTop = Divider_ArticleNo.None,
-                                           Divider_ArticleNo divArtNo_RightorBot = Divider_ArticleNo.None);
+                                           Divider_ArticleNo divArtNo_LeftorTop = null,
+                                           Divider_ArticleNo divArtNo_RightorBot = null);
 
         #endregion
     }

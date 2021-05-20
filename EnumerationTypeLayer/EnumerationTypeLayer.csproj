@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BA9438AC-96C8-4B54-9BC4-0422ACB011D0}</ProjectGuid>
+    <ProjectGuid>{ABBE8DCE-DF8F-44AB-8D0F-217A633105B3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ModelLayer</RootNamespace>
-    <AssemblyName>ModelLayer</AssemblyName>
+    <RootNamespace>EnumerationTypeLayer</RootNamespace>
+    <AssemblyName>EnumerationTypeLayer</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,9 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,29 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Quotation\Divider\DividerModel.cs" />
-    <Compile Include="Model\Quotation\Divider\IDividerModel.cs" />
-    <Compile Include="Model\Quotation\Frame\FrameModel.cs" />
-    <Compile Include="Model\Quotation\Frame\IFrameModel.cs" />
-    <Compile Include="Model\Quotation\IQuotationModel.cs" />
-    <Compile Include="Model\Quotation\MultiPanel\IMultiPanelModel.cs" />
-    <Compile Include="Model\Quotation\MultiPanel\MultiPanelModel.cs" />
-    <Compile Include="Model\Quotation\Panel\IPanelModel.cs" />
-    <Compile Include="Model\Quotation\Panel\PanelModel.cs" />
-    <Compile Include="Model\Quotation\QuotationModel.cs" />
-    <Compile Include="Model\Quotation\WinDoor\IWindoorModel.cs" />
-    <Compile Include="Model\Quotation\WinDoor\WindoorModel.cs" />
-    <Compile Include="Model\User\IUserLoginModel.cs" />
-    <Compile Include="Model\User\IUserModel.cs" />
-    <Compile Include="Model\User\UserLoginModel.cs" />
-    <Compile Include="Model\User\UserModel.cs" />
+    <Compile Include="EnumerationTypes.cs" />
+    <Compile Include="Headspring\Enumeration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EnumerationTypeLayer\EnumerationTypeLayer.csproj">
-      <Project>{ABBE8DCE-DF8F-44AB-8D0F-217A633105B3}</Project>
-      <Name>EnumerationTypeLayer</Name>
-    </ProjectReference>
+    <Content Include="Headspring\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

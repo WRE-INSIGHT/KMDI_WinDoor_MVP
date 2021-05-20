@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Divider
@@ -291,10 +292,23 @@ namespace ModelLayer.Model.Quotation.Divider
                     Div_ReinfArtNo = DividerReinf_ArticleNo._R686;
                     Div_MechJoinArtNo = Divider_MechJointArticleNo._AV585;
                 }
+                NotifyPropertyChanged();
             }
         }
 
-        public DividerReinf_ArticleNo Div_ReinfArtNo { get; set; }
+        private DividerReinf_ArticleNo _divReinfArtNo;
+        public DividerReinf_ArticleNo Div_ReinfArtNo
+        {
+            get
+            {
+                return _divReinfArtNo;
+            }
+            set
+            {
+                _divReinfArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public int Div_ExplosionWidth { get; set; }
         public int Div_ExplosionHeight { get; set; }
