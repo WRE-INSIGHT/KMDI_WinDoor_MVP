@@ -33,15 +33,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _divProperties_CmbdivArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            ComboBox cmb = (ComboBox)sender;
-            if (cmb.Text == "7536")
-            {
-                _divModel.Div_ArtNo = Divider_ArticleNo._7536;
-            }
-            else if (cmb.Text == "7538")
-            {
-                _divModel.Div_ArtNo = Divider_ArticleNo._7538;
-            }
+            _divModel.Div_ArtNo = (Divider_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _divProperties_PanelPropertiesLoadEventRaised(object sender, EventArgs e)

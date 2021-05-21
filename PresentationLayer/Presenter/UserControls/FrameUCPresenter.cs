@@ -17,6 +17,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ServiceLayer.Services.MultiPanelServices;
 using System.Linq;
 using static ModelLayer.Model.Quotation.QuotationModel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls
 {

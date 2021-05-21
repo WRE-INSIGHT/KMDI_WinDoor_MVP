@@ -518,23 +518,23 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelGlassThickness = value;
                 if (value == Glass_Thickness._6mm ||
-                    value == Glass_Thickness._7mm ||
                     value == Glass_Thickness._8mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452;
                 }
-                else if (value == Glass_Thickness._10mm)
+                else if (value == Glass_Thickness._10mm || 
+                         value == Glass_Thickness._11mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2451;
                 }
-                else if (value == Glass_Thickness._11mm ||
-                         value == Glass_Thickness._12mm ||
+                else if (value == Glass_Thickness._12mm ||
                          value == Glass_Thickness._13mm ||
                          value == Glass_Thickness._14mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2453;
                 }
-                else if (value == Glass_Thickness._16mm)
+                else if (value == Glass_Thickness._15mm || 
+                         value == Glass_Thickness._16mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436;
                 }
@@ -550,14 +550,28 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434;
                 }
-                else if (value == Glass_Thickness._24mm ||
-                         value == Glass_Thickness._25mm)
+                else if (value == Glass_Thickness._23mm || 
+                         value == Glass_Thickness._24mm)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2435;
                 }
+                NotifyPropertyChanged();
             }
         }
-        public GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
+
+        private GlazingBead_ArticleNo _panelGlazingBeadArtNo;
+        public GlazingBead_ArticleNo PanelGlazingBead_ArtNo
+        {
+            get
+            {
+                return _panelGlazingBeadArtNo;
+            }
+            set
+            {
+                _panelGlazingBeadArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
         public int Panel_GlazingBeadWidth { get; set; }
         public int Panel_GlazingBeadHeight { get; set; }
         public int Panel_GlassWidth { get; set; }

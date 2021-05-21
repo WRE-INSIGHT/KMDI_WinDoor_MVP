@@ -15,42 +15,6 @@ namespace ModelLayer.Model.Quotation
 {
     public class QuotationModel : IQuotationModel
     {
-        public enum Glass_Thickness
-        {
-            _6mm = 0,
-            _7mm = 1,
-            _8mm = 2,
-            _10mm = 3,
-            _11mm = 4,
-            _12mm = 5,
-            _13mm = 6,
-            _14mm = 7,
-            _16mm = 8,
-            _18mm = 9,
-            _20mm = 10,
-            _22mm = 11,
-            _24mm = 12,
-            _25mm = 13
-        }
-
-        public enum GlazingBead_ArticleNo
-        {
-            _2452 = 0,
-            _2451 = 1,
-            _2453 = 2,
-            _2436 = 3,
-            _2438 = 4,
-            _2437 = 5,
-            _2434 = 6,
-            _2435 = 7
-        }
-
-        public enum InstMats_ArticleNo
-        {
-            PU_FOAMING = 0,
-            SEALANT_WH = 1
-        }
-
         public List<IWindoorModel> Lst_Windoor { get; set; }
 
         [Required(ErrorMessage = "Quotation reference number is Required")]

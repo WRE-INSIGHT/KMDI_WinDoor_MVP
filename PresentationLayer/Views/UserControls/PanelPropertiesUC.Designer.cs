@@ -160,6 +160,7 @@
             // 
             // cmb_GlazingArtNo
             // 
+            this.cmb_GlazingArtNo.CausesValidation = false;
             this.cmb_GlazingArtNo.FormattingEnabled = true;
             this.cmb_GlazingArtNo.Items.AddRange(new object[] {
             "6-8mm",
@@ -186,11 +187,13 @@
             // 
             // cmb_GlassThick
             // 
+            this.cmb_GlassThick.CausesValidation = false;
             this.cmb_GlassThick.FormattingEnabled = true;
             this.cmb_GlassThick.Location = new System.Drawing.Point(70, 23);
             this.cmb_GlassThick.Name = "cmb_GlassThick";
             this.cmb_GlassThick.Size = new System.Drawing.Size(72, 21);
             this.cmb_GlassThick.TabIndex = 9;
+            this.cmb_GlassThick.SelectedIndexChanged += new System.EventHandler(this.cmb_GlassThick_SelectedIndexChanged);
             // 
             // lbl_glassthick
             // 
