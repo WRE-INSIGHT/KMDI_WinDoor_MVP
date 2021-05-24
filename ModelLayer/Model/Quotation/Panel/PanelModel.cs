@@ -593,10 +593,17 @@ namespace ModelLayer.Model.Quotation.Panel
                                                   Divider_ArticleNo divPrev_artNo,
                                                   DividerType div_type, 
                                                   Divider_ArticleNo divArtNo_LeftorTop = null,
-                                                  Divider_ArticleNo divArtNo_RightorBot = null)
+                                                  Divider_ArticleNo divArtNo_RightorBot = null,
+                                                  string div_type_lvl3 = "",
+                                                  Divider_ArticleNo divArtNo_LeftorTop_lvl3 = null,
+                                                  Divider_ArticleNo divArtNo_RightorBot_lvl3 = null,
+                                                  string panel_placement = "",
+                                                  string mpanel_placement = "", //1st level
+                                                  string mpanelparent_placement = "") //2nd level
         {
             int GB_deduction_forLeftorTopRightorBot = 0,
                 GB_deduction_forNxtPrev = 0,
+                GB_deduction_lvl3 = 0,
                 deduction_for_wd = 0,
                 deduction_for_ht = 0;
 
@@ -610,7 +617,14 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (divNxt_artNo == Divider_ArticleNo._None)
             {
-                GB_deduction_forNxtPrev += 33;
+                if (panel_placement == "Last" && mpanelparent_placement == "")
+                {
+                    GB_deduction_forNxtPrev += 33;
+                }
+                if (mpanelparent_placement == "First")
+                {
+                    GB_deduction_forNxtPrev += 33;
+                }
             }
 
             if (divPrev_artNo == Divider_ArticleNo._7536)
@@ -623,7 +637,14 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (divPrev_artNo == Divider_ArticleNo._None)
             {
-                GB_deduction_forNxtPrev += 33;
+                if (panel_placement == "First" && mpanelparent_placement == "")
+                {
+                    GB_deduction_forNxtPrev += 33;
+                }
+                if (mpanelparent_placement == "Last")
+                {
+                    GB_deduction_forNxtPrev += 33;
+                }
             }
 
             if (divArtNo_LeftorTop == Divider_ArticleNo._7536)
@@ -636,7 +657,12 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (divArtNo_LeftorTop == Divider_ArticleNo._None)
             {
-                GB_deduction_forLeftorTopRightorBot += 33;
+                if (mpanel_placement == "First" ||
+                    mpanel_placement == "Last" ||
+                    mpanel_placement == "")
+                {
+                    GB_deduction_forLeftorTopRightorBot += 33;
+                }
             }
 
             if (divArtNo_RightorBot == Divider_ArticleNo._7536)
@@ -649,7 +675,40 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (divArtNo_RightorBot == Divider_ArticleNo._None)
             {
-                GB_deduction_forLeftorTopRightorBot += 33;
+                if (mpanel_placement == "First")
+                {
+                    GB_deduction_forLeftorTopRightorBot += 33;
+                }
+                else if (mpanel_placement == "")
+                {
+                    GB_deduction_forLeftorTopRightorBot += 33;
+                }
+            }
+
+            if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._7536)
+            {
+                GB_deduction_lvl3 += (42 / 2);
+            }
+            else if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._7538)
+            {
+                GB_deduction_lvl3 += (72 / 2);
+            }
+            else if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._None && mpanelparent_placement == "Last")
+            {
+                GB_deduction_lvl3 += 33;
+            }
+
+            if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._7536)
+            {
+                GB_deduction_lvl3 += (42 / 2);
+            }
+            else if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._7538)
+            {
+                GB_deduction_lvl3 += (72 / 2);
+            }
+            else if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._None && mpanelparent_placement == "First")
+            {
+                GB_deduction_lvl3 += 33;
             }
 
             if (div_type == DividerType.Mullion)
@@ -661,6 +720,15 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 deduction_for_wd = GB_deduction_forLeftorTopRightorBot;
                 deduction_for_ht = GB_deduction_forNxtPrev;
+            }
+
+            if (div_type_lvl3 == DividerType.Mullion.ToString())
+            {
+                deduction_for_wd += GB_deduction_lvl3;
+            }
+            else if (div_type_lvl3 == DividerType.Transom.ToString())
+            {
+                deduction_for_ht += GB_deduction_lvl3;
             }
 
             Panel_GlazingBeadWidth = Panel_DisplayWidth - deduction_for_wd;
