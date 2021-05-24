@@ -29,12 +29,12 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _panelPropertiesUC.PanelPropertiesLoadEventRaised += new EventHandler(OnPanelPropertiesLoadEventRaised);
             _panelPropertiesUC.ChkOrientationCheckChangedEventRaised += _panelPropertiesUC_ChkOrientationCheckChangedEventRaised;
-            _panelPropertiesUC.CmbGlassThickSelectedIndexChangedEventRaised += new EventHandler(_panelPropertiesUC_CmbGlassThickSelectedIndexChangedEventRaised);
+            _panelPropertiesUC.CmbGlassThickSelectedValueChangedEventRaised += _panelPropertiesUC_CmbGlassThickSelectedValueChangedEventRaised;
             //_panelPropertiesUC.PnumWidthValueChangedEventRaised += _panelPropertiesUC_PnumWidthValueChangedEventRaised;
             //_panelPropertiesUC.PnumHeightValueChangedEventRaised += _panelPropertiesUC_PnumHeightValueChangedEventRaised;
         }
 
-        private void _panelPropertiesUC_CmbGlassThickSelectedIndexChangedEventRaised(object sender, EventArgs e)
+        private void _panelPropertiesUC_CmbGlassThickSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             _panelModel.Panel_GlassThickness = (Glass_Thickness)((ComboBox)sender).SelectedValue;
         }

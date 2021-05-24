@@ -1,11 +1,4 @@
 ﻿using Headspring;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Generic.HashSet<T>;
 
 namespace EnumerationTypeLayer
 {
@@ -25,9 +18,9 @@ namespace EnumerationTypeLayer
 
         public class Divider_ArticleNo : Enumeration<Divider_ArticleNo, int>
         {
-            public static readonly Divider_ArticleNo _None = new Divider_ArticleNo(0, "None");
-            public static readonly Divider_ArticleNo _7536 = new Divider_ArticleNo(1, "7536");
-            public static readonly Divider_ArticleNo _7538 = new Divider_ArticleNo(2, "7538");
+            public static readonly Divider_ArticleNo _7536 = new Divider_ArticleNo(0, "7536");
+            public static readonly Divider_ArticleNo _7538 = new Divider_ArticleNo(1, "7538");
+            public static readonly Divider_ArticleNo _None = new Divider_ArticleNo(2, "None");
             private Divider_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 

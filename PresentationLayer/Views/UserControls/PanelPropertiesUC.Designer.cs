@@ -193,7 +193,7 @@
             this.cmb_GlassThick.Name = "cmb_GlassThick";
             this.cmb_GlassThick.Size = new System.Drawing.Size(72, 21);
             this.cmb_GlassThick.TabIndex = 9;
-            this.cmb_GlassThick.SelectedIndexChanged += new System.EventHandler(this.cmb_GlassThick_SelectedIndexChanged);
+            this.cmb_GlassThick.SelectedValueChanged += new System.EventHandler(this.cmb_GlassThick_SelectedValueChanged);
             // 
             // lbl_glassthick
             // 

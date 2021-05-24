@@ -50,7 +50,15 @@ namespace PresentationLayer.Views.UserControls
             num_fWidth.Maximum = int.MaxValue;
             num_fHeight.Maximum = int.MaxValue;
             this.Dock = DockStyle.Top;
-            cmb_FrameProfile.DataSource = FrameProfile_ArticleNo.GetAll();
+
+            List<FrameProfile_ArticleNo> fArtNo = new List<FrameProfile_ArticleNo>();
+
+            foreach (FrameProfile_ArticleNo item in FrameProfile_ArticleNo.GetAll())
+            {
+                fArtNo.Add(item);
+            }
+            cmb_FrameProfile.DataSource = fArtNo;
+
             EventHelpers.RaiseEvent(this, FramePropertiesLoadEventRaised, e);
         }
 

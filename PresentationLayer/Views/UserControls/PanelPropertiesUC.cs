@@ -35,21 +35,29 @@ namespace PresentationLayer.Views.UserControls
 
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler ChkOrientationCheckChangedEventRaised;
-        public event EventHandler CmbGlassThickSelectedIndexChangedEventRaised;
+        public event EventHandler CmbGlassThickSelectedValueChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {
             pnum_Width.Maximum = decimal.MaxValue;
             pnum_Height.Maximum = decimal.MaxValue;
             num_BladeCount.Maximum = decimal.MaxValue;
-            List<string> g = new List<string>();
-            //g = Glass_Thickness.GetAll().ToList();
-            foreach (var item in Glass_Thickness.GetAll())
+
+            List<Glass_Thickness> gThickness = new List<Glass_Thickness>();
+
+            foreach (Glass_Thickness item in Glass_Thickness.GetAll())
             {
-                g.Add(item.DisplayName);
+                gThickness.Add(item);
             }
-            cmb_GlassThick.DataSource = g;
-            cmb_GlazingArtNo.DataSource = GlazingBead_ArticleNo.GetAll();
+            cmb_GlassThick.DataSource = gThickness;
+
+            List<GlazingBead_ArticleNo> gArtNo = new List<GlazingBead_ArticleNo>();
+            foreach (GlazingBead_ArticleNo item in GlazingBead_ArticleNo.GetAll())
+            {
+                gArtNo.Add(item);
+            }
+            cmb_GlazingArtNo.DataSource = gArtNo;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 
@@ -73,9 +81,9 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseEvent(sender, ChkOrientationCheckChangedEventRaised, e);
         }
 
-        private void cmb_GlassThick_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmb_GlassThick_SelectedValueChanged(object sender, EventArgs e)
         {
-            //EventHelpers.RaiseEvent(sender, CmbGlassThickSelectedIndexChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, CmbGlassThickSelectedValueChangedEventRaised, e);
         }
     }
 }
