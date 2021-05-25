@@ -675,11 +675,9 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (divArtNo_RightorBot == Divider_ArticleNo._None)
             {
-                if (mpanel_placement == "First")
-                {
-                    GB_deduction_forLeftorTopRightorBot += 33;
-                }
-                else if (mpanel_placement == "")
+                if (mpanel_placement == "First" ||
+                    mpanel_placement == "Last" ||
+                    mpanel_placement == "")
                 {
                     GB_deduction_forLeftorTopRightorBot += 33;
                 }

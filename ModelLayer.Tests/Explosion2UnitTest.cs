@@ -14,6 +14,7 @@ using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
 using System.Data;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Tests
@@ -95,7 +96,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(928, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1928, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
         }
 
 
@@ -156,7 +157,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(547, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(853, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
         }
 
 
@@ -175,7 +176,7 @@ namespace ModelLayer.Tests
                                                                    FrameModel.Frame_Padding.Window,
                                                                    1.0f,
                                                                    1.0f,
-                                                                   QuotationModel.FrameProfile_ArticleNo._7502,
+                                                                   FrameProfile_ArticleNo._7502,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -282,7 +283,7 @@ namespace ModelLayer.Tests
                                                                    FrameModel.Frame_Padding.Window,
                                                                    1.0f,
                                                                    1.0f,
-                                                                   QuotationModel.FrameProfile_ArticleNo._7502,
+                                                                   FrameProfile_ArticleNo._7502,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -440,7 +441,7 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -457,6 +458,7 @@ namespace ModelLayer.Tests
                                                                       Divider_ArticleNo._7536,
                                                                       _multipanelModel.MPanel_DisplayWidth,
                                                                       _multipanelModel.MPanel_DisplayHeight,
+                                                                      _multipanelModel,
                                                                       1,
                                                                       _frameModel.FrameImageRenderer_Zoom,
                                                                       _frameModel.Frame_Type.ToString());
@@ -478,7 +480,7 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    2);
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
@@ -503,7 +505,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(478, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel.Div_ReinfArtNo);
@@ -516,7 +518,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(478, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
         }
 
 
@@ -584,7 +586,7 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    uneqpanelHT1,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -601,6 +603,7 @@ namespace ModelLayer.Tests
                                                                       Divider_ArticleNo._7536,
                                                                       _multipanelModel.MPanel_DisplayWidth,
                                                                       _multipanelModel.MPanel_DisplayHeight,
+                                                                      _multipanelModel,
                                                                       1,
                                                                       _frameModel.FrameImageRenderer_Zoom,
                                                                       _frameModel.Frame_Type.ToString());
@@ -622,7 +625,7 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    uneqpanelHT2,
-                                                                   "6-8mm",
+                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    2);
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
@@ -647,7 +650,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(478, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(640, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel.Div_ReinfArtNo);
@@ -660,7 +663,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(478, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(440, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
         }
     }
 }

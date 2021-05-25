@@ -344,7 +344,7 @@ namespace ModelLayer.Model.Quotation
                                         pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._14mm ||
                                         pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._24mm)
                                     {
-                                        glazing_seal += pnl_curCtrl.Panel_GlazingBeadWidth + pnl_curCtrl.Panel_GlazingBeadHeight;
+                                        glazing_seal += (pnl_curCtrl.Panel_GlazingBeadWidth * 2) + (pnl_curCtrl.Panel_GlazingBeadHeight * 2);
                                     }
 
                                     Material_List.Rows.Add("Glazing Bead Width (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
@@ -401,7 +401,7 @@ namespace ModelLayer.Model.Quotation
                             pnl.Panel_GlassThickness == Glass_Thickness._14mm ||
                             pnl.Panel_GlassThickness == Glass_Thickness._24mm)
                         {
-                            glazing_seal += pnl.Panel_GlazingBeadWidth + pnl.Panel_GlazingBeadHeight;
+                            glazing_seal += (pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2);
                         }
                     }
 

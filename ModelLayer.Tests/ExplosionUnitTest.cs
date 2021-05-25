@@ -86,42 +86,42 @@ namespace ModelLayer.Tests
             Assert.AreEqual("Unit", dt.Columns[2].ColumnName);
             Assert.AreEqual("Size", dt.Columns[3].ColumnName);
 
-            Assert.AreEqual("Frame Width _7502", dt.Rows[0]["Description"].ToString());
+            Assert.AreEqual("Frame Width 7502", dt.Rows[0]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[0]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[0]["Unit"].ToString());
             Assert.AreEqual("505", dt.Rows[0]["Size"]);
 
-            Assert.AreEqual("Frame Height _7502", dt.Rows[1]["Description"].ToString());
+            Assert.AreEqual("Frame Height 7502", dt.Rows[1]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[1]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[1]["Unit"].ToString());
             Assert.AreEqual("1505", dt.Rows[1]["Size"]);
 
-            Assert.AreEqual("Frame Reinf Width _R676", dt.Rows[2]["Description"].ToString());
+            Assert.AreEqual("Frame Reinf Width R676", dt.Rows[2]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[2]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[2]["Unit"].ToString());
             Assert.AreEqual("432", dt.Rows[2]["Size"]);
 
-            Assert.AreEqual("Frame Reinf Height _R676", dt.Rows[3]["Description"].ToString());
+            Assert.AreEqual("Frame Reinf Height R676", dt.Rows[3]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[3]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[3]["Unit"].ToString());
             Assert.AreEqual("1432", dt.Rows[3]["Size"]);
 
-            Assert.AreEqual("Glazing Bead Width _2452", dt.Rows[4]["Description"].ToString());
+            Assert.AreEqual("Glazing Bead Width 2452", dt.Rows[4]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[4]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[4]["Unit"].ToString());
             Assert.AreEqual("434", dt.Rows[4]["Size"]);
 
-            Assert.AreEqual("Glazing Bead Height _2452", dt.Rows[5]["Description"].ToString());
+            Assert.AreEqual("Glazing Bead Height 2452", dt.Rows[5]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[5]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[5]["Unit"].ToString());
             Assert.AreEqual("1434", dt.Rows[5]["Size"]);
 
-            Assert.AreEqual("Glass Width (_6mm)", dt.Rows[6]["Description"].ToString());
+            Assert.AreEqual("Glass Width (6mm)", dt.Rows[6]["Description"].ToString());
             Assert.AreEqual(1, dt.Rows[6]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[6]["Unit"].ToString());
             Assert.AreEqual("428", dt.Rows[6]["Size"]);
 
-            Assert.AreEqual("Glass Height (_6mm)", dt.Rows[7]["Description"].ToString());
+            Assert.AreEqual("Glass Height (6mm)", dt.Rows[7]["Description"].ToString());
             Assert.AreEqual(1, dt.Rows[7]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[7]["Unit"].ToString());
             Assert.AreEqual("1428", dt.Rows[7]["Size"]);
