@@ -1132,6 +1132,65 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        public void Adjust_ControlDisplaySize()
+        {
+            if (MPanelLst_Objects.Count() > 0)
+            {
+                if (MPanel_Type == "Transom")
+                {
+                    int totalDisplayHeight = GetVisiblePanels().Sum(pnl => pnl.Panel_DisplayHeight) +
+                                             GetVisibleMultiPanels().Sum(mpnl => mpnl.MPanel_DisplayHeight);
+                    int diff_DisplayHt_VS_totalDisplayHt = MPanel_DisplayHeight - totalDisplayHeight;
+
+                    while (diff_DisplayHt_VS_totalDisplayHt > 0)
+                    {
+                        foreach (IPanelModel pnl in GetVisiblePanels())
+                        {
+                            if (diff_DisplayHt_VS_totalDisplayHt > 0)
+                            {
+                                pnl.Panel_DisplayHeight++;
+                                diff_DisplayHt_VS_totalDisplayHt--;
+                            }
+                        }
+                        foreach (IMultiPanelModel mpnl in GetVisibleMultiPanels())
+                        {
+                            if (diff_DisplayHt_VS_totalDisplayHt > 0)
+                            {
+                                mpnl.MPanel_DisplayHeight++;
+                                diff_DisplayHt_VS_totalDisplayHt--;
+                            }
+                        }
+                    }
+                }
+                else if (MPanel_Type == "Mullion")
+                {
+                    int totalDisplayWidth = GetVisiblePanels().Sum(pnl => pnl.Panel_DisplayWidth) +
+                                             GetVisibleMultiPanels().Sum(mpnl => mpnl.MPanel_DisplayWidth);
+                    int diff_DisplayWd_VS_totalDisplayWd = MPanel_DisplayWidth - totalDisplayWidth;
+
+                    while (diff_DisplayWd_VS_totalDisplayWd > 0)
+                    {
+                        foreach (IPanelModel pnl in GetVisiblePanels())
+                        {
+                            if (diff_DisplayWd_VS_totalDisplayWd > 0)
+                            {
+                                pnl.Panel_DisplayWidth++;
+                                diff_DisplayWd_VS_totalDisplayWd--;
+                            }
+                        }
+                        foreach (IMultiPanelModel mpnl in GetVisibleMultiPanels())
+                        {
+                            if (diff_DisplayWd_VS_totalDisplayWd > 0)
+                            {
+                                mpnl.MPanel_DisplayWidth++;
+                                diff_DisplayWd_VS_totalDisplayWd--;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public IEnumerable<IDividerModel> GetVisibleDividers()
         {
             return MPanelLst_Divider.Where(div => div.Div_Visible == true);

@@ -875,5 +875,262 @@ namespace ModelLayer.Tests
             //Assert.AreEqual(1, _panelModel4.Panel_SealantWHQty);
 
         }
+
+        [TestMethod]
+        public void ChkVar_11PanelFixedWindow_WithMullionTransom()
+        {
+            //Design : ModelLayer.Tests\ExplosionUnitTestDesigns\Example5.png
+            int total_wd = 2400, total_ht = 1900,
+                p1Wd = 800, p1Ht = 1900,
+                p2p3Wd = 800, p2p3Ht = 950,
+                p4p11Wd = 475, p4p11Ht = 400,
+                panelID = 0, mpanelID = 0, divID = 0;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+            #region MultiMullion_base
+
+            mpanelID++;
+            IMultiPanelModel _multiMullionModel1 = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         mpanelID,
+                                                                                         DockStyle.Fill,
+                                                                                         0,
+                                                                                         null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel1.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel1);
+            Control multimullion = new Control();
+            multimullion.Name = _multiMullionModel1.MPanel_Name;
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel1.MPanel_Divisions + 1;
+
+            int multiMullion_suggest_Wd = (((_multiMullionModel1.MPanel_Width) - (divSize * _multiMullionModel1.MPanel_Divisions)) / multiMullion_totalPanelCount),
+                multiMullion_suggest_HT = _multiMullionModel1.MPanel_Height;
+
+            #endregion
+
+            #region Transom(2)-Fixed-Transom(2)
+
+            mpanelID++;
+            IMultiPanelModel _multiTransomModel2 = _multiPanelServices.AddMultiPanelModel(multiMullion_suggest_Wd,
+                                                                                          multiMullion_suggest_HT,
+                                                                                          multimullion,
+                                                                                          new UserControl(),
+                                                                                          _frameModel,
+                                                                                          true,
+                                                                                          FlowDirection.TopDown,
+                                                                                          _frameModel.Frame_Zoom,
+                                                                                          mpanelID,
+                                                                                          DockStyle.Fill,
+                                                                                          0,
+                                                                                          _multiMullionModel1,
+                                                                                          _frameModel.FrameImageRenderer_Zoom);
+            _multiTransomModel2.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiTransomModel2);
+            Control multiTransom2 = new Control();
+            multiTransom2.Name = _multiTransomModel2.MPanel_Name;
+            _multiMullionModel1.MPanelLst_Objects.Add(multiTransom2);
+
+            divID++;
+            IDividerModel divModel_mullion1 = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel1.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7538,
+                                                                              _multiMullionModel1.MPanel_DisplayWidth,
+                                                                              _multiMullionModel1.MPanel_DisplayHeight,
+                                                                              _multiMullionModel1,
+                                                                              divID,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString());
+            _multiMullionModel1.MPanelLst_Divider.Add(divModel_mullion1);
+            Control div_mullion1 = new Control();
+            div_mullion1.Name = "MullionUC_" + divID;
+            _multiMullionModel1.MPanelLst_Objects.Add(div_mullion1);
+
+            panelID++;
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(multiMullion_suggest_Wd,
+                                                                    multiMullion_suggest_HT,
+                                                                    new Control(),
+                                                                    new UserControl(),
+                                                                    new UserControl(),
+                                                                    new UserControl(),
+                                                                    "Fixed Panel",
+                                                                    true,
+                                                                    1.0f,
+                                                                    null,
+                                                                    _multiMullionModel1,
+                                                                    p1Wd,
+                                                                    p1Ht,
+                                                                    Glass_Thickness._6mm,
+                                                                    GlazingBead_ArticleNo._2451,
+                                                                    panelID);
+            _panelModel1.Panel_Placement = "Somewhere in Between";
+            _multiMullionModel1.MPanelLst_Panel.Add(_panelModel1);
+            Control fw1 = new Control();
+            fw1.Name = "FixedPanelUC_" + panelID;
+            _multiMullionModel1.MPanelLst_Objects.Add(fw1);
+
+            divID++;
+            IDividerModel divModel_mullion2 = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel1.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7538,
+                                                                              _multiMullionModel1.MPanel_DisplayWidth,
+                                                                              _multiMullionModel1.MPanel_DisplayHeight,
+                                                                              _multiMullionModel1,
+                                                                              divID,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString());
+            _multiMullionModel1.MPanelLst_Divider.Add(divModel_mullion2);
+            Control div_mullion2 = new Control();
+            div_mullion2.Name = "MullionUC_" + divID;
+            _multiMullionModel1.MPanelLst_Objects.Add(div_mullion2);
+
+            mpanelID++;
+            IMultiPanelModel _multiTransomModel3 = _multiPanelServices.AddMultiPanelModel(multiMullion_suggest_Wd,
+                                                                                          multiMullion_suggest_HT,
+                                                                                          multimullion,
+                                                                                          new UserControl(),
+                                                                                          _frameModel,
+                                                                                          true,
+                                                                                          FlowDirection.TopDown,
+                                                                                          _frameModel.Frame_Zoom,
+                                                                                          mpanelID,
+                                                                                          DockStyle.Fill,
+                                                                                          0,
+                                                                                          _multiMullionModel1,
+                                                                                          _frameModel.FrameImageRenderer_Zoom);
+            _multiTransomModel3.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiTransomModel3);
+            Control multiTransom3 = new Control();
+            multiTransom3.Name = _multiMullionModel1.MPanel_Name;
+            _multiMullionModel1.MPanelLst_Objects.Add(multiTransom3);
+
+            #endregion
+
+            #region Transom(2) as base
+
+            int multiTransom_totalPanelCount = _multiTransomModel2.MPanel_Divisions + 1;
+
+            int multiTransom2_suggest_Wd = (((_multiTransomModel2.MPanel_Width) - (divSize * _multiTransomModel2.MPanel_Divisions)) / multiTransom_totalPanelCount),
+                multiTransom2_suggest_HT = _multiTransomModel2.MPanel_Height;
+
+            mpanelID++;
+            IMultiPanelModel _multiMullionModel4 = _multiPanelServices.AddMultiPanelModel(multiTransom2_suggest_Wd,
+                                                                                          multiTransom2_suggest_HT,
+                                                                                          multiTransom2,
+                                                                                          new UserControl(),
+                                                                                          _frameModel,
+                                                                                          true,
+                                                                                          FlowDirection.LeftToRight,
+                                                                                          _frameModel.Frame_Zoom,
+                                                                                          mpanelID,
+                                                                                          DockStyle.Fill,
+                                                                                          mpanelID,
+                                                                                          null,
+                                                                                          _frameModel.FrameImageRenderer_Zoom,
+                                                                                          "",
+                                                                                          2);
+            _multiMullionModel4.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel4);
+            Control multimullion4 = new Control();
+            multimullion4.Name = _multiMullionModel4.MPanel_Name;
+            _multiTransomModel2.MPanelLst_Objects.Add(multimullion4);
+
+            divID++;
+            IDividerModel divModel_transom3 = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel1.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7538,
+                                                                              _multiMullionModel1.MPanel_DisplayWidth,
+                                                                              _multiMullionModel1.MPanel_DisplayHeight,
+                                                                              _multiMullionModel1,
+                                                                              divID,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString());
+            _multiTransomModel2.MPanelLst_Divider.Add(divModel_transom3);
+            Control div_mullion3 = new Control();
+            div_mullion3.Name = "MullionUC_" + divID;
+            _multiTransomModel2.MPanelLst_Objects.Add(div_mullion3);
+
+            mpanelID++;
+            IMultiPanelModel _multiMullionModel5 = _multiPanelServices.AddMultiPanelModel(multiTransom2_suggest_Wd,
+                                                                                          multiTransom2_suggest_HT,
+                                                                                          multiTransom2,
+                                                                                          new UserControl(),
+                                                                                          _frameModel,
+                                                                                          true,
+                                                                                          FlowDirection.LeftToRight,
+                                                                                          _frameModel.Frame_Zoom,
+                                                                                          mpanelID,
+                                                                                          DockStyle.Fill,
+                                                                                          0,
+                                                                                          null,
+                                                                                          _frameModel.FrameImageRenderer_Zoom,
+                                                                                          "",
+                                                                                          2);
+            _multiMullionModel5.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel5);
+            Control multimullion5 = new Control();
+            multimullion5.Name = _multiMullionModel5.MPanel_Name;
+            _multiTransomModel2.MPanelLst_Objects.Add(multimullion5);
+
+            divID++;
+            IDividerModel divModel_mullion4 = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel1.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7538,
+                                                                              _multiMullionModel1.MPanel_DisplayWidth,
+                                                                              _multiMullionModel1.MPanel_DisplayHeight,
+                                                                              _multiMullionModel1,
+                                                                              divID,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString());
+            _multiMullionModel1.MPanelLst_Divider.Add(divModel_mullion4);
+            Control div_mullion4 = new Control();
+            div_mullion4.Name = "MullionUC_" + divID;
+            _multiTransomModel2.MPanelLst_Objects.Add(div_mullion4);
+
+            #endregion
+
+        }
     }
 }
