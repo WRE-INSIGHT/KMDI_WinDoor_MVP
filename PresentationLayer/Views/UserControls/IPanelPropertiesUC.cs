@@ -9,6 +9,7 @@ namespace PresentationLayer.Views.UserControls
 
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler ChkOrientationCheckChangedEventRaised;
+        event EventHandler CmbGlassThickSelectedValueChangedEventRaised;
         //event EventHandler PnumWidthValueChangedEventRaised;
         //event EventHandler PnumHeightValueChangedEventRaised;
     }

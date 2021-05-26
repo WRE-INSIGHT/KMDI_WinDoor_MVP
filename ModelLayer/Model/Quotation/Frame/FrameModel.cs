@@ -11,6 +11,7 @@ using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
 using static ModelLayer.Model.Quotation.QuotationModel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -334,7 +335,22 @@ namespace ModelLayer.Model.Quotation.Frame
 
         #region Explosion
 
-        public FrameProfile_ArticleNo Frame_ArtNo { get; set; }
+        FrameProfile_ArticleNo _frameArtNo;
+        public FrameProfile_ArticleNo Frame_ArtNo
+        {
+            get
+            {
+                return _frameArtNo;
+            }
+            set
+            {
+                _frameArtNo = value;
+                if (value == FrameProfile_ArticleNo._7502)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._R676;
+                }
+            }
+        }
         public int Frame_ExplosionWidth { get; set; }
         public int Frame_ExplosionHeight { get; set; }
 

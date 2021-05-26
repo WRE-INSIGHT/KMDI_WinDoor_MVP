@@ -226,7 +226,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_fixedPanelUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
-                _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
             }
             if (_multiPanelMullionUCP != null)
             {
@@ -266,6 +265,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
             _panelModel.Panel_Visibility = false;
+
+            _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
 
             #endregion
         }

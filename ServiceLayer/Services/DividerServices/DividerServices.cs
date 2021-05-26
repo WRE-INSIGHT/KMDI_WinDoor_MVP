@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 

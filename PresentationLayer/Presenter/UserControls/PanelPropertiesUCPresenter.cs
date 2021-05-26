@@ -8,6 +8,7 @@ using ModelLayer.Model.Quotation.Panel;
 using System.Windows.Forms;
 using Unity;
 using CommonComponents;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -28,8 +29,14 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _panelPropertiesUC.PanelPropertiesLoadEventRaised += new EventHandler(OnPanelPropertiesLoadEventRaised);
             _panelPropertiesUC.ChkOrientationCheckChangedEventRaised += _panelPropertiesUC_ChkOrientationCheckChangedEventRaised;
+            _panelPropertiesUC.CmbGlassThickSelectedValueChangedEventRaised += _panelPropertiesUC_CmbGlassThickSelectedValueChangedEventRaised;
             //_panelPropertiesUC.PnumWidthValueChangedEventRaised += _panelPropertiesUC_PnumWidthValueChangedEventRaised;
             //_panelPropertiesUC.PnumHeightValueChangedEventRaised += _panelPropertiesUC_PnumHeightValueChangedEventRaised;
+        }
+
+        private void _panelPropertiesUC_CmbGlassThickSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_GlassThickness = (Glass_Thickness)((ComboBox)sender).SelectedValue;
         }
 
         //int prev_Width, prev_Height;

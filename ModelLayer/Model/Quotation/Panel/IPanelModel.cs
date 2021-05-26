@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
@@ -43,11 +44,17 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_GlazingSpacerQty { get; set; }
 
         void SetPanelExplosionValues_Panel(bool parentIsFrame);
-        void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo, 
+        void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,
                                            DividerType div_type,
-                                           Divider_ArticleNo divArtNo_LeftorTop = Divider_ArticleNo.None,
-                                           Divider_ArticleNo divArtNo_RightorBot = Divider_ArticleNo.None);
+                                           Divider_ArticleNo divArtNo_LeftorTop = null,
+                                           Divider_ArticleNo divArtNo_RightorBot = null,
+                                           string div_type_lvl3 = "",
+                                           Divider_ArticleNo divArtNo_LeftorTop_lvl3 = null,
+                                           Divider_ArticleNo divArtNo_RightorBot_lvl3 = null,
+                                           string panel_placement = "",
+                                           string mpanel_placement = "", //1st level
+                                           string mpanelparent_placement = ""); //2nd level
 
         #endregion
     }

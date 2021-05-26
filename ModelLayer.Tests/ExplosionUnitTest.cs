@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using ServiceLayer.Services.DividerServices;
 using ModelLayer.Model.Quotation.Divider;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Tests
 {
@@ -54,7 +55,7 @@ namespace ModelLayer.Tests
                                                                    FrameModel.Frame_Padding.Window,
                                                                    1.0f,
                                                                    1.0f,
-                                                                   QuotationModel.FrameProfile_ArticleNo._7502,
+                                                                   FrameProfile_ArticleNo._7502,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -85,42 +86,42 @@ namespace ModelLayer.Tests
             Assert.AreEqual("Unit", dt.Columns[2].ColumnName);
             Assert.AreEqual("Size", dt.Columns[3].ColumnName);
 
-            Assert.AreEqual("Frame Width _7502", dt.Rows[0]["Description"].ToString());
+            Assert.AreEqual("Frame Width 7502", dt.Rows[0]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[0]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[0]["Unit"].ToString());
             Assert.AreEqual("505", dt.Rows[0]["Size"]);
 
-            Assert.AreEqual("Frame Height _7502", dt.Rows[1]["Description"].ToString());
+            Assert.AreEqual("Frame Height 7502", dt.Rows[1]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[1]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[1]["Unit"].ToString());
             Assert.AreEqual("1505", dt.Rows[1]["Size"]);
 
-            Assert.AreEqual("Frame Reinf Width _R676", dt.Rows[2]["Description"].ToString());
+            Assert.AreEqual("Frame Reinf Width R676", dt.Rows[2]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[2]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[2]["Unit"].ToString());
             Assert.AreEqual("432", dt.Rows[2]["Size"]);
 
-            Assert.AreEqual("Frame Reinf Height _R676", dt.Rows[3]["Description"].ToString());
+            Assert.AreEqual("Frame Reinf Height R676", dt.Rows[3]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[3]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[3]["Unit"].ToString());
             Assert.AreEqual("1432", dt.Rows[3]["Size"]);
 
-            Assert.AreEqual("Glazing Bead Width _2452", dt.Rows[4]["Description"].ToString());
+            Assert.AreEqual("Glazing Bead Width 2452", dt.Rows[4]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[4]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[4]["Unit"].ToString());
             Assert.AreEqual("434", dt.Rows[4]["Size"]);
 
-            Assert.AreEqual("Glazing Bead Height _2452", dt.Rows[5]["Description"].ToString());
+            Assert.AreEqual("Glazing Bead Height 2452", dt.Rows[5]["Description"].ToString());
             Assert.AreEqual(2, dt.Rows[5]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[5]["Unit"].ToString());
             Assert.AreEqual("1434", dt.Rows[5]["Size"]);
 
-            Assert.AreEqual("Glass Width (_6mm)", dt.Rows[6]["Description"].ToString());
+            Assert.AreEqual("Glass Width (6mm)", dt.Rows[6]["Description"].ToString());
             Assert.AreEqual(1, dt.Rows[6]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[6]["Unit"].ToString());
             Assert.AreEqual("428", dt.Rows[6]["Size"]);
 
-            Assert.AreEqual("Glass Height (_6mm)", dt.Rows[7]["Description"].ToString());
+            Assert.AreEqual("Glass Height (6mm)", dt.Rows[7]["Description"].ToString());
             Assert.AreEqual(1, dt.Rows[7]["Qty"]);
             Assert.AreEqual("pc(s)", dt.Rows[7]["Unit"].ToString());
             Assert.AreEqual("1428", dt.Rows[7]["Size"]);
@@ -202,7 +203,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(628, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1928, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
         }
 
         [TestMethod]
@@ -260,7 +261,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(428, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1428, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
         }
 
         [TestMethod]
@@ -396,7 +397,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(375, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
 
             Assert.AreEqual(Divider_ArticleNo._7538, divModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R686, divModel.Div_ReinfArtNo);
@@ -409,7 +410,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(375, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
         }
 
         [TestMethod]
@@ -544,7 +545,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(325, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
 
             Assert.AreEqual(Divider_ArticleNo._7538, divModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R686, divModel.Div_ReinfArtNo);
@@ -557,7 +558,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(425, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
         }
 
         [TestMethod]
@@ -837,7 +838,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(215, _panelModel1.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel1.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel1.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel1.Panel_SealantWHQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_mullion.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel_mullion.Div_ReinfArtNo);
@@ -850,7 +851,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(215, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(221, _panelModel3.Panel_GlazingBeadWidth);
@@ -858,7 +859,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(215, _panelModel3.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel3.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel3.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel3.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel3.Panel_SealantWHQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_mullion2.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel_mullion2.Div_ReinfArtNo);
@@ -871,7 +872,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(215, _panelModel4.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel4.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel4.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel4.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel4.Panel_SealantWHQty);
 
         }
     }

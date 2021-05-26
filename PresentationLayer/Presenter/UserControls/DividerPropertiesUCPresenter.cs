@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -27,6 +28,12 @@ namespace PresentationLayer.Presenter.UserControls
         private void SubscribeToEventsSetup()
         {
             _divProperties.PanelPropertiesLoadEventRaised += _divProperties_PanelPropertiesLoadEventRaised;
+            _divProperties.CmbdivArtNoSelectedValueChangedEventRaised += _divProperties_CmbdivArtNoSelectedValueChangedEventRaised;
+        }
+
+        private void _divProperties_CmbdivArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _divModel.Div_ArtNo = (Divider_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _divProperties_PanelPropertiesLoadEventRaised(object sender, EventArgs e)

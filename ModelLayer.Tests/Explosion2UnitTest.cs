@@ -14,6 +14,7 @@ using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
 using System.Data;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Tests
@@ -95,7 +96,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(928, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1928, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
         }
 
 
@@ -156,7 +157,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(547, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(853, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
         }
 
 
@@ -175,7 +176,7 @@ namespace ModelLayer.Tests
                                                                    FrameModel.Frame_Padding.Window,
                                                                    1.0f,
                                                                    1.0f,
-                                                                   QuotationModel.FrameProfile_ArticleNo._7502,
+                                                                   FrameProfile_ArticleNo._7502,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -282,7 +283,7 @@ namespace ModelLayer.Tests
                                                                    FrameModel.Frame_Padding.Window,
                                                                    1.0f,
                                                                    1.0f,
-                                                                   QuotationModel.FrameProfile_ArticleNo._7502,
+                                                                   FrameProfile_ArticleNo._7502,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -504,7 +505,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(478, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel.Div_ReinfArtNo);
@@ -517,7 +518,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(478, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
         }
 
 
@@ -649,7 +650,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(478, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(640, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel.Panel_SealantWHQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel.Div_ReinfArtNo);
@@ -662,7 +663,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(478, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(440, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
+            //Assert.AreEqual(1, _panelModel2.Panel_SealantWHQty);
         }
 
 

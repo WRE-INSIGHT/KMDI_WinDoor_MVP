@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Divider
@@ -291,10 +292,23 @@ namespace ModelLayer.Model.Quotation.Divider
                     Div_ReinfArtNo = DividerReinf_ArticleNo._R686;
                     Div_MechJoinArtNo = Divider_MechJointArticleNo._AV585;
                 }
+                NotifyPropertyChanged();
             }
         }
 
-        public DividerReinf_ArticleNo Div_ReinfArtNo { get; set; }
+        private DividerReinf_ArticleNo _divReinfArtNo;
+        public DividerReinf_ArticleNo Div_ReinfArtNo
+        {
+            get
+            {
+                return _divReinfArtNo;
+            }
+            set
+            {
+                _divReinfArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public int Div_ExplosionWidth { get; set; }
         public int Div_ExplosionHeight { get; set; }
@@ -305,17 +319,19 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void SetPanelExplosionValues_Div()
         {
+            const int frame_deduction = 33;
+
             if (Div_MPanelParent.MPanel_Parent.Name.Contains("Frame"))
             {
                 if (Div_Type == DividerType.Mullion)
                 {
                     if (Div_ArtNo == Divider_ArticleNo._7536)
                     {
-                        Div_ExplosionHeight = (Div_DisplayHeight - (33 * 2)) + 3; //3 = (1.5 * 2)
+                        Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2)) + 3; //3 = (1.5 * 2)
                     }
                     else if (Div_ArtNo == Divider_ArticleNo._7538)
                     {
-                        Div_ExplosionHeight = (Div_DisplayHeight - (33 * 2)) + (4 * 2);
+                        Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2)) + (4 * 2);
                     }
 
                     if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
@@ -331,11 +347,11 @@ namespace ModelLayer.Model.Quotation.Divider
                 {
                     if (Div_ArtNo == Divider_ArticleNo._7536)
                     {
-                        Div_ExplosionWidth = (Div_DisplayWidth - (33 * 2)) + 3; //3 = (1.5 * 2)
+                        Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2)) + 3; //3 = (1.5 * 2)
                     }
                     else if (Div_ArtNo == Divider_ArticleNo._7538)
                     {
-                        Div_ExplosionWidth = (Div_DisplayWidth - (33 * 2)) + (4 * 2);
+                        Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2)) + (4 * 2);
                     }
 
                     if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
@@ -369,11 +385,11 @@ namespace ModelLayer.Model.Quotation.Divider
                         top_deduction = 0;
                         if (div_bot.Div_ArtNo == Divider_ArticleNo._7536)
                         {
-                            bot_deduction = 42 / 2;
+                            bot_deduction = (42 / 2) + frame_deduction;
                         }
                         else if (div_bot.Div_ArtNo == Divider_ArticleNo._7538)
                         {
-                            bot_deduction = 72 / 2;
+                            bot_deduction = (72 / 2) + frame_deduction;
                         }
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Somewhere in Between")
@@ -410,11 +426,11 @@ namespace ModelLayer.Model.Quotation.Divider
 
                         if (div_top.Div_ArtNo == Divider_ArticleNo._7536)
                         {
-                            top_deduction = 42 / 2;
+                            top_deduction = (42 / 2) + frame_deduction;
                         }
                         else if (div_top.Div_ArtNo == Divider_ArticleNo._7538)
                         {
-                            top_deduction = 72 / 2;
+                            top_deduction = (72 / 2) + frame_deduction;
                         }
                     }
 
@@ -422,11 +438,11 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         if (Div_ArtNo == Divider_ArticleNo._7536)
                         {
-                            Div_ExplosionHeight = ((Div_DisplayHeight - 33) - (top_deduction + bot_deduction)) + 3; //3 = (1.5 * 2)
+                            Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction)) + 3; //3 = (1.5 * 2)
                         }
                         else if (Div_ArtNo == Divider_ArticleNo._7538)
                         {
-                            Div_ExplosionHeight = ((Div_DisplayHeight - 33) - (top_deduction + bot_deduction)) + (4 * 2);
+                            Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction)) + (4 * 2);
                         }
 
                         if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)
@@ -458,11 +474,11 @@ namespace ModelLayer.Model.Quotation.Divider
 
                         if (div_right.Div_ArtNo == Divider_ArticleNo._7536)
                         {
-                            right_deduction = 42 / 2;
+                            right_deduction = (42 / 2) + frame_deduction;
                         }
                         else if (div_right.Div_ArtNo == Divider_ArticleNo._7538)
                         {
-                            right_deduction = 72 / 2;
+                            right_deduction = (72 / 2) + frame_deduction;
                         }
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Somewhere in Between")
@@ -499,11 +515,11 @@ namespace ModelLayer.Model.Quotation.Divider
 
                         if (div_left.Div_ArtNo == Divider_ArticleNo._7536)
                         {
-                            left_deduction = 42 / 2;
+                            left_deduction = (42 / 2) + frame_deduction;
                         }
                         else if (div_left.Div_ArtNo == Divider_ArticleNo._7538)
                         {
-                            left_deduction = 72 / 2;
+                            left_deduction = (72 / 2) + frame_deduction;
                         }
                     }
 
@@ -511,11 +527,11 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         if (Div_ArtNo == Divider_ArticleNo._7536)
                         {
-                            Div_ExplosionWidth = ((Div_DisplayWidth - 33) - (left_deduction + right_deduction)) + 3; //3 = (1.5 * 2)
+                            Div_ExplosionWidth = (Div_DisplayWidth - (left_deduction + right_deduction)) + 3; //3 = (1.5 * 2)
                         }
                         else if (Div_ArtNo == Divider_ArticleNo._7538)
                         {
-                            Div_ExplosionWidth = ((Div_DisplayWidth - 33) - (left_deduction + right_deduction)) + (4 * 2);
+                            Div_ExplosionWidth = (Div_DisplayWidth - (left_deduction + right_deduction)) + (4 * 2);
                         }
 
                         if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677)

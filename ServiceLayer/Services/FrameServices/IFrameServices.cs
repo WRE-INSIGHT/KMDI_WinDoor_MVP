@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
+using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ServiceLayer.Services.FrameServices

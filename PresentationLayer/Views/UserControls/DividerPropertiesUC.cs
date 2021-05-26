@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using CommonComponents;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -60,13 +61,27 @@ namespace PresentationLayer.Views.UserControls
             }
         }
         public event EventHandler PanelPropertiesLoadEventRaised;
+        public event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
 
         private void DividerPropertiesUC_Load(object sender, EventArgs e)
         {
             num_divWidth.Maximum = decimal.MaxValue;
             num_divHeight.Maximum = decimal.MaxValue;
-            cmb_divArtNo.DataSource = Enum.GetValues(typeof(Divider_ArticleNo));
-            cmb_divReinf.DataSource = Enum.GetValues(typeof(DividerReinf_ArticleNo));
+
+            List<Divider_ArticleNo> dArtNo = new List<Divider_ArticleNo>();
+            foreach (Divider_ArticleNo item in Divider_ArticleNo.GetAll())
+            {
+                dArtNo.Add(item);
+            }
+            cmb_divArtNo.DataSource = dArtNo;
+
+            List<DividerReinf_ArticleNo> dReinfArtNo = new List<DividerReinf_ArticleNo>();
+            foreach (DividerReinf_ArticleNo item in DividerReinf_ArticleNo.GetAll())
+            {
+                dReinfArtNo.Add(item);
+            }
+            cmb_divReinf.DataSource = dReinfArtNo;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 
@@ -80,6 +95,11 @@ namespace PresentationLayer.Views.UserControls
             cmb_divArtNo.DataBindings.Add(ModelBinding["Div_ArtNo"]);
             cmb_divReinf.DataBindings.Add(ModelBinding["Div_ReinfArtNo"]);
             this.DataBindings.Add(ModelBinding["Divider_Type"]);
+        }
+
+        private void cmb_divArtNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbdivArtNoSelectedValueChangedEventRaised, e);
         }
     }
 }

@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.Divider;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using ModelLayer.Model.Quotation.MultiPanel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ServiceLayer.Services.DividerServices
 {

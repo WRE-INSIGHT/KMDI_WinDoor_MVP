@@ -110,6 +110,7 @@
             // 
             // cmb_divReinf
             // 
+            this.cmb_divReinf.CausesValidation = false;
             this.cmb_divReinf.FormattingEnabled = true;
             this.cmb_divReinf.Items.AddRange(new object[] {
             "6-8mm",
@@ -136,6 +137,7 @@
             // 
             // cmb_divArtNo
             // 
+            this.cmb_divArtNo.CausesValidation = false;
             this.cmb_divArtNo.FormattingEnabled = true;
             this.cmb_divArtNo.Items.AddRange(new object[] {
             "6-8mm",
@@ -150,6 +152,7 @@
             this.cmb_divArtNo.Name = "cmb_divArtNo";
             this.cmb_divArtNo.Size = new System.Drawing.Size(72, 21);
             this.cmb_divArtNo.TabIndex = 9;
+            this.cmb_divArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_divArtNo_SelectedValueChanged);
             // 
             // lbl_divArtNo
             // 
