@@ -377,6 +377,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        public int PanelGlassID_Counter { get; set; }
+
         public float GetZoom_forRendering()
         {
             int area = _wdHeight * _wdWidth;
@@ -453,5 +455,43 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 }
             }
         }
+
+        public void SetPanelGlassID()
+        {
+            int i = 0;
+            foreach (IFrameModel fr in lst_frame)
+            {
+                foreach (IPanelModel pnl in fr.GetVisiblePanels())
+                {
+                    pnl.PanelGlass_ID = i;
+                    i++;
+                    if (i == PanelGlassID_Counter)
+                    {
+                        break;
+                    }
+                }
+                foreach (IMultiPanelModel mpnl in fr.GetVisibleMultiPanels())
+                {
+                    foreach (IPanelModel pnl in mpnl.GetVisiblePanels())
+                    {
+                        i++;
+                        pnl.PanelGlass_ID = i;
+                        if (i == PanelGlassID_Counter)
+                        {
+                            break;
+                        }
+                    }
+                    if (i == PanelGlassID_Counter)
+                    {
+                        break;
+                    }
+                }
+                if (i == PanelGlassID_Counter)
+                {
+                    break;
+                }
+            }
+        }
+
     }
 }

@@ -56,10 +56,10 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
 
         private void _transomImagerUC_transomUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            //UserControl transom = (UserControl)sender;
+            UserControl transom = (UserControl)sender;
 
-            //Graphics g = e.Graphics;
-            //g.SmoothingMode = SmoothingMode.AntiAlias;
+            Graphics g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
 
             //GraphicsPath gpath = new GraphicsPath();
 
@@ -93,6 +93,56 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
 
             //g.DrawPath(pen, gpath);
             //g.FillPath(Brushes.PowderBlue, gpath);
+
+            int w = 1;
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+
+            Control transomCounterpart = _multiPanelModel.MPanelLst_Objects.Find(obj => obj.Name == _divModel.Div_Name);
+            int ctrl_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(transomCounterpart);
+            bool prevCtrl_isPanel = false;
+
+            if (!_multiPanelModel.MPanelLst_Objects[ctrl_ndx - 1].Name.Contains("Multi"))
+            {
+                prevCtrl_isPanel = true;
+            }
+            else
+            {
+                prevCtrl_isPanel = false;
+            }
+
+
+            if (_divModel.Div_Height == (int)_frameModel.Frame_Type)
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                       0,
+                                                                       transom.ClientRectangle.Width - w,
+                                                                       transom.ClientRectangle.Height - w));
+            }
+            else if (_divModel.Div_Height == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
+            {
+                if (prevCtrl_isPanel == true)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                           0,
+                                                                           transom.ClientRectangle.Width - w,
+                                                                           (transom.ClientRectangle.Height - w) + 2));
+                }
+                else if (prevCtrl_isPanel == false)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                          -1,
+                                                                          transom.ClientRectangle.Width - w,
+                                                                          (transom.ClientRectangle.Height - w) + 1));
+                }
+
+            }
+            else if (_divModel.Div_Height == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                       -1,
+                                                                       transom.ClientRectangle.Width - w,
+                                                                       (transom.ClientRectangle.Height - w) + 2));
+            }
         }
 
         public ITransomImagerUC GetTransomImager()

@@ -472,6 +472,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        Glass_Thickness._6mm,
                                                                        GlazingBead_ArticleNo._2452,
                                                                        _mainPresenter.GetPanelCount(),
+                                                                       _mainPresenter.GetPanelGlassID(),
                                                                        _frameModel.FrameImageRenderer_Zoom,
                                                                        _multiPanelModel.GetNextIndex(),
                                                                        DockStyle.None);

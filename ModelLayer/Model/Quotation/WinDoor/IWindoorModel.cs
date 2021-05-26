@@ -33,7 +33,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int panelIDCounter { get;  set; }
         int mpanelIDCounter { get; set; }
         int divIDCounter { get; set; }
+        int PanelGlassID_Counter { get; set; }
         float GetZoom_forRendering();
         void SetImageRenderingZoom();
+        void SetPanelGlassID();
     }
 }

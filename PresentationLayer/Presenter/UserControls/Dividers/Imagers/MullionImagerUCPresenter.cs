@@ -57,13 +57,13 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
 
         private void _mullionImagerUC_mullionUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            //UserControl mul = (UserControl)sender;
-            //Graphics g = e.Graphics;
+            UserControl mul = (UserControl)sender;
+            Graphics g = e.Graphics;
 
             //int lineHT = mul.ClientRectangle.Height - 6,
             //    lineWd = mul.ClientRectangle.Width - 2;
 
-            //g.SmoothingMode = SmoothingMode.HighQuality;
+            g.SmoothingMode = SmoothingMode.HighQuality;
 
             //GraphicsPath gpath = new GraphicsPath();
 
@@ -98,6 +98,55 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
 
             //g.DrawPath(pen, gpath);
             //g.FillPath(Brushes.PowderBlue, gpath);
+
+            int w = 1;
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+
+            Control mullionCounterpart = _multiPanelModel.MPanelLst_Objects.Find(obj => obj.Name == _divModel.Div_Name);
+            int ctrl_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mullionCounterpart);
+            bool prevCtrl_isPanel = false;
+
+            if (!_multiPanelModel.MPanelLst_Objects[ctrl_ndx - 1].Name.Contains("Multi"))
+            {
+                prevCtrl_isPanel = true;
+            }
+            else
+            {
+                prevCtrl_isPanel = false;
+            }
+
+
+            if (_divModel.Div_Width == (int)_frameModel.Frame_Type)
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                       0,
+                                                                       mul.ClientRectangle.Width - w,
+                                                                       mul.ClientRectangle.Height - w));
+            }
+            else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
+            {
+                if (prevCtrl_isPanel == false)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(-1,
+                                                                           0,
+                                                                           (mul.ClientRectangle.Width - w) + 1,
+                                                                           mul.ClientRectangle.Height - w));
+                }
+                else if (prevCtrl_isPanel == true)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                           0,
+                                                                           (mul.ClientRectangle.Width - w) + 2,
+                                                                           mul.ClientRectangle.Height - w));
+                }
+            }
+            else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(-1,
+                                                                       0,
+                                                                       (mul.ClientRectangle.Width - w) + 2,
+                                                                       mul.ClientRectangle.Height - w));
+            }
         }
 
         public IMullionImagerUC GetMullionImager()

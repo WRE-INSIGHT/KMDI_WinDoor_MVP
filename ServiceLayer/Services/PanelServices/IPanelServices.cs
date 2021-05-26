@@ -26,6 +26,7 @@ namespace ServiceLayer.Services.PanelServices
                                   Glass_Thickness panelGlassThickness,
                                   GlazingBead_ArticleNo panelGlazingBeadArtNo = null,
                                   int panelID = 0,
+                                  int panelGlassID = 0,
                                   float panelImageRendererZoom = 1,
                                   int panelIndexInsideMPanel = 0,
                                   DockStyle panelDock = DockStyle.Fill,

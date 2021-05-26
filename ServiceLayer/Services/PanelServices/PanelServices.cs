@@ -43,7 +43,8 @@ namespace ServiceLayer.Services.PanelServices
                                             Glass_Thickness panelGlassThickness,
                                             GlazingBead_ArticleNo panelGlazingBeadArtNo,
                                             int panelDisplayWidth,
-                                            int panelDisplayHeight)
+                                            int panelDisplayHeight,
+                                            int panelGlassID)
         {
             PanelModel pnl = new PanelModel(panelID,
                                             panelName,
@@ -65,7 +66,8 @@ namespace ServiceLayer.Services.PanelServices
                                             panelGlassThickness,
                                             panelGlazingBeadArtNo,
                                             panelDisplayWidth,
-                                            panelDisplayHeight);
+                                            panelDisplayHeight,
+                                            panelGlassID);
 
             ValidateModel(pnl);
             return pnl;
@@ -92,6 +94,7 @@ namespace ServiceLayer.Services.PanelServices
                                          Glass_Thickness panelGlassThickness,
                                          GlazingBead_ArticleNo panelGlazingBeadArtNo,
                                          int panelID = 0,
+                                         int panelGlassID = 0,
                                          float panelImageRendererZoom = 1,
                                          int panelIndexInsideMPanel = 0,
                                          DockStyle panelDock = DockStyle.Fill,
@@ -123,7 +126,8 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelGlassThickness,
                                                        panelGlazingBeadArtNo,
                                                        panelDisplayWidth,
-                                                       panelDisplayHeight);
+                                                       panelDisplayHeight,
+                                                       panelGlassID);
 
             return _panelModel;
         }

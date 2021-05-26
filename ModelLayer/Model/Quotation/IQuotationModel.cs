@@ -12,7 +12,6 @@ namespace ModelLayer.Model.Quotation
     {
         string Quotation_ref_no { get; set; }
         List<IWindoorModel> Lst_Windoor { get; set; }
-
         DataTable GetListOfMaterials();
     }
 }

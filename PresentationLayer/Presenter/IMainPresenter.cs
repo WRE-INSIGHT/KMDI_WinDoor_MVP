@@ -46,6 +46,8 @@ namespace PresentationLayer.Presenter
         int GetPanelCount();
         int GetMultiPanelCount();
         int GetDividerCount();
+        int GetPanelGlassID();
+        void DeductPanelGlassID();
         void AddItemInfoUC(IWindoorModel wndr);
         void Invalidate_pnlMain();
         void Scenario_Quotation(bool QoutationInputBox_OkClicked,
