@@ -39,7 +39,9 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  IMultiPanelModel mpanelParentModel,
                                                  float mpanelImageRendererZoom,
                                                  float mpanelZoom,
-                                                 IFrameModel mpanelFrameModelParent)
+                                                 IFrameModel mpanelFrameModelParent,
+                                                 int mpanelDisplayWidth,
+                                                 int mpanelDisplayHeight)
         {
             MultiPanelModel mp = new MultiPanelModel(mid,
                                                      mname,
@@ -59,7 +61,9 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                      mpanelParentModel,
                                                      mpanelImageRendererZoom,
                                                      mpanelZoom,
-                                                     mpanelFrameModelParent);
+                                                     mpanelFrameModelParent,
+                                                     mpanelDisplayWidth,
+                                                     mpanelDisplayHeight);
 
             return mp;
         }
@@ -71,6 +75,8 @@ namespace ServiceLayer.Services.MultiPanelServices
 
         public IMultiPanelModel AddMultiPanelModel(int mwidth,
                                                    int mheight,
+                                                   int mpanelDisplayWidth,
+                                                   int mpanelDisplayHeight,
                                                    Control mpanelParent,
                                                    UserControl mpanelFrameGroup,
                                                    IFrameModel mpanelFrameModelParent,
@@ -129,7 +135,9 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mpanelParentModel, 
                                                                  mpanelImageRendererZoom,
                                                                  mpanelZoom,
-                                                                 mpanelFrameModelParent);
+                                                                 mpanelFrameModelParent,
+                                                                 mpanelDisplayWidth,
+                                                                 mpanelDisplayHeight);
 
             return _multipanelModel;
         }

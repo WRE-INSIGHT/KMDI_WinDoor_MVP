@@ -1229,7 +1229,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                IMultiPanelModel mpanelParentModel,
                                float mpanelImageRendererZoom,
                                float mpanelZoom,
-                               IFrameModel mpanelFrameModelParent)
+                               IFrameModel mpanelFrameModelParent,
+                               int mpanelDisplayWidth,
+                               int mpanelDisplayHeight)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -1252,6 +1254,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanelImageRenderer_Zoom = mpanelImageRendererZoom;
             MPanel_Zoom = mpanelZoom;
             MPanel_FrameModelParent = mpanelFrameModelParent;
+            MPanel_DisplayWidth = mpanelDisplayWidth;
+            MPanel_DisplayHeight = mpanelDisplayHeight;
 
             if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
             {
@@ -1262,24 +1266,24 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 _mpnl_add = 10;
             }
 
-            if (MPanel_FrameModelParent != null && MPanel_ParentModel == null) //parent == frame
-            {
-                MPanel_DisplayWidth = MPanel_FrameModelParent.Frame_Width;
-                MPanel_DisplayHeight = MPanel_FrameModelParent.Frame_Height;
-            }
-            else if (MPanel_FrameModelParent != null && MPanel_ParentModel != null) //parent == multipanel
-            {
-                if (MPanel_ParentModel.MPanel_Type == "Mullion")
-                {
-                    MPanel_DisplayWidth = MPanel_ParentModel.MPanel_DisplayWidth / (MPanel_ParentModel.MPanel_Divisions + 1);
-                    MPanel_DisplayHeight = MPanel_ParentModel.MPanel_DisplayHeight;
-                }
-                else if (MPanel_ParentModel.MPanel_Type == "Transom")
-                {
-                    MPanel_DisplayWidth = MPanel_ParentModel.MPanel_DisplayWidth;
-                    MPanel_DisplayHeight = MPanel_ParentModel.MPanel_DisplayHeight / (MPanel_ParentModel.MPanel_Divisions + 1);
-                }
-            }
+            //if (MPanel_FrameModelParent != null && MPanel_ParentModel == null) //parent == frame
+            //{
+            //    MPanel_DisplayWidth = MPanel_FrameModelParent.Frame_Width;
+            //    MPanel_DisplayHeight = MPanel_FrameModelParent.Frame_Height;
+            //}
+            //else if (MPanel_FrameModelParent != null && MPanel_ParentModel != null) //parent == multipanel
+            //{
+            //    if (MPanel_ParentModel.MPanel_Type == "Mullion")
+            //    {
+            //        MPanel_DisplayWidth = MPanel_ParentModel.MPanel_DisplayWidth / (MPanel_ParentModel.MPanel_Divisions + 1);
+            //        MPanel_DisplayHeight = MPanel_ParentModel.MPanel_DisplayHeight;
+            //    }
+            //    else if (MPanel_ParentModel.MPanel_Type == "Transom")
+            //    {
+            //        MPanel_DisplayWidth = MPanel_ParentModel.MPanel_DisplayWidth;
+            //        MPanel_DisplayHeight = MPanel_ParentModel.MPanel_DisplayHeight / (MPanel_ParentModel.MPanel_Divisions + 1);
+            //    }
+            //}
         }
     }
 }
