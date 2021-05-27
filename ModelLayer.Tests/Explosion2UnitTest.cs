@@ -695,13 +695,15 @@ namespace ModelLayer.Tests
                                                                                        new UserControl(),
                                                                                        _frameModel,
                                                                                        true,
-                                                                                       FlowDirection.TopDown,
+                                                                                       FlowDirection.LeftToRight,
                                                                                        _frameModel.Frame_Zoom,
                                                                                        1,
                                                                                        DockStyle.Fill,
                                                                                        0,
                                                                                        null,
-                                                                                       _frameModel.FrameImageRenderer_Zoom);
+                                                                                       _frameModel.FrameImageRenderer_Zoom,
+                                                                                       "",
+                                                                                       2);
             _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
             _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
             Control multiMullion = new Control();
@@ -722,7 +724,7 @@ namespace ModelLayer.Tests
                                                                                          new UserControl(),
                                                                                          _frameModel,
                                                                                          true,
-                                                                                         FlowDirection.LeftToRight,
+                                                                                         FlowDirection.TopDown,
                                                                                          _frameModel.Frame_Zoom,
                                                                                          3,
                                                                                          DockStyle.None,
@@ -764,7 +766,7 @@ namespace ModelLayer.Tests
                                                                                         new UserControl(),
                                                                                         _frameModel,
                                                                                         true,
-                                                                                        FlowDirection.LeftToRight,
+                                                                                        FlowDirection.TopDown,
                                                                                         _frameModel.Frame_Zoom,
                                                                                         4,
                                                                                         DockStyle.None,
@@ -772,7 +774,7 @@ namespace ModelLayer.Tests
                                                                                         _multiMullionModel,
                                                                                         _frameModel.FrameImageRenderer_Zoom);
             _multiTransomModel2.MPanel_Placement = "Somewhere in Between";
-            _multiTransomModel2.MPanel_Index_Inside_MPanel = 0;
+            _multiTransomModel2.MPanel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_MultiPanel.Add(_multiTransomModel2);
             Control multiMullion4 = new Control();
             multiMullion4.Name = "MultiTransom_4";
@@ -803,7 +805,7 @@ namespace ModelLayer.Tests
                                                                                       new UserControl(),
                                                                                       _frameModel,
                                                                                       true,
-                                                                                      FlowDirection.LeftToRight,
+                                                                                      FlowDirection.TopDown,
                                                                                       _frameModel.Frame_Zoom,
                                                                                       5,
                                                                                       DockStyle.None,
@@ -811,11 +813,11 @@ namespace ModelLayer.Tests
                                                                                       _multiMullionModel,
                                                                                       _frameModel.FrameImageRenderer_Zoom);
             _multiTransomModel3.MPanel_Placement = "Last";
-            _multiTransomModel3.MPanel_Index_Inside_MPanel = 0;
+            _multiTransomModel3.MPanel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_MultiPanel.Add(_multiTransomModel3);
-            Control multiMullion5 = new Control();
-            multiMullion5.Name = "MultiMullion_5";
-            _multiMullionModel.MPanelLst_Objects.Add(multiMullion5);
+            Control multiTransom5 = new Control();
+            multiTransom5.Name = "MultiTransom_5";
+            _multiMullionModel.MPanelLst_Objects.Add(multiTransom5);
 
 
             #endregion
@@ -844,6 +846,7 @@ namespace ModelLayer.Tests
                                                                  GlazingBead_ArticleNo._2451,
                                                                  1);
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel1);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -889,6 +892,7 @@ namespace ModelLayer.Tests
                                                                   GlazingBead_ArticleNo._2451,
                                                                   2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -922,6 +926,7 @@ namespace ModelLayer.Tests
                                                                GlazingBead_ArticleNo._2451,
                                                                3);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_Index_Inside_MPanel = 1;
             _multiTransomModel2.MPanelLst_Panel.Add(_panelModel3);
             Control fw3 = new Control();
             fw3.Name = "FixedPanelUC_3";
@@ -964,6 +969,7 @@ namespace ModelLayer.Tests
                                                               GlazingBead_ArticleNo._2451,
                                                               4);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel2.MPanelLst_Panel.Add(_panelModel4);
             Control fw4 = new Control();
             fw4.Name = "FixedPanelUC_4";
@@ -996,6 +1002,7 @@ namespace ModelLayer.Tests
                                                              GlazingBead_ArticleNo._2451,
                                                              5);
             _panelModel5.Panel_Placement = "First";
+            _panelModel5.Panel_Index_Inside_MPanel = 1;
             _multiTransomModel3.MPanelLst_Panel.Add(_panelModel5);
             Control fw5 = new Control();
             fw5.Name = "FixedPanelUC_5";
@@ -1040,6 +1047,7 @@ namespace ModelLayer.Tests
                                                           GlazingBead_ArticleNo._2451,
                                                           6);
             _panelModel6.Panel_Placement = "Last";
+            _panelModel6.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel3.MPanelLst_Panel.Add(_panelModel6);
             Control fw6 = new Control();
             fw6.Name = "FixedPanelUC_6";
