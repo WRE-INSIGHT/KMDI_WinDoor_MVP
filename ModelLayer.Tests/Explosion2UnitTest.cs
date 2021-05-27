@@ -668,8 +668,8 @@ namespace ModelLayer.Tests
         [TestMethod]
         public void ChkVar_6PanelFixedWindow_WithMullionTransom()
         {
-            int total_wd = 550, total_ht = 1200,
-                eqpanelwd = 275, eqpanelht = 600;
+            int total_wd = 1800, total_ht = 1600,
+                eqpanelwd = 600, eqpanelht = 800;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -797,7 +797,7 @@ namespace ModelLayer.Tests
             _multiMullionModel.MPanelLst_Divider.Add(mullionModel2);
             Control div_mullion2 = new Control();
             div_mullion2.Name = "MullionUC_2";
-            _multiMullionModel.MPanelLst_Objects.Add(div_mullion);
+            _multiMullionModel.MPanelLst_Objects.Add(div_mullion2);
 
             IMultiPanelModel _multiTransomModel3 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                       suggest_HT,
@@ -933,7 +933,7 @@ namespace ModelLayer.Tests
             _multiTransomModel2.MPanelLst_Objects.Add(fw3);
 
 
-            IDividerModel divModel_Transom2 = _dividerServices.AddDividerModel(_multiTransomModel1.MPanel_Width,
+            IDividerModel divModel_Transom2 = _dividerServices.AddDividerModel(_multiTransomModel2.MPanel_Width,
                                                       divSize,
                                                       new Control(),
                                                       DividerModel.DividerType.Transom,
@@ -946,6 +946,7 @@ namespace ModelLayer.Tests
                                                       4,
                                                       _frameModel.FrameImageRenderer_Zoom,
                                                       _frameModel.Frame_Type.ToString());
+
             _multiTransomModel2.MPanelLst_Divider.Add(divModel_Transom2);
             Control div4 = new Control();
             div4.Name = "TransomUC_4";
@@ -1073,7 +1074,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1732, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1532, _frameModel.Frame_ReinfHeight);
             Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(1, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(2, _frameModel.Frame_SealantWHQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, mullionModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, mullionModel.Div_ReinfArtNo);
@@ -1116,8 +1117,11 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_Transom2.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel_Transom2.Div_ReinfArtNo);
-            Assert.AreEqual(564, divModel_Transom2.Div_ExplosionHeight);
-            Assert.AreEqual(484, divModel_Transom2.Div_ReinfHeight);
+            Assert.AreEqual(0, divModel_Transom2.Div_ExplosionHeight);
+            Assert.AreEqual(0, divModel_Transom2.Div_ReinfHeight);
+            //564
+            //484
+
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(558, _panelModel4.Panel_GlazingBeadWidth);
@@ -1135,8 +1139,10 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_Transom3.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel_Transom3.Div_ReinfArtNo);
-            Assert.AreEqual(549, divModel_Transom3.Div_ExplosionHeight);
-            Assert.AreEqual(469, divModel_Transom3.Div_ReinfHeight);
+            Assert.AreEqual(0, divModel_Transom3.Div_ExplosionHeight);
+            Assert.AreEqual(0, divModel_Transom3.Div_ReinfHeight);
+            //549
+            //469
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel6.PanelGlazingBead_ArtNo);
             Assert.AreEqual(546, _panelModel6.Panel_GlazingBeadWidth);
