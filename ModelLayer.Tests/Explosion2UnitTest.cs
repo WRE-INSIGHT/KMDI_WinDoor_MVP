@@ -1153,7 +1153,7 @@ namespace ModelLayer.Tests
 
 
         [TestMethod]
-        public void ChkVar_4PanelFixedWindow_WithMullionTransom()
+        public void ChkVar_4PanelFixedWindow_With2Mullion1Transom()
         {
             int total_wd = 2100, total_ht = 1700,
               eqpanelwd = 700, eqpanelht = 850;
