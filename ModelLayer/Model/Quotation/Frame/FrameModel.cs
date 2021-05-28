@@ -358,18 +358,12 @@ namespace ModelLayer.Model.Quotation.Frame
         public int Frame_ReinfWidth { get; set; }
         public int Frame_ReinfHeight { get; set; }
 
-        public int Frame_PUFoamingQty { get; set; }
-        public int Frame_SealantWHQty { get; set; }
-
         public void SetExplosionValues_Frame()
         {
             Frame_ExplosionWidth = _frameWidth + 5;
             Frame_ExplosionHeight = _frameHeight + 5;
             Frame_ReinfWidth = _frameWidth - (29 * 2) - 10;
             Frame_ReinfHeight = _frameHeight - (29 * 2) - 10;
-
-            Frame_PUFoamingQty = (int)Math.Ceiling((decimal)((_frameWidth + _frameHeight) * 2) / 29694);
-            Frame_SealantWHQty = (int)Math.Ceiling((decimal)((_frameWidth + _frameHeight) * 2) / 3570);
         }
 
         #endregion

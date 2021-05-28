@@ -193,8 +193,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(632, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1932, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(2, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(634, _panelModel.Panel_GlazingBeadWidth);
@@ -251,8 +251,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(432, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1432, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(2, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(434, _panelModel.Panel_GlazingBeadWidth);
@@ -389,8 +389,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(832, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1232, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(2, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(381, _panelModel.Panel_GlazingBeadWidth);
@@ -539,8 +539,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(832, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1232, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(2, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(331, _panelModel.Panel_GlazingBeadWidth);
@@ -833,8 +833,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(482, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1132, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(1, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(1, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(Divider_ArticleNo._7536, transomModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, transomModel.Div_ReinfArtNo);
@@ -1625,8 +1625,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(2332, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1832, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(3, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
 
             #region multimullion_1 controls
 
