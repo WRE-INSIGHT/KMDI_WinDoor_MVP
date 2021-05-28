@@ -1,4 +1,5 @@
 ﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace PresentationLayer.Presenter
 
         private IQuotationModel _quotationModel;
         private IMainPresenter _mainPresenter;
+        private IWindoorModel _windoorModel;
 
         private DataGridView _dgvExplosionMaterialList;
 
@@ -33,7 +35,7 @@ namespace PresentationLayer.Presenter
 
         private void _explosionView_ExplosionViewLoadEventRaised(object sender, EventArgs e)
         {
-            _dgvExplosionMaterialList.DataSource = _quotationModel.GetListOfMaterials();
+            _dgvExplosionMaterialList.DataSource = _quotationModel.GetListOfMaterials(_windoorModel);
         }
         
         public void ShowExplosionView()
@@ -41,7 +43,10 @@ namespace PresentationLayer.Presenter
             _explosionView.ShowThisDialog();
         }
 
-        public IExplosionPresenter GetNewInstance(IUnityContainer unityC, IQuotationModel qoutationModel, IMainPresenter mainPresenter)
+        public IExplosionPresenter GetNewInstance(IUnityContainer unityC, 
+                                                  IQuotationModel qoutationModel, 
+                                                  IMainPresenter mainPresenter,
+                                                  IWindoorModel windoorModel)
         {
             unityC
                 .RegisterType<IExplosionView, ExplosionView>()
@@ -49,6 +54,7 @@ namespace PresentationLayer.Presenter
             ExplosionPresenter explosionPresenter = unityC.Resolve<ExplosionPresenter>();
             explosionPresenter._quotationModel = qoutationModel;
             explosionPresenter._mainPresenter = mainPresenter;
+            explosionPresenter._windoorModel = windoorModel;
 
             return explosionPresenter;
         }
