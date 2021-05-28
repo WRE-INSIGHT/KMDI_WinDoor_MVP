@@ -153,6 +153,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             drawFormat.LineAlignment = StringAlignment.Center;
             g.DrawString("F", drawFont, new SolidBrush(Color.Black), fixedpnl.ClientRectangle, drawFormat);
 
+            RectangleF rect = new RectangleF(0, 
+                                            (fixedpnl.ClientRectangle.Height / 2) + 15,
+                                            fixedpnl.ClientRectangle.Width,
+                                            10);
+
+            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString(),
+                         new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                         new SolidBrush(Color.Black),
+                         rect,
+                         drawFormat);
+
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                              0,
                                                              fixedpnl.ClientRectangle.Width - w,
@@ -267,6 +278,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _panelModel.Panel_Visibility = false;
 
             _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
+
+            _mainPresenter.DeductPanelGlassID();
 
             #endregion
         }

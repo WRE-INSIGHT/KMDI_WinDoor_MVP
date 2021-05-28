@@ -211,7 +211,7 @@ namespace ModelLayer.Model.Quotation
                                         Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                            1, "pc(s)",
                                                            div_nxtCtrl.Div_ExplosionHeight.ToString());
-                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Height" + div_nxtCtrl.Div_ReinfArtNo.ToString(),
+                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Height " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
                                                                1, "pc(s)",
                                                                div_nxtCtrl.Div_ReinfHeight.ToString());
                                     }
@@ -220,7 +220,7 @@ namespace ModelLayer.Model.Quotation
                                         Material_List.Rows.Add(mpnl.MPanel_Type + " Width " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                            1, "pc(s)",
                                                            div_nxtCtrl.Div_ExplosionWidth.ToString());
-                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Width" + div_nxtCtrl.Div_ReinfArtNo.ToString(),
+                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Width " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
                                                                1, "pc(s)",
                                                                div_nxtCtrl.Div_ReinfWidth.ToString());
                                     }

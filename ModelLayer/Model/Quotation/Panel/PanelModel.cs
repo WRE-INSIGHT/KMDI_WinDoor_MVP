@@ -507,6 +507,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
         #region Explosion
 
+        public int PanelGlass_ID { get; set; }
+
         private Glass_Thickness _panelGlassThickness;
         public Glass_Thickness Panel_GlassThickness
         {
@@ -760,7 +762,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           Glass_Thickness panelGlassThickness,
                           GlazingBead_ArticleNo panelGlazingBeadArtNo,
                           int panelDisplayWidth,
-                          int panelDisplayHeight)
+                          int panelDisplayHeight,
+                          int panelGlassID)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -783,6 +786,7 @@ namespace ModelLayer.Model.Quotation.Panel
             PanelGlazingBead_ArtNo = panelGlazingBeadArtNo;
             Panel_DisplayWidth = panelDisplayWidth;
             Panel_DisplayHeight = panelDisplayHeight;
+            PanelGlass_ID = panelGlassID;
 
             //if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel == null) //parent == frame
             //{

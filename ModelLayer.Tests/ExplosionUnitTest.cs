@@ -1,10 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using ServiceLayer.CommonServices;
+using ServiceLayer.Services.DividerServices;
 using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
@@ -12,9 +14,6 @@ using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
 using System.Data;
 using System.Windows.Forms;
-using static ModelLayer.Model.Quotation.QuotationModel;
-using ServiceLayer.Services.DividerServices;
-using ModelLayer.Model.Quotation.Divider;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Tests
@@ -605,7 +604,7 @@ namespace ModelLayer.Tests
 
             int divSize = 26;
             int multiTransom_totalPanelCount = _multiTransomModel.MPanel_Divisions + 1;
-            
+
             int suggest_Wd = (((_multiTransomModel.MPanel_Width) - (divSize * _multiTransomModel.MPanel_Divisions)) / multiTransom_totalPanelCount),
                 suggest_HT = _multiTransomModel.MPanel_Height;
 
@@ -875,5 +874,8 @@ namespace ModelLayer.Tests
             //Assert.AreEqual(1, _panelModel4.Panel_SealantWHQty);
 
         }
+
+
+
     }
 }

@@ -229,7 +229,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                            _frameModel.Frame_Height,
                                                            Glass_Thickness._6mm,
                                                            GlazingBead_ArticleNo._2452,
-                                                           _mainPresenter.GetPanelCount());
+                                                           _mainPresenter.GetPanelCount(),
+                                                           _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);

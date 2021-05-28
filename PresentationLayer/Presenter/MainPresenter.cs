@@ -940,6 +940,17 @@ namespace PresentationLayer.Presenter
             return _windoorModel.divIDCounter += 1;
         }
 
+        public int GetPanelGlassID()
+        {
+            return _windoorModel.PanelGlassID_Counter += 1;
+        }
+
+        public void DeductPanelGlassID()
+        {
+            _windoorModel.PanelGlassID_Counter -= 1;
+            _windoorModel.SetPanelGlassID();
+        }
+
         ITransomUCPresenter current_transom;
         IMullionUCPresenter current_mullion;
 
