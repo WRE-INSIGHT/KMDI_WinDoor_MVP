@@ -86,8 +86,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(932, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1932, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(2, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(934, _panelModel.Panel_GlazingBeadWidth);
@@ -147,8 +147,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(551, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(857, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(1, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(1, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(553, _panelModel.Panel_GlazingBeadWidth);
@@ -497,8 +497,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(482, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1132, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(1, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(1, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(484, _panelModel.Panel_GlazingBeadWidth);
@@ -643,8 +643,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(482, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1132, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(1, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(1, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(484, _panelModel.Panel_GlazingBeadWidth);

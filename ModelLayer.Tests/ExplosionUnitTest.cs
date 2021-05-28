@@ -79,7 +79,7 @@ namespace ModelLayer.Tests
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
 
-            DataTable dt = _qouteModel.GetListOfMaterials();
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
             Assert.AreEqual("Description", dt.Columns[0].ColumnName);
             Assert.AreEqual("Qty", dt.Columns[1].ColumnName);
             Assert.AreEqual("Unit", dt.Columns[2].ColumnName);
@@ -185,7 +185,7 @@ namespace ModelLayer.Tests
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(705, _frameModel.Frame_ExplosionWidth);
@@ -243,7 +243,7 @@ namespace ModelLayer.Tests
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(505, _frameModel.Frame_ExplosionWidth);
@@ -381,7 +381,7 @@ namespace ModelLayer.Tests
             fw2.Name = "FixedPanelUC_2";
             _multipanelModel.MPanelLst_Objects.Add(fw2);
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(905, _frameModel.Frame_ExplosionWidth);
@@ -531,7 +531,7 @@ namespace ModelLayer.Tests
             fw2.Name = "FixedPanelUC_2";
             _multipanelModel.MPanelLst_Objects.Add(fw2);
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(905, _frameModel.Frame_ExplosionWidth);
@@ -825,7 +825,7 @@ namespace ModelLayer.Tests
             _frameModel.Lst_MultiPanel.Add(_multiMullionModel1);
             _frameModel.Lst_MultiPanel.Add(_multiMullionModel2);
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(555, _frameModel.Frame_ExplosionWidth);
@@ -1617,7 +1617,7 @@ namespace ModelLayer.Tests
 
             #endregion
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(2405, _frameModel.Frame_ExplosionWidth);
@@ -1627,6 +1627,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1832, _frameModel.Frame_ReinfHeight);
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(4, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(11, _qouteModel.GlazingSpacer_TotalQty);
+            Assert.AreEqual(12104, _qouteModel.GlazingSeal_TotalQty);
 
             #region multimullion_1 controls
 
@@ -1772,5 +1775,6 @@ namespace ModelLayer.Tests
 
             #endregion
         }
+
     }
 }

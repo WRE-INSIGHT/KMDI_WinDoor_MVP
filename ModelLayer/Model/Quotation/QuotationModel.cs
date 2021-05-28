@@ -23,6 +23,8 @@ namespace ModelLayer.Model.Quotation
         public int Frame_PUFoamingQty_Total { get; set; }
         public int Frame_SealantWHQty_Total { get; set; }
         public int Glass_SealantWHQty_Total { get; set; }
+        public int GlazingSpacer_TotalQty { get; set; }
+        public int GlazingSeal_TotalQty { get; set; }
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
@@ -485,9 +487,12 @@ namespace ModelLayer.Model.Quotation
             Material_List.Columns.Add(CreateColumn("Size", "Size", "System.String"));
 
             int totalFrames_width = 0,
-                    totalFrames_height = 0,
-                     total_glassWidth = 0,
-                     total_glassHeight = 0;
+                totalFrames_height = 0,
+                total_glassWidth = 0,
+                total_glassHeight = 0,
+                glazing_seal = 0,
+                glazing_spacer = 0;
+            ;
 
             foreach (IFrameModel frame in item.GetAllVisibleFrames())
             {
@@ -511,9 +516,6 @@ namespace ModelLayer.Model.Quotation
                 Material_List.Rows.Add("Frame Reinf Height " + frame.Frame_ReinfArtNo.ToString(),
                                        2, "pc(s)",
                                        frame.Frame_ReinfHeight.ToString());
-
-                int glazing_seal = 0,
-                    glazing_spacer = 0;
 
                 if (frame.GetVisibleMultiPanels().Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
                 {
@@ -856,17 +858,14 @@ namespace ModelLayer.Model.Quotation
                     }
                 }
 
-                Material_List.Rows.Add("Glazing Spacer (KBC70)",
-                                       glazing_spacer, "pc(s)", "");
-
-                Material_List.Rows.Add("Glazing Seal",
-                                       glazing_seal, "mm", "");
             }
 
 
             Frame_PUFoamingQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 29694);
             Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 3570);
             Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(total_glassWidth + total_glassHeight) / 6842));
+            GlazingSpacer_TotalQty = glazing_spacer;
+            GlazingSeal_TotalQty = glazing_seal;
 
             Material_List.Rows.Add("PU Foaming",
                                    Frame_PUFoamingQty_Total, "can", "");
@@ -878,6 +877,12 @@ namespace ModelLayer.Model.Quotation
                                    Glass_SealantWHQty_Total,
                                    "pc(s)",
                                    "");
+
+            Material_List.Rows.Add("Glazing Spacer (KBC70)",
+                                   GlazingSpacer_TotalQty, "pc(s)", "");
+
+            Material_List.Rows.Add("Glazing Seal",
+                                   GlazingSeal_TotalQty, "mm", "");
 
             var query = from r in Material_List.AsEnumerable()
                         group r by new
