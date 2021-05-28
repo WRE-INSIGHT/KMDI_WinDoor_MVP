@@ -147,6 +147,8 @@ namespace PresentationLayer.Presenter.UserControls
                 
                 _multipanelModel = _multipanelServices.AddMultiPanelModel(wd,
                                                                           ht,
+                                                                          _frameModel.Frame_Width,
+                                                                          _frameModel.Frame_Height,
                                                                           frame,
                                                                           frame,
                                                                           _frameModel,

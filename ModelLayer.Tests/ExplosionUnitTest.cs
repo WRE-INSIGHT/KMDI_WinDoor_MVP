@@ -1702,6 +1702,75 @@ namespace ModelLayer.Tests
             Assert.AreEqual(429, divModel_mullion7.Div_ExplosionHeight);
             Assert.AreEqual(319, divModel_mullion7.Div_ReinfHeight);
 
+            Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel5.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(328, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(421, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(322, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(415, _panelModel5.Panel_GlassHeight);
+
+            #endregion
+
+            #region multiMullion_5 controls
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel6.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(331, _panelModel6.Panel_GlazingBeadWidth);
+            Assert.AreEqual(433, _panelModel6.Panel_GlazingBeadHeight);
+            Assert.AreEqual(325, _panelModel6.Panel_GlassWidth);
+            Assert.AreEqual(427, _panelModel6.Panel_GlassHeight);
+
+            Assert.AreEqual(Divider_ArticleNo._7538, divModel_mullion8.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, divModel_mullion8.Div_ReinfArtNo);
+            Assert.AreEqual(441, divModel_mullion8.Div_ExplosionHeight);
+            Assert.AreEqual(331, divModel_mullion8.Div_ReinfHeight);
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel7.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(328, _panelModel7.Panel_GlazingBeadWidth);
+            Assert.AreEqual(433, _panelModel7.Panel_GlazingBeadHeight);
+            Assert.AreEqual(322, _panelModel7.Panel_GlassWidth);
+            Assert.AreEqual(427, _panelModel7.Panel_GlassHeight);
+
+            #endregion
+
+            #region multiMullion_6 controls
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel8.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(328, _panelModel8.Panel_GlazingBeadWidth);
+            Assert.AreEqual(421, _panelModel8.Panel_GlazingBeadHeight);
+            Assert.AreEqual(322, _panelModel8.Panel_GlassWidth);
+            Assert.AreEqual(415, _panelModel8.Panel_GlassHeight);
+
+            Assert.AreEqual(Divider_ArticleNo._7538, divModel_mullion9.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, divModel_mullion9.Div_ReinfArtNo);
+            Assert.AreEqual(429, divModel_mullion9.Div_ExplosionHeight);
+            Assert.AreEqual(319, divModel_mullion9.Div_ReinfHeight);
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel9.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(331, _panelModel9.Panel_GlazingBeadWidth);
+            Assert.AreEqual(421, _panelModel9.Panel_GlazingBeadHeight);
+            Assert.AreEqual(325, _panelModel9.Panel_GlassWidth);
+            Assert.AreEqual(415, _panelModel9.Panel_GlassHeight);
+
+            #endregion
+
+            #region multiMullion_7 controls
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel10.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(328, _panelModel10.Panel_GlazingBeadWidth);
+            Assert.AreEqual(433, _panelModel10.Panel_GlazingBeadHeight);
+            Assert.AreEqual(322, _panelModel10.Panel_GlassWidth);
+            Assert.AreEqual(427, _panelModel10.Panel_GlassHeight);
+
+            Assert.AreEqual(Divider_ArticleNo._7538, divModel_mullion10.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, divModel_mullion10.Div_ReinfArtNo);
+            Assert.AreEqual(441, divModel_mullion10.Div_ExplosionHeight);
+            Assert.AreEqual(331, divModel_mullion10.Div_ReinfHeight);
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel11.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(331, _panelModel11.Panel_GlazingBeadWidth);
+            Assert.AreEqual(433, _panelModel11.Panel_GlazingBeadHeight);
+            Assert.AreEqual(325, _panelModel11.Panel_GlassWidth);
+            Assert.AreEqual(427, _panelModel11.Panel_GlassHeight);
+
             #endregion
         }
     }
