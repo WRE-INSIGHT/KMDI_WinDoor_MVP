@@ -86,8 +86,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(932, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1932, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(2, _frameModel.Frame_SealantWHQty);
+
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(934, _panelModel.Panel_GlazingBeadWidth);
@@ -147,8 +146,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(551, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(857, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(1, _frameModel.Frame_SealantWHQty);
+
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(553, _panelModel.Panel_GlazingBeadWidth);
@@ -379,6 +377,16 @@ namespace ModelLayer.Tests
         [TestMethod]
         public void ChkVar_2EQualPanelFW_WithTransom()
         {
+
+            //          |――――――――――――|
+            //          |            |
+            //          |            |
+            //          |――――――――――――|
+            //          |            |
+            //          |            |
+            //          |____________|
+
+
             int total_wd = 550, total_height = 1200,
                 eqpanelWD = 550, eqpanelHT = 600;
 
@@ -398,11 +406,15 @@ namespace ModelLayer.Tests
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
             IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
                                                                                        total_wd,
                                                                                        total_height,
-                                                                                       new Control(),
+                                                                                       frame,
                                                                                        new UserControl(),
                                                                                        _frameModel,
                                                                                        true,
@@ -445,19 +457,20 @@ namespace ModelLayer.Tests
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
+            _panelModel.Panel_Placement = "First";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
             _multipanelModel.MPanelLst_Objects.Add(fw1);
 
-            IDividerModel divModel = _dividerServices.AddDividerModel(divSize,
-                                                                      _multipanelModel.MPanel_Width,
+            IDividerModel divModel = _dividerServices.AddDividerModel(_multipanelModel.MPanel_Width,
+                                                                      divSize,
                                                                       new Control(),
                                                                       DividerModel.DividerType.Transom,
                                                                       true,
                                                                       _frameModel.Frame_Zoom,
                                                                       Divider_ArticleNo._7536,
-                                                                        _multipanelModel.MPanel_DisplayWidth,
+                                                                      _multipanelModel.MPanel_DisplayWidth,
                                                                       _multipanelModel.MPanel_DisplayHeight,
                                                                       _multipanelModel,
                                                                       1,
@@ -484,12 +497,13 @@ namespace ModelLayer.Tests
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    2);
+            _panelModel2.Panel_Placement = "Last";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
             _multipanelModel.MPanelLst_Objects.Add(fw2);
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(555, _frameModel.Frame_ExplosionWidth);
@@ -497,8 +511,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(482, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1132, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(1, _frameModel.Frame_SealantWHQty);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(1, _qouteModel.Frame_SealantWHQty_Total);
+
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(484, _panelModel.Panel_GlazingBeadWidth);
@@ -522,9 +537,21 @@ namespace ModelLayer.Tests
         }
 
 
+
+
         [TestMethod]
         public void ChkVar_2UnEQualPanelFW_WithTransom()
         {
+
+            //          |――――――――――――|
+            //          |            |
+            //          |            |
+            //          |            |
+            //          |――――――――――――|
+            //          |            |
+            //          |____________|
+
+
             int total_wd = 550, total_height = 1200,
                  uneqpanelHT1 = 700, uneqpanelHT2 = 500, eqpanelWD = 550;
 
@@ -544,11 +571,14 @@ namespace ModelLayer.Tests
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
             IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
                                                                                        total_wd,
                                                                                        total_height,
-                                                                                       new Control(),
+                                                                                       frame,
                                                                                        new UserControl(),
                                                                                        _frameModel,
                                                                                        true,
@@ -591,6 +621,7 @@ namespace ModelLayer.Tests
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    1);
+            _panelModel.Panel_Placement = "First";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -630,12 +661,13 @@ namespace ModelLayer.Tests
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    2);
+            _panelModel2.Panel_Placement = "Last";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
             _multipanelModel.MPanelLst_Objects.Add(fw2);
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(555, _frameModel.Frame_ExplosionWidth);
@@ -643,8 +675,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(482, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1132, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _frameModel.Frame_PUFoamingQty);
-            Assert.AreEqual(1, _frameModel.Frame_SealantWHQty);
+
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(484, _panelModel.Panel_GlazingBeadWidth);
@@ -670,8 +701,16 @@ namespace ModelLayer.Tests
 
 
         [TestMethod]
-        public void ChkVar_6PanelFixedWindow_With2Mullion3Transom()
+        public void ChkVar_6PanelFixedWindow_With_2Mullion_3Transom()
         {
+            //          |――――――――┃―――――――┃―――――――|
+            //          |        ┃       ┃       |
+            //          |        ┃       ┃       |
+            //          |――――――――┃―――――――┃―――――――|
+            //          |        ┃       ┃       |
+            //          |        ┃       ┃       |
+            //          |________┃_______┃_______|
+
             int total_wd = 1800, total_ht = 1600,
                 eqpanelwd = 600, eqpanelht = 800;
 
@@ -1083,7 +1122,7 @@ namespace ModelLayer.Tests
             _frameModel.Lst_MultiPanel.Add(_multiTransomModel3);
 
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
@@ -1092,7 +1131,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(1732, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1532, _frameModel.Frame_ReinfHeight);
-
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(Divider_ArticleNo._7536, mullionModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, mullionModel.Div_ReinfArtNo);
@@ -1135,8 +1175,8 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_Transom2.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, divModel_Transom2.Div_ReinfArtNo);
-            Assert.AreEqual(564, divModel_Transom2.Div_ExplosionWidth);
-            Assert.AreEqual(484, divModel_Transom2.Div_ReinfWidth);
+            Assert.AreEqual(561, divModel_Transom2.Div_ExplosionWidth);
+            Assert.AreEqual(481, divModel_Transom2.Div_ReinfWidth);
 
 
 
@@ -1171,8 +1211,17 @@ namespace ModelLayer.Tests
 
 
         [TestMethod]
-        public void ChkVar_4PanelFixedWindow_With2Mullion1Transom()
+        public void ChkVar_4PanelFixedWindow_With_2Mullion_1Transom()
         {
+
+            //          |――――――――┃―――――――┃―――――――|
+            //          |        ┃       ┃       |
+            //          |        ┃       ┃       |
+            //          |        ┃―――――――┃       |
+            //          |        ┃       ┃       |
+            //          |        ┃       ┃       |
+            //          |________┃_______┃_______|
+
             int total_wd = 2100, total_ht = 1700,
               eqpanelwd = 700, eqpanelht = 850;
 
@@ -1426,9 +1475,7 @@ namespace ModelLayer.Tests
             #endregion
 
             _frameModel.Lst_MultiPanel.Add(_multiTransomModel1);
-
-
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
 
 
@@ -1450,7 +1497,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(640, _panelModel1.Panel_GlassWidth);
             Assert.AreEqual(1628, _panelModel1.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
-
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
 
 
 
@@ -1502,8 +1550,18 @@ namespace ModelLayer.Tests
 
 
         [TestMethod]
-        public void ChkVar_6PanelFixedWindow_With4Mullion1Transom()
+        public void ChkVar_6PanelFixedWindow_With_4Mullion_1Transom()
         {
+            //              
+            //          |――――――――┃―――┃―――┃―――――――|
+            //          |        ┃   ┃   ┃       |
+            //          |        ┃   ┃   ┃       |
+            //          |        ┃―――――――┃       |
+            //          |        ┃   ┃   ┃       |
+            //          |        ┃   ┃   ┃       |
+            //          |________┃___┃___┃_______|
+            //
+
             int total_wd = 2400, total_ht = 1950,
                 eqpanelwd1 = 800, eqpanelht1 = 1950,
                 eqpanelwd3 = 400, eqpanelht3 = 975;
@@ -1620,20 +1678,18 @@ namespace ModelLayer.Tests
                                                                                     true,
                                                                                     FlowDirection.TopDown,
                                                                                     _frameModel.Frame_Zoom,
-                                                                                    1,
+                                                                                    3,
                                                                                     DockStyle.None,
                                                                                     0,
                                                                                     _multiMullionModel,
-                                                                                    _frameModel.FrameImageRenderer_Zoom,
-                                                                                    "",
-                                                                                    2);
+                                                                                    _frameModel.FrameImageRenderer_Zoom
+                                                                                    );
             _multiTransomModel1.MPanel_Placement = "Somewhere in Between";
             _multiTransomModel1.MPanel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_MultiPanel.Add(_multiTransomModel1);
-            Control multiMullion1 = new Control();
-
-            multiMullion1.Name = "MultiTransom_1";
-            _multiMullionModel.MPanelLst_Objects.Add(multiMullion1);
+            Control multiMullion3 = new Control();
+            multiMullion3.Name = "MultiTransom_3";
+            _multiMullionModel.MPanelLst_Objects.Add(multiMullion3);
 
             IDividerModel mullionModel2 = _dividerServices.AddDividerModel(divSize,
                                                                _multiMullionModel.MPanel_Height,
@@ -1702,7 +1758,7 @@ namespace ModelLayer.Tests
                                                                                     true,
                                                                                     FlowDirection.TopDown,
                                                                                     _frameModel.Frame_Zoom,
-                                                                                    2,
+                                                                                    4,
                                                                                     DockStyle.None,
                                                                                     0,
                                                                                     _multiTransomModel1,
@@ -1711,9 +1767,9 @@ namespace ModelLayer.Tests
             _multiMullionModel1.MPanel_Placement = "First";
             _multiMullionModel1.MPanel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_MultiPanel.Add(_multiMullionModel1);
-            Control multiMullion2 = new Control();
-            multiMullion2.Name = "MultiMullion_2";
-            _multiTransomModel1.MPanelLst_Objects.Add(multiMullion2);
+            Control multiMullion4 = new Control();
+            multiMullion4.Name = "MultiMullion_4";
+            _multiTransomModel1.MPanelLst_Objects.Add(multiMullion4);
 
 
             IDividerModel transomModel = _dividerServices.AddDividerModel(_multiTransomModel1.MPanel_Width,
@@ -1730,9 +1786,9 @@ namespace ModelLayer.Tests
                                                           _frameModel.FrameImageRenderer_Zoom,
                                                           _frameModel.Frame_Type.ToString());
             _multiTransomModel1.MPanelLst_Divider.Add(transomModel);
-            Control div1 = new Control();
-            div1.Name = "TransomUC_3";
-            _multiTransomModel1.MPanelLst_Objects.Add(div1);
+            Control div6 = new Control();
+            div6.Name = "TransomUC_3";
+            _multiTransomModel1.MPanelLst_Objects.Add(div6);
 
 
 
@@ -1746,7 +1802,7 @@ namespace ModelLayer.Tests
                                                                                       true,
                                                                                       FlowDirection.LeftToRight,
                                                                                       _frameModel.Frame_Zoom,
-                                                                                      3,
+                                                                                      5,
                                                                                       DockStyle.None,
                                                                                       0,
                                                                                       _multiTransomModel1,
@@ -1755,9 +1811,9 @@ namespace ModelLayer.Tests
             _multiMullionModel2.MPanel_Placement = "Last";
             _multiMullionModel2.MPanel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_MultiPanel.Add(_multiMullionModel2);
-            Control multiMullion3 = new Control();
-            multiMullion3.Name = "MultiMullion_3";
-            _multiTransomModel1.MPanelLst_Objects.Add(multiMullion3);
+            Control multiMullion5 = new Control();
+            multiMullion5.Name = "MultiMullion_5";
+            _multiTransomModel1.MPanelLst_Objects.Add(multiMullion5);
 
 
             #endregion
@@ -1788,6 +1844,7 @@ namespace ModelLayer.Tests
                                                                   GlazingBead_ArticleNo._2451,
                                                                   3);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel3);
             Control fw3 = new Control();
             fw3.Name = "FixedPanelUC_3";
@@ -1833,6 +1890,7 @@ namespace ModelLayer.Tests
                                                                   GlazingBead_ArticleNo._2451,
                                                                   4);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel4);
             Control fw4 = new Control();
             fw4.Name = "FixedPanelUC_4";
@@ -1868,6 +1926,7 @@ namespace ModelLayer.Tests
                                                                   GlazingBead_ArticleNo._2451,
                                                                   5);
             _panelModel5.Panel_Placement = "First";
+            _panelModel5.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel5);
             Control fw5 = new Control();
             fw5.Name = "FixedPanelUC_5";
@@ -1913,6 +1972,7 @@ namespace ModelLayer.Tests
                                                                   GlazingBead_ArticleNo._2451,
                                                                   6);
             _panelModel6.Panel_Placement = "Last";
+            _panelModel6.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel5);
             Control fw6 = new Control();
             fw6.Name = "FixedPanelUC_6";
@@ -1924,9 +1984,10 @@ namespace ModelLayer.Tests
 
 
             _frameModel.Lst_MultiPanel.Add(_multiTransomModel1);
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel1);
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel2);
 
-
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(2405, _frameModel.Frame_ExplosionWidth);
