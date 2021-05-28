@@ -50,6 +50,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         void Fit_MyControls_ToBindDimensions();
         void Fit_MyControls_Dimensions();
         void Object_Indexer();
+        void Adjust_ControlDisplaySize();
         IEnumerable<IDividerModel> GetVisibleDividers();
         IEnumerable<IPanelModel> GetVisiblePanels();
         IEnumerable<Control> GetVisibleObjects();

@@ -625,7 +625,17 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 if (mpanelparent_placement == "First")
                 {
-                    GB_deduction_forNxtPrev += 33;
+                    if (panel_placement == "First")
+                    {
+                        GB_deduction_forNxtPrev += 33;
+                    }
+                }
+                else if (mpanelparent_placement == "Last")
+                {
+                    if (panel_placement == "Last")
+                    {
+                        GB_deduction_forNxtPrev += 33;
+                    }
                 }
             }
 
@@ -643,9 +653,19 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     GB_deduction_forNxtPrev += 33;
                 }
-                if (mpanelparent_placement == "Last")
+                if (mpanelparent_placement == "First")
                 {
-                    GB_deduction_forNxtPrev += 33;
+                    if (panel_placement == "First")
+                    {
+                        GB_deduction_forNxtPrev += 33;
+                    }
+                }
+                else if (mpanelparent_placement == "Last")
+                {
+                    if (panel_placement == "Last")
+                    {
+                        GB_deduction_forNxtPrev += 33;
+                    }
                 }
             }
 
@@ -693,9 +713,12 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 GB_deduction_lvl3 += (72 / 2);
             }
-            else if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._None && mpanelparent_placement == "Last")
+            else if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._None)
             {
-                GB_deduction_lvl3 += 33;
+                //if (mpanelparent_placement == "Last")
+                //{
+                //    GB_deduction_lvl3 += 33;
+                //}
             }
 
             if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._7536)
@@ -706,9 +729,12 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 GB_deduction_lvl3 += (72 / 2);
             }
-            else if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._None && mpanelparent_placement == "First")
+            else if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._None)
             {
-                GB_deduction_lvl3 += 33;
+                //if (mpanelparent_placement == "First")
+                //{
+                //    GB_deduction_lvl3 += 33;
+                //}
             }
 
             if (div_type == DividerType.Mullion)

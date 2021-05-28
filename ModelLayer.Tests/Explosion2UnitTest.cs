@@ -400,6 +400,8 @@ namespace ModelLayer.Tests
 
             IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
+                                                                                       total_wd,
+                                                                                       total_height,
                                                                                        new Control(),
                                                                                        new UserControl(),
                                                                                        _frameModel,
@@ -544,6 +546,8 @@ namespace ModelLayer.Tests
 
             IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
+                                                                                       total_wd,
+                                                                                       total_height,
                                                                                        new Control(),
                                                                                        new UserControl(),
                                                                                        _frameModel,

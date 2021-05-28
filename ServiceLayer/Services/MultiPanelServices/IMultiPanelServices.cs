@@ -12,6 +12,8 @@ namespace ServiceLayer.Services.MultiPanelServices
         void ValidateModel(IMultiPanelModel multiPanelModel);
         IMultiPanelModel AddMultiPanelModel(int mwidth,
                                             int mheight,
+                                            int mpanelDisplayWidth,
+                                            int mpanelDisplayHeight,
                                             Control mpanelParent,
                                             UserControl mpanelFrameGroup,
                                             IFrameModel mpanelFrameModelParent,

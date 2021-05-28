@@ -239,6 +239,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int suggest_Wd = _multiPanelModel.MPanel_Width,
                     suggest_HT = (((_multiPanelModel.MPanel_Height) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
 
+                int mpanelDisplayWidth = _multiPanelModel.MPanel_DisplayWidth,
+                    mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight / (_multiPanelModel.MPanel_Divisions + 1);
+
                 //_frmDimensionPresenter.SetPresenters(this);
                 //_frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.AddPanelIntoMultiPanel;
                 //_frmDimensionPresenter.SetHeight();
@@ -254,6 +257,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 IMultiPanelModel mPanelModel = _multipanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                       suggest_HT,
+                                                                                      mpanelDisplayWidth,
+                                                                                      mpanelDisplayHeight,
                                                                                       fpnl,
                                                                                       (UserControl)_frameUCP.GetFrameUC(),
                                                                                       _frameModel,
@@ -305,6 +310,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (mPanelModel.MPanel_Placement == "Last")
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
+                        _multiPanelModel.Adjust_ControlDisplaySize();
                     }
                     else if (mPanelModel.MPanel_Placement != "Last")
                     {
@@ -383,6 +389,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (mPanelModel.MPanel_Placement == "Last")
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
+                        _multiPanelModel.Adjust_ControlDisplaySize();
                     }
                     else if (mPanelModel.MPanel_Placement != "Last")
                     {
@@ -587,6 +594,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (_panelModel.Panel_Placement == "Last")
                 {
                     _multiPanelModel.Fit_MyControls_Dimensions();
+                    _multiPanelModel.Adjust_ControlDisplaySize();
                 }
                 else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                 {
