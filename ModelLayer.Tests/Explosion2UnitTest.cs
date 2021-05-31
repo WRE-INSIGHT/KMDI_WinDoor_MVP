@@ -1692,6 +1692,7 @@ namespace ModelLayer.Tests
                                                                                     );
             _multiTransomModel1.MPanel_Placement = "Somewhere in Between";
             _multiTransomModel1.MPanel_Index_Inside_MPanel = 2;
+            _frameModel.Lst_MultiPanel.Add(_multiTransomModel1);
             _multiMullionModel.MPanelLst_MultiPanel.Add(_multiTransomModel1);
             Control multiMullion3 = new Control();
             multiMullion3.Name = "MultiTransom_3";
@@ -1763,7 +1764,7 @@ namespace ModelLayer.Tests
                                                                                     new UserControl(),
                                                                                     _frameModel,
                                                                                     true,
-                                                                                    FlowDirection.TopDown,
+                                                                                    FlowDirection.LeftToRight,
                                                                                     _frameModel.Frame_Zoom,
                                                                                     4,
 
@@ -1775,6 +1776,7 @@ namespace ModelLayer.Tests
             _multiMullionModel1.MPanel_Placement = "First";
             _multiMullionModel1.MPanel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_MultiPanel.Add(_multiMullionModel1);
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel1);
             Control multiMullion4 = new Control();
             multiMullion4.Name = "MultiMullion_4";
             _multiTransomModel1.MPanelLst_Objects.Add(multiMullion4);
@@ -1821,6 +1823,7 @@ namespace ModelLayer.Tests
             _multiMullionModel2.MPanel_Placement = "Last";
             _multiMullionModel2.MPanel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_MultiPanel.Add(_multiMullionModel2);
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel2);
 
             Control multiMullion5 = new Control();
             multiMullion5.Name = "MultiMullion_5";
@@ -1986,20 +1989,20 @@ namespace ModelLayer.Tests
                                                                   6);
             _panelModel6.Panel_Placement = "Last";
             _panelModel6.Panel_Index_Inside_MPanel = 2;
-            _multiMullionModel2.MPanelLst_Panel.Add(_panelModel5);
+            _multiMullionModel2.MPanelLst_Panel.Add(_panelModel6);
             Control fw6 = new Control();
             fw6.Name = "FixedPanelUC_6";
-            _multiMullionModel2.MPanelLst_Objects.Add(fw4);
+            _multiMullionModel2.MPanelLst_Objects.Add(fw6);
 
 
 
             #endregion
 
 
-            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            //_frameModel.Lst_MultiPanel.Add(_multiMullionModel);
 
-            _frameModel.Lst_MultiPanel.Add(_multiMullionModel1);
-            _frameModel.Lst_MultiPanel.Add(_multiMullionModel2);
+            //_frameModel.Lst_MultiPanel.Add(_multiMullionModel1);
+            //_frameModel.Lst_MultiPanel.Add(_multiMullionModel2);
 
             _qouteModel.GetListOfMaterials(_windoorModel);
 
@@ -2070,8 +2073,8 @@ namespace ModelLayer.Tests
 
 
             Assert.AreEqual(Divider_ArticleNo._7538, mullionModel4.Div_ArtNo);
-            Assert.AreEqual(DividerReinf_ArticleNo._R677, mullionModel4.Div_ReinfArtNo);
-            Assert.AreEqual(914, mullionModel4.Div_ReinfHeight);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, mullionModel4.Div_ReinfArtNo);
+            Assert.AreEqual(914, mullionModel4.Div_ExplosionHeight);
             Assert.AreEqual(804, mullionModel4.Div_ReinfHeight);
 
 
@@ -2088,7 +2091,7 @@ namespace ModelLayer.Tests
 
 
             Assert.AreEqual(Divider_ArticleNo._7538, mullionModel2.Div_ArtNo);
-            Assert.AreEqual(DividerReinf_ArticleNo._R677, mullionModel2.Div_ReinfArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, mullionModel2.Div_ReinfArtNo);
             Assert.AreEqual(1892, mullionModel2.Div_ExplosionHeight);
             Assert.AreEqual(1782, mullionModel2.Div_ReinfHeight);
 
