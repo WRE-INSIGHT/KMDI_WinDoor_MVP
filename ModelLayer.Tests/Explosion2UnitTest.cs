@@ -89,6 +89,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
+
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(934, _panelModel.Panel_GlazingBeadWidth);
             Assert.AreEqual(1934, _panelModel.Panel_GlazingBeadHeight);
@@ -149,6 +150,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(857, _frameModel.Frame_ReinfHeight);
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(1, _qouteModel.Frame_SealantWHQty_Total);
+
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(553, _panelModel.Panel_GlazingBeadWidth);
@@ -678,6 +680,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(482, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1132, _frameModel.Frame_ReinfHeight);
+
 
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
@@ -1681,7 +1684,7 @@ namespace ModelLayer.Tests
                                                                                     true,
                                                                                     FlowDirection.TopDown,
                                                                                     _frameModel.Frame_Zoom,
-                                                                                    2,
+                                                                                    3,
                                                                                     DockStyle.None,
                                                                                     0,
                                                                                     _multiMullionModel,
@@ -1690,9 +1693,10 @@ namespace ModelLayer.Tests
             _multiTransomModel1.MPanel_Placement = "Somewhere in Between";
             _multiTransomModel1.MPanel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_MultiPanel.Add(_multiTransomModel1);
-            Control multiMullion2 = new Control();
-            multiMullion2.Name = "MultiTransom_2";
-            _multiMullionModel.MPanelLst_Objects.Add(multiMullion2);
+            Control multiMullion3 = new Control();
+            multiMullion3.Name = "MultiTransom_3";
+            _multiMullionModel.MPanelLst_Objects.Add(multiMullion3);
+
 
             IDividerModel mullionModel2 = _dividerServices.AddDividerModel(divSize,
                                                                _multiMullionModel.MPanel_Height,
@@ -1761,7 +1765,8 @@ namespace ModelLayer.Tests
                                                                                     true,
                                                                                     FlowDirection.TopDown,
                                                                                     _frameModel.Frame_Zoom,
-                                                                                    3,
+                                                                                    4,
+
                                                                                     DockStyle.None,
                                                                                     0,
                                                                                     _multiTransomModel1,
@@ -1770,9 +1775,10 @@ namespace ModelLayer.Tests
             _multiMullionModel1.MPanel_Placement = "First";
             _multiMullionModel1.MPanel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_MultiPanel.Add(_multiMullionModel1);
-            Control multiMullion3 = new Control();
-            multiMullion3.Name = "MultiMullion_3";
-            _multiTransomModel1.MPanelLst_Objects.Add(multiMullion3);
+            Control multiMullion4 = new Control();
+            multiMullion4.Name = "MultiMullion_4";
+            _multiTransomModel1.MPanelLst_Objects.Add(multiMullion4);
+
 
 
             IDividerModel transomModel = _dividerServices.AddDividerModel(_multiTransomModel1.MPanel_Width,
@@ -1795,6 +1801,7 @@ namespace ModelLayer.Tests
 
 
 
+
             IMultiPanelModel _multiMullionModel2 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                       suggest_HT,
                                                                                       eqpanelwd3,
@@ -1805,7 +1812,7 @@ namespace ModelLayer.Tests
                                                                                       true,
                                                                                       FlowDirection.LeftToRight,
                                                                                       _frameModel.Frame_Zoom,
-                                                                                      4,
+                                                                                      5,
                                                                                       DockStyle.None,
                                                                                       0,
                                                                                       _multiTransomModel1,
@@ -1814,9 +1821,11 @@ namespace ModelLayer.Tests
             _multiMullionModel2.MPanel_Placement = "Last";
             _multiMullionModel2.MPanel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_MultiPanel.Add(_multiMullionModel2);
-            Control multiMullion4 = new Control();
-            multiMullion4.Name = "MultiMullion_4";
-            _multiTransomModel1.MPanelLst_Objects.Add(multiMullion4);
+
+            Control multiMullion5 = new Control();
+            multiMullion5.Name = "MultiMullion_5";
+            _multiTransomModel1.MPanelLst_Objects.Add(multiMullion5);
+
 
 
             #endregion
@@ -1988,6 +1997,7 @@ namespace ModelLayer.Tests
 
 
             _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+
             _frameModel.Lst_MultiPanel.Add(_multiMullionModel1);
             _frameModel.Lst_MultiPanel.Add(_multiMullionModel2);
 
