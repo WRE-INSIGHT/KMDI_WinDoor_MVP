@@ -2107,6 +2107,29 @@ namespace ModelLayer.Tests
         }
 
 
+        [TestMethod]
+        public void Check_6PanelFixedWindow_with_3Mullion_2Transom()
+        {
+            //              
+            //          |――――――――┃―――――――――┃―――――――――|
+            //          |        ┃         ┃         |
+            //          |        ┃   p3    ┃         |
+            //          |        ┃―――――――――┃         |
+            //          |        ┃    ┃    ┃         |
+            //          |   p1   ┃ p5 ┃ p6 ┃     p2  |
+            //          |        ┃    ┃    ┃         |
+            //          |        ┃―――――――――┃         |
+            //          |        ┃         ┃         |
+            //          |        ┃   p4    ┃         |
+            //          |________┃_________┃_________|
+            //
 
+
+            int total_wd = 2100, total_ht = 1500,
+                pnl_1_wd = 700, pnl_1_ht = 1500,
+                pnl_3_wd = 700, pnl_3_ht = 500,
+                pnl_5_wd = 350, pnl_5_ht = 500;
+
+        }
     }
 }
