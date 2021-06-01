@@ -164,218 +164,218 @@ namespace ModelLayer.Tests
 
 
 
+        // 2 checklist
+        //[TestMethod]
+        //public void ChkList_SinglePanelFixedWindow()
+        //{
+        //    int total_wd = 1000, total_height = 2000;
 
-        [TestMethod]
-        public void ChkList_SinglePanelFixedWindow()
-        {
-            int total_wd = 1000, total_height = 2000;
+        //    IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+        //    _qouteModel.Lst_Windoor.Add(_windoorModel);
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
-            _qouteModel.Lst_Windoor.Add(_windoorModel);
+        //    IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+        //                                                           total_height,
+        //                                                           FrameModel.Frame_Padding.Window,
+        //                                                           1.0f,
+        //                                                           1.0f,
+        //                                                           FrameProfile_ArticleNo._7502,
+        //                                                           1);
+        //    _windoorModel.lst_frame.Add(_frameModel);
 
-            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
-                                                                   total_height,
-                                                                   FrameModel.Frame_Padding.Window,
-                                                                   1.0f,
-                                                                   1.0f,
-                                                                   FrameProfile_ArticleNo._7502,
-                                                                   1);
-            _windoorModel.lst_frame.Add(_frameModel);
+        //    int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+        //        ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
-            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
-                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+        //    IPanelModel _panelModel = _panelServices.AddPanelModel(wd,
+        //                                                           ht,
+        //                                                           new Control(),
+        //                                                           new UserControl(),
+        //                                                           new UserControl(),
+        //                                                           new UserControl(),
+        //                                                           "Fixed Panel",
+        //                                                           true,
+        //                                                           1.0f,
+        //                                                           _frameModel,
+        //                                                           null,
+        //                                                           total_wd,
+        //                                                           total_height,
+        //                                                           Glass_Thickness._6mm,
+        //                                                           GlazingBead_ArticleNo._2452,
+        //                                                           1);
+        //    _frameModel.Lst_Panel.Add(_panelModel);
 
-            IPanelModel _panelModel = _panelServices.AddPanelModel(wd,
-                                                                   ht,
-                                                                   new Control(),
-                                                                   new UserControl(),
-                                                                   new UserControl(),
-                                                                   new UserControl(),
-                                                                   "Fixed Panel",
-                                                                   true,
-                                                                   1.0f,
-                                                                   _frameModel,
-                                                                   null,
-                                                                   total_wd,
-                                                                   total_height,
-                                                                   Glass_Thickness._6mm,
-                                                                   GlazingBead_ArticleNo._2452,
-                                                                   1);
-            _frameModel.Lst_Panel.Add(_panelModel);
+        //    DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+        //    Assert.AreEqual("Description", dt.Columns[0].ColumnName);
+        //    Assert.AreEqual("Qty", dt.Columns[1].ColumnName);
+        //    Assert.AreEqual("Unit", dt.Columns[2].ColumnName);
+        //    Assert.AreEqual("Size", dt.Columns[3].ColumnName);
 
-            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
-            Assert.AreEqual("Description", dt.Columns[0].ColumnName);
-            Assert.AreEqual("Qty", dt.Columns[1].ColumnName);
-            Assert.AreEqual("Unit", dt.Columns[2].ColumnName);
-            Assert.AreEqual("Size", dt.Columns[3].ColumnName);
+        //    Assert.AreEqual("Frame Width 7502", dt.Rows[0]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[0]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[0]["Unit"].ToString());
+        //    Assert.AreEqual("1005", dt.Rows[0]["Size"]);
 
-            Assert.AreEqual("Frame Width 7502", dt.Rows[0]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[0]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[0]["Unit"].ToString());
-            Assert.AreEqual("1005", dt.Rows[0]["Size"]);
+        //    Assert.AreEqual("Frame Height 7502", dt.Rows[1]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[1]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[1]["Unit"].ToString());
+        //    Assert.AreEqual("2005", dt.Rows[1]["Size"]);
 
-            Assert.AreEqual("Frame Height 7502", dt.Rows[1]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[1]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[1]["Unit"].ToString());
-            Assert.AreEqual("2005", dt.Rows[1]["Size"]);
+        //    Assert.AreEqual("Frame Reinf Width R676", dt.Rows[2]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[2]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[2]["Unit"].ToString());
+        //    Assert.AreEqual("932", dt.Rows[2]["Size"]);
 
-            Assert.AreEqual("Frame Reinf Width R676", dt.Rows[2]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[2]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[2]["Unit"].ToString());
-            Assert.AreEqual("932", dt.Rows[2]["Size"]);
+        //    Assert.AreEqual("Frame Reinf Height R676", dt.Rows[3]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[3]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[3]["Unit"].ToString());
+        //    Assert.AreEqual("1932", dt.Rows[3]["Size"]);
 
-            Assert.AreEqual("Frame Reinf Height R676", dt.Rows[3]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[3]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[3]["Unit"].ToString());
-            Assert.AreEqual("1932", dt.Rows[3]["Size"]);
+        //    Assert.AreEqual("Glazing Bead Width 2452", dt.Rows[4]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[4]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[4]["Unit"].ToString());
+        //    Assert.AreEqual("934", dt.Rows[4]["Size"]);
 
-            Assert.AreEqual("Glazing Bead Width 2452", dt.Rows[4]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[4]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[4]["Unit"].ToString());
-            Assert.AreEqual("934", dt.Rows[4]["Size"]);
+        //    Assert.AreEqual("Glazing Bead Height 2452", dt.Rows[5]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[5]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[5]["Unit"].ToString());
+        //    Assert.AreEqual("1934", dt.Rows[5]["Size"]);
 
-            Assert.AreEqual("Glazing Bead Height 2452", dt.Rows[5]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[5]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[5]["Unit"].ToString());
-            Assert.AreEqual("1934", dt.Rows[5]["Size"]);
+        //    Assert.AreEqual("Glass Width (6mm)", dt.Rows[6]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[6]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[6]["Unit"].ToString());
+        //    Assert.AreEqual("928", dt.Rows[6]["Size"]);
 
-            Assert.AreEqual("Glass Width (6mm)", dt.Rows[6]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[6]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[6]["Unit"].ToString());
-            Assert.AreEqual("928", dt.Rows[6]["Size"]);
+        //    Assert.AreEqual("Glass Height (6mm)", dt.Rows[7]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[7]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[7]["Unit"].ToString());
+        //    Assert.AreEqual("1928", dt.Rows[7]["Size"]);
 
-            Assert.AreEqual("Glass Height (6mm)", dt.Rows[7]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[7]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[7]["Unit"].ToString());
-            Assert.AreEqual("1928", dt.Rows[7]["Size"]);
+        //    Assert.AreEqual("PU Foaming", dt.Rows[8]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[8]["Qty"]);
+        //    Assert.AreEqual("can", dt.Rows[8]["Unit"].ToString());
+        //    Assert.AreEqual("", dt.Rows[8]["Size"]);
 
-            Assert.AreEqual("PU Foaming", dt.Rows[8]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[8]["Qty"]);
-            Assert.AreEqual("can", dt.Rows[8]["Unit"].ToString());
-            Assert.AreEqual("", dt.Rows[8]["Size"]);
+        //    Assert.AreEqual("Sealant-WH (Frame)", dt.Rows[9]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[9]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[9]["Unit"].ToString());
+        //    Assert.AreEqual("", dt.Rows[9]["Size"]);
 
-            Assert.AreEqual("Sealant-WH (Frame)", dt.Rows[9]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[9]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[9]["Unit"].ToString());
-            Assert.AreEqual("", dt.Rows[9]["Size"]);
+        //    Assert.AreEqual("Sealant-WH (Glass)", dt.Rows[10]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[10]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[10]["Unit"].ToString());
+        //    Assert.AreEqual("", dt.Rows[10]["Size"]);
 
-            Assert.AreEqual("Sealant-WH (Glass)", dt.Rows[10]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[10]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[10]["Unit"].ToString());
-            Assert.AreEqual("", dt.Rows[10]["Size"]);
+        //    Assert.AreEqual("Glazing Spacer (KBC70)", dt.Rows[11]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[11]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[11]["Unit"].ToString());
+        //    Assert.AreEqual("", dt.Rows[11]["Size"]);
 
-            Assert.AreEqual("Glazing Spacer (KBC70)", dt.Rows[11]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[11]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[11]["Unit"].ToString());
-            Assert.AreEqual("", dt.Rows[11]["Size"]);
-
-        }
+        //}
 
 
-        [TestMethod]
-        public void ChkList_SinglePanelFixedWindow2()
-        {
-            int total_wd = 619, total_height = 925;
+        //[TestMethod]
+        //public void ChkList_SinglePanelFixedWindow2()
+        //{
+        //    int total_wd = 619, total_height = 925;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
-            _qouteModel.Lst_Windoor.Add(_windoorModel);
+        //    IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+        //    _qouteModel.Lst_Windoor.Add(_windoorModel);
 
-            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
-                                                                   total_height,
-                                                                   FrameModel.Frame_Padding.Window,
-                                                                   1.0f,
-                                                                   1.0f,
-                                                                   FrameProfile_ArticleNo._7502,
-                                                                   1);
-            _windoorModel.lst_frame.Add(_frameModel);
+        //    IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+        //                                                           total_height,
+        //                                                           FrameModel.Frame_Padding.Window,
+        //                                                           1.0f,
+        //                                                           1.0f,
+        //                                                           FrameProfile_ArticleNo._7502,
+        //                                                           1);
+        //    _windoorModel.lst_frame.Add(_frameModel);
 
-            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
-                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+        //    int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+        //        ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
-            IPanelModel _panelModel = _panelServices.AddPanelModel(wd,
-                                                                   ht,
-                                                                   new Control(),
-                                                                   new UserControl(),
-                                                                   new UserControl(),
-                                                                   new UserControl(),
-                                                                   "Fixed Panel",
-                                                                   true,
-                                                                   1.0f,
-                                                                   _frameModel,
-                                                                   null,
-                                                                   total_wd,
-                                                                   total_height,
-                                                                   Glass_Thickness._6mm,
-                                                                   GlazingBead_ArticleNo._2452,
-                                                                   1);
-            _frameModel.Lst_Panel.Add(_panelModel);
+        //    IPanelModel _panelModel = _panelServices.AddPanelModel(wd,
+        //                                                           ht,
+        //                                                           new Control(),
+        //                                                           new UserControl(),
+        //                                                           new UserControl(),
+        //                                                           new UserControl(),
+        //                                                           "Fixed Panel",
+        //                                                           true,
+        //                                                           1.0f,
+        //                                                           _frameModel,
+        //                                                           null,
+        //                                                           total_wd,
+        //                                                           total_height,
+        //                                                           Glass_Thickness._6mm,
+        //                                                           GlazingBead_ArticleNo._2452,
+        //                                                           1);
+        //    _frameModel.Lst_Panel.Add(_panelModel);
 
-            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
-            Assert.AreEqual("Description", dt.Columns[0].ColumnName);
-            Assert.AreEqual("Qty", dt.Columns[1].ColumnName);
-            Assert.AreEqual("Unit", dt.Columns[2].ColumnName);
-            Assert.AreEqual("Size", dt.Columns[3].ColumnName);
+        //    DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+        //    Assert.AreEqual("Description", dt.Columns[0].ColumnName);
+        //    Assert.AreEqual("Qty", dt.Columns[1].ColumnName);
+        //    Assert.AreEqual("Unit", dt.Columns[2].ColumnName);
+        //    Assert.AreEqual("Size", dt.Columns[3].ColumnName);
 
-            Assert.AreEqual("Frame Width 7502", dt.Rows[0]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[0]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[0]["Unit"].ToString());
-            Assert.AreEqual("624", dt.Rows[0]["Size"]);
+        //    Assert.AreEqual("Frame Width 7502", dt.Rows[0]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[0]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[0]["Unit"].ToString());
+        //    Assert.AreEqual("624", dt.Rows[0]["Size"]);
 
-            Assert.AreEqual("Frame Height 7502", dt.Rows[1]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[1]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[1]["Unit"].ToString());
-            Assert.AreEqual("930", dt.Rows[1]["Size"]);
+        //    Assert.AreEqual("Frame Height 7502", dt.Rows[1]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[1]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[1]["Unit"].ToString());
+        //    Assert.AreEqual("930", dt.Rows[1]["Size"]);
 
-            Assert.AreEqual("Frame Reinf Width R676", dt.Rows[2]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[2]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[2]["Unit"].ToString());
-            Assert.AreEqual("551", dt.Rows[2]["Size"]);
+        //    Assert.AreEqual("Frame Reinf Width R676", dt.Rows[2]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[2]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[2]["Unit"].ToString());
+        //    Assert.AreEqual("551", dt.Rows[2]["Size"]);
 
-            Assert.AreEqual("Frame Reinf Height R676", dt.Rows[3]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[3]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[3]["Unit"].ToString());
-            Assert.AreEqual("857", dt.Rows[3]["Size"]);
+        //    Assert.AreEqual("Frame Reinf Height R676", dt.Rows[3]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[3]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[3]["Unit"].ToString());
+        //    Assert.AreEqual("857", dt.Rows[3]["Size"]);
 
-            Assert.AreEqual("Glazing Bead Width 2452", dt.Rows[4]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[4]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[4]["Unit"].ToString());
-            Assert.AreEqual("553", dt.Rows[4]["Size"]);
+        //    Assert.AreEqual("Glazing Bead Width 2452", dt.Rows[4]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[4]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[4]["Unit"].ToString());
+        //    Assert.AreEqual("553", dt.Rows[4]["Size"]);
 
-            Assert.AreEqual("Glazing Bead Height 2452", dt.Rows[5]["Description"].ToString());
-            Assert.AreEqual(2, dt.Rows[5]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[5]["Unit"].ToString());
-            Assert.AreEqual("859", dt.Rows[5]["Size"]);
+        //    Assert.AreEqual("Glazing Bead Height 2452", dt.Rows[5]["Description"].ToString());
+        //    Assert.AreEqual(2, dt.Rows[5]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[5]["Unit"].ToString());
+        //    Assert.AreEqual("859", dt.Rows[5]["Size"]);
 
-            Assert.AreEqual("Glass Width (6mm)", dt.Rows[6]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[6]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[6]["Unit"].ToString());
-            Assert.AreEqual("547", dt.Rows[6]["Size"]);
+        //    Assert.AreEqual("Glass Width (6mm)", dt.Rows[6]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[6]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[6]["Unit"].ToString());
+        //    Assert.AreEqual("547", dt.Rows[6]["Size"]);
 
-            Assert.AreEqual("Glass Height (6mm)", dt.Rows[7]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[7]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[7]["Unit"].ToString());
-            Assert.AreEqual("853", dt.Rows[7]["Size"]);
+        //    Assert.AreEqual("Glass Height (6mm)", dt.Rows[7]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[7]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[7]["Unit"].ToString());
+        //    Assert.AreEqual("853", dt.Rows[7]["Size"]);
 
-            Assert.AreEqual("PU Foaming", dt.Rows[8]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[8]["Qty"]);
-            Assert.AreEqual("can", dt.Rows[8]["Unit"].ToString());
-            Assert.AreEqual("", dt.Rows[8]["Size"]);
+        //    Assert.AreEqual("PU Foaming", dt.Rows[8]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[8]["Qty"]);
+        //    Assert.AreEqual("can", dt.Rows[8]["Unit"].ToString());
+        //    Assert.AreEqual("", dt.Rows[8]["Size"]);
 
-            Assert.AreEqual("Sealant-WH (Frame)", dt.Rows[9]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[9]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[9]["Unit"].ToString());
-            Assert.AreEqual("", dt.Rows[9]["Size"]);
+        //    Assert.AreEqual("Sealant-WH (Frame)", dt.Rows[9]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[9]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[9]["Unit"].ToString());
+        //    Assert.AreEqual("", dt.Rows[9]["Size"]);
 
-            Assert.AreEqual("Sealant-WH (Glass)", dt.Rows[10]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[10]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[10]["Unit"].ToString());
-            Assert.AreEqual("", dt.Rows[10]["Size"]);
+        //    Assert.AreEqual("Sealant-WH (Glass)", dt.Rows[10]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[10]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[10]["Unit"].ToString());
+        //    Assert.AreEqual("", dt.Rows[10]["Size"]);
 
-            Assert.AreEqual("Glazing Spacer (KBC70)", dt.Rows[11]["Description"].ToString());
-            Assert.AreEqual(1, dt.Rows[11]["Qty"]);
-            Assert.AreEqual("pc(s)", dt.Rows[11]["Unit"].ToString());
-            Assert.AreEqual("", dt.Rows[11]["Size"]);
-        }
+        //    Assert.AreEqual("Glazing Spacer (KBC70)", dt.Rows[11]["Description"].ToString());
+        //    Assert.AreEqual(1, dt.Rows[11]["Qty"]);
+        //    Assert.AreEqual("pc(s)", dt.Rows[11]["Unit"].ToString());
+        //    Assert.AreEqual("", dt.Rows[11]["Size"]);
+        //}
 
 
 
@@ -798,7 +798,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
 
- 
+
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2452%' AND
