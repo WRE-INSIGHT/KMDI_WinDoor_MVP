@@ -12,6 +12,7 @@ using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
 using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -2482,8 +2483,8 @@ namespace ModelLayer.Tests
             #endregion
 
 
-            _qouteModel.GetListOfMaterials(_windoorModel);
 
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
 
             //Assert
 
@@ -2584,6 +2585,121 @@ namespace ModelLayer.Tests
 
             #endregion
 
+            #region Check Quantity
+
+
+            DataRow[] dr;
+            object sumObject;
+
+            dr = dt.Select("Description = 'Frame Width 7502' AND Size = '2105'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1505'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '2032'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1432'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Mullion Height 7536' AND Size = '1437'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Mullion Reinforcement Height R677' AND Size = '1357'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Mullion Mechanical Joint 9U18'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(6, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Transom Width 7536' AND Size = '661'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Transom Reinforcement Width R677' AND Size = '581'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Transom Mechanical Joint 9U18'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(4, dr[0]["Qty"]);
+
+
+            //P1 & P2
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
+                                                 Description LIKE '%2451%' AND
+                                                 Size = '646'");
+            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
+                                                 Description LIKE '%2451%' AND
+                                                 Size = '1434'");
+            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
+                                                 Description LIKE '%6mm%' AND
+                                                 Size = '640'");
+            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
+                                                 Description LIKE '%6mm%' AND
+                                                 Size = '1428'");
+            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+
+            //P3 & P4
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
+                                                 Description LIKE '%2451%' AND
+                                                 Size = '658'");
+            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
+                                                 Description LIKE '%2451%' AND
+                                                 Size = '446'");
+            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
+                                                 Description LIKE '%6mm%' AND
+                                                 Size = '652'");
+            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
+                                                 Description LIKE '%6mm%' AND
+                                                 Size = '440'");
+            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+
+            //P5 & P6
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
+                                                 Description LIKE '%2451%' AND
+                                                 Size = '308'");
+            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
+                                                 Description LIKE '%2451%' AND
+                                                 Size = '458'");
+            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
+                                                 Description LIKE '%6mm%' AND
+                                                 Size = '302'");
+            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+
+            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
+                                                 Description LIKE '%6mm%' AND
+                                                 Size = '452'");
+            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+
+
+
+            #endregion
 
 
         }
