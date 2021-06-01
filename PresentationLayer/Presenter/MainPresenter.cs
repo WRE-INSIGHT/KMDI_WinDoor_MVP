@@ -948,6 +948,10 @@ namespace PresentationLayer.Presenter
         public void DeductPanelGlassID()
         {
             _windoorModel.PanelGlassID_Counter -= 1;
+        }
+
+        public void SetPanelGlassID()
+        {
             _windoorModel.SetPanelGlassID();
         }
 

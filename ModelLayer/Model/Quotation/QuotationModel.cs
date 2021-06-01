@@ -492,7 +492,6 @@ namespace ModelLayer.Model.Quotation
                 total_glassHeight = 0,
                 glazing_seal = 0,
                 glazing_spacer = 0;
-            ;
 
             foreach (IFrameModel frame in item.GetAllVisibleFrames())
             {
@@ -519,8 +518,6 @@ namespace ModelLayer.Model.Quotation
 
                 if (frame.GetVisibleMultiPanels().Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
                 {
-                    int loop_counter = 1;
-
                     foreach (IMultiPanelModel mpnl in frame.GetVisibleMultiPanels())
                     {
                         List<IPanelModel> panels = mpnl.GetVisiblePanels().ToList();
@@ -800,19 +797,19 @@ namespace ModelLayer.Model.Quotation
                                     glazing_seal += (pnl_curCtrl.Panel_GlazingBeadWidth * 2) + (pnl_curCtrl.Panel_GlazingBeadHeight * 2);
                                 }
 
-                                Material_List.Rows.Add("Glazing Bead Width (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
+                                Material_List.Rows.Add("Glazing Bead Width (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                            2, "pc(s)",
                                                            pnl_curCtrl.Panel_GlazingBeadWidth.ToString());
 
-                                Material_List.Rows.Add("Glazing Bead Height (P" + loop_counter + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
+                                Material_List.Rows.Add("Glazing Bead Height (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
                                                        pnl_curCtrl.Panel_GlazingBeadHeight.ToString());
 
-                                Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
+                                Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThickness + "-P" + pnl_curCtrl.PanelGlass_ID + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassWidth.ToString());
 
-                                Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + "-P" + loop_counter + ")",
+                                Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + "-P" + pnl_curCtrl.PanelGlass_ID + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassHeight.ToString());
                                 glazing_spacer++;
@@ -820,7 +817,6 @@ namespace ModelLayer.Model.Quotation
                                 total_glassWidth += (pnl_curCtrl.Panel_GlassWidth * 2);
                                 total_glassHeight += (pnl_curCtrl.Panel_GlassHeight * 2);
 
-                                loop_counter++;
                             }
                         }
                     }
@@ -830,19 +826,19 @@ namespace ModelLayer.Model.Quotation
                     IPanelModel pnl = frame.GetVisiblePanels().ToList()[0];
                     pnl.SetPanelExplosionValues_Panel(true);
 
-                    Material_List.Rows.Add("Glazing Bead Width " + pnl.PanelGlazingBead_ArtNo.ToString(),
+                    Material_List.Rows.Add("Glazing Bead Width (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                                2, "pc(s)",
                                                pnl.Panel_GlazingBeadWidth.ToString());
 
-                    Material_List.Rows.Add("Glazing Bead Height " + pnl.PanelGlazingBead_ArtNo.ToString(),
+                    Material_List.Rows.Add("Glazing Bead Height (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",
                                            pnl.Panel_GlazingBeadHeight.ToString());
 
-                    Material_List.Rows.Add("Glass Width (" + pnl.Panel_GlassThickness + ")",
+                    Material_List.Rows.Add("Glass Width (" + pnl.Panel_GlassThickness + "-P" + pnl.PanelGlass_ID + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassWidth.ToString());
 
-                    Material_List.Rows.Add("Glass Height (" + pnl.Panel_GlassThickness + ")",
+                    Material_List.Rows.Add("Glass Height (" + pnl.Panel_GlassThickness + "-P" + pnl.PanelGlass_ID + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassHeight.ToString());
                     glazing_spacer++;

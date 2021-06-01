@@ -280,6 +280,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
 
             _mainPresenter.DeductPanelGlassID();
+            _mainPresenter.SetPanelGlassID();
 
             #endregion
         }
@@ -425,6 +426,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_MarginToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("PanelGlass_ID", new Binding("PanelGlass_ID", _panelModel, "PanelGlass_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             
             return panelBinding;
         }
