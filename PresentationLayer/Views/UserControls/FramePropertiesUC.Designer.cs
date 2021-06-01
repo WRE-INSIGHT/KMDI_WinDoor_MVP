@@ -250,8 +250,7 @@
             // 
             // cmb_FrameProfile
             // 
-            this.cmb_FrameProfile.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_FrameProfile.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_FrameProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_FrameProfile.FormattingEnabled = true;
             this.cmb_FrameProfile.Location = new System.Drawing.Point(47, 48);
             this.cmb_FrameProfile.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);

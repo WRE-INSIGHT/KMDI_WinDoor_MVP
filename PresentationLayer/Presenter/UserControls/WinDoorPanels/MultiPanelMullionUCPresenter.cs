@@ -685,6 +685,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.MPanelProp_Height -= (228 + 1); //+1 on margin;
                 _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin;
+                _mainPresenter.DeductPanelGlassID();
             }
 
             var mullions = _mpnlCommons.GetAll(innerFlp, "MullionUC");
@@ -714,7 +715,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameModel.SetDeductFramePadding(false);
             }
-
+            
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
             {
                 pnl.Panel_Visibility = false;
@@ -723,9 +724,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 div.Div_Visible = false;
             }
-            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
             {
-                mpnl.MPanel_Visibility = false;
+                _frameModel.Lst_MultiPanel.Remove(mpnl);
             }
 
             _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)_multiPanelMullionUC);
@@ -736,7 +737,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.FrameProp_Height -= (129 + 3);
             }
 
-            _multiPanelModel.MPanel_Visibility = false;
+            _frameModel.Lst_MultiPanel.Remove(_multiPanelModel);
+            //_multiPanelModel.MPanel_Visibility = false;
 
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
@@ -768,6 +770,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
             }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.SetPanelGlassID();
 
             #endregion
         }

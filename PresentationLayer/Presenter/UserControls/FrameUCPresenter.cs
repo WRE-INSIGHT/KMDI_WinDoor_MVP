@@ -443,12 +443,27 @@ namespace PresentationLayer.Presenter.UserControls
         
         public void DeleteFrame()
         {
+            foreach (IPanelModel pnl in _frameModel.GetVisiblePanels())
+            {
+                _mainPresenter.DeductPanelGlassID();
+            }
+
+            foreach (IMultiPanelModel mpnl in _frameModel.GetVisibleMultiPanels())
+            {
+                foreach (IPanelModel pnl in mpnl.GetVisiblePanels())
+                {
+                    _mainPresenter.DeductPanelGlassID();
+                }
+            }
+
             _frameModel.Frame_Visible = false;
             _basePlatformUCP.ViewDeleteControl((UserControl)_frameUC);
             _basePlatformUCP.InvalidateBasePlatform();
             _basePlatformUCP.Invalidate_flpMain();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
+
+            _mainPresenter.SetPanelGlassID();
         }
 
         public void ViewDeleteControl(UserControl control)

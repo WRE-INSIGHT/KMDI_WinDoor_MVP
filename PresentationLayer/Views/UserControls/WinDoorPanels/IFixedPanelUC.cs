@@ -12,5 +12,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event PaintEventHandler fixedPanelUCPaintEventRaised;
         event EventHandler fixedPanelMouseEnterEventRaised;
         event EventHandler fixedPanelMouseLeaveEventRaised;
+
+        int PanelGlass_ID { get; set; }
     }
 }

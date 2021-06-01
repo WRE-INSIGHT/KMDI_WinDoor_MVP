@@ -67,7 +67,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["MPanel_Dock"]);
             this.DataBindings.Add(ModelBinding["MPanel_Width"]);
             this.DataBindings.Add(ModelBinding["MPanel_Height"]);
-            this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
+            //this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
             this.DataBindings.Add(ModelBinding["MPanel_Placement"]);
             //this.DataBindings.Add(ModelBinding["MPanel_Margin"]);
         }

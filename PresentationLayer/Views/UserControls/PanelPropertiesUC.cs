@@ -33,6 +33,21 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        private int _panelGlassID;
+        public int PanelGlass_ID
+        {
+            get
+            {
+                return _panelGlassID;
+            }
+
+            set
+            {
+                _panelGlassID = value;
+                lbl_PanelGlassID.Text = "P" + _panelGlassID;
+            }
+        }
+
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler ChkOrientationCheckChangedEventRaised;
         public event EventHandler CmbGlassThickSelectedValueChangedEventRaised;
@@ -74,6 +89,7 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
             cmb_GlassThick.DataBindings.Add(ModelBinding["Panel_GlassThickness"]);
             cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
+            this.DataBindings.Add(ModelBinding["PanelGlass_ID"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)

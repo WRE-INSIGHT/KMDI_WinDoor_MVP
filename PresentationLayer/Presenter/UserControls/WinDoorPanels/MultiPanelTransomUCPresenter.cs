@@ -697,6 +697,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.MPanelProp_Height -= (228 + 1); //+1 on margin;
                 _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin;
+                _mainPresenter.DeductPanelGlassID();
             }
 
             var mullions = _mpnlCommons.GetAll(innerFlp, "MullionUC");
@@ -735,9 +736,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 div.Div_Visible = false;
             }
-            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
             {
-                mpnl.MPanel_Visibility = false;
+                _frameModel.Lst_MultiPanel.Remove(mpnl);
             }
 
             _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)_multiPanelTransomUC);
@@ -748,7 +749,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.FrameProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin;
             }
 
-            _multiPanelModel.MPanel_Visibility = false;
+            _frameModel.Lst_MultiPanel.Remove(_multiPanelModel);
 
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
@@ -781,6 +782,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
 
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.SetPanelGlassID();
 
             #endregion
         }

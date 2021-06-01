@@ -507,7 +507,19 @@ namespace ModelLayer.Model.Quotation.Panel
 
         #region Explosion
 
-        public int PanelGlass_ID { get; set; }
+        private int _panelGlassID;
+        public int PanelGlass_ID
+        {
+            get
+            {
+                return _panelGlassID;
+            }
+            set
+            {
+                _panelGlassID = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private Glass_Thickness _panelGlassThickness;
         public Glass_Thickness Panel_GlassThickness
