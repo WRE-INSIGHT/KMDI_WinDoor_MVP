@@ -470,7 +470,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                         break;
                     }
                 }
-                foreach (IMultiPanelModel mpnl in fr.GetVisibleMultiPanels())
+                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                 {
                     foreach (IPanelModel pnl in mpnl.GetVisiblePanels())
                     {

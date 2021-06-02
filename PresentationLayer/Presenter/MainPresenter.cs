@@ -377,7 +377,7 @@ namespace PresentationLayer.Presenter
         {
             foreach (IFrameModel frames in _windoorModel.lst_frame.Where(fr => fr.Frame_Visible == true))
             {
-                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
                 {
                     foreach (Control ctrl in mpanel.MPanelLst_Objects)
                     {
@@ -450,7 +450,7 @@ namespace PresentationLayer.Presenter
         {
             foreach (IFrameModel frames in _windoorModel.lst_frame.Where(fr => fr.Frame_Visible == true))
             {
-                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
                 {
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {

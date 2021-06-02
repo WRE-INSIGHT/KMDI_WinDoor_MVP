@@ -75,7 +75,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 int added_width_child_pnls = value - _mpanelWidth;
                 if (MPanel_Type == "Transom")
                 {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                     {
                         mpnl.MPanel_Width += added_width_child_pnls;
                     }
@@ -90,7 +90,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Type == "Mullion")
                 {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                     {
                         if (mpnl.MPanel_Placement == "Last")
                         {
@@ -140,7 +140,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 int added_displaywidth_child_pnls = value - _mpanelDisplayWidth;
                 if (MPanel_Type == "Transom")
                 {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                     {
                         mpnl.MPanel_DisplayWidth += added_displaywidth_child_pnls;
                     }
@@ -155,7 +155,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Type == "Mullion")
                 {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                     {
                         if (mpnl.MPanel_Placement == "Last")
                         {
@@ -188,7 +188,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 int added_height_child_pnls = value - _mpanelHeight;
                 if (MPanel_Type == "Mullion")
                 {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                     {
                         mpnl.MPanel_Height += added_height_child_pnls;
                     }
@@ -203,7 +203,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Type == "Transom")
                 {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                     {
                         if (mpnl.MPanel_Placement == "Last")
                         {
@@ -253,7 +253,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 int added_displayheight_child_pnls = value - _mpanelDisplayHeight;
                 if (MPanel_Type == "Mullion")
                 {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                     {
                         mpnl.MPanel_DisplayHeight += added_displayheight_child_pnls;
                     }
@@ -268,7 +268,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Type == "Transom")
                 {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                     {
                         if (mpnl.MPanel_Placement == "Last")
                         {
@@ -797,7 +797,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void Reload_MultiPanelMargin()
         {
-            List<IMultiPanelModel> Lst_visibleMPanel = MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).ToList();
+            List<IMultiPanelModel> Lst_visibleMPanel = MPanelLst_MultiPanel.ToList();
             int visibleMPnl_count = Lst_visibleMPanel.Count();
 
             foreach (IMultiPanelModel mpnl in Lst_visibleMPanel)
@@ -841,7 +841,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public int GetNextIndex()
         {
             int visiblePanelCount = MPanelLst_Panel.Count(pnl => pnl.Panel_Visibility == true),
-                visibleMPanelCount = MPanelLst_MultiPanel.Count(mpnl => mpnl.MPanel_Visibility == true),
+                visibleMPanelCount = MPanelLst_MultiPanel.Count(),
                 visibleDivider = MPanelLst_Divider.Count(div => div.Div_Visible == true);
 
             return visiblePanelCount + visibleMPanelCount + visibleDivider;
@@ -997,7 +997,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     int totalHeight_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
                                                MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_HeightToBind) +
-                                               MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).Sum(mpnl => mpnl.MPanel_HeightToBind);
+                                               MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
                     int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
 
                     while (diff_MPanelHt_VS_MyCtrlsHeight > 0)
@@ -1010,7 +1010,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 diff_MPanelHt_VS_MyCtrlsHeight--;
                             }
                         }
-                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                         {
                             if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                             {
@@ -1024,7 +1024,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     int totalWidth_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) + 
                                               MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_WidthToBind) +
-                                              MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).Sum(mpnl => mpnl.MPanel_WidthToBind);
+                                              MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
                     int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
 
                     while (diff_MPanelWd_VS_MyCtrlsWidth > 0)
@@ -1037,7 +1037,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 diff_MPanelWd_VS_MyCtrlsWidth--;
                             }
                         }
-                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                         {
                             if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                             {
@@ -1058,7 +1058,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     int totalHeight_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
                                                MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_HeightToBind) +
-                                               MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).Sum(mpnl => mpnl.MPanel_HeightToBind);
+                                               MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
                     int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
 
                     while (diff_MPanelHt_VS_MyCtrlsHeight > 0)
@@ -1071,7 +1071,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 diff_MPanelHt_VS_MyCtrlsHeight--;
                             }
                         }
-                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                         {
                             if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                             {
@@ -1085,7 +1085,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     int totalWidth_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) +
                                               MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_WidthToBind) +
-                                              MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true).Sum(mpnl => mpnl.MPanel_WidthToBind);
+                                              MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
                     int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
 
                     while (diff_MPanelWd_VS_MyCtrlsWidth > 0)
@@ -1098,7 +1098,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 diff_MPanelWd_VS_MyCtrlsWidth--;
                             }
                         }
-                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                         {
                             if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                             {
@@ -1139,7 +1139,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 if (MPanel_Type == "Transom")
                 {
                     int totalDisplayHeight = GetVisiblePanels().Sum(pnl => pnl.Panel_DisplayHeight) +
-                                             GetVisibleMultiPanels().Sum(mpnl => mpnl.MPanel_DisplayHeight);
+                                             MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_DisplayHeight);
                     int diff_DisplayHt_VS_totalDisplayHt = MPanel_DisplayHeight - totalDisplayHeight;
 
                     while (diff_DisplayHt_VS_totalDisplayHt > 0)
@@ -1152,7 +1152,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 diff_DisplayHt_VS_totalDisplayHt--;
                             }
                         }
-                        foreach (IMultiPanelModel mpnl in GetVisibleMultiPanels())
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                         {
                             if (diff_DisplayHt_VS_totalDisplayHt > 0)
                             {
@@ -1165,7 +1165,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 else if (MPanel_Type == "Mullion")
                 {
                     int totalDisplayWidth = GetVisiblePanels().Sum(pnl => pnl.Panel_DisplayWidth) +
-                                             GetVisibleMultiPanels().Sum(mpnl => mpnl.MPanel_DisplayWidth);
+                                             MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_DisplayWidth);
                     int diff_DisplayWd_VS_totalDisplayWd = MPanel_DisplayWidth - totalDisplayWidth;
 
                     while (diff_DisplayWd_VS_totalDisplayWd > 0)
@@ -1178,7 +1178,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 diff_DisplayWd_VS_totalDisplayWd--;
                             }
                         }
-                        foreach (IMultiPanelModel mpnl in GetVisibleMultiPanels())
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                         {
                             if (diff_DisplayWd_VS_totalDisplayWd > 0)
                             {
@@ -1205,12 +1205,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
             return MPanelLst_Objects.Where(obj => obj.Visible == true);
         }
-
-        public IEnumerable<IMultiPanelModel> GetVisibleMultiPanels()
-        {
-            return MPanelLst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true);
-        }
-
+        
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,

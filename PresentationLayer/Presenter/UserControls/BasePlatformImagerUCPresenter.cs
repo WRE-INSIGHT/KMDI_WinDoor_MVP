@@ -148,7 +148,7 @@ namespace PresentationLayer.Presenter.UserControls
             Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
             basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
 
-            _windoorModel.WD_image = bm;
+            //_windoorModel.WD_image = bm;
             //bm.Save(@"C:\Users\KMDI\Pictures\Saved Pictures\2.png");
         }
 

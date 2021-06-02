@@ -720,9 +720,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 pnl.Panel_Visibility = false;
             }
-            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider.Where(div => div.Div_Visible == true))
+            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
             {
-                div.Div_Visible = false;
+                _frameModel.Lst_Divider.Remove(div);
+                //div.Div_Visible = false;
             }
             foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
             {
@@ -742,6 +743,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
+                _multiPanelModel.MPanel_ParentModel.MPanelLst_MultiPanel.Remove(_multiPanelModel);
                 _multiPanelModel.MPanel_ParentModel.Object_Indexer();
                 _multiPanelModel.MPanel_ParentModel.Reload_MultiPanelMargin();
                 _multiPanelModel.MPanel_ParentModel.Reload_PanelMargin();

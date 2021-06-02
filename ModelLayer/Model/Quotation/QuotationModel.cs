@@ -76,15 +76,15 @@ namespace ModelLayer.Model.Quotation
                     int glazing_seal = 0,
                         glazing_spacer = 0;
 
-                    if (frame.GetVisibleMultiPanels().Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
+                    if (frame.Lst_MultiPanel.Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
                     {
                         int loop_counter = 1;
 
-                        foreach (IMultiPanelModel mpnl in frame.GetVisibleMultiPanels())
+                        foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
                         {
                             List<IPanelModel> panels = mpnl.GetVisiblePanels().ToList();
                             List<IDividerModel> divs = mpnl.GetVisibleDividers().ToList();
-                            List<IMultiPanelModel> mpanels = mpnl.GetVisibleMultiPanels().ToList();
+                            List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
 
                             IDividerModel divTopOrLeft = null,
                                           divBotOrRight = null,
@@ -384,7 +384,7 @@ namespace ModelLayer.Model.Quotation
                             }
                         }
                     }
-                    else if (frame.GetVisiblePanels().Count() == 1 && frame.GetVisibleMultiPanels().Count() == 0)
+                    else if (frame.GetVisiblePanels().Count() == 1 && frame.Lst_MultiPanel.Count() == 0)
                     {
                         IPanelModel pnl = frame.GetVisiblePanels().ToList()[0];
                         pnl.SetPanelExplosionValues_Panel(true);
@@ -516,13 +516,13 @@ namespace ModelLayer.Model.Quotation
                                        2, "pc(s)",
                                        frame.Frame_ReinfHeight.ToString());
 
-                if (frame.GetVisibleMultiPanels().Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
+                if (frame.Lst_MultiPanel.Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
                 {
-                    foreach (IMultiPanelModel mpnl in frame.GetVisibleMultiPanels())
+                    foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
                     {
                         List<IPanelModel> panels = mpnl.GetVisiblePanels().ToList();
                         List<IDividerModel> divs = mpnl.GetVisibleDividers().ToList();
-                        List<IMultiPanelModel> mpanels = mpnl.GetVisibleMultiPanels().ToList();
+                        List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
 
                         IDividerModel divTopOrLeft = null,
                                       divBotOrRight = null,
@@ -821,7 +821,7 @@ namespace ModelLayer.Model.Quotation
                         }
                     }
                 }
-                else if (frame.GetVisiblePanels().Count() == 1 && frame.GetVisibleMultiPanels().Count() == 0)
+                else if (frame.GetVisiblePanels().Count() == 1 && frame.Lst_MultiPanel.Count() == 0)
                 {
                     IPanelModel pnl = frame.GetVisiblePanels().ToList()[0];
                     pnl.SetPanelExplosionValues_Panel(true);

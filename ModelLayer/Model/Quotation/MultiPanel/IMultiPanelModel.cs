@@ -54,6 +54,5 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         IEnumerable<IDividerModel> GetVisibleDividers();
         IEnumerable<IPanelModel> GetVisiblePanels();
         IEnumerable<Control> GetVisibleObjects();
-        IEnumerable<IMultiPanelModel> GetVisibleMultiPanels();
     }
 }

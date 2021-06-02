@@ -448,7 +448,7 @@ namespace PresentationLayer.Presenter.UserControls
                 _mainPresenter.DeductPanelGlassID();
             }
 
-            foreach (IMultiPanelModel mpnl in _frameModel.GetVisibleMultiPanels())
+            foreach (IMultiPanelModel mpnl in _frameModel.Lst_MultiPanel)
             {
                 foreach (IPanelModel pnl in mpnl.GetVisiblePanels())
                 {

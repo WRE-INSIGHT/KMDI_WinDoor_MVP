@@ -276,7 +276,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
         private void SetZoom()
         {
-            foreach (IMultiPanelModel mpnl in Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+            foreach (IMultiPanelModel mpnl in Lst_MultiPanel)
             {
                 mpnl.MPanel_Zoom = Frame_Zoom;
             }
@@ -327,12 +327,7 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             return Lst_Panel.Where(pnl => pnl.Panel_Visibility == true);
         }
-
-        public IEnumerable<IMultiPanelModel> GetVisibleMultiPanels()
-        {
-            return Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true);
-        }
-
+        
         #region Explosion
 
         FrameProfile_ArticleNo _frameArtNo;
