@@ -1,5 +1,8 @@
 ﻿using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Divider;
+using static ModelLayer.Model.Quotation.QuotationModel;
+using ModelLayer.Model.Quotation.MultiPanel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ServiceLayer.Services.DividerServices
 {
@@ -7,10 +10,15 @@ namespace ServiceLayer.Services.DividerServices
     {
         IDividerModel AddDividerModel(int divWD, int divHT, 
                                       Control divParent, 
-                                      UserControl divFrameGroup, 
                                       DividerModel.DividerType divType, 
-                                      bool divVisibility, 
-                                      int divID = 0, 
+                                      bool divVisibility,
+                                      float divZoom,
+                                      Divider_ArticleNo divArtNo,
+                                      int divDisplayWidth,
+                                      int divDisplayHeight,
+                                      IMultiPanelModel divMPanelParent,
+                                      int divID = 0,
+                                      float divImageRendererZoom = 1,
                                       string divFrameType = "",
                                       string divName = "");        
     }

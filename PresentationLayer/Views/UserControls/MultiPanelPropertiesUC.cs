@@ -27,8 +27,8 @@ namespace PresentationLayer.Views.UserControls
         }
 
         public event EventHandler MultiPanelPropertiesLoadEventRaised;
-        public event EventHandler NumHeightValueChangedEventRaised;
-        public event EventHandler NumWidthValueChangedEventRaised;
+        //public event EventHandler NumHeightValueChangedEventRaised;
+        //public event EventHandler NumWidthValueChangedEventRaised;
 
         public FlowLayoutPanel GetMultiPanelPropertiesFLP()
         {
@@ -40,11 +40,9 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(ModelBinding["MPanel_ID"]);
             this.DataBindings.Add(ModelBinding["MPanelProp_Height"]);
             lbl_MultiPanelName.DataBindings.Add(ModelBinding["MPanel_Name"]);
-            this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
+            //this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
             num_Width.DataBindings.Add(ModelBinding["MPanel_Width"]);
-            num_Width.DataBindings.Add(ModelBinding["MPanel_PNumEnable1"]);
             num_Height.DataBindings.Add(ModelBinding["MPanel_Height"]);
-            num_Height.DataBindings.Add(ModelBinding["MPanel_PNumEnable2"]);
         }
 
         public MultiPanelPropertiesUC()
@@ -56,17 +54,27 @@ namespace PresentationLayer.Views.UserControls
         {
             num_Height.Maximum = int.MaxValue;
             num_Width.Maximum = int.MaxValue;
+            
             EventHelpers.RaiseEvent(this, MultiPanelPropertiesLoadEventRaised, e);
+
+            if (lbl_MultiPanelName.Text.Contains("Transom"))
+            {
+                this.BackColor = SystemColors.ActiveCaption;
+            }
+            else if (lbl_MultiPanelName.Text.Contains("Mullion"))
+            {
+                this.BackColor = Color.MistyRose;
+            }
         }
 
         private void num_Width_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, NumWidthValueChangedEventRaised, e);
+            //EventHelpers.RaiseEvent(sender, NumWidthValueChangedEventRaised, e);
         }
 
         private void num_Height_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, NumHeightValueChangedEventRaised, e);
+            //EventHelpers.RaiseEvent(sender, NumHeightValueChangedEventRaised, e);
         }
 
         public void BringToFrontThis()

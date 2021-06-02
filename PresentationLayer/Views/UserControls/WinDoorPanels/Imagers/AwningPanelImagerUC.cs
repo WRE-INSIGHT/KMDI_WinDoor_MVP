@@ -45,8 +45,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
                 this.Invalidate();
             }
         }
-        
+
         public event PaintEventHandler awningPanelImagerUCPaintEventRaised;
+        public event EventHandler awningPanelImagerUCVisibleChangedEventRaised;
 
         public void InvalidateThis()
         {
@@ -59,13 +60,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
-            this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
+            this.DataBindings.Add(ModelBinding["Panel_Margin"]);
+            this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
         }
 
         private void AwningPanelImagerUC_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(this, awningPanelImagerUCPaintEventRaised, e);
+        }
+
+        private void AwningPanelImagerUC_VisibleChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, awningPanelImagerUCVisibleChangedEventRaised, e);
         }
     }
 }

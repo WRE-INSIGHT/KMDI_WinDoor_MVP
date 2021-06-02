@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
+using static ModelLayer.Model.Quotation.QuotationModel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -20,6 +22,15 @@ namespace ModelLayer.Model.Quotation.Frame
             Window = 26,
             Door = 33,
             Concrete
+        }
+
+        private static int _frame_basicDeduction = 10;
+        public int Frame_BasicDeduction
+        {
+            get
+            {
+                return _frame_basicDeduction;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -50,6 +61,21 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 _frameWidth = value;
                 FrameImageRenderer_Width = Convert.ToInt32(value * FrameImageRenderer_Zoom);
+                Frame_WidthToBind = (int)(value * Frame_Zoom);
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _frameWidth_toBind;
+        public int Frame_WidthToBind
+        {
+            get
+            {
+                return _frameWidth_toBind;
+            }
+            set
+            {
+                _frameWidth_toBind = value;
                 NotifyPropertyChanged();
             }
         }
@@ -64,7 +90,41 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 _frameHeight = value;
                 FrameImageRenderer_Height = Convert.ToInt32(value * FrameImageRenderer_Zoom);
+                Frame_HeightToBind = (int)(value * Frame_Zoom);
                 NotifyPropertyChanged();
+            }
+        }
+
+        private int _frameHeight_toBind;
+        public int Frame_HeightToBind
+        {
+            get
+            {
+                return _frameHeight_toBind;
+            }
+            set
+            {
+                _frameHeight_toBind = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int[] _arr_padding_norm = { 26, 33, 13, 15, 08, 10, 05, 07 }; //even index means window, odd index means door
+        private int[] _arr_padding_withmpnl = { 16, 23, 08, 12, 05, 07, 03, 06 }; //even index means window, odd index means door
+
+        public int[] Arr_padding_norm
+        {
+            get
+            {
+                return _arr_padding_norm;
+            }
+        }
+
+        public int[] Arr_padding_withmpnl
+        {
+            get
+            {
+                return _arr_padding_withmpnl;
             }
         }
 
@@ -72,36 +132,17 @@ namespace ModelLayer.Model.Quotation.Frame
         public Frame_Padding Frame_Type
         {
             get { return _frameType; }
-            set { _frameType = value;
-                if (value == Frame_Padding.Window)
+            set
+            {
+                _frameType = value;
+
+                if (_deductFramePadding_bool)
                 {
-                    if (_framePadding == new Padding(23)) //galing Door na deleted MultiPanel
-                    {
-                        Frame_Padding_int = new Padding(16);
-                    }
-                    else if(_framePadding == new Padding(33)) //galing Door
-                    {
-                        Frame_Padding_int = new Padding(26);
-                    }
-                    else if (_framePadding == new Padding(0)) //initial Load
-                    {
-                        Frame_Padding_int = new Padding(26);
-                    }
+                    FramePadding_Deduct();
                 }
-                else if (value == Frame_Padding.Door)
+                else
                 {
-                    if (_framePadding == new Padding(16)) //ibig sabihin nito galing Window
-                    {
-                        Frame_Padding_int = new Padding(23);
-                    }
-                    else if (_framePadding == new Padding(26))
-                    {
-                        Frame_Padding_int = new Padding(33);
-                    }
-                    else if (_framePadding == new Padding(0)) //initial Load
-                    {
-                        Frame_Padding_int = new Padding(33);
-                    }
+                    FramePadding_Default();
                 }
                 NotifyPropertyChanged();
             }
@@ -118,7 +159,25 @@ namespace ModelLayer.Model.Quotation.Frame
         public Padding Frame_Padding_int
         {
             get { return _framePadding; }
-            set { _framePadding = value; NotifyPropertyChanged(); }
+            set
+            {
+                if (value.All == 1)
+                {
+                    _framePadding = new Padding(2);
+                }
+                else
+                {
+                    _framePadding = value;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Padding _frameImagePadding;
+        public Padding FrameImageRenderer_Padding_int
+        {
+            get { return _frameImagePadding; }
+            set { _frameImagePadding = value; NotifyPropertyChanged(); }
         }
 
         private int _framePropHeight;
@@ -175,9 +234,139 @@ namespace ModelLayer.Model.Quotation.Frame
                 _frameImage_Zoom = value;
                 FrameImageRenderer_Width = Convert.ToInt32(Frame_Width * value);
                 FrameImageRenderer_Height = Convert.ToInt32(Frame_Height * value);
+
+                if (_deductFramePadding_bool)
+                {
+                    FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
+                }
+                else
+                {
+                    FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type) * FrameImageRenderer_Zoom));
+                }
                 NotifyPropertyChanged();
             }
         }
+
+        private float _frameZoom;
+        public float Frame_Zoom
+        {
+            get
+            {
+                return _frameZoom;
+            }
+
+            set
+            {
+                _frameZoom = value;
+                Frame_WidthToBind = (int)(Frame_Width * value);
+                Frame_HeightToBind = (int)(Frame_Height * value);
+
+                if (_deductFramePadding_bool)
+                {
+                    FramePadding_Deduct();
+                }
+                else
+                {
+                    FramePadding_Default();
+                }
+
+                SetZoom();
+            }
+        }
+
+        private void SetZoom()
+        {
+            foreach (IMultiPanelModel mpnl in Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+            {
+                mpnl.MPanel_Zoom = Frame_Zoom;
+            }
+
+            foreach (IPanelModel pnl in Lst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+            {
+                pnl.Panel_Zoom = Frame_Zoom;
+            }
+        }
+
+        private int _frameDeduction = 0;
+        public int Frame_Deduction
+        {
+            get
+            {
+                return _frameDeduction;
+            }
+        }
+
+        private void FramePadding_Deduct()
+        {
+            _frameDeduction = (int)(_frame_basicDeduction * Frame_Zoom);
+            Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom) - _frameDeduction);
+            FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
+        }
+
+        private void FramePadding_Default()
+        {
+            Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom));
+            FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type) * FrameImageRenderer_Zoom));
+        }
+
+        private bool _deductFramePadding_bool;
+        public void SetDeductFramePadding(bool mode)
+        {
+            _deductFramePadding_bool = mode;
+            if (mode == true)
+            {
+                FramePadding_Deduct();
+            }
+            else if (mode == false)
+            {
+                FramePadding_Default();
+            }
+        }
+
+        public IEnumerable<IPanelModel> GetVisiblePanels()
+        {
+            return Lst_Panel.Where(pnl => pnl.Panel_Visibility == true);
+        }
+
+        public IEnumerable<IMultiPanelModel> GetVisibleMultiPanels()
+        {
+            return Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true);
+        }
+
+        #region Explosion
+
+        FrameProfile_ArticleNo _frameArtNo;
+        public FrameProfile_ArticleNo Frame_ArtNo
+        {
+            get
+            {
+                return _frameArtNo;
+            }
+            set
+            {
+                _frameArtNo = value;
+                if (value == FrameProfile_ArticleNo._7502)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._R676;
+                }
+            }
+        }
+        public int Frame_ExplosionWidth { get; set; }
+        public int Frame_ExplosionHeight { get; set; }
+
+        public FrameReinf_ArticleNo Frame_ReinfArtNo { get; set; }
+        public int Frame_ReinfWidth { get; set; }
+        public int Frame_ReinfHeight { get; set; }
+
+        public void SetExplosionValues_Frame()
+        {
+            Frame_ExplosionWidth = _frameWidth + 5;
+            Frame_ExplosionHeight = _frameHeight + 5;
+            Frame_ReinfWidth = _frameWidth - (29 * 2) - 10;
+            Frame_ReinfHeight = _frameHeight - (29 * 2) - 10;
+        }
+
+        #endregion
 
         public FrameModel(int frameID,
                           string frameName,
@@ -188,7 +377,9 @@ namespace ModelLayer.Model.Quotation.Frame
                           List<IPanelModel> lst_panel,
                           List<IMultiPanelModel> lst_mpanel,
                           float frameImagerZoom,
-                          List<IDividerModel> lst_divider)
+                          List<IDividerModel> lst_divider,
+                          float frameZoom,
+                          FrameProfile_ArticleNo frameArtNo)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -196,20 +387,13 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Height = frameHt;
             Frame_Type = frameType;
             Frame_Visible = frameVisible;
-            FrameProp_Height = 183;
+            FrameProp_Height = 283;
             Lst_Panel = lst_panel;
             Lst_MultiPanel = lst_mpanel;
             FrameImageRenderer_Zoom = frameImagerZoom;
             Lst_Divider = lst_divider;
-
-            if (frameType == Frame_Padding.Window)
-            {
-                Frame_Padding_int = new Padding(26);
-            }
-            else if (frameType == Frame_Padding.Door)
-            {
-                Frame_Padding_int = new Padding(33);
-            }
+            Frame_Zoom = frameZoom;
+            Frame_ArtNo = frameArtNo;
         }
     }
 }

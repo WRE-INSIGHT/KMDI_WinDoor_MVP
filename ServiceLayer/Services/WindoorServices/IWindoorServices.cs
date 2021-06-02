@@ -20,5 +20,18 @@ namespace ServiceLayer.Services.WindoorServices
                                     string WD_Profile,
                                     List<IFrameModel> lst_frame);
         void ValidateModel(IWindoorModel windoorModel);
+        IWindoorModel AddWindoorModel(int WD_width,
+                                      int WD_height,
+                                      string WD_Profile,
+                                      int WD_ID,
+                                      string WD_name = "",
+                                      string WD_description = "",
+                                      int WD_quantity = 1,
+                                      bool WD_visibility = true,
+                                      bool WD_orientation = true,
+                                      float WD_zoom = 1.0f,
+                                      int WD_price = 0,
+                                      decimal WD_discount = 0.0M,
+                                      List<IFrameModel> lst_frame = null);
     }
 }

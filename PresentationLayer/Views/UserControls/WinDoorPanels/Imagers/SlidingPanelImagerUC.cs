@@ -47,6 +47,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
         }
 
         public event PaintEventHandler slidingPanelImagerUCPaintEventRaised;
+        public event EventHandler slidingPanelImagerUCVisibleChangedEventRaised;
 
         public void InvalidateThis()
         {
@@ -59,13 +60,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
-            this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
+            this.DataBindings.Add(ModelBinding["Panel_Margin"]);
+            this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
         }
 
         private void SlidingPanelImagerUC_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(this, slidingPanelImagerUCPaintEventRaised, e);
+        }
+
+        private void SlidingPanelImagerUC_VisibleChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, slidingPanelImagerUCVisibleChangedEventRaised, e);
         }
     }
 }

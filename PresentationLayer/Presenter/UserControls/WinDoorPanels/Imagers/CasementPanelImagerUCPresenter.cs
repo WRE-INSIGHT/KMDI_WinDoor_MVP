@@ -18,6 +18,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
         private IPanelModel _panelModel;
 
+        private IFrameImagerUCPresenter _frameImagerUCP;
+        private IMultiPanelMullionImagerUCPresenter _multiPanelMullionImagerUCP;
+        private IMultiPanelTransomImagerUCPresenter _multiPanelTransomImagerUCP;
+
         public CasementPanelImagerUCPresenter(ICasementPanelImagerUC casementImagerUC)
         {
             _casementImagerUC = casementImagerUC;
@@ -27,6 +31,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         private void SubscribeToEventsSetup()
         {
             _casementImagerUC.casementPanelImagerUCPaintEventRaised += _casementImagerUC_casementPanelImagerUCPaintEventRaised;
+            _casementImagerUC.casementPanelImagerUCVisibleChangedEventRaised += _casementImagerUC_casementPanelImagerUCVisibleChangedEventRaised;
+        }
+
+        private void _casementImagerUC_casementPanelImagerUCVisibleChangedEventRaised(object sender, EventArgs e)
+        {
+            if (((UserControl)sender).Visible == false)
+            {
+                if (_frameImagerUCP != null)
+                {
+                    _frameImagerUCP.DeleteControl((UserControl)_casementImagerUC);
+                }
+                else if (_multiPanelMullionImagerUCP != null)
+                {
+                    _multiPanelMullionImagerUCP.DeleteControl((UserControl)_casementImagerUC);
+                }
+                else if (_multiPanelTransomImagerUCP != null)
+                {
+                    _multiPanelTransomImagerUCP.DeleteControl((UserControl)_casementImagerUC);
+                }
+            }
         }
 
         private void _casementImagerUC_casementPanelImagerUCPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -37,23 +61,43 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
+            Color col = Color.Black;
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+
+            int outer_line = 10,
+                inner_line = 15;
+
+            if (_panelModel.Panel_Zoom == 0.19f)
+            {
+                outer_line = 5;
+                inner_line = 8;
+            }
+            else if (_panelModel.Panel_Zoom == 0.14f)
+            {
+                outer_line = 3;
+                inner_line = 7;
+            }
+            else if (_panelModel.Panel_Zoom == 0.10f)
+            {
+                outer_line = 3;
+                inner_line = 7;
+            }
+
+            g.DrawRectangle(new Pen(col, w), new Rectangle(0,
                                                            0,
                                                            casement.ClientRectangle.Width - w,
                                                            casement.ClientRectangle.Height - w));
 
-            Color col = Color.Black;
-            g.DrawRectangle(new Pen(col, w), new Rectangle(10,
-                                                           10,
-                                                           (casement.ClientRectangle.Width - 20) - w,
-                                                           (casement.ClientRectangle.Height - 20) - w));
+            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                           outer_line,
+                                                           (casement.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                           (casement.ClientRectangle.Height - (outer_line * 2)) - w));
 
-            g.DrawRectangle(new Pen(col, 3), new Rectangle(15,
-                                                           15,
-                                                           (casement.ClientRectangle.Width - 30) - w,
-                                                           (casement.ClientRectangle.Height - 30) - w));
+            g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                           inner_line,
+                                                           (casement.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                           (casement.ClientRectangle.Height - (inner_line * 2)) - w));
 
             Point sashPoint = new Point(casement.ClientRectangle.X, casement.ClientRectangle.Y);
 
@@ -87,13 +131,43 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         }
 
         public ICasementPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                              IPanelModel panelModel)
+                                                              IPanelModel panelModel,
+                                                              IFrameImagerUCPresenter frameImagerUCP)
         {
             unityC
                 .RegisterType<ICasementPanelImagerUC, CasementPanelImagerUC>()
                 .RegisterType<ICasementPanelImagerUCPresenter, CasementPanelImagerUCPresenter>();
             CasementPanelImagerUCPresenter casementImagerUCP = unityC.Resolve<CasementPanelImagerUCPresenter>();
             casementImagerUCP._panelModel = panelModel;
+            casementImagerUCP._frameImagerUCP = frameImagerUCP;
+
+            return casementImagerUCP;
+        }
+
+        public ICasementPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                              IPanelModel panelModel,
+                                                              IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP)
+        {
+            unityC
+                .RegisterType<ICasementPanelImagerUC, CasementPanelImagerUC>()
+                .RegisterType<ICasementPanelImagerUCPresenter, CasementPanelImagerUCPresenter>();
+            CasementPanelImagerUCPresenter casementImagerUCP = unityC.Resolve<CasementPanelImagerUCPresenter>();
+            casementImagerUCP._panelModel = panelModel;
+            casementImagerUCP._multiPanelMullionImagerUCP = multiPanelMullionImagerUCP;
+
+            return casementImagerUCP;
+        }
+
+        public ICasementPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                              IPanelModel panelModel, 
+                                                              IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP)
+        {
+            unityC
+                .RegisterType<ICasementPanelImagerUC, CasementPanelImagerUC>()
+                .RegisterType<ICasementPanelImagerUCPresenter, CasementPanelImagerUCPresenter>();
+            CasementPanelImagerUCPresenter casementImagerUCP = unityC.Resolve<CasementPanelImagerUCPresenter>();
+            casementImagerUCP._panelModel = panelModel;
+            casementImagerUCP._multiPanelTransomImagerUCP = multiPanelTransomImagerUCP;
 
             return casementImagerUCP;
         }
@@ -106,6 +180,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             panelBinding.Add("PanelImageRenderer_Width", new Binding("Width", _panelModel, "PanelImageRenderer_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelImageRenderer_Height", new Binding("Height", _panelModel, "PanelImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "PanelImageRenderer_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;

@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Divider;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -45,9 +47,11 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 _wdWidth = value;
                 WD_Dimension = value.ToString() + " x " + WD_height.ToString();
-                WD_width_4basePlatform = value + 70;
                 WD_width_4basePlatform_forImageRenderer = value + 70;
                 WD_zoom_forImageRenderer = GetZoom_forRendering();
+
+                WD_width_4basePlatform = value + 70; //(int)(value * WD_zoom) + 70;
+                WD_zoom = GetZoom_forRendering();
                 NotifyPropertyChanged();
             }
         }
@@ -94,9 +98,11 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 _wdHeight = value;
                 WD_Dimension = WD_width.ToString() + " x " + value.ToString();
-                WD_height_4basePlatform = value + 35;
                 WD_height_4basePlatform_forImageRenderer = value + 35;
-                WD_zoom_forImageRenderer = GetZoom_forRendering();
+                WD_zoom_forImageRenderer = GetZoom_forRendering(); //1.0f; //GetZoom_forRendering();
+
+                WD_height_4basePlatform = value + 35; // (int)(value * WD_zoom) + 35;
+                WD_zoom = GetZoom_forRendering();
                 NotifyPropertyChanged();
             }
         }
@@ -169,6 +175,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdZoom = value;
+                WD_width_4basePlatform = (int)((WD_width * value) + 70);
+                WD_height_4basePlatform = (int)((WD_height * value) + 35);
+                SetZoom();
                 NotifyPropertyChanged();
             }
         }
@@ -183,9 +192,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdZoomforImageRenderer = value;
-                WD_width_4basePlatform_forImageRenderer = Convert.ToInt32((WD_width_4basePlatform - 70) * value + 70);
-                WD_height_4basePlatform_forImageRenderer = Convert.ToInt32((WD_height_4basePlatform - 35) * value + 35);
-                SetFrameZoom();
+                WD_width_4basePlatform_forImageRenderer = Convert.ToInt32((WD_width * value) + 70);
+                WD_height_4basePlatform_forImageRenderer = Convert.ToInt32((WD_height * value) + 35);
+                SetImageRenderingZoom();
                 NotifyPropertyChanged();
             }
         }
@@ -307,96 +316,116 @@ namespace ModelLayer.Model.Quotation.WinDoor
             return lst_frame.Where(frame => frame.Frame_Visible == true);
         }
 
-        public int GetFrameCount()
+        private float[] _arr_zoomPercentage = { 0.10f, 0.13f, 0.17f, 0.26f, 0.50f, 1.0f };
+        public float[] Arr_ZoomPercentage
         {
-            int frameCount = 0;
-            try
+            get
             {
-                frameCount = lst_frame.Count();
+                return _arr_zoomPercentage;
             }
-            catch (Exception)
-            {
-                frameCount = 0;
-            }
-
-            return frameCount;
         }
 
-        public int GetPanelCount()
+        private int _frameIDCounter;
+        public int frameIDCounter
         {
-            int panelCount = 0;
-            try
+            get
             {
-                panelCount = lst_frame.SelectMany(pnl => pnl.Lst_Panel).Count();
+                return _frameIDCounter;
             }
-            catch (Exception)
+            set
             {
-                panelCount = 0;
+                _frameIDCounter = value;
             }
-           return panelCount;
         }
 
-        public int GetMultiPanelCount()
+        private int _panelIDCounter;
+        public int panelIDCounter
         {
-            int multiCount = 0;
-            try
+            get
             {
-                multiCount = lst_frame.SelectMany(mpnl => mpnl.Lst_MultiPanel).Count();
+                return _panelIDCounter;
             }
-            catch (Exception)
+            set
             {
-                multiCount = 0;
+                _panelIDCounter = value;
             }
-            return multiCount;
         }
 
-        public int GetDividerCount()
+        private int _mpanelIDCounter;
+        public int mpanelIDCounter
         {
-            int divCount = 0;
-            try
+            get
             {
-                divCount = lst_frame.SelectMany(div => div.Lst_Divider).Count();
+                return _mpanelIDCounter;
             }
-            catch (Exception)
+            set
             {
-                divCount = 0;
+                _mpanelIDCounter = value;
             }
-            return divCount;
         }
+
+        private int _divIDCounter;
+        public int divIDCounter
+        {
+            get
+            {
+                return _divIDCounter;
+            }
+            set
+            {
+                _divIDCounter = value;
+            }
+        }
+
+        public int PanelGlassID_Counter { get; set; }
 
         public float GetZoom_forRendering()
         {
             int area = _wdHeight * _wdWidth;
-            float zm = 0.0f;
+            float zm = 1.0f;
+
+            //if (area <= 1500000)
+            //{
+            //    zm = 1.00f;
+            //}
+            //else if (area > 1500000 && area <= 2500000)
+            //{
+            //    zm = 0.50f;
+            //}
+            //else if (area > 2500000)
+            //{
+            //    zm = 0.28f;
+            //}
+
             if (area <= 360000)
             {
-                zm = 1.00f;
+                zm = _arr_zoomPercentage[5];
             }
             else if (area > 360000 && area <= 1000000)
             {
-                zm = 0.50f;
+                zm = _arr_zoomPercentage[4];
             }
             else if (area > 1000000 && area <= 4000000)
             {
-                zm = 0.28f;
+                zm = _arr_zoomPercentage[3];
             }
             else if (area > 4000000 && area <= 9000000)
             {
-                zm = 0.19f;
+                zm = _arr_zoomPercentage[2];
             }
             else if (area > 9000000 && area <= 16000000)
             {
-                zm = 0.14f;
+                zm = _arr_zoomPercentage[1];
             }
             else if (area > 16000000)
             {
-                zm = 0.10f;
+                zm = _arr_zoomPercentage[0];
             }
 
             return zm;
         }
 
-        public void SetFrameZoom()
+        public void SetImageRenderingZoom()
         {
             if (lst_frame != null)
             {
@@ -408,8 +437,61 @@ namespace ModelLayer.Model.Quotation.WinDoor
                     {
                         pnl.PanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
                     }
+                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                    {
+                        mpnl.MPanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                    }
                 }
             }
         }
+
+        private void SetZoom()
+        {
+            if (lst_frame != null)
+            {
+                foreach (IFrameModel fr in lst_frame.Where(fr => fr.Frame_Visible == true))
+                {
+                    fr.Frame_Zoom = WD_zoom;
+                }
+            }
+        }
+
+        public void SetPanelGlassID()
+        {
+            int i = 0;
+            foreach (IFrameModel fr in lst_frame)
+            {
+                foreach (IPanelModel pnl in fr.GetVisiblePanels())
+                {
+                    pnl.PanelGlass_ID = i;
+                    i++;
+                    if (i == PanelGlassID_Counter)
+                    {
+                        break;
+                    }
+                }
+                foreach (IMultiPanelModel mpnl in fr.GetVisibleMultiPanels())
+                {
+                    foreach (IPanelModel pnl in mpnl.GetVisiblePanels())
+                    {
+                        i++;
+                        pnl.PanelGlass_ID = i;
+                        if (i == PanelGlassID_Counter)
+                        {
+                            break;
+                        }
+                    }
+                    if (i == PanelGlassID_Counter)
+                    {
+                        break;
+                    }
+                }
+                if (i == PanelGlassID_Counter)
+                {
+                    break;
+                }
+            }
+        }
+
     }
 }

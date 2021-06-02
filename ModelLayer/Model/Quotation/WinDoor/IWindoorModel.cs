@@ -1,11 +1,13 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using System.Collections.Generic;
 using System.Drawing;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
     public interface IWindoorModel
     {
+        float[] Arr_ZoomPercentage { get; }
         string WD_description { get; set; }
         string WD_profile { get; set; }
         decimal WD_discount { get; set; }
@@ -26,11 +28,14 @@ namespace ModelLayer.Model.Quotation.WinDoor
         Image WD_image { get; set; }
         List<IFrameModel> lst_frame { get; set; }
         IEnumerable<IFrameModel> GetAllVisibleFrames();
-        int GetFrameCount();
-        int GetPanelCount();
-        int GetMultiPanelCount();
-        int GetDividerCount();
+
+        int frameIDCounter { get;  set; }
+        int panelIDCounter { get;  set; }
+        int mpanelIDCounter { get; set; }
+        int divIDCounter { get; set; }
+        int PanelGlassID_Counter { get; set; }
         float GetZoom_forRendering();
-        void SetFrameZoom();
+        void SetImageRenderingZoom();
+        void SetPanelGlassID();
     }
 }

@@ -60,6 +60,20 @@ namespace PresentationLayer.Views
             }
         }
 
+        private float _zoom;
+        public float Zoom
+        {
+            get
+            {
+                return _zoom;
+            }
+            set
+            {
+                _zoom = value;
+                lblZoom.Text = Convert.ToInt32(value * 100).ToString() + "%";
+            }
+        }
+
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
@@ -68,7 +82,10 @@ namespace PresentationLayer.Views
         public event EventHandler PanelMainSizeChangedEventRaised;
         public event EventHandler CreateNewItemClickEventRaised;
         public event EventHandler LabelSizeClickEventRaised;
-        //public event MouseEventHandler CtrlUCfixedMouseDownEventRaised;
+        public event EventHandler ButtonPlusZoomClickEventRaised;
+        public event EventHandler ButtonMinusZoomClickEventRaised;
+        public event EventHandler DeleteToolStripButtonClickEventRaised;
+        public event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -89,9 +106,7 @@ namespace PresentationLayer.Views
         public void ThisBinding(Dictionary<string, Binding> binding)
         {
             lblSize.DataBindings.Add(binding["WD_Dimension"]);
-            //this.DataBindings.Add(binding["Frame_Width"]);
-            //this.DataBindings.Add(binding["Frame_Height"]);
-            //this.DataBindings.Add(binding["Frame_Padding"]);
+            this.DataBindings.Add(binding["WD_zoom"]);
         }
 
         public void RemoveBinding(Control ctrl)
@@ -173,16 +188,29 @@ namespace PresentationLayer.Views
             return this;
         }
 
-        //private void ctrlUC_fixed_MouseDown(object sender, MouseEventArgs e)
-        //{
-        //    ctrlUC_fixed.DoDragDrop(new FixedPanelUC(), DragDropEffects.Move);
-        //    MessageBox.Show("Test");
-        //    EventHelpers.RaiseMouseEvent(sender, CtrlUCfixedMouseDownEventRaised, e);
-        //}
+        public ToolStripLabel GetLblSelectedDivider()
+        {
+            return tsLbl_SelectedDivider;
+        }
 
-        //private void ctrlUC_fixed_Click(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("Test");
-        //}
+        private void btnMinusZoom_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ButtonMinusZoomClickEventRaised, e);
+        }
+
+        private void btnPlusZoom_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ButtonPlusZoomClickEventRaised, e);
+        }
+
+        private void deleteItemToolStripButton1_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, DeleteToolStripButtonClickEventRaised, e);
+        }
+
+        private void listOfMaterialsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ListOfMaterialsToolStripMenuItemClickEventRaised, e);
+        }
     }
 }

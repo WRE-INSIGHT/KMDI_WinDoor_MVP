@@ -33,12 +33,14 @@
             this.cmenu_mulltiP = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.divCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dividerEnabledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenu_mulltiP.SuspendLayout();
             this.SuspendLayout();
             // 
             // flp_MultiMullion
             // 
             this.flp_MultiMullion.AllowDrop = true;
+            this.flp_MultiMullion.BackColor = System.Drawing.SystemColors.Control;
             this.flp_MultiMullion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_MultiMullion.Location = new System.Drawing.Point(0, 0);
             this.flp_MultiMullion.Margin = new System.Windows.Forms.Padding(0);
@@ -56,23 +58,34 @@
             // 
             this.cmenu_mulltiP.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.divCountToolStripMenuItem,
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.dividerEnabledToolStripMenuItem});
             this.cmenu_mulltiP.Name = "cmenu_mulltiP";
-            this.cmenu_mulltiP.Size = new System.Drawing.Size(130, 48);
+            this.cmenu_mulltiP.Size = new System.Drawing.Size(157, 70);
             // 
             // divCountToolStripMenuItem
             // 
             this.divCountToolStripMenuItem.Name = "divCountToolStripMenuItem";
-            this.divCountToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.divCountToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.divCountToolStripMenuItem.Text = "Div-Count";
             this.divCountToolStripMenuItem.Click += new System.EventHandler(this.divCountToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // dividerEnabledToolStripMenuItem
+            // 
+            this.dividerEnabledToolStripMenuItem.Checked = true;
+            this.dividerEnabledToolStripMenuItem.CheckOnClick = true;
+            this.dividerEnabledToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.dividerEnabledToolStripMenuItem.Name = "dividerEnabledToolStripMenuItem";
+            this.dividerEnabledToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.dividerEnabledToolStripMenuItem.Text = "Divider Enabled";
+            this.dividerEnabledToolStripMenuItem.CheckedChanged += new System.EventHandler(this.dividerEnabledToolStripMenuItem_CheckedChanged);
             // 
             // MultiPanelMullionUC
             // 
@@ -84,6 +97,7 @@
             this.Name = "MultiPanelMullionUC";
             this.Size = new System.Drawing.Size(300, 300);
             this.SizeChanged += new System.EventHandler(this.MultiPanelMullionUC_SizeChanged);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MultiPanelMullionUC_Paint);
             this.cmenu_mulltiP.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -95,5 +109,6 @@
         private System.Windows.Forms.ContextMenuStrip cmenu_mulltiP;
         private System.Windows.Forms.ToolStripMenuItem divCountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dividerEnabledToolStripMenuItem;
     }
 }

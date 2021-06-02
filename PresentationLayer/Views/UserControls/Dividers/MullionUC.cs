@@ -17,8 +17,8 @@ namespace PresentationLayer.Views.UserControls.Dividers
         {
             InitializeComponent();
             //for mullion transparency
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            this.BackColor = Color.Transparent;
+            //this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            //this.BackColor = Color.Transparent;
         }
 
         private int _divID;
@@ -37,14 +37,18 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event MouseEventHandler mullionUCMouseDownEventRaised;
         public event MouseEventHandler mullionUCMouseMoveEventRaised;
         public event MouseEventHandler mullionUCMouseUpEventRaised;
+        public event MouseEventHandler mullionUCMouseDoubleClickedEventRaised;
         public event PaintEventHandler mullionUCPaintEventRaised;
-        public event EventHandler deleteToolStripMenuItemClickedEventRaised;
+        //public event EventHandler deleteToolStripMenuItemClickedEventRaised;
         public event EventHandler mullionUCMouseEnterEventRaised;
         public event EventHandler mullionUCMouseLeaveEventRaised;
+        public event EventHandler mullionUCSizeChangedEventRaised;
+        public event KeyEventHandler mullionUCKeyDownEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Div_ID"]);
+            this.DataBindings.Add(ModelBinding["Div_Name"]);
             this.DataBindings.Add(ModelBinding["Div_Visible"]);
             this.DataBindings.Add(ModelBinding["Div_Width"]);
             this.DataBindings.Add(ModelBinding["Div_Height"]);
@@ -72,15 +76,15 @@ namespace PresentationLayer.Views.UserControls.Dividers
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickedEventRaised, e);
+            //EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickedEventRaised, e);
         }
 
         private void MullionUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                cmenu_mullion.Show(new Point(MousePosition.X, MousePosition.Y));
-            }
+            //if (e.Button == MouseButtons.Right)
+            //{
+            //    cmenu_mullion.Show(new Point(MousePosition.X, MousePosition.Y));
+            //}
         }
 
         private void MullionUC_MouseEnter(object sender, EventArgs e)
@@ -96,6 +100,37 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public void InvalidateThis()
         {
             this.Invalidate();
+        }
+
+        private void MullionUC_SizeChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, mullionUCSizeChangedEventRaised, e);
+        }
+
+        private void MullionUC_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseKeyEvent(this, mullionUCKeyDownEventRaised, e);
+        }
+
+        private void MullionUC_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                case Keys.Up:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void MullionUC_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, mullionUCMouseDoubleClickedEventRaised, e);
+        }
+
+        public void FocusOnThis()
+        {
+            this.Focus();
         }
     }
 }

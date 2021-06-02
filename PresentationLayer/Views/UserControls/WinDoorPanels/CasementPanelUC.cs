@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
-    public partial class CasementPanelUC : UserControl, ICasementPanelUC
+    public partial class CasementPanelUC : UserControl, ICasementPanelUC, IPanelUC
     {
         private int _panelID;
         public int Panel_ID
@@ -37,6 +37,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+            set
+            {
+                _panelPlacement = value;
+            }
+        }
+
         public CasementPanelUC()
         {
             InitializeComponent();
@@ -51,12 +64,14 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
+            this.DataBindings.Add(ModelBinding["Panel_Name"]);
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
             this.DataBindings.Add(ModelBinding["Panel_Width"]);
             this.DataBindings.Add(ModelBinding["Panel_Height"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
+            this.DataBindings.Add(ModelBinding["Panel_Placement"]);
         }
 
         private void CasementPanelUC_Paint(object sender, PaintEventArgs e)

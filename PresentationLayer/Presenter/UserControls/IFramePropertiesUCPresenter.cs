@@ -7,6 +7,10 @@ namespace PresentationLayer.Presenter.UserControls
     public interface IFramePropertiesUCPresenter
     {
         IFramePropertiesUC GetFramePropertiesUC();
-        IFramePropertiesUCPresenter GetNewInstance(IFrameModel frameModel, IUnityContainer unityC, IFrameUC frameUC, IMainPresenter mainPresenter);
+        IFramePropertiesUCPresenter GetNewInstance(IFrameModel frameModel, 
+                                                   IUnityContainer unityC, 
+                                                   //IFrameUC frameUC, 
+                                                   IMainPresenter mainPresenter);
+        void SetFrameTypeRadioBtnEnabled(bool frameTypeEnabled);
     }
 }

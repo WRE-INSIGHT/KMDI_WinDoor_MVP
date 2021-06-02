@@ -48,6 +48,7 @@
             this.syncLocalToCloudToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invertOrientationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listOfMaterialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsBtnNwin = new System.Windows.Forms.ToolStripButton();
             this.tsBtnNdoor = new System.Windows.Forms.ToolStripButton();
@@ -62,6 +63,7 @@
             this.deleteItemToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tsp_Sync = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
+            this.tsLbl_SelectedDivider = new System.Windows.Forms.ToolStripLabel();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.pnlItems = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -76,8 +78,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pnlBot = new System.Windows.Forms.Panel();
-            this.lblWelcome = new System.Windows.Forms.Label();
+            this.btnPlusZoom = new System.Windows.Forms.Button();
+            this.btnMinusZoom = new System.Windows.Forms.Button();
             this.lblZoom = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
@@ -103,7 +107,7 @@
             this.mnsMainMenu.Name = "mnsMainMenu";
             this.mnsMainMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.mnsMainMenu.Size = new System.Drawing.Size(1084, 24);
-            this.mnsMainMenu.TabIndex = 2;
+            this.mnsMainMenu.TabIndex = 0;
             this.mnsMainMenu.Text = "msMain";
             // 
             // fileToolStripMenuItem
@@ -215,7 +219,8 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeSyncDirectoryToolStripMenuItem,
             this.syncLocalToCloudToolStripMenuItem,
-            this.editorToolStripMenuItem});
+            this.editorToolStripMenuItem,
+            this.listOfMaterialsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -247,6 +252,13 @@
             this.invertOrientationToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.invertOrientationToolStripMenuItem.Text = "Invert Orientation";
             // 
+            // listOfMaterialsToolStripMenuItem
+            // 
+            this.listOfMaterialsToolStripMenuItem.Name = "listOfMaterialsToolStripMenuItem";
+            this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.listOfMaterialsToolStripMenuItem.Text = "List of Materials";
+            this.listOfMaterialsToolStripMenuItem.Click += new System.EventHandler(this.listOfMaterialsToolStripMenuItem_Click);
+            // 
             // tsMain
             // 
             this.tsMain.AutoSize = false;
@@ -265,12 +277,13 @@
             this.tsprogress_Loading,
             this.deleteItemToolStripButton1,
             this.tsp_Sync,
-            this.tsLbl_Loading});
+            this.tsLbl_Loading,
+            this.tsLbl_SelectedDivider});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.tsMain.Size = new System.Drawing.Size(1084, 32);
-            this.tsMain.TabIndex = 4;
+            this.tsMain.TabIndex = 1;
             this.tsMain.Text = "toolStrip1";
             // 
             // tsBtnNwin
@@ -383,6 +396,7 @@
             this.deleteItemToolStripButton1.Size = new System.Drawing.Size(24, 29);
             this.deleteItemToolStripButton1.Text = "Delete item";
             this.deleteItemToolStripButton1.ToolTipText = "Delete item";
+            this.deleteItemToolStripButton1.Click += new System.EventHandler(this.deleteItemToolStripButton1_Click);
             // 
             // tsp_Sync
             // 
@@ -408,6 +422,15 @@
             this.tsLbl_Loading.Text = "Initializing";
             this.tsLbl_Loading.Visible = false;
             // 
+            // tsLbl_SelectedDivider
+            // 
+            this.tsLbl_SelectedDivider.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsLbl_SelectedDivider.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tsLbl_SelectedDivider.Name = "tsLbl_SelectedDivider";
+            this.tsLbl_SelectedDivider.Size = new System.Drawing.Size(134, 29);
+            this.tsLbl_SelectedDivider.Text = "TransomUC_1 Selected";
+            this.tsLbl_SelectedDivider.Visible = false;
+            // 
             // pnlRight
             // 
             this.pnlRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -426,7 +449,7 @@
             this.pnlItems.Location = new System.Drawing.Point(0, 29);
             this.pnlItems.Name = "pnlItems";
             this.pnlItems.Size = new System.Drawing.Size(166, 466);
-            this.pnlItems.TabIndex = 3;
+            this.pnlItems.TabIndex = 1;
             // 
             // label6
             // 
@@ -436,7 +459,7 @@
             this.label6.Location = new System.Drawing.Point(0, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(166, 29);
-            this.label6.TabIndex = 2;
+            this.label6.TabIndex = 0;
             this.label6.Text = "Items";
             // 
             // splitContainer1
@@ -474,7 +497,7 @@
             this.pnlControlSub.Location = new System.Drawing.Point(0, 29);
             this.pnlControlSub.Name = "pnlControlSub";
             this.pnlControlSub.Size = new System.Drawing.Size(130, 466);
-            this.pnlControlSub.TabIndex = 5;
+            this.pnlControlSub.TabIndex = 1;
             // 
             // label1
             // 
@@ -485,7 +508,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 29);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Controls";
             // 
             // pnlMain
@@ -496,7 +519,7 @@
             this.pnlMain.Location = new System.Drawing.Point(139, 0);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(639, 495);
-            this.pnlMain.TabIndex = 3;
+            this.pnlMain.TabIndex = 0;
             this.pnlMain.SizeChanged += new System.EventHandler(this.pnlMain_SizeChanged);
             // 
             // pnlProperties
@@ -538,7 +561,7 @@
             this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPropertiesBody.Name = "pnlPropertiesBody";
             this.pnlPropertiesBody.Size = new System.Drawing.Size(137, 464);
-            this.pnlPropertiesBody.TabIndex = 6;
+            this.pnlPropertiesBody.TabIndex = 1;
             // 
             // label2
             // 
@@ -558,39 +581,75 @@
             // 
             // pnlBot
             // 
-            this.pnlBot.Controls.Add(this.lblWelcome);
+            this.pnlBot.Controls.Add(this.btnPlusZoom);
+            this.pnlBot.Controls.Add(this.btnMinusZoom);
             this.pnlBot.Controls.Add(this.lblZoom);
+            this.pnlBot.Controls.Add(this.lblWelcome);
             this.pnlBot.Controls.Add(this.lblSize);
             this.pnlBot.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBot.Enabled = false;
             this.pnlBot.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlBot.Location = new System.Drawing.Point(0, 553);
             this.pnlBot.Name = "pnlBot";
-            this.pnlBot.Padding = new System.Windows.Forms.Padding(3);
+            this.pnlBot.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlBot.Size = new System.Drawing.Size(1084, 25);
             this.pnlBot.TabIndex = 8;
             // 
-            // lblWelcome
+            // btnPlusZoom
             // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblWelcome.Location = new System.Drawing.Point(982, 3);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(99, 19);
-            this.lblWelcome.TabIndex = 2;
-            this.lblWelcome.Text = "Welcome, User";
-            this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnPlusZoom.BackgroundImage = global::PresentationLayer.Properties.Resources.plus2_104px;
+            this.btnPlusZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPlusZoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPlusZoom.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPlusZoom.FlatAppearance.BorderSize = 0;
+            this.btnPlusZoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlusZoom.Location = new System.Drawing.Point(121, 1);
+            this.btnPlusZoom.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPlusZoom.Name = "btnPlusZoom";
+            this.btnPlusZoom.Size = new System.Drawing.Size(25, 23);
+            this.btnPlusZoom.TabIndex = 4;
+            this.btnPlusZoom.UseVisualStyleBackColor = true;
+            this.btnPlusZoom.Click += new System.EventHandler(this.btnPlusZoom_Click);
+            // 
+            // btnMinusZoom
+            // 
+            this.btnMinusZoom.BackgroundImage = global::PresentationLayer.Properties.Resources.minus2_104px;
+            this.btnMinusZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMinusZoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMinusZoom.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMinusZoom.FlatAppearance.BorderSize = 0;
+            this.btnMinusZoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinusZoom.Location = new System.Drawing.Point(96, 1);
+            this.btnMinusZoom.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMinusZoom.Name = "btnMinusZoom";
+            this.btnMinusZoom.Size = new System.Drawing.Size(25, 23);
+            this.btnMinusZoom.TabIndex = 3;
+            this.btnMinusZoom.UseVisualStyleBackColor = true;
+            this.btnMinusZoom.Click += new System.EventHandler(this.btnMinusZoom_Click);
             // 
             // lblZoom
             // 
             this.lblZoom.AutoSize = true;
             this.lblZoom.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblZoom.Location = new System.Drawing.Point(67, 3);
+            this.lblZoom.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZoom.Location = new System.Drawing.Point(67, 1);
+            this.lblZoom.Margin = new System.Windows.Forms.Padding(3);
             this.lblZoom.Name = "lblZoom";
-            this.lblZoom.Size = new System.Drawing.Size(44, 19);
+            this.lblZoom.Size = new System.Drawing.Size(29, 19);
             this.lblZoom.TabIndex = 1;
-            this.lblZoom.Text = "100%";
+            this.lblZoom.Text = "0%";
             this.lblZoom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblWelcome.Location = new System.Drawing.Point(982, 1);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(99, 19);
+            this.lblWelcome.TabIndex = 2;
+            this.lblWelcome.Text = "Welcome, User";
+            this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblSize
             // 
@@ -598,7 +657,7 @@
             this.lblSize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblSize.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblSize.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSize.Location = new System.Drawing.Point(3, 3);
+            this.lblSize.Location = new System.Drawing.Point(3, 1);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(64, 17);
             this.lblSize.TabIndex = 0;
@@ -695,5 +754,9 @@
         private System.Windows.Forms.Label lblZoom;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Panel pnlControlSub;
+        private System.Windows.Forms.ToolStripLabel tsLbl_SelectedDivider;
+        private System.Windows.Forms.Button btnMinusZoom;
+        private System.Windows.Forms.Button btnPlusZoom;
+        private System.Windows.Forms.ToolStripMenuItem listOfMaterialsToolStripMenuItem;
     }
 }

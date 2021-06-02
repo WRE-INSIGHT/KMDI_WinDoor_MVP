@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.Name = "SlidingPanelImagerUC";
+            this.VisibleChanged += new System.EventHandler(this.SlidingPanelImagerUC_VisibleChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.SlidingPanelImagerUC_Paint);
             this.ResumeLayout(false);
 

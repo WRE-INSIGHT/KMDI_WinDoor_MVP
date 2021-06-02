@@ -12,6 +12,21 @@
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,9 +48,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MetroFramework">
-      <HintPath>..\..\..\toolkit\MetroFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,7 +74,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonMethods\CommonFunctions.cs" />
+    <Compile Include="Presenter\ExplosionPresenter.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
+    <Compile Include="Presenter\IExplosionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
@@ -73,6 +88,11 @@
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\Dividers\Imagers\IMullionImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\Dividers\Imagers\ITransomImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\Dividers\Imagers\MullionImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\Dividers\Imagers\TransomImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\IMullionUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\ITransomUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\MullionUCPresenter.cs" />
@@ -83,6 +103,7 @@
     <Compile Include="Presenter\UserControls\IBasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\IControlsUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IDividerPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFrameImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFramePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFrameUCPresenter.cs" />
@@ -104,7 +125,11 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\IAwningPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\ICasementPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\IFixedPanelImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\IMultiPanelMullionImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\IMultiPanelTransomImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\ISlidingPanelImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\MultiPanelMullionImagerUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\MultiPanelTransomImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IMultiPanelMullionUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IMultiPanelTransomUCPresenter.cs" />
@@ -114,12 +139,19 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\SlidingPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ExplosionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ExplosionView.Designer.cs">
+      <DependentUpon>ExplosionView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmDimensionView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\frmDimensionView.Designer.cs">
       <DependentUpon>frmDimensionView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\IExplosionView.cs" />
     <Compile Include="Views\IfrmDimensionView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
@@ -160,6 +192,26 @@
     <Compile Include="Views\UserControls\ControlsUC.Designer.cs">
       <DependentUpon>ControlsUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\DividerPropertiesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\DividerPropertiesUC.Designer.cs">
+      <DependentUpon>DividerPropertiesUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Dividers\Imagers\IMullionImagerUC.cs" />
+    <Compile Include="Views\UserControls\Dividers\Imagers\ITransomImagerUC.cs" />
+    <Compile Include="Views\UserControls\Dividers\Imagers\MullionImagerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\Dividers\Imagers\MullionImagerUC.Designer.cs">
+      <DependentUpon>MullionImagerUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Dividers\Imagers\TransomImagerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\Dividers\Imagers\TransomImagerUC.Designer.cs">
+      <DependentUpon>TransomImagerUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\Dividers\IMullionUC.cs" />
     <Compile Include="Views\UserControls\Dividers\ITransomUC.cs" />
     <Compile Include="Views\UserControls\Dividers\MullionUC.cs">
@@ -195,6 +247,7 @@
     <Compile Include="Views\UserControls\IBasePlatformImagerUC.cs" />
     <Compile Include="Views\UserControls\IBasePlatformUC.cs" />
     <Compile Include="Views\UserControls\IControlsUC.cs" />
+    <Compile Include="Views\UserControls\IDividerPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IFrameImagerUC.cs" />
     <Compile Include="Views\UserControls\IFramePropertiesUC.cs" />
     <Compile Include="Views\UserControls\IFrameUC.cs" />
@@ -261,7 +314,21 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\ICasementPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IFixedPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\IFixedPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IMultiPanelMullionImagerUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IMultiPanelTransomImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\ISlidingPanelImagerUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\MultiPanelMullionImagerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\MultiPanelMullionImagerUC.Designer.cs">
+      <DependentUpon>MultiPanelMullionImagerUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\MultiPanelTransomImagerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\MultiPanelTransomImagerUC.Designer.cs">
+      <DependentUpon>MultiPanelTransomImagerUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -270,6 +337,8 @@
     </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\IMultiPanelMullionUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\IMultiPanelTransomUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\IMultiPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\IPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\ISlidingPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\MultiPanelMullionUC.cs">
       <SubType>UserControl</SubType>
@@ -347,6 +416,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\ExplosionView.resx">
+      <DependentUpon>ExplosionView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frmDimensionView.resx">
       <DependentUpon>frmDimensionView.cs</DependentUpon>
     </EmbeddedResource>
@@ -367,6 +439,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ControlsUC.resx">
       <DependentUpon>ControlsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\DividerPropertiesUC.resx">
+      <DependentUpon>DividerPropertiesUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\Dividers\Imagers\MullionImagerUC.resx">
+      <DependentUpon>MullionImagerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\Dividers\Imagers\TransomImagerUC.resx">
+      <DependentUpon>TransomImagerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\Dividers\MullionUC.resx">
       <DependentUpon>MullionUC.cs</DependentUpon>
@@ -409,6 +490,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\FixedPanelUC.resx">
       <DependentUpon>FixedPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Imagers\MultiPanelMullionImagerUC.resx">
+      <DependentUpon>MultiPanelMullionImagerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Imagers\MultiPanelTransomImagerUC.resx">
+      <DependentUpon>MultiPanelTransomImagerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUC.resx">
       <DependentUpon>SlidingPanelImagerUC.cs</DependentUpon>
@@ -505,6 +592,10 @@
       <Project>{2af3ca7c-6526-430e-99d8-cad6e29cb83b}</Project>
       <Name>CommonComponents</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EnumerationTypeLayer\EnumerationTypeLayer.csproj">
+      <Project>{abbe8dce-df8f-44ab-8d0f-217a633105b3}</Project>
+      <Name>EnumerationTypeLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModelLayer\ModelLayer.csproj">
       <Project>{ba9438ac-96c8-4b54-9bc4-0422acb011d0}</Project>
       <Name>ModelLayer</Name>
@@ -517,6 +608,18 @@
       <Project>{f1988357-36f0-43b6-a1ea-ee16dfbbca03}</Project>
       <Name>ServiceLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -14,10 +14,14 @@ namespace PresentationLayer.Views
         event EventHandler PanelMainSizeChangedEventRaised;
         event EventHandler CreateNewItemClickEventRaised;
         event EventHandler LabelSizeClickEventRaised;
-        //event MouseEventHandler CtrlUCfixedMouseDownEventRaised;
+        event EventHandler ButtonPlusZoomClickEventRaised;
+        event EventHandler ButtonMinusZoomClickEventRaised;
+        event EventHandler DeleteToolStripButtonClickEventRaised;
+        event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
+
         string Nickname { set; }
-        //string ofd_InitialDirectory { get; set; }
         string mainview_title { get; set; }
+        float Zoom { get; set; }
         bool ItemToolStripEnabled { get;  set; }
         bool CreateNewWindoorBtnEnabled { get; set; }
         void ShowMainView();
@@ -29,6 +33,7 @@ namespace PresentationLayer.Views
         Panel GetPanelBot();
         Panel GetPanelControlSub();
         Label GetLblSize();
+        ToolStripLabel GetLblSelectedDivider();
         Form GetThis();
     }
 }

@@ -31,19 +31,19 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        public Padding thisPadding
-        {
-            get
-            {
-                return this.Padding;
-            }
+        //public Padding thisPadding
+        //{
+        //    get
+        //    {
+        //        return this.Padding;
+        //    }
 
-            set
-            {
-                this.Padding = value;
-                this.Invalidate();
-            }
-        }
+        //    set
+        //    {
+        //        this.Padding = value;
+        //        this.Invalidate();
+        //    }
+        //}
 
         public FrameUC()
         {
@@ -57,6 +57,8 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler frameMouseEnterEventRaised;
         public event EventHandler frameMouseLeaveEventRaised;
         public event DragEventHandler frameDragDropEventRaised;
+        public event ControlEventHandler frameControlAddedEventRaised;
+        public event ControlEventHandler frameControlRemovedEventRaised;
 
         private void FrameUC_Paint(object sender, PaintEventArgs e)
         {
@@ -103,11 +105,6 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(binding["Frame_Name"]);
         }
 
-        private void pnl_inner_DragOver(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Move;
-        }
-
         private void FrameUC_DragDrop(object sender, DragEventArgs e)
         {
             EventHelpers.RaiseDragEvent(this, frameDragDropEventRaised, e);
@@ -115,16 +112,25 @@ namespace PresentationLayer.Views.UserControls
 
         private void FrameUC_DragOver(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            if (this.Controls.Count == 0)
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+            else if (this.Controls.Count > 0)
+            {
+                e.Effect = DragDropEffects.None;
+            }
         }
 
         private void FrameUC_ControlAdded(object sender, ControlEventArgs e)
         {
+            EventHelpers.RaiseControlEvent(sender, frameControlAddedEventRaised, e);
             this.Invalidate();
         }
 
         private void FrameUC_ControlRemoved(object sender, ControlEventArgs e)
         {
+            EventHelpers.RaiseControlEvent(sender, frameControlRemovedEventRaised, e);
             this.Invalidate();
         }
 
@@ -161,35 +167,14 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        public Bitmap GetImageThis()
+        private void FrameUC_PaddingChanged(object sender, EventArgs e)
         {
-            Bitmap bgThis = new Bitmap(this.Width, this.Height);
-            this.DrawToBitmap(bgThis, new Rectangle(0, 0, this.Width, this.Height));
+            this.Invalidate();
+        }
 
-            //bgThis.Save(@"C:\Users\KMDI\Documents\Windoor Maker files\img\3.png", System.Drawing.Imaging.ImageFormat.Jpeg);
-
-            int crop_wd = this.Width - (thisPadding.All * 2),
-                crop_ht = this.Height - (thisPadding.All * 2);
-
-            Bitmap cropped = new Bitmap(crop_wd, crop_ht);
-
-            //Load image from file
-            using (Bitmap image = new Bitmap(bgThis))
-            {
-                // Create a Graphics object to do the drawing, *with the new bitmap as the target*
-                using (Graphics g = Graphics.FromImage(cropped))
-                {
-                    // Draw the desired area of the original into the graphics object
-                    g.DrawImage(image, new Rectangle(0, 0, crop_wd, crop_ht), 
-                                       new Rectangle(thisPadding.All, thisPadding.All, crop_wd, crop_ht), 
-                                       GraphicsUnit.Pixel);
-                    // Save the result
-                    //cropped.Save(@"C:\Users\KMDI\Documents\Windoor Maker files\img\2.png");
-                }
-            }
-
-            //cropped.Save(@"C:\Users\KMDI\Documents\Windoor Maker files\img\4.png", System.Drawing.Imaging.ImageFormat.Jpeg);
-            return cropped;
+        private void FrameUC_SizeChanged(object sender, EventArgs e)
+        {
+            InvalidateThis();
         }
     }
 }

@@ -9,21 +9,29 @@ namespace CommonComponents
 {
     public static class EventHelpers
     {
-        public static void RaiseEvent(Object objectRaisingEvent, EventHandler eventHandlerRaised, EventArgs eventArgs)
+        public static void RaiseEvent(object objectRaisingEvent, EventHandler eventHandlerRaised, EventArgs eventArgs)
         {
             eventHandlerRaised?.Invoke(objectRaisingEvent, eventArgs); // Notify all subscribers
         }
-        public static void RaiseMouseEvent(Object objectRaisingEvent, MouseEventHandler mouseeventHandlerRaised, MouseEventArgs mouseeventArgs)
+        public static void RaiseMouseEvent(object objectRaisingEvent, MouseEventHandler mouseeventHandlerRaised, MouseEventArgs mouseeventArgs)
         {
             mouseeventHandlerRaised?.Invoke(objectRaisingEvent, mouseeventArgs); // Notify all subscribers
         }
-        public static void RaisePaintEvent(Object objectRaisingEvent, PaintEventHandler paintEventHandlerRaised, PaintEventArgs paintEventArgs)
+        public static void RaisePaintEvent(object objectRaisingEvent, PaintEventHandler paintEventHandlerRaised, PaintEventArgs paintEventArgs)
         {
             paintEventHandlerRaised?.Invoke(objectRaisingEvent, paintEventArgs); // Notify all subscribers
         }
-        public static void RaiseDragEvent(Object objectRaisingEvent, DragEventHandler dragEventHandlerRaised, DragEventArgs dragEventArgs)
+        public static void RaiseDragEvent(object objectRaisingEvent, DragEventHandler dragEventHandlerRaised, DragEventArgs dragEventArgs)
         {
             dragEventHandlerRaised?.Invoke(objectRaisingEvent, dragEventArgs); // Notify all subscribers
+        }
+        public static void RaiseKeyEvent(object objectRaisingEvent, KeyEventHandler keyEventHandlerRaised, KeyEventArgs keyEventArgs)
+        {
+            keyEventHandlerRaised?.Invoke(objectRaisingEvent, keyEventArgs); // Notify all subscribers
+        }
+        public static void RaiseControlEvent(object objectRaisingEvent, ControlEventHandler controlEventHandlerRaised, ControlEventArgs controlEventArgs)
+        {
+            controlEventHandlerRaised?.Invoke(objectRaisingEvent, controlEventArgs);
         }
     }
 }

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PresentationLayer.Views.UserControls;
+﻿using CommonComponents;
 using ModelLayer.Model.Quotation.WinDoor;
-using System.Windows.Forms;
+using PresentationLayer.Views.UserControls;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Windows.Forms;
 using Unity;
-using CommonComponents;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -33,7 +31,7 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatfomrUC.basePlatformSizeChangedEventRaised += new EventHandler(OnbasePlatformSizeChangedEventRaised);
             _basePlatfomrUC.flpFrameDragDropPaintEventRaised += new PaintEventHandler(OnflpFrameDragDropPaintEventRaised);
         }
-        
+
         private void OnflpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
         {
             Panel pnl = (Panel)sender;
@@ -58,6 +56,26 @@ namespace PresentationLayer.Presenter.UserControls
             int cX, cY;
             cX = (pnlMain.Width - basePlatform.Width) / 2;
             cY = (pnlMain.Height - basePlatform.Height) / 2;
+
+            //if (basePlatform.Width > pnlMain.Width)
+            //{
+            //    cX = 5;
+            //}
+            //else
+            //{
+            //    cX -= 17;
+            //}
+
+            //if (basePlatform.Height > pnlMain.Height)
+            //{
+            //    cY = 5;
+            //}
+            //else
+            //{
+            //    cY -= 35;
+            //}
+
+            //basePlatform.Location = new Point(cX, cY);
 
             if (cX <= 30 && cY <= 30)
             {
@@ -110,7 +128,6 @@ namespace PresentationLayer.Presenter.UserControls
                 dmnsion_w_endP,
                 new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
             };
-            ;
 
             if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
             {
@@ -166,15 +183,15 @@ namespace PresentationLayer.Presenter.UserControls
                                       TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
             }
             //arrow for HEIGHT
-            
+
         }
-        
+
         public IBasePlatformUC getBasePlatformViewUC()
         {
             _basePlatfomrUC.ThisBinding(CreateBindingDictionary());
             return _basePlatfomrUC;
         }
-        
+
         public void AddFrame(IFrameUC frame)
         {
             _flpMain.Controls.Add((UserControl)frame);
@@ -190,16 +207,64 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatfomrUC.PerformLayoutThis();
         }
 
+
+        int TotalSumWD;
         public List<int> lst_wd_toPaint(int flpMain_width, List<int> lst_ctrlWds)
         {
+
             List<int> lst_wd = new List<int>();
+            List<int> Arrange_lst_wd = new List<int>();
+            Arrange_lst_wd = lst_ctrlWds.OrderBy(x => x).ToList();
+
+            for (int i = 0; i < lst_ctrlWds.Count; i++)
+            {
+                TotalSumWD += Arrange_lst_wd[i];
+
+
+
+                if (flpMain_width < TotalSumWD)
+                {
+                    break;
+                }
+                else
+                {
+                    lst_wd.Add(Arrange_lst_wd[i]);
+                }
+            }
+
 
             return lst_wd;
+
+
         }
 
+
+        int TotalSumHeight;
         public List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts)
         {
             List<int> lst_ht = new List<int>();
+            List<int> Arrange_lst_Height = new List<int>();
+            Arrange_lst_Height = lst_ctrlHts.OrderBy(x => x).ToList();
+
+
+
+            for (int i = 0; i < Arrange_lst_Height.Count; i++)
+            {
+                TotalSumHeight += Arrange_lst_Height[i];
+
+
+
+                if (flpMain_height < TotalSumHeight)
+                {
+                    break;
+                }
+                else
+                {
+                    lst_ht.Add(Arrange_lst_Height[i]);
+                }
+            }
+
+
 
             return lst_ht;
         }
@@ -234,6 +299,15 @@ namespace PresentationLayer.Presenter.UserControls
         public void ViewDeleteControl(UserControl control)
         {
             _flpMain.Controls.Remove(control);
+        }
+
+        public void Invalidate_flpMainControls()
+        {
+            foreach (IFrameUC frames in _flpMain.Controls)
+            {
+                frames.InvalidateThis();
+                frames.InvalidateThisControls();
+            }
         }
     }
 }

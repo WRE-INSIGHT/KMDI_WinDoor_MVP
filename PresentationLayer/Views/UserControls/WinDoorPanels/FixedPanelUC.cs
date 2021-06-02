@@ -11,7 +11,7 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
-    public partial class FixedPanelUC : UserControl, IFixedPanelUC
+    public partial class FixedPanelUC : UserControl, IFixedPanelUC, IPanelUC
     {
         public FixedPanelUC()
         {
@@ -46,6 +46,33 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+            set
+            {
+                _panelPlacement = value;
+            }
+        }
+
+        private int _panelGlassID;
+        public int PanelGlass_ID
+        {
+            get
+            {
+                return _panelGlassID;
+            }
+            set
+            {
+                _panelGlassID = value;
+                this.Invalidate();
+            }
+        }
+
         public event EventHandler fixedPanelUCSizeChangedEventRaised;
         public event EventHandler deleteToolStripClickedEventRaised;
         public event PaintEventHandler fixedPanelUCPaintEventRaised;
@@ -60,12 +87,15 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public void ThisBinding(Dictionary<string, Binding> binding)
         {
             this.DataBindings.Add(binding["Panel_ID"]);
+            this.DataBindings.Add(binding["Panel_Name"]);
             this.DataBindings.Add(binding["Panel_Dock"]);
             this.DataBindings.Add(binding["Panel_Width"]);
             this.DataBindings.Add(binding["Panel_Height"]);
             this.DataBindings.Add(binding["Panel_Visibility"]);
             this.DataBindings.Add(binding["Panel_Orient"]);
             this.DataBindings.Add(binding["Panel_Margin"]);
+            this.DataBindings.Add(binding["Panel_Placement"]);
+            this.DataBindings.Add(binding["PanelGlass_ID"]);
         }
 
         private void FixedPanelUC_SizeChanged(object sender, EventArgs e)

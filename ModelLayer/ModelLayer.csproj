@@ -61,7 +61,12 @@
     <Compile Include="Model\User\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EnumerationTypeLayer\EnumerationTypeLayer.csproj">
+      <Project>{ABBE8DCE-DF8F-44AB-8D0F-217A633105B3}</Project>
+      <Name>EnumerationTypeLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

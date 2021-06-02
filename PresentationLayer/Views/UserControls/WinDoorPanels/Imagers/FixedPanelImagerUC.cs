@@ -32,22 +32,29 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             }
         }
 
+        private bool _pnlOrientation;
+        public bool pnl_Orientation
+        {
+            get
+            {
+                return _pnlOrientation;
+            }
+
+            set
+            {
+                _pnlOrientation = value;
+                this.Invalidate();
+            }
+        }
+
         Color color = Color.Black;
 
-        public event PaintEventHandler lblFixedUCPaintEventRaised;
+        public event PaintEventHandler fixedPanelImagerUCPaintEventRaised;
+        public event EventHandler fixedPanelImagerUCVisibleChangedEventRaised;
 
         private void FixedPanelImagerUC_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            int w = 1;
-            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
-                                                           0,
-                                                           this.ClientRectangle.Width - w,
-                                                           this.ClientRectangle.Height - w));
+            EventHelpers.RaisePaintEvent(this, fixedPanelImagerUCPaintEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
@@ -56,12 +63,14 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
+            this.DataBindings.Add(ModelBinding["Panel_Orient"]);
+            this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
         }
 
-        private void lbl_Fixed_Paint(object sender, PaintEventArgs e)
+        private void FixedPanelImagerUC_VisibleChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaisePaintEvent(sender, lblFixedUCPaintEventRaised, e);
+            EventHelpers.RaiseEvent(sender, fixedPanelImagerUCVisibleChangedEventRaised, e);
         }
     }
 }

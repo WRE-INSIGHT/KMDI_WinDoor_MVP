@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
 using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
 
 namespace ServiceLayer.Services.MultiPanelServices
 {
@@ -11,14 +12,19 @@ namespace ServiceLayer.Services.MultiPanelServices
         void ValidateModel(IMultiPanelModel multiPanelModel);
         IMultiPanelModel AddMultiPanelModel(int mwidth,
                                             int mheight,
+                                            int mpanelDisplayWidth,
+                                            int mpanelDisplayHeight,
                                             Control mpanelParent,
                                             UserControl mpanelFrameGroup,
+                                            IFrameModel mpanelFrameModelParent,
                                             bool mvisible,
                                             FlowDirection mflow,
+                                            float mpanelZoom,
                                             int mid = 0,
                                             DockStyle mdock = DockStyle.Fill,
                                             int mpanelIndexInsideMPanel = 0,
                                             IMultiPanelModel mpanelParentModel = null,
+                                            float mpanelImageRendererZoom = 1,
                                             string mname = "",
                                             int mpanelDivisions = 1,
                                             List<IPanelModel> mpanelLstPanel = null,

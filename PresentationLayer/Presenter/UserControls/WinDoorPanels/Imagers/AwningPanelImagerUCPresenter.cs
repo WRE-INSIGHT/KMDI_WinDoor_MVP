@@ -18,6 +18,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
         private IPanelModel _panelModel;
 
+        private IFrameImagerUCPresenter _frameImagerUCP;
+
+        private IMultiPanelMullionImagerUCPresenter _multiPanelMullionImagerUCP;
+        private IMultiPanelTransomImagerUCPresenter _multiPanelTransomImagerUCP;
+
         public AwningPanelImagerUCPresenter(IAwningPanelImagerUC awningPanelImagerUC)
         {
             _awningPanelImagerUC = awningPanelImagerUC;
@@ -27,6 +32,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         private void SubscribeToEventsSetup()
         {
             _awningPanelImagerUC.awningPanelImagerUCPaintEventRaised += _awningPanelImagerUC_awningPanelImagerUCPaintEventRaised;
+            _awningPanelImagerUC.awningPanelImagerUCVisibleChangedEventRaised += _awningPanelImagerUC_awningPanelImagerUCVisibleChangedEventRaised;
+        }
+
+        private void _awningPanelImagerUC_awningPanelImagerUCVisibleChangedEventRaised(object sender, EventArgs e)
+        {
+            if (((UserControl)sender).Visible == false)
+            {
+                if (_frameImagerUCP != null)
+                {
+                    _frameImagerUCP.DeleteControl((UserControl)_awningPanelImagerUC);
+                }
+                else if (_multiPanelMullionImagerUCP != null)
+                {
+                    _multiPanelMullionImagerUCP.DeleteControl((UserControl)_awningPanelImagerUC);
+                }
+                else if (_multiPanelTransomImagerUCP != null)
+                {
+                    _multiPanelTransomImagerUCP.DeleteControl((UserControl)_awningPanelImagerUC);
+                }
+            }
         }
 
         private void _awningPanelImagerUC_awningPanelImagerUCPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -37,24 +62,43 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
+            Color col = Color.Black;
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+
+            int outer_line = 10,
+                inner_line = 15;
+
+            if (_panelModel.Panel_Zoom == 0.19f)
+            {
+                outer_line = 5;
+                inner_line = 8;
+            }
+            else if (_panelModel.Panel_Zoom == 0.14f)
+            {
+                outer_line = 3;
+                inner_line = 7;
+            }
+            else if (_panelModel.Panel_Zoom == 0.10f)
+            {
+                outer_line = 3;
+                inner_line = 7;
+            }
+
+            g.DrawRectangle(new Pen(col, w), new Rectangle(0,
                                                            0,
                                                            awning.ClientRectangle.Width - w,
                                                            awning.ClientRectangle.Height - w));
 
-            Color col = Color.Black;
-            g.DrawRectangle(new Pen(col, w), new Rectangle(10,
-                                                           10,
-                                                           (awning.ClientRectangle.Width - 20) - w,
-                                                           (awning.ClientRectangle.Height - 20) - w));
+            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                           outer_line,
+                                                           (awning.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                           (awning.ClientRectangle.Height - (outer_line * 2)) - w));
 
-            g.DrawRectangle(new Pen(col, 3), new Rectangle(15,
-                                                           15,
-                                                           (awning.ClientRectangle.Width - 30) - w,
-                                                           (awning.ClientRectangle.Height - 30) - w));
-
+            g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                           inner_line,
+                                                           (awning.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                           (awning.ClientRectangle.Height - (inner_line * 2)) - w));
 
             Point sashPoint = new Point(awning.ClientRectangle.X, awning.ClientRectangle.Y);
 
@@ -89,13 +133,43 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
 
         public IAwningPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                            IPanelModel panelModel)
+                                                            IPanelModel panelModel,
+                                                            IFrameImagerUCPresenter frameImagerUCP)
         {
             unityC
                 .RegisterType<IAwningPanelImagerUC, AwningPanelImagerUC>()
                 .RegisterType<IAwningPanelImagerUCPresenter, AwningPanelImagerUCPresenter>();
             AwningPanelImagerUCPresenter awningImagerUCP = unityC.Resolve<AwningPanelImagerUCPresenter>();
             awningImagerUCP._panelModel = panelModel;
+            awningImagerUCP._frameImagerUCP = frameImagerUCP;
+
+            return awningImagerUCP;
+        }
+
+        public IAwningPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                            IPanelModel panelModel, 
+                                                            IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP)
+        {
+            unityC
+                .RegisterType<IAwningPanelImagerUC, AwningPanelImagerUC>()
+                .RegisterType<IAwningPanelImagerUCPresenter, AwningPanelImagerUCPresenter>();
+            AwningPanelImagerUCPresenter awningImagerUCP = unityC.Resolve<AwningPanelImagerUCPresenter>();
+            awningImagerUCP._panelModel = panelModel;
+            awningImagerUCP._multiPanelMullionImagerUCP = multiPanelMullionImagerUCP;
+
+            return awningImagerUCP;
+        }
+
+        public IAwningPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                            IPanelModel panelModel, 
+                                                            IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP)
+        {
+            unityC
+                .RegisterType<IAwningPanelImagerUC, AwningPanelImagerUC>()
+                .RegisterType<IAwningPanelImagerUCPresenter, AwningPanelImagerUCPresenter>();
+            AwningPanelImagerUCPresenter awningImagerUCP = unityC.Resolve<AwningPanelImagerUCPresenter>();
+            awningImagerUCP._panelModel = panelModel;
+            awningImagerUCP._multiPanelTransomImagerUCP = multiPanelTransomImagerUCP;
 
             return awningImagerUCP;
         }
@@ -108,6 +182,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             panelBinding.Add("PanelImageRenderer_Width", new Binding("Width", _panelModel, "PanelImageRenderer_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelImageRenderer_Height", new Binding("Height", _panelModel, "PanelImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "PanelImageRenderer_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;

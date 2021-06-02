@@ -8,6 +8,7 @@ using ServiceLayer.CommonServices;
 using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
 
 namespace ServiceLayer.Services.MultiPanelServices
 {
@@ -35,7 +36,12 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  List<IMultiPanelModel> mpanelLstMultiPanel,
                                                  int mpanelIndexInsideMPanel,
                                                  List<Control> mpanelLstObjects,
-                                                 IMultiPanelModel mpanelParentModel)
+                                                 IMultiPanelModel mpanelParentModel,
+                                                 float mpanelImageRendererZoom,
+                                                 float mpanelZoom,
+                                                 IFrameModel mpanelFrameModelParent,
+                                                 int mpanelDisplayWidth,
+                                                 int mpanelDisplayHeight)
         {
             MultiPanelModel mp = new MultiPanelModel(mid,
                                                      mname,
@@ -52,7 +58,12 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                      mpanelLstMultiPanel,
                                                      mpanelIndexInsideMPanel,
                                                      mpanelLstObjects,
-                                                     mpanelParentModel);
+                                                     mpanelParentModel,
+                                                     mpanelImageRendererZoom,
+                                                     mpanelZoom,
+                                                     mpanelFrameModelParent,
+                                                     mpanelDisplayWidth,
+                                                     mpanelDisplayHeight);
 
             return mp;
         }
@@ -64,14 +75,19 @@ namespace ServiceLayer.Services.MultiPanelServices
 
         public IMultiPanelModel AddMultiPanelModel(int mwidth,
                                                    int mheight,
+                                                   int mpanelDisplayWidth,
+                                                   int mpanelDisplayHeight,
                                                    Control mpanelParent,
                                                    UserControl mpanelFrameGroup,
+                                                   IFrameModel mpanelFrameModelParent,
                                                    bool mvisible,
                                                    FlowDirection mflow,
+                                                   float mpanelZoom,
                                                    int mid = 0,
                                                    DockStyle mdock = DockStyle.Fill,
                                                    int mpanelIndexInsideMPanel = 0,
                                                    IMultiPanelModel mpanelParentModel = null,
+                                                   float mpanelImageRendererZoom = 1,
                                                    string mname = "",
                                                    int mpanelDivisions = 1,
                                                    List<IPanelModel> mpanelLstPanel = null,
@@ -101,10 +117,6 @@ namespace ServiceLayer.Services.MultiPanelServices
             {
                 mpanelLstMultiPanel = new List<IMultiPanelModel>();
             }
-            //if (mpanelLstObjects == null)
-            //{
-            //    mpanelLstObjects = new List<Control>();
-            //}
             IMultiPanelModel _multipanelModel = CreateMultiPanel(mid,
                                                                  mname,
                                                                  mwidth,
@@ -120,7 +132,12 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mpanelLstMultiPanel,
                                                                  mpanelIndexInsideMPanel,
                                                                  new List<Control>(),
-                                                                 mpanelParentModel);
+                                                                 mpanelParentModel, 
+                                                                 mpanelImageRendererZoom,
+                                                                 mpanelZoom,
+                                                                 mpanelFrameModelParent,
+                                                                 mpanelDisplayWidth,
+                                                                 mpanelDisplayHeight);
 
             return _multipanelModel;
         }

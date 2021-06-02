@@ -18,5 +18,6 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler RdBtnCheckedChangedEventRaised;
         void BringToFrontThis();
         FlowLayoutPanel GetFramePropertiesFLP();
+        void SetFrameTypeRadioBtnEnabled(bool frameTypeEnabled);
     }
 }

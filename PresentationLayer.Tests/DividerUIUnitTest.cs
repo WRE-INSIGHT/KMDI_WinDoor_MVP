@@ -76,7 +76,7 @@ namespace PresentationLayer.Tests
             frmDividerTesting frm = new frmDividerTesting();
 
             ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(UnityC);
-            ITransomUC transomUC = transomUCP.GetMullion("test");
+            //ITransomUC transomUC = transomUCP.GetMullion("test");
 
             FlowLayoutPanel flp_multi = new FlowLayoutPanel();
             flp_multi.Name = "multiPnl";
@@ -102,7 +102,7 @@ namespace PresentationLayer.Tests
             pnl2.Resize += Pnl_Resize;
 
             flp_multi.Controls.Add(pnl);
-            flp_multi.Controls.Add((UserControl)transomUC);
+            //flp_multi.Controls.Add((UserControl)transomUC);
             flp_multi.Controls.Add(pnl2);
 
             frm.ShowDialog();

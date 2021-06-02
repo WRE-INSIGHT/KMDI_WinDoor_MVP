@@ -47,6 +47,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
         }
 
         public event PaintEventHandler casementPanelImagerUCPaintEventRaised;
+        public event EventHandler casementPanelImagerUCVisibleChangedEventRaised;
 
         public void InvalidateThis()
         {
@@ -59,13 +60,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
-            this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
+            this.DataBindings.Add(ModelBinding["Panel_Margin"]);
+            this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
         }
 
         private void CasementPanelImagerUC_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(this, casementPanelImagerUCPaintEventRaised, e);
+        }
+
+        private void CasementPanelImagerUC_VisibleChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, casementPanelImagerUCVisibleChangedEventRaised, e);
         }
     }
 }

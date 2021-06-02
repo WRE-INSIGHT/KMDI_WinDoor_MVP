@@ -31,6 +31,9 @@ using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using ServiceLayer.Services.DividerServices;
 using ModelLayer.Model.Quotation.Divider;
+using PresentationLayer.Views.UserControls.Dividers.Imagers;
+using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
+using PresentationLayer.CommonMethods;
 
 namespace PresentationLayer
 {
@@ -43,7 +46,7 @@ namespace PresentationLayer
         static void Main()
         {
             IUnityContainer UnityC;
-            string _sqlconStr = "Data Source='121.58.229.248,49107';Network Library=DBMSSOCN;Initial Catalog='KMDIDATA';User ID='kmdiadmin';Password='kmdiadmin';";
+            string _sqlconStr = Properties.Settings.Default.slqcon;
 
             UnityC =
                 new UnityContainer()
@@ -133,17 +136,35 @@ namespace PresentationLayer
                 .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IMultiPanelMullionImagerUC, MultiPanelMullionImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMultiPanelMullionImagerUCPresenter, MultiPanelMullionImagerUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IMullionUC, MullionUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMullionUCPresenter, MullionUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IMullionImagerUC, MullionImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMullionImagerUCPresenter, MullionImagerUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IMultiPanelTransomUC, MultiPanelTransomUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelTransomUCPresenter, MultiPanelTransomUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IMultiPanelTransomImagerUC, MultiPanelTransomImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMultiPanelTransomImagerUCPresenter, MultiPanelTransomImagerUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<ITransomUC, TransomUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ITransomUCPresenter, TransomUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ITransomImagerUC, TransomImagerUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ITransomImagerUCPresenter, TransomImagerUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IMultiPanelPropertiesUC, MultiPanelPropertiesUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelPropertiesUCPresenter, MultiPanelPropertiesUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IDividerPropertiesUC, DividerPropertiesUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDividerPropertiesUCPresenter, DividerPropertiesUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IExplosionView, ExplosionView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IExplosionPresenter, ExplosionPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

@@ -18,6 +18,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
         private IPanelModel _panelModel;
 
+        private IFrameImagerUCPresenter _frameImagerUCP;
+
+        private IMultiPanelMullionImagerUCPresenter _multiPanelMullionImagerUCP;
+        private IMultiPanelTransomImagerUCPresenter _multiPanelTransomImagerUCP;
+
         public SlidingPanelImagerUCPresenter(ISlidingPanelImagerUC slidingPanelImagerUC)
         {
             _slidingPanelImagerUC = slidingPanelImagerUC;
@@ -27,6 +32,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
         private void SubscribeToEventsSetup()
         {
             _slidingPanelImagerUC.slidingPanelImagerUCPaintEventRaised += _slidingPanelImagerUC_slidingPanelImagerUCPaintEventRaised;
+            _slidingPanelImagerUC.slidingPanelImagerUCVisibleChangedEventRaised += _slidingPanelImagerUC_slidingPanelImagerUCVisibleChangedEventRaised;
+        }
+
+        private void _slidingPanelImagerUC_slidingPanelImagerUCVisibleChangedEventRaised(object sender, EventArgs e)
+        {
+            if (((UserControl)sender).Visible == false)
+            {
+                if (_frameImagerUCP != null)
+                {
+                    _frameImagerUCP.DeleteControl((UserControl)_slidingPanelImagerUC);
+                }
+                else if (_multiPanelMullionImagerUCP != null)
+                {
+                    _multiPanelMullionImagerUCP.DeleteControl((UserControl)_slidingPanelImagerUC);
+                }
+                else if (_multiPanelTransomImagerUCP != null)
+                {
+                    _multiPanelTransomImagerUCP.DeleteControl((UserControl)_slidingPanelImagerUC);
+                }
+            }
         }
 
         private void _slidingPanelImagerUC_slidingPanelImagerUCPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -40,20 +65,40 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             Color col = Color.Black;
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+
+            int outer_line = 10,
+                inner_line = 15;
+
+            if (_panelModel.Panel_Zoom == 0.19f)
+            {
+                outer_line = 5;
+                inner_line = 8;
+            }
+            else if (_panelModel.Panel_Zoom == 0.14f)
+            {
+                outer_line = 3;
+                inner_line = 7;
+            }
+            else if (_panelModel.Panel_Zoom == 0.10f)
+            {
+                outer_line = 3;
+                inner_line = 7;
+            }
+
             g.DrawRectangle(new Pen(col, w), new Rectangle(0,
                                                            0,
                                                            sliding.ClientRectangle.Width - w,
                                                            sliding.ClientRectangle.Height - w));
 
-            g.DrawRectangle(new Pen(col, w), new Rectangle(10,
-                                                           10,
-                                                           (sliding.ClientRectangle.Width - 20) - w,
-                                                           (sliding.ClientRectangle.Height - 20) - w));
+            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                           outer_line,
+                                                           (sliding.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                           (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
 
-            g.DrawRectangle(new Pen(col, 3), new Rectangle(15,
-                                                           15,
-                                                           (sliding.ClientRectangle.Width - 30) - w,
-                                                           (sliding.ClientRectangle.Height - 30) - w));
+            g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                           inner_line,
+                                                           (sliding.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                           (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
 
             Point sashPoint = new Point(sliding.ClientRectangle.X + 25, sliding.ClientRectangle.Y);
 
@@ -106,13 +151,43 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
 
         public ISlidingPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                             IPanelModel panelModel)
+                                                             IPanelModel panelModel,
+                                                             IFrameImagerUCPresenter frameImagerUCP)
         {
             unityC
                 .RegisterType<ISlidingPanelImagerUC, SlidingPanelImagerUC>()
                 .RegisterType<ISlidingPanelImagerUCPresenter, SlidingPanelImagerUCPresenter>();
             SlidingPanelImagerUCPresenter slidingImagerUCP = unityC.Resolve<SlidingPanelImagerUCPresenter>();
             slidingImagerUCP._panelModel = panelModel;
+            slidingImagerUCP._frameImagerUCP = frameImagerUCP;
+
+            return slidingImagerUCP;
+        }
+
+        public ISlidingPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                             IPanelModel panelModel, 
+                                                             IMultiPanelMullionImagerUCPresenter multiPanelMullionImagerUCP)
+        {
+            unityC
+                .RegisterType<ISlidingPanelImagerUC, SlidingPanelImagerUC>()
+                .RegisterType<ISlidingPanelImagerUCPresenter, SlidingPanelImagerUCPresenter>();
+            SlidingPanelImagerUCPresenter slidingImagerUCP = unityC.Resolve<SlidingPanelImagerUCPresenter>();
+            slidingImagerUCP._panelModel = panelModel;
+            slidingImagerUCP._multiPanelMullionImagerUCP = multiPanelMullionImagerUCP;
+
+            return slidingImagerUCP;
+        }
+
+        public ISlidingPanelImagerUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                             IPanelModel panelModel, 
+                                                             IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP)
+        {
+            unityC
+                .RegisterType<ISlidingPanelImagerUC, SlidingPanelImagerUC>()
+                .RegisterType<ISlidingPanelImagerUCPresenter, SlidingPanelImagerUCPresenter>();
+            SlidingPanelImagerUCPresenter slidingImagerUCP = unityC.Resolve<SlidingPanelImagerUCPresenter>();
+            slidingImagerUCP._panelModel = panelModel;
+            slidingImagerUCP._multiPanelTransomImagerUCP = multiPanelTransomImagerUCP;
 
             return slidingImagerUCP;
         }
@@ -125,6 +200,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             panelBinding.Add("PanelImageRenderer_Width", new Binding("Width", _panelModel, "PanelImageRenderer_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelImageRenderer_Height", new Binding("Height", _panelModel, "PanelImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "PanelImageRenderer_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;

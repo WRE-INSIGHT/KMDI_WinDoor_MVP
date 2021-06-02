@@ -66,6 +66,10 @@
       <Project>{2af3ca7c-6526-430e-99d8-cad6e29cb83b}</Project>
       <Name>CommonComponents</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EnumerationTypeLayer\EnumerationTypeLayer.csproj">
+      <Project>{ABBE8DCE-DF8F-44AB-8D0F-217A633105B3}</Project>
+      <Name>EnumerationTypeLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModelLayer\ModelLayer.csproj">
       <Project>{ba9438ac-96c8-4b54-9bc4-0422acb011d0}</Project>
       <Name>ModelLayer</Name>

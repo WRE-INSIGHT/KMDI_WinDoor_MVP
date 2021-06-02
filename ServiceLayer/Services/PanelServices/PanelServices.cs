@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using ServiceLayer.CommonServices;
 using ModelLayer.Model.Quotation.Panel;
 using System.Windows.Forms;
+using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
+using static ModelLayer.Model.Quotation.QuotationModel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ServiceLayer.Services.PanelServices
 {
@@ -31,7 +35,16 @@ namespace ServiceLayer.Services.PanelServices
                                             bool panelVisibility,
                                             UserControl panelFramePropertiesGroup,
                                             UserControl panelMultiPanelGroup,
-                                            int panelIndexInsideMPanel)
+                                            int panelIndexInsideMPanel,
+                                            float panelImageRendererZoom,
+                                            float panelZoom,
+                                            IFrameModel panelFrameModelParent,
+                                            IMultiPanelModel panelMultiPanelParent,
+                                            Glass_Thickness panelGlassThickness,
+                                            GlazingBead_ArticleNo panelGlazingBeadArtNo,
+                                            int panelDisplayWidth,
+                                            int panelDisplayHeight,
+                                            int panelGlassID)
         {
             PanelModel pnl = new PanelModel(panelID,
                                             panelName,
@@ -45,7 +58,16 @@ namespace ServiceLayer.Services.PanelServices
                                             panelVisibility,
                                             panelFramePropertiesGroup,
                                             panelMultiPanelGroup,
-                                            panelIndexInsideMPanel);
+                                            panelIndexInsideMPanel,
+                                            panelImageRendererZoom,
+                                            panelZoom,
+                                            panelFrameModelParent,
+                                            panelMultiPanelParent,
+                                            panelGlassThickness,
+                                            panelGlazingBeadArtNo,
+                                            panelDisplayWidth,
+                                            panelDisplayHeight,
+                                            panelGlassID);
 
             ValidateModel(pnl);
             return pnl;
@@ -64,7 +86,16 @@ namespace ServiceLayer.Services.PanelServices
                                          UserControl panelMultiPanelGroup,
                                          string panelType,
                                          bool panelVisibility,
+                                         float panelZoom,
+                                         IFrameModel panelFrameModelParent,
+                                         IMultiPanelModel panelMultiPanelParent,
+                                         int panelDisplayWidth,
+                                         int panelDisplayHeight,
+                                         Glass_Thickness panelGlassThickness,
+                                         GlazingBead_ArticleNo panelGlazingBeadArtNo,
                                          int panelID = 0,
+                                         int panelGlassID = 0,
+                                         float panelImageRendererZoom = 1,
                                          int panelIndexInsideMPanel = 0,
                                          DockStyle panelDock = DockStyle.Fill,
                                          string panelName = "",
@@ -72,7 +103,7 @@ namespace ServiceLayer.Services.PanelServices
         {
             if (panelName == "")
             {
-                panelName = "Panel " + panelID;
+                panelName = panelType.Replace(" Panel", "") + "PanelUC_" + panelID;
             }
 
             IPanelModel _panelModel = CreatePanelModel(panelID,
@@ -87,7 +118,16 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelVisibility,
                                                        panelFramePropertiesGroup,
                                                        panelMultiPanelGroup,
-                                                       panelIndexInsideMPanel);
+                                                       panelIndexInsideMPanel,
+                                                       panelImageRendererZoom,
+                                                       panelZoom,
+                                                       panelFrameModelParent,
+                                                       panelMultiPanelParent,
+                                                       panelGlassThickness,
+                                                       panelGlazingBeadArtNo,
+                                                       panelDisplayWidth,
+                                                       panelDisplayHeight,
+                                                       panelGlassID);
 
             return _panelModel;
         }

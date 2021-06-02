@@ -7,8 +7,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
     public interface IMultiPanelMullionUC: IViewCommon
     {
-        int MPanel_ID { get; set; }
-
         event PaintEventHandler flpMulltiPaintEventRaised;
         event DragEventHandler flpMultiDragDropEventRaised;
         event EventHandler flpMultiMouseEnterEventRaised;
@@ -16,9 +14,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler divCountClickedEventRaised;
         event EventHandler deleteClickedEventRaised;
         event EventHandler multiMullionSizeChangedEventRaised;
-
-        void InvalidateFlp();
-        void DeletePanel(UserControl panel);
-        Bitmap GetPartImageThis(int height);
+        event EventHandler dividerEnabledCheckedChangedEventRaised;
     }
 }

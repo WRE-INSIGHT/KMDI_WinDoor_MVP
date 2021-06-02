@@ -37,10 +37,12 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event MouseEventHandler transomUCMouseMoveEventRaised;
         public event MouseEventHandler transomUCMouseUpEventRaised;
         public event PaintEventHandler transomUCPaintEventRaised;
-        public event EventHandler deleteToolStripMenuItemClickedEventRaised;
+        //public event EventHandler deleteToolStripMenuItemClickedEventRaised;
         public event EventHandler transomUCMouseEnterEventRaised;
         public event EventHandler transomUCMouseLeaveEventRaised;
         public event EventHandler transomUCSizeChangedEventRaised;
+        public event MouseEventHandler transomUCMouseDoubleClickedEventRaised;
+        public event KeyEventHandler transomUCKeyDownEventRaised;
 
         public void InvalidateThis()
         {
@@ -80,6 +82,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Div_ID"]);
+            this.DataBindings.Add(ModelBinding["Div_Name"]);
             this.DataBindings.Add(ModelBinding["Div_Visible"]);
             this.DataBindings.Add(ModelBinding["Div_Width"]);
             this.DataBindings.Add(ModelBinding["Div_Height"]);
@@ -87,20 +90,47 @@ namespace PresentationLayer.Views.UserControls.Dividers
 
         private void TransomUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                cmenu_transom.Show(new Point(MousePosition.X, MousePosition.Y));
-            }
+            //if (e.Button == MouseButtons.Right)
+            //{
+            //    cmenu_transom.Show(new Point(MousePosition.X, MousePosition.Y));
+            //}
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickedEventRaised, e);
+            //EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickedEventRaised, e);
         }
 
         private void TransomUC_SizeChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(this, transomUCSizeChangedEventRaised, e);
         }
+
+        private void TransomUC_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(sender, transomUCMouseDoubleClickedEventRaised, e);
+        }
+
+        private void TransomUC_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseKeyEvent(this, transomUCKeyDownEventRaised, e);
+        }
+        
+        private void TransomUC_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                case Keys.Up:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        public void FocusOnThis()
+        {
+            this.Focus();
+        }
+
     }
 }
