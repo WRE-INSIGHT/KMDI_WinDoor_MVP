@@ -3,6 +3,8 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
+using static ModelLayer.Model.Quotation.Divider.DividerModel;
 
 namespace ModelLayer.Model.Quotation.MultiPanel
 {
@@ -54,5 +56,26 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         IEnumerable<IDividerModel> GetVisibleDividers();
         IEnumerable<IPanelModel> GetVisiblePanels();
         IEnumerable<Control> GetVisibleObjects();
+
+        #region Explosion
+
+        int MPanel_OriginalDisplayWidth { get; set; }
+        int MPanel_OriginalDisplayHeight { get; set; }
+        int MPanel_OriginalGlassWidth { get; set; }
+        int MPanel_OriginalGlassHeight { get; set; }
+
+        void SetEqualGlassDimension();
+        void SetMPanelExplosionValues_Panel(Divider_ArticleNo divNxt_artNo,
+                                            Divider_ArticleNo divPrev_artNo,
+                                            DividerType div_type,
+                                            Divider_ArticleNo divArtNo_LeftorTop = null,
+                                            Divider_ArticleNo divArtNo_RightorBot = null,
+                                            string div_type_lvl3 = "",
+                                            Divider_ArticleNo divArtNo_LeftorTop_lvl3 = null,
+                                            Divider_ArticleNo divArtNo_RightorBot_lvl3 = null,
+                                            string panel_placement = "",
+                                            string mpanel_placement = "", //1st level
+                                            string mpanelparent_placement = ""); //2nd level
+        #endregion
     }
 }

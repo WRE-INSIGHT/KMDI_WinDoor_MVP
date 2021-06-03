@@ -109,6 +109,19 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+        private int _panelDisplayWidth_orig;
+        public int Panel_OriginalDisplayWidth
+        {
+            get
+            {
+                return _panelDisplayWidth_orig;
+            }
+            set
+            {
+                _panelDisplayWidth_orig = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         [Description("Virtual Height that represents the definite given value and used by the program only. (not intended for user to use)")]
         private int _panelHeight;
@@ -153,6 +166,19 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelDisplayHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private int _panelDisplayHeight_orig;
+        public int Panel_OriginalDisplayHeight
+        {
+            get
+            {
+                return _panelDisplayHeight_orig;
+            }
+            set
+            {
+                _panelDisplayHeight_orig = value;
                 NotifyPropertyChanged();
             }
         }
@@ -588,8 +614,10 @@ namespace ModelLayer.Model.Quotation.Panel
         }
         public int Panel_GlazingBeadWidth { get; set; }
         public int Panel_GlazingBeadHeight { get; set; }
+        public int Panel_OriginalGlassWidth { get; set; }
         public int Panel_GlassWidth { get; set; }
         public int Panel_GlassHeight { get; set; }
+        public int Panel_OriginalGlassHeight { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
@@ -775,6 +803,9 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GlassWidth = (Panel_DisplayWidth - deduction_for_wd) - 6;
             Panel_GlassHeight = (Panel_DisplayHeight - deduction_for_ht) - 6;
 
+            Panel_OriginalGlassWidth = (Panel_OriginalDisplayWidth - deduction_for_wd) - 6;
+            Panel_OriginalGlassHeight = (Panel_OriginalDisplayHeight - deduction_for_ht) - 6;
+
             Panel_GlazingSpacerQty = 1;
         }
 
@@ -825,6 +856,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_DisplayWidth = panelDisplayWidth;
             Panel_DisplayHeight = panelDisplayHeight;
             PanelGlass_ID = panelGlassID;
+            Panel_OriginalDisplayWidth = panelDisplayWidth;
+            Panel_OriginalDisplayHeight = panelDisplayHeight;
 
             //if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel == null) //parent == frame
             //{

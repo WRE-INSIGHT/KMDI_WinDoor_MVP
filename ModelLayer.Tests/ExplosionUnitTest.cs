@@ -198,8 +198,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(634, _panelModel.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1934, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(700, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(2000, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(628, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1928, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
@@ -226,13 +226,13 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2451%' AND
-                             Size = '634'");
+                             Size = '700'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2451%' AND
-                             Size = '1934'");
+                             Size = '2000'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
@@ -302,8 +302,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(434, _panelModel.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1434, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(500, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1500, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(428, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1428, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
@@ -330,13 +330,13 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2452%' AND
-                             Size = '434'");
+                             Size = '500'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2452%' AND
-                             Size = '1434'");
+                             Size = '1500'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
@@ -486,8 +486,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(381, _panelModel.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1234, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(450, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1300, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(375, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
@@ -498,8 +498,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1132, divModel.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(381, _panelModel2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1234, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(450, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1300, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(375, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
@@ -527,12 +527,12 @@ namespace ModelLayer.Tests
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2451%' AND
-                                                 Size = '381'");
+                                                 Size = '450'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
                                                  Description LIKE '%2451%' AND
-                                                 Size = '1234'");
+                                                 Size = '1300'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
@@ -690,8 +690,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(331, _panelModel.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1234, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1300, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
@@ -702,8 +702,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1132, divModel.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(431, _panelModel2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1234, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(500, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1300, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(425, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
@@ -731,19 +731,19 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2451%' AND
-                             Size = '331'");
+                             Size = '400'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2451%' AND
-                             Size = '431'");
+                             Size = '500'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
                                                  Description LIKE '%2451%' AND
-                                                 Size = '1234'");
+                                                 Size = '1300'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
@@ -1057,8 +1057,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(407, transomModel.Div_ReinfWidth);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel1.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(221, _panelModel1.Panel_GlazingBeadWidth);
-            Assert.AreEqual(546, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(275, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(600, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel1.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel1.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
@@ -1069,15 +1069,15 @@ namespace ModelLayer.Tests
             Assert.AreEqual(469, divModel_mullion.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(221, _panelModel2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(546, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(275, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(600, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel3.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(221, _panelModel3.Panel_GlazingBeadWidth);
-            Assert.AreEqual(546, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(275, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(600, _panelModel3.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel3.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel3.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel3.Panel_GlazingSpacerQty);
@@ -1088,8 +1088,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(469, divModel_mullion2.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel4.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(221, _panelModel4.Panel_GlazingBeadWidth);
-            Assert.AreEqual(546, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(275, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(600, _panelModel4.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel4.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel4.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel4.Panel_GlazingSpacerQty);
@@ -1130,12 +1130,12 @@ namespace ModelLayer.Tests
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2451%' AND
-                                                 Size = '221'");
+                                                 Size = '275'");
             Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
                                                  Description LIKE '%2451%' AND
-                                                 Size = '546'");
+                                                 Size = '600'");
             Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
@@ -1907,7 +1907,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(4, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(11, _qouteModel.GlazingSpacer_TotalQty);
-            Assert.AreEqual(12104, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual(14000, _qouteModel.GlazingSeal_TotalQty);
 
             #region multimullion_1 controls
 
@@ -1922,8 +1922,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1732, divModel_mullion2.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel1.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(728, _panelModel1.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1834, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(800, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1900, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(722, _panelModel1.Panel_GlassWidth);
             Assert.AreEqual(1828, _panelModel1.Panel_GlassHeight);
 
@@ -1942,8 +1942,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(654, divModel_transom4.Div_ReinfWidth);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(731, _panelModel2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(896, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(800, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(950, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(725, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(890, _panelModel2.Panel_GlassHeight);
 
@@ -1962,8 +1962,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(654, divModel_transom6.Div_ReinfWidth);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel3.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(731, _panelModel3.Panel_GlazingBeadWidth);
-            Assert.AreEqual(896, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(800, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(950, _panelModel3.Panel_GlazingBeadHeight);
             Assert.AreEqual(725, _panelModel3.Panel_GlassWidth);
             Assert.AreEqual(890, _panelModel3.Panel_GlassHeight);
 
@@ -1972,8 +1972,8 @@ namespace ModelLayer.Tests
             #region multiMullion_4 controls
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel4.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(331, _panelModel4.Panel_GlazingBeadWidth);
-            Assert.AreEqual(421, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel4.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel4.Panel_GlassWidth);
             Assert.AreEqual(415, _panelModel4.Panel_GlassHeight);
 
@@ -1983,8 +1983,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(319, divModel_mullion7.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel5.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(328, _panelModel5.Panel_GlazingBeadWidth);
-            Assert.AreEqual(421, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel5.Panel_GlazingBeadHeight);
             Assert.AreEqual(322, _panelModel5.Panel_GlassWidth);
             Assert.AreEqual(415, _panelModel5.Panel_GlassHeight);
 
@@ -1993,8 +1993,8 @@ namespace ModelLayer.Tests
             #region multiMullion_5 controls
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel6.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(331, _panelModel6.Panel_GlazingBeadWidth);
-            Assert.AreEqual(433, _panelModel6.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel6.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel6.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel6.Panel_GlassWidth);
             Assert.AreEqual(427, _panelModel6.Panel_GlassHeight);
 
@@ -2004,8 +2004,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(331, divModel_mullion8.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel7.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(328, _panelModel7.Panel_GlazingBeadWidth);
-            Assert.AreEqual(433, _panelModel7.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel7.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel7.Panel_GlazingBeadHeight);
             Assert.AreEqual(322, _panelModel7.Panel_GlassWidth);
             Assert.AreEqual(427, _panelModel7.Panel_GlassHeight);
 
@@ -2014,8 +2014,8 @@ namespace ModelLayer.Tests
             #region multiMullion_6 controls
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel8.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(328, _panelModel8.Panel_GlazingBeadWidth);
-            Assert.AreEqual(421, _panelModel8.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel8.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel8.Panel_GlazingBeadHeight);
             Assert.AreEqual(322, _panelModel8.Panel_GlassWidth);
             Assert.AreEqual(415, _panelModel8.Panel_GlassHeight);
 
@@ -2025,8 +2025,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(319, divModel_mullion9.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel9.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(331, _panelModel9.Panel_GlazingBeadWidth);
-            Assert.AreEqual(421, _panelModel9.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel9.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel9.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel9.Panel_GlassWidth);
             Assert.AreEqual(415, _panelModel9.Panel_GlassHeight);
 
@@ -2035,8 +2035,8 @@ namespace ModelLayer.Tests
             #region multiMullion_7 controls
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel10.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(328, _panelModel10.Panel_GlazingBeadWidth);
-            Assert.AreEqual(433, _panelModel10.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel10.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel10.Panel_GlazingBeadHeight);
             Assert.AreEqual(322, _panelModel10.Panel_GlassWidth);
             Assert.AreEqual(427, _panelModel10.Panel_GlassHeight);
 
@@ -2046,8 +2046,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(331, divModel_mullion10.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel11.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(331, _panelModel11.Panel_GlazingBeadWidth);
-            Assert.AreEqual(433, _panelModel11.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel11.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel11.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel11.Panel_GlassWidth);
             Assert.AreEqual(427, _panelModel11.Panel_GlassHeight);
 
@@ -2086,15 +2086,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(12, dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2451%' AND 
-                             Size = '728'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
-
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2451%' AND 
-                             Size = '1834'");
+                             Size = '1900'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
@@ -2124,12 +2118,12 @@ namespace ModelLayer.Tests
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2451%' AND
-                                                 Size = '731'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+                                                 Size = '800'");
+            Assert.AreEqual(6, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
                                                  Description LIKE '%2451%' AND
-                                                 Size = '896'");
+                                                 Size = '950'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
@@ -2144,13 +2138,13 @@ namespace ModelLayer.Tests
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2435%' AND
-                                                 Size = '331'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
+                                                 Size = '400'");
+            Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
                                                  Description LIKE '%2435%' AND
-                                                 Size = '421'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
+                                                 Size = '475'");
+            Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
                                                  Description LIKE '%24mm%' AND
@@ -2164,13 +2158,13 @@ namespace ModelLayer.Tests
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2435%' AND
-                                                 Size = '328'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
+                                                 Size = '400'");
+            Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
                                                  Description LIKE '%2435%' AND
-                                                 Size = '433'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
+                                                 Size = '475'");
+            Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
                                                  Description LIKE '%24mm%' AND

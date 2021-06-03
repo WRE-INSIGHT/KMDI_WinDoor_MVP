@@ -241,14 +241,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 int mpanelDisplayWidth = _multiPanelModel.MPanel_DisplayWidth,
                     mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight / (_multiPanelModel.MPanel_Divisions + 1);
-
-                //_frmDimensionPresenter.SetPresenters(this);
-                //_frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.AddPanelIntoMultiPanel;
-                //_frmDimensionPresenter.SetHeight();
-                //_frmDimensionPresenter.SetValues(suggest_Wd, suggest_HT);
-                //_frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                //bool frmResult = _frmDimensionPresenter.GetfrmResult();
-
+                
                 FlowDirection flow = FlowDirection.LeftToRight;
                 if (data.Contains("Transom"))
                 {
@@ -311,6 +304,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
                         _multiPanelModel.Adjust_ControlDisplaySize();
+                        _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                        _multiPanelModel.SetEqualGlassDimension();
                     }
                     else if (mPanelModel.MPanel_Placement != "Last")
                     {
@@ -390,6 +385,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
                         _multiPanelModel.Adjust_ControlDisplaySize();
+                        _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                        _multiPanelModel.SetEqualGlassDimension();
                     }
                     else if (mPanelModel.MPanel_Placement != "Last")
                     {
@@ -439,11 +436,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _basePlatformImagerUCP.InvalidateBasePlatform();
                     }
                 }
-
-                //if (!frmResult)
-                //{
-                    
-                //}
+                
             }
             else
             {
@@ -466,14 +459,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     suggest_Wd = multiPanel_boundsWD + 2;
                 }
-
-                //_frmDimensionPresenter.SetPresenters(this);
-                //_frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.AddPanelIntoMultiPanel;
-                //_frmDimensionPresenter.SetHeight();
-                //_frmDimensionPresenter.SetValues(suggest_Wd, suggest_HT);
-                //_frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                //bool frmResult = _frmDimensionPresenter.GetfrmResult();
-
+                
                 IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
                 _panelModel = _panelServices.AddPanelModel(suggest_Wd,
@@ -595,6 +581,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.Fit_MyControls_Dimensions();
                     _multiPanelModel.Adjust_ControlDisplaySize();
+                    _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                    _multiPanelModel.SetEqualGlassDimension();
                 }
                 else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                 {
@@ -643,11 +631,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelTransomImagerUCP.AddControl((UserControl)transomImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
-
-                //if (!frmResult)
-                //{
-
-                //}
             }
             foreach (Control ctrl in fpnl.Controls)
             {

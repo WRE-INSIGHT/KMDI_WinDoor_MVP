@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
+using static EnumerationTypeLayer.EnumerationTypes;
+using static ModelLayer.Model.Quotation.Divider.DividerModel;
 
 namespace ModelLayer.Model.Quotation.MultiPanel
 {
@@ -1205,7 +1207,248 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
             return MPanelLst_Objects.Where(obj => obj.Visible == true);
         }
-        
+
+        #region Explosion
+
+        public int MPanel_OriginalDisplayWidth { get; set; }
+        public int MPanel_OriginalDisplayHeight { get; set; }
+        public int MPanel_OriginalGlassWidth { get; set; }
+        public int MPanel_OriginalGlassHeight { get; set; }
+
+        public void SetEqualGlassDimension()
+        {
+            int Equal_GlassSize = 0,
+                div_deduction = 0,
+                totalPanels = MPanel_Divisions + 1;
+            if (MPanel_Type == "Mullion")
+            {
+                if (MPanel_Divisions >= 2)
+                {
+                    foreach (IDividerModel div in GetVisibleDividers())
+                    {
+                        if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            div_deduction += 72;
+                        }
+                        else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            div_deduction += 42;
+                        }
+                    }
+
+                    Equal_GlassSize = (((MPanel_DisplayWidth - (33 * 2) - div_deduction)) / totalPanels) - 6;
+
+                    foreach (IPanelModel pnl in GetVisiblePanels())
+                    {
+                        pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth + (Equal_GlassSize - pnl.Panel_OriginalGlassWidth);
+                    }
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
+                    {
+                        mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth + (Equal_GlassSize - mpnl.MPanel_OriginalGlassWidth);
+                    }
+                }
+            }
+            else if (MPanel_Type == "Transom")
+            {
+                if (MPanel_Divisions >= 2)
+                {
+                    foreach (IDividerModel div in GetVisibleDividers())
+                    {
+                        if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                        {
+                            div_deduction += 72;
+                        }
+                        else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                        {
+                            div_deduction += 42;
+                        }
+                    }
+
+                    Equal_GlassSize = (((MPanel_DisplayHeight - (33 * 2) - div_deduction)) / totalPanels) - 6;
+
+                    foreach (IPanelModel pnl in GetVisiblePanels())
+                    {
+                        pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight + (Equal_GlassSize - pnl.Panel_OriginalGlassHeight);
+                    }
+                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
+                    {
+                        mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight + (Equal_GlassSize - mpnl.MPanel_OriginalGlassHeight);
+                    }
+                }
+            }
+        }
+        public void SetMPanelExplosionValues_Panel(Divider_ArticleNo divNxt_artNo,
+                                                   Divider_ArticleNo divPrev_artNo,
+                                                   DividerType div_type,
+                                                   Divider_ArticleNo divArtNo_LeftorTop = null,
+                                                   Divider_ArticleNo divArtNo_RightorBot = null,
+                                                   string div_type_lvl3 = "",
+                                                   Divider_ArticleNo divArtNo_LeftorTop_lvl3 = null,
+                                                   Divider_ArticleNo divArtNo_RightorBot_lvl3 = null,
+                                                   string panel_placement = "",
+                                                   string mpanel_placement = "", //1st level
+                                                   string mpanelparent_placement = "") //2nd level
+        {
+            int GB_deduction_forLeftorTopRightorBot = 0,
+                GB_deduction_forNxtPrev = 0,
+                GB_deduction_lvl3 = 0,
+                deduction_for_wd = 0,
+                deduction_for_ht = 0;
+
+            if (divNxt_artNo == Divider_ArticleNo._7536)
+            {
+                GB_deduction_forNxtPrev += (42 / 2);
+            }
+            else if (divNxt_artNo == Divider_ArticleNo._7538)
+            {
+                GB_deduction_forNxtPrev += (72 / 2);
+            }
+            else if (divNxt_artNo == Divider_ArticleNo._None)
+            {
+                if (panel_placement == "Last" && mpanelparent_placement == "")
+                {
+                    GB_deduction_forNxtPrev += 33;
+                }
+                if (mpanelparent_placement == "First")
+                {
+                    if (panel_placement == "First")
+                    {
+                        GB_deduction_forNxtPrev += 33;
+                    }
+                }
+                else if (mpanelparent_placement == "Last")
+                {
+                    if (panel_placement == "Last")
+                    {
+                        GB_deduction_forNxtPrev += 33;
+                    }
+                }
+            }
+
+            if (divPrev_artNo == Divider_ArticleNo._7536)
+            {
+                GB_deduction_forNxtPrev += (42 / 2);
+            }
+            else if (divPrev_artNo == Divider_ArticleNo._7538)
+            {
+                GB_deduction_forNxtPrev += (72 / 2);
+            }
+            else if (divPrev_artNo == Divider_ArticleNo._None)
+            {
+                if (panel_placement == "First" && mpanelparent_placement == "")
+                {
+                    GB_deduction_forNxtPrev += 33;
+                }
+                if (mpanelparent_placement == "First")
+                {
+                    if (panel_placement == "First")
+                    {
+                        GB_deduction_forNxtPrev += 33;
+                    }
+                }
+                else if (mpanelparent_placement == "Last")
+                {
+                    if (panel_placement == "Last")
+                    {
+                        GB_deduction_forNxtPrev += 33;
+                    }
+                }
+            }
+
+            if (divArtNo_LeftorTop == Divider_ArticleNo._7536)
+            {
+                GB_deduction_forLeftorTopRightorBot += (42 / 2);
+            }
+            else if (divArtNo_LeftorTop == Divider_ArticleNo._7538)
+            {
+                GB_deduction_forLeftorTopRightorBot += (72 / 2);
+            }
+            else if (divArtNo_LeftorTop == Divider_ArticleNo._None)
+            {
+                if (mpanel_placement == "First" ||
+                    mpanel_placement == "Last" ||
+                    mpanel_placement == "")
+                {
+                    GB_deduction_forLeftorTopRightorBot += 33;
+                }
+            }
+
+            if (divArtNo_RightorBot == Divider_ArticleNo._7536)
+            {
+                GB_deduction_forLeftorTopRightorBot += (42 / 2);
+            }
+            else if (divArtNo_RightorBot == Divider_ArticleNo._7538)
+            {
+                GB_deduction_forLeftorTopRightorBot += (72 / 2);
+            }
+            else if (divArtNo_RightorBot == Divider_ArticleNo._None)
+            {
+                if (mpanel_placement == "First" ||
+                    mpanel_placement == "Last" ||
+                    mpanel_placement == "")
+                {
+                    GB_deduction_forLeftorTopRightorBot += 33;
+                }
+            }
+
+            if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._7536)
+            {
+                GB_deduction_lvl3 += (42 / 2);
+            }
+            else if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._7538)
+            {
+                GB_deduction_lvl3 += (72 / 2);
+            }
+            else if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._None)
+            {
+                //if (mpanelparent_placement == "Last")
+                //{
+                //    GB_deduction_lvl3 += 33;
+                //}
+            }
+
+            if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._7536)
+            {
+                GB_deduction_lvl3 += (42 / 2);
+            }
+            else if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._7538)
+            {
+                GB_deduction_lvl3 += (72 / 2);
+            }
+            else if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._None)
+            {
+                //if (mpanelparent_placement == "First")
+                //{
+                //    GB_deduction_lvl3 += 33;
+                //}
+            }
+
+            if (div_type == DividerType.Mullion)
+            {
+                deduction_for_wd = GB_deduction_forNxtPrev;
+                deduction_for_ht = GB_deduction_forLeftorTopRightorBot;
+            }
+            else if (div_type == DividerType.Transom)
+            {
+                deduction_for_wd = GB_deduction_forLeftorTopRightorBot;
+                deduction_for_ht = GB_deduction_forNxtPrev;
+            }
+
+            if (div_type_lvl3 == DividerType.Mullion.ToString())
+            {
+                deduction_for_wd += GB_deduction_lvl3;
+            }
+            else if (div_type_lvl3 == DividerType.Transom.ToString())
+            {
+                deduction_for_ht += GB_deduction_lvl3;
+            }
+
+            MPanel_OriginalGlassWidth = (MPanel_OriginalDisplayWidth - deduction_for_wd) - 6;
+            MPanel_OriginalGlassHeight = (MPanel_OriginalDisplayHeight - deduction_for_ht) - 6;
+        }
+
+        #endregion
+
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,
@@ -1251,6 +1494,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_FrameModelParent = mpanelFrameModelParent;
             MPanel_DisplayWidth = mpanelDisplayWidth;
             MPanel_DisplayHeight = mpanelDisplayHeight;
+            MPanel_OriginalDisplayWidth = mpanelDisplayWidth;
+            MPanel_OriginalDisplayHeight = mpanelDisplayHeight;
 
             if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
             {

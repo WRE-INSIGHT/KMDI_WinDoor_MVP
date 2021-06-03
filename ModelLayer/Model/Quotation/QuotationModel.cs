@@ -677,31 +677,32 @@ namespace ModelLayer.Model.Quotation
                                 Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                        2, "pc(s)", "");
 
+                                Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
+                                                  divArtNo_prevCtrl = Divider_ArticleNo._None,
+                                                  divArtNo_LeftOrTop = Divider_ArticleNo._None,
+                                                  divArtNo_RightOrBot = Divider_ArticleNo._None,
+                                                  divArtNo_LeftOrTop_lvl3 = Divider_ArticleNo._None,
+                                                  divArtNo_RightOrBot_lvl3 = Divider_ArticleNo._None;
+                                if (div_nxtCtrl != null)
+                                {
+                                    divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
+                                }
+                                if (div_prevCtrl != null)
+                                {
+                                    divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
+                                }
+                                if (divTopOrLeft != null)
+                                {
+                                    divArtNo_LeftOrTop = divTopOrLeft.Div_ArtNo;
+                                }
+                                if (divBotOrRight != null)
+                                {
+                                    divArtNo_RightOrBot = divBotOrRight.Div_ArtNo;
+                                }
+
+
                                 if (pnl_curCtrl != null)
                                 {
-                                    Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
-                                                      divArtNo_prevCtrl = Divider_ArticleNo._None,
-                                                      divArtNo_LeftOrTop = Divider_ArticleNo._None,
-                                                      divArtNo_RightOrBot = Divider_ArticleNo._None,
-                                                      divArtNo_LeftOrTop_lvl3 = Divider_ArticleNo._None,
-                                                      divArtNo_RightOrBot_lvl3 = Divider_ArticleNo._None;
-                                    if (div_nxtCtrl != null)
-                                    {
-                                        divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
-                                    }
-                                    if (div_prevCtrl != null)
-                                    {
-                                        divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
-                                    }
-                                    if (divTopOrLeft != null)
-                                    {
-                                        divArtNo_LeftOrTop = divTopOrLeft.Div_ArtNo;
-                                    }
-                                    if (divBotOrRight != null)
-                                    {
-                                        divArtNo_RightOrBot = divBotOrRight.Div_ArtNo;
-                                    }
-
                                     if (pnl_curCtrl.Panel_Placement == "First")
                                     {
                                         if (divTopOrLeft_lvl3 != null)
@@ -715,7 +716,6 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             divArtNo_RightOrBot_lvl3 = divBotOrRight_lvl3.Div_ArtNo;
                                         }
-
                                     }
 
                                     pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
@@ -730,34 +730,63 @@ namespace ModelLayer.Model.Quotation
                                                                               mpanel_placement,
                                                                               mpanelParentlvl2_placement);
                                 }
+                                else if (mpnl_curCtrl != null)
+                                {
+                                    if (mpnl_curCtrl.MPanel_Placement == "First")
+                                    {
+                                        if (divTopOrLeft_lvl3 != null)
+                                        {
+                                            divArtNo_LeftOrTop_lvl3 = divTopOrLeft_lvl3.Div_ArtNo;
+                                        }
+                                    }
+                                    else if (mpnl_curCtrl.MPanel_Placement == "Last")
+                                    {
+                                        if (divBotOrRight_lvl3 != null)
+                                        {
+                                            divArtNo_RightOrBot_lvl3 = divBotOrRight_lvl3.Div_ArtNo;
+                                        }
+                                    }
+
+                                    mpnl_curCtrl.SetMPanelExplosionValues_Panel(divArtNo_nxtCtrl,
+                                                                                divArtNo_prevCtrl,
+                                                                                div_nxtCtrl.Div_Type,
+                                                                                divArtNo_LeftOrTop,
+                                                                                divArtNo_RightOrBot,
+                                                                                mpnl_Parent_lvl3_mpanelType,
+                                                                                divArtNo_LeftOrTop_lvl3,
+                                                                                divArtNo_RightOrBot_lvl3,
+                                                                                mpnl_curCtrl.MPanel_Placement,
+                                                                                mpanel_placement,
+                                                                                mpanelParentlvl2_placement);
+                                }
                             }
                             else if (i + 1 == obj_count)
                             {
+                                Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
+                                                  divArtNo_prevCtrl = Divider_ArticleNo._None,
+                                                  divArtNo_LeftOrTop = Divider_ArticleNo._None,
+                                                  divArtNo_RightOrBot = Divider_ArticleNo._None,
+                                                  divArtNo_LeftOrTop_lvl3 = Divider_ArticleNo._None,
+                                                  divArtNo_RightOrBot_lvl3 = Divider_ArticleNo._None;
+                                if (div_nxtCtrl != null)
+                                {
+                                    divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
+                                }
+                                if (div_prevCtrl != null)
+                                {
+                                    divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
+                                }
+                                if (divTopOrLeft != null)
+                                {
+                                    divArtNo_LeftOrTop = divTopOrLeft.Div_ArtNo;
+                                }
+                                if (divBotOrRight != null)
+                                {
+                                    divArtNo_RightOrBot = divBotOrRight.Div_ArtNo;
+                                }
+
                                 if (pnl_curCtrl != null)
                                 {
-                                    Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
-                                                      divArtNo_prevCtrl = Divider_ArticleNo._None,
-                                                      divArtNo_LeftOrTop = Divider_ArticleNo._None,
-                                                      divArtNo_RightOrBot = Divider_ArticleNo._None,
-                                                      divArtNo_LeftOrTop_lvl3 = Divider_ArticleNo._None,
-                                                      divArtNo_RightOrBot_lvl3 = Divider_ArticleNo._None;
-                                    if (div_nxtCtrl != null)
-                                    {
-                                        divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
-                                    }
-                                    if (div_prevCtrl != null)
-                                    {
-                                        divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
-                                    }
-                                    if (divTopOrLeft != null)
-                                    {
-                                        divArtNo_LeftOrTop = divTopOrLeft.Div_ArtNo;
-                                    }
-                                    if (divBotOrRight != null)
-                                    {
-                                        divArtNo_RightOrBot = divBotOrRight.Div_ArtNo;
-                                    }
-
                                     if (pnl_curCtrl.Panel_Placement == "First")
                                     {
                                         if (divTopOrLeft_lvl3 != null)
@@ -771,7 +800,6 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             divArtNo_RightOrBot_lvl3 = divBotOrRight_lvl3.Div_ArtNo;
                                         }
-
                                     }
 
                                     pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
@@ -785,6 +813,35 @@ namespace ModelLayer.Model.Quotation
                                                                               pnl_curCtrl.Panel_Placement,
                                                                               mpanel_placement,
                                                                               mpanelParentlvl2_placement);
+                                }
+                                else if (mpnl_curCtrl != null)
+                                {
+                                    if (mpnl_curCtrl.MPanel_Placement == "First")
+                                    {
+                                        if (divTopOrLeft_lvl3 != null)
+                                        {
+                                            divArtNo_LeftOrTop_lvl3 = divTopOrLeft_lvl3.Div_ArtNo;
+                                        }
+                                    }
+                                    else if (mpnl_curCtrl.MPanel_Placement == "Last")
+                                    {
+                                        if (divBotOrRight_lvl3 != null)
+                                        {
+                                            divArtNo_RightOrBot_lvl3 = divBotOrRight_lvl3.Div_ArtNo;
+                                        }
+                                    }
+
+                                    mpnl_curCtrl.SetMPanelExplosionValues_Panel(divArtNo_nxtCtrl,
+                                                                                divArtNo_prevCtrl,
+                                                                                div_prevCtrl.Div_Type,
+                                                                                divArtNo_LeftOrTop,
+                                                                                divArtNo_RightOrBot,
+                                                                                mpnl_Parent_lvl3_mpanelType,
+                                                                                divArtNo_LeftOrTop_lvl3,
+                                                                                divArtNo_RightOrBot_lvl3,
+                                                                                mpnl_curCtrl.MPanel_Placement,
+                                                                                mpanel_placement,
+                                                                                mpanelParentlvl2_placement);
                                 }
                             }
 

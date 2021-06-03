@@ -235,14 +235,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 int mpanelDisplayWidth = _multiPanelModel.MPanel_DisplayWidth / (_multiPanelModel.MPanel_Divisions + 1),
                     mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight;
-
-                //_frmDimensionPresenter.SetPresenters(this);
-                //_frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.AddPanelIntoMultiPanel;
-                //_frmDimensionPresenter.SetHeight();
-                //_frmDimensionPresenter.SetValues(suggest_Wd, suggest_HT);
-                //_frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                //bool frmResult = _frmDimensionPresenter.GetfrmResult();
-
+                
                 FlowDirection flow = FlowDirection.LeftToRight;
                 if (data.Contains("Transom"))
                 {
@@ -304,6 +297,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
                         _multiPanelModel.Adjust_ControlDisplaySize();
+                        _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                        _multiPanelModel.SetEqualGlassDimension();
                     }
                     else if (mPanelModel.MPanel_Placement != "Last")
                     {
@@ -382,6 +377,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
                         _multiPanelModel.Adjust_ControlDisplaySize();
+                        _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                        _multiPanelModel.SetEqualGlassDimension();
                     }
                     else if (mPanelModel.MPanel_Placement != "Last")
                     {
@@ -429,11 +426,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _basePlatformImagerUCP.InvalidateBasePlatform();
                     }
                 }
-
-                //if (!frmResult)
-                //{
-                    
-                //}
+                
             }
             else
             {
@@ -455,14 +448,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     suggest_HT = (_multiPanelModel.MPanel_Height - 20) + 2;
                 }
-
-                //_frmDimensionPresenter.SetPresenters(this);
-                //_frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.AddPanelIntoMultiPanel;
-                //_frmDimensionPresenter.SetHeight();
-                //_frmDimensionPresenter.SetValues(suggest_Wd, suggest_HT);
-                //_frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                //bool frmResult = _frmDimensionPresenter.GetfrmResult();
-
+                
                 IPanelModel _panelModel = _panelServices.AddPanelModel(suggest_Wd,
                                                                        suggest_HT,
                                                                        fpnl,
@@ -582,6 +568,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.Fit_MyControls_Dimensions();
                     _multiPanelModel.Adjust_ControlDisplaySize();
+                    _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                    _multiPanelModel.SetEqualGlassDimension();
                 }
                 else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                 {
@@ -631,11 +619,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
-
-                //if (!frmResult)
-                //{
-                    
-                //}
             }
             foreach (Control ctrl in fpnl.Controls)
             {

@@ -65,6 +65,7 @@ namespace PresentationLayer.Presenter
                                 ITransomUCPresenter transomUCP = null,
                                 IMullionUCPresenter mullionUCP = null);
         void DeselectDivider();
+        void Run_GetListOfMaterials_SpecificItem();
         void DeletePropertiesUC(int multiPanelID);
     }
 }

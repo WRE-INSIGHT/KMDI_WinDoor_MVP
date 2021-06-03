@@ -335,6 +335,11 @@ namespace PresentationLayer.Presenter
             _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised;
         }
 
+        public void Run_GetListOfMaterials_SpecificItem()
+        {
+            _quotationModel.GetListOfMaterials(_windoorModel);
+        }
+
         private void _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             IExplosionPresenter explosionPresenter = _explosionPresenter.GetNewInstance(_unityC, _quotationModel, this, _windoorModel);
