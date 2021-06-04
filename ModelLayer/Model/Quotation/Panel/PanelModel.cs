@@ -797,8 +797,8 @@ namespace ModelLayer.Model.Quotation.Panel
                 deduction_for_ht += GB_deduction_lvl3;
             }
 
-            Panel_GlazingBeadWidth = Panel_DisplayWidth; //- deduction_for_wd;
-            Panel_GlazingBeadHeight = Panel_DisplayHeight; //- deduction_for_ht;
+            Panel_GlazingBeadWidth = Panel_DisplayWidth; //Panel_OriginalDisplayWidth;  //- deduction_for_wd;
+            Panel_GlazingBeadHeight = Panel_DisplayHeight; //Panel_OriginalDisplayHeight;  //- deduction_for_ht;
 
             Panel_GlassWidth = (Panel_DisplayWidth - deduction_for_wd) - 6;
             Panel_GlassHeight = (Panel_DisplayHeight - deduction_for_ht) - 6;

@@ -443,14 +443,14 @@ namespace PresentationLayer.Presenter.UserControls
         
         public void DeleteFrame()
         {
-            foreach (IPanelModel pnl in _frameModel.GetVisiblePanels())
+            foreach (IPanelModel pnl in _frameModel.Lst_Panel)
             {
                 _mainPresenter.DeductPanelGlassID();
             }
 
             foreach (IMultiPanelModel mpnl in _frameModel.Lst_MultiPanel)
             {
-                foreach (IPanelModel pnl in mpnl.GetVisiblePanels())
+                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                 {
                     _mainPresenter.DeductPanelGlassID();
                 }

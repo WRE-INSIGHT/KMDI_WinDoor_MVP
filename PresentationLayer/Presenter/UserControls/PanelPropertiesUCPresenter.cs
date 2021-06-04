@@ -99,7 +99,7 @@ namespace PresentationLayer.Presenter.UserControls
         public IPanelPropertiesUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter)
         {
             unityC
-                .RegisterType<IPanelPropertiesUC, PanelPropertiesUC>()
+                .RegisterType<IPanelPropertiesUC, Panel_PropertiesUC>()
                 .RegisterType<IPanelPropertiesUCPresenter, PanelPropertiesUCPresenter>();
             PanelPropertiesUCPresenter panelPropUCP = unityC.Resolve<PanelPropertiesUCPresenter>();
             panelPropUCP._panelModel = panelModel;

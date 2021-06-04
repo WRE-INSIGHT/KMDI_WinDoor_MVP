@@ -658,7 +658,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)divUC);
 
                 IDividerModel div = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
-                div.Div_Visible = false;
+                _mainPresenter.DeleteDividerPropertiesUC(div.Div_ID);
+                div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
+                _frameModel.Lst_Divider.Remove(div);
+
                 _multiPanelModel.MPanel_ParentModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
                 _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
             }
@@ -697,7 +700,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
             }
 
-            _mainPresenter.DeletePropertiesUC(_multiPanelModel.MPanel_ID);
+            _mainPresenter.DeleteMultiPanelPropertiesUC(_multiPanelModel.MPanel_ID);
 
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
@@ -711,13 +714,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.SetDeductFramePadding(false);
             }
 
-            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
             {
-                pnl.Panel_Visibility = false;
+                _frameModel.Lst_Panel.Remove(pnl);
             }
-            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider.Where(div => div.Div_Visible == true))
+            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
             {
-                div.Div_Visible = false;
+                _frameModel.Lst_Divider.Remove(div);
             }
             foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
             {

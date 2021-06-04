@@ -1,6 +1,6 @@
 ﻿namespace PresentationLayer.Views.UserControls
 {
-    partial class PanelPropertiesUC
+    partial class Panel_PropertiesUC
     {
         /// <summary> 
         /// Required designer variable.
@@ -227,7 +227,7 @@
             this.lbl_PanelGlassID.TabIndex = 9;
             this.lbl_PanelGlassID.Text = "P1";
             // 
-            // PanelPropertiesUC
+            // Panel_PropertiesUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -245,7 +245,7 @@
             this.Controls.Add(this.chk_Orientation);
             this.Controls.Add(this.num_BladeCount);
             this.Margin = new System.Windows.Forms.Padding(1);
-            this.Name = "PanelPropertiesUC";
+            this.Name = "Panel_PropertiesUC";
             this.Size = new System.Drawing.Size(159, 228);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();

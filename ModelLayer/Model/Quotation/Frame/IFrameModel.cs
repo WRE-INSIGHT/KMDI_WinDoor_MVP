@@ -46,7 +46,6 @@ namespace ModelLayer.Model.Quotation.Frame
         int Frame_ReinfWidth { get; set; }
         int Frame_ReinfHeight { get; set; }
         
-        IEnumerable<IPanelModel> GetVisiblePanels();
         void SetExplosionValues_Frame();
         #endregion
     }

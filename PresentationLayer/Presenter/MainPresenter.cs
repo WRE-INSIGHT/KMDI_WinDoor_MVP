@@ -17,7 +17,6 @@ using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
 using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.PanelServices;
-using CommonComponents;
 using Unity;
 using System.Linq;
 using ModelLayer.Model.Quotation.MultiPanel;
@@ -1010,7 +1009,7 @@ namespace PresentationLayer.Presenter
             _mainView.GetLblSelectedDivider().Text = "";
         }
 
-        public void DeletePropertiesUC(int multiPanelID)
+        public void DeleteMultiPanelPropertiesUC(int multiPanelID)
         {
             var propertiesUC = _commonfunc.GetAll(_pnlPropertiesBody, "MultiPanelPropertiesUC");
             foreach (IMultiPanelPropertiesUC mpnlProperties in propertiesUC)
@@ -1018,6 +1017,30 @@ namespace PresentationLayer.Presenter
                 if (mpnlProperties.MPanelID == multiPanelID)
                 {
                     ((UserControl)mpnlProperties).Parent.Controls.Remove((UserControl)mpnlProperties);
+                }
+            }
+        }
+
+        public void DeleteDividerPropertiesUC(int divID)
+        {
+            var propertiesUC = _commonfunc.GetAll(_pnlPropertiesBody, "DividerPropertiesUC");
+            foreach (IDividerPropertiesUC divProperties in propertiesUC)
+            {
+                if (divProperties.Div_ID == divID)
+                {
+                    ((UserControl)divProperties).Parent.Controls.Remove((UserControl)divProperties);
+                }
+            }
+        }
+
+        public void DeletePanelPropertiesUC(int panelID)
+        {
+            var propertiesUC = _commonfunc.GetAll(_pnlPropertiesBody, "Panel_PropertiesUC");
+            foreach (IPanelPropertiesUC pnlProperties in propertiesUC)
+            {
+                if (pnlProperties.Panel_ID == panelID)
+                {
+                    ((UserControl)pnlProperties).Parent.Controls.Remove((UserControl)pnlProperties);
                 }
             }
         }

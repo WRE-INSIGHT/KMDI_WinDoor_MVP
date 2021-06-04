@@ -13,9 +13,9 @@ using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public partial class PanelPropertiesUC : UserControl, IPanelPropertiesUC
+    public partial class Panel_PropertiesUC : UserControl, IPanelPropertiesUC
     {
-        public PanelPropertiesUC()
+        public Panel_PropertiesUC()
         {
             InitializeComponent();
         }
@@ -90,6 +90,7 @@ namespace PresentationLayer.Views.UserControls
             cmb_GlassThick.DataBindings.Add(ModelBinding["Panel_GlassThickness"]);
             cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
             this.DataBindings.Add(ModelBinding["PanelGlass_ID"]);
+            this.DataBindings.Add(ModelBinding["Panel_ID"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)

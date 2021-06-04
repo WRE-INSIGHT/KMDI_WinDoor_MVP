@@ -281,7 +281,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 mpnl.MPanel_Zoom = Frame_Zoom;
             }
 
-            foreach (IPanelModel pnl in Lst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+            foreach (IPanelModel pnl in Lst_Panel)
             {
                 pnl.Panel_Zoom = Frame_Zoom;
             }
@@ -321,11 +321,6 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 FramePadding_Default();
             }
-        }
-
-        public IEnumerable<IPanelModel> GetVisiblePanels()
-        {
-            return Lst_Panel.Where(pnl => pnl.Panel_Visibility == true);
         }
         
         #region Explosion

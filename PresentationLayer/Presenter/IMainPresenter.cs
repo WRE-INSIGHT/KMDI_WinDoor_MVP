@@ -2,16 +2,11 @@
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Presenter.UserControls;
 using ModelLayer.Model.User;
-using System;
-using System.Collections.Generic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Frame;
 using System.Windows.Forms;
 using Unity;
-using ModelLayer.Model.Quotation.Panel;
-using ModelLayer.Model.Quotation.MultiPanel;
-using System.Drawing;
 using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.Presenter.UserControls.Dividers;
 
@@ -66,6 +61,8 @@ namespace PresentationLayer.Presenter
                                 IMullionUCPresenter mullionUCP = null);
         void DeselectDivider();
         void Run_GetListOfMaterials_SpecificItem();
-        void DeletePropertiesUC(int multiPanelID);
+        void DeleteMultiPanelPropertiesUC(int multiPanelID);
+        void DeleteDividerPropertiesUC(int divID);
+        void DeletePanelPropertiesUC(int panelID);
     }
 }

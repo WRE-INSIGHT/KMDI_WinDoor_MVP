@@ -81,11 +81,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         mpnl.MPanel_Width += added_width_child_pnls;
                     }
-                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         pnl.Panel_Width += added_width_child_pnls;
                     }
-                    foreach (IDividerModel div in MPanelLst_Divider.Where(div => div.Div_Visible == true))
+                    foreach (IDividerModel div in MPanelLst_Divider)
                     {
                         div.Div_Width += added_width_child_pnls;
                     }
@@ -99,7 +99,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             mpnl.MPanel_Width += added_width_child_pnls;
                         }
                     }
-                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         if (pnl.Panel_Placement == "Last")
                         {
@@ -146,11 +146,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         mpnl.MPanel_DisplayWidth += added_displaywidth_child_pnls;
                     }
-                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         pnl.Panel_DisplayWidth += added_displaywidth_child_pnls;
                     }
-                    foreach (IDividerModel div in MPanelLst_Divider.Where(div => div.Div_Visible == true))
+                    foreach (IDividerModel div in MPanelLst_Divider)
                     {
                         div.Div_DisplayWidth += added_displaywidth_child_pnls;
                     }
@@ -164,7 +164,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             mpnl.MPanel_DisplayWidth += added_displaywidth_child_pnls;
                         }
                     }
-                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         if (pnl.Panel_Placement == "Last")
                         {
@@ -194,11 +194,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         mpnl.MPanel_Height += added_height_child_pnls;
                     }
-                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         pnl.Panel_Height += added_height_child_pnls;
                     }
-                    foreach (IDividerModel div in MPanelLst_Divider.Where(div => div.Div_Visible == true))
+                    foreach (IDividerModel div in MPanelLst_Divider)
                     {
                         div.Div_Height += added_height_child_pnls;
                     }
@@ -212,7 +212,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             mpnl.MPanel_Height += added_height_child_pnls;
                         }
                     }
-                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         if (pnl.Panel_Placement == "Last")
                         {
@@ -259,11 +259,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         mpnl.MPanel_DisplayHeight += added_displayheight_child_pnls;
                     }
-                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         pnl.Panel_DisplayHeight += added_displayheight_child_pnls;
                     }
-                    foreach (IDividerModel div in MPanelLst_Divider.Where(div => div.Div_Visible == true))
+                    foreach (IDividerModel div in MPanelLst_Divider)
                     {
                         div.Div_DisplayHeight += added_displayheight_child_pnls;
                     }
@@ -277,7 +277,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             mpnl.MPanel_DisplayHeight += added_displayheight_child_pnls;
                         }
                     }
-                    foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         if (pnl.Panel_Placement == "Last")
                         {
@@ -623,7 +623,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void Reload_PanelMargin()
         {
-            List<IPanelModel> Lst_visiblePnl = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).ToList();
+            List<IPanelModel> Lst_visiblePnl = MPanelLst_Panel;
             int visiblePnl_count = Lst_visiblePnl.Count();
 
             foreach (IPanelModel pnl in Lst_visiblePnl)
@@ -842,9 +842,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public int GetNextIndex()
         {
-            int visiblePanelCount = MPanelLst_Panel.Count(pnl => pnl.Panel_Visibility == true),
+            int visiblePanelCount = MPanelLst_Panel.Count(),
                 visibleMPanelCount = MPanelLst_MultiPanel.Count(),
-                visibleDivider = MPanelLst_Divider.Count(div => div.Div_Visible == true);
+                visibleDivider = MPanelLst_Divider.Count();
 
             return visiblePanelCount + visibleMPanelCount + visibleDivider;
         }
@@ -997,14 +997,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_Type == "Transom")
                 {
-                    int totalHeight_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
-                                               MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_HeightToBind) +
+                    int totalHeight_Controls = MPanelLst_Panel.Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
+                                               MPanelLst_Divider.Sum(div => div.Div_HeightToBind) +
                                                MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
                     int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
 
                     while (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                     {
-                        foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
                             if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                             {
@@ -1024,14 +1024,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Type == "Mullion")
                 {
-                    int totalWidth_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) + 
-                                              MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_WidthToBind) +
+                    int totalWidth_Controls = MPanelLst_Panel.Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) + 
+                                              MPanelLst_Divider.Sum(div => div.Div_WidthToBind) +
                                               MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
                     int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
 
                     while (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                     {
-                        foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
                             if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                             {
@@ -1058,14 +1058,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_Type == "Transom")
                 {
-                    int totalHeight_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
-                                               MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_HeightToBind) +
+                    int totalHeight_Controls = MPanelLst_Panel.Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
+                                               MPanelLst_Divider.Sum(div => div.Div_HeightToBind) +
                                                MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
                     int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
 
                     while (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                     {
-                        foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
                             if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                             {
@@ -1085,14 +1085,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Type == "Mullion")
                 {
-                    int totalWidth_Controls = MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true).Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) +
-                                              MPanelLst_Divider.Where(div => div.Div_Visible == true).Sum(div => div.Div_WidthToBind) +
+                    int totalWidth_Controls = MPanelLst_Panel.Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) +
+                                              MPanelLst_Divider.Sum(div => div.Div_WidthToBind) +
                                               MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
                     int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
 
                     while (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                     {
-                        foreach (IPanelModel pnl in MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
                             if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                             {
@@ -1140,13 +1140,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_Type == "Transom")
                 {
-                    int totalDisplayHeight = GetVisiblePanels().Sum(pnl => pnl.Panel_DisplayHeight) +
+                    int totalDisplayHeight = MPanelLst_Panel.Sum(pnl => pnl.Panel_DisplayHeight) +
                                              MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_DisplayHeight);
                     int diff_DisplayHt_VS_totalDisplayHt = MPanel_DisplayHeight - totalDisplayHeight;
 
                     while (diff_DisplayHt_VS_totalDisplayHt > 0)
                     {
-                        foreach (IPanelModel pnl in GetVisiblePanels())
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
                             if (diff_DisplayHt_VS_totalDisplayHt > 0)
                             {
@@ -1166,13 +1166,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Type == "Mullion")
                 {
-                    int totalDisplayWidth = GetVisiblePanels().Sum(pnl => pnl.Panel_DisplayWidth) +
+                    int totalDisplayWidth = MPanelLst_Panel.Sum(pnl => pnl.Panel_DisplayWidth) +
                                              MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_DisplayWidth);
                     int diff_DisplayWd_VS_totalDisplayWd = MPanel_DisplayWidth - totalDisplayWidth;
 
                     while (diff_DisplayWd_VS_totalDisplayWd > 0)
                     {
-                        foreach (IPanelModel pnl in GetVisiblePanels())
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
                             if (diff_DisplayWd_VS_totalDisplayWd > 0)
                             {
@@ -1192,17 +1192,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
             }
         }
-
-        public IEnumerable<IDividerModel> GetVisibleDividers()
-        {
-            return MPanelLst_Divider.Where(div => div.Div_Visible == true);
-        }
-
-        public IEnumerable<IPanelModel> GetVisiblePanels()
-        {
-            return MPanelLst_Panel.Where(pnl => pnl.Panel_Visibility == true);
-        }
-
+        
         public IEnumerable<Control> GetVisibleObjects()
         {
             return MPanelLst_Objects.Where(obj => obj.Visible == true);
@@ -1224,21 +1214,21 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_Divisions >= 2)
                 {
-                    foreach (IDividerModel div in GetVisibleDividers())
+                    foreach (IDividerModel div in MPanelLst_Divider)
                     {
                         if (div.Div_ArtNo == Divider_ArticleNo._7536)
                         {
-                            div_deduction += 72;
+                            div_deduction += 42;
                         }
                         else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                         {
-                            div_deduction += 42;
+                            div_deduction += 72;
                         }
                     }
 
                     Equal_GlassSize = (((MPanel_DisplayWidth - (33 * 2) - div_deduction)) / totalPanels) - 6;
 
-                    foreach (IPanelModel pnl in GetVisiblePanels())
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth + (Equal_GlassSize - pnl.Panel_OriginalGlassWidth);
                     }
@@ -1252,21 +1242,21 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_Divisions >= 2)
                 {
-                    foreach (IDividerModel div in GetVisibleDividers())
+                    foreach (IDividerModel div in MPanelLst_Divider)
                     {
                         if (div.Div_ArtNo == Divider_ArticleNo._7536)
                         {
-                            div_deduction += 72;
+                            div_deduction += 42;
                         }
                         else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                         {
-                            div_deduction += 42;
+                            div_deduction += 72;
                         }
                     }
 
                     Equal_GlassSize = (((MPanel_DisplayHeight - (33 * 2) - div_deduction)) / totalPanels) - 6;
 
-                    foreach (IPanelModel pnl in GetVisiblePanels())
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight + (Equal_GlassSize - pnl.Panel_OriginalGlassHeight);
                     }

@@ -76,14 +76,14 @@ namespace ModelLayer.Model.Quotation
                     int glazing_seal = 0,
                         glazing_spacer = 0;
 
-                    if (frame.Lst_MultiPanel.Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
+                    if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
                     {
                         int loop_counter = 1;
 
                         foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
                         {
-                            List<IPanelModel> panels = mpnl.GetVisiblePanels().ToList();
-                            List<IDividerModel> divs = mpnl.GetVisibleDividers().ToList();
+                            List<IPanelModel> panels = mpnl.MPanelLst_Panel;
+                            List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                             List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
 
                             IDividerModel divTopOrLeft = null,
@@ -384,9 +384,9 @@ namespace ModelLayer.Model.Quotation
                             }
                         }
                     }
-                    else if (frame.GetVisiblePanels().Count() == 1 && frame.Lst_MultiPanel.Count() == 0)
+                    else if (frame.Lst_Panel.Count() == 1 && frame.Lst_MultiPanel.Count() == 0)
                     {
-                        IPanelModel pnl = frame.GetVisiblePanels().ToList()[0];
+                        IPanelModel pnl = frame.Lst_Panel[0];
                         pnl.SetPanelExplosionValues_Panel(true);
 
                         Material_List.Rows.Add("Glazing Bead Width " + pnl.PanelGlazingBead_ArtNo.ToString(),
@@ -516,12 +516,12 @@ namespace ModelLayer.Model.Quotation
                                        2, "pc(s)",
                                        frame.Frame_ReinfHeight.ToString());
 
-                if (frame.Lst_MultiPanel.Count() >= 1 && frame.GetVisiblePanels().Count() == 0)
+                if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
                 {
                     foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
                     {
-                        List<IPanelModel> panels = mpnl.GetVisiblePanels().ToList();
-                        List<IDividerModel> divs = mpnl.GetVisibleDividers().ToList();
+                        List<IPanelModel> panels = mpnl.MPanelLst_Panel;
+                        List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                         List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
 
                         IDividerModel divTopOrLeft = null,
@@ -878,9 +878,9 @@ namespace ModelLayer.Model.Quotation
                         }
                     }
                 }
-                else if (frame.GetVisiblePanels().Count() == 1 && frame.Lst_MultiPanel.Count() == 0)
+                else if (frame.Lst_Panel.Count() == 1 && frame.Lst_MultiPanel.Count() == 0)
                 {
-                    IPanelModel pnl = frame.GetVisiblePanels().ToList()[0];
+                    IPanelModel pnl = frame.Lst_Panel[0];
                     pnl.SetPanelExplosionValues_Panel(true);
 
                     Material_List.Rows.Add("Glazing Bead Width (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),

@@ -461,7 +461,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             int i = 0;
             foreach (IFrameModel fr in lst_frame)
             {
-                foreach (IPanelModel pnl in fr.GetVisiblePanels())
+                foreach (IPanelModel pnl in fr.Lst_Panel)
                 {
                     pnl.PanelGlass_ID = i;
                     i++;
@@ -472,7 +472,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 }
                 foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                 {
-                    foreach (IPanelModel pnl in mpnl.GetVisiblePanels())
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                     {
                         i++;
                         pnl.PanelGlass_ID = i;
