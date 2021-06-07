@@ -456,11 +456,11 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
 
-            _frameModel.Frame_Visible = false;
             _basePlatformUCP.ViewDeleteControl((UserControl)_frameUC);
             _basePlatformUCP.InvalidateBasePlatform();
             _basePlatformUCP.Invalidate_flpMain();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.DeleteFramePropertiesUC(_frameModel.Frame_ID);
             _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
 
             _mainPresenter.SetPanelGlassID();

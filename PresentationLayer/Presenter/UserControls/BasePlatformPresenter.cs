@@ -269,6 +269,19 @@ namespace PresentationLayer.Presenter.UserControls
             return lst_ht;
         }
 
+
+        public List<int> WidthList_ToPaint(int flpMain_width, Dictionary<int, Point> dict_Wd_Point)
+        {
+            List<int> Width_List = new List<int>();
+
+            foreach (KeyValuePair<int,Point> item in dict_Wd_Point)
+            {
+
+            }
+
+            return Width_List;
+        }
+
         public void Invalidate_flpMain()
         {
             _flpMain.Invalidate();

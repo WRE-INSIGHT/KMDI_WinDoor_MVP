@@ -43,14 +43,14 @@ namespace ModelLayer.Model.Quotation
             Material_List.Columns.Add(CreateColumn("Unit", "Unit", "System.String"));
             Material_List.Columns.Add(CreateColumn("Size", "Size", "System.String"));
 
-            foreach (IWindoorModel item in Lst_Windoor.Where(wndr => wndr.WD_visibility == true))
+            foreach (IWindoorModel item in Lst_Windoor)
             {
                 int totalFrames_width = 0,
                     totalFrames_height = 0,
                      total_glassWidth = 0,
                      total_glassHeight = 0;
 
-                foreach (IFrameModel frame in item.GetAllVisibleFrames())
+                foreach (IFrameModel frame in item.lst_frame)
                 {
                     frame.SetExplosionValues_Frame();
 
@@ -493,7 +493,7 @@ namespace ModelLayer.Model.Quotation
                 glazing_seal = 0,
                 glazing_spacer = 0;
 
-            foreach (IFrameModel frame in item.GetAllVisibleFrames())
+            foreach (IFrameModel frame in item.lst_frame)
             {
                 frame.SetExplosionValues_Frame();
 

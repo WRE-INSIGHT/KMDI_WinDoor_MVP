@@ -296,6 +296,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (mPanelModel.MPanel_Placement == "Last")
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
+                        _multiPanelModel.Fit_MyControls_ToBindDimensions();
                         _multiPanelModel.Adjust_ControlDisplaySize();
                         _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                         _multiPanelModel.SetEqualGlassDimension();
@@ -376,6 +377,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (mPanelModel.MPanel_Placement == "Last")
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
+                        _multiPanelModel.Fit_MyControls_ToBindDimensions();
                         _multiPanelModel.Adjust_ControlDisplaySize();
                         _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                         _multiPanelModel.SetEqualGlassDimension();
@@ -446,7 +448,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (_multiPanelModel.MPanel_ParentModel != null)
                 {
-                    suggest_HT = (_multiPanelModel.MPanel_Height - 20) + 2;
+                    suggest_HT = (_multiPanelModel.MPanel_Height - 20) + 4;
                 }
                 
                 IPanelModel _panelModel = _panelServices.AddPanelModel(suggest_Wd,
@@ -567,6 +569,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (_panelModel.Panel_Placement == "Last")
                 {
                     _multiPanelModel.Fit_MyControls_Dimensions();
+                    _multiPanelModel.Fit_MyControls_ToBindDimensions();
                     _multiPanelModel.Adjust_ControlDisplaySize();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                     _multiPanelModel.SetEqualGlassDimension();

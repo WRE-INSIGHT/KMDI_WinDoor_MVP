@@ -379,7 +379,7 @@ namespace PresentationLayer.Presenter
 
         private void Fit_MyControls_byControlsLocation()
         {
-            foreach (IFrameModel frames in _windoorModel.lst_frame.Where(fr => fr.Frame_Visible == true))
+            foreach (IFrameModel frames in _windoorModel.lst_frame)
             {
                 foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
                 {
@@ -452,7 +452,7 @@ namespace PresentationLayer.Presenter
 
         private void FitControls_InsideMultiPanel()
         {
-            foreach (IFrameModel frames in _windoorModel.lst_frame.Where(fr => fr.Frame_Visible == true))
+            foreach (IFrameModel frames in _windoorModel.lst_frame)
             {
                 foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
                 {
@@ -835,7 +835,7 @@ namespace PresentationLayer.Presenter
                                          _windoorModel.WD_profile,
                                          false);
 
-                         Console.WriteLine("Visible Frames: " + _windoorModel.GetAllVisibleFrames().Count());
+                         Console.WriteLine("Visible Frames: " + _windoorModel.lst_frame.Count());
 
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
@@ -920,8 +920,7 @@ namespace PresentationLayer.Presenter
 
         public void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel)
         {
-            frameModel.Frame_Visible = false;
-            //_windoorModel.lst_frame.Remove(frameModel);
+            _windoorModel.lst_frame.Remove(frameModel);
         }
 
         public IFramePropertiesUC GetFrameProperties(int frameID)
@@ -1041,6 +1040,18 @@ namespace PresentationLayer.Presenter
                 if (pnlProperties.Panel_ID == panelID)
                 {
                     ((UserControl)pnlProperties).Parent.Controls.Remove((UserControl)pnlProperties);
+                }
+            }
+        }
+
+        public void DeleteFramePropertiesUC(int frameID)
+        {
+            var propertiesUC = _commonfunc.GetAll(_pnlPropertiesBody, "FramePropertiesUC");
+            foreach (IFramePropertiesUC frameProperties in propertiesUC)
+            {
+                if (frameProperties.FrameID == frameID)
+                {
+                    ((UserControl)frameProperties).Parent.Controls.Remove((UserControl)frameProperties);
                 }
             }
         }
