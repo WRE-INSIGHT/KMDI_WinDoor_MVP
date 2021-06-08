@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -17,7 +18,7 @@ namespace PresentationLayer.Presenter.UserControls
         IBasePlatformPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel);
         List<int> lst_wd_toPaint(int flpMain_width, List<int> lst_ctrlWds);
         List<int> lst_ht_toPaint(int flpMain_height, List<int> lst_ctrlHts);
-        List<int> WidthList_ToPaint(int flpMain_width, Dictionary<int, Point> dict_Wd_Point);
+        List<int> WidthList_ToPaint(int flpMain_width, int[,] arr_wd_locX);
         void ViewDeleteControl(UserControl control);
         void Invalidate_flpMainControls();
     }
