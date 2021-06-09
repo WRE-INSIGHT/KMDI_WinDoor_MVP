@@ -192,6 +192,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         }
                         break;
                 }
+                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             }
         }
 
@@ -434,6 +435,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         }
                     }
                 }
+                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             }
             catch (Exception ex)
             {

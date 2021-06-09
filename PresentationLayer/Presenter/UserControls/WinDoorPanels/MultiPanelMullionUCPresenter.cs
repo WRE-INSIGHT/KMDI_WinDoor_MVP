@@ -762,6 +762,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.SetPanelGlassID();
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
 
             #endregion
         }

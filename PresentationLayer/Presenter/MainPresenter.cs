@@ -753,7 +753,7 @@ namespace PresentationLayer.Presenter
                         _mainView.GetThis().Controls.Add(bpUC);
                         //bpUC.BringToFront();
 
-                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
+                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
 
                         AddItemInfoUC(_windoorModel);
@@ -787,7 +787,7 @@ namespace PresentationLayer.Presenter
                         _mainView.GetThis().Controls.Add(bpUC);
                         //bpUC.BringToFront();
 
-                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
+                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
 
                         AddItemInfoUC(_windoorModel); //add item information user control

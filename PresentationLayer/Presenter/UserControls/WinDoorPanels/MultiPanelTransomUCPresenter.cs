@@ -459,7 +459,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (_multiPanelModel.MPanel_ParentModel != null)
                 {
-                    suggest_Wd = _multiPanelModel.MPanel_Width - 12;//multiPanel_boundsWD + 2;
+                    suggest_Wd = multiPanel_boundsWD + 2;
                 }
                 
                 IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
@@ -774,6 +774,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.SetPanelGlassID();
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
 
             #endregion
         }

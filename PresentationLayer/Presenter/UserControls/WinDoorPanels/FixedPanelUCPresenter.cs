@@ -296,7 +296,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             _mainPresenter.DeductPanelGlassID();
             _mainPresenter.SetPanelGlassID();
-
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             #endregion
         }
 
