@@ -112,6 +112,41 @@ namespace PresentationLayer.Tests
         }
 
         [TestMethod]
+        public void WidthList_ToPaint_11Panel2400x1900()
+        {
+            /*  _________________________
+             *  |   |   |       |   |   | 
+             *  |___|___|       |___|___|
+             *  |   |   |       |   |   |
+             *  |___|___|       |___|___|
+             *  |       |       |       |
+             *  |_______|_______|_______|
+             */
+            int total_wd = 2400;
+            int[,] given_arr = new int[11, 2] { { 792, 690 },
+                                                { 804, 484 },
+                                                { 804, 896 },
+                                                { 402, 484 },
+                                                { 402, 587 },
+                                                { 402, 484 },
+                                                { 402, 587 },
+                                                { 402, 896 },
+                                                { 402, 999 },
+                                                { 402, 896 },
+                                                { 402, 999 }
+                                            };
+
+            List<int> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
+
+            Assert.AreEqual(5, actual_lst.Count);
+            Assert.AreEqual(402, actual_lst[0]);
+            Assert.AreEqual(402, actual_lst[1]);
+            Assert.AreEqual(792, actual_lst[2]);
+            Assert.AreEqual(402, actual_lst[3]);
+            Assert.AreEqual(402, actual_lst[4]);
+        }
+
+        [TestMethod]
         public void HeightList_ToPaint2Panel400x400()
         {
             /*  ________

@@ -460,35 +460,43 @@ namespace PresentationLayer.Presenter.UserControls
 
             List<int> lst_wd = new List<int>();
             List<int> lst_of_inserted_locX = new List<int>();
+            List<int> lst_of_inserted_locX_indices = new List<int>();
 
             for (int i = 0; i < arr_locX.Length; i++)
             {
-                if (lst_of_inserted_locX.Contains(arr_locX[i]) == false)
+                int curr_locX = arr_locX[i],
+                    curr_wd = arr_wd[i];
+                if (lst_of_inserted_locX.Contains(curr_locX) == false)
                 {
-                    lst_wd.Add(arr_wd[i]);
-                    lst_of_inserted_locX.Add(arr_locX[i]);
+                    lst_wd.Add(curr_wd);
+                    lst_of_inserted_locX.Add(curr_locX);
+                    lst_of_inserted_locX_indices.Add(i);
                 }
-                else if (lst_of_inserted_locX.Contains(arr_locX[i]) == true)
+                else if (lst_of_inserted_locX.Contains(curr_locX) == true)
                 {
-                    int ndx = lst_of_inserted_locX.IndexOf(arr_locX[i]);
-                    if (arr_wd[i] < arr_wd[ndx])
+                    int indx_of_locX = lst_of_inserted_locX.IndexOf(curr_locX),
+                        indx_of_locXIndex = lst_of_inserted_locX_indices[indx_of_locX],
+                        wd_to_compare = arr_wd[indx_of_locXIndex];
+                    if (curr_wd < wd_to_compare)
                     {
-                        lst_wd[ndx] = arr_wd[i];
+                        lst_wd[indx_of_locX] = curr_wd;
                     }
                 }
             }
 
-            int total_wd = 0;
+            int total_wd = 0,
+                curr_lst_wd = 0;
             for (int i = 0; i < lst_wd.Count; i++)
             {
-                total_wd += lst_wd[i];
+                curr_lst_wd = lst_wd[i];
+                total_wd += curr_lst_wd;
                 if (total_wd <= flpMain_width)
                 {
-                    Width_List.Add(lst_wd[i]);
+                    Width_List.Add(curr_lst_wd);
                 }
                 else if (total_wd > flpMain_width)
                 {
-                    total_wd -= lst_wd[i];
+                    total_wd -= curr_lst_wd;
                 }
             }
 
@@ -516,20 +524,26 @@ namespace PresentationLayer.Presenter.UserControls
 
             List<int> lst_ht = new List<int>();
             List<int> lst_of_inserted_locY = new List<int>();
+            List<int> lst_of_inserted_locY_indices = new List<int>();
 
             for (int i = 0; i < arr_locY.Length; i++)
             {
-                if (lst_of_inserted_locY.Contains(arr_locY[i]) == false)
+                int curr_locY = arr_locY[i],
+                    curr_ht = arr_ht[i];
+                if (lst_of_inserted_locY.Contains(curr_locY) == false)
                 {
-                    lst_ht.Add(arr_ht[i]);
-                    lst_of_inserted_locY.Add(arr_locY[i]);
+                    lst_ht.Add(curr_ht);
+                    lst_of_inserted_locY.Add(curr_locY);
+                    lst_of_inserted_locY_indices.Add(i);
                 }
-                else if (lst_of_inserted_locY.Contains(arr_locY[i]) == true)
+                else if (lst_of_inserted_locY.Contains(curr_locY) == true)
                 {
-                    int ndx = lst_of_inserted_locY.IndexOf(arr_locY[i]);
-                    if (arr_ht[i] < arr_ht[ndx])
+                    int indx_of_locY = lst_of_inserted_locY.IndexOf(curr_locY),
+                        indx_of_locYIndex = lst_of_inserted_locY_indices[indx_of_locY],
+                        ht_to_compare = arr_ht[indx_of_locYIndex];
+                    if (curr_ht < ht_to_compare)
                     {
-                        lst_ht[ndx] = arr_ht[i];
+                        lst_ht[indx_of_locY] = curr_ht;
                     }
                 }
             }
