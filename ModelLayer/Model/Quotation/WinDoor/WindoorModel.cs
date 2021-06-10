@@ -311,11 +311,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public IEnumerable<IFrameModel> GetAllVisibleFrames()
-        {
-            return lst_frame.Where(frame => frame.Frame_Visible == true);
-        }
-
         private float[] _arr_zoomPercentage = { 0.10f, 0.13f, 0.17f, 0.26f, 0.50f, 1.0f };
         public float[] Arr_ZoomPercentage
         {
@@ -449,7 +444,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             if (lst_frame != null)
             {
-                foreach (IFrameModel fr in lst_frame.Where(fr => fr.Frame_Visible == true))
+                foreach (IFrameModel fr in lst_frame)
                 {
                     fr.Frame_Zoom = WD_zoom;
                 }

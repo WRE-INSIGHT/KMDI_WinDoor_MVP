@@ -64,5 +64,6 @@ namespace PresentationLayer.Presenter
         void DeleteMultiPanelPropertiesUC(int multiPanelID);
         void DeleteDividerPropertiesUC(int divID);
         void DeletePanelPropertiesUC(int panelID);
+        void DeleteFramePropertiesUC(int frameID);
     }
 }

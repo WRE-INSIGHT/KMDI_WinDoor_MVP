@@ -303,6 +303,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (mPanelModel.MPanel_Placement == "Last")
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
+                        _multiPanelModel.Fit_MyControls_ToBindDimensions();
                         _multiPanelModel.Adjust_ControlDisplaySize();
                         _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                         _multiPanelModel.SetEqualGlassDimension();
@@ -384,6 +385,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (mPanelModel.MPanel_Placement == "Last")
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
+                        _multiPanelModel.Fit_MyControls_ToBindDimensions();
                         _multiPanelModel.Adjust_ControlDisplaySize();
                         _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                         _multiPanelModel.SetEqualGlassDimension();
@@ -580,6 +582,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (_panelModel.Panel_Placement == "Last")
                 {
                     _multiPanelModel.Fit_MyControls_Dimensions();
+                    _multiPanelModel.Fit_MyControls_ToBindDimensions();
                     _multiPanelModel.Adjust_ControlDisplaySize();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                     _multiPanelModel.SetEqualGlassDimension();
@@ -643,6 +646,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     ctrl.Invalidate(); //Divider
                 }
             }
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
         }
 
         private void _multiPanelTransomUC_deleteClickedEventRaised(object sender, EventArgs e)
@@ -770,6 +774,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.SetPanelGlassID();
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
 
             #endregion
         }
