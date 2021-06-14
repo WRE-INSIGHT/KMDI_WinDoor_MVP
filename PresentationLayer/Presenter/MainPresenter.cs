@@ -748,7 +748,7 @@ namespace PresentationLayer.Presenter
 
                         _mainView.Zoom = _windoorModel.WD_zoom;
 
-                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel);
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);
                         //bpUC.BringToFront();
@@ -782,7 +782,7 @@ namespace PresentationLayer.Presenter
                                                                          _quotationModel.Lst_Windoor.Count() + 1);
                         AddWndrList_QuotationModel(_windoorModel);
 
-                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel);
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);
                         //bpUC.BringToFront();

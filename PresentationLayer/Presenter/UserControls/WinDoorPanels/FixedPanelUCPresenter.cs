@@ -300,8 +300,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
         }
 
-        int prev_Width = 0,
-            prev_Height = 0;
         private void OnFixedPanelUCSizeChangedEventRaised(object sender, EventArgs e)
         {
             //try

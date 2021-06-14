@@ -599,6 +599,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        private int mpanelStackNo;
+        public int MPanel_StackNo
+        {
+            get
+            {
+                return mpanelStackNo;
+            }
+
+            set
+            {
+                mpanelStackNo = value;
+            }
+        }
+
         private void SetZoomDivider()
         {
             foreach (IDividerModel div in MPanelLst_Divider)
@@ -1459,7 +1473,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                float mpanelZoom,
                                IFrameModel mpanelFrameModelParent,
                                int mpanelDisplayWidth,
-                               int mpanelDisplayHeight)
+                               int mpanelDisplayHeight,
+                               int mpanelStackNo)
         {
             MPanel_ID = mpanelID;
             MPanel_Name = mpanelName;
@@ -1486,6 +1501,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_DisplayHeight = mpanelDisplayHeight;
             MPanel_OriginalDisplayWidth = mpanelDisplayWidth;
             MPanel_OriginalDisplayHeight = mpanelDisplayHeight;
+            MPanel_StackNo = mpanelStackNo;
 
             if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
             {
