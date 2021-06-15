@@ -47,6 +47,7 @@ namespace ModelLayer.Model.Quotation.Frame
         int Frame_ReinfHeight { get; set; }
         
         void SetExplosionValues_Frame();
+        void AdjustPropertyPanelHeight(string objtype);
         #endregion
     }
 }

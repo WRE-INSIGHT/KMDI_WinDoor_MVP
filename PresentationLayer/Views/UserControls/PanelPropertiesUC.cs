@@ -73,6 +73,13 @@ namespace PresentationLayer.Views.UserControls
             }
             cmb_GlazingArtNo.DataSource = gArtNo;
 
+            List<GlassFilm_Types> gFilm = new List<GlassFilm_Types>();
+            foreach (GlassFilm_Types item in GlassFilm_Types.GetAll())
+            {
+                gFilm.Add(item);
+            }
+            cmb_FilmType.DataSource = gFilm;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 
@@ -91,6 +98,7 @@ namespace PresentationLayer.Views.UserControls
             cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
             this.DataBindings.Add(ModelBinding["PanelGlass_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
+            cmb_FilmType.DataBindings.Add(ModelBinding["Panel_GlassFilm"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)

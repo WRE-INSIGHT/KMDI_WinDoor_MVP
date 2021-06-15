@@ -619,6 +619,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_GlassHeight { get; set; }
         public int Panel_OriginalGlassHeight { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
+        public GlassFilm_Types Panel_GlassFilm { get; set; }
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
@@ -832,7 +833,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           GlazingBead_ArticleNo panelGlazingBeadArtNo,
                           int panelDisplayWidth,
                           int panelDisplayHeight,
-                          int panelGlassID)
+                          int panelGlassID,
+                          GlassFilm_Types panelGlassFilm)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -858,6 +860,7 @@ namespace ModelLayer.Model.Quotation.Panel
             PanelGlass_ID = panelGlassID;
             Panel_OriginalDisplayWidth = panelDisplayWidth;
             Panel_OriginalDisplayHeight = panelDisplayHeight;
+            Panel_GlassFilm = panelGlassFilm;
 
             //if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel == null) //parent == frame
             //{

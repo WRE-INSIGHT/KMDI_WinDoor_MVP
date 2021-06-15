@@ -229,8 +229,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
                 _frameModel.Lst_Divider.Remove(div);
 
-                _multiPanelModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
-                _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _multiPanelModel.AdjustPropertyPanelHeight("Div");
+                _frameModel.AdjustPropertyPanelHeight("Div");
             }
 
             #endregion
@@ -241,6 +241,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_fixedPanelUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel");
             }
             if (_multiPanelMullionUCP != null)
             {
@@ -290,7 +291,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
 
-            _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
+            _frameModel.AdjustPropertyPanelHeight("Panel");
 
             _mainPresenter.DeductPanelGlassID();
             _mainPresenter.SetPanelGlassID();
