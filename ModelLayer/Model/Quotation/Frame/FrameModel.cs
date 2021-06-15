@@ -152,7 +152,8 @@ namespace ModelLayer.Model.Quotation.Frame
         public bool Frame_Visible
         {
             get { return _frameVisible; }
-            set { _frameVisible = value; NotifyPropertyChanged(); }
+            set { _frameVisible = value; }
+            //NotifyPropertyChanged(); }
         }
 
         private Padding _framePadding;

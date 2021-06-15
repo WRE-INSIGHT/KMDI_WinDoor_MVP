@@ -54,6 +54,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event DragEventHandler flpMultiDragDropEventRaised;
         public event EventHandler multiMullionSizeChangedEventRaised;
         public event EventHandler dividerEnabledCheckedChangedEventRaised;
+        public event DragEventHandler flpMultiDragOverEventRaised;
 
         private void flp_Multi_Paint(object sender, PaintEventArgs e)
         {
@@ -67,7 +68,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["MPanel_Dock"]);
             this.DataBindings.Add(ModelBinding["MPanel_Width"]);
             this.DataBindings.Add(ModelBinding["MPanel_Height"]);
-            //this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
+            this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
             this.DataBindings.Add(ModelBinding["MPanel_Placement"]);
             //this.DataBindings.Add(ModelBinding["MPanel_Margin"]);
         }
@@ -107,7 +108,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void flp_MultiMullion_DragOver(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            EventHelpers.RaiseDragEvent(sender, flpMultiDragOverEventRaised, e);
         }
 
         private void flp_MultiMullion_DragDrop(object sender, DragEventArgs e)

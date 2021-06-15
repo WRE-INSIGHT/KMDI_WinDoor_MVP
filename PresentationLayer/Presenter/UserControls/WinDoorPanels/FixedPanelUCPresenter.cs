@@ -290,8 +290,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
 
-            //_panelModel.Panel_Visibility = false;
-
             _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
 
             _mainPresenter.DeductPanelGlassID();
@@ -300,8 +298,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
         }
 
-        int prev_Width = 0,
-            prev_Height = 0;
         private void OnFixedPanelUCSizeChangedEventRaised(object sender, EventArgs e)
         {
             //try

@@ -157,6 +157,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                           _frameModel.Frame_Zoom,
                                                                           _mainPresenter.GetMultiPanelCount(),
                                                                           DockStyle.Fill,
+                                                                          1,
                                                                           0,
                                                                           null,
                                                                           _frameModel.FrameImageRenderer_Zoom);

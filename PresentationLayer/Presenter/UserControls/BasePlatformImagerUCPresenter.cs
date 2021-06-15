@@ -1,5 +1,9 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using PresentationLayer.CommonMethods;
 using PresentationLayer.Views.UserControls;
 using System;
 using System.Collections.Generic;
@@ -16,12 +20,17 @@ namespace PresentationLayer.Presenter.UserControls
     public class BasePlatformImagerUCPresenter : IBasePlatformImagerUCPresenter, IPresenterCommon
     {
         IBasePlatformImagerUC _basePlatformImagerUC;
+        FlowLayoutPanel _flpMain;
 
         IWindoorModel _windoorModel;
+        IMainPresenter _mainPresenter;
+
+        CommonFunctions _commonfunc = new CommonFunctions();
 
         public BasePlatformImagerUCPresenter(IBasePlatformImagerUC basePlatformImagerUC)
         {
             _basePlatformImagerUC = basePlatformImagerUC;
+            _flpMain = _basePlatformImagerUC.GetFlpMain();
             SubscribeToEventsSetup();
         }
 
@@ -54,6 +63,20 @@ namespace PresentationLayer.Presenter.UserControls
                                                            pnl.ClientRectangle.Height - w));
         }
 
+        private Control FindFrameControl(string frameName, int _frameID)
+        {
+            Control frame = new Control();
+            var frameUC = _commonfunc.GetAll(_flpMain, frameName);
+            foreach (IFrameUC fr in frameUC)
+            {
+                if (fr.frameID == _frameID)
+                {
+                    frame = ((UserControl)fr);
+                }
+            }
+            return frame;
+        }
+
         private void _basePlatformImagerUC_basePlatformPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             UserControl basePL = (UserControl)sender;
@@ -62,93 +85,240 @@ namespace PresentationLayer.Presenter.UserControls
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-
             int ctrl_Y = 35;
             Pen redP = new Pen(Color.Red);
             redP.Width = 3.5f;
-            Font dmnsion_font = new Font("Segoe UI", 20, FontStyle.Bold);
+            Font dmnsion_font = new Font("Segoe UI", 12, FontStyle.Bold);
 
-            string dmnsion_w = _windoorModel.WD_width.ToString();
-            Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
-            Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
-
-            Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
-            double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
-
-            //arrow for WIDTH
-            Point[] arrwhd_pnts_W1 =
+            int total_panel = 0, total_mpanel = 0;
+            foreach (IFrameModel frame in _windoorModel.lst_frame)
             {
-                new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
-                dmnsion_w_startP,
-                new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
-            };
-
-            Point[] arrwhd_pnts_W2 =
-            {
-                new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
-                dmnsion_w_endP,
-                new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
-            };
-            ;
-
-            if (_flpMain.Controls.OfType<IFrameImagerUC>().Where(fr => fr.thisVisible == true).Count() > 0)
-            {
-                g.DrawLines(redP, arrwhd_pnts_W1);
-                g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
-                g.DrawLines(redP, arrwhd_pnts_W2);
-                TextRenderer.DrawText(g,
-                                      dmnsion_w,
-                                      dmnsion_font,
-                                      new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
-                                                    new Size(s.Width, s.Height)),
-                                      Color.Black,
-                                      Color.White,
-                                      TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                total_panel += frame.Lst_Panel.Count();
+                total_mpanel += frame.Lst_MultiPanel.Count();
+                foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                {
+                    total_panel += mpnl.MPanelLst_Panel.Count();
+                }
             }
-            //arrow for WIDTH
 
-            //arrow for HEIGHT
-            string dmnsion_h = _windoorModel.WD_height.ToString();
-            Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
-            Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
-
-            Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
-            double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
-
-            Point[] arrwhd_pnts_H1 =
+            if (total_panel > 1 || total_mpanel >= 1)
             {
+                int[,] actual_arr_wd_locX = new int[total_panel, 2];
+                int[,] actual_arr_ht_locY = new int[total_panel, 2];
+                int ndx = 0;
+
+                if (total_panel > 1 && total_mpanel == 0)
+                {
+                    foreach (IFrameModel frame in _windoorModel.lst_frame)
+                    {
+                        foreach (IPanelModel pnl in frame.Lst_Panel)
+                        {
+                            Control ctrl = FindFrameControl(frame.Frame_Name, frame.Frame_ID);
+                            actual_arr_wd_locX[ndx, 0] = pnl.Panel_DisplayWidth;
+                            actual_arr_ht_locY[ndx, 0] = pnl.Panel_DisplayHeight;
+
+                            actual_arr_wd_locX[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                            actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                            ndx++;
+                        }
+                    }
+                }
+                else if (total_mpanel >= 1)
+                {
+                    foreach (IFrameModel frame in _windoorModel.lst_frame)
+                    {
+                        foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                        {
+                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                            {
+                                Control ctrl = mpnl.MPanelLst_Objects.Find(obj => obj.Name == pnl.Panel_Name);
+                                actual_arr_wd_locX[ndx, 0] = pnl.Panel_DisplayWidth;
+                                actual_arr_ht_locY[ndx, 0] = pnl.Panel_DisplayHeight;
+
+                                actual_arr_wd_locX[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                ndx++;
+                            }
+                        }
+                    }
+                }
+
+
+                List<int> wds = _mainPresenter.basePlatform_MainPresenter.WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
+                List<int> hts = _mainPresenter.basePlatform_MainPresenter.HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
+
+                int locX = 0;
+                foreach (int wd in wds)
+                {
+                    string dmnsion_w = wd.ToString();
+                    PointF dmnsion_w_startP = new PointF(_flpMain.Location.X + (locX * _windoorModel.WD_zoom_forImageRenderer),
+                                                         (ctrl_Y - 17));// * _windoorModel.WD_zoom);
+                    PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + wd) * _windoorModel.WD_zoom_forImageRenderer),
+                                                       (ctrl_Y - 17)); // * _windoorModel.WD_zoom);
+
+                    Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
+                    double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
+
+                    //arrow for WIDTH
+                    PointF[] arrwhd_pnts_W1 =
+                    {
+                            new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
+                            dmnsion_w_startP,
+                            new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
+                        };
+
+                    PointF[] arrwhd_pnts_W2 =
+                    {
+                            new PointF(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
+                            dmnsion_w_endP,
+                            new PointF(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
+                        };
+
+                    if (_flpMain.Controls.OfType<IFrameImagerUC>().Where(fr => fr.thisVisible == true).Count() > 0)
+                    {
+                        g.DrawLines(redP, arrwhd_pnts_W1);
+                        g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
+                        g.DrawLines(redP, arrwhd_pnts_W2);
+                        TextRenderer.DrawText(g,
+                                              dmnsion_w,
+                                              dmnsion_font,
+                                              new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
+                                                            new Size(s.Width, s.Height)),
+                                              Color.Black,
+                                              SystemColors.Control,
+                                              TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                    }
+                    //arrow for WIDTH
+                    locX += wd;
+                }
+
+                int locY = 0;
+                foreach (int ht in hts)
+                {
+                    //arrow for HEIGHT
+                    string dmnsion_h = ht.ToString();
+                    PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.WD_zoom_forImageRenderer));
+                    PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + ht) * _windoorModel.WD_zoom_forImageRenderer));
+
+                    Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
+                    double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
+
+                    PointF[] arrwhd_pnts_H1 =
+                    {
+                        new PointF(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
+                        dmnsion_h_startP,
+                        new PointF(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
+                    };
+
+                    PointF[] arrwhd_pnts_H2 =
+                    {
+                        new PointF(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
+                        dmnsion_h_endP,
+                        new PointF(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
+                    };
+
+                    if (_flpMain.Controls.OfType<IFrameImagerUC>().Where(fr => fr.thisVisible == true).Count() > 0)
+                    {
+                        g.DrawLines(redP, arrwhd_pnts_H1);
+                        g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
+                        g.DrawLines(redP, arrwhd_pnts_H2);
+                        TextRenderer.DrawText(g,
+                                              dmnsion_h,
+                                              dmnsion_font,
+                                              new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
+                                                            new Size(s2.Width, s2.Height)),
+                                              Color.Black,
+                                              SystemColors.Control,
+                                              TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                    }
+                    //arrow for HEIGHT
+                    locY += ht;
+                }
+            }
+            else if (total_panel == 1 && total_mpanel == 0)
+            {
+                string dmnsion_w = _windoorModel.WD_width.ToString();
+                Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
+                Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
+
+                Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
+                double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
+
+                //arrow for WIDTH
+                Point[] arrwhd_pnts_W1 =
+                {
+                            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
+                            dmnsion_w_startP,
+                            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
+                        };
+
+                Point[] arrwhd_pnts_W2 =
+                {
+                            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
+                            dmnsion_w_endP,
+                            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
+                        };
+
+                if (_flpMain.Controls.OfType<IFrameImagerUC>().Where(fr => fr.thisVisible == true).Count() > 0)
+                {
+                    g.DrawLines(redP, arrwhd_pnts_W1);
+                    g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
+                    g.DrawLines(redP, arrwhd_pnts_W2);
+                    TextRenderer.DrawText(g,
+                                          dmnsion_w,
+                                          dmnsion_font,
+                                          new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
+                                                        new Size(s.Width, s.Height)),
+                                          Color.Black,
+                                          Color.White,
+                                          TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                }
+                //arrow for WIDTH
+
+
+                //arrow for HEIGHT
+                string dmnsion_h = _windoorModel.WD_height.ToString();
+                Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
+                Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
+
+                Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
+                double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
+
+                Point[] arrwhd_pnts_H1 =
+                {
                     new Point(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
                     dmnsion_h_startP,
                     new Point(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
                 };
 
-            Point[] arrwhd_pnts_H2 =
-            {
+                Point[] arrwhd_pnts_H2 =
+                {
                     new Point(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
                     dmnsion_h_endP,
                     new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
                 };
 
-            if (_flpMain.Controls.OfType<IFrameImagerUC>().Where(fr => fr.thisVisible == true).Count() > 0)
-            {
-                g.DrawLines(redP, arrwhd_pnts_H1);
-                g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
-                g.DrawLines(redP, arrwhd_pnts_H2);
-                TextRenderer.DrawText(g,
-                                      dmnsion_h,
-                                      dmnsion_font,
-                                      new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
-                                                    new Size(s2.Width, s2.Height)),
-                                      Color.Black,
-                                      Color.White,
-                                      TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                if (_flpMain.Controls.OfType<IFrameImagerUC>().Where(fr => fr.thisVisible == true).Count() > 0)
+                {
+                    g.DrawLines(redP, arrwhd_pnts_H1);
+                    g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
+                    g.DrawLines(redP, arrwhd_pnts_H2);
+                    TextRenderer.DrawText(g,
+                                          dmnsion_h,
+                                          dmnsion_font,
+                                          new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
+                                                        new Size(s2.Width, s2.Height)),
+                                          Color.Black,
+                                          Color.White,
+                                          TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                }
+                //arrow for HEIGHT
             }
-            //arrow for HEIGHT
 
             Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
             basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
 
-            //_windoorModel.WD_image = bm;
+            _windoorModel.WD_image = bm;
             //bm.Save(@"C:\Users\KMDI\Pictures\Saved Pictures\2.png");
         }
 
@@ -158,13 +328,24 @@ namespace PresentationLayer.Presenter.UserControls
             return _basePlatformImagerUC;
         }
 
-        public IBasePlatformImagerUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel)
+        public void BringToFront_baseImager()
+        {
+            _basePlatformImagerUC.BringToFront_baseImager();
+        }
+
+        public void SendToBack_baseImager()
+        {
+            _basePlatformImagerUC.SendToBack_baseImager();
+        }
+
+        public IBasePlatformImagerUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel, IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IBasePlatformImagerUC, BasePlatformImagerUC>()
                 .RegisterType<IBasePlatformImagerUCPresenter, BasePlatformImagerUCPresenter>();
             BasePlatformImagerUCPresenter imagerUCP = unityC.Resolve<BasePlatformImagerUCPresenter>();
             imagerUCP._windoorModel = windoorModel;
+            imagerUCP._mainPresenter = mainPresenter;
             imagerUCP._basePlatformImagerUC.ClearBinding((UserControl)_basePlatformImagerUC);
 
             return imagerUCP;
@@ -194,6 +375,11 @@ namespace PresentationLayer.Presenter.UserControls
         public void Invalidate_flpMain()
         {
             _basePlatformImagerUC.GetFlpMain().Invalidate();
+        }
+
+        public void DeleteControl(UserControl frameImagerUC)
+        {
+            _flpMain.Controls.Remove(frameImagerUC);
         }
     }
 }

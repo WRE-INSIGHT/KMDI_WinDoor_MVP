@@ -40,6 +40,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanel_AddPixel { get; }
         int MPanel_DisplayWidth { get; set; }
         int MPanel_DisplayHeight { get; set; }
+        int MPanel_StackNo { get; set; }
 
         int GetNextIndex();
         int GetCount_MPanelLst_Object();

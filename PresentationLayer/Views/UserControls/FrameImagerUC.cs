@@ -53,7 +53,8 @@ namespace PresentationLayer.Views.UserControls
 
         public event EventHandler frameLoadEventRaised;
         public event PaintEventHandler outerFramePaintEventRaised;
-        
+        public event EventHandler frameVisibleChangedEventRaised;
+
         private void FrameImagerUC_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(this, frameLoadEventRaised, e);
@@ -87,6 +88,11 @@ namespace PresentationLayer.Views.UserControls
         private void FrameImagerUC_PaddingChanged(object sender, EventArgs e)
         {
             this.Invalidate();
+        }
+
+        private void FrameImagerUC_VisibleChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, frameVisibleChangedEventRaised, e);
         }
     }
 }
