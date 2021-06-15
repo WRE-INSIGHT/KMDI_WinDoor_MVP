@@ -290,8 +290,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
 
-            //_panelModel.Panel_Visibility = false;
-
             _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
 
             _mainPresenter.DeductPanelGlassID();

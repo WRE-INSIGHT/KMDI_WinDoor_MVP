@@ -8,7 +8,7 @@ namespace PresentationLayer.Presenter.UserControls
     public interface IFrameImagerUCPresenter
     {
         IFrameImagerUC GetFrameImagerUC();
-        IFrameImagerUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel);
+        IFrameImagerUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel, IMainPresenter mainPresenter);
         void AddControl(UserControl userctrlObj);
         void DeleteControl(UserControl userctrlObj);
     }

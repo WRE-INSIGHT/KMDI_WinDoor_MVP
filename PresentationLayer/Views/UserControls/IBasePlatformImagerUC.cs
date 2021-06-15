@@ -12,5 +12,7 @@ namespace PresentationLayer.Views.UserControls
         void InvalidateThis();
         void ClearBinding(Control _basePlatfomrUC);
         FlowLayoutPanel GetFlpMain();
+        void BringToFront_baseImager();
+        void SendToBack_baseImager();
     }
 }

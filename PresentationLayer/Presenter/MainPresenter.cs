@@ -345,36 +345,18 @@ namespace PresentationLayer.Presenter
             explosionPresenter.ShowExplosionView();
         }
 
+        bool toggle;
         private void _mainView_DeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-            //FitControls_InsideMultiPanel();
-
-            //foreach (IFrameModel fr in _windoorModel.lst_frame)
-            //{
-            //    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
-            //    {
-            //        Console.WriteLine(mpnl.MPanel_Name + " WD:" + mpnl.MPanel_WidthToBind);
-            //        Console.WriteLine("Margin:" + mpnl.MPanel_Margin.ToString());
-
-            //        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-            //        {
-            //            Console.WriteLine(pnl.Panel_Name + " WD:" + pnl.Panel_WidthToBind);
-            //            Console.WriteLine("Margin:" + pnl.Panel_MarginToBind.ToString());
-            //        }
-            //        foreach (IDividerModel div in mpnl.MPanelLst_Divider)
-            //        {
-            //            Console.WriteLine(div.Div_Name + " WD:" + div.Div_WidthToBind);
-            //        }
-
-            //        Console.WriteLine();
-
-            //        foreach (Control item in mpnl.MPanelLst_Objects)
-            //        {
-            //            Console.WriteLine(item.Name + " WD:" + item.Width);
-            //            Console.WriteLine("Margin:" + item.Margin.ToString());
-            //        }
-            //    }
-            //}
+            toggle = !toggle;
+            if (toggle == true)
+            {
+                _basePlatformImagerUCPresenter.BringToFront_baseImager();
+            }
+            else if (toggle == false)
+            {
+                _basePlatformImagerUCPresenter.SendToBack_baseImager();
+            }
         }
 
         private void Fit_MyControls_byControlsLocation()
@@ -889,7 +871,7 @@ namespace PresentationLayer.Presenter
 
         public void AddFrameUC(IFrameModel frameModel, IFramePropertiesUCPresenter framePropertiesUCP)
         {
-            IFrameImagerUCPresenter frameImagerUCP = (FrameImagerUCPresenter)_frameImagerUCPresenter.GetNewInstance(_unityC, frameModel);
+            IFrameImagerUCPresenter frameImagerUCP = (FrameImagerUCPresenter)_frameImagerUCPresenter.GetNewInstance(_unityC, frameModel, this);
 
             IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, 
                                                                                             frameModel, 

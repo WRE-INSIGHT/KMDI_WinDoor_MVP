@@ -743,16 +743,25 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.Lst_MultiPanel.Remove(mpnl);
             }
 
-            _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)_multiPanelMullionUC);
+            if (_frameUCP != null)
+            {
+                _frameUCP.ViewDeleteControl((UserControl)_multiPanelMullionUC);
+            }
+            if (_multiPanelMullionUCP != null)
+            {
+                _multiPanelMullionUCP.DeletePanel((UserControl)_multiPanelMullionUC);
+            }
+            if (_multiPanelTransomUCP != null)
+            {
+                _multiPanelTransomUCP.DeletePanel((UserControl)_multiPanelMullionUC);
+            }
 
             if (_multiPanelModel.MPanel_Parent != null)
             {
                 _multiPanelModel.MPanelProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin;;
                 _frameModel.FrameProp_Height -= (129 + 3);
+                _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)_multiPanelMullionUC);
             }
-
-            _frameModel.Lst_MultiPanel.Remove(_multiPanelModel);
-            //_multiPanelModel.MPanel_Visibility = false;
 
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
@@ -775,6 +784,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _multiPanelMullionUCP,
                                                         _multiMullionImagerUCP_parent,
                                                         _multiPanelTransomImagerUCP_parent);
+            }
+
+            if (_frameModel != null)
+            {
+                _frameModel.Lst_MultiPanel.Remove(_multiPanelModel);
             }
 
             if (parent_ctrl.Name.Contains("flp_Multi"))

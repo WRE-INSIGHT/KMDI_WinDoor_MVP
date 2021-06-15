@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.WinDoor;
+﻿using System.Windows.Forms;
+using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views.UserControls;
 using Unity;
 
@@ -11,5 +12,8 @@ namespace PresentationLayer.Presenter.UserControls
         void InvalidateBasePlatform();
         void AddFrame(IFrameImagerUC frameImagerUC);
         void Invalidate_flpMain();
+        void BringToFront_baseImager();
+        void SendToBack_baseImager();
+        void DeleteControl(UserControl frameImagerUC);
     }
 }

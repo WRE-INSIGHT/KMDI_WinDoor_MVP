@@ -754,6 +754,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.Lst_MultiPanel.Remove(mpnl);
             }
 
+            if (_frameUCP != null)
+            {
+                _frameUCP.ViewDeleteControl((UserControl)_multiPanelTransomUC);
+            }
+            if (_multiMullionUCP_given != null)
+            {
+                _multiMullionUCP_given.DeletePanel((UserControl)_multiPanelTransomUC);
+            }
+            if (_multiPanelTransomUCP != null)
+            {
+                _multiPanelTransomUCP.DeletePanel((UserControl)_multiPanelTransomUC);
+            }
             _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)_multiPanelTransomUC);
 
             if (_multiPanelModel.MPanel_Parent != null)

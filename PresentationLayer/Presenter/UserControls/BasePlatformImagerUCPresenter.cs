@@ -88,7 +88,7 @@ namespace PresentationLayer.Presenter.UserControls
             int ctrl_Y = 35;
             Pen redP = new Pen(Color.Red);
             redP.Width = 3.5f;
-            Font dmnsion_font = new Font("Segoe UI", 20 * _windoorModel.WD_zoom, FontStyle.Bold);
+            Font dmnsion_font = new Font("Segoe UI", 12, FontStyle.Bold);
 
             int total_panel = 0, total_mpanel = 0;
             foreach (IFrameModel frame in _windoorModel.lst_frame)
@@ -151,9 +151,9 @@ namespace PresentationLayer.Presenter.UserControls
                 foreach (int wd in wds)
                 {
                     string dmnsion_w = wd.ToString();
-                    PointF dmnsion_w_startP = new PointF(_flpMain.Location.X + (locX * _windoorModel.WD_zoom),
+                    PointF dmnsion_w_startP = new PointF(_flpMain.Location.X + (locX * _windoorModel.WD_zoom_forImageRenderer),
                                                          (ctrl_Y - 17));// * _windoorModel.WD_zoom);
-                    PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + wd) * _windoorModel.WD_zoom),
+                    PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + wd) * _windoorModel.WD_zoom_forImageRenderer),
                                                        (ctrl_Y - 17)); // * _windoorModel.WD_zoom);
 
                     Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
@@ -197,8 +197,8 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     //arrow for HEIGHT
                     string dmnsion_h = ht.ToString();
-                    PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.WD_zoom));
-                    PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + ht) * _windoorModel.WD_zoom));
+                    PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.WD_zoom_forImageRenderer));
+                    PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + ht) * _windoorModel.WD_zoom_forImageRenderer));
 
                     Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
                     double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
@@ -328,6 +328,16 @@ namespace PresentationLayer.Presenter.UserControls
             return _basePlatformImagerUC;
         }
 
+        public void BringToFront_baseImager()
+        {
+            _basePlatformImagerUC.BringToFront_baseImager();
+        }
+
+        public void SendToBack_baseImager()
+        {
+            _basePlatformImagerUC.SendToBack_baseImager();
+        }
+
         public IBasePlatformImagerUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel, IMainPresenter mainPresenter)
         {
             unityC
@@ -365,6 +375,11 @@ namespace PresentationLayer.Presenter.UserControls
         public void Invalidate_flpMain()
         {
             _basePlatformImagerUC.GetFlpMain().Invalidate();
+        }
+
+        public void DeleteControl(UserControl frameImagerUC)
+        {
+            _flpMain.Controls.Remove(frameImagerUC);
         }
     }
 }
