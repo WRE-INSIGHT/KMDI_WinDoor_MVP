@@ -314,15 +314,17 @@ namespace ModelLayer.Model.Quotation.Divider
         public int Div_ExplosionHeight { get; set; }
         public int Div_ReinfWidth { get; set; }
         public int Div_ReinfHeight { get; set; }
+        public string Div_Bounded { get; set; }
 
         public Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
 
-        public void SetPanelExplosionValues_Div()
+        public void SetExplosionValues_Div()
         {
             const int frame_deduction = 33;
 
             if (Div_MPanelParent.MPanel_Parent.Name.Contains("Frame"))
             {
+                Div_Bounded = "Frame";
                 if (Div_Type == DividerType.Mullion)
                 {
                     if (Div_ArtNo == Divider_ArticleNo._7536)
@@ -369,6 +371,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 IMultiPanelModel parent_mpanelParent = Div_MPanelParent.MPanel_ParentModel; //div.Parent.Parent 2nd level Parent
                 if (parent_mpanelParent.MPanel_Type == "Transom")
                 {
+
                     IDividerModel div_top = null,
                                   div_bot = null;
 
@@ -379,6 +382,8 @@ namespace ModelLayer.Model.Quotation.Divider
                            prevctrl_name = "";
                     if (Div_MPanelParent.MPanel_Placement == "First")
                     {
+                        Div_Bounded = "Frame&Transom";
+
                         nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
                         div_bot = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
 
@@ -394,6 +399,8 @@ namespace ModelLayer.Model.Quotation.Divider
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Somewhere in Between")
                     {
+                        Div_Bounded = "Transom";
+
                         nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
                         prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
 
@@ -420,6 +427,8 @@ namespace ModelLayer.Model.Quotation.Divider
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Last")
                     {
+                        Div_Bounded = "Frame&Transom";
+
                         prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
                         div_top = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
                         bot_deduction = 0;
@@ -468,6 +477,8 @@ namespace ModelLayer.Model.Quotation.Divider
 
                     if (Div_MPanelParent.MPanel_Placement == "First")
                     {
+                        Div_Bounded = "Frame&Mullion";
+
                         nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
                         div_right = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
                         left_deduction = 0;
@@ -483,6 +494,8 @@ namespace ModelLayer.Model.Quotation.Divider
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Somewhere in Between")
                     {
+                        Div_Bounded = "Mullion";
+
                         nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
                         div_right = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
 
@@ -509,6 +522,8 @@ namespace ModelLayer.Model.Quotation.Divider
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Last")
                     {
+                        Div_Bounded = "Frame&Mullion";
+
                         prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
                         div_left = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
                         right_deduction = 0;

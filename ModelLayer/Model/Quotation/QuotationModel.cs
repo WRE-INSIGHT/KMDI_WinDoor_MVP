@@ -216,7 +216,7 @@ namespace ModelLayer.Model.Quotation
 
                                 if (i + 1 < obj_count)
                                 {
-                                    div_nxtCtrl.SetPanelExplosionValues_Div();
+                                    div_nxtCtrl.SetExplosionValues_Div();
 
                                     if (mpnl.MPanel_Type == "Mullion")
                                     {
@@ -485,15 +485,16 @@ namespace ModelLayer.Model.Quotation
             Material_List.Columns.Add(CreateColumn("Qty", "Qty", "System.Int32"));
             Material_List.Columns.Add(CreateColumn("Unit", "Unit", "System.String"));
             Material_List.Columns.Add(CreateColumn("Size", "Size", "System.String"));
-            Material_List.Columns.Add(CreateColumn("Where", "Size", "System.String"));
-            Material_List.Columns.Add(CreateColumn("Cut", "Size", "System.String"));
+            Material_List.Columns.Add(CreateColumn("Where", "Where", "System.String"));
+            Material_List.Columns.Add(CreateColumn("Cut", "Cut", "System.String"));
 
             int totalFrames_width = 0,
                 totalFrames_height = 0,
                 total_glassWidth = 0,
                 total_glassHeight = 0,
                 glazing_seal = 0,
-                glazing_spacer = 0;
+                glazing_spacer = 0,
+                qty_cladding_profile = 0;
 
             foreach (IFrameModel frame in item.lst_frame)
             {
@@ -506,25 +507,25 @@ namespace ModelLayer.Model.Quotation
                                        2, "pc(s)",
                                        frame.Frame_ExplosionWidth.ToString(),
                                        "Frame",
-                                       @"\ /");
+                                       @"\  /");
 
                 Material_List.Rows.Add("Frame Height " + frame.Frame_ArtNo.ToString(),
                                        2, "pc(s)",
                                        frame.Frame_ExplosionHeight,
                                        "Frame",
-                                       @"\ /");
+                                       @"\  /");
 
                 Material_List.Rows.Add("Frame Reinf Width " + frame.Frame_ReinfArtNo.ToString(),
                                        2, "pc(s)",
                                        frame.Frame_ReinfWidth.ToString(),
                                        "Frame",
-                                       @"| |");
+                                       @"|  |");
 
                 Material_List.Rows.Add("Frame Reinf Height " + frame.Frame_ReinfArtNo.ToString(),
                                        2, "pc(s)",
                                        frame.Frame_ReinfHeight.ToString(),
                                        "Frame",
-                                       @"| |");
+                                       @"|  |");
 
                 if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
                 {
@@ -664,33 +665,39 @@ namespace ModelLayer.Model.Quotation
 
                             if (i + 1 < obj_count)
                             {
-                                div_nxtCtrl.SetPanelExplosionValues_Div();
+                                div_nxtCtrl.SetExplosionValues_Div();
 
                                 if (mpnl.MPanel_Type == "Mullion")
                                 {
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                            1, "pc(s)",
                                                            div_nxtCtrl.Div_ExplosionHeight.ToString(),
-                                                           "",
-                                                           @"[ ]");
+                                                           div_nxtCtrl.Div_Bounded,
+                                                           @"[  ]");
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Height " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
                                                            1, "pc(s)",
                                                            div_nxtCtrl.Div_ReinfHeight.ToString(),
                                                            mpnl.MPanel_Type,
-                                                           @"| |");
+                                                           @"|  |");
+
+                                    if (div_nxtCtrl.Div_Height >= 2000)
+                                    {
+                                        //qty_cladding_profile
+                                    }
+
                                 }
                                 else if (mpnl.MPanel_Type == "Transom")
                                 {
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Width " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                            1, "pc(s)",
                                                            div_nxtCtrl.Div_ExplosionWidth.ToString(),
-                                                           "",
-                                                           @"[ ]");
+                                                           div_nxtCtrl.Div_Bounded,
+                                                           @"[  ]");
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Width " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
                                                            1, "pc(s)",
                                                            div_nxtCtrl.Div_ReinfWidth.ToString(),
                                                            mpnl.MPanel_Type,
-                                                           @"| |");
+                                                           @"|  |");
                                 }
                                 Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                        2, "pc(s)", "");
@@ -873,20 +880,28 @@ namespace ModelLayer.Model.Quotation
                                 }
 
                                 Material_List.Rows.Add("Glazing Bead Width (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
-                                                           2, "pc(s)",
-                                                           pnl_curCtrl.Panel_GlazingBeadWidth.ToString());
+                                                       2, "pc(s)",
+                                                       pnl_curCtrl.Panel_GlazingBeadWidth.ToString(),
+                                                       "Frame",
+                                                       "|  |");
 
                                 Material_List.Rows.Add("Glazing Bead Height (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
-                                                       pnl_curCtrl.Panel_GlazingBeadHeight.ToString());
+                                                       pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
+                                                       "Frame",
+                                                       "|  |");
 
                                 Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThickness + "-P" + pnl_curCtrl.PanelGlass_ID + ")",
                                                        1, "pc(s)",
-                                                       pnl_curCtrl.Panel_GlassWidth.ToString());
+                                                       pnl_curCtrl.Panel_GlassWidth.ToString(),
+                                                       "Frame",
+                                                       "|  |");
 
                                 Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + "-P" + pnl_curCtrl.PanelGlass_ID + ")",
                                                        1, "pc(s)",
-                                                       pnl_curCtrl.Panel_GlassHeight.ToString());
+                                                       pnl_curCtrl.Panel_GlassHeight.ToString(),
+                                                       "Frame",
+                                                       "|  |");
                                 glazing_spacer++;
 
                                 total_glassWidth += (pnl_curCtrl.Panel_GlassWidth * 2);
@@ -902,20 +917,28 @@ namespace ModelLayer.Model.Quotation
                     pnl.SetPanelExplosionValues_Panel(true);
 
                     Material_List.Rows.Add("Glazing Bead Width (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
-                                               2, "pc(s)",
-                                               pnl.Panel_GlazingBeadWidth.ToString());
+                                           2, "pc(s)",
+                                           pnl.Panel_GlazingBeadWidth.ToString(),
+                                           "Frame",
+                                           "|  |");
 
                     Material_List.Rows.Add("Glazing Bead Height (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",
-                                           pnl.Panel_GlazingBeadHeight.ToString());
+                                           pnl.Panel_GlazingBeadHeight.ToString(),
+                                           "Frame",
+                                           "|  |");
 
                     Material_List.Rows.Add("Glass Width (" + pnl.Panel_GlassThickness + "-P" + pnl.PanelGlass_ID + ")",
                                            1, "pc(s)",
-                                           pnl.Panel_GlassWidth.ToString());
+                                           pnl.Panel_GlassWidth.ToString(),
+                                           "Frame",
+                                           "|  |");
 
                     Material_List.Rows.Add("Glass Height (" + pnl.Panel_GlassThickness + "-P" + pnl.PanelGlass_ID + ")",
                                            1, "pc(s)",
-                                           pnl.Panel_GlassHeight.ToString());
+                                           pnl.Panel_GlassHeight.ToString(),
+                                           "Frame",
+                                           "|  |");
                     glazing_spacer++;
 
                     total_glassWidth += (pnl.Panel_GlassWidth * 2);
@@ -930,7 +953,6 @@ namespace ModelLayer.Model.Quotation
                 }
 
             }
-
 
             Frame_PUFoamingQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 29694);
             Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 3570);
@@ -960,14 +982,18 @@ namespace ModelLayer.Model.Quotation
                         {
                             Description = r.Field<string>("Description"),
                             Unit = r.Field<string>("Unit"),
-                            Size = r.Field<string>("Size")
+                            Size = r.Field<string>("Size"),
+                            Where = r.Field<string>("Where"),
+                            Cut = r.Field<string>("Cut")
                         } into g
                         select new
                         {
                             Description = g.Key.Description,
                             Qty = g.Sum(r => r.Field<int>("Qty")),
                             Unit = g.Key.Unit,
-                            Size = g.Key.Size
+                            Size = g.Key.Size,
+                            Where = g.Key.Where,
+                            Cut = g.Key.Cut
                         };
 
             DataTable dt = new DataTable();
@@ -975,6 +1001,8 @@ namespace ModelLayer.Model.Quotation
             dt.Columns.Add(CreateColumn("Qty", "Qty", "System.Int32"));
             dt.Columns.Add(CreateColumn("Unit", "Unit", "System.String"));
             dt.Columns.Add(CreateColumn("Size", "Size", "System.String"));
+            dt.Columns.Add(CreateColumn("Where", "Where", "System.String"));
+            dt.Columns.Add(CreateColumn("Cut", "Cut", "System.String"));
 
             foreach (var element in query)
             {
@@ -983,6 +1011,8 @@ namespace ModelLayer.Model.Quotation
                 row["Qty"] = element.Qty;
                 row["Unit"] = element.Unit;
                 row["Size"] = element.Size;
+                row["Where"] = element.Where;
+                row["Cut"] = element.Cut;
 
                 dt.Rows.Add(row);
             }

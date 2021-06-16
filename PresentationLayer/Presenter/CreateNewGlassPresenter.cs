@@ -18,7 +18,7 @@ namespace PresentationLayer.Presenter
 
         private CreateNewGlass_ShowPurpose _purpose;
         private DataTable _glassThicknessDT;
-        /* DataTable scheme
+        /* DataTable schema
          * 
          * Example : Double Laminated 12.75mm
          * 

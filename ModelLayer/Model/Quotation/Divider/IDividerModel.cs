@@ -37,8 +37,9 @@ namespace ModelLayer.Model.Quotation.Divider
         int Div_ExplosionHeight { get; set; }
         int Div_ReinfWidth { get; set; }
         int Div_ReinfHeight { get; set; }
+        string Div_Bounded { get; set; }
 
-        void SetPanelExplosionValues_Div();
+        void SetExplosionValues_Div();
 
         #endregion
     }
