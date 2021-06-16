@@ -166,6 +166,9 @@ namespace PresentationLayer
                 .RegisterType<IExplosionView, ExplosionView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IExplosionPresenter, ExplosionPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ICreateNewGlassView, CreateNewGlassView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICreateNewGlassPresenter, CreateNewGlassPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();

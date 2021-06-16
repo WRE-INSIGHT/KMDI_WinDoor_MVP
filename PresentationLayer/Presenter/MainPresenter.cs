@@ -25,6 +25,7 @@ using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using static EnumerationTypeLayer.EnumerationTypes;
+using System.Data;
 
 namespace PresentationLayer.Presenter
 {
@@ -64,6 +65,7 @@ namespace PresentationLayer.Presenter
         private IFixedPanelUCPresenter _fixedPanelUCPresenter;
         private IExplosionPresenter _explosionPresenter;
         private IDividerPropertiesUCPresenter _divPropertiesUCP;
+        private ICreateNewGlassPresenter _createNewGlassPresenter;
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
@@ -72,6 +74,8 @@ namespace PresentationLayer.Presenter
         private string input_qrefno;
 
         CommonFunctions _commonfunc = new CommonFunctions();
+
+        private DataTable _glassThicknessDT = new DataTable(); 
 
         #endregion
 
@@ -283,7 +287,8 @@ namespace PresentationLayer.Presenter
                              IBasePlatformImagerUCPresenter basePlatformImagerUCPresenter,
                              IFrameImagerUCPresenter frameImagerUCPresenter,
                              IExplosionPresenter explosionPresenter,
-                             IDividerPropertiesUCPresenter divPropertiesUCP)
+                             IDividerPropertiesUCPresenter divPropertiesUCP,
+                             ICreateNewGlassPresenter createNewGlassPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -301,6 +306,7 @@ namespace PresentationLayer.Presenter
             _basePlatformImagerUCPresenter = basePlatformImagerUCPresenter;
             _explosionPresenter = explosionPresenter;
             _divPropertiesUCP = divPropertiesUCP;
+            _createNewGlassPresenter = createNewGlassPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -332,6 +338,37 @@ namespace PresentationLayer.Presenter
             _mainView.ButtonPlusZoomClickEventRaised += _mainView_ButtonPlusZoomClickEventRaised;
             _mainView.DeleteToolStripButtonClickEventRaised += _mainView_DeleteToolStripButtonClickEventRaised;
             _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised;
+            _mainView.CreateNewGlassClickEventRaised += _mainView_CreateNewGlassClickEventRaised;
+        }
+
+        private void _mainView_CreateNewGlassClickEventRaised(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
+            CreateNewGlass_ShowPurpose show_purpose = CreateNewGlass_ShowPurpose._DefaultNone;
+
+            if (menu == _mainView.Glass_Single)
+            {
+                show_purpose = CreateNewGlass_ShowPurpose._Single;
+            }
+            else if (menu == _mainView.Glass_DoubleInsulated)
+            {
+                show_purpose = CreateNewGlass_ShowPurpose._DoubleInsulated;
+            }
+            else if (menu == _mainView.Glass_DoubleLaminated)
+            {
+                show_purpose = CreateNewGlass_ShowPurpose._DoubleLaminated;
+            }
+            else if (menu == _mainView.Glass_TripleInsulated)
+            {
+                show_purpose = CreateNewGlass_ShowPurpose._TripleInsulated;
+            }
+            else if (menu == _mainView.Glass_TripleLaminated)
+            {
+                show_purpose = CreateNewGlass_ShowPurpose._TripleLaminated;
+            }
+
+            ICreateNewGlassPresenter createNewGlassPresenter = _createNewGlassPresenter.GetNewInstance(_unityC, this, show_purpose, _glassThicknessDT);
+            createNewGlassPresenter.ShowCreateNewGlassView();
         }
 
         public void Run_GetListOfMaterials_SpecificItem()
@@ -596,6 +633,13 @@ namespace PresentationLayer.Presenter
                 (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, "Fixed Panel", new Thumbs_FixedPanelUC()).GetControlUC());
 
+            _glassThicknessDT.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Description", "Description", "System.String"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Single", "Single", "System.Boolean"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Double", "Double", "System.Boolean"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Triple", "Triple", "System.Boolean"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Insulated", "Insulated", "System.Boolean"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Laminated", "Laminated", "System.Boolean"));
         }
 
         #endregion
@@ -1036,6 +1080,15 @@ namespace PresentationLayer.Presenter
                     ((UserControl)frameProperties).Parent.Controls.Remove((UserControl)frameProperties);
                 }
             }
+        }
+
+        private DataColumn CreateColumn(string columname, string caption, string type)
+        {
+            DataColumn col = new DataColumn();
+            col.DataType = Type.GetType(type);
+            col.ColumnName = columname;
+            col.Caption = caption;
+            return col;
         }
 
         #endregion

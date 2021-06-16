@@ -43,6 +43,8 @@
             this.lbl_glassthick = new System.Windows.Forms.Label();
             this.lbl_pnlSpecs = new System.Windows.Forms.Label();
             this.lbl_PanelGlassID = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmb_FilmType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Height)).BeginInit();
@@ -149,6 +151,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cmb_FilmType);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.cmb_GlazingArtNo);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.cmb_GlassThick);
@@ -156,7 +160,7 @@
             this.panel1.Controls.Add(this.lbl_pnlSpecs);
             this.panel1.Location = new System.Drawing.Point(7, 141);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(147, 84);
+            this.panel1.Size = new System.Drawing.Size(147, 107);
             this.panel1.TabIndex = 8;
             // 
             // cmb_GlazingArtNo
@@ -227,6 +231,26 @@
             this.lbl_PanelGlassID.TabIndex = 9;
             this.lbl_PanelGlassID.Text = "P1";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(0, 84);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Film type";
+            // 
+            // cmb_FilmType
+            // 
+            this.cmb_FilmType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_FilmType.DropDownWidth = 100;
+            this.cmb_FilmType.FormattingEnabled = true;
+            this.cmb_FilmType.Location = new System.Drawing.Point(70, 81);
+            this.cmb_FilmType.Name = "cmb_FilmType";
+            this.cmb_FilmType.Size = new System.Drawing.Size(72, 21);
+            this.cmb_FilmType.TabIndex = 13;
+            // 
             // Panel_PropertiesUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,7 +270,7 @@
             this.Controls.Add(this.num_BladeCount);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Panel_PropertiesUC";
-            this.Size = new System.Drawing.Size(159, 228);
+            this.Size = new System.Drawing.Size(159, 255);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();
@@ -275,5 +299,7 @@
         private System.Windows.Forms.ComboBox cmb_GlassThick;
         private System.Windows.Forms.ComboBox cmb_GlazingArtNo;
         private System.Windows.Forms.Label lbl_PanelGlassID;
+        private System.Windows.Forms.ComboBox cmb_FilmType;
+        private System.Windows.Forms.Label label2;
     }
 }

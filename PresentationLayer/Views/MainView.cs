@@ -74,6 +74,46 @@ namespace PresentationLayer.Views
             }
         }
 
+        public ToolStripMenuItem Glass_Single
+        {
+            get
+            {
+                return singleToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Glass_DoubleInsulated
+        {
+            get
+            {
+                return DoubleInsulatedToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Glass_DoubleLaminated
+        {
+            get
+            {
+                return DoubleLaminatedToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Glass_TripleInsulated
+        {
+            get
+            {
+                return TripleInsulatedToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Glass_TripleLaminated
+        {
+            get
+            {
+                return TripleLaminatedToolStripMenuItem;
+            }
+        }
+
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
@@ -86,6 +126,7 @@ namespace PresentationLayer.Views
         public event EventHandler ButtonMinusZoomClickEventRaised;
         public event EventHandler DeleteToolStripButtonClickEventRaised;
         public event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
+        public event EventHandler CreateNewGlassClickEventRaised;
 
         public MainView()
         {
@@ -211,6 +252,11 @@ namespace PresentationLayer.Views
         private void listOfMaterialsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, ListOfMaterialsToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void CreateNewGlass_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CreateNewGlassClickEventRaised, e);
         }
     }
 }

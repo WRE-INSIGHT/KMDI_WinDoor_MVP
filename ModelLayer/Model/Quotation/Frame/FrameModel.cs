@@ -357,6 +357,22 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_ReinfHeight = _frameHeight - (29 * 2) - 10;
         }
 
+        public void AdjustPropertyPanelHeight(string objtype)
+        {
+            if (objtype == "Panel")
+            {
+                FrameProp_Height -= (255 + 1); //+1 on margin (PanelProperties)
+            }
+            else if (objtype == "Div")
+            {
+                FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+            }
+            else if (objtype == "Mpanel")
+            {
+                FrameProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin
+            }
+        }
+
         #endregion
 
         public FrameModel(int frameID,

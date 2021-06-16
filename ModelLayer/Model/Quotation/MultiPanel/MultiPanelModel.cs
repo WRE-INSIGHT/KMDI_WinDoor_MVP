@@ -1451,6 +1451,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_OriginalGlassHeight = (MPanel_OriginalDisplayHeight - deduction_for_ht) - 6;
         }
 
+        public void AdjustPropertyPanelHeight(string objtype)
+        {
+            if (objtype == "Panel")
+            {
+                MPanelProp_Height -= (255 + 1); //+1 on margin (PanelProperties)
+            }
+            else if (objtype == "Div")
+            {
+                MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
+            }
+            else if (objtype == "Mpanel")
+            {
+                MPanelProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin
+            }
+        }
+
         #endregion
 
         public MultiPanelModel(int mpanelID,

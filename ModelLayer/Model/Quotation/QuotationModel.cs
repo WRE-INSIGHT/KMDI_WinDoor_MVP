@@ -485,6 +485,8 @@ namespace ModelLayer.Model.Quotation
             Material_List.Columns.Add(CreateColumn("Qty", "Qty", "System.Int32"));
             Material_List.Columns.Add(CreateColumn("Unit", "Unit", "System.String"));
             Material_List.Columns.Add(CreateColumn("Size", "Size", "System.String"));
+            Material_List.Columns.Add(CreateColumn("Where", "Size", "System.String"));
+            Material_List.Columns.Add(CreateColumn("Cut", "Size", "System.String"));
 
             int totalFrames_width = 0,
                 totalFrames_height = 0,
@@ -502,19 +504,27 @@ namespace ModelLayer.Model.Quotation
 
                 Material_List.Rows.Add("Frame Width " + frame.Frame_ArtNo.ToString(),
                                        2, "pc(s)",
-                                       frame.Frame_ExplosionWidth.ToString());
+                                       frame.Frame_ExplosionWidth.ToString(),
+                                       "Frame",
+                                       @"\ /");
 
                 Material_List.Rows.Add("Frame Height " + frame.Frame_ArtNo.ToString(),
                                        2, "pc(s)",
-                                       frame.Frame_ExplosionHeight);
+                                       frame.Frame_ExplosionHeight,
+                                       "Frame",
+                                       @"\ /");
 
                 Material_List.Rows.Add("Frame Reinf Width " + frame.Frame_ReinfArtNo.ToString(),
                                        2, "pc(s)",
-                                       frame.Frame_ReinfWidth.ToString());
+                                       frame.Frame_ReinfWidth.ToString(),
+                                       "Frame",
+                                       @"| |");
 
                 Material_List.Rows.Add("Frame Reinf Height " + frame.Frame_ReinfArtNo.ToString(),
                                        2, "pc(s)",
-                                       frame.Frame_ReinfHeight.ToString());
+                                       frame.Frame_ReinfHeight.ToString(),
+                                       "Frame",
+                                       @"| |");
 
                 if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
                 {
@@ -659,20 +669,28 @@ namespace ModelLayer.Model.Quotation
                                 if (mpnl.MPanel_Type == "Mullion")
                                 {
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       div_nxtCtrl.Div_ExplosionHeight.ToString());
+                                                           1, "pc(s)",
+                                                           div_nxtCtrl.Div_ExplosionHeight.ToString(),
+                                                           "",
+                                                           @"[ ]");
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Height " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
                                                            1, "pc(s)",
-                                                           div_nxtCtrl.Div_ReinfHeight.ToString());
+                                                           div_nxtCtrl.Div_ReinfHeight.ToString(),
+                                                           mpnl.MPanel_Type,
+                                                           @"| |");
                                 }
                                 else if (mpnl.MPanel_Type == "Transom")
                                 {
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Width " + div_nxtCtrl.Div_ArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       div_nxtCtrl.Div_ExplosionWidth.ToString());
+                                                           1, "pc(s)",
+                                                           div_nxtCtrl.Div_ExplosionWidth.ToString(),
+                                                           "",
+                                                           @"[ ]");
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Width " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
                                                            1, "pc(s)",
-                                                           div_nxtCtrl.Div_ReinfWidth.ToString());
+                                                           div_nxtCtrl.Div_ReinfWidth.ToString(),
+                                                           mpnl.MPanel_Type,
+                                                           @"| |");
                                 }
                                 Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                        2, "pc(s)", "");
