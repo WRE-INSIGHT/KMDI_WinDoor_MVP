@@ -75,8 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonMethods\CommonFunctions.cs" />
+    <Compile Include="Presenter\CreateNewGlassPresenter.cs" />
     <Compile Include="Presenter\ExplosionPresenter.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
+    <Compile Include="Presenter\ICreateNewGlassPresenter.cs" />
     <Compile Include="Presenter\IExplosionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
@@ -139,6 +141,12 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\SlidingPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\CreateNewGlassView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassView.Designer.cs">
+      <DependentUpon>CreateNewGlassView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExplosionView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +159,7 @@
     <Compile Include="Views\frmDimensionView.Designer.cs">
       <DependentUpon>frmDimensionView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ICreateNewGlassView.cs" />
     <Compile Include="Views\IExplosionView.cs" />
     <Compile Include="Views\IfrmDimensionView.cs" />
     <Compile Include="Views\ILoginView.cs" />
@@ -416,6 +425,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\CreateNewGlassView.resx">
+      <DependentUpon>CreateNewGlassView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ExplosionView.resx">
       <DependentUpon>ExplosionView.cs</DependentUpon>
     </EmbeddedResource>

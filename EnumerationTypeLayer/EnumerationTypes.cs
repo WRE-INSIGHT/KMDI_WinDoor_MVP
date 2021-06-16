@@ -82,5 +82,24 @@ namespace EnumerationTypeLayer
             public static readonly GlassFilm_Types _None = new GlassFilm_Types(9, "None");
             private GlassFilm_Types(int value, string displayName) : base(value, displayName) { }
         }
+        public class GlassType : Enumeration<GlassType, int>
+        {
+            public static readonly GlassType _Single = new GlassType(0, "Single");
+            public static readonly GlassType _Double = new GlassType(1, "Double");
+            public static readonly GlassType _Triple = new GlassType(2, "Triple");
+
+            private GlassType(int value, string displayName) : base(value, displayName) { }
+        }
+        public class CreateNewGlass_ShowPurpose : Enumeration<CreateNewGlass_ShowPurpose, int>
+        {
+            public static readonly CreateNewGlass_ShowPurpose _Single = new CreateNewGlass_ShowPurpose(0, "Single");
+            public static readonly CreateNewGlass_ShowPurpose _DoubleInsulated = new CreateNewGlass_ShowPurpose(1, "DoubleInsulated");
+            public static readonly CreateNewGlass_ShowPurpose _DoubleLaminated = new CreateNewGlass_ShowPurpose(2, "DoubleLaminated");
+            public static readonly CreateNewGlass_ShowPurpose _TripleInsulated = new CreateNewGlass_ShowPurpose(3, "TripleInsulated");
+            public static readonly CreateNewGlass_ShowPurpose _TripleLaminated = new CreateNewGlass_ShowPurpose(4, "TripleLaminated");
+            public static readonly CreateNewGlass_ShowPurpose _DefaultNone = new CreateNewGlass_ShowPurpose(5, "DefaultNone");
+
+            private CreateNewGlass_ShowPurpose(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }
