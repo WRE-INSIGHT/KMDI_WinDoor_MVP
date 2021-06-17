@@ -66,6 +66,7 @@ namespace PresentationLayer.Presenter
         private IExplosionPresenter _explosionPresenter;
         private IDividerPropertiesUCPresenter _divPropertiesUCP;
         private ICreateNewGlassPresenter _createNewGlassPresenter;
+        private IChangeItemColorPresenter _changeItemColorPresenter;
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
@@ -288,7 +289,8 @@ namespace PresentationLayer.Presenter
                              IFrameImagerUCPresenter frameImagerUCPresenter,
                              IExplosionPresenter explosionPresenter,
                              IDividerPropertiesUCPresenter divPropertiesUCP,
-                             ICreateNewGlassPresenter createNewGlassPresenter)
+                             ICreateNewGlassPresenter createNewGlassPresenter,
+                             IChangeItemColorPresenter changeItemColorPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -307,6 +309,7 @@ namespace PresentationLayer.Presenter
             _explosionPresenter = explosionPresenter;
             _divPropertiesUCP = divPropertiesUCP;
             _createNewGlassPresenter = createNewGlassPresenter;
+            _changeItemColorPresenter = changeItemColorPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -339,6 +342,13 @@ namespace PresentationLayer.Presenter
             _mainView.DeleteToolStripButtonClickEventRaised += _mainView_DeleteToolStripButtonClickEventRaised;
             _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised;
             _mainView.CreateNewGlassClickEventRaised += _mainView_CreateNewGlassClickEventRaised;
+            _mainView.ChangeItemColorClickEventRaised += _mainView_ChangeItemColorClickEventRaised;
+        }
+
+        private void _mainView_ChangeItemColorClickEventRaised(object sender, EventArgs e)
+        {
+            IChangeItemColorPresenter presenter = _changeItemColorPresenter.GetNewInstance(_unityC, this, _windoorModel);
+            presenter.ShowView();
         }
 
         private void _mainView_CreateNewGlassClickEventRaised(object sender, EventArgs e)
@@ -769,7 +779,10 @@ namespace PresentationLayer.Presenter
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
-                                                                         _quotationModel.Lst_Windoor.Count() + 1);
+                                                                         _quotationModel.Lst_Windoor.Count() + 1,
+                                                                         Base_Color._Ivory,
+                                                                         Foil_Color._Walnut,
+                                                                         Foil_Color._Walnut);
                         AddWndrList_QuotationModel(_windoorModel);
 
                         _mainView.Zoom = _windoorModel.WD_zoom;
@@ -805,7 +818,10 @@ namespace PresentationLayer.Presenter
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
-                                                                         _quotationModel.Lst_Windoor.Count() + 1);
+                                                                         _quotationModel.Lst_Windoor.Count() + 1,
+                                                                         Base_Color._Ivory,
+                                                                         Foil_Color._Walnut,
+                                                                         Foil_Color._Walnut);
                         AddWndrList_QuotationModel(_windoorModel);
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);

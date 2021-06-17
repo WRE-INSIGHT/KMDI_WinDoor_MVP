@@ -317,6 +317,10 @@ namespace ModelLayer.Model.Quotation.Divider
         public string Div_Bounded { get; set; }
 
         public Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
+        public CladdingProfile_ArticleNo Div_CladdingProfileArtNo { get; set; }
+        public CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
+
+        public int Div_CladdingProfileSize { get; set; }
 
         public void SetExplosionValues_Div()
         {
@@ -344,6 +348,13 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
                     }
+
+                    if (Div_ExplosionHeight >= 2000)
+                    {
+                        Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+                        Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
+                        Div_CladdingProfileSize = Div_ExplosionHeight + 30;
+                    }
                 }
                 else if (Div_Type == DividerType.Transom)
                 {
@@ -363,6 +374,13 @@ namespace ModelLayer.Model.Quotation.Divider
                     else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
                     {
                         Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
+                    }
+
+                    if (Div_ExplosionWidth >= 2000)
+                    {
+                        Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+                        Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
+                        Div_CladdingProfileSize = Div_ExplosionWidth + 30;
                     }
                 }
             }
@@ -462,6 +480,13 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
                         }
+
+                        if (Div_ExplosionHeight >= 2000)
+                        {
+                            Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+                            Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
+                            Div_CladdingProfileSize = Div_ExplosionHeight + 30;
+                        }
                     }
                 }
                 else if (parent_mpanelParent.MPanel_Type == "Mullion")
@@ -556,6 +581,13 @@ namespace ModelLayer.Model.Quotation.Divider
                         else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
                         {
                             Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
+                        }
+
+                        if (Div_ExplosionWidth >= 2000)
+                        {
+                            Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+                            Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
+                            Div_CladdingProfileSize = Div_ExplosionWidth + 30;
                         }
                     }
                 }

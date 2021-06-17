@@ -39,6 +39,11 @@ namespace ModelLayer.Model.Quotation.Divider
         int Div_ReinfHeight { get; set; }
         string Div_Bounded { get; set; }
 
+
+        CladdingProfile_ArticleNo Div_CladdingProfileArtNo { get; set; }
+        CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
+        int Div_CladdingProfileSize { get; set; }
+
         void SetExplosionValues_Div();
 
         #endregion

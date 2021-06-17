@@ -9,6 +9,7 @@ using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -374,6 +375,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         public int PanelGlassID_Counter { get; set; }
 
+        public Base_Color WD_BaseColor { get; set; }
+        public Foil_Color WD_InsideColor { get; set; }
+        public Foil_Color WD_OutsideColor { get; set; }
+
         public float GetZoom_forRendering()
         {
             int area = _wdHeight * _wdWidth;
@@ -488,5 +493,39 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        public WindoorModel(int wd_id,
+                            string wd_name,
+                            string wd_description,
+                            int wd_width,
+                            int wd_height,
+                            int wd_price,
+                            int wd_quantity,
+                            decimal wd_discount,
+                            bool wd_visibility,
+                            bool wd_orientation,
+                            //float wd_zoom,
+                            string wd_Profile,
+                            List<IFrameModel> wdlstframe,
+                            Base_Color wd_basecolor,
+                            Foil_Color wd_insidecolor,
+                            Foil_Color wd_outisdecolor)
+        {
+            WD_id = wd_id;
+            WD_name = wd_name;
+            WD_description = wd_description;
+            WD_width = wd_width;
+            WD_height = wd_height;
+            WD_price = wd_price;
+            WD_quantity = wd_quantity;
+            WD_discount = wd_discount;
+            WD_visibility = wd_visibility;
+            WD_orientation = wd_orientation;
+            //WD_zoom = wd_zoom;
+            WD_profile = wd_Profile;
+            lst_frame = wdlstframe;
+            WD_BaseColor = wd_basecolor;
+            WD_InsideColor = wd_insidecolor;
+            WD_OutsideColor = wd_outisdecolor;
+        }
     }
 }

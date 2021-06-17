@@ -19,6 +19,7 @@ namespace PresentationLayer.Views
         event EventHandler DeleteToolStripButtonClickEventRaised;
         event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
         event EventHandler CreateNewGlassClickEventRaised;
+        event EventHandler ChangeItemColorClickEventRaised;
 
         string Nickname { set; }
         string mainview_title { get; set; }

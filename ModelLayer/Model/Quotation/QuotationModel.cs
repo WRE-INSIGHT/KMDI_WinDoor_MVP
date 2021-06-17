@@ -25,6 +25,7 @@ namespace ModelLayer.Model.Quotation
         public int Glass_SealantWHQty_Total { get; set; }
         public int GlazingSpacer_TotalQty { get; set; }
         public int GlazingSeal_TotalQty { get; set; }
+        public int Screws_for_Installation { get; set; }
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
@@ -494,7 +495,9 @@ namespace ModelLayer.Model.Quotation
                 total_glassHeight = 0,
                 glazing_seal = 0,
                 glazing_spacer = 0,
-                qty_cladding_profile = 0;
+                total_screws_installation = 0;
+
+            string screws_for_inst_where = "";
 
             foreach (IFrameModel frame in item.lst_frame)
             {
@@ -502,6 +505,12 @@ namespace ModelLayer.Model.Quotation
 
                 totalFrames_width += (frame.Frame_Width * 2);
                 totalFrames_height += (frame.Frame_Height * 2);
+                total_screws_installation += ((frame.Frame_Width * 2) + (frame.Frame_Height * 2));
+
+                if (!screws_for_inst_where.Contains("Frame"))
+                {
+                    screws_for_inst_where = "Frame";
+                }
 
                 Material_List.Rows.Add("Frame Width " + frame.Frame_ArtNo.ToString(),
                                        2, "pc(s)",
@@ -680,9 +689,26 @@ namespace ModelLayer.Model.Quotation
                                                            mpnl.MPanel_Type,
                                                            @"|  |");
 
+                                    total_screws_installation += (div_nxtCtrl.Div_ExplosionHeight * 2);
+
+                                    if (!screws_for_inst_where.Contains("Mullion"))
+                                    {
+                                        screws_for_inst_where += ", Mullion";
+                                    }
+
                                     if (div_nxtCtrl.Div_Height >= 2000)
                                     {
-                                        //qty_cladding_profile
+                                        Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               div_nxtCtrl.Div_CladdingProfileSize.ToString(),
+                                                               mpnl.MPanel_Type,
+                                                               @"|  |");
+
+                                        Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               div_nxtCtrl.Div_CladdingProfileSize.ToString(),
+                                                               "CPL",
+                                                               @"|  |");
                                     }
 
                                 }
@@ -698,6 +724,28 @@ namespace ModelLayer.Model.Quotation
                                                            div_nxtCtrl.Div_ReinfWidth.ToString(),
                                                            mpnl.MPanel_Type,
                                                            @"|  |");
+
+                                    total_screws_installation += (div_nxtCtrl.Div_ExplosionWidth * 2);
+
+                                    if (!screws_for_inst_where.Contains("Transom"))
+                                    {
+                                        screws_for_inst_where += ", Transom";
+                                    }
+
+                                    if (div_nxtCtrl.Div_Width >= 2000)
+                                    {
+                                        Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
+                                                              1, "pc(s)",
+                                                              div_nxtCtrl.Div_CladdingProfileSize.ToString(),
+                                                              mpnl.MPanel_Type,
+                                                              @"|  |");
+
+                                        Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               div_nxtCtrl.Div_CladdingProfileSize.ToString(),
+                                                               "CPL",
+                                                               @"|  |");
+                                    }
                                 }
                                 Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                        2, "pc(s)", "");
@@ -951,7 +999,6 @@ namespace ModelLayer.Model.Quotation
                         glazing_seal += (pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2);
                     }
                 }
-
             }
 
             Frame_PUFoamingQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 29694);
@@ -959,23 +1006,28 @@ namespace ModelLayer.Model.Quotation
             Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(total_glassWidth + total_glassHeight) / 6842));
             GlazingSpacer_TotalQty = glazing_spacer;
             GlazingSeal_TotalQty = glazing_seal;
+            Screws_for_Installation = (int)(Math.Ceiling((decimal)total_screws_installation / 300));
 
             Material_List.Rows.Add("PU Foaming",
-                                   Frame_PUFoamingQty_Total, "can", "");
+                                   Frame_PUFoamingQty_Total, "can", "", "Frame");
 
             Material_List.Rows.Add("Sealant-WH (Frame)",
-                                   Frame_SealantWHQty_Total, "pc(s)", "");
+                                   Frame_SealantWHQty_Total, "pc(s)", "", "Frame");
 
             Material_List.Rows.Add("Sealant-WH (Glass)",
                                    Glass_SealantWHQty_Total,
                                    "pc(s)",
-                                   "");
+                                   "",
+                                   "Frame"); // Frame or Sash
 
             Material_List.Rows.Add("Glazing Spacer (KBC70)",
-                                   GlazingSpacer_TotalQty, "pc(s)", "");
+                                   GlazingSpacer_TotalQty, "pc(s)", "", "Frame");
 
             Material_List.Rows.Add("Glazing Seal",
-                                   GlazingSeal_TotalQty, "mm", "");
+                                   GlazingSeal_TotalQty, "mm", "", "GB");
+
+            Material_List.Rows.Add("Screws for Installation",
+                                   Screws_for_Installation, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
 
             var query = from r in Material_List.AsEnumerable()
                         group r by new

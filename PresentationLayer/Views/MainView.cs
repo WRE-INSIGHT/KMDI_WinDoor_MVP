@@ -127,6 +127,7 @@ namespace PresentationLayer.Views
         public event EventHandler DeleteToolStripButtonClickEventRaised;
         public event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
         public event EventHandler CreateNewGlassClickEventRaised;
+        public event EventHandler ChangeItemColorClickEventRaised;
 
         public MainView()
         {
@@ -257,6 +258,11 @@ namespace PresentationLayer.Views
         private void CreateNewGlass_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CreateNewGlassClickEventRaised, e);
+        }
+
+        private void changeItemColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ChangeItemColorClickEventRaised, e);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -33,6 +34,11 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int mpanelIDCounter { get; set; }
         int divIDCounter { get; set; }
         int PanelGlassID_Counter { get; set; }
+
+        Base_Color WD_BaseColor { get; set; }
+        Foil_Color WD_InsideColor { get; set; }
+        Foil_Color WD_OutsideColor { get; set; }
+
         float GetZoom_forRendering();
         void SetImageRenderingZoom();
         void SetPanelGlassID();

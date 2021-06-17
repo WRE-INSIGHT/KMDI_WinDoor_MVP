@@ -621,6 +621,9 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_GlazingSpacerQty { get; set; }
         public GlassFilm_Types Panel_GlassFilm { get; set; }
 
+        public SashProfile_ArticleNo Panel_SashProfileArtNo { get; set; }
+        public SashReinf_ArticleNo Panel_SashReinfArtNo { get; set; }
+
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
             Panel_GlazingBeadWidth = Panel_DisplayWidth; //- (33 * 2);
