@@ -422,7 +422,7 @@ namespace ModelLayer.Model.Quotation
                                            glazing_spacer, "pc(s)", "");
 
                     Material_List.Rows.Add("Glazing Seal",
-                                           glazing_seal, "mm","");
+                                           glazing_seal, "mm", "");
                 }
 
                 Frame_PUFoamingQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 29694);
