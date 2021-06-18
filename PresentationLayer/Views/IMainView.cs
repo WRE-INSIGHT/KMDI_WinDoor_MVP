@@ -20,6 +20,7 @@ namespace PresentationLayer.Views
         event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
         event EventHandler CreateNewGlassClickEventRaised;
         event EventHandler ChangeItemColorClickEventRaised;
+        event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
 
         string Nickname { set; }
         string mainview_title { get; set; }
@@ -41,6 +42,9 @@ namespace PresentationLayer.Views
         ToolStripMenuItem Glass_DoubleLaminated { get; }
         ToolStripMenuItem Glass_TripleInsulated { get; }
         ToolStripMenuItem Glass_TripleLaminated { get; }
+        ToolStripMenuItem Glass_Type { get; }
+        ToolStripMenuItem Spacer { get; }
+        ToolStripMenuItem Color { get; }
         Form GetThis();
     }
 }

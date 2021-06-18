@@ -114,6 +114,30 @@ namespace PresentationLayer.Views
             }
         }
 
+        public ToolStripMenuItem Glass_Type
+        {
+            get
+            {
+                return glassTypeToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Spacer
+        {
+            get
+            {
+                return spacerToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Color
+        {
+            get
+            {
+                return colorToolStripMenuItem;
+            }
+        }
+
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
@@ -128,6 +152,7 @@ namespace PresentationLayer.Views
         public event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
         public event EventHandler CreateNewGlassClickEventRaised;
         public event EventHandler ChangeItemColorClickEventRaised;
+        public event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -263,6 +288,11 @@ namespace PresentationLayer.Views
         private void changeItemColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, ChangeItemColorClickEventRaised, e);
+        }
+
+        private void glassTypeColorSpacerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, glassTypeColorSpacerToolStripMenuItemClickEventRaised, e);
         }
     }
 }

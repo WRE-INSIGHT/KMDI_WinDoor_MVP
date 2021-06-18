@@ -41,7 +41,6 @@ namespace PresentationLayer.Presenter
         private IQuotationModel _quotationModel;
         private IWindoorModel _windoorModel;
         private IFrameModel _frameModel;
-        //private IPanelModel _panelModel;
 
         private ILoginView _loginView;
         private IItemInfoUC _itemInfoUC;
@@ -76,7 +75,10 @@ namespace PresentationLayer.Presenter
 
         CommonFunctions _commonfunc = new CommonFunctions();
 
-        private DataTable _glassThicknessDT = new DataTable(); 
+        private DataTable _glassThicknessDT = new DataTable();
+        private DataTable _glassTypeDT = new DataTable();
+        private DataTable _spacerDT = new DataTable();
+        private DataTable _colorDT = new DataTable();
 
         #endregion
 
@@ -343,6 +345,39 @@ namespace PresentationLayer.Presenter
             _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised;
             _mainView.CreateNewGlassClickEventRaised += _mainView_CreateNewGlassClickEventRaised;
             _mainView.ChangeItemColorClickEventRaised += _mainView_ChangeItemColorClickEventRaised;
+            _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised;
+        }
+
+        #region Events
+
+        private void _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
+
+            string inputbox_title = "";
+            DataTable dt = new DataTable();
+
+            if (menu == _mainView.Glass_Type)
+            {
+                inputbox_title = "Glass Type";
+                dt = _glassTypeDT;
+            }
+            else if (menu == _mainView.Spacer)
+            {
+                inputbox_title = "Spacer";
+                dt = _spacerDT;
+            }
+            else if (menu == _mainView.Color)
+            {
+                inputbox_title = "Color";
+                dt = _colorDT;
+            }
+
+            string input_box_str = Interaction.InputBox(inputbox_title, "Windoor Maker", "");
+            if (input_box_str != "")
+            {
+                dt.Rows.Add(input_box_str);
+            }
         }
 
         private void _mainView_ChangeItemColorClickEventRaised(object sender, EventArgs e)
@@ -380,12 +415,6 @@ namespace PresentationLayer.Presenter
             ICreateNewGlassPresenter createNewGlassPresenter = _createNewGlassPresenter.GetNewInstance(_unityC, this, show_purpose, _glassThicknessDT);
             createNewGlassPresenter.ShowCreateNewGlassView();
         }
-
-        public void Run_GetListOfMaterials_SpecificItem()
-        {
-            _quotationModel.GetListOfMaterials(_windoorModel);
-        }
-
         private void _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             IExplosionPresenter explosionPresenter = _explosionPresenter.GetNewInstance(_unityC, _quotationModel, this, _windoorModel);
@@ -406,92 +435,6 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void Fit_MyControls_byControlsLocation()
-        {
-            foreach (IFrameModel frames in _windoorModel.lst_frame)
-            {
-                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
-                {
-                    foreach (Control ctrl in mpanel.MPanelLst_Objects)
-                    {
-                        if (ctrl is IPanelUC)
-                        {
-                            IPanelUC panel = (IPanelUC)ctrl;
-                            if (panel.Panel_Placement == "Last")
-                            {
-                                IPanelModel pnlModel = mpanel.MPanelLst_Panel.Find(pnl => pnl.Panel_ID == panel.Panel_ID);
-                                if (mpanel.MPanel_Type == "Mullion")
-                                {
-                                    while (ctrl.Location.Y > ctrl.Margin.Top)
-                                    {
-                                        pnlModel.Panel_WidthToBind--;
-                                        if (ctrl.Location.Y == ctrl.Margin.Top)
-                                        {
-                                            break;
-                                        }
-                                    }
-                                }
-                                else if (mpanel.MPanel_Type == "Transom")
-                                {
-                                    while (ctrl.Location.X > ctrl.Margin.Left)
-                                    {
-                                        pnlModel.Panel_HeightToBind--;
-                                        if (ctrl.Location.X == ctrl.Margin.Left)
-                                        {
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        else if (ctrl is IMultiPanelUC)
-                        {
-                            IMultiPanelUC multi = (IMultiPanelUC)ctrl;
-                            if (multi.MPanel_Placement == "Last")
-                            {
-                                IMultiPanelModel mpnlModel = mpanel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_ID == multi.MPanel_ID);
-                                if (mpanel.MPanel_Type == "Mullion")
-                                {
-                                    while (ctrl.Location.Y > ctrl.Margin.Top)
-                                    {
-                                        mpnlModel.MPanel_WidthToBind--;
-                                        if (ctrl.Location.Y == ctrl.Margin.Top)
-                                        {
-                                            break;
-                                        }
-                                    }
-                                }
-                                else if (mpanel.MPanel_Type == "Transom")
-                                {
-                                    while (ctrl.Location.X > ctrl.Margin.Left)
-                                    {
-                                        mpnlModel.MPanel_HeightToBind--;
-                                        if (ctrl.Location.X == ctrl.Margin.Left)
-                                        {
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void FitControls_InsideMultiPanel()
-        {
-            foreach (IFrameModel frames in _windoorModel.lst_frame)
-            {
-                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
-                {
-                    if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
-                    {
-                        mpanel.Fit_MyControls_ToBindDimensions();
-                    }
-                }
-            }
-        }
         private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
             int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
@@ -521,7 +464,6 @@ namespace PresentationLayer.Presenter
             _basePlatformPresenter.InvalidateBasePlatform();
             _basePlatformPresenter.Invalidate_flpMainControls();
         }
-        #region Events
 
         private void OnLabelSizeClickEventRaised(object sender, EventArgs e)
         {
@@ -650,6 +592,21 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Columns.Add(CreateColumn("Triple", "Triple", "System.Boolean"));
             _glassThicknessDT.Columns.Add(CreateColumn("Insulated", "Insulated", "System.Boolean"));
             _glassThicknessDT.Columns.Add(CreateColumn("Laminated", "Laminated", "System.Boolean"));
+
+            _glassTypeDT.Columns.Add(CreateColumn("GlassType", "GlassType", "System.String"));
+            _spacerDT.Columns.Add(CreateColumn("Spacer", "Spacer", "System.String"));
+            _colorDT.Columns.Add(CreateColumn("Color", "Color", "System.String"));
+
+            _glassTypeDT.Rows.Add("Anneled");
+            _glassTypeDT.Rows.Add("Tempered");
+
+            _spacerDT.Rows.Add("Air");
+            _spacerDT.Rows.Add("Argon");
+
+            _colorDT.Rows.Add("Clear");
+            _colorDT.Rows.Add("Tinted Gray");
+            _colorDT.Rows.Add("Tinted Bronze");
+            _colorDT.Rows.Add("Tinted Green");
         }
 
         #endregion
@@ -903,6 +860,98 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region Functions
+
+        public void Run_GetListOfMaterials_SpecificItem()
+        {
+            _quotationModel.GetListOfMaterials(_windoorModel);
+        }
+
+        private void Fit_MyControls_byControlsLocation()
+        {
+            foreach (IFrameModel frames in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
+                {
+                    foreach (Control ctrl in mpanel.MPanelLst_Objects)
+                    {
+                        if (ctrl is IPanelUC)
+                        {
+                            IPanelUC panel = (IPanelUC)ctrl;
+                            if (panel.Panel_Placement == "Last")
+                            {
+                                IPanelModel pnlModel = mpanel.MPanelLst_Panel.Find(pnl => pnl.Panel_ID == panel.Panel_ID);
+                                if (mpanel.MPanel_Type == "Mullion")
+                                {
+                                    while (ctrl.Location.Y > ctrl.Margin.Top)
+                                    {
+                                        pnlModel.Panel_WidthToBind--;
+                                        if (ctrl.Location.Y == ctrl.Margin.Top)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (mpanel.MPanel_Type == "Transom")
+                                {
+                                    while (ctrl.Location.X > ctrl.Margin.Left)
+                                    {
+                                        pnlModel.Panel_HeightToBind--;
+                                        if (ctrl.Location.X == ctrl.Margin.Left)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else if (ctrl is IMultiPanelUC)
+                        {
+                            IMultiPanelUC multi = (IMultiPanelUC)ctrl;
+                            if (multi.MPanel_Placement == "Last")
+                            {
+                                IMultiPanelModel mpnlModel = mpanel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_ID == multi.MPanel_ID);
+                                if (mpanel.MPanel_Type == "Mullion")
+                                {
+                                    while (ctrl.Location.Y > ctrl.Margin.Top)
+                                    {
+                                        mpnlModel.MPanel_WidthToBind--;
+                                        if (ctrl.Location.Y == ctrl.Margin.Top)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (mpanel.MPanel_Type == "Transom")
+                                {
+                                    while (ctrl.Location.X > ctrl.Margin.Left)
+                                    {
+                                        mpnlModel.MPanel_HeightToBind--;
+                                        if (ctrl.Location.X == ctrl.Margin.Left)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void FitControls_InsideMultiPanel()
+        {
+            foreach (IFrameModel frames in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
+                {
+                    if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
+                    {
+                        mpanel.Fit_MyControls_ToBindDimensions();
+                    }
+                }
+            }
+        }
         private Dictionary<string, Binding> CreateBindingDictionary_MainPresenter()
         {
             Dictionary<string, Binding> mainPresenterBinding = new Dictionary<string, Binding>();
