@@ -91,6 +91,7 @@
             this.lblZoom = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
+            this.changeItemColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -292,7 +293,8 @@
             this.changeSyncDirectoryToolStripMenuItem,
             this.syncLocalToCloudToolStripMenuItem,
             this.editorToolStripMenuItem,
-            this.listOfMaterialsToolStripMenuItem});
+            this.listOfMaterialsToolStripMenuItem,
+            this.changeItemColorToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -737,6 +739,13 @@
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblSize.Click += new System.EventHandler(this.lblSize_Click);
             // 
+            // changeItemColorToolStripMenuItem
+            // 
+            this.changeItemColorToolStripMenuItem.Name = "changeItemColorToolStripMenuItem";
+            this.changeItemColorToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.changeItemColorToolStripMenuItem.Text = "Change Item Color";
+            this.changeItemColorToolStripMenuItem.Click += new System.EventHandler(this.changeItemColorToolStripMenuItem_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -838,5 +847,6 @@
         private System.Windows.Forms.ToolStripMenuItem tripleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TripleInsulatedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TripleLaminatedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeItemColorToolStripMenuItem;
     }
 }

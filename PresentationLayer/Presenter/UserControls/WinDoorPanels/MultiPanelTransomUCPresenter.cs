@@ -162,10 +162,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void _multiPanelTransomUC_flpMultiDragOverEventRaised(object sender, DragEventArgs e)
         {
             int totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
+            string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
 
             if (_multiPanelModel.MPanelLst_Objects.Count() < totalCount_objs_to_accomodate)
             {
-                e.Effect = DragDropEffects.Move;
+                if ((data.Contains("Multi-Panel") && data.Contains("Transom")))
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+                else
+                {
+                    e.Effect = DragDropEffects.Move;
+                }
             }
             else
             {

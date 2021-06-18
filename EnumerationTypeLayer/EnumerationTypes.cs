@@ -101,5 +101,57 @@ namespace EnumerationTypeLayer
 
             private CreateNewGlass_ShowPurpose(int value, string displayName) : base(value, displayName) { }
         }
+        public class CladdingProfile_ArticleNo : Enumeration<CladdingProfile_ArticleNo, int>
+        {
+            public static readonly CladdingProfile_ArticleNo _1338 = new CladdingProfile_ArticleNo(0, "1338");
+
+            private CladdingProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class CladdingReinf_ArticleNo : Enumeration<CladdingReinf_ArticleNo, int>
+        {
+            public static readonly CladdingReinf_ArticleNo _9120 = new CladdingReinf_ArticleNo(0, "9120");
+
+            private CladdingReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class SashProfile_ArticleNo : Enumeration<SashProfile_ArticleNo, int>
+        {
+            public static readonly SashProfile_ArticleNo _7581 = new SashProfile_ArticleNo(0, "7581");
+            private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SashReinf_ArticleNo : Enumeration<SashReinf_ArticleNo, int>
+        {
+            public static readonly SashReinf_ArticleNo _R675 = new SashReinf_ArticleNo(0, "R675");
+            private SashReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Base_Color : Enumeration<Base_Color, int>
+        {
+            public static readonly Base_Color _White = new Base_Color(0, "White");
+            public static readonly Base_Color _Ivory = new Base_Color(1, "Ivory");
+            public static readonly Base_Color _DarkBrown = new Base_Color(2, "Dark Brown");
+
+            private Base_Color(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Foil_Color : Enumeration<Foil_Color, int>
+        {
+            public static readonly Foil_Color _Walnut = new Foil_Color(0, "Walnut");
+            public static readonly Foil_Color _GoldenOak = new Foil_Color(1, "GoldenOak");
+            public static readonly Foil_Color _Mahogany = new Foil_Color(2, "Mahogany");
+            public static readonly Foil_Color _CharcoalGray = new Foil_Color(3, "Charcoal Gray");
+            public static readonly Foil_Color _FossilGray = new Foil_Color(4, "Fossil Gray");
+            public static readonly Foil_Color _BeechOak = new Foil_Color(5, "Beech Oak");
+            public static readonly Foil_Color _DriftWood = new Foil_Color(6, "DriftWood");
+            public static readonly Foil_Color _Graphite = new Foil_Color(7, "Graphite");
+            public static readonly Foil_Color _JetBlack = new Foil_Color(8, "JetBlack");
+            public static readonly Foil_Color _ChestnutOak = new Foil_Color(9, "Chestnut Oak");
+            public static readonly Foil_Color _WashedOak = new Foil_Color(10, "Washed Oak");
+            public static readonly Foil_Color _GreyOak = new Foil_Color(11, "Grey Oak");
+            public static readonly Foil_Color _Cacao = new Foil_Color(12, "Cacao");
+            public static readonly Foil_Color _Havana = new Foil_Color(13, "Havana");
+
+            private Foil_Color(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }
