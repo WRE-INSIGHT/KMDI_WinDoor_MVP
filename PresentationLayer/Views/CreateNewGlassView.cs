@@ -44,7 +44,7 @@ namespace PresentationLayer.Views
                 cmbGlassType1.SelectedIndex = value;
                 cmbGlassType2.SelectedIndex = value;
                 cmbGlassType3.SelectedIndex = value;
-                
+
             }
         }
 
@@ -175,91 +175,6 @@ namespace PresentationLayer.Views
             return tboxTotalGlassThickness;
         }
 
-        //private int _tboxGlassThickness1;
-        //public int tboxGlassThickness_1
-        //{
-        //    get
-        //    {
-        //        return _tboxGlassThickness1;
-        //    }
-        //    set
-        //    {
-        //        _tboxGlassThickness1 = value;
-        //        tboxGlassThickness1.Text = Convert.ToInt32(value).ToString();
-        //    }
-        //}
-
-
-        //private int _tboxGlassThickness2;
-        //public int tboxGlassThickness_2
-        //{
-        //    get
-        //    {
-        //        return _tboxGlassThickness2;
-        //    }
-        //    set
-        //    {
-        //        _tboxGlassThickness2 = value;
-        //        tboxGlassThickness2.Text = Convert.ToInt32(value).ToString();
-        //    }
-        //}
-
-
-        //private int _tboxGlassThickness3;
-        //public int tboxGlassThickness_3
-        //{
-        //    get
-        //    {
-        //        return _tboxGlassThickness3;
-        //    }
-        //    set
-        //    {
-        //        _tboxGlassThickness3 = value;
-        //        tboxGlassThickness3.Text = Convert.ToInt32(value).ToString();
-        //    }
-        //}
-
-
-        //public string tboxBetweenTheGlass_1
-        //{
-        //    get
-        //    {
-        //        return tboxBetweenTheGlass1.Text;
-        //    }
-        //    set
-        //    {
-        //        tboxBetweenTheGlass1.Text = value;
-        //    }
-        //}
-
-
-        //public string tboxBetweenTheGlass_2
-        //{
-        //    get
-        //    {
-        //        return tboxBetweenTheGlass2.Text;
-        //    }
-        //    set
-        //    {
-        //        tboxBetweenTheGlass2.Text = value;
-        //    }
-        //}
-
-
-        //private int _tboxTotalGlassThickness;
-        //public int tboxTotalGlassThickness1
-        //{
-        //    get
-        //    {
-        //        return _tboxTotalGlassThickness;
-        //    }
-        //    set
-        //    {
-        //        _tboxTotalGlassThickness = value;
-        //        tboxTotalGlassThickness.Text = Convert.ToInt32(value).ToString();
-        //    }
-        //}
-
         public string lblBetweenTheGlass
         {
             set
@@ -281,6 +196,10 @@ namespace PresentationLayer.Views
         int crntFormWD;
         public string lblDescriptionView
         {
+            get
+            {
+                return lblDescription.Text;
+            }
             set
             {
                 lblDescription.Text = value;
@@ -304,7 +223,7 @@ namespace PresentationLayer.Views
 
         public CreateNewGlassView()
         {
-            InitializeComponent();  
+            InitializeComponent();
         }
 
         private void OnTextChangeEventRaised(object sender, EventArgs e)
@@ -332,6 +251,6 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, BtnAddGlassClick, e);
         }
 
-      
+        
     }
 }

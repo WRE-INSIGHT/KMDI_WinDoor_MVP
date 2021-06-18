@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlGlass2 = new System.Windows.Forms.Panel();
+            this.nudGlassThickness2 = new System.Windows.Forms.NumericUpDown();
+            this.nudBetweenTheGlass1 = new System.Windows.Forms.NumericUpDown();
             this.cmbGlassType2 = new System.Windows.Forms.ComboBox();
             this.cmbColor2 = new System.Windows.Forms.ComboBox();
             this.lblColor2 = new System.Windows.Forms.Label();
@@ -44,7 +46,10 @@
             this.cmbColor1 = new System.Windows.Forms.ComboBox();
             this.lblColor1 = new System.Windows.Forms.Label();
             this.pnlGlass1 = new System.Windows.Forms.Panel();
+            this.nudGlassThickness1 = new System.Windows.Forms.NumericUpDown();
             this.pnlGlass3 = new System.Windows.Forms.Panel();
+            this.nudGlassThickness3 = new System.Windows.Forms.NumericUpDown();
+            this.nudBetweenTheGlass2 = new System.Windows.Forms.NumericUpDown();
             this.cmbGlassType3 = new System.Windows.Forms.ComboBox();
             this.cmbColor3 = new System.Windows.Forms.ComboBox();
             this.cmbBetweenTheGlass2 = new System.Windows.Forms.ComboBox();
@@ -57,24 +62,19 @@
             this.tboxTotalGlassThickness = new System.Windows.Forms.TextBox();
             this.lblTotalGlassThickness = new System.Windows.Forms.Label();
             this.pnlDescription = new System.Windows.Forms.Panel();
-            this.nudGlassThickness1 = new System.Windows.Forms.NumericUpDown();
             this.btnAddGlass = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lbl_Description = new System.Windows.Forms.Label();
-            this.nudBetweenTheGlass1 = new System.Windows.Forms.NumericUpDown();
-            this.nudGlassThickness2 = new System.Windows.Forms.NumericUpDown();
-            this.nudBetweenTheGlass2 = new System.Windows.Forms.NumericUpDown();
-            this.nudGlassThickness3 = new System.Windows.Forms.NumericUpDown();
             this.pnlGlass2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass1)).BeginInit();
             this.pnlGlass1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness1)).BeginInit();
             this.pnlGlass3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass2)).BeginInit();
             this.pnlTotal.SuspendLayout();
             this.pnlDescription.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness3)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlGlass2
@@ -94,6 +94,24 @@
             this.pnlGlass2.Name = "pnlGlass2";
             this.pnlGlass2.Size = new System.Drawing.Size(584, 82);
             this.pnlGlass2.TabIndex = 1;
+            // 
+            // nudGlassThickness2
+            // 
+            this.nudGlassThickness2.Location = new System.Drawing.Point(140, 44);
+            this.nudGlassThickness2.Name = "nudGlassThickness2";
+            this.nudGlassThickness2.Size = new System.Drawing.Size(53, 22);
+            this.nudGlassThickness2.TabIndex = 44;
+            this.nudGlassThickness2.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.nudGlassThickness2.Click += new System.EventHandler(this.OnTextChangeEventRaised);
+            // 
+            // nudBetweenTheGlass1
+            // 
+            this.nudBetweenTheGlass1.Location = new System.Drawing.Point(140, 7);
+            this.nudBetweenTheGlass1.Name = "nudBetweenTheGlass1";
+            this.nudBetweenTheGlass1.Size = new System.Drawing.Size(53, 22);
+            this.nudBetweenTheGlass1.TabIndex = 27;
+            this.nudBetweenTheGlass1.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.nudBetweenTheGlass1.Click += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbGlassType2
             // 
@@ -266,6 +284,15 @@
             this.pnlGlass1.Size = new System.Drawing.Size(584, 64);
             this.pnlGlass1.TabIndex = 0;
             // 
+            // nudGlassThickness1
+            // 
+            this.nudGlassThickness1.Location = new System.Drawing.Point(140, 34);
+            this.nudGlassThickness1.Name = "nudGlassThickness1";
+            this.nudGlassThickness1.Size = new System.Drawing.Size(53, 22);
+            this.nudGlassThickness1.TabIndex = 26;
+            this.nudGlassThickness1.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.nudGlassThickness1.Click += new System.EventHandler(this.OnTextChangeEventRaised);
+            // 
             // pnlGlass3
             // 
             this.pnlGlass3.BackColor = System.Drawing.SystemColors.Control;
@@ -284,6 +311,24 @@
             this.pnlGlass3.Name = "pnlGlass3";
             this.pnlGlass3.Size = new System.Drawing.Size(584, 74);
             this.pnlGlass3.TabIndex = 2;
+            // 
+            // nudGlassThickness3
+            // 
+            this.nudGlassThickness3.Location = new System.Drawing.Point(140, 39);
+            this.nudGlassThickness3.Name = "nudGlassThickness3";
+            this.nudGlassThickness3.Size = new System.Drawing.Size(53, 22);
+            this.nudGlassThickness3.TabIndex = 46;
+            this.nudGlassThickness3.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.nudGlassThickness3.Click += new System.EventHandler(this.OnTextChangeEventRaised);
+            // 
+            // nudBetweenTheGlass2
+            // 
+            this.nudBetweenTheGlass2.Location = new System.Drawing.Point(140, 4);
+            this.nudBetweenTheGlass2.Name = "nudBetweenTheGlass2";
+            this.nudBetweenTheGlass2.Size = new System.Drawing.Size(53, 22);
+            this.nudBetweenTheGlass2.TabIndex = 45;
+            this.nudBetweenTheGlass2.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.nudBetweenTheGlass2.Click += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbGlassType3
             // 
@@ -413,14 +458,6 @@
             this.pnlDescription.Size = new System.Drawing.Size(584, 98);
             this.pnlDescription.TabIndex = 4;
             // 
-            // nudGlassThickness1
-            // 
-            this.nudGlassThickness1.Location = new System.Drawing.Point(140, 34);
-            this.nudGlassThickness1.Name = "nudGlassThickness1";
-            this.nudGlassThickness1.Size = new System.Drawing.Size(53, 22);
-            this.nudGlassThickness1.TabIndex = 26;
-            this.nudGlassThickness1.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            // 
             // btnAddGlass
             // 
             this.btnAddGlass.Location = new System.Drawing.Point(485, 71);
@@ -450,38 +487,6 @@
             this.lbl_Description.TabIndex = 24;
             this.lbl_Description.Text = "Description";
             // 
-            // nudBetweenTheGlass1
-            // 
-            this.nudBetweenTheGlass1.Location = new System.Drawing.Point(140, 7);
-            this.nudBetweenTheGlass1.Name = "nudBetweenTheGlass1";
-            this.nudBetweenTheGlass1.Size = new System.Drawing.Size(53, 22);
-            this.nudBetweenTheGlass1.TabIndex = 27;
-            this.nudBetweenTheGlass1.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            // 
-            // nudGlassThickness2
-            // 
-            this.nudGlassThickness2.Location = new System.Drawing.Point(140, 44);
-            this.nudGlassThickness2.Name = "nudGlassThickness2";
-            this.nudGlassThickness2.Size = new System.Drawing.Size(53, 22);
-            this.nudGlassThickness2.TabIndex = 44;
-            this.nudGlassThickness2.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            // 
-            // nudBetweenTheGlass2
-            // 
-            this.nudBetweenTheGlass2.Location = new System.Drawing.Point(140, 4);
-            this.nudBetweenTheGlass2.Name = "nudBetweenTheGlass2";
-            this.nudBetweenTheGlass2.Size = new System.Drawing.Size(53, 22);
-            this.nudBetweenTheGlass2.TabIndex = 45;
-            this.nudBetweenTheGlass2.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            // 
-            // nudGlassThickness3
-            // 
-            this.nudGlassThickness3.Location = new System.Drawing.Point(140, 39);
-            this.nudGlassThickness3.Name = "nudGlassThickness3";
-            this.nudGlassThickness3.Size = new System.Drawing.Size(53, 22);
-            this.nudGlassThickness3.TabIndex = 46;
-            this.nudGlassThickness3.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            // 
             // CreateNewGlassView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -499,19 +504,19 @@
             this.Load += new System.EventHandler(this.CreateNewGlassView_Load);
             this.pnlGlass2.ResumeLayout(false);
             this.pnlGlass2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass1)).EndInit();
             this.pnlGlass1.ResumeLayout(false);
             this.pnlGlass1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness1)).EndInit();
             this.pnlGlass3.ResumeLayout(false);
             this.pnlGlass3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass2)).EndInit();
             this.pnlTotal.ResumeLayout(false);
             this.pnlTotal.PerformLayout();
             this.pnlDescription.ResumeLayout(false);
             this.pnlDescription.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness3)).EndInit();
             this.ResumeLayout(false);
 
         }
