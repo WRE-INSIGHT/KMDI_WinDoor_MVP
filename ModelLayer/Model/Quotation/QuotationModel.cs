@@ -41,7 +41,7 @@ namespace ModelLayer.Model.Quotation
             Material_List.Columns.Add(CreateColumn("Description", "Description", "System.String"));
             Material_List.Columns.Add(CreateColumn("Qty", "Qty", "System.Int32"));
             Material_List.Columns.Add(CreateColumn("Unit", "Unit", "System.String"));
-            Material_List.Columns.Add(CreateColumn("Size", "Size1", "System.String"));
+            Material_List.Columns.Add(CreateColumn("Size", "Size", "System.String"));
 
             foreach (IWindoorModel item in Lst_Windoor)
             {

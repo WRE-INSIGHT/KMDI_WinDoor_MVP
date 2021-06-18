@@ -233,7 +233,11 @@ namespace PresentationLayer.Presenter
             newRow = _glassThicknessDT.NewRow();
 
             // Populate row here
-            
+
+            _glassThicknessTbl.Rows.Add();
+
+
+
             return newRow;
         }
 
