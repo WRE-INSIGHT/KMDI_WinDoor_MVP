@@ -36,13 +36,13 @@ namespace PresentationLayer.Views
         //string tboxBetweenTheGlass_2 { get; set; }
         //int tboxTotalGlassThickness1 { get; set; }
 
-        TextBox GetTboxGlassThickness1();
-        TextBox GetTboxGlassThickness2();
-        TextBox GetTboxGlassThickness3();
-        TextBox GetTboxBetweenTheGlass1();
-        TextBox GetTboxBetweenTheGlass2();
-        TextBox GetTboxTotalGlassThickness1();
+        NumericUpDown GetNudGlassThickness1();
+        NumericUpDown GetNudGlassThickness2();
+        NumericUpDown GetNudGlassThickness3();
+        NumericUpDown GetNudBetweenTheGlass1();
+        NumericUpDown GetNudBetweenTheGlass2();
 
+        TextBox GetTboxTotalGlassThickness1();
 
 
 

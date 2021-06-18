@@ -7,8 +7,6 @@ namespace PresentationLayer.Views
 {
     public partial class CreateNewGlassView : Form, ICreateNewGlassView
     {
-
-
         public bool pnlGlassVisible2
         {
             set
@@ -150,26 +148,28 @@ namespace PresentationLayer.Views
             }
         }
 
-        public TextBox GetTboxGlassThickness1()
+        public NumericUpDown GetNudGlassThickness1()
         {
-            return tboxGlassThickness1;
+            return nudGlassThickness1;
         }
-        public TextBox GetTboxGlassThickness2()
+        public NumericUpDown GetNudGlassThickness2()
         {
-            return tboxGlassThickness2;
+            return nudGlassThickness2;
         }
-        public TextBox GetTboxGlassThickness3()
+        public NumericUpDown GetNudGlassThickness3()
         {
-            return tboxGlassThickness3;
+            return nudGlassThickness3;
         }
-        public TextBox GetTboxBetweenTheGlass1()
+        public NumericUpDown GetNudBetweenTheGlass1()
         {
-            return tboxBetweenTheGlass1;
+            return nudBetweenTheGlass1;
         }
-        public TextBox GetTboxBetweenTheGlass2()
+
+        public NumericUpDown GetNudBetweenTheGlass2()
         {
-            return tboxBetweenTheGlass2;
+            return nudBetweenTheGlass2;
         }
+
         public TextBox GetTboxTotalGlassThickness1()
         {
             return tboxTotalGlassThickness;
@@ -304,22 +304,7 @@ namespace PresentationLayer.Views
 
         public CreateNewGlassView()
         {
-            InitializeComponent();
-
-            tboxGlassThickness1.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            tboxGlassThickness2.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            tboxGlassThickness3.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            cmbGlassType1.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            cmbGlassType2.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            cmbGlassType3.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            cmbColor1.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            cmbColor2.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            cmbColor3.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            cmbBetweenTheGlass1.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            cmbBetweenTheGlass2.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            tboxBetweenTheGlass1.TextChanged += new EventHandler(OnTextChangeEventRaised);
-            tboxBetweenTheGlass2.TextChanged += new EventHandler(OnTextChangeEventRaised);
-
+            InitializeComponent();  
         }
 
         private void OnTextChangeEventRaised(object sender, EventArgs e)
@@ -346,5 +331,7 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, BtnAddGlassClick, e);
         }
+
+      
     }
 }

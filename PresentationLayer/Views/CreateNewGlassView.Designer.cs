@@ -35,13 +35,10 @@
             this.lblGlassType2 = new System.Windows.Forms.Label();
             this.lblSpacerUnit1 = new System.Windows.Forms.Label();
             this.cmbBetweenTheGlass1 = new System.Windows.Forms.ComboBox();
-            this.tboxGlassThickness2 = new System.Windows.Forms.TextBox();
-            this.tboxBetweenTheGlass1 = new System.Windows.Forms.TextBox();
             this.lblBetweenTheGlass1 = new System.Windows.Forms.Label();
             this.lblGlassThickness2 = new System.Windows.Forms.Label();
             this.lblGlass = new System.Windows.Forms.Label();
             this.lblGlassThickness1 = new System.Windows.Forms.Label();
-            this.tboxGlassThickness1 = new System.Windows.Forms.TextBox();
             this.cmbGlassType1 = new System.Windows.Forms.ComboBox();
             this.lblGlassType1 = new System.Windows.Forms.Label();
             this.cmbColor1 = new System.Windows.Forms.ComboBox();
@@ -54,34 +51,42 @@
             this.lblColor3 = new System.Windows.Forms.Label();
             this.lblGlassType3 = new System.Windows.Forms.Label();
             this.lblSpacerUnit2 = new System.Windows.Forms.Label();
-            this.tboxGlassThickness3 = new System.Windows.Forms.TextBox();
-            this.tboxBetweenTheGlass2 = new System.Windows.Forms.TextBox();
             this.lblBetweenTheGlass2 = new System.Windows.Forms.Label();
             this.lblGlassThickness3 = new System.Windows.Forms.Label();
             this.pnlTotal = new System.Windows.Forms.Panel();
             this.tboxTotalGlassThickness = new System.Windows.Forms.TextBox();
             this.lblTotalGlassThickness = new System.Windows.Forms.Label();
             this.pnlDescription = new System.Windows.Forms.Panel();
+            this.nudGlassThickness1 = new System.Windows.Forms.NumericUpDown();
             this.btnAddGlass = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lbl_Description = new System.Windows.Forms.Label();
+            this.nudBetweenTheGlass1 = new System.Windows.Forms.NumericUpDown();
+            this.nudGlassThickness2 = new System.Windows.Forms.NumericUpDown();
+            this.nudBetweenTheGlass2 = new System.Windows.Forms.NumericUpDown();
+            this.nudGlassThickness3 = new System.Windows.Forms.NumericUpDown();
             this.pnlGlass2.SuspendLayout();
             this.pnlGlass1.SuspendLayout();
             this.pnlGlass3.SuspendLayout();
             this.pnlTotal.SuspendLayout();
             this.pnlDescription.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness3)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlGlass2
             // 
+            this.pnlGlass2.Controls.Add(this.nudGlassThickness2);
+            this.pnlGlass2.Controls.Add(this.nudBetweenTheGlass1);
             this.pnlGlass2.Controls.Add(this.cmbGlassType2);
             this.pnlGlass2.Controls.Add(this.cmbColor2);
             this.pnlGlass2.Controls.Add(this.lblColor2);
             this.pnlGlass2.Controls.Add(this.lblGlassType2);
             this.pnlGlass2.Controls.Add(this.lblSpacerUnit1);
             this.pnlGlass2.Controls.Add(this.cmbBetweenTheGlass1);
-            this.pnlGlass2.Controls.Add(this.tboxGlassThickness2);
-            this.pnlGlass2.Controls.Add(this.tboxBetweenTheGlass1);
             this.pnlGlass2.Controls.Add(this.lblBetweenTheGlass1);
             this.pnlGlass2.Controls.Add(this.lblGlassThickness2);
             this.pnlGlass2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -103,6 +108,7 @@
             this.cmbGlassType2.Name = "cmbGlassType2";
             this.cmbGlassType2.Size = new System.Drawing.Size(117, 21);
             this.cmbGlassType2.TabIndex = 7;
+            this.cmbGlassType2.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbColor2
             // 
@@ -117,6 +123,7 @@
             this.cmbColor2.Name = "cmbColor2";
             this.cmbColor2.Size = new System.Drawing.Size(117, 21);
             this.cmbColor2.TabIndex = 8;
+            this.cmbColor2.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblColor2
             // 
@@ -156,24 +163,7 @@
             this.cmbBetweenTheGlass1.Name = "cmbBetweenTheGlass1";
             this.cmbBetweenTheGlass1.Size = new System.Drawing.Size(117, 21);
             this.cmbBetweenTheGlass1.TabIndex = 5;
-            // 
-            // tboxGlassThickness2
-            // 
-            this.tboxGlassThickness2.Location = new System.Drawing.Point(138, 44);
-            this.tboxGlassThickness2.MaxLength = 2;
-            this.tboxGlassThickness2.Name = "tboxGlassThickness2";
-            this.tboxGlassThickness2.Size = new System.Drawing.Size(53, 22);
-            this.tboxGlassThickness2.TabIndex = 6;
-            this.tboxGlassThickness2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tboxBetweenTheGlass1
-            // 
-            this.tboxBetweenTheGlass1.Location = new System.Drawing.Point(138, 7);
-            this.tboxBetweenTheGlass1.MaxLength = 4;
-            this.tboxBetweenTheGlass1.Name = "tboxBetweenTheGlass1";
-            this.tboxBetweenTheGlass1.Size = new System.Drawing.Size(53, 22);
-            this.tboxBetweenTheGlass1.TabIndex = 4;
-            this.tboxBetweenTheGlass1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.cmbBetweenTheGlass1.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblBetweenTheGlass1
             // 
@@ -212,15 +202,6 @@
             this.lblGlassThickness1.TabIndex = 1;
             this.lblGlassThickness1.Text = "Glass Thickness 1";
             // 
-            // tboxGlassThickness1
-            // 
-            this.tboxGlassThickness1.Location = new System.Drawing.Point(138, 36);
-            this.tboxGlassThickness1.MaxLength = 2;
-            this.tboxGlassThickness1.Name = "tboxGlassThickness1";
-            this.tboxGlassThickness1.Size = new System.Drawing.Size(53, 22);
-            this.tboxGlassThickness1.TabIndex = 1;
-            this.tboxGlassThickness1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // cmbGlassType1
             // 
             this.cmbGlassType1.DisplayMember = "1";
@@ -235,6 +216,7 @@
             this.cmbGlassType1.Name = "cmbGlassType1";
             this.cmbGlassType1.Size = new System.Drawing.Size(117, 21);
             this.cmbGlassType1.TabIndex = 2;
+            this.cmbGlassType1.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblGlassType1
             // 
@@ -258,6 +240,7 @@
             this.cmbColor1.Name = "cmbColor1";
             this.cmbColor1.Size = new System.Drawing.Size(117, 21);
             this.cmbColor1.TabIndex = 3;
+            this.cmbColor1.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblColor1
             // 
@@ -270,11 +253,11 @@
             // 
             // pnlGlass1
             // 
+            this.pnlGlass1.Controls.Add(this.nudGlassThickness1);
             this.pnlGlass1.Controls.Add(this.lblColor1);
             this.pnlGlass1.Controls.Add(this.cmbColor1);
             this.pnlGlass1.Controls.Add(this.lblGlassType1);
             this.pnlGlass1.Controls.Add(this.cmbGlassType1);
-            this.pnlGlass1.Controls.Add(this.tboxGlassThickness1);
             this.pnlGlass1.Controls.Add(this.lblGlassThickness1);
             this.pnlGlass1.Controls.Add(this.lblGlass);
             this.pnlGlass1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -286,14 +269,14 @@
             // pnlGlass3
             // 
             this.pnlGlass3.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlGlass3.Controls.Add(this.nudGlassThickness3);
+            this.pnlGlass3.Controls.Add(this.nudBetweenTheGlass2);
             this.pnlGlass3.Controls.Add(this.cmbGlassType3);
             this.pnlGlass3.Controls.Add(this.cmbColor3);
             this.pnlGlass3.Controls.Add(this.cmbBetweenTheGlass2);
             this.pnlGlass3.Controls.Add(this.lblColor3);
             this.pnlGlass3.Controls.Add(this.lblGlassType3);
             this.pnlGlass3.Controls.Add(this.lblSpacerUnit2);
-            this.pnlGlass3.Controls.Add(this.tboxGlassThickness3);
-            this.pnlGlass3.Controls.Add(this.tboxBetweenTheGlass2);
             this.pnlGlass3.Controls.Add(this.lblBetweenTheGlass2);
             this.pnlGlass3.Controls.Add(this.lblGlassThickness3);
             this.pnlGlass3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -315,6 +298,7 @@
             this.cmbGlassType3.Name = "cmbGlassType3";
             this.cmbGlassType3.Size = new System.Drawing.Size(117, 21);
             this.cmbGlassType3.TabIndex = 12;
+            this.cmbGlassType3.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbColor3
             // 
@@ -329,6 +313,7 @@
             this.cmbColor3.Name = "cmbColor3";
             this.cmbColor3.Size = new System.Drawing.Size(117, 21);
             this.cmbColor3.TabIndex = 13;
+            this.cmbColor3.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbBetweenTheGlass2
             // 
@@ -341,6 +326,7 @@
             this.cmbBetweenTheGlass2.Name = "cmbBetweenTheGlass2";
             this.cmbBetweenTheGlass2.Size = new System.Drawing.Size(117, 21);
             this.cmbBetweenTheGlass2.TabIndex = 10;
+            this.cmbBetweenTheGlass2.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblColor3
             // 
@@ -368,24 +354,6 @@
             this.lblSpacerUnit2.Size = new System.Drawing.Size(29, 13);
             this.lblSpacerUnit2.TabIndex = 41;
             this.lblSpacerUnit2.Text = "Unit";
-            // 
-            // tboxGlassThickness3
-            // 
-            this.tboxGlassThickness3.Location = new System.Drawing.Point(138, 39);
-            this.tboxGlassThickness3.MaxLength = 2;
-            this.tboxGlassThickness3.Name = "tboxGlassThickness3";
-            this.tboxGlassThickness3.Size = new System.Drawing.Size(53, 22);
-            this.tboxGlassThickness3.TabIndex = 11;
-            this.tboxGlassThickness3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tboxBetweenTheGlass2
-            // 
-            this.tboxBetweenTheGlass2.Location = new System.Drawing.Point(138, 1);
-            this.tboxBetweenTheGlass2.MaxLength = 4;
-            this.tboxBetweenTheGlass2.Name = "tboxBetweenTheGlass2";
-            this.tboxBetweenTheGlass2.Size = new System.Drawing.Size(53, 22);
-            this.tboxBetweenTheGlass2.TabIndex = 9;
-            this.tboxBetweenTheGlass2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblBetweenTheGlass2
             // 
@@ -419,7 +387,7 @@
             // tboxTotalGlassThickness
             // 
             this.tboxTotalGlassThickness.Enabled = false;
-            this.tboxTotalGlassThickness.Location = new System.Drawing.Point(138, 13);
+            this.tboxTotalGlassThickness.Location = new System.Drawing.Point(140, 17);
             this.tboxTotalGlassThickness.Name = "tboxTotalGlassThickness";
             this.tboxTotalGlassThickness.Size = new System.Drawing.Size(53, 22);
             this.tboxTotalGlassThickness.TabIndex = 14;
@@ -428,7 +396,7 @@
             // lblTotalGlassThickness
             // 
             this.lblTotalGlassThickness.AutoSize = true;
-            this.lblTotalGlassThickness.Location = new System.Drawing.Point(25, 19);
+            this.lblTotalGlassThickness.Location = new System.Drawing.Point(25, 20);
             this.lblTotalGlassThickness.Name = "lblTotalGlassThickness";
             this.lblTotalGlassThickness.Size = new System.Drawing.Size(85, 13);
             this.lblTotalGlassThickness.TabIndex = 20;
@@ -444,6 +412,14 @@
             this.pnlDescription.Name = "pnlDescription";
             this.pnlDescription.Size = new System.Drawing.Size(584, 98);
             this.pnlDescription.TabIndex = 4;
+            // 
+            // nudGlassThickness1
+            // 
+            this.nudGlassThickness1.Location = new System.Drawing.Point(140, 34);
+            this.nudGlassThickness1.Name = "nudGlassThickness1";
+            this.nudGlassThickness1.Size = new System.Drawing.Size(53, 22);
+            this.nudGlassThickness1.TabIndex = 26;
+            this.nudGlassThickness1.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // btnAddGlass
             // 
@@ -474,6 +450,38 @@
             this.lbl_Description.TabIndex = 24;
             this.lbl_Description.Text = "Description";
             // 
+            // nudBetweenTheGlass1
+            // 
+            this.nudBetweenTheGlass1.Location = new System.Drawing.Point(140, 7);
+            this.nudBetweenTheGlass1.Name = "nudBetweenTheGlass1";
+            this.nudBetweenTheGlass1.Size = new System.Drawing.Size(53, 22);
+            this.nudBetweenTheGlass1.TabIndex = 27;
+            this.nudBetweenTheGlass1.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            // 
+            // nudGlassThickness2
+            // 
+            this.nudGlassThickness2.Location = new System.Drawing.Point(140, 44);
+            this.nudGlassThickness2.Name = "nudGlassThickness2";
+            this.nudGlassThickness2.Size = new System.Drawing.Size(53, 22);
+            this.nudGlassThickness2.TabIndex = 44;
+            this.nudGlassThickness2.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            // 
+            // nudBetweenTheGlass2
+            // 
+            this.nudBetweenTheGlass2.Location = new System.Drawing.Point(140, 4);
+            this.nudBetweenTheGlass2.Name = "nudBetweenTheGlass2";
+            this.nudBetweenTheGlass2.Size = new System.Drawing.Size(53, 22);
+            this.nudBetweenTheGlass2.TabIndex = 45;
+            this.nudBetweenTheGlass2.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            // 
+            // nudGlassThickness3
+            // 
+            this.nudGlassThickness3.Location = new System.Drawing.Point(140, 39);
+            this.nudGlassThickness3.Name = "nudGlassThickness3";
+            this.nudGlassThickness3.Size = new System.Drawing.Size(53, 22);
+            this.nudGlassThickness3.TabIndex = 46;
+            this.nudGlassThickness3.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            // 
             // CreateNewGlassView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -499,6 +507,11 @@
             this.pnlTotal.PerformLayout();
             this.pnlDescription.ResumeLayout(false);
             this.pnlDescription.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -512,13 +525,10 @@
         private System.Windows.Forms.Label lblGlassType2;
         private System.Windows.Forms.Label lblSpacerUnit1;
         private System.Windows.Forms.ComboBox cmbBetweenTheGlass1;
-        private System.Windows.Forms.TextBox tboxGlassThickness2;
-        private System.Windows.Forms.TextBox tboxBetweenTheGlass1;
         private System.Windows.Forms.Label lblBetweenTheGlass1;
         private System.Windows.Forms.Label lblGlassThickness2;
         private System.Windows.Forms.Label lblGlass;
         private System.Windows.Forms.Label lblGlassThickness1;
-        private System.Windows.Forms.TextBox tboxGlassThickness1;
         private System.Windows.Forms.ComboBox cmbGlassType1;
         private System.Windows.Forms.Label lblGlassType1;
         private System.Windows.Forms.ComboBox cmbColor1;
@@ -531,8 +541,6 @@
         private System.Windows.Forms.Label lblColor3;
         private System.Windows.Forms.Label lblGlassType3;
         private System.Windows.Forms.Label lblSpacerUnit2;
-        private System.Windows.Forms.TextBox tboxGlassThickness3;
-        private System.Windows.Forms.TextBox tboxBetweenTheGlass2;
         private System.Windows.Forms.Label lblBetweenTheGlass2;
         private System.Windows.Forms.Label lblGlassThickness3;
         private System.Windows.Forms.Panel pnlTotal;
@@ -542,5 +550,10 @@
         private System.Windows.Forms.Button btnAddGlass;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Label lbl_Description;
+        private System.Windows.Forms.NumericUpDown nudGlassThickness1;
+        private System.Windows.Forms.NumericUpDown nudGlassThickness2;
+        private System.Windows.Forms.NumericUpDown nudBetweenTheGlass1;
+        private System.Windows.Forms.NumericUpDown nudGlassThickness3;
+        private System.Windows.Forms.NumericUpDown nudBetweenTheGlass2;
     }
 }
