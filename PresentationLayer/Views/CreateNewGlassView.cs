@@ -300,6 +300,7 @@ namespace PresentationLayer.Views
 
         public event EventHandler NewGlassViewLoadEventRaised;
         public event EventHandler GlassThicknessTextChange;
+        public event EventHandler BtnAddGlassClick;
 
         public CreateNewGlassView()
         {
@@ -341,6 +342,9 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, NewGlassViewLoadEventRaised, e);
         }
 
-
+        private void btnAddGlass_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, BtnAddGlassClick, e);
+        }
     }
 }

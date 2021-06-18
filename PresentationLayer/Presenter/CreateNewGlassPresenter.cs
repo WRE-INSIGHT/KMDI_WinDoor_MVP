@@ -1,6 +1,7 @@
 ﻿using PresentationLayer.Views;
 using System;
 using System.Data;
+using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
 
@@ -35,9 +36,10 @@ namespace PresentationLayer.Presenter
         {
             _createNewGlassView.NewGlassViewLoadEventRaised += new EventHandler(OnNewGlassViewLoadEventRaised);
             _createNewGlassView.GlassThicknessTextChange += new EventHandler(OnGlassTextchangeEventRaised);
+            _createNewGlassView.BtnAddGlassClick += new EventHandler(OnBtnAddGlassClick);
         }
 
-
+      
 
         private void OnNewGlassViewLoadEventRaised(object sender, EventArgs e)
         {
@@ -139,15 +141,23 @@ namespace PresentationLayer.Presenter
                 }
                 else
                 {
-                    double glassResult, glass1 = 0, glass2 = 0, BetweenTheGlass1 = 0;
-                    glass1 = Convert.ToDouble(_createNewGlassView.GetTboxGlassThickness1().Text);
-                    glass2 = Convert.ToDouble(_createNewGlassView.GetTboxGlassThickness2().Text);
-                    BetweenTheGlass1 = Convert.ToDouble(_createNewGlassView.GetTboxBetweenTheGlass1().Text);
-                    glassResult = glass1 + BetweenTheGlass1 + glass2;
+                    try
+                    {
+                        decimal glassResult, glass1 = 0, glass2 = 0, BetweenTheGlass1 = 0;
+                        glass1 = Convert.ToDecimal(_createNewGlassView.GetTboxGlassThickness1().Text);
+                        glass2 = Convert.ToDecimal(_createNewGlassView.GetTboxGlassThickness2().Text);
+                        BetweenTheGlass1 = Convert.ToDecimal(_createNewGlassView.GetTboxBetweenTheGlass1().Text);
+                        glassResult = glass1 + BetweenTheGlass1 + glass2;
 
-                    _createNewGlassView.GetTboxTotalGlassThickness1().Text = Convert.ToString(glassResult);
+                        _createNewGlassView.GetTboxTotalGlassThickness1().Text = Convert.ToString(glassResult);
 
-                    _createNewGlassView.lblDescriptionView = _Glass1Description + " ➕ " + _BetweenTheGlass1 + " ➕ " + _Glass2Description;
+                        _createNewGlassView.lblDescriptionView = _Glass1Description + " ➕ " + _BetweenTheGlass1 + " ➕ " + _Glass2Description;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
 
 
@@ -161,18 +171,25 @@ namespace PresentationLayer.Presenter
                 }
                 else
                 {
-                    double glassResult, glass1 = 0, glass2 = 0, glass3 = 0, BetweenTheGlass1 = 0, BetweenTheGlass2 = 0;
-                    glass1 = Convert.ToDouble(_createNewGlassView.GetTboxGlassThickness1().Text);
-                    glass2 = Convert.ToDouble(_createNewGlassView.GetTboxGlassThickness2().Text);
-                    glass3 = Convert.ToDouble(_createNewGlassView.GetTboxGlassThickness3().Text);
-                    BetweenTheGlass1 = Convert.ToDouble(_createNewGlassView.GetTboxBetweenTheGlass1().Text);
-                    BetweenTheGlass2 = Convert.ToDouble(_createNewGlassView.GetTboxBetweenTheGlass2().Text);
-                    glassResult = glass1 + BetweenTheGlass1 + glass2 + BetweenTheGlass2 + glass3;
+                    try
+                    {
+                        decimal glassResult, glass1 = 0, glass2 = 0, glass3 = 0, BetweenTheGlass1 = 0, BetweenTheGlass2 = 0;
+                        glass1 = Convert.ToDecimal(_createNewGlassView.GetTboxGlassThickness1().Text);
+                        glass2 = Convert.ToDecimal(_createNewGlassView.GetTboxGlassThickness2().Text);
+                        glass3 = Convert.ToDecimal(_createNewGlassView.GetTboxGlassThickness3().Text);
+                        BetweenTheGlass1 = Convert.ToDecimal(_createNewGlassView.GetTboxBetweenTheGlass1().Text);
+                        BetweenTheGlass2 = Convert.ToDecimal(_createNewGlassView.GetTboxBetweenTheGlass2().Text);
+                        glassResult = glass1 + BetweenTheGlass1 + glass2 + BetweenTheGlass2 + glass3;
 
-                    _createNewGlassView.GetTboxTotalGlassThickness1().Text = Convert.ToString(glassResult);
+                        _createNewGlassView.GetTboxTotalGlassThickness1().Text = Convert.ToString(glassResult);
 
-                    _createNewGlassView.lblDescriptionView = _Glass1Description + " ➕ " + _BetweenTheGlass1 + " ➕ " + _Glass2Description + " ➕ " + _BetweenTheGlass2 + " ➕ " + _Glass3Description;
+                        _createNewGlassView.lblDescriptionView = _Glass1Description + " ➕ " + _BetweenTheGlass1 + " ➕ " + _Glass2Description + " ➕ " + _BetweenTheGlass2 + " ➕ " + _Glass3Description;
 
+                    }
+                    catch (Exception ex)
+                    {
+                             MessageBox.Show(ex.Message);
+                    }
                 }
 
 
@@ -185,7 +202,10 @@ namespace PresentationLayer.Presenter
         }
 
 
+        private void OnBtnAddGlassClick(object sender, EventArgs e)
+        {
 
+        }
 
         public DataRow CreateNewGlass_Datarow()
         {

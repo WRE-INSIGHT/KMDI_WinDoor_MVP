@@ -453,6 +453,7 @@
             this.btnAddGlass.TabIndex = 23;
             this.btnAddGlass.Text = "Add";
             this.btnAddGlass.UseVisualStyleBackColor = true;
+            this.btnAddGlass.Click += new System.EventHandler(this.btnAddGlass_Click);
             // 
             // lblDescription
             // 
