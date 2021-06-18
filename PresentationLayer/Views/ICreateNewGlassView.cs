@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace PresentationLayer.Views
 {
@@ -17,9 +18,30 @@ namespace PresentationLayer.Views
         string lblBetweenTheGlass { set; }
         string lblGlassHeader { set; }
         string lblDescriptionView { set; }
+        string cmbGlassType_1 { get; set; }
+        string cmbGlassType_2 { get; set; }
+        string cmbGlassType_3 { get; set; }
+        string cmbColor_1 { get; set; }
+        string cmbColor_2 { get; set; }
+        string cmbColor_3 { get; set; }
+        string cmbBetweenTheGlass_1 { get; set; }
+        string cmbBetweenTheGlass_2 { get; set; }
         int GlassViewHeight { set; }
         int cmbSelectedindex { set; }
-        int tboxGlassThickness_1 { get; set; }
+
+        //int tboxGlassThickness_1 { get; set; }
+        //int tboxGlassThickness_2 { get; set; }
+        //int tboxGlassThickness_3 { get; set; }
+        //string tboxBetweenTheGlass_1 { get; set; }
+        //string tboxBetweenTheGlass_2 { get; set; }
+        //int tboxTotalGlassThickness1 { get; set; }
+
+        TextBox GetTboxGlassThickness1();
+        TextBox GetTboxGlassThickness2();
+        TextBox GetTboxGlassThickness3();
+        TextBox GetTboxBetweenTheGlass1();
+        TextBox GetTboxBetweenTheGlass2();
+        TextBox GetTboxTotalGlassThickness1();
 
 
 

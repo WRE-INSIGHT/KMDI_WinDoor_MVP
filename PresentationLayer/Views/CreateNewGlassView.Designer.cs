@@ -169,7 +169,7 @@
             // tboxBetweenTheGlass1
             // 
             this.tboxBetweenTheGlass1.Location = new System.Drawing.Point(138, 7);
-            this.tboxBetweenTheGlass1.MaxLength = 2;
+            this.tboxBetweenTheGlass1.MaxLength = 4;
             this.tboxBetweenTheGlass1.Name = "tboxBetweenTheGlass1";
             this.tboxBetweenTheGlass1.Size = new System.Drawing.Size(53, 22);
             this.tboxBetweenTheGlass1.TabIndex = 4;
@@ -285,6 +285,7 @@
             // 
             // pnlGlass3
             // 
+            this.pnlGlass3.BackColor = System.Drawing.SystemColors.Control;
             this.pnlGlass3.Controls.Add(this.cmbGlassType3);
             this.pnlGlass3.Controls.Add(this.cmbColor3);
             this.pnlGlass3.Controls.Add(this.cmbBetweenTheGlass2);
@@ -380,7 +381,7 @@
             // tboxBetweenTheGlass2
             // 
             this.tboxBetweenTheGlass2.Location = new System.Drawing.Point(138, 1);
-            this.tboxBetweenTheGlass2.MaxLength = 2;
+            this.tboxBetweenTheGlass2.MaxLength = 4;
             this.tboxBetweenTheGlass2.Name = "tboxBetweenTheGlass2";
             this.tboxBetweenTheGlass2.Size = new System.Drawing.Size(53, 22);
             this.tboxBetweenTheGlass2.TabIndex = 9;
@@ -441,12 +442,12 @@
             this.pnlDescription.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDescription.Location = new System.Drawing.Point(0, 265);
             this.pnlDescription.Name = "pnlDescription";
-            this.pnlDescription.Size = new System.Drawing.Size(584, 100);
+            this.pnlDescription.Size = new System.Drawing.Size(584, 98);
             this.pnlDescription.TabIndex = 4;
             // 
             // btnAddGlass
             // 
-            this.btnAddGlass.Location = new System.Drawing.Point(490, 59);
+            this.btnAddGlass.Location = new System.Drawing.Point(485, 71);
             this.btnAddGlass.Name = "btnAddGlass";
             this.btnAddGlass.Size = new System.Drawing.Size(75, 23);
             this.btnAddGlass.TabIndex = 23;
@@ -476,7 +477,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 361);
+            this.ClientSize = new System.Drawing.Size(584, 371);
             this.Controls.Add(this.pnlDescription);
             this.Controls.Add(this.pnlTotal);
             this.Controls.Add(this.pnlGlass3);
