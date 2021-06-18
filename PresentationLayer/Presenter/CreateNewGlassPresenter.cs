@@ -77,6 +77,17 @@ namespace PresentationLayer.Presenter
                 _createNewGlassView.lblGlassHeader = "Triple Insulated Glass";
                 _createNewGlassView.lblBetweenTheGlass = "Polyvinyl";
             }
+
+            _createNewGlassView.GlassType1.DataSource = _mainPresenter.Glass_Type;
+            _createNewGlassView.GlassType1.DisplayMember = "GlassType";
+
+            /* yung gagamitin mong dataSource
+             * _mainPresenter.Color at _mainPresenter.Spacer
+             * 
+             * yung sa DisplayMember
+             * "Color" at "Spacer"
+             * 
+             */
         }
 
 

@@ -41,7 +41,7 @@ namespace PresentationLayer.Views
                 cmbColor1.SelectedIndex = value;
                 cmbColor2.SelectedIndex = value;
                 cmbColor3.SelectedIndex = value;
-                cmbGlassType1.SelectedIndex = value;
+                //cmbGlassType1.SelectedIndex = value;
                 cmbGlassType2.SelectedIndex = value;
                 cmbGlassType3.SelectedIndex = value;
                 
@@ -295,6 +295,14 @@ namespace PresentationLayer.Views
             set
             {
                 this.Height = value;
+            }
+        }
+
+        public ComboBox GlassType1
+        {
+            get
+            {
+                return cmbGlassType1;
             }
         }
 

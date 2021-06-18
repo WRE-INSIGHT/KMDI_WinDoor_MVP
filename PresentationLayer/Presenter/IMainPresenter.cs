@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Unity;
 using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.Presenter.UserControls.Dividers;
+using System.Data;
 
 namespace PresentationLayer.Presenter
 {
@@ -29,6 +30,9 @@ namespace PresentationLayer.Presenter
         Panel pnlItems_MainPresenter { get; set; }
         Panel pnlPropertiesBody_MainPresenter { get; set; }
         IDividerPropertiesUCPresenter divPropertiesUCP { get; }
+        DataTable Glass_Type { get; }
+        DataTable Spacer { get; }
+        DataTable Color { get; }
 
         IMainView GetMainView();
         IFramePropertiesUC GetFrameProperties(int frameID);

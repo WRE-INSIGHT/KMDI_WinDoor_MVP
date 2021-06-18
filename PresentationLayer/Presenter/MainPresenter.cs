@@ -83,6 +83,7 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region GetSet
+       
         public string inputted_quotationRefNo
         {
             get
@@ -270,6 +271,30 @@ namespace PresentationLayer.Presenter
             get
             {
                 return _divPropertiesUCP;
+            }
+        }
+
+        public DataTable Glass_Type
+        {
+            get
+            {
+                return _glassTypeDT;
+            }
+        }
+
+        public DataTable Spacer
+        {
+            get
+            {
+                return _spacerDT;
+            }
+        }
+
+        public DataTable Color
+        {
+            get
+            {
+                return _colorDT;
             }
         }
 

@@ -29,6 +29,8 @@ namespace PresentationLayer.Views
         int GlassViewHeight { set; }
         int cmbSelectedindex { set; }
 
+        ComboBox GlassType1 { get; }
+
         //int tboxGlassThickness_1 { get; set; }
         //int tboxGlassThickness_2 { get; set; }
         //int tboxGlassThickness_3 { get; set; }
