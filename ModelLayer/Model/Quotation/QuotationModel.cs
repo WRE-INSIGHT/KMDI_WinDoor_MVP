@@ -421,7 +421,7 @@ namespace ModelLayer.Model.Quotation
                                            glazing_spacer, "pc(s)", "");
 
                     Material_List.Rows.Add("Glazing Seal",
-                                           glazing_seal, "mm","");
+                                           glazing_seal, "mm", "");
                 }
 
                 Frame_PUFoamingQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 29694);
@@ -481,7 +481,7 @@ namespace ModelLayer.Model.Quotation
         public DataTable GetListOfMaterials(IWindoorModel item)
         {
             DataTable Material_List = new DataTable();
-            Material_List.Columns.Add(CreateColumn("Description11", "Description", "System.String"));
+            Material_List.Columns.Add(CreateColumn("Description", "Description", "System.String"));
             Material_List.Columns.Add(CreateColumn("Qty", "Qty", "System.Int32"));
             Material_List.Columns.Add(CreateColumn("Unit", "Unit", "System.String"));
             Material_List.Columns.Add(CreateColumn("Size", "Size", "System.String"));

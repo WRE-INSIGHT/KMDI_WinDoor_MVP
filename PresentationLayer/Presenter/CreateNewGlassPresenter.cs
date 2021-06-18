@@ -207,13 +207,33 @@ namespace PresentationLayer.Presenter
 
         }
 
+
+        private DataColumn DTColumn(string columname, string caption, string DTtype)
+        {
+            DataColumn _glassThicknessDT = new DataColumn();
+            _glassThicknessDT.DataType = Type.GetType(DTtype);
+            _glassThicknessDT.ColumnName = columname;
+            _glassThicknessDT.Caption = caption;
+            return _glassThicknessDT;
+        }
+
         public DataRow CreateNewGlass_Datarow()
         {
+
+            DataTable _glassThicknessTbl = new DataTable();
+            _glassThicknessTbl.Columns.Add(DTColumn("TotalThickness", "TotalThickness", "System.Decimal"));
+            _glassThicknessTbl.Columns.Add(DTColumn("Description", "Description", "System.String"));
+            _glassThicknessTbl.Columns.Add(DTColumn("Single", "Single", "System.bool"));
+            _glassThicknessTbl.Columns.Add(DTColumn("Double", "Double", "System.bool"));
+            _glassThicknessTbl.Columns.Add(DTColumn("Triple", "Triple", "System.bool"));
+            _glassThicknessTbl.Columns.Add(DTColumn("Insulated", "Insulated", "System.bool"));
+            _glassThicknessTbl.Columns.Add(DTColumn("Laminated", "Laminated", "System.bool"));
+
             DataRow newRow;
             newRow = _glassThicknessDT.NewRow();
 
             // Populate row here
-
+            
             return newRow;
         }
 
