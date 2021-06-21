@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
+using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
@@ -34,6 +36,8 @@ namespace ModelLayer.Model.Quotation.Panel
         Padding Panel_Margin { get; set; }
         Padding Panel_MarginToBind { get; set; }
         float Panel_Zoom { get; set; }
+        IFrameModel Panel_ParentFrameModel { get; set; }
+        IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
 
         #region Explosion
 

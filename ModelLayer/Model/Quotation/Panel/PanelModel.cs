@@ -222,14 +222,17 @@ namespace ModelLayer.Model.Quotation.Panel
                     if (value == true)
                     {
                         _panelChkText = "dSash";
+                        Panel_SashPropertyVisibility = true;
                     }
                     else if (value == false)
                     {
                         _panelChkText = "None";
+                        Panel_SashPropertyVisibility = false;
                     }
                 }
                 else if (_panelType.Contains("Casement"))
                 {
+                    Panel_SashPropertyVisibility = true;
                     if (value == true)
                     {
                         _panelChkText = "L";
@@ -241,6 +244,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (_panelType.Contains("Awning"))
                 {
+                    Panel_SashPropertyVisibility = true;
                     if (value == true)
                     {
                         _panelChkText = "Invrt";
@@ -252,6 +256,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (_panelType.Contains("Sliding"))
                 {
+                    Panel_SashPropertyVisibility = true;
                     if (value == true)
                     {
                         _panelChkText = "L";
@@ -339,7 +344,6 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelVisibility = value;
-                NotifyPropertyChanged();
             }
         }
 
@@ -624,6 +628,20 @@ namespace ModelLayer.Model.Quotation.Panel
         public SashProfile_ArticleNo Panel_SashProfileArtNo { get; set; }
         public SashReinf_ArticleNo Panel_SashReinfArtNo { get; set; }
 
+        private bool _panelSashPropertyVisibility;
+        public bool Panel_SashPropertyVisibility
+        {
+            get
+            {
+                return _panelSashPropertyVisibility;
+            }
+            set
+            {
+                _panelSashPropertyVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
             Panel_GlazingBeadWidth = Panel_DisplayWidth; //- (33 * 2);
@@ -864,25 +882,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_OriginalDisplayWidth = panelDisplayWidth;
             Panel_OriginalDisplayHeight = panelDisplayHeight;
             Panel_GlassFilm = panelGlassFilm;
-
-            //if (Panel_ParentFrameModel != null && Panel_ParentMultiPanelModel == null) //parent == frame
-            //{
-            //    Panel_DisplayWidth = Panel_ParentFrameModel.Frame_Width;
-            //    Panel_DisplayHeight = Panel_ParentFrameModel.Frame_Height;
-            //}
-            //else if (Panel_ParentMultiPanelModel != null && Panel_ParentFrameModel == null) //parent == multipanel
-            //{
-            //    if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-            //    {
-            //        Panel_DisplayWidth = Panel_ParentMultiPanelModel.MPanel_DisplayWidth / (Panel_ParentMultiPanelModel.MPanel_Divisions + 1);
-            //        Panel_DisplayHeight = Panel_ParentMultiPanelModel.MPanel_DisplayHeight;
-            //    }
-            //    else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
-            //    {
-            //        Panel_DisplayWidth = Panel_ParentMultiPanelModel.MPanel_DisplayWidth;
-            //        Panel_DisplayHeight = Panel_ParentMultiPanelModel.MPanel_DisplayHeight / (Panel_ParentMultiPanelModel.MPanel_Divisions + 1);
-            //    }
-            //}
+            
         }
     }
 }

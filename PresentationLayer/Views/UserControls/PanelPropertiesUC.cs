@@ -48,6 +48,29 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public bool SashPanel_Visibility
+        {
+            get
+            {
+                return pnl_Sash.Visible;
+            }
+
+            set
+            {
+                pnl_Sash.Visible = value;
+                if (value == true)
+                {
+                    //this.Height -= 53;
+                    flp_PanelSpecs.Height = 166;
+                }
+                else if (value == false)
+                {
+                    //this.Height += 53;
+                    flp_PanelSpecs.Height = 113;
+                }
+            }
+        }
+
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler ChkOrientationCheckChangedEventRaised;
         public event EventHandler CmbGlassThickSelectedValueChangedEventRaised;
@@ -59,7 +82,6 @@ namespace PresentationLayer.Views.UserControls
             num_BladeCount.Maximum = decimal.MaxValue;
 
             List<Glass_Thickness> gThickness = new List<Glass_Thickness>();
-
             foreach (Glass_Thickness item in Glass_Thickness.GetAll())
             {
                 gThickness.Add(item);
@@ -80,6 +102,20 @@ namespace PresentationLayer.Views.UserControls
             }
             cmb_FilmType.DataSource = gFilm;
 
+            List<SashProfile_ArticleNo> sash = new List<SashProfile_ArticleNo>();
+            foreach (SashProfile_ArticleNo item in SashProfile_ArticleNo.GetAll())
+            {
+                sash.Add(item);
+            }
+            cmb_SashProfile.DataSource = sash;
+
+            List<SashReinf_ArticleNo> sashReinf = new List<SashReinf_ArticleNo>();
+            foreach (SashReinf_ArticleNo item in SashReinf_ArticleNo.GetAll())
+            {
+                sashReinf.Add(item);
+            }
+            cmb_SashReinf.DataSource = sashReinf;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 
@@ -93,12 +129,14 @@ namespace PresentationLayer.Views.UserControls
             lbl_Type.DataBindings.Add(ModelBinding["Panel_Type"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_ChkText"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_Orient"]);
-            this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
+            //this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
             cmb_GlassThick.DataBindings.Add(ModelBinding["Panel_GlassThickness"]);
             cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
             this.DataBindings.Add(ModelBinding["PanelGlass_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
             cmb_FilmType.DataBindings.Add(ModelBinding["Panel_GlassFilm"]);
+            pnl_Sash.DataBindings.Add(ModelBinding["Panel_SashPropertyVisibility"]);
+            this.DataBindings.Add(ModelBinding["SashPanel_Visibility"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)

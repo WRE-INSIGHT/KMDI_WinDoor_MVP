@@ -62,6 +62,30 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _panelPropertiesUC_ChkOrientationCheckChangedEventRaised(object sender, EventArgs e)
         {
+            CheckBox chk = (CheckBox)sender;
+
+            if (_panelModel.Panel_ParentFrameModel != null)
+            {
+                if (chk.Checked == true)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("SashProp", "add");
+                }
+                else if (chk.Checked == false)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("SashProp", "delete");
+                }
+            }
+            if (_panelModel.Panel_ParentMultiPanelModel != null)
+            {
+                if (chk.Checked == true)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("SashProp", "add");
+                }
+                else if (chk.Checked == false)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("SashProp", "delete");
+                }
+            }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -87,6 +111,8 @@ namespace PresentationLayer.Presenter.UserControls
             panelBinding.Add("PanelGlazingBead_ArtNo", new Binding("Text", _panelModel, "PanelGlazingBead_ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelGlass_ID", new Binding("PanelGlass_ID", _panelModel, "PanelGlass_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_GlassFilm", new Binding("Text", _panelModel, "Panel_GlassFilm", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_SashPropertyVisibility", new Binding("Visible", _panelModel, "Panel_SashPropertyVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("SashPanel_Visibility", new Binding("SashPanel_Visibility", _panelModel, "Panel_SashPropertyVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }
