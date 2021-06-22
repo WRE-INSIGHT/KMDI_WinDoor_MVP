@@ -15,6 +15,7 @@ namespace PresentationLayer.Presenter
 {
     public interface IMainPresenter
     {
+        DataTable GlassThicknessDT { get; set; }
         string inputted_quotationRefNo { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }
