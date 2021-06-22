@@ -84,6 +84,18 @@ namespace PresentationLayer.Presenter
 
         #region GetSet
        
+        public DataTable GlassThicknessDT
+        {
+            get
+            {
+                return _glassThicknessDT;
+            }
+            set
+            {
+                _glassThicknessDT = value;
+            }
+        }
+
         public string inputted_quotationRefNo
         {
             get
