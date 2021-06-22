@@ -26,6 +26,8 @@ namespace ServiceLayer.Services.PanelServices
                                   Glass_Thickness panelGlassThickness,
                                   GlazingBead_ArticleNo panelGlazingBeadArtNo,
                                   GlassFilm_Types panelGlassFilm,
+                                  SashProfile_ArticleNo panelSash,
+                                  SashReinf_ArticleNo panelSashReinf,
                                   int panelID = 0,
                                   int panelGlassID = 0,
                                   float panelImageRendererZoom = 1,

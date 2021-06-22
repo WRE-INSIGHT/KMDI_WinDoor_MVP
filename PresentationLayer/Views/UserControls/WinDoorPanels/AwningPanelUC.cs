@@ -63,7 +63,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler awningPanelUCMouseEnterEventRaised;
         public event EventHandler awningPanelUCMouseLeaveEventRaised;
         public event PaintEventHandler awningPanelUCPaintEventRaised;
-        public event EventHandler awningPanelUCSizeChangedEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -81,11 +80,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         private void AwningPanelUC_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(this, awningPanelUCPaintEventRaised, e);
-        }
-
-        private void AwningPanelUC_SizeChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(this, awningPanelUCSizeChangedEventRaised, e);
         }
 
         private void AwningPanelUC_MouseEnter(object sender, EventArgs e)

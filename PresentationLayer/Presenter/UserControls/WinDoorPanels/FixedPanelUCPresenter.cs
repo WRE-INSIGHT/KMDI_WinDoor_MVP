@@ -47,8 +47,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private IDividerServices _divServices;
         
-        bool _initialLoad;
-
         private CommonFunctions _commonFunctions = new CommonFunctions();
         Timer _tmr = new Timer();
 
@@ -74,7 +72,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void SubscribeToEventsSetup()
         {
-            _fixedPanelUC.fixedPanelUCSizeChangedEventRaised += new EventHandler(OnFixedPanelUCSizeChangedEventRaised);
             _fixedPanelUC.deleteToolStripClickedEventRaised += _fixedPanelUC_deleteToolStripClickedEventRaised;
             _fixedPanelUC.fixedPanelUCPaintEventRaised += _fixedPanelUC_fixedPanelUCPaintEventRaised;
             _fixedPanelUC.fixedPanelMouseLeaveEventRaised += _fixedPanelUC_fixedPanelMouseLeaveEventRaised;
@@ -313,61 +310,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
         }
 
-        private void OnFixedPanelUCSizeChangedEventRaised(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    if (!_initialLoad)
-            //    {
-            //int thisWd = 0,
-            //    thisHt = 0,
-            //    pnlModelWd = _panelModel.Panel_Width,
-            //    pnlModelHt = _panelModel.Panel_Height;
-
-            //        if (_multiPanelModel != null) 
-            //        {
-            //            if (_multiPanelModel.MPanel_Type == "Mullion")
-            //            {
-            //                thisWd = (int)(((UserControl)sender).Width / _panelModel.Panel_Zoom);
-            //                thisHt = (int)(pnlModelHt * _panelModel.Panel_Zoom);
-            //            }
-            //            else if (_multiPanelModel.MPanel_Type == "Transom")
-            //            {
-            //                thisWd = (int)(pnlModelWd * _panelModel.Panel_Zoom);
-            //                thisHt = (int)(((UserControl)sender).Height / _panelModel.Panel_Zoom);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            thisWd = (int)((UserControl)sender).Width;
-            //            thisHt = (int)((UserControl)sender).Height;
-            //        }
-
-            //        if (prev_Width != pnlModelWd || thisWd != pnlModelWd)
-            //        {
-            //            _panelModel.Panel_Width = thisWd;
-            //            _WidthChange = true;
-            //        }
-            //        if (prev_Height != pnlModelHt || thisHt != pnlModelHt)
-            //        {
-            //            _panelModel.Panel_Height = thisHt;
-            //            _HeightChange = true;
-            //        }
-            //    }
-
-            //    prev_Width = _panelModel.Panel_Width;
-            //    prev_Height = _panelModel.Panel_Height;
-
-            //    _tmr.Start();
-            //    ((UserControl)sender).Invalidate();
-            //    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-        }
-
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
                                                      IPanelModel panelModel, 
                                                      IFrameModel frameModel,
@@ -435,7 +377,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public IFixedPanelUC GetFixedPanelUC()
         {
-            _initialLoad = true;
             _fixedPanelUC.ThisBinding(CreateBindingDictionary());
             return _fixedPanelUC;
         }
@@ -456,23 +397,5 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             
             return panelBinding;
         }
-
-        public void SetInitialLoadFalse()
-        {
-            _initialLoad = false;
-        }
-
-        //for Testing
-        //public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
-        //{ 
-        //    unityC
-        //        .RegisterType<IFixedPanelUC, FixedPanelUC>()
-        //        .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>();
-        //    FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
-        //    fixedPanelUCP._panelModel = panelModel;
-        //    fixedPanelUCP._frameModel = frameModel;
-
-        //    return fixedPanelUCP;
-        //}
     }
 }

@@ -70,16 +70,16 @@ namespace EnumerationTypeLayer
         }
         public class GlassFilm_Types : Enumeration<GlassFilm_Types, int>
         {
-            public static readonly GlassFilm_Types _VKoolOEM35 = new GlassFilm_Types(0, "V-Kool OEM-35");
-            public static readonly GlassFilm_Types _Titanium = new GlassFilm_Types(1, "Titanium");
-            public static readonly GlassFilm_Types _Silver40 = new GlassFilm_Types(2, "Silver 40");
-            public static readonly GlassFilm_Types _Black50 = new GlassFilm_Types(3, "Black 50");
-            public static readonly GlassFilm_Types _Black35 = new GlassFilm_Types(4, "Black 35");
-            public static readonly GlassFilm_Types _Black05 = new GlassFilm_Types(5, "Black 05");
-            public static readonly GlassFilm_Types _4milSolarGuard = new GlassFilm_Types(6, "4 mil (Solar Guard)");
-            public static readonly GlassFilm_Types _4milUpera = new GlassFilm_Types(7, "4 mil (Upera)");
-            public static readonly GlassFilm_Types _FrostedFilm = new GlassFilm_Types(8, "Frosted Film");
-            public static readonly GlassFilm_Types _None = new GlassFilm_Types(9, "None");
+            public static readonly GlassFilm_Types _None = new GlassFilm_Types(0, "None");
+            public static readonly GlassFilm_Types _VKoolOEM35 = new GlassFilm_Types(1, "V-Kool OEM-35");
+            public static readonly GlassFilm_Types _Titanium = new GlassFilm_Types(2, "Titanium");
+            public static readonly GlassFilm_Types _Silver40 = new GlassFilm_Types(3, "Silver 40");
+            public static readonly GlassFilm_Types _Black50 = new GlassFilm_Types(4, "Black 50");
+            public static readonly GlassFilm_Types _Black35 = new GlassFilm_Types(5, "Black 35");
+            public static readonly GlassFilm_Types _Black05 = new GlassFilm_Types(6, "Black 05");
+            public static readonly GlassFilm_Types _4milSolarGuard = new GlassFilm_Types(7, "4 mil (Solar Guard)");
+            public static readonly GlassFilm_Types _4milUpera = new GlassFilm_Types(8, "4 mil (Upera)");
+            public static readonly GlassFilm_Types _FrostedFilm = new GlassFilm_Types(9, "Frosted Film");
             private GlassFilm_Types(int value, string displayName) : base(value, displayName) { }
         }
         public class GlassType : Enumeration<GlassType, int>
@@ -115,13 +115,15 @@ namespace EnumerationTypeLayer
         }
         public class SashProfile_ArticleNo : Enumeration<SashProfile_ArticleNo, int>
         {
-            public static readonly SashProfile_ArticleNo _7581 = new SashProfile_ArticleNo(0, "7581");
+            public static readonly SashProfile_ArticleNo _None = new SashProfile_ArticleNo(0, "None");
+            public static readonly SashProfile_ArticleNo _7581 = new SashProfile_ArticleNo(1, "7581");
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class SashReinf_ArticleNo : Enumeration<SashReinf_ArticleNo, int>
         {
-            public static readonly SashReinf_ArticleNo _R675 = new SashReinf_ArticleNo(0, "R675");
+            public static readonly SashReinf_ArticleNo _None = new SashReinf_ArticleNo(0, "None");
+            public static readonly SashReinf_ArticleNo _R675 = new SashReinf_ArticleNo(1, "R675");
             private SashReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 

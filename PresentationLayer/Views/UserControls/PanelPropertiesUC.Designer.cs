@@ -212,6 +212,7 @@
             this.cmb_SashReinf.Name = "cmb_SashReinf";
             this.cmb_SashReinf.Size = new System.Drawing.Size(72, 21);
             this.cmb_SashReinf.TabIndex = 12;
+            this.cmb_SashReinf.SelectedValueChanged += new System.EventHandler(this.cmb_SashReinf_SelectedValueChanged);
             // 
             // label4
             // 
@@ -230,6 +231,7 @@
             this.cmb_SashProfile.Name = "cmb_SashProfile";
             this.cmb_SashProfile.Size = new System.Drawing.Size(72, 21);
             this.cmb_SashProfile.TabIndex = 10;
+            this.cmb_SashProfile.SelectedValueChanged += new System.EventHandler(this.cmb_SashProfile_SelectedValueChanged);
             // 
             // label3
             // 
@@ -260,6 +262,7 @@
             this.cmb_GlassThick.Name = "cmb_GlassThick";
             this.cmb_GlassThick.Size = new System.Drawing.Size(68, 21);
             this.cmb_GlassThick.TabIndex = 17;
+            this.cmb_GlassThick.SelectedValueChanged += new System.EventHandler(this.cmb_GlassThick_SelectedValueChanged);
             // 
             // label1
             // 
@@ -287,6 +290,7 @@
             this.cmb_GlazingArtNo.Name = "cmb_GlazingArtNo";
             this.cmb_GlazingArtNo.Size = new System.Drawing.Size(68, 21);
             this.cmb_GlazingArtNo.TabIndex = 19;
+            this.cmb_GlazingArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_GlazingArtNo_SelectedValueChanged);
             // 
             // label2
             // 
@@ -308,6 +312,7 @@
             this.cmb_FilmType.Name = "cmb_FilmType";
             this.cmb_FilmType.Size = new System.Drawing.Size(68, 21);
             this.cmb_FilmType.TabIndex = 21;
+            this.cmb_FilmType.SelectedValueChanged += new System.EventHandler(this.cmb_FilmType_SelectedValueChanged);
             // 
             // Panel_PropertiesUC
             // 

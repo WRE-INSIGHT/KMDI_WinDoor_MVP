@@ -9,7 +9,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler awningPanelUCMouseEnterEventRaised;
         event EventHandler awningPanelUCMouseLeaveEventRaised;
         event PaintEventHandler awningPanelUCPaintEventRaised;
-        event EventHandler awningPanelUCSizeChangedEventRaised;
         event EventHandler deleteToolStripClickedEventRaised;
     }
 }

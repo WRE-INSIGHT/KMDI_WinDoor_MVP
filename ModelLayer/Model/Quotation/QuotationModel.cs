@@ -927,6 +927,33 @@ namespace ModelLayer.Model.Quotation
                                     glazing_seal += (pnl_curCtrl.Panel_GlazingBeadWidth * 2) + (pnl_curCtrl.Panel_GlazingBeadHeight * 2);
                                 }
 
+                                if (pnl_curCtrl.Panel_SashPropertyVisibility == true)
+                                {
+                                    Material_List.Rows.Add("Sash Width " + pnl_curCtrl.Panel_SashProfileArtNo.ToString(),
+                                                           2, "pc(s)",
+                                                           pnl_curCtrl.Panel_SashWidth.ToString(),
+                                                           "Sash",
+                                                           @"\  /");
+
+                                    Material_List.Rows.Add("Sash Height " + pnl_curCtrl.Panel_SashProfileArtNo.ToString(),
+                                                           2, "pc(s)",
+                                                           pnl_curCtrl.Panel_SashHeight.ToString(),
+                                                           "Sash",
+                                                           @"\  /");
+
+                                    Material_List.Rows.Add("Sash Reinf Width " + pnl_curCtrl.Panel_SashReinfArtNo.ToString(),
+                                                           2, "pc(s)",
+                                                           pnl_curCtrl.Panel_SashReinfWidth.ToString(),
+                                                           "Sash",
+                                                           @"|  |");
+
+                                    Material_List.Rows.Add("Sash Reinf Height " + pnl_curCtrl.Panel_SashReinfArtNo.ToString(),
+                                                           2, "pc(s)",
+                                                           pnl_curCtrl.Panel_SashReinfHeight.ToString(),
+                                                           "Sash",
+                                                           @"|  |");
+                                }
+
                                 Material_List.Rows.Add("Glazing Bead Width (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
                                                        pnl_curCtrl.Panel_GlazingBeadWidth.ToString(),
@@ -963,6 +990,33 @@ namespace ModelLayer.Model.Quotation
                 {
                     IPanelModel pnl = frame.Lst_Panel[0];
                     pnl.SetPanelExplosionValues_Panel(true);
+
+                    if (pnl.Panel_SashPropertyVisibility == true)
+                    {
+                        Material_List.Rows.Add("Sash Width " + pnl.Panel_SashProfileArtNo.ToString(),
+                                               2, "pc(s)",
+                                               pnl.Panel_SashWidth.ToString(),
+                                               "Sash",
+                                               @"\  /");
+
+                        Material_List.Rows.Add("Sash Height " + pnl.Panel_SashProfileArtNo.ToString(),
+                                               2, "pc(s)",
+                                               pnl.Panel_SashHeight.ToString(),
+                                               "Sash",
+                                               @"\  /");
+
+                        Material_List.Rows.Add("Sash Reinf Width " + pnl.Panel_SashReinfArtNo.ToString(),
+                                               2, "pc(s)",
+                                               pnl.Panel_SashReinfWidth.ToString(),
+                                               "Sash",
+                                               @"|  |");
+
+                        Material_List.Rows.Add("Sash Reinf Height " + pnl.Panel_SashReinfArtNo.ToString(),
+                                               2, "pc(s)",
+                                               pnl.Panel_SashReinfHeight.ToString(),
+                                               "Sash",
+                                               @"|  |");
+                    }
 
                     Material_List.Rows.Add("Glazing Bead Width (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",

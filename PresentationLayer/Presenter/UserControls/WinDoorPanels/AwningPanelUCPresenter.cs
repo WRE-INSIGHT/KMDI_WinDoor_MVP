@@ -45,8 +45,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private IDividerServices _divServices;
 
-        bool _initialLoad;
-
         private CommonFunctions _commonFunctions = new CommonFunctions();
         Timer _tmr = new Timer();
 
@@ -75,7 +73,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _awningPanelUC.awningPanelUCPaintEventRaised += OnAwningPanelUCPaintEventRaised;
             _awningPanelUC.awningPanelUCMouseEnterEventRaised += _awningPanelUC_awningPanelUCMouseEnterEventRaised;
             _awningPanelUC.awningPanelUCMouseLeaveEventRaised += _awningPanelUC_awningPanelUCMouseLeaveEventRaised;
-            _awningPanelUC.awningPanelUCSizeChangedEventRaised += _awningPanelUC_awningPanelUCSizeChangedEventRaised;
             _awningPanelUC.deleteToolStripClickedEventRaised += _awningPanelUC_deleteToolStripClickedEventRaised;
             _tmr.Tick += _tmr_Tick;
         }
@@ -115,9 +112,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
                 _frameModel.Lst_Divider.Remove(div);
 
-                _multiPanelModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
-                _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
+                _frameModel.AdjustPropertyPanelHeight("Div", "delete");
             }
+
             #endregion
 
             #region Delete Awning
@@ -126,6 +124,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_awningPanelUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "delete");
             }
             if (_multiPanelMullionUCP != null)
             {
@@ -165,6 +164,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
             _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
+
             if (_frameModel != null)
             {
                 _frameModel.Lst_Panel.Remove(_panelModel);
@@ -174,49 +174,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
 
-            //_panelModel.Panel_Visibility = false;
+            _frameModel.AdjustPropertyPanelHeight("Panel", "delete");
 
-            _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
-
+            _mainPresenter.DeductPanelGlassID();
+            _mainPresenter.SetPanelGlassID();
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             #endregion
-        }
-
-        int prev_Width = 0,
-            prev_Height = 0;
-        private void _awningPanelUC_awningPanelUCSizeChangedEventRaised(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    if (!_initialLoad)
-            //    {
-            //        int thisWd = ((UserControl)sender).Width,
-            //            thisHt = ((UserControl)sender).Height,
-            //            pnlModelWd = _panelModel.Panel_Width,
-            //            pnlModelHt = _panelModel.Panel_Height;
-
-            //        if (thisWd != pnlModelWd || prev_Width != pnlModelWd)
-            //        {
-            //            _panelModel.Panel_Width = thisWd;
-            //            _WidthChange = true;
-            //        }
-            //        if (thisHt != pnlModelHt || prev_Height != pnlModelHt)
-            //        {
-            //            _panelModel.Panel_Height = thisHt;
-            //            _HeightChange = true;
-            //        }
-            //    }
-
-            //    prev_Width = _panelModel.Panel_Width;
-            //    prev_Height = _panelModel.Panel_Height;
-
-            //    _tmr.Start();
-            //    ((UserControl)sender).Invalidate();
-            //    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
         }
 
         private void _awningPanelUC_awningPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
@@ -243,27 +206,51 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             int w = 1;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            
-            int outer_line = 10,
+
+            int font_size = 30,
+                outer_line = 10,
                 inner_line = 15;
 
             int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
 
-            if (ndx_zoomPercentage == 2)
+            if (ndx_zoomPercentage == 3)
             {
+                font_size = 25;
+            }
+            else if (ndx_zoomPercentage == 2)
+            {
+                font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
             }
             else if (ndx_zoomPercentage == 1)
             {
+                font_size = 13;
                 outer_line = 3;
                 inner_line = 7;
             }
             else if (ndx_zoomPercentage == 0)
             {
+                font_size = 8;
                 outer_line = 3;
                 inner_line = 7;
             }
+
+            Font drawFont = new Font("Times New Roman", font_size);
+            StringFormat drawFormat = new StringFormat();
+            drawFormat.Alignment = StringAlignment.Center;
+            drawFormat.LineAlignment = StringAlignment.Center;
+
+            RectangleF rect = new RectangleF(0,
+                                            (awning.ClientRectangle.Height / 2) + 15,
+                                            awning.ClientRectangle.Width,
+                                            10);
+
+            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString(),
+                         new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                         new SolidBrush(Color.Black),
+                         rect,
+                         drawFormat);
 
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                            0,
@@ -329,7 +316,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public IAwningPanelUC GetAwningPanelUC()
         {
-            _initialLoad = true;
             _awningPanelUC.ThisBinding(CreateBindingDictionary());
             return _awningPanelUC;
         }
@@ -414,11 +400,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
-        }
-
-        public void SetInitialLoadFalse()
-        {
-            _initialLoad = false;
         }
     }
 }

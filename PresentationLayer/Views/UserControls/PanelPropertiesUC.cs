@@ -60,12 +60,10 @@ namespace PresentationLayer.Views.UserControls
                 pnl_Sash.Visible = value;
                 if (value == true)
                 {
-                    //this.Height -= 53;
                     flp_PanelSpecs.Height = 166;
                 }
                 else if (value == false)
                 {
-                    //this.Height += 53;
                     flp_PanelSpecs.Height = 113;
                 }
             }
@@ -74,6 +72,10 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler ChkOrientationCheckChangedEventRaised;
         public event EventHandler CmbGlassThickSelectedValueChangedEventRaised;
+        public event EventHandler CmbGlazingArtNoSelectedValueChangedEventRaised;
+        public event EventHandler CmbFilmTypeSelectedValueChangedEventRaised;
+        public event EventHandler CmbSashProfileSelectedValueChangedEventRaised;
+        public event EventHandler CmbSashReinfSelectedValueChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -123,20 +125,19 @@ namespace PresentationLayer.Views.UserControls
         {
             pnum_Width.DataBindings.Add(ModelBinding["Panel_Width"]);
             pnum_Height.DataBindings.Add(ModelBinding["Panel_Height"]);
-            //pnum_Width.DataBindings.Add(ModelBinding["Panel_PNumEnable1"]);
-            //pnum_Height.DataBindings.Add(ModelBinding["Panel_PNumEnable2"]);
             lbl_pnlname.DataBindings.Add(ModelBinding["Panel_Name"]);
             lbl_Type.DataBindings.Add(ModelBinding["Panel_Type"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_ChkText"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_Orient"]);
-            //this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
-            cmb_GlassThick.DataBindings.Add(ModelBinding["Panel_GlassThickness"]);
-            cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
             this.DataBindings.Add(ModelBinding["PanelGlass_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
-            cmb_FilmType.DataBindings.Add(ModelBinding["Panel_GlassFilm"]);
             pnl_Sash.DataBindings.Add(ModelBinding["Panel_SashPropertyVisibility"]);
             this.DataBindings.Add(ModelBinding["SashPanel_Visibility"]);
+            cmb_FilmType.DataBindings.Add(ModelBinding["Panel_GlassFilm"]);
+            cmb_GlassThick.DataBindings.Add(ModelBinding["Panel_GlassThickness"]);
+            cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
+            cmb_SashProfile.DataBindings.Add(ModelBinding["Panel_SashProfileArtNo"]);
+            cmb_SashReinf.DataBindings.Add(ModelBinding["Panel_SashReinfArtNo"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)
@@ -147,6 +148,26 @@ namespace PresentationLayer.Views.UserControls
         private void cmb_GlassThick_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbGlassThickSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_SashProfile_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbSashProfileSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_SashReinf_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbSashReinfSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_GlazingArtNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbGlazingArtNoSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_FilmType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbFilmTypeSelectedValueChangedEventRaised, e);
         }
     }
 }

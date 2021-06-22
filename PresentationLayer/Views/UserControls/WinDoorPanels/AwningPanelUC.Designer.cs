@@ -55,7 +55,6 @@
             this.BackColor = System.Drawing.Color.DarkGray;
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "AwningPanelUC";
-            this.SizeChanged += new System.EventHandler(this.AwningPanelUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.AwningPanelUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AwningPanelUC_MouseClick);
             this.MouseEnter += new System.EventHandler(this.AwningPanelUC_MouseEnter);

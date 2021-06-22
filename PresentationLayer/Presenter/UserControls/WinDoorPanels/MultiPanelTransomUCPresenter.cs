@@ -511,6 +511,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                Glass_Thickness._6mm,
                                                                GlazingBead_ArticleNo._2452,
                                                                GlassFilm_Types._None,
+                                                               SashProfile_ArticleNo._None,
+                                                               SashReinf_ArticleNo._None,
                                                                _mainPresenter.GetPanelCount(),
                                                                _mainPresenter.GetPanelGlassID(),
                                                                _frameModel.FrameImageRenderer_Zoom,
@@ -538,7 +540,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     fpnl.Controls.Add((UserControl)fixedUC);
                     _multiPanelModel.AddControl_MPanelLstObjects((UserControl)fixedUC, _frameModel.Frame_Type.ToString());
-                    fixedUCP.SetInitialLoadFalse();
 
                     IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC,
                                                                                                  _panelModel,
@@ -586,7 +587,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
                     fpnl.Controls.Add((UserControl)awningUC);
                     _multiPanelModel.AddControl_MPanelLstObjects((UserControl)awningUC, _frameModel.Frame_Type.ToString());
-                    awningUCP.SetInitialLoadFalse();
 
                     IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC,
                                                                                                     _panelModel,

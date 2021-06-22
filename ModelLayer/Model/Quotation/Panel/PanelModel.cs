@@ -623,10 +623,53 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_GlassHeight { get; set; }
         public int Panel_OriginalGlassHeight { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
-        public GlassFilm_Types Panel_GlassFilm { get; set; }
 
-        public SashProfile_ArticleNo Panel_SashProfileArtNo { get; set; }
-        public SashReinf_ArticleNo Panel_SashReinfArtNo { get; set; }
+        private GlassFilm_Types _panelGlassFilm;
+        public GlassFilm_Types Panel_GlassFilm
+        {
+            get
+            {
+                return _panelGlassFilm;
+            }
+            set
+            {
+                _panelGlassFilm = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private SashProfile_ArticleNo _panelSashProfileArtNo;
+        public SashProfile_ArticleNo Panel_SashProfileArtNo
+        {
+            get
+            {
+                return _panelSashProfileArtNo;
+            }
+            set
+            {
+                _panelSashProfileArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private SashReinf_ArticleNo _panelSashReinfArtNo;
+        public SashReinf_ArticleNo Panel_SashReinfArtNo
+        {
+            get
+            {
+                return _panelSashReinfArtNo;
+            }
+            set
+            {
+                _panelSashReinfArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int Panel_SashWidth { get; set; }
+        public int Panel_SashHeight { get; set; }
+        public int Panel_SashReinfWidth { get; set; }
+        public int Panel_SashReinfHeight { get; set; }
 
         private bool _panelSashPropertyVisibility;
         public bool Panel_SashPropertyVisibility
@@ -649,6 +692,23 @@ namespace ModelLayer.Model.Quotation.Panel
 
             Panel_GlazingBeadHeight = Panel_DisplayHeight; //- (33 * 2);
             Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
+
+            if (Panel_SashPropertyVisibility == true)
+            {
+                Panel_SashWidth = Panel_DisplayWidth - (26 * 2) + 5;
+                Panel_SashHeight = Panel_DisplayHeight - (26 * 2) + 5;
+
+                Panel_SashReinfWidth = Panel_SashWidth - 5 - (55 * 2) - 10;
+                Panel_SashReinfHeight = Panel_SashHeight - 5 - (55 * 2) - 10;
+            }
+            else if (Panel_SashPropertyVisibility == false)
+            {
+                Panel_SashWidth = 0;
+                Panel_SashHeight = 0;
+
+                Panel_SashReinfWidth = 0;
+                Panel_SashReinfHeight = 0;
+            }
 
             Panel_GlazingSpacerQty = 1;
         }
@@ -775,13 +835,6 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 GB_deduction_lvl3 += (72 / 2);
             }
-            else if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._None)
-            {
-                //if (mpanelparent_placement == "Last")
-                //{
-                //    GB_deduction_lvl3 += 33;
-                //}
-            }
 
             if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._7536)
             {
@@ -790,13 +843,6 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._7538)
             {
                 GB_deduction_lvl3 += (72 / 2);
-            }
-            else if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._None)
-            {
-                //if (mpanelparent_placement == "First")
-                //{
-                //    GB_deduction_lvl3 += 33;
-                //}
             }
 
             if (div_type == DividerType.Mullion)
@@ -828,6 +874,20 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_OriginalGlassWidth = (Panel_OriginalDisplayWidth - deduction_for_wd) - 6;
             Panel_OriginalGlassHeight = (Panel_OriginalDisplayHeight - deduction_for_ht) - 6;
 
+            if (Panel_SashPropertyVisibility == true)
+            {
+                Panel_SashWidth = 0;
+                Panel_SashHeight = 0;
+            }
+            else if (Panel_SashPropertyVisibility == false)
+            {
+                Panel_SashWidth = 0;
+                Panel_SashHeight = 0;
+
+                Panel_SashReinfWidth = 0;
+                Panel_SashReinfHeight = 0;
+            }
+
             Panel_GlazingSpacerQty = 1;
         }
 
@@ -855,7 +915,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           int panelDisplayWidth,
                           int panelDisplayHeight,
                           int panelGlassID,
-                          GlassFilm_Types panelGlassFilm)
+                          GlassFilm_Types panelGlassFilm,
+                          SashProfile_ArticleNo panelSash,
+                          SashReinf_ArticleNo panelSashReinf)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -882,6 +944,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_OriginalDisplayWidth = panelDisplayWidth;
             Panel_OriginalDisplayHeight = panelDisplayHeight;
             Panel_GlassFilm = panelGlassFilm;
+            Panel_SashProfileArtNo = panelSash;
+            Panel_SashReinfArtNo = panelSashReinf;
             
         }
     }

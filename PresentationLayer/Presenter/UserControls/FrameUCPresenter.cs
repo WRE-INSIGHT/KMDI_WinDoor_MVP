@@ -233,6 +233,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                            Glass_Thickness._6mm,
                                                            GlazingBead_ArticleNo._2452,
                                                            GlassFilm_Types._None,
+                                                           SashProfile_ArticleNo._None,
+                                                           SashReinf_ArticleNo._None,
                                                            _mainPresenter.GetPanelCount(),
                                                            _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);
@@ -250,7 +252,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                this);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     frame.Controls.Add((UserControl)fixedUC);
-                    //fixedUCP.SetInitialLoadFalse();
 
                     IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, 
                                                                                                  _panelModel, 
