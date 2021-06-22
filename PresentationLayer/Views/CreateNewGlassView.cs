@@ -197,6 +197,10 @@ namespace PresentationLayer.Views
         int crntFormWD;
         public string lblDescriptionView
         {
+            get
+            {
+                return lblDescription.Text;
+            }
             set
             {
                 lblDescription.Text = value;
@@ -237,10 +241,6 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, GlassThicknessTextChange, e);
         }
 
-        private void OnTextChangeEventRaised(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, GlassThicknessTextChange, e);
-        }
 
         public void ShowThis()
         {

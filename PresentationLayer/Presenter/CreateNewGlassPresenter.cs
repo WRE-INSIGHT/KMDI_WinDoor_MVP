@@ -150,9 +150,9 @@ namespace PresentationLayer.Presenter
                 else
                 {
                     decimal glassResult, glass1 = 0, glass2 = 0, BetweenTheGlass1 = 0;
-                    glass1 = Convert.ToDecimal(_createNewGlassView.GetNudGlassThickness1().Text);
-                    glass2 = Convert.ToDecimal(_createNewGlassView.GetNudGlassThickness2().Text);
-                    BetweenTheGlass1 = Convert.ToDecimal(_createNewGlassView.GetNudBetweenTheGlass1().Text);
+                    glass1 = _createNewGlassView.GetNudGlassThickness1().Value;
+                    glass2 = _createNewGlassView.GetNudGlassThickness2().Value;
+                    BetweenTheGlass1 = _createNewGlassView.GetNudBetweenTheGlass1().Value;
                     glassResult = glass1 + BetweenTheGlass1 + glass2;
 
                     _createNewGlassView.GetTboxTotalGlassThickness1().Text = Convert.ToString(glassResult);
@@ -175,11 +175,11 @@ namespace PresentationLayer.Presenter
                 else
                 {
                     decimal glassResult, glass1 = 0, glass2 = 0, glass3 = 0, BetweenTheGlass1 = 0, BetweenTheGlass2 = 0;
-                    glass1 = Convert.ToDecimal(_createNewGlassView.GetNudGlassThickness1().Text);
-                    glass2 = Convert.ToDecimal(_createNewGlassView.GetNudGlassThickness2().Text);
-                    glass3 = Convert.ToDecimal(_createNewGlassView.GetNudGlassThickness3().Text);
-                    BetweenTheGlass1 = Convert.ToDecimal(_createNewGlassView.GetNudBetweenTheGlass1().Text);
-                    BetweenTheGlass2 = Convert.ToDecimal(_createNewGlassView.GetNudBetweenTheGlass2().Text);
+                    glass1 = _createNewGlassView.GetNudGlassThickness1().Value;
+                    glass2 = _createNewGlassView.GetNudGlassThickness2().Value;
+                    glass3 = _createNewGlassView.GetNudGlassThickness3().Value;
+                    BetweenTheGlass1 = _createNewGlassView.GetNudBetweenTheGlass1().Value;
+                    BetweenTheGlass2 = _createNewGlassView.GetNudBetweenTheGlass2().Value;
                     glassResult = glass1 + BetweenTheGlass1 + glass2 + BetweenTheGlass2 + glass3;
 
                     _createNewGlassView.GetTboxTotalGlassThickness1().Text = Convert.ToString(glassResult);

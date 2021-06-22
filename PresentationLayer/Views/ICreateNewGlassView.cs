@@ -18,7 +18,7 @@ namespace PresentationLayer.Views
         string lblBetweenTheGlass { set; }
         string lblGlassHeader { set; }
 
-        string lblDescriptionView { set; }
+        string lblDescriptionView { get; set; }
 
         string cmbGlassType_1 { get; set; }
         string cmbGlassType_2 { get; set; }
