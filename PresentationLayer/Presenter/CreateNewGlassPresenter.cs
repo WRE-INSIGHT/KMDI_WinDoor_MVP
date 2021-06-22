@@ -40,6 +40,7 @@ namespace PresentationLayer.Presenter
 
 
 
+
         private void OnNewGlassViewLoadEventRaised(object sender, EventArgs e)
         {
             _createNewGlassView.cmbSelectedindex = 0;
@@ -76,8 +77,18 @@ namespace PresentationLayer.Presenter
                 _createNewGlassView.lblGlassHeader = "Triple Insulated Glass";
                 _createNewGlassView.lblBetweenTheGlass = "Polyvinyl";
             }
-        }
 
+            _createNewGlassView.GlassType1.DataSource = _mainPresenter.Glass_Type;
+            _createNewGlassView.GlassType1.DisplayMember = "GlassType";
+
+            /* yung gagamitin mong dataSource
+             * _mainPresenter.Color at _mainPresenter.Spacer
+             * 
+             * yung sa DisplayMember
+             * "Color" at "Spacer"
+             * 
+             */
+        }
 
         string _Glass1Description;
         string _Glass2Description;
@@ -191,19 +202,15 @@ namespace PresentationLayer.Presenter
             CreateNewGlass_Datarow();
         }
 
-
-
         public DataRow CreateNewGlass_Datarow()
         {
-
-
 
             DataRow newRow;
             newRow = _glassThicknessDT.NewRow();
 
             // Populate row here
             string GlassDescription = _createNewGlassView.lblDescriptionView;
-              
+
 
             if (_purpose == CreateNewGlass_ShowPurpose._Single)
             {
@@ -260,6 +267,10 @@ namespace PresentationLayer.Presenter
                                            false,
                                            true);
             }
+
+
+
+
 
             return newRow;
         }

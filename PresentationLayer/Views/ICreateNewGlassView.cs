@@ -17,7 +17,9 @@ namespace PresentationLayer.Views
         bool pnlTotalGlassVisible { set; }
         string lblBetweenTheGlass { set; }
         string lblGlassHeader { set; }
-        string lblDescriptionView { get; set; }
+
+        string lblDescriptionView { set; }
+
         string cmbGlassType_1 { get; set; }
         string cmbGlassType_2 { get; set; }
         string cmbGlassType_3 { get; set; }
@@ -28,6 +30,9 @@ namespace PresentationLayer.Views
         string cmbBetweenTheGlass_2 { get; set; }
         int GlassViewHeight { set; }
         int cmbSelectedindex { set; }
+
+
+        ComboBox GlassType1 { get; }
 
         //int tboxGlassThickness_1 { get; set; }
         //int tboxGlassThickness_2 { get; set; }

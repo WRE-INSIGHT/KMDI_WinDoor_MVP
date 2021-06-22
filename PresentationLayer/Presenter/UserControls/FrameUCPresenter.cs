@@ -165,7 +165,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP.GetNewInstance(_unityC, _multipanelModel, _mainPresenter);
                 framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)multiPropUCP.GetMultiPanelPropertiesUC());
-                _frameModel.FrameProp_Height += (129 + 3); // +3 for MultiPanelProperties' Margin
+                _frameModel.AdjustPropertyPanelHeight("Mpanel", "add");
 
                 if (data.Contains("Mullion"))
                 {
@@ -239,10 +239,10 @@ namespace PresentationLayer.Presenter.UserControls
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
-                _frameModel.FrameProp_Height += 255;
 
                 if (data == "Fixed Panel")
                 {
+                    _frameModel.AdjustPropertyPanelHeight("FxdNone", "add");
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, 
                                                                                _panelModel, 
                                                                                _frameModel, 
@@ -261,6 +261,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Casement Panel")
                 {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                     ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, 
                                                                                         _panelModel, 
                                                                                         _frameModel, 
@@ -277,6 +278,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Awning Panel")
                 {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, 
                                                                                   _panelModel, 
                                                                                   _frameModel, 
@@ -292,6 +294,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Sliding Panel")
                 {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                     ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, 
                                                                                      _panelModel, 
                                                                                      _frameModel, 

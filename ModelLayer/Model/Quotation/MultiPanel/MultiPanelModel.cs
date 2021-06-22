@@ -1451,19 +1451,62 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_OriginalGlassHeight = (MPanel_OriginalDisplayHeight - deduction_for_ht) - 6;
         }
 
-        public void AdjustPropertyPanelHeight(string objtype)
+        public void AdjustPropertyPanelHeight(string objtype, string mode)
         {
             if (objtype == "Panel")
             {
-                MPanelProp_Height -= (255 + 1); //+1 on margin (PanelProperties)
+                if (mode == "delete")
+                {
+                    MPanelProp_Height -= (315 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "add")
+                {
+                    MPanelProp_Height += (315 + 1); //+1 on margin (PanelProperties)
+                }
+            }
+            else if (objtype == "FxdNone")
+            {
+                if (mode == "delete")
+                {
+                    MPanelProp_Height -= (262 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "add")
+                {
+                    MPanelProp_Height += (262 + 1); //+1 on margin (PanelProperties)
+                }
+            }
+            else if (objtype == "SashProp")
+            {
+                if (mode == "delete")
+                {
+                    MPanelProp_Height -= 53;
+                }
+                else if (mode == "add")
+                {
+                    MPanelProp_Height += 53;
+                }
             }
             else if (objtype == "Div")
             {
-                MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                if (mode == "delete")
+                {
+                    MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                }
+                else if (mode == "add")
+                {
+                    MPanelProp_Height += (173 + 1); //+1 on margin (divProperties)
+                }
             }
             else if (objtype == "Mpanel")
             {
-                MPanelProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin
+                if (mode == "delete")
+                {
+                    MPanelProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin
+                }
+                else if (mode == "add")
+                {
+                    MPanelProp_Height += (129 + 3); // +3 for MultiPanelProperties' Margin
+                }
             }
         }
 

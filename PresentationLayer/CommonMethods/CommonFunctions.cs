@@ -119,8 +119,8 @@ namespace PresentationLayer.CommonMethods
                     multiTransomUCP.multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)divPropUCP.GetDivProperties());
                 }
 
-                frameModel.FrameProp_Height += (173 + 1); //+1 on margin
-                parentModel.MPanelProp_Height += (173 + 1); //+1 on margin
+                parentModel.AdjustPropertyPanelHeight("Div", "add");
+                frameModel.AdjustPropertyPanelHeight("Div", "add");
 
                 if (parentModel.MPanel_Type == "Transom")
                 {

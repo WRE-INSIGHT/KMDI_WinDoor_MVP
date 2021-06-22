@@ -357,19 +357,62 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_ReinfHeight = _frameHeight - (29 * 2) - 10;
         }
 
-        public void AdjustPropertyPanelHeight(string objtype)
+        public void AdjustPropertyPanelHeight(string objtype, string mode)
         {
             if (objtype == "Panel")
             {
-                FrameProp_Height -= (255 + 1); //+1 on margin (PanelProperties)
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= (315 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += (315 + 1); //+1 on margin (PanelProperties)
+                }
+            }
+            else if (objtype == "FxdNone")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= (262 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += (262 + 1); //+1 on margin (PanelProperties)
+                }
+            }
+            else if (objtype == "SashProp")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= 53;
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += 53;
+                }
             }
             else if (objtype == "Div")
             {
-                FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += (173 + 1); //+1 on margin (divProperties)
+                }
             }
             else if (objtype == "Mpanel")
             {
-                FrameProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += (129 + 3); // +3 for MultiPanelProperties' Margin
+                }
             }
         }
 

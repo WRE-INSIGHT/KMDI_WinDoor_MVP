@@ -297,8 +297,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
                     _multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)multiPropUCP.GetMultiPanelPropertiesUC());
 
-                    _frameModel.FrameProp_Height += (129 + 3); // +3 for MultiPanelProperties' Margin
-                    _multiPanelModel.MPanelProp_Height += (129 + 3);
+                    _multiPanelModel.AdjustPropertyPanelHeight("Mpanel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Mpanel", "add");
 
                     if (data.Contains("Mullion"))
                     {
@@ -358,8 +358,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
                             _multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)divPropUCP.GetDivProperties());
 
-                            _frameModel.FrameProp_Height += (173 + 1); //+1 on margin
-                            _multiPanelModel.MPanelProp_Height += (173 + 1); //+1 on margin
+                            _multiPanelModel.AdjustPropertyPanelHeight("Div", "add");
+                            _frameModel.AdjustPropertyPanelHeight("Div", "add");
 
                             ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
                                                                                         divModel,
@@ -440,8 +440,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
                             _multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)divPropUCP.GetDivProperties());
 
-                            _frameModel.FrameProp_Height += (173 + 1); //+1 on margin
-                            _multiPanelModel.MPanelProp_Height += (173 + 1); //+1 on margin
+                            _multiPanelModel.AdjustPropertyPanelHeight("Div", "add");
+                            _frameModel.AdjustPropertyPanelHeight("Div", "add");
 
                             ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
                                                                                         divModel,
@@ -523,11 +523,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 _multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
 
-                _frameModel.FrameProp_Height += (255 + 1); //+1 on margin
-                _multiPanelModel.MPanelProp_Height += (255 + 1); //+1 on margin
-
                 if (data == "Fixed Panel")
                 {
+                    _multiPanelModel.AdjustPropertyPanelHeight("FxdNone", "add");
+                    _frameModel.AdjustPropertyPanelHeight("FxdNone", "add");
+
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
                                                                                _panelModel,
                                                                                _frameModel,
@@ -549,6 +549,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 else if (data == "Casement Panel")
                 {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+
                     ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC,
                                                                                         _panelModel,
                                                                                         _frameModel,
@@ -570,6 +573,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 else if (data == "Awning Panel")
                 {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
                                                                                   _panelModel,
                                                                                   _frameModel,
@@ -591,6 +597,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 else if (data == "Sliding Panel")
                 {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+
                     ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC,
                                                                                      _panelModel,
                                                                                      _frameModel,
@@ -642,8 +651,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
                     _multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)divPropUCP.GetDivProperties());
 
-                    _frameModel.FrameProp_Height += (173 + 1); //+1 on margin
-                    _multiPanelModel.MPanelProp_Height += (173 + 1); //+1 on margin
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "add");
 
                     ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
                                                                                 divModel,
@@ -698,10 +707,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
                 _frameModel.Lst_Divider.Remove(div);
 
-                _multiPanelModel.AdjustPropertyPanelHeight("Div");
-                _frameModel.AdjustPropertyPanelHeight("Div");
-                //_multiPanelModel.MPanel_ParentModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
-                //_frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
+                _frameModel.AdjustPropertyPanelHeight("Div", "delete");
             }
             #endregion
 
@@ -712,30 +719,42 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             var multiPanels = _mpnlCommons.GetAll(innerFlp, "Multi", "flp");
             foreach (var mpnl in multiPanels)
             {
-                _multiPanelModel.AdjustPropertyPanelHeight("Mpanel");
-                _frameModel.AdjustPropertyPanelHeight("Mpanel");
+                _multiPanelModel.AdjustPropertyPanelHeight("Mpanel", "delete");
+                _frameModel.AdjustPropertyPanelHeight("Mpanel", "delete");
             }
 
             var panels = _mpnlCommons.GetAll(innerFlp, "PanelUC");
             foreach (var pnl in panels)
             {
-                _multiPanelModel.AdjustPropertyPanelHeight("Panel");
-                _frameModel.AdjustPropertyPanelHeight("Panel");
+                IPanelUC fxd = (IPanelUC)pnl;
+                if (pnl.Name.Contains("Fixed"))
+                {
+                    if (fxd.pnl_Orientation == true)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "delete");
+                        _frameModel.AdjustPropertyPanelHeight("Panel", "delete");
+                    }
+                    else
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("FxdNone", "delete");
+                        _frameModel.AdjustPropertyPanelHeight("FxdNone", "delete");
+                    }
+                }
                 _mainPresenter.DeductPanelGlassID();
             }
 
             var mullions = _mpnlCommons.GetAll(innerFlp, "MullionUC");
             foreach (var mul in mullions)
             {
-                _multiPanelModel.AdjustPropertyPanelHeight("Div");
-                _frameModel.AdjustPropertyPanelHeight("Div");
+                _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
+                _frameModel.AdjustPropertyPanelHeight("Div", "delete");
             }
 
             var transoms = _mpnlCommons.GetAll(innerFlp, "TransomUC");
             foreach (var transom in transoms)
             {
-                _multiPanelModel.AdjustPropertyPanelHeight("Div");
-                _frameModel.AdjustPropertyPanelHeight("Div");
+                _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
+                _frameModel.AdjustPropertyPanelHeight("Div", "delete");
             }
 
             _mainPresenter.DeleteMultiPanelPropertiesUC(_multiPanelModel.MPanel_ID);
@@ -781,8 +800,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_multiPanelModel.MPanel_Parent != null)
             {
-                _multiPanelModel.AdjustPropertyPanelHeight("Mpanel");
-                _frameModel.AdjustPropertyPanelHeight("Mpanel");
+                _multiPanelModel.AdjustPropertyPanelHeight("Mpanel", "delete");
+                _frameModel.AdjustPropertyPanelHeight("Mpanel", "delete");
             }
 
             _frameModel.Lst_MultiPanel.Remove(_multiPanelModel);

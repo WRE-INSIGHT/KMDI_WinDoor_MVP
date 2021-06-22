@@ -41,7 +41,8 @@ namespace PresentationLayer.Views
                 cmbColor1.SelectedIndex = value;
                 cmbColor2.SelectedIndex = value;
                 cmbColor3.SelectedIndex = value;
-                cmbGlassType1.SelectedIndex = value;
+
+                //cmbGlassType1.SelectedIndex = value;
                 cmbGlassType2.SelectedIndex = value;
                 cmbGlassType3.SelectedIndex = value;
 
@@ -196,10 +197,6 @@ namespace PresentationLayer.Views
         int crntFormWD;
         public string lblDescriptionView
         {
-            get
-            {
-                return lblDescription.Text;
-            }
             set
             {
                 lblDescription.Text = value;
@@ -217,6 +214,15 @@ namespace PresentationLayer.Views
             }
         }
 
+
+        public ComboBox GlassType1
+        {
+            get
+            {
+                return cmbGlassType1;
+            }
+        }
+
         public event EventHandler NewGlassViewLoadEventRaised;
         public event EventHandler GlassThicknessTextChange;
         public event EventHandler BtnAddGlassClick;
@@ -224,6 +230,11 @@ namespace PresentationLayer.Views
         public CreateNewGlassView()
         {
             InitializeComponent();
+        }
+
+        private void OnTextChangeEventRaised(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, GlassThicknessTextChange, e);
         }
 
         private void OnTextChangeEventRaised(object sender, EventArgs e)
@@ -250,7 +261,5 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, BtnAddGlassClick, e);
         }
-
-        
     }
 }
