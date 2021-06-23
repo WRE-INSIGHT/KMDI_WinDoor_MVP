@@ -107,6 +107,7 @@
             // 
             // nudBetweenTheGlass1
             // 
+            this.nudBetweenTheGlass1.DecimalPlaces = 2;
             this.nudBetweenTheGlass1.Location = new System.Drawing.Point(140, 7);
             this.nudBetweenTheGlass1.Name = "nudBetweenTheGlass1";
             this.nudBetweenTheGlass1.Size = new System.Drawing.Size(53, 22);
@@ -300,6 +301,7 @@
             // 
             // nudBetweenTheGlass2
             // 
+            this.nudBetweenTheGlass2.DecimalPlaces = 2;
             this.nudBetweenTheGlass2.Location = new System.Drawing.Point(140, 4);
             this.nudBetweenTheGlass2.Name = "nudBetweenTheGlass2";
             this.nudBetweenTheGlass2.Size = new System.Drawing.Size(53, 22);

@@ -15,17 +15,6 @@ namespace PresentationLayer.Presenter
         private CreateNewGlass_ShowPurpose _purpose;
         private DataTable _glassThicknessDT;
 
-        private DataTable _glassTypeDT = new DataTable();
-        private DataTable _glassTypeDT2 = new DataTable();
-        private DataTable _glassTypeDT3 = new DataTable();
-
-        private DataTable _color1DT = new DataTable();
-        private DataTable _color2DT = new DataTable();
-        private DataTable _color3DT = new DataTable();
-
-        private DataTable _spacer1DT = new DataTable();
-        private DataTable _spacer2DT = new DataTable();
-
         /* DataTable schema
          * 
          * Example : Double Laminated 12.75mm
@@ -92,37 +81,23 @@ namespace PresentationLayer.Presenter
                 _createNewGlassView.lblBetweenTheGlass = "Polyvinyl";
             }
 
-
-            _glassTypeDT = _mainPresenter.Glass_Type.Copy();
-            _glassTypeDT2 = _mainPresenter.Glass_Type.Copy();
-            _glassTypeDT3 = _mainPresenter.Glass_Type.Copy();
-
-            _color1DT = _mainPresenter.Color.Copy();
-            _color2DT = _mainPresenter.Color.Copy();
-            _color3DT = _mainPresenter.Color.Copy();
-
-            _spacer1DT = _mainPresenter.Spacer.Copy();
-            _spacer2DT = _mainPresenter.Spacer.Copy();
-
-
-
-            _createNewGlassView.GlassType1().DataSource = _glassTypeDT;
+            _createNewGlassView.GlassType1().DataSource = _mainPresenter.Glass_Type.Copy();
             _createNewGlassView.GlassType1().DisplayMember = "GlassType";
-            _createNewGlassView.GlassType2().DataSource = _glassTypeDT2;
+            _createNewGlassView.GlassType2().DataSource = _mainPresenter.Glass_Type.Copy();
             _createNewGlassView.GlassType2().DisplayMember = "GlassType";
-            _createNewGlassView.GlassType3().DataSource = _glassTypeDT3;
+            _createNewGlassView.GlassType3().DataSource = _mainPresenter.Glass_Type.Copy();
             _createNewGlassView.GlassType3().DisplayMember = "GlassType";
 
-            _createNewGlassView.Color1().DataSource = _color1DT;
+            _createNewGlassView.Color1().DataSource = _mainPresenter.Color.Copy();
             _createNewGlassView.Color1().DisplayMember = "Color";
-            _createNewGlassView.Color2().DataSource = _color2DT;
+            _createNewGlassView.Color2().DataSource = _mainPresenter.Color.Copy();
             _createNewGlassView.Color2().DisplayMember = "Color";
-            _createNewGlassView.Color3().DataSource = _color3DT;
+            _createNewGlassView.Color3().DataSource = _mainPresenter.Color.Copy();
             _createNewGlassView.Color3().DisplayMember = "Color";
 
-            _createNewGlassView.Spacer1().DataSource = _spacer1DT;
+            _createNewGlassView.Spacer1().DataSource = _mainPresenter.Spacer.Copy();
             _createNewGlassView.Spacer1().DisplayMember = "Spacer";
-            _createNewGlassView.Spacer2().DataSource = _spacer2DT;
+            _createNewGlassView.Spacer2().DataSource = _mainPresenter.Spacer.Copy();
             _createNewGlassView.Spacer2().DisplayMember = "Spacer";
 
             /* yung gagamitin mong dataSource
