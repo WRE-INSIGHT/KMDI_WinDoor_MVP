@@ -952,6 +952,18 @@ namespace ModelLayer.Model.Quotation
                                                            pnl_curCtrl.Panel_SashReinfHeight.ToString(),
                                                            "Sash",
                                                            @"|  |");
+
+                                    Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           frame.Frame_Width.ToString(),
+                                                           "Frame",
+                                                           @"|  |");
+
+                                    Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.ToString(),
+                                                           1, "pc(s)",
+                                                           frame.Frame_Width.ToString(),
+                                                           "Frame",
+                                                           @"|  |");
                                 }
 
                                 Material_List.Rows.Add("Glazing Bead Width (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
@@ -1016,6 +1028,24 @@ namespace ModelLayer.Model.Quotation
                                                pnl.Panel_SashReinfHeight.ToString(),
                                                "Sash",
                                                @"|  |");
+
+                        Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo.ToString(),
+                                               1, "pc(s)",
+                                               frame.Frame_Width.ToString(),
+                                               "Frame",
+                                               @"|  |");
+
+                        Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.ToString(),
+                                               1, "pc(s)",
+                                               frame.Frame_Width.ToString(),
+                                               "Frame",
+                                               @"|  |");
+
+                        Material_List.Rows.Add("Friction Stay " + pnl.Panel_FrictionStayArtNo.ToString(),
+                                               1, "pair",
+                                               "",
+                                               "Sash & Frame",
+                                               @"");
                     }
 
                     Material_List.Rows.Add("Glazing Bead Width (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),

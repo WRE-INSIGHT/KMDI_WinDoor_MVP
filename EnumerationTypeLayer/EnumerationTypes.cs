@@ -155,5 +155,25 @@ namespace EnumerationTypeLayer
 
             private Foil_Color(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class CoverProfile_ArticleNo : Enumeration<CoverProfile_ArticleNo, int>
+        {
+            public static readonly CoverProfile_ArticleNo _0914 = new CoverProfile_ArticleNo(0, "0914");
+            public static readonly CoverProfile_ArticleNo _1640 = new CoverProfile_ArticleNo(1, "1640");
+
+            private CoverProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class FrictionStay_ArticleNo : Enumeration<FrictionStay_ArticleNo, int>
+        {
+            public static readonly FrictionStay_ArticleNo _Storm8 = new FrictionStay_ArticleNo(0, "Storm 8");
+            public static readonly FrictionStay_ArticleNo _477254 = new FrictionStay_ArticleNo(1, "477254");
+            public static readonly FrictionStay_ArticleNo _A2121C1261 = new FrictionStay_ArticleNo(2, "A2121C1261");
+            public static readonly FrictionStay_ArticleNo _A212C16161 = new FrictionStay_ArticleNo(3, "A212C16161");
+            public static readonly FrictionStay_ArticleNo _Storm22 = new FrictionStay_ArticleNo(4, "Storm 22");
+            public static readonly FrictionStay_ArticleNo _Storm26 = new FrictionStay_ArticleNo(5, "Storm 26");
+
+            private FrictionStay_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

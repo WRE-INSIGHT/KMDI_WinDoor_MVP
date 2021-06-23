@@ -60,6 +60,9 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_SashReinfWidth { get; set; }
         int Panel_SashReinfHeight { get; set; }
 
+        CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
+        CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
+        FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
         void SetPanelExplosionValues_Panel(bool parentIsFrame);
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,
