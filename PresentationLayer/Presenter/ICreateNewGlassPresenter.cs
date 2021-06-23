@@ -1,7 +1,6 @@
-﻿using System.Data;
-using EnumerationTypeLayer;
+﻿using EnumerationTypeLayer;
+using System.Data;
 using Unity;
-using System;
 
 namespace PresentationLayer.Presenter
 {
@@ -11,6 +10,6 @@ namespace PresentationLayer.Presenter
         ICreateNewGlassPresenter GetNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, EnumerationTypes.CreateNewGlass_ShowPurpose purpose, DataTable glassThicknessDT);
         void ShowCreateNewGlassView();
 
-    
+
     }
 }

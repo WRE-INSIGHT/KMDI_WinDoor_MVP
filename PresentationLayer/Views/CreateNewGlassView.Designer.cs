@@ -59,7 +59,7 @@
             this.lblBetweenTheGlass2 = new System.Windows.Forms.Label();
             this.lblGlassThickness3 = new System.Windows.Forms.Label();
             this.pnlTotal = new System.Windows.Forms.Panel();
-            this.tboxTotalGlassThickness = new System.Windows.Forms.TextBox();
+            this.nudTotalGlassThickness = new System.Windows.Forms.NumericUpDown();
             this.lblTotalGlassThickness = new System.Windows.Forms.Label();
             this.pnlDescription = new System.Windows.Forms.Panel();
             this.btnAddGlass = new System.Windows.Forms.Button();
@@ -74,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudGlassThickness3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass2)).BeginInit();
             this.pnlTotal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTotalGlassThickness)).BeginInit();
             this.pnlDescription.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,6 +103,7 @@
             this.nudGlassThickness2.Size = new System.Drawing.Size(53, 22);
             this.nudGlassThickness2.TabIndex = 44;
             this.nudGlassThickness2.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.nudGlassThickness2.Click += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // nudBetweenTheGlass1
             // 
@@ -110,36 +112,27 @@
             this.nudBetweenTheGlass1.Size = new System.Drawing.Size(53, 22);
             this.nudBetweenTheGlass1.TabIndex = 27;
             this.nudBetweenTheGlass1.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.nudBetweenTheGlass1.Click += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbGlassType2
             // 
             this.cmbGlassType2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGlassType2.FormattingEnabled = true;
-            this.cmbGlassType2.Items.AddRange(new object[] {
-            "Annealed",
-            "Tempered",
-            "Annealed Low-e",
-            "Tempered Low-e"});
             this.cmbGlassType2.Location = new System.Drawing.Point(273, 45);
             this.cmbGlassType2.Name = "cmbGlassType2";
             this.cmbGlassType2.Size = new System.Drawing.Size(117, 21);
             this.cmbGlassType2.TabIndex = 7;
-            this.cmbGlassType2.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbGlassType2.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbColor2
             // 
             this.cmbColor2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbColor2.FormattingEnabled = true;
-            this.cmbColor2.Items.AddRange(new object[] {
-            "Clear ",
-            "Tinted Gray",
-            "Tinted Bronze",
-            "Tinted Green"});
             this.cmbColor2.Location = new System.Drawing.Point(443, 45);
             this.cmbColor2.Name = "cmbColor2";
             this.cmbColor2.Size = new System.Drawing.Size(117, 21);
             this.cmbColor2.TabIndex = 8;
-            this.cmbColor2.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbColor2.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblColor2
             // 
@@ -172,14 +165,11 @@
             // 
             this.cmbBetweenTheGlass1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBetweenTheGlass1.FormattingEnabled = true;
-            this.cmbBetweenTheGlass1.Items.AddRange(new object[] {
-            "Air",
-            "Argon"});
             this.cmbBetweenTheGlass1.Location = new System.Drawing.Point(273, 8);
             this.cmbBetweenTheGlass1.Name = "cmbBetweenTheGlass1";
             this.cmbBetweenTheGlass1.Size = new System.Drawing.Size(117, 21);
             this.cmbBetweenTheGlass1.TabIndex = 5;
-            this.cmbBetweenTheGlass1.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbBetweenTheGlass1.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblBetweenTheGlass1
             // 
@@ -220,14 +210,13 @@
             // 
             // cmbGlassType1
             // 
-            this.cmbGlassType1.DisplayMember = "1";
             this.cmbGlassType1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGlassType1.FormattingEnabled = true;
             this.cmbGlassType1.Location = new System.Drawing.Point(273, 36);
             this.cmbGlassType1.Name = "cmbGlassType1";
             this.cmbGlassType1.Size = new System.Drawing.Size(117, 21);
             this.cmbGlassType1.TabIndex = 2;
-            this.cmbGlassType1.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbGlassType1.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblGlassType1
             // 
@@ -242,16 +231,11 @@
             // 
             this.cmbColor1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbColor1.FormattingEnabled = true;
-            this.cmbColor1.Items.AddRange(new object[] {
-            "Clear ",
-            "Tinted Gray",
-            "Tinted Bronze",
-            "Tinted Green"});
             this.cmbColor1.Location = new System.Drawing.Point(443, 35);
             this.cmbColor1.Name = "cmbColor1";
             this.cmbColor1.Size = new System.Drawing.Size(117, 21);
             this.cmbColor1.TabIndex = 3;
-            this.cmbColor1.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbColor1.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblColor1
             // 
@@ -284,6 +268,7 @@
             this.nudGlassThickness1.Size = new System.Drawing.Size(53, 22);
             this.nudGlassThickness1.TabIndex = 26;
             this.nudGlassThickness1.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.nudGlassThickness1.Click += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // pnlGlass3
             // 
@@ -311,6 +296,7 @@
             this.nudGlassThickness3.Size = new System.Drawing.Size(53, 22);
             this.nudGlassThickness3.TabIndex = 46;
             this.nudGlassThickness3.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.nudGlassThickness3.Click += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // nudBetweenTheGlass2
             // 
@@ -319,49 +305,37 @@
             this.nudBetweenTheGlass2.Size = new System.Drawing.Size(53, 22);
             this.nudBetweenTheGlass2.TabIndex = 45;
             this.nudBetweenTheGlass2.ValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.nudBetweenTheGlass2.Click += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbGlassType3
             // 
             this.cmbGlassType3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGlassType3.FormattingEnabled = true;
-            this.cmbGlassType3.Items.AddRange(new object[] {
-            "Annealed",
-            "Tempered",
-            "Annealed Low-e",
-            "Tempered Low-e"});
             this.cmbGlassType3.Location = new System.Drawing.Point(273, 39);
             this.cmbGlassType3.Name = "cmbGlassType3";
             this.cmbGlassType3.Size = new System.Drawing.Size(117, 21);
             this.cmbGlassType3.TabIndex = 12;
-            this.cmbGlassType3.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbGlassType3.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbColor3
             // 
             this.cmbColor3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbColor3.FormattingEnabled = true;
-            this.cmbColor3.Items.AddRange(new object[] {
-            "Clear ",
-            "Tinted Gray",
-            "Tinted Bronze",
-            "Tinted Green"});
             this.cmbColor3.Location = new System.Drawing.Point(443, 39);
             this.cmbColor3.Name = "cmbColor3";
             this.cmbColor3.Size = new System.Drawing.Size(117, 21);
             this.cmbColor3.TabIndex = 13;
-            this.cmbColor3.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbColor3.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbBetweenTheGlass2
             // 
             this.cmbBetweenTheGlass2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBetweenTheGlass2.FormattingEnabled = true;
-            this.cmbBetweenTheGlass2.Items.AddRange(new object[] {
-            "Air",
-            "Argon"});
             this.cmbBetweenTheGlass2.Location = new System.Drawing.Point(273, 5);
             this.cmbBetweenTheGlass2.Name = "cmbBetweenTheGlass2";
             this.cmbBetweenTheGlass2.Size = new System.Drawing.Size(117, 21);
             this.cmbBetweenTheGlass2.TabIndex = 10;
-            this.cmbBetweenTheGlass2.TextChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbBetweenTheGlass2.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblColor3
             // 
@@ -411,7 +385,7 @@
             // pnlTotal
             // 
             this.pnlTotal.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlTotal.Controls.Add(this.tboxTotalGlassThickness);
+            this.pnlTotal.Controls.Add(this.nudTotalGlassThickness);
             this.pnlTotal.Controls.Add(this.lblTotalGlassThickness);
             this.pnlTotal.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTotal.Location = new System.Drawing.Point(0, 220);
@@ -419,14 +393,13 @@
             this.pnlTotal.Size = new System.Drawing.Size(584, 45);
             this.pnlTotal.TabIndex = 3;
             // 
-            // tboxTotalGlassThickness
+            // nudTotalGlassThickness
             // 
-            this.tboxTotalGlassThickness.Enabled = false;
-            this.tboxTotalGlassThickness.Location = new System.Drawing.Point(140, 17);
-            this.tboxTotalGlassThickness.Name = "tboxTotalGlassThickness";
-            this.tboxTotalGlassThickness.Size = new System.Drawing.Size(53, 22);
-            this.tboxTotalGlassThickness.TabIndex = 14;
-            this.tboxTotalGlassThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudTotalGlassThickness.Enabled = false;
+            this.nudTotalGlassThickness.Location = new System.Drawing.Point(140, 14);
+            this.nudTotalGlassThickness.Name = "nudTotalGlassThickness";
+            this.nudTotalGlassThickness.Size = new System.Drawing.Size(53, 22);
+            this.nudTotalGlassThickness.TabIndex = 47;
             // 
             // lblTotalGlassThickness
             // 
@@ -505,6 +478,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudBetweenTheGlass2)).EndInit();
             this.pnlTotal.ResumeLayout(false);
             this.pnlTotal.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTotalGlassThickness)).EndInit();
             this.pnlDescription.ResumeLayout(false);
             this.pnlDescription.PerformLayout();
             this.ResumeLayout(false);
@@ -539,7 +513,6 @@
         private System.Windows.Forms.Label lblBetweenTheGlass2;
         private System.Windows.Forms.Label lblGlassThickness3;
         private System.Windows.Forms.Panel pnlTotal;
-        private System.Windows.Forms.TextBox tboxTotalGlassThickness;
         private System.Windows.Forms.Label lblTotalGlassThickness;
         private System.Windows.Forms.Panel pnlDescription;
         private System.Windows.Forms.Button btnAddGlass;
@@ -550,5 +523,6 @@
         private System.Windows.Forms.NumericUpDown nudBetweenTheGlass1;
         private System.Windows.Forms.NumericUpDown nudGlassThickness3;
         private System.Windows.Forms.NumericUpDown nudBetweenTheGlass2;
+        private System.Windows.Forms.NumericUpDown nudTotalGlassThickness;
     }
 }

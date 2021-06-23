@@ -17,34 +17,24 @@ namespace PresentationLayer.Views
         bool pnlTotalGlassVisible { set; }
         string lblBetweenTheGlass { set; }
         string lblGlassHeader { set; }
-        string lblDescriptionView { set; }
-        string cmbGlassType_1 { get; set; }
-        string cmbGlassType_2 { get; set; }
-        string cmbGlassType_3 { get; set; }
-        string cmbColor_1 { get; set; }
-        string cmbColor_2 { get; set; }
-        string cmbColor_3 { get; set; }
-        string cmbBetweenTheGlass_1 { get; set; }
-        string cmbBetweenTheGlass_2 { get; set; }
+        string lblDescriptionView { get; set; }
         int GlassViewHeight { set; }
-        int cmbSelectedindex { set; }
 
-        ComboBox GlassType1 { get; }
+        NumericUpDown GlassThickness1 { get; set; }
+        NumericUpDown GlassThickness2 { get; set; }
+        NumericUpDown GlassThickness3 { get; set; }
+        NumericUpDown BetweenTheGlass1 { get; set; }
+        NumericUpDown BetweenTheGlass2 { get; set; }
+        NumericUpDown TotalThickness { get; set; }
 
-        //int tboxGlassThickness_1 { get; set; }
-        //int tboxGlassThickness_2 { get; set; }
-        //int tboxGlassThickness_3 { get; set; }
-        //string tboxBetweenTheGlass_1 { get; set; }
-        //string tboxBetweenTheGlass_2 { get; set; }
-        //int tboxTotalGlassThickness1 { get; set; }
-
-        NumericUpDown GetNudGlassThickness1();
-        NumericUpDown GetNudGlassThickness2();
-        NumericUpDown GetNudGlassThickness3();
-        NumericUpDown GetNudBetweenTheGlass1();
-        NumericUpDown GetNudBetweenTheGlass2();
-
-        TextBox GetTboxTotalGlassThickness1();
+        ComboBox GlassType1();
+        ComboBox GlassType2();
+        ComboBox GlassType3();
+        ComboBox Color1();
+        ComboBox Color2();
+        ComboBox Color3();
+        ComboBox Spacer1();
+        ComboBox Spacer2();
 
 
 
