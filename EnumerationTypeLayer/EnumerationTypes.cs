@@ -7,6 +7,7 @@ namespace EnumerationTypeLayer
         public class FrameProfile_ArticleNo : Enumeration<FrameProfile_ArticleNo>
         {
             public static readonly FrameProfile_ArticleNo _7502 = new FrameProfile_ArticleNo(0, "7502");
+            public static readonly FrameProfile_ArticleNo _7507 = new FrameProfile_ArticleNo(1, "7507");
             private FrameProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 

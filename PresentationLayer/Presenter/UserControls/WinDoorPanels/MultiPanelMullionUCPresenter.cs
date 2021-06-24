@@ -326,7 +326,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
                             _multiPanelModel.Adjust_ControlDisplaySize();
                             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
-                            _multiPanelModel.SetEqualGlassDimension();
                         }
                         else if (mPanelModel.MPanel_Placement != "Last")
                         {
@@ -407,7 +406,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
                             _multiPanelModel.Adjust_ControlDisplaySize();
                             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
-                            _multiPanelModel.SetEqualGlassDimension();
                         }
                         else if (mPanelModel.MPanel_Placement != "Last")
                         {
@@ -612,7 +610,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                     _multiPanelModel.Adjust_ControlDisplaySize();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
-                    _multiPanelModel.SetEqualGlassDimension();
                 }
                 else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                 {

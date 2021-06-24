@@ -57,6 +57,8 @@ namespace ModelLayer.Model.Quotation.Panel
         SashReinf_ArticleNo Panel_SashReinfArtNo { get; set; }
         int Panel_SashWidth { get; set; }
         int Panel_SashHeight { get; set; }
+        int Panel_OriginalSashWidth { get; set; }
+        int Panel_OriginalSashHeight { get; set; }
         int Panel_SashReinfWidth { get; set; }
         int Panel_SashReinfHeight { get; set; }
 

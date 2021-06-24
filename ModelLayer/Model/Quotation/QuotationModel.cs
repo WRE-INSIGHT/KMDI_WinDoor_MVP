@@ -964,6 +964,12 @@ namespace ModelLayer.Model.Quotation
                                                            frame.Frame_Width.ToString(),
                                                            "Frame",
                                                            @"|  |");
+
+                                    Material_List.Rows.Add("Friction Stay " + pnl_curCtrl.Panel_FrictionStayArtNo.ToString(),
+                                                           1, "pair(s)",
+                                                           "",
+                                                           "Sash & Frame",
+                                                           @"");
                                 }
 
                                 Material_List.Rows.Add("Glazing Bead Width (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
@@ -1042,7 +1048,7 @@ namespace ModelLayer.Model.Quotation
                                                @"|  |");
 
                         Material_List.Rows.Add("Friction Stay " + pnl.Panel_FrictionStayArtNo.ToString(),
-                                               1, "pair",
+                                               1, "pair(s)",
                                                "",
                                                "Sash & Frame",
                                                @"");

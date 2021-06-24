@@ -63,7 +63,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanel_OriginalGlassWidth { get; set; }
         int MPanel_OriginalGlassHeight { get; set; }
 
-        void SetEqualGlassDimension();
+        void SetEqualGlassDimension(string mode);
         void SetMPanelExplosionValues_Panel(Divider_ArticleNo divNxt_artNo,
                                             Divider_ArticleNo divPrev_artNo,
                                             DividerType div_type,
