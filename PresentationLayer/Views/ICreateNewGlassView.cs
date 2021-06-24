@@ -15,6 +15,7 @@ namespace PresentationLayer.Views
         bool pnlGlassVisible2 { set; }
         bool pnlGlassVisible3 { set; }
         bool pnlTotalGlassVisible { set; }
+        bool SpacerVisible { set; }
         string lblBetweenTheGlass { set; }
         string lblGlassHeader { set; }
         string lblDescriptionView { get; set; }
