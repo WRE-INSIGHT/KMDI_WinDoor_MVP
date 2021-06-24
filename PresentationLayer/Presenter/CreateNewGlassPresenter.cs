@@ -120,33 +120,51 @@ namespace PresentationLayer.Presenter
         string _BetweenTheGlassUnit2;
         private void OnGlassTextchangeEventRaised(object sender, EventArgs e)
         {
-            if (_createNewGlassView.GlassType1().Text == "Annealed" && _createNewGlassView.Color1().Text == "Clear")
+
+            //if (_createNewGlassView.GlassType1().Text == "Annealed")
+            //{
+            //    _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.Color1().Text;
+            //}
+            //else
+            //{
+            //    _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.GlassType1().Text + " " + _createNewGlassView.Color1().Text;
+            //}
+
+            //if (_createNewGlassView.GlassType2().Text == "Annealed")
+            //{
+            //    _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _createNewGlassView.Color2().Text;
+            //}
+            //else
+            //{
+            //    _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _createNewGlassView.GlassType2().Text + " " + _createNewGlassView.Color2().Text;
+            //}
+
+
+            //if (_createNewGlassView.GlassType3().Text == "Annealed")
+            //{
+            //    _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _createNewGlassView.Color3().Text;
+            //}
+            //else
+            //{
+            //    _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _createNewGlassView.GlassType3().Text + " " + _createNewGlassView.Color3().Text;
+            //}
+
+            if (_createNewGlassView.GlassType1().Text == "Anneled" || _createNewGlassView.GlassType3().Text == "Anneled" || _createNewGlassView.GlassType3().Text == "Anneled")
             {
-                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + "Clear";
+                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.Color1().Text;
+                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _createNewGlassView.Color2().Text;
+                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _createNewGlassView.Color3().Text;
+
             }
             else
             {
                 _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.GlassType1().Text + " " + _createNewGlassView.Color1().Text;
-            }
-
-            if (_createNewGlassView.GlassType2().Text == "Annealed" && _createNewGlassView.Color2().Text == "Clear")
-            {
-                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + "Clear";
-            }
-            else
-            {
                 _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _createNewGlassView.GlassType2().Text + " " + _createNewGlassView.Color2().Text;
-            }
-
-
-            if (_createNewGlassView.GlassType3().Text == "Annealed" && _createNewGlassView.Color3().Text == "Clear")
-            {
-                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + "Clear";
-            }
-            else
-            {
                 _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _createNewGlassView.GlassType3().Text + " " + _createNewGlassView.Color3().Text;
+
             }
+
+
 
 
             if (_createNewGlassView.Spacer1().Text == "Argon")
@@ -246,27 +264,6 @@ namespace PresentationLayer.Presenter
         {
             _glassThicknessDT.Rows.Add(CreateNewGlass_Datarow());
             _mainPresenter.GlassThicknessDT = _glassThicknessDT;
-
-
-            _glassThicknessDT.Rows.Add("5mm Clear");
-            _glassThicknessDT.Rows.Add("6mm Clear");
-            _glassThicknessDT.Rows.Add("6mm Tinted Green");
-            _glassThicknessDT.Rows.Add("6mm Tinted Blue");
-            _glassThicknessDT.Rows.Add("6mm Tinted Bronze");
-            _glassThicknessDT.Rows.Add("10mm Clear");
-            _glassThicknessDT.Rows.Add("10mm Tinted Green");
-            _glassThicknessDT.Rows.Add("12mm Tinted Blue");
-
-            _glassThicknessDT.Rows.Add("6mm Clear + 12 + 6mm Clear");
-            _glassThicknessDT.Rows.Add(" ");
-            _glassThicknessDT.Rows.Add(" ");
-            _glassThicknessDT.Rows.Add(" ");
-            _glassThicknessDT.Rows.Add(" ");
-
-            _glassThicknessDT.Rows.Add(" ");
-            _glassThicknessDT.Rows.Add(" ");
-            _glassThicknessDT.Rows.Add(" ");
-            _glassThicknessDT.Rows.Add(" ");
         }
 
         public DataRow CreateNewGlass_Datarow()
