@@ -696,7 +696,7 @@ namespace ModelLayer.Model.Quotation
                                         screws_for_inst_where += ", Mullion";
                                     }
 
-                                    if (div_nxtCtrl.Div_Height >= 2000)
+                                    if (div_nxtCtrl.Div_ExplosionHeight >= 2000)
                                     {
                                         Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
                                                                1, "pc(s)",
@@ -732,7 +732,7 @@ namespace ModelLayer.Model.Quotation
                                         screws_for_inst_where += ", Transom";
                                     }
 
-                                    if (div_nxtCtrl.Div_Width >= 2000)
+                                    if (div_nxtCtrl.Div_ExplosionWidth >= 2000)
                                     {
                                         Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
                                                               1, "pc(s)",
@@ -1116,7 +1116,7 @@ namespace ModelLayer.Model.Quotation
             Material_List.Rows.Add("Glazing Seal",
                                    GlazingSeal_TotalQty, "mm", "", "GB");
 
-            Material_List.Rows.Add("Screws for Installation",
+            Material_List.Rows.Add("Screws for Installation wt 10x15",
                                    Screws_for_Installation, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
 
             var query = from r in Material_List.AsEnumerable()

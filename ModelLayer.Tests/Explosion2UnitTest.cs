@@ -95,8 +95,8 @@ namespace ModelLayer.Tests
 
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(934, _panelModel.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1934, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(1000, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(2000, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(928, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1928, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
@@ -160,8 +160,8 @@ namespace ModelLayer.Tests
 
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(553, _panelModel.Panel_GlazingBeadWidth);
-            Assert.AreEqual(859, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(619, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(925, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(547, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(853, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
@@ -1452,9 +1452,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(4, dr[0]["Qty"]);
 
             //TransomUC3
-            dr = dt.Select("Description = 'Transom Width 7536' AND Size = '553'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(3, dr[0]["Qty"]);
+            sumObject = dt.Compute("Sum(Qty)", @"Description = 'Transom Width 7536' AND Size = '553'");
+            Assert.AreEqual(3, Convert.ToInt32(sumObject));
 
             dr = dt.Select("Description = 'Transom Reinforcement Width R677' AND Size = '473'");
             Assert.AreEqual(1, dr.Length);
