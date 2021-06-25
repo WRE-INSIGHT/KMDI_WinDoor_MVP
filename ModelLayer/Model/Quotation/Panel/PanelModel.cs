@@ -80,6 +80,8 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public int Panel_OriginalWidth { get; set; }
+
         [Description("Virtual Width that is dependent on Panel_Width and Panel_Zoomand varies accordingly. (not intended for user to use)")]
         private int _panelWidthToBind;
         public int Panel_WidthToBind
@@ -139,6 +141,8 @@ namespace ModelLayer.Model.Quotation.Panel
                 //NotifyPropertyChanged();
             }
         }
+
+        public int Panel_OriginalHeight { get; set; }
 
         [Description("Virtual Height that is dependent on Panel_Height and Panel_Zoom and varies accordingly. (not intended for user to use)")]
         private int _panelHeightToBind;
@@ -692,6 +696,8 @@ namespace ModelLayer.Model.Quotation.Panel
         public CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         public FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
 
+        public Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
             if (Panel_SashPropertyVisibility == true)
@@ -1100,6 +1106,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GlassFilm = panelGlassFilm;
             Panel_SashProfileArtNo = panelSash;
             Panel_SashReinfArtNo = panelSashReinf;
+            Panel_OriginalWidth = Panel_Width;
+            Panel_OriginalHeight = Panel_Height;
             
         }
     }

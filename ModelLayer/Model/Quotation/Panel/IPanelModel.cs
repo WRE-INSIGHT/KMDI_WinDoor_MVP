@@ -16,6 +16,7 @@ namespace ModelLayer.Model.Quotation.Panel
         UserControl Panel_FrameGroup { get; set; }
         UserControl Panel_FramePropertiesGroup { get; set; }
         int Panel_Height { get; set; }
+        int Panel_OriginalHeight { get; set; }
         int PanelImageRenderer_Height { get; set; }
         int Panel_HeightToBind { get; set; }
         int Panel_DisplayHeight { get; set; }
@@ -25,6 +26,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_Orient { get; set; }
         string Panel_Type { get; set; }
         int Panel_Width { get; set; }
+        int Panel_OriginalWidth { get; set; }
         int PanelImageRenderer_Width { get; set; }
         int Panel_WidthToBind { get; set; }
         int Panel_DisplayWidth { get; set; }
@@ -65,6 +67,7 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
+        Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
         void SetPanelExplosionValues_Panel(bool parentIsFrame);
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,

@@ -430,6 +430,11 @@ namespace PresentationLayer.Presenter
                     {
                         foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                         {
+                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                            {
+                                pnl.Panel_Width = pnl.Panel_OriginalWidth;
+                                pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                            }
                             mpnl.SetEqualGlassDimension(gbmode);
                         }
                     }
@@ -445,6 +450,8 @@ namespace PresentationLayer.Presenter
 
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
+                                pnl.Panel_Width = pnl.Panel_OriginalWidth;
+                                pnl.Panel_Height = pnl.Panel_OriginalHeight;
                                 pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth;
                                 pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight;
                             }

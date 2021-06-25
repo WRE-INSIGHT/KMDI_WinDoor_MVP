@@ -176,5 +176,19 @@ namespace EnumerationTypeLayer
 
             private FrictionStay_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class Espagnolette_ArticleNo : Enumeration<Espagnolette_ArticleNo, int>
+        {
+            public static readonly Espagnolette_ArticleNo _628806 = new Espagnolette_ArticleNo(0, "628806");
+            public static readonly Espagnolette_ArticleNo _628807 = new Espagnolette_ArticleNo(1, "628807");
+            public static readonly Espagnolette_ArticleNo _628809 = new Espagnolette_ArticleNo(2, "628809");
+            public static readonly Espagnolette_ArticleNo _612978 = new Espagnolette_ArticleNo(3, "612978");
+            public static readonly Espagnolette_ArticleNo _639957 = new Espagnolette_ArticleNo(4, "639957");
+            public static readonly Espagnolette_ArticleNo _639958 = new Espagnolette_ArticleNo(5, "639958");
+            public static readonly Espagnolette_ArticleNo _741012 = new Espagnolette_ArticleNo(6, "741012");
+            public static readonly Espagnolette_ArticleNo _EQ87NT = new Espagnolette_ArticleNo(7, "EQ87(NT)");
+
+            private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }
