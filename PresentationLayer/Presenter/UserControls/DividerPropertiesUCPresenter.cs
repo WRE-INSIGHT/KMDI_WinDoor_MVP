@@ -36,15 +36,15 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _divModel.Div_ArtNo = (Divider_ArticleNo)((ComboBox)sender).SelectedValue;
 
-            IMultiPanelModel parent = _divModel.Div_MPanelParent;
-            int obj_actualCount = parent.MPanelLst_Objects.Where(obj => obj.Visible == true).Count(),
-                obj_expectedCound = (parent.MPanel_Divisions * 2) + 1;
+            //IMultiPanelModel parent = _divModel.Div_MPanelParent;
+            //int obj_actualCount = parent.MPanelLst_Objects.Where(obj => obj.Visible == true).Count(),
+            //    obj_expectedCount = (parent.MPanel_Divisions * 2) + 1;
 
-            if (obj_actualCount == obj_expectedCound)
-            {
-                _mainPresenter.Run_GetListOfMaterials_SpecificItem();
-                parent.SetEqualGlassDimension();
-            }
+            //if (obj_actualCount == obj_expectedCount)
+            //{
+            //    _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+            //    parent.SetEqualGlassDimension();
+            //}
         }
 
         private void _divProperties_PanelPropertiesLoadEventRaised(object sender, EventArgs e)

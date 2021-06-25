@@ -153,7 +153,7 @@ namespace ModelLayer.Tests
         {
             int total_wd = 700, total_height = 2000;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -183,6 +183,9 @@ namespace ModelLayer.Tests
                                                                    total_height,
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
 
@@ -257,7 +260,7 @@ namespace ModelLayer.Tests
         {
             int total_wd = 500, total_height = 1500;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -287,6 +290,9 @@ namespace ModelLayer.Tests
                                                                    total_height,
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
 
@@ -362,7 +368,7 @@ namespace ModelLayer.Tests
             int total_wd = 900, total_height = 1300,
                 eqpanelWD = 450, eqpanelHT = 1300;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
 
@@ -393,6 +399,7 @@ namespace ModelLayer.Tests
                                                                                        _frameModel.Frame_Zoom,
                                                                                        1,
                                                                                        DockStyle.Fill,
+                                                                                       1,
                                                                                        0,
                                                                                        null,
                                                                                        _frameModel.FrameImageRenderer_Zoom);
@@ -427,6 +434,9 @@ namespace ModelLayer.Tests
                                                                    eqpanelHT,
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -467,6 +477,9 @@ namespace ModelLayer.Tests
                                                                    eqpanelHT,
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
@@ -567,7 +580,7 @@ namespace ModelLayer.Tests
             int total_wd = 900, total_height = 1300,
                 uneqpanelWD1 = 400, uneqpanelWD2 = 500, eqpanelHT = 1300;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -597,6 +610,7 @@ namespace ModelLayer.Tests
                                                                                        _frameModel.Frame_Zoom,
                                                                                        1,
                                                                                        DockStyle.Fill,
+                                                                                       1,
                                                                                        0,
                                                                                        null,
                                                                                        _frameModel.FrameImageRenderer_Zoom);
@@ -631,6 +645,9 @@ namespace ModelLayer.Tests
                                                                    eqpanelHT,
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -671,6 +688,9 @@ namespace ModelLayer.Tests
                                                                    eqpanelHT,
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
@@ -785,7 +805,7 @@ namespace ModelLayer.Tests
             int total_wd = 550, total_ht = 1200,
                 eqpanelwd = 275, eqpanelht = 600;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -815,6 +835,7 @@ namespace ModelLayer.Tests
                                                                                        _frameModel.Frame_Zoom,
                                                                                        1,
                                                                                        DockStyle.Fill,
+                                                                                       1,
                                                                                        0,
                                                                                        null,
                                                                                        _frameModel.FrameImageRenderer_Zoom);
@@ -843,6 +864,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           2,
                                                                                           DockStyle.None,
+                                                                                          2,
                                                                                           0,
                                                                                           _multiTransomModel,
                                                                                           _frameModel.FrameImageRenderer_Zoom);
@@ -883,6 +905,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           3,
                                                                                           DockStyle.None,
+                                                                                          2,
                                                                                           0,
                                                                                           _multiTransomModel,
                                                                                           _frameModel.FrameImageRenderer_Zoom);
@@ -917,6 +940,9 @@ namespace ModelLayer.Tests
                                                                    eqpanelht,
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
                                                                    1);
             _panelModel1.Panel_Placement = "First";
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel1);
@@ -957,6 +983,9 @@ namespace ModelLayer.Tests
                                                                    eqpanelht,
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel2);
@@ -988,6 +1017,9 @@ namespace ModelLayer.Tests
                                                                    eqpanelht,
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
                                                                    3);
             _panelModel3.Panel_Placement = "First";
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel3);
@@ -1028,6 +1060,9 @@ namespace ModelLayer.Tests
                                                                    eqpanelht,
                                                                    Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
                                                                    4);
             _panelModel4.Panel_Placement = "Last";
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel4);
@@ -1173,7 +1208,7 @@ namespace ModelLayer.Tests
                 p4p11Wd = 400, p4p11Ht = 475,
                 panelID = 0, mpanelID = 0, divID = 0;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -1207,6 +1242,7 @@ namespace ModelLayer.Tests
                                                                                          _frameModel.Frame_Zoom,
                                                                                          mpanelID,
                                                                                          DockStyle.Fill,
+                                                                                         1,
                                                                                          0,
                                                                                          null,
                                                                                          _frameModel.FrameImageRenderer_Zoom,
@@ -1240,6 +1276,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          2,
                                                                                           0,
                                                                                           _multiMullionModel1,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1288,6 +1325,9 @@ namespace ModelLayer.Tests
                                                                     p1Ht,
                                                                     Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel1.Panel_Placement = "Somewhere in Between";
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel1);
@@ -1328,6 +1368,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          2,
                                                                                           0,
                                                                                           _multiMullionModel1,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1364,6 +1405,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          3,
                                                                                           0,
                                                                                           _multiTransomModel2,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1409,6 +1451,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          3,
                                                                                           0,
                                                                                           _multiTransomModel2,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1457,6 +1500,9 @@ namespace ModelLayer.Tests
                                                                     p2p3Ht,
                                                                     Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel2.Panel_Placement = "Last";
             _multiTransomModel2.MPanelLst_Panel.Add(_panelModel2);
@@ -1487,6 +1533,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          3,
                                                                                           0,
                                                                                           _multiTransomModel3,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1532,6 +1579,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          3,
                                                                                           0,
                                                                                           _multiTransomModel3,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1580,6 +1628,9 @@ namespace ModelLayer.Tests
                                                                     p2p3Ht,
                                                                     Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel3.Panel_Placement = "Last";
             _multiTransomModel3.MPanelLst_Panel.Add(_panelModel3);
@@ -1614,6 +1665,9 @@ namespace ModelLayer.Tests
                                                                     p4p11Ht,
                                                                     Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel4.Panel_Placement = "First";
             _multiMullionModel4.MPanelLst_Panel.Add(_panelModel4);
@@ -1657,6 +1711,9 @@ namespace ModelLayer.Tests
                                                                     p4p11Ht,
                                                                     Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel5.Panel_Placement = "Last";
             _multiMullionModel4.MPanelLst_Panel.Add(_panelModel5);
@@ -1690,6 +1747,9 @@ namespace ModelLayer.Tests
                                                                     p4p11Ht,
                                                                     Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel6.Panel_Placement = "First";
             _multiMullionModel5.MPanelLst_Panel.Add(_panelModel6);
@@ -1733,6 +1793,9 @@ namespace ModelLayer.Tests
                                                                     p4p11Ht,
                                                                     Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel7.Panel_Placement = "Last";
             _multiMullionModel5.MPanelLst_Panel.Add(_panelModel7);
@@ -1766,6 +1829,9 @@ namespace ModelLayer.Tests
                                                                     p4p11Ht,
                                                                     Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel8.Panel_Placement = "First";
             _multiMullionModel6.MPanelLst_Panel.Add(_panelModel8);
@@ -1809,6 +1875,9 @@ namespace ModelLayer.Tests
                                                                     p4p11Ht,
                                                                     Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel9.Panel_Placement = "Last";
             _multiMullionModel6.MPanelLst_Panel.Add(_panelModel9);
@@ -1842,6 +1911,9 @@ namespace ModelLayer.Tests
                                                                     p4p11Ht,
                                                                     Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel10.Panel_Placement = "First";
             _multiMullionModel7.MPanelLst_Panel.Add(_panelModel10);
@@ -1885,6 +1957,9 @@ namespace ModelLayer.Tests
                                                                     p4p11Ht,
                                                                     Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
                                                                     panelID);
             _panelModel11.Panel_Placement = "Last";
             _multiMullionModel7.MPanelLst_Panel.Add(_panelModel11);

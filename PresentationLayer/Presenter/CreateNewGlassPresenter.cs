@@ -15,6 +15,7 @@ namespace PresentationLayer.Presenter
         private CreateNewGlass_ShowPurpose _purpose;
         private DataTable _glassThicknessDT;
 
+
         /* DataTable schema
          * 
          * Example : Double Laminated 12.75mm
@@ -121,6 +122,7 @@ namespace PresentationLayer.Presenter
         private void OnGlassTextchangeEventRaised(object sender, EventArgs e)
         {
 
+
             if (_createNewGlassView.GlassType1().Text == "Annealed")
             {
                 _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.Color1().Text;
@@ -209,7 +211,9 @@ namespace PresentationLayer.Presenter
 
                     _createNewGlassView.TotalThickness.Value = glassResult;
 
+
                     _createNewGlassView.lblDescriptionView = _Glass1Description + " + " + _BetweenTheGlass1 + " + " + _Glass2Description;
+
                 }
 
             }
@@ -238,6 +242,7 @@ namespace PresentationLayer.Presenter
                     _createNewGlassView.TotalThickness.Value = glassResult;
 
                     _createNewGlassView.lblDescriptionView = _Glass1Description + " + " + _BetweenTheGlass1 + " + " + _Glass2Description + " + " + _BetweenTheGlass2 + " + " + _Glass3Description;
+
                 }
             }
         }

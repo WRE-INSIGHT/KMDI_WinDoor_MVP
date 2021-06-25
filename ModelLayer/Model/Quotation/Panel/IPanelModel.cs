@@ -51,7 +51,20 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_GlassHeight { get; set; }
         int Panel_OriginalGlassHeight { get; set; }
         int Panel_GlazingSpacerQty { get; set; }
+        GlassFilm_Types Panel_GlassFilm { get; set; }
+        bool Panel_SashPropertyVisibility { get; set; }
+        SashProfile_ArticleNo Panel_SashProfileArtNo { get; set; }
+        SashReinf_ArticleNo Panel_SashReinfArtNo { get; set; }
+        int Panel_SashWidth { get; set; }
+        int Panel_SashHeight { get; set; }
+        int Panel_OriginalSashWidth { get; set; }
+        int Panel_OriginalSashHeight { get; set; }
+        int Panel_SashReinfWidth { get; set; }
+        int Panel_SashReinfHeight { get; set; }
 
+        CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
+        CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
+        FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
         void SetPanelExplosionValues_Panel(bool parentIsFrame);
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,

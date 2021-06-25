@@ -257,6 +257,7 @@
             this.cmb_FrameProfile.Name = "cmb_FrameProfile";
             this.cmb_FrameProfile.Size = new System.Drawing.Size(91, 21);
             this.cmb_FrameProfile.TabIndex = 8;
+            this.cmb_FrameProfile.SelectedValueChanged += new System.EventHandler(this.cmb_FrameProfile_SelectedValueChanged);
             // 
             // FramePropertiesUC
             // 

@@ -1219,64 +1219,165 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public int MPanel_OriginalGlassWidth { get; set; }
         public int MPanel_OriginalGlassHeight { get; set; }
 
-        public void SetEqualGlassDimension()
+        public void SetEqualGlassDimension(string mode)
         {
             int Equal_GlassSize = 0,
                 div_deduction = 0,
+                frame_deduction = 0,
                 totalPanels = MPanel_Divisions + 1;
-            if (MPanel_Type == "Mullion")
+
+
+            if (mode == "noSash")
             {
-                if (MPanel_Divisions >= 2)
+                if (MPanel_Type == "Mullion")
                 {
-                    foreach (IDividerModel div in MPanelLst_Divider)
+                    if (MPanel_Divisions >= 2)
                     {
-                        if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
                         {
-                            div_deduction += 42;
+                            frame_deduction = 33;
                         }
-                        else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
                         {
-                            div_deduction += 72;
+                            frame_deduction = 47;
+                        }
+
+                        foreach (IDividerModel div in MPanelLst_Divider)
+                        {
+                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                            {
+                                div_deduction += 42;
+                            }
+                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                div_deduction += 72;
+                            }
+                        }
+
+                        Equal_GlassSize = (((MPanel_DisplayWidth - (frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth + (Equal_GlassSize - pnl.Panel_OriginalGlassWidth);
+                        }
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
+                        {
+                            mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth + (Equal_GlassSize - mpnl.MPanel_OriginalGlassWidth);
                         }
                     }
-
-                    Equal_GlassSize = (((MPanel_DisplayWidth - (33 * 2) - div_deduction)) / totalPanels) - 6;
-
-                    foreach (IPanelModel pnl in MPanelLst_Panel)
+                }
+                else if (MPanel_Type == "Transom")
+                {
+                    if (MPanel_Divisions >= 2)
                     {
-                        pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth + (Equal_GlassSize - pnl.Panel_OriginalGlassWidth);
-                    }
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                    {
-                        mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth + (Equal_GlassSize - mpnl.MPanel_OriginalGlassWidth);
+                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+                        {
+                            frame_deduction = 33;
+                        }
+                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                        {
+                            frame_deduction = 47;
+                        }
+
+                        foreach (IDividerModel div in MPanelLst_Divider)
+                        {
+                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                            {
+                                div_deduction += 42;
+                            }
+                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                div_deduction += 72;
+                            }
+                        }
+
+                        Equal_GlassSize = (((MPanel_DisplayHeight - (frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight + (Equal_GlassSize - pnl.Panel_OriginalGlassHeight);
+                        }
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
+                        {
+                            mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight + (Equal_GlassSize - mpnl.MPanel_OriginalGlassHeight);
+                        }
                     }
                 }
             }
-            else if (MPanel_Type == "Transom")
+            else if (mode == "withSash")
             {
-                if (MPanel_Divisions >= 2)
+                if (MPanel_Type == "Mullion")
                 {
-                    foreach (IDividerModel div in MPanelLst_Divider)
+                    if (MPanel_Divisions >= 2)
                     {
-                        if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
                         {
-                            div_deduction += 42;
+                            frame_deduction = 26;
                         }
-                        else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
                         {
-                            div_deduction += 72;
+                            frame_deduction = 40;
+                        }
+
+                        foreach (IDividerModel div in MPanelLst_Divider)
+                        {
+                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                            {
+                                div_deduction += (42 - 14);
+                            }
+                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                div_deduction += (72 - 14);
+                            }
+                        }
+
+                        Equal_GlassSize = (((MPanel_DisplayWidth - (frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
+
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth + (Equal_GlassSize - pnl.Panel_OriginalSashWidth);
+                        }
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
+                        {
+                            mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth + (Equal_GlassSize - mpnl.MPanel_OriginalGlassWidth);
                         }
                     }
-
-                    Equal_GlassSize = (((MPanel_DisplayHeight - (33 * 2) - div_deduction)) / totalPanels) - 6;
-
-                    foreach (IPanelModel pnl in MPanelLst_Panel)
+                }
+                else if (MPanel_Type == "Transom")
+                {
+                    if (MPanel_Divisions >= 2)
                     {
-                        pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight + (Equal_GlassSize - pnl.Panel_OriginalGlassHeight);
-                    }
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                    {
-                        mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight + (Equal_GlassSize - mpnl.MPanel_OriginalGlassHeight);
+                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+                        {
+                            frame_deduction = 26;
+                        }
+                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                        {
+                            frame_deduction = 40;
+                        }
+
+                        foreach (IDividerModel div in MPanelLst_Divider)
+                        {
+                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                            {
+                                div_deduction += (42 - 14);
+                            }
+                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                div_deduction += (72 - 14);
+                            }
+                        }
+
+                        Equal_GlassSize = (((MPanel_DisplayHeight - (frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
+
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight + (Equal_GlassSize - pnl.Panel_OriginalSashHeight);
+                        }
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
+                        {
+                            mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight + (Equal_GlassSize - mpnl.MPanel_OriginalGlassHeight);
+                        }
                     }
                 }
             }

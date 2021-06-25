@@ -31,6 +31,7 @@ namespace PresentationLayer.Views
             }
         }
 
+
         public bool SpacerVisible
         {
             set
@@ -41,7 +42,6 @@ namespace PresentationLayer.Views
                 cmbBetweenTheGlass2.Visible = value;
             }
         }
-    
 
         public NumericUpDown GlassThickness1
         {
@@ -195,6 +195,7 @@ namespace PresentationLayer.Views
 
         public ComboBox Spacer2()
         {
+
             return cmbBetweenTheGlass2;
         }
 

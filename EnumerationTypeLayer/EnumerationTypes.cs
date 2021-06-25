@@ -7,6 +7,7 @@ namespace EnumerationTypeLayer
         public class FrameProfile_ArticleNo : Enumeration<FrameProfile_ArticleNo>
         {
             public static readonly FrameProfile_ArticleNo _7502 = new FrameProfile_ArticleNo(0, "7502");
+            public static readonly FrameProfile_ArticleNo _7507 = new FrameProfile_ArticleNo(1, "7507");
             private FrameProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -70,16 +71,16 @@ namespace EnumerationTypeLayer
         }
         public class GlassFilm_Types : Enumeration<GlassFilm_Types, int>
         {
-            public static readonly GlassFilm_Types _VKoolOEM35 = new GlassFilm_Types(0, "V-Kool OEM-35");
-            public static readonly GlassFilm_Types _Titanium = new GlassFilm_Types(1, "Titanium");
-            public static readonly GlassFilm_Types _Silver40 = new GlassFilm_Types(2, "Silver 40");
-            public static readonly GlassFilm_Types _Black50 = new GlassFilm_Types(3, "Black 50");
-            public static readonly GlassFilm_Types _Black35 = new GlassFilm_Types(4, "Black 35");
-            public static readonly GlassFilm_Types _Black05 = new GlassFilm_Types(5, "Black 05");
-            public static readonly GlassFilm_Types _4milSolarGuard = new GlassFilm_Types(6, "4 mil (Solar Guard)");
-            public static readonly GlassFilm_Types _4milUpera = new GlassFilm_Types(7, "4 mil (Upera)");
-            public static readonly GlassFilm_Types _FrostedFilm = new GlassFilm_Types(8, "Frosted Film");
-            public static readonly GlassFilm_Types _None = new GlassFilm_Types(9, "None");
+            public static readonly GlassFilm_Types _None = new GlassFilm_Types(0, "None");
+            public static readonly GlassFilm_Types _VKoolOEM35 = new GlassFilm_Types(1, "V-Kool OEM-35");
+            public static readonly GlassFilm_Types _Titanium = new GlassFilm_Types(2, "Titanium");
+            public static readonly GlassFilm_Types _Silver40 = new GlassFilm_Types(3, "Silver 40");
+            public static readonly GlassFilm_Types _Black50 = new GlassFilm_Types(4, "Black 50");
+            public static readonly GlassFilm_Types _Black35 = new GlassFilm_Types(5, "Black 35");
+            public static readonly GlassFilm_Types _Black05 = new GlassFilm_Types(6, "Black 05");
+            public static readonly GlassFilm_Types _4milSolarGuard = new GlassFilm_Types(7, "4 mil (Solar Guard)");
+            public static readonly GlassFilm_Types _4milUpera = new GlassFilm_Types(8, "4 mil (Upera)");
+            public static readonly GlassFilm_Types _FrostedFilm = new GlassFilm_Types(9, "Frosted Film");
             private GlassFilm_Types(int value, string displayName) : base(value, displayName) { }
         }
         public class GlassType : Enumeration<GlassType, int>
@@ -115,13 +116,15 @@ namespace EnumerationTypeLayer
         }
         public class SashProfile_ArticleNo : Enumeration<SashProfile_ArticleNo, int>
         {
-            public static readonly SashProfile_ArticleNo _7581 = new SashProfile_ArticleNo(0, "7581");
+            public static readonly SashProfile_ArticleNo _None = new SashProfile_ArticleNo(0, "None");
+            public static readonly SashProfile_ArticleNo _7581 = new SashProfile_ArticleNo(1, "7581");
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class SashReinf_ArticleNo : Enumeration<SashReinf_ArticleNo, int>
         {
-            public static readonly SashReinf_ArticleNo _R675 = new SashReinf_ArticleNo(0, "R675");
+            public static readonly SashReinf_ArticleNo _None = new SashReinf_ArticleNo(0, "None");
+            public static readonly SashReinf_ArticleNo _R675 = new SashReinf_ArticleNo(1, "R675");
             private SashReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -152,6 +155,26 @@ namespace EnumerationTypeLayer
             public static readonly Foil_Color _Havana = new Foil_Color(13, "Havana");
 
             private Foil_Color(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CoverProfile_ArticleNo : Enumeration<CoverProfile_ArticleNo, int>
+        {
+            public static readonly CoverProfile_ArticleNo _0914 = new CoverProfile_ArticleNo(0, "0914");
+            public static readonly CoverProfile_ArticleNo _1640 = new CoverProfile_ArticleNo(1, "1640");
+
+            private CoverProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class FrictionStay_ArticleNo : Enumeration<FrictionStay_ArticleNo, int>
+        {
+            public static readonly FrictionStay_ArticleNo _Storm8 = new FrictionStay_ArticleNo(0, "Storm 8");
+            public static readonly FrictionStay_ArticleNo _477254 = new FrictionStay_ArticleNo(1, "477254");
+            public static readonly FrictionStay_ArticleNo _A2121C1261 = new FrictionStay_ArticleNo(2, "A2121C1261");
+            public static readonly FrictionStay_ArticleNo _A212C16161 = new FrictionStay_ArticleNo(3, "A212C16161");
+            public static readonly FrictionStay_ArticleNo _Storm22 = new FrictionStay_ArticleNo(4, "Storm 22");
+            public static readonly FrictionStay_ArticleNo _Storm26 = new FrictionStay_ArticleNo(5, "Storm 26");
+
+            private FrictionStay_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

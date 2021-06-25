@@ -340,6 +340,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._R676;
                 }
+                NotifyPropertyChanged();
             }
         }
         public int Frame_ExplosionWidth { get; set; }

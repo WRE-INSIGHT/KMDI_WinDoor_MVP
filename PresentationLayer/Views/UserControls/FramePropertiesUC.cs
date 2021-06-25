@@ -39,6 +39,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler NumFHeightValueChangedEventRaised;
         public event EventHandler NumFWidthValueChangedEventRaised;
         public event EventHandler RdBtnCheckedChangedEventRaised;
+        public event EventHandler cmbFrameProfileSelectedValueChangedEventRaised;
 
         public void BringToFrontThis()
         {
@@ -102,6 +103,11 @@ namespace PresentationLayer.Views.UserControls
             rdBtn_Window.Enabled = frameTypeEnabled;
             rdBtn_Door.Enabled = frameTypeEnabled;
             rdBtn_Concrete.Enabled = frameTypeEnabled;
+        }
+
+        private void cmb_FrameProfile_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbFrameProfileSelectedValueChangedEventRaised, e);
         }
     }
 }

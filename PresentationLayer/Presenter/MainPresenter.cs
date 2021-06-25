@@ -383,9 +383,84 @@ namespace PresentationLayer.Presenter
             _mainView.CreateNewGlassClickEventRaised += _mainView_CreateNewGlassClickEventRaised;
             _mainView.ChangeItemColorClickEventRaised += _mainView_ChangeItemColorClickEventRaised;
             _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised;
+            _mainView.glassBalancingToolStripMenuItemClickEventRaised += _mainView_glassBalancingToolStripMenuItemClickEventRaised;
         }
 
         #region Events
+
+        private void _mainView_glassBalancingToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            ToolStripMenuItem gb = (ToolStripMenuItem)sender;
+
+            string gbmode = "";
+
+            foreach (IFrameModel fr in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                {
+                    bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
+                    bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
+                    if (allWithSash == true && allNoSash == false)
+                    {
+                        gbmode = "withSash";
+                    }
+                    else if (allWithSash == false && allNoSash == true)
+                    {
+                        gbmode = "noSash";
+                    }
+                    else if (allWithSash == false && allNoSash == false)
+                    {
+                        gbmode = "";
+                    }
+                }
+            }
+
+            if (gbmode == "")
+            {
+                MessageBox.Show("Cannot apply auto glass balancing" + "\n" + "You can apply auto glass balancing if all panel has sash or all panel has no sash", 
+                                "Glass balancing not available",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else if (gbmode != "")
+            {
+
+                if (gb.Checked == true)
+                {
+                    foreach (IFrameModel fr in _windoorModel.lst_frame)
+                    {
+                        foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                        {
+                            mpnl.SetEqualGlassDimension(gbmode);
+                        }
+                    }
+                }
+                else if (gb.Checked == false)
+                {
+                    foreach (IFrameModel fr in _windoorModel.lst_frame)
+                    {
+                        foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                        {
+                            mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth;
+                            mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight;
+
+                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                            {
+                                pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth;
+                                pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight;
+                            }
+
+                            mpnl.Fit_MyControls_Dimensions();
+                            mpnl.Fit_MyControls_ToBindDimensions();
+                            mpnl.Adjust_ControlDisplaySize();
+                        }
+                    }
+                }
+                _basePlatformPresenter.InvalidateBasePlatform();
+                _basePlatformPresenter.Invalidate_flpMainControls();
+                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                _basePlatformImagerUCPresenter.Invalidate_flpMain();
+            }
+        }
 
         private void _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
@@ -630,11 +705,37 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Columns.Add(CreateColumn("Insulated", "Insulated", "System.Boolean"));
             _glassThicknessDT.Columns.Add(CreateColumn("Laminated", "Laminated", "System.Boolean"));
 
+            //single
+            _glassThicknessDT.Rows.Add(5, "5 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6, "6 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6, "6 mm Tinted Green", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6, "6 mm Tempered Tinted Blue", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6, "6 mm Tinted Bronze", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10, "10 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10, "10 mm Tempered Tinted Green", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12, "12 mm Tinted Blue", true, false, false, false, false);
+            //double insulated
+            _glassThicknessDT.Rows.Add(24, "6 mm Clear + 12 + 6 mm Clear", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23, "5 mm Clear Low-e + 12 Ar + 6 mm Clear Low-e", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23, "6 mm Tempered Clear + 12 + 5 mm Tempered Clear", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23, "6 mm Tempered Clear Low-e + 12 + 5 mm Tempered Tinted Gray", false, true, false, true, false);
+            //double laminated
+            _glassThicknessDT.Rows.Add(11.76, "6 mm Clear + 0.76 + 5 mm Clear", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76, "6 mm Tinted Black+ 0.76 + 5 mm Clear", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52, "6 mm Tempered Clear Low-e + 1.52 + 6 mm Tempered Clear Low-e", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.58, "4 mm Tempered Clear Low-e + 1.52 + 4 mm Tempered Clear Low-e", false, true, false, false, true);
+            //triple insulated
+            _glassThicknessDT.Rows.Add(41, "6 mm Tempered Clear Low-e + 12 + 5 mm Tempered Tinted Gray + 12 + 6 mm Tempered Clear Low-e", false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(33, "4 mm Tinted Black + 10 + 5 mm Clear + 10 + 4 mm Tinted Black", false, false, true, true, false);
+            //triple laminated
+            _glassThicknessDT.Rows.Add(19.04, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", false, false, true, false, true);
+            _glassThicknessDT.Rows.Add(23.04, "8 mm Tempered Tinted Green + 1.52 + 4 mm Tempered Clear + 1.52 + 8 mm Tempered Tinted Green", false, false, true, false, true);
+
             _glassTypeDT.Columns.Add(CreateColumn("GlassType", "GlassType", "System.String"));
             _spacerDT.Columns.Add(CreateColumn("Spacer", "Spacer", "System.String"));
             _colorDT.Columns.Add(CreateColumn("Color", "Color", "System.String"));
 
-            _glassTypeDT.Rows.Add("Anneled");
+            _glassTypeDT.Rows.Add("Annealed");
             _glassTypeDT.Rows.Add("Tempered");
 
             _spacerDT.Rows.Add("Air");

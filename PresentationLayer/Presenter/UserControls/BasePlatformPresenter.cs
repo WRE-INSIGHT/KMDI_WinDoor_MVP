@@ -528,17 +528,19 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
 
-            int total_ht = 0;
+            int total_ht = 0,
+                curr_lst_ht = 0;
             for (int i = 0; i < lst_ht.Count; i++)
             {
-                total_ht += lst_ht[i];
+                curr_lst_ht = lst_ht[i];
+                total_ht += curr_lst_ht;
                 if (total_ht <= flpMain_height)
                 {
-                    Height_List.Add(lst_ht[i]);
+                    Height_List.Add(curr_lst_ht);
                 }
                 else if (total_ht > flpMain_height)
                 {
-                    total_ht -= lst_ht[i];
+                    total_ht -= curr_lst_ht;
                 }
             }
 
