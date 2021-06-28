@@ -3271,5 +3271,174 @@ namespace ModelLayer.Tests
 
 
         }
+
+
+
+        [TestMethod]
+        public void ChkVar_SinglePanelAwningWindow()
+        {
+            /*           _________________
+             *           |\              /|   
+             *           | \            / |
+             *           |  \          /  |
+             *           |   \        /   |
+             *           |    \      /    | 
+             *           |     \    /     |
+             *           |      \  /      |
+             *           |_______\/_______|    
+             */
+
+
+
+            int total_wd = 700, total_height = 1200;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_height,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            IPanelModel _panelModel = _panelServices.AddPanelModel(wd,
+                                                                   ht,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Awning Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   null,
+                                                                   total_wd,
+                                                                   total_height,
+                                                                   Glass_Thickness._13mm,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   1);
+            _frameModel.Lst_Panel.Add(_panelModel);
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(705, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1205, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(632, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1132, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(3612, _qouteModel.GlazingSeal_TotalQty);
+
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(653, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1153, _panelModel.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel.Panel_SashProfileArtNo);
+            Assert.AreEqual(1153, _panelModel.Panel_SashHeight);
+            Assert.AreEqual(653, _panelModel.Panel_SashWidth);
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel.Panel_SashReinfArtNo);
+            Assert.AreEqual(528, _panelModel.Panel_SashReinfWidth);
+            Assert.AreEqual(1028, _panelModel.Panel_SashReinfHeight);
+
+            Assert.AreEqual(532, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(1032, _panelModel.Panel_GlassHeight);
+
+            //hardware
+            Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel.Panel_FrictionStayArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel.Panel_CoverProfileArtNo2);
+            //Assert.AreEqual(25, _qouteModel.Screws_for_Installation);
+
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7502' AND Size = '705'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1205'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '632'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1132'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '700'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1200'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '653'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1153'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '528'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1028'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '700'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '2000'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+                             Description LIKE '%6mm%' AND
+                             Size = '628'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+                             Description LIKE '%6mm%' AND
+                             Size = '1928'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+            #endregion
+
+        }
+
     }
 }
