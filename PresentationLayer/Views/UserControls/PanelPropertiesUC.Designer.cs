@@ -44,8 +44,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmb_SashProfile = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmb_GlassType = new System.Windows.Forms.ComboBox();
             this.lbl_glassthick = new System.Windows.Forms.Label();
-            this.cmb_GlassThick = new System.Windows.Forms.ComboBox();
+            this.btn_SelectGlassthickness = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cmb_GlazingArtNo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -88,7 +91,7 @@
             this.chk_Orientation.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
             this.chk_Orientation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chk_Orientation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_Orientation.Location = new System.Drawing.Point(101, 41);
+            this.chk_Orientation.Location = new System.Drawing.Point(102, 41);
             this.chk_Orientation.Name = "chk_Orientation";
             this.chk_Orientation.Size = new System.Drawing.Size(50, 21);
             this.chk_Orientation.TabIndex = 2;
@@ -102,7 +105,7 @@
             this.num_BladeCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.num_BladeCount.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.num_BladeCount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.num_BladeCount.Location = new System.Drawing.Point(101, 40);
+            this.num_BladeCount.Location = new System.Drawing.Point(102, 40);
             this.num_BladeCount.Minimum = new decimal(new int[] {
             2,
             0,
@@ -167,11 +170,17 @@
             // 
             // flp_PanelSpecs
             // 
+            this.flp_PanelSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.flp_PanelSpecs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flp_PanelSpecs.Controls.Add(this.lbl_pnlSpecs);
             this.flp_PanelSpecs.Controls.Add(this.pnl_Sash);
+            this.flp_PanelSpecs.Controls.Add(this.label5);
+            this.flp_PanelSpecs.Controls.Add(this.cmb_GlassType);
             this.flp_PanelSpecs.Controls.Add(this.lbl_glassthick);
-            this.flp_PanelSpecs.Controls.Add(this.cmb_GlassThick);
+            this.flp_PanelSpecs.Controls.Add(this.btn_SelectGlassthickness);
+            this.flp_PanelSpecs.Controls.Add(this.label6);
             this.flp_PanelSpecs.Controls.Add(this.label1);
             this.flp_PanelSpecs.Controls.Add(this.cmb_GlazingArtNo);
             this.flp_PanelSpecs.Controls.Add(this.label2);
@@ -179,7 +188,7 @@
             this.flp_PanelSpecs.Location = new System.Drawing.Point(7, 144);
             this.flp_PanelSpecs.Name = "flp_PanelSpecs";
             this.flp_PanelSpecs.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.flp_PanelSpecs.Size = new System.Drawing.Size(147, 166);
+            this.flp_PanelSpecs.Size = new System.Drawing.Size(148, 212);
             this.flp_PanelSpecs.TabIndex = 14;
             // 
             // lbl_pnlSpecs
@@ -242,32 +251,66 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Sash Profile";
             // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 81);
+            this.label5.Margin = new System.Windows.Forms.Padding(3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Glass Type";
+            // 
+            // cmb_GlassType
+            // 
+            this.cmb_GlassType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_GlassType.DropDownWidth = 100;
+            this.cmb_GlassType.FormattingEnabled = true;
+            this.cmb_GlassType.Location = new System.Drawing.Point(73, 78);
+            this.cmb_GlassType.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.cmb_GlassType.Name = "cmb_GlassType";
+            this.cmb_GlassType.Size = new System.Drawing.Size(68, 21);
+            this.cmb_GlassType.TabIndex = 23;
+            this.cmb_GlassType.SelectedValueChanged += new System.EventHandler(this.cmb_GlassType_SelectedValueChanged);
+            // 
             // lbl_glassthick
             // 
             this.lbl_glassthick.AutoSize = true;
             this.lbl_glassthick.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_glassthick.Location = new System.Drawing.Point(3, 81);
+            this.lbl_glassthick.Location = new System.Drawing.Point(3, 105);
             this.lbl_glassthick.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_glassthick.Name = "lbl_glassthick";
             this.lbl_glassthick.Size = new System.Drawing.Size(64, 13);
             this.lbl_glassthick.TabIndex = 16;
             this.lbl_glassthick.Text = "Glass Thick";
             // 
-            // cmb_GlassThick
+            // btn_SelectGlassthickness
             // 
-            this.cmb_GlassThick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_GlassThick.FormattingEnabled = true;
-            this.cmb_GlassThick.Location = new System.Drawing.Point(73, 78);
-            this.cmb_GlassThick.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.cmb_GlassThick.Name = "cmb_GlassThick";
-            this.cmb_GlassThick.Size = new System.Drawing.Size(68, 21);
-            this.cmb_GlassThick.TabIndex = 17;
-            this.cmb_GlassThick.SelectedValueChanged += new System.EventHandler(this.cmb_GlassThick_SelectedValueChanged);
+            this.btn_SelectGlassthickness.Location = new System.Drawing.Point(73, 102);
+            this.btn_SelectGlassthickness.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.btn_SelectGlassthickness.Name = "btn_SelectGlassthickness";
+            this.btn_SelectGlassthickness.Size = new System.Drawing.Size(68, 23);
+            this.btn_SelectGlassthickness.TabIndex = 24;
+            this.btn_SelectGlassthickness.Text = "select";
+            this.btn_SelectGlassthickness.UseVisualStyleBackColor = true;
+            this.btn_SelectGlassthickness.Click += new System.EventHandler(this.btn_SelectGlassthickness_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoEllipsis = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(3, 131);
+            this.label6.Margin = new System.Windows.Forms.Padding(3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(138, 13);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Glass thickness";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 102);
+            this.label1.Location = new System.Drawing.Point(3, 147);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 32);
             this.label1.TabIndex = 18;
@@ -286,7 +329,7 @@
             "20mm",
             "22mm",
             "25mm"});
-            this.cmb_GlazingArtNo.Location = new System.Drawing.Point(73, 105);
+            this.cmb_GlazingArtNo.Location = new System.Drawing.Point(73, 150);
             this.cmb_GlazingArtNo.Name = "cmb_GlazingArtNo";
             this.cmb_GlazingArtNo.Size = new System.Drawing.Size(68, 21);
             this.cmb_GlazingArtNo.TabIndex = 19;
@@ -295,7 +338,7 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 137);
+            this.label2.Location = new System.Drawing.Point(3, 182);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 13);
@@ -307,7 +350,7 @@
             this.cmb_FilmType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_FilmType.DropDownWidth = 100;
             this.cmb_FilmType.FormattingEnabled = true;
-            this.cmb_FilmType.Location = new System.Drawing.Point(73, 134);
+            this.cmb_FilmType.Location = new System.Drawing.Point(73, 179);
             this.cmb_FilmType.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.cmb_FilmType.Name = "cmb_FilmType";
             this.cmb_FilmType.Size = new System.Drawing.Size(68, 21);
@@ -333,7 +376,7 @@
             this.Controls.Add(this.num_BladeCount);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Panel_PropertiesUC";
-            this.Size = new System.Drawing.Size(159, 315);
+            this.Size = new System.Drawing.Size(160, 361);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();
@@ -366,10 +409,13 @@
         private System.Windows.Forms.ComboBox cmb_SashProfile;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbl_glassthick;
-        private System.Windows.Forms.ComboBox cmb_GlassThick;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmb_GlazingArtNo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmb_FilmType;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmb_GlassType;
+        private System.Windows.Forms.Button btn_SelectGlassthickness;
+        private System.Windows.Forms.Label label6;
     }
 }

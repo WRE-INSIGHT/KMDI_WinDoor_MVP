@@ -1116,7 +1116,7 @@ namespace ModelLayer.Model.Quotation
             Material_List.Rows.Add("Glazing Seal",
                                    GlazingSeal_TotalQty, "mm", "", "GB");
 
-            Material_List.Rows.Add("Screws for Installation wt 10x15",
+            Material_List.Rows.Add("Screws for Fabrication wt 10x15",
                                    Screws_for_Installation, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
 
             var query = from r in Material_List.AsEnumerable()

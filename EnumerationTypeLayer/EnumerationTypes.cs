@@ -177,6 +177,32 @@ namespace EnumerationTypeLayer
             private FrictionStay_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class Handle_Type : Enumeration<Handle_Type, int>
+        {
+            public static readonly Handle_Type _Rotoswing = new Handle_Type(0, "Rotoswing Handle");
+            public static readonly Handle_Type _Rotary = new Handle_Type(1, "Rotary Handle");
+
+            private Handle_Type(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Rotoswing_Handle : Enumeration<Rotoswing_Handle, int>
+        {
+            public static readonly Rotoswing_Handle _RSC773451 = new Rotoswing_Handle(0, "RSC-773451");
+            public static readonly Rotoswing_Handle _RSC773452 = new Rotoswing_Handle(1, "RSC-773452");
+            public static readonly Rotoswing_Handle _RSC823048 = new Rotoswing_Handle(2, "RSC-823048");
+            public static readonly Rotoswing_Handle _RSC833307 = new Rotoswing_Handle(3, "RSC-833307");
+
+            private Rotoswing_Handle(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Rotary_Handle : Enumeration<Rotary_Handle, int>
+        {
+            public static readonly Rotary_Handle _T511155KMWSS = new Rotary_Handle(0, "T-51.1155 KM-W-SS");
+            public static readonly Rotary_Handle _T511155KMBLSS = new Rotary_Handle(1, "T-51.1155 KM-BL-SS");
+
+            private Rotary_Handle(int value, string displayName) : base(value, displayName) { }
+        }
+
         public class Espagnolette_ArticleNo : Enumeration<Espagnolette_ArticleNo, int>
         {
             public static readonly Espagnolette_ArticleNo _628806 = new Espagnolette_ArticleNo(0, "628806");

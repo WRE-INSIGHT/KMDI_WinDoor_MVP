@@ -670,6 +670,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private GlassType _panelGlassType;
+        public GlassType Panel_GlassType
+        {
+            get
+            {
+                return _panelGlassType;
+            }
+            set
+            {
+                _panelGlassType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Panel_SashWidth { get; set; }
         public int Panel_SashHeight { get; set; }
         public int Panel_OriginalSashWidth { get; set; }
@@ -695,8 +709,8 @@ namespace ModelLayer.Model.Quotation.Panel
         public CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
         public CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         public FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
-
         public Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
@@ -1108,7 +1122,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_SashReinfArtNo = panelSashReinf;
             Panel_OriginalWidth = Panel_Width;
             Panel_OriginalHeight = Panel_Height;
-            
+            Panel_GlassType = GlassType._Single;
         }
     }
 }
