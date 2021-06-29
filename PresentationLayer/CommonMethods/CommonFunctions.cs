@@ -714,5 +714,21 @@ namespace PresentationLayer.CommonMethods
                                       .Where(c => c.Visible == true)
                                       .Where(c => c.Name.Contains(name));
         }
+
+        public void rowpostpaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DataGridView grid = (DataGridView)sender;
+            e.PaintHeader(DataGridViewPaintParts.Background);
+            string rowIdx = (e.RowIndex + 1).ToString();
+            Font rowFont = new Font("Segoe UI", 9.0f,
+                                    FontStyle.Regular,
+                                    GraphicsUnit.Point);
+            StringFormat centerFormat = new StringFormat();
+            centerFormat.Alignment = StringAlignment.Far;
+            centerFormat.LineAlignment = StringAlignment.Near;
+
+            Rectangle headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
+            e.Graphics.DrawString(rowIdx, rowFont, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
     }
 }

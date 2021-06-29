@@ -155,7 +155,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             fixedpnl.ClientRectangle.Width,
                                             10);
 
-            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString(),
+            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm",
                          new Font("Segoe UI", 8.0f, FontStyle.Bold),
                          new SolidBrush(Color.Black),
                          rect,

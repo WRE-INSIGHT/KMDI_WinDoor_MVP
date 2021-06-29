@@ -44,7 +44,8 @@ namespace ModelLayer.Model.Quotation.Panel
         #region Explosion
 
         int PanelGlass_ID { get; set; }
-        Glass_Thickness Panel_GlassThickness { get; set; }
+        string Panel_GlassThicknessDesc { get; set; }
+        float Panel_GlassThickness { get; set; }
         GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
         int Panel_GlazingBeadWidth { get; set; }
         int Panel_GlazingBeadHeight { get; set; }

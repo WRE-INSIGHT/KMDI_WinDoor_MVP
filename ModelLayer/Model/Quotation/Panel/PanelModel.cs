@@ -555,8 +555,8 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        private Glass_Thickness _panelGlassThickness;
-        public Glass_Thickness Panel_GlassThickness
+        private float _panelGlassThickness;
+        public float Panel_GlassThickness
         {
             get
             {
@@ -565,44 +565,58 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelGlassThickness = value;
-                if (value == Glass_Thickness._6mm ||
-                    value == Glass_Thickness._8mm)
+                if (value == 6.0f ||
+                    value == 8.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452;
                 }
-                else if (value == Glass_Thickness._10mm || 
-                         value == Glass_Thickness._11mm)
+                else if (value == 10.0f || 
+                         value == 11.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2451;
                 }
-                else if (value == Glass_Thickness._12mm ||
-                         value == Glass_Thickness._13mm ||
-                         value == Glass_Thickness._14mm)
+                else if (value == 12.0f || 
+                         value == 13.0f ||
+                         value == 14.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2453;
                 }
-                else if (value == Glass_Thickness._15mm || 
-                         value == Glass_Thickness._16mm)
+                else if (value == 15.0f ||
+                         value == 16.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436;
                 }
-                else if (value == Glass_Thickness._18mm)
+                else if (value == 18.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2438;
                 }
-                else if (value == Glass_Thickness._20mm)
+                else if (value == 20.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2437;
                 }
-                else if (value == Glass_Thickness._22mm)
+                else if (value == 22.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434;
                 }
-                else if (value == Glass_Thickness._23mm || 
-                         value == Glass_Thickness._24mm)
+                else if (value == 23.0f || 
+                         value == 24.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2435;
                 }
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _panelGlassThicknessDesc;
+        public string Panel_GlassThicknessDesc
+        {
+            get
+            {
+                return _panelGlassThicknessDesc;
+            }
+            set
+            {
+                _panelGlassThicknessDesc = value;
                 NotifyPropertyChanged();
             }
         }
@@ -1084,7 +1098,6 @@ namespace ModelLayer.Model.Quotation.Panel
                           float panelZoom,
                           IFrameModel panelFrameModelParent,
                           IMultiPanelModel panelMultiPanelParent,
-                          Glass_Thickness panelGlassThickness,
                           GlazingBead_ArticleNo panelGlazingBeadArtNo,
                           int panelDisplayWidth,
                           int panelDisplayHeight,
@@ -1110,7 +1123,6 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_Zoom = panelZoom;
             Panel_ParentFrameModel = panelFrameModelParent;
             Panel_ParentMultiPanelModel = panelMultiPanelParent;
-            Panel_GlassThickness = panelGlassThickness;
             PanelGlazingBead_ArtNo = panelGlazingBeadArtNo;
             Panel_DisplayWidth = panelDisplayWidth;
             Panel_DisplayHeight = panelDisplayHeight;

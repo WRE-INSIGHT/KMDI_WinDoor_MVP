@@ -48,7 +48,7 @@
             this.cmb_GlassType = new System.Windows.Forms.ComboBox();
             this.lbl_glassthick = new System.Windows.Forms.Label();
             this.btn_SelectGlassthickness = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbl_GlassThicknessDesc = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cmb_GlazingArtNo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -180,7 +180,7 @@
             this.flp_PanelSpecs.Controls.Add(this.cmb_GlassType);
             this.flp_PanelSpecs.Controls.Add(this.lbl_glassthick);
             this.flp_PanelSpecs.Controls.Add(this.btn_SelectGlassthickness);
-            this.flp_PanelSpecs.Controls.Add(this.label6);
+            this.flp_PanelSpecs.Controls.Add(this.lbl_GlassThicknessDesc);
             this.flp_PanelSpecs.Controls.Add(this.label1);
             this.flp_PanelSpecs.Controls.Add(this.cmb_GlazingArtNo);
             this.flp_PanelSpecs.Controls.Add(this.label2);
@@ -295,17 +295,17 @@
             this.btn_SelectGlassthickness.UseVisualStyleBackColor = true;
             this.btn_SelectGlassthickness.Click += new System.EventHandler(this.btn_SelectGlassthickness_Click);
             // 
-            // label6
+            // lbl_GlassThicknessDesc
             // 
-            this.label6.AutoEllipsis = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(3, 131);
-            this.label6.Margin = new System.Windows.Forms.Padding(3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(138, 13);
-            this.label6.TabIndex = 25;
-            this.label6.Text = "Glass thickness";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbl_GlassThicknessDesc.AutoEllipsis = true;
+            this.lbl_GlassThicknessDesc.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_GlassThicknessDesc.Location = new System.Drawing.Point(3, 131);
+            this.lbl_GlassThicknessDesc.Margin = new System.Windows.Forms.Padding(3);
+            this.lbl_GlassThicknessDesc.Name = "lbl_GlassThicknessDesc";
+            this.lbl_GlassThicknessDesc.Size = new System.Drawing.Size(138, 13);
+            this.lbl_GlassThicknessDesc.TabIndex = 25;
+            this.lbl_GlassThicknessDesc.Text = "Glass thickness";
+            this.lbl_GlassThicknessDesc.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label1
             // 
@@ -416,6 +416,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmb_GlassType;
         private System.Windows.Forms.Button btn_SelectGlassthickness;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbl_GlassThicknessDesc;
     }
 }

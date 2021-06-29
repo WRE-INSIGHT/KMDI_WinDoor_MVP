@@ -353,9 +353,9 @@ namespace ModelLayer.Model.Quotation
 
                                 if (pnl_curCtrl != null)
                                 {
-                                    if (pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._13mm ||
-                                        pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._14mm ||
-                                        pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._24mm)
+                                    if (pnl_curCtrl.Panel_GlassThickness == 13.0f ||
+                                        pnl_curCtrl.Panel_GlassThickness == 14.0f ||
+                                        pnl_curCtrl.Panel_GlassThickness == 24.0f)
                                     {
                                         glazing_seal += (pnl_curCtrl.Panel_GlazingBeadWidth * 2) + (pnl_curCtrl.Panel_GlazingBeadHeight * 2);
                                     }
@@ -410,9 +410,9 @@ namespace ModelLayer.Model.Quotation
                         total_glassWidth += (pnl.Panel_GlassWidth * 2);
                         total_glassHeight += (pnl.Panel_GlassHeight * 2);
 
-                        if (pnl.Panel_GlassThickness == Glass_Thickness._13mm ||
-                            pnl.Panel_GlassThickness == Glass_Thickness._14mm ||
-                            pnl.Panel_GlassThickness == Glass_Thickness._24mm)
+                        if (pnl.Panel_GlassThickness == 13.0f ||
+                            pnl.Panel_GlassThickness == 14.0f ||
+                            pnl.Panel_GlassThickness == 24.0f)
                         {
                             glazing_seal += (pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2);
                         }
@@ -920,9 +920,9 @@ namespace ModelLayer.Model.Quotation
 
                             if (pnl_curCtrl != null)
                             {
-                                if (pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._13mm ||
-                                    pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._14mm ||
-                                    pnl_curCtrl.Panel_GlassThickness == Glass_Thickness._24mm)
+                                if (pnl_curCtrl.Panel_GlassThickness == 13.0f ||
+                                    pnl_curCtrl.Panel_GlassThickness == 14.0f ||
+                                    pnl_curCtrl.Panel_GlassThickness == 24.0f)
                                 {
                                     glazing_seal += (pnl_curCtrl.Panel_GlazingBeadWidth * 2) + (pnl_curCtrl.Panel_GlazingBeadHeight * 2);
                                 }
@@ -1082,9 +1082,9 @@ namespace ModelLayer.Model.Quotation
                     total_glassWidth += (pnl.Panel_GlassWidth * 2);
                     total_glassHeight += (pnl.Panel_GlassHeight * 2);
 
-                    if (pnl.Panel_GlassThickness == Glass_Thickness._13mm ||
-                        pnl.Panel_GlassThickness == Glass_Thickness._14mm ||
-                        pnl.Panel_GlassThickness == Glass_Thickness._24mm)
+                    if (pnl.Panel_GlassThickness == 13.0f ||
+                        pnl.Panel_GlassThickness == 14.0f ||
+                        pnl.Panel_GlassThickness == 24.0f)
                     {
                         glazing_seal += (pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2);
                     }

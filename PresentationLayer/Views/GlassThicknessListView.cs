@@ -19,6 +19,8 @@ namespace PresentationLayer.Views
         }
 
         public event EventHandler GlassThicknessListViewLoadEventRaised;
+        public event DataGridViewRowPostPaintEventHandler DgvGlassThicknessListRowpostpaintEventRaised;
+        public event DataGridViewCellEventHandler DgvGlassThicknessListCellDoubleClickEventRaised;
 
         public DataGridView Get_DgvGlassThicknessList()
         {
@@ -33,6 +35,30 @@ namespace PresentationLayer.Views
         private void GlassThicknessList_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(this, GlassThicknessListViewLoadEventRaised, e);
+        }
+
+        private void dgv_GlassThicknessList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewRowpostpaintEvent(sender, DgvGlassThicknessListRowpostpaintEventRaised, e);
+        }
+
+        private void dgv_GlassThicknessList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewCell cell = dgv_GlassThicknessList.Rows[e.RowIndex].Cells["Description"];
+            if (cell.Value.ToString() == "Laminated" || cell.Value.ToString() == "Insulated")
+            {
+                e.CellStyle.Font = new Font("Segoe UI", 10.0f, FontStyle.Bold);
+            }
+        }
+
+        private void dgv_GlassThicknessList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewCellEvent(sender, DgvGlassThicknessListCellDoubleClickEventRaised, e);
+        }
+
+        public void CloseThisDialog()
+        {
+            this.Close();
         }
     }
 }

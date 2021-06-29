@@ -493,7 +493,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        _multiPanelModel,
                                                                        suggest_DisplayWD,
                                                                        suggest_DisplayHT,
-                                                                       Glass_Thickness._6mm,
                                                                        GlazingBead_ArticleNo._2452,
                                                                        GlassFilm_Types._None,
                                                                        SashProfile_ArticleNo._None,

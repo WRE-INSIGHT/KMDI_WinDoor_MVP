@@ -60,11 +60,13 @@ namespace PresentationLayer.Views.UserControls
                 pnl_Sash.Visible = value;
                 if (value == true)
                 {
-                    flp_PanelSpecs.Height = 166;
+                    this.Height = 361;
+                    flp_PanelSpecs.Height = 212;
                 }
                 else if (value == false)
                 {
-                    flp_PanelSpecs.Height = 113;
+                    this.Height = 308;
+                    flp_PanelSpecs.Height = 159;
                 }
             }
         }
@@ -139,6 +141,7 @@ namespace PresentationLayer.Views.UserControls
             cmb_SashProfile.DataBindings.Add(ModelBinding["Panel_SashProfileArtNo"]);
             cmb_SashReinf.DataBindings.Add(ModelBinding["Panel_SashReinfArtNo"]);
             cmb_GlassType.DataBindings.Add(ModelBinding["Panel_GlassType"]);
+            lbl_GlassThicknessDesc.DataBindings.Add(ModelBinding["Panel_GlassThicknessDesc"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)
