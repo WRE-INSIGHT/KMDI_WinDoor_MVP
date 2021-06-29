@@ -3272,7 +3272,7 @@ namespace ModelLayer.Tests
 
         }
 
-
+        //Awning Samples
 
         [TestMethod]
         public void ChkVar_SinglePanelAwningWindow()
@@ -3355,10 +3355,12 @@ namespace ModelLayer.Tests
             Assert.AreEqual(532, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1032, _panelModel.Panel_GlassHeight);
 
-            //hardware
-            Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel.Panel_FrictionStayArtNo);
+
+
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel.Panel_CoverProfileArtNo2);
+            //Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel.Panel_FrictionStayArtNo);
             //Assert.AreEqual(25, _qouteModel.Screws_for_Installation);
 
 
@@ -3382,19 +3384,6 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2453%' AND
-                             Size = '700'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
-
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%2453%' AND
-                             Size = '1200'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
-
-
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '653'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
@@ -3414,31 +3403,34 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2453%' AND
-                             Size = '700'");
+                             Size = '653'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2453%' AND
-                             Size = '2000'");
+                             Size = '1153'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND
-                             Size = '628'");
+                             Description LIKE '%13mm%' AND
+                             Size = '532'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%6mm%' AND
-                             Size = '1928'");
+                             Description LIKE '%13mm%' AND
+                             Size = '1032'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             #endregion
 
         }
+
+
+
 
     }
 }
