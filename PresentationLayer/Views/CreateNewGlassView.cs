@@ -216,7 +216,7 @@ namespace PresentationLayer.Views
 
         public void ShowThis()
         {
-            this.ShowDialog();
+            this.Show();
         }
 
         public void CloseThis()
