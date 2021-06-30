@@ -60,13 +60,13 @@ namespace PresentationLayer.Views.UserControls
                 pnl_Sash.Visible = value;
                 if (value == true)
                 {
-                    this.Height = 361;
-                    flp_PanelSpecs.Height = 212;
+                    this.Height = 563;
+                    flp_PanelSpecs.Height = 414;
                 }
                 else if (value == false)
                 {
-                    this.Height = 308;
-                    flp_PanelSpecs.Height = 159;
+                    this.Height = 563;
+                    flp_PanelSpecs.Height = 414;
                 }
             }
         }
@@ -79,6 +79,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler CmbSashReinfSelectedValueChangedEventRaised;
         public event EventHandler btnSelectGlassThicknessClickedEventRaised;
         public event EventHandler CmbGlassTypeSelectedValueChangedEventRaised;
+        public event EventHandler CmbHandleTypeSelectedValueChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -121,6 +122,13 @@ namespace PresentationLayer.Views.UserControls
             }
             cmb_GlassType.DataSource = gType;
 
+            List<Handle_Type> hType = new List<Handle_Type>();
+            foreach (Handle_Type item in Handle_Type.GetAll())
+            {
+                hType.Add(item);
+            }
+            cmb_HandleType.DataSource = hType;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 
@@ -142,6 +150,7 @@ namespace PresentationLayer.Views.UserControls
             cmb_SashReinf.DataBindings.Add(ModelBinding["Panel_SashReinfArtNo"]);
             cmb_GlassType.DataBindings.Add(ModelBinding["Panel_GlassType"]);
             lbl_GlassThicknessDesc.DataBindings.Add(ModelBinding["Panel_GlassThicknessDesc"]);
+            cmb_HandleType.DataBindings.Add(ModelBinding["Panel_HandleType"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)
@@ -177,6 +186,26 @@ namespace PresentationLayer.Views.UserControls
         private void cmb_GlassType_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbGlassTypeSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_HandleType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbHandleTypeSelectedValueChangedEventRaised, e);
+        }
+
+        public ComboBox GetCmbHandleArtNo()
+        {
+            return cmb_HandleArtNo;
+        }
+
+        public Panel GetPnlRotoswingOptions()
+        {
+            return pnl_RotoswingOptions;
+        }
+
+        public Panel GetPnlRotaryOptions()
+        {
+            return pnl_RotaryOptions;
         }
     }
 }

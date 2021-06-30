@@ -21,11 +21,18 @@ namespace PresentationLayer.Presenter.UserControls
         private IGlassThicknessListPresenter _glassThicknessPresenter;
         private IUnityContainer _unityC;
 
+        private ComboBox _cmbHandleArtNo;
+        private Panel _pnlRotoswingOptions;
+        private Panel _pnlRotaryOptions;
+
         public PanelPropertiesUCPresenter(IPanelPropertiesUC panelPropertiesUC,
                                           IGlassThicknessListPresenter glassThicknessPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _glassThicknessPresenter = glassThicknessPresenter;
+            _cmbHandleArtNo = _panelPropertiesUC.GetCmbHandleArtNo();
+            _pnlRotoswingOptions = _panelPropertiesUC.GetPnlRotoswingOptions();
+            _pnlRotaryOptions = _panelPropertiesUC.GetPnlRotaryOptions();
             SubscribeToEventsSetup();
         }
 
@@ -39,6 +46,37 @@ namespace PresentationLayer.Presenter.UserControls
             _panelPropertiesUC.CmbSashReinfSelectedValueChangedEventRaised += _panelPropertiesUC_CmbSashReinfSelectedValueChangedEventRaised;
             _panelPropertiesUC.btnSelectGlassThicknessClickedEventRaised += _panelPropertiesUC_btnSelectGlassThicknessClickedEventRaised;
             _panelPropertiesUC.CmbGlassTypeSelectedValueChangedEventRaised += _panelPropertiesUC_CmbGlassTypeSelectedValueChangedEventRaised;
+            _panelPropertiesUC.CmbHandleTypeSelectedValueChangedEventRaised += _panelPropertiesUC_CmbHandleTypeSelectedValueChangedEventRaised;
+        }
+
+        private void _panelPropertiesUC_CmbHandleTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_HandleType = (Handle_Type)((ComboBox)sender).SelectedValue;
+
+            List<Rotoswing_Handle> rotoswing = new List<Rotoswing_Handle>();
+            foreach (Rotoswing_Handle item in Rotoswing_Handle.GetAll())
+            {
+                rotoswing.Add(item);
+            }
+
+            List<Rotary_Handle> rotary = new List<Rotary_Handle>();
+            foreach (Rotary_Handle item in Rotary_Handle.GetAll())
+            {
+                rotary.Add(item);
+            }
+
+            if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
+            {
+                _cmbHandleArtNo.DataSource = rotoswing;
+                _pnlRotoswingOptions.Visible = true;
+                _pnlRotaryOptions.Visible = false;
+            }
+            else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
+            {
+                _cmbHandleArtNo.DataSource = rotary;
+                _pnlRotoswingOptions.Visible = false;
+                _pnlRotaryOptions.Visible = true;
+            }
         }
 
         private void _panelPropertiesUC_CmbGlassTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -129,6 +167,7 @@ namespace PresentationLayer.Presenter.UserControls
             panelBinding.Add("Panel_SashReinfArtNo", new Binding("Text", _panelModel, "Panel_SashReinfArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_GlassType", new Binding("Text", _panelModel, "Panel_GlassType", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_GlassThicknessDesc", new Binding("Text", _panelModel, "Panel_GlassThicknessDesc", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_HandleType", new Binding("Text", _panelModel, "Panel_HandleType", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

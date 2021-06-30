@@ -68,6 +68,7 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
+        Handle_Type Panel_HandleType { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
         GlassType Panel_GlassType { get; set; }
 

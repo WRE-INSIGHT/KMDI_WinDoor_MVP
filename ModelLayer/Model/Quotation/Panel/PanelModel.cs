@@ -599,9 +599,24 @@ namespace ModelLayer.Model.Quotation.Panel
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434;
                 }
                 else if (value == 23.0f || 
-                         value == 24.0f)
+                         value == 24.0f ||
+                         value == 25.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2435;
+                }
+                else if (value == 26.0f ||
+                         value == 27.0f)
+                {
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2433;
+                }
+                else if (value == 28.0f)
+                {
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2432;
+                }
+                else if (value == 29.0f ||
+                         value == 30.0f)
+                {
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2431;
                 }
                 NotifyPropertyChanged();
             }
@@ -723,6 +738,21 @@ namespace ModelLayer.Model.Quotation.Panel
         public CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
         public CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         public FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
+
+        private Handle_Type _panelHandleType;
+        public Handle_Type Panel_HandleType
+        {
+            get
+            {
+                return _panelHandleType;
+            }
+            set
+            {
+                _panelHandleType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
 
 
@@ -786,6 +816,10 @@ namespace ModelLayer.Model.Quotation.Panel
                          (sashHt_floor >= 1300 && sashHt_floor <= 2300)))
                 {
                     Panel_FrictionStayArtNo = FrictionStay_ArticleNo._Storm26;
+                }
+                else
+                {
+                    Panel_FrictionStayArtNo = FrictionStay_ArticleNo._None;
                 }
             }
             else if (Panel_SashPropertyVisibility == false)
@@ -1056,6 +1090,10 @@ namespace ModelLayer.Model.Quotation.Panel
                          (sashHt_floor >= 1300 && sashHt_floor <= 2300)))
                 {
                     Panel_FrictionStayArtNo = FrictionStay_ArticleNo._Storm26;
+                }
+                else
+                {
+                    Panel_FrictionStayArtNo = FrictionStay_ArticleNo._None;
                 }
             }
             else if (Panel_SashPropertyVisibility == false)

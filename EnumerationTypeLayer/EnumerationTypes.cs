@@ -67,6 +67,9 @@ namespace EnumerationTypeLayer
             public static readonly GlazingBead_ArticleNo _2437 = new GlazingBead_ArticleNo(5, "2437");
             public static readonly GlazingBead_ArticleNo _2434 = new GlazingBead_ArticleNo(6, "2434");
             public static readonly GlazingBead_ArticleNo _2435 = new GlazingBead_ArticleNo(7, "2435");
+            public static readonly GlazingBead_ArticleNo _2433 = new GlazingBead_ArticleNo(8, "2433");
+            public static readonly GlazingBead_ArticleNo _2432 = new GlazingBead_ArticleNo(9, "2432");
+            public static readonly GlazingBead_ArticleNo _2431 = new GlazingBead_ArticleNo(10, "2431");
             private GlazingBead_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
         public class GlassFilm_Types : Enumeration<GlassFilm_Types, int>
@@ -173,6 +176,7 @@ namespace EnumerationTypeLayer
             public static readonly FrictionStay_ArticleNo _A212C16161 = new FrictionStay_ArticleNo(3, "A212C16161");
             public static readonly FrictionStay_ArticleNo _Storm22 = new FrictionStay_ArticleNo(4, "Storm 22");
             public static readonly FrictionStay_ArticleNo _Storm26 = new FrictionStay_ArticleNo(5, "Storm 26");
+            public static readonly FrictionStay_ArticleNo _None = new FrictionStay_ArticleNo(6, "None");
 
             private FrictionStay_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -215,6 +219,28 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _EQ87NT = new Espagnolette_ArticleNo(7, "EQ87(NT)");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Striker_ArticleNo : Enumeration<Striker_ArticleNo, int>
+        {
+            public static readonly Striker_ArticleNo _M89ANT = new Striker_ArticleNo(0, "M89A-NT");
+            private Striker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MiddleCloser_ArticleNo : Enumeration<MiddleCloser_ArticleNo, int>
+        {
+            public static readonly MiddleCloser_ArticleNo _1WC70DB = new MiddleCloser_ArticleNo(0, "1WC70-DB");
+            public static readonly MiddleCloser_ArticleNo _1WC70WHT = new MiddleCloser_ArticleNo(1, "1WC70-WHT");
+
+            private MiddleCloser_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LockingKit_ArticleNo : Enumeration<LockingKit_ArticleNo, int>
+        {
+            public static readonly LockingKit_ArticleNo _T244002KMW = new LockingKit_ArticleNo(0, "T-24.40.02 KM-W");
+            public static readonly LockingKit_ArticleNo _T24402KMBL = new LockingKit_ArticleNo(1, "T-24.4.02 KM-BL");
+
+            private LockingKit_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
     }
 }
