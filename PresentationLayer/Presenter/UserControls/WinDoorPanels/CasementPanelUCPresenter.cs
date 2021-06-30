@@ -112,7 +112,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
 
                 IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
-                div.Div_Visible = false;
+                _mainPresenter.DeleteDividerPropertiesUC(div.Div_ID);
+                div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
+                _frameModel.Lst_Divider.Remove(div);
+
+                _multiPanelModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
             }
             #endregion
 
@@ -162,8 +167,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
-            _panelModel.Panel_Visibility = false;
-            _frameModel.FrameProp_Height -= 148;
+            _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
+            if (_frameModel != null)
+            {
+                _frameModel.Lst_Panel.Remove(_panelModel);
+            }
+            if (_multiPanelModel != null)
+            {
+                _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
+            }
+
+            //_panelModel.Panel_Visibility = false;
+            _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
 
             #endregion
         }

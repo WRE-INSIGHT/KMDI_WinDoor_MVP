@@ -152,7 +152,8 @@ namespace ModelLayer.Model.Quotation.Frame
         public bool Frame_Visible
         {
             get { return _frameVisible; }
-            set { _frameVisible = value; NotifyPropertyChanged(); }
+            set { _frameVisible = value; }
+            //NotifyPropertyChanged(); }
         }
 
         private Padding _framePadding;
@@ -276,12 +277,12 @@ namespace ModelLayer.Model.Quotation.Frame
 
         private void SetZoom()
         {
-            foreach (IMultiPanelModel mpnl in Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+            foreach (IMultiPanelModel mpnl in Lst_MultiPanel)
             {
                 mpnl.MPanel_Zoom = Frame_Zoom;
             }
 
-            foreach (IPanelModel pnl in Lst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+            foreach (IPanelModel pnl in Lst_Panel)
             {
                 pnl.Panel_Zoom = Frame_Zoom;
             }
@@ -322,17 +323,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 FramePadding_Default();
             }
         }
-
-        public IEnumerable<IPanelModel> GetVisiblePanels()
-        {
-            return Lst_Panel.Where(pnl => pnl.Panel_Visibility == true);
-        }
-
-        public IEnumerable<IMultiPanelModel> GetVisibleMultiPanels()
-        {
-            return Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true);
-        }
-
+        
         #region Explosion
 
         FrameProfile_ArticleNo _frameArtNo;
@@ -349,6 +340,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._R676;
                 }
+                NotifyPropertyChanged();
             }
         }
         public int Frame_ExplosionWidth { get; set; }
@@ -358,18 +350,71 @@ namespace ModelLayer.Model.Quotation.Frame
         public int Frame_ReinfWidth { get; set; }
         public int Frame_ReinfHeight { get; set; }
 
-        public int Frame_PUFoamingQty { get; set; }
-        public int Frame_SealantWHQty { get; set; }
-
         public void SetExplosionValues_Frame()
         {
             Frame_ExplosionWidth = _frameWidth + 5;
             Frame_ExplosionHeight = _frameHeight + 5;
             Frame_ReinfWidth = _frameWidth - (29 * 2) - 10;
             Frame_ReinfHeight = _frameHeight - (29 * 2) - 10;
+        }
 
-            Frame_PUFoamingQty = (int)Math.Ceiling((decimal)((_frameWidth + _frameHeight) * 2) / 29694);
-            Frame_SealantWHQty = (int)Math.Ceiling((decimal)((_frameWidth + _frameHeight) * 2) / 3570);
+        public void AdjustPropertyPanelHeight(string objtype, string mode)
+        {
+            if (objtype == "Panel")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= (563 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += (563 + 1); //+1 on margin (PanelProperties)
+                }
+            }
+            else if (objtype == "FxdNone")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= (308 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += (308 + 1); //+1 on margin (PanelProperties)
+                }
+            }
+            else if (objtype == "SashProp")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= 53;
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += 53;
+                }
+            }
+            else if (objtype == "Div")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += (173 + 1); //+1 on margin (divProperties)
+                }
+            }
+            else if (objtype == "Mpanel")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += (129 + 3); // +3 for MultiPanelProperties' Margin
+                }
+            }
         }
 
         #endregion

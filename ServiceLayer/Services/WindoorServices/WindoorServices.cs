@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Frame;
 using ServiceLayer.CommonServices;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ServiceLayer.Services.WindoorServices
 {
@@ -18,7 +19,7 @@ namespace ServiceLayer.Services.WindoorServices
             _modelCheck = modelCheck;
         }
 
-        public IWindoorModel CreateWindoor(int WD_id, 
+        private IWindoorModel CreateWindoor(int WD_id, 
                                            string WD_name, 
                                            string WD_description, 
                                            int WD_width, 
@@ -30,22 +31,26 @@ namespace ServiceLayer.Services.WindoorServices
                                            bool WD_orientation,
                                            float WD_zoom,
                                            string WD_Profile,
-                                           List<IFrameModel> lst_frame)
+                                           List<IFrameModel> lst_frame,
+                                           Base_Color wd_basecolor,
+                                           Foil_Color wd_insidecolor,
+                                           Foil_Color wd_outisdecolor)
         {
-            WindoorModel wndr = new WindoorModel();
-            wndr.WD_id = WD_id;
-            wndr.WD_name = WD_name;
-            wndr.WD_description = WD_description;
-            wndr.WD_width = WD_width;
-            wndr.WD_height = WD_height;
-            wndr.WD_price = WD_price;
-            wndr.WD_quantity = WD_quantity;
-            wndr.WD_discount = WD_discount;
-            wndr.WD_visibility = WD_visibility;
-            wndr.WD_orientation = WD_orientation;
-            //wndr.WD_zoom = WD_zoom;
-            wndr.WD_profile = WD_Profile;
-            wndr.lst_frame = lst_frame;
+            IWindoorModel wndr = new WindoorModel(WD_id,
+                                                  WD_name,
+                                                  WD_description,
+                                                  WD_width,
+                                                  WD_height,
+                                                  WD_price,
+                                                  WD_quantity,
+                                                  WD_discount,
+                                                  WD_visibility,
+                                                  WD_orientation,
+                                                  WD_Profile,
+                                                  lst_frame,
+                                                  wd_basecolor,
+                                                  wd_insidecolor,
+                                                  wd_outisdecolor);
 
             ValidateModel(wndr);
             return wndr;
@@ -55,6 +60,9 @@ namespace ServiceLayer.Services.WindoorServices
                                              int WD_height,
                                              string WD_Profile,
                                              int WD_ID,
+                                             Base_Color wd_basecolor,
+                                             Foil_Color wd_insidecolor,
+                                             Foil_Color wd_outisdecolor,
                                              string WD_name = "",
                                              string WD_description = "",
                                              int WD_quantity = 1,
@@ -90,7 +98,10 @@ namespace ServiceLayer.Services.WindoorServices
                                                         WD_orientation,
                                                         WD_zoom,
                                                         WD_Profile,
-                                                        lst_frame);
+                                                        lst_frame,
+                                                        wd_basecolor, 
+                                                        wd_insidecolor,
+                                                        wd_outisdecolor);
 
             return _windoorModel;
         }

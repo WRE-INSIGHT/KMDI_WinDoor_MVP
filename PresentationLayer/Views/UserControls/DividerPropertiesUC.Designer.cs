@@ -110,7 +110,7 @@
             // 
             // cmb_divReinf
             // 
-            this.cmb_divReinf.CausesValidation = false;
+            this.cmb_divReinf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_divReinf.FormattingEnabled = true;
             this.cmb_divReinf.Items.AddRange(new object[] {
             "6-8mm",
@@ -137,7 +137,7 @@
             // 
             // cmb_divArtNo
             // 
-            this.cmb_divArtNo.CausesValidation = false;
+            this.cmb_divArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_divArtNo.FormattingEnabled = true;
             this.cmb_divArtNo.Items.AddRange(new object[] {
             "6-8mm",

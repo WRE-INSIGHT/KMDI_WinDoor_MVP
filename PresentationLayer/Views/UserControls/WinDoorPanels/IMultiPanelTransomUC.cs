@@ -15,5 +15,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler deleteClickedEventRaised;
         event EventHandler multiMullionSizeChangedEventRaised;
         event EventHandler dividerEnabledCheckedChangedEventRaised;
+        event DragEventHandler flpMultiDragOverEventRaised;
     }
 }

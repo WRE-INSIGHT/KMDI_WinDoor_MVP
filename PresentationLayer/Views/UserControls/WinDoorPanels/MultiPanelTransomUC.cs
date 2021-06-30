@@ -55,6 +55,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event DragEventHandler flpMultiDragDropEventRaised;
         public event EventHandler multiMullionSizeChangedEventRaised;
         public event EventHandler dividerEnabledCheckedChangedEventRaised;
+        public event DragEventHandler flpMultiDragOverEventRaised;
 
         public void InvalidateFlp()
         {
@@ -112,7 +113,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void flp_MultiTransom_DragOver(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            EventHelpers.RaiseDragEvent(sender, flpMultiDragOverEventRaised, e);
         }
 
         private void flp_MultiTransom_DragDrop(object sender, DragEventArgs e)

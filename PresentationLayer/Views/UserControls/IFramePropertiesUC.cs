@@ -16,6 +16,7 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler NumFHeightValueChangedEventRaised;
         event EventHandler NumFWidthValueChangedEventRaised;
         event EventHandler RdBtnCheckedChangedEventRaised;
+        event EventHandler cmbFrameProfileSelectedValueChangedEventRaised;
         void BringToFrontThis();
         FlowLayoutPanel GetFramePropertiesFLP();
         void SetFrameTypeRadioBtnEnabled(bool frameTypeEnabled);

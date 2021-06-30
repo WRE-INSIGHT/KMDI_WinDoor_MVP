@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Unity;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
+using ModelLayer.Model.Quotation.MultiPanel;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -33,15 +34,17 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _divProperties_CmbdivArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            ComboBox cmb = (ComboBox)sender;
-            if (cmb.Text == "7536")
-            {
-                _divModel.Div_ArtNo = Divider_ArticleNo._7536;
-            }
-            else if (cmb.Text == "7538")
-            {
-                _divModel.Div_ArtNo = Divider_ArticleNo._7538;
-            }
+            _divModel.Div_ArtNo = (Divider_ArticleNo)((ComboBox)sender).SelectedValue;
+
+            //IMultiPanelModel parent = _divModel.Div_MPanelParent;
+            //int obj_actualCount = parent.MPanelLst_Objects.Where(obj => obj.Visible == true).Count(),
+            //    obj_expectedCount = (parent.MPanel_Divisions * 2) + 1;
+
+            //if (obj_actualCount == obj_expectedCount)
+            //{
+            //    _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+            //    parent.SetEqualGlassDimension();
+            //}
         }
 
         private void _divProperties_PanelPropertiesLoadEventRaised(object sender, EventArgs e)

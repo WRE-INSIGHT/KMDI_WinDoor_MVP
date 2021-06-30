@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using static ModelLayer.Model.Quotation.QuotationModel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ServiceLayer.Services.PanelServices
 {
@@ -22,9 +23,12 @@ namespace ServiceLayer.Services.PanelServices
                                   IMultiPanelModel panelMultiPanelParent,
                                   int panelDisplayWidth,
                                   int panelDisplayHeight,
-                                  Glass_Thickness panelGlassThickness,
-                                  GlazingBead_ArticleNo panelGlazingBeadArtNo = GlazingBead_ArticleNo._2452,
+                                  GlazingBead_ArticleNo panelGlazingBeadArtNo,
+                                  GlassFilm_Types panelGlassFilm,
+                                  SashProfile_ArticleNo panelSash,
+                                  SashReinf_ArticleNo panelSashReinf,
                                   int panelID = 0,
+                                  int panelGlassID = 0,
                                   float panelImageRendererZoom = 1,
                                   int panelIndexInsideMPanel = 0,
                                   DockStyle panelDock = DockStyle.Fill,

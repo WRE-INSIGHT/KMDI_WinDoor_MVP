@@ -69,8 +69,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)sender);
             FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
 
-            //int me_indx = flp.Controls.IndexOf(me);
-
             Control prev_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx - 1];
             Control nxt_ctrl = null;
 
@@ -152,12 +150,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 }
                             }
                         }
-
-                        //flp.Controls[me_indx - 1].Height ++;
-                        //flp.Controls[me_indx + 1].Height --;
-
-                        //flp.Controls[me_indx - 1].Invalidate();
-                        //flp.Controls[me_indx + 1].Invalidate();
+                        
                         break;
 
                     case Keys.Down:
@@ -197,14 +190,9 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 }
                             }
                         }
-
-                        //flp.Controls[me_indx - 1].Height--;
-                        //flp.Controls[me_indx + 1].Height++;
-
-                        //flp.Controls[me_indx - 1].Invalidate();
-                        //flp.Controls[me_indx + 1].Invalidate();
                         break;
                 }
+                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             }
         }
 
@@ -447,6 +435,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         }
                     }
                 }
+                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             }
             catch (Exception ex)
             {

@@ -19,23 +19,23 @@ namespace ServiceLayer.Tests
             _quotationServices = new QuotationServices(new ModelDataAnnotationCheck());
         }
 
-        [TestMethod]
-        public void CreateQuotation_QRefNoIsNothing_ShouldReturnException()
-        {
-            try
-            {
-                QuotationModel qrefno = new QuotationModel();
-                List<IWindoorModel> lst_wndr = new List<IWindoorModel>();
-                lst_wndr.Add(new WindoorModel());
-                qrefno = (QuotationModel)_quotationServices.CreateQuotationModel("", lst_wndr);
-            }
-            catch (Exception ex)
-            {
-                StringAssert.Contains(ex.Message, "Quotation reference number is Required");
-                return;
-            }
-            Assert.Fail("No exception was thrown.");
-        }
+        //[TestMethod]
+        //public void CreateQuotation_QRefNoIsNothing_ShouldReturnException()
+        //{
+        //    try
+        //    {
+        //        QuotationModel qrefno = new QuotationModel();
+        //        List<IWindoorModel> lst_wndr = new List<IWindoorModel>();
+        //        lst_wndr.Add(new WindoorModel());
+        //        qrefno = (QuotationModel)_quotationServices.CreateQuotationModel("", lst_wndr);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        StringAssert.Contains(ex.Message, "Quotation reference number is Required");
+        //        return;
+        //    }
+        //    Assert.Fail("No exception was thrown.");
+        //}
 
     }
 }

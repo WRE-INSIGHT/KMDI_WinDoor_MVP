@@ -36,6 +36,17 @@
             this.ItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.C70ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PremiLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.glassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.singleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doubleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DoubleInsulatedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DoubleLaminatedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tripleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TripleInsulatedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TripleLaminatedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.glassTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spacerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.costingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +60,8 @@
             this.editorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invertOrientationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listOfMaterialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeItemColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.glassBalancingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsBtnNwin = new System.Windows.Forms.ToolStripButton();
             this.tsBtnNdoor = new System.Windows.Forms.ToolStripButton();
@@ -124,7 +137,11 @@
             // 
             this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.QuotationToolStripMenuItem,
-            this.ItemToolStripMenuItem});
+            this.ItemToolStripMenuItem,
+            this.glassToolStripMenuItem,
+            this.glassTypeToolStripMenuItem,
+            this.colorToolStripMenuItem,
+            this.spacerToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
@@ -159,6 +176,90 @@
             this.PremiLineToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.PremiLineToolStripMenuItem.Text = "P&remiLine";
             this.PremiLineToolStripMenuItem.Click += new System.EventHandler(this.CreateNewItem_Clicked);
+            // 
+            // glassToolStripMenuItem
+            // 
+            this.glassToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.singleToolStripMenuItem,
+            this.doubleToolStripMenuItem,
+            this.tripleToolStripMenuItem});
+            this.glassToolStripMenuItem.Name = "glassToolStripMenuItem";
+            this.glassToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.glassToolStripMenuItem.Text = "Glass";
+            // 
+            // singleToolStripMenuItem
+            // 
+            this.singleToolStripMenuItem.Name = "singleToolStripMenuItem";
+            this.singleToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.singleToolStripMenuItem.Text = "Single";
+            this.singleToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
+            // 
+            // doubleToolStripMenuItem
+            // 
+            this.doubleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DoubleInsulatedToolStripMenuItem,
+            this.DoubleLaminatedToolStripMenuItem});
+            this.doubleToolStripMenuItem.Name = "doubleToolStripMenuItem";
+            this.doubleToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.doubleToolStripMenuItem.Text = "Double";
+            // 
+            // DoubleInsulatedToolStripMenuItem
+            // 
+            this.DoubleInsulatedToolStripMenuItem.Name = "DoubleInsulatedToolStripMenuItem";
+            this.DoubleInsulatedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.DoubleInsulatedToolStripMenuItem.Text = "Insulated";
+            this.DoubleInsulatedToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
+            // 
+            // DoubleLaminatedToolStripMenuItem
+            // 
+            this.DoubleLaminatedToolStripMenuItem.Name = "DoubleLaminatedToolStripMenuItem";
+            this.DoubleLaminatedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.DoubleLaminatedToolStripMenuItem.Text = "Laminated";
+            this.DoubleLaminatedToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
+            // 
+            // tripleToolStripMenuItem
+            // 
+            this.tripleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TripleInsulatedToolStripMenuItem,
+            this.TripleLaminatedToolStripMenuItem});
+            this.tripleToolStripMenuItem.Name = "tripleToolStripMenuItem";
+            this.tripleToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.tripleToolStripMenuItem.Text = "Triple";
+            // 
+            // TripleInsulatedToolStripMenuItem
+            // 
+            this.TripleInsulatedToolStripMenuItem.Name = "TripleInsulatedToolStripMenuItem";
+            this.TripleInsulatedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.TripleInsulatedToolStripMenuItem.Text = "Insulated";
+            this.TripleInsulatedToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
+            // 
+            // TripleLaminatedToolStripMenuItem
+            // 
+            this.TripleLaminatedToolStripMenuItem.Name = "TripleLaminatedToolStripMenuItem";
+            this.TripleLaminatedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.TripleLaminatedToolStripMenuItem.Text = "Laminated";
+            this.TripleLaminatedToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
+            // 
+            // glassTypeToolStripMenuItem
+            // 
+            this.glassTypeToolStripMenuItem.Name = "glassTypeToolStripMenuItem";
+            this.glassTypeToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.glassTypeToolStripMenuItem.Text = "Glass Type";
+            this.glassTypeToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
+            // 
+            // colorToolStripMenuItem
+            // 
+            this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.colorToolStripMenuItem.Text = "Color";
+            this.colorToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
+            // 
+            // spacerToolStripMenuItem
+            // 
+            this.spacerToolStripMenuItem.Name = "spacerToolStripMenuItem";
+            this.spacerToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.spacerToolStripMenuItem.Text = "Spacer";
+            this.spacerToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -220,7 +321,9 @@
             this.changeSyncDirectoryToolStripMenuItem,
             this.syncLocalToCloudToolStripMenuItem,
             this.editorToolStripMenuItem,
-            this.listOfMaterialsToolStripMenuItem});
+            this.listOfMaterialsToolStripMenuItem,
+            this.changeItemColorToolStripMenuItem,
+            this.glassBalancingToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -258,6 +361,21 @@
             this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.listOfMaterialsToolStripMenuItem.Text = "List of Materials";
             this.listOfMaterialsToolStripMenuItem.Click += new System.EventHandler(this.listOfMaterialsToolStripMenuItem_Click);
+            // 
+            // changeItemColorToolStripMenuItem
+            // 
+            this.changeItemColorToolStripMenuItem.Name = "changeItemColorToolStripMenuItem";
+            this.changeItemColorToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.changeItemColorToolStripMenuItem.Text = "Change Item Color";
+            this.changeItemColorToolStripMenuItem.Click += new System.EventHandler(this.changeItemColorToolStripMenuItem_Click);
+            // 
+            // glassBalancingToolStripMenuItem
+            // 
+            this.glassBalancingToolStripMenuItem.CheckOnClick = true;
+            this.glassBalancingToolStripMenuItem.Name = "glassBalancingToolStripMenuItem";
+            this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.glassBalancingToolStripMenuItem.Text = "Glass Balancing";
+            this.glassBalancingToolStripMenuItem.Click += new System.EventHandler(this.glassBalancingToolStripMenuItem_Click);
             // 
             // tsMain
             // 
@@ -758,5 +876,18 @@
         private System.Windows.Forms.Button btnMinusZoom;
         private System.Windows.Forms.Button btnPlusZoom;
         private System.Windows.Forms.ToolStripMenuItem listOfMaterialsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem glassToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem singleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem doubleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DoubleInsulatedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DoubleLaminatedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tripleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TripleInsulatedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TripleLaminatedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeItemColorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem glassTypeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spacerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem glassBalancingToolStripMenuItem;
     }
 }

@@ -12,6 +12,8 @@ namespace ServiceLayer.Services.MultiPanelServices
         void ValidateModel(IMultiPanelModel multiPanelModel);
         IMultiPanelModel AddMultiPanelModel(int mwidth,
                                             int mheight,
+                                            int mpanelDisplayWidth,
+                                            int mpanelDisplayHeight,
                                             Control mpanelParent,
                                             UserControl mpanelFrameGroup,
                                             IFrameModel mpanelFrameModelParent,
@@ -20,6 +22,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                             float mpanelZoom,
                                             int mid = 0,
                                             DockStyle mdock = DockStyle.Fill,
+                                            int mpanelStackNo = 0,
                                             int mpanelIndexInsideMPanel = 0,
                                             IMultiPanelModel mpanelParentModel = null,
                                             float mpanelImageRendererZoom = 1,

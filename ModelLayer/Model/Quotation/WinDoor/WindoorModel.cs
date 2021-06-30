@@ -9,6 +9,7 @@ using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -311,11 +312,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public IEnumerable<IFrameModel> GetAllVisibleFrames()
-        {
-            return lst_frame.Where(frame => frame.Frame_Visible == true);
-        }
-
         private float[] _arr_zoomPercentage = { 0.10f, 0.13f, 0.17f, 0.26f, 0.50f, 1.0f };
         public float[] Arr_ZoomPercentage
         {
@@ -376,6 +372,12 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _divIDCounter = value;
             }
         }
+
+        public int PanelGlassID_Counter { get; set; }
+
+        public Base_Color WD_BaseColor { get; set; }
+        public Foil_Color WD_InsideColor { get; set; }
+        public Foil_Color WD_OutsideColor { get; set; }
 
         public float GetZoom_forRendering()
         {
@@ -447,11 +449,83 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             if (lst_frame != null)
             {
-                foreach (IFrameModel fr in lst_frame.Where(fr => fr.Frame_Visible == true))
+                foreach (IFrameModel fr in lst_frame)
                 {
                     fr.Frame_Zoom = WD_zoom;
                 }
             }
+        }
+
+        public void SetPanelGlassID()
+        {
+            int i = 0;
+            foreach (IFrameModel fr in lst_frame)
+            {
+                foreach (IPanelModel pnl in fr.Lst_Panel)
+                {
+                    pnl.PanelGlass_ID = i;
+                    i++;
+                    if (i == PanelGlassID_Counter)
+                    {
+                        break;
+                    }
+                }
+                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                {
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                    {
+                        i++;
+                        pnl.PanelGlass_ID = i;
+                        if (i == PanelGlassID_Counter)
+                        {
+                            break;
+                        }
+                    }
+                    if (i == PanelGlassID_Counter)
+                    {
+                        break;
+                    }
+                }
+                if (i == PanelGlassID_Counter)
+                {
+                    break;
+                }
+            }
+        }
+
+        public WindoorModel(int wd_id,
+                            string wd_name,
+                            string wd_description,
+                            int wd_width,
+                            int wd_height,
+                            int wd_price,
+                            int wd_quantity,
+                            decimal wd_discount,
+                            bool wd_visibility,
+                            bool wd_orientation,
+                            //float wd_zoom,
+                            string wd_Profile,
+                            List<IFrameModel> wdlstframe,
+                            Base_Color wd_basecolor,
+                            Foil_Color wd_insidecolor,
+                            Foil_Color wd_outisdecolor)
+        {
+            WD_id = wd_id;
+            WD_name = wd_name;
+            WD_description = wd_description;
+            WD_width = wd_width;
+            WD_height = wd_height;
+            WD_price = wd_price;
+            WD_quantity = wd_quantity;
+            WD_discount = wd_discount;
+            WD_visibility = wd_visibility;
+            WD_orientation = wd_orientation;
+            //WD_zoom = wd_zoom;
+            WD_profile = wd_Profile;
+            lst_frame = wdlstframe;
+            WD_BaseColor = wd_basecolor;
+            WD_InsideColor = wd_insidecolor;
+            WD_OutsideColor = wd_outisdecolor;
         }
     }
 }

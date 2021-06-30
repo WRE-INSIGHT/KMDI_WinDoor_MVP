@@ -11,8 +11,15 @@ namespace ModelLayer.Model.Quotation
     public interface IQuotationModel
     {
         string Quotation_ref_no { get; set; }
-        List<IWindoorModel> Lst_Windoor { get; set; }
 
+        int Frame_PUFoamingQty_Total { get; set; }
+        int Frame_SealantWHQty_Total { get; set; }
+        int Glass_SealantWHQty_Total { get; set; }
+        int GlazingSpacer_TotalQty { get; set; }
+        int GlazingSeal_TotalQty { get; set; }
+
+        List<IWindoorModel> Lst_Windoor { get; set; }
         DataTable GetListOfMaterials();
+        DataTable GetListOfMaterials(IWindoorModel item);
     }
 }

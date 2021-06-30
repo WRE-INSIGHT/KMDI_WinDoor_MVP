@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using static ModelLayer.Model.Quotation.QuotationModel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ServiceLayer.Services.PanelServices
 {
@@ -39,32 +40,38 @@ namespace ServiceLayer.Services.PanelServices
                                             float panelZoom,
                                             IFrameModel panelFrameModelParent,
                                             IMultiPanelModel panelMultiPanelParent,
-                                            Glass_Thickness panelGlassThickness,
                                             GlazingBead_ArticleNo panelGlazingBeadArtNo,
                                             int panelDisplayWidth,
-                                            int panelDisplayHeight)
+                                            int panelDisplayHeight,
+                                            int panelGlassID,
+                                            GlassFilm_Types panelGlassFilm,
+                                            SashProfile_ArticleNo panelSash,
+                                            SashReinf_ArticleNo panelSashReinf)
         {
-            PanelModel pnl = new PanelModel(panelID,
-                                            panelName,
-                                            panelWd,
-                                            panelHt,
-                                            panelDock,
-                                            panelType,
-                                            panelOrient,
-                                            panelParent,
-                                            panelFrameGroup,
-                                            panelVisibility,
-                                            panelFramePropertiesGroup,
-                                            panelMultiPanelGroup,
-                                            panelIndexInsideMPanel,
-                                            panelImageRendererZoom,
-                                            panelZoom,
-                                            panelFrameModelParent,
-                                            panelMultiPanelParent,
-                                            panelGlassThickness,
-                                            panelGlazingBeadArtNo,
-                                            panelDisplayWidth,
-                                            panelDisplayHeight);
+            IPanelModel pnl = new PanelModel(panelID,
+                                             panelName,
+                                             panelWd,
+                                             panelHt,
+                                             panelDock,
+                                             panelType,
+                                             panelOrient,
+                                             panelParent,
+                                             panelFrameGroup,
+                                             panelVisibility,
+                                             panelFramePropertiesGroup,
+                                             panelMultiPanelGroup,
+                                             panelIndexInsideMPanel,
+                                             panelImageRendererZoom,
+                                             panelZoom,
+                                             panelFrameModelParent,
+                                             panelMultiPanelParent,
+                                             panelGlazingBeadArtNo,
+                                             panelDisplayWidth,
+                                             panelDisplayHeight,
+                                             panelGlassID,
+                                             panelGlassFilm,
+                                             panelSash,
+                                             panelSashReinf);
 
             ValidateModel(pnl);
             return pnl;
@@ -88,9 +95,12 @@ namespace ServiceLayer.Services.PanelServices
                                          IMultiPanelModel panelMultiPanelParent,
                                          int panelDisplayWidth,
                                          int panelDisplayHeight,
-                                         Glass_Thickness panelGlassThickness,
-                                         GlazingBead_ArticleNo panelGlazingBeadArtNo = GlazingBead_ArticleNo._2452,
+                                         GlazingBead_ArticleNo panelGlazingBeadArtNo,
+                                         GlassFilm_Types panelGlassFilm,
+                                         SashProfile_ArticleNo panelSash,
+                                         SashReinf_ArticleNo panelSashReinf,
                                          int panelID = 0,
+                                         int panelGlassID = 0,
                                          float panelImageRendererZoom = 1,
                                          int panelIndexInsideMPanel = 0,
                                          DockStyle panelDock = DockStyle.Fill,
@@ -119,10 +129,13 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelZoom,
                                                        panelFrameModelParent,
                                                        panelMultiPanelParent,
-                                                       panelGlassThickness,
                                                        panelGlazingBeadArtNo,
                                                        panelDisplayWidth,
-                                                       panelDisplayHeight);
+                                                       panelDisplayHeight,
+                                                       panelGlassID,
+                                                       panelGlassFilm,
+                                                       panelSash,
+                                                       panelSashReinf);
 
             return _panelModel;
         }

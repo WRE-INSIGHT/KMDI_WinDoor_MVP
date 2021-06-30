@@ -2,23 +2,20 @@
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Presenter.UserControls;
 using ModelLayer.Model.User;
-using System;
-using System.Collections.Generic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Frame;
 using System.Windows.Forms;
 using Unity;
-using ModelLayer.Model.Quotation.Panel;
-using ModelLayer.Model.Quotation.MultiPanel;
-using System.Drawing;
 using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.Presenter.UserControls.Dividers;
+using System.Data;
 
 namespace PresentationLayer.Presenter
 {
     public interface IMainPresenter
     {
+        DataTable GlassThicknessDT { get; set; }
         string inputted_quotationRefNo { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }
@@ -34,6 +31,9 @@ namespace PresentationLayer.Presenter
         Panel pnlItems_MainPresenter { get; set; }
         Panel pnlPropertiesBody_MainPresenter { get; set; }
         IDividerPropertiesUCPresenter divPropertiesUCP { get; }
+        DataTable Glass_Type { get; }
+        DataTable Spacer { get; }
+        DataTable Color { get; }
 
         IMainView GetMainView();
         IFramePropertiesUC GetFrameProperties(int frameID);
@@ -46,6 +46,9 @@ namespace PresentationLayer.Presenter
         int GetPanelCount();
         int GetMultiPanelCount();
         int GetDividerCount();
+        int GetPanelGlassID();
+        void DeductPanelGlassID();
+        void SetPanelGlassID();
         void AddItemInfoUC(IWindoorModel wndr);
         void Invalidate_pnlMain();
         void Scenario_Quotation(bool QoutationInputBox_OkClicked,
@@ -62,6 +65,10 @@ namespace PresentationLayer.Presenter
                                 ITransomUCPresenter transomUCP = null,
                                 IMullionUCPresenter mullionUCP = null);
         void DeselectDivider();
-        void DeletePropertiesUC(int multiPanelID);
+        void Run_GetListOfMaterials_SpecificItem();
+        void DeleteMultiPanelPropertiesUC(int multiPanelID);
+        void DeleteDividerPropertiesUC(int divID);
+        void DeletePanelPropertiesUC(int panelID);
+        void DeleteFramePropertiesUC(int frameID);
     }
 }

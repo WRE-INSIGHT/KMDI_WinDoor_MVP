@@ -33,5 +33,13 @@ namespace CommonComponents
         {
             controlEventHandlerRaised?.Invoke(objectRaisingEvent, controlEventArgs);
         }
+        public static void RaiseDatagridviewRowpostpaintEvent(object objectRaisingEvent, DataGridViewRowPostPaintEventHandler controlEventHandlerRaised, DataGridViewRowPostPaintEventArgs controlEventArgs)
+        {
+            controlEventHandlerRaised?.Invoke(objectRaisingEvent, controlEventArgs);
+        }
+        public static void RaiseDatagridviewCellEvent(object objectRaisingEvent, DataGridViewCellEventHandler controlEventHandlerRaised, DataGridViewCellEventArgs controlEventArgs)
+        {
+            controlEventHandlerRaised?.Invoke(objectRaisingEvent, controlEventArgs);
+        }
     }
 }

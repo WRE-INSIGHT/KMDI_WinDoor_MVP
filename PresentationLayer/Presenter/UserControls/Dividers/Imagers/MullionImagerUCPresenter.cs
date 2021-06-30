@@ -57,47 +57,59 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
 
         private void _mullionImagerUC_mullionUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            //UserControl mul = (UserControl)sender;
-            //Graphics g = e.Graphics;
+            UserControl mul = (UserControl)sender;
+            Graphics g = e.Graphics;
 
-            //int lineHT = mul.ClientRectangle.Height - 6,
-            //    lineWd = mul.ClientRectangle.Width - 2;
+            g.SmoothingMode = SmoothingMode.HighQuality;
 
-            //g.SmoothingMode = SmoothingMode.HighQuality;
+            int w = 1;
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
 
-            //GraphicsPath gpath = new GraphicsPath();
+            Control mullionCounterpart = _multiPanelModel.MPanelLst_Objects.Find(obj => obj.Name == _divModel.Div_Name);
+            int ctrl_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mullionCounterpart);
+            bool prevCtrl_isPanel = false;
 
-            //int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_mullionUC);
-            //int prev_obj_ndx = this_ndx - 1,
-            //    next_obj_ndx = this_ndx + 1;
-            //string prev_obj_name = "",
-            //       next_obj_name = "";
+            if (!_multiPanelModel.MPanelLst_Objects[ctrl_ndx - 1].Name.Contains("Multi"))
+            {
+                prevCtrl_isPanel = true;
+            }
+            else
+            {
+                prevCtrl_isPanel = false;
+            }
 
-            //if (prev_obj_ndx >= 0)
-            //{
-            //    prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
-            //}
-            //if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
-            //{
-            //    next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
-            //}
 
-            //List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints(mul.Width,
-            //                                                            mul.Height,
-            //                                                            prev_obj_name,
-            //                                                            next_obj_name,
-            //                                                            _frameModel,
-            //                                                            _divModel.DivImageRenderer_Zoom);
-
-            //gpath.AddLine(TPoints[0][0], TPoints[0][1]);
-            //gpath.AddCurve(TPoints[1]);
-            //gpath.AddLine(TPoints[2][0], TPoints[2][1]);
-            //gpath.AddCurve(TPoints[3]);
-
-            //Pen pen = new Pen(Color.Black, 2);
-
-            //g.DrawPath(pen, gpath);
-            //g.FillPath(Brushes.PowderBlue, gpath);
+            if (_divModel.Div_Width == (int)_frameModel.Frame_Type)
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                       0,
+                                                                       mul.ClientRectangle.Width - w,
+                                                                       mul.ClientRectangle.Height - w));
+            }
+            else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
+            {
+                if (prevCtrl_isPanel == false)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(-1,
+                                                                           0,
+                                                                           (mul.ClientRectangle.Width - w) + 1,
+                                                                           mul.ClientRectangle.Height - w));
+                }
+                else if (prevCtrl_isPanel == true)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                           0,
+                                                                           (mul.ClientRectangle.Width - w) + 2,
+                                                                           mul.ClientRectangle.Height - w));
+                }
+            }
+            else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(-1,
+                                                                       0,
+                                                                       (mul.ClientRectangle.Width - w) + 2,
+                                                                       mul.ClientRectangle.Height - w));
+            }
         }
 
         public IMullionImagerUC GetMullionImager()

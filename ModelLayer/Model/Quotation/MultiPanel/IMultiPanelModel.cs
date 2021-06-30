@@ -3,6 +3,8 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
+using static ModelLayer.Model.Quotation.Divider.DividerModel;
 
 namespace ModelLayer.Model.Quotation.MultiPanel
 {
@@ -38,6 +40,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanel_AddPixel { get; }
         int MPanel_DisplayWidth { get; set; }
         int MPanel_DisplayHeight { get; set; }
+        int MPanel_StackNo { get; set; }
 
         int GetNextIndex();
         int GetCount_MPanelLst_Object();
@@ -50,9 +53,29 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         void Fit_MyControls_ToBindDimensions();
         void Fit_MyControls_Dimensions();
         void Object_Indexer();
-        IEnumerable<IDividerModel> GetVisibleDividers();
-        IEnumerable<IPanelModel> GetVisiblePanels();
+        void Adjust_ControlDisplaySize();
         IEnumerable<Control> GetVisibleObjects();
-        IEnumerable<IMultiPanelModel> GetVisibleMultiPanels();
+
+        #region Explosion
+
+        int MPanel_OriginalDisplayWidth { get; set; }
+        int MPanel_OriginalDisplayHeight { get; set; }
+        int MPanel_OriginalGlassWidth { get; set; }
+        int MPanel_OriginalGlassHeight { get; set; }
+
+        void SetEqualGlassDimension(string mode);
+        void SetMPanelExplosionValues_Panel(Divider_ArticleNo divNxt_artNo,
+                                            Divider_ArticleNo divPrev_artNo,
+                                            DividerType div_type,
+                                            Divider_ArticleNo divArtNo_LeftorTop = null,
+                                            Divider_ArticleNo divArtNo_RightorBot = null,
+                                            string div_type_lvl3 = "",
+                                            Divider_ArticleNo divArtNo_LeftorTop_lvl3 = null,
+                                            Divider_ArticleNo divArtNo_RightorBot_lvl3 = null,
+                                            string panel_placement = "",
+                                            string mpanel_placement = "", //1st level
+                                            string mpanelparent_placement = ""); //2nd level
+        void AdjustPropertyPanelHeight(string objtype, string mode);
+        #endregion
     }
 }

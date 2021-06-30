@@ -12,7 +12,8 @@ namespace PresentationLayer.Views.UserControls
 
         event EventHandler frameLoadEventRaised;
         event PaintEventHandler outerFramePaintEventRaised;
-        
+        event EventHandler frameVisibleChangedEventRaised;
+
         void AddImagerControl(Control ctrlObj);
         void DeleteImagerControl(UserControl userctrlObj);
     }

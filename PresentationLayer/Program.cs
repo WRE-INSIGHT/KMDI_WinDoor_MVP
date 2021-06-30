@@ -106,7 +106,7 @@ namespace PresentationLayer
                 .RegisterType<IControlsUC, ControlsUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IControlsUCPresenter, ControlsUCPresenter>(new ContainerControlledLifetimeManager())
 
-                .RegisterType<IPanelPropertiesUC, PanelPropertiesUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPanelPropertiesUC, Panel_PropertiesUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPanelPropertiesUCPresenter, PanelPropertiesUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IFixedPanelUC, FixedPanelUC>(new ContainerControlledLifetimeManager())
@@ -165,6 +165,15 @@ namespace PresentationLayer
 
                 .RegisterType<IExplosionView, ExplosionView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IExplosionPresenter, ExplosionPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ICreateNewGlassView, CreateNewGlassView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICreateNewGlassPresenter, CreateNewGlassPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IChangeItemColorView, ChangeItemColorView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IChangeItemColorPresenter, ChangeItemColorPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IGlassThicknessListView, GlassThicknessListView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IGlassThicknessListPresenter, GlassThicknessListPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

@@ -67,8 +67,21 @@ namespace PresentationLayer.Views.UserControls
         {
             num_divWidth.Maximum = decimal.MaxValue;
             num_divHeight.Maximum = decimal.MaxValue;
-            cmb_divArtNo.DataSource = Divider_ArticleNo.GetAll();
-            cmb_divReinf.DataSource = DividerReinf_ArticleNo.GetAll();
+
+            List<Divider_ArticleNo> dArtNo = new List<Divider_ArticleNo>();
+            foreach (Divider_ArticleNo item in Divider_ArticleNo.GetAll())
+            {
+                dArtNo.Add(item);
+            }
+            cmb_divArtNo.DataSource = dArtNo;
+
+            List<DividerReinf_ArticleNo> dReinfArtNo = new List<DividerReinf_ArticleNo>();
+            foreach (DividerReinf_ArticleNo item in DividerReinf_ArticleNo.GetAll())
+            {
+                dReinfArtNo.Add(item);
+            }
+            cmb_divReinf.DataSource = dReinfArtNo;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 

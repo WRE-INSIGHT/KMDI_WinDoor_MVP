@@ -9,6 +9,7 @@ using ServiceLayer.Services.FrameServices;
 using Unity;
 using System.Windows.Forms;
 using CommonComponents;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -35,6 +36,12 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.NumFHeightValueChangedEventRaised += new EventHandler(OnNumFHeightValueChangedEventRaised);
             _framePropertiesUC.NumFWidthValueChangedEventRaised += new EventHandler(OnNumFWidthValueChangedEventRaised);
             _framePropertiesUC.RdBtnCheckedChangedEventRaised += new EventHandler(OnRdBtnCheckedChangedEventRaised);
+            _framePropertiesUC.cmbFrameProfileSelectedValueChangedEventRaised += _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised;
+        }
+
+        private void _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
         private void OnRdBtnCheckedChangedEventRaised(object sender, EventArgs e)

@@ -17,6 +17,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ServiceLayer.Services.MultiPanelServices;
 using System.Linq;
 using static ModelLayer.Model.Quotation.QuotationModel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -146,6 +147,8 @@ namespace PresentationLayer.Presenter.UserControls
                 
                 _multipanelModel = _multipanelServices.AddMultiPanelModel(wd,
                                                                           ht,
+                                                                          _frameModel.Frame_Width,
+                                                                          _frameModel.Frame_Height,
                                                                           frame,
                                                                           frame,
                                                                           _frameModel,
@@ -154,6 +157,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                           _frameModel.Frame_Zoom,
                                                                           _mainPresenter.GetMultiPanelCount(),
                                                                           DockStyle.Fill,
+                                                                          1,
                                                                           0,
                                                                           null,
                                                                           _frameModel.FrameImageRenderer_Zoom);
@@ -161,7 +165,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP.GetNewInstance(_unityC, _multipanelModel, _mainPresenter);
                 framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)multiPropUCP.GetMultiPanelPropertiesUC());
-                _frameModel.FrameProp_Height += (129 + 3); // +3 for MultiPanelProperties' Margin
+                _frameModel.AdjustPropertyPanelHeight("Mpanel", "add");
 
                 if (data.Contains("Mullion"))
                 {
@@ -226,17 +230,20 @@ namespace PresentationLayer.Presenter.UserControls
                                                            null,
                                                            _frameModel.Frame_Width,
                                                            _frameModel.Frame_Height,
-                                                           Glass_Thickness._6mm,
                                                            GlazingBead_ArticleNo._2452,
-                                                           _mainPresenter.GetPanelCount());
+                                                           GlassFilm_Types._None,
+                                                           SashProfile_ArticleNo._None,
+                                                           SashReinf_ArticleNo._None,
+                                                           _mainPresenter.GetPanelCount(),
+                                                           _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
-                _frameModel.FrameProp_Height += 228;
 
                 if (data == "Fixed Panel")
                 {
+                    _frameModel.AdjustPropertyPanelHeight("FxdNone", "add");
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, 
                                                                                _panelModel, 
                                                                                _frameModel, 
@@ -244,7 +251,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                this);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     frame.Controls.Add((UserControl)fixedUC);
-                    //fixedUCP.SetInitialLoadFalse();
 
                     IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, 
                                                                                                  _panelModel, 
@@ -255,6 +261,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Casement Panel")
                 {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                     ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, 
                                                                                         _panelModel, 
                                                                                         _frameModel, 
@@ -271,6 +278,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Awning Panel")
                 {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, 
                                                                                   _panelModel, 
                                                                                   _frameModel, 
@@ -286,6 +294,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Sliding Panel")
                 {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                     ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC, 
                                                                                      _panelModel, 
                                                                                      _frameModel, 
@@ -300,6 +309,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
             }
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnFrameMouseLeaveEventRaised(object sender, EventArgs e)
@@ -439,12 +449,27 @@ namespace PresentationLayer.Presenter.UserControls
         
         public void DeleteFrame()
         {
-            _frameModel.Frame_Visible = false;
+            foreach (IPanelModel pnl in _frameModel.Lst_Panel)
+            {
+                _mainPresenter.DeductPanelGlassID();
+            }
+
+            foreach (IMultiPanelModel mpnl in _frameModel.Lst_MultiPanel)
+            {
+                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                {
+                    _mainPresenter.DeductPanelGlassID();
+                }
+            }
+
             _basePlatformUCP.ViewDeleteControl((UserControl)_frameUC);
             _basePlatformUCP.InvalidateBasePlatform();
             _basePlatformUCP.Invalidate_flpMain();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.DeleteFramePropertiesUC(_frameModel.Frame_ID);
             _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
+
+            _mainPresenter.SetPanelGlassID();
         }
 
         public void ViewDeleteControl(UserControl control)
