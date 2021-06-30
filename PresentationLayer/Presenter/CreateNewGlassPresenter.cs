@@ -1,6 +1,7 @@
 ﻿using PresentationLayer.Views;
 using System;
 using System.Data;
+using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
 
@@ -173,12 +174,9 @@ namespace PresentationLayer.Presenter
 
             _BetweenTheGlass1 = _createNewGlassView.BetweenTheGlass1.Value + _BetweenTheGlassUnit;
             _BetweenTheGlass2 = _createNewGlassView.BetweenTheGlass2.Value + _BetweenTheGlassUnit2;
-
             string StrGlass1 = Convert.ToString(_createNewGlassView.GlassThickness1.Value);
             string StrGlass2 = Convert.ToString(_createNewGlassView.GlassThickness2.Value);
             string StrGlass3 = Convert.ToString(_createNewGlassView.GlassThickness3.Value);
-            string StrBetweenTheGlass1 = Convert.ToString(_createNewGlassView.BetweenTheGlass1.Value);
-            string StrBetweenTheGlass2 = Convert.ToString(_createNewGlassView.BetweenTheGlass2.Value);
 
             if (_purpose == CreateNewGlass_ShowPurpose._Single)
             {
@@ -203,11 +201,10 @@ namespace PresentationLayer.Presenter
                 }
                 else
                 {
-                    decimal glassResult, glass1 = 0, glass2 = 0, BetweenTheGlass1 = 0;
-                    glass1 = _createNewGlassView.GlassThickness1.Value;
-                    glass2 = _createNewGlassView.GlassThickness2.Value;
-                    BetweenTheGlass1 = _createNewGlassView.BetweenTheGlass1.Value;
-                    glassResult = glass1 + BetweenTheGlass1 + glass2;
+                    //Glass1 + Spacer + Glass2
+                    int glassResult = Convert.ToInt32(Math.Round(_createNewGlassView.GlassThickness1.Value +
+                                                                 _createNewGlassView.BetweenTheGlass1.Value +
+                                                                 _createNewGlassView.GlassThickness2.Value));
 
                     _createNewGlassView.TotalThickness.Value = glassResult;
 
@@ -230,14 +227,12 @@ namespace PresentationLayer.Presenter
                 }
                 else
                 {
-                    decimal glassResult, glass1 = 0, glass2 = 0, glass3 = 0, BetweenTheGlass1 = 0, BetweenTheGlass2 = 0;
-                    glass1 = _createNewGlassView.GlassThickness1.Value;
-                    glass2 = _createNewGlassView.GlassThickness2.Value;
-                    glass3 = _createNewGlassView.GlassThickness3.Value;
-                    BetweenTheGlass1 = _createNewGlassView.BetweenTheGlass1.Value;
-                    BetweenTheGlass2 = _createNewGlassView.BetweenTheGlass2.Value;
-
-                    glassResult = glass1 + BetweenTheGlass1 + glass2 + BetweenTheGlass2 + glass3;
+                    //Glass1 + Spacer + Glass2 + Spacer + Glass3            
+                    int glassResult = Convert.ToInt32(Math.Round(_createNewGlassView.GlassThickness1.Value +
+                                                                 _createNewGlassView.BetweenTheGlass1.Value +
+                                                                 _createNewGlassView.GlassThickness2.Value +
+                                                                 _createNewGlassView.BetweenTheGlass2.Value +
+                                                                 _createNewGlassView.GlassThickness3.Value));
 
                     _createNewGlassView.TotalThickness.Value = glassResult;
 
@@ -250,8 +245,32 @@ namespace PresentationLayer.Presenter
 
         private void OnBtnAddGlassClick(object sender, EventArgs e)
         {
-            _glassThicknessDT.Rows.Add(CreateNewGlass_Datarow());
-            _mainPresenter.GlassThicknessDT = _glassThicknessDT;
+            string WarningMsg;
+            if (_purpose == CreateNewGlass_ShowPurpose._Single)
+            {
+                WarningMsg = "Your Glass Thickness is " + _createNewGlassView.GlassThickness1.Value + ", are you sure you want to add ?";
+            }
+            else
+            {
+                WarningMsg = "Your Glass Thickness is " + _createNewGlassView.TotalThickness.Value + ", are you sure you want to add ?";
+            }
+
+            if (_createNewGlassView.TotalThickness.Value > 24 || _createNewGlassView.GlassThickness1.Value > 24)
+            {
+                if (MessageBox.Show(WarningMsg, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    _glassThicknessDT.Rows.Add(CreateNewGlass_Datarow());
+                    _mainPresenter.GlassThicknessDT = _glassThicknessDT;
+                    _createNewGlassView.CloseThis();
+                }
+            }
+
+            else
+            {
+                _glassThicknessDT.Rows.Add(CreateNewGlass_Datarow());
+                _mainPresenter.GlassThicknessDT = _glassThicknessDT;
+                _createNewGlassView.CloseThis();
+            }
         }
 
         public DataRow CreateNewGlass_Datarow()
