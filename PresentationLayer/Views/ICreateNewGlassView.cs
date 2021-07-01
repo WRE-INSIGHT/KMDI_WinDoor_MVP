@@ -11,6 +11,7 @@ namespace PresentationLayer.Views
         event EventHandler NewGlassViewLoadEventRaised;
         event EventHandler GlassThicknessTextChange;
         event EventHandler BtnAddGlassClick;
+        event EventHandler CmbClickEventRaised;
 
         bool pnlGlassVisible2 { set; }
         bool pnlGlassVisible3 { set; }

@@ -39,10 +39,13 @@ namespace PresentationLayer.Presenter
             _createNewGlassView.NewGlassViewLoadEventRaised += new EventHandler(OnNewGlassViewLoadEventRaised);
             _createNewGlassView.GlassThicknessTextChange += new EventHandler(OnGlassTextchangeEventRaised);
             _createNewGlassView.BtnAddGlassClick += new EventHandler(OnBtnAddGlassClick);
+            _createNewGlassView.CmbClickEventRaised += new EventHandler(OnCmbClick);
         }
 
-
-
+        private void OnCmbClick(object sender, EventArgs e)
+        {
+            RefreshCmb();
+        }
 
         private void OnNewGlassViewLoadEventRaised(object sender, EventArgs e)
         {
@@ -85,34 +88,10 @@ namespace PresentationLayer.Presenter
                 _createNewGlassView.SpacerVisible = false;
             }
 
-            _createNewGlassView.GlassType1().DataSource = _mainPresenter.Glass_Type.Copy();
-            _createNewGlassView.GlassType1().DisplayMember = "GlassType";
-            _createNewGlassView.GlassType2().DataSource = _mainPresenter.Glass_Type.Copy();
-            _createNewGlassView.GlassType2().DisplayMember = "GlassType";
-            _createNewGlassView.GlassType3().DataSource = _mainPresenter.Glass_Type.Copy();
-            _createNewGlassView.GlassType3().DisplayMember = "GlassType";
-
-            _createNewGlassView.Color1().DataSource = _mainPresenter.Color.Copy();
-            _createNewGlassView.Color1().DisplayMember = "Color";
-            _createNewGlassView.Color2().DataSource = _mainPresenter.Color.Copy();
-            _createNewGlassView.Color2().DisplayMember = "Color";
-            _createNewGlassView.Color3().DataSource = _mainPresenter.Color.Copy();
-            _createNewGlassView.Color3().DisplayMember = "Color";
-
-            _createNewGlassView.Spacer1().DataSource = _mainPresenter.Spacer.Copy();
-            _createNewGlassView.Spacer1().DisplayMember = "Spacer";
-            _createNewGlassView.Spacer2().DataSource = _mainPresenter.Spacer.Copy();
-            _createNewGlassView.Spacer2().DisplayMember = "Spacer";
-
-            /* yung gagamitin mong dataSource
-             * _mainPresenter.Color at _mainPresenter.Spacer
-             * 
-             * yung sa DisplayMember
-             * "Color" at "Spacer"
-             * 
-             */
+            RefreshCmb();
+         
         }
-
+   
         string _Glass1Description;
         string _Glass2Description;
         string _Glass3Description;
@@ -336,6 +315,38 @@ namespace PresentationLayer.Presenter
                 newRow["Laminated"] = true;
             }
             return newRow;
+        }
+
+        private void RefreshCmb()
+        {
+            _createNewGlassView.GlassType1().DataSource = _mainPresenter.Glass_Type.Copy();
+            _createNewGlassView.GlassType1().DisplayMember = "GlassType";
+            _createNewGlassView.GlassType2().DataSource = _mainPresenter.Glass_Type.Copy();
+            _createNewGlassView.GlassType2().DisplayMember = "GlassType";
+            _createNewGlassView.GlassType3().DataSource = _mainPresenter.Glass_Type.Copy();
+            _createNewGlassView.GlassType3().DisplayMember = "GlassType";
+
+            _createNewGlassView.Color1().DataSource = _mainPresenter.Color.Copy();
+            _createNewGlassView.Color1().DisplayMember = "Color";
+            _createNewGlassView.Color2().DataSource = _mainPresenter.Color.Copy();
+            _createNewGlassView.Color2().DisplayMember = "Color";
+            _createNewGlassView.Color3().DataSource = _mainPresenter.Color.Copy();
+            _createNewGlassView.Color3().DisplayMember = "Color";
+
+            _createNewGlassView.Spacer1().DataSource = _mainPresenter.Spacer.Copy();
+            _createNewGlassView.Spacer1().DisplayMember = "Spacer";
+            _createNewGlassView.Spacer2().DataSource = _mainPresenter.Spacer.Copy();
+            _createNewGlassView.Spacer2().DisplayMember = "Spacer";
+
+            /* yung gagamitin mong dataSource
+          * _mainPresenter.Color at _mainPresenter.Spacer
+          * 
+          * yung sa DisplayMember
+          * "Color" at "Spacer"
+          * 
+          */
+
+
         }
 
         public ICreateNewGlassPresenter GetNewInstance(IUnityContainer unityC,
