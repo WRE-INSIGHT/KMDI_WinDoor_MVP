@@ -172,6 +172,9 @@ namespace PresentationLayer
                 .RegisterType<IChangeItemColorView, ChangeItemColorView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IChangeItemColorPresenter, ChangeItemColorPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IGlassThicknessListView, GlassThicknessListView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IGlassThicknessListPresenter, GlassThicknessListPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();

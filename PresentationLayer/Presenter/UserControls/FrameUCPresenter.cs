@@ -230,7 +230,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                            null,
                                                            _frameModel.Frame_Width,
                                                            _frameModel.Frame_Height,
-                                                           Glass_Thickness._6mm,
                                                            GlazingBead_ArticleNo._2452,
                                                            GlassFilm_Types._None,
                                                            SashProfile_ArticleNo._None,

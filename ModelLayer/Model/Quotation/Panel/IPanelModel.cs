@@ -44,7 +44,8 @@ namespace ModelLayer.Model.Quotation.Panel
         #region Explosion
 
         int PanelGlass_ID { get; set; }
-        Glass_Thickness Panel_GlassThickness { get; set; }
+        string Panel_GlassThicknessDesc { get; set; }
+        float Panel_GlassThickness { get; set; }
         GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
         int Panel_GlazingBeadWidth { get; set; }
         int Panel_GlazingBeadHeight { get; set; }
@@ -67,7 +68,10 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
+        Handle_Type Panel_HandleType { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+        GlassType Panel_GlassType { get; set; }
+
         void SetPanelExplosionValues_Panel(bool parentIsFrame);
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,

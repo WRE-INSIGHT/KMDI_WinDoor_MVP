@@ -555,8 +555,8 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        private Glass_Thickness _panelGlassThickness;
-        public Glass_Thickness Panel_GlassThickness
+        private float _panelGlassThickness;
+        public float Panel_GlassThickness
         {
             get
             {
@@ -565,44 +565,73 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelGlassThickness = value;
-                if (value == Glass_Thickness._6mm ||
-                    value == Glass_Thickness._8mm)
+                if (value == 6.0f ||
+                    value == 8.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452;
                 }
-                else if (value == Glass_Thickness._10mm || 
-                         value == Glass_Thickness._11mm)
+                else if (value == 10.0f || 
+                         value == 11.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2451;
                 }
-                else if (value == Glass_Thickness._12mm ||
-                         value == Glass_Thickness._13mm ||
-                         value == Glass_Thickness._14mm)
+                else if (value == 12.0f || 
+                         value == 13.0f ||
+                         value == 14.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2453;
                 }
-                else if (value == Glass_Thickness._15mm || 
-                         value == Glass_Thickness._16mm)
+                else if (value == 15.0f ||
+                         value == 16.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436;
                 }
-                else if (value == Glass_Thickness._18mm)
+                else if (value == 18.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2438;
                 }
-                else if (value == Glass_Thickness._20mm)
+                else if (value == 20.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2437;
                 }
-                else if (value == Glass_Thickness._22mm)
+                else if (value == 22.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434;
                 }
-                else if (value == Glass_Thickness._23mm || 
-                         value == Glass_Thickness._24mm)
+                else if (value == 23.0f || 
+                         value == 24.0f ||
+                         value == 25.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2435;
                 }
+                else if (value == 26.0f ||
+                         value == 27.0f)
+                {
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2433;
+                }
+                else if (value == 28.0f)
+                {
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2432;
+                }
+                else if (value == 29.0f ||
+                         value == 30.0f)
+                {
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2431;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _panelGlassThicknessDesc;
+        public string Panel_GlassThicknessDesc
+        {
+            get
+            {
+                return _panelGlassThicknessDesc;
+            }
+            set
+            {
+                _panelGlassThicknessDesc = value;
                 NotifyPropertyChanged();
             }
         }
@@ -670,6 +699,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private GlassType _panelGlassType;
+        public GlassType Panel_GlassType
+        {
+            get
+            {
+                return _panelGlassType;
+            }
+            set
+            {
+                _panelGlassType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Panel_SashWidth { get; set; }
         public int Panel_SashHeight { get; set; }
         public int Panel_OriginalSashWidth { get; set; }
@@ -696,7 +739,22 @@ namespace ModelLayer.Model.Quotation.Panel
         public CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         public FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
 
+        private Handle_Type _panelHandleType;
+        public Handle_Type Panel_HandleType
+        {
+            get
+            {
+                return _panelHandleType;
+            }
+            set
+            {
+                _panelHandleType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
@@ -758,6 +816,10 @@ namespace ModelLayer.Model.Quotation.Panel
                          (sashHt_floor >= 1300 && sashHt_floor <= 2300)))
                 {
                     Panel_FrictionStayArtNo = FrictionStay_ArticleNo._Storm26;
+                }
+                else
+                {
+                    Panel_FrictionStayArtNo = FrictionStay_ArticleNo._None;
                 }
             }
             else if (Panel_SashPropertyVisibility == false)
@@ -1029,6 +1091,10 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_FrictionStayArtNo = FrictionStay_ArticleNo._Storm26;
                 }
+                else
+                {
+                    Panel_FrictionStayArtNo = FrictionStay_ArticleNo._None;
+                }
             }
             else if (Panel_SashPropertyVisibility == false)
             {
@@ -1070,7 +1136,6 @@ namespace ModelLayer.Model.Quotation.Panel
                           float panelZoom,
                           IFrameModel panelFrameModelParent,
                           IMultiPanelModel panelMultiPanelParent,
-                          Glass_Thickness panelGlassThickness,
                           GlazingBead_ArticleNo panelGlazingBeadArtNo,
                           int panelDisplayWidth,
                           int panelDisplayHeight,
@@ -1096,7 +1161,6 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_Zoom = panelZoom;
             Panel_ParentFrameModel = panelFrameModelParent;
             Panel_ParentMultiPanelModel = panelMultiPanelParent;
-            Panel_GlassThickness = panelGlassThickness;
             PanelGlazingBead_ArtNo = panelGlazingBeadArtNo;
             Panel_DisplayWidth = panelDisplayWidth;
             Panel_DisplayHeight = panelDisplayHeight;
@@ -1108,7 +1172,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_SashReinfArtNo = panelSashReinf;
             Panel_OriginalWidth = Panel_Width;
             Panel_OriginalHeight = Panel_Height;
-            
+            Panel_GlassType = GlassType._Single;
         }
     }
 }

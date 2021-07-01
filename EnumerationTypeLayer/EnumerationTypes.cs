@@ -39,24 +39,24 @@ namespace EnumerationTypeLayer
             private Divider_MechJointArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class Glass_Thickness : Enumeration<Glass_Thickness, int>
-        {
-            public static readonly Glass_Thickness _6mm = new Glass_Thickness(0, "6mm");
-            public static readonly Glass_Thickness _8mm = new Glass_Thickness(1, "8mm");
-            public static readonly Glass_Thickness _10mm = new Glass_Thickness(2, "10mm");
-            public static readonly Glass_Thickness _11mm = new Glass_Thickness(3, "11mm");
-            public static readonly Glass_Thickness _12mm = new Glass_Thickness(4, "12mm");
-            public static readonly Glass_Thickness _13mm = new Glass_Thickness(5, "13mm");
-            public static readonly Glass_Thickness _14mm = new Glass_Thickness(6, "14mm");
-            public static readonly Glass_Thickness _15mm = new Glass_Thickness(7, "15mm");
-            public static readonly Glass_Thickness _16mm = new Glass_Thickness(8, "16mm");
-            public static readonly Glass_Thickness _18mm = new Glass_Thickness(9, "18mm");
-            public static readonly Glass_Thickness _20mm = new Glass_Thickness(10, "20mm");
-            public static readonly Glass_Thickness _22mm = new Glass_Thickness(11, "22mm");
-            public static readonly Glass_Thickness _23mm = new Glass_Thickness(12, "23mm");
-            public static readonly Glass_Thickness _24mm = new Glass_Thickness(13, "24mm");
-            public Glass_Thickness(int value, string displayName) : base(value, displayName) { }
-        }
+        //public class Glass_Thickness : Enumeration<Glass_Thickness, int>
+        //{
+        //    public static readonly Glass_Thickness _6mm = new Glass_Thickness(0, "6mm");
+        //    public static readonly Glass_Thickness _8mm = new Glass_Thickness(1, "8mm");
+        //    public static readonly Glass_Thickness _10mm = new Glass_Thickness(2, "10mm");
+        //    public static readonly Glass_Thickness _11mm = new Glass_Thickness(3, "11mm");
+        //    public static readonly Glass_Thickness _12mm = new Glass_Thickness(4, "12mm");
+        //    public static readonly Glass_Thickness _13mm = new Glass_Thickness(5, "13mm");
+        //    public static readonly Glass_Thickness _14mm = new Glass_Thickness(6, "14mm");
+        //    public static readonly Glass_Thickness _15mm = new Glass_Thickness(7, "15mm");
+        //    public static readonly Glass_Thickness _16mm = new Glass_Thickness(8, "16mm");
+        //    public static readonly Glass_Thickness _18mm = new Glass_Thickness(9, "18mm");
+        //    public static readonly Glass_Thickness _20mm = new Glass_Thickness(10, "20mm");
+        //    public static readonly Glass_Thickness _22mm = new Glass_Thickness(11, "22mm");
+        //    public static readonly Glass_Thickness _23mm = new Glass_Thickness(12, "23mm");
+        //    public static readonly Glass_Thickness _24mm = new Glass_Thickness(13, "24mm");
+        //    public Glass_Thickness(int value, string displayName) : base(value, displayName) { }
+        //}
         public class GlazingBead_ArticleNo : Enumeration<GlazingBead_ArticleNo, int>
         {
             public static readonly GlazingBead_ArticleNo _2452 = new GlazingBead_ArticleNo(0, "2452");
@@ -67,6 +67,9 @@ namespace EnumerationTypeLayer
             public static readonly GlazingBead_ArticleNo _2437 = new GlazingBead_ArticleNo(5, "2437");
             public static readonly GlazingBead_ArticleNo _2434 = new GlazingBead_ArticleNo(6, "2434");
             public static readonly GlazingBead_ArticleNo _2435 = new GlazingBead_ArticleNo(7, "2435");
+            public static readonly GlazingBead_ArticleNo _2433 = new GlazingBead_ArticleNo(8, "2433");
+            public static readonly GlazingBead_ArticleNo _2432 = new GlazingBead_ArticleNo(9, "2432");
+            public static readonly GlazingBead_ArticleNo _2431 = new GlazingBead_ArticleNo(10, "2431");
             private GlazingBead_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
         public class GlassFilm_Types : Enumeration<GlassFilm_Types, int>
@@ -173,8 +176,35 @@ namespace EnumerationTypeLayer
             public static readonly FrictionStay_ArticleNo _A212C16161 = new FrictionStay_ArticleNo(3, "A212C16161");
             public static readonly FrictionStay_ArticleNo _Storm22 = new FrictionStay_ArticleNo(4, "Storm 22");
             public static readonly FrictionStay_ArticleNo _Storm26 = new FrictionStay_ArticleNo(5, "Storm 26");
+            public static readonly FrictionStay_ArticleNo _None = new FrictionStay_ArticleNo(6, "None");
 
             private FrictionStay_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Handle_Type : Enumeration<Handle_Type, int>
+        {
+            public static readonly Handle_Type _Rotoswing = new Handle_Type(0, "Rotoswing Handle");
+            public static readonly Handle_Type _Rotary = new Handle_Type(1, "Rotary Handle");
+
+            private Handle_Type(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Rotoswing_Handle : Enumeration<Rotoswing_Handle, int>
+        {
+            public static readonly Rotoswing_Handle _RSC773451 = new Rotoswing_Handle(0, "RSC-773451");
+            public static readonly Rotoswing_Handle _RSC773452 = new Rotoswing_Handle(1, "RSC-773452");
+            public static readonly Rotoswing_Handle _RSC823048 = new Rotoswing_Handle(2, "RSC-823048");
+            public static readonly Rotoswing_Handle _RSC833307 = new Rotoswing_Handle(3, "RSC-833307");
+
+            private Rotoswing_Handle(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Rotary_Handle : Enumeration<Rotary_Handle, int>
+        {
+            public static readonly Rotary_Handle _T511155KMWSS = new Rotary_Handle(0, "T-51.1155 KM-W-SS");
+            public static readonly Rotary_Handle _T511155KMBLSS = new Rotary_Handle(1, "T-51.1155 KM-BL-SS");
+
+            private Rotary_Handle(int value, string displayName) : base(value, displayName) { }
         }
 
         public class Espagnolette_ArticleNo : Enumeration<Espagnolette_ArticleNo, int>
@@ -189,6 +219,28 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _EQ87NT = new Espagnolette_ArticleNo(7, "EQ87(NT)");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Striker_ArticleNo : Enumeration<Striker_ArticleNo, int>
+        {
+            public static readonly Striker_ArticleNo _M89ANT = new Striker_ArticleNo(0, "M89A-NT");
+            private Striker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MiddleCloser_ArticleNo : Enumeration<MiddleCloser_ArticleNo, int>
+        {
+            public static readonly MiddleCloser_ArticleNo _1WC70DB = new MiddleCloser_ArticleNo(0, "1WC70-DB");
+            public static readonly MiddleCloser_ArticleNo _1WC70WHT = new MiddleCloser_ArticleNo(1, "1WC70-WHT");
+
+            private MiddleCloser_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LockingKit_ArticleNo : Enumeration<LockingKit_ArticleNo, int>
+        {
+            public static readonly LockingKit_ArticleNo _T244002KMW = new LockingKit_ArticleNo(0, "T-24.40.02 KM-W");
+            public static readonly LockingKit_ArticleNo _T24402KMBL = new LockingKit_ArticleNo(1, "T-24.4.02 KM-BL");
+
+            private LockingKit_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

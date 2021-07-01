@@ -60,35 +60,32 @@ namespace PresentationLayer.Views.UserControls
                 pnl_Sash.Visible = value;
                 if (value == true)
                 {
-                    flp_PanelSpecs.Height = 166;
+                    this.Height = 563;
+                    flp_PanelSpecs.Height = 414;
                 }
                 else if (value == false)
                 {
-                    flp_PanelSpecs.Height = 113;
+                    this.Height = 563;
+                    flp_PanelSpecs.Height = 414;
                 }
             }
         }
 
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler ChkOrientationCheckChangedEventRaised;
-        public event EventHandler CmbGlassThickSelectedValueChangedEventRaised;
         public event EventHandler CmbGlazingArtNoSelectedValueChangedEventRaised;
         public event EventHandler CmbFilmTypeSelectedValueChangedEventRaised;
         public event EventHandler CmbSashProfileSelectedValueChangedEventRaised;
         public event EventHandler CmbSashReinfSelectedValueChangedEventRaised;
+        public event EventHandler btnSelectGlassThicknessClickedEventRaised;
+        public event EventHandler CmbGlassTypeSelectedValueChangedEventRaised;
+        public event EventHandler CmbHandleTypeSelectedValueChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {
             pnum_Width.Maximum = decimal.MaxValue;
             pnum_Height.Maximum = decimal.MaxValue;
             num_BladeCount.Maximum = decimal.MaxValue;
-
-            List<Glass_Thickness> gThickness = new List<Glass_Thickness>();
-            foreach (Glass_Thickness item in Glass_Thickness.GetAll())
-            {
-                gThickness.Add(item);
-            }
-            cmb_GlassThick.DataSource = gThickness;
 
             List<GlazingBead_ArticleNo> gArtNo = new List<GlazingBead_ArticleNo>();
             foreach (GlazingBead_ArticleNo item in GlazingBead_ArticleNo.GetAll())
@@ -118,6 +115,20 @@ namespace PresentationLayer.Views.UserControls
             }
             cmb_SashReinf.DataSource = sashReinf;
 
+            List<GlassType> gType = new List<GlassType>();
+            foreach (GlassType item in GlassType.GetAll())
+            {
+                gType.Add(item);
+            }
+            cmb_GlassType.DataSource = gType;
+
+            List<Handle_Type> hType = new List<Handle_Type>();
+            foreach (Handle_Type item in Handle_Type.GetAll())
+            {
+                hType.Add(item);
+            }
+            cmb_HandleType.DataSource = hType;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 
@@ -134,20 +145,17 @@ namespace PresentationLayer.Views.UserControls
             pnl_Sash.DataBindings.Add(ModelBinding["Panel_SashPropertyVisibility"]);
             this.DataBindings.Add(ModelBinding["SashPanel_Visibility"]);
             cmb_FilmType.DataBindings.Add(ModelBinding["Panel_GlassFilm"]);
-            cmb_GlassThick.DataBindings.Add(ModelBinding["Panel_GlassThickness"]);
             cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
             cmb_SashProfile.DataBindings.Add(ModelBinding["Panel_SashProfileArtNo"]);
             cmb_SashReinf.DataBindings.Add(ModelBinding["Panel_SashReinfArtNo"]);
+            cmb_GlassType.DataBindings.Add(ModelBinding["Panel_GlassType"]);
+            lbl_GlassThicknessDesc.DataBindings.Add(ModelBinding["Panel_GlassThicknessDesc"]);
+            cmb_HandleType.DataBindings.Add(ModelBinding["Panel_HandleType"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, ChkOrientationCheckChangedEventRaised, e);
-        }
-
-        private void cmb_GlassThick_SelectedValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, CmbGlassThickSelectedValueChangedEventRaised, e);
         }
 
         private void cmb_SashProfile_SelectedValueChanged(object sender, EventArgs e)
@@ -168,6 +176,36 @@ namespace PresentationLayer.Views.UserControls
         private void cmb_FilmType_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbFilmTypeSelectedValueChangedEventRaised, e);
+        }
+
+        private void btn_SelectGlassthickness_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, btnSelectGlassThicknessClickedEventRaised, e);
+        }
+
+        private void cmb_GlassType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbGlassTypeSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_HandleType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbHandleTypeSelectedValueChangedEventRaised, e);
+        }
+
+        public ComboBox GetCmbHandleArtNo()
+        {
+            return cmb_HandleArtNo;
+        }
+
+        public Panel GetPnlRotoswingOptions()
+        {
+            return pnl_RotoswingOptions;
+        }
+
+        public Panel GetPnlRotaryOptions()
+        {
+            return pnl_RotaryOptions;
         }
     }
 }

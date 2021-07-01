@@ -713,30 +713,30 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Columns.Add(CreateColumn("Laminated", "Laminated", "System.Boolean"));
 
             //single
-            _glassThicknessDT.Rows.Add(5, "5 mm Clear", true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6, "6 mm Clear", true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6, "6 mm Tinted Green", true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6, "6 mm Tempered Tinted Blue", true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6, "6 mm Tinted Bronze", true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10, "10 mm Clear", true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10, "10 mm Tempered Tinted Green", true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12, "12 mm Tinted Blue", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Green", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Blue", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Bronze", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Green", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tinted Blue", true, false, false, false, false);
             //double insulated
-            _glassThicknessDT.Rows.Add(24, "6 mm Clear + 12 + 6 mm Clear", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23, "5 mm Clear Low-e + 12 Ar + 6 mm Clear Low-e", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23, "6 mm Tempered Clear + 12 + 5 mm Tempered Clear", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23, "6 mm Tempered Clear Low-e + 12 + 5 mm Tempered Tinted Gray", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 + 6 mm Clear", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear Low-e + 12 Ar + 6 mm Clear Low-e", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Clear + 12 + 5 mm Tempered Clear", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Clear Low-e + 12 + 5 mm Tempered Tinted Gray", false, true, false, true, false);
             //double laminated
-            _glassThicknessDT.Rows.Add(11.76, "6 mm Clear + 0.76 + 5 mm Clear", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76, "6 mm Tinted Black+ 0.76 + 5 mm Clear", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52, "6 mm Tempered Clear Low-e + 1.52 + 6 mm Tempered Clear Low-e", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.58, "4 mm Tempered Clear Low-e + 1.52 + 4 mm Tempered Clear Low-e", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76f, "6 mm Clear + 0.76 + 5 mm Clear", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76f, "6 mm Tinted Black+ 0.76 + 5 mm Clear", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear Low-e + 1.52 + 6 mm Tempered Clear Low-e", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.58f, "4 mm Tempered Clear Low-e + 1.52 + 4 mm Tempered Clear Low-e", false, true, false, false, true);
             //triple insulated
-            _glassThicknessDT.Rows.Add(41, "6 mm Tempered Clear Low-e + 12 + 5 mm Tempered Tinted Gray + 12 + 6 mm Tempered Clear Low-e", false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(33, "4 mm Tinted Black + 10 + 5 mm Clear + 10 + 4 mm Tinted Black", false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(41.0f, "6 mm Tempered Clear Low-e + 12 + 5 mm Tempered Tinted Gray + 12 + 6 mm Tempered Clear Low-e", false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(33.0f, "4 mm Tinted Black + 10 + 5 mm Clear + 10 + 4 mm Tinted Black", false, false, true, true, false);
             //triple laminated
-            _glassThicknessDT.Rows.Add(19.04, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", false, false, true, false, true);
-            _glassThicknessDT.Rows.Add(23.04, "8 mm Tempered Tinted Green + 1.52 + 4 mm Tempered Clear + 1.52 + 8 mm Tempered Tinted Green", false, false, true, false, true);
+            _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", false, false, true, false, true);
+            _glassThicknessDT.Rows.Add(23.04f, "8 mm Tempered Tinted Green + 1.52 + 4 mm Tempered Clear + 1.52 + 8 mm Tempered Tinted Green", false, false, true, false, true);
 
             _glassTypeDT.Columns.Add(CreateColumn("GlassType", "GlassType", "System.String"));
             _spacerDT.Columns.Add(CreateColumn("Spacer", "Spacer", "System.String"));

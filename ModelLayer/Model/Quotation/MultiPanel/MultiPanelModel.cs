@@ -1558,22 +1558,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (mode == "delete")
                 {
-                    MPanelProp_Height -= (315 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height -= (563 + 1); //+1 on margin (PanelProperties)
                 }
                 else if (mode == "add")
                 {
-                    MPanelProp_Height += (315 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height += (563 + 1); //+1 on margin (PanelProperties)
                 }
             }
             else if (objtype == "FxdNone")
             {
                 if (mode == "delete")
                 {
-                    MPanelProp_Height -= (262 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height -= (308 + 1); //+1 on margin (PanelProperties)
                 }
                 else if (mode == "add")
                 {
-                    MPanelProp_Height += (262 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height += (308 + 1); //+1 on margin (PanelProperties)
                 }
             }
             else if (objtype == "SashProp")

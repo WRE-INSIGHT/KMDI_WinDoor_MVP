@@ -23,7 +23,6 @@ namespace ServiceLayer.Services.PanelServices
                                   IMultiPanelModel panelMultiPanelParent,
                                   int panelDisplayWidth,
                                   int panelDisplayHeight,
-                                  Glass_Thickness panelGlassThickness,
                                   GlazingBead_ArticleNo panelGlazingBeadArtNo,
                                   GlassFilm_Types panelGlassFilm,
                                   SashProfile_ArticleNo panelSash,

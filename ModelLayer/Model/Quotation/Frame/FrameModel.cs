@@ -364,22 +364,22 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 if (mode == "delete")
                 {
-                    FrameProp_Height -= (315 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height -= (563 + 1); //+1 on margin (PanelProperties)
                 }
                 else if (mode == "add")
                 {
-                    FrameProp_Height += (315 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height += (563 + 1); //+1 on margin (PanelProperties)
                 }
             }
             else if (objtype == "FxdNone")
             {
                 if (mode == "delete")
                 {
-                    FrameProp_Height -= (262 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height -= (308 + 1); //+1 on margin (PanelProperties)
                 }
                 else if (mode == "add")
                 {
-                    FrameProp_Height += (262 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height += (308 + 1); //+1 on margin (PanelProperties)
                 }
             }
             else if (objtype == "SashProp")

@@ -1,5 +1,6 @@
 ﻿using CommonComponents;
 using System;
+using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -11,10 +12,16 @@ namespace PresentationLayer.Views.UserControls
 
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler ChkOrientationCheckChangedEventRaised;
-        event EventHandler CmbGlassThickSelectedValueChangedEventRaised;
         event EventHandler CmbGlazingArtNoSelectedValueChangedEventRaised;
         event EventHandler CmbFilmTypeSelectedValueChangedEventRaised;
         event EventHandler CmbSashProfileSelectedValueChangedEventRaised;
         event EventHandler CmbSashReinfSelectedValueChangedEventRaised;
+        event EventHandler btnSelectGlassThicknessClickedEventRaised;
+        event EventHandler CmbGlassTypeSelectedValueChangedEventRaised;
+        event EventHandler CmbHandleTypeSelectedValueChangedEventRaised;
+
+        ComboBox GetCmbHandleArtNo();
+        Panel GetPnlRotoswingOptions();
+        Panel GetPnlRotaryOptions();
     }
 }
