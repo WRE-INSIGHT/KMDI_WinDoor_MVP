@@ -124,7 +124,7 @@
             this.cmbGlassType2.Size = new System.Drawing.Size(117, 21);
             this.cmbGlassType2.TabIndex = 7;
             this.cmbGlassType2.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            this.cmbGlassType2.Click += new System.EventHandler(this.OnClickEventRaised);
+            this.cmbGlassType2.Enter += new System.EventHandler(this.OnClickEventRaised);
             // 
             // cmbColor2
             // 
@@ -135,7 +135,7 @@
             this.cmbColor2.Size = new System.Drawing.Size(117, 21);
             this.cmbColor2.TabIndex = 8;
             this.cmbColor2.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            this.cmbColor2.Click += new System.EventHandler(this.OnClickEventRaised);
+            this.cmbColor2.Enter += new System.EventHandler(this.OnClickEventRaised);
             // 
             // lblColor2
             // 
@@ -173,7 +173,7 @@
             this.cmbBetweenTheGlass1.Size = new System.Drawing.Size(117, 21);
             this.cmbBetweenTheGlass1.TabIndex = 5;
             this.cmbBetweenTheGlass1.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            this.cmbBetweenTheGlass1.Click += new System.EventHandler(this.OnClickEventRaised);
+            this.cmbBetweenTheGlass1.Enter += new System.EventHandler(this.OnClickEventRaised);
             // 
             // lblBetweenTheGlass1
             // 
@@ -221,7 +221,7 @@
             this.cmbGlassType1.Size = new System.Drawing.Size(117, 21);
             this.cmbGlassType1.TabIndex = 2;
             this.cmbGlassType1.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            this.cmbGlassType1.Click += new System.EventHandler(this.OnClickEventRaised);
+            this.cmbGlassType1.Enter += new System.EventHandler(this.OnClickEventRaised);
             // 
             // lblGlassType1
             // 
@@ -241,7 +241,7 @@
             this.cmbColor1.Size = new System.Drawing.Size(117, 21);
             this.cmbColor1.TabIndex = 3;
             this.cmbColor1.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            this.cmbColor1.Click += new System.EventHandler(this.OnClickEventRaised);
+            this.cmbColor1.Enter += new System.EventHandler(this.OnClickEventRaised);
             // 
             // lblColor1
             // 
@@ -323,7 +323,7 @@
             this.cmbGlassType3.Size = new System.Drawing.Size(117, 21);
             this.cmbGlassType3.TabIndex = 12;
             this.cmbGlassType3.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            this.cmbGlassType3.Click += new System.EventHandler(this.OnClickEventRaised);
+            this.cmbGlassType3.Enter += new System.EventHandler(this.OnClickEventRaised);
             // 
             // cmbColor3
             // 
@@ -334,7 +334,7 @@
             this.cmbColor3.Size = new System.Drawing.Size(117, 21);
             this.cmbColor3.TabIndex = 13;
             this.cmbColor3.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            this.cmbColor3.Click += new System.EventHandler(this.OnClickEventRaised);
+            this.cmbColor3.Enter += new System.EventHandler(this.OnClickEventRaised);
             // 
             // cmbBetweenTheGlass2
             // 
@@ -345,7 +345,7 @@
             this.cmbBetweenTheGlass2.Size = new System.Drawing.Size(117, 21);
             this.cmbBetweenTheGlass2.TabIndex = 10;
             this.cmbBetweenTheGlass2.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
-            this.cmbBetweenTheGlass2.Click += new System.EventHandler(this.OnClickEventRaised);
+            this.cmbBetweenTheGlass2.Enter += new System.EventHandler(this.OnClickEventRaised);
             // 
             // lblColor3
             // 

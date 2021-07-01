@@ -89,9 +89,9 @@ namespace PresentationLayer.Presenter
             }
 
             RefreshCmb();
-         
+
         }
-   
+
         string _Glass1Description;
         string _Glass2Description;
         string _Glass3Description;
@@ -99,22 +99,29 @@ namespace PresentationLayer.Presenter
         string _BetweenTheGlass2;
         string _BetweenTheGlassUnit;
         string _BetweenTheGlassUnit2;
+        string _GlassType1;
+        string _GlassType2;
+        string _GlassType3;
         private void OnGlassTextchangeEventRaised(object sender, EventArgs e)
         {
+            _GlassType1 = _createNewGlassView.GlassType1().Text;
+            _GlassType2 = _createNewGlassView.GlassType2().Text;
+            _GlassType3 = _createNewGlassView.GlassType3().Text;
 
-
-            if (_createNewGlassView.GlassType1().Text == "Annealed")
+            if (_GlassType1.Contains("Annealed"))
             {
-                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.Color1().Text;
+                _GlassType1 = _GlassType1.Remove(0, 8);
+                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _GlassType1 + " " + _createNewGlassView.Color1().Text;
             }
             else
             {
                 _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.GlassType1().Text + " " + _createNewGlassView.Color1().Text;
             }
 
-            if (_createNewGlassView.GlassType2().Text == "Annealed")
+            if (_GlassType2.Contains("Annealed"))
             {
-                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _createNewGlassView.Color2().Text;
+                _GlassType2 = _GlassType2.Remove(0, 8);
+                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _GlassType2 + " " + _createNewGlassView.Color2().Text;
             }
             else
             {
@@ -122,9 +129,10 @@ namespace PresentationLayer.Presenter
             }
 
 
-            if (_createNewGlassView.GlassType3().Text == "Annealed")
+            if (_GlassType3.Contains("Annealed"))
             {
-                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _createNewGlassView.Color3().Text;
+                _GlassType3 = _GlassType3.Remove(0, 8);
+                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _GlassType3 + " " + _createNewGlassView.Color3().Text;
             }
             else
             {
