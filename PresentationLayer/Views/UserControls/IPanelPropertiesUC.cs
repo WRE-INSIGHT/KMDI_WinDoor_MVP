@@ -1,6 +1,7 @@
 ﻿using CommonComponents;
 using System;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -8,7 +9,6 @@ namespace PresentationLayer.Views.UserControls
     {
         int Panel_ID { get; set; }
         int PanelGlass_ID { get; set; }
-        bool SashPanel_Visibility { get; set; }
 
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler ChkOrientationCheckChangedEventRaised;

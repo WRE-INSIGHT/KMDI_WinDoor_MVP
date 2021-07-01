@@ -198,6 +198,8 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (value.Contains("Fixed"))
                 {
+                    Panel_HandleOptionsVisibility = false;
+
                     if (_panelOrient == true)
                     {
                         _panelChkText = "dSash";
@@ -206,6 +208,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         _panelChkText = "Norm";
                     }
+                }
+                else
+                {
+                    Panel_HandleOptionsVisibility = true;
                 }
                 _panelType = value;
                 NotifyPropertyChanged();
@@ -539,6 +545,62 @@ namespace ModelLayer.Model.Quotation.Panel
         public IFrameModel Panel_ParentFrameModel { get; set; }
         public IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
 
+        public int _panelPropertyHeight;
+        public int Panel_PropertyHeight
+        {
+            get
+            {
+                return _panelPropertyHeight;
+            }
+            set
+            {
+                _panelPropertyHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelHandleOptionsHeight;
+        public int Panel_HandleOptionsHeight
+        {
+            get
+            {
+                return _panelHandleOptionsHeight;
+            }
+            set
+            {
+                _panelHandleOptionsHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelRotoswingOptionsVisibility;
+        public bool Panel_RotoswingOptionsVisibility
+        {
+            get
+            {
+                return _panelRotoswingOptionsVisibility;
+            }
+            set
+            {
+                _panelRotoswingOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelRotaryOptionsVisibility;
+        public bool Panel_RotaryOptionsVisibility
+        {
+            get
+            {
+                return _panelRotaryOptionsVisibility;
+            }
+            set
+            {
+                _panelRotaryOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #region Explosion
 
         private int _panelGlassID;
@@ -731,6 +793,43 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelSashPropertyVisibility = value;
+                if (value == true)
+                {
+                    if (Panel_Type == "Fixed Panel")
+                    {
+                        _panelPropertyHeight = 357;
+                    }
+                    else
+                    {
+                        _panelPropertyHeight = 552;
+                        if (_panelHandleType == Handle_Type._Rotoswing)
+                        {
+                            _panelPropertyHeight = 513;
+                        }
+                        else if (_panelHandleType == Handle_Type._Rotary)
+                        {
+                            _panelPropertyHeight = 467;
+                        }
+                    }
+                }
+                else if (value == false)
+                {
+                    _panelPropertyHeight = 304;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelHandleOptionsVisibility;
+        public bool Panel_HandleOptionsVisibility
+        {
+            get
+            {
+                return _panelHandleOptionsVisibility;
+            }
+            set
+            {
+                _panelHandleOptionsVisibility = value;
                 NotifyPropertyChanged();
             }
         }
@@ -749,6 +848,20 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelHandleType = value;
+                if (_panelHandleType == Handle_Type._Rotoswing)
+                {
+                    _panelRotoswingOptionsVisibility = true;
+                    _panelRotaryOptionsVisibility = false;
+                    _panelPropertyHeight = 513;
+                    _panelHandleOptionsHeight = 153;
+                }
+                else if (_panelHandleType == Handle_Type._Rotary)
+                {
+                    _panelRotoswingOptionsVisibility = false;
+                    _panelRotaryOptionsVisibility = true;
+                    _panelPropertyHeight = 467;
+                    _panelHandleOptionsHeight = 107;
+                }
                 NotifyPropertyChanged();
             }
         }

@@ -40,7 +40,11 @@ namespace ModelLayer.Model.Quotation.Panel
         float Panel_Zoom { get; set; }
         IFrameModel Panel_ParentFrameModel { get; set; }
         IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
-
+        int Panel_PropertyHeight { get; set; }
+        bool Panel_HandleOptionsVisibility { get; set; }
+        bool Panel_RotoswingOptionsVisibility { get; set; }
+        bool Panel_RotaryOptionsVisibility { get; set; }
+        int Panel_HandleOptionsHeight { get; set; }
         #region Explosion
 
         int PanelGlass_ID { get; set; }

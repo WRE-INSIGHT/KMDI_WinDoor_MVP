@@ -207,7 +207,7 @@
             this.flp_PanelSpecs.Location = new System.Drawing.Point(2, 144);
             this.flp_PanelSpecs.Name = "flp_PanelSpecs";
             this.flp_PanelSpecs.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 414);
+            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 403);
             this.flp_PanelSpecs.TabIndex = 14;
             // 
             // lbl_pnlSpecs
@@ -387,7 +387,7 @@
             this.flp_HandleOptions.Location = new System.Drawing.Point(3, 206);
             this.flp_HandleOptions.Name = "flp_HandleOptions";
             this.flp_HandleOptions.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.flp_HandleOptions.Size = new System.Drawing.Size(148, 203);
+            this.flp_HandleOptions.Size = new System.Drawing.Size(148, 192);
             this.flp_HandleOptions.TabIndex = 27;
             // 
             // label7
@@ -437,7 +437,8 @@
             this.pnl_RotoswingOptions.Controls.Add(this.label9);
             this.pnl_RotoswingOptions.Controls.Add(this.label8);
             this.pnl_RotoswingOptions.Controls.Add(this.cmb_Espagnolette);
-            this.pnl_RotoswingOptions.Location = new System.Drawing.Point(3, 66);
+            this.pnl_RotoswingOptions.Location = new System.Drawing.Point(3, 63);
+            this.pnl_RotoswingOptions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.pnl_RotoswingOptions.Name = "pnl_RotoswingOptions";
             this.pnl_RotoswingOptions.Size = new System.Drawing.Size(142, 85);
             this.pnl_RotoswingOptions.TabIndex = 17;
@@ -505,7 +506,8 @@
             // 
             this.pnl_RotaryOptions.Controls.Add(this.label11);
             this.pnl_RotaryOptions.Controls.Add(this.cmb_LockingKit);
-            this.pnl_RotaryOptions.Location = new System.Drawing.Point(3, 157);
+            this.pnl_RotaryOptions.Location = new System.Drawing.Point(3, 148);
+            this.pnl_RotaryOptions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.pnl_RotaryOptions.Name = "pnl_RotaryOptions";
             this.pnl_RotaryOptions.Size = new System.Drawing.Size(142, 39);
             this.pnl_RotaryOptions.TabIndex = 18;
@@ -549,7 +551,7 @@
             this.Controls.Add(this.num_BladeCount);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Panel_PropertiesUC";
-            this.Size = new System.Drawing.Size(160, 563);
+            this.Size = new System.Drawing.Size(160, 552);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();

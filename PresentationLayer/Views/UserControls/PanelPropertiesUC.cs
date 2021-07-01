@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using CommonComponents;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using static EnumerationTypeLayer.EnumerationTypes;
+using EnumerationTypeLayer;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -45,29 +46,6 @@ namespace PresentationLayer.Views.UserControls
             {
                 _panelGlassID = value;
                 lbl_PanelGlassID.Text = "P" + _panelGlassID;
-            }
-        }
-
-        public bool SashPanel_Visibility
-        {
-            get
-            {
-                return pnl_Sash.Visible;
-            }
-
-            set
-            {
-                pnl_Sash.Visible = value;
-                if (value == true)
-                {
-                    this.Height = 563;
-                    flp_PanelSpecs.Height = 414;
-                }
-                else if (value == false)
-                {
-                    this.Height = 563;
-                    flp_PanelSpecs.Height = 414;
-                }
             }
         }
 
@@ -143,7 +121,6 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(ModelBinding["PanelGlass_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
             pnl_Sash.DataBindings.Add(ModelBinding["Panel_SashPropertyVisibility"]);
-            this.DataBindings.Add(ModelBinding["SashPanel_Visibility"]);
             cmb_FilmType.DataBindings.Add(ModelBinding["Panel_GlassFilm"]);
             cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
             cmb_SashProfile.DataBindings.Add(ModelBinding["Panel_SashProfileArtNo"]);
@@ -151,6 +128,11 @@ namespace PresentationLayer.Views.UserControls
             cmb_GlassType.DataBindings.Add(ModelBinding["Panel_GlassType"]);
             lbl_GlassThicknessDesc.DataBindings.Add(ModelBinding["Panel_GlassThicknessDesc"]);
             cmb_HandleType.DataBindings.Add(ModelBinding["Panel_HandleType"]);
+            this.DataBindings.Add(ModelBinding["Panel_PropertyHeight"]);
+            flp_HandleOptions.DataBindings.Add(ModelBinding["Panel_HandleOptionsVisibility"]);
+            pnl_RotoswingOptions.DataBindings.Add(ModelBinding["Panel_RotoswingOptionsVisibility"]);
+            pnl_RotaryOptions.DataBindings.Add(ModelBinding["Panel_RotaryOptionsVisibility"]);
+            flp_HandleOptions.DataBindings.Add(ModelBinding["Panel_HandleOptionsHeight"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)

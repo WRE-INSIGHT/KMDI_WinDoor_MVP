@@ -25,6 +25,8 @@ namespace PresentationLayer.Presenter.UserControls
         private Panel _pnlRotoswingOptions;
         private Panel _pnlRotaryOptions;
 
+        private bool _initialLoad = true;
+
         public PanelPropertiesUCPresenter(IPanelPropertiesUC panelPropertiesUC,
                                           IGlassThicknessListPresenter glassThicknessPresenter)
         {
@@ -70,12 +72,30 @@ namespace PresentationLayer.Presenter.UserControls
                 _cmbHandleArtNo.DataSource = rotoswing;
                 _pnlRotoswingOptions.Visible = true;
                 _pnlRotaryOptions.Visible = false;
+                if (_initialLoad == true)
+                {
+                    _initialLoad = false;
+                }
+                else if (_initialLoad == false)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
+                }
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
             }
             else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
             {
                 _cmbHandleArtNo.DataSource = rotary;
                 _pnlRotoswingOptions.Visible = false;
                 _pnlRotaryOptions.Visible = true;
+                if (_initialLoad == true)
+                {
+                    _initialLoad = false;
+                }
+                else if (_initialLoad == false)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+                }
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
             }
         }
 
@@ -162,12 +182,16 @@ namespace PresentationLayer.Presenter.UserControls
             panelBinding.Add("PanelGlass_ID", new Binding("PanelGlass_ID", _panelModel, "PanelGlass_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_GlassFilm", new Binding("Text", _panelModel, "Panel_GlassFilm", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_SashPropertyVisibility", new Binding("Visible", _panelModel, "Panel_SashPropertyVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("SashPanel_Visibility", new Binding("SashPanel_Visibility", _panelModel, "Panel_SashPropertyVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_SashProfileArtNo", new Binding("Text", _panelModel, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_SashReinfArtNo", new Binding("Text", _panelModel, "Panel_SashReinfArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_GlassType", new Binding("Text", _panelModel, "Panel_GlassType", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_GlassThicknessDesc", new Binding("Text", _panelModel, "Panel_GlassThicknessDesc", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_HandleType", new Binding("Text", _panelModel, "Panel_HandleType", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_PropertyHeight", new Binding("Height", _panelModel, "Panel_PropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_HandleOptionsVisibility", new Binding("Visible", _panelModel, "Panel_HandleOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_RotoswingOptionsVisibility", new Binding("Visible", _panelModel, "Panel_RotoswingOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_RotaryOptionsVisibility", new Binding("Visible", _panelModel, "Panel_RotaryOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_HandleOptionsHeight", new Binding("Height", _panelModel, "Panel_HandleOptionsHeight", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

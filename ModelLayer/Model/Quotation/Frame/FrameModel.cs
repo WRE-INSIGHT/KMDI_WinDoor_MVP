@@ -364,11 +364,27 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 if (mode == "delete")
                 {
-                    FrameProp_Height -= (563 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height -= (552 + 1); //+1 on margin (PanelProperties)
                 }
                 else if (mode == "add")
                 {
-                    FrameProp_Height += (563 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height += (552 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "addRotary")
+                {
+                    FrameProp_Height += (39 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "minusRotary")
+                {
+                    FrameProp_Height -= (39 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "addRotoswing")
+                {
+                    FrameProp_Height += (85 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "minusRotoswing")
+                {
+                    FrameProp_Height -= (85 + 1); //+1 on margin (PanelProperties)
                 }
             }
             else if (objtype == "FxdNone")
@@ -380,6 +396,17 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "add")
                 {
                     FrameProp_Height += (308 + 1); //+1 on margin (PanelProperties)
+                }
+            }
+            else if (objtype == "FxdSash")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= (360 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += (360 + 1); //+1 on margin (PanelProperties)
                 }
             }
             else if (objtype == "SashProp")
