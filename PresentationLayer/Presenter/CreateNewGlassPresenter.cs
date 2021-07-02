@@ -12,7 +12,6 @@ namespace PresentationLayer.Presenter
         ICreateNewGlassView _createNewGlassView;
 
         private IMainPresenter _mainPresenter;
-
         private CreateNewGlass_ShowPurpose _purpose;
         private DataTable _glassThicknessDT;
 

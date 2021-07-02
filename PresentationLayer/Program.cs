@@ -1,39 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Unity;
-using Unity.Lifetime;
+﻿using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using PresentationLayer.Presenter;
 using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Presenter.UserControls.Dividers;
+using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
-using QueryLayer.DataAccess.Repositories.Specific.User;
-using ServiceLayer.Services.UserServices;
-using ServiceLayer.Services.QuotationServices;
-using ServiceLayer.Services.WindoorServices;
-using ServiceLayer.Services.FrameServices;
-using ServiceLayer.Services.PanelServices;
-using ServiceLayer.CommonServices;
-using ModelLayer.Model.User;
-using ModelLayer.Model.Quotation.WinDoor;
-using ModelLayer.Model.Quotation.Frame;
-using ModelLayer.Model.Quotation.Panel;
-using Unity.Injection;
-using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
-using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
-using ServiceLayer.Services.MultiPanelServices;
-using ModelLayer.Model.Quotation.MultiPanel;
 using PresentationLayer.Views.UserControls.Dividers;
-using PresentationLayer.Presenter.UserControls.Dividers;
-using ServiceLayer.Services.DividerServices;
-using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
-using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
-using PresentationLayer.CommonMethods;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
+using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
+using QueryLayer.DataAccess.Repositories.Specific.User;
+using ServiceLayer.CommonServices;
+using ServiceLayer.Services.DividerServices;
+using ServiceLayer.Services.FrameServices;
+using ServiceLayer.Services.MultiPanelServices;
+using ServiceLayer.Services.PanelServices;
+using ServiceLayer.Services.QuotationServices;
+using ServiceLayer.Services.UserServices;
+using ServiceLayer.Services.WindoorServices;
+using System;
+using System.Windows.Forms;
+using Unity;
+using Unity.Injection;
+using Unity.Lifetime;
 
 namespace PresentationLayer
 {
@@ -174,6 +170,16 @@ namespace PresentationLayer
 
                 .RegisterType<IGlassThicknessListView, GlassThicknessListView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGlassThicknessListPresenter, GlassThicknessListPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ICreateNewGlassTypeView, CreateNewGlassTypeView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICreateNewGlassTypePresenter, CreateNewGlassTypePresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ICreateNewGlassSpacerView, CreateNewGlassSpacerView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICreateNewGlassSpacerPresenter, CreateNewGlassSpacerPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ICreateNewGlassColorView, CreateNewGlassColorView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICreateNewGlassColorPresenter, CreateNewGlassColorPresenter>(new ContainerControlledLifetimeManager())
+
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
