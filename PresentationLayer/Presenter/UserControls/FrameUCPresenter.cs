@@ -234,6 +234,11 @@ namespace PresentationLayer.Presenter.UserControls
                                                            GlassFilm_Types._None,
                                                            SashProfile_ArticleNo._None,
                                                            SashReinf_ArticleNo._None,
+                                                           GlassType._Single,
+                                                           Espagnolette_ArticleNo._None,
+                                                           Striker_ArticleNo._M89ANT,
+                                                           MiddleCloser_ArticleNo._None,
+                                                           LockingKit_ArticleNo._None,
                                                            _mainPresenter.GetPanelCount(),
                                                            _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);

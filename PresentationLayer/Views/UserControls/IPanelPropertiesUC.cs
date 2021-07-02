@@ -19,6 +19,10 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler btnSelectGlassThicknessClickedEventRaised;
         event EventHandler CmbGlassTypeSelectedValueChangedEventRaised;
         event EventHandler CmbHandleTypeSelectedValueChangedEventRaised;
+        event EventHandler CmbHandleArtNoSelectedValueChangedEventRaised;
+        event EventHandler CmbEspagnoletteSelectedValueChangedEventRaised;
+        event EventHandler CmbMiddleCloserSelectedValueChangedEventRaised;
+        event EventHandler CmbLockingKitSelectedValueChangedEventRaised;
 
         ComboBox GetCmbHandleArtNo();
         Panel GetPnlRotoswingOptions();

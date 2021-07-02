@@ -74,6 +74,9 @@ namespace ModelLayer.Model.Quotation.Panel
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
         Handle_Type Panel_HandleType { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+        Striker_ArticleNo Panel_StrikerArtno { get; set; }
+        MiddleCloser_ArticleNo Panel_MiddleCloserArtNo { get; set; }
+        LockingKit_ArticleNo Panel_LockingKitArtNo { get; set; }
         GlassType Panel_GlassType { get; set; }
 
         void SetPanelExplosionValues_Panel(bool parentIsFrame);

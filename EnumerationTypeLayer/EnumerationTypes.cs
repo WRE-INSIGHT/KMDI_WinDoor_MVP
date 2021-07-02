@@ -189,22 +189,22 @@ namespace EnumerationTypeLayer
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class Rotoswing_Handle : Enumeration<Rotoswing_Handle, int>
+        public class Rotoswing_HandleArtNo : Enumeration<Rotoswing_HandleArtNo, int>
         {
-            public static readonly Rotoswing_Handle _RSC773451 = new Rotoswing_Handle(0, "RSC-773451");
-            public static readonly Rotoswing_Handle _RSC773452 = new Rotoswing_Handle(1, "RSC-773452");
-            public static readonly Rotoswing_Handle _RSC823048 = new Rotoswing_Handle(2, "RSC-823048");
-            public static readonly Rotoswing_Handle _RSC833307 = new Rotoswing_Handle(3, "RSC-833307");
+            public static readonly Rotoswing_HandleArtNo _RSC773451 = new Rotoswing_HandleArtNo(0, "RSC-773451");
+            public static readonly Rotoswing_HandleArtNo _RSC773452 = new Rotoswing_HandleArtNo(1, "RSC-773452");
+            public static readonly Rotoswing_HandleArtNo _RSC823048 = new Rotoswing_HandleArtNo(2, "RSC-823048");
+            public static readonly Rotoswing_HandleArtNo _RSC833307 = new Rotoswing_HandleArtNo(3, "RSC-833307");
 
-            private Rotoswing_Handle(int value, string displayName) : base(value, displayName) { }
+            private Rotoswing_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class Rotary_Handle : Enumeration<Rotary_Handle, int>
+        public class Rotary_HandleArtNo : Enumeration<Rotary_HandleArtNo, int>
         {
-            public static readonly Rotary_Handle _T511155KMWSS = new Rotary_Handle(0, "T-51.1155 KM-W-SS");
-            public static readonly Rotary_Handle _T511155KMBLSS = new Rotary_Handle(1, "T-51.1155 KM-BL-SS");
+            public static readonly Rotary_HandleArtNo _T511155KMWSS = new Rotary_HandleArtNo(0, "T-51.1155 KM-W-SS");
+            public static readonly Rotary_HandleArtNo _T511155KMBLSS = new Rotary_HandleArtNo(1, "T-51.1155 KM-BL-SS");
 
-            private Rotary_Handle(int value, string displayName) : base(value, displayName) { }
+            private Rotary_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class Espagnolette_ArticleNo : Enumeration<Espagnolette_ArticleNo, int>
@@ -217,6 +217,7 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _639958 = new Espagnolette_ArticleNo(5, "639958");
             public static readonly Espagnolette_ArticleNo _741012 = new Espagnolette_ArticleNo(6, "741012");
             public static readonly Espagnolette_ArticleNo _EQ87NT = new Espagnolette_ArticleNo(7, "EQ87(NT)");
+            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(8, "None");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -231,6 +232,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly MiddleCloser_ArticleNo _1WC70DB = new MiddleCloser_ArticleNo(0, "1WC70-DB");
             public static readonly MiddleCloser_ArticleNo _1WC70WHT = new MiddleCloser_ArticleNo(1, "1WC70-WHT");
+            public static readonly MiddleCloser_ArticleNo _None = new MiddleCloser_ArticleNo(2, "None");
 
             private MiddleCloser_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -239,6 +241,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly LockingKit_ArticleNo _T244002KMW = new LockingKit_ArticleNo(0, "T-24.40.02 KM-W");
             public static readonly LockingKit_ArticleNo _T24402KMBL = new LockingKit_ArticleNo(1, "T-24.4.02 KM-BL");
+            public static readonly LockingKit_ArticleNo _None = new LockingKit_ArticleNo(2, "None");
 
             private LockingKit_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

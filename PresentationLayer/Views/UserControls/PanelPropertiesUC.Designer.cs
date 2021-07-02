@@ -428,6 +428,7 @@
             this.cmb_HandleArtNo.Name = "cmb_HandleArtNo";
             this.cmb_HandleArtNo.Size = new System.Drawing.Size(73, 21);
             this.cmb_HandleArtNo.TabIndex = 16;
+            this.cmb_HandleArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_HandleArtNo_SelectedValueChanged);
             // 
             // pnl_RotoswingOptions
             // 
@@ -463,6 +464,7 @@
             this.cmb_MiddleCloser.Name = "cmb_MiddleCloser";
             this.cmb_MiddleCloser.Size = new System.Drawing.Size(69, 21);
             this.cmb_MiddleCloser.TabIndex = 22;
+            this.cmb_MiddleCloser.SelectedValueChanged += new System.EventHandler(this.cmb_MiddleCloser_SelectedValueChanged);
             // 
             // txt_Striker
             // 
@@ -501,6 +503,7 @@
             this.cmb_Espagnolette.Name = "cmb_Espagnolette";
             this.cmb_Espagnolette.Size = new System.Drawing.Size(69, 21);
             this.cmb_Espagnolette.TabIndex = 18;
+            this.cmb_Espagnolette.SelectedValueChanged += new System.EventHandler(this.cmb_Espagnolette_SelectedValueChanged);
             // 
             // pnl_RotaryOptions
             // 
@@ -531,6 +534,7 @@
             this.cmb_LockingKit.Name = "cmb_LockingKit";
             this.cmb_LockingKit.Size = new System.Drawing.Size(69, 21);
             this.cmb_LockingKit.TabIndex = 24;
+            this.cmb_LockingKit.SelectedValueChanged += new System.EventHandler(this.cmb_LockingKit_SelectedValueChanged);
             // 
             // Panel_PropertiesUC
             // 

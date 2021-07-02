@@ -362,11 +362,7 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             if (objtype == "Panel")
             {
-                if (mode == "delete")
-                {
-                    FrameProp_Height -= (552 + 1); //+1 on margin (PanelProperties)
-                }
-                else if (mode == "add")
+                if (mode == "add")
                 {
                     FrameProp_Height += (552 + 1); //+1 on margin (PanelProperties)
                 }
@@ -444,6 +440,23 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        public void AdjustPropertyPanelHeight(string objtype, string mode, Handle_Type handleType)
+        {
+            if (objtype == "Panel")
+            {
+                if (mode == "delete")
+                {
+                    if (handleType == Handle_Type._Rotoswing)
+                    {
+                        FrameProp_Height -= (513 + 1); //+1 on margin (PanelProperties)
+                    }
+                    else if (handleType == Handle_Type._Rotary)
+                    {
+                        FrameProp_Height -= (467 + 1); //+1 on margin (PanelProperties)
+                    }
+                }
+            }
+        }
         #endregion
 
         public FrameModel(int frameID,

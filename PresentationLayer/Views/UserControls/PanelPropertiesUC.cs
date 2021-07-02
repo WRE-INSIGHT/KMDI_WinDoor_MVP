@@ -58,6 +58,10 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler btnSelectGlassThicknessClickedEventRaised;
         public event EventHandler CmbGlassTypeSelectedValueChangedEventRaised;
         public event EventHandler CmbHandleTypeSelectedValueChangedEventRaised;
+        public event EventHandler CmbHandleArtNoSelectedValueChangedEventRaised;
+        public event EventHandler CmbEspagnoletteSelectedValueChangedEventRaised;
+        public event EventHandler CmbMiddleCloserSelectedValueChangedEventRaised;
+        public event EventHandler CmbLockingKitSelectedValueChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -107,6 +111,27 @@ namespace PresentationLayer.Views.UserControls
             }
             cmb_HandleType.DataSource = hType;
 
+            List<Espagnolette_ArticleNo> espArtNo = new List<Espagnolette_ArticleNo>();
+            foreach (Espagnolette_ArticleNo item in Espagnolette_ArticleNo.GetAll())
+            {
+                espArtNo.Add(item);
+            }
+            cmb_Espagnolette.DataSource = espArtNo;
+
+            List<MiddleCloser_ArticleNo> midArtNo = new List<MiddleCloser_ArticleNo>();
+            foreach (MiddleCloser_ArticleNo item in MiddleCloser_ArticleNo.GetAll())
+            {
+                midArtNo.Add(item);
+            }
+            cmb_MiddleCloser.DataSource = midArtNo;
+
+            List<LockingKit_ArticleNo> lockArtNo = new List<LockingKit_ArticleNo>();
+            foreach (LockingKit_ArticleNo item in LockingKit_ArticleNo.GetAll())
+            {
+                lockArtNo.Add(item);
+            }
+            cmb_LockingKit.DataSource = lockArtNo;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 
@@ -133,6 +158,10 @@ namespace PresentationLayer.Views.UserControls
             pnl_RotoswingOptions.DataBindings.Add(ModelBinding["Panel_RotoswingOptionsVisibility"]);
             pnl_RotaryOptions.DataBindings.Add(ModelBinding["Panel_RotaryOptionsVisibility"]);
             flp_HandleOptions.DataBindings.Add(ModelBinding["Panel_HandleOptionsHeight"]);
+            cmb_Espagnolette.DataBindings.Add(ModelBinding["Panel_EspagnoletteArtNo"]);
+            txt_Striker.DataBindings.Add(ModelBinding["Panel_StrikerArtno"]);
+            cmb_MiddleCloser.DataBindings.Add(ModelBinding["Panel_MiddleCloserArtNo"]);
+            cmb_LockingKit.DataBindings.Add(ModelBinding["Panel_LockingKitArtNo"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)
@@ -188,6 +217,26 @@ namespace PresentationLayer.Views.UserControls
         public Panel GetPnlRotaryOptions()
         {
             return pnl_RotaryOptions;
+        }
+
+        private void cmb_HandleArtNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbHandleArtNoSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_Espagnolette_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbEspagnoletteSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_MiddleCloser_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbMiddleCloserSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_LockingKit_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbLockingKitSelectedValueChangedEventRaised, e);
         }
     }
 }

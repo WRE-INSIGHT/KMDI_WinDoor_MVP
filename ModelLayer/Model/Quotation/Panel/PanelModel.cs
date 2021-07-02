@@ -776,6 +776,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         public int Panel_SashWidth { get; set; }
+
         public int Panel_SashHeight { get; set; }
         public int Panel_OriginalSashWidth { get; set; }
         public int Panel_OriginalSashHeight { get; set; }
@@ -848,26 +849,82 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelHandleType = value;
-                if (_panelHandleType == Handle_Type._Rotoswing)
+                if (_panelType != "Fixed Panel")
                 {
-                    _panelRotoswingOptionsVisibility = true;
-                    _panelRotaryOptionsVisibility = false;
-                    _panelPropertyHeight = 513;
-                    _panelHandleOptionsHeight = 153;
-                }
-                else if (_panelHandleType == Handle_Type._Rotary)
-                {
-                    _panelRotoswingOptionsVisibility = false;
-                    _panelRotaryOptionsVisibility = true;
-                    _panelPropertyHeight = 467;
-                    _panelHandleOptionsHeight = 107;
+                    if (_panelHandleType == Handle_Type._Rotoswing)
+                    {
+                        _panelRotoswingOptionsVisibility = true;
+                        _panelRotaryOptionsVisibility = false;
+                        _panelPropertyHeight = 513;
+                        _panelHandleOptionsHeight = 153;
+                    }
+                    else if (_panelHandleType == Handle_Type._Rotary)
+                    {
+                        _panelRotoswingOptionsVisibility = false;
+                        _panelRotaryOptionsVisibility = true;
+                        _panelPropertyHeight = 467;
+                        _panelHandleOptionsHeight = 107;
+                    }
                 }
                 NotifyPropertyChanged();
             }
         }
 
-        public Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+        private Espagnolette_ArticleNo _panelEspagnoletteArtno;
+        public Espagnolette_ArticleNo Panel_EspagnoletteArtNo
+        {
+            get
+            {
+                return _panelEspagnoletteArtno;
+            }
+            set
+            {
+                _panelEspagnoletteArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
 
+        private Striker_ArticleNo _panelStrikerArtno;
+        public Striker_ArticleNo Panel_StrikerArtno
+        {
+            get
+            {
+                return _panelStrikerArtno;
+            }
+            set
+            {
+                _panelStrikerArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private MiddleCloser_ArticleNo _panelMiddleCloserArtno;
+        public MiddleCloser_ArticleNo Panel_MiddleCloserArtNo
+        {
+            get
+            {
+                return _panelMiddleCloserArtno;
+            }
+            set
+            {
+                _panelMiddleCloserArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private LockingKit_ArticleNo _panelLockingKitArtno;
+        public LockingKit_ArticleNo Panel_LockingKitArtNo
+        {
+            get
+            {
+                return _panelLockingKitArtno;
+            }
+            set
+            {
+                _panelLockingKitArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
@@ -1255,7 +1312,12 @@ namespace ModelLayer.Model.Quotation.Panel
                           int panelGlassID,
                           GlassFilm_Types panelGlassFilm,
                           SashProfile_ArticleNo panelSash,
-                          SashReinf_ArticleNo panelSashReinf)
+                          SashReinf_ArticleNo panelSashReinf,
+                          GlassType panelGlassType,
+                          Espagnolette_ArticleNo panelEspagnoletteArtNo,
+                          Striker_ArticleNo panelStrikerArtno,
+                          MiddleCloser_ArticleNo panelMiddleCloserArtno,
+                          LockingKit_ArticleNo panelLockingKitArtno)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -1285,7 +1347,11 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_SashReinfArtNo = panelSashReinf;
             Panel_OriginalWidth = Panel_Width;
             Panel_OriginalHeight = Panel_Height;
-            Panel_GlassType = GlassType._Single;
+            Panel_GlassType = panelGlassType;
+            Panel_EspagnoletteArtNo = panelEspagnoletteArtNo;
+            Panel_StrikerArtno = panelStrikerArtno;
+            Panel_MiddleCloserArtNo = panelMiddleCloserArtno;
+            Panel_LockingKitArtNo = panelLockingKitArtno;
         }
     }
 }
