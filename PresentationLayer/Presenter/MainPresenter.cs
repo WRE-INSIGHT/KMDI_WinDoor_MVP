@@ -100,6 +100,44 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public DataTable GlassTypeDT
+        {
+            get
+            {
+                return _glassTypeDT;
+            }
+            set
+            {
+                _glassTypeDT = value;
+            }
+        }
+
+
+        public DataTable GlassSpacerDT
+        {
+            get
+            {
+                return _spacerDT;
+            }
+            set
+            {
+                _spacerDT = value;
+            }
+        }
+
+        public DataTable GlassColorDT
+        {
+            get
+            {
+                return _colorDT;
+            }
+            set
+            {
+                _colorDT = value;
+            }
+        }
+
+
         public string inputted_quotationRefNo
         {
             get

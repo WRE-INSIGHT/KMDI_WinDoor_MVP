@@ -7,5 +7,7 @@ namespace PresentationLayer.Presenter
     {
         void ShowCreateNewGlassTypeView();
         ICreateNewGlassTypePresenter GetNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, DataTable glassTypeDT);
+        DataTable PopulateDgvGlassType();
+        DataRow CreateNewRowGlassTypeDT();
     }
 }

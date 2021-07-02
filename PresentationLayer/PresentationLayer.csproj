@@ -473,6 +473,9 @@
     <EmbeddedResource Include="Views\ChangeItemColorView.resx">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateNewGlassTypeView.resx">
+      <DependentUpon>CreateNewGlassTypeView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateNewGlassView.resx">
       <DependentUpon>CreateNewGlassView.cs</DependentUpon>
     </EmbeddedResource>

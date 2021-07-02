@@ -1,21 +1,24 @@
-﻿using PresentationLayer.Views;
-using PresentationLayer.Views.UserControls;
-using PresentationLayer.Presenter.UserControls;
-using ModelLayer.Model.User;
-using ModelLayer.Model.Quotation;
-using ModelLayer.Model.Quotation.WinDoor;
+﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
+using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Presenter.UserControls.Dividers;
+using PresentationLayer.Views;
+using PresentationLayer.Views.UserControls;
+using System.Data;
 using System.Windows.Forms;
 using Unity;
-using ModelLayer.Model.Quotation.Divider;
-using PresentationLayer.Presenter.UserControls.Dividers;
-using System.Data;
 
 namespace PresentationLayer.Presenter
 {
     public interface IMainPresenter
     {
         DataTable GlassThicknessDT { get; set; }
+        DataTable GlassTypeDT { get; set; }
+        DataTable GlassColorDT { get; set; }
+        DataTable GlassSpacerDT { get; set; }
         string inputted_quotationRefNo { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }

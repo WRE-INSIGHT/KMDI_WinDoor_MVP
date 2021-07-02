@@ -1,10 +1,11 @@
 ﻿using PresentationLayer.Views;
+using System;
 using System.Data;
 using Unity;
 
 namespace PresentationLayer.Presenter
 {
-   public class CreateNewGlassTypePresenter : ICreateNewGlassTypePresenter
+    public class CreateNewGlassTypePresenter : ICreateNewGlassTypePresenter
     {
         ICreateNewGlassTypeView _createNewGlassTypeView;
 
@@ -19,8 +20,47 @@ namespace PresentationLayer.Presenter
 
         private void SubscribeToEventsSetup()
         {
-            //events
+            _createNewGlassTypeView.OnCreateNewGlassTypeViewLoadEventRaised += new EventHandler(OnCreateNewGlassTypeViewLoadEventRaised);
+            _createNewGlassTypeView.OnBtnAddGlassTypeClickEventRaised += new EventHandler(OnBtnAddGlassTypeClickEventRaised);
         }
+
+        private void OnBtnAddGlassTypeClickEventRaised(object sender, EventArgs e)
+        {
+        
+            _glassTypeDT.Rows.Add(CreateNewRowGlassTypeDT());
+            _mainPresenter.GlassTypeDT = _glassTypeDT;
+            _createNewGlassTypeView.GetDgvGlassTypeList().DataSource = PopulateDgvGlassType();
+
+
+        }
+
+        private void OnCreateNewGlassTypeViewLoadEventRaised(object sender, EventArgs e)
+        {
+            _createNewGlassTypeView.GetDgvGlassTypeList().DataSource = PopulateDgvGlassType();
+        }
+
+        public DataTable PopulateDgvGlassType()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("GlassType", Type.GetType("System.String"));
+
+            foreach (DataRow row in _glassTypeDT.Rows)
+            {
+                dt.Rows.Add(row["GlassType"]);
+            }
+
+            return dt;
+        }
+        public DataRow CreateNewRowGlassTypeDT()
+        {
+            DataRow newRow;
+            newRow = _glassTypeDT.NewRow();
+
+            newRow["GlassType"] = _createNewGlassTypeView.tboxGlassTypeView;
+
+            return newRow;
+        }
+
 
 
         public ICreateNewGlassTypePresenter GetNewInstance(IUnityContainer unityC,
@@ -44,5 +84,6 @@ namespace PresentationLayer.Presenter
             _createNewGlassTypeView.ShowThis();
         }
 
+        
     }
 }
