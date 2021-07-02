@@ -14,5 +14,6 @@ namespace PresentationLayer.Views
 
         event EventHandler OnCreateNewGlassTypeViewLoadEventRaised;
         event EventHandler OnBtnAddGlassTypeClickEventRaised;
+        event DataGridViewRowPostPaintEventHandler DgvGlassTypeListRowpostpaintEventRaised;
     }
 }

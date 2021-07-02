@@ -1,6 +1,8 @@
-﻿using PresentationLayer.Views;
+﻿using PresentationLayer.CommonMethods;
+using PresentationLayer.Views;
 using System;
 using System.Data;
+using System.Windows.Forms;
 using Unity;
 
 namespace PresentationLayer.Presenter
@@ -12,6 +14,8 @@ namespace PresentationLayer.Presenter
         private IMainPresenter _mainPresenter;
         private DataTable _glassTypeDT;
 
+        CommonFunctions commonfunc = new CommonFunctions();
+
         public CreateNewGlassTypePresenter(ICreateNewGlassTypeView createNewGlassTypeView)
         {
             _createNewGlassTypeView = createNewGlassTypeView;
@@ -22,42 +26,46 @@ namespace PresentationLayer.Presenter
         {
             _createNewGlassTypeView.OnCreateNewGlassTypeViewLoadEventRaised += new EventHandler(OnCreateNewGlassTypeViewLoadEventRaised);
             _createNewGlassTypeView.OnBtnAddGlassTypeClickEventRaised += new EventHandler(OnBtnAddGlassTypeClickEventRaised);
+            _createNewGlassTypeView.DgvGlassTypeListRowpostpaintEventRaised += new DataGridViewRowPostPaintEventHandler(DgvGlassTypeListRowpostpaintEventRaised);
+        }
+
+        private void DgvGlassTypeListRowpostpaintEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            commonfunc.rowpostpaint(sender, e);
         }
 
         private void OnBtnAddGlassTypeClickEventRaised(object sender, EventArgs e)
         {
-        
-            _glassTypeDT.Rows.Add(CreateNewRowGlassTypeDT());
-            _mainPresenter.GlassTypeDT = _glassTypeDT;
-            _createNewGlassTypeView.GetDgvGlassTypeList().DataSource = PopulateDgvGlassType();
-
-
+            if (_createNewGlassTypeView.tboxGlassTypeView != string.Empty)
+            {
+                _glassTypeDT.Rows.Add(CreateNewRowGlassTypeDT());
+                _mainPresenter.GlassTypeDT = _glassTypeDT;
+                _createNewGlassTypeView.GetDgvGlassTypeList().DataSource = PopulateDgvGlassType();
+                _createNewGlassTypeView.tboxGlassTypeView = string.Empty;
+            }
         }
 
         private void OnCreateNewGlassTypeViewLoadEventRaised(object sender, EventArgs e)
         {
             _createNewGlassTypeView.GetDgvGlassTypeList().DataSource = PopulateDgvGlassType();
+            _createNewGlassTypeView.GetDgvGlassTypeList().Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         public DataTable PopulateDgvGlassType()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("GlassType", Type.GetType("System.String"));
-
             foreach (DataRow row in _glassTypeDT.Rows)
             {
                 dt.Rows.Add(row["GlassType"]);
             }
-
             return dt;
         }
         public DataRow CreateNewRowGlassTypeDT()
         {
             DataRow newRow;
             newRow = _glassTypeDT.NewRow();
-
             newRow["GlassType"] = _createNewGlassTypeView.tboxGlassTypeView;
-
             return newRow;
         }
 
@@ -84,6 +92,6 @@ namespace PresentationLayer.Presenter
             _createNewGlassTypeView.ShowThis();
         }
 
-        
+
     }
 }

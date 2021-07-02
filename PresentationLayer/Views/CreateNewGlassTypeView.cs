@@ -17,7 +17,7 @@ namespace PresentationLayer.Views
                 tboxGlassType.Text = value;
             }
         }
-            
+
         public CreateNewGlassTypeView()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace PresentationLayer.Views
 
         public event EventHandler OnCreateNewGlassTypeViewLoadEventRaised;
         public event EventHandler OnBtnAddGlassTypeClickEventRaised;
-
+        public event DataGridViewRowPostPaintEventHandler DgvGlassTypeListRowpostpaintEventRaised;
         public void ShowThis()
         {
             this.Show();
@@ -49,6 +49,11 @@ namespace PresentationLayer.Views
         private void btnAddGlassType_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, OnBtnAddGlassTypeClickEventRaised, e);
+        }
+
+        private void dgvGlassTypeList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewRowpostpaintEvent(sender, DgvGlassTypeListRowpostpaintEventRaised, e);
         }
     }
 }

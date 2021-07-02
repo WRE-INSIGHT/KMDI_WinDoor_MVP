@@ -47,6 +47,7 @@
             this.dgvGlassTypeList.ReadOnly = true;
             this.dgvGlassTypeList.Size = new System.Drawing.Size(299, 275);
             this.dgvGlassTypeList.TabIndex = 0;
+            this.dgvGlassTypeList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvGlassTypeList_RowPostPaint);
             // 
             // btnAddGlassType
             // 
@@ -83,6 +84,8 @@
             this.Controls.Add(this.tboxGlassType);
             this.Controls.Add(this.btnAddGlassType);
             this.Controls.Add(this.dgvGlassTypeList);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CreateNewGlassTypeView";
             this.Text = "Glass Type";
             this.Load += new System.EventHandler(this.CreateNewGlassTypeView_Load);
