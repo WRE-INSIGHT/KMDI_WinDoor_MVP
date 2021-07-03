@@ -473,6 +473,12 @@
     <EmbeddedResource Include="Views\ChangeItemColorView.resx">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateNewGlassColorView.resx">
+      <DependentUpon>CreateNewGlassColorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateNewGlassSpacerView.resx">
+      <DependentUpon>CreateNewGlassSpacerView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateNewGlassTypeView.resx">
       <DependentUpon>CreateNewGlassTypeView.cs</DependentUpon>
     </EmbeddedResource>

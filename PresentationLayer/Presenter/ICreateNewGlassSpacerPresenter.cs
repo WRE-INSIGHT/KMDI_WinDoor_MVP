@@ -7,5 +7,8 @@ namespace PresentationLayer.Presenter
     {
         void ShowCreateNewGlassSpacerView();
         ICreateNewGlassSpacerPresenter GetNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, DataTable spacerDT);
+        DataTable PopulateDgvGlassSpacer();
+        DataRow CreateNewRowGlassSpacerDT();
+
     }
 }

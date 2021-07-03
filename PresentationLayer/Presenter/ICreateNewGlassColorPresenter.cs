@@ -7,5 +7,7 @@ namespace PresentationLayer.Presenter
     {
         ICreateNewGlassColorPresenter GetNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, DataTable colorDT);
         void ShowCreateNewGlassColorView();
+        DataTable PopulateDgvGlassColor();
+        DataRow CreateNewRow_ColorDT();
     }
 }
