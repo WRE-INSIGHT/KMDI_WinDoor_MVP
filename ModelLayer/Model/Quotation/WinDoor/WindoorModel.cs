@@ -493,6 +493,28 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        public void SetMiddleCloser_onPanel()
+        {
+            MiddleCloser_ArticleNo midArt = MiddleCloser_ArticleNo._None;
+            if (WD_BaseColor == Base_Color._DarkBrown)
+            {
+                midArt = MiddleCloser_ArticleNo._1WC70DB;
+            }
+            else if (WD_BaseColor == Base_Color._White ||
+                     WD_BaseColor == Base_Color._Ivory)
+            {
+                midArt = MiddleCloser_ArticleNo._1WC70WHT;
+            }
+
+            foreach (IFrameModel fr in lst_frame)
+            {
+                foreach (IPanelModel pnl in fr.Lst_Panel)
+                {
+                    pnl.Panel_MiddleCloserArtNo = midArt;
+                }
+            }
+        }
+
         public WindoorModel(int wd_id,
                             string wd_name,
                             string wd_description,

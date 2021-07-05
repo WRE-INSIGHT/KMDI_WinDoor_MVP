@@ -56,9 +56,9 @@
             this.flp_HandleOptions = new System.Windows.Forms.FlowLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
             this.cmb_HandleType = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cmb_HandleArtNo = new System.Windows.Forms.ComboBox();
             this.pnl_RotoswingOptions = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmb_RotoswingNo = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cmb_MiddleCloser = new System.Windows.Forms.ComboBox();
             this.txt_Striker = new System.Windows.Forms.TextBox();
@@ -66,6 +66,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.cmb_Espagnolette = new System.Windows.Forms.ComboBox();
             this.pnl_RotaryOptions = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cmb_RotaryArtNo = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cmb_LockingKit = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).BeginInit();
@@ -207,7 +209,7 @@
             this.flp_PanelSpecs.Location = new System.Drawing.Point(2, 144);
             this.flp_PanelSpecs.Name = "flp_PanelSpecs";
             this.flp_PanelSpecs.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 403);
+            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 427);
             this.flp_PanelSpecs.TabIndex = 14;
             // 
             // lbl_pnlSpecs
@@ -380,14 +382,12 @@
             this.flp_HandleOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flp_HandleOptions.Controls.Add(this.label7);
             this.flp_HandleOptions.Controls.Add(this.cmb_HandleType);
-            this.flp_HandleOptions.Controls.Add(this.label6);
-            this.flp_HandleOptions.Controls.Add(this.cmb_HandleArtNo);
             this.flp_HandleOptions.Controls.Add(this.pnl_RotoswingOptions);
             this.flp_HandleOptions.Controls.Add(this.pnl_RotaryOptions);
             this.flp_HandleOptions.Location = new System.Drawing.Point(3, 206);
             this.flp_HandleOptions.Name = "flp_HandleOptions";
             this.flp_HandleOptions.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.flp_HandleOptions.Size = new System.Drawing.Size(148, 192);
+            this.flp_HandleOptions.Size = new System.Drawing.Size(148, 217);
             this.flp_HandleOptions.TabIndex = 27;
             // 
             // label7
@@ -410,45 +410,47 @@
             this.cmb_HandleType.TabIndex = 14;
             this.cmb_HandleType.SelectedValueChanged += new System.EventHandler(this.cmb_HandleType_SelectedValueChanged);
             // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(3, 42);
-            this.label6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Article No.";
-            // 
-            // cmb_HandleArtNo
-            // 
-            this.cmb_HandleArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_HandleArtNo.FormattingEnabled = true;
-            this.cmb_HandleArtNo.Location = new System.Drawing.Point(70, 39);
-            this.cmb_HandleArtNo.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.cmb_HandleArtNo.Name = "cmb_HandleArtNo";
-            this.cmb_HandleArtNo.Size = new System.Drawing.Size(73, 21);
-            this.cmb_HandleArtNo.TabIndex = 16;
-            this.cmb_HandleArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_HandleArtNo_SelectedValueChanged);
-            // 
             // pnl_RotoswingOptions
             // 
+            this.pnl_RotoswingOptions.Controls.Add(this.label6);
+            this.pnl_RotoswingOptions.Controls.Add(this.cmb_RotoswingNo);
             this.pnl_RotoswingOptions.Controls.Add(this.label10);
             this.pnl_RotoswingOptions.Controls.Add(this.cmb_MiddleCloser);
             this.pnl_RotoswingOptions.Controls.Add(this.txt_Striker);
             this.pnl_RotoswingOptions.Controls.Add(this.label9);
             this.pnl_RotoswingOptions.Controls.Add(this.label8);
             this.pnl_RotoswingOptions.Controls.Add(this.cmb_Espagnolette);
-            this.pnl_RotoswingOptions.Location = new System.Drawing.Point(3, 63);
+            this.pnl_RotoswingOptions.Location = new System.Drawing.Point(3, 36);
             this.pnl_RotoswingOptions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.pnl_RotoswingOptions.Name = "pnl_RotoswingOptions";
-            this.pnl_RotoswingOptions.Size = new System.Drawing.Size(142, 85);
+            this.pnl_RotoswingOptions.Size = new System.Drawing.Size(142, 116);
             this.pnl_RotoswingOptions.TabIndex = 17;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(1, 9);
+            this.label6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(61, 13);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Article No.";
+            // 
+            // cmb_RotoswingNo
+            // 
+            this.cmb_RotoswingNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_RotoswingNo.FormattingEnabled = true;
+            this.cmb_RotoswingNo.Location = new System.Drawing.Point(68, 6);
+            this.cmb_RotoswingNo.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.cmb_RotoswingNo.Name = "cmb_RotoswingNo";
+            this.cmb_RotoswingNo.Size = new System.Drawing.Size(73, 21);
+            this.cmb_RotoswingNo.TabIndex = 24;
+            this.cmb_RotoswingNo.SelectedValueChanged += new System.EventHandler(this.cmb_RotoswingNo_SelectedValueChanged);
             // 
             // label10
             // 
             this.label10.AutoEllipsis = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 53);
+            this.label10.Location = new System.Drawing.Point(3, 82);
             this.label10.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(56, 29);
@@ -460,7 +462,7 @@
             // 
             this.cmb_MiddleCloser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_MiddleCloser.FormattingEnabled = true;
-            this.cmb_MiddleCloser.Location = new System.Drawing.Point(68, 57);
+            this.cmb_MiddleCloser.Location = new System.Drawing.Point(68, 86);
             this.cmb_MiddleCloser.Name = "cmb_MiddleCloser";
             this.cmb_MiddleCloser.Size = new System.Drawing.Size(69, 21);
             this.cmb_MiddleCloser.TabIndex = 22;
@@ -468,7 +470,7 @@
             // 
             // txt_Striker
             // 
-            this.txt_Striker.Location = new System.Drawing.Point(68, 31);
+            this.txt_Striker.Location = new System.Drawing.Point(68, 60);
             this.txt_Striker.Name = "txt_Striker";
             this.txt_Striker.ReadOnly = true;
             this.txt_Striker.Size = new System.Drawing.Size(69, 20);
@@ -477,7 +479,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 34);
+            this.label9.Location = new System.Drawing.Point(3, 63);
             this.label9.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(37, 13);
@@ -488,7 +490,7 @@
             // 
             this.label8.AutoEllipsis = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(3, 7);
+            this.label8.Location = new System.Drawing.Point(3, 36);
             this.label8.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(56, 13);
@@ -499,7 +501,7 @@
             // 
             this.cmb_Espagnolette.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_Espagnolette.FormattingEnabled = true;
-            this.cmb_Espagnolette.Location = new System.Drawing.Point(68, 4);
+            this.cmb_Espagnolette.Location = new System.Drawing.Point(68, 33);
             this.cmb_Espagnolette.Name = "cmb_Espagnolette";
             this.cmb_Espagnolette.Size = new System.Drawing.Size(69, 21);
             this.cmb_Espagnolette.TabIndex = 18;
@@ -507,19 +509,41 @@
             // 
             // pnl_RotaryOptions
             // 
+            this.pnl_RotaryOptions.Controls.Add(this.label12);
+            this.pnl_RotaryOptions.Controls.Add(this.cmb_RotaryArtNo);
             this.pnl_RotaryOptions.Controls.Add(this.label11);
             this.pnl_RotaryOptions.Controls.Add(this.cmb_LockingKit);
-            this.pnl_RotaryOptions.Location = new System.Drawing.Point(3, 148);
+            this.pnl_RotaryOptions.Location = new System.Drawing.Point(3, 152);
             this.pnl_RotaryOptions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.pnl_RotaryOptions.Name = "pnl_RotaryOptions";
-            this.pnl_RotaryOptions.Size = new System.Drawing.Size(142, 39);
+            this.pnl_RotaryOptions.Size = new System.Drawing.Size(142, 61);
             this.pnl_RotaryOptions.TabIndex = 18;
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(5, 9);
+            this.label12.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(61, 13);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "Article No.";
+            // 
+            // cmb_RotaryArtNo
+            // 
+            this.cmb_RotaryArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_RotaryArtNo.FormattingEnabled = true;
+            this.cmb_RotaryArtNo.Location = new System.Drawing.Point(69, 6);
+            this.cmb_RotaryArtNo.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.cmb_RotaryArtNo.Name = "cmb_RotaryArtNo";
+            this.cmb_RotaryArtNo.Size = new System.Drawing.Size(71, 21);
+            this.cmb_RotaryArtNo.TabIndex = 26;
+            this.cmb_RotaryArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_RotaryArtNo_SelectedValueChanged);
             // 
             // label11
             // 
             this.label11.AutoEllipsis = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(4, 6);
+            this.label11.Location = new System.Drawing.Point(4, 29);
             this.label11.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(56, 29);
@@ -530,7 +554,7 @@
             // 
             this.cmb_LockingKit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_LockingKit.FormattingEnabled = true;
-            this.cmb_LockingKit.Location = new System.Drawing.Point(69, 10);
+            this.cmb_LockingKit.Location = new System.Drawing.Point(69, 33);
             this.cmb_LockingKit.Name = "cmb_LockingKit";
             this.cmb_LockingKit.Size = new System.Drawing.Size(69, 21);
             this.cmb_LockingKit.TabIndex = 24;
@@ -555,7 +579,7 @@
             this.Controls.Add(this.num_BladeCount);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Panel_PropertiesUC";
-            this.Size = new System.Drawing.Size(160, 552);
+            this.Size = new System.Drawing.Size(160, 576);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();
@@ -603,8 +627,6 @@
         private System.Windows.Forms.FlowLayoutPanel flp_HandleOptions;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmb_HandleType;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cmb_HandleArtNo;
         private System.Windows.Forms.Panel pnl_RotoswingOptions;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmb_Espagnolette;
@@ -615,5 +637,9 @@
         private System.Windows.Forms.Panel pnl_RotaryOptions;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cmb_LockingKit;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmb_RotoswingNo;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cmb_RotaryArtNo;
     }
 }

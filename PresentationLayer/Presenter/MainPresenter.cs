@@ -967,6 +967,7 @@ namespace PresentationLayer.Presenter
                                                                    _windoorModel.WD_zoom_forImageRenderer,
                                                                    _windoorModel.WD_zoom,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    frameID);
                         AddFrameList_WindoorModel(_frameModel);
                         IFramePropertiesUCPresenter framePropUCP =  AddFramePropertiesUC(_frameModel);
@@ -998,8 +999,6 @@ namespace PresentationLayer.Presenter
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
                 _basePlatformPresenter.Invalidate_flpMainControls();
-                //_basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
-                //_basePlatformPresenter_willRenderImg.Invalidate_flpMain();
             }
         }
         #endregion

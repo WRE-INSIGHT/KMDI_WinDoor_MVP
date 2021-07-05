@@ -58,10 +58,11 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler btnSelectGlassThicknessClickedEventRaised;
         public event EventHandler CmbGlassTypeSelectedValueChangedEventRaised;
         public event EventHandler CmbHandleTypeSelectedValueChangedEventRaised;
-        public event EventHandler CmbHandleArtNoSelectedValueChangedEventRaised;
         public event EventHandler CmbEspagnoletteSelectedValueChangedEventRaised;
         public event EventHandler CmbMiddleCloserSelectedValueChangedEventRaised;
         public event EventHandler CmbLockingKitSelectedValueChangedEventRaised;
+        public event EventHandler CmbRotoswingArtNoSelectedValueChangedEventRaised;
+        public event EventHandler CmbRotaryArtNoSelectedValueChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -132,6 +133,21 @@ namespace PresentationLayer.Views.UserControls
             }
             cmb_LockingKit.DataSource = lockArtNo;
 
+
+            List<Rotoswing_HandleArtNo> rotoswing = new List<Rotoswing_HandleArtNo>();
+            foreach (Rotoswing_HandleArtNo item in Rotoswing_HandleArtNo.GetAll())
+            {
+                rotoswing.Add(item);
+            }
+            cmb_RotoswingNo.DataSource = rotoswing;
+
+            List<Rotary_HandleArtNo> rotary = new List<Rotary_HandleArtNo>();
+            foreach (Rotary_HandleArtNo item in Rotary_HandleArtNo.GetAll())
+            {
+                rotary.Add(item);
+            }
+            cmb_RotaryArtNo.DataSource = rotary;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 
@@ -162,6 +178,8 @@ namespace PresentationLayer.Views.UserControls
             txt_Striker.DataBindings.Add(ModelBinding["Panel_StrikerArtno"]);
             cmb_MiddleCloser.DataBindings.Add(ModelBinding["Panel_MiddleCloserArtNo"]);
             cmb_LockingKit.DataBindings.Add(ModelBinding["Panel_LockingKitArtNo"]);
+            cmb_RotoswingNo.DataBindings.Add(ModelBinding["Panel_RotoswingArtNo"]);
+            cmb_RotaryArtNo.DataBindings.Add(ModelBinding["Panel_RotaryArtNo"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)
@@ -204,11 +222,6 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseEvent(sender, CmbHandleTypeSelectedValueChangedEventRaised, e);
         }
 
-        public ComboBox GetCmbHandleArtNo()
-        {
-            return cmb_HandleArtNo;
-        }
-
         public Panel GetPnlRotoswingOptions()
         {
             return pnl_RotoswingOptions;
@@ -217,11 +230,6 @@ namespace PresentationLayer.Views.UserControls
         public Panel GetPnlRotaryOptions()
         {
             return pnl_RotaryOptions;
-        }
-
-        private void cmb_HandleArtNo_SelectedValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, CmbHandleArtNoSelectedValueChangedEventRaised, e);
         }
 
         private void cmb_Espagnolette_SelectedValueChanged(object sender, EventArgs e)
@@ -237,6 +245,16 @@ namespace PresentationLayer.Views.UserControls
         private void cmb_LockingKit_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbLockingKitSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_RotoswingNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbRotoswingArtNoSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_RotaryArtNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbRotaryArtNoSelectedValueChangedEventRaised, e);
         }
     }
 }

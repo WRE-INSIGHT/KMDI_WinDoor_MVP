@@ -12,6 +12,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using static EnumerationTypeLayer.EnumerationTypes;
+using ModelLayer.Model.Quotation.WinDoor;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -324,6 +325,8 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
         
+        public IWindoorModel Frame_WindoorModel { get; set; }
+
         #region Explosion
 
         FrameProfile_ArticleNo _frameArtNo;
@@ -470,7 +473,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           float frameImagerZoom,
                           List<IDividerModel> lst_divider,
                           float frameZoom,
-                          FrameProfile_ArticleNo frameArtNo)
+                          FrameProfile_ArticleNo frameArtNo,
+                          IWindoorModel frameWindoorModel)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -485,6 +489,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Lst_Divider = lst_divider;
             Frame_Zoom = frameZoom;
             Frame_ArtNo = frameArtNo;
+            Frame_WindoorModel = frameWindoorModel;
         }
     }
 }

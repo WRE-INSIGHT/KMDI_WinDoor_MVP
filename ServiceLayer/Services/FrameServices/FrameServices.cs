@@ -11,6 +11,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using static EnumerationTypeLayer.EnumerationTypes;
+using ModelLayer.Model.Quotation.WinDoor;
 
 namespace ServiceLayer.Services.FrameServices
 {
@@ -23,7 +24,7 @@ namespace ServiceLayer.Services.FrameServices
             _modelCheck = modelCheck;
         }
 
-        public IFrameModel CreateFrame(int frame_id, 
+        private IFrameModel CreateFrame(int frame_id, 
                                        string frame_name, 
                                        int frame_width, 
                                        int frame_height, 
@@ -34,7 +35,8 @@ namespace ServiceLayer.Services.FrameServices
                                        float frameImager_Zoom,
                                        List<IDividerModel> lst_divider,
                                        float frameZoom,
-                                       FrameProfile_ArticleNo frameArtNo)
+                                       FrameProfile_ArticleNo frameArtNo,
+                                       IWindoorModel frameWindoorModel)
         {
             IFrameModel fr = new FrameModel(frame_id,
                                            frame_name,
@@ -47,7 +49,8 @@ namespace ServiceLayer.Services.FrameServices
                                            frameImager_Zoom,
                                            lst_divider,
                                            frameZoom,
-                                           frameArtNo);
+                                           frameArtNo,
+                                           frameWindoorModel);
             ValidateModel(fr);
 
             return fr;
@@ -64,6 +67,7 @@ namespace ServiceLayer.Services.FrameServices
                                          float frameImager_Zoom,
                                          float frameZoom,
                                          FrameProfile_ArticleNo frameArtNo,
+                                         IWindoorModel frameWindoorModel,
                                          int frame_id = 0,
                                          string frame_name = "",
                                          bool frame_visible = true,
@@ -99,7 +103,8 @@ namespace ServiceLayer.Services.FrameServices
                                                      frameImager_Zoom,
                                                      lst_Divider,
                                                      frameZoom,
-                                                     frameArtNo);
+                                                     frameArtNo,
+                                                     frameWindoorModel);
 
             return _frameModel;
         }

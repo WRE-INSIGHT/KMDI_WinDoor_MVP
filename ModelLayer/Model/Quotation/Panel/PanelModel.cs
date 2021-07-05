@@ -870,6 +870,34 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private Rotoswing_HandleArtNo _panelRotoswingArtNo;
+        public Rotoswing_HandleArtNo Panel_RotoswingArtNo
+        {
+            get
+            {
+                return _panelRotoswingArtNo;
+            }
+            set
+            {
+                _panelRotoswingArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Rotary_HandleArtNo _panelRotaryArtNo;
+        public Rotary_HandleArtNo Panel_RotaryArtNo
+        {
+            get
+            {
+                return _panelRotaryArtNo;
+            }
+            set
+            {
+                _panelRotaryArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private Espagnolette_ArticleNo _panelEspagnoletteArtno;
         public Espagnolette_ArticleNo Panel_EspagnoletteArtNo
         {
@@ -897,6 +925,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+        public int Panel_StrikerQty { get; set; }
 
         private MiddleCloser_ArticleNo _panelMiddleCloserArtno;
         public MiddleCloser_ArticleNo Panel_MiddleCloserArtNo
@@ -911,6 +940,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+        public int Panel_MiddleCloserPairQty { get; set; }
 
         private LockingKit_ArticleNo _panelLockingKitArtno;
         public LockingKit_ArticleNo Panel_LockingKitArtNo
@@ -944,6 +974,61 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
+
+                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                {
+                    //Panel_MiddleCloserArtNo = MiddleCloser_ArticleNo._1WC70DB;
+                    if (Panel_Height < 1551)
+                    {
+                        Panel_MiddleCloserPairQty = 1;
+                    }
+                    else if (Panel_Height > 1551 && Panel_Height < 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 2;
+                    }
+                    else if (Panel_Height > 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 3;
+                    }
+                }
+                else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                {
+                    //Panel_MiddleCloserArtNo = MiddleCloser_ArticleNo._1WC70WHT;
+                    if (Panel_SashHeight < 1551)
+                    {
+                        Panel_MiddleCloserPairQty = 1;
+                    }
+                    else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 2;
+                    }
+                    else if (Panel_SashHeight > 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 3;
+                    }
+                }
+
+                if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._612978)
+                {
+                    Panel_StrikerQty = 0;
+                }
+                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._639957 ||
+                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._639958)
+                {
+                    Panel_StrikerQty = 1;
+                }
+                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                {
+                    Panel_StrikerQty = 2;
+                }
+                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                {
+                    Panel_StrikerQty = 3;
+                }
 
                 int sashWD_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashWidth / 100)) * 100;
                 int sashHt_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashHeight / 100)) * 100;
@@ -1218,6 +1303,40 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
+
+                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                {
+                    //Panel_MiddleCloserArtNo = MiddleCloser_ArticleNo._1WC70DB;
+                    if (Panel_Height < 1551)
+                    {
+                        Panel_MiddleCloserPairQty = 1;
+                    }
+                    else if (Panel_Height > 1551 && Panel_Height < 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 2;
+                    }
+                    else if (Panel_Height > 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 3;
+                    }
+                }
+                else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                {
+                    //Panel_MiddleCloserArtNo = MiddleCloser_ArticleNo._1WC70WHT;
+                    if (Panel_SashHeight < 1551)
+                    {
+                        Panel_MiddleCloserPairQty = 1;
+                    }
+                    else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 2;
+                    }
+                    else if (Panel_SashHeight > 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 3;
+                    }
+                }
 
                 int sashWD_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashWidth / 100)) * 100;
                 int sashHt_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashHeight / 100)) * 100;

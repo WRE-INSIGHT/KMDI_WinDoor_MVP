@@ -21,7 +21,6 @@ namespace PresentationLayer.Presenter.UserControls
         private IGlassThicknessListPresenter _glassThicknessPresenter;
         private IUnityContainer _unityC;
 
-        private ComboBox _cmbHandleArtNo;
         private Panel _pnlRotoswingOptions;
         private Panel _pnlRotaryOptions;
 
@@ -32,7 +31,6 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _panelPropertiesUC = panelPropertiesUC;
             _glassThicknessPresenter = glassThicknessPresenter;
-            _cmbHandleArtNo = _panelPropertiesUC.GetCmbHandleArtNo();
             _pnlRotoswingOptions = _panelPropertiesUC.GetPnlRotoswingOptions();
             _pnlRotaryOptions = _panelPropertiesUC.GetPnlRotaryOptions();
             SubscribeToEventsSetup();
@@ -49,10 +47,21 @@ namespace PresentationLayer.Presenter.UserControls
             _panelPropertiesUC.btnSelectGlassThicknessClickedEventRaised += _panelPropertiesUC_btnSelectGlassThicknessClickedEventRaised;
             _panelPropertiesUC.CmbGlassTypeSelectedValueChangedEventRaised += _panelPropertiesUC_CmbGlassTypeSelectedValueChangedEventRaised;
             _panelPropertiesUC.CmbHandleTypeSelectedValueChangedEventRaised += _panelPropertiesUC_CmbHandleTypeSelectedValueChangedEventRaised;
-            _panelPropertiesUC.CmbHandleArtNoSelectedValueChangedEventRaised += _panelPropertiesUC_CmbHandleArtNoSelectedValueChangedEventRaised;
             _panelPropertiesUC.CmbEspagnoletteSelectedValueChangedEventRaised += _panelPropertiesUC_CmbEspagnoletteSelectedValueChangedEventRaised;
             _panelPropertiesUC.CmbMiddleCloserSelectedValueChangedEventRaised += _panelPropertiesUC_CmbMiddleCloserSelectedValueChangedEventRaised;
             _panelPropertiesUC.CmbLockingKitSelectedValueChangedEventRaised += _panelPropertiesUC_CmbLockingKitSelectedValueChangedEventRaised;
+            _panelPropertiesUC.CmbRotoswingArtNoSelectedValueChangedEventRaised += _panelPropertiesUC_CmbRotoswingArtNoSelectedValueChangedEventRaised;
+            _panelPropertiesUC.CmbRotaryArtNoSelectedValueChangedEventRaised += _panelPropertiesUC_CmbRotaryArtNoSelectedValueChangedEventRaised;
+        }
+
+        private void _panelPropertiesUC_CmbRotaryArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_RotaryArtNo = (Rotary_HandleArtNo)((ComboBox)sender).SelectedValue;
+        }
+
+        private void _panelPropertiesUC_CmbRotoswingArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_RotoswingArtNo = (Rotoswing_HandleArtNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _panelPropertiesUC_CmbLockingKitSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -70,32 +79,14 @@ namespace PresentationLayer.Presenter.UserControls
             _panelModel.Panel_EspagnoletteArtNo = (Espagnolette_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
-        private void _panelPropertiesUC_CmbHandleArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
         private void _panelPropertiesUC_CmbHandleTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             _panelModel.Panel_HandleType = (Handle_Type)((ComboBox)sender).SelectedValue;
-
-            List<Rotoswing_HandleArtNo> rotoswing = new List<Rotoswing_HandleArtNo>();
-            foreach (Rotoswing_HandleArtNo item in Rotoswing_HandleArtNo.GetAll())
-            {
-                rotoswing.Add(item);
-            }
-
-            List<Rotary_HandleArtNo> rotary = new List<Rotary_HandleArtNo>();
-            foreach (Rotary_HandleArtNo item in Rotary_HandleArtNo.GetAll())
-            {
-                rotary.Add(item);
-            }
 
             if (_panelModel.Panel_Type != "Fixed Panel")
             {
                 if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
                 {
-                    _cmbHandleArtNo.DataSource = rotoswing;
                     _pnlRotoswingOptions.Visible = true;
                     _pnlRotaryOptions.Visible = false;
                     if (_initialLoad == true)
@@ -119,7 +110,6 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
                 {
-                    _cmbHandleArtNo.DataSource = rotary;
                     _pnlRotoswingOptions.Visible = false;
                     _pnlRotaryOptions.Visible = true;
                     if (_initialLoad == true)
@@ -242,6 +232,8 @@ namespace PresentationLayer.Presenter.UserControls
             panelBinding.Add("Panel_StrikerArtno", new Binding("Text", _panelModel, "Panel_StrikerArtno", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_MiddleCloserArtNo", new Binding("Text", _panelModel, "Panel_MiddleCloserArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_LockingKitArtNo", new Binding("Text", _panelModel, "Panel_LockingKitArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_RotoswingArtNo", new Binding("Text", _panelModel, "Panel_RotoswingArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_RotaryArtNo", new Binding("Text", _panelModel, "Panel_RotaryArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

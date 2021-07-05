@@ -39,24 +39,6 @@ namespace EnumerationTypeLayer
             private Divider_MechJointArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        //public class Glass_Thickness : Enumeration<Glass_Thickness, int>
-        //{
-        //    public static readonly Glass_Thickness _6mm = new Glass_Thickness(0, "6mm");
-        //    public static readonly Glass_Thickness _8mm = new Glass_Thickness(1, "8mm");
-        //    public static readonly Glass_Thickness _10mm = new Glass_Thickness(2, "10mm");
-        //    public static readonly Glass_Thickness _11mm = new Glass_Thickness(3, "11mm");
-        //    public static readonly Glass_Thickness _12mm = new Glass_Thickness(4, "12mm");
-        //    public static readonly Glass_Thickness _13mm = new Glass_Thickness(5, "13mm");
-        //    public static readonly Glass_Thickness _14mm = new Glass_Thickness(6, "14mm");
-        //    public static readonly Glass_Thickness _15mm = new Glass_Thickness(7, "15mm");
-        //    public static readonly Glass_Thickness _16mm = new Glass_Thickness(8, "16mm");
-        //    public static readonly Glass_Thickness _18mm = new Glass_Thickness(9, "18mm");
-        //    public static readonly Glass_Thickness _20mm = new Glass_Thickness(10, "20mm");
-        //    public static readonly Glass_Thickness _22mm = new Glass_Thickness(11, "22mm");
-        //    public static readonly Glass_Thickness _23mm = new Glass_Thickness(12, "23mm");
-        //    public static readonly Glass_Thickness _24mm = new Glass_Thickness(13, "24mm");
-        //    public Glass_Thickness(int value, string displayName) : base(value, displayName) { }
-        //}
         public class GlazingBead_ArticleNo : Enumeration<GlazingBead_ArticleNo, int>
         {
             public static readonly GlazingBead_ArticleNo _2452 = new GlazingBead_ArticleNo(0, "2452");
