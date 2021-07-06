@@ -109,8 +109,8 @@ namespace PresentationLayer.Presenter
 
             if (_GlassType1.Contains("Annealed"))
             {
-                _GlassType1 = _GlassType1.Remove(0, 8);
-                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _GlassType1 + " " + _createNewGlassView.Color1().Text;
+                _GlassType1 = _GlassType1.Replace("Annealed", string.Empty);
+                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm" + _GlassType1 + " " + _createNewGlassView.Color1().Text;
             }
             else
             {
@@ -119,7 +119,7 @@ namespace PresentationLayer.Presenter
 
             if (_GlassType2.Contains("Annealed"))
             {
-                _GlassType2 = _GlassType2.Remove(0, 8);
+                _GlassType2 = _GlassType2.Replace("Annealed", string.Empty);
                 _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _GlassType2 + " " + _createNewGlassView.Color2().Text;
             }
             else
@@ -130,7 +130,7 @@ namespace PresentationLayer.Presenter
 
             if (_GlassType3.Contains("Annealed"))
             {
-                _GlassType3 = _GlassType3.Remove(0, 8);
+                _GlassType3 = _GlassType3.Replace("Annealed", string.Empty);
                 _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _GlassType3 + " " + _createNewGlassView.Color3().Text;
             }
             else
