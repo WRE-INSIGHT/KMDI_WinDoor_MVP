@@ -86,6 +86,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CreateNewGlassColorView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Color";
             this.Load += new System.EventHandler(this.CreateNewGlassColorView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGlassColorList)).EndInit();

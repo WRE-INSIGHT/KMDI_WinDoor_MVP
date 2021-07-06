@@ -214,9 +214,16 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, GlassThicknessTextChange, e);
         }
 
-        private void OnClickEventRaised(object sender, EventArgs e)
+
+
+        private void CreateNewGlassView_Load(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, CmbClickEventRaised, e);
+            EventHelpers.RaiseEvent(sender, NewGlassViewLoadEventRaised, e);
+        }
+
+        private void btnAddGlass_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, BtnAddGlassClick, e);
         }
 
 
@@ -230,16 +237,5 @@ namespace PresentationLayer.Views
             this.Hide();
         }
 
-        private void CreateNewGlassView_Load(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, NewGlassViewLoadEventRaised, e);
-        }
-
-        private void btnAddGlass_Click(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, BtnAddGlassClick, e);
-        }
-
-    
     }
 }

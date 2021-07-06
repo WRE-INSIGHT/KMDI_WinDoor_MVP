@@ -88,6 +88,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CreateNewGlassTypeView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Glass Type";
             this.Load += new System.EventHandler(this.CreateNewGlassTypeView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGlassTypeList)).EndInit();

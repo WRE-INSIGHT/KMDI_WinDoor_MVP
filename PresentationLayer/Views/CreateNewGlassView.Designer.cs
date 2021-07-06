@@ -133,7 +133,7 @@
             this.cmbColor2.Name = "cmbColor2";
             this.cmbColor2.Size = new System.Drawing.Size(117, 21);
             this.cmbColor2.TabIndex = 8;
-            this.cmbColor2.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbColor2.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblColor2
             // 
@@ -170,7 +170,7 @@
             this.cmbBetweenTheGlass1.Name = "cmbBetweenTheGlass1";
             this.cmbBetweenTheGlass1.Size = new System.Drawing.Size(117, 21);
             this.cmbBetweenTheGlass1.TabIndex = 5;
-            this.cmbBetweenTheGlass1.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbBetweenTheGlass1.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblBetweenTheGlass1
             // 
@@ -236,7 +236,7 @@
             this.cmbColor1.Name = "cmbColor1";
             this.cmbColor1.Size = new System.Drawing.Size(117, 21);
             this.cmbColor1.TabIndex = 3;
-            this.cmbColor1.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbColor1.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblColor1
             // 
@@ -327,7 +327,7 @@
             this.cmbColor3.Name = "cmbColor3";
             this.cmbColor3.Size = new System.Drawing.Size(117, 21);
             this.cmbColor3.TabIndex = 13;
-            this.cmbColor3.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbColor3.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // cmbBetweenTheGlass2
             // 
@@ -337,7 +337,7 @@
             this.cmbBetweenTheGlass2.Name = "cmbBetweenTheGlass2";
             this.cmbBetweenTheGlass2.Size = new System.Drawing.Size(117, 21);
             this.cmbBetweenTheGlass2.TabIndex = 10;
-            this.cmbBetweenTheGlass2.SelectedValueChanged += new System.EventHandler(this.OnTextChangeEventRaised);
+            this.cmbBetweenTheGlass2.SelectedIndexChanged += new System.EventHandler(this.OnTextChangeEventRaised);
             // 
             // lblColor3
             // 

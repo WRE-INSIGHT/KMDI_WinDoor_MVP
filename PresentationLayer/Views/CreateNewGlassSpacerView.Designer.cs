@@ -88,6 +88,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CreateNewGlassSpacerView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Spacer";
             this.Load += new System.EventHandler(this.CreateNewGlassSpacerView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGlassSpacerList)).EndInit();
