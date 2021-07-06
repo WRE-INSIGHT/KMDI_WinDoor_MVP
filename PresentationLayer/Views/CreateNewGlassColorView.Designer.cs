@@ -62,6 +62,7 @@
             this.tboxGlassColor.Name = "tboxGlassColor";
             this.tboxGlassColor.Size = new System.Drawing.Size(191, 20);
             this.tboxGlassColor.TabIndex = 5;
+            this.tboxGlassColor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tboxGlassColor_KeyDown);
             // 
             // btnAddGlassColor
             // 

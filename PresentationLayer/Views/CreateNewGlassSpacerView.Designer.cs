@@ -50,6 +50,7 @@
             this.tboxGlassSpacer.Name = "tboxGlassSpacer";
             this.tboxGlassSpacer.Size = new System.Drawing.Size(181, 20);
             this.tboxGlassSpacer.TabIndex = 6;
+            this.tboxGlassSpacer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tboxGlassSpacer_KeyDown);
             // 
             // btnAddGlassSpacer
             // 

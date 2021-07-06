@@ -39,10 +39,23 @@ namespace PresentationLayer.Presenter
             _createNewGlassSpacerView.GetDgvGlassSpacerList().DataSource = PopulateDgvGlassSpacer();
             _createNewGlassSpacerView.GetDgvGlassSpacerList().Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
-
+        string ChkRowStatus;
         private void OnBtnAddGlassSpacerClickEventRaised(object sender, EventArgs e)
         {
-            if (_createNewGlassSpacerView.tboxGlassSpacerView != string.Empty)
+            foreach (DataGridViewRow ChkRows in _createNewGlassSpacerView.GetDgvGlassSpacerList().Rows)
+            {
+                if (ChkRows.Cells["Spacer"].Value.ToString().ToUpper() == _createNewGlassSpacerView.tboxGlassSpacerView.ToUpper())
+                {
+                    ChkRowStatus = "Duplicate";
+                    MessageBox.Show(_createNewGlassSpacerView.tboxGlassSpacerView + " Already Exist");
+                }
+                else
+                {
+                    ChkRowStatus = "Valid";
+                }
+            }
+
+            if (ChkRowStatus == "Valid" && _createNewGlassSpacerView.tboxGlassSpacerView != string.Empty)
             {
                 _spacerDT.Rows.Add(CreateNewRowGlassSpacerDT());
                 _mainPresenter.GlassSpacerDT = _spacerDT;

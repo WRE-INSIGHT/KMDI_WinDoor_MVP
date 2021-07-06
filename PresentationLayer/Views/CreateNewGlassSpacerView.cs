@@ -57,5 +57,13 @@ namespace PresentationLayer.Views
         {
             return dgvGlassSpacerList;
         }
+
+        private void tboxGlassSpacer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                EventHelpers.RaiseEvent(sender, OnBtnAddGlassSpacerClickEventRaised, e);
+            }
+        }
     }
 }

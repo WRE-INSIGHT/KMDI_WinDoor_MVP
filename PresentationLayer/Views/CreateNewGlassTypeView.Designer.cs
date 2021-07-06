@@ -65,6 +65,7 @@
             this.tboxGlassType.Name = "tboxGlassType";
             this.tboxGlassType.Size = new System.Drawing.Size(162, 20);
             this.tboxGlassType.TabIndex = 2;
+            this.tboxGlassType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tboxGlassType_KeyDown);
             // 
             // lblGlassType
             // 

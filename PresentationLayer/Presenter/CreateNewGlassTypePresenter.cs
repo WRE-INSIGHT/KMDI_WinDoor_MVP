@@ -33,14 +33,26 @@ namespace PresentationLayer.Presenter
         {
             commonfunc.rowpostpaint(sender, e);
         }
-
+        string ChkRowStatus;
         private void OnBtnAddGlassTypeClickEventRaised(object sender, EventArgs e)
         {
-            if (_createNewGlassTypeView.tboxGlassTypeView != string.Empty)
+            foreach (DataGridViewRow ChkRows in _createNewGlassTypeView.GetDgvGlassTypeList().Rows)
+            {
+                if (ChkRows.Cells["GlassType"].Value.ToString().ToUpper() == _createNewGlassTypeView.tboxGlassTypeView.ToUpper())
+                {
+                    ChkRowStatus = "Duplicate";
+                    MessageBox.Show(_createNewGlassTypeView.tboxGlassTypeView + " Already Exist");
+                }
+                else
+                {
+                    ChkRowStatus = "Valid";
+                }
+            }
+            if (ChkRowStatus == "Valid" && _createNewGlassTypeView.tboxGlassTypeView != string.Empty)
             {
                 _glassTypeDT.Rows.Add(CreateNewRowGlassTypeDT());
-                _mainPresenter.GlassTypeDT = _glassTypeDT;
                 _createNewGlassTypeView.GetDgvGlassTypeList().DataSource = PopulateDgvGlassType();
+                _mainPresenter.GlassTypeDT = _glassTypeDT;
                 _createNewGlassTypeView.tboxGlassTypeView = string.Empty;
             }
         }

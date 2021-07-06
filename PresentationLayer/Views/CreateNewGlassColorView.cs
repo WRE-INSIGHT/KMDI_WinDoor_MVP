@@ -55,5 +55,13 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, OnBtnAddGlassColorClickEventRaised, e);
         }
+
+        private void tboxGlassColor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                EventHelpers.RaiseEvent(sender, OnBtnAddGlassColorClickEventRaised, e);
+            }
+        }
     }
 }

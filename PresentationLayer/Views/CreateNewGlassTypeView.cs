@@ -55,5 +55,13 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseDatagridviewRowpostpaintEvent(sender, DgvGlassTypeListRowpostpaintEventRaised, e);
         }
+
+        private void tboxGlassType_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                EventHelpers.RaiseEvent(sender, OnBtnAddGlassTypeClickEventRaised, e);
+            }
+        }
     }
 }
