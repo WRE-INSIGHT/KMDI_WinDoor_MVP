@@ -55,6 +55,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -74,11 +75,15 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
 
@@ -120,6 +125,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -139,11 +145,15 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
 
@@ -411,6 +421,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -466,11 +477,15 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -509,11 +524,15 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
@@ -641,6 +660,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -695,11 +715,15 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    uneqpanelHT1,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -738,11 +762,15 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    uneqpanelHT2,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
@@ -884,6 +912,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -1065,11 +1094,15 @@ namespace ModelLayer.Tests
                                                                  _multiTransomModel1,
                                                                  PanelWD1_BG,
                                                                  PanelHT1_BG,
-                                                                 Glass_Thickness._6mm,
                                                                  GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                 GlassFilm_Types._None,
+                                                                 SashProfile_ArticleNo._None,
+                                                                 SashReinf_ArticleNo._None,
+                                                                 GlassType._Single,
+                                                                 Espagnolette_ArticleNo._None,
+                                                                 Striker_ArticleNo._M89ANT,
+                                                                 MiddleCloser_ArticleNo._None,
+                                                                 LockingKit_ArticleNo._None,
                                                                  1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_Index_Inside_MPanel = 0;
@@ -1114,11 +1147,15 @@ namespace ModelLayer.Tests
                                                                   _multiTransomModel1,
                                                                   PanelWD1_BG,
                                                                   PanelHT1_BG,
-                                                                  Glass_Thickness._6mm,
                                                                   GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                  GlassFilm_Types._None,
+                                                                  SashProfile_ArticleNo._None,
+                                                                  SashReinf_ArticleNo._None,
+                                                                  GlassType._Single,
+                                                                  Espagnolette_ArticleNo._None,
+                                                                  Striker_ArticleNo._M89ANT,
+                                                                  MiddleCloser_ArticleNo._None,
+                                                                  LockingKit_ArticleNo._None,
                                                                   2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_Index_Inside_MPanel = 2;
@@ -1151,11 +1188,15 @@ namespace ModelLayer.Tests
                                                                _multiTransomModel2,
                                                                PanelWD3_BG,
                                                                PanelHT3_BG,
-                                                               Glass_Thickness._6mm,
                                                                GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                               GlassFilm_Types._None,
+                                                               SashProfile_ArticleNo._None,
+                                                               SashReinf_ArticleNo._None,
+                                                               GlassType._Single,
+                                                               Espagnolette_ArticleNo._None,
+                                                               Striker_ArticleNo._M89ANT,
+                                                               MiddleCloser_ArticleNo._None,
+                                                               LockingKit_ArticleNo._None,
                                                                3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_Index_Inside_MPanel = 1;
@@ -1198,11 +1239,15 @@ namespace ModelLayer.Tests
                                                               _multiTransomModel2,
                                                               PanelWD3_BG,
                                                               PanelHT3_BG,
-                                                              Glass_Thickness._6mm,
                                                               GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                              GlassFilm_Types._None,
+                                                              SashProfile_ArticleNo._None,
+                                                              SashReinf_ArticleNo._None,
+                                                              GlassType._Single,
+                                                              Espagnolette_ArticleNo._None,
+                                                              Striker_ArticleNo._M89ANT,
+                                                              MiddleCloser_ArticleNo._None,
+                                                              LockingKit_ArticleNo._None,
                                                               4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_Index_Inside_MPanel = 2;
@@ -1234,11 +1279,15 @@ namespace ModelLayer.Tests
                                                              _multiTransomModel3,
                                                              PanelWD1_BG,
                                                              PanelHT1_BG,
-                                                             Glass_Thickness._6mm,
                                                              GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                             GlassFilm_Types._None,
+                                                             SashProfile_ArticleNo._None,
+                                                             SashReinf_ArticleNo._None,
+                                                             GlassType._Single,
+                                                             Espagnolette_ArticleNo._None,
+                                                             Striker_ArticleNo._M89ANT,
+                                                             MiddleCloser_ArticleNo._None,
+                                                             LockingKit_ArticleNo._None,
                                                              5);
             _panelModel5.Panel_Placement = "First";
             _panelModel5.Panel_Index_Inside_MPanel = 1;
@@ -1282,11 +1331,15 @@ namespace ModelLayer.Tests
                                                           _multiTransomModel3,
                                                           PanelWD1_BG,
                                                           PanelHT1_BG,
-                                                          Glass_Thickness._6mm,
                                                           GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                          GlassFilm_Types._None,
+                                                          SashProfile_ArticleNo._None,
+                                                          SashReinf_ArticleNo._None,
+                                                          GlassType._Single,
+                                                          Espagnolette_ArticleNo._None,
+                                                          Striker_ArticleNo._M89ANT,
+                                                          MiddleCloser_ArticleNo._None,
+                                                          LockingKit_ArticleNo._None,
                                                           6);
             _panelModel6.Panel_Placement = "Last";
             _panelModel6.Panel_Index_Inside_MPanel = 2;
@@ -1529,6 +1582,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -1591,11 +1645,15 @@ namespace ModelLayer.Tests
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
                                                                      PanelHT1_BG,
-                                                                     Glass_Thickness._6mm,
                                                                      GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                     GlassFilm_Types._None,
+                                                                     SashProfile_ArticleNo._None,
+                                                                     SashReinf_ArticleNo._None,
+                                                                     GlassType._Single,
+                                                                     Espagnolette_ArticleNo._None,
+                                                                     Striker_ArticleNo._M89ANT,
+                                                                     MiddleCloser_ArticleNo._None,
+                                                                     LockingKit_ArticleNo._None,
                                                                      1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_Index_Inside_MPanel = 0;
@@ -1682,11 +1740,15 @@ namespace ModelLayer.Tests
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
                                                                      PanelHT1_BG,
-                                                                     Glass_Thickness._6mm,
                                                                      GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                     GlassFilm_Types._None,
+                                                                     SashProfile_ArticleNo._None,
+                                                                     SashReinf_ArticleNo._None,
+                                                                     GlassType._Single,
+                                                                     Espagnolette_ArticleNo._None,
+                                                                     Striker_ArticleNo._M89ANT,
+                                                                     MiddleCloser_ArticleNo._None,
+                                                                     LockingKit_ArticleNo._None,
                                                                      2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_Index_Inside_MPanel = 4;
@@ -1718,11 +1780,15 @@ namespace ModelLayer.Tests
                                                                    _multiTransomModel1,
                                                                    PanelWD3_BG,
                                                                    PanelHT3_BG,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                    GlassType._Single,
+                                                              Espagnolette_ArticleNo._None,
+                                                              Striker_ArticleNo._M89ANT,
+                                                              MiddleCloser_ArticleNo._None,
+                                                              LockingKit_ArticleNo._None,
                                                                    3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_Index_Inside_MPanel = 0;
@@ -1766,11 +1832,15 @@ namespace ModelLayer.Tests
                                                                     _multiTransomModel1,
                                                                     PanelWD3_BG,
                                                                     PanelHT3_BG,
-                                                                    Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                    GlassType._Single,
+                                                                    Espagnolette_ArticleNo._None,
+                                                                    Striker_ArticleNo._M89ANT,
+                                                                    MiddleCloser_ArticleNo._None,
+                                                                    LockingKit_ArticleNo._None,
                                                                     4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_Index_Inside_MPanel = 2;
@@ -1988,6 +2058,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -2044,11 +2115,15 @@ namespace ModelLayer.Tests
                                                                  _multiMullionModel,
                                                                  PanelWD1_BG,
                                                                  PanelHT1_BG,
-                                                                 Glass_Thickness._14mm,
                                                                  GlazingBead_ArticleNo._2453,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                 GlassFilm_Types._None,
+                                                                 SashProfile_ArticleNo._None,
+                                                                 SashReinf_ArticleNo._None,
+                                                                 GlassType._Single,
+                                                              Espagnolette_ArticleNo._None,
+                                                              Striker_ArticleNo._M89ANT,
+                                                              MiddleCloser_ArticleNo._None,
+                                                              LockingKit_ArticleNo._None,
                                                                  1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_Index_Inside_MPanel = 0;
@@ -2136,11 +2211,15 @@ namespace ModelLayer.Tests
                                                                  _multiMullionModel,
                                                                  PanelWD1_BG,
                                                                  PanelHT1_BG,
-                                                                 Glass_Thickness._14mm,
                                                                  GlazingBead_ArticleNo._2453,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                 GlassFilm_Types._None,
+                                                                 SashProfile_ArticleNo._None,
+                                                                 SashReinf_ArticleNo._None,
+                                                                 GlassType._Single,
+                                                                 Espagnolette_ArticleNo._None,
+                                                                 Striker_ArticleNo._M89ANT,
+                                                                 MiddleCloser_ArticleNo._None,
+                                                                 LockingKit_ArticleNo._None,
                                                                  2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_Index_Inside_MPanel = 4;
@@ -2261,11 +2340,15 @@ namespace ModelLayer.Tests
                                                                   _multiMullionModel1,
                                                                   PanelWD3_BG,
                                                                   PanelHT3_BG,
-                                                                  Glass_Thickness._6mm,
                                                                   GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                  GlassFilm_Types._None,
+                                                                  SashProfile_ArticleNo._None,
+                                                                  SashReinf_ArticleNo._None,
+                                                                  GlassType._Single,
+                                                                  Espagnolette_ArticleNo._None,
+                                                                  Striker_ArticleNo._M89ANT,
+                                                                  MiddleCloser_ArticleNo._None,
+                                                                  LockingKit_ArticleNo._None,
                                                                   3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_Index_Inside_MPanel = 0;
@@ -2310,11 +2393,15 @@ namespace ModelLayer.Tests
                                                                   _multiMullionModel1,
                                                                   PanelWD3_BG,
                                                                   PanelHT3_BG,
-                                                                  Glass_Thickness._6mm,
                                                                   GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                  GlassFilm_Types._None,
+                                                                  SashProfile_ArticleNo._None,
+                                                                  SashReinf_ArticleNo._None,
+                                                                  GlassType._Single,
+                                                                  Espagnolette_ArticleNo._None,
+                                                                  Striker_ArticleNo._M89ANT,
+                                                                  MiddleCloser_ArticleNo._None,
+                                                                  LockingKit_ArticleNo._None,
                                                                   4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_Index_Inside_MPanel = 2;
@@ -2349,11 +2436,15 @@ namespace ModelLayer.Tests
                                                                   _multiMullionModel2,
                                                                   PanelWD3_BG,
                                                                   PanelHT3_BG,
-                                                                  Glass_Thickness._6mm,
                                                                   GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                  GlassFilm_Types._None,
+                                                                  SashProfile_ArticleNo._None,
+                                                                  SashReinf_ArticleNo._None,
+                                                                  GlassType._Single,
+                                                                  Espagnolette_ArticleNo._None,
+                                                                  Striker_ArticleNo._M89ANT,
+                                                                  MiddleCloser_ArticleNo._None,
+                                                                  LockingKit_ArticleNo._None,
                                                                   5);
             _panelModel5.Panel_Placement = "First";
             _panelModel5.Panel_Index_Inside_MPanel = 0;
@@ -2398,11 +2489,15 @@ namespace ModelLayer.Tests
                                                                   _multiMullionModel2,
                                                                   PanelWD3_BG,
                                                                   PanelHT3_BG,
-                                                                  Glass_Thickness._6mm,
                                                                   GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                  GlassFilm_Types._None,
+                                                                  SashProfile_ArticleNo._None,
+                                                                  SashReinf_ArticleNo._None,
+                                                                  GlassType._Single,
+                                                                  Espagnolette_ArticleNo._None,
+                                                                  Striker_ArticleNo._M89ANT,
+                                                                  MiddleCloser_ArticleNo._None,
+                                                                  LockingKit_ArticleNo._None,
                                                                   6);
             _panelModel6.Panel_Placement = "Last";
             _panelModel6.Panel_Index_Inside_MPanel = 2;
@@ -2664,6 +2759,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -2721,11 +2817,15 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel,
                                                                     pnl_1_wd,
                                                                     pnl_1_ht,
-                                                                    Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                    GlassType._Single,
+                                                                    Espagnolette_ArticleNo._None,
+                                                                    Striker_ArticleNo._M89ANT,
+                                                                    MiddleCloser_ArticleNo._None,
+                                                                    LockingKit_ArticleNo._None,
                                                                     1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_Index_Inside_MPanel = 0;
@@ -2814,11 +2914,15 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel,
                                                                     pnl_1_wd,
                                                                     pnl_1_ht,
-                                                                    Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                    GlassType._Single,
+                                                                    Espagnolette_ArticleNo._None,
+                                                                    Striker_ArticleNo._M89ANT,
+                                                                    MiddleCloser_ArticleNo._None,
+                                                                    LockingKit_ArticleNo._None,
                                                                     2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_Index_Inside_MPanel = 4;
@@ -2851,11 +2955,15 @@ namespace ModelLayer.Tests
                                                                     _multiTransomModel1,
                                                                     pnl_3_wd,
                                                                     pnl_3_ht,
-                                                                    Glass_Thickness._13mm,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                    GlassType._Single,
+                                                                    Espagnolette_ArticleNo._None,
+                                                                    Striker_ArticleNo._M89ANT,
+                                                                    MiddleCloser_ArticleNo._None,
+                                                                    LockingKit_ArticleNo._None,
                                                                     3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_Index_Inside_MPanel = 0;
@@ -2944,11 +3052,15 @@ namespace ModelLayer.Tests
                                                                      _multiTransomModel1,
                                                                      pnl_3_wd,
                                                                      pnl_3_ht,
-                                                                     Glass_Thickness._13mm,
                                                                      GlazingBead_ArticleNo._2453,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
+                                                                     GlassFilm_Types._None,
+                                                                     SashProfile_ArticleNo._None,
+                                                                     SashReinf_ArticleNo._None,
+                                                                     GlassType._Single,
+                                                                     Espagnolette_ArticleNo._None,
+                                                                     Striker_ArticleNo._M89ANT,
+                                                                     MiddleCloser_ArticleNo._None,
+                                                                     LockingKit_ArticleNo._None,
                                                                      4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_Index_Inside_MPanel = 4;
@@ -2983,11 +3095,15 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel1,
                                                                     pnl_5_wd,
                                                                     pnl_5_ht,
-                                                                    Glass_Thickness._13mm,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                    GlassType._Single,
+                                                                    Espagnolette_ArticleNo._None,
+                                                                    Striker_ArticleNo._M89ANT,
+                                                                    MiddleCloser_ArticleNo._None,
+                                                                    LockingKit_ArticleNo._None,
                                                                     5);
             _panelModel5.Panel_Placement = "First";
             _panelModel5.Panel_Index_Inside_MPanel = 0;
@@ -3030,11 +3146,15 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel1,
                                                                     pnl_5_wd,
                                                                     pnl_5_ht,
-                                                                    Glass_Thickness._13mm,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                    GlassType._Single,
+                                                                    Espagnolette_ArticleNo._None,
+                                                                    Striker_ArticleNo._M89ANT,
+                                                                    MiddleCloser_ArticleNo._None,
+                                                                    LockingKit_ArticleNo._None,
                                                                     6);
             _panelModel6.Panel_Placement = "Last";
             _panelModel6.Panel_Index_Inside_MPanel = 2;
@@ -3301,6 +3421,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -3323,11 +3444,15 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   Glass_Thickness._13mm,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
                                                                    SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._628807,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70DB,
+                                                                   LockingKit_ArticleNo._None,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
 
@@ -3461,6 +3586,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -3519,11 +3645,15 @@ namespace ModelLayer.Tests
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
                                                                    total_ht,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
                                                                    SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._628807,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70DB,
+                                                                   LockingKit_ArticleNo._None,
                                                                    1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_Index_Inside_MPanel = 0;
@@ -3565,11 +3695,15 @@ namespace ModelLayer.Tests
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
                                                                       total_ht,
-                                                                      Glass_Thickness._6mm,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
                                                                       SashReinf_ArticleNo._R675,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._628807,
+                                                                      Striker_ArticleNo._M89ANT,
+                                                                      MiddleCloser_ArticleNo._1WC70DB,
+                                                                      LockingKit_ArticleNo._None,
                                                                       2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_Index_Inside_MPanel = 2;
@@ -3734,14 +3868,14 @@ namespace ModelLayer.Tests
             /*
                         ________________________________
                        |                |              |                 
-                       |       P1       |              |
+                       |       P2       |              |
                        |                |              |
                        |________________|              |
                        |       /\       |              |   
-                       |      /  \      |      P3      |
+                       |      /  \      |      P1      |
                        |     /    \     |              |
                        |    /      \    |              |
-                       |   /   P2   \   |              | 
+                       |   /   P3   \   |              | 
                        |  /          \  |              |
                        | /            \ |              |
                        |/______________\|______________|    
@@ -3763,6 +3897,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -3852,7 +3987,7 @@ namespace ModelLayer.Tests
             _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
 
 
-            IPanelModel _panelModel1_fixed3 = _panelServices.AddPanelModel(suggest_Wd,
+            IPanelModel _panelModel1_fixed1 = _panelServices.AddPanelModel(suggest_Wd,
                                                                    suggest_HT,
                                                                    new Control(),
                                                                    new UserControl(),
@@ -3865,15 +4000,19 @@ namespace ModelLayer.Tests
                                                                    _multiMullionModel,
                                                                    PnlWidth3_Fix,
                                                                    PnlHeight3_Fix,
-                                                                   Glass_Thickness._13mm,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
                                                                    1);
-            _panelModel1_fixed3.Panel_Placement = "Last";
-            _panelModel1_fixed3.Panel_Index_Inside_MPanel = 2;
-            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1_fixed3);
+            _panelModel1_fixed1.Panel_Placement = "Last";
+            _panelModel1_fixed1.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1_fixed1);
             Control Fixed1 = new Control();
             Fixed1.Name = "FixedPanelUC_1";
             _multiMullionModel.MPanelLst_Objects.Add(Fixed1);
@@ -3887,7 +4026,7 @@ namespace ModelLayer.Tests
             int multiTransom1_suggest_Wd = (((_multiTransomModel1.MPanel_Width) - (divSize * _multiTransomModel1.MPanel_Divisions)) / multiTransom1_totalPanelCount),
                 multiTransom1_suggest_HT = _multiTransomModel1.MPanel_Height;
 
-            IPanelModel _panelModel2_fixed1 = _panelServices.AddPanelModel(multiTransom1_suggest_Wd,
+            IPanelModel _panelModel2_fixed2 = _panelServices.AddPanelModel(multiTransom1_suggest_Wd,
                                                                   multiTransom1_suggest_HT,
                                                                   new Control(),
                                                                   new UserControl(),
@@ -3900,15 +4039,19 @@ namespace ModelLayer.Tests
                                                                   _multiTransomModel1,
                                                                   PnlWidth1_Fix,
                                                                   PnlHeight1_Fix,
-                                                                  Glass_Thickness._13mm,
                                                                   GlazingBead_ArticleNo._2453,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
                                                                   SashReinf_ArticleNo._None,
+                                                                  GlassType._Single,
+                                                                  Espagnolette_ArticleNo._None,
+                                                                  Striker_ArticleNo._M89ANT,
+                                                                  MiddleCloser_ArticleNo._None,
+                                                                  LockingKit_ArticleNo._None,
                                                                   2);
-            _panelModel2_fixed1.Panel_Placement = "First";
-            _panelModel2_fixed1.Panel_Index_Inside_MPanel = 0;
-            _multiTransomModel1.MPanelLst_Panel.Add(_panelModel2_fixed1);
+            _panelModel2_fixed2.Panel_Placement = "First";
+            _panelModel2_fixed2.Panel_Index_Inside_MPanel = 0;
+            _multiTransomModel1.MPanelLst_Panel.Add(_panelModel2_fixed2);
             Control Fixed2 = new Control();
             Fixed2.Name = "FixedPanelUC_2";
             _multiTransomModel1.MPanelLst_Objects.Add(Fixed2);
@@ -3937,7 +4080,7 @@ namespace ModelLayer.Tests
 
 
 
-            IPanelModel _panelModel3_Awning2 = _panelServices.AddPanelModel(multiTransom1_suggest_Wd,
+            IPanelModel _panelModel3_Awning1 = _panelServices.AddPanelModel(multiTransom1_suggest_Wd,
                                                                     multiTransom1_suggest_HT,
                                                                      new Control(),
                                                                      new UserControl(),
@@ -3950,15 +4093,19 @@ namespace ModelLayer.Tests
                                                                      _multiTransomModel1,
                                                                      PnlWidth2_Awning,
                                                                      PnlHeight2_Awning,
-                                                                     Glass_Thickness._13mm,
                                                                      GlazingBead_ArticleNo._2453,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._7581,
                                                                      SashReinf_ArticleNo._R675,
+                                                                     GlassType._Single,
+                                                                     Espagnolette_ArticleNo._628807,
+                                                                     Striker_ArticleNo._M89ANT,
+                                                                     MiddleCloser_ArticleNo._1WC70DB,
+                                                                     LockingKit_ArticleNo._None,
                                                                      3);
-            _panelModel3_Awning2.Panel_Placement = "Last";
-            _panelModel3_Awning2.Panel_Index_Inside_MPanel = 2;
-            _multiTransomModel1.MPanelLst_Panel.Add(_panelModel3_Awning2);
+            _panelModel3_Awning1.Panel_Placement = "Last";
+            _panelModel3_Awning1.Panel_Index_Inside_MPanel = 2;
+            _multiTransomModel1.MPanelLst_Panel.Add(_panelModel3_Awning1);
             Control Awning3 = new Control();
             Awning3.Name = "AwningPanelUC_3";
             _multiTransomModel1.MPanelLst_Objects.Add(Awning3);
@@ -3995,21 +4142,21 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1632, _divMullionModel.Div_ReinfHeight);
 
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1_fixed3.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(700, _panelModel1_fixed3.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1800, _panelModel1_fixed3.Panel_GlazingBeadHeight);
-            Assert.AreEqual(625, _panelModel1_fixed3.Panel_GlassWidth);
-            Assert.AreEqual(1728, _panelModel1_fixed3.Panel_GlassHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1_fixed1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(700, _panelModel1_fixed1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1800, _panelModel1_fixed1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(625, _panelModel1_fixed1.Panel_GlassWidth);
+            Assert.AreEqual(1728, _panelModel1_fixed1.Panel_GlassHeight);
 
             #endregion
 
             #region MultiTransom
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2_fixed1.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(800, _panelModel2_fixed1.Panel_GlazingBeadWidth);
-            Assert.AreEqual(600, _panelModel2_fixed1.Panel_GlazingBeadHeight);
-            Assert.AreEqual(725, _panelModel2_fixed1.Panel_GlassWidth);
-            Assert.AreEqual(540, _panelModel2_fixed1.Panel_GlassHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2_fixed2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(800, _panelModel2_fixed2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(600, _panelModel2_fixed2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(725, _panelModel2_fixed2.Panel_GlassWidth);
+            Assert.AreEqual(540, _panelModel2_fixed2.Panel_GlassHeight);
 
 
 
@@ -4021,25 +4168,25 @@ namespace ModelLayer.Tests
 
 
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel3_Awning2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(750, _panelModel3_Awning2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1165, _panelModel3_Awning2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel3_Awning1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(750, _panelModel3_Awning1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1165, _panelModel3_Awning1.Panel_GlazingBeadHeight);
 
-            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3_Awning2.Panel_SashProfileArtNo);
-            Assert.AreEqual(750, _panelModel3_Awning2.Panel_SashWidth);
-            Assert.AreEqual(1165, _panelModel3_Awning2.Panel_SashHeight);
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3_Awning1.Panel_SashProfileArtNo);
+            Assert.AreEqual(750, _panelModel3_Awning1.Panel_SashWidth);
+            Assert.AreEqual(1165, _panelModel3_Awning1.Panel_SashHeight);
 
-            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3_Awning2.Panel_SashReinfArtNo);
-            Assert.AreEqual(625, _panelModel3_Awning2.Panel_SashReinfWidth);
-            Assert.AreEqual(1040, _panelModel3_Awning2.Panel_SashReinfHeight);
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3_Awning1.Panel_SashReinfArtNo);
+            Assert.AreEqual(625, _panelModel3_Awning1.Panel_SashReinfWidth);
+            Assert.AreEqual(1040, _panelModel3_Awning1.Panel_SashReinfHeight);
 
-            Assert.AreEqual(629, _panelModel3_Awning2.Panel_GlassWidth);
-            Assert.AreEqual(1044, _panelModel3_Awning2.Panel_GlassHeight);
+            Assert.AreEqual(629, _panelModel3_Awning1.Panel_GlassWidth);
+            Assert.AreEqual(1044, _panelModel3_Awning1.Panel_GlassHeight);
 
-            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3_Awning2.Panel_CoverProfileArtNo);
-            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel3_Awning2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3_Awning1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel3_Awning1.Panel_CoverProfileArtNo2);
             //Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel.Panel_EspagnoletteArtNo);
-            Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel3_Awning2.Panel_FrictionStayArtNo);
+            Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel3_Awning1.Panel_FrictionStayArtNo);
             #endregion
 
 
