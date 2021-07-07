@@ -40,7 +40,11 @@ namespace ModelLayer.Model.Quotation.Panel
         float Panel_Zoom { get; set; }
         IFrameModel Panel_ParentFrameModel { get; set; }
         IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
-
+        int Panel_PropertyHeight { get; set; }
+        bool Panel_HandleOptionsVisibility { get; set; }
+        bool Panel_RotoswingOptionsVisibility { get; set; }
+        bool Panel_RotaryOptionsVisibility { get; set; }
+        int Panel_HandleOptionsHeight { get; set; }
         #region Explosion
 
         int PanelGlass_ID { get; set; }
@@ -69,8 +73,16 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
         Handle_Type Panel_HandleType { get; set; }
+        Rotoswing_HandleArtNo Panel_RotoswingArtNo { get; set; }
+        Rotary_HandleArtNo Panel_RotaryArtNo { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+        Striker_ArticleNo Panel_StrikerArtno { get; set; }
+        MiddleCloser_ArticleNo Panel_MiddleCloserArtNo { get; set; }
+        LockingKit_ArticleNo Panel_LockingKitArtNo { get; set; }
         GlassType Panel_GlassType { get; set; }
+
+        int Panel_StrikerQty { get; set; }
+        int Panel_MiddleCloserPairQty { get; set; }
 
         void SetPanelExplosionValues_Panel(bool parentIsFrame);
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,

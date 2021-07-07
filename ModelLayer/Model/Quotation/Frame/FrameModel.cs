@@ -12,6 +12,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using static EnumerationTypeLayer.EnumerationTypes;
+using ModelLayer.Model.Quotation.WinDoor;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -324,6 +325,8 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
         
+        public IWindoorModel Frame_WindoorModel { get; set; }
+
         #region Explosion
 
         FrameProfile_ArticleNo _frameArtNo;
@@ -362,13 +365,25 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             if (objtype == "Panel")
             {
-                if (mode == "delete")
+                if (mode == "add")
                 {
-                    FrameProp_Height -= (563 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height += (552 + 1); //+1 on margin (PanelProperties)
                 }
-                else if (mode == "add")
+                else if (mode == "addRotary")
                 {
-                    FrameProp_Height += (563 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height += (39 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "minusRotary")
+                {
+                    FrameProp_Height -= (39 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "addRotoswing")
+                {
+                    FrameProp_Height += (85 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "minusRotoswing")
+                {
+                    FrameProp_Height -= (85 + 1); //+1 on margin (PanelProperties)
                 }
             }
             else if (objtype == "FxdNone")
@@ -380,6 +395,17 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "add")
                 {
                     FrameProp_Height += (308 + 1); //+1 on margin (PanelProperties)
+                }
+            }
+            else if (objtype == "FxdSash")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= (360 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += (360 + 1); //+1 on margin (PanelProperties)
                 }
             }
             else if (objtype == "SashProp")
@@ -417,6 +443,23 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        public void AdjustPropertyPanelHeight(string objtype, string mode, Handle_Type handleType)
+        {
+            if (objtype == "Panel")
+            {
+                if (mode == "delete")
+                {
+                    if (handleType == Handle_Type._Rotoswing)
+                    {
+                        FrameProp_Height -= (513 + 1); //+1 on margin (PanelProperties)
+                    }
+                    else if (handleType == Handle_Type._Rotary)
+                    {
+                        FrameProp_Height -= (467 + 1); //+1 on margin (PanelProperties)
+                    }
+                }
+            }
+        }
         #endregion
 
         public FrameModel(int frameID,
@@ -430,7 +473,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           float frameImagerZoom,
                           List<IDividerModel> lst_divider,
                           float frameZoom,
-                          FrameProfile_ArticleNo frameArtNo)
+                          FrameProfile_ArticleNo frameArtNo,
+                          IWindoorModel frameWindoorModel)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -445,6 +489,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Lst_Divider = lst_divider;
             Frame_Zoom = frameZoom;
             Frame_ArtNo = frameArtNo;
+            Frame_WindoorModel = frameWindoorModel;
         }
     }
 }

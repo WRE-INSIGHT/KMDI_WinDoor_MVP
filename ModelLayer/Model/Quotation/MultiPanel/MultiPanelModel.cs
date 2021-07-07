@@ -1556,13 +1556,25 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
             if (objtype == "Panel")
             {
-                if (mode == "delete")
+                if (mode == "add")
                 {
-                    MPanelProp_Height -= (563 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height += (552 + 1); //+1 on margin (PanelProperties)
                 }
-                else if (mode == "add")
+                else if (mode == "addRotary")
                 {
-                    MPanelProp_Height += (563 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height += (39 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "minusRotary")
+                {
+                    MPanelProp_Height -= (39 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "addRotoswing")
+                {
+                    MPanelProp_Height += (85 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "minusRotoswing")
+                {
+                    MPanelProp_Height -= (85 + 1); //+1 on margin (PanelProperties)
                 }
             }
             else if (objtype == "FxdNone")
@@ -1574,6 +1586,17 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 else if (mode == "add")
                 {
                     MPanelProp_Height += (308 + 1); //+1 on margin (PanelProperties)
+                }
+            }
+            else if (objtype == "FxdSash")
+            {
+                if (mode == "delete")
+                {
+                    MPanelProp_Height -= (360 + 1); //+1 on margin (PanelProperties)
+                }
+                else if (mode == "add")
+                {
+                    MPanelProp_Height += (360 + 1); //+1 on margin (PanelProperties)
                 }
             }
             else if (objtype == "SashProp")
@@ -1611,6 +1634,23 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        public void AdjustPropertyPanelHeight(string objtype, string mode, Handle_Type handleType)
+        {
+            if (objtype == "Panel")
+            {
+                if (mode == "delete")
+                {
+                    if (handleType == Handle_Type._Rotoswing)
+                    {
+                        MPanelProp_Height -= (513 + 1); //+1 on margin (PanelProperties)
+                    }
+                    else if (handleType == Handle_Type._Rotary)
+                    {
+                        MPanelProp_Height -= (467 + 1); //+1 on margin (PanelProperties)
+                    }
+                }
+            }
+        }
         #endregion
 
         public MultiPanelModel(int mpanelID,

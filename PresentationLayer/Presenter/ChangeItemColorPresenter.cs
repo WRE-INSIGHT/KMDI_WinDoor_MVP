@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter
             _windoorModel.WD_BaseColor = base_color;
             _windoorModel.WD_InsideColor = inside_color;
             _windoorModel.WD_OutsideColor = outside_color;
+            _windoorModel.SetMiddleCloser_onPanel();
             _changeItemColorView.CloseView();
         }
 

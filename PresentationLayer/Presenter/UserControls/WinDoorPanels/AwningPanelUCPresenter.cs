@@ -124,7 +124,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_awningPanelUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
-                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "delete");
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "delete", _panelModel.Panel_HandleType);
             }
             if (_multiPanelMullionUCP != null)
             {
@@ -174,7 +174,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
 
-            _frameModel.AdjustPropertyPanelHeight("Panel", "delete");
+            _frameModel.AdjustPropertyPanelHeight("Panel", "delete", _panelModel.Panel_HandleType);
 
             _mainPresenter.DeductPanelGlassID();
             _mainPresenter.SetPanelGlassID();

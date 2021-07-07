@@ -198,6 +198,8 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (value.Contains("Fixed"))
                 {
+                    Panel_HandleOptionsVisibility = false;
+
                     if (_panelOrient == true)
                     {
                         _panelChkText = "dSash";
@@ -206,6 +208,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         _panelChkText = "Norm";
                     }
+                }
+                else
+                {
+                    Panel_HandleOptionsVisibility = true;
                 }
                 _panelType = value;
                 NotifyPropertyChanged();
@@ -539,6 +545,62 @@ namespace ModelLayer.Model.Quotation.Panel
         public IFrameModel Panel_ParentFrameModel { get; set; }
         public IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
 
+        public int _panelPropertyHeight;
+        public int Panel_PropertyHeight
+        {
+            get
+            {
+                return _panelPropertyHeight;
+            }
+            set
+            {
+                _panelPropertyHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelHandleOptionsHeight;
+        public int Panel_HandleOptionsHeight
+        {
+            get
+            {
+                return _panelHandleOptionsHeight;
+            }
+            set
+            {
+                _panelHandleOptionsHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelRotoswingOptionsVisibility;
+        public bool Panel_RotoswingOptionsVisibility
+        {
+            get
+            {
+                return _panelRotoswingOptionsVisibility;
+            }
+            set
+            {
+                _panelRotoswingOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelRotaryOptionsVisibility;
+        public bool Panel_RotaryOptionsVisibility
+        {
+            get
+            {
+                return _panelRotaryOptionsVisibility;
+            }
+            set
+            {
+                _panelRotaryOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #region Explosion
 
         private int _panelGlassID;
@@ -714,6 +776,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         public int Panel_SashWidth { get; set; }
+
         public int Panel_SashHeight { get; set; }
         public int Panel_OriginalSashWidth { get; set; }
         public int Panel_OriginalSashHeight { get; set; }
@@ -731,6 +794,43 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelSashPropertyVisibility = value;
+                if (value == true)
+                {
+                    if (Panel_Type == "Fixed Panel")
+                    {
+                        _panelPropertyHeight = 357;
+                    }
+                    else
+                    {
+                        _panelPropertyHeight = 552;
+                        if (_panelHandleType == Handle_Type._Rotoswing)
+                        {
+                            _panelPropertyHeight = 513;
+                        }
+                        else if (_panelHandleType == Handle_Type._Rotary)
+                        {
+                            _panelPropertyHeight = 467;
+                        }
+                    }
+                }
+                else if (value == false)
+                {
+                    _panelPropertyHeight = 304;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelHandleOptionsVisibility;
+        public bool Panel_HandleOptionsVisibility
+        {
+            get
+            {
+                return _panelHandleOptionsVisibility;
+            }
+            set
+            {
+                _panelHandleOptionsVisibility = value;
                 NotifyPropertyChanged();
             }
         }
@@ -749,12 +849,112 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelHandleType = value;
+                if (_panelType != "Fixed Panel")
+                {
+                    if (_panelHandleType == Handle_Type._Rotoswing)
+                    {
+                        _panelRotoswingOptionsVisibility = true;
+                        _panelRotaryOptionsVisibility = false;
+                        _panelPropertyHeight = 513;
+                        _panelHandleOptionsHeight = 153;
+                    }
+                    else if (_panelHandleType == Handle_Type._Rotary)
+                    {
+                        _panelRotoswingOptionsVisibility = false;
+                        _panelRotaryOptionsVisibility = true;
+                        _panelPropertyHeight = 467;
+                        _panelHandleOptionsHeight = 107;
+                    }
+                }
                 NotifyPropertyChanged();
             }
         }
 
-        public Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+        private Rotoswing_HandleArtNo _panelRotoswingArtNo;
+        public Rotoswing_HandleArtNo Panel_RotoswingArtNo
+        {
+            get
+            {
+                return _panelRotoswingArtNo;
+            }
+            set
+            {
+                _panelRotoswingArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
 
+        private Rotary_HandleArtNo _panelRotaryArtNo;
+        public Rotary_HandleArtNo Panel_RotaryArtNo
+        {
+            get
+            {
+                return _panelRotaryArtNo;
+            }
+            set
+            {
+                _panelRotaryArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Espagnolette_ArticleNo _panelEspagnoletteArtno;
+        public Espagnolette_ArticleNo Panel_EspagnoletteArtNo
+        {
+            get
+            {
+                return _panelEspagnoletteArtno;
+            }
+            set
+            {
+                _panelEspagnoletteArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Striker_ArticleNo _panelStrikerArtno;
+        public Striker_ArticleNo Panel_StrikerArtno
+        {
+            get
+            {
+                return _panelStrikerArtno;
+            }
+            set
+            {
+                _panelStrikerArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public int Panel_StrikerQty { get; set; }
+
+        private MiddleCloser_ArticleNo _panelMiddleCloserArtno;
+        public MiddleCloser_ArticleNo Panel_MiddleCloserArtNo
+        {
+            get
+            {
+                return _panelMiddleCloserArtno;
+            }
+            set
+            {
+                _panelMiddleCloserArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public int Panel_MiddleCloserPairQty { get; set; }
+
+        private LockingKit_ArticleNo _panelLockingKitArtno;
+        public LockingKit_ArticleNo Panel_LockingKitArtNo
+        {
+            get
+            {
+                return _panelLockingKitArtno;
+            }
+            set
+            {
+                _panelLockingKitArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
@@ -774,6 +974,61 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
+
+                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                {
+                    //Panel_MiddleCloserArtNo = MiddleCloser_ArticleNo._1WC70DB;
+                    if (Panel_Height < 1551)
+                    {
+                        Panel_MiddleCloserPairQty = 1;
+                    }
+                    else if (Panel_Height > 1551 && Panel_Height < 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 2;
+                    }
+                    else if (Panel_Height > 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 3;
+                    }
+                }
+                else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                {
+                    //Panel_MiddleCloserArtNo = MiddleCloser_ArticleNo._1WC70WHT;
+                    if (Panel_SashHeight < 1551)
+                    {
+                        Panel_MiddleCloserPairQty = 1;
+                    }
+                    else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 2;
+                    }
+                    else if (Panel_SashHeight > 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 3;
+                    }
+                }
+
+                if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._612978)
+                {
+                    Panel_StrikerQty = 0;
+                }
+                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._639957 ||
+                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._639958)
+                {
+                    Panel_StrikerQty = 1;
+                }
+                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                {
+                    Panel_StrikerQty = 2;
+                }
+                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                {
+                    Panel_StrikerQty = 3;
+                }
 
                 int sashWD_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashWidth / 100)) * 100;
                 int sashHt_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashHeight / 100)) * 100;
@@ -1049,6 +1304,40 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
 
+                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                {
+                    //Panel_MiddleCloserArtNo = MiddleCloser_ArticleNo._1WC70DB;
+                    if (Panel_Height < 1551)
+                    {
+                        Panel_MiddleCloserPairQty = 1;
+                    }
+                    else if (Panel_Height > 1551 && Panel_Height < 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 2;
+                    }
+                    else if (Panel_Height > 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 3;
+                    }
+                }
+                else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                {
+                    //Panel_MiddleCloserArtNo = MiddleCloser_ArticleNo._1WC70WHT;
+                    if (Panel_SashHeight < 1551)
+                    {
+                        Panel_MiddleCloserPairQty = 1;
+                    }
+                    else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 2;
+                    }
+                    else if (Panel_SashHeight > 1999)
+                    {
+                        Panel_MiddleCloserPairQty = 3;
+                    }
+                }
+
                 int sashWD_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashWidth / 100)) * 100;
                 int sashHt_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashHeight / 100)) * 100;
 
@@ -1142,7 +1431,12 @@ namespace ModelLayer.Model.Quotation.Panel
                           int panelGlassID,
                           GlassFilm_Types panelGlassFilm,
                           SashProfile_ArticleNo panelSash,
-                          SashReinf_ArticleNo panelSashReinf)
+                          SashReinf_ArticleNo panelSashReinf,
+                          GlassType panelGlassType,
+                          Espagnolette_ArticleNo panelEspagnoletteArtNo,
+                          Striker_ArticleNo panelStrikerArtno,
+                          MiddleCloser_ArticleNo panelMiddleCloserArtno,
+                          LockingKit_ArticleNo panelLockingKitArtno)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -1172,7 +1466,11 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_SashReinfArtNo = panelSashReinf;
             Panel_OriginalWidth = Panel_Width;
             Panel_OriginalHeight = Panel_Height;
-            Panel_GlassType = GlassType._Single;
+            Panel_GlassType = panelGlassType;
+            Panel_EspagnoletteArtNo = panelEspagnoletteArtNo;
+            Panel_StrikerArtno = panelStrikerArtno;
+            Panel_MiddleCloserArtNo = panelMiddleCloserArtno;
+            Panel_LockingKitArtNo = panelLockingKitArtno;
         }
     }
 }

@@ -244,7 +244,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 else
                 {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "delete");
+                    _multiPanelModel.AdjustPropertyPanelHeight("FxdSash", "delete");
                 }
             }
             if (_multiPanelMullionUCP != null)
@@ -301,7 +301,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else
             {
-                _frameModel.AdjustPropertyPanelHeight("Panel", "delete");
+                _frameModel.AdjustPropertyPanelHeight("FxdSash", "delete");
             }
 
             _mainPresenter.DeductPanelGlassID();

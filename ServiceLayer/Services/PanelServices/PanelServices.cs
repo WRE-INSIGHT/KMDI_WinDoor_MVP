@@ -46,7 +46,12 @@ namespace ServiceLayer.Services.PanelServices
                                             int panelGlassID,
                                             GlassFilm_Types panelGlassFilm,
                                             SashProfile_ArticleNo panelSash,
-                                            SashReinf_ArticleNo panelSashReinf)
+                                            SashReinf_ArticleNo panelSashReinf,
+                                            GlassType panelGlassType,
+                                            Espagnolette_ArticleNo panelEspagnoletteArtNo,
+                                            Striker_ArticleNo panelStrikerArtno,
+                                            MiddleCloser_ArticleNo panelMiddleCloserArtno,
+                                            LockingKit_ArticleNo panelLockingKitArtno)
         {
             IPanelModel pnl = new PanelModel(panelID,
                                              panelName,
@@ -71,7 +76,12 @@ namespace ServiceLayer.Services.PanelServices
                                              panelGlassID,
                                              panelGlassFilm,
                                              panelSash,
-                                             panelSashReinf);
+                                             panelSashReinf,
+                                             panelGlassType,
+                                             panelEspagnoletteArtNo,
+                                             panelStrikerArtno,
+                                             panelMiddleCloserArtno,
+                                             panelLockingKitArtno);
 
             ValidateModel(pnl);
             return pnl;
@@ -99,6 +109,11 @@ namespace ServiceLayer.Services.PanelServices
                                          GlassFilm_Types panelGlassFilm,
                                          SashProfile_ArticleNo panelSash,
                                          SashReinf_ArticleNo panelSashReinf,
+                                         GlassType panelGlassType,
+                                         Espagnolette_ArticleNo panelEspagnoletteArtNo,
+                                         Striker_ArticleNo panelStrikerArtno,
+                                         MiddleCloser_ArticleNo panelMiddleCloserArtno,
+                                         LockingKit_ArticleNo panelLockingKitArtno,
                                          int panelID = 0,
                                          int panelGlassID = 0,
                                          float panelImageRendererZoom = 1,
@@ -135,7 +150,12 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelGlassID,
                                                        panelGlassFilm,
                                                        panelSash,
-                                                       panelSashReinf);
+                                                       panelSashReinf,
+                                                       panelGlassType,
+                                                       panelEspagnoletteArtNo,
+                                                       panelStrikerArtno,
+                                                       panelMiddleCloserArtno,
+                                                       panelLockingKitArtno);
 
             return _panelModel;
         }
