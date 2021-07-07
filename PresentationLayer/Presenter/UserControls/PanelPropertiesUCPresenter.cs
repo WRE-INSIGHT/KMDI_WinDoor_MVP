@@ -79,60 +79,66 @@ namespace PresentationLayer.Presenter.UserControls
             _panelModel.Panel_EspagnoletteArtNo = (Espagnolette_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
+        Handle_Type curr_handleType;
+
         private void _panelPropertiesUC_CmbHandleTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_HandleType = (Handle_Type)((ComboBox)sender).SelectedValue;
-
-            if (_panelModel.Panel_Type != "Fixed Panel")
+            Handle_Type sel_handleType = (Handle_Type)((ComboBox)sender).SelectedValue;
+            if (curr_handleType != sel_handleType)
             {
-                if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
+                _panelModel.Panel_HandleType = sel_handleType;
+                curr_handleType = sel_handleType;
+
+                if (_panelModel.Panel_Type != "Fixed Panel")
                 {
-                    _pnlRotoswingOptions.Visible = true;
-                    _pnlRotaryOptions.Visible = false;
-                    if (_initialLoad == true)
+                    if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
                     {
-                        _initialLoad = false;
-                    }
-                    else if (_initialLoad == false)
-                    {
-                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
+                        _pnlRotoswingOptions.Visible = true;
+                        _pnlRotaryOptions.Visible = false;
+                        if (_initialLoad == true)
+                        {
+                            _initialLoad = false;
+                        }
+                        else if (_initialLoad == false)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
+                            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
+                            }
+                        }
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
-                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
                         }
                     }
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                    else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
+                    {
+                        _pnlRotoswingOptions.Visible = false;
+                        _pnlRotaryOptions.Visible = true;
+                        if (_initialLoad == true)
+                        {
+                            _initialLoad = false;
+                        }
+                        else if (_initialLoad == false)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+                            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+                            }
+                        }
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
 
-                    if (_panelModel.Panel_ParentMultiPanelModel != null)
-                    {
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
-                    }
-                }
-                else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
-                {
-                    _pnlRotoswingOptions.Visible = false;
-                    _pnlRotaryOptions.Visible = true;
-                    if (_initialLoad == true)
-                    {
-                        _initialLoad = false;
-                    }
-                    else if (_initialLoad == false)
-                    {
-                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
-                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
                         }
-                    }
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
-
-                    if (_panelModel.Panel_ParentMultiPanelModel != null)
-                    {
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
                     }
                 }
             }
-
         }
 
         private void _panelPropertiesUC_CmbGlassTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -183,7 +189,7 @@ namespace PresentationLayer.Presenter.UserControls
             }
             if (_panelModel.Panel_ParentMultiPanelModel != null)
             {
-                if (chk.Text == "None" == chk.Checked == true)
+                if (chk.Text == "None" && chk.Checked == true)
                 {
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("SashProp", "add");
                 }

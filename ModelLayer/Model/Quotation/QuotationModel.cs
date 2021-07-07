@@ -499,8 +499,12 @@ namespace ModelLayer.Model.Quotation
 
             string screws_for_inst_where = "";
 
+            bool allow_coverProfile = false;
+
             foreach (IFrameModel frame in item.lst_frame)
             {
+                allow_coverProfile = true;
+
                 frame.SetExplosionValues_Frame();
 
                 totalFrames_width += (frame.Frame_Width * 2);
@@ -953,22 +957,33 @@ namespace ModelLayer.Model.Quotation
                                                            "Sash",
                                                            @"|  |");
 
-                                    Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.ToString(),
-                                                           1, "pc(s)",
-                                                           frame.Frame_Width.ToString(),
-                                                           "Frame",
-                                                           @"|  |");
+                                    if (allow_coverProfile == true)
+                                    {
+                                        Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               frame.Frame_Width.ToString(),
+                                                               "Frame",
+                                                               @"|  |");
 
-                                    Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.ToString(),
-                                                           1, "pc(s)",
-                                                           frame.Frame_Width.ToString(),
-                                                           "Frame",
-                                                           @"|  |");
+                                        Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.ToString(),
+                                                               1, "pc(s)",
+                                                               frame.Frame_Width.ToString(),
+                                                               "Frame",
+                                                               @"|  |");
+
+                                        allow_coverProfile = false;
+                                    }
 
                                     Material_List.Rows.Add("Friction Stay " + pnl_curCtrl.Panel_FrictionStayArtNo.ToString(),
                                                            1, "pair(s)",
                                                            "",
                                                            "Sash & Frame",
+                                                           @"");
+
+                                    Material_List.Rows.Add("Plastic Wedge 7199",
+                                                           pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
+                                                           "",
+                                                           "Frame",
                                                            @"");
 
                                     if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoswing)
@@ -1010,7 +1025,6 @@ namespace ModelLayer.Model.Quotation
                                                                "",
                                                                "Sash",
                                                                @"");
-
                                     }
                                 }
 
@@ -1026,13 +1040,13 @@ namespace ModelLayer.Model.Quotation
                                                        "Frame",
                                                        "|  |");
 
-                                Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThicknessDesc + "-P" + pnl_curCtrl.PanelGlass_ID + ")",
+                                Material_List.Rows.Add("Glass Width (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassWidth.ToString(),
                                                        "Frame",
                                                        "|  |");
 
-                                Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThicknessDesc + "-P" + pnl_curCtrl.PanelGlass_ID + ")",
+                                Material_List.Rows.Add("Glass Height (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassHeight.ToString(),
                                                        "Frame",
@@ -1099,6 +1113,12 @@ namespace ModelLayer.Model.Quotation
                                                "Sash & Frame",
                                                @"");
 
+                        Material_List.Rows.Add("Plastic Wedge 7199",
+                                               pnl.Panel_PlasticWedgeQty, "pc (s)",
+                                               "",
+                                               "Frame",
+                                               @"");
+
                         if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
                         {
                             Material_List.Rows.Add("Espagnolette " + pnl.Panel_EspagnoletteArtNo.ToString(),
@@ -1154,13 +1174,13 @@ namespace ModelLayer.Model.Quotation
                                            "Frame",
                                            "|  |");
 
-                    Material_List.Rows.Add("Glass Width (" + pnl.Panel_GlassThicknessDesc + "-P" + pnl.PanelGlass_ID + ")",
+                    Material_List.Rows.Add("Glass Width (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassWidth.ToString(),
                                            "Frame",
                                            "|  |");
 
-                    Material_List.Rows.Add("Glass Height (" + pnl.Panel_GlassThicknessDesc + "-P" + pnl.PanelGlass_ID + ")",
+                    Material_List.Rows.Add("Glass Height (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassHeight.ToString(),
                                            "Frame",

@@ -70,6 +70,9 @@
             this.cmb_RotaryArtNo = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cmb_LockingKit = new System.Windows.Forms.ComboBox();
+            this.pnl_motorizedOptions = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cmb_MotorizedMechanism = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Height)).BeginInit();
@@ -78,6 +81,7 @@
             this.flp_HandleOptions.SuspendLayout();
             this.pnl_RotoswingOptions.SuspendLayout();
             this.pnl_RotaryOptions.SuspendLayout();
+            this.pnl_motorizedOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_pnlname
@@ -206,6 +210,7 @@
             this.flp_PanelSpecs.Controls.Add(this.label2);
             this.flp_PanelSpecs.Controls.Add(this.cmb_FilmType);
             this.flp_PanelSpecs.Controls.Add(this.flp_HandleOptions);
+            this.flp_PanelSpecs.Controls.Add(this.pnl_motorizedOptions);
             this.flp_PanelSpecs.Location = new System.Drawing.Point(2, 144);
             this.flp_PanelSpecs.Name = "flp_PanelSpecs";
             this.flp_PanelSpecs.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
@@ -560,6 +565,37 @@
             this.cmb_LockingKit.TabIndex = 24;
             this.cmb_LockingKit.SelectedValueChanged += new System.EventHandler(this.cmb_LockingKit_SelectedValueChanged);
             // 
+            // pnl_motorizedOptions
+            // 
+            this.pnl_motorizedOptions.Controls.Add(this.label13);
+            this.pnl_motorizedOptions.Controls.Add(this.cmb_MotorizedMechanism);
+            this.pnl_motorizedOptions.Location = new System.Drawing.Point(3, 426);
+            this.pnl_motorizedOptions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.pnl_motorizedOptions.Name = "pnl_motorizedOptions";
+            this.pnl_motorizedOptions.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.pnl_motorizedOptions.Size = new System.Drawing.Size(148, 41);
+            this.pnl_motorizedOptions.TabIndex = 29;
+            // 
+            // label13
+            // 
+            this.label13.AutoEllipsis = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(7, 8);
+            this.label13.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(56, 27);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "Motorized\r\nMechanism";
+            // 
+            // cmb_MotorizedMechanism
+            // 
+            this.cmb_MotorizedMechanism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_MotorizedMechanism.FormattingEnabled = true;
+            this.cmb_MotorizedMechanism.Location = new System.Drawing.Point(72, 11);
+            this.cmb_MotorizedMechanism.Name = "cmb_MotorizedMechanism";
+            this.cmb_MotorizedMechanism.Size = new System.Drawing.Size(69, 21);
+            this.cmb_MotorizedMechanism.TabIndex = 20;
+            // 
             // Panel_PropertiesUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -592,6 +628,7 @@
             this.pnl_RotoswingOptions.ResumeLayout(false);
             this.pnl_RotoswingOptions.PerformLayout();
             this.pnl_RotaryOptions.ResumeLayout(false);
+            this.pnl_motorizedOptions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -641,5 +678,8 @@
         private System.Windows.Forms.ComboBox cmb_RotoswingNo;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmb_RotaryArtNo;
+        private System.Windows.Forms.Panel pnl_motorizedOptions;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cmb_MotorizedMechanism;
     }
 }
