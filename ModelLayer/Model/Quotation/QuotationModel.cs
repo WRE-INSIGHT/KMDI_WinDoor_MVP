@@ -970,6 +970,48 @@ namespace ModelLayer.Model.Quotation
                                                            "",
                                                            "Sash & Frame",
                                                            @"");
+
+                                    if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoswing)
+                                    {
+                                        Material_List.Rows.Add("Espagnolette " + pnl_curCtrl.Panel_EspagnoletteArtNo.ToString(),
+                                                               1, "pc (s)",
+                                                               "",
+                                                               "Sash",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Rotoswing handle " + pnl_curCtrl.Panel_RotoswingArtNo.ToString(),
+                                                               1, "pc (s)",
+                                                               "",
+                                                               "Sash",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno.ToString(),
+                                                               pnl_curCtrl.Panel_StrikerQty, "pc (s)",
+                                                               "",
+                                                               "Frame",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Middle Closer " + pnl_curCtrl.Panel_MiddleCloserArtNo.ToString(),
+                                                               pnl_curCtrl.Panel_MiddleCloserPairQty, "pair (s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+                                    }
+                                    else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotary)
+                                    {
+                                        Material_List.Rows.Add("Rotary handle " + pnl_curCtrl.Panel_RotaryArtNo.ToString(),
+                                                               1, "set (s)",
+                                                               "",
+                                                               "Frame & Sash",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Locking Kit " + pnl_curCtrl.Panel_LockingKitArtNo.ToString(),
+                                                               1, "set (s)",
+                                                               "",
+                                                               "Sash",
+                                                               @"");
+
+                                    }
                                 }
 
                                 Material_List.Rows.Add("Glazing Bead Width (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
@@ -984,18 +1026,22 @@ namespace ModelLayer.Model.Quotation
                                                        "Frame",
                                                        "|  |");
 
-                                Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThickness + "-P" + pnl_curCtrl.PanelGlass_ID + ")",
+                                Material_List.Rows.Add("Glass Width (" + pnl_curCtrl.Panel_GlassThicknessDesc + "-P" + pnl_curCtrl.PanelGlass_ID + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassWidth.ToString(),
                                                        "Frame",
                                                        "|  |");
 
-                                Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThickness + "-P" + pnl_curCtrl.PanelGlass_ID + ")",
+                                Material_List.Rows.Add("Glass Height (" + pnl_curCtrl.Panel_GlassThicknessDesc + "-P" + pnl_curCtrl.PanelGlass_ID + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassHeight.ToString(),
                                                        "Frame",
                                                        "|  |");
-                                glazing_spacer++;
+
+                                if (pnl_curCtrl.Panel_Type == "Fixed Panel")
+                                {
+                                    glazing_spacer++;
+                                }
 
                                 total_glassWidth += (pnl_curCtrl.Panel_GlassWidth * 2);
                                 total_glassHeight += (pnl_curCtrl.Panel_GlassHeight * 2);
@@ -1052,6 +1098,48 @@ namespace ModelLayer.Model.Quotation
                                                "",
                                                "Sash & Frame",
                                                @"");
+
+                        if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
+                        {
+                            Material_List.Rows.Add("Espagnolette " + pnl.Panel_EspagnoletteArtNo.ToString(),
+                                                   1, "pc (s)",
+                                                   "",
+                                                   "Sash",
+                                                   @"");
+
+                            Material_List.Rows.Add("Rotoswing handle " + pnl.Panel_RotoswingArtNo.ToString(),
+                                                   1, "pc (s)",
+                                                   "",
+                                                   "Sash",
+                                                   @"");
+
+                            Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno.ToString(),
+                                                   pnl.Panel_StrikerQty, "pc (s)",
+                                                   "",
+                                                   "Frame",
+                                                   @"");
+
+                            Material_List.Rows.Add("Middle Closer " + pnl.Panel_MiddleCloserArtNo.ToString(),
+                                                   pnl.Panel_MiddleCloserPairQty, "pair (s)",
+                                                   "",
+                                                   "Sash & Frame",
+                                                   @"");
+                        }
+                        else if (pnl.Panel_HandleType == Handle_Type._Rotary)
+                        {
+                            Material_List.Rows.Add("Rotary handle " + pnl.Panel_RotaryArtNo.ToString(),
+                                                   1, "set (s)",
+                                                   "",
+                                                   "Frame & Sash",
+                                                   @"");
+
+                            Material_List.Rows.Add("Locking Kit " + pnl.Panel_LockingKitArtNo.ToString(),
+                                                   1, "set (s)",
+                                                   "",
+                                                   "Sash",
+                                                   @"");
+
+                        }
                     }
 
                     Material_List.Rows.Add("Glazing Bead Width (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
@@ -1066,18 +1154,22 @@ namespace ModelLayer.Model.Quotation
                                            "Frame",
                                            "|  |");
 
-                    Material_List.Rows.Add("Glass Width (" + pnl.Panel_GlassThickness + "-P" + pnl.PanelGlass_ID + ")",
+                    Material_List.Rows.Add("Glass Width (" + pnl.Panel_GlassThicknessDesc + "-P" + pnl.PanelGlass_ID + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassWidth.ToString(),
                                            "Frame",
                                            "|  |");
 
-                    Material_List.Rows.Add("Glass Height (" + pnl.Panel_GlassThickness + "-P" + pnl.PanelGlass_ID + ")",
+                    Material_List.Rows.Add("Glass Height (" + pnl.Panel_GlassThicknessDesc + "-P" + pnl.PanelGlass_ID + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassHeight.ToString(),
                                            "Frame",
                                            "|  |");
-                    glazing_spacer++;
+
+                    if (pnl.Panel_Type == "Fixed Panel")
+                    {
+                        glazing_spacer++;
+                    }
 
                     total_glassWidth += (pnl.Panel_GlassWidth * 2);
                     total_glassHeight += (pnl.Panel_GlassHeight * 2);
@@ -1110,10 +1202,13 @@ namespace ModelLayer.Model.Quotation
                                    "",
                                    "Frame"); // Frame or Sash
 
-            Material_List.Rows.Add("Glazing Spacer (KBC70)",
-                                   GlazingSpacer_TotalQty, "pc(s)", "", "Frame");
+            if (GlazingSpacer_TotalQty > 0)
+            {
+                Material_List.Rows.Add("Glazing Spacer (KBC70)",
+                                       GlazingSpacer_TotalQty, "pc(s)", "", "Frame");
+            }
 
-            Material_List.Rows.Add("Glazing Seal",
+            Material_List.Rows.Add("Glazing Seal 9073",
                                    GlazingSeal_TotalQty, "mm", "", "GB");
 
             Material_List.Rows.Add("Screws for Fabrication wt 10x15",

@@ -212,8 +212,8 @@ namespace EnumerationTypeLayer
 
         public class MiddleCloser_ArticleNo : Enumeration<MiddleCloser_ArticleNo, int>
         {
-            public static readonly MiddleCloser_ArticleNo _1WC70DB = new MiddleCloser_ArticleNo(0, "1WC70-DB");
-            public static readonly MiddleCloser_ArticleNo _1WC70WHT = new MiddleCloser_ArticleNo(1, "1WC70-WHT");
+            public static readonly MiddleCloser_ArticleNo _1WC70WHT = new MiddleCloser_ArticleNo(0, "1WC70-WHT");
+            public static readonly MiddleCloser_ArticleNo _1WC70DB = new MiddleCloser_ArticleNo(1, "1WC70-DB");
             public static readonly MiddleCloser_ArticleNo _None = new MiddleCloser_ArticleNo(2, "None");
 
             private MiddleCloser_ArticleNo(int value, string displayName) : base(value, displayName) { }

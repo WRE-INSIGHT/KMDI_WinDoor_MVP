@@ -493,6 +493,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 
                 IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
+                MiddleCloser_ArticleNo midArtNo = MiddleCloser_ArticleNo._None;
+                if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                {
+                    midArtNo = MiddleCloser_ArticleNo._1WC70DB;
+                }
+                else if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                         _frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                {
+                    midArtNo = MiddleCloser_ArticleNo._1WC70WHT;
+                }
+
                 _panelModel = _panelServices.AddPanelModel(suggest_Wd,
                                                                suggest_HT,
                                                                fpnl,
@@ -513,7 +524,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                GlassType._Single,
                                                                Espagnolette_ArticleNo._None,
                                                                Striker_ArticleNo._M89ANT,
-                                                               MiddleCloser_ArticleNo._None,
+                                                               midArtNo,
                                                                LockingKit_ArticleNo._None,
                                                                _mainPresenter.GetPanelCount(),
                                                                _mainPresenter.GetPanelGlassID(),

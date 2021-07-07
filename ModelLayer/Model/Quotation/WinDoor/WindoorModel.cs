@@ -512,6 +512,13 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 {
                     pnl.Panel_MiddleCloserArtNo = midArt;
                 }
+                foreach (IMultiPanelModel mpnl  in fr.Lst_MultiPanel)
+                {
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                    {
+                        pnl.Panel_MiddleCloserArtNo = midArt;
+                    }
+                }
             }
         }
 

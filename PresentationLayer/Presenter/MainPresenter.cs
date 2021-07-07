@@ -420,6 +420,7 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Cannot apply auto glass balancing" + "\n" + "You can apply auto glass balancing if all panel has sash or all panel has no sash", 
                                 "Glass balancing not available",
                                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                gb.Checked = false;
             }
             else if (gbmode != "")
             {
