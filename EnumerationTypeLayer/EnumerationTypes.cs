@@ -232,6 +232,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly MotorizedMech_ArticleNo _41556C = new MotorizedMech_ArticleNo(0, "41556C");
             public static readonly MotorizedMech_ArticleNo _41555B = new MotorizedMech_ArticleNo(1, "41555B");
+            public static readonly MotorizedMech_ArticleNo _409990E = new MotorizedMech_ArticleNo(2, "409990E");
 
             private MotorizedMech_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
