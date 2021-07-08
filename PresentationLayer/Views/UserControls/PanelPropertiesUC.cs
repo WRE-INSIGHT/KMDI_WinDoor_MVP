@@ -148,6 +148,13 @@ namespace PresentationLayer.Views.UserControls
             }
             cmb_RotaryArtNo.DataSource = rotary;
 
+            List<MotorizedMech_ArticleNo> motormech = new List<MotorizedMech_ArticleNo>();
+            foreach (MotorizedMech_ArticleNo item in MotorizedMech_ArticleNo.GetAll())
+            {
+                motormech.Add(item);
+            }
+            cmb_MotorizedMechanism.DataSource = motormech;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
 

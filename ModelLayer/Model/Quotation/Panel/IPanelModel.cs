@@ -76,6 +76,7 @@ namespace ModelLayer.Model.Quotation.Panel
         Rotoswing_HandleArtNo Panel_RotoswingArtNo { get; set; }
         Rotary_HandleArtNo Panel_RotaryArtNo { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+        int Panel_PlasticWedgeQty { get; set; }
         Striker_ArticleNo Panel_StrikerArtno { get; set; }
         MiddleCloser_ArticleNo Panel_MiddleCloserArtNo { get; set; }
         LockingKit_ArticleNo Panel_LockingKitArtNo { get; set; }

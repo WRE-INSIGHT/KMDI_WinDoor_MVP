@@ -227,5 +227,13 @@ namespace EnumerationTypeLayer
 
             private LockingKit_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class MotorizedMech_ArticleNo : Enumeration<MotorizedMech_ArticleNo, int>
+        {
+            public static readonly MotorizedMech_ArticleNo _41556C = new MotorizedMech_ArticleNo(0, "41556C");
+            public static readonly MotorizedMech_ArticleNo _41555B = new MotorizedMech_ArticleNo(1, "41555B");
+
+            private MotorizedMech_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }
