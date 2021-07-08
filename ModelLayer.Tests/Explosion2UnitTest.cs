@@ -85,6 +85,8 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    1);
+
+            _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
 
             _qouteModel.GetListOfMaterials();
@@ -155,6 +157,7 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    1);
+            _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
 
             _qouteModel.GetListOfMaterials();
@@ -488,6 +491,8 @@ namespace ModelLayer.Tests
                                                                    LockingKit_ArticleNo._None,
                                                                    1);
             _panelModel.Panel_Placement = "First";
+            _panelModel.Panel_GlassThickness = 6.0f;
+            _panelModel.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -535,6 +540,8 @@ namespace ModelLayer.Tests
                                                                    LockingKit_ArticleNo._None,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -619,12 +626,10 @@ namespace ModelLayer.Tests
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '478'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '540'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
@@ -726,6 +731,7 @@ namespace ModelLayer.Tests
                                                                    LockingKit_ArticleNo._None,
                                                                    1);
             _panelModel.Panel_Placement = "First";
+            _panelModel.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -773,6 +779,7 @@ namespace ModelLayer.Tests
                                                                    LockingKit_ArticleNo._None,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -869,17 +876,14 @@ namespace ModelLayer.Tests
 
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '478'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '640'");
             Assert.AreEqual(1, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '440'");
             Assert.AreEqual(1, Convert.ToInt32(sumObject));
             #endregion
@@ -1105,6 +1109,7 @@ namespace ModelLayer.Tests
                                                                  LockingKit_ArticleNo._None,
                                                                  1);
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel1);
             Control fw1 = new Control();
@@ -1158,6 +1163,7 @@ namespace ModelLayer.Tests
                                                                   LockingKit_ArticleNo._None,
                                                                   2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _panelModel2.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
@@ -1199,6 +1205,7 @@ namespace ModelLayer.Tests
                                                                LockingKit_ArticleNo._None,
                                                                3);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_GlassThickness = 6.0f;
             _panelModel3.Panel_Index_Inside_MPanel = 1;
             _multiTransomModel2.MPanelLst_Panel.Add(_panelModel3);
             Control fw3 = new Control();
@@ -1250,6 +1257,7 @@ namespace ModelLayer.Tests
                                                               LockingKit_ArticleNo._None,
                                                               4);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_GlassThickness = 6.0f;
             _panelModel4.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel2.MPanelLst_Panel.Add(_panelModel4);
             Control fw4 = new Control();
@@ -1290,6 +1298,7 @@ namespace ModelLayer.Tests
                                                              LockingKit_ArticleNo._None,
                                                              5);
             _panelModel5.Panel_Placement = "First";
+            _panelModel5.Panel_GlassThickness = 6.0f;
             _panelModel5.Panel_Index_Inside_MPanel = 1;
             _multiTransomModel3.MPanelLst_Panel.Add(_panelModel5);
             Control fw5 = new Control();
@@ -1342,6 +1351,7 @@ namespace ModelLayer.Tests
                                                           LockingKit_ArticleNo._None,
                                                           6);
             _panelModel6.Panel_Placement = "Last";
+            _panelModel6.Panel_GlassThickness = 6.0f;
             _panelModel6.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel3.MPanelLst_Panel.Add(_panelModel6);
             Control fw6 = new Control();
@@ -1399,7 +1409,7 @@ namespace ModelLayer.Tests
 
             #region MultiTransom1
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel1.Panel_GlazingBeadWidth);
             Assert.AreEqual(800, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(544, _panelModel1.Panel_GlassWidth);
@@ -1412,7 +1422,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(553, divModel_Transom.Div_ExplosionWidth);
             Assert.AreEqual(473, divModel_Transom.Div_ReinfWidth);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel2.Panel_GlazingBeadWidth);
             Assert.AreEqual(800, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(544, _panelModel2.Panel_GlassWidth);
@@ -1423,7 +1433,7 @@ namespace ModelLayer.Tests
 
             #region MultiTransom2
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel3.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(592, _panelModel3.Panel_GlazingBeadWidth);
             Assert.AreEqual(800, _panelModel3.Panel_GlazingBeadHeight);
             Assert.AreEqual(544, _panelModel3.Panel_GlassWidth);
@@ -1435,7 +1445,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(553, divModel_Transom2.Div_ExplosionWidth);
             Assert.AreEqual(473, divModel_Transom2.Div_ReinfWidth);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel4.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(592, _panelModel4.Panel_GlazingBeadWidth);
             Assert.AreEqual(800, _panelModel4.Panel_GlazingBeadHeight);
             Assert.AreEqual(544, _panelModel4.Panel_GlassWidth);
@@ -1446,7 +1456,7 @@ namespace ModelLayer.Tests
 
             #region MultiTransom3
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel5.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel5.Panel_GlazingBeadWidth);
             Assert.AreEqual(800, _panelModel5.Panel_GlazingBeadHeight);
             Assert.AreEqual(544, _panelModel5.Panel_GlassWidth);
@@ -1459,7 +1469,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(473, divModel_Transom3.Div_ReinfWidth);
 
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel6.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel6.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel6.Panel_GlazingBeadWidth);
             Assert.AreEqual(800, _panelModel6.Panel_GlazingBeadHeight);
             Assert.AreEqual(544, _panelModel6.Panel_GlassWidth);
@@ -1520,17 +1530,17 @@ namespace ModelLayer.Tests
 
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '604'");
             Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '592'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '800'");
             Assert.AreEqual(12, Convert.ToInt32(sumObject));
 
@@ -1540,12 +1550,10 @@ namespace ModelLayer.Tests
 
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '544'");
             Assert.AreEqual(6, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '740'");
             Assert.AreEqual(6, Convert.ToInt32(sumObject));
 
@@ -1656,6 +1664,7 @@ namespace ModelLayer.Tests
                                                                      LockingKit_ArticleNo._None,
                                                                      1);
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
             Control fw1 = new Control();
@@ -1751,6 +1760,7 @@ namespace ModelLayer.Tests
                                                                      LockingKit_ArticleNo._None,
                                                                      2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _panelModel2.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
@@ -1791,6 +1801,7 @@ namespace ModelLayer.Tests
                                                               LockingKit_ArticleNo._None,
                                                                    3);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_GlassThickness = 6.0f;
             _panelModel3.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel3);
             Control fw3 = new Control();
@@ -1843,6 +1854,7 @@ namespace ModelLayer.Tests
                                                                     LockingKit_ArticleNo._None,
                                                                     4);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_GlassThickness = 6.0f;
             _panelModel4.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel4);
             Control fw4 = new Control();
@@ -1878,7 +1890,7 @@ namespace ModelLayer.Tests
 
             #region MultiMullion(2) as base
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel1.Panel_GlazingBeadWidth);
             Assert.AreEqual(1700, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(644, _panelModel1.Panel_GlassWidth);
@@ -1899,7 +1911,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1637, mullionModel2.Div_ExplosionHeight);
             Assert.AreEqual(1557, mullionModel2.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel2.Panel_GlazingBeadWidth);
             Assert.AreEqual(1700, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(644, _panelModel2.Panel_GlassWidth);
@@ -1910,7 +1922,7 @@ namespace ModelLayer.Tests
 
             #region MultiTransom
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel3.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(692, _panelModel3.Panel_GlazingBeadWidth);
             Assert.AreEqual(850, _panelModel3.Panel_GlazingBeadHeight);
             Assert.AreEqual(644, _panelModel3.Panel_GlassWidth);
@@ -1922,7 +1934,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(653, divModel_Transom.Div_ExplosionWidth);
             Assert.AreEqual(573, divModel_Transom.Div_ReinfWidth);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel4.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(692, _panelModel4.Panel_GlazingBeadWidth);
             Assert.AreEqual(850, _panelModel4.Panel_GlazingBeadHeight);
             Assert.AreEqual(644, _panelModel4.Panel_GlassWidth);
@@ -1985,40 +1997,37 @@ namespace ModelLayer.Tests
 
             //P1 & P2
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '704'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '1700'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '644'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '1628'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             //P3 & P4
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '692'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '850'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
 
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '790'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
@@ -2120,12 +2129,13 @@ namespace ModelLayer.Tests
                                                                  SashProfile_ArticleNo._None,
                                                                  SashReinf_ArticleNo._None,
                                                                  GlassType._Single,
-                                                              Espagnolette_ArticleNo._None,
-                                                              Striker_ArticleNo._M89ANT,
-                                                              MiddleCloser_ArticleNo._None,
-                                                              LockingKit_ArticleNo._None,
+                                                                 Espagnolette_ArticleNo._None,
+                                                                 Striker_ArticleNo._M89ANT,
+                                                                 MiddleCloser_ArticleNo._None,
+                                                                 LockingKit_ArticleNo._None,
                                                                  1);
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 14.0f;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
             Control fw1 = new Control();
@@ -2222,6 +2232,7 @@ namespace ModelLayer.Tests
                                                                  LockingKit_ArticleNo._None,
                                                                  2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 14.0f;
             _panelModel2.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
@@ -2351,6 +2362,7 @@ namespace ModelLayer.Tests
                                                                   LockingKit_ArticleNo._None,
                                                                   3);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_GlassThickness = 6.0f;
             _panelModel3.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel3);
             Control fw3 = new Control();
@@ -2404,6 +2416,7 @@ namespace ModelLayer.Tests
                                                                   LockingKit_ArticleNo._None,
                                                                   4);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_GlassThickness = 6.0f;
             _panelModel4.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel4);
             Control fw4 = new Control();
@@ -2447,6 +2460,7 @@ namespace ModelLayer.Tests
                                                                   LockingKit_ArticleNo._None,
                                                                   5);
             _panelModel5.Panel_Placement = "First";
+            _panelModel5.Panel_GlassThickness = 6.0f;
             _panelModel5.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel5);
             Control fw5 = new Control();
@@ -2500,6 +2514,7 @@ namespace ModelLayer.Tests
                                                                   LockingKit_ArticleNo._None,
                                                                   6);
             _panelModel6.Panel_Placement = "Last";
+            _panelModel6.Panel_GlassThickness = 6.0f;
             _panelModel6.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel6);
             Control fw6 = new Control();
@@ -2688,12 +2703,10 @@ namespace ModelLayer.Tests
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%14mm%' AND
                                                  Size = '724'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%14mm%' AND
                                                  Size = '1878'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
@@ -2709,12 +2722,10 @@ namespace ModelLayer.Tests
             Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '323'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '900'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
@@ -2828,6 +2839,7 @@ namespace ModelLayer.Tests
                                                                     LockingKit_ArticleNo._None,
                                                                     1);
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
             Control fw1 = new Control();
@@ -2925,6 +2937,7 @@ namespace ModelLayer.Tests
                                                                     LockingKit_ArticleNo._None,
                                                                     2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _panelModel2.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
@@ -2966,6 +2979,7 @@ namespace ModelLayer.Tests
                                                                     LockingKit_ArticleNo._None,
                                                                     3);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_GlassThickness = 13.0f;
             _panelModel3.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel3);
             Control fw3 = new Control();
@@ -3063,6 +3077,7 @@ namespace ModelLayer.Tests
                                                                      LockingKit_ArticleNo._None,
                                                                      4);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_GlassThickness = 13.0f;
             _panelModel4.Panel_Index_Inside_MPanel = 4;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel4);
             Control fw4 = new Control();
@@ -3106,6 +3121,7 @@ namespace ModelLayer.Tests
                                                                     LockingKit_ArticleNo._None,
                                                                     5);
             _panelModel5.Panel_Placement = "First";
+            _panelModel5.Panel_GlassThickness = 13.0f;
             _panelModel5.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel5);
             Control fw5 = new Control();
@@ -3157,6 +3173,7 @@ namespace ModelLayer.Tests
                                                                     LockingKit_ArticleNo._None,
                                                                     6);
             _panelModel6.Panel_Placement = "Last";
+            _panelModel6.Panel_GlassThickness = 13.0f;
             _panelModel6.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel6);
             Control fw6 = new Control();
@@ -3185,14 +3202,14 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(3, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(6, _qouteModel.GlazingSpacer_TotalQty);
-            // Assert.AreEqual(7480, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual(8136, _qouteModel.GlazingSeal_TotalQty);
 
 
             #endregion
 
             #region MultiMullion(2) base
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel1.Panel_GlazingBeadWidth);
             Assert.AreEqual(1500, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(644, _panelModel1.Panel_GlassWidth);
@@ -3210,7 +3227,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1437, _divMullionModel2.Div_ExplosionHeight);
             Assert.AreEqual(1357, _divMullionModel2.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel2.Panel_GlazingBeadWidth);
             Assert.AreEqual(1500, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(644, _panelModel2.Panel_GlassWidth);
@@ -3322,22 +3339,20 @@ namespace ModelLayer.Tests
 
             //P1 & P2
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '704'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '1500'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '644'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '1428'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
@@ -3354,12 +3369,10 @@ namespace ModelLayer.Tests
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%13mm%' AND
                                                  Size = '644'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%13mm%' AND
                                                  Size = '444'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
@@ -3376,12 +3389,10 @@ namespace ModelLayer.Tests
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%13mm%' AND
                                                  Size = '298'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%13mm%' AND
                                                  Size = '444'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
@@ -3454,6 +3465,7 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70DB,
                                                                    LockingKit_ArticleNo._None,
                                                                    1);
+            _panelModel.Panel_GlassThickness = 13.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
 
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
@@ -3543,13 +3555,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%13mm%' AND
                              Size = '532'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%13mm%' AND
                              Size = '1032'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
@@ -3656,6 +3666,7 @@ namespace ModelLayer.Tests
                                                                    LockingKit_ArticleNo._None,
                                                                    1);
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
             Control Awning1 = new Control();
@@ -3706,6 +3717,7 @@ namespace ModelLayer.Tests
                                                                       LockingKit_ArticleNo._None,
                                                                       2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _panelModel2.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
             Control Awning2 = new Control();
@@ -4011,6 +4023,7 @@ namespace ModelLayer.Tests
                                                                    LockingKit_ArticleNo._None,
                                                                    1);
             _panelModel1_fixed1.Panel_Placement = "Last";
+            _panelModel1_fixed1.Panel_GlassThickness = 13.0f;
             _panelModel1_fixed1.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1_fixed1);
             Control Fixed1 = new Control();
@@ -4050,6 +4063,7 @@ namespace ModelLayer.Tests
                                                                   LockingKit_ArticleNo._None,
                                                                   2);
             _panelModel2_fixed2.Panel_Placement = "First";
+            _panelModel2_fixed2.Panel_GlassThickness = 13.0f;
             _panelModel2_fixed2.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel2_fixed2);
             Control Fixed2 = new Control();
@@ -4104,6 +4118,7 @@ namespace ModelLayer.Tests
                                                                      LockingKit_ArticleNo._None,
                                                                      3);
             _panelModel3_Awning1.Panel_Placement = "Last";
+            _panelModel3_Awning1.Panel_GlassThickness = 13.0f;
             _panelModel3_Awning1.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel3_Awning1);
             Control Awning3 = new Control();
