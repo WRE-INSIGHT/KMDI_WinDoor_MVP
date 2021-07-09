@@ -63,6 +63,8 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler CmbLockingKitSelectedValueChangedEventRaised;
         public event EventHandler CmbRotoswingArtNoSelectedValueChangedEventRaised;
         public event EventHandler CmbRotaryArtNoSelectedValueChangedEventRaised;
+        public event EventHandler ChkMotorizedCheckChangedEventRaised;
+        public event EventHandler CmbMotorizedMechSelectedValueChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -187,6 +189,10 @@ namespace PresentationLayer.Views.UserControls
             cmb_LockingKit.DataBindings.Add(ModelBinding["Panel_LockingKitArtNo"]);
             cmb_RotoswingNo.DataBindings.Add(ModelBinding["Panel_RotoswingArtNo"]);
             cmb_RotaryArtNo.DataBindings.Add(ModelBinding["Panel_RotaryArtNo"]);
+            chk_Motorized.DataBindings.Add(ModelBinding["Panel_MotorizedOptionVisibility"]);
+            cmb_MotorizedMechanism.DataBindings.Add(ModelBinding["Panel_MotorizedMechArtNo"]);
+            pnl_motorizedOptions.DataBindings.Add(ModelBinding["Panel_MotorizedOptionVisibility2"]);
+            pnl_motorized.DataBindings.Add(ModelBinding["Panel_MotorizedpnlOptionVisibility"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)
@@ -262,6 +268,16 @@ namespace PresentationLayer.Views.UserControls
         private void cmb_RotaryArtNo_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbRotaryArtNoSelectedValueChangedEventRaised, e);
+        }
+
+        private void chk_Motorized_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ChkMotorizedCheckChangedEventRaised, e);
+        }
+
+        private void cmb_MotorizedMechanism_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbMotorizedMechSelectedValueChangedEventRaised, e);
         }
     }
 }

@@ -39,6 +39,9 @@
             this.lbl_PanelGlassID = new System.Windows.Forms.Label();
             this.flp_PanelSpecs = new System.Windows.Forms.FlowLayoutPanel();
             this.lbl_pnlSpecs = new System.Windows.Forms.Label();
+            this.pnl_motorized = new System.Windows.Forms.Panel();
+            this.lbl_motorized = new System.Windows.Forms.Label();
+            this.chk_Motorized = new System.Windows.Forms.CheckBox();
             this.pnl_Sash = new System.Windows.Forms.Panel();
             this.cmb_SashReinf = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -77,6 +80,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Height)).BeginInit();
             this.flp_PanelSpecs.SuspendLayout();
+            this.pnl_motorized.SuspendLayout();
             this.pnl_Sash.SuspendLayout();
             this.flp_HandleOptions.SuspendLayout();
             this.pnl_RotoswingOptions.SuspendLayout();
@@ -199,6 +203,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flp_PanelSpecs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flp_PanelSpecs.Controls.Add(this.lbl_pnlSpecs);
+            this.flp_PanelSpecs.Controls.Add(this.pnl_motorized);
             this.flp_PanelSpecs.Controls.Add(this.pnl_Sash);
             this.flp_PanelSpecs.Controls.Add(this.label5);
             this.flp_PanelSpecs.Controls.Add(this.cmb_GlassType);
@@ -214,7 +219,7 @@
             this.flp_PanelSpecs.Location = new System.Drawing.Point(2, 144);
             this.flp_PanelSpecs.Name = "flp_PanelSpecs";
             this.flp_PanelSpecs.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 427);
+            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 500);
             this.flp_PanelSpecs.TabIndex = 14;
             // 
             // lbl_pnlSpecs
@@ -227,6 +232,44 @@
             this.lbl_pnlSpecs.TabIndex = 8;
             this.lbl_pnlSpecs.Text = "Panel Specification";
             // 
+            // pnl_motorized
+            // 
+            this.pnl_motorized.Controls.Add(this.lbl_motorized);
+            this.pnl_motorized.Controls.Add(this.chk_Motorized);
+            this.pnl_motorized.Location = new System.Drawing.Point(3, 19);
+            this.pnl_motorized.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.pnl_motorized.Name = "pnl_motorized";
+            this.pnl_motorized.Size = new System.Drawing.Size(148, 29);
+            this.pnl_motorized.TabIndex = 32;
+            // 
+            // lbl_motorized
+            // 
+            this.lbl_motorized.Location = new System.Drawing.Point(1, 2);
+            this.lbl_motorized.Name = "lbl_motorized";
+            this.lbl_motorized.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.lbl_motorized.Size = new System.Drawing.Size(91, 24);
+            this.lbl_motorized.TabIndex = 32;
+            this.lbl_motorized.Text = "Motorized";
+            this.lbl_motorized.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // chk_Motorized
+            // 
+            this.chk_Motorized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chk_Motorized.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chk_Motorized.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.chk_Motorized.FlatAppearance.BorderSize = 0;
+            this.chk_Motorized.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
+            this.chk_Motorized.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chk_Motorized.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_Motorized.Location = new System.Drawing.Point(97, 4);
+            this.chk_Motorized.Name = "chk_Motorized";
+            this.chk_Motorized.Size = new System.Drawing.Size(50, 21);
+            this.chk_Motorized.TabIndex = 33;
+            this.chk_Motorized.Text = "No";
+            this.chk_Motorized.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chk_Motorized.UseVisualStyleBackColor = false;
+            this.chk_Motorized.CheckedChanged += new System.EventHandler(this.chk_Motorized_CheckedChanged);
+            // 
             // pnl_Sash
             // 
             this.pnl_Sash.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -234,7 +277,7 @@
             this.pnl_Sash.Controls.Add(this.label4);
             this.pnl_Sash.Controls.Add(this.cmb_SashProfile);
             this.pnl_Sash.Controls.Add(this.label3);
-            this.pnl_Sash.Location = new System.Drawing.Point(3, 22);
+            this.pnl_Sash.Location = new System.Drawing.Point(3, 51);
             this.pnl_Sash.Name = "pnl_Sash";
             this.pnl_Sash.Size = new System.Drawing.Size(148, 53);
             this.pnl_Sash.TabIndex = 15;
@@ -280,7 +323,7 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 81);
+            this.label5.Location = new System.Drawing.Point(3, 110);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 13);
@@ -292,7 +335,7 @@
             this.cmb_GlassType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_GlassType.DropDownWidth = 100;
             this.cmb_GlassType.FormattingEnabled = true;
-            this.cmb_GlassType.Location = new System.Drawing.Point(77, 78);
+            this.cmb_GlassType.Location = new System.Drawing.Point(77, 107);
             this.cmb_GlassType.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.cmb_GlassType.Name = "cmb_GlassType";
             this.cmb_GlassType.Size = new System.Drawing.Size(72, 21);
@@ -302,7 +345,7 @@
             // lbl_glassthick
             // 
             this.lbl_glassthick.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_glassthick.Location = new System.Drawing.Point(3, 105);
+            this.lbl_glassthick.Location = new System.Drawing.Point(3, 134);
             this.lbl_glassthick.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_glassthick.Name = "lbl_glassthick";
             this.lbl_glassthick.Size = new System.Drawing.Size(66, 13);
@@ -311,7 +354,7 @@
             // 
             // btn_SelectGlassthickness
             // 
-            this.btn_SelectGlassthickness.Location = new System.Drawing.Point(75, 102);
+            this.btn_SelectGlassthickness.Location = new System.Drawing.Point(75, 131);
             this.btn_SelectGlassthickness.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.btn_SelectGlassthickness.Name = "btn_SelectGlassthickness";
             this.btn_SelectGlassthickness.Size = new System.Drawing.Size(74, 23);
@@ -324,7 +367,7 @@
             // 
             this.lbl_GlassThicknessDesc.AutoEllipsis = true;
             this.lbl_GlassThicknessDesc.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_GlassThicknessDesc.Location = new System.Drawing.Point(3, 131);
+            this.lbl_GlassThicknessDesc.Location = new System.Drawing.Point(3, 160);
             this.lbl_GlassThicknessDesc.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_GlassThicknessDesc.Name = "lbl_GlassThicknessDesc";
             this.lbl_GlassThicknessDesc.Size = new System.Drawing.Size(138, 13);
@@ -335,7 +378,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 147);
+            this.label1.Location = new System.Drawing.Point(3, 176);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 32);
             this.label1.TabIndex = 18;
@@ -354,7 +397,7 @@
             "20mm",
             "22mm",
             "25mm"});
-            this.cmb_GlazingArtNo.Location = new System.Drawing.Point(75, 150);
+            this.cmb_GlazingArtNo.Location = new System.Drawing.Point(75, 179);
             this.cmb_GlazingArtNo.Name = "cmb_GlazingArtNo";
             this.cmb_GlazingArtNo.Size = new System.Drawing.Size(73, 21);
             this.cmb_GlazingArtNo.TabIndex = 19;
@@ -363,7 +406,7 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 182);
+            this.label2.Location = new System.Drawing.Point(3, 211);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
@@ -375,7 +418,7 @@
             this.cmb_FilmType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_FilmType.DropDownWidth = 100;
             this.cmb_FilmType.FormattingEnabled = true;
-            this.cmb_FilmType.Location = new System.Drawing.Point(75, 179);
+            this.cmb_FilmType.Location = new System.Drawing.Point(75, 208);
             this.cmb_FilmType.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.cmb_FilmType.Name = "cmb_FilmType";
             this.cmb_FilmType.Size = new System.Drawing.Size(73, 21);
@@ -389,7 +432,7 @@
             this.flp_HandleOptions.Controls.Add(this.cmb_HandleType);
             this.flp_HandleOptions.Controls.Add(this.pnl_RotoswingOptions);
             this.flp_HandleOptions.Controls.Add(this.pnl_RotaryOptions);
-            this.flp_HandleOptions.Location = new System.Drawing.Point(3, 206);
+            this.flp_HandleOptions.Location = new System.Drawing.Point(3, 235);
             this.flp_HandleOptions.Name = "flp_HandleOptions";
             this.flp_HandleOptions.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.flp_HandleOptions.Size = new System.Drawing.Size(148, 217);
@@ -567,9 +610,10 @@
             // 
             // pnl_motorizedOptions
             // 
+            this.pnl_motorizedOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_motorizedOptions.Controls.Add(this.label13);
             this.pnl_motorizedOptions.Controls.Add(this.cmb_MotorizedMechanism);
-            this.pnl_motorizedOptions.Location = new System.Drawing.Point(3, 426);
+            this.pnl_motorizedOptions.Location = new System.Drawing.Point(3, 455);
             this.pnl_motorizedOptions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.pnl_motorizedOptions.Name = "pnl_motorizedOptions";
             this.pnl_motorizedOptions.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
@@ -595,6 +639,7 @@
             this.cmb_MotorizedMechanism.Name = "cmb_MotorizedMechanism";
             this.cmb_MotorizedMechanism.Size = new System.Drawing.Size(69, 21);
             this.cmb_MotorizedMechanism.TabIndex = 20;
+            this.cmb_MotorizedMechanism.SelectedValueChanged += new System.EventHandler(this.cmb_MotorizedMechanism_SelectedValueChanged);
             // 
             // Panel_PropertiesUC
             // 
@@ -615,13 +660,14 @@
             this.Controls.Add(this.num_BladeCount);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Panel_PropertiesUC";
-            this.Size = new System.Drawing.Size(160, 576);
+            this.Size = new System.Drawing.Size(160, 649);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Height)).EndInit();
             this.flp_PanelSpecs.ResumeLayout(false);
             this.flp_PanelSpecs.PerformLayout();
+            this.pnl_motorized.ResumeLayout(false);
             this.pnl_Sash.ResumeLayout(false);
             this.pnl_Sash.PerformLayout();
             this.flp_HandleOptions.ResumeLayout(false);
@@ -681,5 +727,8 @@
         private System.Windows.Forms.Panel pnl_motorizedOptions;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cmb_MotorizedMechanism;
+        private System.Windows.Forms.Panel pnl_motorized;
+        private System.Windows.Forms.Label lbl_motorized;
+        private System.Windows.Forms.CheckBox chk_Motorized;
     }
 }

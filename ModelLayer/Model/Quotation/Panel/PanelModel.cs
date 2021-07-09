@@ -202,6 +202,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (value.Contains("Fixed"))
                 {
                     Panel_HandleOptionsVisibility = false;
+                    Panel_MotorizedpnlOptionVisibility = false;
 
                     if (_panelOrient == true)
                     {
@@ -217,6 +218,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 else
                 {
                     Panel_HandleOptionsVisibility = true;
+                    Panel_MotorizedpnlOptionVisibility = true;
                     Panel_SashPropertyVisibility = true;
                 }
                 _panelType = value;
@@ -801,24 +803,43 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     if (Panel_Type == "Fixed Panel")
                     {
-                        _panelPropertyHeight = constants.panel_propertyHeight_default - constants.panel_property_handleOptionsHeight;//357
+                        _panelPropertyHeight = constants.panel_propertyHeight_default 
+                                               - constants.panel_property_handleOptionsHeight
+                                               - constants.panel_property_pnlmotorizedheight
+                                               - constants.panel_property_motorizedOptionsheight;
                     }
                     else
                     {
-                        _panelPropertyHeight = constants.panel_propertyHeight_default; //552
-                        if (_panelHandleType == Handle_Type._Rotoswing)
+                        _panelPropertyHeight = constants.panel_propertyHeight_default;
+                        if (_panelMotorizedOptionVisibility == false)
                         {
-                            _panelPropertyHeight = constants.panel_propertyHeight_default - (constants.panel_property_handleOptionsHeight - constants.panel_property_rotaryOptionsheight_default); //513
+                            if (_panelHandleType == Handle_Type._Rotoswing)
+                            {
+                                _panelPropertyHeight = constants.panel_propertyHeight_default
+                                                       - constants.panel_property_handleOptionsHeight 
+                                                       - constants.panel_property_rotaryOptionsheight_default
+                                                       - constants.panel_property_motorizedOptionsheight;
+                            }
+                            else if (_panelHandleType == Handle_Type._Rotary)
+                            {
+                                _panelPropertyHeight = constants.panel_propertyHeight_default 
+                                                       - constants.panel_property_handleOptionsHeight 
+                                                       - constants.panel_property_rotoswingOptionsheight_default
+                                                       - constants.panel_property_motorizedOptionsheight;
+                            }
                         }
-                        else if (_panelHandleType == Handle_Type._Rotary)
+                        else if (_panelMotorizedOptionVisibility == true)
                         {
-                            _panelPropertyHeight = constants.panel_propertyHeight_default - (constants.panel_property_handleOptionsHeight - constants.panel_property_rotoswingOptionsheight_default); ;//467;
+
                         }
                     }
                 }
                 else if (value == false)
                 {
-                    _panelPropertyHeight = constants.panel_propertyHeight_default - (constants.panel_property_sashPanelHeight + constants.panel_property_handleOptionsHeight);//304;
+                    _panelPropertyHeight = constants.panel_propertyHeight_default 
+                                           - (constants.panel_property_sashPanelHeight + constants.panel_property_handleOptionsHeight)
+                                           - constants.panel_property_pnlmotorizedheight
+                                           - constants.panel_property_motorizedOptionsheight; ;//304;
                 }
                 NotifyPropertyChanged();
             }
@@ -885,14 +906,18 @@ namespace ModelLayer.Model.Quotation.Panel
                         _panelRotoswingOptionsVisibility = true;
                         _panelRotaryOptionsVisibility = false;
                         _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight - constants.panel_property_rotaryOptionsheight_default; //153
-                        _panelPropertyHeight = constants.panel_propertyHeight_default - constants.panel_property_rotaryOptionsheight_default; //513;
+                        _panelPropertyHeight = constants.panel_propertyHeight_default 
+                                               - constants.panel_property_rotaryOptionsheight_default
+                                               - constants.panel_property_motorizedOptionsheight;
                     }
                     else if (_panelHandleType == Handle_Type._Rotary)
                     {
                         _panelRotoswingOptionsVisibility = false;
                         _panelRotaryOptionsVisibility = true;
                         _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight - constants.panel_property_rotoswingOptionsheight_default; //107
-                        _panelPropertyHeight = constants.panel_propertyHeight_default - constants.panel_property_rotoswingOptionsheight_default;//467;
+                        _panelPropertyHeight = constants.panel_propertyHeight_default 
+                                               - constants.panel_property_rotoswingOptionsheight_default
+                                               - constants.panel_property_motorizedOptionsheight;
                     }
                 }
                 NotifyPropertyChanged();
@@ -983,6 +1008,48 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelLockingKitArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelMotorizedpnlOptionVisibility;
+        public bool Panel_MotorizedpnlOptionVisibility
+        {
+            get
+            {
+                return _panelMotorizedpnlOptionVisibility;
+            }
+            set
+            {
+                _panelMotorizedpnlOptionVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelMotorizedOptionVisibility;
+        public bool Panel_MotorizedOptionVisibility
+        {
+            get
+            {
+                return _panelMotorizedOptionVisibility;
+            }
+            set
+            {
+                _panelMotorizedOptionVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private MotorizedMech_ArticleNo _panelMotorizedMechArtNo;
+        public MotorizedMech_ArticleNo Panel_MotorizedMechArtNo
+        {
+            get
+            {
+                return _panelMotorizedMechArtNo;
+            }
+            set
+            {
+                _panelMotorizedMechArtNo = value;
                 NotifyPropertyChanged();
             }
         }
