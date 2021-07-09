@@ -1222,7 +1222,7 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (divNxt_artNo == Divider_ArticleNo._7538)
             {
                 GB_deduction_forNxtPrev += (72 / 2);
-                Sash_deduction_forNxtPrev += (42 / 2);
+                Sash_deduction_forNxtPrev += (72 / 2);
                 Sash_deduction_forNxtPrev -= 7; //sash bite allowance
             }
             else if (divNxt_artNo == Divider_ArticleNo._None)
