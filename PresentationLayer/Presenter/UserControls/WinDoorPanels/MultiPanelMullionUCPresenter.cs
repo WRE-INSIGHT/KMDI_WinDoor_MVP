@@ -491,6 +491,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     midArtNo = MiddleCloser_ArticleNo._1WC70WHT;
                 }
 
+                MotorizedMech_ArticleNo motor = MotorizedMech_ArticleNo._41556C;
+
+                if (suggest_HT >= 2000 ||
+                   (suggest_Wd >= 1600 && suggest_HT >= 1500))
+                {
+                    motor = MotorizedMech_ArticleNo._409990E;
+                }
+                else
+                {
+                    if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                    {
+                        motor = MotorizedMech_ArticleNo._41555B;
+                    }
+                    else if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                             _frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                    {
+                        motor = MotorizedMech_ArticleNo._41556C;
+                    }
+                }
+
                 IPanelModel _panelModel = _panelServices.AddPanelModel(suggest_Wd,
                                                                        suggest_HT,
                                                                        fpnl,
@@ -513,6 +533,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        Striker_ArticleNo._M89ANT,
                                                                        midArtNo,
                                                                        LockingKit_ArticleNo._None,
+                                                                       motor,
                                                                        _mainPresenter.GetPanelCount(),
                                                                        _mainPresenter.GetPanelGlassID(),
                                                                        _frameModel.FrameImageRenderer_Zoom,

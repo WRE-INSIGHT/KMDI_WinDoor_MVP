@@ -58,7 +58,10 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _panelPropertiesUC_CmbMotorizedMechSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_MotorizedMechArtNo = (MotorizedMech_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (_initialLoad == false)
+            {
+                _panelModel.Panel_MotorizedMechArtNo = (MotorizedMech_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _panelPropertiesUC_ChkMotorizedCheckChangedEventRaised(object sender, EventArgs e)
@@ -142,11 +145,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _pnlRotoswingOptions.Visible = true;
                         _pnlRotaryOptions.Visible = false;
-                        if (_initialLoad == true)
-                        {
-                            _initialLoad = false;
-                        }
-                        else if (_initialLoad == false)
+                        if (_initialLoad == false)
                         {
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
                             if (_panelModel.Panel_ParentMultiPanelModel != null)
@@ -165,11 +164,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _pnlRotoswingOptions.Visible = false;
                         _pnlRotaryOptions.Visible = true;
-                        if (_initialLoad == true)
-                        {
-                            _initialLoad = false;
-                        }
-                        else if (_initialLoad == false)
+                        if (_initialLoad == false)
                         {
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
                             if (_panelModel.Panel_ParentMultiPanelModel != null)
@@ -251,6 +246,7 @@ namespace PresentationLayer.Presenter.UserControls
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
             _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
+            _initialLoad = false;
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()

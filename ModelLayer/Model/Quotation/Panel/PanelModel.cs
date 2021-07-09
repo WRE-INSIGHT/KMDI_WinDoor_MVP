@@ -1036,6 +1036,26 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelMotorizedOptionVisibility = value;
+                if (_panelMotorizedOptionVisibility == true)
+                {
+                    _panelPropertyHeight = constants.panel_propertyHeight_default
+                                           - constants.panel_property_handleOptionsHeight;
+                }
+                else if (_panelMotorizedOptionVisibility == false)
+                {
+                    if (_panelHandleType == Handle_Type._Rotoswing)
+                    {
+                        _panelPropertyHeight = constants.panel_propertyHeight_default
+                                               - constants.panel_property_motorizedOptionsheight
+                                               - constants.panel_property_rotaryOptionsheight_default;
+                    }
+                    else if (_panelHandleType == Handle_Type._Rotary)
+                    {
+                        _panelPropertyHeight = constants.panel_propertyHeight_default
+                                               - constants.panel_property_motorizedOptionsheight
+                                               - constants.panel_property_rotoswingOptionsheight_default;
+                    }
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -1053,6 +1073,8 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        public int Panel_MotorizedMechQty { get; set; }
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
@@ -1432,6 +1454,15 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
+                if (Panel_Height >= 1000 && Panel_Height <= 1499)
+                {
+                    Panel_MotorizedMechQty = 1;
+                }
+                else if (Panel_Height >= 1500)
+                {
+                    Panel_MotorizedMechQty = 2;
+                }
+
                 if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._612978)
                 {
                     Panel_StrikerQty = 0;
@@ -1550,7 +1581,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           Espagnolette_ArticleNo panelEspagnoletteArtNo,
                           Striker_ArticleNo panelStrikerArtno,
                           MiddleCloser_ArticleNo panelMiddleCloserArtno,
-                          LockingKit_ArticleNo panelLockingKitArtno)
+                          LockingKit_ArticleNo panelLockingKitArtno,
+                          MotorizedMech_ArticleNo panelMotorizedMechArtNo)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -1585,6 +1617,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_StrikerArtno = panelStrikerArtno;
             Panel_MiddleCloserArtNo = panelMiddleCloserArtno;
             Panel_LockingKitArtNo = panelLockingKitArtno;
+            Panel_MotorizedMechArtNo = panelMotorizedMechArtNo;
         }
     }
 }
