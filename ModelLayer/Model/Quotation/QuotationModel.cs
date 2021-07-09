@@ -499,11 +499,11 @@ namespace ModelLayer.Model.Quotation
 
             string screws_for_inst_where = "";
 
-            bool allow_coverProfile = false;
+            bool perFrame = false;
 
             foreach (IFrameModel frame in item.lst_frame)
             {
-                allow_coverProfile = true;
+                perFrame = true;
 
                 frame.SetExplosionValues_Frame();
 
@@ -957,7 +957,7 @@ namespace ModelLayer.Model.Quotation
                                                            "Sash",
                                                            @"|  |");
 
-                                    if (allow_coverProfile == true)
+                                    if (perFrame == true)
                                     {
                                         Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.ToString(),
                                                                1, "pc(s)",
@@ -971,60 +971,119 @@ namespace ModelLayer.Model.Quotation
                                                                "Frame",
                                                                @"|  |");
 
-                                        allow_coverProfile = false;
+                                        if (pnl_curCtrl.Panel_MotorizedOptionVisibility == true)
+                                        {
+                                            Material_List.Rows.Add("30X25 Cover 1067-MILLED",
+                                                                   1, "pc(s)",
+                                                                   frame.Frame_Width,
+                                                                   "Frame",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Divider 0505",
+                                                                   1, "pc(s)",
+                                                                   frame.Frame_Width,
+                                                                   "Frame",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Cover for motor 1182",
+                                                                   1, "pc(s)",
+                                                                   frame.Frame_Width,
+                                                                   "Frame",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("2D Hinge 614293",
+                                                                   1, "pair(s)",
+                                                                   "",
+                                                                   "Sash & Frame",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Motorized Mechanism " + pnl_curCtrl.Panel_MotorizedMechArtNo.ToString(),
+                                                                   pnl_curCtrl.Panel_MotorizedMechQty, "pc(s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Push Button Switch N4037",
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Concrete",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("False pole N4950",
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Concrete",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Supporting Frame N4703",
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Concrete",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Plate N4803LB",
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Concrete",
+                                                                   @"");
+                                        }
+                                        perFrame = false;
                                     }
 
-                                    Material_List.Rows.Add("Friction Stay " + pnl_curCtrl.Panel_FrictionStayArtNo.ToString(),
-                                                           1, "pair(s)",
-                                                           "",
-                                                           "Sash & Frame",
-                                                           @"");
-
-                                    Material_List.Rows.Add("Plastic Wedge 7199",
-                                                           pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
-
-                                    if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoswing)
+                                    if (pnl_curCtrl.Panel_MotorizedOptionVisibility == false)
                                     {
-                                        Material_List.Rows.Add("Espagnolette " + pnl_curCtrl.Panel_EspagnoletteArtNo.ToString(),
-                                                               1, "pc (s)",
+                                        Material_List.Rows.Add("Friction Stay " + pnl_curCtrl.Panel_FrictionStayArtNo.ToString(),
+                                                               1, "pair(s)",
                                                                "",
-                                                               "Sash",
+                                                               "Sash & Frame",
                                                                @"");
 
-                                        Material_List.Rows.Add("Rotoswing handle " + pnl_curCtrl.Panel_RotoswingArtNo.ToString(),
-                                                               1, "pc (s)",
-                                                               "",
-                                                               "Sash",
-                                                               @"");
-
-                                        Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno.ToString(),
-                                                               pnl_curCtrl.Panel_StrikerQty, "pc (s)",
+                                        Material_List.Rows.Add("Plastic Wedge 7199",
+                                                               pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
                                                                "",
                                                                "Frame",
                                                                @"");
 
-                                        Material_List.Rows.Add("Middle Closer " + pnl_curCtrl.Panel_MiddleCloserArtNo.ToString(),
-                                                               pnl_curCtrl.Panel_MiddleCloserPairQty, "pair (s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
-                                    }
-                                    else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotary)
-                                    {
-                                        Material_List.Rows.Add("Rotary handle " + pnl_curCtrl.Panel_RotaryArtNo.ToString(),
-                                                               1, "set (s)",
-                                                               "",
-                                                               "Frame & Sash",
-                                                               @"");
+                                        if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoswing)
+                                        {
+                                            Material_List.Rows.Add("Espagnolette " + pnl_curCtrl.Panel_EspagnoletteArtNo.ToString(),
+                                                                   1, "pc (s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
 
-                                        Material_List.Rows.Add("Locking Kit " + pnl_curCtrl.Panel_LockingKitArtNo.ToString(),
-                                                               1, "set (s)",
-                                                               "",
-                                                               "Sash",
-                                                               @"");
+                                            Material_List.Rows.Add("Rotoswing handle " + pnl_curCtrl.Panel_RotoswingArtNo.ToString(),
+                                                                   1, "pc (s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno.ToString(),
+                                                                   pnl_curCtrl.Panel_StrikerQty, "pc (s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Middle Closer " + pnl_curCtrl.Panel_MiddleCloserArtNo.ToString(),
+                                                                   pnl_curCtrl.Panel_MiddleCloserPairQty, "pair (s)",
+                                                                   "",
+                                                                   "Sash & Frame",
+                                                                   @"");
+                                        }
+                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotary)
+                                        {
+                                            Material_List.Rows.Add("Rotary handle " + pnl_curCtrl.Panel_RotaryArtNo.ToString(),
+                                                                   1, "set (s)",
+                                                                   "",
+                                                                   "Frame & Sash",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Locking Kit " + pnl_curCtrl.Panel_LockingKitArtNo.ToString(),
+                                                                   1, "set (s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
+                                        }
                                     }
                                 }
 
@@ -1032,25 +1091,25 @@ namespace ModelLayer.Model.Quotation
                                                        2, "pc(s)",
                                                        pnl_curCtrl.Panel_GlazingBeadWidth.ToString(),
                                                        "Frame",
-                                                       "|  |");
+                                                       @"\  /");
 
                                 Material_List.Rows.Add("Glazing Bead Height (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
                                                        pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
                                                        "Frame",
-                                                       "|  |");
+                                                       @"\  /");
 
                                 Material_List.Rows.Add("Glass Width (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassWidth.ToString(),
                                                        "Frame",
-                                                       "|  |");
+                                                       @"\  /");
 
                                 Material_List.Rows.Add("Glass Height (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassHeight.ToString(),
                                                        "Frame",
-                                                       "|  |");
+                                                       @"\  /");
 
                                 if (pnl_curCtrl.Panel_Type == "Fixed Panel")
                                 {
@@ -1107,58 +1166,117 @@ namespace ModelLayer.Model.Quotation
                                                "Frame",
                                                @"|  |");
 
-                        Material_List.Rows.Add("Friction Stay " + pnl.Panel_FrictionStayArtNo.ToString(),
-                                               1, "pair(s)",
-                                               "",
-                                               "Sash & Frame",
-                                               @"");
-
-                        Material_List.Rows.Add("Plastic Wedge 7199",
-                                               pnl.Panel_PlasticWedgeQty, "pc (s)",
-                                               "",
-                                               "Frame",
-                                               @"");
-
-                        if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
+                        if (pnl.Panel_MotorizedOptionVisibility == true)
                         {
-                            Material_List.Rows.Add("Espagnolette " + pnl.Panel_EspagnoletteArtNo.ToString(),
-                                                   1, "pc (s)",
+                            Material_List.Rows.Add("30X25 Cover 1067-MILLED",
+                                                   1, "pc(s)",
+                                                   frame.Frame_Width,
+                                                   "Frame",
+                                                   @"");
+
+                            Material_List.Rows.Add("Divider 0505",
+                                                   1, "pc(s)",
+                                                   frame.Frame_Width,
+                                                   "Frame",
+                                                   @"");
+
+                            Material_List.Rows.Add("Cover for motor 1182",
+                                                   1, "pc(s)",
+                                                   frame.Frame_Width,
+                                                   "Frame",
+                                                   @"");
+
+                            Material_List.Rows.Add("2D Hinge 614293",
+                                                   1, "pair(s)",
+                                                   "",
+                                                   "Sash & Frame",
+                                                   @"");
+
+                            Material_List.Rows.Add("Motorized Mechanism " + pnl.Panel_MotorizedMechArtNo.ToString(),
+                                                   pnl.Panel_MotorizedMechQty, "pc(s)",
                                                    "",
                                                    "Sash",
                                                    @"");
 
-                            Material_List.Rows.Add("Rotoswing handle " + pnl.Panel_RotoswingArtNo.ToString(),
-                                                   1, "pc (s)",
+                            Material_List.Rows.Add("Push Button Switch N4037",
+                                                   1, "pc(s)",
                                                    "",
-                                                   "Sash",
+                                                   "Concrete",
                                                    @"");
 
-                            Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno.ToString(),
-                                                   pnl.Panel_StrikerQty, "pc (s)",
+                            Material_List.Rows.Add("False pole N4950",
+                                                   1, "pc(s)",
+                                                   "",
+                                                   "Concrete",
+                                                   @"");
+
+                            Material_List.Rows.Add("Supporting Frame N4703",
+                                                   1, "pc(s)",
+                                                   "",
+                                                   "Concrete",
+                                                   @"");
+
+                            Material_List.Rows.Add("Plate N4803LB",
+                                                   1, "pc(s)",
+                                                   "",
+                                                   "Concrete",
+                                                   @"");
+                        }
+                        else if (pnl.Panel_MotorizedOptionVisibility == false)
+                        {
+                            Material_List.Rows.Add("Friction Stay " + pnl.Panel_FrictionStayArtNo.ToString(),
+                                                   1, "pair(s)",
+                                                   "",
+                                                   "Sash & Frame",
+                                                   @"");
+
+                            Material_List.Rows.Add("Plastic Wedge 7199",
+                                                   pnl.Panel_PlasticWedgeQty, "pc (s)",
                                                    "",
                                                    "Frame",
                                                    @"");
 
-                            Material_List.Rows.Add("Middle Closer " + pnl.Panel_MiddleCloserArtNo.ToString(),
-                                                   pnl.Panel_MiddleCloserPairQty, "pair (s)",
-                                                   "",
-                                                   "Sash & Frame",
-                                                   @"");
-                        }
-                        else if (pnl.Panel_HandleType == Handle_Type._Rotary)
-                        {
-                            Material_List.Rows.Add("Rotary handle " + pnl.Panel_RotaryArtNo.ToString(),
-                                                   1, "set (s)",
-                                                   "",
-                                                   "Frame & Sash",
-                                                   @"");
+                            if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
+                            {
+                                Material_List.Rows.Add("Espagnolette " + pnl.Panel_EspagnoletteArtNo.ToString(),
+                                                       1, "pc (s)",
+                                                       "",
+                                                       "Sash",
+                                                       @"");
 
-                            Material_List.Rows.Add("Locking Kit " + pnl.Panel_LockingKitArtNo.ToString(),
-                                                   1, "set (s)",
-                                                   "",
-                                                   "Sash",
-                                                   @"");
+                                Material_List.Rows.Add("Rotoswing handle " + pnl.Panel_RotoswingArtNo.ToString(),
+                                                       1, "pc (s)",
+                                                       "",
+                                                       "Sash",
+                                                       @"");
 
+                                Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno.ToString(),
+                                                       pnl.Panel_StrikerQty, "pc (s)",
+                                                       "",
+                                                       "Frame",
+                                                       @"");
+
+                                Material_List.Rows.Add("Middle Closer " + pnl.Panel_MiddleCloserArtNo.ToString(),
+                                                       pnl.Panel_MiddleCloserPairQty, "pair (s)",
+                                                       "",
+                                                       "Sash & Frame",
+                                                       @"");
+                            }
+                            else if (pnl.Panel_HandleType == Handle_Type._Rotary)
+                            {
+                                Material_List.Rows.Add("Rotary handle " + pnl.Panel_RotaryArtNo.ToString(),
+                                                       1, "set (s)",
+                                                       "",
+                                                       "Frame & Sash",
+                                                       @"");
+
+                                Material_List.Rows.Add("Locking Kit " + pnl.Panel_LockingKitArtNo.ToString(),
+                                                       1, "set (s)",
+                                                       "",
+                                                       "Sash",
+                                                       @"");
+
+                            }
                         }
                     }
 
@@ -1166,25 +1284,25 @@ namespace ModelLayer.Model.Quotation
                                            2, "pc(s)",
                                            pnl.Panel_GlazingBeadWidth.ToString(),
                                            "Frame",
-                                           "|  |");
+                                           @"\  /");
 
                     Material_List.Rows.Add("Glazing Bead Height (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",
                                            pnl.Panel_GlazingBeadHeight.ToString(),
                                            "Frame",
-                                           "|  |");
+                                           @"\  /");
 
                     Material_List.Rows.Add("Glass Width (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassWidth.ToString(),
                                            "Frame",
-                                           "|  |");
+                                           @"\  /");
 
                     Material_List.Rows.Add("Glass Height (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassHeight.ToString(),
                                            "Frame",
-                                           "|  |");
+                                           @"\  /");
 
                     if (pnl.Panel_Type == "Fixed Panel")
                     {

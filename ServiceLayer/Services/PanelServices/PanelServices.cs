@@ -51,7 +51,8 @@ namespace ServiceLayer.Services.PanelServices
                                             Espagnolette_ArticleNo panelEspagnoletteArtNo,
                                             Striker_ArticleNo panelStrikerArtno,
                                             MiddleCloser_ArticleNo panelMiddleCloserArtno,
-                                            LockingKit_ArticleNo panelLockingKitArtno)
+                                            LockingKit_ArticleNo panelLockingKitArtno,
+                                            MotorizedMech_ArticleNo panelMotorizedMechArtNo)
         {
             IPanelModel pnl = new PanelModel(panelID,
                                              panelName,
@@ -81,7 +82,8 @@ namespace ServiceLayer.Services.PanelServices
                                              panelEspagnoletteArtNo,
                                              panelStrikerArtno,
                                              panelMiddleCloserArtno,
-                                             panelLockingKitArtno);
+                                             panelLockingKitArtno,
+                                             panelMotorizedMechArtNo);
 
             ValidateModel(pnl);
             return pnl;
@@ -114,6 +116,7 @@ namespace ServiceLayer.Services.PanelServices
                                          Striker_ArticleNo panelStrikerArtno,
                                          MiddleCloser_ArticleNo panelMiddleCloserArtno,
                                          LockingKit_ArticleNo panelLockingKitArtno,
+                                         MotorizedMech_ArticleNo panelMotorizedMechArtNo,
                                          int panelID = 0,
                                          int panelGlassID = 0,
                                          float panelImageRendererZoom = 1,
@@ -155,7 +158,8 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelEspagnoletteArtNo,
                                                        panelStrikerArtno,
                                                        panelMiddleCloserArtno,
-                                                       panelLockingKitArtno);
+                                                       panelLockingKitArtno,
+                                                       panelMotorizedMechArtNo);
 
             return _panelModel;
         }

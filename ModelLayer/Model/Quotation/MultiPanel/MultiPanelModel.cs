@@ -1561,7 +1561,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (mode == "add")
                 {
-                    MPanelProp_Height += constants.panel_propertyHeight_default; //(552 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height += constants.panel_propertyHeight_default
+                                         - constants.panel_property_motorizedOptionsheight;
+                }
+                if (mode == "deleteMotorized")
+                {
+                    MPanelProp_Height -= constants.panel_propertyHeight_default
+                                        - constants.panel_property_handleOptionsHeight;
                 }
                 else if (mode == "addRotary")
                 {
@@ -1579,27 +1585,49 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_rotoswingOptionsheight_default; //(85 + 1); //+1 on margin (PanelProperties)
                 }
+                else if (mode == "addHandle")
+                {
+                    MPanelProp_Height += constants.panel_property_handleOptionsHeight;
+                }
+                else if (mode == "minusHandle")
+                {
+                    MPanelProp_Height -= constants.panel_property_handleOptionsHeight;
+                }
             }
             else if (objtype == "FxdNone")
             {
                 if (mode == "delete")
                 {
-                    MPanelProp_Height -= ((constants.panel_propertyHeight_default - constants.panel_property_sashPanelHeight) - constants.panel_property_handleOptionsHeight); //(308 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height -= ((((constants.panel_propertyHeight_default
+                                        - constants.panel_property_sashPanelHeight)
+                                        - constants.panel_property_handleOptionsHeight)
+                                        - constants.panel_property_pnlmotorizedheight)
+                                        - constants.panel_property_motorizedOptionsheight);
                 }
                 else if (mode == "add")
                 {
-                    MPanelProp_Height += ((constants.panel_propertyHeight_default - constants.panel_property_sashPanelHeight) - constants.panel_property_handleOptionsHeight); ; //(308 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height += ((((constants.panel_propertyHeight_default
+                                        - constants.panel_property_sashPanelHeight)
+                                        - constants.panel_property_handleOptionsHeight)
+                                        - constants.panel_property_pnlmotorizedheight)
+                                        - constants.panel_property_motorizedOptionsheight);
                 }
             }
             else if (objtype == "FxdSash")
             {
                 if (mode == "delete")
                 {
-                    MPanelProp_Height -= (constants.panel_propertyHeight_default - constants.panel_property_handleOptionsHeight); //(360 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height -= (((constants.panel_propertyHeight_default
+                                        - constants.panel_property_handleOptionsHeight)
+                                        - constants.panel_property_pnlmotorizedheight)
+                                        - constants.panel_property_motorizedOptionsheight);
                 }
                 else if (mode == "add")
                 {
-                    MPanelProp_Height += (constants.panel_propertyHeight_default - constants.panel_property_handleOptionsHeight); // (360 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height += (((constants.panel_propertyHeight_default
+                                        - constants.panel_property_handleOptionsHeight)
+                                        - constants.panel_property_pnlmotorizedheight)
+                                        - constants.panel_property_motorizedOptionsheight);
                 }
             }
             else if (objtype == "SashProp")
@@ -1645,11 +1673,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (handleType == Handle_Type._Rotoswing)
                     {
-                        MPanelProp_Height -= (constants.panel_propertyHeight_default - constants.panel_property_rotaryOptionsheight_default); //(513 + 1); //+1 on margin (PanelProperties)
+                        MPanelProp_Height -= constants.panel_propertyHeight_default
+                                            - constants.panel_property_rotaryOptionsheight_default
+                                            - constants.panel_property_motorizedOptionsheight;
                     }
                     else if (handleType == Handle_Type._Rotary)
                     {
-                        MPanelProp_Height -= (constants.panel_propertyHeight_default - constants.panel_property_rotoswingOptionsheight_default); //(467 + 1); //+1 on margin (PanelProperties)
+                        MPanelProp_Height -= constants.panel_propertyHeight_default
+                                            - constants.panel_property_rotaryOptionsheight_default
+                                            - constants.panel_property_motorizedOptionsheight;
                     }
                 }
             }

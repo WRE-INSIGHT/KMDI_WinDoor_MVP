@@ -228,6 +228,26 @@ namespace PresentationLayer.Presenter.UserControls
                     midArtNo = MiddleCloser_ArticleNo._1WC70WHT;
                 }
 
+                MotorizedMech_ArticleNo motor = MotorizedMech_ArticleNo._41556C;
+
+                if (ht >= 2000 ||
+                    (wd >= 1600 && ht >= 1500))
+                {
+                    motor = MotorizedMech_ArticleNo._409990E;
+                }
+                else
+                {
+                    if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                    {
+                        motor = MotorizedMech_ArticleNo._41555B;
+                    }
+                    else if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                             _frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                    {
+                        motor = MotorizedMech_ArticleNo._41556C;
+                    }
+                }
+
                 _panelModel = _panelServices.AddPanelModel(wd,
                                                            ht,
                                                            frame,
@@ -250,6 +270,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            Striker_ArticleNo._M89ANT,
                                                            midArtNo,
                                                            LockingKit_ArticleNo._None,
+                                                           motor,
                                                            _mainPresenter.GetPanelCount(),
                                                            _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);
