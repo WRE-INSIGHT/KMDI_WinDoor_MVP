@@ -84,6 +84,7 @@ namespace ModelLayer.Tests
                                                                    Striker_ArticleNo._M89ANT,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
                                                                    1);
 
             _panelModel.Panel_GlassThickness = 6.0f;
@@ -156,6 +157,7 @@ namespace ModelLayer.Tests
                                                                    Striker_ArticleNo._M89ANT,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
                                                                    1);
             _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -489,6 +491,7 @@ namespace ModelLayer.Tests
                                                                    Striker_ArticleNo._M89ANT,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _panelModel.Panel_GlassThickness = 6.0f;
@@ -538,6 +541,7 @@ namespace ModelLayer.Tests
                                                                    Striker_ArticleNo._M89ANT,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -729,6 +733,7 @@ namespace ModelLayer.Tests
                                                                    Striker_ArticleNo._M89ANT,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _panelModel.Panel_GlassThickness = 6.0f;
@@ -777,6 +782,7 @@ namespace ModelLayer.Tests
                                                                    Striker_ArticleNo._M89ANT,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -1107,6 +1113,7 @@ namespace ModelLayer.Tests
                                                                  Striker_ArticleNo._M89ANT,
                                                                  MiddleCloser_ArticleNo._None,
                                                                  LockingKit_ArticleNo._None,
+                                                                 MotorizedMech_ArticleNo._41555B,
                                                                  1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 6.0f;
@@ -1161,6 +1168,7 @@ namespace ModelLayer.Tests
                                                                   Striker_ArticleNo._M89ANT,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
+                                                                  MotorizedMech_ArticleNo._41555B,
                                                                   2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -1203,6 +1211,7 @@ namespace ModelLayer.Tests
                                                                Striker_ArticleNo._M89ANT,
                                                                MiddleCloser_ArticleNo._None,
                                                                LockingKit_ArticleNo._None,
+                                                               MotorizedMech_ArticleNo._41555B,
                                                                3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_GlassThickness = 6.0f;
@@ -1255,6 +1264,7 @@ namespace ModelLayer.Tests
                                                               Striker_ArticleNo._M89ANT,
                                                               MiddleCloser_ArticleNo._None,
                                                               LockingKit_ArticleNo._None,
+                                                              MotorizedMech_ArticleNo._41555B,
                                                               4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_GlassThickness = 6.0f;
@@ -1296,6 +1306,7 @@ namespace ModelLayer.Tests
                                                              Striker_ArticleNo._M89ANT,
                                                              MiddleCloser_ArticleNo._None,
                                                              LockingKit_ArticleNo._None,
+                                                             MotorizedMech_ArticleNo._41555B,
                                                              5);
             _panelModel5.Panel_Placement = "First";
             _panelModel5.Panel_GlassThickness = 6.0f;
@@ -1349,6 +1360,7 @@ namespace ModelLayer.Tests
                                                           Striker_ArticleNo._M89ANT,
                                                           MiddleCloser_ArticleNo._None,
                                                           LockingKit_ArticleNo._None,
+                                                          MotorizedMech_ArticleNo._41555B,
                                                           6);
             _panelModel6.Panel_Placement = "Last";
             _panelModel6.Panel_GlassThickness = 6.0f;
@@ -1662,6 +1674,7 @@ namespace ModelLayer.Tests
                                                                      Striker_ArticleNo._M89ANT,
                                                                      MiddleCloser_ArticleNo._None,
                                                                      LockingKit_ArticleNo._None,
+                                                                     MotorizedMech_ArticleNo._41555B,
                                                                      1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 6.0f;
@@ -1758,6 +1771,7 @@ namespace ModelLayer.Tests
                                                                      Striker_ArticleNo._M89ANT,
                                                                      MiddleCloser_ArticleNo._None,
                                                                      LockingKit_ArticleNo._None,
+                                                                     MotorizedMech_ArticleNo._41555B,
                                                                      2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -1791,14 +1805,15 @@ namespace ModelLayer.Tests
                                                                    PanelWD3_BG,
                                                                    PanelHT3_BG,
                                                                    GlazingBead_ArticleNo._2451,
-                                                                    GlassFilm_Types._None,
-                                                                    SashProfile_ArticleNo._None,
-                                                                    SashReinf_ArticleNo._None,
-                                                                    GlassType._Single,
-                                                              Espagnolette_ArticleNo._None,
-                                                              Striker_ArticleNo._M89ANT,
-                                                              MiddleCloser_ArticleNo._None,
-                                                              LockingKit_ArticleNo._None,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
                                                                    3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_GlassThickness = 6.0f;
@@ -1852,6 +1867,7 @@ namespace ModelLayer.Tests
                                                                     Striker_ArticleNo._M89ANT,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
+                                                                    MotorizedMech_ArticleNo._41555B,
                                                                     4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_GlassThickness = 6.0f;
@@ -2133,6 +2149,7 @@ namespace ModelLayer.Tests
                                                                  Striker_ArticleNo._M89ANT,
                                                                  MiddleCloser_ArticleNo._None,
                                                                  LockingKit_ArticleNo._None,
+                                                                 MotorizedMech_ArticleNo._41555B,
                                                                  1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 14.0f;
@@ -2230,6 +2247,7 @@ namespace ModelLayer.Tests
                                                                  Striker_ArticleNo._M89ANT,
                                                                  MiddleCloser_ArticleNo._None,
                                                                  LockingKit_ArticleNo._None,
+                                                                 MotorizedMech_ArticleNo._41555B,
                                                                  2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 14.0f;
@@ -2360,6 +2378,7 @@ namespace ModelLayer.Tests
                                                                   Striker_ArticleNo._M89ANT,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
+                                                                  MotorizedMech_ArticleNo._41555B,
                                                                   3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_GlassThickness = 6.0f;
@@ -2414,6 +2433,7 @@ namespace ModelLayer.Tests
                                                                   Striker_ArticleNo._M89ANT,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
+                                                                  MotorizedMech_ArticleNo._41555B,
                                                                   4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_GlassThickness = 6.0f;
@@ -2458,6 +2478,7 @@ namespace ModelLayer.Tests
                                                                   Striker_ArticleNo._M89ANT,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
+                                                                  MotorizedMech_ArticleNo._41555B,
                                                                   5);
             _panelModel5.Panel_Placement = "First";
             _panelModel5.Panel_GlassThickness = 6.0f;
@@ -2512,6 +2533,7 @@ namespace ModelLayer.Tests
                                                                   Striker_ArticleNo._M89ANT,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
+                                                                  MotorizedMech_ArticleNo._41555B,
                                                                   6);
             _panelModel6.Panel_Placement = "Last";
             _panelModel6.Panel_GlassThickness = 6.0f;
@@ -2837,6 +2859,7 @@ namespace ModelLayer.Tests
                                                                     Striker_ArticleNo._M89ANT,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
+                                                                    MotorizedMech_ArticleNo._41555B,
                                                                     1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 6.0f;
@@ -2935,6 +2958,7 @@ namespace ModelLayer.Tests
                                                                     Striker_ArticleNo._M89ANT,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
+                                                                    MotorizedMech_ArticleNo._41555B,
                                                                     2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -2977,6 +3001,7 @@ namespace ModelLayer.Tests
                                                                     Striker_ArticleNo._M89ANT,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
+                                                                    MotorizedMech_ArticleNo._41555B,
                                                                     3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_GlassThickness = 13.0f;
@@ -3075,6 +3100,7 @@ namespace ModelLayer.Tests
                                                                      Striker_ArticleNo._M89ANT,
                                                                      MiddleCloser_ArticleNo._None,
                                                                      LockingKit_ArticleNo._None,
+                                                                     MotorizedMech_ArticleNo._41555B,
                                                                      4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_GlassThickness = 13.0f;
@@ -3119,6 +3145,7 @@ namespace ModelLayer.Tests
                                                                     Striker_ArticleNo._M89ANT,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
+                                                                    MotorizedMech_ArticleNo._41555B,
                                                                     5);
             _panelModel5.Panel_Placement = "First";
             _panelModel5.Panel_GlassThickness = 13.0f;
@@ -3171,6 +3198,7 @@ namespace ModelLayer.Tests
                                                                     Striker_ArticleNo._M89ANT,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
+                                                                    MotorizedMech_ArticleNo._41555B,
                                                                     6);
             _panelModel6.Panel_Placement = "Last";
             _panelModel6.Panel_GlassThickness = 13.0f;
@@ -3464,6 +3492,7 @@ namespace ModelLayer.Tests
                                                                    Striker_ArticleNo._M89ANT,
                                                                    MiddleCloser_ArticleNo._1WC70DB,
                                                                    LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
                                                                    1);
             _panelModel.Panel_GlassThickness = 13.0f;
             _panelModel.Panel_HandleType = Handle_Type._Rotoswing;
@@ -3684,6 +3713,7 @@ namespace ModelLayer.Tests
                                                                    Striker_ArticleNo._M89ANT,
                                                                    MiddleCloser_ArticleNo._1WC70DB,
                                                                    LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
                                                                    1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 6.0f;
@@ -3737,6 +3767,7 @@ namespace ModelLayer.Tests
                                                                       Striker_ArticleNo._M89ANT,
                                                                       MiddleCloser_ArticleNo._1WC70DB,
                                                                       LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
                                                                       2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -4080,6 +4111,7 @@ namespace ModelLayer.Tests
                                                                    Striker_ArticleNo._M89ANT,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
                                                                    1);
             _panelModel1_fixed1.Panel_Placement = "Last";
             _panelModel1_fixed1.Panel_GlassThickness = 13.0f;
@@ -4120,6 +4152,7 @@ namespace ModelLayer.Tests
                                                                   Striker_ArticleNo._M89ANT,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
+                                                                  MotorizedMech_ArticleNo._41555B,
                                                                   2);
             _panelModel2_fixed2.Panel_Placement = "First";
             _panelModel2_fixed2.Panel_GlassThickness = 13.0f;
@@ -4175,6 +4208,7 @@ namespace ModelLayer.Tests
                                                                      Striker_ArticleNo._M89ANT,
                                                                      MiddleCloser_ArticleNo._1WC70DB,
                                                                      LockingKit_ArticleNo._None,
+                                                                     MotorizedMech_ArticleNo._41555B,
                                                                      3);
             _panelModel3_Awning1.Panel_Placement = "Last";
             _panelModel3_Awning1.Panel_GlassThickness = 13.0f;
@@ -4495,6 +4529,7 @@ namespace ModelLayer.Tests
                                                                              Striker_ArticleNo._M89ANT,
                                                                              MiddleCloser_ArticleNo._None,
                                                                              LockingKit_ArticleNo._None,
+                                                                             MotorizedMech_ArticleNo._41555B,
                                                                              1);
             _panelModel1_fixed.Panel_Placement = "First";
             _panelModel1_fixed.Panel_GlassThickness = 6.0f;
@@ -4546,6 +4581,7 @@ namespace ModelLayer.Tests
                                                                              Striker_ArticleNo._M89ANT,
                                                                              MiddleCloser_ArticleNo._1WC70WHT,
                                                                              LockingKit_ArticleNo._None,
+                                                                             MotorizedMech_ArticleNo._41555B,
                                                                              2);
             _panelModel2_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel2_Awning.Panel_GlassThickness = 6.0f;
@@ -4599,6 +4635,7 @@ namespace ModelLayer.Tests
                                                                             Striker_ArticleNo._M89ANT,
                                                                             MiddleCloser_ArticleNo._None,
                                                                             LockingKit_ArticleNo._None,
+                                                                            MotorizedMech_ArticleNo._41555B,
                                                                             3);
             _panelModel3_fixed.Panel_Placement = "Last";
             _panelModel3_fixed.Panel_GlassThickness = 6.0f;
@@ -4790,8 +4827,6 @@ namespace ModelLayer.Tests
         }
 
 
-
-
         [TestMethod]
         public void ChkVar_4Panel_2FixWindow_2Awning()
         {
@@ -4890,6 +4925,7 @@ namespace ModelLayer.Tests
                                                                             Striker_ArticleNo._M89ANT,
                                                                             MiddleCloser_ArticleNo._None,
                                                                             LockingKit_ArticleNo._None,
+                                                                            MotorizedMech_ArticleNo._41555B,
                                                                             1);
             _panelModel1_fixed.Panel_Placement = "First";
             _panelModel1_fixed.Panel_GlassThickness = 13.0f;
@@ -4977,6 +5013,7 @@ namespace ModelLayer.Tests
                                                                     Striker_ArticleNo._M89ANT,
                                                                     MiddleCloser_ArticleNo._1WC70DB,
                                                                     LockingKit_ArticleNo._None,
+                                                                    MotorizedMech_ArticleNo._41555B,
                                                                     2);
             _panelModel2_Awning.Panel_Placement = "First";
             _panelModel2_Awning.Panel_GlassThickness = 13.0f;
@@ -5031,6 +5068,7 @@ namespace ModelLayer.Tests
                                                                             Striker_ArticleNo._M89ANT,
                                                                             MiddleCloser_ArticleNo._None,
                                                                             LockingKit_ArticleNo._None,
+                                                                            MotorizedMech_ArticleNo._41555B,
                                                                             3);
             _panelModel3_fixed.Panel_Placement = "Somewhere in Between";
             _panelModel3_fixed.Panel_GlassThickness = 13.0f;
@@ -5086,6 +5124,7 @@ namespace ModelLayer.Tests
                                                                             Striker_ArticleNo._M89ANT,
                                                                             MiddleCloser_ArticleNo._1WC70DB,
                                                                             LockingKit_ArticleNo._None,
+                                                                            MotorizedMech_ArticleNo._41555B,
                                                                             4);
             _panelModel4_Awning.Panel_Placement = "Last";
             _panelModel4_Awning.Panel_GlassThickness = 13.0f;
@@ -5342,5 +5381,11 @@ namespace ModelLayer.Tests
         }
 
 
+        //Motorize Awning
+
+
+
+
+        //GlassBalancingAwning
     }
 }
