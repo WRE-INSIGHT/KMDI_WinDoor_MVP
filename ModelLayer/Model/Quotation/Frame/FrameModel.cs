@@ -331,7 +331,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
         #region Explosion
 
-        FrameProfile_ArticleNo _frameArtNo;
+        private FrameProfile_ArticleNo _frameArtNo;
         public FrameProfile_ArticleNo Frame_ArtNo
         {
             get
@@ -345,13 +345,30 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._R676;
                 }
+                else if (value == FrameProfile_ArticleNo._7507)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._R677;
+                }
                 NotifyPropertyChanged();
             }
         }
         public int Frame_ExplosionWidth { get; set; }
         public int Frame_ExplosionHeight { get; set; }
 
-        public FrameReinf_ArticleNo Frame_ReinfArtNo { get; set; }
+        private FrameReinf_ArticleNo _frameReinfArtNo;
+        public FrameReinf_ArticleNo Frame_ReinfArtNo
+        {
+            get
+            {
+                return _frameReinfArtNo;
+            }
+            set
+            {
+                _frameReinfArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Frame_ReinfWidth { get; set; }
         public int Frame_ReinfHeight { get; set; }
 

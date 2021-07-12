@@ -38,10 +38,10 @@
             this.lbl_Height = new System.Windows.Forms.Label();
             this.num_fHeight = new System.Windows.Forms.NumericUpDown();
             this.pbl_specs = new System.Windows.Forms.Panel();
+            this.cmb_FrameReinf = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_Specs = new System.Windows.Forms.Label();
             this.lbl_FrameProfile = new System.Windows.Forms.Label();
-            this.txt_FrameReinf = new System.Windows.Forms.TextBox();
             this.lbl_FrameReinf = new System.Windows.Forms.Label();
             this.cmb_FrameProfile = new System.Windows.Forms.ComboBox();
             this.flp_frameProperties.SuspendLayout();
@@ -184,16 +184,27 @@
             // pbl_specs
             // 
             this.pbl_specs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbl_specs.Controls.Add(this.cmb_FrameReinf);
             this.pbl_specs.Controls.Add(this.label1);
             this.pbl_specs.Controls.Add(this.lbl_Specs);
             this.pbl_specs.Controls.Add(this.lbl_FrameProfile);
-            this.pbl_specs.Controls.Add(this.txt_FrameReinf);
             this.pbl_specs.Controls.Add(this.lbl_FrameReinf);
             this.pbl_specs.Controls.Add(this.cmb_FrameProfile);
             this.pbl_specs.Location = new System.Drawing.Point(3, 200);
             this.pbl_specs.Name = "pbl_specs";
             this.pbl_specs.Size = new System.Drawing.Size(147, 102);
             this.pbl_specs.TabIndex = 12;
+            // 
+            // cmb_FrameReinf
+            // 
+            this.cmb_FrameReinf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_FrameReinf.FormattingEnabled = true;
+            this.cmb_FrameReinf.Location = new System.Drawing.Point(47, 72);
+            this.cmb_FrameReinf.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
+            this.cmb_FrameReinf.Name = "cmb_FrameReinf";
+            this.cmb_FrameReinf.Size = new System.Drawing.Size(91, 21);
+            this.cmb_FrameReinf.TabIndex = 14;
+            this.cmb_FrameReinf.SelectedValueChanged += new System.EventHandler(this.cmb_FrameReinf_SelectedValueChanged);
             // 
             // label1
             // 
@@ -227,15 +238,6 @@
             this.lbl_FrameProfile.Size = new System.Drawing.Size(41, 15);
             this.lbl_FrameProfile.TabIndex = 9;
             this.lbl_FrameProfile.Text = "Profile";
-            // 
-            // txt_FrameReinf
-            // 
-            this.txt_FrameReinf.Location = new System.Drawing.Point(47, 75);
-            this.txt_FrameReinf.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.txt_FrameReinf.Name = "txt_FrameReinf";
-            this.txt_FrameReinf.ReadOnly = true;
-            this.txt_FrameReinf.Size = new System.Drawing.Size(92, 22);
-            this.txt_FrameReinf.TabIndex = 11;
             // 
             // lbl_FrameReinf
             // 
@@ -292,9 +294,9 @@
         private System.Windows.Forms.ComboBox cmb_FrameProfile;
         private System.Windows.Forms.Label lbl_FrameProfile;
         private System.Windows.Forms.Label lbl_FrameReinf;
-        private System.Windows.Forms.TextBox txt_FrameReinf;
         private System.Windows.Forms.Panel pbl_specs;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_Specs;
+        private System.Windows.Forms.ComboBox cmb_FrameReinf;
     }
 }

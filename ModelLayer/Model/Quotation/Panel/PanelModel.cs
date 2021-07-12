@@ -1040,9 +1040,23 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     _panelPropertyHeight = constants.panel_propertyHeight_default
                                            - constants.panel_property_handleOptionsHeight;
+                    if (Panel_ParentMultiPanelModel != null)
+                    {
+                        Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
+                    }
+                    else if (Panel_ParentMultiPanelModel == null)
+                    {
+                        Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
+                    }
+
+                    if (Panel_Width >= 1500)
+                    {
+                        Panel_GlassFilm = GlassFilm_Types._4milUpera;
+                    }
                 }
                 else if (_panelMotorizedOptionVisibility == false)
                 {
+                    Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
                     if (_panelHandleType == Handle_Type._Rotoswing)
                     {
                         _panelPropertyHeight = constants.panel_propertyHeight_default
@@ -1151,7 +1165,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 int sashWD_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashWidth / 100)) * 100;
                 int sashHt_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashHeight / 100)) * 100;
 
-                if ((sashWD_floor >= 400 && sashWD_floor <= 1200) &&
+                if ((sashWD_floor > 0 && sashWD_floor <= 1200) &&
                     (Panel_SashHeight >= 350 && Panel_SashHeight <= 399))
                 {
                     Panel_FrictionStayArtNo = FrictionStay_ArticleNo._Storm8;
@@ -1454,11 +1468,11 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                if (Panel_Height >= 1000 && Panel_Height <= 1499)
+                if (Panel_Width > 0 && Panel_Width <= 1499)
                 {
                     Panel_MotorizedMechQty = 1;
                 }
-                else if (Panel_Height >= 1500)
+                else if (Panel_Width >= 1500)
                 {
                     Panel_MotorizedMechQty = 2;
                 }

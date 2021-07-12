@@ -14,6 +14,7 @@ namespace EnumerationTypeLayer
         public class FrameReinf_ArticleNo : Enumeration<FrameReinf_ArticleNo>
         {
             public static readonly FrameReinf_ArticleNo _R676 = new FrameReinf_ArticleNo(0, "R676");
+            public static readonly FrameReinf_ArticleNo _R677 = new FrameReinf_ArticleNo(1, "R677");
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 

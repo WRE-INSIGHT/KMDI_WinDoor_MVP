@@ -40,7 +40,6 @@
             // 
             this.dgv_ExplosionMaterialList.AllowUserToAddRows = false;
             this.dgv_ExplosionMaterialList.AllowUserToDeleteRows = false;
-            this.dgv_ExplosionMaterialList.AllowUserToResizeColumns = false;
             this.dgv_ExplosionMaterialList.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
             this.dgv_ExplosionMaterialList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;

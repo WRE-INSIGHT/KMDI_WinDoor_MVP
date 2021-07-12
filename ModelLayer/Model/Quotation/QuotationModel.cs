@@ -495,7 +495,8 @@ namespace ModelLayer.Model.Quotation
                 total_glassHeight = 0,
                 glazing_seal = 0,
                 glazing_spacer = 0,
-                total_screws_installation = 0;
+                total_screws_installation = 0,
+                additional_screws_installation = 0;
 
             string screws_for_inst_where = "";
 
@@ -754,6 +755,8 @@ namespace ModelLayer.Model.Quotation
                                 Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                        2, "pc(s)", "");
 
+                                additional_screws_installation += 2;
+
                                 Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
                                                   divArtNo_prevCtrl = Divider_ArticleNo._None,
                                                   divArtNo_LeftOrTop = Divider_ArticleNo._None,
@@ -933,6 +936,8 @@ namespace ModelLayer.Model.Quotation
 
                                 if (pnl_curCtrl.Panel_SashPropertyVisibility == true)
                                 {
+                                    total_screws_installation += ((pnl_curCtrl.Panel_SashWidth * 2) + (pnl_curCtrl.Panel_SashHeight * 2));
+
                                     Material_List.Rows.Add("Sash Width " + pnl_curCtrl.Panel_SashProfileArtNo.ToString(),
                                                            2, "pc(s)",
                                                            pnl_curCtrl.Panel_SashWidth.ToString(),
@@ -1069,6 +1074,8 @@ namespace ModelLayer.Model.Quotation
                                                                    "",
                                                                    "Sash & Frame",
                                                                    @"");
+
+                                            additional_screws_installation += 16;
                                         }
                                         else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotary)
                                         {
@@ -1099,13 +1106,13 @@ namespace ModelLayer.Model.Quotation
                                                        "Frame",
                                                        @"\  /");
 
-                                Material_List.Rows.Add("Glass Width (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + ")",
+                                Material_List.Rows.Add("Glass Width (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + " " + pnl_curCtrl.Panel_GlassFilm.DisplayName + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassWidth.ToString(),
                                                        "Frame",
                                                        @"\  /");
 
-                                Material_List.Rows.Add("Glass Height (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + ")",
+                                Material_List.Rows.Add("Glass Height (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + " " + pnl_curCtrl.Panel_GlassFilm.DisplayName + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassHeight.ToString(),
                                                        "Frame",
@@ -1130,6 +1137,8 @@ namespace ModelLayer.Model.Quotation
 
                     if (pnl.Panel_SashPropertyVisibility == true)
                     {
+                        total_screws_installation += ((pnl.Panel_SashWidth * 2) + (pnl.Panel_SashHeight * 2));
+
                         Material_List.Rows.Add("Sash Width " + pnl.Panel_SashProfileArtNo.ToString(),
                                                2, "pc(s)",
                                                pnl.Panel_SashWidth.ToString(),
@@ -1230,6 +1239,8 @@ namespace ModelLayer.Model.Quotation
                                                    "Sash & Frame",
                                                    @"");
 
+                            additional_screws_installation += 6;
+
                             Material_List.Rows.Add("Plastic Wedge 7199",
                                                    pnl.Panel_PlasticWedgeQty, "pc (s)",
                                                    "",
@@ -1261,6 +1272,8 @@ namespace ModelLayer.Model.Quotation
                                                        "",
                                                        "Sash & Frame",
                                                        @"");
+
+                                additional_screws_installation += 10;
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._Rotary)
                             {
@@ -1292,13 +1305,13 @@ namespace ModelLayer.Model.Quotation
                                            "Frame",
                                            @"\  /");
 
-                    Material_List.Rows.Add("Glass Width (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + ")",
+                    Material_List.Rows.Add("Glass Width (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + " " + pnl.Panel_GlassFilm.DisplayName + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassWidth.ToString(),
                                            "Frame",
                                            @"\  /");
 
-                    Material_List.Rows.Add("Glass Height (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + ")",
+                    Material_List.Rows.Add("Glass Height (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + " " + pnl.Panel_GlassFilm.DisplayName + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassHeight.ToString(),
                                            "Frame",
@@ -1326,7 +1339,7 @@ namespace ModelLayer.Model.Quotation
             Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(total_glassWidth + total_glassHeight) / 6842));
             GlazingSpacer_TotalQty = glazing_spacer;
             GlazingSeal_TotalQty = glazing_seal;
-            Screws_for_Installation = (int)(Math.Ceiling((decimal)total_screws_installation / 300));
+            Screws_for_Installation = (int)(Math.Ceiling((decimal)total_screws_installation / 300)) + additional_screws_installation;
 
             Material_List.Rows.Add("PU Foaming",
                                    Frame_PUFoamingQty_Total, "can", "", "Frame");
@@ -1346,8 +1359,11 @@ namespace ModelLayer.Model.Quotation
                                        GlazingSpacer_TotalQty, "pc(s)", "", "Frame");
             }
 
-            Material_List.Rows.Add("Glazing Seal 9073",
-                                   GlazingSeal_TotalQty, "mm", "", "GB");
+            if (GlazingSeal_TotalQty > 0)
+            {
+                Material_List.Rows.Add("Glazing Seal 9073",
+                                       GlazingSeal_TotalQty, "mm", "", "GB");
+            }
 
             Material_List.Rows.Add("Screws for Fabrication wt 10x15",
                                    Screws_for_Installation, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
