@@ -10,13 +10,14 @@ namespace ModelLayer.Variables
     {
         #region PanelModelConstants
 
-        public int panel_propertyHeight_default = 649;
+        public int panel_propertyHeight_default = 700;
         public int panel_property_sashPanelHeight = 53 + 6; //+6 top and bot margin is 3
-        public int panel_property_handleOptionsHeight = 217 + 6; //+6 top margin top and bot margin is 3
-        public int panel_property_rotoswingOptionsheight_default = 116;
+        public int panel_property_handleOptionsHeight = 268 + 6; //+6 top margin top and bot margin is 3
+        public int panel_property_rotoswingOptionsheight_default = 167;
         public int panel_property_rotaryOptionsheight_default = 61;
         public int panel_property_motorizedOptionsheight = 41;
         public int panel_property_pnlmotorizedheight = 29;
+        public int panel_property_extCorDriveOptionsheight_default = 54;
 
         #endregion
 

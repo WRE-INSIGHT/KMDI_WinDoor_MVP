@@ -1043,6 +1043,15 @@ namespace ModelLayer.Model.Quotation
                                                                "Sash & Frame",
                                                                @"");
 
+                                        if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                        {
+                                            Material_List.Rows.Add("Snap-in Keep " + pnl_curCtrl.Panel_SnapInKeepArtNo.ToString(),
+                                                                   2, "pc(s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+                                        }
+
                                         Material_List.Rows.Add("Plastic Wedge 7199",
                                                                pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
                                                                "",
@@ -1057,6 +1066,24 @@ namespace ModelLayer.Model.Quotation
                                                                    "Sash",
                                                                    @"");
 
+                                            if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                                                pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                                            {
+                                                additional_screws_installation += 8;
+                                            }
+                                            else if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806)
+                                            {
+                                                additional_screws_installation += 2;
+                                            }
+                                            else if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807)
+                                            {
+                                                additional_screws_installation += 4;
+                                            }
+                                            else if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                                            {
+                                                additional_screws_installation += 6;
+                                            }
+
                                             Material_List.Rows.Add("Rotoswing handle " + pnl_curCtrl.Panel_RotoswingArtNo.ToString(),
                                                                    1, "pc (s)",
                                                                    "",
@@ -1069,13 +1096,18 @@ namespace ModelLayer.Model.Quotation
                                                                    "Frame",
                                                                    @"");
 
+                                            if (pnl_curCtrl.Panel_StrikerArtno == Striker_ArticleNo._M89ANT)
+                                            {
+                                                additional_screws_installation += 1;
+                                            }
+
                                             Material_List.Rows.Add("Middle Closer " + pnl_curCtrl.Panel_MiddleCloserArtNo.ToString(),
                                                                    pnl_curCtrl.Panel_MiddleCloserPairQty, "pair (s)",
                                                                    "",
                                                                    "Sash & Frame",
                                                                    @"");
 
-                                            additional_screws_installation += 16;
+                                            additional_screws_installation += 4;
                                         }
                                         else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotary)
                                         {
@@ -1090,6 +1122,8 @@ namespace ModelLayer.Model.Quotation
                                                                    "",
                                                                    "Sash",
                                                                    @"");
+
+                                            additional_screws_installation += 9;
                                         }
                                     }
                                 }

@@ -60,6 +60,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.cmb_HandleType = new System.Windows.Forms.ComboBox();
             this.pnl_RotoswingOptions = new System.Windows.Forms.Panel();
+            this.pnl_ExtensionCornerDrive = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.cmb_CornerDrive = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cmb_Extension = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cmb_RotoswingNo = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -84,6 +89,7 @@
             this.pnl_Sash.SuspendLayout();
             this.flp_HandleOptions.SuspendLayout();
             this.pnl_RotoswingOptions.SuspendLayout();
+            this.pnl_ExtensionCornerDrive.SuspendLayout();
             this.pnl_RotaryOptions.SuspendLayout();
             this.pnl_motorizedOptions.SuspendLayout();
             this.SuspendLayout();
@@ -219,7 +225,7 @@
             this.flp_PanelSpecs.Location = new System.Drawing.Point(2, 144);
             this.flp_PanelSpecs.Name = "flp_PanelSpecs";
             this.flp_PanelSpecs.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 500);
+            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 551);
             this.flp_PanelSpecs.TabIndex = 14;
             // 
             // lbl_pnlSpecs
@@ -435,7 +441,7 @@
             this.flp_HandleOptions.Location = new System.Drawing.Point(3, 235);
             this.flp_HandleOptions.Name = "flp_HandleOptions";
             this.flp_HandleOptions.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.flp_HandleOptions.Size = new System.Drawing.Size(148, 217);
+            this.flp_HandleOptions.Size = new System.Drawing.Size(148, 268);
             this.flp_HandleOptions.TabIndex = 27;
             // 
             // label7
@@ -460,6 +466,7 @@
             // 
             // pnl_RotoswingOptions
             // 
+            this.pnl_RotoswingOptions.Controls.Add(this.pnl_ExtensionCornerDrive);
             this.pnl_RotoswingOptions.Controls.Add(this.label6);
             this.pnl_RotoswingOptions.Controls.Add(this.cmb_RotoswingNo);
             this.pnl_RotoswingOptions.Controls.Add(this.label10);
@@ -471,8 +478,62 @@
             this.pnl_RotoswingOptions.Location = new System.Drawing.Point(3, 36);
             this.pnl_RotoswingOptions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.pnl_RotoswingOptions.Name = "pnl_RotoswingOptions";
-            this.pnl_RotoswingOptions.Size = new System.Drawing.Size(142, 116);
+            this.pnl_RotoswingOptions.Size = new System.Drawing.Size(142, 167);
             this.pnl_RotoswingOptions.TabIndex = 17;
+            // 
+            // pnl_ExtensionCornerDrive
+            // 
+            this.pnl_ExtensionCornerDrive.Controls.Add(this.label15);
+            this.pnl_ExtensionCornerDrive.Controls.Add(this.cmb_CornerDrive);
+            this.pnl_ExtensionCornerDrive.Controls.Add(this.label14);
+            this.pnl_ExtensionCornerDrive.Controls.Add(this.cmb_Extension);
+            this.pnl_ExtensionCornerDrive.Location = new System.Drawing.Point(3, 110);
+            this.pnl_ExtensionCornerDrive.Name = "pnl_ExtensionCornerDrive";
+            this.pnl_ExtensionCornerDrive.Size = new System.Drawing.Size(139, 54);
+            this.pnl_ExtensionCornerDrive.TabIndex = 25;
+            // 
+            // label15
+            // 
+            this.label15.AutoEllipsis = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(2, 23);
+            this.label15.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(56, 26);
+            this.label15.TabIndex = 21;
+            this.label15.Text = "Corner\r\nDrive";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmb_CornerDrive
+            // 
+            this.cmb_CornerDrive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_CornerDrive.FormattingEnabled = true;
+            this.cmb_CornerDrive.Location = new System.Drawing.Point(67, 28);
+            this.cmb_CornerDrive.Name = "cmb_CornerDrive";
+            this.cmb_CornerDrive.Size = new System.Drawing.Size(69, 21);
+            this.cmb_CornerDrive.TabIndex = 22;
+            this.cmb_CornerDrive.SelectedValueChanged += new System.EventHandler(this.cmb_CornerDrive_SelectedValueChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoEllipsis = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(2, 6);
+            this.label14.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(56, 13);
+            this.label14.TabIndex = 19;
+            this.label14.Text = "Extension";
+            // 
+            // cmb_Extension
+            // 
+            this.cmb_Extension.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Extension.FormattingEnabled = true;
+            this.cmb_Extension.Location = new System.Drawing.Point(67, 3);
+            this.cmb_Extension.Name = "cmb_Extension";
+            this.cmb_Extension.Size = new System.Drawing.Size(69, 21);
+            this.cmb_Extension.TabIndex = 20;
+            this.cmb_Extension.SelectedValueChanged += new System.EventHandler(this.cmb_Extension_SelectedValueChanged);
             // 
             // label6
             // 
@@ -561,7 +622,7 @@
             this.pnl_RotaryOptions.Controls.Add(this.cmb_RotaryArtNo);
             this.pnl_RotaryOptions.Controls.Add(this.label11);
             this.pnl_RotaryOptions.Controls.Add(this.cmb_LockingKit);
-            this.pnl_RotaryOptions.Location = new System.Drawing.Point(3, 152);
+            this.pnl_RotaryOptions.Location = new System.Drawing.Point(3, 203);
             this.pnl_RotaryOptions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.pnl_RotaryOptions.Name = "pnl_RotaryOptions";
             this.pnl_RotaryOptions.Size = new System.Drawing.Size(142, 61);
@@ -613,7 +674,7 @@
             this.pnl_motorizedOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_motorizedOptions.Controls.Add(this.label13);
             this.pnl_motorizedOptions.Controls.Add(this.cmb_MotorizedMechanism);
-            this.pnl_motorizedOptions.Location = new System.Drawing.Point(3, 455);
+            this.pnl_motorizedOptions.Location = new System.Drawing.Point(3, 506);
             this.pnl_motorizedOptions.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.pnl_motorizedOptions.Name = "pnl_motorizedOptions";
             this.pnl_motorizedOptions.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
@@ -660,7 +721,7 @@
             this.Controls.Add(this.num_BladeCount);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Panel_PropertiesUC";
-            this.Size = new System.Drawing.Size(160, 649);
+            this.Size = new System.Drawing.Size(160, 700);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();
@@ -673,6 +734,7 @@
             this.flp_HandleOptions.ResumeLayout(false);
             this.pnl_RotoswingOptions.ResumeLayout(false);
             this.pnl_RotoswingOptions.PerformLayout();
+            this.pnl_ExtensionCornerDrive.ResumeLayout(false);
             this.pnl_RotaryOptions.ResumeLayout(false);
             this.pnl_motorizedOptions.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -730,5 +792,10 @@
         private System.Windows.Forms.Panel pnl_motorized;
         private System.Windows.Forms.Label lbl_motorized;
         private System.Windows.Forms.CheckBox chk_Motorized;
+        private System.Windows.Forms.Panel pnl_ExtensionCornerDrive;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox cmb_CornerDrive;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox cmb_Extension;
     }
 }

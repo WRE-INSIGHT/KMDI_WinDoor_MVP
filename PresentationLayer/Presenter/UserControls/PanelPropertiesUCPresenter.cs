@@ -54,6 +54,18 @@ namespace PresentationLayer.Presenter.UserControls
             _panelPropertiesUC.CmbRotaryArtNoSelectedValueChangedEventRaised += _panelPropertiesUC_CmbRotaryArtNoSelectedValueChangedEventRaised;
             _panelPropertiesUC.ChkMotorizedCheckChangedEventRaised += _panelPropertiesUC_ChkMotorizedCheckChangedEventRaised;
             _panelPropertiesUC.CmbMotorizedMechSelectedValueChangedEventRaised += _panelPropertiesUC_CmbMotorizedMechSelectedValueChangedEventRaised;
+            _panelPropertiesUC.CmbExtensionSelectedValueChangedEventRaised += _panelPropertiesUC_CmbExtensionSelectedValueChangedEventRaised;
+            _panelPropertiesUC.CmbCornerDriveSelectedValueChangedEventRaised += _panelPropertiesUC_CmbCornerDriveSelectedValueChangedEventRaised;
+        }
+
+        private void _panelPropertiesUC_CmbCornerDriveSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_CornerDriveArtNo = (CornerDrive_ArticleNo)((ComboBox)sender).SelectedValue;
+        }
+
+        private void _panelPropertiesUC_CmbExtensionSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_ExtensionArtNo = (Extension_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _panelPropertiesUC_CmbMotorizedMechSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -68,12 +80,15 @@ namespace PresentationLayer.Presenter.UserControls
         {
             CheckBox chk = (CheckBox)sender;
             _panelModel.Panel_MotorizedOptionVisibility = chk.Checked;
+            bool extCordrive = _panelModel.Panel_ExtensionCornerDriveOptionsVisibility;
+
             if (chk.Checked == true)
             {
                 chk.Text = "Yes";
                 _panelModel.Panel_HandleOptionsVisibility = false;
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
+
                 if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
                 {
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
@@ -81,6 +96,15 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
                 {
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+
+                    if (extCordrive == true)
+                    {
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtCordrive");
+                    }
+                    else if (extCordrive == false)
+                    {
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtCordrive");
+                    }
                 }
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addmotorized");
@@ -98,6 +122,14 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
                 {
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                    if (extCordrive == true)
+                    {
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtCordrive");
+                    }
+                    else if (extCordrive == false)
+                    {
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtCordrive");
+                    }
                 }
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusmotorized");
@@ -134,6 +166,8 @@ namespace PresentationLayer.Presenter.UserControls
         private void _panelPropertiesUC_CmbHandleTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             Handle_Type sel_handleType = (Handle_Type)((ComboBox)sender).SelectedValue;
+            bool extCordrive = _panelModel.Panel_ExtensionCornerDriveOptionsVisibility;
+
             if (curr_handleType != sel_handleType)
             {
                 _panelModel.Panel_HandleType = sel_handleType;
@@ -147,7 +181,15 @@ namespace PresentationLayer.Presenter.UserControls
                         _pnlRotaryOptions.Visible = false;
                         if (_initialLoad == false)
                         {
-                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
+                            if (extCordrive == true)
+                            {
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
+                            }
+                            else if (extCordrive == false)
+                            {
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswingWithoutExtCordrive");
+                            }
+
                             if (_panelModel.Panel_ParentMultiPanelModel != null)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
@@ -172,7 +214,14 @@ namespace PresentationLayer.Presenter.UserControls
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotary");
                             }
                         }
-                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
+                        if (extCordrive == true)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
+                        }
+                        else if (extCordrive == false)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingExtCordrive");
+                        }
 
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
@@ -287,6 +336,10 @@ namespace PresentationLayer.Presenter.UserControls
             panelBinding.Add("Panel_MotorizedMechArtNo", new Binding("Text", _panelModel, "Panel_MotorizedMechArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_MotorizedOptionVisibility2", new Binding("Visible", _panelModel, "Panel_MotorizedOptionVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_MotorizedpnlOptionVisibility", new Binding("Visible", _panelModel, "Panel_MotorizedpnlOptionVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_ExtensionArtNo", new Binding("Text", _panelModel, "Panel_ExtensionArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_CornerDriveArtNo", new Binding("Text", _panelModel, "Panel_CornerDriveArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_ExtensionCornerDriveOptionsVisibility", new Binding("Visible", _panelModel, "Panel_ExtensionCornerDriveOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_RotoswingOptionsHeight", new Binding("Height", _panelModel, "Panel_RotoswingOptionsHeight", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

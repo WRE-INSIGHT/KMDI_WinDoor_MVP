@@ -195,14 +195,28 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _628806 = new Espagnolette_ArticleNo(0, "628806");
             public static readonly Espagnolette_ArticleNo _628807 = new Espagnolette_ArticleNo(1, "628807");
             public static readonly Espagnolette_ArticleNo _628809 = new Espagnolette_ArticleNo(2, "628809");
-            public static readonly Espagnolette_ArticleNo _612978 = new Espagnolette_ArticleNo(3, "612978");
-            public static readonly Espagnolette_ArticleNo _639957 = new Espagnolette_ArticleNo(4, "639957");
-            public static readonly Espagnolette_ArticleNo _639958 = new Espagnolette_ArticleNo(5, "639958");
-            public static readonly Espagnolette_ArticleNo _741012 = new Espagnolette_ArticleNo(6, "741012");
-            public static readonly Espagnolette_ArticleNo _EQ87NT = new Espagnolette_ArticleNo(7, "EQ87(NT)");
-            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(8, "None");
+            public static readonly Espagnolette_ArticleNo _741012 = new Espagnolette_ArticleNo(3, "741012");
+            public static readonly Espagnolette_ArticleNo _EQ87NT = new Espagnolette_ArticleNo(4, "EQ87(NT)");
+            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(5, "None");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Extension_ArticleNo: Enumeration<Extension_ArticleNo, int>
+        {
+            public static readonly Extension_ArticleNo _612978 = new Extension_ArticleNo(0, "612978");
+            public static readonly Extension_ArticleNo _639957 = new Extension_ArticleNo(1, "639957");
+            public static readonly Extension_ArticleNo _None = new Extension_ArticleNo(2, "None");
+
+            private Extension_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CornerDrive_ArticleNo : Enumeration<CornerDrive_ArticleNo, int>
+        {
+            public static readonly CornerDrive_ArticleNo _639958 = new CornerDrive_ArticleNo(0, "639958");
+            public static readonly CornerDrive_ArticleNo _None = new CornerDrive_ArticleNo(1, "None");
+
+            private CornerDrive_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class Striker_ArticleNo : Enumeration<Striker_ArticleNo, int>
@@ -218,6 +232,14 @@ namespace EnumerationTypeLayer
             public static readonly MiddleCloser_ArticleNo _None = new MiddleCloser_ArticleNo(2, "None");
 
             private MiddleCloser_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SnapInKeep_ArticleNo : Enumeration<SnapInKeep_ArticleNo, int>
+        {
+            public static readonly SnapInKeep_ArticleNo _0400205 = new SnapInKeep_ArticleNo(0, "0400205");
+            public static readonly SnapInKeep_ArticleNo _0400215 = new SnapInKeep_ArticleNo(1, "0400215");
+
+            private SnapInKeep_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class LockingKit_ArticleNo : Enumeration<LockingKit_ArticleNo, int>

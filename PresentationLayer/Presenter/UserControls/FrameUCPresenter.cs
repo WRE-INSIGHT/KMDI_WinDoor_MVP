@@ -315,7 +315,14 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Awning Panel")
                 {
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    if (_panelModel.Panel_ExtensionCornerDriveOptionsVisibility == true)
+                    {
+                        _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    }
+                    else if (_panelModel.Panel_ExtensionCornerDriveOptionsVisibility == false)
+                    {
+                        _frameModel.AdjustPropertyPanelHeight("Panel", "addWithoutExtCordrive");
+                    }
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, 
                                                                                   _panelModel, 
                                                                                   _frameModel, 
