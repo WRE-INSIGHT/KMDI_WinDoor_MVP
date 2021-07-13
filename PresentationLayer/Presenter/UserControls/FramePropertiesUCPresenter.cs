@@ -37,6 +37,12 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.NumFWidthValueChangedEventRaised += new EventHandler(OnNumFWidthValueChangedEventRaised);
             _framePropertiesUC.RdBtnCheckedChangedEventRaised += new EventHandler(OnRdBtnCheckedChangedEventRaised);
             _framePropertiesUC.cmbFrameProfileSelectedValueChangedEventRaised += _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised;
+            _framePropertiesUC.cmbFrameReinfSelectedValueChangedEventRaised += _framePropertiesUC_cmbFrameReinfSelectedValueChangedEventRaised;
+        }
+
+        private void _framePropertiesUC_cmbFrameReinfSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _frameModel.Frame_ReinfArtNo = (FrameReinf_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
