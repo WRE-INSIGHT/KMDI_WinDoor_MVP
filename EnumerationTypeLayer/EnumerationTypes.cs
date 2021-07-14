@@ -204,17 +204,17 @@ namespace EnumerationTypeLayer
 
         public class Extension_ArticleNo: Enumeration<Extension_ArticleNo, int>
         {
-            public static readonly Extension_ArticleNo _612978 = new Extension_ArticleNo(0, "612978");
-            public static readonly Extension_ArticleNo _639957 = new Extension_ArticleNo(1, "639957");
-            public static readonly Extension_ArticleNo _None = new Extension_ArticleNo(2, "None");
+            public static readonly Extension_ArticleNo _None = new Extension_ArticleNo(0, "None");
+            public static readonly Extension_ArticleNo _612978 = new Extension_ArticleNo(1, "612978");
+            public static readonly Extension_ArticleNo _639957 = new Extension_ArticleNo(2, "639957");
 
             private Extension_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class CornerDrive_ArticleNo : Enumeration<CornerDrive_ArticleNo, int>
         {
-            public static readonly CornerDrive_ArticleNo _639958 = new CornerDrive_ArticleNo(0, "639958");
-            public static readonly CornerDrive_ArticleNo _None = new CornerDrive_ArticleNo(1, "None");
+            public static readonly CornerDrive_ArticleNo _None = new CornerDrive_ArticleNo(0, "None");
+            public static readonly CornerDrive_ArticleNo _639958 = new CornerDrive_ArticleNo(1, "639958");
 
             private CornerDrive_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -222,6 +222,7 @@ namespace EnumerationTypeLayer
         public class Striker_ArticleNo : Enumeration<Striker_ArticleNo, int>
         {
             public static readonly Striker_ArticleNo _M89ANT = new Striker_ArticleNo(0, "M89A-NT");
+            public static readonly Striker_ArticleNo _M89CNT = new Striker_ArticleNo(1, "M89C-NT");
             private Striker_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 

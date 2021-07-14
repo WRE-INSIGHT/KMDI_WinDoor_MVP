@@ -78,6 +78,10 @@ namespace ModelLayer.Model.Quotation.Panel
         Rotary_HandleArtNo Panel_RotaryArtNo { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionArtNo { get; set; }
+        int Panel_ExtTopQty { get; set; }
+        int Panel_ExtBotQty { get; set; }
+        int Panel_ExtLeftQty { get; set; }
+        int Panel_ExtRightQty { get; set; }
         CornerDrive_ArticleNo Panel_CornerDriveArtNo { get; set; }
         bool Panel_ExtensionCornerDriveOptionsVisibility { get; set; }
         int Panel_RotoswingOptionsHeight { get; set; }

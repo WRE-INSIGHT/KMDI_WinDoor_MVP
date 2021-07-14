@@ -56,6 +56,12 @@ namespace PresentationLayer.Presenter.UserControls
             _panelPropertiesUC.CmbMotorizedMechSelectedValueChangedEventRaised += _panelPropertiesUC_CmbMotorizedMechSelectedValueChangedEventRaised;
             _panelPropertiesUC.CmbExtensionSelectedValueChangedEventRaised += _panelPropertiesUC_CmbExtensionSelectedValueChangedEventRaised;
             _panelPropertiesUC.CmbCornerDriveSelectedValueChangedEventRaised += _panelPropertiesUC_CmbCornerDriveSelectedValueChangedEventRaised;
+            _panelPropertiesUC.CmbStrikerSelectedValueChangedEventRaised += _panelPropertiesUC_CmbStrikerSelectedValueChangedEventRaised;
+        }
+
+        private void _panelPropertiesUC_CmbStrikerSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_StrikerArtno = (Striker_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _panelPropertiesUC_CmbCornerDriveSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -340,6 +346,10 @@ namespace PresentationLayer.Presenter.UserControls
             panelBinding.Add("Panel_CornerDriveArtNo", new Binding("Text", _panelModel, "Panel_CornerDriveArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_ExtensionCornerDriveOptionsVisibility", new Binding("Visible", _panelModel, "Panel_ExtensionCornerDriveOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_RotoswingOptionsHeight", new Binding("Height", _panelModel, "Panel_RotoswingOptionsHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_ExtTopQty", new Binding("Value", _panelModel, "Panel_ExtTopQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_ExtBotQty", new Binding("Value", _panelModel, "Panel_ExtBotQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_ExtLeftQty", new Binding("Value", _panelModel, "Panel_ExtLeftQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_ExtRightQty", new Binding("Value", _panelModel, "Panel_ExtRightQty", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

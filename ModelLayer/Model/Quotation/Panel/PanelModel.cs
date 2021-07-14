@@ -963,6 +963,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         _panelRotaryOptionsVisibility = true;
                         _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight 
                                                     - constants.panel_property_rotoswingOptionsheight_default;
+
                         _panelPropertyHeight = constants.panel_propertyHeight_default 
                                                - constants.panel_property_rotoswingOptionsheight_default
                                                - constants.panel_property_motorizedOptionsheight;
@@ -1027,6 +1028,11 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        public int Panel_ExtTopQty { get; set; }
+        public int Panel_ExtBotQty { get; set; }
+        public int Panel_ExtLeftQty { get; set; }
+        public int Panel_ExtRightQty { get; set; }
 
         private CornerDrive_ArticleNo _panelCornerDriveArtNo;
         public CornerDrive_ArticleNo Panel_CornerDriveArtNo
@@ -1265,6 +1271,15 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_MiddleCloserPairQty = 3;
                     }
+                }
+
+                if (Panel_Width > 0 && Panel_Width <= 1499)
+                {
+                    Panel_MotorizedMechQty = 1;
+                }
+                else if (Panel_Width >= 1500)
+                {
+                    Panel_MotorizedMechQty = 2;
                 }
 
                 if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||

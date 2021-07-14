@@ -67,12 +67,17 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler CmbMotorizedMechSelectedValueChangedEventRaised;
         public event EventHandler CmbExtensionSelectedValueChangedEventRaised;
         public event EventHandler CmbCornerDriveSelectedValueChangedEventRaised;
+        public event EventHandler CmbStrikerSelectedValueChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {
             pnum_Width.Maximum = decimal.MaxValue;
             pnum_Height.Maximum = decimal.MaxValue;
             num_BladeCount.Maximum = decimal.MaxValue;
+            num_TopExtQty.Maximum = decimal.MaxValue;
+            num_BotExtQty.Maximum = decimal.MaxValue;
+            num_LeftExtQty.Maximum = decimal.MaxValue;
+            num_RightExtQty.Maximum = decimal.MaxValue;
 
             List<GlazingBead_ArticleNo> gArtNo = new List<GlazingBead_ArticleNo>();
             foreach (GlazingBead_ArticleNo item in GlazingBead_ArticleNo.GetAll())
@@ -122,6 +127,13 @@ namespace PresentationLayer.Views.UserControls
                 espArtNo.Add(item);
             }
             cmb_Espagnolette.DataSource = espArtNo;
+
+            List<Striker_ArticleNo> strArtNo = new List<Striker_ArticleNo>();
+            foreach (Striker_ArticleNo item in Striker_ArticleNo.GetAll())
+            {
+                strArtNo.Add(item);
+            }
+            cmb_Striker.DataSource = strArtNo;
 
             List<MiddleCloser_ArticleNo> midArtNo = new List<MiddleCloser_ArticleNo>();
             foreach (MiddleCloser_ArticleNo item in MiddleCloser_ArticleNo.GetAll())
@@ -200,7 +212,7 @@ namespace PresentationLayer.Views.UserControls
             pnl_RotaryOptions.DataBindings.Add(ModelBinding["Panel_RotaryOptionsVisibility"]);
             flp_HandleOptions.DataBindings.Add(ModelBinding["Panel_HandleOptionsHeight"]);
             cmb_Espagnolette.DataBindings.Add(ModelBinding["Panel_EspagnoletteArtNo"]);
-            txt_Striker.DataBindings.Add(ModelBinding["Panel_StrikerArtno"]);
+            cmb_Striker.DataBindings.Add(ModelBinding["Panel_StrikerArtno"]);
             cmb_MiddleCloser.DataBindings.Add(ModelBinding["Panel_MiddleCloserArtNo"]);
             cmb_LockingKit.DataBindings.Add(ModelBinding["Panel_LockingKitArtNo"]);
             cmb_RotoswingNo.DataBindings.Add(ModelBinding["Panel_RotoswingArtNo"]);
@@ -213,6 +225,10 @@ namespace PresentationLayer.Views.UserControls
             cmb_CornerDrive.DataBindings.Add(ModelBinding["Panel_CornerDriveArtNo"]);
             pnl_ExtensionCornerDrive.DataBindings.Add(ModelBinding["Panel_ExtensionCornerDriveOptionsVisibility"]);
             pnl_RotoswingOptions.DataBindings.Add(ModelBinding["Panel_RotoswingOptionsHeight"]);
+            num_TopExtQty.DataBindings.Add(ModelBinding["Panel_ExtTopQty"]);
+            num_BotExtQty.DataBindings.Add(ModelBinding["Panel_ExtBotQty"]);
+            num_LeftExtQty.DataBindings.Add(ModelBinding["Panel_ExtLeftQty"]);
+            num_RightExtQty.DataBindings.Add(ModelBinding["Panel_ExtRightQty"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)
@@ -308,6 +324,11 @@ namespace PresentationLayer.Views.UserControls
         private void cmb_CornerDrive_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbCornerDriveSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_Striker_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbStrikerSelectedValueChangedEventRaised, e);
         }
     }
 }
