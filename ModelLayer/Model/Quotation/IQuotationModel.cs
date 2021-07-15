@@ -14,7 +14,7 @@ namespace ModelLayer.Model.Quotation
         int GlazingSpacer_TotalQty { get; set; }
         int GlazingSeal_TotalQty { get; set; }
         int Screws_for_Installation { get; set; }
-
+        int Expansion_BoltQty_Total { get; set; }
         List<IWindoorModel> Lst_Windoor { get; set; }
         DataTable GetListOfMaterials();
         DataTable GetListOfMaterials(IWindoorModel item);

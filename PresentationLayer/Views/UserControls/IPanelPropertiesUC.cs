@@ -26,6 +26,9 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler CmbRotaryArtNoSelectedValueChangedEventRaised;
         event EventHandler ChkMotorizedCheckChangedEventRaised;
         event EventHandler CmbMotorizedMechSelectedValueChangedEventRaised;
+        event EventHandler CmbExtensionSelectedValueChangedEventRaised;
+        event EventHandler CmbCornerDriveSelectedValueChangedEventRaised;
+        event EventHandler CmbStrikerSelectedValueChangedEventRaised;
 
         Panel GetPnlRotoswingOptions();
         Panel GetPnlRotaryOptions();

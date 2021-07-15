@@ -72,10 +72,19 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
+        SnapInKeep_ArticleNo Panel_SnapInKeepArtNo { get; set; }
         Handle_Type Panel_HandleType { get; set; }
         Rotoswing_HandleArtNo Panel_RotoswingArtNo { get; set; }
         Rotary_HandleArtNo Panel_RotaryArtNo { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+        Extension_ArticleNo Panel_ExtensionArtNo { get; set; }
+        int Panel_ExtTopQty { get; set; }
+        int Panel_ExtBotQty { get; set; }
+        int Panel_ExtLeftQty { get; set; }
+        int Panel_ExtRightQty { get; set; }
+        CornerDrive_ArticleNo Panel_CornerDriveArtNo { get; set; }
+        bool Panel_ExtensionCornerDriveOptionsVisibility { get; set; }
+        int Panel_RotoswingOptionsHeight { get; set; }
         int Panel_PlasticWedgeQty { get; set; }
         Striker_ArticleNo Panel_StrikerArtno { get; set; }
         MiddleCloser_ArticleNo Panel_MiddleCloserArtNo { get; set; }

@@ -129,6 +129,8 @@
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\MultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_ExtensionUCPrenseter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_ExtensionUCPrenseter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\AwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\CasementPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\FixedPanelUCPresenter.cs" />
@@ -329,6 +331,13 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelPropertiesUC.Designer.cs">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_ExtensionUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionUC.Designer.cs">
+      <DependentUpon>PP_ExtensionUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\AwningPanelUC.cs">
       <SubType>UserControl</SubType>
@@ -548,6 +557,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelPropertiesUC.resx">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionUC.resx">
+      <DependentUpon>PP_ExtensionUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\AwningPanelUC.resx">
       <DependentUpon>AwningPanelUC.cs</DependentUpon>
