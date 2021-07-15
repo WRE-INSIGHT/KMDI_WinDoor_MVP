@@ -3,9 +3,8 @@ using System;
 
 namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
-    public interface IPP_ExtensionUC : IViewCommon
+    public interface IPP_ExtensionPropertyUC : IViewCommon
     {
         event EventHandler PPExtensionUCLoadEventRaised;
-        event EventHandler btnaddTopExt2ClickedEventRaised;
     }
 }

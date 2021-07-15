@@ -34,6 +34,8 @@ using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.CommonMethods;
+using PresentationLayer.Views.UserControls.PanelProperties_Modules;
+using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
 
 namespace PresentationLayer
 {
@@ -174,6 +176,18 @@ namespace PresentationLayer
 
                 .RegisterType<IGlassThicknessListView, GlassThicknessListView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGlassThicknessListPresenter, GlassThicknessListPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_MotorizedPropertyUC, PP_MotorizedPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_MotorizedPropertyUCPresenter, PP_MotorizedPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_SashPropertyUC, PP_SashPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_SashPropertyUCPresenter, PP_SashPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_GlassPropertyUC, PP_GlassPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_GlassPropertyUCPresenter, PP_GlassPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_HandlePropertyUC, PP_HandlePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_HandlePropertyUCPresenter, PP_HandlePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

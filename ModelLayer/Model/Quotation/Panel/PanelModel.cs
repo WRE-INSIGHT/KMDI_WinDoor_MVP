@@ -765,62 +765,62 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelSashPropertyVisibility = value;
-                if (value == true)
-                {
-                    if (Panel_Type == "Fixed Panel")
-                    {
-                        _panelPropertyHeight = constants.panel_propertyHeight_default 
-                                               - constants.panel_property_handleOptionsHeight
-                                               - constants.panel_property_pnlmotorizedheight
-                                               - constants.panel_property_motorizedOptionsheight
-                                               - constants.panel_property_extCorDriveOptionsheight_default;
-                    }
-                    else
-                    {
-                        _panelPropertyHeight = constants.panel_propertyHeight_default;
-                        if (_panelMotorizedOptionVisibility == false)
-                        {
-                            if (_panelHandleType == Handle_Type._Rotoswing)
-                            {
-                                if (Panel_ExtensionCornerDriveOptionsVisibility == true)
-                                {
-                                    _panelPropertyHeight = constants.panel_propertyHeight_default
-                                                           - constants.panel_property_handleOptionsHeight
-                                                           - constants.panel_property_rotaryOptionsheight_default
-                                                           - constants.panel_property_motorizedOptionsheight;
+                //if (value == true)
+                //{
+                //    if (Panel_Type == "Fixed Panel")
+                //    {
+                //        _panelPropertyHeight = constants.panel_propertyHeight_default 
+                //                               - constants.panel_property_handleOptionsHeight
+                //                               - constants.panel_property_pnlmotorizedheight
+                //                               - constants.panel_property_motorizedOptionsheight
+                //                               - constants.panel_property_extCorDriveOptionsheight_default;
+                //    }
+                //    else
+                //    {
+                //        _panelPropertyHeight = constants.panel_propertyHeight_default;
+                //        if (_panelMotorizedOptionVisibility == false)
+                //        {
+                //            if (_panelHandleType == Handle_Type._Rotoswing)
+                //            {
+                //                if (Panel_ExtensionCornerDriveOptionsVisibility == true)
+                //                {
+                //                    _panelPropertyHeight = constants.panel_propertyHeight_default
+                //                                           - constants.panel_property_handleOptionsHeight
+                //                                           - constants.panel_property_rotaryOptionsheight_default
+                //                                           - constants.panel_property_motorizedOptionsheight;
 
-                                    _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
-                                }
-                                else if (Panel_ExtensionCornerDriveOptionsVisibility == false)
-                                {
-                                    _panelPropertyHeight = constants.panel_propertyHeight_default
-                                                           - constants.panel_property_handleOptionsHeight
-                                                           - constants.panel_property_rotaryOptionsheight_default
-                                                           - constants.panel_property_motorizedOptionsheight
-                                                           - constants.panel_property_extCorDriveOptionsheight_default;
+                //                    _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
+                //                }
+                //                else if (Panel_ExtensionCornerDriveOptionsVisibility == false)
+                //                {
+                //                    _panelPropertyHeight = constants.panel_propertyHeight_default
+                //                                           - constants.panel_property_handleOptionsHeight
+                //                                           - constants.panel_property_rotaryOptionsheight_default
+                //                                           - constants.panel_property_motorizedOptionsheight
+                //                                           - constants.panel_property_extCorDriveOptionsheight_default;
 
-                                    _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default
-                                                                   - constants.panel_property_extCorDriveOptionsheight_default;
-                                }
-                            }
-                            else if (_panelHandleType == Handle_Type._Rotary)
-                            {
-                                _panelPropertyHeight = constants.panel_propertyHeight_default 
-                                                       - constants.panel_property_handleOptionsHeight 
-                                                       - constants.panel_property_rotoswingOptionsheight_default
-                                                       - constants.panel_property_motorizedOptionsheight;
-                            }
-                        }
-                    }
-                }
-                else if (value == false)
-                {
-                    _panelPropertyHeight = constants.panel_propertyHeight_default 
-                                           - (constants.panel_property_sashPanelHeight + constants.panel_property_handleOptionsHeight)
-                                           - constants.panel_property_pnlmotorizedheight
-                                           - constants.panel_property_motorizedOptionsheight
-                                           - constants.panel_property_extCorDriveOptionsheight_default;
-                }
+                //                    _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default
+                //                                                   - constants.panel_property_extCorDriveOptionsheight_default;
+                //                }
+                //            }
+                //            else if (_panelHandleType == Handle_Type._Rotary)
+                //            {
+                //                _panelPropertyHeight = constants.panel_propertyHeight_default 
+                //                                       - constants.panel_property_handleOptionsHeight 
+                //                                       - constants.panel_property_rotoswingOptionsheight_default
+                //                                       - constants.panel_property_motorizedOptionsheight;
+                //            }
+                //        }
+                //    }
+                //}
+                //else if (value == false)
+                //{
+                //    _panelPropertyHeight = constants.panel_propertyHeight_default 
+                //                           - (constants.panel_property_sashPanelHeight + constants.panel_property_handleOptionsHeight)
+                //                           - constants.panel_property_pnlmotorizedheight
+                //                           - constants.panel_property_motorizedOptionsheight
+                //                           - constants.panel_property_extCorDriveOptionsheight_default;
+                //}
                 NotifyPropertyChanged();
             }
         }
@@ -923,52 +923,52 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelHandleType = value;
-                if (_panelType != "Fixed Panel")
-                {
-                    if (_panelHandleType == Handle_Type._Rotoswing)
-                    {
-                        _panelRotoswingOptionsVisibility = true;
-                        _panelRotaryOptionsVisibility = false;
+                //if (_panelType != "Fixed Panel")
+                //{
+                //    if (_panelHandleType == Handle_Type._Rotoswing)
+                //    {
+                //        _panelRotoswingOptionsVisibility = true;
+                //        _panelRotaryOptionsVisibility = false;
 
-                        if (Panel_ExtensionCornerDriveOptionsVisibility == true)
-                        {
-                            _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight 
-                                                        - constants.panel_property_rotaryOptionsheight_default;
+                //        if (Panel_ExtensionCornerDriveOptionsVisibility == true)
+                //        {
+                //            _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight 
+                //                                        - constants.panel_property_rotaryOptionsheight_default;
 
-                            _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
+                //            _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
 
-                            _panelPropertyHeight = constants.panel_propertyHeight_default
-                                                   - constants.panel_property_rotaryOptionsheight_default
-                                                   - constants.panel_property_motorizedOptionsheight;
-                        }
-                        else if (Panel_ExtensionCornerDriveOptionsVisibility == false)
-                        {
-                            _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight
-                                                        - constants.panel_property_rotaryOptionsheight_default
-                                                        - constants.panel_property_extCorDriveOptionsheight_default;
+                //            _panelPropertyHeight = constants.panel_propertyHeight_default
+                //                                   - constants.panel_property_rotaryOptionsheight_default
+                //                                   - constants.panel_property_motorizedOptionsheight;
+                //        }
+                //        else if (Panel_ExtensionCornerDriveOptionsVisibility == false)
+                //        {
+                //            _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight
+                //                                        - constants.panel_property_rotaryOptionsheight_default
+                //                                        - constants.panel_property_extCorDriveOptionsheight_default;
 
-                            _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default
-                                                           - constants.panel_property_extCorDriveOptionsheight_default;
+                //            _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default
+                //                                           - constants.panel_property_extCorDriveOptionsheight_default;
 
-                            _panelPropertyHeight = constants.panel_propertyHeight_default
-                                                   - constants.panel_property_rotaryOptionsheight_default
-                                                   - constants.panel_property_motorizedOptionsheight
-                                                   - constants.panel_property_extCorDriveOptionsheight_default;
-                        }
+                //            _panelPropertyHeight = constants.panel_propertyHeight_default
+                //                                   - constants.panel_property_rotaryOptionsheight_default
+                //                                   - constants.panel_property_motorizedOptionsheight
+                //                                   - constants.panel_property_extCorDriveOptionsheight_default;
+                //        }
                         
-                    }
-                    else if (_panelHandleType == Handle_Type._Rotary)
-                    {
-                        _panelRotoswingOptionsVisibility = false;
-                        _panelRotaryOptionsVisibility = true;
-                        _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight 
-                                                    - constants.panel_property_rotoswingOptionsheight_default;
+                //    }
+                //    else if (_panelHandleType == Handle_Type._Rotary)
+                //    {
+                //        _panelRotoswingOptionsVisibility = false;
+                //        _panelRotaryOptionsVisibility = true;
+                //        _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight 
+                //                                    - constants.panel_property_rotoswingOptionsheight_default;
 
-                        _panelPropertyHeight = constants.panel_propertyHeight_default 
-                                               - constants.panel_property_rotoswingOptionsheight_default
-                                               - constants.panel_property_motorizedOptionsheight;
-                    }
-                }
+                //        _panelPropertyHeight = constants.panel_propertyHeight_default 
+                //                               - constants.panel_property_rotoswingOptionsheight_default
+                //                               - constants.panel_property_motorizedOptionsheight;
+                //    }
+                //}
                 NotifyPropertyChanged();
             }
         }
@@ -1148,8 +1148,8 @@ namespace ModelLayer.Model.Quotation.Panel
                 _panelMotorizedOptionVisibility = value;
                 if (_panelMotorizedOptionVisibility == true)
                 {
-                    _panelPropertyHeight = constants.panel_propertyHeight_default
-                                           - constants.panel_property_handleOptionsHeight;
+                    //_panelPropertyHeight = constants.panel_propertyHeight_default
+                    //                       - constants.panel_property_handleOptionsHeight;
                     if (Panel_ParentMultiPanelModel != null)
                     {
                         Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
@@ -1167,40 +1167,40 @@ namespace ModelLayer.Model.Quotation.Panel
                 else if (_panelMotorizedOptionVisibility == false)
                 {
                     Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
-                    if (_panelHandleType == Handle_Type._Rotoswing)
-                    {
-                        if (Panel_ExtensionCornerDriveOptionsVisibility == true)
-                        {
-                            _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight
-                                                        - constants.panel_property_rotaryOptionsheight_default;
+                    //if (_panelHandleType == Handle_Type._Rotoswing)
+                    //{
+                    //    if (Panel_ExtensionCornerDriveOptionsVisibility == true)
+                    //    {
+                    //        _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight
+                    //                                    - constants.panel_property_rotaryOptionsheight_default;
 
-                            _panelPropertyHeight = constants.panel_propertyHeight_default
-                                                   - constants.panel_property_rotaryOptionsheight_default
-                                                   - constants.panel_property_motorizedOptionsheight;
+                    //        _panelPropertyHeight = constants.panel_propertyHeight_default
+                    //                               - constants.panel_property_rotaryOptionsheight_default
+                    //                               - constants.panel_property_motorizedOptionsheight;
 
-                            _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
-                        }
-                        else if (Panel_ExtensionCornerDriveOptionsVisibility == false)
-                        {
-                            _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight
-                                                        - constants.panel_property_rotaryOptionsheight_default
-                                                        - constants.panel_property_extCorDriveOptionsheight_default;
+                    //        _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
+                    //    }
+                    //    else if (Panel_ExtensionCornerDriveOptionsVisibility == false)
+                    //    {
+                    //        _panelHandleOptionsHeight = constants.panel_property_handleOptionsHeight
+                    //                                    - constants.panel_property_rotaryOptionsheight_default
+                    //                                    - constants.panel_property_extCorDriveOptionsheight_default;
 
-                            _panelPropertyHeight = constants.panel_propertyHeight_default
-                                                   - constants.panel_property_rotaryOptionsheight_default
-                                                   - constants.panel_property_motorizedOptionsheight
-                                                   - constants.panel_property_extCorDriveOptionsheight_default;
+                    //        _panelPropertyHeight = constants.panel_propertyHeight_default
+                    //                               - constants.panel_property_rotaryOptionsheight_default
+                    //                               - constants.panel_property_motorizedOptionsheight
+                    //                               - constants.panel_property_extCorDriveOptionsheight_default;
 
-                            _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default
-                                                           - constants.panel_property_extCorDriveOptionsheight_default;
-                        }
-                    }
-                    else if (_panelHandleType == Handle_Type._Rotary)
-                    {
-                        _panelPropertyHeight = constants.panel_propertyHeight_default
-                                               - constants.panel_property_motorizedOptionsheight
-                                               - constants.panel_property_rotoswingOptionsheight_default;
-                    }
+                    //        _panelRotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default
+                    //                                       - constants.panel_property_extCorDriveOptionsheight_default;
+                    //    }
+                    //}
+                    //else if (_panelHandleType == Handle_Type._Rotary)
+                    //{
+                    //    _panelPropertyHeight = constants.panel_propertyHeight_default
+                    //                           - constants.panel_property_motorizedOptionsheight
+                    //                           - constants.panel_property_rotoswingOptionsheight_default;
+                    //}
                 }
                 NotifyPropertyChanged();
             }
@@ -1220,14 +1220,80 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private int _panelMotorizedPropertyHeight;
+        public int Panel_MotorizedPropertyHeight
+        {
+            get
+            {
+                return _panelMotorizedPropertyHeight;
+            }
+            set
+            {
+                _panelMotorizedPropertyHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Panel_MotorizedMechQty { get; set; }
+
+        public void AdjustPropertyPanelHeight(string mode)
+        {
+            if (mode == "addChkMotorized")
+            {
+                Panel_PropertyHeight += constants.panel_property_motorizedChkOptionsheight;
+            }
+            else if (mode == "addCmbMotorized")
+            {
+                Panel_PropertyHeight += constants.panel_property_motorizedCmbOptionsheight;
+            }
+            else if (mode == "minusCmbMotorized")
+            {
+                Panel_PropertyHeight -= constants.panel_property_motorizedCmbOptionsheight;
+            }
+            else if (mode == "addSash")
+            {
+                Panel_PropertyHeight += constants.panel_property_sashPanelHeight;
+            }
+            else if (mode == "addGlass")
+            {
+                Panel_PropertyHeight += constants.panel_property_glassOptionsHeight;
+            }
+            else if (mode == "addHandle")
+            {
+                Panel_PropertyHeight += constants.panel_property_handleOptionsHeight;
+            }
+            else if (mode == "minusHandle")
+            {
+                Panel_PropertyHeight -= constants.panel_property_handleOptionsHeight;
+            }
+        }
+
+        public void AdjustMotorizedPropertyHeight(string mode)
+        {
+            if (mode == "chkMotorizedOnly")
+            {
+                Panel_MotorizedPropertyHeight = constants.panel_property_motorizedChkOptionsheight;
+            }
+            else if (mode == "whole")
+            {
+                Panel_MotorizedPropertyHeight = constants.panel_property_motorizedOptionsheight;
+            }
+        }
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
             if (Panel_SashPropertyVisibility == true)
             {
-                Panel_SashWidth = Panel_DisplayWidth - (26 * 2) + 5;
-                Panel_SashHeight = Panel_DisplayHeight - (26 * 2) + 5;
+                if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+                {
+                    Panel_SashWidth = Panel_DisplayWidth - (26 * 2) + 5;
+                    Panel_SashHeight = Panel_DisplayHeight - (26 * 2) + 5;
+                }
+                else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+                {
+                    Panel_SashWidth = Panel_DisplayWidth - (40 * 2) + 5;
+                    Panel_SashHeight = Panel_DisplayHeight - (40 * 2) + 5;
+                }
 
                 Panel_SashReinfWidth = Panel_SashWidth - 5 - (55 * 2) - 10;
                 Panel_SashReinfHeight = Panel_SashHeight - 5 - (55 * 2) - 10;
@@ -1422,14 +1488,28 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (panel_placement == "Last" && mpanelparent_placement == "")
                 {
                     GB_deduction_forNxtPrev += 33;
-                    Sash_deduction_forNxtPrev += 26;
+                    if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+                    {
+                        Sash_deduction_forNxtPrev += 26;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+                    {
+                        Sash_deduction_forNxtPrev += 40;
+                    }
                 }
                 if (mpanelparent_placement == "First")
                 {
                     if (panel_placement == "First")
                     {
                         GB_deduction_forNxtPrev += 33;
-                        Sash_deduction_forNxtPrev += 26;
+                        if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+                        {
+                            Sash_deduction_forNxtPrev += 26;
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+                        {
+                            Sash_deduction_forNxtPrev += 40;
+                        }
                     }
                 }
                 else if (mpanelparent_placement == "Last")
@@ -1437,7 +1517,14 @@ namespace ModelLayer.Model.Quotation.Panel
                     if (panel_placement == "Last")
                     {
                         GB_deduction_forNxtPrev += 33;
-                        Sash_deduction_forNxtPrev += 26;
+                        if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+                        {
+                            Sash_deduction_forNxtPrev += 26;
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+                        {
+                            Sash_deduction_forNxtPrev += 40;
+                        }
                     }
                 }
             }
@@ -1459,14 +1546,28 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (panel_placement == "First" && mpanelparent_placement == "")
                 {
                     GB_deduction_forNxtPrev += 33;
-                    Sash_deduction_forNxtPrev += 26;
+                    if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+                    {
+                        Sash_deduction_forNxtPrev += 26;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+                    {
+                        Sash_deduction_forNxtPrev += 40;
+                    }
                 }
                 if (mpanelparent_placement == "First")
                 {
                     if (panel_placement == "First")
                     {
                         GB_deduction_forNxtPrev += 33;
-                        Sash_deduction_forNxtPrev += 26;
+                        if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+                        {
+                            Sash_deduction_forNxtPrev += 26;
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+                        {
+                            Sash_deduction_forNxtPrev += 40;
+                        }
                     }
                 }
                 else if (mpanelparent_placement == "Last")
@@ -1474,7 +1575,14 @@ namespace ModelLayer.Model.Quotation.Panel
                     if (panel_placement == "Last")
                     {
                         GB_deduction_forNxtPrev += 33;
-                        Sash_deduction_forNxtPrev += 26;
+                        if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+                        {
+                            Sash_deduction_forNxtPrev += 26;
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+                        {
+                            Sash_deduction_forNxtPrev += 40;
+                        }
                     }
                 }
             }
@@ -1498,7 +1606,14 @@ namespace ModelLayer.Model.Quotation.Panel
                     mpanel_placement == "")
                 {
                     GB_deduction_forLeftorTopRightorBot += 33;
-                    Sash_deduction_forLeftorTopRightorBot += 26;
+                    if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+                    {
+                        Sash_deduction_forLeftorTopRightorBot += 26;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+                    {
+                        Sash_deduction_forLeftorTopRightorBot += 40;
+                    }
                 }
             }
 
@@ -1521,7 +1636,14 @@ namespace ModelLayer.Model.Quotation.Panel
                     mpanel_placement == "")
                 {
                     GB_deduction_forLeftorTopRightorBot += 33;
-                    Sash_deduction_forLeftorTopRightorBot += 26;
+                    if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+                    {
+                        Sash_deduction_forLeftorTopRightorBot += 26;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+                    {
+                        Sash_deduction_forLeftorTopRightorBot += 40;
+                    }
                 }
             }
 
@@ -1804,6 +1926,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_MiddleCloserArtNo = panelMiddleCloserArtno;
             Panel_LockingKitArtNo = panelLockingKitArtno;
             Panel_MotorizedMechArtNo = panelMotorizedMechArtNo;
+
+            Panel_PropertyHeight = constants.panel_propertyHeight_default;
         }
     }
 }

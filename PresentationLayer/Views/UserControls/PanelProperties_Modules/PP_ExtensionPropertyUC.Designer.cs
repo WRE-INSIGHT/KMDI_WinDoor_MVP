@@ -1,6 +1,6 @@
 ﻿namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
-    partial class PP_ExtensionUC
+    partial class PP_ExtensionPropertyUC
     {
         /// <summary> 
         /// Required designer variable.

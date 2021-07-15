@@ -95,8 +95,11 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_MiddleCloserPairQty { get; set; }
         bool Panel_MotorizedOptionVisibility { get; set; }
         MotorizedMech_ArticleNo Panel_MotorizedMechArtNo { get; set; }
+        int Panel_MotorizedPropertyHeight { get; set; }
         int Panel_MotorizedMechQty { get; set; }
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
+        void AdjustPropertyPanelHeight(string mode);
+        void AdjustMotorizedPropertyHeight(string mode);
         void SetPanelExplosionValues_Panel(bool parentIsFrame);
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,

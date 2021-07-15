@@ -1601,7 +1601,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     MPanelProp_Height -= ((((constants.panel_propertyHeight_default
                                         - constants.panel_property_sashPanelHeight)
                                         - constants.panel_property_handleOptionsHeight)
-                                        - constants.panel_property_pnlmotorizedheight)
+                                        - constants.panel_property_motorizedChkOptionsheight)
                                         - constants.panel_property_motorizedOptionsheight);
                 }
                 else if (mode == "add")
@@ -1609,7 +1609,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     MPanelProp_Height += ((((constants.panel_propertyHeight_default
                                         - constants.panel_property_sashPanelHeight)
                                         - constants.panel_property_handleOptionsHeight)
-                                        - constants.panel_property_pnlmotorizedheight)
+                                        - constants.panel_property_motorizedChkOptionsheight)
                                         - constants.panel_property_motorizedOptionsheight);
                 }
             }
@@ -1619,14 +1619,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= (((constants.panel_propertyHeight_default
                                         - constants.panel_property_handleOptionsHeight)
-                                        - constants.panel_property_pnlmotorizedheight)
+                                        - constants.panel_property_motorizedChkOptionsheight)
                                         - constants.panel_property_motorizedOptionsheight);
                 }
                 else if (mode == "add")
                 {
                     MPanelProp_Height += (((constants.panel_propertyHeight_default
                                         - constants.panel_property_handleOptionsHeight)
-                                        - constants.panel_property_pnlmotorizedheight)
+                                        - constants.panel_property_motorizedChkOptionsheight)
                                         - constants.panel_property_motorizedOptionsheight);
                 }
             }

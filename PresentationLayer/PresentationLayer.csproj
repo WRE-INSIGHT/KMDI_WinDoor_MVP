@@ -119,8 +119,16 @@
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\MultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter.cs" />
-    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_ExtensionUCPrenseter.cs" />
-    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_ExtensionUCPrenseter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_ExtensionPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_GlassPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_HandlePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_MotorizedPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_SashPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_ExtensionPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_GlassPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_HandlePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_MotorizedPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_SashPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\AwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\CasementPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\FixedPanelUCPresenter.cs" />
@@ -301,12 +309,52 @@
     <Compile Include="Views\UserControls\PanelPropertiesUC.Designer.cs">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_ExtensionUC.cs" />
-    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_ExtensionPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_GlassPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HandlePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MotorizedPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SashPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionUC.Designer.cs">
-      <DependentUpon>PP_ExtensionUC.cs</DependentUpon>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionPropertyUC.Designer.cs">
+      <DependentUpon>PP_ExtensionPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_GlassPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_GlassPropertyUC.Designer.cs">
+      <DependentUpon>PP_GlassPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HandlePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HandlePropertyUC.Designer.cs">
+      <DependentUpon>PP_HandlePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.Designer.cs">
+      <DependentUpon>PP_MotorizedPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.Designer.cs">
+      <DependentUpon>PP_RotaryPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.Designer.cs">
+      <DependentUpon>PP_RotoswingPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.Designer.cs">
+      <DependentUpon>PP_SashPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\AwningPanelUC.cs">
       <SubType>UserControl</SubType>
@@ -518,8 +566,26 @@
     <EmbeddedResource Include="Views\UserControls\PanelPropertiesUC.resx">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionUC.resx">
-      <DependentUpon>PP_ExtensionUC.cs</DependentUpon>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionPropertyUC.resx">
+      <DependentUpon>PP_ExtensionPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_GlassPropertyUC.resx">
+      <DependentUpon>PP_GlassPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_HandlePropertyUC.resx">
+      <DependentUpon>PP_HandlePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.resx">
+      <DependentUpon>PP_MotorizedPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.resx">
+      <DependentUpon>PP_RotaryPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.resx">
+      <DependentUpon>PP_RotoswingPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.resx">
+      <DependentUpon>PP_SashPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\AwningPanelUC.resx">
       <DependentUpon>AwningPanelUC.cs</DependentUpon>

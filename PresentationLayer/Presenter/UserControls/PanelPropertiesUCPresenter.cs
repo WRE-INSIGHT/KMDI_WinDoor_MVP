@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using Unity;
 using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
+using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
+using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -19,20 +21,35 @@ namespace PresentationLayer.Presenter.UserControls
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IGlassThicknessListPresenter _glassThicknessPresenter;
+        private IPP_MotorizedPropertyUCPresenter _pp_motorizedPropertyUCPresenter;
+        private IPP_SashPropertyUCPresenter _pp_sashPropertyUCPresenter;
+        private IPP_GlassPropertyUCPresenter _pp_glassPropertyUCPresenter;
+        private IPP_HandlePropertyUCPresenter _pp_handlePropertUCPresenter;
         private IUnityContainer _unityC;
 
-        private Panel _pnlRotoswingOptions;
-        private Panel _pnlRotaryOptions;
+        private FlowLayoutPanel _flpPanelSpecs;
+        //private Panel _pnlRotoswingOptions;
+        //private Panel _pnlRotaryOptions;
 
         private bool _initialLoad = true;
 
         public PanelPropertiesUCPresenter(IPanelPropertiesUC panelPropertiesUC,
-                                          IGlassThicknessListPresenter glassThicknessPresenter)
+                                          IGlassThicknessListPresenter glassThicknessPresenter,
+                                          IPP_MotorizedPropertyUCPresenter pp_motorizedPropertyUCPresenter,
+                                          IPP_SashPropertyUCPresenter pp_sashPropertyUCPresenter,
+                                          IPP_GlassPropertyUCPresenter pp_glassPropertyUCPresenter,
+                                          IPP_HandlePropertyUCPresenter pp_handlePropertUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _glassThicknessPresenter = glassThicknessPresenter;
-            _pnlRotoswingOptions = _panelPropertiesUC.GetPnlRotoswingOptions();
-            _pnlRotaryOptions = _panelPropertiesUC.GetPnlRotaryOptions();
+            _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
+            _pp_sashPropertyUCPresenter = pp_sashPropertyUCPresenter;
+            _pp_glassPropertyUCPresenter = pp_glassPropertyUCPresenter;
+            _pp_handlePropertUCPresenter = pp_handlePropertUCPresenter;
+            _flpPanelSpecs = _panelPropertiesUC.GetPanelSpecsFLP();
+
+            //_pnlRotoswingOptions = _panelPropertiesUC.GetPnlRotoswingOptions();
+            //_pnlRotaryOptions = _panelPropertiesUC.GetPnlRotaryOptions();
             SubscribeToEventsSetup();
         }
 
@@ -53,7 +70,6 @@ namespace PresentationLayer.Presenter.UserControls
             _panelPropertiesUC.CmbRotoswingArtNoSelectedValueChangedEventRaised += _panelPropertiesUC_CmbRotoswingArtNoSelectedValueChangedEventRaised;
             _panelPropertiesUC.CmbRotaryArtNoSelectedValueChangedEventRaised += _panelPropertiesUC_CmbRotaryArtNoSelectedValueChangedEventRaised;
             _panelPropertiesUC.ChkMotorizedCheckChangedEventRaised += _panelPropertiesUC_ChkMotorizedCheckChangedEventRaised;
-            _panelPropertiesUC.CmbMotorizedMechSelectedValueChangedEventRaised += _panelPropertiesUC_CmbMotorizedMechSelectedValueChangedEventRaised;
             _panelPropertiesUC.CmbExtensionSelectedValueChangedEventRaised += _panelPropertiesUC_CmbExtensionSelectedValueChangedEventRaised;
             _panelPropertiesUC.CmbCornerDriveSelectedValueChangedEventRaised += _panelPropertiesUC_CmbCornerDriveSelectedValueChangedEventRaised;
             _panelPropertiesUC.CmbStrikerSelectedValueChangedEventRaised += _panelPropertiesUC_CmbStrikerSelectedValueChangedEventRaised;
@@ -72,14 +88,6 @@ namespace PresentationLayer.Presenter.UserControls
         private void _panelPropertiesUC_CmbExtensionSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             _panelModel.Panel_ExtensionArtNo = (Extension_ArticleNo)((ComboBox)sender).SelectedValue;
-        }
-
-        private void _panelPropertiesUC_CmbMotorizedMechSelectedValueChangedEventRaised(object sender, EventArgs e)
-        {
-            if (_initialLoad == false)
-            {
-                _panelModel.Panel_MotorizedMechArtNo = (MotorizedMech_ArticleNo)((ComboBox)sender).SelectedValue;
-            }
         }
 
         private void _panelPropertiesUC_ChkMotorizedCheckChangedEventRaised(object sender, EventArgs e)
@@ -183,8 +191,8 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
                     {
-                        _pnlRotoswingOptions.Visible = true;
-                        _pnlRotaryOptions.Visible = false;
+                        //_pnlRotoswingOptions.Visible = true;
+                        //_pnlRotaryOptions.Visible = false;
                         if (_initialLoad == false)
                         {
                             if (extCordrive == true)
@@ -210,8 +218,8 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                     else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
                     {
-                        _pnlRotoswingOptions.Visible = false;
-                        _pnlRotaryOptions.Visible = true;
+                        //_pnlRotoswingOptions.Visible = false;
+                        //_pnlRotaryOptions.Visible = true;
                         if (_initialLoad == false)
                         {
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
@@ -245,7 +253,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _panelPropertiesUC_btnSelectGlassThicknessClickedEventRaised(object sender, EventArgs e)
         {
-            IGlassThicknessListPresenter glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance(_unityC, this, _mainPresenter.GlassThicknessDT, _panelModel);
+            IGlassThicknessListPresenter glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance(_unityC, _mainPresenter.GlassThicknessDT, _panelModel);
             glassThicknessPresenter.ShowGlassThicknessListView();
         }
 
@@ -301,6 +309,20 @@ namespace PresentationLayer.Presenter.UserControls
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
             _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
+            if (_panelModel.Panel_SashPropertyVisibility == true)
+            {
+                IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                _flpPanelSpecs.Controls.Add((UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC());
+
+                IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel);
+                _flpPanelSpecs.Controls.Add((UserControl)handlePropUCP.GetPPHandlePropertyUC());
+
+                IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                _flpPanelSpecs.Controls.Add((UserControl)sashPropUCP.GetPPSashPropertyUC());
+            }
+
+            IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+            _flpPanelSpecs.Controls.Add((UserControl)glassPropUCP.GetPPGlassPropertyUC());
             _initialLoad = false;
         }
 
