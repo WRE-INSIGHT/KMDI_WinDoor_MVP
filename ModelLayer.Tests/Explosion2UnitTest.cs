@@ -3962,6 +3962,394 @@ namespace ModelLayer.Tests
 
         }
 
+        [TestMethod]
+        public void ChkVar_2Panel_2AwningWindowUsingExtension()
+        {
+
+            /*
+                                                
+                   __________________
+                   |       /\       |
+                   |      /  \      | 
+                   |     /    \     |         
+                   |    /      \    |   
+                   |   /   P1   \   |   
+                   |  /          \  |          
+                   | /            \ |             
+                   |/______________\|
+                   |       /\       |
+                   |      /  \      | 
+                   |     /    \     |         
+                   |    /      \    |   
+                   |   /   P2   \   |   
+                   |  /          \  |          
+                   | /            \ |             
+                   |/______________\|
+
+             */
+
+            int total_wd = 1247, total_ht = 3370,
+                AwWD1 = 1247, AwHT1 = 1235,
+                AwWD2 = 1247, AwHT2 = 2135;
+
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._JetBlack, Foil_Color._JetBlack);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.TopDown,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiTransomModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiTransomModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiTransomModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiTransom_totalPanelCount = _multiTransomModel.MPanel_Divisions + 1;
+            int suggest_Wd = _multiTransomModel.MPanel_Width,
+                suggest_HT = (((_multiTransomModel.MPanel_Height) - (divSize * _multiTransomModel.MPanel_Divisions)) / multiTransom_totalPanelCount);
+
+            #region MultiMullionPlatform (2)
+
+            IPanelModel _panelModel1_Awning = _panelServices.AddPanelModel(suggest_Wd,
+                                                                                  suggest_HT,
+                                                                                  new Control(),
+                                                                                  new UserControl(),
+                                                                                  new UserControl(),
+                                                                                  new UserControl(),
+                                                                                  "Awning Panel",
+                                                                                  true,
+                                                                                  1.0f,
+                                                                                  _frameModel,
+                                                                                  _multiTransomModel,
+                                                                                  AwWD1,
+                                                                                  AwHT1,
+                                                                                  GlazingBead_ArticleNo._2435,
+                                                                                  GlassFilm_Types._None,
+                                                                                  SashProfile_ArticleNo._7581,
+                                                                                  SashReinf_ArticleNo._R675,
+                                                                                  GlassType._Single,
+                                                                                  Espagnolette_ArticleNo._628806,
+                                                                                  Striker_ArticleNo._M89ANT,
+                                                                                  MiddleCloser_ArticleNo._1WC70DB,
+                                                                                  LockingKit_ArticleNo._None,
+                                                                                  MotorizedMech_ArticleNo._41556C,
+                                                                                  1);
+            _panelModel1_Awning.Panel_Placement = "First";
+            _panelModel1_Awning.Panel_GlassThickness = 24.0f;
+            _panelModel1_Awning.Panel_HandleType = Handle_Type._Rotoswing;
+            _panelModel1_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773452;
+            _panelModel1_Awning.Panel_Index_Inside_MPanel = 0;
+            _multiTransomModel.MPanelLst_Panel.Add(_panelModel1_Awning);
+            Control Awning = new Control();
+            Awning.Name = "AwningPanelUC_1";
+            _multiTransomModel.MPanelLst_Objects.Add(Awning);
+
+            IDividerModel _divTransomModel = _dividerServices.AddDividerModel(divSize,
+                                                                             _multiTransomModel.MPanel_Height,
+                                                                             new Control(),
+                                                                             DividerModel.DividerType.Transom,
+                                                                             true,
+                                                                             _frameModel.Frame_Zoom,
+                                                                             Divider_ArticleNo._7536,
+                                                                             _multiTransomModel.MPanel_DisplayWidth,
+                                                                             _multiTransomModel.MPanel_DisplayHeight,
+                                                                             _multiTransomModel,
+                                                                             1,
+                                                                             _frameModel.FrameImageRenderer_Zoom,
+                                                                             _frameModel.Frame_Type.ToString());
+            _multiTransomModel.MPanelLst_Divider.Add(_divTransomModel);
+            Control div_Transom = new Control();
+            div_Transom.Name = "TransomUC_1";
+            _multiTransomModel.MPanelLst_Objects.Add(div_Transom);
+
+
+
+            IPanelModel _panelModel2_Awning = _panelServices.AddPanelModel(suggest_Wd,
+                                                                                  suggest_HT,
+                                                                                  new Control(),
+                                                                                  new UserControl(),
+                                                                                  new UserControl(),
+                                                                                  new UserControl(),
+                                                                                  "Awning Panel",
+                                                                                  true,
+                                                                                  1.0f,
+                                                                                  _frameModel,
+                                                                                  _multiTransomModel,
+                                                                                  AwWD2,
+                                                                                  AwHT2,
+                                                                                  GlazingBead_ArticleNo._2452,
+                                                                                  GlassFilm_Types._None,
+                                                                                  SashProfile_ArticleNo._7581,
+                                                                                  SashReinf_ArticleNo._R675,
+                                                                                  GlassType._Single,
+                                                                                  Espagnolette_ArticleNo._741012,
+                                                                                  Striker_ArticleNo._M89ANT,
+                                                                                  MiddleCloser_ArticleNo._1WC70DB,
+                                                                                  LockingKit_ArticleNo._T24402KMBL,
+                                                                                  MotorizedMech_ArticleNo._41556C,
+                                                                                  2);
+            _panelModel2_Awning.Panel_Placement = "Last";
+            _panelModel2_Awning.Panel_GlassThickness = 6.0f;
+            _panelModel2_Awning.Panel_HandleType = Handle_Type._Rotary;
+            _panelModel2_Awning.Panel_RotaryArtNo = Rotary_HandleArtNo._T511155KMBLSS;
+            _panelModel2_Awning.Panel_ExtensionArtNo = Extension_ArticleNo._612978;
+            _panelModel2_Awning.Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+            
+            _panelModel2_Awning.Panel_ExtensionCornerDriveOptionsVisibility = true;
+            _panelModel2_Awning.Panel_Index_Inside_MPanel = 2;
+            _multiTransomModel.MPanelLst_Panel.Add(_panelModel2_Awning);
+            Control Awning2 = new Control();
+            Awning2.Name = "AwningPanelUC_2";
+            _multiTransomModel.MPanelLst_Objects.Add(Awning2);
+
+
+            #endregion
+
+            //Assert
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1252, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(3375, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1179, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(3302, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(4800, _qouteModel.GlazingSeal_TotalQty);
+            //Assert.AreEqual(111, _qouteModel.Screws_for_Installation);
+
+
+            #region AwningUC_1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel1_Awning.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(1200, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1200, _panelModel1_Awning.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
+            Assert.AreEqual(1200, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(1200, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
+            Assert.AreEqual(1075, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(1075, _panelModel1_Awning.Panel_SashReinfHeight);
+
+            Assert.AreEqual(1079, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(1079, _panelModel1_Awning.Panel_GlassHeight);
+
+
+            //ACCESSORIES & HARWARE
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1_Awning.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel1_Awning.Panel_FrictionStayArtNo);
+            Assert.AreEqual(2, _panelModel1_Awning.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._628806, _panelModel1_Awning.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1_Awning.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel1_Awning.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel1_Awning.Panel_StrikerArtno);
+            Assert.AreEqual(2, _panelModel1_Awning.Panel_StrikerQty);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel1_Awning.Panel_MiddleCloserArtNo);
+
+
+            #endregion
+
+            Assert.AreEqual(Divider_ArticleNo._7536, _divTransomModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R677, _divTransomModel.Div_ReinfArtNo);
+            Assert.AreEqual(1184, _divTransomModel.Div_ExplosionWidth);
+            Assert.AreEqual(1104, _divTransomModel.Div_ReinfWidth);
+
+            #region AwningUC_2
+
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_Awning.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(1200, _panelModel2_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(2100, _panelModel2_Awning.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2_Awning.Panel_SashProfileArtNo);
+            Assert.AreEqual(1200, _panelModel2_Awning.Panel_SashWidth);
+            Assert.AreEqual(2100, _panelModel2_Awning.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2_Awning.Panel_SashReinfArtNo);
+            Assert.AreEqual(1075, _panelModel2_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(1975, _panelModel2_Awning.Panel_SashReinfHeight);
+
+            Assert.AreEqual(1079, _panelModel2_Awning.Panel_GlassWidth);
+            Assert.AreEqual(1979, _panelModel2_Awning.Panel_GlassHeight);
+
+            //ACCESSORIES & HARDWARE
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2_Awning.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2_Awning.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(FrictionStay_ArticleNo._Storm26, _panelModel2_Awning.Panel_FrictionStayArtNo);
+            Assert.AreEqual(4, _panelModel2_Awning.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel2_Awning.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotary, _panelModel2_Awning.Panel_HandleType);
+            Assert.AreEqual(Rotary_HandleArtNo._T511155KMBLSS, _panelModel2_Awning.Panel_RotaryArtNo);
+            Assert.AreEqual(LockingKit_ArticleNo._T24402KMBL, _panelModel2_Awning.Panel_LockingKitArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel2_Awning.Panel_StrikerArtno);
+            Assert.AreEqual(3, _panelModel2_Awning.Panel_StrikerQty);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel2_Awning.Panel_MiddleCloserArtNo);
+
+
+            #endregion
+
+
+
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1252'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7502' AND Size = '3375'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1179'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '3302'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '1200'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(4, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1200'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '2100'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '1075'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(4, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1075'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1975'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            //p1
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2435%' AND
+                             Size = '1200'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2435%' AND
+                             Size = '1200'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+                             Size = '1079'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+                             Size = '1079'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+            //P2
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1200'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '2100'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+                             Size = '1079'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+                             Size = '1079'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+            //ACCESSORIES AND HARDWARES
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(5, dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(6, dr[0]["Qty"]);
+
+
+
+            dr = dt.Select(@"Description LIKE '%SNAP-IN KEEP%' AND
+                             Description LIKE '%0400205%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%FIXED CAM%' AND
+                             Description LIKE '%1481413%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+
+            #endregion
+
+        }
+
 
         [TestMethod]
         public void ChkVar_3Panel_1Awning_2FixWindow()
@@ -6079,274 +6467,10 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
-            #endregion
-        }
-
-
-        [TestMethod]
-        public void ChkVar_2Panel_2AwningWindowUsingExtension()
-        {
-
-            /*
-                                                
-                   __________________
-                   |       /\       |
-                   |      /  \      | 
-                   |     /    \     |         
-                   |    /      \    |   
-                   |   /   P1   \   |   
-                   |  /          \  |          
-                   | /            \ |             
-                   |/______________\|
-                   |       /\       |
-                   |      /  \      | 
-                   |     /    \     |         
-                   |    /      \    |   
-                   |   /   P2   \   |   
-                   |  /          \  |          
-                   | /            \ |             
-                   |/______________\|
-
-             */
-
-            int total_wd = 2170, total_ht = 2990,
-                AwWD1 = 2170, AwHT1 = 500,
-                AwWD2 = 2170, AwHT2 = 2490;
-
-
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._JetBlack, Foil_Color._JetBlack);
-            _qouteModel.Lst_Windoor.Add(_windoorModel);
-
-            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
-                                                                   total_ht,
-                                                                   FrameModel.Frame_Padding.Window,
-                                                                   1.0f,
-                                                                   1.0f,
-                                                                   FrameProfile_ArticleNo._7502,
-                                                                   _windoorModel,
-                                                                   1);
-            _windoorModel.lst_frame.Add(_frameModel);
-
-            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
-                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
-
-            Control frame = new Control();
-            frame.Name = _frameModel.Frame_Name;
-
-
-            IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
-                                                                                         ht,
-                                                                                         total_wd,
-                                                                                         total_ht,
-                                                                                         frame,
-                                                                                         new UserControl(),
-                                                                                         _frameModel,
-                                                                                         true,
-                                                                                         FlowDirection.TopDown,
-                                                                                         _frameModel.Frame_Zoom,
-                                                                                         1,
-                                                                                         DockStyle.Fill,
-                                                                                         1,
-                                                                                         0,
-                                                                                          null,
-                                                                                         _frameModel.FrameImageRenderer_Zoom,
-                                                                                         "",
-                                                                                         2);
-            _multiTransomModel.MPanel_Index_Inside_MPanel = 0;
-            _frameModel.Lst_MultiPanel.Add(_multiTransomModel);
-            Control multiMullion = new Control();
-            multiMullion.Name = _multiTransomModel.MPanel_Name;
-
-
-            int divSize = 26;
-            int multiTransom_totalPanelCount = _multiTransomModel.MPanel_Divisions + 1;
-            int suggest_Wd = _multiTransomModel.MPanel_Width,
-                suggest_HT = (((_multiTransomModel.MPanel_Height) - (divSize * _multiTransomModel.MPanel_Divisions)) / multiTransom_totalPanelCount);
-
-            #region MultiMullionPlatform (2)
-
-            IPanelModel _panelModel1_Awning = _panelServices.AddPanelModel(suggest_Wd,
-                                                                                  suggest_HT,
-                                                                                  new Control(),
-                                                                                  new UserControl(),
-                                                                                  new UserControl(),
-                                                                                  new UserControl(),
-                                                                                  "Awning Panel",
-                                                                                  true,
-                                                                                  1.0f,
-                                                                                  _frameModel,
-                                                                                  _multiTransomModel,
-                                                                                  AwWD1,
-                                                                                  AwHT1,
-                                                                                  GlazingBead_ArticleNo._2452,
-                                                                                  GlassFilm_Types._None,
-                                                                                  SashProfile_ArticleNo._7581,
-                                                                                  SashReinf_ArticleNo._R675,
-                                                                                  GlassType._Single,
-                                                                                  Espagnolette_ArticleNo._628806,
-                                                                                  Striker_ArticleNo._M89ANT,
-                                                                                  MiddleCloser_ArticleNo._1WC70DB,
-                                                                                  LockingKit_ArticleNo._None,
-                                                                                  MotorizedMech_ArticleNo._41556C,
-                                                                                  1);
-            _panelModel1_Awning.Panel_Placement = "First";
-            _panelModel1_Awning.Panel_GlassThickness = 6.0f;
-            _panelModel1_Awning.Panel_HandleType = Handle_Type._Rotoswing;
-            _panelModel1_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773452;
-            _panelModel1_Awning.Panel_Index_Inside_MPanel = 0;
-            _multiTransomModel.MPanelLst_Panel.Add(_panelModel1_Awning);
-            Control Awning = new Control();
-            Awning.Name = "AwningPanelUC_1";
-            _multiTransomModel.MPanelLst_Objects.Add(Awning);
-
-            IDividerModel _divTransomModel = _dividerServices.AddDividerModel(divSize,
-                                                                             _multiTransomModel.MPanel_Height,
-                                                                             new Control(),
-                                                                             DividerModel.DividerType.Transom,
-                                                                             true,
-                                                                             _frameModel.Frame_Zoom,
-                                                                             Divider_ArticleNo._7536,
-                                                                             _multiTransomModel.MPanel_DisplayWidth,
-                                                                             _multiTransomModel.MPanel_DisplayHeight,
-                                                                             _multiTransomModel,
-                                                                             1,
-                                                                             _frameModel.FrameImageRenderer_Zoom,
-                                                                             _frameModel.Frame_Type.ToString());
-            _multiTransomModel.MPanelLst_Divider.Add(_divTransomModel);
-            Control div_Transom = new Control();
-            div_Transom.Name = "TransomUC_1";
-            _multiTransomModel.MPanelLst_Objects.Add(div_Transom);
-
-
-
-            IPanelModel _panelModel2_Awning = _panelServices.AddPanelModel(suggest_Wd,
-                                                                                  suggest_HT,
-                                                                                  new Control(),
-                                                                                  new UserControl(),
-                                                                                  new UserControl(),
-                                                                                  new UserControl(),
-                                                                                  "Awning Panel",
-                                                                                  true,
-                                                                                  1.0f,
-                                                                                  _frameModel,
-                                                                                  _multiTransomModel,
-                                                                                  AwWD2,
-                                                                                  AwHT2,
-                                                                                  GlazingBead_ArticleNo._2452,
-                                                                                  GlassFilm_Types._None,
-                                                                                  SashProfile_ArticleNo._7581,
-                                                                                  SashReinf_ArticleNo._R675,
-                                                                                  GlassType._Single,
-                                                                                  Espagnolette_ArticleNo._741012,
-                                                                                  Striker_ArticleNo._M89ANT,
-                                                                                  MiddleCloser_ArticleNo._1WC70DB,
-                                                                                  LockingKit_ArticleNo._T24402KMBL,
-                                                                                  MotorizedMech_ArticleNo._41556C,
-                                                                                  2);
-            _panelModel2_Awning.Panel_Placement = "Last";
-            _panelModel2_Awning.Panel_GlassThickness = 6.0f;
-            _panelModel2_Awning.Panel_HandleType = Handle_Type._Rotary;
-            _panelModel2_Awning.Panel_RotaryArtNo = Rotary_HandleArtNo._T511155KMBLSS;
-            _panelModel2_Awning.Panel_ExtensionArtNo = Extension_ArticleNo._612978;
-            _panelModel2_Awning.Panel_ExtensionCornerDriveOptionsVisibility = true;
-            _panelModel2_Awning.Panel_Index_Inside_MPanel = 2;
-            _multiTransomModel.MPanelLst_Panel.Add(_panelModel2_Awning);
-            Control Awning2 = new Control();
-            Awning2.Name = "AwningPanelUC_2";
-            _multiTransomModel.MPanelLst_Objects.Add(Awning2);
 
 
             #endregion
-
-            //Assert
-
-            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
-
-            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
-            Assert.AreEqual(2175, _frameModel.Frame_ExplosionWidth);
-            Assert.AreEqual(2995, _frameModel.Frame_ExplosionHeight);
-            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
-            Assert.AreEqual(2102, _frameModel.Frame_ReinfWidth);
-            Assert.AreEqual(2922, _frameModel.Frame_ReinfHeight);
-            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
-            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
-            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
-            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
-            //Assert.AreEqual(123, _qouteModel.Screws_for_Installation);
-
-
-            #region AwningUC_1
-
-            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1_Awning.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(2123, _panelModel1_Awning.Panel_GlazingBeadWidth);
-            Assert.AreEqual(465, _panelModel1_Awning.Panel_GlazingBeadHeight);
-
-            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
-            Assert.AreEqual(465, _panelModel1_Awning.Panel_SashHeight);
-            Assert.AreEqual(2123, _panelModel1_Awning.Panel_SashWidth);
-            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
-            Assert.AreEqual(1998, _panelModel1_Awning.Panel_SashReinfWidth);
-            Assert.AreEqual(340, _panelModel1_Awning.Panel_SashReinfHeight);
-
-            Assert.AreEqual(2002, _panelModel1_Awning.Panel_GlassWidth);
-            Assert.AreEqual(344, _panelModel1_Awning.Panel_GlassHeight);
-
-
-            //ACCESSORIES & HARWARE
-            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
-            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1_Awning.Panel_CoverProfileArtNo2);
-            Assert.AreEqual(FrictionStay_ArticleNo._477254, _panelModel1_Awning.Panel_FrictionStayArtNo);
-            Assert.AreEqual(1, _panelModel1_Awning.Panel_PlasticWedgeQty);
-            Assert.AreEqual(Espagnolette_ArticleNo._628806, _panelModel1_Awning.Panel_EspagnoletteArtNo);
-            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1_Awning.Panel_HandleType);
-            Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel1_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel1_Awning.Panel_StrikerArtno);
-            Assert.AreEqual(2, _panelModel1_Awning.Panel_StrikerQty);
-            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel1_Awning.Panel_MiddleCloserArtNo);
-         
-
-            #endregion
-
-            Assert.AreEqual(Divider_ArticleNo._7536, _divTransomModel.Div_ArtNo);
-            Assert.AreEqual(DividerReinf_ArticleNo._R677, _divTransomModel.Div_ReinfArtNo);
-            Assert.AreEqual(2107, _divTransomModel.Div_ExplosionWidth);
-            Assert.AreEqual(2027, _divTransomModel.Div_ReinfWidth);
-
-            #region AwningUC_2
-
-
-            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_Awning.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(2123, _panelModel2_Awning.Panel_GlazingBeadWidth);
-            Assert.AreEqual(2455, _panelModel2_Awning.Panel_GlazingBeadHeight);
-
-            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2_Awning.Panel_SashProfileArtNo);
-            Assert.AreEqual(2123, _panelModel2_Awning.Panel_SashWidth);
-            Assert.AreEqual(2455, _panelModel2_Awning.Panel_SashHeight);
-
-            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2_Awning.Panel_SashReinfArtNo);
-            Assert.AreEqual(1998, _panelModel2_Awning.Panel_SashReinfWidth);
-            Assert.AreEqual(2330, _panelModel2_Awning.Panel_SashReinfHeight);
-
-            Assert.AreEqual(2002, _panelModel2_Awning.Panel_GlassWidth);
-            Assert.AreEqual(2334, _panelModel2_Awning.Panel_GlassHeight);
-
-            //ACCESSORIES & HARDWARE
-            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2_Awning.Panel_CoverProfileArtNo);
-            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2_Awning.Panel_CoverProfileArtNo2);
-           // Assert.AreEqual(FrictionStay_ArticleNo._Storm26, _panelModel2_Awning.Panel_FrictionStayArtNo);
-            //Assert.AreEqual(4, _panelModel2_Awning.Panel_PlasticWedgeQty);
-            Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel2_Awning.Panel_EspagnoletteArtNo);
-            Assert.AreEqual(Handle_Type._Rotary, _panelModel2_Awning.Panel_HandleType);
-            Assert.AreEqual(Rotary_HandleArtNo._T511155KMBLSS,_panelModel2_Awning.Panel_RotaryArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel2_Awning.Panel_StrikerArtno);
-            Assert.AreEqual(3, _panelModel2_Awning.Panel_StrikerQty);
-            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel2_Awning.Panel_MiddleCloserArtNo);
-
-
-            #endregion
-
-
-        }
+        }  
 
 
 
