@@ -12,15 +12,14 @@ using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
-    public partial class PP_ExtensionUC : UserControl, IPP_ExtensionUC
+    public partial class PP_ExtensionPropertyUC : UserControl, IPP_ExtensionPropertyUC
     {
-        public PP_ExtensionUC()
+        public PP_ExtensionPropertyUC()
         {
             InitializeComponent();
         }
 
         public event EventHandler PPExtensionUCLoadEventRaised;
-        public event EventHandler btnaddTopExt2ClickedEventRaised;
 
         private void PP_ExtensionUC_Load(object sender, EventArgs e)
         {
@@ -40,7 +39,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
-
+            num_TopExtQty.DataBindings.Add(ModelBinding["Panel_ExtTopQty"]);
         }
 
         private void chk_ToAdd_TopExt2_CheckedChanged(object sender, EventArgs e)

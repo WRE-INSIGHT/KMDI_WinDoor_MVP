@@ -64,7 +64,6 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler CmbRotoswingArtNoSelectedValueChangedEventRaised;
         public event EventHandler CmbRotaryArtNoSelectedValueChangedEventRaised;
         public event EventHandler ChkMotorizedCheckChangedEventRaised;
-        public event EventHandler CmbMotorizedMechSelectedValueChangedEventRaised;
         public event EventHandler CmbExtensionSelectedValueChangedEventRaised;
         public event EventHandler CmbCornerDriveSelectedValueChangedEventRaised;
         public event EventHandler CmbStrikerSelectedValueChangedEventRaised;
@@ -74,116 +73,116 @@ namespace PresentationLayer.Views.UserControls
             pnum_Width.Maximum = decimal.MaxValue;
             pnum_Height.Maximum = decimal.MaxValue;
             num_BladeCount.Maximum = decimal.MaxValue;
-            num_TopExtQty.Maximum = decimal.MaxValue;
-            num_BotExtQty.Maximum = decimal.MaxValue;
-            num_LeftExtQty.Maximum = decimal.MaxValue;
-            num_RightExtQty.Maximum = decimal.MaxValue;
+            //num_TopExtQty.Maximum = decimal.MaxValue;
+            //num_BotExtQty.Maximum = decimal.MaxValue;
+            //num_LeftExtQty.Maximum = decimal.MaxValue;
+            //num_RightExtQty.Maximum = decimal.MaxValue;
 
-            List<GlazingBead_ArticleNo> gArtNo = new List<GlazingBead_ArticleNo>();
-            foreach (GlazingBead_ArticleNo item in GlazingBead_ArticleNo.GetAll())
-            {
-                gArtNo.Add(item);
-            }
-            cmb_GlazingArtNo.DataSource = gArtNo;
+            //List<GlazingBead_ArticleNo> gArtNo = new List<GlazingBead_ArticleNo>();
+            //foreach (GlazingBead_ArticleNo item in GlazingBead_ArticleNo.GetAll())
+            //{
+            //    gArtNo.Add(item);
+            //}
+            //cmb_GlazingArtNo.DataSource = gArtNo;
 
-            List<GlassFilm_Types> gFilm = new List<GlassFilm_Types>();
-            foreach (GlassFilm_Types item in GlassFilm_Types.GetAll())
-            {
-                gFilm.Add(item);
-            }
-            cmb_FilmType.DataSource = gFilm;
+            //List<GlassFilm_Types> gFilm = new List<GlassFilm_Types>();
+            //foreach (GlassFilm_Types item in GlassFilm_Types.GetAll())
+            //{
+            //    gFilm.Add(item);
+            //}
+            //cmb_FilmType.DataSource = gFilm;
 
-            List<SashProfile_ArticleNo> sash = new List<SashProfile_ArticleNo>();
-            foreach (SashProfile_ArticleNo item in SashProfile_ArticleNo.GetAll())
-            {
-                sash.Add(item);
-            }
-            cmb_SashProfile.DataSource = sash;
+            //List<SashProfile_ArticleNo> sash = new List<SashProfile_ArticleNo>();
+            //foreach (SashProfile_ArticleNo item in SashProfile_ArticleNo.GetAll())
+            //{
+            //    sash.Add(item);
+            //}
+            //cmb_SashProfile.DataSource = sash;
 
-            List<SashReinf_ArticleNo> sashReinf = new List<SashReinf_ArticleNo>();
-            foreach (SashReinf_ArticleNo item in SashReinf_ArticleNo.GetAll())
-            {
-                sashReinf.Add(item);
-            }
-            cmb_SashReinf.DataSource = sashReinf;
+            //List<SashReinf_ArticleNo> sashReinf = new List<SashReinf_ArticleNo>();
+            //foreach (SashReinf_ArticleNo item in SashReinf_ArticleNo.GetAll())
+            //{
+            //    sashReinf.Add(item);
+            //}
+            //cmb_SashReinf.DataSource = sashReinf;
 
-            List<GlassType> gType = new List<GlassType>();
-            foreach (GlassType item in GlassType.GetAll())
-            {
-                gType.Add(item);
-            }
-            cmb_GlassType.DataSource = gType;
+            //List<GlassType> gType = new List<GlassType>();
+            //foreach (GlassType item in GlassType.GetAll())
+            //{
+            //    gType.Add(item);
+            //}
+            //cmb_GlassType.DataSource = gType;
 
-            List<Handle_Type> hType = new List<Handle_Type>();
-            foreach (Handle_Type item in Handle_Type.GetAll())
-            {
-                hType.Add(item);
-            }
-            cmb_HandleType.DataSource = hType;
+            //List<Handle_Type> hType = new List<Handle_Type>();
+            //foreach (Handle_Type item in Handle_Type.GetAll())
+            //{
+            //    hType.Add(item);
+            //}
+            //cmb_HandleType.DataSource = hType;
 
-            List<Espagnolette_ArticleNo> espArtNo = new List<Espagnolette_ArticleNo>();
-            foreach (Espagnolette_ArticleNo item in Espagnolette_ArticleNo.GetAll())
-            {
-                espArtNo.Add(item);
-            }
-            cmb_Espagnolette.DataSource = espArtNo;
+            //List<Espagnolette_ArticleNo> espArtNo = new List<Espagnolette_ArticleNo>();
+            //foreach (Espagnolette_ArticleNo item in Espagnolette_ArticleNo.GetAll())
+            //{
+            //    espArtNo.Add(item);
+            //}
+            //cmb_Espagnolette.DataSource = espArtNo;
 
-            List<Striker_ArticleNo> strArtNo = new List<Striker_ArticleNo>();
-            foreach (Striker_ArticleNo item in Striker_ArticleNo.GetAll())
-            {
-                strArtNo.Add(item);
-            }
-            cmb_Striker.DataSource = strArtNo;
+            //List<Striker_ArticleNo> strArtNo = new List<Striker_ArticleNo>();
+            //foreach (Striker_ArticleNo item in Striker_ArticleNo.GetAll())
+            //{
+            //    strArtNo.Add(item);
+            //}
+            //cmb_Striker.DataSource = strArtNo;
 
-            List<MiddleCloser_ArticleNo> midArtNo = new List<MiddleCloser_ArticleNo>();
-            foreach (MiddleCloser_ArticleNo item in MiddleCloser_ArticleNo.GetAll())
-            {
-                midArtNo.Add(item);
-            }
-            cmb_MiddleCloser.DataSource = midArtNo;
+            //List<MiddleCloser_ArticleNo> midArtNo = new List<MiddleCloser_ArticleNo>();
+            //foreach (MiddleCloser_ArticleNo item in MiddleCloser_ArticleNo.GetAll())
+            //{
+            //    midArtNo.Add(item);
+            //}
+            //cmb_MiddleCloser.DataSource = midArtNo;
 
-            List<LockingKit_ArticleNo> lockArtNo = new List<LockingKit_ArticleNo>();
-            foreach (LockingKit_ArticleNo item in LockingKit_ArticleNo.GetAll())
-            {
-                lockArtNo.Add(item);
-            }
-            cmb_LockingKit.DataSource = lockArtNo;
+            //List<LockingKit_ArticleNo> lockArtNo = new List<LockingKit_ArticleNo>();
+            //foreach (LockingKit_ArticleNo item in LockingKit_ArticleNo.GetAll())
+            //{
+            //    lockArtNo.Add(item);
+            //}
+            //cmb_LockingKit.DataSource = lockArtNo;
 
 
-            List<Rotoswing_HandleArtNo> rotoswing = new List<Rotoswing_HandleArtNo>();
-            foreach (Rotoswing_HandleArtNo item in Rotoswing_HandleArtNo.GetAll())
-            {
-                rotoswing.Add(item);
-            }
-            cmb_RotoswingNo.DataSource = rotoswing;
+            //List<Rotoswing_HandleArtNo> rotoswing = new List<Rotoswing_HandleArtNo>();
+            //foreach (Rotoswing_HandleArtNo item in Rotoswing_HandleArtNo.GetAll())
+            //{
+            //    rotoswing.Add(item);
+            //}
+            //cmb_RotoswingNo.DataSource = rotoswing;
 
-            List<Rotary_HandleArtNo> rotary = new List<Rotary_HandleArtNo>();
-            foreach (Rotary_HandleArtNo item in Rotary_HandleArtNo.GetAll())
-            {
-                rotary.Add(item);
-            }
-            cmb_RotaryArtNo.DataSource = rotary;
+            //List<Rotary_HandleArtNo> rotary = new List<Rotary_HandleArtNo>();
+            //foreach (Rotary_HandleArtNo item in Rotary_HandleArtNo.GetAll())
+            //{
+            //    rotary.Add(item);
+            //}
+            //cmb_RotaryArtNo.DataSource = rotary;
 
-            List<MotorizedMech_ArticleNo> motormech = new List<MotorizedMech_ArticleNo>();
-            foreach (MotorizedMech_ArticleNo item in MotorizedMech_ArticleNo.GetAll())
-            {
-                motormech.Add(item);
-            }
-            cmb_MotorizedMechanism.DataSource = motormech;
+            //List<MotorizedMech_ArticleNo> motormech = new List<MotorizedMech_ArticleNo>();
+            //foreach (MotorizedMech_ArticleNo item in MotorizedMech_ArticleNo.GetAll())
+            //{
+            //    motormech.Add(item);
+            //}
+            //cmb_MotorizedMechanism.DataSource = motormech;
 
-            List<Extension_ArticleNo> extArtNo = new List<Extension_ArticleNo>();
-            foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
-            {
-                extArtNo.Add(item);
-            }
-            cmb_Extension.DataSource = extArtNo;
+            //List<Extension_ArticleNo> extArtNo = new List<Extension_ArticleNo>();
+            //foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
+            //{
+            //    extArtNo.Add(item);
+            //}
+            //cmb_Extension.DataSource = extArtNo;
 
-            List<CornerDrive_ArticleNo> cdArtNo = new List<CornerDrive_ArticleNo>();
-            foreach (CornerDrive_ArticleNo item in CornerDrive_ArticleNo.GetAll())
-            {
-                cdArtNo.Add(item);
-            }
-            cmb_CornerDrive.DataSource = cdArtNo;
+            //List<CornerDrive_ArticleNo> cdArtNo = new List<CornerDrive_ArticleNo>();
+            //foreach (CornerDrive_ArticleNo item in CornerDrive_ArticleNo.GetAll())
+            //{
+            //    cdArtNo.Add(item);
+            //}
+            //cmb_CornerDrive.DataSource = cdArtNo;
 
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
@@ -198,37 +197,37 @@ namespace PresentationLayer.Views.UserControls
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["PanelGlass_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
-            pnl_Sash.DataBindings.Add(ModelBinding["Panel_SashPropertyVisibility"]);
-            cmb_FilmType.DataBindings.Add(ModelBinding["Panel_GlassFilm"]);
-            cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
-            cmb_SashProfile.DataBindings.Add(ModelBinding["Panel_SashProfileArtNo"]);
-            cmb_SashReinf.DataBindings.Add(ModelBinding["Panel_SashReinfArtNo"]);
-            cmb_GlassType.DataBindings.Add(ModelBinding["Panel_GlassType"]);
-            lbl_GlassThicknessDesc.DataBindings.Add(ModelBinding["Panel_GlassThicknessDesc"]);
-            cmb_HandleType.DataBindings.Add(ModelBinding["Panel_HandleType"]);
+            //pnl_Sash.DataBindings.Add(ModelBinding["Panel_SashPropertyVisibility"]);
+            //cmb_FilmType.DataBindings.Add(ModelBinding["Panel_GlassFilm"]);
+            //cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
+            //cmb_SashProfile.DataBindings.Add(ModelBinding["Panel_SashProfileArtNo"]);
+            //cmb_SashReinf.DataBindings.Add(ModelBinding["Panel_SashReinfArtNo"]);
+            //cmb_GlassType.DataBindings.Add(ModelBinding["Panel_GlassType"]);
+            //lbl_GlassThicknessDesc.DataBindings.Add(ModelBinding["Panel_GlassThicknessDesc"]);
+            //cmb_HandleType.DataBindings.Add(ModelBinding["Panel_HandleType"]);
             this.DataBindings.Add(ModelBinding["Panel_PropertyHeight"]);
-            flp_HandleOptions.DataBindings.Add(ModelBinding["Panel_HandleOptionsVisibility"]);
-            pnl_RotoswingOptions.DataBindings.Add(ModelBinding["Panel_RotoswingOptionsVisibility"]);
-            pnl_RotaryOptions.DataBindings.Add(ModelBinding["Panel_RotaryOptionsVisibility"]);
-            flp_HandleOptions.DataBindings.Add(ModelBinding["Panel_HandleOptionsHeight"]);
-            cmb_Espagnolette.DataBindings.Add(ModelBinding["Panel_EspagnoletteArtNo"]);
-            cmb_Striker.DataBindings.Add(ModelBinding["Panel_StrikerArtno"]);
-            cmb_MiddleCloser.DataBindings.Add(ModelBinding["Panel_MiddleCloserArtNo"]);
-            cmb_LockingKit.DataBindings.Add(ModelBinding["Panel_LockingKitArtNo"]);
-            cmb_RotoswingNo.DataBindings.Add(ModelBinding["Panel_RotoswingArtNo"]);
-            cmb_RotaryArtNo.DataBindings.Add(ModelBinding["Panel_RotaryArtNo"]);
-            chk_Motorized.DataBindings.Add(ModelBinding["Panel_MotorizedOptionVisibility"]);
-            cmb_MotorizedMechanism.DataBindings.Add(ModelBinding["Panel_MotorizedMechArtNo"]);
-            pnl_motorizedOptions.DataBindings.Add(ModelBinding["Panel_MotorizedOptionVisibility2"]);
-            pnl_motorized.DataBindings.Add(ModelBinding["Panel_MotorizedpnlOptionVisibility"]);
-            cmb_Extension.DataBindings.Add(ModelBinding["Panel_ExtensionArtNo"]);
-            cmb_CornerDrive.DataBindings.Add(ModelBinding["Panel_CornerDriveArtNo"]);
-            pnl_ExtensionCornerDrive.DataBindings.Add(ModelBinding["Panel_ExtensionCornerDriveOptionsVisibility"]);
-            pnl_RotoswingOptions.DataBindings.Add(ModelBinding["Panel_RotoswingOptionsHeight"]);
-            num_TopExtQty.DataBindings.Add(ModelBinding["Panel_ExtTopQty"]);
-            num_BotExtQty.DataBindings.Add(ModelBinding["Panel_ExtBotQty"]);
-            num_LeftExtQty.DataBindings.Add(ModelBinding["Panel_ExtLeftQty"]);
-            num_RightExtQty.DataBindings.Add(ModelBinding["Panel_ExtRightQty"]);
+            //flp_HandleOptions.DataBindings.Add(ModelBinding["Panel_HandleOptionsVisibility"]);
+            //pnl_RotoswingOptions.DataBindings.Add(ModelBinding["Panel_RotoswingOptionsVisibility"]);
+            //pnl_RotaryOptions.DataBindings.Add(ModelBinding["Panel_RotaryOptionsVisibility"]);
+            //flp_HandleOptions.DataBindings.Add(ModelBinding["Panel_HandleOptionsHeight"]);
+            //cmb_Espagnolette.DataBindings.Add(ModelBinding["Panel_EspagnoletteArtNo"]);
+            //cmb_Striker.DataBindings.Add(ModelBinding["Panel_StrikerArtno"]);
+            //cmb_MiddleCloser.DataBindings.Add(ModelBinding["Panel_MiddleCloserArtNo"]);
+            //cmb_LockingKit.DataBindings.Add(ModelBinding["Panel_LockingKitArtNo"]);
+            //cmb_RotoswingNo.DataBindings.Add(ModelBinding["Panel_RotoswingArtNo"]);
+            //cmb_RotaryArtNo.DataBindings.Add(ModelBinding["Panel_RotaryArtNo"]);
+            //chk_Motorized.DataBindings.Add(ModelBinding["Panel_MotorizedOptionVisibility"]);
+            //cmb_MotorizedMechanism.DataBindings.Add(ModelBinding["Panel_MotorizedMechArtNo"]);
+            //pnl_motorizedOptions.DataBindings.Add(ModelBinding["Panel_MotorizedOptionVisibility2"]);
+            //pnl_motorized.DataBindings.Add(ModelBinding["Panel_MotorizedpnlOptionVisibility"]);
+            //cmb_Extension.DataBindings.Add(ModelBinding["Panel_ExtensionArtNo"]);
+            //cmb_CornerDrive.DataBindings.Add(ModelBinding["Panel_CornerDriveArtNo"]);
+            //pnl_ExtensionCornerDrive.DataBindings.Add(ModelBinding["Panel_ExtensionCornerDriveOptionsVisibility"]);
+            //pnl_RotoswingOptions.DataBindings.Add(ModelBinding["Panel_RotoswingOptionsHeight"]);
+            //num_TopExtQty.DataBindings.Add(ModelBinding["Panel_ExtTopQty"]);
+            //num_BotExtQty.DataBindings.Add(ModelBinding["Panel_ExtBotQty"]);
+            //num_LeftExtQty.DataBindings.Add(ModelBinding["Panel_ExtLeftQty"]);
+            //num_RightExtQty.DataBindings.Add(ModelBinding["Panel_ExtRightQty"]);
         }
 
         private void chk_Orientation_CheckedChanged(object sender, EventArgs e)
@@ -271,15 +270,15 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseEvent(sender, CmbHandleTypeSelectedValueChangedEventRaised, e);
         }
 
-        public Panel GetPnlRotoswingOptions()
-        {
-            return pnl_RotoswingOptions;
-        }
+        //public Panel GetPnlRotoswingOptions()
+        //{
+        //    return pnl_RotoswingOptions;
+        //}
 
-        public Panel GetPnlRotaryOptions()
-        {
-            return pnl_RotaryOptions;
-        }
+        //public Panel GetPnlRotaryOptions()
+        //{
+        //    return pnl_RotaryOptions;
+        //}
 
         private void cmb_Espagnolette_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -310,12 +309,7 @@ namespace PresentationLayer.Views.UserControls
         {
             EventHelpers.RaiseEvent(sender, ChkMotorizedCheckChangedEventRaised, e);
         }
-
-        private void cmb_MotorizedMechanism_SelectedValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, CmbMotorizedMechSelectedValueChangedEventRaised, e);
-        }
-
+        
         private void cmb_Extension_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbExtensionSelectedValueChangedEventRaised, e);
@@ -329,6 +323,11 @@ namespace PresentationLayer.Views.UserControls
         private void cmb_Striker_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbStrikerSelectedValueChangedEventRaised, e);
+        }
+
+        public FlowLayoutPanel GetPanelSpecsFLP()
+        {
+            return flp_PanelSpecs;
         }
     }
 }

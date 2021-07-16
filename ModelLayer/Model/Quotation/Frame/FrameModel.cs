@@ -376,8 +376,19 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             Frame_ExplosionWidth = _frameWidth + 5;
             Frame_ExplosionHeight = _frameHeight + 5;
-            Frame_ReinfWidth = _frameWidth - (29 * 2) - 10;
-            Frame_ReinfHeight = _frameHeight - (29 * 2) - 10;
+
+            int reinf_size = 0;
+            if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+            {
+                reinf_size = 29;
+            }
+            else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+            {
+                reinf_size = 43;
+            }
+
+            Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
+            Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
         }
 
         public void AdjustPropertyPanelHeight(string objtype, string mode)
@@ -386,8 +397,8 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 if (mode == "add")
                 {
-                    FrameProp_Height += constants.panel_propertyHeight_default
-                                        - constants.panel_property_motorizedOptionsheight;
+                    FrameProp_Height += constants.panel_propertyHeight_default;
+                                        //- constants.panel_property_motorizedOptionsheight;
                 }
                 else if (mode == "addWithoutExtCordrive")
                 {
@@ -427,13 +438,13 @@ namespace ModelLayer.Model.Quotation.Frame
                                         - constants.panel_property_extCorDriveOptionsheight_default;
 
                 }
-                else if (mode == "addmotorized")
+                else if (mode == "addCmbMotorized")
                 {
-                    FrameProp_Height += constants.panel_property_motorizedOptionsheight;
+                    FrameProp_Height += constants.panel_property_motorizedCmbOptionsheight;
                 }
-                else if (mode == "minusmotorized")
+                else if (mode == "minusCmbMotorized")
                 {
-                    FrameProp_Height -= constants.panel_property_motorizedOptionsheight;
+                    FrameProp_Height -= constants.panel_property_motorizedCmbOptionsheight;
                 }
                 else if (mode == "addHandle")
                 {
@@ -451,6 +462,18 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_extCorDriveOptionsheight_default;
                 }
+                else if (mode == "addChkMotorized")
+                {
+                    FrameProp_Height += constants.panel_property_motorizedChkOptionsheight;
+                }
+                else if (mode == "addSash")
+                {
+                    FrameProp_Height += constants.panel_property_sashPanelHeight;
+                }
+                else if (mode == "addGlass")
+                {
+                    FrameProp_Height += constants.panel_property_glassOptionsHeight;
+                }
             }
             else if (objtype == "FxdNone")
             {
@@ -459,7 +482,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     FrameProp_Height -= constants.panel_propertyHeight_default 
                                         - constants.panel_property_sashPanelHeight
                                         - constants.panel_property_handleOptionsHeight
-                                        - constants.panel_property_pnlmotorizedheight
+                                        - constants.panel_property_motorizedChkOptionsheight
                                         - constants.panel_property_motorizedOptionsheight
                                         - constants.panel_property_extCorDriveOptionsheight_default;
                 }
@@ -468,7 +491,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     FrameProp_Height += constants.panel_propertyHeight_default 
                                         - constants.panel_property_sashPanelHeight
                                         - constants.panel_property_handleOptionsHeight
-                                        - constants.panel_property_pnlmotorizedheight
+                                        - constants.panel_property_motorizedChkOptionsheight
                                         - constants.panel_property_motorizedOptionsheight
                                         - constants.panel_property_extCorDriveOptionsheight_default;
                 }
@@ -479,7 +502,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_propertyHeight_default 
                                         - constants.panel_property_handleOptionsHeight
-                                        - constants.panel_property_pnlmotorizedheight
+                                        - constants.panel_property_motorizedChkOptionsheight
                                         - constants.panel_property_motorizedOptionsheight
                                         - constants.panel_property_extCorDriveOptionsheight_default;
                 }
@@ -487,7 +510,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height += constants.panel_propertyHeight_default 
                                         - constants.panel_property_handleOptionsHeight
-                                        - constants.panel_property_pnlmotorizedheight
+                                        - constants.panel_property_motorizedChkOptionsheight
                                         - constants.panel_property_motorizedOptionsheight
                                         - constants.panel_property_extCorDriveOptionsheight_default;
                 }

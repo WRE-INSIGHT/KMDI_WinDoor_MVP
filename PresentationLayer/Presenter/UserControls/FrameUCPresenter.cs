@@ -315,14 +315,27 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Awning Panel")
                 {
-                    if (_panelModel.Panel_ExtensionCornerDriveOptionsVisibility == true)
-                    {
-                        _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    }
-                    else if (_panelModel.Panel_ExtensionCornerDriveOptionsVisibility == false)
-                    {
-                        _frameModel.AdjustPropertyPanelHeight("Panel", "addWithoutExtCordrive");
-                    }
+                    //if (_panelModel.Panel_ExtensionCornerDriveOptionsVisibility == true)
+                    //{
+                    //    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    //}
+                    //else if (_panelModel.Panel_ExtensionCornerDriveOptionsVisibility == false)
+                    //{
+                    //    _frameModel.AdjustPropertyPanelHeight("Panel", "addWithoutExtCordrive");
+                    //}
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    _panelModel.AdjustPropertyPanelHeight("addSash");
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
+                    _panelModel.AdjustPropertyPanelHeight("addHandle");
+
+                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC, 
                                                                                   _panelModel, 
                                                                                   _frameModel, 

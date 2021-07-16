@@ -19,7 +19,6 @@ namespace PresentationLayer.Presenter
         IGlassThicknessListView _glassThicknessListView;
 
         private IPanelModel _panelModel;
-        private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private DataTable _glassThicknessDT;
 
         CommonFunctions commonfunc = new CommonFunctions();
@@ -136,7 +135,6 @@ namespace PresentationLayer.Presenter
         }
 
         public IGlassThicknessListPresenter GetNewInstance(IUnityContainer unityC,
-                                                           IPanelPropertiesUCPresenter panelPropertiesUCP,
                                                            DataTable glassThicknessDT,
                                                            IPanelModel panelModel)
         {
@@ -144,7 +142,6 @@ namespace PresentationLayer.Presenter
                 .RegisterType<IGlassThicknessListView, GlassThicknessListView>()
                 .RegisterType<IGlassThicknessListPresenter, GlassThicknessListPresenter>();
             GlassThicknessListPresenter presenter = unityC.Resolve<GlassThicknessListPresenter>();
-            presenter._panelPropertiesUCP = panelPropertiesUCP;
             presenter._glassThicknessDT = glassThicknessDT;
             presenter._panelModel = panelModel;
 

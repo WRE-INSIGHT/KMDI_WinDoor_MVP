@@ -4,9 +4,9 @@ using Unity;
 
 namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules
 {
-    public interface IPP_ExtensionUCPrenseter
+    public interface IPP_HandlePropertyUCPresenter
     {
-        IPP_ExtensionUCPrenseter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
-        IPP_ExtensionUC GetPPExtensionUC();
+        IPP_HandlePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
+        IPP_HandlePropertyUC GetPPHandlePropertyUC();
     }
 }
