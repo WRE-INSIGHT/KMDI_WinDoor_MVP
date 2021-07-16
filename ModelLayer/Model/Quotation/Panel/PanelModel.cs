@@ -1236,6 +1236,20 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public int Panel_MotorizedMechQty { get; set; }
 
+        private int _panelExtensionPropertyHeight;
+        public int Panel_ExtensionPropertyHeight
+        {
+            get
+            {
+                return _panelExtensionPropertyHeight;
+            }
+            set
+            {
+                _panelExtensionPropertyHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public void AdjustPropertyPanelHeight(string mode)
         {
             if (mode == "addChkMotorized")
@@ -1266,6 +1280,34 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_handleOptionsHeight;
             }
+            else if (mode == "addRotoswing")
+            {
+                Panel_PropertyHeight += constants.panel_property_rotoswingOptionsheight_default;
+            }
+            else if (mode == "minusRotoswing")
+            {
+                Panel_PropertyHeight -= constants.panel_property_rotoswingOptionsheight_default;
+            }
+            else if (mode == "addRotary")
+            {
+                Panel_PropertyHeight += constants.panel_property_rotaryOptionsheight_default;
+            }
+            else if (mode == "minusRotary")
+            {
+                Panel_PropertyHeight -= constants.panel_property_rotaryOptionsheight_default;
+            }
+            else if (mode == "addExtension")
+            {
+                Panel_PropertyHeight += constants.panel_property_extensionOptionsheight;
+            }
+            else if (mode == "addExtensionField")
+            {
+                Panel_PropertyHeight += constants.panel_property_extensionFieldsheight;
+            }
+            else if (mode == "minusExtensionField")
+            {
+                Panel_PropertyHeight -= constants.panel_property_extensionFieldsheight;
+            }
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
@@ -1277,6 +1319,66 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "whole")
             {
                 Panel_MotorizedPropertyHeight = constants.panel_property_motorizedOptionsheight;
+            }
+        }
+
+        public void AdjustHandlePropertyHeight(string mode)
+        {
+            if (mode == "addRotoswing")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_rotoswingOptionsheight_default;
+            }
+            else if (mode == "minusRotoswing")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_rotoswingOptionsheight_default;
+            }
+            else if (mode == "addRotary")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_rotaryOptionsheight_default;
+            }
+            else if (mode == "minusRotary")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_rotaryOptionsheight_default;
+            }
+            else if (mode == "addExtension")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_extensionOptionsheight;
+            }
+            else if (mode == "addExtensionField")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_extensionFieldsheight;
+            }
+            else if (mode == "minusExtensionField")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_extensionFieldsheight;
+            }
+        }
+
+        public void AdjustRotoswingPropertyHeight(string mode)
+        {
+            if (mode == "addExtension")
+            {
+                Panel_RotoswingOptionsHeight += constants.panel_property_extensionOptionsheight;
+            }
+            else if (mode == "addExtensionField")
+            {
+                Panel_RotoswingOptionsHeight += constants.panel_property_extensionFieldsheight;
+            }
+            else if (mode == "minusExtensionField")
+            {
+                Panel_RotoswingOptionsHeight -= constants.panel_property_extensionFieldsheight;
+            }
+        }
+
+        public void AdjustExtensionPropertyHeight(string mode)
+        {
+            if (mode == "addExtensionField")
+            {
+                Panel_ExtensionPropertyHeight += constants.panel_property_extensionFieldsheight;
+            }
+            else if (mode == "minusExtensionField")
+            {
+                Panel_ExtensionPropertyHeight -= constants.panel_property_extensionFieldsheight;
             }
         }
 
@@ -1890,7 +1992,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           Striker_ArticleNo panelStrikerArtno,
                           MiddleCloser_ArticleNo panelMiddleCloserArtno,
                           LockingKit_ArticleNo panelLockingKitArtno,
-                          MotorizedMech_ArticleNo panelMotorizedMechArtNo)
+                          MotorizedMech_ArticleNo panelMotorizedMechArtNo,
+                          Handle_Type panelHandleType)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -1926,8 +2029,12 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_MiddleCloserArtNo = panelMiddleCloserArtno;
             Panel_LockingKitArtNo = panelLockingKitArtno;
             Panel_MotorizedMechArtNo = panelMotorizedMechArtNo;
+            Panel_HandleType = panelHandleType;
 
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
+            Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;
+            Panel_RotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
+            Panel_ExtensionPropertyHeight = constants.panel_property_extensionOptionsheight;
         }
     }
 }

@@ -20,6 +20,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         }
 
         public event EventHandler PPExtensionUCLoadEventRaised;
+        public event EventHandler chkToAddExtension2CheckedChangedEventRaised;
 
         private void PP_ExtensionUC_Load(object sender, EventArgs e)
         {
@@ -32,29 +33,179 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 extArtNo.Add(item);
             }
             cmb_TopExt.DataSource = extArtNo;
-            cmb_TopExt2.DataSource = extArtNo;
+
+            List<Extension_ArticleNo> extArtNo1 = new List<Extension_ArticleNo>();
+            foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
+            {
+                extArtNo1.Add(item);
+            }
+            cmb_TopExt2.DataSource = extArtNo1;
+
+            List<Extension_ArticleNo> extArtNo2 = new List<Extension_ArticleNo>();
+            foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
+            {
+                extArtNo2.Add(item);
+            }
+            cmb_BotExt.DataSource = extArtNo2;
+
+            List<Extension_ArticleNo> extArtNo3 = new List<Extension_ArticleNo>();
+            foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
+            {
+                extArtNo3.Add(item);
+            }
+            cmb_BotExt2.DataSource = extArtNo3;
+
+            List<Extension_ArticleNo> extArtNo4 = new List<Extension_ArticleNo>();
+            foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
+            {
+                extArtNo4.Add(item);
+            }
+            cmb_RightExt.DataSource = extArtNo4;
+
+            List<Extension_ArticleNo> extArtNo5 = new List<Extension_ArticleNo>();
+            foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
+            {
+                extArtNo5.Add(item);
+            }
+            cmb_RightExt2.DataSource = extArtNo5;
+
+            List<Extension_ArticleNo> extArtNo6 = new List<Extension_ArticleNo>();
+            foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
+            {
+                extArtNo6.Add(item);
+            }
+            cmb_LeftExt.DataSource = extArtNo6;
+
+            List<Extension_ArticleNo> extArtNo7 = new List<Extension_ArticleNo>();
+            foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
+            {
+                extArtNo7.Add(item);
+            }
+            cmb_LeftExt2.DataSource = extArtNo7;
 
             EventHelpers.RaiseEvent(this, PPExtensionUCLoadEventRaised, e);
+        }
+
+        private void chk_ToAdd_TopExt2_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkToAddExtension2CheckedChangedEventRaised, e);
+        }
+
+        private void chk_ToAdd_TopExt2_MouseHover(object sender, EventArgs e)
+        {
+            chk_ToAdd_TopExt2.BackgroundImage = base.BackgroundImage;
+            if (chk_ToAdd_TopExt2.Checked == true)
+            {
+                chk_ToAdd_TopExt2.Text = "-";
+            }
+            else if (chk_ToAdd_TopExt2.Checked == false)
+            {
+                chk_ToAdd_TopExt2.Text = "+";
+            }
+        }
+
+        private void chk_ToAdd_TopExt2_MouseLeave(object sender, EventArgs e)
+        {
+            chk_ToAdd_TopExt2.BackgroundImage = Properties.Resources.ExtensionTop;
+            chk_ToAdd_TopExt2.Text = "";
+        }
+
+        private void chk_ToAdd_BotExt2_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkToAddExtension2CheckedChangedEventRaised, e);
+        }
+
+        private void chk_ToAdd_BotExt2_MouseHover(object sender, EventArgs e)
+        {
+            chk_ToAdd_BotExt2.BackgroundImage = base.BackgroundImage;
+            if (chk_ToAdd_BotExt2.Checked == true)
+            {
+                chk_ToAdd_BotExt2.Text = "-";
+            }
+            else if (chk_ToAdd_BotExt2.Checked == false)
+            {
+                chk_ToAdd_BotExt2.Text = "+";
+            }
+        }
+
+        private void chk_ToAdd_BotExt2_MouseLeave(object sender, EventArgs e)
+        {
+            chk_ToAdd_BotExt2.BackgroundImage = Properties.Resources.ExtensionBot;
+            chk_ToAdd_BotExt2.Text = "";
+        }
+
+        private void chk_ToAdd_LeftExt2_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkToAddExtension2CheckedChangedEventRaised, e);
+        }
+
+        private void chk_ToAdd_LeftExt2_MouseHover(object sender, EventArgs e)
+        {
+            chk_ToAdd_LeftExt2.BackgroundImage = base.BackgroundImage;
+            if (chk_ToAdd_LeftExt2.Checked == true)
+            {
+                chk_ToAdd_LeftExt2.Text = "-";
+            }
+            else if (chk_ToAdd_LeftExt2.Checked == false)
+            {
+                chk_ToAdd_LeftExt2.Text = "+";
+            }
+        }
+
+        private void chk_ToAdd_LeftExt2_MouseLeave(object sender, EventArgs e)
+        {
+            chk_ToAdd_LeftExt2.BackgroundImage = Properties.Resources.ExtensionLeft;
+            chk_ToAdd_LeftExt2.Text = "";
+        }
+
+        private void chk_ToAdd_RightExt2_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkToAddExtension2CheckedChangedEventRaised, e);
+        }
+
+        private void chk_ToAdd_RightExt2_MouseHover(object sender, EventArgs e)
+        {
+            chk_ToAdd_RightExt2.BackgroundImage = base.BackgroundImage;
+            if (chk_ToAdd_RightExt2.Checked == true)
+            {
+                chk_ToAdd_RightExt2.Text = "-";
+            }
+            else if (chk_ToAdd_RightExt2.Checked == false)
+            {
+                chk_ToAdd_RightExt2.Text = "+";
+            }
+        }
+
+        private void chk_ToAdd_RightExt2_MouseLeave(object sender, EventArgs e)
+        {
+            chk_ToAdd_RightExt2.BackgroundImage = Properties.Resources.ExtensionRight;
+            chk_ToAdd_RightExt2.Text = "";
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             num_TopExtQty.DataBindings.Add(ModelBinding["Panel_ExtTopQty"]);
+            this.DataBindings.Add(ModelBinding["Panel_ExtensionPropertyHeight"]);
         }
 
-        private void chk_ToAdd_TopExt2_CheckedChanged(object sender, EventArgs e)
+        public Panel GetTopExt2OptionPNL()
         {
-            CheckBox chk = (CheckBox)sender;
-            if (chk.Checked == true)
-            {
-                chk.Text = "-";
-            }
-            else if (chk.Checked == true)
-            {
-                chk.Text = "+";
-            }
+            return pnl_TopExt2Option;
+        }
 
-            pnl_TopExt2Option.Visible = chk.Checked;
+        public Panel GetBotExt2OptionPNL()
+        {
+            return pnl_BotExt2Option;
+        }
+
+        public Panel GetLeftExt2OptionPNL()
+        {
+            return pnl_LeftExt2Option;
+        }
+
+        public Panel GetRightExt2OptionPNL()
+        {
+            return pnl_RightExt2Option;
         }
     }
 }

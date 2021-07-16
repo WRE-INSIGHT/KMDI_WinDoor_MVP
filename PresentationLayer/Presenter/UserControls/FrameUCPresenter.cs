@@ -271,6 +271,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            midArtNo,
                                                            LockingKit_ArticleNo._None,
                                                            motor,
+                                                           Handle_Type._Rotoswing,
                                                            _mainPresenter.GetPanelCount(),
                                                            _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);

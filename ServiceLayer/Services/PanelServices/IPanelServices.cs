@@ -33,6 +33,7 @@ namespace ServiceLayer.Services.PanelServices
                                   MiddleCloser_ArticleNo panelMiddleCloserArtno,
                                   LockingKit_ArticleNo panelLockingKitArtno,
                                   MotorizedMech_ArticleNo panelMotorizedMechArtNo,
+                                  Handle_Type panelHandleType,
                                   int panelID = 0,
                                   int panelGlassID = 0,
                                   float panelImageRendererZoom = 1,

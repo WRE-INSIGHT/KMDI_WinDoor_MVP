@@ -547,6 +547,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                midArtNo,
                                                                LockingKit_ArticleNo._None,
                                                                motor,
+                                                               Handle_Type._Rotoswing,
                                                                _mainPresenter.GetPanelCount(),
                                                                _mainPresenter.GetPanelGlassID(),
                                                                _frameModel.FrameImageRenderer_Zoom,

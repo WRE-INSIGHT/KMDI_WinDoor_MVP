@@ -474,6 +474,18 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height += constants.panel_property_glassOptionsHeight;
                 }
+                else if (mode == "addExtension")
+                {
+                    FrameProp_Height += constants.panel_property_extensionOptionsheight;
+                }
+                else if (mode == "addExtensionField")
+                {
+                    FrameProp_Height += constants.panel_property_extensionFieldsheight;
+                }
+                else if (mode == "minusExtensionField")
+                {
+                    FrameProp_Height -= constants.panel_property_extensionFieldsheight;
+                }
             }
             else if (objtype == "FxdNone")
             {

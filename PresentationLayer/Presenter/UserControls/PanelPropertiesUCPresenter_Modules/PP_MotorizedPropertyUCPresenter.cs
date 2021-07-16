@@ -52,6 +52,17 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.AdjustPropertyPanelHeight("addCmbMotorized");
                 _panelModel.AdjustPropertyPanelHeight("minusHandle");
 
+                if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
+                    _panelModel.AdjustPropertyPanelHeight("minusRotoswing");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                    _panelModel.AdjustPropertyPanelHeight("minusRotary");
+                }
+
                 _panelModel.AdjustMotorizedPropertyHeight("whole");
             }
             else if (chk.Checked == false)
@@ -62,6 +73,17 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                 _panelModel.AdjustPropertyPanelHeight("minusCmbMotorized");
                 _panelModel.AdjustPropertyPanelHeight("addHandle");
+
+                if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
+                    _panelModel.AdjustPropertyPanelHeight("addRotoswing");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+                    _panelModel.AdjustPropertyPanelHeight("addRotary");
+                }
 
                 _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
             }
