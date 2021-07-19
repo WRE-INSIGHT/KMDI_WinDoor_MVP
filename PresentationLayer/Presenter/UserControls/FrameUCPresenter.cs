@@ -272,6 +272,26 @@ namespace PresentationLayer.Presenter.UserControls
                                                            LockingKit_ArticleNo._None,
                                                            motor,
                                                            Handle_Type._Rotoswing,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           false,
+                                                           false,
+                                                           false,
+                                                           false,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
                                                            _mainPresenter.GetPanelCount(),
                                                            _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);
@@ -316,14 +336,6 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Awning Panel")
                 {
-                    //if (_panelModel.Panel_ExtensionCornerDriveOptionsVisibility == true)
-                    //{
-                    //    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    //}
-                    //else if (_panelModel.Panel_ExtensionCornerDriveOptionsVisibility == false)
-                    //{
-                    //    _frameModel.AdjustPropertyPanelHeight("Panel", "addWithoutExtCordrive");
-                    //}
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                     _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
                     _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");

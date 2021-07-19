@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules
 {
@@ -23,6 +24,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         Panel _pnlLeftExt2Option;
         Panel _pnlRightExt2Option;
 
+        bool _initialLoad = true;
+
         public PP_ExtensionPropertyUCPresenter(IPP_ExtensionPropertyUC pp_extensionUC)
         {
             _pp_extensionUC = pp_extensionUC;
@@ -37,11 +40,71 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_extensionUC.PPExtensionUCLoadEventRaised += _pp_extensionUC_PPExtensionUCLoadEventRaised;
             _pp_extensionUC.chkToAddExtension2CheckedChangedEventRaised += _pp_extensionUC_chkToAddExtension2CheckedChangedEventRaised;
+            _pp_extensionUC.cmbExtensionsSelectedValueChangedEventRaised += _pp_extensionUC_cmbExtensionsSelectedValueChangedEventRaised;
+        }
+
+        private void _pp_extensionUC_cmbExtensionsSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            ComboBox cmb = (ComboBox)sender;
+            if (_initialLoad == false)
+            {
+                Extension_ArticleNo extArtNo = (Extension_ArticleNo)cmb.SelectedValue;
+                if (cmb.Name == "cmb_TopExt")
+                {
+                    _panelModel.Panel_ExtensionTopArtNo = extArtNo;
+                }
+                else if (cmb.Name == "cmb_TopExt2")
+                {
+                    _panelModel.Panel_ExtensionTop2ArtNo = extArtNo;
+                }
+                else if (cmb.Name == "cmb_BotExt")
+                {
+                    _panelModel.Panel_ExtensionBotArtNo = extArtNo;
+                }
+                else if (cmb.Name == "cmb_BotExt2")
+                {
+                    _panelModel.Panel_ExtensionBot2ArtNo = extArtNo;
+                }
+                else if (cmb.Name == "cmb_LeftExt")
+                {
+                    _panelModel.Panel_ExtensionLeftArtNo = extArtNo;
+                }
+                else if (cmb.Name == "cmb_LeftExt2")
+                {
+                    _panelModel.Panel_ExtensionLeft2ArtNo = extArtNo;
+                }
+                else if (cmb.Name == "cmb_RightExt")
+                {
+                    _panelModel.Panel_ExtensionRightArtNo = extArtNo;
+                }
+                else if (cmb.Name == "cmb_RightExt2")
+                {
+                    _panelModel.Panel_ExtensionRight2ArtNo = extArtNo;
+                }
+            }
         }
 
         private void _pp_extensionUC_chkToAddExtension2CheckedChangedEventRaised(object sender, EventArgs e)
         {
             CheckBox chk = (CheckBox)sender;
+
+            if (chk.Name == "chk_ToAdd_TopExt2")
+            {
+                _panelModel.Panel_ExtTopChk = chk.Checked;
+            }
+            else if (chk.Name == "chk_ToAdd_BotExt2")
+            {
+                _panelModel.Panel_ExtBotChk = chk.Checked;
+            }
+            else if (chk.Name == "chk_ToAdd_LeftExt2")
+            {
+                _panelModel.Panel_ExtLeftChk = chk.Checked;
+            }
+            else if (chk.Name == "chk_ToAdd_RightExt2")
+            {
+                _panelModel.Panel_ExtRightChk = chk.Checked;
+            }
+
             if (chk.Checked == true)
             {
                 chk.Text = "-";
@@ -61,33 +124,42 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.AdjustExtensionPropertyHeight("minusExtensionField");
             }
 
-            if (chk.Name == "chk_ToAdd_TopExt2")
-            {
-                _pnlTopExt2Option.Visible = chk.Checked;
-            }
-            else if (chk.Name == "chk_ToAdd_BotExt2")
-            {
-                _pnlBotExt2Option.Visible = chk.Checked;
-            }
-            else if (chk.Name == "chk_ToAdd_LeftExt2")
-            {
-                _pnlLeftExt2Option.Visible = chk.Checked;
-            }
-            else if (chk.Name == "chk_ToAdd_RightExt2")
-            {
-                _pnlRightExt2Option.Visible = chk.Checked;
-            }
         }
 
         private void _pp_extensionUC_PPExtensionUCLoadEventRaised(object sender, EventArgs e)
         {
             _pp_extensionUC.ThisBinding(CreateBindingDictionary());
+            _initialLoad = false;
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
             binding.Add("Panel_ExtTopQty", new Binding("Value", _panelModel, "Panel_ExtTopQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtBotQty", new Binding("Value", _panelModel, "Panel_ExtBotQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtLeftQty", new Binding("Value", _panelModel, "Panel_ExtLeftQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtRightQty", new Binding("Value", _panelModel, "Panel_ExtRightQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtTop2Qty", new Binding("Value", _panelModel, "Panel_ExtTop2Qty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtBot2Qty", new Binding("Value", _panelModel, "Panel_ExtBot2Qty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtLeft2Qty", new Binding("Value", _panelModel, "Panel_ExtLeft2Qty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtRight2Qty", new Binding("Value", _panelModel, "Panel_ExtRight2Qty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtensionTopArtNo", new Binding("Text", _panelModel, "Panel_ExtensionTopArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtensionTop2ArtNo", new Binding("Text", _panelModel, "Panel_ExtensionTop2ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtensionBotArtNo", new Binding("Text", _panelModel, "Panel_ExtensionBotArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtensionBot2ArtNo", new Binding("Text", _panelModel, "Panel_ExtensionBot2ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtensionLeftArtNo", new Binding("Text", _panelModel, "Panel_ExtensionLeftArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtensionLeft2ArtNo", new Binding("Text", _panelModel, "Panel_ExtensionLeft2ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtensionRightArtNo", new Binding("Text", _panelModel, "Panel_ExtensionRightArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtensionRight2ArtNo", new Binding("Text", _panelModel, "Panel_ExtensionRight2ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtTopChk", new Binding("Checked", _panelModel, "Panel_ExtTopChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtTopChk_visible", new Binding("Visible", _panelModel, "Panel_ExtTopChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtBotChk", new Binding("Checked", _panelModel, "Panel_ExtBotChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtBotChk_visible", new Binding("Visible", _panelModel, "Panel_ExtBotChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtLeftChk", new Binding("Checked", _panelModel, "Panel_ExtLeftChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtLeftChk_visible", new Binding("Visible", _panelModel, "Panel_ExtLeftChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtRightChk", new Binding("Checked", _panelModel, "Panel_ExtLeftChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtRightChk_visible", new Binding("Visible", _panelModel, "Panel_ExtLeftChk", true, DataSourceUpdateMode.OnPropertyChanged));
+
             binding.Add("Panel_ExtensionPropertyHeight", new Binding("Height", _panelModel, "Panel_ExtensionPropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;

@@ -54,6 +54,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 if (_initialLoad == false)
                 {
                     _panelModel.Panel_HandleType = sel_handleType;
+                    int fieldExtension_count = 0;
+
+                    fieldExtension_count = (_panelModel.Panel_ExtTopChk == true) ? fieldExtension_count +=1 : fieldExtension_count;
+                    fieldExtension_count = (_panelModel.Panel_ExtBotChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+                    fieldExtension_count = (_panelModel.Panel_ExtLeftChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+                    fieldExtension_count = (_panelModel.Panel_ExtRightChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
 
                     if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
                     {
@@ -67,6 +73,27 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
                         _panelModel.AdjustPropertyPanelHeight("addRotoswing");
                         _panelModel.AdjustHandlePropertyHeight("addRotoswing");
+
+                        if (_panelModel.Panel_Height >= 2100)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                            _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
+                            _panelModel.AdjustHandlePropertyHeight("addCornerDrive");
+                            _panelModel.AdjustRotoswingPropertyHeight("addCornerDrive");
+
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                            _panelModel.AdjustPropertyPanelHeight("addExtension");
+                            _panelModel.AdjustHandlePropertyHeight("addExtension");
+                            _panelModel.AdjustRotoswingPropertyHeight("addExtension");
+
+                            for (int i = 0; i < fieldExtension_count; i++)
+                            {
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtensionField");
+                                _panelModel.AdjustPropertyPanelHeight("addExtensionField");
+                                _panelModel.AdjustHandlePropertyHeight("addExtensionField");
+                                _panelModel.AdjustRotoswingPropertyHeight("addExtensionField");
+                            }
+                        }
                     }
                     else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
                     {
@@ -76,6 +103,27 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
                         _panelModel.AdjustPropertyPanelHeight("minusRotoswing");
                         _panelModel.AdjustHandlePropertyHeight("minusRotoswing");
+
+                        if (_panelModel.Panel_Height >= 2100)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                            _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                            _panelModel.AdjustHandlePropertyHeight("minusCornerDrive");
+                            _panelModel.AdjustRotoswingPropertyHeight("minusCornerDrive");
+
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+                            _panelModel.AdjustPropertyPanelHeight("minusExtension");
+                            _panelModel.AdjustHandlePropertyHeight("minusExtension");
+                            _panelModel.AdjustRotoswingPropertyHeight("minusExtension");
+
+                            for (int i = 0; i < fieldExtension_count; i++)
+                            {
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
+                                _panelModel.AdjustPropertyPanelHeight("minusExtensionField");
+                                _panelModel.AdjustHandlePropertyHeight("minusExtensionField");
+                                _panelModel.AdjustRotoswingPropertyHeight("minusExtensionField");
+                            }
+                        }
 
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
                         _panelModel.AdjustPropertyPanelHeight("addRotary");

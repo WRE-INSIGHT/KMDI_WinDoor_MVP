@@ -21,11 +21,18 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         public event EventHandler PPExtensionUCLoadEventRaised;
         public event EventHandler chkToAddExtension2CheckedChangedEventRaised;
+        public event EventHandler cmbExtensionsSelectedValueChangedEventRaised;
 
         private void PP_ExtensionUC_Load(object sender, EventArgs e)
         {
             num_TopExtQty.Maximum = decimal.MaxValue;
             num_TopExtQty2.Maximum = decimal.MaxValue;
+            num_BotExtQty.Maximum = decimal.MaxValue;
+            num_BotExtQty2.Maximum = decimal.MaxValue;
+            num_LeftExtQty.Maximum = decimal.MaxValue;
+            num_LeftExtQty2.Maximum = decimal.MaxValue;
+            num_RightExtQty.Maximum = decimal.MaxValue;
+            num_RightExtQty2.Maximum = decimal.MaxValue;
 
             List<Extension_ArticleNo> extArtNo = new List<Extension_ArticleNo>();
             foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
@@ -185,8 +192,37 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             num_TopExtQty.DataBindings.Add(ModelBinding["Panel_ExtTopQty"]);
+            num_BotExtQty.DataBindings.Add(ModelBinding["Panel_ExtBotQty"]);
+            num_LeftExtQty.DataBindings.Add(ModelBinding["Panel_ExtLeftQty"]);
+            num_RightExtQty.DataBindings.Add(ModelBinding["Panel_ExtRightQty"]);
+            num_TopExtQty2.DataBindings.Add(ModelBinding["Panel_ExtTop2Qty"]);
+            num_BotExtQty2.DataBindings.Add(ModelBinding["Panel_ExtBot2Qty"]);
+            num_LeftExtQty2.DataBindings.Add(ModelBinding["Panel_ExtLeft2Qty"]);
+            num_RightExtQty2.DataBindings.Add(ModelBinding["Panel_ExtRight2Qty"]);
+            cmb_TopExt.DataBindings.Add(ModelBinding["Panel_ExtensionTopArtNo"]);
+            cmb_TopExt2.DataBindings.Add(ModelBinding["Panel_ExtensionTop2ArtNo"]);
+            cmb_BotExt.DataBindings.Add(ModelBinding["Panel_ExtensionBotArtNo"]);
+            cmb_BotExt2.DataBindings.Add(ModelBinding["Panel_ExtensionBot2ArtNo"]);
+            cmb_LeftExt.DataBindings.Add(ModelBinding["Panel_ExtensionLeftArtNo"]);
+            cmb_LeftExt2.DataBindings.Add(ModelBinding["Panel_ExtensionLeft2ArtNo"]);
+            cmb_RightExt.DataBindings.Add(ModelBinding["Panel_ExtensionRightArtNo"]);
+            cmb_RightExt2.DataBindings.Add(ModelBinding["Panel_ExtensionRight2ArtNo"]);
+            chk_ToAdd_TopExt2.DataBindings.Add(ModelBinding["Panel_ExtTopChk"]);
+            chk_ToAdd_BotExt2.DataBindings.Add(ModelBinding["Panel_ExtBotChk"]);
+            chk_ToAdd_LeftExt2.DataBindings.Add(ModelBinding["Panel_ExtLeftChk"]);
+            chk_ToAdd_RightExt2.DataBindings.Add(ModelBinding["Panel_ExtRightChk"]);
+            pnl_TopExt2Option.DataBindings.Add(ModelBinding["Panel_ExtTopChk_visible"]);
+            pnl_BotExt2Option.DataBindings.Add(ModelBinding["Panel_ExtBotChk_visible"]);
+            pnl_LeftExt2Option.DataBindings.Add(ModelBinding["Panel_ExtLeftChk_visible"]);
+            pnl_RightExt2Option.DataBindings.Add(ModelBinding["Panel_ExtRightChk_visible"]);
             this.DataBindings.Add(ModelBinding["Panel_ExtensionPropertyHeight"]);
         }
+
+        private void cmbExtension_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbExtensionsSelectedValueChangedEventRaised, e);
+        }
+
 
         public Panel GetTopExt2OptionPNL()
         {

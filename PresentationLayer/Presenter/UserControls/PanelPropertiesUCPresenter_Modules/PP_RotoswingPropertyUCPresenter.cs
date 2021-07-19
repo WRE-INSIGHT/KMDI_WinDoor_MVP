@@ -20,14 +20,17 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IUnityContainer _unityC;
 
         private IPP_ExtensionPropertyUCPresenter _pp_extensionPropertyUCPresenter;
+        private IPP_CornerDrivePropertyUCPresenter _pp_cornerDrivePropertyUCPresenter;
 
         FlowLayoutPanel _flpRotoswingOptions;
 
         public PP_RotoswingPropertyUCPresenter(IPP_RotoswingPropertyUC pp_rotoswingPropertyUC,
-                                               IPP_ExtensionPropertyUCPresenter pp_extensionPropertyUCPresenter)
+                                               IPP_ExtensionPropertyUCPresenter pp_extensionPropertyUCPresenter,
+                                               IPP_CornerDrivePropertyUCPresenter pp_cornerDrivePropertyUCPresenter)
         {
             _pp_rotoswingPropertyUC = pp_rotoswingPropertyUC;
             _pp_extensionPropertyUCPresenter = pp_extensionPropertyUCPresenter;
+            _pp_cornerDrivePropertyUCPresenter = pp_cornerDrivePropertyUCPresenter;
             _flpRotoswingOptions = _pp_rotoswingPropertyUC.GetRotoswingOptionFLP();
             SubscribeToEventsSetup();
         }
@@ -67,6 +70,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             if (_panelModel.Panel_Height >= 2100)
             {
+                IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                _flpRotoswingOptions.Controls.Add((UserControl)cdPropUCP.GetPPCornerDriveUC());
+
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
+                _panelModel.AdjustHandlePropertyHeight("addCornerDrive");
+                _panelModel.AdjustRotoswingPropertyHeight("addCornerDrive");
+
                 IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                 _flpRotoswingOptions.Controls.Add((UserControl)extPropUCP.GetPPExtensionUC());
 

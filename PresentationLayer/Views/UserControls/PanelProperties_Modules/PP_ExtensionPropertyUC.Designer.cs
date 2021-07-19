@@ -31,36 +31,36 @@
             this.pnl_TopExtOption = new System.Windows.Forms.Panel();
             this.num_TopExtQty = new System.Windows.Forms.NumericUpDown();
             this.cmb_TopExt = new System.Windows.Forms.ComboBox();
+            this.chk_ToAdd_TopExt2 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pnl_TopExt2Option = new System.Windows.Forms.Panel();
             this.num_TopExtQty2 = new System.Windows.Forms.NumericUpDown();
             this.cmb_TopExt2 = new System.Windows.Forms.ComboBox();
+            this.pnl_TopExtField2 = new System.Windows.Forms.Panel();
             this.pnl_BotExtOption = new System.Windows.Forms.Panel();
             this.num_BotExtQty = new System.Windows.Forms.NumericUpDown();
             this.cmb_BotExt = new System.Windows.Forms.ComboBox();
+            this.chk_ToAdd_BotExt2 = new System.Windows.Forms.CheckBox();
             this.pnl_BotExt2Option = new System.Windows.Forms.Panel();
             this.num_BotExtQty2 = new System.Windows.Forms.NumericUpDown();
             this.cmb_BotExt2 = new System.Windows.Forms.ComboBox();
+            this.pnl_BotExtField2 = new System.Windows.Forms.Panel();
             this.pnl_LeftExt2Option = new System.Windows.Forms.Panel();
             this.num_LeftExtQty2 = new System.Windows.Forms.NumericUpDown();
             this.cmb_LeftExt2 = new System.Windows.Forms.ComboBox();
+            this.pnl_LeftExtField2 = new System.Windows.Forms.Panel();
             this.pnl_LeftExtOption = new System.Windows.Forms.Panel();
             this.num_LeftExtQty = new System.Windows.Forms.NumericUpDown();
             this.cmb_LeftExt = new System.Windows.Forms.ComboBox();
+            this.chk_ToAdd_LeftExt2 = new System.Windows.Forms.CheckBox();
             this.pnl_RightExt2Option = new System.Windows.Forms.Panel();
             this.num_RightExtQty2 = new System.Windows.Forms.NumericUpDown();
             this.cmb_RightExt2 = new System.Windows.Forms.ComboBox();
+            this.pnl_RightExtField2 = new System.Windows.Forms.Panel();
             this.pnl_RightExtOption = new System.Windows.Forms.Panel();
             this.num_RightExtQty = new System.Windows.Forms.NumericUpDown();
             this.cmb_RightExt = new System.Windows.Forms.ComboBox();
-            this.pnl_RightExtField2 = new System.Windows.Forms.Panel();
             this.chk_ToAdd_RightExt2 = new System.Windows.Forms.CheckBox();
-            this.pnl_LeftExtField2 = new System.Windows.Forms.Panel();
-            this.chk_ToAdd_LeftExt2 = new System.Windows.Forms.CheckBox();
-            this.pnl_BotExtField2 = new System.Windows.Forms.Panel();
-            this.chk_ToAdd_BotExt2 = new System.Windows.Forms.CheckBox();
-            this.pnl_TopExtField2 = new System.Windows.Forms.Panel();
-            this.chk_ToAdd_TopExt2 = new System.Windows.Forms.CheckBox();
             this.pnl_TopExtOption.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_TopExtQty)).BeginInit();
             this.pnl_TopExt2Option.SuspendLayout();
@@ -107,6 +107,27 @@
             this.cmb_TopExt.Name = "cmb_TopExt";
             this.cmb_TopExt.Size = new System.Drawing.Size(84, 23);
             this.cmb_TopExt.TabIndex = 30;
+            this.cmb_TopExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            // 
+            // chk_ToAdd_TopExt2
+            // 
+            this.chk_ToAdd_TopExt2.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chk_ToAdd_TopExt2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.chk_ToAdd_TopExt2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionTop;
+            this.chk_ToAdd_TopExt2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chk_ToAdd_TopExt2.FlatAppearance.BorderSize = 0;
+            this.chk_ToAdd_TopExt2.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
+            this.chk_ToAdd_TopExt2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chk_ToAdd_TopExt2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_ToAdd_TopExt2.Location = new System.Drawing.Point(3, 5);
+            this.chk_ToAdd_TopExt2.Name = "chk_ToAdd_TopExt2";
+            this.chk_ToAdd_TopExt2.Size = new System.Drawing.Size(21, 21);
+            this.chk_ToAdd_TopExt2.TabIndex = 34;
+            this.chk_ToAdd_TopExt2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chk_ToAdd_TopExt2.UseVisualStyleBackColor = false;
+            this.chk_ToAdd_TopExt2.CheckedChanged += new System.EventHandler(this.chk_ToAdd_TopExt2_CheckedChanged);
+            this.chk_ToAdd_TopExt2.MouseLeave += new System.EventHandler(this.chk_ToAdd_TopExt2_MouseLeave);
+            this.chk_ToAdd_TopExt2.MouseHover += new System.EventHandler(this.chk_ToAdd_TopExt2_MouseHover);
             // 
             // label1
             // 
@@ -127,7 +148,6 @@
             this.pnl_TopExt2Option.Name = "pnl_TopExt2Option";
             this.pnl_TopExt2Option.Size = new System.Drawing.Size(154, 31);
             this.pnl_TopExt2Option.TabIndex = 3;
-            this.pnl_TopExt2Option.Visible = false;
             // 
             // num_TopExtQty2
             // 
@@ -146,6 +166,17 @@
             this.cmb_TopExt2.Name = "cmb_TopExt2";
             this.cmb_TopExt2.Size = new System.Drawing.Size(84, 23);
             this.cmb_TopExt2.TabIndex = 30;
+            this.cmb_TopExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            // 
+            // pnl_TopExtField2
+            // 
+            this.pnl_TopExtField2.BackColor = System.Drawing.SystemColors.Control;
+            this.pnl_TopExtField2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionTop;
+            this.pnl_TopExtField2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pnl_TopExtField2.Location = new System.Drawing.Point(3, 5);
+            this.pnl_TopExtField2.Name = "pnl_TopExtField2";
+            this.pnl_TopExtField2.Size = new System.Drawing.Size(21, 21);
+            this.pnl_TopExtField2.TabIndex = 29;
             // 
             // pnl_BotExtOption
             // 
@@ -175,6 +206,27 @@
             this.cmb_BotExt.Name = "cmb_BotExt";
             this.cmb_BotExt.Size = new System.Drawing.Size(84, 23);
             this.cmb_BotExt.TabIndex = 30;
+            this.cmb_BotExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            // 
+            // chk_ToAdd_BotExt2
+            // 
+            this.chk_ToAdd_BotExt2.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chk_ToAdd_BotExt2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.chk_ToAdd_BotExt2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionBot;
+            this.chk_ToAdd_BotExt2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chk_ToAdd_BotExt2.FlatAppearance.BorderSize = 0;
+            this.chk_ToAdd_BotExt2.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
+            this.chk_ToAdd_BotExt2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chk_ToAdd_BotExt2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_ToAdd_BotExt2.Location = new System.Drawing.Point(3, 5);
+            this.chk_ToAdd_BotExt2.Name = "chk_ToAdd_BotExt2";
+            this.chk_ToAdd_BotExt2.Size = new System.Drawing.Size(21, 21);
+            this.chk_ToAdd_BotExt2.TabIndex = 34;
+            this.chk_ToAdd_BotExt2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chk_ToAdd_BotExt2.UseVisualStyleBackColor = false;
+            this.chk_ToAdd_BotExt2.CheckedChanged += new System.EventHandler(this.chk_ToAdd_BotExt2_CheckedChanged);
+            this.chk_ToAdd_BotExt2.MouseLeave += new System.EventHandler(this.chk_ToAdd_BotExt2_MouseLeave);
+            this.chk_ToAdd_BotExt2.MouseHover += new System.EventHandler(this.chk_ToAdd_BotExt2_MouseHover);
             // 
             // pnl_BotExt2Option
             // 
@@ -186,7 +238,6 @@
             this.pnl_BotExt2Option.Name = "pnl_BotExt2Option";
             this.pnl_BotExt2Option.Size = new System.Drawing.Size(154, 31);
             this.pnl_BotExt2Option.TabIndex = 5;
-            this.pnl_BotExt2Option.Visible = false;
             // 
             // num_BotExtQty2
             // 
@@ -205,6 +256,17 @@
             this.cmb_BotExt2.Name = "cmb_BotExt2";
             this.cmb_BotExt2.Size = new System.Drawing.Size(84, 23);
             this.cmb_BotExt2.TabIndex = 30;
+            this.cmb_BotExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            // 
+            // pnl_BotExtField2
+            // 
+            this.pnl_BotExtField2.BackColor = System.Drawing.SystemColors.Control;
+            this.pnl_BotExtField2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionBot;
+            this.pnl_BotExtField2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pnl_BotExtField2.Location = new System.Drawing.Point(3, 5);
+            this.pnl_BotExtField2.Name = "pnl_BotExtField2";
+            this.pnl_BotExtField2.Size = new System.Drawing.Size(21, 21);
+            this.pnl_BotExtField2.TabIndex = 29;
             // 
             // pnl_LeftExt2Option
             // 
@@ -216,7 +278,6 @@
             this.pnl_LeftExt2Option.Name = "pnl_LeftExt2Option";
             this.pnl_LeftExt2Option.Size = new System.Drawing.Size(154, 31);
             this.pnl_LeftExt2Option.TabIndex = 7;
-            this.pnl_LeftExt2Option.Visible = false;
             // 
             // num_LeftExtQty2
             // 
@@ -235,6 +296,17 @@
             this.cmb_LeftExt2.Name = "cmb_LeftExt2";
             this.cmb_LeftExt2.Size = new System.Drawing.Size(84, 23);
             this.cmb_LeftExt2.TabIndex = 30;
+            this.cmb_LeftExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            // 
+            // pnl_LeftExtField2
+            // 
+            this.pnl_LeftExtField2.BackColor = System.Drawing.SystemColors.Control;
+            this.pnl_LeftExtField2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionLeft;
+            this.pnl_LeftExtField2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pnl_LeftExtField2.Location = new System.Drawing.Point(3, 5);
+            this.pnl_LeftExtField2.Name = "pnl_LeftExtField2";
+            this.pnl_LeftExtField2.Size = new System.Drawing.Size(21, 21);
+            this.pnl_LeftExtField2.TabIndex = 29;
             // 
             // pnl_LeftExtOption
             // 
@@ -264,6 +336,27 @@
             this.cmb_LeftExt.Name = "cmb_LeftExt";
             this.cmb_LeftExt.Size = new System.Drawing.Size(84, 23);
             this.cmb_LeftExt.TabIndex = 30;
+            this.cmb_LeftExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            // 
+            // chk_ToAdd_LeftExt2
+            // 
+            this.chk_ToAdd_LeftExt2.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chk_ToAdd_LeftExt2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.chk_ToAdd_LeftExt2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionLeft;
+            this.chk_ToAdd_LeftExt2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chk_ToAdd_LeftExt2.FlatAppearance.BorderSize = 0;
+            this.chk_ToAdd_LeftExt2.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
+            this.chk_ToAdd_LeftExt2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chk_ToAdd_LeftExt2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_ToAdd_LeftExt2.Location = new System.Drawing.Point(3, 5);
+            this.chk_ToAdd_LeftExt2.Name = "chk_ToAdd_LeftExt2";
+            this.chk_ToAdd_LeftExt2.Size = new System.Drawing.Size(21, 21);
+            this.chk_ToAdd_LeftExt2.TabIndex = 34;
+            this.chk_ToAdd_LeftExt2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chk_ToAdd_LeftExt2.UseVisualStyleBackColor = false;
+            this.chk_ToAdd_LeftExt2.CheckedChanged += new System.EventHandler(this.chk_ToAdd_LeftExt2_CheckedChanged);
+            this.chk_ToAdd_LeftExt2.MouseLeave += new System.EventHandler(this.chk_ToAdd_LeftExt2_MouseLeave);
+            this.chk_ToAdd_LeftExt2.MouseHover += new System.EventHandler(this.chk_ToAdd_LeftExt2_MouseHover);
             // 
             // pnl_RightExt2Option
             // 
@@ -275,7 +368,6 @@
             this.pnl_RightExt2Option.Name = "pnl_RightExt2Option";
             this.pnl_RightExt2Option.Size = new System.Drawing.Size(154, 31);
             this.pnl_RightExt2Option.TabIndex = 9;
-            this.pnl_RightExt2Option.Visible = false;
             // 
             // num_RightExtQty2
             // 
@@ -294,6 +386,17 @@
             this.cmb_RightExt2.Name = "cmb_RightExt2";
             this.cmb_RightExt2.Size = new System.Drawing.Size(84, 23);
             this.cmb_RightExt2.TabIndex = 30;
+            this.cmb_RightExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            // 
+            // pnl_RightExtField2
+            // 
+            this.pnl_RightExtField2.BackColor = System.Drawing.SystemColors.Control;
+            this.pnl_RightExtField2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionRight;
+            this.pnl_RightExtField2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pnl_RightExtField2.Location = new System.Drawing.Point(3, 5);
+            this.pnl_RightExtField2.Name = "pnl_RightExtField2";
+            this.pnl_RightExtField2.Size = new System.Drawing.Size(21, 21);
+            this.pnl_RightExtField2.TabIndex = 29;
             // 
             // pnl_RightExtOption
             // 
@@ -323,22 +426,14 @@
             this.cmb_RightExt.Name = "cmb_RightExt";
             this.cmb_RightExt.Size = new System.Drawing.Size(84, 23);
             this.cmb_RightExt.TabIndex = 30;
-            // 
-            // pnl_RightExtField2
-            // 
-            this.pnl_RightExtField2.BackColor = System.Drawing.SystemColors.Control;
-            this.pnl_RightExtField2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionRight;
-            this.pnl_RightExtField2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pnl_RightExtField2.Location = new System.Drawing.Point(3, 5);
-            this.pnl_RightExtField2.Name = "pnl_RightExtField2";
-            this.pnl_RightExtField2.Size = new System.Drawing.Size(21, 21);
-            this.pnl_RightExtField2.TabIndex = 29;
+            this.cmb_RightExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
             // 
             // chk_ToAdd_RightExt2
             // 
             this.chk_ToAdd_RightExt2.Appearance = System.Windows.Forms.Appearance.Button;
             this.chk_ToAdd_RightExt2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.chk_ToAdd_RightExt2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionRight;
+            this.chk_ToAdd_RightExt2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chk_ToAdd_RightExt2.FlatAppearance.BorderSize = 0;
             this.chk_ToAdd_RightExt2.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
             this.chk_ToAdd_RightExt2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -352,93 +447,6 @@
             this.chk_ToAdd_RightExt2.CheckedChanged += new System.EventHandler(this.chk_ToAdd_RightExt2_CheckedChanged);
             this.chk_ToAdd_RightExt2.MouseLeave += new System.EventHandler(this.chk_ToAdd_RightExt2_MouseLeave);
             this.chk_ToAdd_RightExt2.MouseHover += new System.EventHandler(this.chk_ToAdd_RightExt2_MouseHover);
-            // 
-            // pnl_LeftExtField2
-            // 
-            this.pnl_LeftExtField2.BackColor = System.Drawing.SystemColors.Control;
-            this.pnl_LeftExtField2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionLeft;
-            this.pnl_LeftExtField2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pnl_LeftExtField2.Location = new System.Drawing.Point(3, 5);
-            this.pnl_LeftExtField2.Name = "pnl_LeftExtField2";
-            this.pnl_LeftExtField2.Size = new System.Drawing.Size(21, 21);
-            this.pnl_LeftExtField2.TabIndex = 29;
-            // 
-            // chk_ToAdd_LeftExt2
-            // 
-            this.chk_ToAdd_LeftExt2.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chk_ToAdd_LeftExt2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.chk_ToAdd_LeftExt2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionLeft;
-            this.chk_ToAdd_LeftExt2.FlatAppearance.BorderSize = 0;
-            this.chk_ToAdd_LeftExt2.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
-            this.chk_ToAdd_LeftExt2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chk_ToAdd_LeftExt2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_ToAdd_LeftExt2.Location = new System.Drawing.Point(3, 5);
-            this.chk_ToAdd_LeftExt2.Name = "chk_ToAdd_LeftExt2";
-            this.chk_ToAdd_LeftExt2.Size = new System.Drawing.Size(21, 21);
-            this.chk_ToAdd_LeftExt2.TabIndex = 34;
-            this.chk_ToAdd_LeftExt2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chk_ToAdd_LeftExt2.UseVisualStyleBackColor = false;
-            this.chk_ToAdd_LeftExt2.CheckedChanged += new System.EventHandler(this.chk_ToAdd_LeftExt2_CheckedChanged);
-            this.chk_ToAdd_LeftExt2.MouseLeave += new System.EventHandler(this.chk_ToAdd_LeftExt2_MouseLeave);
-            this.chk_ToAdd_LeftExt2.MouseHover += new System.EventHandler(this.chk_ToAdd_LeftExt2_MouseHover);
-            // 
-            // pnl_BotExtField2
-            // 
-            this.pnl_BotExtField2.BackColor = System.Drawing.SystemColors.Control;
-            this.pnl_BotExtField2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionBot;
-            this.pnl_BotExtField2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pnl_BotExtField2.Location = new System.Drawing.Point(3, 5);
-            this.pnl_BotExtField2.Name = "pnl_BotExtField2";
-            this.pnl_BotExtField2.Size = new System.Drawing.Size(21, 21);
-            this.pnl_BotExtField2.TabIndex = 29;
-            // 
-            // chk_ToAdd_BotExt2
-            // 
-            this.chk_ToAdd_BotExt2.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chk_ToAdd_BotExt2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.chk_ToAdd_BotExt2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionBot;
-            this.chk_ToAdd_BotExt2.FlatAppearance.BorderSize = 0;
-            this.chk_ToAdd_BotExt2.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
-            this.chk_ToAdd_BotExt2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chk_ToAdd_BotExt2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_ToAdd_BotExt2.Location = new System.Drawing.Point(3, 5);
-            this.chk_ToAdd_BotExt2.Name = "chk_ToAdd_BotExt2";
-            this.chk_ToAdd_BotExt2.Size = new System.Drawing.Size(21, 21);
-            this.chk_ToAdd_BotExt2.TabIndex = 34;
-            this.chk_ToAdd_BotExt2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chk_ToAdd_BotExt2.UseVisualStyleBackColor = false;
-            this.chk_ToAdd_BotExt2.CheckedChanged += new System.EventHandler(this.chk_ToAdd_BotExt2_CheckedChanged);
-            this.chk_ToAdd_BotExt2.MouseLeave += new System.EventHandler(this.chk_ToAdd_BotExt2_MouseLeave);
-            this.chk_ToAdd_BotExt2.MouseHover += new System.EventHandler(this.chk_ToAdd_BotExt2_MouseHover);
-            // 
-            // pnl_TopExtField2
-            // 
-            this.pnl_TopExtField2.BackColor = System.Drawing.SystemColors.Control;
-            this.pnl_TopExtField2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionTop;
-            this.pnl_TopExtField2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pnl_TopExtField2.Location = new System.Drawing.Point(3, 5);
-            this.pnl_TopExtField2.Name = "pnl_TopExtField2";
-            this.pnl_TopExtField2.Size = new System.Drawing.Size(21, 21);
-            this.pnl_TopExtField2.TabIndex = 29;
-            // 
-            // chk_ToAdd_TopExt2
-            // 
-            this.chk_ToAdd_TopExt2.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chk_ToAdd_TopExt2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.chk_ToAdd_TopExt2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionTop;
-            this.chk_ToAdd_TopExt2.FlatAppearance.BorderSize = 0;
-            this.chk_ToAdd_TopExt2.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
-            this.chk_ToAdd_TopExt2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chk_ToAdd_TopExt2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_ToAdd_TopExt2.Location = new System.Drawing.Point(3, 5);
-            this.chk_ToAdd_TopExt2.Name = "chk_ToAdd_TopExt2";
-            this.chk_ToAdd_TopExt2.Size = new System.Drawing.Size(21, 21);
-            this.chk_ToAdd_TopExt2.TabIndex = 34;
-            this.chk_ToAdd_TopExt2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chk_ToAdd_TopExt2.UseVisualStyleBackColor = false;
-            this.chk_ToAdd_TopExt2.CheckedChanged += new System.EventHandler(this.chk_ToAdd_TopExt2_CheckedChanged);
-            this.chk_ToAdd_TopExt2.MouseLeave += new System.EventHandler(this.chk_ToAdd_TopExt2_MouseLeave);
-            this.chk_ToAdd_TopExt2.MouseHover += new System.EventHandler(this.chk_ToAdd_TopExt2_MouseHover);
             // 
             // PP_ExtensionPropertyUC
             // 

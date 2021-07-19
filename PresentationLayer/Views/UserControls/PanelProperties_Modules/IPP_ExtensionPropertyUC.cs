@@ -8,6 +8,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     {
         event EventHandler PPExtensionUCLoadEventRaised;
         event EventHandler chkToAddExtension2CheckedChangedEventRaised;
+        event EventHandler cmbExtensionsSelectedValueChangedEventRaised;
 
         Panel GetTopExt2OptionPNL();
         Panel GetBotExt2OptionPNL();

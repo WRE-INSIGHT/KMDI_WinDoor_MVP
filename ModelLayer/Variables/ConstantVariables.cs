@@ -19,7 +19,7 @@ namespace ModelLayer.Variables
         public int panel_property_motorizedOptionsheight = 72; //41;
         public int panel_property_motorizedChkOptionsheight = 31; //29;
         public int panel_property_motorizedCmbOptionsheight = 41;
-        public int panel_property_extCorDriveOptionsheight_default = 154;
+        public int panel_property_cornerDriveOptionsheight_default = 30;
         public int panel_property_extensionOptionsheight = 143;
         public int panel_property_extensionFieldsheight = 31;
 
