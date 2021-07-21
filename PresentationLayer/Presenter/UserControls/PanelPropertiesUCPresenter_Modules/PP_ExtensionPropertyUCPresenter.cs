@@ -113,6 +113,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.AdjustHandlePropertyHeight("addExtensionField");
                 _panelModel.AdjustRotoswingPropertyHeight("addExtensionField");
                 _panelModel.AdjustExtensionPropertyHeight("addExtensionField");
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtensionField");
+                }
             }
             else if (chk.Checked == false)
             {
@@ -122,6 +127,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.AdjustHandlePropertyHeight("minusExtensionField");
                 _panelModel.AdjustRotoswingPropertyHeight("minusExtensionField");
                 _panelModel.AdjustExtensionPropertyHeight("minusExtensionField");
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
+                }
             }
 
         }

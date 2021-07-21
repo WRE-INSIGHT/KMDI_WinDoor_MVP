@@ -141,14 +141,6 @@ namespace ModelLayer.Model.Quotation.Panel
                 _panelHeight = value;
                 PanelImageRenderer_Height = Convert.ToInt32(value * PanelImageRenderer_Zoom);
                 Panel_HeightToBind = (int)(value * Panel_Zoom);
-                if (value >= 2100)
-                {
-                    Panel_ExtensionCornerDriveOptionsVisibility = true;
-                }
-                else if (value < 2100)
-                {
-                    Panel_ExtensionCornerDriveOptionsVisibility = false;
-                }
                 //NotifyPropertyChanged();
             }
         }
@@ -1105,19 +1097,8 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        private bool _panelExtensionCornerDriveOptionsVisible;
-        public bool Panel_ExtensionCornerDriveOptionsVisibility
-        {
-            get
-            {
-                return _panelExtensionCornerDriveOptionsVisible;
-            }
-            set
-            {
-                _panelExtensionCornerDriveOptionsVisible = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public bool Panel_CornerDriveOptionsVisibility { get; set; }
+        public bool Panel_ExtensionOptionsVisibility { get; set; }
 
         private int _panelRotoswingOptionsHeight;
         public int Panel_RotoswingOptionsHeight
@@ -1288,6 +1269,10 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "addSash")
             {
                 Panel_PropertyHeight += constants.panel_property_sashPanelHeight;
+            }
+            else if (mode == "minusSash")
+            {
+                Panel_PropertyHeight -= constants.panel_property_sashPanelHeight;
             }
             else if (mode == "addGlass")
             {

@@ -399,10 +399,9 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height += constants.panel_propertyHeight_default;
                 }
-                if (mode == "deleteMotorized")
+                if (mode == "minus")
                 {
-                    FrameProp_Height -= constants.panel_propertyHeight_default
-                                        - constants.panel_property_handleOptionsHeight;
+                    FrameProp_Height -= constants.panel_propertyHeight_default;
                 }
                 else if (mode == "addRotary")
                 {
@@ -440,13 +439,25 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height += constants.panel_property_motorizedChkOptionsheight;
                 }
+                else if (mode == "minusChkMotorized")
+                {
+                    FrameProp_Height -= constants.panel_property_motorizedChkOptionsheight;
+                }
                 else if (mode == "addSash")
                 {
                     FrameProp_Height += constants.panel_property_sashPanelHeight;
                 }
+                else if (mode == "minusSash")
+                {
+                    FrameProp_Height -= constants.panel_property_sashPanelHeight;
+                }
                 else if (mode == "addGlass")
                 {
                     FrameProp_Height += constants.panel_property_glassOptionsHeight;
+                }
+                else if (mode == "minusGlass")
+                {
+                    FrameProp_Height -= constants.panel_property_glassOptionsHeight;
                 }
                 else if (mode == "addExtension")
                 {
@@ -473,53 +484,6 @@ namespace ModelLayer.Model.Quotation.Frame
                     FrameProp_Height -= constants.panel_property_cornerDriveOptionsheight_default;
                 }
             }
-            else if (objtype == "FxdNone")
-            {
-                if (mode == "delete")
-                {
-                    FrameProp_Height -= constants.panel_propertyHeight_default 
-                                        - constants.panel_property_sashPanelHeight
-                                        - constants.panel_property_handleOptionsHeight
-                                        - constants.panel_property_motorizedChkOptionsheight
-                                        - constants.panel_property_motorizedOptionsheight;
-                }
-                else if (mode == "add")
-                {
-                    FrameProp_Height += constants.panel_propertyHeight_default 
-                                        - constants.panel_property_sashPanelHeight
-                                        - constants.panel_property_handleOptionsHeight
-                                        - constants.panel_property_motorizedChkOptionsheight
-                                        - constants.panel_property_motorizedOptionsheight;
-                }
-            }
-            else if (objtype == "FxdSash")
-            {
-                if (mode == "delete")
-                {
-                    FrameProp_Height -= constants.panel_propertyHeight_default 
-                                        - constants.panel_property_handleOptionsHeight
-                                        - constants.panel_property_motorizedChkOptionsheight
-                                        - constants.panel_property_motorizedOptionsheight;
-                }
-                else if (mode == "add")
-                {
-                    FrameProp_Height += constants.panel_propertyHeight_default 
-                                        - constants.panel_property_handleOptionsHeight
-                                        - constants.panel_property_motorizedChkOptionsheight
-                                        - constants.panel_property_motorizedOptionsheight;
-                }
-            }
-            else if (objtype == "SashProp")
-            {
-                if (mode == "delete")
-                {
-                    FrameProp_Height -= constants.panel_property_sashPanelHeight;
-                }
-                else if (mode == "add")
-                {
-                    FrameProp_Height += constants.panel_property_sashPanelHeight;
-                }
-            }
             else if (objtype == "Div")
             {
                 if (mode == "delete")
@@ -540,28 +504,6 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "add")
                 {
                     FrameProp_Height += constants.mpnl_propertyHeight_default;
-                }
-            }
-        }
-
-        public void AdjustPropertyPanelHeight(string objtype, string mode, Handle_Type handleType)
-        {
-            if (objtype == "Panel")
-            {
-                if (mode == "delete")
-                {
-                    if (handleType == Handle_Type._Rotoswing)
-                    {
-                        FrameProp_Height -= constants.panel_propertyHeight_default 
-                                            - constants.panel_property_rotaryOptionsheight_default
-                                            - constants.panel_property_motorizedOptionsheight;
-                    }
-                    else if (handleType == Handle_Type._Rotary)
-                    {
-                        FrameProp_Height -= constants.panel_propertyHeight_default
-                                            - constants.panel_property_rotoswingOptionsheight_default
-                                            - constants.panel_property_motorizedOptionsheight;
-                    }
                 }
             }
         }

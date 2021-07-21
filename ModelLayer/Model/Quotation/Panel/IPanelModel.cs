@@ -103,7 +103,8 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_ExtRight2Qty { get; set; }
 
         CornerDrive_ArticleNo Panel_CornerDriveArtNo { get; set; }
-        bool Panel_ExtensionCornerDriveOptionsVisibility { get; set; }
+        bool Panel_CornerDriveOptionsVisibility { get; set; }
+        bool Panel_ExtensionOptionsVisibility { get; set; }
         int Panel_RotoswingOptionsHeight { get; set; }
         int Panel_PlasticWedgeQty { get; set; }
         Striker_ArticleNo Panel_StrikerArtno { get; set; }

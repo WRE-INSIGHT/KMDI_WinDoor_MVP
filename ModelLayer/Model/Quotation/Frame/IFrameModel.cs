@@ -49,7 +49,6 @@ namespace ModelLayer.Model.Quotation.Frame
         
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
-        void AdjustPropertyPanelHeight(string objtype, string mode, Handle_Type handleType);
 
         #endregion
     }

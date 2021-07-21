@@ -301,7 +301,11 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (data == "Fixed Panel")
                 {
-                    _frameModel.AdjustPropertyPanelHeight("FxdNone", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
+
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, 
                                                                                _panelModel, 
                                                                                _frameModel, 

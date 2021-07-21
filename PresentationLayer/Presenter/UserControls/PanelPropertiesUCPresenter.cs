@@ -50,33 +50,51 @@ namespace PresentationLayer.Presenter.UserControls
             _panelPropertiesUC.ChkOrientationCheckChangedEventRaised += _panelPropertiesUC_ChkOrientationCheckChangedEventRaised;
         }
 
+        bool chkOrient_state, adjust_bool;
         private void _panelPropertiesUC_ChkOrientationCheckChangedEventRaised(object sender, EventArgs e)
         {
             CheckBox chk = (CheckBox)sender;
 
-            if (_panelModel.Panel_ParentFrameModel != null)
+            _panelModel.Panel_Orient = chk.Checked;
+
+            if (chkOrient_state != chk.Checked)
             {
-                if (chk.Text == "None" && chk.Checked == true)
+                adjust_bool = true;
+                chkOrient_state = chk.Checked;
+
+                if (adjust_bool == true)
                 {
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("SashProp", "add");
+
+                    if (_panelModel.Panel_ParentFrameModel != null)
+                    {
+                        if (chk.Text == "None" && chk.Checked == false)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+                            _panelModel.AdjustPropertyPanelHeight("minusSash");
+                        }
+                        else if (chk.Text == "dSash" && chk.Checked == true)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                            _panelModel.AdjustPropertyPanelHeight("addSash");
+                        }
+                        adjust_bool = false;
+                    }
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        if (chk.Text == "None" && chk.Checked == false)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+                        }
+                        else if (chk.Text == "dSash" && chk.Checked == true)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                        }
+                        adjust_bool = false;
+                    }
                 }
-                else if (chk.Text == "dSash" && chk.Checked == false)
-                {
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("SashProp", "delete");
-                }
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
-            if (_panelModel.Panel_ParentMultiPanelModel != null)
-            {
-                if (chk.Text == "None" && chk.Checked == true)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("SashProp", "add");
-                }
-                else if (chk.Text == "dSash" && chk.Checked == false)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("SashProp", "delete");
-                }
-            }
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
@@ -89,13 +107,14 @@ namespace PresentationLayer.Presenter.UserControls
 
                 IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel);
                 _flpPanelSpecs.Controls.Add((UserControl)handlePropUCP.GetPPHandlePropertyUC());
-
-                IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                _flpPanelSpecs.Controls.Add((UserControl)sashPropUCP.GetPPSashPropertyUC());
             }
+            IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            _flpPanelSpecs.Controls.Add((UserControl)sashPropUCP.GetPPSashPropertyUC());
 
             IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
             _flpPanelSpecs.Controls.Add((UserControl)glassPropUCP.GetPPGlassPropertyUC());
+
+            chkOrient_state = _panelModel.Panel_Orient;
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()

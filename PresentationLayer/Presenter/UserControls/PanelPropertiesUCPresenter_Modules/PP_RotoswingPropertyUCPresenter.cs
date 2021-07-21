@@ -70,6 +70,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             if (_panelModel.Panel_Height >= 2100)
             {
+                _panelModel.Panel_ExtensionOptionsVisibility = true;
+                _panelModel.Panel_CornerDriveOptionsVisibility = true;
+
                 IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                 _flpRotoswingOptions.Controls.Add((UserControl)cdPropUCP.GetPPCornerDriveUC());
 
@@ -85,6 +88,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.AdjustPropertyPanelHeight("addExtension");
                 _panelModel.AdjustHandlePropertyHeight("addExtension");
                 _panelModel.AdjustRotoswingPropertyHeight("addExtension");
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                }
             }
         }
 

@@ -568,8 +568,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (data == "Fixed Panel")
                 {
-                    _multiPanelModel.AdjustPropertyPanelHeight("FxdNone", "add");
-                    _frameModel.AdjustPropertyPanelHeight("FxdNone", "add");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
 
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
                                                                                _panelModel,
@@ -616,7 +621,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (data == "Awning Panel")
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    _panelModel.AdjustPropertyPanelHeight("addSash");
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
+                    _panelModel.AdjustPropertyPanelHeight("addHandle");
+
+                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
 
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
                                                                                   _panelModel,
