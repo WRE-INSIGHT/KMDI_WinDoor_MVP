@@ -1293,7 +1293,7 @@ namespace ModelLayer.Model.Quotation
 
                                 if (pnl.Panel_ExtTopQty > 0)
                                 {
-                                    Material_List.Rows.Add("Extension(Top) " + pnl.Panel_ExtensionArtNo.ToString(),
+                                    Material_List.Rows.Add("Extension(Top) " + pnl.Panel_ExtensionTopArtNo.ToString(),
                                                            pnl.Panel_ExtTopQty, "pc (s)",
                                                            "",
                                                            "Sash",
@@ -1301,7 +1301,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (pnl.Panel_ExtBotQty > 0)
                                 {
-                                    Material_List.Rows.Add("Extension(Bot) " + pnl.Panel_ExtensionArtNo.ToString(),
+                                    Material_List.Rows.Add("Extension(Bot) " + pnl.Panel_ExtensionBotArtNo.ToString(),
                                                            pnl.Panel_ExtBotQty, "pc (s)",
                                                            "",
                                                            "Sash",
@@ -1309,7 +1309,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (pnl.Panel_ExtLeftQty > 0)
                                 {
-                                    Material_List.Rows.Add("Extension(Left) " + pnl.Panel_ExtensionArtNo.ToString(),
+                                    Material_List.Rows.Add("Extension(Left) " + pnl.Panel_ExtensionLeftArtNo.ToString(),
                                                            pnl.Panel_ExtLeftQty, "pc (s)",
                                                            "",
                                                            "Sash",
@@ -1317,7 +1317,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (pnl.Panel_ExtRightQty > 0)
                                 {
-                                    Material_List.Rows.Add("Extension(Right) " + pnl.Panel_ExtensionArtNo.ToString(),
+                                    Material_List.Rows.Add("Extension(Right) " + pnl.Panel_ExtensionRightArtNo.ToString(),
                                                            pnl.Panel_ExtRightQty, "pc (s)",
                                                            "",
                                                            "Sash",

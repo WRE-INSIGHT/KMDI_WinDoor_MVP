@@ -1561,29 +1561,35 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (mode == "add")
                 {
-                    MPanelProp_Height += constants.panel_propertyHeight_default
-                                         - constants.panel_property_motorizedOptionsheight;
+                    MPanelProp_Height += constants.panel_propertyHeight_default;
                 }
-                if (mode == "deleteMotorized")
+                if (mode == "minus")
                 {
-                    MPanelProp_Height -= constants.panel_propertyHeight_default
-                                        - constants.panel_property_handleOptionsHeight;
+                    MPanelProp_Height -= constants.panel_propertyHeight_default;
                 }
                 else if (mode == "addRotary")
                 {
-                    MPanelProp_Height += constants.panel_property_rotaryOptionsheight_default; //(39 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height += constants.panel_property_rotaryOptionsheight_default;
                 }
                 else if (mode == "minusRotary")
                 {
-                    MPanelProp_Height -= constants.panel_property_rotaryOptionsheight_default; //(39 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height -= constants.panel_property_rotaryOptionsheight_default;
                 }
                 else if (mode == "addRotoswing")
                 {
-                    MPanelProp_Height += constants.panel_property_rotoswingOptionsheight_default; //(85 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height += constants.panel_property_rotoswingOptionsheight_default;
                 }
                 else if (mode == "minusRotoswing")
                 {
-                    MPanelProp_Height -= constants.panel_property_rotoswingOptionsheight_default; //(85 + 1); //+1 on margin (PanelProperties)
+                    MPanelProp_Height -= constants.panel_property_rotoswingOptionsheight_default;
+                }
+                else if (mode == "addCmbMotorized")
+                {
+                    MPanelProp_Height += constants.panel_property_motorizedCmbOptionsheight;
+                }
+                else if (mode == "minusCmbMotorized")
+                {
+                    MPanelProp_Height -= constants.panel_property_motorizedCmbOptionsheight;
                 }
                 else if (mode == "addHandle")
                 {
@@ -1593,63 +1599,64 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_handleOptionsHeight;
                 }
-            }
-            else if (objtype == "FxdNone")
-            {
-                if (mode == "delete")
+                else if (mode == "addChkMotorized")
                 {
-                    MPanelProp_Height -= ((((constants.panel_propertyHeight_default
-                                        - constants.panel_property_sashPanelHeight)
-                                        - constants.panel_property_handleOptionsHeight)
-                                        - constants.panel_property_pnlmotorizedheight)
-                                        - constants.panel_property_motorizedOptionsheight);
+                    MPanelProp_Height += constants.panel_property_motorizedChkOptionsheight;
                 }
-                else if (mode == "add")
+                else if (mode == "minusChkMotorized")
                 {
-                    MPanelProp_Height += ((((constants.panel_propertyHeight_default
-                                        - constants.panel_property_sashPanelHeight)
-                                        - constants.panel_property_handleOptionsHeight)
-                                        - constants.panel_property_pnlmotorizedheight)
-                                        - constants.panel_property_motorizedOptionsheight);
+                    MPanelProp_Height -= constants.panel_property_motorizedChkOptionsheight;
                 }
-            }
-            else if (objtype == "FxdSash")
-            {
-                if (mode == "delete")
+                else if (mode == "addSash")
                 {
-                    MPanelProp_Height -= (((constants.panel_propertyHeight_default
-                                        - constants.panel_property_handleOptionsHeight)
-                                        - constants.panel_property_pnlmotorizedheight)
-                                        - constants.panel_property_motorizedOptionsheight);
+                    MPanelProp_Height += constants.panel_property_sashPanelHeight;
                 }
-                else if (mode == "add")
-                {
-                    MPanelProp_Height += (((constants.panel_propertyHeight_default
-                                        - constants.panel_property_handleOptionsHeight)
-                                        - constants.panel_property_pnlmotorizedheight)
-                                        - constants.panel_property_motorizedOptionsheight);
-                }
-            }
-            else if (objtype == "SashProp")
-            {
-                if (mode == "delete")
+                else if (mode == "minusSash")
                 {
                     MPanelProp_Height -= constants.panel_property_sashPanelHeight;
                 }
-                else if (mode == "add")
+                else if (mode == "addGlass")
                 {
-                    MPanelProp_Height += constants.panel_property_sashPanelHeight;
+                    MPanelProp_Height += constants.panel_property_glassOptionsHeight;
+                }
+                else if (mode == "minusGlass")
+                {
+                    MPanelProp_Height -= constants.panel_property_glassOptionsHeight;
+                }
+                else if (mode == "addExtension")
+                {
+                    MPanelProp_Height += constants.panel_property_extensionOptionsheight;
+                }
+                else if (mode == "minusExtension")
+                {
+                    MPanelProp_Height -= constants.panel_property_extensionOptionsheight;
+                }
+                else if (mode == "addExtensionField")
+                {
+                    MPanelProp_Height += constants.panel_property_extensionFieldsheight;
+                }
+                else if (mode == "minusExtensionField")
+                {
+                    MPanelProp_Height -= constants.panel_property_extensionFieldsheight;
+                }
+                else if (mode == "addCornerDrive")
+                {
+                    MPanelProp_Height += constants.panel_property_cornerDriveOptionsheight_default;
+                }
+                else if (mode == "minusCornerDrive")
+                {
+                    MPanelProp_Height -= constants.panel_property_cornerDriveOptionsheight_default;
                 }
             }
             else if (objtype == "Div")
             {
                 if (mode == "delete")
                 {
-                    MPanelProp_Height -= constants.div_propertyheight_default; // (173 + 1); //+1 on margin (divProperties)
+                    MPanelProp_Height -= constants.div_propertyheight_default;
                 }
                 else if (mode == "add")
                 {
-                    MPanelProp_Height += constants.div_propertyheight_default; //(173 + 1); //+1 on margin (divProperties)
+                    MPanelProp_Height += constants.div_propertyheight_default;
                 }
             }
             else if (objtype == "Mpanel")
@@ -1661,28 +1668,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 else if (mode == "add")
                 {
                     MPanelProp_Height += constants.mpnl_propertyHeight_default; // (129 + 3); // +3 for MultiPanelProperties' Margin
-                }
-            }
-        }
-
-        public void AdjustPropertyPanelHeight(string objtype, string mode, Handle_Type handleType)
-        {
-            if (objtype == "Panel")
-            {
-                if (mode == "delete")
-                {
-                    if (handleType == Handle_Type._Rotoswing)
-                    {
-                        MPanelProp_Height -= constants.panel_propertyHeight_default
-                                            - constants.panel_property_rotaryOptionsheight_default
-                                            - constants.panel_property_motorizedOptionsheight;
-                    }
-                    else if (handleType == Handle_Type._Rotary)
-                    {
-                        MPanelProp_Height -= constants.panel_propertyHeight_default
-                                            - constants.panel_property_rotaryOptionsheight_default
-                                            - constants.panel_property_motorizedOptionsheight;
-                    }
                 }
             }
         }

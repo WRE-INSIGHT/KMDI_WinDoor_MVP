@@ -77,13 +77,34 @@ namespace ModelLayer.Model.Quotation.Panel
         Rotoswing_HandleArtNo Panel_RotoswingArtNo { get; set; }
         Rotary_HandleArtNo Panel_RotaryArtNo { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
-        Extension_ArticleNo Panel_ExtensionArtNo { get; set; }
+
+        Extension_ArticleNo Panel_ExtensionTopArtNo { get; set;}
+        Extension_ArticleNo Panel_ExtensionTop2ArtNo { get; set; }
+        Extension_ArticleNo Panel_ExtensionBotArtNo { get; set; }
+        Extension_ArticleNo Panel_ExtensionBot2ArtNo { get; set; }
+        Extension_ArticleNo Panel_ExtensionLeftArtNo { get; set; }
+        Extension_ArticleNo Panel_ExtensionLeft2ArtNo { get; set; }
+        Extension_ArticleNo Panel_ExtensionRightArtNo { get; set; }
+        Extension_ArticleNo Panel_ExtensionRight2ArtNo { get; set; }
+
+        bool Panel_ExtTopChk { get; set; }
+        bool Panel_ExtBotChk { get; set; }
+        bool Panel_ExtLeftChk { get; set; }
+
+        bool Panel_ExtRightChk { get; set; }
         int Panel_ExtTopQty { get; set; }
         int Panel_ExtBotQty { get; set; }
         int Panel_ExtLeftQty { get; set; }
         int Panel_ExtRightQty { get; set; }
+
+        int Panel_ExtTop2Qty { get; set; }
+        int Panel_ExtBot2Qty { get; set; }
+        int Panel_ExtLeft2Qty { get; set; }
+        int Panel_ExtRight2Qty { get; set; }
+
         CornerDrive_ArticleNo Panel_CornerDriveArtNo { get; set; }
-        bool Panel_ExtensionCornerDriveOptionsVisibility { get; set; }
+        bool Panel_CornerDriveOptionsVisibility { get; set; }
+        bool Panel_ExtensionOptionsVisibility { get; set; }
         int Panel_RotoswingOptionsHeight { get; set; }
         int Panel_PlasticWedgeQty { get; set; }
         Striker_ArticleNo Panel_StrikerArtno { get; set; }
@@ -95,8 +116,15 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_MiddleCloserPairQty { get; set; }
         bool Panel_MotorizedOptionVisibility { get; set; }
         MotorizedMech_ArticleNo Panel_MotorizedMechArtNo { get; set; }
+        int Panel_MotorizedPropertyHeight { get; set; }
         int Panel_MotorizedMechQty { get; set; }
+        int Panel_ExtensionPropertyHeight { get; set; }
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
+        void AdjustPropertyPanelHeight(string mode);
+        void AdjustMotorizedPropertyHeight(string mode);
+        void AdjustHandlePropertyHeight(string mode);
+        void AdjustRotoswingPropertyHeight(string mode);
+        void AdjustExtensionPropertyHeight(string mode);
         void SetPanelExplosionValues_Panel(bool parentIsFrame);
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,

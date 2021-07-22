@@ -8,7 +8,6 @@ namespace PresentationLayer.Presenter
     public interface IGlassThicknessListPresenter
     {
         IGlassThicknessListPresenter GetNewInstance(IUnityContainer unityC, 
-                                                    IPanelPropertiesUCPresenter panelPropertiesUCP, 
                                                     DataTable glassThicknessDT,
                                                     IPanelModel panelModel);
         void ShowGlassThicknessListView();

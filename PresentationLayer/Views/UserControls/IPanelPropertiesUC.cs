@@ -12,25 +12,8 @@ namespace PresentationLayer.Views.UserControls
 
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler ChkOrientationCheckChangedEventRaised;
-        event EventHandler CmbGlazingArtNoSelectedValueChangedEventRaised;
-        event EventHandler CmbFilmTypeSelectedValueChangedEventRaised;
-        event EventHandler CmbSashProfileSelectedValueChangedEventRaised;
-        event EventHandler CmbSashReinfSelectedValueChangedEventRaised;
-        event EventHandler btnSelectGlassThicknessClickedEventRaised;
-        event EventHandler CmbGlassTypeSelectedValueChangedEventRaised;
-        event EventHandler CmbHandleTypeSelectedValueChangedEventRaised;
-        event EventHandler CmbEspagnoletteSelectedValueChangedEventRaised;
-        event EventHandler CmbMiddleCloserSelectedValueChangedEventRaised;
-        event EventHandler CmbLockingKitSelectedValueChangedEventRaised;
-        event EventHandler CmbRotoswingArtNoSelectedValueChangedEventRaised;
-        event EventHandler CmbRotaryArtNoSelectedValueChangedEventRaised;
-        event EventHandler ChkMotorizedCheckChangedEventRaised;
-        event EventHandler CmbMotorizedMechSelectedValueChangedEventRaised;
-        event EventHandler CmbExtensionSelectedValueChangedEventRaised;
-        event EventHandler CmbCornerDriveSelectedValueChangedEventRaised;
-        event EventHandler CmbStrikerSelectedValueChangedEventRaised;
 
-        Panel GetPnlRotoswingOptions();
-        Panel GetPnlRotaryOptions();
+        FlowLayoutPanel GetPanelSpecsFLP();
+
     }
 }

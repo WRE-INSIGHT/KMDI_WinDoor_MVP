@@ -8,12 +8,14 @@ using PresentationLayer.Presenter;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
+using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
+using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using QueryLayer.DataAccess.Repositories.Specific.User;
@@ -30,6 +32,7 @@ using System.Windows.Forms;
 using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
+
 
 namespace PresentationLayer
 {
@@ -171,6 +174,7 @@ namespace PresentationLayer
                 .RegisterType<IGlassThicknessListView, GlassThicknessListView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGlassThicknessListPresenter, GlassThicknessListPresenter>(new ContainerControlledLifetimeManager())
 
+
                 .RegisterType<ICreateNewGlassTypeView, CreateNewGlassTypeView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICreateNewGlassTypePresenter, CreateNewGlassTypePresenter>(new ContainerControlledLifetimeManager())
 
@@ -179,6 +183,31 @@ namespace PresentationLayer
 
                 .RegisterType<ICreateNewGlassColorView, CreateNewGlassColorView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICreateNewGlassColorPresenter, CreateNewGlassColorPresenter>(new ContainerControlledLifetimeManager())
+
+
+                .RegisterType<IPP_MotorizedPropertyUC, PP_MotorizedPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_MotorizedPropertyUCPresenter, PP_MotorizedPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_SashPropertyUC, PP_SashPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_SashPropertyUCPresenter, PP_SashPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_GlassPropertyUC, PP_GlassPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_GlassPropertyUCPresenter, PP_GlassPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_HandlePropertyUC, PP_HandlePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_HandlePropertyUCPresenter, PP_HandlePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_RotoswingPropertyUC, PP_RotoswingPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RotoswingPropertyUCPresenter, PP_RotoswingPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_RotaryPropertyUC, PP_RotaryPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RotaryPropertyUCPresenter, PP_RotaryPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_ExtensionPropertyUC, PP_ExtensionPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_ExtensionPropertyUCPresenter, PP_ExtensionPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_CornerDrivePropertyUC, PP_CornerDrivePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_CornerDrivePropertyUCPresenter, PP_CornerDrivePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
