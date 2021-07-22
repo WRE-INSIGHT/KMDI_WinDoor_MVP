@@ -73,6 +73,16 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
         SnapInKeep_ArticleNo Panel_SnapInKeepArtNo { get; set; }
+        FixedCam_ArticleNo Panel_FixedCamArtNo { get; set; }
+        _30x25Cover_ArticleNo Panel_30x25CoverArtNo { get; set; }
+        MotorizedDivider_ArticleNo Panel_MotorizedDividerArtNo { get; set; }
+        CoverForMotor_ArticleNo Panel_CoverForMotorArtNo { get; set; }
+        _2DHinge_ArticleNo Panel_2dHingeArtNo { get; set; }
+        PushButtonSwitch_ArticleNo Panel_PushButtonSwitchArtNo { get; set; }
+        FalsePole_ArticleNo Panel_FalsePoleArtNo { get; set; }
+        SupportingFrame_ArticleNo Panel_SupportingFrameArtNo { get; set; }
+        Plate_ArticleNo Panel_PlateArtNo { get; set; }
+
         Handle_Type Panel_HandleType { get; set; }
         Rotoswing_HandleArtNo Panel_RotoswingArtNo { get; set; }
         Rotary_HandleArtNo Panel_RotaryArtNo { get; set; }
@@ -119,6 +129,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_MotorizedPropertyHeight { get; set; }
         int Panel_MotorizedMechQty { get; set; }
         int Panel_ExtensionPropertyHeight { get; set; }
+
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
         void AdjustPropertyPanelHeight(string mode);
         void AdjustMotorizedPropertyHeight(string mode);
