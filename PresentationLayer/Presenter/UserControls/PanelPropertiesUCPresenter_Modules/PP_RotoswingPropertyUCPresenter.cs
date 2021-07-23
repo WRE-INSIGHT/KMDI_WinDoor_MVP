@@ -24,6 +24,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         FlowLayoutPanel _flpRotoswingOptions;
 
+        bool _initialLoad = true;
+
         public PP_RotoswingPropertyUCPresenter(IPP_RotoswingPropertyUC pp_rotoswingPropertyUC,
                                                IPP_ExtensionPropertyUCPresenter pp_extensionPropertyUCPresenter,
                                                IPP_CornerDrivePropertyUCPresenter pp_cornerDrivePropertyUCPresenter)
@@ -46,17 +48,26 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_rotoswingPropertyUC_cmbStrikerSelectedValueEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_StrikerArtno = (Striker_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_StrikerArtno = (Striker_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_rotoswingPropertyUC_cmbRotoswingNoSelectedValueEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_RotoswingArtNo = (Rotoswing_HandleArtNo)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_RotoswingArtNo = (Rotoswing_HandleArtNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_rotoswingPropertyUC_cmbMiddleCloserSelectedValueEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_MiddleCloserArtNo = (MiddleCloser_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_MiddleCloserArtNo = (MiddleCloser_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_rotoswingPropertyUC_cmbEspagnoletteSelectedValueEventRaised(object sender, EventArgs e)
@@ -95,6 +106,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                 }
             }
+            _initialLoad = false;
         }
 
         public IPP_RotoswingPropertyUC GetPPRotoswingPropertyUC()
