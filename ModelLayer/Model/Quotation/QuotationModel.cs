@@ -1607,8 +1607,11 @@ namespace ModelLayer.Model.Quotation
             Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(total_glassWidth + total_glassHeight) / 6842));
             GlazingSpacer_TotalQty = glazing_spacer;
             GlazingSeal_TotalQty = glazing_seal;
-            Screws_for_Fabrication = (int)(Math.Ceiling((decimal)total_screws_fabrication / 300)) + additional_screws_fabrication;
-            Screws_for_Installation = total_screws_installation; //+ fixing screw
+
+            int fixing_screw = (int)(Math.Ceiling((decimal)total_screws_fabrication / 300));
+            Screws_for_Fabrication = fixing_screw + additional_screws_fabrication;
+            Screws_for_Installation = fixing_screw + total_screws_installation;
+
             Plastic_CoverQty_Total = (frame_width * frame_height) * 2;
             Expansion_BoltQty_Total = exp_bolt;
             Rebate_Qty = 2 * 2 * Expansion_BoltQty_Total;
