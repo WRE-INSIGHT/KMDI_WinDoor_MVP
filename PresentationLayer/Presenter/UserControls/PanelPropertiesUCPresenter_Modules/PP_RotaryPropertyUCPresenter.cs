@@ -19,6 +19,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
 
+        bool _initialLoad = true;
+
         public PP_RotaryPropertyUCPresenter(IPP_RotaryPropertyUC pp_rotaryPropertyUC)
         {
             _pp_rotaryPropertyUC = pp_rotaryPropertyUC;
@@ -34,17 +36,24 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_rotaryPropertyUC_cmbLockingKitSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_LockingKitArtNo = (LockingKit_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_LockingKitArtNo = (LockingKit_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_rotaryPropertyUC_cmbRotaryArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_RotaryArtNo = (Rotary_HandleArtNo)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_RotaryArtNo = (Rotary_HandleArtNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_rotaryPropertyUC_PPRotaryPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_rotaryPropertyUC.ThisBinding(CreateBindingDictionary());
+            _initialLoad = false;
         }
 
         public IPP_RotaryPropertyUC GetPPRotaryPropertyUC()

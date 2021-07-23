@@ -22,6 +22,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
 
+        bool _initialLoad = true;
+
         public PP_GlassPropertyUCPresenter(IPP_GlassPropertyUC pp_glassPropertyUC,
                                            IGlassThicknessListPresenter glassThicknessPresenter)
         {
@@ -47,22 +49,32 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_glassPropertyUC_cmbFilmTypeSelectedValueEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_GlassFilm = (GlassFilm_Types)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_GlassFilm = (GlassFilm_Types)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_glassPropertyUC_cmbGlassTypeSelectedValueEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_GlassType = (GlassType)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_GlassType = (GlassType)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_glassPropertyUC_cmbGlazingArtNoSelectedValueEventRaised(object sender, EventArgs e)
         {
-            _panelModel.PanelGlazingBead_ArtNo = (GlazingBead_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.PanelGlazingBead_ArtNo = (GlazingBead_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_glassPropertyUC_PPGlassPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_glassPropertyUC.ThisBinding(CreateBindingDictionary());
+            _initialLoad = false;
         }
 
         public IPP_GlassPropertyUC GetPPGlassPropertyUC()

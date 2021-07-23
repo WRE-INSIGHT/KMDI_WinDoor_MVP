@@ -1069,6 +1069,8 @@ namespace ModelLayer.Model.Quotation
 
                                         if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                         {
+                                            additional_screws_fabrication += 6; //for Storm26
+
                                             Material_List.Rows.Add("Snap-in Keep " + pnl_curCtrl.Panel_SnapInKeepArtNo.ToString(),
                                                                    2, "pc(s)",
                                                                    "",
@@ -1084,6 +1086,23 @@ namespace ModelLayer.Model.Quotation
                                                                    @"");
 
                                             additional_screws_fabrication += 2;
+                                        }
+                                        else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8)
+                                        {
+                                            additional_screws_fabrication += 3;
+                                        }
+                                        else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._477254 ||
+                                                 pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._A2121C1261)
+                                        {
+                                            additional_screws_fabrication += 4;
+                                        }
+                                        else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._A212C16161)
+                                        {
+                                            additional_screws_fabrication += 5;
+                                        }
+                                        else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22)
+                                        {
+                                            additional_screws_fabrication += 6;
                                         }
 
                                         Material_List.Rows.Add("Plastic Wedge 7199",
@@ -1392,6 +1411,8 @@ namespace ModelLayer.Model.Quotation
 
                             if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                             {
+                                additional_screws_fabrication += 6; //for Storm26
+
                                 Material_List.Rows.Add("Snap-in Keep " + pnl.Panel_SnapInKeepArtNo.ToString(),
                                                        2, "pc(s)",
                                                        "",
@@ -1407,6 +1428,24 @@ namespace ModelLayer.Model.Quotation
                                                        @"");
 
                                 additional_screws_fabrication += 2;
+                            }
+
+                            else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8)
+                            {
+                                additional_screws_fabrication += 3;
+                            }
+                            else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._477254 ||
+                                     pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._A2121C1261)
+                            {
+                                additional_screws_fabrication += 4;
+                            }
+                            else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._A212C16161)
+                            {
+                                additional_screws_fabrication += 5;
+                            }
+                            else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22)
+                            {
+                                additional_screws_fabrication += 6;
                             }
 
                             Material_List.Rows.Add("Plastic Wedge 7199",
