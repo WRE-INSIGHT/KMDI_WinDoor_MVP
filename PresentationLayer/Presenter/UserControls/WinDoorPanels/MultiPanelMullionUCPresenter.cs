@@ -511,6 +511,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                 }
 
+                Rotoswing_HandleArtNo handleArtNo = null;
+                Foil_Color inside_color = _frameModel.Frame_WindoorModel.WD_InsideColor;
+
+                if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
+                    inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
+                {
+                    handleArtNo = Rotoswing_HandleArtNo._RSC833307;
+                }
+                else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
+                         inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
+                         inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
+                         inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
+                         inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                {
+                    handleArtNo = Rotoswing_HandleArtNo._RSC773452;
+                }
+
                 IPanelModel _panelModel = _panelServices.AddPanelModel(suggest_Wd,
                                                                        suggest_HT,
                                                                        fpnl,
@@ -555,6 +572,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        0,
                                                                        0,
                                                                        0,
+                                                                       handleArtNo,
                                                                        _mainPresenter.GetPanelCount(),
                                                                        _mainPresenter.GetPanelGlassID(),
                                                                        _frameModel.FrameImageRenderer_Zoom,

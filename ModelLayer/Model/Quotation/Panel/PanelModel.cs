@@ -2200,7 +2200,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           int panelExtTop2Qty,
                           int panelExtBot2Qty,
                           int panelExtLeft2Qty,
-                          int panelExtRight2Qty)
+                          int panelExtRight2Qty,
+                          Rotoswing_HandleArtNo panelRotoswingArtNo)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -2257,6 +2258,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_ExtLeft2Qty = panelExtLeft2Qty;
             Panel_ExtRightQty = panelExtRightQty;
             Panel_ExtRight2Qty = panelExtRight2Qty;
+            Panel_RotoswingArtNo = panelRotoswingArtNo;
 
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;

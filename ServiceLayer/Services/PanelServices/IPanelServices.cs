@@ -54,6 +54,7 @@ namespace ServiceLayer.Services.PanelServices
                                   int panelExtBot2Qty,
                                   int panelExtLeft2Qty,
                                   int panelExtRight2Qty,
+                                  Rotoswing_HandleArtNo panelRotoswingArtNo,
                                   int panelID = 0,
                                   int panelGlassID = 0,
                                   float panelImageRendererZoom = 1,

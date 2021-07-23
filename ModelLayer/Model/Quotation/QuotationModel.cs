@@ -704,7 +704,7 @@ namespace ModelLayer.Model.Quotation
                                                            mpnl.MPanel_Type,
                                                            @"|  |");
 
-                                    total_screws_fabrication += (div_nxtCtrl.Div_ExplosionHeight * 2);
+                                    total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
 
                                     if (!screws_for_inst_where.Contains("Mullion"))
                                     {
@@ -740,7 +740,7 @@ namespace ModelLayer.Model.Quotation
                                                            mpnl.MPanel_Type,
                                                            @"|  |");
 
-                                    total_screws_fabrication += (div_nxtCtrl.Div_ExplosionWidth * 2);
+                                    total_screws_fabrication += div_nxtCtrl.Div_ExplosionWidth;
 
                                     if (!screws_for_inst_where.Contains("Transom"))
                                     {
