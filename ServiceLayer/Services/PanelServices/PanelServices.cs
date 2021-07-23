@@ -73,7 +73,8 @@ namespace ServiceLayer.Services.PanelServices
                                             int panelExtTop2Qty,
                                             int panelExtBot2Qty,
                                             int panelExtLeft2Qty,
-                                            int panelExtRight2Qty)
+                                            int panelExtRight2Qty,
+                                            Rotoswing_HandleArtNo panelRotoswingArtNo)
         {
             IPanelModel pnl = new PanelModel(panelID,
                                              panelName,
@@ -125,7 +126,8 @@ namespace ServiceLayer.Services.PanelServices
                                              panelExtTop2Qty,
                                              panelExtBot2Qty,
                                              panelExtLeft2Qty,
-                                             panelExtRight2Qty);
+                                             panelExtRight2Qty,
+                                             panelRotoswingArtNo);
 
             ValidateModel(pnl);
             return pnl;
@@ -180,6 +182,7 @@ namespace ServiceLayer.Services.PanelServices
                                          int panelExtBot2Qty,
                                          int panelExtLeft2Qty,
                                          int panelExtRight2Qty,
+                                         Rotoswing_HandleArtNo panelRotoswingArtNo,
                                          int panelID = 0,
                                          int panelGlassID = 0,
                                          float panelImageRendererZoom = 1,
@@ -243,7 +246,8 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelExtTop2Qty,
                                                        panelExtBot2Qty,
                                                        panelExtLeft2Qty,
-                                                       panelExtRight2Qty);
+                                                       panelExtRight2Qty,
+                                                       panelRotoswingArtNo);
 
             return _panelModel;
         }

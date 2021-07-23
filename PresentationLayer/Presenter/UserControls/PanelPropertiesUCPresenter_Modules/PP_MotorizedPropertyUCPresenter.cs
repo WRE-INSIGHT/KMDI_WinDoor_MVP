@@ -19,6 +19,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
 
+        bool _initialLoad = true;
+
         public PP_MotorizedPropertyUCPresenter(IPP_MotorizedPropertyUC pp_motorizedPropertyUC)
         {
             _pp_motorizedPropertyUC = pp_motorizedPropertyUC;
@@ -34,7 +36,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_motorizedPropertyUC_cmbMotorizedMechSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_MotorizedMechArtNo = (MotorizedMech_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_MotorizedMechArtNo = (MotorizedMech_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_motorizedPropertyUC_chkMotorizedCheckedChangedEventRaised(object sender, EventArgs e)
@@ -92,6 +97,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_motorizedPropertyUC_PPMotorizedPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _pp_motorizedPropertyUC.ThisBinding(CreateBindingDictionary());
+            _initialLoad = false;
         }
 
         public IPP_MotorizedPropertyUC GetPPMotorizedPropertyUC()
