@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ModelLayer.Variables
+﻿namespace ModelLayer.Variables
 {
     public class ConstantVariables
     {
@@ -22,7 +16,7 @@ namespace ModelLayer.Variables
         public int panel_property_cornerDriveOptionsheight_default = 30;
         public int panel_property_extensionOptionsheight = 143;
         public int panel_property_extensionFieldsheight = 31;
-
+        public int panel_property_georgianBarHeight = 93;
         #endregion
 
         public int div_propertyheight_default = 173;

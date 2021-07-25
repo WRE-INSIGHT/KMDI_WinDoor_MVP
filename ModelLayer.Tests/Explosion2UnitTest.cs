@@ -106,6 +106,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                    1);
 
             _panelModel.Panel_GlassThickness = 6.0f;
@@ -200,6 +201,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                    1);
             _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -520,7 +522,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
@@ -555,6 +557,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _panelModel.Panel_GlassThickness = 6.0f;
@@ -591,7 +594,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
@@ -626,6 +629,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -804,7 +808,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    uneqpanelHT1,
@@ -839,6 +843,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _panelModel.Panel_GlassThickness = 6.0f;
@@ -874,7 +879,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    uneqpanelHT2,
@@ -909,6 +914,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -1226,7 +1232,7 @@ namespace ModelLayer.Tests
                                                                  "Fixed Panel",
                                                                  true,
                                                                  1.0f,
-                                                                 null,
+                                                                 _frameModel,
                                                                  _multiTransomModel1,
                                                                  PanelWD1_BG,
                                                                  PanelHT1_BG,
@@ -1261,7 +1267,8 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
-                                                                 1);
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 6.0f;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
@@ -1302,7 +1309,7 @@ namespace ModelLayer.Tests
                                                                   "Fixed Panel",
                                                                   true,
                                                                   1.0f,
-                                                                  null,
+                                                                  _frameModel,
                                                                   _multiTransomModel1,
                                                                   PanelWD1_BG,
                                                                   PanelHT1_BG,
@@ -1337,7 +1344,8 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
-                                                                  2);
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
             _panelModel2.Panel_Index_Inside_MPanel = 2;
@@ -1366,7 +1374,7 @@ namespace ModelLayer.Tests
                                                                "Fixed Panel",
                                                                true,
                                                                1.0f,
-                                                               null,
+                                                               _frameModel,
                                                                _multiTransomModel2,
                                                                PanelWD3_BG,
                                                                PanelHT3_BG,
@@ -1401,6 +1409,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_GlassThickness = 6.0f;
@@ -1440,7 +1449,7 @@ namespace ModelLayer.Tests
                                                               "Fixed Panel",
                                                               true,
                                                               1.0f,
-                                                              null,
+                                                              _frameModel,
                                                               _multiTransomModel2,
                                                               PanelWD3_BG,
                                                               PanelHT3_BG,
@@ -1475,6 +1484,7 @@ namespace ModelLayer.Tests
                                                               0,
                                                               0,
                                                               0,
+                                                              Rotoswing_HandleArtNo._RSC773451,
                                                               4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_GlassThickness = 6.0f;
@@ -1503,7 +1513,7 @@ namespace ModelLayer.Tests
                                                              "Fixed Panel",
                                                              true,
                                                              1.0f,
-                                                             null,
+                                                             _frameModel,
                                                              _multiTransomModel3,
                                                              PanelWD1_BG,
                                                              PanelHT1_BG,
@@ -1538,6 +1548,7 @@ namespace ModelLayer.Tests
                                                               0,
                                                               0,
                                                               0,
+                                                              Rotoswing_HandleArtNo._RSC773451,
                                                              5);
             _panelModel5.Panel_Placement = "First";
             _panelModel5.Panel_GlassThickness = 6.0f;
@@ -1578,7 +1589,7 @@ namespace ModelLayer.Tests
                                                           "Fixed Panel",
                                                           true,
                                                           1.0f,
-                                                          null,
+                                                          _frameModel,
                                                           _multiTransomModel3,
                                                           PanelWD1_BG,
                                                           PanelHT1_BG,
@@ -1613,6 +1624,7 @@ namespace ModelLayer.Tests
                                                           0,
                                                           0,
                                                           0,
+                                                          Rotoswing_HandleArtNo._RSC773451,
                                                           6);
             _panelModel6.Panel_Placement = "Last";
             _panelModel6.Panel_GlassThickness = 6.0f;
@@ -1913,7 +1925,7 @@ namespace ModelLayer.Tests
                                                                      "Fixed Panel",
                                                                      true,
                                                                      1.0f,
-                                                                     null,
+                                                                     _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
                                                                      PanelHT1_BG,
@@ -1948,6 +1960,7 @@ namespace ModelLayer.Tests
                                                                       0,
                                                                       0,
                                                                       0,
+                                                                      Rotoswing_HandleArtNo._RSC773451,
                                                                      1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 6.0f;
@@ -2031,7 +2044,7 @@ namespace ModelLayer.Tests
                                                                      "Fixed Panel",
                                                                      true,
                                                                      1.0f,
-                                                                     null,
+                                                                     _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
                                                                      PanelHT1_BG,
@@ -2066,6 +2079,7 @@ namespace ModelLayer.Tests
                                                                       0,
                                                                       0,
                                                                       0,
+                                                                      Rotoswing_HandleArtNo._RSC773451,
                                                                      2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -2094,7 +2108,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiTransomModel1,
                                                                    PanelWD3_BG,
                                                                    PanelHT3_BG,
@@ -2129,6 +2143,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                    3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_GlassThickness = 6.0f;
@@ -2169,7 +2184,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiTransomModel1,
                                                                     PanelWD3_BG,
                                                                     PanelHT3_BG,
@@ -2204,6 +2219,7 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     0,
+                                                                    Rotoswing_HandleArtNo._RSC773451,
                                                                     4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_GlassThickness = 6.0f;
@@ -2472,7 +2488,7 @@ namespace ModelLayer.Tests
                                                                      "Fixed Panel",
                                                                      true,
                                                                      1.0f,
-                                                                     null,
+                                                                     _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
                                                                      PanelHT1_BG,
@@ -2507,6 +2523,7 @@ namespace ModelLayer.Tests
                                                                      0,
                                                                      0,
                                                                      0,
+                                                                     Rotoswing_HandleArtNo._RSC773451,
                                                                      1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 14.0f;
@@ -2591,7 +2608,7 @@ namespace ModelLayer.Tests
                                                                  "Fixed Panel",
                                                                  true,
                                                                  1.0f,
-                                                                 null,
+                                                                 _frameModel,
                                                                  _multiMullionModel,
                                                                  PanelWD1_BG,
                                                                  PanelHT1_BG,
@@ -2626,6 +2643,7 @@ namespace ModelLayer.Tests
                                                               0,
                                                               0,
                                                               0,
+                                                              Rotoswing_HandleArtNo._RSC773451,
                                                                  2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 14.0f;
@@ -2743,7 +2761,7 @@ namespace ModelLayer.Tests
                                                                   "Fixed Panel",
                                                                   true,
                                                                   1.0f,
-                                                                  null,
+                                                                  _frameModel,
                                                                   _multiMullionModel1,
                                                                   PanelWD3_BG,
                                                                   PanelHT3_BG,
@@ -2778,6 +2796,7 @@ namespace ModelLayer.Tests
                                                                   0,
                                                                   0,
                                                                   0,
+                                                                  Rotoswing_HandleArtNo._RSC773451,
                                                                   3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_GlassThickness = 6.0f;
@@ -2819,7 +2838,7 @@ namespace ModelLayer.Tests
                                                                   "Fixed Panel",
                                                                   true,
                                                                   1.0f,
-                                                                  null,
+                                                                  _frameModel,
                                                                   _multiMullionModel1,
                                                                   PanelWD3_BG,
                                                                   PanelHT3_BG,
@@ -2854,6 +2873,7 @@ namespace ModelLayer.Tests
                                                                   0,
                                                                   0,
                                                                   0,
+                                                                  Rotoswing_HandleArtNo._RSC773451,
                                                                   4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_GlassThickness = 6.0f;
@@ -2885,7 +2905,7 @@ namespace ModelLayer.Tests
                                                                       "Fixed Panel",
                                                                       true,
                                                                       1.0f,
-                                                                      null,
+                                                                      _frameModel,
                                                                       _multiMullionModel2,
                                                                       PanelWD3_BG,
                                                                       PanelHT3_BG,
@@ -2920,6 +2940,7 @@ namespace ModelLayer.Tests
                                                                       0,
                                                                       0,
                                                                       0,
+                                                                      Rotoswing_HandleArtNo._RSC773451,
                                                                       5);
             _panelModel5.Panel_Placement = "First";
             _panelModel5.Panel_GlassThickness = 6.0f;
@@ -2961,7 +2982,7 @@ namespace ModelLayer.Tests
                                                                   "Fixed Panel",
                                                                   true,
                                                                   1.0f,
-                                                                  null,
+                                                                  _frameModel,
                                                                   _multiMullionModel2,
                                                                   PanelWD3_BG,
                                                                   PanelHT3_BG,
@@ -2996,6 +3017,7 @@ namespace ModelLayer.Tests
                                                                   0,
                                                                   0,
                                                                   0,
+                                                                  Rotoswing_HandleArtNo._RSC773451,
                                                                   6);
             _panelModel6.Panel_Placement = "Last";
             _panelModel6.Panel_GlassThickness = 6.0f;
@@ -3308,7 +3330,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel,
                                                                     pnl_1_wd,
                                                                     pnl_1_ht,
@@ -3343,6 +3365,7 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     0,
+                                                                    Rotoswing_HandleArtNo._RSC773451,
                                                                     1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 6.0f;
@@ -3428,7 +3451,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel,
                                                                     pnl_1_wd,
                                                                     pnl_1_ht,
@@ -3463,6 +3486,7 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     0,
+                                                                    Rotoswing_HandleArtNo._RSC773451,
                                                                     2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -3492,7 +3516,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiTransomModel1,
                                                                     pnl_3_wd,
                                                                     pnl_3_ht,
@@ -3527,6 +3551,7 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     0,
+                                                                    Rotoswing_HandleArtNo._RSC773451,
                                                                     3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_GlassThickness = 13.0f;
@@ -3612,7 +3637,7 @@ namespace ModelLayer.Tests
                                                                      "Fixed Panel",
                                                                      true,
                                                                      1.0f,
-                                                                     null,
+                                                                     _frameModel,
                                                                      _multiTransomModel1,
                                                                      pnl_3_wd,
                                                                      pnl_3_ht,
@@ -3647,6 +3672,7 @@ namespace ModelLayer.Tests
                                                                      0,
                                                                      0,
                                                                      0,
+                                                                     Rotoswing_HandleArtNo._RSC773451,
                                                                      4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_GlassThickness = 13.0f;
@@ -3678,7 +3704,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel1,
                                                                     pnl_5_wd,
                                                                     pnl_5_ht,
@@ -3713,6 +3739,7 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     0,
+                                                                    Rotoswing_HandleArtNo._RSC773451,
                                                                     5);
             _panelModel5.Panel_Placement = "First";
             _panelModel5.Panel_GlassThickness = 13.0f;
@@ -3752,7 +3779,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel1,
                                                                     pnl_5_wd,
                                                                     pnl_5_ht,
@@ -3787,6 +3814,7 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     0,
+                                                                    Rotoswing_HandleArtNo._RSC773451,
                                                                     6);
             _panelModel6.Panel_Placement = "Last";
             _panelModel6.Panel_GlassThickness = 13.0f;
@@ -4102,10 +4130,13 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                    1);
             _panelModel.Panel_GlassThickness = 13.0f;
             _panelModel.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773452;
             _frameModel.Lst_Panel.Add(_panelModel);
+
+
 
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
 
@@ -4119,8 +4150,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(3612, _qouteModel.GlazingSeal_TotalQty);
-            Assert.AreEqual(41, _qouteModel.Screws_for_Installation);
-
+            Assert.AreEqual(1680000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(6, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(24, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(40, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(25, _qouteModel.Screws_for_Installation);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(653, _panelModel.Panel_GlazingBeadWidth);
@@ -4220,6 +4254,9 @@ namespace ModelLayer.Tests
                              Description LIKE '%7199%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
+
+
+
 
             #endregion
 
@@ -4343,6 +4380,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                    1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 6.0f;
@@ -4417,6 +4455,7 @@ namespace ModelLayer.Tests
                                                                       0,
                                                                       0,
                                                                       0,
+                                                                      Rotoswing_HandleArtNo._RSC773451,
                                                                       2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -4444,7 +4483,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
-            // Assert.AreEqual(63, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(3014000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(8, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(32, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(75, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(43, _qouteModel.Screws_for_Installation);
 
             #region Multimullion(2)
 
@@ -4736,6 +4779,7 @@ namespace ModelLayer.Tests
                                                                                    0,
                                                                                    0,
                                                                                    0,
+                                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                                   1);
             _panelModel1_Awning.Panel_Placement = "First";
             _panelModel1_Awning.Panel_GlassThickness = 24.0f;
@@ -4810,6 +4854,7 @@ namespace ModelLayer.Tests
                                                                                   0,
                                                                                   0,
                                                                                   0,
+                                                                                  Rotoswing_HandleArtNo._RSC773451,
                                                                                   2);
             _panelModel2_Awning.Panel_Placement = "Last";
             _panelModel2_Awning.Panel_GlassThickness = 6.0f;
@@ -4838,7 +4883,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(4800, _qouteModel.GlazingSeal_TotalQty);
-            //Assert.AreEqual(111, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(8404780, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(13, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(52, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(115, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(73, _qouteModel.Screws_for_Installation);
 
 
             #region AwningUC_1
@@ -5171,7 +5220,7 @@ namespace ModelLayer.Tests
                                                                            "Fixed Panel",
                                                                            true,
                                                                            1.0f,
-                                                                           null,
+                                                                           _frameModel,
                                                                            _multiMullionModel,
                                                                            PnlWidth3_Fix,
                                                                            PnlHeight3_Fix,
@@ -5206,6 +5255,7 @@ namespace ModelLayer.Tests
                                                                            0,
                                                                            0,
                                                                            0,
+                                                                           Rotoswing_HandleArtNo._RSC773451,
                                                                            1);
             _panelModel1_fixed1.Panel_Placement = "Last";
             _panelModel1_fixed1.Panel_GlassThickness = 13.0f;
@@ -5233,7 +5283,7 @@ namespace ModelLayer.Tests
                                                                   "Fixed Panel",
                                                                   true,
                                                                   1.0f,
-                                                                  null,
+                                                                  _frameModel,
                                                                   _multiTransomModel1,
                                                                   PnlWidth1_Fix,
                                                                   PnlHeight1_Fix,
@@ -5268,6 +5318,7 @@ namespace ModelLayer.Tests
                                                                   0,
                                                                   0,
                                                                   0,
+                                                                  Rotoswing_HandleArtNo._RSC773451,
                                                                   2);
             _panelModel2_fixed2.Panel_Placement = "First";
             _panelModel2_fixed2.Panel_GlassThickness = 13.0f;
@@ -5345,6 +5396,7 @@ namespace ModelLayer.Tests
                                                                              0,
                                                                              0,
                                                                              0,
+                                                                             Rotoswing_HandleArtNo._RSC773451,
                                                                              3);
             _panelModel3_Awning1.Panel_Placement = "Last";
             _panelModel3_Awning1.Panel_GlassThickness = 13.0f;
@@ -5376,7 +5428,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(11630, _qouteModel.GlazingSeal_TotalQty);
             Assert.AreEqual(2, _qouteModel.GlazingSpacer_TotalQty);
-            //Assert.AreEqual(61, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(5400000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(10, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(40, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(64, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(44, _qouteModel.Screws_for_Installation);
 
             #region MultiMullion
 
@@ -5697,7 +5753,7 @@ namespace ModelLayer.Tests
                                                                            "Fixed Panel",
                                                                            true,
                                                                            1.0f,
-                                                                           null,
+                                                                           _frameModel,
                                                                            _multiMullionModel,
                                                                            PnlWidth3_Fix,
                                                                            PnlHeight3_Fix,
@@ -5732,6 +5788,7 @@ namespace ModelLayer.Tests
                                                                            0,
                                                                            0,
                                                                            0,
+                                                                           Rotoswing_HandleArtNo._RSC773451,
                                                                            1);
             _panelModel1_fixed1.Panel_Placement = "Last";
             _panelModel1_fixed1.Panel_GlassThickness = 13.0f;
@@ -5759,7 +5816,7 @@ namespace ModelLayer.Tests
                                                                           "Fixed Panel",
                                                                           true,
                                                                           1.0f,
-                                                                          null,
+                                                                          _frameModel,
                                                                           _multiTransomModel1,
                                                                           PnlWidth1_Fix,
                                                                           PnlHeight1_Fix,
@@ -5794,6 +5851,7 @@ namespace ModelLayer.Tests
                                                                           0,
                                                                           0,
                                                                           0,
+                                                                          Rotoswing_HandleArtNo._RSC773451,
                                                                           2);
             _panelModel2_fixed2.Panel_Placement = "First";
             _panelModel2_fixed2.Panel_GlassThickness = 13.0f;
@@ -5871,6 +5929,7 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               0,
                                                                               0,
+                                                                              Rotoswing_HandleArtNo._RSC773451,
                                                                              3);
             _panelModel3_Awning1.Panel_Placement = "Last";
             _panelModel3_Awning1.Panel_GlassThickness = 13.0f;
@@ -5903,7 +5962,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(11630, _qouteModel.GlazingSeal_TotalQty);
             Assert.AreEqual(2, _qouteModel.GlazingSpacer_TotalQty);
-            //Assert.AreEqual(61, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(5400000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(10, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(40, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(55, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(37, _qouteModel.Screws_for_Installation);
 
             #region MultiMullion
 
@@ -6230,6 +6293,7 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               0,
                                                                               0,
+                                                                              Rotoswing_HandleArtNo._RSC773451,
                                                                              1);
             _panelModel1_fixed.Panel_Placement = "First";
             _panelModel1_fixed.Panel_GlassThickness = 6.0f;
@@ -6303,6 +6367,7 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               0,
                                                                               0,
+                                                                              Rotoswing_HandleArtNo._RSC773451,
                                                                              2);
             _panelModel2_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel2_Awning.Panel_GlassThickness = 6.0f;
@@ -6377,6 +6442,7 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             0,
                                                                             0,
+                                                                            Rotoswing_HandleArtNo._RSC773451,
                                                                             3);
             _panelModel3_fixed.Panel_Placement = "Last";
             _panelModel3_fixed.Panel_GlassThickness = 6.0f;
@@ -6405,7 +6471,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
             Assert.AreEqual(2, _qouteModel.GlazingSpacer_TotalQty);
-            //Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(3520000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(56, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(37, _qouteModel.Screws_for_Installation);
 
             #region MultiTransom (3)
 
@@ -6688,6 +6758,7 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             0,
                                                                             0,
+                                                                            Rotoswing_HandleArtNo._RSC773451,
                                                                             1);
             _panelModel1_fixed.Panel_Placement = "First";
             _panelModel1_fixed.Panel_GlassThickness = 13.0f;
@@ -6797,6 +6868,7 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             0,
                                                                             0,
+                                                                            Rotoswing_HandleArtNo._RSC773451,
                                                                             2);
             _panelModel2_Awning.Panel_Placement = "First";
             _panelModel2_Awning.Panel_GlassThickness = 13.0f;
@@ -6872,6 +6944,7 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             0,
                                                                             0,
+                                                                            Rotoswing_HandleArtNo._RSC773451,
                                                                             3);
             _panelModel3_fixed.Panel_Placement = "Somewhere in Between";
             _panelModel3_fixed.Panel_GlassThickness = 13.0f;
@@ -6949,6 +7022,7 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             0,
                                                                             0,
+                                                                            Rotoswing_HandleArtNo._RSC773451,
                                                                             4);
             _panelModel4_Awning.Panel_Placement = "Last";
             _panelModel4_Awning.Panel_GlassThickness = 13.0f;
@@ -6977,7 +7051,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(19860, _qouteModel.GlazingSeal_TotalQty);
             Assert.AreEqual(2, _qouteModel.GlazingSpacer_TotalQty);
-            //Assert.AreEqual(105, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(10200000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(13, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(52, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(106, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(68, _qouteModel.Screws_for_Installation);
 
 
 
@@ -7288,6 +7366,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                    1);
             _panelModel.Panel_GlassThickness = 6.0f;
             _panelModel.Panel_MotorizedOptionVisibility = true;
@@ -7305,7 +7384,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
-            //Assert.AreEqual(30, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(1000000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(4, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(16, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(22, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(33, _qouteModel.Screws_for_Installation);
 
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
@@ -7571,6 +7654,7 @@ namespace ModelLayer.Tests
                                                                            0,
                                                                            0,
                                                                            0,
+                                                                           Rotoswing_HandleArtNo._RSC773451,
                                                                           1);
             _panelModel1_fixed.Panel_Placement = "First";
             _panelModel1_fixed.Panel_GlassThickness = 6.0f;
@@ -7646,6 +7730,7 @@ namespace ModelLayer.Tests
                                                                                    0,
                                                                                    0,
                                                                                    0,
+                                                                                   Rotoswing_HandleArtNo._RSC773451,
                                                                                    2);
             _panelModel2_MotorizeAwning.Panel_Placement = "Last";
             _panelModel2_MotorizeAwning.Panel_MotorizedOptionVisibility = true;
@@ -7672,7 +7757,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
-            //Assert.AreEqual(39, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(1440000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(5, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(20, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(18, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(29, _qouteModel.Screws_for_Installation);
 
 
 
@@ -7987,6 +8076,7 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 0,
                                                                                 0,
+                                                                                Rotoswing_HandleArtNo._RSC773451,
                                                                                 1);
             _panelModel1_Awning.Panel_Placement = "First";
             _panelModel1_Awning.Panel_GlassThickness = 24.0f;
@@ -8064,6 +8154,7 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 0,
                                                                                 0,
+                                                                                Rotoswing_HandleArtNo._RSC773451,
                                                                                 2);
             _panelModel2_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel2_Awning.Panel_GlassThickness = 24.0f;
@@ -8141,6 +8232,7 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 0,
                                                                                 0,
+                                                                                Rotoswing_HandleArtNo._RSC773451,
                                                                                 3);
             _panelModel3_Awning.Panel_Placement = "Last";
             _panelModel3_Awning.Panel_GlassThickness = 24.0f;
@@ -8168,7 +8260,12 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(14532, _qouteModel.GlazingSeal_TotalQty);
-            //Assert.AreEqual(135, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(7560000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(11, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(44, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(135, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(87, _qouteModel.Screws_for_Installation);
+
 
 
             #region MultiMullion(3)
@@ -8471,6 +8568,7 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 0,
                                                                                 0,
+                                                                                Rotoswing_HandleArtNo._RSC773451,
                                                                                 1);
             _panelModel1_Awning.Panel_Placement = "First";
             _panelModel1_Awning.Panel_GlassThickness = 6.0f;
@@ -8548,6 +8646,7 @@ namespace ModelLayer.Tests
                                                                           0,
                                                                           0,
                                                                           0,
+                                                                          Rotoswing_HandleArtNo._RSC773451,
                                                                           2);
             _panelModel2_fixed.Panel_Placement = "Somewhere in Between";
             _panelModel2_fixed.Panel_GlassThickness = 6.0f;
@@ -8622,6 +8721,7 @@ namespace ModelLayer.Tests
                                                                                0,
                                                                                0,
                                                                                0,
+                                                                               Rotoswing_HandleArtNo._RSC773451,
                                                                                3);
             _panelModel3_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel3_Awning.Panel_GlassThickness = 6.0f;
@@ -8697,6 +8797,7 @@ namespace ModelLayer.Tests
                                                                  0,
                                                                  0,
                                                                  0,
+                                                                 Rotoswing_HandleArtNo._RSC773451,
                                                                  4);
             _panelModel4_fixed.Panel_Placement = "Somewhere in Between";
             _panelModel4_fixed.Panel_GlassThickness = 6.0f;
@@ -8771,6 +8872,7 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               0,
                                                                               0,
+                                                                              Rotoswing_HandleArtNo._RSC773451,
                                                                               5);
             _panelModel5_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel5_Awning.Panel_GlassThickness = 6.0f;
@@ -8846,6 +8948,7 @@ namespace ModelLayer.Tests
                                                                         0,
                                                                         0,
                                                                         0,
+                                                                        Rotoswing_HandleArtNo._RSC773451,
                                                                         6);
             _panelModel6_fixed.Panel_Placement = "Last";
             _panelModel6_fixed.Panel_GlassThickness = 6.0f;
@@ -8874,8 +8977,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(3, _qouteModel.GlazingSpacer_TotalQty);
             Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
-            //Assert.AreEqual(57, _qouteModel.Screws_for_Installation);
-
+            Assert.AreEqual(3960000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(57, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(49, _qouteModel.Screws_for_Installation);
 
             #region MultiMullion (6)
 
