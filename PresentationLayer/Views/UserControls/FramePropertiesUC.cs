@@ -40,6 +40,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler NumFWidthValueChangedEventRaised;
         public event EventHandler RdBtnCheckedChangedEventRaised;
         public event EventHandler cmbFrameProfileSelectedValueChangedEventRaised;
+        public event EventHandler cmbFrameReinfSelectedValueChangedEventRaised;
 
         public void BringToFrontThis()
         {
@@ -60,6 +61,13 @@ namespace PresentationLayer.Views.UserControls
             }
             cmb_FrameProfile.DataSource = fArtNo;
 
+            List<FrameReinf_ArticleNo> fReinf = new List<FrameReinf_ArticleNo>();
+            foreach (FrameReinf_ArticleNo item in FrameReinf_ArticleNo.GetAll())
+            {
+                fReinf.Add(item);
+            }
+            cmb_FrameReinf.DataSource = fReinf;
+
             EventHelpers.RaiseEvent(this, FramePropertiesLoadEventRaised, e);
         }
 
@@ -75,7 +83,7 @@ namespace PresentationLayer.Views.UserControls
             rdBtn_Door.DataBindings.Add(frameModelBinding["Frame_Type_Door"]);
             rdBtn_Concrete.DataBindings.Add(frameModelBinding["Frame_Type_Concrete"]);
             cmb_FrameProfile.DataBindings.Add(frameModelBinding["Frame_ArtNo"]);
-            txt_FrameReinf.DataBindings.Add(frameModelBinding["Frame_ReinfArtNo"]);
+            cmb_FrameReinf.DataBindings.Add(frameModelBinding["Frame_ReinfArtNo"]);
         }
 
         private void num_fWidth_ValueChanged(object sender, EventArgs e)
@@ -108,6 +116,11 @@ namespace PresentationLayer.Views.UserControls
         private void cmb_FrameProfile_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbFrameProfileSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_FrameReinf_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbFrameReinfSelectedValueChangedEventRaised, e);
         }
     }
 }

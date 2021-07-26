@@ -10,8 +10,9 @@ using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
-using static ModelLayer.Model.Quotation.QuotationModel;
 using static EnumerationTypeLayer.EnumerationTypes;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Variables;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -32,6 +33,8 @@ namespace ModelLayer.Model.Quotation.Frame
                 return _frame_basicDeduction;
             }
         }
+
+        private ConstantVariables constants = new ConstantVariables();
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -324,9 +327,11 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
         
+        public IWindoorModel Frame_WindoorModel { get; set; }
+
         #region Explosion
 
-        FrameProfile_ArticleNo _frameArtNo;
+        private FrameProfile_ArticleNo _frameArtNo;
         public FrameProfile_ArticleNo Frame_ArtNo
         {
             get
@@ -340,13 +345,30 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._R676;
                 }
+                else if (value == FrameProfile_ArticleNo._7507)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._R677;
+                }
                 NotifyPropertyChanged();
             }
         }
         public int Frame_ExplosionWidth { get; set; }
         public int Frame_ExplosionHeight { get; set; }
 
-        public FrameReinf_ArticleNo Frame_ReinfArtNo { get; set; }
+        private FrameReinf_ArticleNo _frameReinfArtNo;
+        public FrameReinf_ArticleNo Frame_ReinfArtNo
+        {
+            get
+            {
+                return _frameReinfArtNo;
+            }
+            set
+            {
+                _frameReinfArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Frame_ReinfWidth { get; set; }
         public int Frame_ReinfHeight { get; set; }
 
@@ -354,69 +376,137 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             Frame_ExplosionWidth = _frameWidth + 5;
             Frame_ExplosionHeight = _frameHeight + 5;
-            Frame_ReinfWidth = _frameWidth - (29 * 2) - 10;
-            Frame_ReinfHeight = _frameHeight - (29 * 2) - 10;
+
+            int reinf_size = 0;
+            if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+            {
+                reinf_size = 29;
+            }
+            else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+            {
+                reinf_size = 43;
+            }
+
+            Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
+            Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
         }
 
         public void AdjustPropertyPanelHeight(string objtype, string mode)
         {
             if (objtype == "Panel")
             {
-                if (mode == "delete")
+                if (mode == "add")
                 {
-                    FrameProp_Height -= (563 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height += constants.panel_propertyHeight_default;
                 }
-                else if (mode == "add")
+                if (mode == "minus")
                 {
-                    FrameProp_Height += (563 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height -= constants.panel_propertyHeight_default;
                 }
-            }
-            else if (objtype == "FxdNone")
-            {
-                if (mode == "delete")
+                else if (mode == "addRotary")
                 {
-                    FrameProp_Height -= (308 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height += constants.panel_property_rotaryOptionsheight_default;
                 }
-                else if (mode == "add")
+                else if (mode == "minusRotary")
                 {
-                    FrameProp_Height += (308 + 1); //+1 on margin (PanelProperties)
+                    FrameProp_Height -= constants.panel_property_rotaryOptionsheight_default;
                 }
-            }
-            else if (objtype == "SashProp")
-            {
-                if (mode == "delete")
+                else if (mode == "addRotoswing")
                 {
-                    FrameProp_Height -= 53;
+                    FrameProp_Height += constants.panel_property_rotoswingOptionsheight_default;
                 }
-                else if (mode == "add")
+                else if (mode == "minusRotoswing")
                 {
-                    FrameProp_Height += 53;
+                    FrameProp_Height -= constants.panel_property_rotoswingOptionsheight_default;
+                }
+                else if (mode == "addCmbMotorized")
+                {
+                    FrameProp_Height += constants.panel_property_motorizedCmbOptionsheight;
+                }
+                else if (mode == "minusCmbMotorized")
+                {
+                    FrameProp_Height -= constants.panel_property_motorizedCmbOptionsheight;
+                }
+                else if (mode == "addHandle")
+                {
+                    FrameProp_Height += constants.panel_property_handleOptionsHeight;
+                }
+                else if (mode == "minusHandle")
+                {
+                    FrameProp_Height -= constants.panel_property_handleOptionsHeight;
+                }
+                else if (mode == "addChkMotorized")
+                {
+                    FrameProp_Height += constants.panel_property_motorizedChkOptionsheight;
+                }
+                else if (mode == "minusChkMotorized")
+                {
+                    FrameProp_Height -= constants.panel_property_motorizedChkOptionsheight;
+                }
+                else if (mode == "addSash")
+                {
+                    FrameProp_Height += constants.panel_property_sashPanelHeight;
+                }
+                else if (mode == "minusSash")
+                {
+                    FrameProp_Height -= constants.panel_property_sashPanelHeight;
+                }
+                else if (mode == "addGlass")
+                {
+                    FrameProp_Height += constants.panel_property_glassOptionsHeight;
+                }
+                else if (mode == "minusGlass")
+                {
+                    FrameProp_Height -= constants.panel_property_glassOptionsHeight;
+                }
+                else if (mode == "addExtension")
+                {
+                    FrameProp_Height += constants.panel_property_extensionOptionsheight;
+                }
+                else if (mode == "minusExtension")
+                {
+                    FrameProp_Height -= constants.panel_property_extensionOptionsheight;
+                }
+                else if (mode == "addExtensionField")
+                {
+                    FrameProp_Height += constants.panel_property_extensionFieldsheight;
+                }
+                else if (mode == "minusExtensionField")
+                {
+                    FrameProp_Height -= constants.panel_property_extensionFieldsheight;
+                }
+                else if (mode == "addCornerDrive")
+                {
+                    FrameProp_Height += constants.panel_property_cornerDriveOptionsheight_default;
+                }
+                else if (mode == "minusCornerDrive")
+                {
+                    FrameProp_Height -= constants.panel_property_cornerDriveOptionsheight_default;
                 }
             }
             else if (objtype == "Div")
             {
                 if (mode == "delete")
                 {
-                    FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                    FrameProp_Height -= constants.div_propertyheight_default;
                 }
                 else if (mode == "add")
                 {
-                    FrameProp_Height += (173 + 1); //+1 on margin (divProperties)
+                    FrameProp_Height += constants.div_propertyheight_default;
                 }
             }
             else if (objtype == "Mpanel")
             {
                 if (mode == "delete")
                 {
-                    FrameProp_Height -= (129 + 3); // +3 for MultiPanelProperties' Margin
+                    FrameProp_Height -= constants.mpnl_propertyHeight_default;
                 }
                 else if (mode == "add")
                 {
-                    FrameProp_Height += (129 + 3); // +3 for MultiPanelProperties' Margin
+                    FrameProp_Height += constants.mpnl_propertyHeight_default;
                 }
             }
         }
-
         #endregion
 
         public FrameModel(int frameID,
@@ -430,7 +520,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           float frameImagerZoom,
                           List<IDividerModel> lst_divider,
                           float frameZoom,
-                          FrameProfile_ArticleNo frameArtNo)
+                          FrameProfile_ArticleNo frameArtNo,
+                          IWindoorModel frameWindoorModel)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -445,6 +536,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Lst_Divider = lst_divider;
             Frame_Zoom = frameZoom;
             Frame_ArtNo = frameArtNo;
+            Frame_WindoorModel = frameWindoorModel;
         }
     }
 }

@@ -493,6 +493,54 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 
                 IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
+                MiddleCloser_ArticleNo midArtNo = MiddleCloser_ArticleNo._None;
+                if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                {
+                    midArtNo = MiddleCloser_ArticleNo._1WC70DB;
+                }
+                else if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                         _frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                {
+                    midArtNo = MiddleCloser_ArticleNo._1WC70WHT;
+                }
+
+                MotorizedMech_ArticleNo motor = MotorizedMech_ArticleNo._41556C;
+
+                if (suggest_HT >= 2000 ||
+                   (suggest_Wd >= 1600 && suggest_HT >= 1500))
+                {
+                    motor = MotorizedMech_ArticleNo._409990E;
+                }
+                else
+                {
+                    if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                    {
+                        motor = MotorizedMech_ArticleNo._41555B;
+                    }
+                    else if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                             _frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                    {
+                        motor = MotorizedMech_ArticleNo._41556C;
+                    }
+                }
+
+                Rotoswing_HandleArtNo handleArtNo = null;
+                Foil_Color inside_color = _frameModel.Frame_WindoorModel.WD_InsideColor;
+
+                if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
+                    inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
+                {
+                    handleArtNo = Rotoswing_HandleArtNo._RSC833307;
+                }
+                else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
+                         inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
+                         inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
+                         inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
+                         inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                {
+                    handleArtNo = Rotoswing_HandleArtNo._RSC773452;
+                }
+
                 _panelModel = _panelServices.AddPanelModel(suggest_Wd,
                                                                suggest_HT,
                                                                fpnl,
@@ -510,6 +558,34 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                GlassFilm_Types._None,
                                                                SashProfile_ArticleNo._None,
                                                                SashReinf_ArticleNo._None,
+                                                               GlassType._Single,
+                                                               Espagnolette_ArticleNo._None,
+                                                               Striker_ArticleNo._M89ANT,
+                                                               midArtNo,
+                                                               LockingKit_ArticleNo._None,
+                                                               motor,
+                                                               Handle_Type._Rotoswing,
+                                                               Extension_ArticleNo._None,
+                                                               Extension_ArticleNo._None,
+                                                               Extension_ArticleNo._None,
+                                                               Extension_ArticleNo._None,
+                                                               Extension_ArticleNo._None,
+                                                               Extension_ArticleNo._None,
+                                                               Extension_ArticleNo._None,
+                                                               Extension_ArticleNo._None,
+                                                               false,
+                                                               false,
+                                                               false,
+                                                               false,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               handleArtNo,
                                                                _mainPresenter.GetPanelCount(),
                                                                _mainPresenter.GetPanelGlassID(),
                                                                _frameModel.FrameImageRenderer_Zoom,
@@ -524,8 +600,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (data == "Fixed Panel")
                 {
-                    _multiPanelModel.AdjustPropertyPanelHeight("FxdNone", "add");
-                    _frameModel.AdjustPropertyPanelHeight("FxdNone", "add");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
 
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
                                                                                _panelModel,
@@ -572,7 +653,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (data == "Awning Panel")
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    _panelModel.AdjustPropertyPanelHeight("addSash");
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
+                    _panelModel.AdjustPropertyPanelHeight("addHandle");
+
+                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
 
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
                                                                                   _panelModel,

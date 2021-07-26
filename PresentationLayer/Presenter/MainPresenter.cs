@@ -420,6 +420,7 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Cannot apply auto glass balancing" + "\n" + "You can apply auto glass balancing if all panel has sash or all panel has no sash", 
                                 "Glass balancing not available",
                                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                gb.Checked = false;
             }
             else if (gbmode != "")
             {
@@ -718,6 +719,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Green", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Blue", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Bronze", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear with Georgian Bar", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Green", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tinted Blue", true, false, false, false, false);
@@ -967,6 +969,7 @@ namespace PresentationLayer.Presenter
                                                                    _windoorModel.WD_zoom_forImageRenderer,
                                                                    _windoorModel.WD_zoom,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    frameID);
                         AddFrameList_WindoorModel(_frameModel);
                         IFramePropertiesUCPresenter framePropUCP =  AddFramePropertiesUC(_frameModel);
@@ -998,8 +1001,6 @@ namespace PresentationLayer.Presenter
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
                 _basePlatformPresenter.Invalidate_flpMainControls();
-                //_basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
-                //_basePlatformPresenter_willRenderImg.Invalidate_flpMain();
             }
         }
         #endregion

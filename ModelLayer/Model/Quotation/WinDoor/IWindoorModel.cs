@@ -42,5 +42,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
         float GetZoom_forRendering();
         void SetImageRenderingZoom();
         void SetPanelGlassID();
+        void SetMiddleCloser_onPanel();
     }
 }

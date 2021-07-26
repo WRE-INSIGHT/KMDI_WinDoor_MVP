@@ -238,14 +238,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_fixedPanelUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
-                if (_panelModel.Panel_ChkText == "None")
+
+                if (_panelModel.Panel_Orient == true)
                 {
-                    _multiPanelModel.AdjustPropertyPanelHeight("FxdNone", "delete");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
                 }
-                else
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "delete");
-                }
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minus");
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
             }
             if (_multiPanelMullionUCP != null)
             {
@@ -295,14 +294,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
 
-            if (_panelModel.Panel_ChkText == "None")
+            if (_panelModel.Panel_Orient == true)
             {
-                _frameModel.AdjustPropertyPanelHeight("FxdNone", "delete");
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusSash");
             }
-            else
-            {
-                _frameModel.AdjustPropertyPanelHeight("Panel", "delete");
-            }
+
+            _frameModel.AdjustPropertyPanelHeight("Panel", "minus");
+            _frameModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
 
             _mainPresenter.DeductPanelGlassID();
             _mainPresenter.SetPanelGlassID();

@@ -1,6 +1,7 @@
 ﻿using PresentationLayer.Views;
 using System;
 using System.Data;
+using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
 
@@ -15,16 +16,6 @@ namespace PresentationLayer.Presenter
         private CreateNewGlass_ShowPurpose _purpose;
         private DataTable _glassThicknessDT;
 
-        private DataTable _glassTypeDT = new DataTable();
-        private DataTable _glassTypeDT2 = new DataTable();
-        private DataTable _glassTypeDT3 = new DataTable();
-
-        private DataTable _color1DT = new DataTable();
-        private DataTable _color2DT = new DataTable();
-        private DataTable _color3DT = new DataTable();
-
-        private DataTable _spacer1DT = new DataTable();
-        private DataTable _spacer2DT = new DataTable();
 
         /* DataTable schema
          * 
@@ -80,6 +71,7 @@ namespace PresentationLayer.Presenter
                 _createNewGlassView.lblBetweenTheGlass = "Polyvinyl";
                 _createNewGlassView.GlassViewHeight = 335;
                 _createNewGlassView.pnlGlassVisible3 = false;
+                _createNewGlassView.SpacerVisible = false;
             }
             else if (_purpose == CreateNewGlass_ShowPurpose._TripleInsulated)
             {
@@ -90,39 +82,26 @@ namespace PresentationLayer.Presenter
             {
                 _createNewGlassView.lblGlassHeader = "Triple Insulated Glass";
                 _createNewGlassView.lblBetweenTheGlass = "Polyvinyl";
+                _createNewGlassView.SpacerVisible = false;
             }
 
-
-            _glassTypeDT = _mainPresenter.Glass_Type.Copy();
-            _glassTypeDT2 = _mainPresenter.Glass_Type.Copy();
-            _glassTypeDT3 = _mainPresenter.Glass_Type.Copy();
-
-            _color1DT = _mainPresenter.Color.Copy();
-            _color2DT = _mainPresenter.Color.Copy();
-            _color3DT = _mainPresenter.Color.Copy();
-
-            _spacer1DT = _mainPresenter.Spacer.Copy();
-            _spacer2DT = _mainPresenter.Spacer.Copy();
-
-
-
-            _createNewGlassView.GlassType1().DataSource = _glassTypeDT;
+            _createNewGlassView.GlassType1().DataSource = _mainPresenter.Glass_Type.Copy();
             _createNewGlassView.GlassType1().DisplayMember = "GlassType";
-            _createNewGlassView.GlassType2().DataSource = _glassTypeDT2;
+            _createNewGlassView.GlassType2().DataSource = _mainPresenter.Glass_Type.Copy();
             _createNewGlassView.GlassType2().DisplayMember = "GlassType";
-            _createNewGlassView.GlassType3().DataSource = _glassTypeDT3;
+            _createNewGlassView.GlassType3().DataSource = _mainPresenter.Glass_Type.Copy();
             _createNewGlassView.GlassType3().DisplayMember = "GlassType";
 
-            _createNewGlassView.Color1().DataSource = _color1DT;
+            _createNewGlassView.Color1().DataSource = _mainPresenter.Color.Copy();
             _createNewGlassView.Color1().DisplayMember = "Color";
-            _createNewGlassView.Color2().DataSource = _color2DT;
+            _createNewGlassView.Color2().DataSource = _mainPresenter.Color.Copy();
             _createNewGlassView.Color2().DisplayMember = "Color";
-            _createNewGlassView.Color3().DataSource = _color3DT;
+            _createNewGlassView.Color3().DataSource = _mainPresenter.Color.Copy();
             _createNewGlassView.Color3().DisplayMember = "Color";
 
-            _createNewGlassView.Spacer1().DataSource = _spacer1DT;
+            _createNewGlassView.Spacer1().DataSource = _mainPresenter.Spacer.Copy();
             _createNewGlassView.Spacer1().DisplayMember = "Spacer";
-            _createNewGlassView.Spacer2().DataSource = _spacer2DT;
+            _createNewGlassView.Spacer2().DataSource = _mainPresenter.Spacer.Copy();
             _createNewGlassView.Spacer2().DisplayMember = "Spacer";
 
             /* yung gagamitin mong dataSource
@@ -144,9 +123,35 @@ namespace PresentationLayer.Presenter
         private void OnGlassTextchangeEventRaised(object sender, EventArgs e)
         {
 
-            _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.GlassType1().Text + " " + _createNewGlassView.Color1().Text;
-            _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _createNewGlassView.GlassType2().Text + " " + _createNewGlassView.Color2().Text;
-            _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _createNewGlassView.GlassType3().Text + " " + _createNewGlassView.Color3().Text;
+
+            if (_createNewGlassView.GlassType1().Text == "Annealed")
+            {
+                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.Color1().Text;
+            }
+            else
+            {
+                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.GlassType1().Text + " " + _createNewGlassView.Color1().Text;
+            }
+
+            if (_createNewGlassView.GlassType2().Text == "Annealed")
+            {
+                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _createNewGlassView.Color2().Text;
+            }
+            else
+            {
+                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _createNewGlassView.GlassType2().Text + " " + _createNewGlassView.Color2().Text;
+            }
+
+
+            if (_createNewGlassView.GlassType3().Text == "Annealed")
+            {
+                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _createNewGlassView.Color3().Text;
+            }
+            else
+            {
+                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _createNewGlassView.GlassType3().Text + " " + _createNewGlassView.Color3().Text;
+            }
+
 
             if (_createNewGlassView.Spacer1().Text == "Argon")
             {
@@ -169,12 +174,9 @@ namespace PresentationLayer.Presenter
 
             _BetweenTheGlass1 = _createNewGlassView.BetweenTheGlass1.Value + _BetweenTheGlassUnit;
             _BetweenTheGlass2 = _createNewGlassView.BetweenTheGlass2.Value + _BetweenTheGlassUnit2;
-
             string StrGlass1 = Convert.ToString(_createNewGlassView.GlassThickness1.Value);
             string StrGlass2 = Convert.ToString(_createNewGlassView.GlassThickness2.Value);
             string StrGlass3 = Convert.ToString(_createNewGlassView.GlassThickness3.Value);
-            string StrBetweenTheGlass1 = Convert.ToString(_createNewGlassView.BetweenTheGlass1.Value);
-            string StrBetweenTheGlass2 = Convert.ToString(_createNewGlassView.BetweenTheGlass2.Value);
 
             if (_purpose == CreateNewGlass_ShowPurpose._Single)
             {
@@ -199,15 +201,16 @@ namespace PresentationLayer.Presenter
                 }
                 else
                 {
-                    decimal glassResult, glass1 = 0, glass2 = 0, BetweenTheGlass1 = 0;
-                    glass1 = _createNewGlassView.GlassThickness1.Value;
-                    glass2 = _createNewGlassView.GlassThickness2.Value;
-                    BetweenTheGlass1 = _createNewGlassView.BetweenTheGlass1.Value;
-                    glassResult = glass1 + BetweenTheGlass1 + glass2;
+                    //Glass1 + Spacer + Glass2
+                    int glassResult = Convert.ToInt32(Math.Round(_createNewGlassView.GlassThickness1.Value +
+                                                                 _createNewGlassView.BetweenTheGlass1.Value +
+                                                                 _createNewGlassView.GlassThickness2.Value));
 
                     _createNewGlassView.TotalThickness.Value = glassResult;
 
-                    _createNewGlassView.lblDescriptionView = _Glass1Description + " ➕ " + _BetweenTheGlass1 + " ➕ " + _Glass2Description;
+
+                    _createNewGlassView.lblDescriptionView = _Glass1Description + " + " + _BetweenTheGlass1 + " + " + _Glass2Description;
+
                 }
 
             }
@@ -224,18 +227,17 @@ namespace PresentationLayer.Presenter
                 }
                 else
                 {
-                    decimal glassResult, glass1 = 0, glass2 = 0, glass3 = 0, BetweenTheGlass1 = 0, BetweenTheGlass2 = 0;
-                    glass1 = _createNewGlassView.GlassThickness1.Value;
-                    glass2 = _createNewGlassView.GlassThickness2.Value;
-                    glass3 = _createNewGlassView.GlassThickness3.Value;
-                    BetweenTheGlass1 = _createNewGlassView.BetweenTheGlass1.Value;
-                    BetweenTheGlass2 = _createNewGlassView.BetweenTheGlass2.Value;
-
-                    glassResult = glass1 + BetweenTheGlass1 + glass2 + BetweenTheGlass2 + glass3;
+                    //Glass1 + Spacer + Glass2 + Spacer + Glass3            
+                    int glassResult = Convert.ToInt32(Math.Round(_createNewGlassView.GlassThickness1.Value +
+                                                                 _createNewGlassView.BetweenTheGlass1.Value +
+                                                                 _createNewGlassView.GlassThickness2.Value +
+                                                                 _createNewGlassView.BetweenTheGlass2.Value +
+                                                                 _createNewGlassView.GlassThickness3.Value));
 
                     _createNewGlassView.TotalThickness.Value = glassResult;
 
-                    _createNewGlassView.lblDescriptionView = _Glass1Description + " ➕ " + _BetweenTheGlass1 + " ➕ " + _Glass2Description + " ➕ " + _BetweenTheGlass2 + " ➕ " + _Glass3Description;
+                    _createNewGlassView.lblDescriptionView = _Glass1Description + " + " + _BetweenTheGlass1 + " + " + _Glass2Description + " + " + _BetweenTheGlass2 + " + " + _Glass3Description;
+
                 }
             }
         }
@@ -243,8 +245,32 @@ namespace PresentationLayer.Presenter
 
         private void OnBtnAddGlassClick(object sender, EventArgs e)
         {
-            _glassThicknessDT.Rows.Add(CreateNewGlass_Datarow());
-            _mainPresenter.GlassThicknessDT = _glassThicknessDT;
+            string WarningMsg;
+            if (_purpose == CreateNewGlass_ShowPurpose._Single)
+            {
+                WarningMsg = "Your Glass Thickness is " + _createNewGlassView.GlassThickness1.Value + ", are you sure you want to add ?";
+            }
+            else
+            {
+                WarningMsg = "Your Glass Thickness is " + _createNewGlassView.TotalThickness.Value + ", are you sure you want to add ?";
+            }
+
+            if (_createNewGlassView.TotalThickness.Value > 24 || _createNewGlassView.GlassThickness1.Value > 24)
+            {
+                if (MessageBox.Show(WarningMsg, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    _glassThicknessDT.Rows.Add(CreateNewGlass_Datarow());
+                    _mainPresenter.GlassThicknessDT = _glassThicknessDT;
+                    _createNewGlassView.CloseThis();
+                }
+            }
+
+            else
+            {
+                _glassThicknessDT.Rows.Add(CreateNewGlass_Datarow());
+                _mainPresenter.GlassThicknessDT = _glassThicknessDT;
+                _createNewGlassView.CloseThis();
+            }
         }
 
         public DataRow CreateNewGlass_Datarow()

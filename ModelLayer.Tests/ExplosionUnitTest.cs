@@ -162,6 +162,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -181,11 +182,16 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
 
@@ -269,6 +275,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -288,11 +295,16 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                    1);
             _frameModel.Lst_Panel.Add(_panelModel);
 
@@ -378,6 +390,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -432,11 +445,16 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -475,11 +493,16 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
@@ -589,6 +612,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -643,11 +667,16 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    uneqpanelWD1,
                                                                    eqpanelHT,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
@@ -686,11 +715,16 @@ namespace ModelLayer.Tests
                                                                    _multipanelModel,
                                                                    uneqpanelWD2,
                                                                    eqpanelHT,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
@@ -814,6 +848,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -938,11 +973,16 @@ namespace ModelLayer.Tests
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                    1);
             _panelModel1.Panel_Placement = "First";
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel1);
@@ -981,11 +1021,16 @@ namespace ModelLayer.Tests
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel2);
@@ -1015,11 +1060,16 @@ namespace ModelLayer.Tests
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                    3);
             _panelModel3.Panel_Placement = "First";
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel3);
@@ -1058,11 +1108,16 @@ namespace ModelLayer.Tests
                                                                    _multiMullionModel2,
                                                                    eqpanelwd,
                                                                    eqpanelht,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                    4);
             _panelModel4.Panel_Placement = "Last";
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel4);
@@ -1217,6 +1272,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -1323,11 +1379,16 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel1,
                                                                     p1Wd,
                                                                     p1Ht,
-                                                                    Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel1.Panel_Placement = "Somewhere in Between";
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel1);
@@ -1498,11 +1559,16 @@ namespace ModelLayer.Tests
                                                                     _multiTransomModel2,
                                                                     p2p3Wd,
                                                                     p2p3Ht,
-                                                                    Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel2.Panel_Placement = "Last";
             _multiTransomModel2.MPanelLst_Panel.Add(_panelModel2);
@@ -1626,11 +1692,16 @@ namespace ModelLayer.Tests
                                                                     _multiTransomModel3,
                                                                     p2p3Wd,
                                                                     p2p3Ht,
-                                                                    Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel3.Panel_Placement = "Last";
             _multiTransomModel3.MPanelLst_Panel.Add(_panelModel3);
@@ -1663,11 +1734,16 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel4,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel4.Panel_Placement = "First";
             _multiMullionModel4.MPanelLst_Panel.Add(_panelModel4);
@@ -1709,11 +1785,16 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel4,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel5.Panel_Placement = "Last";
             _multiMullionModel4.MPanelLst_Panel.Add(_panelModel5);
@@ -1745,11 +1826,16 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel5,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel6.Panel_Placement = "First";
             _multiMullionModel5.MPanelLst_Panel.Add(_panelModel6);
@@ -1791,11 +1877,16 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel5,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel7.Panel_Placement = "Last";
             _multiMullionModel5.MPanelLst_Panel.Add(_panelModel7);
@@ -1827,11 +1918,16 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel6,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel8.Panel_Placement = "First";
             _multiMullionModel6.MPanelLst_Panel.Add(_panelModel8);
@@ -1873,11 +1969,16 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel6,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel9.Panel_Placement = "Last";
             _multiMullionModel6.MPanelLst_Panel.Add(_panelModel9);
@@ -1909,11 +2010,16 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel7,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel10.Panel_Placement = "First";
             _multiMullionModel7.MPanelLst_Panel.Add(_panelModel10);
@@ -1955,11 +2061,16 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel7,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
                                                                     SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
                                                                     panelID);
             _panelModel11.Panel_Placement = "Last";
             _multiMullionModel7.MPanelLst_Panel.Add(_panelModel11);

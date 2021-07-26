@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using Unity;
 using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
+using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
+using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -18,21 +20,27 @@ namespace PresentationLayer.Presenter.UserControls
 
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
-        private IGlassThicknessListPresenter _glassThicknessPresenter;
+        private IPP_MotorizedPropertyUCPresenter _pp_motorizedPropertyUCPresenter;
+        private IPP_SashPropertyUCPresenter _pp_sashPropertyUCPresenter;
+        private IPP_GlassPropertyUCPresenter _pp_glassPropertyUCPresenter;
+        private IPP_HandlePropertyUCPresenter _pp_handlePropertUCPresenter;
         private IUnityContainer _unityC;
 
-        private ComboBox _cmbHandleArtNo;
-        private Panel _pnlRotoswingOptions;
-        private Panel _pnlRotaryOptions;
+        private FlowLayoutPanel _flpPanelSpecs;
 
         public PanelPropertiesUCPresenter(IPanelPropertiesUC panelPropertiesUC,
-                                          IGlassThicknessListPresenter glassThicknessPresenter)
+                                          IPP_MotorizedPropertyUCPresenter pp_motorizedPropertyUCPresenter,
+                                          IPP_SashPropertyUCPresenter pp_sashPropertyUCPresenter,
+                                          IPP_GlassPropertyUCPresenter pp_glassPropertyUCPresenter,
+                                          IPP_HandlePropertyUCPresenter pp_handlePropertUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
-            _glassThicknessPresenter = glassThicknessPresenter;
-            _cmbHandleArtNo = _panelPropertiesUC.GetCmbHandleArtNo();
-            _pnlRotoswingOptions = _panelPropertiesUC.GetPnlRotoswingOptions();
-            _pnlRotaryOptions = _panelPropertiesUC.GetPnlRotaryOptions();
+            _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
+            _pp_sashPropertyUCPresenter = pp_sashPropertyUCPresenter;
+            _pp_glassPropertyUCPresenter = pp_glassPropertyUCPresenter;
+            _pp_handlePropertUCPresenter = pp_handlePropertUCPresenter;
+            _flpPanelSpecs = _panelPropertiesUC.GetPanelSpecsFLP();
+
             SubscribeToEventsSetup();
         }
 
@@ -40,108 +48,73 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _panelPropertiesUC.PanelPropertiesLoadEventRaised += new EventHandler(OnPanelPropertiesLoadEventRaised);
             _panelPropertiesUC.ChkOrientationCheckChangedEventRaised += _panelPropertiesUC_ChkOrientationCheckChangedEventRaised;
-            _panelPropertiesUC.CmbGlazingArtNoSelectedValueChangedEventRaised += _panelPropertiesUC_CmbGlazingArtNoSelectedValueChangedEventRaised;
-            _panelPropertiesUC.CmbFilmTypeSelectedValueChangedEventRaised += _panelPropertiesUC_CmbFilmTypeSelectedValueChangedEventRaised;
-            _panelPropertiesUC.CmbSashProfileSelectedValueChangedEventRaised += _panelPropertiesUC_CmbSashProfileSelectedValueChangedEventRaised;
-            _panelPropertiesUC.CmbSashReinfSelectedValueChangedEventRaised += _panelPropertiesUC_CmbSashReinfSelectedValueChangedEventRaised;
-            _panelPropertiesUC.btnSelectGlassThicknessClickedEventRaised += _panelPropertiesUC_btnSelectGlassThicknessClickedEventRaised;
-            _panelPropertiesUC.CmbGlassTypeSelectedValueChangedEventRaised += _panelPropertiesUC_CmbGlassTypeSelectedValueChangedEventRaised;
-            _panelPropertiesUC.CmbHandleTypeSelectedValueChangedEventRaised += _panelPropertiesUC_CmbHandleTypeSelectedValueChangedEventRaised;
         }
 
-        private void _panelPropertiesUC_CmbHandleTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
-        {
-            _panelModel.Panel_HandleType = (Handle_Type)((ComboBox)sender).SelectedValue;
-
-            List<Rotoswing_Handle> rotoswing = new List<Rotoswing_Handle>();
-            foreach (Rotoswing_Handle item in Rotoswing_Handle.GetAll())
-            {
-                rotoswing.Add(item);
-            }
-
-            List<Rotary_Handle> rotary = new List<Rotary_Handle>();
-            foreach (Rotary_Handle item in Rotary_Handle.GetAll())
-            {
-                rotary.Add(item);
-            }
-
-            if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
-            {
-                _cmbHandleArtNo.DataSource = rotoswing;
-                _pnlRotoswingOptions.Visible = true;
-                _pnlRotaryOptions.Visible = false;
-            }
-            else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
-            {
-                _cmbHandleArtNo.DataSource = rotary;
-                _pnlRotoswingOptions.Visible = false;
-                _pnlRotaryOptions.Visible = true;
-            }
-        }
-
-        private void _panelPropertiesUC_CmbGlassTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
-        {
-            _panelModel.Panel_GlassType = (GlassType)((ComboBox)sender).SelectedValue;
-        }
-
-        private void _panelPropertiesUC_btnSelectGlassThicknessClickedEventRaised(object sender, EventArgs e)
-        {
-            IGlassThicknessListPresenter glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance(_unityC, this, _mainPresenter.GlassThicknessDT, _panelModel);
-            glassThicknessPresenter.ShowGlassThicknessListView();
-        }
-
-        private void _panelPropertiesUC_CmbSashReinfSelectedValueChangedEventRaised(object sender, EventArgs e)
-        {
-            _panelModel.Panel_SashReinfArtNo = (SashReinf_ArticleNo)((ComboBox)sender).SelectedValue;
-        }
-
-        private void _panelPropertiesUC_CmbSashProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
-        {
-            _panelModel.Panel_SashProfileArtNo = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
-        }
-
-        private void _panelPropertiesUC_CmbFilmTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
-        {
-           _panelModel.Panel_GlassFilm = (GlassFilm_Types)((ComboBox)sender).SelectedValue;
-        }
-
-        private void _panelPropertiesUC_CmbGlazingArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
-        {
-            _panelModel.PanelGlazingBead_ArtNo = (GlazingBead_ArticleNo)((ComboBox)sender).SelectedValue;
-        }
-
+        bool chkOrient_state, adjust_bool;
         private void _panelPropertiesUC_ChkOrientationCheckChangedEventRaised(object sender, EventArgs e)
         {
             CheckBox chk = (CheckBox)sender;
 
-            if (_panelModel.Panel_ParentFrameModel != null)
+            _panelModel.Panel_Orient = chk.Checked;
+
+            if (chkOrient_state != chk.Checked)
             {
-                if (chk.Text == "None" && chk.Checked == true)
+                adjust_bool = true;
+                chkOrient_state = chk.Checked;
+
+                if (adjust_bool == true)
                 {
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("SashProp", "add");
+
+                    if (_panelModel.Panel_ParentFrameModel != null)
+                    {
+                        if (chk.Text == "None" && chk.Checked == false)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+                            _panelModel.AdjustPropertyPanelHeight("minusSash");
+                        }
+                        else if (chk.Text == "dSash" && chk.Checked == true)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                            _panelModel.AdjustPropertyPanelHeight("addSash");
+                        }
+                        adjust_bool = false;
+                    }
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        if (chk.Text == "None" && chk.Checked == false)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+                        }
+                        else if (chk.Text == "dSash" && chk.Checked == true)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                        }
+                        adjust_bool = false;
+                    }
                 }
-                else if (chk.Text == "dSash" && chk.Checked == false)
-                {
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("SashProp", "delete");
-                }
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
-            if (_panelModel.Panel_ParentMultiPanelModel != null)
-            {
-                if (chk.Text == "None" == chk.Checked == true)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("SashProp", "add");
-                }
-                else if (chk.Text == "dSash" && chk.Checked == false)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("SashProp", "delete");
-                }
-            }
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
             _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
+            if (_panelModel.Panel_SashPropertyVisibility == true)
+            {
+                IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                _flpPanelSpecs.Controls.Add((UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC());
+
+                IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel);
+                _flpPanelSpecs.Controls.Add((UserControl)handlePropUCP.GetPPHandlePropertyUC());
+            }
+            IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            _flpPanelSpecs.Controls.Add((UserControl)sashPropUCP.GetPPSashPropertyUC());
+
+            IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+            _flpPanelSpecs.Controls.Add((UserControl)glassPropUCP.GetPPGlassPropertyUC());
+
+            chkOrient_state = _panelModel.Panel_Orient;
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()
@@ -154,21 +127,9 @@ namespace PresentationLayer.Presenter.UserControls
             panelBinding.Add("Panel_Type", new Binding("Text", _panelModel, "Panel_Type", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_ChkText", new Binding("Text", _panelModel, "Panel_ChkText", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("Checked", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_PNumEnable1", new Binding("Enabled", _panelModel, "Panel_PNumEnable", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_PNumEnable2", new Binding("Enabled", _panelModel, "Panel_PNumEnable", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_GlassThickness", new Binding("Text", _panelModel, "Panel_GlassThickness", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("PanelGlazingBead_ArtNo", new Binding("Text", _panelModel, "PanelGlazingBead_ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelGlass_ID", new Binding("PanelGlass_ID", _panelModel, "PanelGlass_ID", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_GlassFilm", new Binding("Text", _panelModel, "Panel_GlassFilm", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_SashPropertyVisibility", new Binding("Visible", _panelModel, "Panel_SashPropertyVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("SashPanel_Visibility", new Binding("SashPanel_Visibility", _panelModel, "Panel_SashPropertyVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_SashProfileArtNo", new Binding("Text", _panelModel, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_SashReinfArtNo", new Binding("Text", _panelModel, "Panel_SashReinfArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_GlassType", new Binding("Text", _panelModel, "Panel_GlassType", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_GlassThicknessDesc", new Binding("Text", _panelModel, "Panel_GlassThicknessDesc", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_HandleType", new Binding("Text", _panelModel, "Panel_HandleType", true, DataSourceUpdateMode.OnPropertyChanged));
-
+            panelBinding.Add("Panel_PropertyHeight", new Binding("Height", _panelModel, "Panel_PropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            
             return panelBinding;
         }
 
