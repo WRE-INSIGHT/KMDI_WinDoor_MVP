@@ -195,6 +195,18 @@ namespace PresentationLayer
                 .RegisterType<IPP_HandlePropertyUC, PP_HandlePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_HandlePropertyUCPresenter, PP_HandlePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPP_RotoswingPropertyUC, PP_RotoswingPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RotoswingPropertyUCPresenter, PP_RotoswingPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_RotaryPropertyUC, PP_RotaryPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RotaryPropertyUCPresenter, PP_RotaryPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_ExtensionPropertyUC, PP_ExtensionPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_ExtensionPropertyUCPresenter, PP_ExtensionPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_CornerDrivePropertyUC, PP_CornerDrivePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_CornerDrivePropertyUCPresenter, PP_CornerDrivePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

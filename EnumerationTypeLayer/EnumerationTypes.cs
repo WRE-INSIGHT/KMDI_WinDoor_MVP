@@ -202,7 +202,7 @@ namespace EnumerationTypeLayer
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class Extension_ArticleNo: Enumeration<Extension_ArticleNo, int>
+        public class Extension_ArticleNo : Enumeration<Extension_ArticleNo, int>
         {
             public static readonly Extension_ArticleNo _None = new Extension_ArticleNo(0, "None");
             public static readonly Extension_ArticleNo _612978 = new Extension_ArticleNo(1, "612978");
@@ -243,6 +243,13 @@ namespace EnumerationTypeLayer
             private SnapInKeep_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class FixedCam_ArticleNo : Enumeration<FixedCam_ArticleNo, int>
+        {
+            public static readonly FixedCam_ArticleNo _1481413 = new FixedCam_ArticleNo(0, "1481413");
+
+            private FixedCam_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
         public class LockingKit_ArticleNo : Enumeration<LockingKit_ArticleNo, int>
         {
             public static readonly LockingKit_ArticleNo _T244002KMW = new LockingKit_ArticleNo(0, "T-24.40.02 KM-W");
@@ -260,5 +267,69 @@ namespace EnumerationTypeLayer
 
             private MotorizedMech_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class _30x25Cover_ArticleNo : Enumeration<_30x25Cover_ArticleNo, int>
+        {
+            public static readonly _30x25Cover_ArticleNo _1067_Milled = new _30x25Cover_ArticleNo(0, "1067 - Milled");
+
+            private _30x25Cover_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MotorizedDivider_ArticleNo : Enumeration<MotorizedDivider_ArticleNo, int>
+        {
+            public static readonly MotorizedDivider_ArticleNo _0505 = new MotorizedDivider_ArticleNo(0, "0505");
+
+            private MotorizedDivider_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CoverForMotor_ArticleNo : Enumeration<CoverForMotor_ArticleNo, int>
+        {
+            public static readonly CoverForMotor_ArticleNo _1182 = new CoverForMotor_ArticleNo(0, "1182");
+
+            private CoverForMotor_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class _2DHinge_ArticleNo : Enumeration<_2DHinge_ArticleNo, int>
+        {
+            public static readonly _2DHinge_ArticleNo _614293 = new _2DHinge_ArticleNo(0, "614293");
+
+            private _2DHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class PushButtonSwitch_ArticleNo : Enumeration<PushButtonSwitch_ArticleNo, int>
+        {
+            public static readonly PushButtonSwitch_ArticleNo _N4037 = new PushButtonSwitch_ArticleNo(0, "N4037");
+
+            private PushButtonSwitch_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class FalsePole_ArticleNo : Enumeration<FalsePole_ArticleNo, int>
+        {
+            public static readonly FalsePole_ArticleNo _N4950 = new FalsePole_ArticleNo(0, "N4950");
+
+            private FalsePole_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SupportingFrame_ArticleNo : Enumeration<SupportingFrame_ArticleNo, int>
+        {
+            public static readonly SupportingFrame_ArticleNo _N4703 = new SupportingFrame_ArticleNo(0, "N4703");
+
+            private SupportingFrame_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Plate_ArticleNo : Enumeration<Plate_ArticleNo, int>
+        {
+            public static readonly Plate_ArticleNo _N4803LB = new Plate_ArticleNo(0, "N4803LB");
+
+            private Plate_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class GeorgianBar_ArticleNo : Enumeration<GeorgianBar_ArticleNo, int>
+        {
+            public static readonly GeorgianBar_ArticleNo _0724 = new GeorgianBar_ArticleNo(0, "0724");
+            public static readonly GeorgianBar_ArticleNo _0726 = new GeorgianBar_ArticleNo(1, "0726");
+
+            private GeorgianBar_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
     }
 }

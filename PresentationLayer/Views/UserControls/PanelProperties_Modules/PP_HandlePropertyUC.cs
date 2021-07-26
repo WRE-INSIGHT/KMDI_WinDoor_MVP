@@ -43,6 +43,12 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             cmb_HandleType.DataBindings.Add(ModelBinding["Panel_HandleType"]);
             this.DataBindings.Add(ModelBinding["Panel_HandleOptionsVisibility"]);
+            this.DataBindings.Add(ModelBinding["Panel_HandleOptionsHeight"]);
+        }
+
+        public FlowLayoutPanel GetHandleTypeFLP()
+        {
+            return flp_HandleTypeOptions;
         }
     }
 }

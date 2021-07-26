@@ -248,6 +248,23 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
 
+                Rotoswing_HandleArtNo handleArtNo = null;
+                Foil_Color inside_color = _frameModel.Frame_WindoorModel.WD_InsideColor;
+
+                if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
+                    inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
+                {
+                    handleArtNo = Rotoswing_HandleArtNo._RSC833307;
+                }
+                else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
+                         inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
+                         inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
+                         inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
+                         inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                {
+                    handleArtNo = Rotoswing_HandleArtNo._RSC773452;
+                }
+
                 _panelModel = _panelServices.AddPanelModel(wd,
                                                            ht,
                                                            frame,
@@ -271,6 +288,28 @@ namespace PresentationLayer.Presenter.UserControls
                                                            midArtNo,
                                                            LockingKit_ArticleNo._None,
                                                            motor,
+                                                           Handle_Type._Rotoswing,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           false,
+                                                           false,
+                                                           false,
+                                                           false,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           handleArtNo,
                                                            _mainPresenter.GetPanelCount(),
                                                            _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);
@@ -280,7 +319,11 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (data == "Fixed Panel")
                 {
-                    _frameModel.AdjustPropertyPanelHeight("FxdNone", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
+
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC, 
                                                                                _panelModel, 
                                                                                _frameModel, 
@@ -315,14 +358,6 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Awning Panel")
                 {
-                    //if (_panelModel.Panel_ExtensionCornerDriveOptionsVisibility == true)
-                    //{
-                    //    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    //}
-                    //else if (_panelModel.Panel_ExtensionCornerDriveOptionsVisibility == false)
-                    //{
-                    //    _frameModel.AdjustPropertyPanelHeight("Panel", "addWithoutExtCordrive");
-                    //}
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                     _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
                     _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");

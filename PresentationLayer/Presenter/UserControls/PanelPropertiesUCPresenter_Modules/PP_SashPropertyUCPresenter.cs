@@ -19,6 +19,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
 
+        bool _initialLoad = true;
+
         public PP_SashPropertyUCPresenter(IPP_SashPropertyUC pp_sashPropertyUC)
         {
             _pp_sashPropertyUC = pp_sashPropertyUC;
@@ -34,17 +36,24 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_sashPropertyUC_cmbSashProfileReinfSelectedValueEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_SashReinfArtNo = (SashReinf_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_SashReinfArtNo = (SashReinf_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_sashPropertyUC_cmbSashProfileSelectedValueEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_SashProfileArtNo = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_SashProfileArtNo = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_sashPropertyUC_PPSashPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_sashPropertyUC.ThisBinding(CreateBindingDictionary());
+            _initialLoad = false;
         }
 
         public IPP_SashPropertyUC GetPPSashPropertyUC()
@@ -69,6 +78,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
             binding.Add("Panel_SashProfileArtNo", new Binding("Text", _panelModel, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_SashReinfArtNo", new Binding("Text", _panelModel, "Panel_SashReinfArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_SashPropertyVisibility", new Binding("Visible", _panelModel, "Panel_SashPropertyVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

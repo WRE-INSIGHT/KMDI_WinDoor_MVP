@@ -511,6 +511,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                 }
 
+                Rotoswing_HandleArtNo handleArtNo = null;
+                Foil_Color inside_color = _frameModel.Frame_WindoorModel.WD_InsideColor;
+
+                if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
+                    inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
+                {
+                    handleArtNo = Rotoswing_HandleArtNo._RSC833307;
+                }
+                else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
+                         inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
+                         inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
+                         inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
+                         inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                {
+                    handleArtNo = Rotoswing_HandleArtNo._RSC773452;
+                }
+
                 IPanelModel _panelModel = _panelServices.AddPanelModel(suggest_Wd,
                                                                        suggest_HT,
                                                                        fpnl,
@@ -534,6 +551,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        midArtNo,
                                                                        LockingKit_ArticleNo._None,
                                                                        motor,
+                                                                       Handle_Type._Rotoswing,
+                                                                       Extension_ArticleNo._None,
+                                                                       Extension_ArticleNo._None,
+                                                                       Extension_ArticleNo._None,
+                                                                       Extension_ArticleNo._None,
+                                                                       Extension_ArticleNo._None,
+                                                                       Extension_ArticleNo._None,
+                                                                       Extension_ArticleNo._None,
+                                                                       Extension_ArticleNo._None,
+                                                                       false,
+                                                                       false,
+                                                                       false,
+                                                                       false,
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       0,
+                                                                       handleArtNo,
                                                                        _mainPresenter.GetPanelCount(),
                                                                        _mainPresenter.GetPanelGlassID(),
                                                                        _frameModel.FrameImageRenderer_Zoom,
@@ -547,8 +586,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (data == "Fixed Panel")
                 {
-                    _multiPanelModel.AdjustPropertyPanelHeight("FxdNone", "add");
-                    _frameModel.AdjustPropertyPanelHeight("FxdNone", "add");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
 
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
                                                                                _panelModel,
@@ -595,7 +639,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (data == "Awning Panel")
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    _panelModel.AdjustPropertyPanelHeight("addSash");
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
+                    _panelModel.AdjustPropertyPanelHeight("addHandle");
+
+                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
 
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
                                                                                   _panelModel,

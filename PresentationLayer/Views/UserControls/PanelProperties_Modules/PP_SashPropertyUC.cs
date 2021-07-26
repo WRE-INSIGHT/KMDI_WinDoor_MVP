@@ -56,6 +56,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             cmb_SashProfile.DataBindings.Add(ModelBinding["Panel_SashProfileArtNo"]);
             cmb_SashReinf.DataBindings.Add(ModelBinding["Panel_SashReinfArtNo"]);
+            this.DataBindings.Add(ModelBinding["Panel_SashPropertyVisibility"]);
         }
     }
 }
