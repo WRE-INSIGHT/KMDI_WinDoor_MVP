@@ -765,10 +765,7 @@ namespace ModelLayer.Model.Quotation
                                 Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                        2, "pc(s)", "");
 
-                                if (div_nxtCtrl.Div_MechJoinArtNo == Divider_MechJointArticleNo._AV585)
-                                {
-                                    additional_screws_fabrication += 2;
-                                }
+                                additional_screws_fabrication += 2;
 
                                 Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
                                                   divArtNo_prevCtrl = Divider_ArticleNo._None,

@@ -207,6 +207,7 @@ namespace PresentationLayer
                 .RegisterType<IPP_CornerDrivePropertyUC, PP_CornerDrivePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_CornerDrivePropertyUCPresenter, PP_CornerDrivePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();
