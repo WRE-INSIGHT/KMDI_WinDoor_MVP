@@ -48,9 +48,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.5.3">
+      <HintPath>..\..\..\..\Pictures\icon\Bunifu_UI_v1.5.3\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
@@ -76,12 +80,18 @@
   <ItemGroup>
     <Compile Include="CommonMethods\CommonFunctions.cs" />
     <Compile Include="Presenter\ChangeItemColorPresenter.cs" />
+    <Compile Include="Presenter\CreateNewGlassColorPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassPresenter.cs" />
+    <Compile Include="Presenter\CreateNewGlassSpacerPresenter.cs" />
+    <Compile Include="Presenter\CreateNewGlassTypePresenter.cs" />
     <Compile Include="Presenter\ExplosionPresenter.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
     <Compile Include="Presenter\GlassThicknessListPresenter.cs" />
     <Compile Include="Presenter\IChangeItemColorPresenter.cs" />
+    <Compile Include="Presenter\ICreateNewGlassColorPresenter.cs" />
     <Compile Include="Presenter\ICreateNewGlassPresenter.cs" />
+    <Compile Include="Presenter\ICreateNewGlassSpacerPresenter.cs" />
+    <Compile Include="Presenter\ICreateNewGlassTypePresenter.cs" />
     <Compile Include="Presenter\IExplosionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
@@ -167,6 +177,24 @@
     <Compile Include="Views\ChangeItemColorView.Designer.cs">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\CreateNewGlassColorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassColorView.Designer.cs">
+      <DependentUpon>CreateNewGlassColorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassSpacerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassSpacerView.Designer.cs">
+      <DependentUpon>CreateNewGlassSpacerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassTypeView.Designer.cs">
+      <DependentUpon>CreateNewGlassTypeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateNewGlassView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +220,9 @@
       <DependentUpon>GlassThicknessListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\IChangeItemColorView.cs" />
+    <Compile Include="Views\ICreateNewGlassColorView.cs" />
+    <Compile Include="Views\ICreateNewGlassSpacerView.cs" />
+    <Compile Include="Views\ICreateNewGlassTypeView.cs" />
     <Compile Include="Views\ICreateNewGlassView.cs" />
     <Compile Include="Views\IExplosionView.cs" />
     <Compile Include="Views\IfrmDimensionView.cs" />
@@ -517,6 +548,15 @@
     </Compile>
     <EmbeddedResource Include="Views\ChangeItemColorView.resx">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateNewGlassColorView.resx">
+      <DependentUpon>CreateNewGlassColorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateNewGlassSpacerView.resx">
+      <DependentUpon>CreateNewGlassSpacerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateNewGlassTypeView.resx">
+      <DependentUpon>CreateNewGlassTypeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateNewGlassView.resx">
       <DependentUpon>CreateNewGlassView.cs</DependentUpon>
