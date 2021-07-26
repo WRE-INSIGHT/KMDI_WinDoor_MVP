@@ -132,19 +132,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCmbMotorized");
                 }
+                else if (_panelModel.Panel_MotorizedOptionVisibility == false)
+                {
+                    if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
+                    }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                    }
+                }
 
                 if (_panelModel.Panel_HandleOptionsVisibility == true)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
-                }
-
-                if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
-                }
-                else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
                 }
 
                 if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
@@ -228,19 +230,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameModel.AdjustPropertyPanelHeight("Panel", "minusCmbMotorized");
             }
+            else if (_panelModel.Panel_MotorizedOptionVisibility == false)
+            {
+                if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                }
+            }
 
             if (_panelModel.Panel_HandleOptionsVisibility == true)
             {
                 _frameModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
-            }
-
-            if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
-            {
-                _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
-            }
-            else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
-            {
-                _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
             }
 
             if (_panelModel.Panel_CornerDriveOptionsVisibility == true)

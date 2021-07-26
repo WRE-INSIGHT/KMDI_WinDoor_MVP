@@ -1080,7 +1080,7 @@ namespace ModelLayer.Model.Quotation
                                                                    "Frame",
                                                                    @"");
 
-                                            additional_screws_fabrication += 2;
+                                            additional_screws_fabrication += 4;
 
                                             Material_List.Rows.Add("Fixed Cam " + pnl_curCtrl.Panel_FixedCamArtNo.ToString(),
                                                                    2, "pc(s)",
@@ -1088,7 +1088,7 @@ namespace ModelLayer.Model.Quotation
                                                                    "Frame",
                                                                    @"");
 
-                                            additional_screws_fabrication += 2;
+                                            additional_screws_fabrication += 4;
                                         }
                                         else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8)
                                         {
@@ -1229,7 +1229,7 @@ namespace ModelLayer.Model.Quotation
 
                                             if (pnl_curCtrl.Panel_StrikerArtno == Striker_ArticleNo._M89ANT)
                                             {
-                                                additional_screws_fabrication += 1;
+                                                additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty;
                                             }
 
                                             Material_List.Rows.Add("Middle Closer " + pnl_curCtrl.Panel_MiddleCloserArtNo.ToString(),
@@ -1238,7 +1238,7 @@ namespace ModelLayer.Model.Quotation
                                                                    "Sash & Frame",
                                                                    @"");
 
-                                            additional_screws_fabrication += 4;
+                                            additional_screws_fabrication += (4 * pnl_curCtrl.Panel_MiddleCloserPairQty);
                                         }
                                         else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotary)
                                         {
@@ -1422,7 +1422,7 @@ namespace ModelLayer.Model.Quotation
                                                        "Frame",
                                                        @"");
 
-                                additional_screws_fabrication += 2;
+                                additional_screws_fabrication += 4;
 
                                 Material_List.Rows.Add("Fixed Cam " + pnl.Panel_FixedCamArtNo.ToString(),
                                                        2, "pc(s)",
@@ -1430,7 +1430,7 @@ namespace ModelLayer.Model.Quotation
                                                        "Frame",
                                                        @"");
 
-                                additional_screws_fabrication += 2;
+                                additional_screws_fabrication += 4;
                             }
 
                             else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8)
@@ -1571,7 +1571,7 @@ namespace ModelLayer.Model.Quotation
 
                                 if (pnl.Panel_StrikerArtno == Striker_ArticleNo._M89ANT)
                                 {
-                                    additional_screws_fabrication += 1;
+                                    additional_screws_fabrication += pnl.Panel_StrikerQty;
                                 }
 
                                 Material_List.Rows.Add("Middle Closer " + pnl.Panel_MiddleCloserArtNo.ToString(),
@@ -1580,7 +1580,7 @@ namespace ModelLayer.Model.Quotation
                                                        "Sash & Frame",
                                                        @"");
 
-                                additional_screws_fabrication += 4;
+                                additional_screws_fabrication += (4 * pnl.Panel_MiddleCloserPairQty);
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._Rotary)
                             {
