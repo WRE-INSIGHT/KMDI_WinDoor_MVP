@@ -1673,6 +1673,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                 {
+                    Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
+
                     if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory ||
                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White)
                     {
@@ -1681,7 +1683,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
-                        Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
                     }
                 }
 
