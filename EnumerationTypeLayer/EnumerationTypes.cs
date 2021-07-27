@@ -327,6 +327,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly GeorgianBar_ArticleNo _0724 = new GeorgianBar_ArticleNo(0, "0724");
             public static readonly GeorgianBar_ArticleNo _0726 = new GeorgianBar_ArticleNo(1, "0726");
+            public static readonly GeorgianBar_ArticleNo _None = new GeorgianBar_ArticleNo(2, "None");
 
             private GeorgianBar_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

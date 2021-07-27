@@ -1252,6 +1252,38 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private GeorgianBar_ArticleNo _panelGeorgianBarArtNo;
+        public GeorgianBar_ArticleNo Panel_GeorgianBarArtNo
+        {
+            get
+            {
+                return _panelGeorgianBarArtNo;
+            }
+            set
+            {
+                _panelGeorgianBarArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int Panel_GeorgianBar_VerticalQty { get; set; }
+        public int Panel_GeorgianBar_HorizontalQty { get; set; }
+
+        private bool _panelGeorgianBarOptionVisibility;
+        public bool Panel_GeorgianBarOptionVisibility
+        {
+            get
+            {
+                return _panelGeorgianBarOptionVisibility;
+            }
+            set
+            {
+                _panelGeorgianBarOptionVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public void AdjustPropertyPanelHeight(string mode)
         {
             if (mode == "addChkMotorized")
@@ -1325,6 +1357,14 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusCornerDrive")
             {
                 Panel_PropertyHeight -= constants.panel_property_cornerDriveOptionsheight_default;
+            }
+            else if (mode == "addGeorgianBar")
+            {
+                Panel_PropertyHeight += constants.panel_property_georgianBarHeight;
+            }
+            else if (mode == "minusGeorgianBar")
+            {
+                Panel_PropertyHeight -= constants.panel_property_georgianBarHeight;
             }
         }
 
@@ -2276,7 +2316,11 @@ namespace ModelLayer.Model.Quotation.Panel
                           int panelExtBot2Qty,
                           int panelExtLeft2Qty,
                           int panelExtRight2Qty,
-                          Rotoswing_HandleArtNo panelRotoswingArtNo)
+                          Rotoswing_HandleArtNo panelRotoswingArtNo,
+                          GeorgianBar_ArticleNo panelGeorgianBarArtNo,
+                          int panelGeorgianBarVerticalQty,
+                          int panelGeorgianBarHorizontalQty,
+                          bool panelGeorgianBarOptionVisibility)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -2334,6 +2378,10 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_ExtRightQty = panelExtRightQty;
             Panel_ExtRight2Qty = panelExtRight2Qty;
             Panel_RotoswingArtNo = panelRotoswingArtNo;
+            Panel_GeorgianBarArtNo = panelGeorgianBarArtNo;
+            Panel_GeorgianBar_VerticalQty = panelGeorgianBarVerticalQty;
+            Panel_GeorgianBar_HorizontalQty = panelGeorgianBarHorizontalQty;
+            Panel_GeorgianBarOptionVisibility = panelGeorgianBarOptionVisibility;
 
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;

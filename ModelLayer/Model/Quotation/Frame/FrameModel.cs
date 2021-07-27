@@ -483,6 +483,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_cornerDriveOptionsheight_default;
                 }
+                else if (mode == "addGeorgianBar")
+                {
+                    FrameProp_Height += constants.panel_property_georgianBarHeight;
+                }
+                else if (mode == "minusGeorgianBar")
+                {
+                    FrameProp_Height -= constants.panel_property_georgianBarHeight;
+                }
             }
             else if (objtype == "Div")
             {

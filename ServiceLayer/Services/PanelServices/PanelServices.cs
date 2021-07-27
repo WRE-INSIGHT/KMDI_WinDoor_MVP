@@ -74,7 +74,11 @@ namespace ServiceLayer.Services.PanelServices
                                             int panelExtBot2Qty,
                                             int panelExtLeft2Qty,
                                             int panelExtRight2Qty,
-                                            Rotoswing_HandleArtNo panelRotoswingArtNo)
+                                            Rotoswing_HandleArtNo panelRotoswingArtNo,
+                                            GeorgianBar_ArticleNo panelGeorgianBarArtNo,
+                                            int panelGeorgianBarVerticalQty,
+                                            int panelGeorgianBarHorizontalQty,
+                                            bool panelGeorgianBarOptionVisibility)
         {
             IPanelModel pnl = new PanelModel(panelID,
                                              panelName,
@@ -127,7 +131,11 @@ namespace ServiceLayer.Services.PanelServices
                                              panelExtBot2Qty,
                                              panelExtLeft2Qty,
                                              panelExtRight2Qty,
-                                             panelRotoswingArtNo);
+                                             panelRotoswingArtNo,
+                                             panelGeorgianBarArtNo,
+                                             panelGeorgianBarVerticalQty,
+                                             panelGeorgianBarHorizontalQty,
+                                             panelGeorgianBarOptionVisibility);
 
             ValidateModel(pnl);
             return pnl;
@@ -183,6 +191,10 @@ namespace ServiceLayer.Services.PanelServices
                                          int panelExtLeft2Qty,
                                          int panelExtRight2Qty,
                                          Rotoswing_HandleArtNo panelRotoswingArtNo,
+                                         GeorgianBar_ArticleNo panelGeorgianBarArtNo,
+                                         int panelGeorgianBarVerticalQty,
+                                         int panelGeorgianBarHorizontalQty,
+                                         bool panelGeorgianBarOptionVisibility,
                                          int panelID = 0,
                                          int panelGlassID = 0,
                                          float panelImageRendererZoom = 1,
@@ -247,7 +259,11 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelExtBot2Qty,
                                                        panelExtLeft2Qty,
                                                        panelExtRight2Qty,
-                                                       panelRotoswingArtNo);
+                                                       panelRotoswingArtNo,
+                                                       panelGeorgianBarArtNo,
+                                                       panelGeorgianBarVerticalQty,
+                                                       panelGeorgianBarHorizontalQty,
+                                                       panelGeorgianBarOptionVisibility);
 
             return _panelModel;
         }

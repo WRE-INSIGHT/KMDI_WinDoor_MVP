@@ -310,6 +310,10 @@ namespace PresentationLayer.Presenter.UserControls
                                                            0,
                                                            0,
                                                            handleArtNo,
+                                                           GeorgianBar_ArticleNo._None,
+                                                           0,
+                                                           0,
+                                                           false,
                                                            _mainPresenter.GetPanelCount(),
                                                            _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);

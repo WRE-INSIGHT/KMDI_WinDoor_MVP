@@ -13,10 +13,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             InitializeComponent();
         }
         public event EventHandler PPGeorgianBarPropertyUCLoadEventRaised;
-        public event EventHandler nudVerticalQuantityValueChanged;
-        public event EventHandler nudHorizontalQuantityValueChanged;
+        public event EventHandler cmbGBArtNumSelectedValueChangedEventRaised;
+
         private void PP_GeorgianBarPropertyUC_Load(object sender, EventArgs e)
         {
+            nudHorizontal.Maximum = decimal.MaxValue;
+            nudVertical.Maximum = decimal.MaxValue;
+
             List<GeorgianBar_ArticleNo> GeorgianBarArtNo = new List<GeorgianBar_ArticleNo>();
             foreach (GeorgianBar_ArticleNo GBaritem in GeorgianBar_ArticleNo.GetAll())
             {
@@ -27,22 +30,17 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             EventHelpers.RaiseEvent(sender, PPGeorgianBarPropertyUCLoadEventRaised, e);
         }
 
-        private void nudVertical_ValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, nudVerticalQuantityValueChanged, e);
-        }
-
-        private void nudHorizontal_ValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, nudHorizontalQuantityValueChanged, e);
-        }
-
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
-            cmbGBArtNum.DataBindings.Add(ModelBinding["Panel_GeorgianBarArticleNo"]);
-            nudVertical.DataBindings.Add(ModelBinding["Panel_GeorgianBarVerticalQuantity"]);
-            nudHorizontal.DataBindings.Add(ModelBinding["Panel_GeorgianBarHorizontalQuantity"]);
+            cmbGBArtNum.DataBindings.Add(ModelBinding["Panel_GeorgianBarArtNo"]);
+            nudVertical.DataBindings.Add(ModelBinding["Panel_GeorgianBar_VerticalQty"]);
+            nudHorizontal.DataBindings.Add(ModelBinding["Panel_GeorgianBar_HorizontalQty"]);
+            this.DataBindings.Add(ModelBinding["Panel_GeorgianBarOptionVisibility"]);
+        }
 
+        private void cmbGBArtNum_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbGBArtNumSelectedValueChangedEventRaised, e);
         }
     }
 }

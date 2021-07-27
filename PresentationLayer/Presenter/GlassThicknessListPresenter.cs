@@ -46,6 +46,27 @@ namespace PresentationLayer.Presenter
                 {
                     _panelModel.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
                     _panelModel.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
+
+                    if (_panelModel.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
+                    {
+                        _panelModel.Panel_GeorgianBarOptionVisibility = true;
+                        _panelModel.AdjustPropertyPanelHeight("addGeorgianBar");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                        }
+                    }
+                    else
+                    {
+                        _panelModel.AdjustPropertyPanelHeight("minusGeorgianBar");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
+                        }
+                    }
+
                     _glassThicknessListView.CloseThisDialog();
                 }
                 else

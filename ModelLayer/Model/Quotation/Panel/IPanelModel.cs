@@ -133,6 +133,10 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_MotorizedPropertyHeight { get; set; }
         int Panel_MotorizedMechQty { get; set; }
         int Panel_ExtensionPropertyHeight { get; set; }
+        GeorgianBar_ArticleNo Panel_GeorgianBarArtNo { get; set; }
+        int Panel_GeorgianBar_VerticalQty { get; set; }
+        int Panel_GeorgianBar_HorizontalQty { get; set; }
+        bool Panel_GeorgianBarOptionVisibility { get; set; }
 
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
         void AdjustPropertyPanelHeight(string mode);

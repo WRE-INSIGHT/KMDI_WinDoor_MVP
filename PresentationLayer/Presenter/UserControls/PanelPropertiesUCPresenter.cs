@@ -24,6 +24,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_SashPropertyUCPresenter _pp_sashPropertyUCPresenter;
         private IPP_GlassPropertyUCPresenter _pp_glassPropertyUCPresenter;
         private IPP_HandlePropertyUCPresenter _pp_handlePropertUCPresenter;
+        private IPP_GeorgianBarPropertyUCPresenter _pp_georgianBarPropertUCPresenter;
         private IUnityContainer _unityC;
 
         private FlowLayoutPanel _flpPanelSpecs;
@@ -32,13 +33,15 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_MotorizedPropertyUCPresenter pp_motorizedPropertyUCPresenter,
                                           IPP_SashPropertyUCPresenter pp_sashPropertyUCPresenter,
                                           IPP_GlassPropertyUCPresenter pp_glassPropertyUCPresenter,
-                                          IPP_HandlePropertyUCPresenter pp_handlePropertUCPresenter)
+                                          IPP_HandlePropertyUCPresenter pp_handlePropertUCPresenter,
+                                          IPP_GeorgianBarPropertyUCPresenter pp_georgianBarPropertUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
             _pp_sashPropertyUCPresenter = pp_sashPropertyUCPresenter;
             _pp_glassPropertyUCPresenter = pp_glassPropertyUCPresenter;
             _pp_handlePropertUCPresenter = pp_handlePropertUCPresenter;
+            _pp_georgianBarPropertUCPresenter = pp_georgianBarPropertUCPresenter;
             _flpPanelSpecs = _panelPropertiesUC.GetPanelSpecsFLP();
 
             SubscribeToEventsSetup();
@@ -113,6 +116,9 @@ namespace PresentationLayer.Presenter.UserControls
 
             IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
             _flpPanelSpecs.Controls.Add((UserControl)glassPropUCP.GetPPGlassPropertyUC());
+
+            IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel);
+            _flpPanelSpecs.Controls.Add((UserControl)gbarPropUCP.GetPPGeorgianBarPropertyUC());
 
             chkOrient_state = _panelModel.Panel_Orient;
         }

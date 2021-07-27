@@ -16,7 +16,7 @@
         public int panel_property_cornerDriveOptionsheight_default = 30;
         public int panel_property_extensionOptionsheight = 81;
         public int panel_property_extensionFieldsheight = 31;
-        public int panel_property_georgianBarHeight = 93;
+        public int panel_property_georgianBarHeight = 101;
         #endregion
 
         public int div_propertyheight_default = 173;

@@ -1647,6 +1647,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_cornerDriveOptionsheight_default;
                 }
+                else if (mode == "addGeorgianBar")
+                {
+                    MPanelProp_Height += constants.panel_property_georgianBarHeight;
+                }
+                else if (mode == "minusGeorgianBar")
+                {
+                    MPanelProp_Height -= constants.panel_property_georgianBarHeight;
+                }
             }
             else if (objtype == "Div")
             {
