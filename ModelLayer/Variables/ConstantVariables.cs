@@ -14,7 +14,7 @@
         public int panel_property_motorizedChkOptionsheight = 31; //29;
         public int panel_property_motorizedCmbOptionsheight = 41;
         public int panel_property_cornerDriveOptionsheight_default = 30;
-        public int panel_property_extensionOptionsheight = 143;
+        public int panel_property_extensionOptionsheight = 81;
         public int panel_property_extensionFieldsheight = 31;
         public int panel_property_georgianBarHeight = 93;
         #endregion

@@ -6,6 +6,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
     public interface IPP_ExtensionPropertyUC : IViewCommon
     {
+        string Panel_Type { get; set; }
+
         event EventHandler PPExtensionUCLoadEventRaised;
         event EventHandler chkToAddExtension2CheckedChangedEventRaised;
         event EventHandler cmbExtensionsSelectedValueChangedEventRaised;

@@ -1460,6 +1460,26 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
 
+                if (Panel_Height < 2100)
+                {
+                    if (Panel_SashWidth <= 600)
+                    {
+                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+                    }
+                    else if (Panel_SashWidth >= 600 && Panel_SashWidth <= 899)
+                    {
+                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628807;
+                    }
+                    else if (Panel_SashWidth >= 900)
+                    {
+                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628809;
+                    }
+                }
+                else if (Panel_Height >= 2100)
+                {
+
+                }
+
                 if (Panel_MotorizedOptionVisibility == true)
                 {
                     Panel_30x25CoverArtNo = _30x25Cover_ArticleNo._1067_Milled;
@@ -1977,6 +1997,26 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_MiddleCloserPairQty = 3;
                     }
+                }
+
+                if (Panel_Height < 2100)
+                {
+                    if (Panel_SashWidth <= 600)
+                    {
+                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+                    }
+                    else if (Panel_SashWidth >= 600 && Panel_SashWidth <= 899)
+                    {
+                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628807;
+                    }
+                    else if (Panel_SashWidth >= 900)
+                    {
+                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628809;
+                    }
+                }
+                else if (Panel_Height >= 2100)
+                {
+
                 }
 
                 if (Panel_Width > 0 && Panel_Width <= 1499)
