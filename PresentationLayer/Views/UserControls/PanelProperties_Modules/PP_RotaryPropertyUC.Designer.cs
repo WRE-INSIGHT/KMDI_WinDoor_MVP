@@ -36,7 +36,7 @@
             // 
             // label12
             // 
-            this.label12.Location = new System.Drawing.Point(12, 6);
+            this.label12.Location = new System.Drawing.Point(1, 6);
             this.label12.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(61, 13);
@@ -47,10 +47,10 @@
             // 
             this.cmb_RotaryArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_RotaryArtNo.FormattingEnabled = true;
-            this.cmb_RotaryArtNo.Location = new System.Drawing.Point(76, 3);
+            this.cmb_RotaryArtNo.Location = new System.Drawing.Point(62, 3);
             this.cmb_RotaryArtNo.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.cmb_RotaryArtNo.Name = "cmb_RotaryArtNo";
-            this.cmb_RotaryArtNo.Size = new System.Drawing.Size(71, 21);
+            this.cmb_RotaryArtNo.Size = new System.Drawing.Size(88, 21);
             this.cmb_RotaryArtNo.TabIndex = 30;
             this.cmb_RotaryArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_RotaryArtNo_SelectedValueChanged);
             // 
@@ -58,7 +58,7 @@
             // 
             this.label11.AutoEllipsis = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(11, 26);
+            this.label11.Location = new System.Drawing.Point(0, 26);
             this.label11.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(56, 29);
@@ -69,9 +69,9 @@
             // 
             this.cmb_LockingKit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_LockingKit.FormattingEnabled = true;
-            this.cmb_LockingKit.Location = new System.Drawing.Point(76, 30);
+            this.cmb_LockingKit.Location = new System.Drawing.Point(62, 30);
             this.cmb_LockingKit.Name = "cmb_LockingKit";
-            this.cmb_LockingKit.Size = new System.Drawing.Size(69, 21);
+            this.cmb_LockingKit.Size = new System.Drawing.Size(88, 21);
             this.cmb_LockingKit.TabIndex = 28;
             this.cmb_LockingKit.SelectedValueChanged += new System.EventHandler(this.cmb_LockingKit_SelectedValueChanged);
             // 

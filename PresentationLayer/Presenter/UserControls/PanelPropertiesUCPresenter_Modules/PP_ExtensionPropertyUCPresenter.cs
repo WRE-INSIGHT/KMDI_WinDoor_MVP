@@ -167,10 +167,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_ExtBotChk_visible", new Binding("Visible", _panelModel, "Panel_ExtBotChk", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtLeftChk", new Binding("Checked", _panelModel, "Panel_ExtLeftChk", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtLeftChk_visible", new Binding("Visible", _panelModel, "Panel_ExtLeftChk", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Panel_ExtRightChk", new Binding("Checked", _panelModel, "Panel_ExtLeftChk", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Panel_ExtRightChk_visible", new Binding("Visible", _panelModel, "Panel_ExtLeftChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtRightChk", new Binding("Checked", _panelModel, "Panel_ExtRightChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtRightChk_visible", new Binding("Visible", _panelModel, "Panel_ExtRightChk", true, DataSourceUpdateMode.OnPropertyChanged));
 
             binding.Add("Panel_ExtensionPropertyHeight", new Binding("Height", _panelModel, "Panel_ExtensionPropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_Type", new Binding("Panel_Type", _panelModel, "Panel_Type", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

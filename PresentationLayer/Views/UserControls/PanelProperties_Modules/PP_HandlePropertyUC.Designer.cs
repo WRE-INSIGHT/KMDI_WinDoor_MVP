@@ -57,21 +57,21 @@
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(9, 4);
+            this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 26);
+            this.label7.Size = new System.Drawing.Size(44, 36);
             this.label7.TabIndex = 15;
-            this.label7.Text = "Handle \r\nType";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label7.Text = "Handle Type";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmb_HandleType
             // 
             this.cmb_HandleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_HandleType.FormattingEnabled = true;
-            this.cmb_HandleType.Location = new System.Drawing.Point(74, 7);
+            this.cmb_HandleType.Location = new System.Drawing.Point(52, 7);
             this.cmb_HandleType.Name = "cmb_HandleType";
-            this.cmb_HandleType.Size = new System.Drawing.Size(73, 21);
+            this.cmb_HandleType.Size = new System.Drawing.Size(98, 21);
             this.cmb_HandleType.TabIndex = 16;
             this.cmb_HandleType.SelectedValueChanged += new System.EventHandler(this.cmb_HandleType_SelectedValueChanged);
             // 

@@ -174,7 +174,6 @@ namespace PresentationLayer
                 .RegisterType<IGlassThicknessListView, GlassThicknessListView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGlassThicknessListPresenter, GlassThicknessListPresenter>(new ContainerControlledLifetimeManager())
 
-
                 .RegisterType<ICreateNewGlassTypeView, CreateNewGlassTypeView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICreateNewGlassTypePresenter, CreateNewGlassTypePresenter>(new ContainerControlledLifetimeManager())
 
@@ -183,7 +182,6 @@ namespace PresentationLayer
 
                 .RegisterType<ICreateNewGlassColorView, CreateNewGlassColorView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICreateNewGlassColorPresenter, CreateNewGlassColorPresenter>(new ContainerControlledLifetimeManager())
-
 
                 .RegisterType<IPP_MotorizedPropertyUC, PP_MotorizedPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_MotorizedPropertyUCPresenter, PP_MotorizedPropertyUCPresenter>(new ContainerControlledLifetimeManager())

@@ -465,7 +465,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "PP_ExtensionPropertyUC";
-            this.Size = new System.Drawing.Size(154, 267);
+            this.Size = new System.Drawing.Size(154, 81);
             this.Load += new System.EventHandler(this.PP_ExtensionUC_Load);
             this.pnl_TopExtOption.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.num_TopExtQty)).EndInit();

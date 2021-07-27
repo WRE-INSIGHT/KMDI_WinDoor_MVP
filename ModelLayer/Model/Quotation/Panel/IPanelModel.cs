@@ -117,12 +117,16 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_ExtensionOptionsVisibility { get; set; }
         int Panel_RotoswingOptionsHeight { get; set; }
         int Panel_PlasticWedgeQty { get; set; }
-        Striker_ArticleNo Panel_StrikerArtno { get; set; }
         MiddleCloser_ArticleNo Panel_MiddleCloserArtNo { get; set; }
         LockingKit_ArticleNo Panel_LockingKitArtNo { get; set; }
         GlassType Panel_GlassType { get; set; }
 
-        int Panel_StrikerQty { get; set; }
+        Striker_ArticleNo Panel_StrikerArtno_A { get; set; } //for Awning
+        int Panel_StrikerQty_A { get; set; }
+
+        Striker_ArticleNo Panel_StrikerArtno_C { get; set; } //for Casement
+        int Panel_StrikerQty_C { get; set; }
+
         int Panel_MiddleCloserPairQty { get; set; }
         bool Panel_MotorizedOptionVisibility { get; set; }
         MotorizedMech_ArticleNo Panel_MotorizedMechArtNo { get; set; }

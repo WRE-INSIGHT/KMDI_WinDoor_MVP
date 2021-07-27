@@ -202,7 +202,7 @@ namespace EnumerationTypeLayer
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class Extension_ArticleNo: Enumeration<Extension_ArticleNo, int>
+        public class Extension_ArticleNo : Enumeration<Extension_ArticleNo, int>
         {
             public static readonly Extension_ArticleNo _None = new Extension_ArticleNo(0, "None");
             public static readonly Extension_ArticleNo _612978 = new Extension_ArticleNo(1, "612978");
@@ -322,6 +322,13 @@ namespace EnumerationTypeLayer
             public static readonly Plate_ArticleNo _N4803LB = new Plate_ArticleNo(0, "N4803LB");
 
             private Plate_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class GeorgianBar_ArticleNo : Enumeration<GeorgianBar_ArticleNo, int>
+        {
+            public static readonly GeorgianBar_ArticleNo _0724 = new GeorgianBar_ArticleNo(0, "0724");
+            public static readonly GeorgianBar_ArticleNo _0726 = new GeorgianBar_ArticleNo(1, "0726");
+
+            private GeorgianBar_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
     }
