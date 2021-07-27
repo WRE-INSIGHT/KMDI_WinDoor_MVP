@@ -1125,20 +1125,11 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public int Panel_PlasticWedgeQty { get; set; }
 
-        private Striker_ArticleNo _panelStrikerArtno;
-        public Striker_ArticleNo Panel_StrikerArtno
-        {
-            get
-            {
-                return _panelStrikerArtno;
-            }
-            set
-            {
-                _panelStrikerArtno = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public int Panel_StrikerQty { get; set; }
+        public Striker_ArticleNo Panel_StrikerArtno_A { get; set; } //for Awning
+        public int Panel_StrikerQty_A { get; set; }
+
+        public Striker_ArticleNo Panel_StrikerArtno_C { get; set; } //for Casement
+        public int Panel_StrikerQty_C { get; set; }
 
         private MiddleCloser_ArticleNo _panelMiddleCloserArtno;
         public MiddleCloser_ArticleNo Panel_MiddleCloserArtNo
@@ -1460,26 +1451,6 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
 
-                if (Panel_Height < 2100)
-                {
-                    if (Panel_SashWidth <= 600)
-                    {
-                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
-                    }
-                    else if (Panel_SashWidth >= 600 && Panel_SashWidth <= 899)
-                    {
-                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628807;
-                    }
-                    else if (Panel_SashWidth >= 900)
-                    {
-                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628809;
-                    }
-                }
-                else if (Panel_Height >= 2100)
-                {
-
-                }
-
                 if (Panel_MotorizedOptionVisibility == true)
                 {
                     Panel_30x25CoverArtNo = _30x25Cover_ArticleNo._1067_Milled;
@@ -1524,6 +1495,9 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
+                Panel_StrikerArtno_A = Striker_ArticleNo._M89ANT;
+                Panel_StrikerArtno_C = Striker_ArticleNo._M89CNT;
+
                 if (Panel_Width > 0 && Panel_Width <= 1499)
                 {
                     Panel_MotorizedMechQty = 1;
@@ -1537,22 +1511,62 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
                 {
-                    Panel_StrikerQty += 2;
+                    Panel_StrikerQty_A += 2;
                 }
                 else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
                          Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
                 {
-                    Panel_StrikerQty += 3;
+                    Panel_StrikerQty_A += 3;
                 }
 
-                if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
+                if (Panel_Type.Contains("Awning"))
                 {
-                    Panel_StrikerQty += 1;
+                    if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionRightArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                }
+                else if (Panel_Type.Contains("Casement"))
+                {
+                    if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionBotArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
                 }
 
                 if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                 {
-                    Panel_StrikerQty += 1;
+                    Panel_StrikerQty_A += 1;
                 }
 
                 FrictionStay_ArticleNo fs_dimension_based = FrictionStay_ArticleNo._None;
@@ -1999,26 +2013,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                if (Panel_Height < 2100)
-                {
-                    if (Panel_SashWidth <= 600)
-                    {
-                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
-                    }
-                    else if (Panel_SashWidth >= 600 && Panel_SashWidth <= 899)
-                    {
-                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628807;
-                    }
-                    else if (Panel_SashWidth >= 900)
-                    {
-                        Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628809;
-                    }
-                }
-                else if (Panel_Height >= 2100)
-                {
-
-                }
-
                 if (Panel_Width > 0 && Panel_Width <= 1499)
                 {
                     Panel_MotorizedMechQty = 1;
@@ -2032,22 +2026,62 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
                 {
-                    Panel_StrikerQty += 2;
+                    Panel_StrikerQty_A += 2;
                 }
                 else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
                          Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
                 {
-                    Panel_StrikerQty += 3;
+                    Panel_StrikerQty_A += 3;
                 }
 
-                if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
+                if (Panel_Type.Contains("Awning"))
                 {
-                    Panel_StrikerQty += 1;
+                    if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionRightArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                }
+                else if (Panel_Type.Contains("Casement"))
+                {
+                    if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionBotArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
                 }
 
                 if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                 {
-                    Panel_StrikerQty += 1;
+                    Panel_StrikerQty_A += 1;
                 }
 
                 FrictionStay_ArticleNo fs_dimension_based = FrictionStay_ArticleNo._None;
@@ -2273,7 +2307,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_OriginalHeight = Panel_Height;
             Panel_GlassType = panelGlassType;
             Panel_EspagnoletteArtNo = panelEspagnoletteArtNo;
-            Panel_StrikerArtno = panelStrikerArtno;
+            Panel_StrikerArtno_A = panelStrikerArtno;
             Panel_MiddleCloserArtNo = panelMiddleCloserArtno;
             Panel_LockingKitArtNo = panelLockingKitArtno;
             Panel_MotorizedMechArtNo = panelMotorizedMechArtNo;

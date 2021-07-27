@@ -1119,81 +1119,6 @@ namespace ModelLayer.Model.Quotation
                                                                    "Sash",
                                                                    @"");
 
-                                            if (pnl_curCtrl.Panel_ExtTopQty > 0)
-                                            {
-                                                Material_List.Rows.Add("Extension(Top) " + pnl_curCtrl.Panel_ExtensionTopArtNo.ToString(),
-                                                                       pnl_curCtrl.Panel_ExtTopQty, "pc (s)",
-                                                                       "",
-                                                                       "Sash",
-                                                                       @"");
-                                            }
-                                            if (pnl_curCtrl.Panel_ExtTop2Qty > 0)
-                                            {
-                                                Material_List.Rows.Add("Extension_2(Top) " + pnl_curCtrl.Panel_ExtensionTop2ArtNo.ToString(),
-                                                                       pnl_curCtrl.Panel_ExtTop2Qty, "pc (s)",
-                                                                       "",
-                                                                       "Sash",
-                                                                       @"");
-                                            }
-                                            if (pnl_curCtrl.Panel_ExtBotQty > 0)
-                                            {
-                                                Material_List.Rows.Add("Extension(Bot) " + pnl_curCtrl.Panel_ExtensionBotArtNo.ToString(),
-                                                                       pnl_curCtrl.Panel_ExtBotQty, "pc (s)",
-                                                                       "",
-                                                                       "Sash",
-                                                                       @"");
-                                            }
-                                            if (pnl_curCtrl.Panel_ExtBot2Qty > 0)
-                                            {
-                                                Material_List.Rows.Add("Extension_2(Bot) " + pnl_curCtrl.Panel_ExtensionBot2ArtNo.ToString(),
-                                                                       pnl_curCtrl.Panel_ExtBot2Qty, "pc (s)",
-                                                                       "",
-                                                                       "Sash",
-                                                                       @"");
-                                            }
-                                            if (pnl_curCtrl.Panel_ExtLeftQty > 0)
-                                            {
-                                                Material_List.Rows.Add("Extension(Left) " + pnl_curCtrl.Panel_ExtensionLeftArtNo.ToString(),
-                                                                       pnl_curCtrl.Panel_ExtLeftQty, "pc (s)",
-                                                                       "",
-                                                                       "Sash",
-                                                                       @"");
-                                            }
-                                            if (pnl_curCtrl.Panel_ExtLeft2Qty > 0)
-                                            {
-                                                Material_List.Rows.Add("Extension_2(Left) " + pnl_curCtrl.Panel_ExtensionLeft2ArtNo.ToString(),
-                                                                       pnl_curCtrl.Panel_ExtLeft2Qty, "pc (s)",
-                                                                       "",
-                                                                       "Sash",
-                                                                       @"");
-                                            }
-                                            if (pnl_curCtrl.Panel_ExtRightQty > 0)
-                                            {
-                                                Material_List.Rows.Add("Extension(Right) " + pnl_curCtrl.Panel_ExtensionRightArtNo.ToString(),
-                                                                       pnl_curCtrl.Panel_ExtRightQty, "pc (s)",
-                                                                       "",
-                                                                       "Sash",
-                                                                       @"");
-                                            }
-                                            if (pnl_curCtrl.Panel_ExtRight2Qty > 0)
-                                            {
-                                                Material_List.Rows.Add("Extension_2(Right) " + pnl_curCtrl.Panel_ExtensionRight2ArtNo.ToString(),
-                                                                       pnl_curCtrl.Panel_ExtRight2Qty, "pc (s)",
-                                                                       "",
-                                                                       "Sash",
-                                                                       @"");
-                                            }
-
-                                            if (pnl_curCtrl.Panel_CornerDriveArtNo != CornerDrive_ArticleNo._None &&
-                                                pnl_curCtrl.Panel_CornerDriveArtNo != null)
-                                            {
-                                                Material_List.Rows.Add("Corner Drive " + pnl_curCtrl.Panel_CornerDriveArtNo.ToString(),
-                                                                       1, "pc (s)",
-                                                                       "",
-                                                                       "Sash",
-                                                                       @"");
-                                            }
-
                                             if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
                                                 pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
                                             {
@@ -1212,21 +1137,204 @@ namespace ModelLayer.Model.Quotation
                                                 additional_screws_fabrication += 6;
                                             }
 
+                                            if (pnl_curCtrl.Panel_ExtTopQty > 0)
+                                            {
+                                                Material_List.Rows.Add("Extension(Top) " + pnl_curCtrl.Panel_ExtensionTopArtNo.ToString(),
+                                                                       pnl_curCtrl.Panel_ExtTopQty, "pc (s)",
+                                                                       "",
+                                                                       "Sash",
+                                                                       @"");
+
+                                                if (pnl_curCtrl.Panel_ExtensionTopArtNo == Extension_ArticleNo._612978)
+                                                {
+                                                    additional_screws_fabrication += 3;
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
+                                                {
+                                                    additional_screws_fabrication += 5;
+                                                }
+                                            }
+                                            if (pnl_curCtrl.Panel_ExtTop2Qty > 0)
+                                            {
+                                                Material_List.Rows.Add("Extension_2(Top) " + pnl_curCtrl.Panel_ExtensionTop2ArtNo.ToString(),
+                                                                       pnl_curCtrl.Panel_ExtTop2Qty, "pc (s)",
+                                                                       "",
+                                                                       "Sash",
+                                                                       @"");
+
+                                                if (pnl_curCtrl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._612978)
+                                                {
+                                                    additional_screws_fabrication += 3;
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957)
+                                                {
+                                                    additional_screws_fabrication += 5;
+                                                }
+                                            }
+                                            if (pnl_curCtrl.Panel_ExtBotQty > 0)
+                                            {
+                                                Material_List.Rows.Add("Extension(Bot) " + pnl_curCtrl.Panel_ExtensionBotArtNo.ToString(),
+                                                                       pnl_curCtrl.Panel_ExtBotQty, "pc (s)",
+                                                                       "",
+                                                                       "Sash",
+                                                                       @"");
+
+                                                if (pnl_curCtrl.Panel_ExtensionBotArtNo == Extension_ArticleNo._612978)
+                                                {
+                                                    additional_screws_fabrication += 3;
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionBotArtNo == Extension_ArticleNo._639957)
+                                                {
+                                                    additional_screws_fabrication += 5;
+                                                }
+                                            }
+                                            if (pnl_curCtrl.Panel_ExtBot2Qty > 0)
+                                            {
+                                                Material_List.Rows.Add("Extension_2(Bot) " + pnl_curCtrl.Panel_ExtensionBot2ArtNo.ToString(),
+                                                                       pnl_curCtrl.Panel_ExtBot2Qty, "pc (s)",
+                                                                       "",
+                                                                       "Sash",
+                                                                       @"");
+
+                                                if (pnl_curCtrl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._612978)
+                                                {
+                                                    additional_screws_fabrication += 3;
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957)
+                                                {
+                                                    additional_screws_fabrication += 5;
+                                                }
+                                            }
+                                            if (pnl_curCtrl.Panel_ExtLeftQty > 0)
+                                            {
+                                                Material_List.Rows.Add("Extension(Left) " + pnl_curCtrl.Panel_ExtensionLeftArtNo.ToString(),
+                                                                       pnl_curCtrl.Panel_ExtLeftQty, "pc (s)",
+                                                                       "",
+                                                                       "Sash",
+                                                                       @"");
+
+                                                if (pnl_curCtrl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._612978)
+                                                {
+                                                    additional_screws_fabrication += 3;
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957)
+                                                {
+                                                    additional_screws_fabrication += 5;
+                                                }
+                                            }
+                                            if (pnl_curCtrl.Panel_ExtLeft2Qty > 0)
+                                            {
+                                                Material_List.Rows.Add("Extension_2(Left) " + pnl_curCtrl.Panel_ExtensionLeft2ArtNo.ToString(),
+                                                                       pnl_curCtrl.Panel_ExtLeft2Qty, "pc (s)",
+                                                                       "",
+                                                                       "Sash",
+                                                                       @"");
+
+                                                if (pnl_curCtrl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._612978)
+                                                {
+                                                    additional_screws_fabrication += 3;
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957)
+                                                {
+                                                    additional_screws_fabrication += 5;
+                                                }
+                                            }
+                                            if (pnl_curCtrl.Panel_ExtRightQty > 0)
+                                            {
+                                                Material_List.Rows.Add("Extension(Right) " + pnl_curCtrl.Panel_ExtensionRightArtNo.ToString(),
+                                                                       pnl_curCtrl.Panel_ExtRightQty, "pc (s)",
+                                                                       "",
+                                                                       "Sash",
+                                                                       @"");
+
+                                                if (pnl_curCtrl.Panel_ExtensionRightArtNo == Extension_ArticleNo._612978)
+                                                {
+                                                    additional_screws_fabrication += 3;
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionRightArtNo == Extension_ArticleNo._639957)
+                                                {
+                                                    additional_screws_fabrication += 5;
+                                                }
+                                            }
+                                            if (pnl_curCtrl.Panel_ExtRight2Qty > 0)
+                                            {
+                                                Material_List.Rows.Add("Extension_2(Right) " + pnl_curCtrl.Panel_ExtensionRight2ArtNo.ToString(),
+                                                                       pnl_curCtrl.Panel_ExtRight2Qty, "pc (s)",
+                                                                       "",
+                                                                       "Sash",
+                                                                       @"");
+
+                                                if (pnl_curCtrl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._612978)
+                                                {
+                                                    additional_screws_fabrication += 3;
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
+                                                {
+                                                    additional_screws_fabrication += 5;
+                                                }
+                                            }
+
+                                            if (pnl_curCtrl.Panel_CornerDriveArtNo != CornerDrive_ArticleNo._None &&
+                                                pnl_curCtrl.Panel_CornerDriveArtNo != null)
+                                            {
+                                                Material_List.Rows.Add("Corner Drive " + pnl_curCtrl.Panel_CornerDriveArtNo.ToString(),
+                                                                       2, "pc (s)",
+                                                                       "",
+                                                                       "Sash",
+                                                                       @"");
+
+                                                additional_screws_fabrication += 4;
+                                            }
+
                                             Material_List.Rows.Add("Rotoswing handle " + pnl_curCtrl.Panel_RotoswingArtNo.ToString(),
                                                                    1, "pc (s)",
                                                                    "",
                                                                    "Sash",
                                                                    @"");
 
-                                            Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno.ToString(),
-                                                                   pnl_curCtrl.Panel_StrikerQty, "pc (s)",
-                                                                   "",
-                                                                   "Frame",
-                                                                   @"");
-
-                                            if (pnl_curCtrl.Panel_StrikerArtno == Striker_ArticleNo._M89ANT)
+                                            if (pnl_curCtrl.Panel_Type.Contains("Awning"))
                                             {
-                                                additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty;
+                                                Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno_A.ToString(),
+                                                                       pnl_curCtrl.Panel_StrikerQty_A, "pc (s)",
+                                                                       "",
+                                                                       "Frame",
+                                                                       @"");
+
+                                                additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty_A;
+
+                                                if (pnl_curCtrl.Panel_Height >= 2100)
+                                                {
+                                                    Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno_C.ToString(),
+                                                                       pnl_curCtrl.Panel_StrikerQty_C, "pc (s)",
+                                                                       "",
+                                                                       "Frame",
+                                                                       @"");
+
+                                                    additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty_C;
+                                                }
+
+                                            }
+                                            else if (pnl_curCtrl.Panel_Type.Contains("Casement"))
+                                            {
+                                                Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno_C.ToString(),
+                                                                       pnl_curCtrl.Panel_StrikerQty_C, "pc (s)",
+                                                                       "",
+                                                                       "Frame",
+                                                                       @"");
+
+                                                additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty_C;
+
+                                                if (pnl_curCtrl.Panel_Height >= 2100)
+                                                {
+                                                    Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno_A.ToString(),
+                                                                       pnl_curCtrl.Panel_StrikerQty_A, "pc (s)",
+                                                                       "",
+                                                                       "Frame",
+                                                                       @"");
+
+                                                    additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty_A;
+                                                }
+
                                             }
 
                                             Material_List.Rows.Add("Middle Closer " + pnl_curCtrl.Panel_MiddleCloserArtNo.ToString(),
@@ -1530,10 +1638,12 @@ namespace ModelLayer.Model.Quotation
                                     pnl.Panel_CornerDriveArtNo != null)
                                 {
                                     Material_List.Rows.Add("Corner Drive " + pnl.Panel_CornerDriveArtNo.ToString(),
-                                                           1, "pc (s)",
+                                                           2, "pc (s)",
                                                            "",
                                                            "Sash",
                                                            @"");
+
+                                    additional_screws_fabrication += 4;
                                 }
 
                                 if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
@@ -1560,15 +1670,49 @@ namespace ModelLayer.Model.Quotation
                                                        "Sash",
                                                        @"");
 
-                                Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno.ToString(),
-                                                       pnl.Panel_StrikerQty, "pc (s)",
-                                                       "",
-                                                       "Frame",
-                                                       @"");
-
-                                if (pnl.Panel_StrikerArtno == Striker_ArticleNo._M89ANT)
+                                if (pnl.Panel_Type.Contains("Awning"))
                                 {
-                                    additional_screws_fabrication += pnl.Panel_StrikerQty;
+                                    Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_A.ToString(),
+                                                           pnl.Panel_StrikerQty_A, "pc (s)",
+                                                           "",
+                                                           "Frame",
+                                                           @"");
+
+                                    additional_screws_fabrication += pnl.Panel_StrikerQty_A;
+
+                                    if (pnl.Panel_Height >= 2100)
+                                    {
+                                        Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_C.ToString(),
+                                                           pnl.Panel_StrikerQty_C, "pc (s)",
+                                                           "",
+                                                           "Frame",
+                                                           @"");
+
+                                        additional_screws_fabrication += pnl.Panel_StrikerQty_C;
+                                    }
+
+                                }
+                                else if (pnl.Panel_Type.Contains("Casement"))
+                                {
+                                    Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_C.ToString(),
+                                                           pnl.Panel_StrikerQty_C, "pc (s)",
+                                                           "",
+                                                           "Frame",
+                                                           @"");
+
+                                    additional_screws_fabrication += pnl.Panel_StrikerQty_C;
+
+                                    if (pnl.Panel_Height >= 2100)
+                                    {
+                                        Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_A.ToString(),
+                                                           pnl.Panel_StrikerQty_A, "pc (s)",
+                                                           "",
+                                                           "Frame",
+                                                           @"");
+
+                                        additional_screws_fabrication += pnl.Panel_StrikerQty_A;
+                                    }
+
                                 }
 
                                 Material_List.Rows.Add("Middle Closer " + pnl.Panel_MiddleCloserArtNo.ToString(),

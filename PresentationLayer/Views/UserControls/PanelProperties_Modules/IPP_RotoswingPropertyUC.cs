@@ -10,7 +10,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler cmbEspagnoletteSelectedValueEventRaised;
         event EventHandler cmbMiddleCloserSelectedValueEventRaised;
         event EventHandler cmbRotoswingNoSelectedValueEventRaised;
-        event EventHandler cmbStrikerSelectedValueEventRaised;
 
         FlowLayoutPanel GetRotoswingOptionFLP();
     }
