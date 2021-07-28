@@ -765,7 +765,10 @@ namespace ModelLayer.Model.Quotation
                                 Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                        2, "pc(s)", "");
 
-                                additional_screws_fabrication += 2;
+                                if (div_nxtCtrl.Div_MechJoinArtNo == Divider_MechJointArticleNo._AV585)
+                                {
+                                    additional_screws_fabrication += 2;
+                                }
 
                                 Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
                                                   divArtNo_prevCtrl = Divider_ArticleNo._None,
@@ -1304,13 +1307,19 @@ namespace ModelLayer.Model.Quotation
 
                                                 if (pnl_curCtrl.Panel_Height >= 2100)
                                                 {
-                                                    Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno_C.ToString(),
-                                                                       pnl_curCtrl.Panel_StrikerQty_C, "pc (s)",
-                                                                       "",
-                                                                       "Frame",
-                                                                       @"");
+                                                    if (pnl_curCtrl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957 ||
+                                                        pnl_curCtrl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957 ||
+                                                        pnl_curCtrl.Panel_ExtensionRightArtNo == Extension_ArticleNo._639957 ||
+                                                        pnl_curCtrl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
+                                                    {
+                                                        Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno_C.ToString(),
+                                                                           pnl_curCtrl.Panel_StrikerQty_C, "pc (s)",
+                                                                           "",
+                                                                           "Frame",
+                                                                           @"");
 
-                                                    additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty_C;
+                                                        additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty_C;
+                                                    }
                                                 }
 
                                             }
@@ -1326,15 +1335,17 @@ namespace ModelLayer.Model.Quotation
 
                                                 if (pnl_curCtrl.Panel_Height >= 2100)
                                                 {
-                                                    Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno_A.ToString(),
-                                                                       pnl_curCtrl.Panel_StrikerQty_A, "pc (s)",
-                                                                       "",
-                                                                       "Frame",
-                                                                       @"");
+                                                    if (pnl_curCtrl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                                                    {
+                                                        Material_List.Rows.Add("Striker " + pnl_curCtrl.Panel_StrikerArtno_A.ToString(),
+                                                                           pnl_curCtrl.Panel_StrikerQty_A, "pc (s)",
+                                                                           "",
+                                                                           "Frame",
+                                                                           @"");
 
-                                                    additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty_A;
+                                                        additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty_A;
+                                                    }
                                                 }
-
                                             }
 
                                             Material_List.Rows.Add("Middle Closer " + pnl_curCtrl.Panel_MiddleCloserArtNo.ToString(),
@@ -1682,13 +1693,19 @@ namespace ModelLayer.Model.Quotation
 
                                     if (pnl.Panel_Height >= 2100)
                                     {
-                                        Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_C.ToString(),
-                                                           pnl.Panel_StrikerQty_C, "pc (s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
+                                        if (pnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957 ||
+                                            pnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957 ||
+                                            pnl.Panel_ExtensionRightArtNo == Extension_ArticleNo._639957 ||
+                                            pnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
+                                        {
+                                            Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_C.ToString(),
+                                                               pnl.Panel_StrikerQty_C, "pc (s)",
+                                                               "",
+                                                               "Frame",
+                                                               @"");
 
-                                        additional_screws_fabrication += pnl.Panel_StrikerQty_C;
+                                            additional_screws_fabrication += pnl.Panel_StrikerQty_C;
+                                        }
                                     }
 
                                 }
@@ -1704,15 +1721,17 @@ namespace ModelLayer.Model.Quotation
 
                                     if (pnl.Panel_Height >= 2100)
                                     {
-                                        Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_A.ToString(),
-                                                           pnl.Panel_StrikerQty_A, "pc (s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
+                                        if (pnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                                        {
+                                            Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_A.ToString(),
+                                                               pnl.Panel_StrikerQty_A, "pc (s)",
+                                                               "",
+                                                               "Frame",
+                                                               @"");
 
-                                        additional_screws_fabrication += pnl.Panel_StrikerQty_A;
+                                            additional_screws_fabrication += pnl.Panel_StrikerQty_A;
+                                        }
                                     }
-
                                 }
 
                                 Material_List.Rows.Add("Middle Closer " + pnl.Panel_MiddleCloserArtNo.ToString(),

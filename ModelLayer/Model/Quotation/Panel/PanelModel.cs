@@ -1606,7 +1606,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                 {
-                    Panel_StrikerQty_A += 1;
+                    Panel_StrikerQty_A += 2;
                 }
 
                 FrictionStay_ArticleNo fs_dimension_based = FrictionStay_ArticleNo._None;
@@ -2122,7 +2122,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                 {
-                    Panel_StrikerQty_A += 1;
+                    Panel_StrikerQty_A += 2;
                 }
 
                 FrictionStay_ArticleNo fs_dimension_based = FrictionStay_ArticleNo._None;
