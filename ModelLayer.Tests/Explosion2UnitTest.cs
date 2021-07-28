@@ -5021,7 +5021,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(8404780, _qouteModel.Plastic_CoverQty_Total);
             Assert.AreEqual(14, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(56, _qouteModel.Rebate_Qty);
-           // Assert.AreEqual(136, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(164, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(73, _qouteModel.Screws_for_Installation);
 
 
@@ -5091,11 +5091,21 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel2_Awning.Panel_RotoswingArtNo);
             Assert.AreEqual(LockingKit_ArticleNo._T24402KMBL, _panelModel2_Awning.Panel_LockingKitArtNo);
             Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel2_Awning.Panel_StrikerArtno_A);
-          //  Assert.AreEqual(3, _panelModel2_Awning.Panel_StrikerQty_A);
+            Assert.AreEqual(5, _panelModel2_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(Striker_ArticleNo._M89CNT, _panelModel2_Awning.Panel_StrikerArtno_C);
-           // Assert.AreEqual(4, _panelModel2_Awning.Panel_StrikerQty_C);
+            Assert.AreEqual(4, _panelModel2_Awning.Panel_StrikerQty_C);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel2_Awning.Panel_MiddleCloserArtNo);
-          //  Assert.AreEqual(3, _panelModel2_Awning.Panel_MiddleCloserPairQty);
+            Assert.AreEqual(3, _panelModel2_Awning.Panel_MiddleCloserPairQty);
+
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2_Awning.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(2, _panelModel2_Awning.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2_Awning.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(1, _panelModel2_Awning.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2_Awning.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(2, _panelModel2_Awning.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2_Awning.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(1, _panelModel2_Awning.Panel_ExtRight2Qty);
 
 
             #endregion
@@ -5198,13 +5208,7 @@ namespace ModelLayer.Tests
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
-
-            //dr = dt.Select(@"Description LIKE '%Striker%' AND
-            //                 Description LIKE '%M89C-NT%'");
-            //Assert.AreEqual(1, dr.Length);
-            //Assert.AreEqual(4, dr[0]["Qty"]);
-
+            Assert.AreEqual(7, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
                              Description LIKE '%7199%'");
@@ -6817,7 +6821,7 @@ namespace ModelLayer.Tests
         }
 
 
-        
+
 
         [TestMethod]
         public void ChkVar_4Panel_2FixWindow_2Awning()
@@ -8686,11 +8690,11 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1800, total_ht = 1100,
-                BalanceAwningWD1 = 308, AwningHT1 = 1100,
-                BalanceAwningWD3 = 296, AwningHT3 = 1100,
-                BalanceFixedWD2 = 296, FixedHT2 = 1100,
-                BalanceFixedWD6 = 308, FixedHT6 = 1100;
+            int total_wd = 3000, total_ht = 1100,
+                BalanceAwningWD1 = 508, AwningHT1 = 1100,
+                BalanceAwningWD3 = 496, AwningHT3 = 1100,
+                BalanceFixedWD2 = 496, FixedHT2 = 1100,
+                BalanceFixedWD6 = 508, FixedHT6 = 1100;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -9214,45 +9218,45 @@ namespace ModelLayer.Tests
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
-            Assert.AreEqual(1805, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(3005, _frameModel.Frame_ExplosionWidth);
             Assert.AreEqual(1105, _frameModel.Frame_ExplosionHeight);
             Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
-            Assert.AreEqual(1732, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(2932, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1032, _frameModel.Frame_ReinfHeight);
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
-            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(3, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(3, _qouteModel.GlazingSpacer_TotalQty);
             Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
-            Assert.AreEqual(3960000, _qouteModel.Plastic_CoverQty_Total);
-            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
-            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
-           //Assert.AreEqual(159, _qouteModel.Screws_for_Fabrication);
-            Assert.AreEqual(87, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(6600000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(12, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(48, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(118, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(76, _qouteModel.Screws_for_Installation);
 
             #region MultiMullion (6)
 
             #region AwningUC_1
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
-            Assert.AreEqual(273, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(473, _panelModel1_Awning.Panel_SashWidth);
             Assert.AreEqual(1053, _panelModel1_Awning.Panel_SashHeight);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
-            Assert.AreEqual(148, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(348, _panelModel1_Awning.Panel_SashReinfWidth);
             Assert.AreEqual(928, _panelModel1_Awning.Panel_SashReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1_Awning.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(273, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(473, _panelModel1_Awning.Panel_GlazingBeadWidth);
             Assert.AreEqual(1053, _panelModel1_Awning.Panel_GlazingBeadHeight);
 
-            Assert.AreEqual(152, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(352, _panelModel1_Awning.Panel_GlassWidth);
             Assert.AreEqual(932, _panelModel1_Awning.Panel_GlassHeight);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1_Awning.Panel_CoverProfileArtNo2);
-            Assert.AreEqual(FrictionStay_ArticleNo._Storm8, _panelModel1_Awning.Panel_FrictionStayArtNo);
+            Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel1_Awning.Panel_FrictionStayArtNo);
             Assert.AreEqual(2, _panelModel1_Awning.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._628806, _panelModel1_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1_Awning.Panel_HandleType);
@@ -9270,33 +9274,33 @@ namespace ModelLayer.Tests
 
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_fixed.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(296, _panelModel2_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(496, _panelModel2_fixed.Panel_GlazingBeadWidth);
             Assert.AreEqual(1100, _panelModel2_fixed.Panel_GlazingBeadHeight);
-            Assert.AreEqual(248, _panelModel2_fixed.Panel_GlassWidth);
+            Assert.AreEqual(448, _panelModel2_fixed.Panel_GlassWidth);
             Assert.AreEqual(1028, _panelModel2_fixed.Panel_GlassHeight);
 
 
             #region AwningUC_2
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3_Awning.Panel_SashProfileArtNo);
-            Assert.AreEqual(273, _panelModel3_Awning.Panel_SashWidth);
+            Assert.AreEqual(473, _panelModel3_Awning.Panel_SashWidth);
             Assert.AreEqual(1053, _panelModel3_Awning.Panel_SashHeight);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3_Awning.Panel_SashReinfArtNo);
-            Assert.AreEqual(148, _panelModel3_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(348, _panelModel3_Awning.Panel_SashReinfWidth);
             Assert.AreEqual(928, _panelModel3_Awning.Panel_SashReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3_Awning.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(273, _panelModel3_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(473, _panelModel3_Awning.Panel_GlazingBeadWidth);
             Assert.AreEqual(1053, _panelModel3_Awning.Panel_GlazingBeadHeight);
 
-            Assert.AreEqual(152, _panelModel3_Awning.Panel_GlassWidth);
+            Assert.AreEqual(352, _panelModel3_Awning.Panel_GlassWidth);
             Assert.AreEqual(932, _panelModel3_Awning.Panel_GlassHeight);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3_Awning.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel3_Awning.Panel_CoverProfileArtNo2);
-            Assert.AreEqual(FrictionStay_ArticleNo._Storm8, _panelModel3_Awning.Panel_FrictionStayArtNo);
+            Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel3_Awning.Panel_FrictionStayArtNo);
             Assert.AreEqual(2, _panelModel3_Awning.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._628806, _panelModel3_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel3_Awning.Panel_HandleType);
@@ -9314,9 +9318,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(957, _divMullionModel2.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4_fixed.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(296, _panelModel4_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(496, _panelModel4_fixed.Panel_GlazingBeadWidth);
             Assert.AreEqual(1100, _panelModel4_fixed.Panel_GlazingBeadHeight);
-            Assert.AreEqual(248, _panelModel4_fixed.Panel_GlassWidth);
+            Assert.AreEqual(448, _panelModel4_fixed.Panel_GlassWidth);
             Assert.AreEqual(1028, _panelModel4_fixed.Panel_GlassHeight);
 
 
@@ -9324,24 +9328,24 @@ namespace ModelLayer.Tests
             #region AwningUC_3
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel5_Awning.Panel_SashProfileArtNo);
-            Assert.AreEqual(273, _panelModel5_Awning.Panel_SashWidth);
+            Assert.AreEqual(473, _panelModel5_Awning.Panel_SashWidth);
             Assert.AreEqual(1053, _panelModel5_Awning.Panel_SashHeight);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel5_Awning.Panel_SashReinfArtNo);
-            Assert.AreEqual(148, _panelModel5_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(348, _panelModel5_Awning.Panel_SashReinfWidth);
             Assert.AreEqual(928, _panelModel5_Awning.Panel_SashReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5_Awning.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(273, _panelModel5_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(473, _panelModel5_Awning.Panel_GlazingBeadWidth);
             Assert.AreEqual(1053, _panelModel5_Awning.Panel_GlazingBeadHeight);
 
-            Assert.AreEqual(152, _panelModel5_Awning.Panel_GlassWidth);
+            Assert.AreEqual(352, _panelModel5_Awning.Panel_GlassWidth);
             Assert.AreEqual(932, _panelModel5_Awning.Panel_GlassHeight);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel5_Awning.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel5_Awning.Panel_CoverProfileArtNo2);
-            Assert.AreEqual(FrictionStay_ArticleNo._Storm8, _panelModel5_Awning.Panel_FrictionStayArtNo);
+            Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel5_Awning.Panel_FrictionStayArtNo);
             Assert.AreEqual(2, _panelModel5_Awning.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._628806, _panelModel5_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel5_Awning.Panel_HandleType);
@@ -9359,9 +9363,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(957, _divMullionModel3.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel6_fixed.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(308, _panelModel6_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(508, _panelModel6_fixed.Panel_GlazingBeadWidth);
             Assert.AreEqual(1100, _panelModel6_fixed.Panel_GlazingBeadHeight);
-            Assert.AreEqual(248, _panelModel6_fixed.Panel_GlassWidth);
+            Assert.AreEqual(448, _panelModel6_fixed.Panel_GlassWidth);
             Assert.AreEqual(1028, _panelModel6_fixed.Panel_GlassHeight);
 
             #endregion
@@ -9371,7 +9375,7 @@ namespace ModelLayer.Tests
 
             DataRow[] dr;
 
-            dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1805'");
+            dr = dt.Select("Description = 'Frame Width 7502' AND Size = '3005'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
@@ -9379,7 +9383,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1732'");
+            dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '2932'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
@@ -9389,7 +9393,7 @@ namespace ModelLayer.Tests
 
 
             //aw
-            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '273'");
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '473'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(6, dr[0]["Qty"]);
 
@@ -9397,7 +9401,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(6, dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '148'");
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '348'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(6, dr[0]["Qty"]);
 
@@ -9408,7 +9412,7 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2452%' AND
-                             Size = '273'");
+                             Size = '473'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(6, dr[0]["Qty"]);
 
@@ -9419,7 +9423,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(6, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Size = '152'");
+                             Size = '352'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(3, dr[0]["Qty"]);
 
@@ -9432,14 +9436,14 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2452%' AND
-                             Size = '308'");
+                             Size = '508'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2452%' AND
-                             Size = '296'");
+                             Size = '496'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(4, dr[0]["Qty"]);
 
@@ -9450,7 +9454,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(6, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Size = '248'");
+                             Size = '448'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(3, dr[0]["Qty"]);
 
