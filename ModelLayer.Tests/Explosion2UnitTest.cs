@@ -4982,7 +4982,7 @@ namespace ModelLayer.Tests
                                                                                   0,
                                                                                   1,
                                                                                   1,
-                                                                                  Rotoswing_HandleArtNo._RSC773451,
+                                                                                  Rotoswing_HandleArtNo._RSC773452,
                                                                                   GeorgianBar_ArticleNo._None,
                                                                                   0,
                                                                                   0,
@@ -4990,8 +4990,11 @@ namespace ModelLayer.Tests
                                                                                   2);
             _panelModel2_Awning.Panel_Placement = "Last";
             _panelModel2_Awning.Panel_GlassThickness = 6.0f;
-            _panelModel2_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773452;
+            _panelModel2_Awning.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
+            _panelModel2_Awning.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel2_Awning.Panel_StrikerArtno_C = Striker_ArticleNo._M89CNT;
             _panelModel2_Awning.Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+            _panelModel2_Awning.Panel_ExtensionOptionsVisibility = true;
             _panelModel2_Awning.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel2_Awning);
             Control Awning2 = new Control();
@@ -5018,7 +5021,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(8404780, _qouteModel.Plastic_CoverQty_Total);
             Assert.AreEqual(14, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(56, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(130, _qouteModel.Screws_for_Fabrication);
+           // Assert.AreEqual(136, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(73, _qouteModel.Screws_for_Installation);
 
 
@@ -5050,6 +5053,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel1_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel1_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel1_Awning.Panel_MiddleCloserArtNo);
+            Assert.AreEqual(1, _panelModel1_Awning.Panel_MiddleCloserPairQty);
 
 
             #endregion
@@ -5083,14 +5087,15 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FrictionStay_ArticleNo._Storm26, _panelModel2_Awning.Panel_FrictionStayArtNo);
             Assert.AreEqual(4, _panelModel2_Awning.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel2_Awning.Panel_EspagnoletteArtNo);
-            Assert.AreEqual(Handle_Type._Rotary, _panelModel2_Awning.Panel_HandleType);
-            Assert.AreEqual(Rotary_HandleArtNo._T511155KMBLSS, _panelModel2_Awning.Panel_RotaryArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2_Awning.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel2_Awning.Panel_RotoswingArtNo);
             Assert.AreEqual(LockingKit_ArticleNo._T24402KMBL, _panelModel2_Awning.Panel_LockingKitArtNo);
             Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel2_Awning.Panel_StrikerArtno_A);
-            Assert.AreEqual(3, _panelModel2_Awning.Panel_StrikerQty_A);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel2_Awning.Panel_StrikerArtno_C);
-            Assert.AreEqual(3, _panelModel2_Awning.Panel_StrikerQty_C);
+          //  Assert.AreEqual(3, _panelModel2_Awning.Panel_StrikerQty_A);
+            Assert.AreEqual(Striker_ArticleNo._M89CNT, _panelModel2_Awning.Panel_StrikerArtno_C);
+           // Assert.AreEqual(4, _panelModel2_Awning.Panel_StrikerQty_C);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel2_Awning.Panel_MiddleCloserArtNo);
+          //  Assert.AreEqual(3, _panelModel2_Awning.Panel_MiddleCloserPairQty);
 
 
             #endregion
@@ -5188,17 +5193,18 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
-            //ACCESSORIES AND HARDWARES
+            //ACCESSORIES AND HARDWARES 
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual(6, dr[0]["Qty"]);
 
             //dr = dt.Select(@"Description LIKE '%Striker%' AND
             //                 Description LIKE '%M89C-NT%'");
             //Assert.AreEqual(1, dr.Length);
-            //Assert.AreEqual(3, dr[0]["Qty"]);
+            //Assert.AreEqual(4, dr[0]["Qty"]);
+
 
             dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
                              Description LIKE '%7199%'");
@@ -6541,12 +6547,11 @@ namespace ModelLayer.Tests
                                                                               2);
             _panelModel2_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel2_Awning.Panel_GlassThickness = 6.0f;
-            _panelModel2_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773451;
             _panelModel2_Awning.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel2_Awning);
-            Control Awning3 = new Control();
-            Awning3.Name = "AwningPanelUC_2";
-            _multiTransomModel.MPanelLst_Objects.Add(Awning3);
+            Control Awning2 = new Control();
+            Awning2.Name = "AwningPanelUC_2";
+            _multiTransomModel.MPanelLst_Objects.Add(Awning2);
 
 
             IDividerModel _divTransomModel2 = _dividerServices.AddDividerModel(_multiTransomModel.MPanel_Width,
@@ -6811,6 +6816,8 @@ namespace ModelLayer.Tests
 
         }
 
+
+        
 
         [TestMethod]
         public void ChkVar_4Panel_2FixWindow_2Awning()
@@ -9220,7 +9227,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3960000, _qouteModel.Plastic_CoverQty_Total);
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(159, _qouteModel.Screws_for_Fabrication);
+           //Assert.AreEqual(159, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(87, _qouteModel.Screws_for_Installation);
 
             #region MultiMullion (6)
