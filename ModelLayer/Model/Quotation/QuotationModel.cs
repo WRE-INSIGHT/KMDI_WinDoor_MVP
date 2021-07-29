@@ -1399,6 +1399,21 @@ namespace ModelLayer.Model.Quotation
                                                        "Frame",
                                                        @"\  /");
 
+                                if (pnl_curCtrl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
+                                {
+                                    Material_List.Rows.Add("Georgian bar P" + pnl_curCtrl.PanelGlass_ID + " (Horizontal) " + pnl_curCtrl.Panel_GeorgianBarArtNo.ToString(),
+                                                           pnl_curCtrl.Panel_GeorgianBar_HorizontalQty, "pc(s)",
+                                                           pnl_curCtrl.Panel_GlassWidth + 5,
+                                                           "Glass",
+                                                           "");
+
+                                    Material_List.Rows.Add("Georgian bar P" + pnl_curCtrl.PanelGlass_ID + " (Vertical) " + pnl_curCtrl.Panel_GeorgianBarArtNo.ToString(),
+                                                           pnl_curCtrl.Panel_GeorgianBar_VerticalQty, "pc(s)",
+                                                           pnl_curCtrl.Panel_GlassHeight + 5,
+                                                           "Glass",
+                                                           "");
+                                }
+
                                 if (pnl_curCtrl.Panel_Type == "Fixed Panel")
                                 {
                                     glazing_spacer++;
@@ -1857,6 +1872,21 @@ namespace ModelLayer.Model.Quotation
                                            pnl.Panel_GlassHeight.ToString(),
                                            "Frame",
                                            @"\  /");
+
+                    if (pnl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
+                    {
+                        Material_List.Rows.Add("Georgian bar P" + pnl.PanelGlass_ID + " (Horizontal) " + pnl.Panel_GeorgianBarArtNo.ToString(),
+                                               pnl.Panel_GeorgianBar_HorizontalQty, "pc(s)",
+                                               pnl.Panel_GlassWidth + 5,
+                                               "Glass",
+                                               "");
+
+                        Material_List.Rows.Add("Georgian bar P" + pnl.PanelGlass_ID + " (Vertical) " + pnl.Panel_GeorgianBarArtNo.ToString(),
+                                               pnl.Panel_GeorgianBar_VerticalQty, "pc(s)",
+                                               pnl.Panel_GlassHeight + 5,
+                                               "Glass",
+                                               "");
+                    }
 
                     if (pnl.Panel_Type == "Fixed Panel")
                     {

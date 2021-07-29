@@ -79,6 +79,7 @@
             this.Name = "ExplosionView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "List of Materials";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ExplosionView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ExplosionMaterialList)).EndInit();
             this.ResumeLayout(false);
