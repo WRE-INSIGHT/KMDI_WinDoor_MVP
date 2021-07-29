@@ -1195,7 +1195,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
                     }
 
-                    if (Panel_Width >= 1500)
+                    if (Panel_DisplayWidth >= 1500)
                     {
                         Panel_GlassFilm = GlassFilm_Types._4milUpera;
                     }
@@ -1505,15 +1505,15 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
                 {
-                    if (Panel_Height < 1551)
+                    if (Panel_DisplayHeight < 1551)
                     {
                         Panel_MiddleCloserPairQty = 1;
                     }
-                    else if (Panel_Height > 1551 && Panel_Height < 1999)
+                    else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
                     {
                         Panel_MiddleCloserPairQty = 2;
                     }
-                    else if (Panel_Height > 1999)
+                    else if (Panel_DisplayHeight > 1999)
                     {
                         Panel_MiddleCloserPairQty = 3;
                     }
@@ -1538,11 +1538,11 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_StrikerArtno_A = Striker_ArticleNo._M89ANT;
                 Panel_StrikerArtno_C = Striker_ArticleNo._M89CNT;
 
-                if (Panel_Width > 0 && Panel_Width <= 1499)
+                if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1499)
                 {
                     Panel_MotorizedMechQty = 1;
                 }
-                else if (Panel_Width >= 1500)
+                else if (Panel_DisplayWidth >= 1500)
                 {
                     Panel_MotorizedMechQty = 2;
                 }
@@ -2024,15 +2024,15 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
                 {
-                    if (Panel_Height < 1551)
+                    if (Panel_DisplayHeight < 1551)
                     {
                         Panel_MiddleCloserPairQty = 1;
                     }
-                    else if (Panel_Height > 1551 && Panel_Height < 1999)
+                    else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
                     {
                         Panel_MiddleCloserPairQty = 2;
                     }
-                    else if (Panel_Height > 1999)
+                    else if (Panel_DisplayHeight > 1999)
                     {
                         Panel_MiddleCloserPairQty = 3;
                     }
@@ -2054,11 +2054,14 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                if (Panel_Width > 0 && Panel_Width <= 1499)
+                Panel_StrikerArtno_A = Striker_ArticleNo._M89ANT;
+                Panel_StrikerArtno_C = Striker_ArticleNo._M89CNT;
+
+                if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1499)
                 {
                     Panel_MotorizedMechQty = 1;
                 }
-                else if (Panel_Width >= 1500)
+                else if (Panel_DisplayWidth >= 1500)
                 {
                     Panel_MotorizedMechQty = 2;
                 }
