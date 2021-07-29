@@ -73,5 +73,6 @@ namespace PresentationLayer.Presenter
         void DeleteDividerPropertiesUC(int divID);
         void DeletePanelPropertiesUC(int panelID);
         void DeleteFramePropertiesUC(int frameID);
+        void Fit_MyControls_byControlsLocation();
     }
 }

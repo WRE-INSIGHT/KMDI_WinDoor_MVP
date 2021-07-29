@@ -75,7 +75,55 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _awningPanelUC.awningPanelUCMouseEnterEventRaised += _awningPanelUC_awningPanelUCMouseEnterEventRaised;
             _awningPanelUC.awningPanelUCMouseLeaveEventRaised += _awningPanelUC_awningPanelUCMouseLeaveEventRaised;
             _awningPanelUC.deleteToolStripClickedEventRaised += _awningPanelUC_deleteToolStripClickedEventRaised;
+            _awningPanelUC.extensionToolStripMenuItemClickedEventRaised += _awningPanelUC_extensionToolStripMenuItemClickedEventRaised;
             _tmr.Tick += _tmr_Tick;
+        }
+
+        private void _awningPanelUC_extensionToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsm = (ToolStripMenuItem)sender;
+            if (tsm.Checked == true)
+            {
+                _panelModel.Panel_ExtensionOptionsVisibility = true;
+                _panelModel.Panel_CornerDriveOptionsVisibility = true;
+
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
+                _panelModel.AdjustHandlePropertyHeight("addCornerDrive");
+                _panelModel.AdjustRotoswingPropertyHeight("addCornerDrive");
+
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                _panelModel.AdjustPropertyPanelHeight("addExtension");
+                _panelModel.AdjustHandlePropertyHeight("addExtension");
+                _panelModel.AdjustRotoswingPropertyHeight("addExtension");
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                }
+            }
+            else if (tsm.Checked == false)
+            {
+                _panelModel.Panel_ExtensionOptionsVisibility = false;
+                _panelModel.Panel_CornerDriveOptionsVisibility = false;
+
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                _panelModel.AdjustHandlePropertyHeight("minusCornerDrive");
+                _panelModel.AdjustRotoswingPropertyHeight("minusCornerDrive");
+
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+                _panelModel.AdjustPropertyPanelHeight("minusExtension");
+                _panelModel.AdjustHandlePropertyHeight("minusExtension");
+                _panelModel.AdjustRotoswingPropertyHeight("minusExtension");
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+                }
+            }
         }
 
         int _timer_count;
@@ -489,12 +537,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_ID", new Binding("Panel_ID", _panelModel, "Panel_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Name", new Binding("Name", _panelModel, "Panel_Name", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Dock", new Binding("Dock", _panelModel, "Panel_Dock", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Width", new Binding("Width", _panelModel, "Panel_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Height", new Binding("Height", _panelModel, "Panel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_WidthToBind", new Binding("Width", _panelModel, "Panel_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_HeightToBind", new Binding("Height", _panelModel, "Panel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_DisplayHeight", new Binding("Panel_DisplayHeight", _panelModel, "Panel_DisplayHeight", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_MarginToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_ExtensionOptionsVisibility", new Binding("Panel_ExtensionOptionsVisibility", _panelModel, "Panel_ExtensionOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

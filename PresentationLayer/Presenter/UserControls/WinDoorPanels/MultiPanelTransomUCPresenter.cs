@@ -723,6 +723,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.Fit_MyControls_Dimensions();
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                     _multiPanelModel.Adjust_ControlDisplaySize();
+                    _mainPresenter.Fit_MyControls_byControlsLocation();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                 }
                 else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
