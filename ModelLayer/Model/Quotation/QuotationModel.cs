@@ -1305,7 +1305,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty_A;
 
-                                                if (pnl_curCtrl.Panel_Height >= 2100)
+                                                if (pnl_curCtrl.Panel_DisplayHeight >= 2100)
                                                 {
                                                     if (pnl_curCtrl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957 ||
                                                         pnl_curCtrl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957 ||
@@ -1333,7 +1333,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 additional_screws_fabrication += pnl_curCtrl.Panel_StrikerQty_C;
 
-                                                if (pnl_curCtrl.Panel_Height >= 2100)
+                                                if (pnl_curCtrl.Panel_DisplayHeight >= 2100)
                                                 {
                                                     if (pnl_curCtrl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                                                     {
@@ -1764,7 +1764,7 @@ namespace ModelLayer.Model.Quotation
 
                                     additional_screws_fabrication += pnl.Panel_StrikerQty_A;
 
-                                    if (pnl.Panel_Height >= 2100)
+                                    if (pnl.Panel_DisplayHeight >= 2100)
                                     {
                                         if (pnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957 ||
                                             pnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957 ||
@@ -1792,7 +1792,7 @@ namespace ModelLayer.Model.Quotation
 
                                     additional_screws_fabrication += pnl.Panel_StrikerQty_C;
 
-                                    if (pnl.Panel_Height >= 2100)
+                                    if (pnl.Panel_DisplayHeight >= 2100)
                                     {
                                         if (pnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                                         {
