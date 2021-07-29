@@ -70,21 +70,21 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_rotoswingPropertyUC.ThisBinding(CreateBindingDictionary());
 
+            IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            _flpRotoswingOptions.Controls.Add((UserControl)cdPropUCP.GetPPCornerDriveUC());
+
+            IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            _flpRotoswingOptions.Controls.Add((UserControl)extPropUCP.GetPPExtensionUC());
+
             if (_panelModel.Panel_Height >= 2100)
             {
                 _panelModel.Panel_ExtensionOptionsVisibility = true;
                 _panelModel.Panel_CornerDriveOptionsVisibility = true;
 
-                IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                _flpRotoswingOptions.Controls.Add((UserControl)cdPropUCP.GetPPCornerDriveUC());
-
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
                 _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
                 _panelModel.AdjustHandlePropertyHeight("addCornerDrive");
                 _panelModel.AdjustRotoswingPropertyHeight("addCornerDrive");
-
-                IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                _flpRotoswingOptions.Controls.Add((UserControl)extPropUCP.GetPPExtensionUC());
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                 _panelModel.AdjustPropertyPanelHeight("addExtension");

@@ -1072,7 +1072,7 @@ namespace PresentationLayer.Presenter
             _quotationModel.GetListOfMaterials(_windoorModel);
         }
 
-        private void Fit_MyControls_byControlsLocation()
+        public void Fit_MyControls_byControlsLocation()
         {
             foreach (IFrameModel frames in _windoorModel.lst_frame)
             {

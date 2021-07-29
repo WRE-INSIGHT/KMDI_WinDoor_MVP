@@ -245,6 +245,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             pnl_RightExt2Option.DataBindings.Add(ModelBinding["Panel_ExtRightChk_visible"]);
             this.DataBindings.Add(ModelBinding["Panel_ExtensionPropertyHeight"]);
             this.DataBindings.Add(ModelBinding["Panel_Type"]);
+            this.DataBindings.Add(ModelBinding["Panel_ExtensionOptionsVisibility"]);
         }
 
         private void cmbExtension_SelectedValueChanged(object sender, EventArgs e)
