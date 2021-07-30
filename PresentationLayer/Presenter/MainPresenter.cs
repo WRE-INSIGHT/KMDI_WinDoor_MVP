@@ -1042,8 +1042,6 @@ namespace PresentationLayer.Presenter
                                          _windoorModel.WD_profile,
                                          false);
 
-                        Console.WriteLine("Visible Frames: " + _windoorModel.lst_frame.Count());
-
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }

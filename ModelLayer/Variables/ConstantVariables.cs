@@ -2,6 +2,13 @@
 {
     public class ConstantVariables
     {
+        #region FrameModelConstants
+
+        public int frame_propertyHeight_default = 291;
+        public int frame_property_concretePanelHeight = 26;
+
+        #endregion
+
         #region PanelModelConstants
 
         public int panel_propertyHeight_default = 175; //800;
@@ -17,6 +24,7 @@
         public int panel_property_extensionOptionsheight = 81;
         public int panel_property_extensionFieldsheight = 31;
         public int panel_property_georgianBarHeight = 101;
+
         #endregion
 
         public int div_propertyheight_default = 173;
