@@ -69,7 +69,6 @@
             // 
             // chk_Orientation
             // 
-            this.chk_Orientation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_Orientation.Appearance = System.Windows.Forms.Appearance.Button;
             this.chk_Orientation.BackColor = System.Drawing.SystemColors.ControlDark;
             this.chk_Orientation.FlatAppearance.BorderSize = 0;
@@ -163,7 +162,7 @@
             this.flp_PanelSpecs.Location = new System.Drawing.Point(2, 144);
             this.flp_PanelSpecs.Name = "flp_PanelSpecs";
             this.flp_PanelSpecs.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 77);
+            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 145);
             this.flp_PanelSpecs.TabIndex = 14;
             // 
             // lbl_pnlSpecs
@@ -195,7 +194,7 @@
             this.Controls.Add(this.num_BladeCount);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Panel_PropertiesUC";
-            this.Size = new System.Drawing.Size(160, 226);
+            this.Size = new System.Drawing.Size(160, 294);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();

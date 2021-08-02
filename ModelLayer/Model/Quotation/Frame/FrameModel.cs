@@ -537,7 +537,6 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Height = frameHt;
             Frame_Type = frameType;
             Frame_Visible = frameVisible;
-            FrameProp_Height = 283;
             Lst_Panel = lst_panel;
             Lst_MultiPanel = lst_mpanel;
             FrameImageRenderer_Zoom = frameImagerZoom;
@@ -545,6 +544,8 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Zoom = frameZoom;
             Frame_ArtNo = frameArtNo;
             Frame_WindoorModel = frameWindoorModel;
+
+            FrameProp_Height = constants.frame_propertyHeight_default - constants.frame_property_concretePanelHeight;
         }
     }
 }

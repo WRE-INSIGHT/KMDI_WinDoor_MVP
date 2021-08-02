@@ -42,7 +42,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(-1, 20);
+            this.label7.Location = new System.Drawing.Point(-1, 21);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 19;
@@ -64,19 +64,21 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(-1, 36);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(-1, 48);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 29);
+            this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Vertical\r\nQuantity";
+            this.label2.Text = "Vertical Qty";
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(-1, 68);
+            this.label1.AutoEllipsis = true;
+            this.label1.Location = new System.Drawing.Point(-2, 76);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 29);
+            this.label1.Size = new System.Drawing.Size(66, 18);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Horizontal\r\nQuantity";
+            this.label1.Text = "Horizontal Qty";
             // 
             // label3
             // 

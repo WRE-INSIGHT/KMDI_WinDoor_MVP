@@ -164,7 +164,9 @@ namespace PresentationLayer.Presenter.UserControls
                 _frameModel.Lst_MultiPanel.Add(_multipanelModel);
 
                 IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP.GetNewInstance(_unityC, _multipanelModel, _mainPresenter);
-                framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)multiPropUCP.GetMultiPanelPropertiesUC());
+                UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
+                multiPropUC.Dock = DockStyle.Top;
+                framePropUC.GetFramePropertiesPNL().Controls.Add(multiPropUC);
                 _frameModel.AdjustPropertyPanelHeight("Mpanel", "add");
 
                 if (data.Contains("Mullion"))
@@ -319,7 +321,9 @@ namespace PresentationLayer.Presenter.UserControls
                 _frameModel.Lst_Panel.Add(_panelModel);
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+                UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
+                panelPropUC.Dock = DockStyle.Top;
+                framePropUC.GetFramePropertiesPNL().Controls.Add(panelPropUC);
 
                 if (data == "Fixed Panel")
                 {
