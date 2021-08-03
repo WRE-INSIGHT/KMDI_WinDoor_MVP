@@ -730,7 +730,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     IDividerModel divModel = _divServices.AddDividerModel(divSize,
                                                                           _multiPanelModel.MPanel_Height,
                                                                           fpnl,
-                                                                          //(UserControl)_frameUCP.GetFrameUC(),
                                                                           DividerModel.DividerType.Mullion,
                                                                           true,
                                                                           _frameModel.Frame_Zoom,
@@ -759,8 +758,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                 _multiPanelModel,
                                                                                 this,
                                                                                 _frameModel,
-                                                                                _mainPresenter);//,
-                                                                                                //_basePlatformImagerUCP);
+                                                                                _mainPresenter);
                     IMullionUC mullionUC = mullionUCP.GetMullion();
                     fpnl.Controls.Add((UserControl)mullionUC);
                     _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
