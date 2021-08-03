@@ -940,9 +940,11 @@ namespace ModelLayer.Model.Quotation
 
                             if (pnl_curCtrl != null)
                             {
-                                if (pnl_curCtrl.Panel_GlassThickness == 13.0f ||
-                                    pnl_curCtrl.Panel_GlassThickness == 14.0f ||
-                                    pnl_curCtrl.Panel_GlassThickness == 24.0f)
+                                double glassThickness_roundUP = Math.Ceiling(pnl_curCtrl.Panel_GlassThickness);
+
+                                if (glassThickness_roundUP == 13.0f ||
+                                    glassThickness_roundUP == 14.0f ||
+                                    glassThickness_roundUP == 24.0f)
                                 {
                                     glazing_seal += (pnl_curCtrl.Panel_GlazingBeadWidth * 2) + (pnl_curCtrl.Panel_GlazingBeadHeight * 2);
                                 }
@@ -1387,13 +1389,19 @@ namespace ModelLayer.Model.Quotation
                                                        "Frame",
                                                        @"\  /");
 
-                                Material_List.Rows.Add("Glass Width (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + " " + pnl_curCtrl.Panel_GlassFilm.DisplayName + ")",
+                                string glassFilm = "";
+                                if (pnl_curCtrl.Panel_GlassFilm != GlassFilm_Types._None)
+                                {
+                                    glassFilm = pnl_curCtrl.Panel_GlassFilm.DisplayName;
+                                }
+
+                                Material_List.Rows.Add("Glass Width (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassWidth.ToString(),
                                                        "Frame",
                                                        @"\  /");
 
-                                Material_List.Rows.Add("Glass Height (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + " " + pnl_curCtrl.Panel_GlassFilm.DisplayName + ")",
+                                Material_List.Rows.Add("Glass Height (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassHeight.ToString(),
                                                        "Frame",
@@ -1861,13 +1869,19 @@ namespace ModelLayer.Model.Quotation
                                            "Frame",
                                            @"\  /");
 
-                    Material_List.Rows.Add("Glass Width (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + " " + pnl.Panel_GlassFilm.DisplayName + ")",
+                    string glassFilm = "";
+                    if (pnl.Panel_GlassFilm != GlassFilm_Types._None)
+                    {
+                        glassFilm = pnl.Panel_GlassFilm.DisplayName;
+                    }
+
+                    Material_List.Rows.Add("Glass Width (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassWidth.ToString(),
                                            "Frame",
                                            @"\  /");
 
-                    Material_List.Rows.Add("Glass Height (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + " " + pnl.Panel_GlassFilm.DisplayName + ")",
+                    Material_List.Rows.Add("Glass Height (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassHeight.ToString(),
                                            "Frame",
@@ -1896,9 +1910,11 @@ namespace ModelLayer.Model.Quotation
                     total_glassWidth += (pnl.Panel_GlassWidth * 2);
                     total_glassHeight += (pnl.Panel_GlassHeight * 2);
 
-                    if (pnl.Panel_GlassThickness == 13.0f ||
-                        pnl.Panel_GlassThickness == 14.0f ||
-                        pnl.Panel_GlassThickness == 24.0f)
+                    double glassThickness_roundUP = Math.Ceiling(pnl.Panel_GlassThickness);
+
+                    if (glassThickness_roundUP == 13.0f ||
+                        glassThickness_roundUP == 14.0f ||
+                        glassThickness_roundUP == 24.0f)
                     {
                         glazing_seal += (pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2);
                     }
@@ -1966,7 +1982,7 @@ namespace ModelLayer.Model.Quotation
             Material_List.Rows.Add("Screws for Fabrication wt 10x15",
                                    Screws_for_Fabrication, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
 
-            Material_List.Rows.Add("Screws for Installation wt 10x15",
+            Material_List.Rows.Add("Screws for Installation",
                                    Screws_for_Installation, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
 
             var query = from r in Material_List.AsEnumerable()

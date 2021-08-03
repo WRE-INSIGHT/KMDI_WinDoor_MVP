@@ -9,5 +9,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     {
         event EventHandler PPGeorgianBarPropertyUCLoadEventRaised;
         event EventHandler cmbGBArtNumSelectedValueChangedEventRaised;
+        event EventHandler numVerticalValueChangedEventRaised;
+        event EventHandler numHorizontalValueChangedEventRaised;
     }
 }

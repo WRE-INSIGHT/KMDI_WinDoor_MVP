@@ -14,6 +14,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         }
         public event EventHandler PPGeorgianBarPropertyUCLoadEventRaised;
         public event EventHandler cmbGBArtNumSelectedValueChangedEventRaised;
+        public event EventHandler numVerticalValueChangedEventRaised;
+        public event EventHandler numHorizontalValueChangedEventRaised;
 
         private void PP_GeorgianBarPropertyUC_Load(object sender, EventArgs e)
         {
@@ -41,6 +43,16 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         private void cmbGBArtNum_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbGBArtNumSelectedValueChangedEventRaised, e);
+        }
+
+        private void nudVertical_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numVerticalValueChangedEventRaised, e);
+        }
+
+        private void nudHorizontal_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numHorizontalValueChangedEventRaised, e);
         }
     }
 }

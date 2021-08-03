@@ -28,6 +28,52 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_georgianBarPropertyUC.PPGeorgianBarPropertyUCLoadEventRaised += OnPPGeorgianBarPropertyUCLoadEventRaised;
             _pp_georgianBarPropertyUC.cmbGBArtNumSelectedValueChangedEventRaised += _pp_georgianBarPropertyUC_cmbGBArtNumSelectedValueChangedEventRaised;
+            _pp_georgianBarPropertyUC.numVerticalValueChangedEventRaised += _pp_georgianBarPropertyUC_numVerticalValueChangedEventRaised;
+            _pp_georgianBarPropertyUC.numHorizontalValueChangedEventRaised += _pp_georgianBarPropertyUC_numHorizontalValueChangedEventRaised;
+        }
+
+        private void _pp_georgianBarPropertyUC_numHorizontalValueChangedEventRaised(object sender, EventArgs e)
+        {
+            int gbarThickness = 0;
+            if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+            {
+                gbarThickness = 20;
+            }
+            else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+            {
+                gbarThickness = 40;
+            }
+
+            NumericUpDown numHorizontal = (NumericUpDown)sender;
+            int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassWidth / gbarThickness)));
+
+            if (numHorizontal.Value > maxlimitqty)
+            {
+                MessageBox.Show("Maximum quantity reached","", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                numHorizontal.Value = maxlimitqty;
+            }
+        }
+
+        private void _pp_georgianBarPropertyUC_numVerticalValueChangedEventRaised(object sender, EventArgs e)
+        {
+            int gbarThickness = 0;
+            if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+            {
+                gbarThickness = 20;
+            }
+            else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+            {
+                gbarThickness = 40;
+            }
+
+            NumericUpDown numVertical = (NumericUpDown)sender;
+            int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassHeight / gbarThickness)));
+
+            if (numVertical.Value > maxlimitqty)
+            {
+                MessageBox.Show("Maximum quantity reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                numVertical.Value = maxlimitqty;
+            }
         }
 
         private void _pp_georgianBarPropertyUC_cmbGBArtNumSelectedValueChangedEventRaised(object sender, EventArgs e)
