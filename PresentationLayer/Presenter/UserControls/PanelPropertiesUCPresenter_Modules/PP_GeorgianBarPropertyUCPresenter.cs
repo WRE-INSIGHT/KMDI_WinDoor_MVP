@@ -34,45 +34,62 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_georgianBarPropertyUC_numHorizontalValueChangedEventRaised(object sender, EventArgs e)
         {
-            int gbarThickness = 0;
-            if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
-            {
-                gbarThickness = 20;
-            }
-            else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
-            {
-                gbarThickness = 40;
-            }
-
             NumericUpDown numHorizontal = (NumericUpDown)sender;
-            int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassWidth / gbarThickness)));
 
-            if (numHorizontal.Value > maxlimitqty)
+            if (_panelModel.Panel_GlassWidth != 0)
             {
-                MessageBox.Show("Maximum quantity reached","", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                numHorizontal.Value = maxlimitqty;
+                int gbarThickness = 0;
+                if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+                {
+                    gbarThickness = 20;
+                }
+                else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+                {
+                    gbarThickness = 40;
+                }
+
+                int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassWidth / gbarThickness)));
+
+                if (numHorizontal.Value > maxlimitqty)
+                {
+                    MessageBox.Show("Maximum quantity reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    numHorizontal.Value = maxlimitqty;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please complete the design first", "Cant compute for glass", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                numHorizontal.Value = 0;
             }
         }
 
         private void _pp_georgianBarPropertyUC_numVerticalValueChangedEventRaised(object sender, EventArgs e)
         {
-            int gbarThickness = 0;
-            if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
-            {
-                gbarThickness = 20;
-            }
-            else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
-            {
-                gbarThickness = 40;
-            }
-
             NumericUpDown numVertical = (NumericUpDown)sender;
-            int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassHeight / gbarThickness)));
-
-            if (numVertical.Value > maxlimitqty)
+            if (_panelModel.Panel_GlassHeight != 0)
             {
-                MessageBox.Show("Maximum quantity reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                numVertical.Value = maxlimitqty;
+                int gbarThickness = 0;
+                if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+                {
+                    gbarThickness = 20;
+                }
+                else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+                {
+                    gbarThickness = 40;
+                }
+
+                int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassHeight / gbarThickness)));
+
+                if (numVertical.Value > maxlimitqty)
+                {
+                    MessageBox.Show("Maximum quantity reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    numVertical.Value = maxlimitqty;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please complete the design first", "Cant compute for glass", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                numVertical.Value = 0;
             }
         }
 
@@ -81,12 +98,21 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             if (!_initialLoad)
             {
                 _panelModel.Panel_GeorgianBarArtNo = (GeorgianBar_ArticleNo)((ComboBox)sender).SelectedValue;
+                if (_panelModel.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
+                {
+                    _pp_georgianBarPropertyUC.enable_num = true;
+                }
+                else
+                {
+                    _pp_georgianBarPropertyUC.enable_num = false;
+                }
             }
         }
 
         private void OnPPGeorgianBarPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _pp_georgianBarPropertyUC.ThisBinding(CreateBindingDictionary());
+            _pp_georgianBarPropertyUC.enable_num = false;
             _initialLoad = false;
         }
 

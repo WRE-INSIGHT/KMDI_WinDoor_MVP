@@ -357,7 +357,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                         this);
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                     frame.Controls.Add((UserControl)casementUC);
-                    //casementUCP.SetInitialLoadFalse();
 
                     ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
                     ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
@@ -409,6 +408,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
             }
+            _mainPresenter.Run_GetListOfMaterials_SpecificItem();
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -432,7 +432,6 @@ namespace PresentationLayer.Presenter.UserControls
                                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 DeleteFrame();
-                //_frameUC.InvalidateThisParentsParent();
             }
         }
 

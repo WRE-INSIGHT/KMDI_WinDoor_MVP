@@ -8,6 +8,15 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
     public partial class PP_GeorgianBarPropertyUC : UserControl, IPP_GeorgianBarPropertyUC
     {
+        public bool enable_num
+        {
+            set
+            {
+                nudHorizontal.Enabled = value;
+                nudVertical.Enabled = value;
+            }
+        }
+
         public PP_GeorgianBarPropertyUC()
         {
             InitializeComponent();
