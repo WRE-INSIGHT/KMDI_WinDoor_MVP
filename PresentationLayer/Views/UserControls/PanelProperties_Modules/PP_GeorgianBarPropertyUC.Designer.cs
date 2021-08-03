@@ -54,6 +54,7 @@
             this.nudHorizontal.Name = "nudHorizontal";
             this.nudHorizontal.Size = new System.Drawing.Size(85, 22);
             this.nudHorizontal.TabIndex = 17;
+            this.nudHorizontal.ValueChanged += new System.EventHandler(this.nudHorizontal_ValueChanged);
             // 
             // nudVertical
             // 
@@ -61,6 +62,7 @@
             this.nudVertical.Name = "nudVertical";
             this.nudVertical.Size = new System.Drawing.Size(85, 22);
             this.nudVertical.TabIndex = 16;
+            this.nudVertical.ValueChanged += new System.EventHandler(this.nudVertical_ValueChanged);
             // 
             // label2
             // 

@@ -290,6 +290,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
                     UserControl multiProp = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
+                    multiProp.Dock = DockStyle.Top;
                     _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(multiProp);
                     multiProp.BringToFront();
 
@@ -350,6 +351,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
                             UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
+                            divPropUC.Dock = DockStyle.Top;
                             _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
                             divPropUC.BringToFront();
 
@@ -431,6 +433,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
                             UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
+                            divPropUC.Dock = DockStyle.Top;
                             _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
                             divPropUC.BringToFront();
 
@@ -712,6 +715,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiMullionImagerUCP.AddControl((UserControl)slidingImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
+
 
                 if (_panelModel.Panel_Placement == "Last")
                 {

@@ -1466,6 +1466,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
+            Panel_StrikerQty_A = 0;
+            Panel_StrikerQty_C = 0;
             if (Panel_SashPropertyVisibility == true)
             {
                 if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
@@ -1986,6 +1988,9 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 deduction_for_ht += GB_deduction_lvl3;
             }
+
+            Panel_StrikerQty_A = 0;
+            Panel_StrikerQty_C = 0;
 
             if (Panel_MotorizedOptionVisibility == true)
             {
