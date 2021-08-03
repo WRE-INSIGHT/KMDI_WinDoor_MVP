@@ -4248,7 +4248,7 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    false,
                                                                    1);
-            _panelModel.Panel_GlassThickness = 13.0f;
+            _panelModel.Panel_GlassThickness = 14.0f;
             _panelModel.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773452;
             _frameModel.Lst_Panel.Add(_panelModel);
 
@@ -4282,7 +4282,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel.Panel_SashReinfArtNo);
             Assert.AreEqual(528, _panelModel.Panel_SashReinfWidth);
             Assert.AreEqual(1028, _panelModel.Panel_SashReinfHeight);
-
+            Assert.AreEqual(1028, _panelModel.Panel_SashReinfHeight);
             Assert.AreEqual(532, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1032, _panelModel.Panel_GlassHeight);
 
@@ -4615,7 +4615,7 @@ namespace ModelLayer.Tests
 
             #region Multimullion(2)
 
-            #region Panel1
+            #region AW1
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(650, _panelModel1.Panel_GlazingBeadWidth);
@@ -4661,7 +4661,7 @@ namespace ModelLayer.Tests
 
             #endregion
 
-            #region Panel2
+            #region AW2
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(650, _panelModel2.Panel_GlazingBeadWidth);
@@ -5410,7 +5410,7 @@ namespace ModelLayer.Tests
                                                                            false,
                                                                            1);
             _panelModel1_fixed1.Panel_Placement = "Last";
-            _panelModel1_fixed1.Panel_GlassThickness = 13.0f;
+            _panelModel1_fixed1.Panel_GlassThickness = 14.0f;
             _panelModel1_fixed1.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1_fixed1);
             Control Fixed1 = new Control();
@@ -5477,7 +5477,7 @@ namespace ModelLayer.Tests
                                                                   false,
                                                                   2);
             _panelModel2_fixed2.Panel_Placement = "First";
-            _panelModel2_fixed2.Panel_GlassThickness = 13.0f;
+            _panelModel2_fixed2.Panel_GlassThickness = 14.0f;
             _panelModel2_fixed2.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel2_fixed2);
             Control Fixed2 = new Control();
@@ -5559,7 +5559,7 @@ namespace ModelLayer.Tests
                                                                              false,
                                                                              3);
             _panelModel3_Awning1.Panel_Placement = "Last";
-            _panelModel3_Awning1.Panel_GlassThickness = 13.0f;
+            _panelModel3_Awning1.Panel_GlassThickness = 14.0f;
             _panelModel3_Awning1.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC823048;
             _panelModel3_Awning1.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel3_Awning1);
@@ -5955,7 +5955,7 @@ namespace ModelLayer.Tests
                                                                            false,
                                                                            1);
             _panelModel1_fixed1.Panel_Placement = "Last";
-            _panelModel1_fixed1.Panel_GlassThickness = 13.0f;
+            _panelModel1_fixed1.Panel_GlassThickness = 14.0f;
             _panelModel1_fixed1.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1_fixed1);
             Control Fixed1 = new Control();
@@ -6022,7 +6022,7 @@ namespace ModelLayer.Tests
                                                                           false,
                                                                           2);
             _panelModel2_fixed2.Panel_Placement = "First";
-            _panelModel2_fixed2.Panel_GlassThickness = 13.0f;
+            _panelModel2_fixed2.Panel_GlassThickness = 14.0f;
             _panelModel2_fixed2.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel2_fixed2);
             Control Fixed2 = new Control();
@@ -6104,7 +6104,7 @@ namespace ModelLayer.Tests
                                                                               false,
                                                                               3);
             _panelModel3_Awning1.Panel_Placement = "Last";
-            _panelModel3_Awning1.Panel_GlassThickness = 13.0f;
+            _panelModel3_Awning1.Panel_GlassThickness = 14.0f;
             _panelModel3_Awning1.Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
             _panelModel3_Awning1.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC823048;
             _panelModel3_Awning1.Panel_Index_Inside_MPanel = 2;
@@ -6950,7 +6950,7 @@ namespace ModelLayer.Tests
                                                                             false,
                                                                             1);
             _panelModel1_fixed.Panel_Placement = "First";
-            _panelModel1_fixed.Panel_GlassThickness = 13.0f;
+            _panelModel1_fixed.Panel_GlassThickness = 14.0f;
             _panelModel1_fixed.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel1_fixed);
             Control Fixed1 = new Control();
@@ -7064,7 +7064,7 @@ namespace ModelLayer.Tests
                                                                             false,
                                                                             2);
             _panelModel2_Awning.Panel_Placement = "First";
-            _panelModel2_Awning.Panel_GlassThickness = 13.0f;
+            _panelModel2_Awning.Panel_GlassThickness = 14.0f;
             _panelModel2_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC833307;
             _panelModel2_Awning.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel2_Awning);
@@ -7144,7 +7144,7 @@ namespace ModelLayer.Tests
                                                                             false,
                                                                             3);
             _panelModel3_fixed.Panel_Placement = "Somewhere in Between";
-            _panelModel3_fixed.Panel_GlassThickness = 13.0f;
+            _panelModel3_fixed.Panel_GlassThickness = 14.0f;
             _panelModel3_fixed.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel3_fixed);
             Control Fixed2 = new Control();
@@ -7226,7 +7226,7 @@ namespace ModelLayer.Tests
                                                                             false,
                                                                             4);
             _panelModel4_Awning.Panel_Placement = "Last";
-            _panelModel4_Awning.Panel_GlassThickness = 13.0f;
+            _panelModel4_Awning.Panel_GlassThickness = 14.0f;
             _panelModel4_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC833307;
             _panelModel4_Awning.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel4_Awning);
