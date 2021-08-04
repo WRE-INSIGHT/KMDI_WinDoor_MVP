@@ -976,21 +976,20 @@ namespace ModelLayer.Model.Quotation
                                                            pnl_curCtrl.Panel_SashReinfHeight.ToString(),
                                                            "Sash",
                                                            @"|  |");
+                                    Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               frame.Frame_Width.ToString(),
+                                                               "Frame",
+                                                               @"|  |");
+
+                                    Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.ToString(),
+                                                           1, "pc(s)",
+                                                           frame.Frame_Width.ToString(),
+                                                           "Frame",
+                                                           @"|  |");
 
                                     if (perFrame == true)
                                     {
-                                        Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.ToString(),
-                                                               1, "pc(s)",
-                                                               frame.Frame_Width.ToString(),
-                                                               "Frame",
-                                                               @"|  |");
-
-                                        Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.ToString(),
-                                                               1, "pc(s)",
-                                                               frame.Frame_Width.ToString(),
-                                                               "Frame",
-                                                               @"|  |");
-
                                         if (pnl_curCtrl.Panel_MotorizedOptionVisibility == true)
                                         {
                                             Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
@@ -1007,7 +1006,7 @@ namespace ModelLayer.Model.Quotation
 
                                             Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
                                                                    1, "pc(s)",
-                                                                   frame.Frame_Width,
+                                                                   frame.Frame_Width + 150,
                                                                    "Frame",
                                                                    @"");
 
@@ -1410,13 +1409,13 @@ namespace ModelLayer.Model.Quotation
                                 if (pnl_curCtrl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
                                 {
                                     Material_List.Rows.Add("Georgian bar P" + pnl_curCtrl.PanelGlass_ID + " (Horizontal) " + pnl_curCtrl.Panel_GeorgianBarArtNo.ToString(),
-                                                           pnl_curCtrl.Panel_GeorgianBar_HorizontalQty, "pc(s)",
+                                                           pnl_curCtrl.Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
                                                            pnl_curCtrl.Panel_GlassWidth + 5,
                                                            "Glass",
                                                            "");
 
                                     Material_List.Rows.Add("Georgian bar P" + pnl_curCtrl.PanelGlass_ID + " (Vertical) " + pnl_curCtrl.Panel_GeorgianBarArtNo.ToString(),
-                                                           pnl_curCtrl.Panel_GeorgianBar_VerticalQty, "pc(s)",
+                                                           pnl_curCtrl.Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
                                                            pnl_curCtrl.Panel_GlassHeight + 5,
                                                            "Glass",
                                                            "");
@@ -1495,7 +1494,7 @@ namespace ModelLayer.Model.Quotation
 
                             Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
                                                    1, "pc(s)",
-                                                   frame.Frame_Width,
+                                                   frame.Frame_Width + 150,
                                                    "Frame",
                                                    @"");
 
@@ -1896,13 +1895,13 @@ namespace ModelLayer.Model.Quotation
                     if (pnl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
                     {
                         Material_List.Rows.Add("Georgian bar P" + pnl.PanelGlass_ID + " (Horizontal) " + pnl.Panel_GeorgianBarArtNo.ToString(),
-                                               pnl.Panel_GeorgianBar_HorizontalQty, "pc(s)",
+                                               pnl.Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
                                                pnl.Panel_GlassWidth + 5,
                                                "Glass",
                                                "");
 
                         Material_List.Rows.Add("Georgian bar P" + pnl.PanelGlass_ID + " (Vertical) " + pnl.Panel_GeorgianBarArtNo.ToString(),
-                                               pnl.Panel_GeorgianBar_VerticalQty, "pc(s)",
+                                               pnl.Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
                                                pnl.Panel_GlassHeight + 5,
                                                "Glass",
                                                "");
@@ -1961,7 +1960,7 @@ namespace ModelLayer.Model.Quotation
                                    "",
                                    "Frame");
 
-            Material_List.Rows.Add("Exp bolt",
+            Material_List.Rows.Add("Exp bolt FRA003",
                                    Expansion_BoltQty_Total,
                                    "pc(s)",
                                    "",

@@ -286,7 +286,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            SashReinf_ArticleNo._None,
                                                            GlassType._Single,
                                                            Espagnolette_ArticleNo._None,
-                                                           Striker_ArticleNo._M89ANT,
+                                                           Striker_ArticleNo._M89ANTA,
                                                            midArtNo,
                                                            LockingKit_ArticleNo._None,
                                                            motor,

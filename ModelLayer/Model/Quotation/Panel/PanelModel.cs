@@ -1537,8 +1537,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                Panel_StrikerArtno_A = Striker_ArticleNo._M89ANT;
-                Panel_StrikerArtno_C = Striker_ArticleNo._M89CNT;
+                Panel_StrikerArtno_A = Striker_ArticleNo._M89ANTA;
+                Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;
 
                 if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1499)
                 {
@@ -2059,8 +2059,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                Panel_StrikerArtno_A = Striker_ArticleNo._M89ANT;
-                Panel_StrikerArtno_C = Striker_ArticleNo._M89CNT;
+                Panel_StrikerArtno_A = Striker_ArticleNo._M89ANTA;
+                Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;
 
                 if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1499)
                 {

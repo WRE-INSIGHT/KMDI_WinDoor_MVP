@@ -221,8 +221,8 @@ namespace EnumerationTypeLayer
 
         public class Striker_ArticleNo : Enumeration<Striker_ArticleNo, int>
         {
-            public static readonly Striker_ArticleNo _M89ANT = new Striker_ArticleNo(0, "M89A-NT");
-            public static readonly Striker_ArticleNo _M89CNT = new Striker_ArticleNo(1, "M89C-NT");
+            public static readonly Striker_ArticleNo _M89ANTA = new Striker_ArticleNo(0, "M89A-NT-A");
+            public static readonly Striker_ArticleNo _M89ANTC = new Striker_ArticleNo(1, "M89A-NT-C");
             private Striker_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
