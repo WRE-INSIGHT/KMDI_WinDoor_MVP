@@ -7735,6 +7735,255 @@ namespace ModelLayer.Tests
         }
 
 
+        [TestMethod]
+        public void ChkVar_SinglePanelMotorizeAwningWindow1500x1500()
+        {
+            /*
+                         Motorize
+                    __________________
+                    |       /\       |
+                    |      /  \      | 
+                    |     /    \     |         
+                    |    /      \    |   
+                    |   /   P1   \   |   
+                    |  /          \  |          
+                    | /            \ |             
+                    |/______________\|
+              */
+
+            int total_wd = 1500, total_height = 1500;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._DarkBrown, Foil_Color._CharcoalGray, Foil_Color._CharcoalGray);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_height,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+            IPanelModel _panelModel = _panelServices.AddPanelModel(wd,
+                                                                   ht,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Awning Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   null,
+                                                                   total_wd,
+                                                                   total_height,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._628807,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70DB,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1);
+            _panelModel.Panel_GlassThickness = 6.0f;
+            _panelModel.Panel_MotorizedOptionVisibility = true;
+            _frameModel.Lst_Panel.Add(_panelModel);
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1505, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1505, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1404, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1404, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual(4500000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(42, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(63, _qouteModel.Screws_for_Installation);
+
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(1425, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1425, _panelModel.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel.Panel_SashProfileArtNo);
+            Assert.AreEqual(1425, _panelModel.Panel_SashHeight);
+            Assert.AreEqual(1425, _panelModel.Panel_SashWidth);
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel.Panel_SashReinfArtNo);
+            Assert.AreEqual(1300, _panelModel.Panel_SashReinfWidth);
+            Assert.AreEqual(1300, _panelModel.Panel_SashReinfHeight);
+
+            Assert.AreEqual(1304, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(1304, _panelModel.Panel_GlassHeight);
+
+
+            //ACCESSORIES & HARWARE
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(MotorizedMech_ArticleNo._41555B, _panelModel.Panel_MotorizedMechArtNo);
+            Assert.AreEqual(2, _panelModel.Panel_MotorizedMechQty);
+
+
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1505'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1505'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '1404'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1404'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '1425'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1425'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '1300'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1300'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1425'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1425'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(2, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+                             Size = '1304'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+                             Size = '1304'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+            // ACCESSORIES AND HARDWARE
+
+            dr = dt.Select(@"Description LIKE '%30X25 Cover %' AND
+                            Description LIKE '%1067 - MILLED%' AND
+                             Size = '1500'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Divider%' AND
+                            Description LIKE '%0505%' AND
+                             Size = '1500'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover for motor%' AND
+                            Description LIKE '%1182%' AND
+                             Size = '1500'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%2D Hinge%' AND
+                            Description LIKE '%614293%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Push Button Switch%' AND
+                            Description LIKE '%N4037%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%False pole%' AND
+                            Description LIKE '%N4950%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+
+
+            dr = dt.Select(@"Description LIKE '%Supporting Frame%' AND
+                            Description LIKE '%N4703%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+
+
+            dr = dt.Select(@"Description LIKE '%Plate%' AND
+                            Description LIKE '%N4803LB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual(1, dr[0]["Qty"]);
+
+
+
+            #endregion
+        }
+
 
         [TestMethod]
         public void ChkVar_2Panel_1FixedWindow_1MotorizeAwningWindow()
