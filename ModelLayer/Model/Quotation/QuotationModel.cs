@@ -1027,12 +1027,12 @@ namespace ModelLayer.Model.Quotation
 
                                             if (pnl_curCtrl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                                             {
-                                                total_screws_installation += 20;
+                                                total_screws_installation += (20 * pnl_curCtrl.Panel_MotorizedMechQty);
                                             }
                                             else if (pnl_curCtrl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
                                                      pnl_curCtrl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
                                             {
-                                                total_screws_installation += 10;
+                                                total_screws_installation += (10 * pnl_curCtrl.Panel_MotorizedMechQty);
                                             }
 
                                             Material_List.Rows.Add("Push Button Switch " + pnl_curCtrl.Panel_PushButtonSwitchArtNo.ToString(),
@@ -1505,16 +1505,22 @@ namespace ModelLayer.Model.Quotation
                                                    "Sash & Frame",
                                                    @"");
 
+                            Material_List.Rows.Add("Motorized Mechanism " + pnl.Panel_MotorizedMechArtNo.ToString(),
+                                                   pnl.Panel_MotorizedMechQty, "pc(s)",
+                                                   "",
+                                                   "Sash",
+                                                   @"");
+
                             additional_screws_fabrication += 3;
 
                             if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                             {
-                                total_screws_installation += 20;
+                                total_screws_installation += (20 * pnl.Panel_MotorizedMechQty);
                             }
                             else if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
                                      pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
                             {
-                                total_screws_installation += 10;
+                                total_screws_installation += (10 * pnl.Panel_MotorizedMechQty);
                             }
 
                             Material_List.Rows.Add("Push Button Switch " + pnl.Panel_PushButtonSwitchArtNo.ToString(),
