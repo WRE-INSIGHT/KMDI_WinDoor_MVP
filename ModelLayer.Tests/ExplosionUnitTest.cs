@@ -214,6 +214,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -348,6 +352,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -483,7 +491,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
@@ -519,6 +527,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _panelModel.Panel_GlassThickness = 6.0f;
@@ -554,7 +566,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
@@ -590,6 +602,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -749,7 +765,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    uneqpanelWD1,
                                                                    eqpanelHT,
@@ -785,6 +801,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel.Panel_Placement = "First";
             _panelModel.Panel_GlassThickness = 6.0f;
@@ -820,7 +840,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    uneqpanelWD2,
                                                                    eqpanelHT,
@@ -856,6 +876,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -1098,7 +1122,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
@@ -1134,6 +1158,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 6.0f;
@@ -1169,7 +1197,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
@@ -1205,6 +1233,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -1231,7 +1263,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
@@ -1267,6 +1299,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    3);
             _panelModel3.Panel_Placement = "First";
             _panelModel3.Panel_GlassThickness = 6.0f;
@@ -1302,7 +1338,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel2,
                                                                    eqpanelwd,
                                                                    eqpanelht,
@@ -1338,6 +1374,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    4);
             _panelModel4.Panel_Placement = "Last";
             _panelModel4.Panel_GlassThickness = 6.0f;
@@ -1594,7 +1634,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel1,
                                                                     p1Wd,
                                                                     p1Ht,
@@ -1630,6 +1670,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel1.Panel_Placement = "Somewhere in Between";
             _panelModel1.Panel_GlassThickness = 6.0f;
@@ -1797,7 +1841,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiTransomModel2,
                                                                     p2p3Wd,
                                                                     p2p3Ht,
@@ -1833,6 +1877,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
@@ -1953,7 +2001,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiTransomModel3,
                                                                     p2p3Wd,
                                                                     p2p3Ht,
@@ -1989,6 +2037,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel3.Panel_Placement = "Last";
             _panelModel3.Panel_GlassThickness = 6.0f;
@@ -2018,7 +2070,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel4,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -2054,6 +2106,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel4.Panel_Placement = "First";
             _panelModel4.Panel_GlassThickness = 24.0f;
@@ -2092,7 +2148,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel4,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -2128,6 +2184,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel5.Panel_Placement = "Last";
             _panelModel5.Panel_GlassThickness = 24.0f;
@@ -2156,7 +2216,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel5,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -2192,6 +2252,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel6.Panel_Placement = "First";
             _panelModel6.Panel_GlassThickness = 24.0f;
@@ -2230,7 +2294,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel5,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -2266,6 +2330,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel7.Panel_Placement = "Last";
             _panelModel7.Panel_GlassThickness = 24.0f;
@@ -2294,7 +2362,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel6,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -2330,6 +2398,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel8.Panel_Placement = "First";
             _panelModel8.Panel_GlassThickness = 24.0f;
@@ -2368,7 +2440,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel6,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -2404,6 +2476,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel9.Panel_Placement = "Last";
             _panelModel9.Panel_GlassThickness = 24.0f;
@@ -2432,7 +2508,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel7,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -2468,6 +2544,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel10.Panel_Placement = "First";
             _panelModel10.Panel_GlassThickness = 24.0f;
@@ -2506,7 +2586,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel7,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -2542,6 +2622,10 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    panelID);
             _panelModel11.Panel_Placement = "Last";
             _panelModel11.Panel_GlassThickness = 24.0f;
