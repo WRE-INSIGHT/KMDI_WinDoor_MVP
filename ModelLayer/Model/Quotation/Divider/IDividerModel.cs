@@ -25,6 +25,7 @@ namespace ModelLayer.Model.Quotation.Divider
         int Div_HeightToBind { get; set; }
         int Div_DisplayWidth { get; set; }
         int Div_DisplayHeight { get; set; }
+        int Div_PropHeight { get; set; }
         IMultiPanelModel Div_MPanelParent { get; set; }
 
         #region Explosion

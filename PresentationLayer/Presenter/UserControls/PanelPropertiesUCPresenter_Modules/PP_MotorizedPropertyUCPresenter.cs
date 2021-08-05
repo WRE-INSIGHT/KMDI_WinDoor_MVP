@@ -167,6 +167,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_MotorizedOptionVisibility2", new Binding("Visible", _panelModel, "Panel_MotorizedOptionVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_MotorizedMechArtNo", new Binding("Text", _panelModel, "Panel_MotorizedMechArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_MotorizedPropertyHeight", new Binding("Height", _panelModel, "Panel_MotorizedPropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_MotorizedMechSetQty", new Binding("Value", _panelModel, "Panel_MotorizedMechSetQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_2DHingeQty", new Binding("Value", _panelModel, "Panel_2DHingeQty", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

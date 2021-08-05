@@ -853,6 +853,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public MotorizedDivider_ArticleNo Panel_MotorizedDividerArtNo { get; set; }
         public CoverForMotor_ArticleNo Panel_CoverForMotorArtNo { get; set; }
         public _2DHinge_ArticleNo Panel_2dHingeArtNo { get; set; }
+        public int Panel_2DHingeQty { get; set; }
         public PushButtonSwitch_ArticleNo Panel_PushButtonSwitchArtNo { get; set; }
         public FalsePole_ArticleNo Panel_FalsePoleArtNo { get; set; }
         public SupportingFrame_ArticleNo Panel_SupportingFrameArtNo { get; set; }
@@ -1123,6 +1124,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public PlasticWedge_ArticleNo Panel_PlasticWedge { get; set; }
         public int Panel_PlasticWedgeQty { get; set; }
 
         public Striker_ArticleNo Panel_StrikerArtno_A { get; set; } //for Awning
@@ -1237,6 +1239,8 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         public int Panel_MotorizedMechQty { get; set; }
+
+        public int Panel_MotorizedMechSetQty { get; set;}
 
         private int _panelExtensionPropertyHeight;
         public int Panel_ExtensionPropertyHeight
@@ -1721,10 +1725,12 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+                        Panel_PlasticWedge = PlasticWedge_ArticleNo._7199WHT;
                     }
                     else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
+                        Panel_PlasticWedge = PlasticWedge_ArticleNo._7199DB;
                     }
                 }
 
@@ -2243,10 +2249,12 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+                        Panel_PlasticWedge = PlasticWedge_ArticleNo._7199WHT;
                     }
                     else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
+                        Panel_PlasticWedge = PlasticWedge_ArticleNo._7199DB;
                     }
                 }
             }

@@ -1011,7 +1011,7 @@ namespace ModelLayer.Model.Quotation
                                                                    @"");
 
                                             Material_List.Rows.Add("2D Hinge " + pnl_curCtrl.Panel_2dHingeArtNo.ToString(),
-                                                                   1, "pair(s)",
+                                                                   pnl_curCtrl.Panel_2DHingeQty, "pair(s)",
                                                                    "",
                                                                    "Sash & Frame",
                                                                    @"");
@@ -1035,13 +1035,13 @@ namespace ModelLayer.Model.Quotation
                                             }
 
                                             Material_List.Rows.Add("Push Button Switch " + pnl_curCtrl.Panel_PushButtonSwitchArtNo.ToString(),
-                                                                   1, "pc(s)",
+                                                                   pnl_curCtrl.Panel_MotorizedMechSetQty, "pc(s)",
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
 
                                             Material_List.Rows.Add("False pole " + pnl_curCtrl.Panel_FalsePoleArtNo.ToString(),
-                                                                   1, "pc(s)",
+                                                                   pnl_curCtrl.Panel_MotorizedMechSetQty * 2, "pc(s)",
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
@@ -1049,13 +1049,13 @@ namespace ModelLayer.Model.Quotation
                                             total_screws_installation += 4;
 
                                             Material_List.Rows.Add("Supporting Frame " + pnl_curCtrl.Panel_SupportingFrameArtNo.ToString(),
-                                                                   1, "pc(s)",
+                                                                   pnl_curCtrl.Panel_MotorizedMechSetQty, "pc(s)",
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
 
                                             Material_List.Rows.Add("Plate " + pnl_curCtrl.Panel_PlateArtNo.ToString(),
-                                                                   1, "pc(s)",
+                                                                   pnl_curCtrl.Panel_MotorizedMechSetQty, "pc(s)",
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
@@ -1083,6 +1083,12 @@ namespace ModelLayer.Model.Quotation
 
                                             additional_screws_fabrication += 4;
 
+                                            Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
+                                                                   pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+
                                             Material_List.Rows.Add("Fixed Cam " + pnl_curCtrl.Panel_FixedCamArtNo.ToString(),
                                                                    2, "pc(s)",
                                                                    "",
@@ -1108,12 +1114,6 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             additional_screws_fabrication += 6;
                                         }
-
-                                        Material_List.Rows.Add("Plastic Wedge 7199",
-                                                               pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
-                                                               "",
-                                                               "Frame",
-                                                               @"");
 
                                         if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoswing)
                                         {
@@ -1499,7 +1499,7 @@ namespace ModelLayer.Model.Quotation
                                                    @"");
 
                             Material_List.Rows.Add("2D Hinge " + pnl.Panel_2dHingeArtNo.ToString(),
-                                                   1, "pair(s)",
+                                                   pnl.Panel_2DHingeQty, "pair(s)",
                                                    "",
                                                    "Sash & Frame",
                                                    @"");
@@ -1523,13 +1523,13 @@ namespace ModelLayer.Model.Quotation
                             }
 
                             Material_List.Rows.Add("Push Button Switch " + pnl.Panel_PushButtonSwitchArtNo.ToString(),
-                                                   1, "pc(s)",
+                                                   pnl.Panel_MotorizedMechSetQty, "pc(s)",
                                                    "",
                                                    "Concrete",
                                                    @"");
 
                             Material_List.Rows.Add("False pole " + pnl.Panel_FalsePoleArtNo.ToString(),
-                                                   1, "pc(s)",
+                                                   pnl.Panel_MotorizedMechSetQty * 2, "pc(s)",
                                                    "",
                                                    "Concrete",
                                                    @"");
@@ -1537,13 +1537,13 @@ namespace ModelLayer.Model.Quotation
                             total_screws_installation += 4;
 
                             Material_List.Rows.Add("Supporting Frame " + pnl.Panel_SupportingFrameArtNo.ToString(),
-                                                   1, "pc(s)",
+                                                   pnl.Panel_MotorizedMechSetQty, "pc(s)",
                                                    "",
                                                    "Concrete",
                                                    @"");
 
                             Material_List.Rows.Add("Plate " + pnl.Panel_PlateArtNo.ToString(),
-                                                   1, "pc(s)",
+                                                   pnl.Panel_MotorizedMechSetQty, "pc(s)",
                                                    "",
                                                    "Concrete",
                                                    @"");
@@ -1567,6 +1567,12 @@ namespace ModelLayer.Model.Quotation
                                                        @"");
 
                                 additional_screws_fabrication += 4;
+
+                                Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
+                                                       pnl.Panel_PlasticWedgeQty, "pc (s)",
+                                                       "",
+                                                       "Frame",
+                                                       @"");
 
                                 Material_List.Rows.Add("Fixed Cam " + pnl.Panel_FixedCamArtNo.ToString(),
                                                        2, "pc(s)",
@@ -1594,12 +1600,6 @@ namespace ModelLayer.Model.Quotation
                             {
                                 additional_screws_fabrication += 6;
                             }
-
-                            Material_List.Rows.Add("Plastic Wedge 7199",
-                                                   pnl.Panel_PlasticWedgeQty, "pc (s)",
-                                                   "",
-                                                   "Frame",
-                                                   @"");
 
                             if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
                             {

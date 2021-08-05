@@ -116,6 +116,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_CornerDriveOptionsVisibility { get; set; }
         bool Panel_ExtensionOptionsVisibility { get; set; }
         int Panel_RotoswingOptionsHeight { get; set; }
+        PlasticWedge_ArticleNo Panel_PlasticWedge { get; set; }
         int Panel_PlasticWedgeQty { get; set; }
         MiddleCloser_ArticleNo Panel_MiddleCloserArtNo { get; set; }
         LockingKit_ArticleNo Panel_LockingKitArtNo { get; set; }
@@ -132,6 +133,8 @@ namespace ModelLayer.Model.Quotation.Panel
         MotorizedMech_ArticleNo Panel_MotorizedMechArtNo { get; set; }
         int Panel_MotorizedPropertyHeight { get; set; }
         int Panel_MotorizedMechQty { get; set; }
+        int Panel_MotorizedMechSetQty { get; set; }
+        int Panel_2DHingeQty { get; set; }
         int Panel_ExtensionPropertyHeight { get; set; }
         GeorgianBar_ArticleNo Panel_GeorgianBarArtNo { get; set; }
         int Panel_GeorgianBar_VerticalQty { get; set; }

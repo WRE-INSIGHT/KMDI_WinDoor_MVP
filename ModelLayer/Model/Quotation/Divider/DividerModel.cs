@@ -1,4 +1,5 @@
 ﻿using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Variables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,8 @@ namespace ModelLayer.Model.Quotation.Divider
 {
     public class DividerModel : IDividerModel, INotifyPropertyChanged
     {
+        ConstantVariables constants = new ConstantVariables();
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -322,6 +325,8 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public int Div_CladdingProfileSize { get; set; }
 
+        public int Div_PropHeight { get; set; }
+
         public void SetExplosionValues_Div()
         {
             const int frame_deduction = 33;
@@ -625,6 +630,8 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_DisplayWidth = divDisplayWidth;
             Div_DisplayHeight = divDisplayHeight;
             Div_MPanelParent = divMPanelParent;
+
+            Div_PropHeight = constants.div_propertyheight_default;
         }
     }
 }

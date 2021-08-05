@@ -332,5 +332,13 @@ namespace EnumerationTypeLayer
             private GeorgianBar_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class PlasticWedge_ArticleNo : Enumeration<PlasticWedge_ArticleNo, int>
+        {
+            public static readonly PlasticWedge_ArticleNo _7199DB = new PlasticWedge_ArticleNo(0, "7199-DB");
+            public static readonly PlasticWedge_ArticleNo _7199WHT = new PlasticWedge_ArticleNo(0, "7199-WHT");
+
+            private PlasticWedge_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
     }
 }

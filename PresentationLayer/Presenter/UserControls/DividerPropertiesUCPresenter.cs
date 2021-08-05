@@ -35,16 +35,6 @@ namespace PresentationLayer.Presenter.UserControls
         private void _divProperties_CmbdivArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             _divModel.Div_ArtNo = (Divider_ArticleNo)((ComboBox)sender).SelectedValue;
-
-            //IMultiPanelModel parent = _divModel.Div_MPanelParent;
-            //int obj_actualCount = parent.MPanelLst_Objects.Where(obj => obj.Visible == true).Count(),
-            //    obj_expectedCount = (parent.MPanel_Divisions * 2) + 1;
-
-            //if (obj_actualCount == obj_expectedCount)
-            //{
-            //    _mainPresenter.Run_GetListOfMaterials_SpecificItem();
-            //    parent.SetEqualGlassDimension();
-            //}
         }
 
         private void _divProperties_PanelPropertiesLoadEventRaised(object sender, EventArgs e)
@@ -80,6 +70,7 @@ namespace PresentationLayer.Presenter.UserControls
             divBinding.Add("Div_Visible", new Binding("Visible", _divModel, "Div_Visible", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_ArtNo", new Binding("Text", _divModel, "Div_ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_ReinfArtNo", new Binding("Text", _divModel, "Div_ReinfArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_PropHeight", new Binding("Height", _divModel, "Div_PropHeight", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return divBinding;
         }

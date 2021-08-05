@@ -1,6 +1,7 @@
 ﻿using System;
 using ModelLayer.Model.Quotation.Divider;
 using CommonComponents;
+using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -11,5 +12,7 @@ namespace PresentationLayer.Views.UserControls
 
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
+
+        Panel GetDividerPropertiesBodyPNL();
     }
 }
