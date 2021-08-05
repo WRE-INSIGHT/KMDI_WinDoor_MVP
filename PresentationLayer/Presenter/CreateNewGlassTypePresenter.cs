@@ -75,6 +75,7 @@ namespace PresentationLayer.Presenter
         }
         public DataRow CreateNewRowGlassTypeDT()
         {
+            _createNewGlassTypeView.tboxGlassTypeView = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_createNewGlassTypeView.tboxGlassTypeView.ToLower());
             DataRow newRow;
             newRow = _glassTypeDT.NewRow();
             newRow["GlassType"] = _createNewGlassTypeView.tboxGlassTypeView;
