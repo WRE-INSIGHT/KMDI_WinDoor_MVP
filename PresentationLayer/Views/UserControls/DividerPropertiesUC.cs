@@ -62,6 +62,7 @@ namespace PresentationLayer.Views.UserControls
         }
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
+        public event EventHandler btnAddCladdingClickedEventRaised;
 
         private void DividerPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -93,6 +94,10 @@ namespace PresentationLayer.Views.UserControls
         public Panel GetDividerPropertiesBodyPNL()
         {
             return pnl_dividerBody;
+        }
+        private void btn_AddCladding_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnAddCladdingClickedEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)

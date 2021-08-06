@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.MultiPanel;
+﻿using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Variables;
 using System;
 using System.Collections.Generic;
@@ -272,6 +273,7 @@ namespace ModelLayer.Model.Quotation.Divider
         }
 
         public IMultiPanelModel Div_MPanelParent { get; set; }
+        public IFrameModel Div_FrameParent { get; set; }
 
         #region Explosion
 
@@ -322,10 +324,23 @@ namespace ModelLayer.Model.Quotation.Divider
         public Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
         public CladdingProfile_ArticleNo Div_CladdingProfileArtNo { get; set; }
         public CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
+        public List<int> Div_CladdingSizeList { get; set; }
 
         public int Div_CladdingProfileSize { get; set; }
 
-        public int Div_PropHeight { get; set; }
+        private int _divPropHeight;
+        public int Div_PropHeight
+        {
+            get
+            {
+                return _divPropHeight;
+            }
+            set
+            {
+                _divPropHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public void SetExplosionValues_Div()
         {
@@ -599,6 +614,19 @@ namespace ModelLayer.Model.Quotation.Divider
             }
 
         }
+
+        public void AdjustPropertyPanelHeight(string mode)
+        {
+            if (mode == "addCladding")
+            {
+                Div_PropHeight += constants.div_property_claddingOptionsHeight;
+            }
+            else if (mode == "minusCladding")
+            {
+                Div_PropHeight -= constants.div_property_claddingOptionsHeight;
+            }
+        }
+
         #endregion
 
         public DividerModel(int divID,
@@ -614,7 +642,9 @@ namespace ModelLayer.Model.Quotation.Divider
                             Divider_ArticleNo divArtNo,
                             int divDisplayWidth,
                             int divDisplayHeight,
-                            IMultiPanelModel divMPanelParent)
+                            IMultiPanelModel divMPanelParent,
+                            List<int> divCladdingSizeList,
+                            IFrameModel divFrameParent)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -630,6 +660,8 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_DisplayWidth = divDisplayWidth;
             Div_DisplayHeight = divDisplayHeight;
             Div_MPanelParent = divMPanelParent;
+            Div_CladdingSizeList = divCladdingSizeList;
+            Div_FrameParent = divFrameParent;
 
             Div_PropHeight = constants.div_propertyheight_default;
         }

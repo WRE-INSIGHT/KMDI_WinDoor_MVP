@@ -342,7 +342,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             IDividerModel divModel = _divServices.AddDividerModel(_multiPanelModel.MPanel_Width,
                                                                                   divSize,
                                                                                   fpnl,
-                                                                                  //(UserControl)_frameUCP.GetFrameUC(),
                                                                                   DividerModel.DividerType.Transom,
                                                                                   true,
                                                                                   _frameModel.Frame_Zoom,
@@ -350,6 +349,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                   _multiPanelModel.MPanel_DisplayWidth,
                                                                                   _multiPanelModel.MPanel_DisplayHeight,
                                                                                   _multiPanelModel,
+                                                                                  _frameModel,
                                                                                   _mainPresenter.GetDividerCount(),
                                                                                   _frameModel.FrameImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString());
@@ -434,6 +434,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                   _multiPanelModel.MPanel_DisplayWidth,
                                                                                   _multiPanelModel.MPanel_DisplayHeight,
                                                                                   _multiPanelModel,
+                                                                                  _frameModel,
                                                                                   _mainPresenter.GetDividerCount(),
                                                                                   _frameModel.FrameImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString());
@@ -751,6 +752,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                           _multiPanelModel.MPanel_DisplayWidth,
                                                                           _multiPanelModel.MPanel_DisplayHeight,
                                                                           _multiPanelModel,
+                                                                          _frameModel,
                                                                           _mainPresenter.GetDividerCount(),
                                                                           _frameModel.FrameImageRenderer_Zoom,
                                                                           _frameModel.Frame_Type.ToString());

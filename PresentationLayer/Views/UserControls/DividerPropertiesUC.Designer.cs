@@ -40,19 +40,20 @@
             this.lbl_divArtNo = new System.Windows.Forms.Label();
             this.lbl_divSpecs = new System.Windows.Forms.Label();
             this.pnl_dividerBody = new System.Windows.Forms.Panel();
+            this.pnl_AddCladding = new System.Windows.Forms.Panel();
+            this.btn_AddCladding = new System.Windows.Forms.Button();
             this.pnl_divName = new System.Windows.Forms.Panel();
             this.pnl_divWd = new System.Windows.Forms.Panel();
             this.pnl_divHt = new System.Windows.Forms.Panel();
-            this.pnl_AddCladding = new System.Windows.Forms.Panel();
-            this.btn_AddCladding = new System.Windows.Forms.Button();
+            this.btn_Save = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).BeginInit();
             this.pnl_divArtNo.SuspendLayout();
             this.pnl_dividerBody.SuspendLayout();
+            this.pnl_AddCladding.SuspendLayout();
             this.pnl_divName.SuspendLayout();
             this.pnl_divWd.SuspendLayout();
             this.pnl_divHt.SuspendLayout();
-            this.pnl_AddCladding.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_divname
@@ -194,6 +195,29 @@
             this.pnl_dividerBody.Size = new System.Drawing.Size(160, 120);
             this.pnl_dividerBody.TabIndex = 13;
             // 
+            // pnl_AddCladding
+            // 
+            this.pnl_AddCladding.Controls.Add(this.btn_Save);
+            this.pnl_AddCladding.Controls.Add(this.btn_AddCladding);
+            this.pnl_AddCladding.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_AddCladding.Location = new System.Drawing.Point(0, 90);
+            this.pnl_AddCladding.Name = "pnl_AddCladding";
+            this.pnl_AddCladding.Size = new System.Drawing.Size(158, 27);
+            this.pnl_AddCladding.TabIndex = 13;
+            // 
+            // btn_AddCladding
+            // 
+            this.btn_AddCladding.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_AddCladding.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_AddCladding.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_AddCladding.Location = new System.Drawing.Point(3, 2);
+            this.btn_AddCladding.Name = "btn_AddCladding";
+            this.btn_AddCladding.Size = new System.Drawing.Size(90, 23);
+            this.btn_AddCladding.TabIndex = 0;
+            this.btn_AddCladding.Text = "Add cladding";
+            this.btn_AddCladding.UseVisualStyleBackColor = true;
+            this.btn_AddCladding.Click += new System.EventHandler(this.btn_AddCladding_Click);
+            // 
             // pnl_divName
             // 
             this.pnl_divName.Controls.Add(this.lbl_divname);
@@ -223,29 +247,17 @@
             this.pnl_divHt.Size = new System.Drawing.Size(160, 40);
             this.pnl_divHt.TabIndex = 16;
             // 
-            // pnl_AddCladding
+            // btn_Save
             // 
-            this.pnl_AddCladding.Controls.Add(this.btn_AddCladding);
-            this.pnl_AddCladding.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_AddCladding.Location = new System.Drawing.Point(0, 90);
-            this.pnl_AddCladding.Name = "pnl_AddCladding";
-            this.pnl_AddCladding.Size = new System.Drawing.Size(158, 27);
-            this.pnl_AddCladding.TabIndex = 13;
-            // 
-            // btn_AddCladding
-            // 
-            this.btn_AddCladding.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_AddCladding.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btn_AddCladding.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_AddCladding.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_AddCladding.Location = new System.Drawing.Point(5, 2);
-            this.btn_AddCladding.Name = "btn_AddCladding";
-            this.btn_AddCladding.Size = new System.Drawing.Size(148, 23);
-            this.btn_AddCladding.TabIndex = 0;
-            this.btn_AddCladding.Text = "Add cladding profile";
-            this.btn_AddCladding.UseVisualStyleBackColor = true;
+            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_Save.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_Save.Location = new System.Drawing.Point(101, 2);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(54, 23);
+            this.btn_Save.TabIndex = 1;
+            this.btn_Save.Text = "Save";
+            this.btn_Save.UseVisualStyleBackColor = true;
             // 
             // DividerPropertiesUC
             // 
@@ -266,11 +278,11 @@
             this.pnl_divArtNo.ResumeLayout(false);
             this.pnl_divArtNo.PerformLayout();
             this.pnl_dividerBody.ResumeLayout(false);
+            this.pnl_AddCladding.ResumeLayout(false);
             this.pnl_divName.ResumeLayout(false);
             this.pnl_divName.PerformLayout();
             this.pnl_divWd.ResumeLayout(false);
             this.pnl_divHt.ResumeLayout(false);
-            this.pnl_AddCladding.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -294,5 +306,6 @@
         private System.Windows.Forms.Panel pnl_divHt;
         private System.Windows.Forms.Panel pnl_AddCladding;
         private System.Windows.Forms.Button btn_AddCladding;
+        private System.Windows.Forms.Button btn_Save;
     }
 }

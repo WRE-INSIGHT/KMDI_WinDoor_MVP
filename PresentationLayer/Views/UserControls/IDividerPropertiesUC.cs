@@ -12,6 +12,7 @@ namespace PresentationLayer.Views.UserControls
 
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
+        event EventHandler btnAddCladdingClickedEventRaised;
 
         Panel GetDividerPropertiesBodyPNL();
     }

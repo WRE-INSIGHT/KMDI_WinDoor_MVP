@@ -10,6 +10,7 @@ using Unity;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using ModelLayer.Model.Quotation.MultiPanel;
+using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -19,10 +20,18 @@ namespace PresentationLayer.Presenter.UserControls
 
         private IMainPresenter _mainPresenter;
         private IDividerModel _divModel;
+        private IUnityContainer _unityC;
 
-        public DividerPropertiesUCPresenter(IDividerPropertiesUC divProperties)
+        private IDP_CladdingPropertyUCPresenter _dp_claddingPropertyUCP;
+
+        private Panel _divPropertiesBodyPNL;
+
+        public DividerPropertiesUCPresenter(IDividerPropertiesUC divProperties,
+                                            IDP_CladdingPropertyUCPresenter dp_claddingPropertyUCP)
         {
             _divProperties = divProperties;
+            _dp_claddingPropertyUCP = dp_claddingPropertyUCP;
+            _divPropertiesBodyPNL = _divProperties.GetDividerPropertiesBodyPNL();
             SubscribeToEventsSetup();
         }
 
@@ -30,6 +39,20 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _divProperties.PanelPropertiesLoadEventRaised += _divProperties_PanelPropertiesLoadEventRaised;
             _divProperties.CmbdivArtNoSelectedValueChangedEventRaised += _divProperties_CmbdivArtNoSelectedValueChangedEventRaised;
+            _divProperties.btnAddCladdingClickedEventRaised += _divProperties_btnAddCladdingClickedEventRaised;
+        }
+
+        private void _divProperties_btnAddCladdingClickedEventRaised(object sender, EventArgs e)
+        {
+            _divModel.Div_CladdingSizeList.Add(0);
+            IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel);
+            UserControl claddingUC = (UserControl)claddingUCP.GetCladdingPropertyUC();
+            claddingUC.Dock = DockStyle.Top;
+            _divPropertiesBodyPNL.Controls.Add(claddingUC);
+            _divModel.AdjustPropertyPanelHeight("addCladding");
+            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladding");
+            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
+            claddingUC.BringToFront();
         }
 
         private void _divProperties_CmbdivArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -53,6 +76,7 @@ namespace PresentationLayer.Presenter.UserControls
                 .RegisterType<IDividerPropertiesUC, DividerPropertiesUC>()
                 .RegisterType<IDividerPropertiesUCPresenter, DividerPropertiesUCPresenter>();
             DividerPropertiesUCPresenter divPropUCP = unityC.Resolve<DividerPropertiesUCPresenter>();
+            divPropUCP._unityC = unityC;
             divPropUCP._divModel = divModel;
             divPropUCP._mainPresenter = mainPresenter;
 
