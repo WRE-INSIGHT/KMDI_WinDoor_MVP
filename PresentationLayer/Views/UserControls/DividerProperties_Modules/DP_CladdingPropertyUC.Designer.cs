@@ -29,35 +29,53 @@
         private void InitializeComponent()
         {
             this.num_CladdingSize = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_CladdingSize = new System.Windows.Forms.Label();
+            this.btn_DeleteCladding = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.num_CladdingSize)).BeginInit();
             this.SuspendLayout();
             // 
             // num_CladdingSize
             // 
             this.num_CladdingSize.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.num_CladdingSize.Location = new System.Drawing.Point(53, 2);
+            this.num_CladdingSize.Location = new System.Drawing.Point(60, 2);
             this.num_CladdingSize.Name = "num_CladdingSize";
-            this.num_CladdingSize.Size = new System.Drawing.Size(95, 23);
+            this.num_CladdingSize.Size = new System.Drawing.Size(64, 23);
             this.num_CladdingSize.TabIndex = 18;
+            this.num_CladdingSize.ValueChanged += new System.EventHandler(this.num_CladdingSize_ValueChanged);
             // 
-            // label2
+            // lbl_CladdingSize
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(4, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 15);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Height";
+            this.lbl_CladdingSize.AutoSize = true;
+            this.lbl_CladdingSize.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_CladdingSize.Location = new System.Drawing.Point(4, 6);
+            this.lbl_CladdingSize.Name = "lbl_CladdingSize";
+            this.lbl_CladdingSize.Size = new System.Drawing.Size(43, 15);
+            this.lbl_CladdingSize.TabIndex = 17;
+            this.lbl_CladdingSize.Text = "Height";
+            // 
+            // btn_DeleteCladding
+            // 
+            this.btn_DeleteCladding.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_DeleteCladding.FlatAppearance.BorderSize = 0;
+            this.btn_DeleteCladding.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btn_DeleteCladding.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
+            this.btn_DeleteCladding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_DeleteCladding.Location = new System.Drawing.Point(127, 2);
+            this.btn_DeleteCladding.Name = "btn_DeleteCladding";
+            this.btn_DeleteCladding.Size = new System.Drawing.Size(23, 23);
+            this.btn_DeleteCladding.TabIndex = 19;
+            this.btn_DeleteCladding.Text = "X";
+            this.btn_DeleteCladding.UseVisualStyleBackColor = true;
+            this.btn_DeleteCladding.Click += new System.EventHandler(this.btn_DeleteCladding_Click);
             // 
             // DP_CladdingPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.btn_DeleteCladding);
             this.Controls.Add(this.num_CladdingSize);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbl_CladdingSize);
             this.Name = "DP_CladdingPropertyUC";
             this.Size = new System.Drawing.Size(152, 28);
             this.Load += new System.EventHandler(this.DP_CladdingPropertyUC_Load);
@@ -70,6 +88,7 @@
         #endregion
 
         private System.Windows.Forms.NumericUpDown num_CladdingSize;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_CladdingSize;
+        private System.Windows.Forms.Button btn_DeleteCladding;
     }
 }

@@ -41,11 +41,11 @@
             this.lbl_divSpecs = new System.Windows.Forms.Label();
             this.pnl_dividerBody = new System.Windows.Forms.Panel();
             this.pnl_AddCladding = new System.Windows.Forms.Panel();
+            this.btn_Save = new System.Windows.Forms.Button();
             this.btn_AddCladding = new System.Windows.Forms.Button();
             this.pnl_divName = new System.Windows.Forms.Panel();
             this.pnl_divWd = new System.Windows.Forms.Panel();
             this.pnl_divHt = new System.Windows.Forms.Panel();
-            this.btn_Save = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).BeginInit();
             this.pnl_divArtNo.SuspendLayout();
@@ -205,9 +205,23 @@
             this.pnl_AddCladding.Size = new System.Drawing.Size(158, 27);
             this.pnl_AddCladding.TabIndex = 13;
             // 
+            // btn_Save
+            // 
+            this.btn_Save.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Save.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_Save.Location = new System.Drawing.Point(101, 2);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(54, 23);
+            this.btn_Save.TabIndex = 1;
+            this.btn_Save.Text = "Save";
+            this.btn_Save.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_Save.UseVisualStyleBackColor = false;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            // 
             // btn_AddCladding
             // 
-            this.btn_AddCladding.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btn_AddCladding.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_AddCladding.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btn_AddCladding.Location = new System.Drawing.Point(3, 2);
@@ -246,18 +260,6 @@
             this.pnl_divHt.Name = "pnl_divHt";
             this.pnl_divHt.Size = new System.Drawing.Size(160, 40);
             this.pnl_divHt.TabIndex = 16;
-            // 
-            // btn_Save
-            // 
-            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btn_Save.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_Save.Location = new System.Drawing.Point(101, 2);
-            this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(54, 23);
-            this.btn_Save.TabIndex = 1;
-            this.btn_Save.Text = "Save";
-            this.btn_Save.UseVisualStyleBackColor = true;
             // 
             // DividerPropertiesUC
             // 

@@ -63,6 +63,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
         public event EventHandler btnAddCladdingClickedEventRaised;
+        public event EventHandler btnSaveCladdingClickedEventRaised;
 
         private void DividerPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -100,6 +101,11 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseEvent(sender, btnAddCladdingClickedEventRaised, e);
         }
 
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnSaveCladdingClickedEventRaised, e);
+        }
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Div_ID"]);
@@ -111,6 +117,11 @@ namespace PresentationLayer.Views.UserControls
             cmb_divReinf.DataBindings.Add(ModelBinding["Div_ReinfArtNo"]);
             this.DataBindings.Add(ModelBinding["Divider_Type"]);
             this.DataBindings.Add(ModelBinding["Div_PropHeight"]);
+        }
+
+        public void SetBtnSaveBackColor(Color color)
+        {
+            btn_Save.BackColor = color;
         }
     }
 }

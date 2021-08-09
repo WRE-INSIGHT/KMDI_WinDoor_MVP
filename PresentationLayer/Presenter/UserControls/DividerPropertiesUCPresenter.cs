@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using ModelLayer.Model.Quotation.MultiPanel;
 using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
+using PresentationLayer.Views.UserControls.DividerProperties_Modules;
+using System.Drawing;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -40,12 +42,36 @@ namespace PresentationLayer.Presenter.UserControls
             _divProperties.PanelPropertiesLoadEventRaised += _divProperties_PanelPropertiesLoadEventRaised;
             _divProperties.CmbdivArtNoSelectedValueChangedEventRaised += _divProperties_CmbdivArtNoSelectedValueChangedEventRaised;
             _divProperties.btnAddCladdingClickedEventRaised += _divProperties_btnAddCladdingClickedEventRaised;
+            _divProperties.btnSaveCladdingClickedEventRaised += _divProperties_btnSaveCladdingClickedEventRaised;
+        }
+
+        private void _divProperties_btnSaveCladdingClickedEventRaised(object sender, EventArgs e)
+        {
+            List<int> cladding_sizes_list = new List<int>();
+            foreach (Control cladding in _divPropertiesBodyPNL.Controls)
+            {
+                if (cladding.Name.Contains("DP_CladdingPropertyUC"))
+                {
+                    cladding_sizes_list.Add(((IDP_CladdingPropertyUC)cladding).Cladding_Size);
+                }
+            }
+
+            if (cladding_sizes_list.Count > 0)
+            {
+                _divModel.Div_CladdingSizeList = cladding_sizes_list;
+                MessageBox.Show("Saved");
+                _divProperties.SetBtnSaveBackColor(Color.ForestGreen);
+            }
+            else
+            {
+                MessageBox.Show("Invalid save");
+            }
         }
 
         private void _divProperties_btnAddCladdingClickedEventRaised(object sender, EventArgs e)
         {
             _divModel.Div_CladdingSizeList.Add(0);
-            IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel);
+            IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, this);
             UserControl claddingUC = (UserControl)claddingUCP.GetCladdingPropertyUC();
             claddingUC.Dock = DockStyle.Top;
             _divPropertiesBodyPNL.Controls.Add(claddingUC);
@@ -53,6 +79,8 @@ namespace PresentationLayer.Presenter.UserControls
             _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladding");
             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
             claddingUC.BringToFront();
+
+            _divProperties.SetBtnSaveBackColor(Color.White);
         }
 
         private void _divProperties_CmbdivArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -97,6 +125,11 @@ namespace PresentationLayer.Presenter.UserControls
             divBinding.Add("Div_PropHeight", new Binding("Height", _divModel, "Div_PropHeight", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return divBinding;
+        }
+
+        public void SetSaveBtnColor(Color color)
+        {
+            _divProperties.SetBtnSaveBackColor(color);
         }
     }
 }

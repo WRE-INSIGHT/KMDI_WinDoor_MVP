@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules
 {
@@ -18,6 +19,8 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
         private IUnityContainer _unityC;
         private IDividerModel _dividerModel;
 
+        private IDividerPropertiesUCPresenter _divPropUCP;
+
         public DP_CladdingPropertyUCPresenter(IDP_CladdingPropertyUC dp_claddingPropertyUC)
         {
             _dp_claddingPropertyUC = dp_claddingPropertyUC;
@@ -27,10 +30,34 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
         private void SubscribeToEventsSetup()
         {
             _dp_claddingPropertyUC.DPCladdingPropertyUCLoadEventRaised += _dp_claddingPropertyUC_DPCladdingPropertyUCLoadEventRaised;
+            _dp_claddingPropertyUC.numCladdingSizeValueChangedEventRaised += _dp_claddingPropertyUC_numCladdingSizeValueChangedEventRaised;
+            _dp_claddingPropertyUC.btnDeleteCladdingClickedEventRaised += _dp_claddingPropertyUC_btnDeleteCladdingClickedEventRaised;
+        }
+
+        private void _dp_claddingPropertyUC_btnDeleteCladdingClickedEventRaised(object sender, EventArgs e)
+        {
+            _dividerModel.Div_CladdingSizeList.RemoveAt(_dp_claddingPropertyUC.Cladding_ID);
+
+            _dividerModel.AdjustPropertyPanelHeight("minusCladding");
+            _dividerModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladding");
+            _dividerModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
+
+            _divPropUCP.SetSaveBtnColor(Color.White);
+
+            Control pnl_parent = ((UserControl)_dp_claddingPropertyUC).Parent;
+            pnl_parent.Controls.Remove((UserControl)_dp_claddingPropertyUC);
+
+        }
+
+        private void _dp_claddingPropertyUC_numCladdingSizeValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _divPropUCP.SetSaveBtnColor(Color.White);
         }
 
         private void _dp_claddingPropertyUC_DPCladdingPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
+            _dp_claddingPropertyUC.Cladding_ID = _dividerModel.Div_CladdingSizeList.Count - 1;
+            _dp_claddingPropertyUC.Divider_Type = _dividerModel.Div_Type.ToString();
         }
 
         public IDP_CladdingPropertyUC GetCladdingPropertyUC()
@@ -38,7 +65,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
             return _dp_claddingPropertyUC;
         }
 
-        public IDP_CladdingPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel)
+        public IDP_CladdingPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel, IDividerPropertiesUCPresenter divPropUCP)
         {
             unityC
                 .RegisterType<IDP_CladdingPropertyUC, DP_CladdingPropertyUC>()
@@ -46,6 +73,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
             DP_CladdingPropertyUCPresenter presenter = unityC.Resolve<DP_CladdingPropertyUCPresenter>();
             presenter._unityC = unityC;
             presenter._dividerModel = divModel;
+            presenter._divPropUCP = divPropUCP;
 
             return presenter;
         }
