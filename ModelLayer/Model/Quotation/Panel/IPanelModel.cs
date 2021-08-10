@@ -57,6 +57,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_OriginalGlassWidth { get; set; }
         int Panel_GlassHeight { get; set; }
         int Panel_OriginalGlassHeight { get; set; }
+        int Panel_GlassPropertyHeight { get; set; }
         int Panel_GlazingSpacerQty { get; set; }
         GlassFilm_Types Panel_GlassFilm { get; set; }
         bool Panel_SashPropertyVisibility { get; set; }

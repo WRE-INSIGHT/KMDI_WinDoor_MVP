@@ -713,17 +713,20 @@ namespace ModelLayer.Model.Quotation
 
                                     if (div_nxtCtrl.Div_ExplosionHeight >= 2000)
                                     {
-                                        Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
-                                                               1, "pc(s)",
-                                                               div_nxtCtrl.Div_CladdingProfileSize.ToString(),
-                                                               mpnl.MPanel_Type,
-                                                               @"|  |");
+                                        foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList)
+                                        {
+                                            Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   cladding_size.ToString(),
+                                                                   mpnl.MPanel_Type,
+                                                                   @"|  |");
 
-                                        Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
-                                                               1, "pc(s)",
-                                                               div_nxtCtrl.Div_CladdingProfileSize.ToString(),
-                                                               "CPL",
-                                                               @"|  |");
+                                            Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   cladding_size.ToString(),
+                                                                   "CPL",
+                                                                   @"|  |");
+                                        }
                                     }
 
                                 }
@@ -749,17 +752,20 @@ namespace ModelLayer.Model.Quotation
 
                                     if (div_nxtCtrl.Div_ExplosionWidth >= 2000)
                                     {
-                                        Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
-                                                              1, "pc(s)",
-                                                              div_nxtCtrl.Div_CladdingProfileSize.ToString(),
-                                                              mpnl.MPanel_Type,
-                                                              @"|  |");
+                                        foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList)
+                                        {
+                                            Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   cladding_size.ToString(),
+                                                                   mpnl.MPanel_Type,
+                                                                   @"|  |");
 
-                                        Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
-                                                               1, "pc(s)",
-                                                               div_nxtCtrl.Div_CladdingProfileSize.ToString(),
-                                                               "CPL",
-                                                               @"|  |");
+                                            Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   cladding_size.ToString(),
+                                                                   "CPL",
+                                                                   @"|  |");
+                                        }
                                     }
                                 }
                                 Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
@@ -976,17 +982,22 @@ namespace ModelLayer.Model.Quotation
                                                            pnl_curCtrl.Panel_SashReinfHeight.ToString(),
                                                            "Sash",
                                                            @"|  |");
-                                    Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.ToString(),
+
+                                    if (pnl_curCtrl.Panel_Type.Contains("Fixed") == false)
+                                    {
+                                        Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   frame.Frame_Width.ToString(),
+                                                                   "Frame",
+                                                                   @"|  |");
+
+                                        Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.ToString(),
                                                                1, "pc(s)",
                                                                frame.Frame_Width.ToString(),
                                                                "Frame",
                                                                @"|  |");
 
-                                    Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.ToString(),
-                                                           1, "pc(s)",
-                                                           frame.Frame_Width.ToString(),
-                                                           "Frame",
-                                                           @"|  |");
+                                    }
 
                                     if (perFrame == true)
                                     {
@@ -1466,17 +1477,20 @@ namespace ModelLayer.Model.Quotation
                                                "Sash",
                                                @"|  |");
 
-                        Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo.ToString(),
-                                               1, "pc(s)",
-                                               frame.Frame_Width.ToString(),
-                                               "Frame",
-                                               @"|  |");
+                        if (pnl.Panel_Type.Contains("Fixed") == false)
+                        {
+                            Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo.ToString(),
+                                                   1, "pc(s)",
+                                                   frame.Frame_Width.ToString(),
+                                                   "Frame",
+                                                   @"|  |");
 
-                        Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.ToString(),
-                                               1, "pc(s)",
-                                               frame.Frame_Width.ToString(),
-                                               "Frame",
-                                               @"|  |");
+                            Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.ToString(),
+                                                   1, "pc(s)",
+                                                   frame.Frame_Width.ToString(),
+                                                   "Frame",
+                                                   @"|  |");
+                        }
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)
                         {

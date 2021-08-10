@@ -326,8 +326,6 @@ namespace ModelLayer.Model.Quotation.Divider
         public CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
         public List<int> Div_CladdingSizeList { get; set; }
 
-        public int Div_CladdingProfileSize { get; set; }
-
         private int _divPropHeight;
         public int Div_PropHeight
         {
@@ -373,7 +371,6 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                         Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                        Div_CladdingProfileSize = Div_ExplosionHeight + 30;
                     }
                 }
                 else if (Div_Type == DividerType.Transom)
@@ -400,7 +397,6 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                         Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                        Div_CladdingProfileSize = Div_ExplosionWidth + 30;
                     }
                 }
             }
@@ -505,7 +501,6 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                             Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                            Div_CladdingProfileSize = Div_ExplosionHeight + 30;
                         }
                     }
                 }
@@ -607,7 +602,6 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                             Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                            Div_CladdingProfileSize = Div_ExplosionWidth + 30;
                         }
                     }
                 }
@@ -663,7 +657,36 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_CladdingSizeList = divCladdingSizeList;
             Div_FrameParent = divFrameParent;
 
-            Div_PropHeight = constants.div_propertyheight_default;
+            SetExplosionValues_Div();
+
+            if (Div_Type == DividerType.Mullion)
+            {
+                if (Div_ExplosionHeight >= 2000)
+                {
+                    Div_PropHeight = constants.div_propertyheight_default +
+                                     constants.div_property_pnlAddcladdingOptionsHeight;
+                    Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                    Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                }
+                else
+                {
+                    Div_PropHeight = constants.div_propertyheight_default;
+                }
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                if (Div_ExplosionWidth >= 2000)
+                {
+                    Div_PropHeight = constants.div_propertyheight_default +
+                                     constants.div_property_pnlAddcladdingOptionsHeight;
+                    Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                    Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                }
+                else
+                {
+                    Div_PropHeight = constants.div_propertyheight_default;
+                }
+            }
         }
     }
 }

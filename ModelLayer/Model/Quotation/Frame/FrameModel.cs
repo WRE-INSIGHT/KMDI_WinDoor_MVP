@@ -510,6 +510,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.div_property_claddingOptionsHeight;
                 }
+                else if (mode == "addPanelAddCladding")
+                {
+                    FrameProp_Height += constants.div_property_pnlAddcladdingOptionsHeight;
+                }
+                else if (mode == "minusPanelAddCladding")
+                {
+                    FrameProp_Height -= constants.div_property_pnlAddcladdingOptionsHeight;
+                }
             }
             else if (objtype == "Mpanel")
             {

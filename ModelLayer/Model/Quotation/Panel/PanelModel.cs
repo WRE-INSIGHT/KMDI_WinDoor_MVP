@@ -682,6 +682,20 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_OriginalGlassHeight { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
 
+        private int _panelGlassPropertyHt;
+        public int Panel_GlassPropertyHeight
+        {
+            get
+            {
+                return _panelGlassPropertyHt;
+            }
+            set
+            {
+                _panelGlassPropertyHt = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private GlassFilm_Types _panelGlassFilm;
         public GlassFilm_Types Panel_GlassFilm
         {
@@ -2403,6 +2417,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;
             Panel_RotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
             Panel_ExtensionPropertyHeight = constants.panel_property_extensionOptionsheight;
+            Panel_GlassPropertyHeight = constants.panel_property_glassOptionsHeight;
         }
     }
 }
