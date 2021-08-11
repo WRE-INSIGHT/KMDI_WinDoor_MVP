@@ -24,6 +24,6 @@ namespace ServiceLayer.Services.DividerServices
                                       float divImageRendererZoom = 1,
                                       string divFrameType = "",
                                       string divName = "",
-                                      List<int> divCladdingSizeList = null);        
+                                      Dictionary<int, int> divCladdingSizeList = null);        
     }
 }

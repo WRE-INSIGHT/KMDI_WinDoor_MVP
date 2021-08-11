@@ -47,12 +47,16 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _divProperties_btnSaveCladdingClickedEventRaised(object sender, EventArgs e)
         {
-            List<int> cladding_sizes_list = new List<int>();
+            Dictionary<int, int> cladding_sizes_list = new Dictionary<int, int>();
+            int cladding_ID = 0;
+
             foreach (Control cladding in _divPropertiesBodyPNL.Controls)
             {
                 if (cladding.Name.Contains("DP_CladdingPropertyUC"))
                 {
-                    cladding_sizes_list.Add(((IDP_CladdingPropertyUC)cladding).Cladding_Size);
+                    ((IDP_CladdingPropertyUC)cladding).Cladding_ID = cladding_ID;
+                    cladding_sizes_list.Add(cladding_ID,((IDP_CladdingPropertyUC)cladding).Cladding_Size);
+                    cladding_ID++;
                 }
             }
 
@@ -70,7 +74,6 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _divProperties_btnAddCladdingClickedEventRaised(object sender, EventArgs e)
         {
-            _divModel.Div_CladdingSizeList.Add(0);
             IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, this);
             UserControl claddingUC = (UserControl)claddingUCP.GetCladdingPropertyUC();
             claddingUC.Dock = DockStyle.Top;

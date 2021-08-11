@@ -20,7 +20,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
         private IDividerModel _dividerModel;
 
         private IDividerPropertiesUCPresenter _divPropUCP;
-
+        
         public DP_CladdingPropertyUCPresenter(IDP_CladdingPropertyUC dp_claddingPropertyUC)
         {
             _dp_claddingPropertyUC = dp_claddingPropertyUC;
@@ -36,8 +36,6 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
 
         private void _dp_claddingPropertyUC_btnDeleteCladdingClickedEventRaised(object sender, EventArgs e)
         {
-            _dividerModel.Div_CladdingSizeList.RemoveAt(_dp_claddingPropertyUC.Cladding_ID);
-
             _dividerModel.AdjustPropertyPanelHeight("minusCladding");
             _dividerModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladding");
             _dividerModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
@@ -56,7 +54,6 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
 
         private void _dp_claddingPropertyUC_DPCladdingPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
-            _dp_claddingPropertyUC.Cladding_ID = _dividerModel.Div_CladdingSizeList.Count - 1;
             _dp_claddingPropertyUC.Divider_Type = _dividerModel.Div_Type.ToString();
         }
 
@@ -65,7 +62,9 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
             return _dp_claddingPropertyUC;
         }
 
-        public IDP_CladdingPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel, IDividerPropertiesUCPresenter divPropUCP)
+        public IDP_CladdingPropertyUCPresenter GetNewInstance(IUnityContainer unityC, 
+                                                              IDividerModel divModel, 
+                                                              IDividerPropertiesUCPresenter divPropUCP)
         {
             unityC
                 .RegisterType<IDP_CladdingPropertyUC, DP_CladdingPropertyUC>()

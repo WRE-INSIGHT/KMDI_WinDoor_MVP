@@ -713,7 +713,7 @@ namespace ModelLayer.Model.Quotation
 
                                     if (div_nxtCtrl.Div_ExplosionHeight >= 2000)
                                     {
-                                        foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList)
+                                        foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
                                         {
                                             Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
                                                                    1, "pc(s)",
@@ -752,7 +752,7 @@ namespace ModelLayer.Model.Quotation
 
                                     if (div_nxtCtrl.Div_ExplosionWidth >= 2000)
                                     {
-                                        foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList)
+                                        foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
                                         {
                                             Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
                                                                    1, "pc(s)",

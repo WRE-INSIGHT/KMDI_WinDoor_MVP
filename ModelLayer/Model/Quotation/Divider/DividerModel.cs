@@ -324,7 +324,7 @@ namespace ModelLayer.Model.Quotation.Divider
         public Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
         public CladdingProfile_ArticleNo Div_CladdingProfileArtNo { get; set; }
         public CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
-        public List<int> Div_CladdingSizeList { get; set; }
+        public Dictionary<int, int> Div_CladdingSizeList { get; set; }
 
         private int _divPropHeight;
         public int Div_PropHeight
@@ -637,7 +637,7 @@ namespace ModelLayer.Model.Quotation.Divider
                             int divDisplayWidth,
                             int divDisplayHeight,
                             IMultiPanelModel divMPanelParent,
-                            List<int> divCladdingSizeList,
+                            Dictionary<int, int> divCladdingSizeList,
                             IFrameModel divFrameParent)
         {
             Div_ID = divID;

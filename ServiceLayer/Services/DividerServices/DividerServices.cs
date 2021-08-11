@@ -37,7 +37,7 @@ namespace ServiceLayer.Services.DividerServices
                                                 int divDisplayWidth,
                                                 int divDisplayHeight,
                                                 IMultiPanelModel divMPanelParent,
-                                                List<int> divCladdingSizeList,
+                                                Dictionary<int, int> divCladdingSizeList,
                                                 IFrameModel divFrameParent)
         {
             DividerModel div = new DividerModel(divID,
@@ -81,7 +81,7 @@ namespace ServiceLayer.Services.DividerServices
                                              float divImageRendererZoom = 1,
                                              string divFrameType = "",
                                              string divName = "",
-                                             List<int> divCladdingSizeList = null)
+                                             Dictionary<int, int> divCladdingSizeList = null)
         {
             if (divName == "")
             {
@@ -99,7 +99,7 @@ namespace ServiceLayer.Services.DividerServices
 
             if (divCladdingSizeList == null)
             {
-                divCladdingSizeList = new List<int>();
+                divCladdingSizeList = new Dictionary<int, int>();
             }
 
             IDividerModel _divModel = CreateDividerModel(divID,

@@ -818,7 +818,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)divUC);
 
                 IDividerModel div = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
-                foreach (int cladding in div.Div_CladdingSizeList)
+                foreach (int cladding in div.Div_CladdingSizeList.Values)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
                     _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
@@ -968,7 +968,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
                 _frameModel.AdjustPropertyPanelHeight("Div", "delete");
 
-                foreach (int cladding in div.Div_CladdingSizeList)
+                foreach (int cladding in div.Div_CladdingSizeList.Values)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
                     _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
@@ -988,7 +988,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
                 _frameModel.AdjustPropertyPanelHeight("Div", "delete");
 
-                foreach (int cladding in div.Div_CladdingSizeList)
+                foreach (int cladding in div.Div_CladdingSizeList.Values)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
                     _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
