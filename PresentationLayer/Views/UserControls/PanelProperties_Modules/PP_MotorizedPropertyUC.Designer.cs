@@ -31,17 +31,17 @@
             this.lbl_motorized = new System.Windows.Forms.Label();
             this.chk_Motorized = new System.Windows.Forms.CheckBox();
             this.pnl_motorizedOptions = new System.Windows.Forms.Panel();
+            this.num_2dHingeQty = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.num_SetQty = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.cmb_MotorizedMechanism = new System.Windows.Forms.ComboBox();
             this.pnl_chkMotorizedOptions = new System.Windows.Forms.Panel();
-            this.num_2dHingeQty = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
             this.pnl_motorizedOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_2dHingeQty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_SetQty)).BeginInit();
             this.pnl_chkMotorizedOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_2dHingeQty)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_motorized
@@ -89,10 +89,30 @@
             this.pnl_motorizedOptions.Size = new System.Drawing.Size(154, 89);
             this.pnl_motorizedOptions.TabIndex = 36;
             // 
+            // num_2dHingeQty
+            // 
+            this.num_2dHingeQty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.num_2dHingeQty.Location = new System.Drawing.Point(78, 61);
+            this.num_2dHingeQty.Name = "num_2dHingeQty";
+            this.num_2dHingeQty.Size = new System.Drawing.Size(69, 20);
+            this.num_2dHingeQty.TabIndex = 24;
+            // 
+            // label2
+            // 
+            this.label2.AutoEllipsis = true;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(2, 64);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "2D Hinge Qty";
+            // 
             // num_SetQty
             // 
-            this.num_SetQty.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.num_SetQty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.num_SetQty.Location = new System.Drawing.Point(78, 35);
             this.num_SetQty.Name = "num_SetQty";
@@ -144,28 +164,6 @@
             this.pnl_chkMotorizedOptions.Size = new System.Drawing.Size(154, 31);
             this.pnl_chkMotorizedOptions.TabIndex = 37;
             // 
-            // num_2dHingeQty
-            // 
-            this.num_2dHingeQty.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.num_2dHingeQty.Location = new System.Drawing.Point(78, 61);
-            this.num_2dHingeQty.Name = "num_2dHingeQty";
-            this.num_2dHingeQty.Size = new System.Drawing.Size(69, 20);
-            this.num_2dHingeQty.TabIndex = 24;
-            // 
-            // label2
-            // 
-            this.label2.AutoEllipsis = true;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(2, 64);
-            this.label2.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "2D Hinge Qty";
-            // 
             // PP_MotorizedPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -178,9 +176,9 @@
             this.Load += new System.EventHandler(this.PP_MotorizedPropertyUC_Load);
             this.pnl_motorizedOptions.ResumeLayout(false);
             this.pnl_motorizedOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_2dHingeQty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_SetQty)).EndInit();
             this.pnl_chkMotorizedOptions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.num_2dHingeQty)).EndInit();
             this.ResumeLayout(false);
 
         }

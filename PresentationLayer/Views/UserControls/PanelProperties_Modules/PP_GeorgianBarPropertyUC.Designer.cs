@@ -50,6 +50,8 @@
             // 
             // nudHorizontal
             // 
+            this.nudHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.nudHorizontal.Location = new System.Drawing.Point(65, 73);
             this.nudHorizontal.Name = "nudHorizontal";
             this.nudHorizontal.Size = new System.Drawing.Size(85, 22);
@@ -58,6 +60,8 @@
             // 
             // nudVertical
             // 
+            this.nudVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.nudVertical.Location = new System.Drawing.Point(65, 44);
             this.nudVertical.Name = "nudVertical";
             this.nudVertical.Size = new System.Drawing.Size(85, 22);
@@ -94,6 +98,8 @@
             // 
             // cmbGBArtNum
             // 
+            this.cmbGBArtNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbGBArtNum.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGBArtNum.FormattingEnabled = true;
             this.cmbGBArtNum.Location = new System.Drawing.Point(65, 17);

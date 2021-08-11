@@ -9,6 +9,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler cmbHandleTypeSelectedValueEventRaised;
         event EventHandler PPHandlePropertyLoadEventRaised;
 
-        FlowLayoutPanel GetHandleTypeFLP();
+        Panel GetHandleTypePNL();
     }
 }

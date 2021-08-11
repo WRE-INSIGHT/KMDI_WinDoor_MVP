@@ -74,9 +74,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_RotoswingNo.DataBindings.Add(ModelBinding["Panel_RotoswingArtNo"]);
         }
 
-        public FlowLayoutPanel GetRotoswingOptionFLP()
+        public Panel GetRotoswingOptionPNL()
         {
-            return flp_RotoswingOptions;
+            return pnl_RotoswingOptions;
         }
     }
 }

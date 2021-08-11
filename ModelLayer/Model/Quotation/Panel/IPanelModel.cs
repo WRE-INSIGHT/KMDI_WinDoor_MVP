@@ -73,6 +73,7 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
+        FrictionStayCasement_ArticleNo Panel_FSCasementArtNo { get; set; }
         SnapInKeep_ArticleNo Panel_SnapInKeepArtNo { get; set; }
         FixedCam_ArticleNo Panel_FixedCamArtNo { get; set; }
         _30x25Cover_ArticleNo Panel_30x25CoverArtNo { get; set; }

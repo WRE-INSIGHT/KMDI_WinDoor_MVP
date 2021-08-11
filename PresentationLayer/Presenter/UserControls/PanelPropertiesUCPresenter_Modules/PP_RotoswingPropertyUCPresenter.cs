@@ -22,7 +22,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPP_ExtensionPropertyUCPresenter _pp_extensionPropertyUCPresenter;
         private IPP_CornerDrivePropertyUCPresenter _pp_cornerDrivePropertyUCPresenter;
 
-        FlowLayoutPanel _flpRotoswingOptions;
+        Panel _pnlRotoswingOptions;
 
         bool _initialLoad = true;
 
@@ -33,7 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_rotoswingPropertyUC = pp_rotoswingPropertyUC;
             _pp_extensionPropertyUCPresenter = pp_extensionPropertyUCPresenter;
             _pp_cornerDrivePropertyUCPresenter = pp_cornerDrivePropertyUCPresenter;
-            _flpRotoswingOptions = _pp_rotoswingPropertyUC.GetRotoswingOptionFLP();
+            _pnlRotoswingOptions = _pp_rotoswingPropertyUC.GetRotoswingOptionPNL();
             SubscribeToEventsSetup();
         }
 
@@ -71,12 +71,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_rotoswingPropertyUC.ThisBinding(CreateBindingDictionary());
 
             IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-            _flpRotoswingOptions.Controls.Add((UserControl)cdPropUCP.GetPPCornerDriveUC());
+            UserControl cdPropUC = (UserControl)cdPropUCP.GetPPCornerDriveUC();
+            _pnlRotoswingOptions.Controls.Add(cdPropUC);
+            cdPropUC.Dock = DockStyle.Top;
+            cdPropUC.BringToFront();
 
             IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-            _flpRotoswingOptions.Controls.Add((UserControl)extPropUCP.GetPPExtensionUC());
+            UserControl extPropUC = (UserControl)extPropUCP.GetPPExtensionUC();
+            _pnlRotoswingOptions.Controls.Add(extPropUC);
+            extPropUC.Dock = DockStyle.Top;
+            extPropUC.BringToFront();
 
-            if (_panelModel.Panel_Height >= 2100)
+            if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Height >= 2100)
             {
                 _panelModel.Panel_ExtensionOptionsVisibility = true;
                 _panelModel.Panel_CornerDriveOptionsVisibility = true;

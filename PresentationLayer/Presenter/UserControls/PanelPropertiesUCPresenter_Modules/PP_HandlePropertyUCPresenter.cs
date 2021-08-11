@@ -22,7 +22,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
 
-        FlowLayoutPanel _flpHandleType;
+        Panel _pnlHandleType;
         bool _initialLoad = true;
 
         public PP_HandlePropertyUCPresenter(IPP_HandlePropertyUC pp_handlePropertyUC,
@@ -32,7 +32,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_handlePropertyUC = pp_handlePropertyUC;
             _pp_rotoswingPropertyUCPresenter = pp_rotoswingPropertyUCPresenter;
             _pp_rotaryPropertyUCPresenter = pp_rotaryPropertyUCPresenter;
-            _flpHandleType = _pp_handlePropertyUC.GetHandleTypeFLP();
+            _pnlHandleType = _pp_handlePropertyUC.GetHandleTypePNL();
             SubscribeToEventsSetup();
         }
 
@@ -80,7 +80,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
                         }
 
-                        if (_panelModel.Panel_Height >= 2100)
+                        if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Height >= 2100)
                         {
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
                             _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
@@ -126,7 +126,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
                         }
 
-                        if (_panelModel.Panel_Height >= 2100)
+                        if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Height >= 2100)
                         {
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
                             _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
@@ -177,10 +177,16 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_handlePropertyUC.ThisBinding(CreateBindingDictionary());
 
             IPP_RotoswingPropertyUCPresenter rotoswingPropUCP = _pp_rotoswingPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-            _flpHandleType.Controls.Add((UserControl)rotoswingPropUCP.GetPPRotoswingPropertyUC());
+            UserControl rotoswingPropUC = (UserControl)rotoswingPropUCP.GetPPRotoswingPropertyUC();
+            _pnlHandleType.Controls.Add(rotoswingPropUC);
+            rotoswingPropUC.Dock = DockStyle.Top;
+            rotoswingPropUC.BringToFront();
 
             IPP_RotaryPropertyUCPresenter rotaryPropUCP = _pp_rotaryPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-            _flpHandleType.Controls.Add((UserControl)rotaryPropUCP.GetPPRotaryPropertyUC());
+            UserControl rotaryPropUC = (UserControl)rotaryPropUCP.GetPPRotaryPropertyUC();
+            _pnlHandleType.Controls.Add(rotaryPropUC);
+            rotaryPropUC.Dock = DockStyle.Top;
+            rotaryPropUC.BringToFront();
 
             if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
             {
