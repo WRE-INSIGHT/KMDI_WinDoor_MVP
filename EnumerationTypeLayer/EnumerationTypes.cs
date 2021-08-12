@@ -104,6 +104,8 @@ namespace EnumerationTypeLayer
         {
             public static readonly SashProfile_ArticleNo _None = new SashProfile_ArticleNo(0, "None");
             public static readonly SashProfile_ArticleNo _7581 = new SashProfile_ArticleNo(1, "7581");
+            public static readonly SashProfile_ArticleNo _374 = new SashProfile_ArticleNo(2, "374");
+            public static readonly SashProfile_ArticleNo _395 = new SashProfile_ArticleNo(3, "395"); //inward
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -111,6 +113,8 @@ namespace EnumerationTypeLayer
         {
             public static readonly SashReinf_ArticleNo _None = new SashReinf_ArticleNo(0, "None");
             public static readonly SashReinf_ArticleNo _R675 = new SashReinf_ArticleNo(1, "R675");
+            public static readonly SashReinf_ArticleNo _655 = new SashReinf_ArticleNo(2, "655");
+            public static readonly SashReinf_ArticleNo _207 = new SashReinf_ArticleNo(3, "207");
             private SashReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -180,6 +184,9 @@ namespace EnumerationTypeLayer
         {
             public static readonly Handle_Type _Rotoswing = new Handle_Type(0, "Rotoswing Handle");
             public static readonly Handle_Type _Rotary = new Handle_Type(1, "Rotary Handle");
+            public static readonly Handle_Type _Rio = new Handle_Type(2, "Rio Handle");
+            public static readonly Handle_Type _Rotoline = new Handle_Type(3, "Rotoline Handle");
+            public static readonly Handle_Type _MVD = new Handle_Type(4, "MVD Handle");
 
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
         }
@@ -200,6 +207,29 @@ namespace EnumerationTypeLayer
             public static readonly Rotary_HandleArtNo _T511155KMBLSS = new Rotary_HandleArtNo(1, "T-51.1155 KM-BL-SS");
 
             private Rotary_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Rio_HandleArtNo : Enumeration<Rio_HandleArtNo, int>
+        {
+            public static readonly Rio_HandleArtNo _C050C108019 = new Rio_HandleArtNo(0, "C050C108019");
+            public static readonly Rio_HandleArtNo _C050C109005 = new Rio_HandleArtNo(1, "C050C109005");
+            public static readonly Rio_HandleArtNo _C050C107025 = new Rio_HandleArtNo(2, "C050C107025");
+
+            private Rio_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Rotoline_HandleArtNo : Enumeration<Rio_HandleArtNo, int>
+        {
+            public static readonly Rotoline_HandleArtNo _K070A21725 = new Rotoline_HandleArtNo(0, "K070A21725");
+
+            private Rotoline_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MVD_HandleArtNo : Enumeration<MVD_HandleArtNo, int>
+        {
+            public static readonly MVD_HandleArtNo _046366M = new MVD_HandleArtNo(0, "046-366M");
+
+            private MVD_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class Espagnolette_ArticleNo : Enumeration<Espagnolette_ArticleNo, int>

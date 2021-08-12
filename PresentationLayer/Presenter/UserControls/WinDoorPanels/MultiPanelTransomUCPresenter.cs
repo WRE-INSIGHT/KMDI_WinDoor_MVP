@@ -566,7 +566,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                suggest_DisplayHT,
                                                                GlazingBead_ArticleNo._2452,
                                                                GlassFilm_Types._None,
-                                                               SashProfile_ArticleNo._None,
+                                                               SashProfile_ArticleNo._7581,
                                                                SashReinf_ArticleNo._None,
                                                                GlassType._Single,
                                                                Espagnolette_ArticleNo._None,

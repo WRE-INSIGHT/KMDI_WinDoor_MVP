@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using System;
@@ -54,120 +55,120 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 if (_initialLoad == false)
                 {
                     _panelModel.Panel_HandleType = sel_handleType;
-                    int fieldExtension_count = 0;
+                    //    int fieldExtension_count = 0;
 
-                    fieldExtension_count = (_panelModel.Panel_ExtTopChk == true) ? fieldExtension_count +=1 : fieldExtension_count;
-                    fieldExtension_count = (_panelModel.Panel_ExtBotChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
-                    fieldExtension_count = (_panelModel.Panel_ExtLeftChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
-                    fieldExtension_count = (_panelModel.Panel_ExtRightChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+                    //    fieldExtension_count = (_panelModel.Panel_ExtTopChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+                    //    fieldExtension_count = (_panelModel.Panel_ExtBotChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+                    //    fieldExtension_count = (_panelModel.Panel_ExtLeftChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+                    //    fieldExtension_count = (_panelModel.Panel_ExtRightChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
 
-                    if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
-                    {
-                        _panelModel.Panel_RotoswingOptionsVisibility = true;
-                        _panelModel.Panel_RotaryOptionsVisibility = false;
+                    //    if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
+                    //    {
+                    //        _panelModel.Panel_RotoswingOptionsVisibility = true;
+                    //        _panelModel.Panel_RotaryOptionsVisibility = false;
 
-                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
-                        _panelModel.AdjustPropertyPanelHeight("minusRotary");
-                        _panelModel.AdjustHandlePropertyHeight("minusRotary");
+                    //        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                    //        _panelModel.AdjustPropertyPanelHeight("minusRotary");
+                    //        _panelModel.AdjustHandlePropertyHeight("minusRotary");
 
-                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
-                        _panelModel.AdjustPropertyPanelHeight("addRotoswing");
-                        _panelModel.AdjustHandlePropertyHeight("addRotoswing");
+                    //        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
+                    //        _panelModel.AdjustPropertyPanelHeight("addRotoswing");
+                    //        _panelModel.AdjustHandlePropertyHeight("addRotoswing");
 
-                        if (_panelModel.Panel_ParentMultiPanelModel != null)
-                        {
-                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
-                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
-                        }
+                    //        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    //        {
+                    //            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                    //            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
+                    //        }
 
-                        if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Height >= 2100)
-                        {
-                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
-                            _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
-                            _panelModel.AdjustHandlePropertyHeight("addCornerDrive");
-                            _panelModel.AdjustRotoswingPropertyHeight("addCornerDrive");
+                    //        if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Height >= 2100)
+                    //        {
+                    //            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                    //            _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
+                    //            _panelModel.AdjustHandlePropertyHeight("addCornerDrive");
+                    //            _panelModel.AdjustRotoswingPropertyHeight("addCornerDrive");
 
-                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
-                            _panelModel.AdjustPropertyPanelHeight("addExtension");
-                            _panelModel.AdjustHandlePropertyHeight("addExtension");
-                            _panelModel.AdjustRotoswingPropertyHeight("addExtension");
+                    //            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                    //            _panelModel.AdjustPropertyPanelHeight("addExtension");
+                    //            _panelModel.AdjustHandlePropertyHeight("addExtension");
+                    //            _panelModel.AdjustRotoswingPropertyHeight("addExtension");
 
-                            if (_panelModel.Panel_ParentMultiPanelModel != null)
-                            {
-                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
-                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
-                            }
+                    //            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    //            {
+                    //                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                    //                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                    //            }
 
-                            for (int i = 0; i < fieldExtension_count; i++)
-                            {
-                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtensionField");
-                                _panelModel.AdjustPropertyPanelHeight("addExtensionField");
-                                _panelModel.AdjustHandlePropertyHeight("addExtensionField");
-                                _panelModel.AdjustRotoswingPropertyHeight("addExtensionField");
+                    //            for (int i = 0; i < fieldExtension_count; i++)
+                    //            {
+                    //                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtensionField");
+                    //                _panelModel.AdjustPropertyPanelHeight("addExtensionField");
+                    //                _panelModel.AdjustHandlePropertyHeight("addExtensionField");
+                    //                _panelModel.AdjustRotoswingPropertyHeight("addExtensionField");
 
-                                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                                {
-                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtensionField");
-                                }
-                            }
-                        }
-                    }
-                    else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
-                    {
-                        _panelModel.Panel_RotoswingOptionsVisibility = false;
-                        _panelModel.Panel_RotaryOptionsVisibility = true;
+                    //                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    //                {
+                    //                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtensionField");
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //    else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
+                    //    {
+                    //        _panelModel.Panel_RotoswingOptionsVisibility = false;
+                    //        _panelModel.Panel_RotaryOptionsVisibility = true;
 
-                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
-                        _panelModel.AdjustPropertyPanelHeight("minusRotoswing");
-                        _panelModel.AdjustHandlePropertyHeight("minusRotoswing");
+                    //        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
+                    //        _panelModel.AdjustPropertyPanelHeight("minusRotoswing");
+                    //        _panelModel.AdjustHandlePropertyHeight("minusRotoswing");
 
-                        if (_panelModel.Panel_ParentMultiPanelModel != null)
-                        {
-                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
-                        }
+                    //        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    //        {
+                    //            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
+                    //        }
 
-                        if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Height >= 2100)
-                        {
-                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
-                            _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
-                            _panelModel.AdjustHandlePropertyHeight("minusCornerDrive");
-                            _panelModel.AdjustRotoswingPropertyHeight("minusCornerDrive");
+                    //        if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Height >= 2100)
+                    //        {
+                    //            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                    //            _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                    //            _panelModel.AdjustHandlePropertyHeight("minusCornerDrive");
+                    //            _panelModel.AdjustRotoswingPropertyHeight("minusCornerDrive");
 
-                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
-                            _panelModel.AdjustPropertyPanelHeight("minusExtension");
-                            _panelModel.AdjustHandlePropertyHeight("minusExtension");
-                            _panelModel.AdjustRotoswingPropertyHeight("minusExtension");
+                    //            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+                    //            _panelModel.AdjustPropertyPanelHeight("minusExtension");
+                    //            _panelModel.AdjustHandlePropertyHeight("minusExtension");
+                    //            _panelModel.AdjustRotoswingPropertyHeight("minusExtension");
 
-                            if (_panelModel.Panel_ParentMultiPanelModel != null)
-                            {
-                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
-                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
-                            }
+                    //            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    //            {
+                    //                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                    //                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+                    //            }
 
-                            for (int i = 0; i < fieldExtension_count; i++)
-                            {
-                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
-                                _panelModel.AdjustPropertyPanelHeight("minusExtensionField");
-                                _panelModel.AdjustHandlePropertyHeight("minusExtensionField");
-                                _panelModel.AdjustRotoswingPropertyHeight("minusExtensionField");
+                    //            for (int i = 0; i < fieldExtension_count; i++)
+                    //            {
+                    //                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
+                    //                _panelModel.AdjustPropertyPanelHeight("minusExtensionField");
+                    //                _panelModel.AdjustHandlePropertyHeight("minusExtensionField");
+                    //                _panelModel.AdjustRotoswingPropertyHeight("minusExtensionField");
 
-                                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                                {
-                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
-                                }
+                    //                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    //                {
+                    //                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
+                    //                }
 
-                            }
-                        }
+                    //            }
+                    //        }
 
-                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
-                        _panelModel.AdjustPropertyPanelHeight("addRotary");
-                        _panelModel.AdjustHandlePropertyHeight("addRotary");
+                    //        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+                    //        _panelModel.AdjustPropertyPanelHeight("addRotary");
+                    //        _panelModel.AdjustHandlePropertyHeight("addRotary");
 
-                        if (_panelModel.Panel_ParentMultiPanelModel != null)
-                        {
-                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotary");
-                        }
-                    }
+                    //        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    //        {
+                    //            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+                    //        }
+                    //    }
                 }
             }
         }
@@ -247,6 +248,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_HandleType", new Binding("Text", _panelModel, "Panel_HandleType", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_HandleOptionsVisibility", new Binding("Visible", _panelModel, "Panel_HandleOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_HandleOptionsHeight", new Binding("Height", _panelModel, "Panel_HandleOptionsHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Frame_ArtNo", new Binding("Frame_ArtNo", _panelModel.Panel_ParentFrameModel, "Frame_ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_SashProfileArtNo", new Binding("Panel_SashProfileArtNo", _panelModel, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             
             return binding;
         }

@@ -1076,11 +1076,22 @@ namespace ModelLayer.Model.Quotation
 
                                     if (pnl_curCtrl.Panel_MotorizedOptionVisibility == false)
                                     {
-                                        Material_List.Rows.Add("Friction Stay " + pnl_curCtrl.Panel_FrictionStayArtNo.ToString(),
-                                                               1, "pair(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
+                                        if (pnl_curCtrl.Panel_Type.Contains("Awning"))
+                                        {
+                                            Material_List.Rows.Add("Friction Stay " + pnl_curCtrl.Panel_FrictionStayArtNo.ToString(),
+                                                                   1, "pair(s)",
+                                                                   "",
+                                                                   "Sash & Frame",
+                                                                   @"");
+                                        }
+                                        else if (pnl_curCtrl.Panel_Type.Contains("Casement"))
+                                        {
+                                            Material_List.Rows.Add("Friction Stay " + pnl_curCtrl.Panel_FSCasementArtNo.ToString(),
+                                                                   1, "pair(s)",
+                                                                   "",
+                                                                   "Sash & Frame",
+                                                                   @"");
+                                        }
 
                                         if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                         {
@@ -1564,11 +1575,22 @@ namespace ModelLayer.Model.Quotation
                         }
                         else if (pnl.Panel_MotorizedOptionVisibility == false)
                         {
-                            Material_List.Rows.Add("Friction Stay " + pnl.Panel_FrictionStayArtNo.ToString(),
-                                                   1, "pair(s)",
-                                                   "",
-                                                   "Sash & Frame",
-                                                   @"");
+                            if (pnl.Panel_Type.Contains("Awning"))
+                            {
+                                Material_List.Rows.Add("Friction Stay " + pnl.Panel_FrictionStayArtNo.ToString(),
+                                                       1, "pair(s)",
+                                                       "",
+                                                       "Sash & Frame",
+                                                       @"");
+                            }
+                            else if (pnl.Panel_Type.Contains("Casement"))
+                            {
+                                Material_List.Rows.Add("Friction Stay " + pnl.Panel_FSCasementArtNo.ToString(),
+                                                       1, "pair(s)",
+                                                       "",
+                                                       "Sash & Frame",
+                                                       @"");
+                            }
 
                             if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                             {

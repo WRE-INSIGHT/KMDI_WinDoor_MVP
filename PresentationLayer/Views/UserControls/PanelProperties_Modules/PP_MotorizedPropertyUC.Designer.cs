@@ -56,7 +56,6 @@
             // 
             // chk_Motorized
             // 
-            this.chk_Motorized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_Motorized.Appearance = System.Windows.Forms.Appearance.Button;
             this.chk_Motorized.BackColor = System.Drawing.SystemColors.ControlDark;
             this.chk_Motorized.FlatAppearance.BorderSize = 0;
