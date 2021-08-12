@@ -11,15 +11,15 @@
 
         #region PanelModelConstants
 
-        public int panel_propertyHeight_default = 175; //800;
+        public int panel_propertyHeight_default = 175;
         public int panel_property_sashPanelHeight = 53;
         public int panel_property_handleOptionsHeight = 35;
         public int panel_property_glassOptionsHeight = 130;
         public int panel_property_rotoswingOptionsheight_default = 84;
         public int panel_property_rotaryOptionsheight_default = 56;
-        public int panel_property_motorizedOptionsheight = 72; //41;
-        public int panel_property_motorizedChkOptionsheight = 31; //29;
-        public int panel_property_motorizedCmbOptionsheight = 41;
+        public int panel_property_motorizedOptionsheight = 120;
+        public int panel_property_motorizedChkOptionsheight = 31;
+        public int panel_property_motorizedCmbOptionsheight = 89;
         public int panel_property_cornerDriveOptionsheight_default = 30;
         public int panel_property_extensionOptionsheight = 81;
         public int panel_property_extensionFieldsheight = 31;
@@ -27,7 +27,14 @@
 
         #endregion
 
-        public int div_propertyheight_default = 173;
+        #region DividerModelConstants
+
+        public int div_propertyheight_default = 161; //228 - 40(height/Width) - 27(cladding_panel)
+        public int div_property_claddingOptionsHeight = 28;
+        public int div_property_pnlAddcladdingOptionsHeight = 27;
+
+        #endregion
+
         public int mpnl_propertyHeight_default = 129;
     }
 }

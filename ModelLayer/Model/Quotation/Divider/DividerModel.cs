@@ -1,4 +1,6 @@
-﻿using ModelLayer.Model.Quotation.MultiPanel;
+﻿using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Variables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +17,8 @@ namespace ModelLayer.Model.Quotation.Divider
 {
     public class DividerModel : IDividerModel, INotifyPropertyChanged
     {
+        ConstantVariables constants = new ConstantVariables();
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -269,6 +273,7 @@ namespace ModelLayer.Model.Quotation.Divider
         }
 
         public IMultiPanelModel Div_MPanelParent { get; set; }
+        public IFrameModel Div_FrameParent { get; set; }
 
         #region Explosion
 
@@ -319,8 +324,21 @@ namespace ModelLayer.Model.Quotation.Divider
         public Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
         public CladdingProfile_ArticleNo Div_CladdingProfileArtNo { get; set; }
         public CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
+        public Dictionary<int, int> Div_CladdingSizeList { get; set; }
 
-        public int Div_CladdingProfileSize { get; set; }
+        private int _divPropHeight;
+        public int Div_PropHeight
+        {
+            get
+            {
+                return _divPropHeight;
+            }
+            set
+            {
+                _divPropHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public void SetExplosionValues_Div()
         {
@@ -353,7 +371,6 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                         Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                        Div_CladdingProfileSize = Div_ExplosionHeight + 30;
                     }
                 }
                 else if (Div_Type == DividerType.Transom)
@@ -380,7 +397,6 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                         Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                        Div_CladdingProfileSize = Div_ExplosionWidth + 30;
                     }
                 }
             }
@@ -485,7 +501,6 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                             Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                            Div_CladdingProfileSize = Div_ExplosionHeight + 30;
                         }
                     }
                 }
@@ -587,13 +602,25 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                             Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                            Div_CladdingProfileSize = Div_ExplosionWidth + 30;
                         }
                     }
                 }
             }
 
         }
+
+        public void AdjustPropertyPanelHeight(string mode)
+        {
+            if (mode == "addCladding")
+            {
+                Div_PropHeight += constants.div_property_claddingOptionsHeight;
+            }
+            else if (mode == "minusCladding")
+            {
+                Div_PropHeight -= constants.div_property_claddingOptionsHeight;
+            }
+        }
+
         #endregion
 
         public DividerModel(int divID,
@@ -609,7 +636,9 @@ namespace ModelLayer.Model.Quotation.Divider
                             Divider_ArticleNo divArtNo,
                             int divDisplayWidth,
                             int divDisplayHeight,
-                            IMultiPanelModel divMPanelParent)
+                            IMultiPanelModel divMPanelParent,
+                            Dictionary<int, int> divCladdingSizeList,
+                            IFrameModel divFrameParent)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -625,6 +654,39 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_DisplayWidth = divDisplayWidth;
             Div_DisplayHeight = divDisplayHeight;
             Div_MPanelParent = divMPanelParent;
+            Div_CladdingSizeList = divCladdingSizeList;
+            Div_FrameParent = divFrameParent;
+
+            SetExplosionValues_Div();
+
+            if (Div_Type == DividerType.Mullion)
+            {
+                if (Div_ExplosionHeight >= 2000)
+                {
+                    Div_PropHeight = constants.div_propertyheight_default +
+                                     constants.div_property_pnlAddcladdingOptionsHeight;
+                    Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                    Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                }
+                else
+                {
+                    Div_PropHeight = constants.div_propertyheight_default;
+                }
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                if (Div_ExplosionWidth >= 2000)
+                {
+                    Div_PropHeight = constants.div_propertyheight_default +
+                                     constants.div_property_pnlAddcladdingOptionsHeight;
+                    Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                    Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                }
+                else
+                {
+                    Div_PropHeight = constants.div_propertyheight_default;
+                }
+            }
         }
     }
 }

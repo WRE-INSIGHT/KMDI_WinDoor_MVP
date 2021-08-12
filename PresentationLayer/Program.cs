@@ -6,6 +6,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.Presenter;
 using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
@@ -13,6 +14,7 @@ using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.DividerProperties_Modules;
 using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
@@ -209,6 +211,9 @@ namespace PresentationLayer
 
                 .RegisterType<IPP_GeorgianBarPropertyUC, PP_GeorgianBarPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_GeorgianBarPropertyUCPresenter, PP_GeorgianBarPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IDP_CladdingPropertyUC, DP_CladdingPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDP_CladdingPropertyUCPresenter, DP_CladdingPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

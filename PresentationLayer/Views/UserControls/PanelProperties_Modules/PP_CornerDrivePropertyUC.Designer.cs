@@ -44,6 +44,8 @@
             // 
             // cmb_CornerDrive
             // 
+            this.cmb_CornerDrive.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_CornerDrive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_CornerDrive.DropDownWidth = 69;
             this.cmb_CornerDrive.FormattingEnabled = true;

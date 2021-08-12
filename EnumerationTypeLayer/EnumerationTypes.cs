@@ -151,7 +151,7 @@ namespace EnumerationTypeLayer
             private CoverProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class FrictionStay_ArticleNo : Enumeration<FrictionStay_ArticleNo, int>
+        public class FrictionStay_ArticleNo : Enumeration<FrictionStay_ArticleNo, int> //AW
         {
             public static readonly FrictionStay_ArticleNo _Storm8 = new FrictionStay_ArticleNo(0, "Storm 8");
             public static readonly FrictionStay_ArticleNo _477254 = new FrictionStay_ArticleNo(1, "477254");
@@ -162,6 +162,18 @@ namespace EnumerationTypeLayer
             public static readonly FrictionStay_ArticleNo _None = new FrictionStay_ArticleNo(6, "None");
 
             private FrictionStay_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class FrictionStayCasement_ArticleNo : Enumeration<FrictionStayCasement_ArticleNo, int> //CW
+        {
+            public static readonly FrictionStayCasement_ArticleNo _485770 = new FrictionStayCasement_ArticleNo(0, "485770");
+            public static readonly FrictionStayCasement_ArticleNo _A235B12161 = new FrictionStayCasement_ArticleNo(1, "A235B12161");
+            public static readonly FrictionStayCasement_ArticleNo _A212C12161 = new FrictionStayCasement_ArticleNo(2, "A212C12161");
+            public static readonly FrictionStayCasement_ArticleNo _A212C16161 = new FrictionStayCasement_ArticleNo(3, "A212C16161");
+            public static readonly FrictionStayCasement_ArticleNo _A212C20161 = new FrictionStayCasement_ArticleNo(4, "A212C20161");
+            public static readonly FrictionStayCasement_ArticleNo _None = new FrictionStayCasement_ArticleNo(5, "None");
+
+            private FrictionStayCasement_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class Handle_Type : Enumeration<Handle_Type, int>
@@ -221,8 +233,8 @@ namespace EnumerationTypeLayer
 
         public class Striker_ArticleNo : Enumeration<Striker_ArticleNo, int>
         {
-            public static readonly Striker_ArticleNo _M89ANT = new Striker_ArticleNo(0, "M89A-NT");
-            public static readonly Striker_ArticleNo _M89CNT = new Striker_ArticleNo(1, "M89C-NT");
+            public static readonly Striker_ArticleNo _M89ANTA = new Striker_ArticleNo(0, "M89A-NT-A");
+            public static readonly Striker_ArticleNo _M89ANTC = new Striker_ArticleNo(1, "M89A-NT-C");
             private Striker_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -330,6 +342,14 @@ namespace EnumerationTypeLayer
             public static readonly GeorgianBar_ArticleNo _None = new GeorgianBar_ArticleNo(2, "None");
 
             private GeorgianBar_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class PlasticWedge_ArticleNo : Enumeration<PlasticWedge_ArticleNo, int>
+        {
+            public static readonly PlasticWedge_ArticleNo _7199DB = new PlasticWedge_ArticleNo(0, "7199-DB");
+            public static readonly PlasticWedge_ArticleNo _7199WHT = new PlasticWedge_ArticleNo(0, "7199-WHT");
+
+            private PlasticWedge_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
     }

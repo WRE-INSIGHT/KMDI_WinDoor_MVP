@@ -57,6 +57,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_OriginalGlassWidth { get; set; }
         int Panel_GlassHeight { get; set; }
         int Panel_OriginalGlassHeight { get; set; }
+        int Panel_GlassPropertyHeight { get; set; }
         int Panel_GlazingSpacerQty { get; set; }
         GlassFilm_Types Panel_GlassFilm { get; set; }
         bool Panel_SashPropertyVisibility { get; set; }
@@ -72,6 +73,7 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
+        FrictionStayCasement_ArticleNo Panel_FSCasementArtNo { get; set; }
         SnapInKeep_ArticleNo Panel_SnapInKeepArtNo { get; set; }
         FixedCam_ArticleNo Panel_FixedCamArtNo { get; set; }
         _30x25Cover_ArticleNo Panel_30x25CoverArtNo { get; set; }
@@ -116,6 +118,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_CornerDriveOptionsVisibility { get; set; }
         bool Panel_ExtensionOptionsVisibility { get; set; }
         int Panel_RotoswingOptionsHeight { get; set; }
+        PlasticWedge_ArticleNo Panel_PlasticWedge { get; set; }
         int Panel_PlasticWedgeQty { get; set; }
         MiddleCloser_ArticleNo Panel_MiddleCloserArtNo { get; set; }
         LockingKit_ArticleNo Panel_LockingKitArtNo { get; set; }
@@ -132,6 +135,8 @@ namespace ModelLayer.Model.Quotation.Panel
         MotorizedMech_ArticleNo Panel_MotorizedMechArtNo { get; set; }
         int Panel_MotorizedPropertyHeight { get; set; }
         int Panel_MotorizedMechQty { get; set; }
+        int Panel_MotorizedMechSetQty { get; set; }
+        int Panel_2DHingeQty { get; set; }
         int Panel_ExtensionPropertyHeight { get; set; }
         GeorgianBar_ArticleNo Panel_GeorgianBarArtNo { get; set; }
         int Panel_GeorgianBar_VerticalQty { get; set; }

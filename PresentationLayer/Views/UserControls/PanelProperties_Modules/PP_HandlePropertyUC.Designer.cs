@@ -28,27 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flp_HandleTypeOptions = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.cmb_HandleType = new System.Windows.Forms.ComboBox();
-            this.flp_HandleTypeOptions.SuspendLayout();
+            this.pnl_HandleTypeOptions = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // flp_HandleTypeOptions
-            // 
-            this.flp_HandleTypeOptions.Controls.Add(this.panel1);
-            this.flp_HandleTypeOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flp_HandleTypeOptions.Location = new System.Drawing.Point(0, 0);
-            this.flp_HandleTypeOptions.Name = "flp_HandleTypeOptions";
-            this.flp_HandleTypeOptions.Size = new System.Drawing.Size(154, 35);
-            this.flp_HandleTypeOptions.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.cmb_HandleType);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
@@ -67,6 +58,8 @@
             // 
             // cmb_HandleType
             // 
+            this.cmb_HandleType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_HandleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_HandleType.FormattingEnabled = true;
             this.cmb_HandleType.Location = new System.Drawing.Point(52, 7);
@@ -75,27 +68,34 @@
             this.cmb_HandleType.TabIndex = 16;
             this.cmb_HandleType.SelectedValueChanged += new System.EventHandler(this.cmb_HandleType_SelectedValueChanged);
             // 
+            // pnl_HandleTypeOptions
+            // 
+            this.pnl_HandleTypeOptions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl_HandleTypeOptions.Location = new System.Drawing.Point(0, 36);
+            this.pnl_HandleTypeOptions.Name = "pnl_HandleTypeOptions";
+            this.pnl_HandleTypeOptions.Size = new System.Drawing.Size(154, 0);
+            this.pnl_HandleTypeOptions.TabIndex = 1;
+            // 
             // PP_HandlePropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.flp_HandleTypeOptions);
+            this.Controls.Add(this.pnl_HandleTypeOptions);
+            this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "PP_HandlePropertyUC";
             this.Size = new System.Drawing.Size(154, 35);
             this.Load += new System.EventHandler(this.PP_HandlePropertyUC_Load);
-            this.flp_HandleTypeOptions.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.FlowLayoutPanel flp_HandleTypeOptions;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmb_HandleType;
+        private System.Windows.Forms.Panel pnl_HandleTypeOptions;
     }
 }

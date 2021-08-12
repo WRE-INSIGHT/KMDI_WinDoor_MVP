@@ -77,6 +77,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_GlazingArtNo.DataBindings.Add(ModelBinding["PanelGlazingBead_ArtNo"]);
             cmb_GlassType.DataBindings.Add(ModelBinding["Panel_GlassType"]);
             lbl_GlassThicknessDesc.DataBindings.Add(ModelBinding["Panel_GlassThicknessDesc"]);
+            this.DataBindings.Add(ModelBinding["Panel_GlassPropertyHeight"]);
         }
     }
 }

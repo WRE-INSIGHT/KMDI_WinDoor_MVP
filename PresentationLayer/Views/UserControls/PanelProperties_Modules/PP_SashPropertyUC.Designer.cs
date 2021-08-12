@@ -36,6 +36,8 @@
             // 
             // cmb_SashReinf
             // 
+            this.cmb_SashReinf.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_SashReinf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_SashReinf.FormattingEnabled = true;
             this.cmb_SashReinf.Location = new System.Drawing.Point(76, 28);
@@ -55,6 +57,8 @@
             // 
             // cmb_SashProfile
             // 
+            this.cmb_SashProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_SashProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_SashProfile.FormattingEnabled = true;
             this.cmb_SashProfile.Location = new System.Drawing.Point(76, 3);

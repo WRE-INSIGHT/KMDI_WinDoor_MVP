@@ -78,9 +78,9 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseEvent(sender, ChkOrientationCheckChangedEventRaised, e);
         }
 
-        public FlowLayoutPanel GetPanelSpecsFLP()
+        public Panel GetPanelSpecsPNL()
         {
-            return flp_PanelSpecs;
+            return pnl_panelSpecsBody;
         }
     }
 }

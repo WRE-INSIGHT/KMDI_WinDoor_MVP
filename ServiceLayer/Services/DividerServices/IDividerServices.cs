@@ -3,6 +3,8 @@ using ModelLayer.Model.Quotation.Divider;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using static EnumerationTypeLayer.EnumerationTypes;
+using System.Collections.Generic;
+using ModelLayer.Model.Quotation.Frame;
 
 namespace ServiceLayer.Services.DividerServices
 {
@@ -17,9 +19,11 @@ namespace ServiceLayer.Services.DividerServices
                                       int divDisplayWidth,
                                       int divDisplayHeight,
                                       IMultiPanelModel divMPanelParent,
+                                      IFrameModel divFrameParent,
                                       int divID = 0,
                                       float divImageRendererZoom = 1,
                                       string divFrameType = "",
-                                      string divName = "");        
+                                      string divName = "",
+                                      Dictionary<int, int> divCladdingSizeList = null);        
     }
 }

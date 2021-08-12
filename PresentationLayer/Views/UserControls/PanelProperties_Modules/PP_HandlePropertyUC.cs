@@ -46,9 +46,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_HandleOptionsHeight"]);
         }
 
-        public FlowLayoutPanel GetHandleTypeFLP()
+        public Panel GetHandleTypePNL()
         {
-            return flp_HandleTypeOptions;
+            return pnl_HandleTypeOptions;
         }
     }
 }

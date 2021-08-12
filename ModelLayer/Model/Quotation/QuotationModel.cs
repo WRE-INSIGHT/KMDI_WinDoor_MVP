@@ -713,17 +713,20 @@ namespace ModelLayer.Model.Quotation
 
                                     if (div_nxtCtrl.Div_ExplosionHeight >= 2000)
                                     {
-                                        Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
-                                                               1, "pc(s)",
-                                                               div_nxtCtrl.Div_CladdingProfileSize.ToString(),
-                                                               mpnl.MPanel_Type,
-                                                               @"|  |");
+                                        foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
+                                        {
+                                            Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   cladding_size.ToString(),
+                                                                   mpnl.MPanel_Type,
+                                                                   @"|  |");
 
-                                        Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
-                                                               1, "pc(s)",
-                                                               div_nxtCtrl.Div_CladdingProfileSize.ToString(),
-                                                               "CPL",
-                                                               @"|  |");
+                                            Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   cladding_size.ToString(),
+                                                                   "CPL",
+                                                                   @"|  |");
+                                        }
                                     }
 
                                 }
@@ -749,17 +752,20 @@ namespace ModelLayer.Model.Quotation
 
                                     if (div_nxtCtrl.Div_ExplosionWidth >= 2000)
                                     {
-                                        Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
-                                                              1, "pc(s)",
-                                                              div_nxtCtrl.Div_CladdingProfileSize.ToString(),
-                                                              mpnl.MPanel_Type,
-                                                              @"|  |");
+                                        foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
+                                        {
+                                            Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   cladding_size.ToString(),
+                                                                   mpnl.MPanel_Type,
+                                                                   @"|  |");
 
-                                        Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
-                                                               1, "pc(s)",
-                                                               div_nxtCtrl.Div_CladdingProfileSize.ToString(),
-                                                               "CPL",
-                                                               @"|  |");
+                                            Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   cladding_size.ToString(),
+                                                                   "CPL",
+                                                                   @"|  |");
+                                        }
                                     }
                                 }
                                 Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
@@ -977,13 +983,13 @@ namespace ModelLayer.Model.Quotation
                                                            "Sash",
                                                            @"|  |");
 
-                                    if (perFrame == true)
+                                    if (pnl_curCtrl.Panel_Type.Contains("Fixed") == false)
                                     {
                                         Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.ToString(),
-                                                               1, "pc(s)",
-                                                               frame.Frame_Width.ToString(),
-                                                               "Frame",
-                                                               @"|  |");
+                                                                   1, "pc(s)",
+                                                                   frame.Frame_Width.ToString(),
+                                                                   "Frame",
+                                                                   @"|  |");
 
                                         Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.ToString(),
                                                                1, "pc(s)",
@@ -991,6 +997,10 @@ namespace ModelLayer.Model.Quotation
                                                                "Frame",
                                                                @"|  |");
 
+                                    }
+
+                                    if (perFrame == true)
+                                    {
                                         if (pnl_curCtrl.Panel_MotorizedOptionVisibility == true)
                                         {
                                             Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
@@ -1007,12 +1017,12 @@ namespace ModelLayer.Model.Quotation
 
                                             Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
                                                                    1, "pc(s)",
-                                                                   frame.Frame_Width,
+                                                                   frame.Frame_Width + 150,
                                                                    "Frame",
                                                                    @"");
 
                                             Material_List.Rows.Add("2D Hinge " + pnl_curCtrl.Panel_2dHingeArtNo.ToString(),
-                                                                   1, "pair(s)",
+                                                                   pnl_curCtrl.Panel_2DHingeQty, "pair(s)",
                                                                    "",
                                                                    "Sash & Frame",
                                                                    @"");
@@ -1027,22 +1037,22 @@ namespace ModelLayer.Model.Quotation
 
                                             if (pnl_curCtrl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                                             {
-                                                total_screws_installation += 20;
+                                                total_screws_installation += (20 * pnl_curCtrl.Panel_MotorizedMechQty);
                                             }
                                             else if (pnl_curCtrl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
                                                      pnl_curCtrl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
                                             {
-                                                total_screws_installation += 10;
+                                                total_screws_installation += (10 * pnl_curCtrl.Panel_MotorizedMechQty);
                                             }
 
                                             Material_List.Rows.Add("Push Button Switch " + pnl_curCtrl.Panel_PushButtonSwitchArtNo.ToString(),
-                                                                   1, "pc(s)",
+                                                                   pnl_curCtrl.Panel_MotorizedMechSetQty, "pc(s)",
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
 
                                             Material_List.Rows.Add("False pole " + pnl_curCtrl.Panel_FalsePoleArtNo.ToString(),
-                                                                   1, "pc(s)",
+                                                                   pnl_curCtrl.Panel_MotorizedMechSetQty * 2, "pc(s)",
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
@@ -1050,13 +1060,13 @@ namespace ModelLayer.Model.Quotation
                                             total_screws_installation += 4;
 
                                             Material_List.Rows.Add("Supporting Frame " + pnl_curCtrl.Panel_SupportingFrameArtNo.ToString(),
-                                                                   1, "pc(s)",
+                                                                   pnl_curCtrl.Panel_MotorizedMechSetQty, "pc(s)",
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
 
                                             Material_List.Rows.Add("Plate " + pnl_curCtrl.Panel_PlateArtNo.ToString(),
-                                                                   1, "pc(s)",
+                                                                   pnl_curCtrl.Panel_MotorizedMechSetQty, "pc(s)",
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
@@ -1084,6 +1094,12 @@ namespace ModelLayer.Model.Quotation
 
                                             additional_screws_fabrication += 4;
 
+                                            Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
+                                                                   pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+
                                             Material_List.Rows.Add("Fixed Cam " + pnl_curCtrl.Panel_FixedCamArtNo.ToString(),
                                                                    2, "pc(s)",
                                                                    "",
@@ -1109,12 +1125,6 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             additional_screws_fabrication += 6;
                                         }
-
-                                        Material_List.Rows.Add("Plastic Wedge 7199",
-                                                               pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
-                                                               "",
-                                                               "Frame",
-                                                               @"");
 
                                         if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoswing)
                                         {
@@ -1410,13 +1420,13 @@ namespace ModelLayer.Model.Quotation
                                 if (pnl_curCtrl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
                                 {
                                     Material_List.Rows.Add("Georgian bar P" + pnl_curCtrl.PanelGlass_ID + " (Horizontal) " + pnl_curCtrl.Panel_GeorgianBarArtNo.ToString(),
-                                                           pnl_curCtrl.Panel_GeorgianBar_HorizontalQty, "pc(s)",
+                                                           pnl_curCtrl.Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
                                                            pnl_curCtrl.Panel_GlassWidth + 5,
                                                            "Glass",
                                                            "");
 
                                     Material_List.Rows.Add("Georgian bar P" + pnl_curCtrl.PanelGlass_ID + " (Vertical) " + pnl_curCtrl.Panel_GeorgianBarArtNo.ToString(),
-                                                           pnl_curCtrl.Panel_GeorgianBar_VerticalQty, "pc(s)",
+                                                           pnl_curCtrl.Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
                                                            pnl_curCtrl.Panel_GlassHeight + 5,
                                                            "Glass",
                                                            "");
@@ -1467,17 +1477,20 @@ namespace ModelLayer.Model.Quotation
                                                "Sash",
                                                @"|  |");
 
-                        Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo.ToString(),
-                                               1, "pc(s)",
-                                               frame.Frame_Width.ToString(),
-                                               "Frame",
-                                               @"|  |");
+                        if (pnl.Panel_Type.Contains("Fixed") == false)
+                        {
+                            Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo.ToString(),
+                                                   1, "pc(s)",
+                                                   frame.Frame_Width.ToString(),
+                                                   "Frame",
+                                                   @"|  |");
 
-                        Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.ToString(),
-                                               1, "pc(s)",
-                                               frame.Frame_Width.ToString(),
-                                               "Frame",
-                                               @"|  |");
+                            Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.ToString(),
+                                                   1, "pc(s)",
+                                                   frame.Frame_Width.ToString(),
+                                                   "Frame",
+                                                   @"|  |");
+                        }
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)
                         {
@@ -1495,36 +1508,42 @@ namespace ModelLayer.Model.Quotation
 
                             Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
                                                    1, "pc(s)",
-                                                   frame.Frame_Width,
+                                                   frame.Frame_Width + 150,
                                                    "Frame",
                                                    @"");
 
                             Material_List.Rows.Add("2D Hinge " + pnl.Panel_2dHingeArtNo.ToString(),
-                                                   1, "pair(s)",
+                                                   pnl.Panel_2DHingeQty, "pair(s)",
                                                    "",
                                                    "Sash & Frame",
+                                                   @"");
+
+                            Material_List.Rows.Add("Motorized Mechanism " + pnl.Panel_MotorizedMechArtNo.ToString(),
+                                                   pnl.Panel_MotorizedMechQty, "pc(s)",
+                                                   "",
+                                                   "Sash",
                                                    @"");
 
                             additional_screws_fabrication += 3;
 
                             if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                             {
-                                total_screws_installation += 20;
+                                total_screws_installation += (20 * pnl.Panel_MotorizedMechQty);
                             }
                             else if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
                                      pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
                             {
-                                total_screws_installation += 10;
+                                total_screws_installation += (10 * pnl.Panel_MotorizedMechQty);
                             }
 
                             Material_List.Rows.Add("Push Button Switch " + pnl.Panel_PushButtonSwitchArtNo.ToString(),
-                                                   1, "pc(s)",
+                                                   pnl.Panel_MotorizedMechSetQty, "pc(s)",
                                                    "",
                                                    "Concrete",
                                                    @"");
 
                             Material_List.Rows.Add("False pole " + pnl.Panel_FalsePoleArtNo.ToString(),
-                                                   1, "pc(s)",
+                                                   pnl.Panel_MotorizedMechSetQty * 2, "pc(s)",
                                                    "",
                                                    "Concrete",
                                                    @"");
@@ -1532,13 +1551,13 @@ namespace ModelLayer.Model.Quotation
                             total_screws_installation += 4;
 
                             Material_List.Rows.Add("Supporting Frame " + pnl.Panel_SupportingFrameArtNo.ToString(),
-                                                   1, "pc(s)",
+                                                   pnl.Panel_MotorizedMechSetQty, "pc(s)",
                                                    "",
                                                    "Concrete",
                                                    @"");
 
                             Material_List.Rows.Add("Plate " + pnl.Panel_PlateArtNo.ToString(),
-                                                   1, "pc(s)",
+                                                   pnl.Panel_MotorizedMechSetQty, "pc(s)",
                                                    "",
                                                    "Concrete",
                                                    @"");
@@ -1562,6 +1581,12 @@ namespace ModelLayer.Model.Quotation
                                                        @"");
 
                                 additional_screws_fabrication += 4;
+
+                                Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
+                                                       pnl.Panel_PlasticWedgeQty, "pc (s)",
+                                                       "",
+                                                       "Frame",
+                                                       @"");
 
                                 Material_List.Rows.Add("Fixed Cam " + pnl.Panel_FixedCamArtNo.ToString(),
                                                        2, "pc(s)",
@@ -1589,12 +1614,6 @@ namespace ModelLayer.Model.Quotation
                             {
                                 additional_screws_fabrication += 6;
                             }
-
-                            Material_List.Rows.Add("Plastic Wedge 7199",
-                                                   pnl.Panel_PlasticWedgeQty, "pc (s)",
-                                                   "",
-                                                   "Frame",
-                                                   @"");
 
                             if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
                             {
@@ -1890,13 +1909,13 @@ namespace ModelLayer.Model.Quotation
                     if (pnl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
                     {
                         Material_List.Rows.Add("Georgian bar P" + pnl.PanelGlass_ID + " (Horizontal) " + pnl.Panel_GeorgianBarArtNo.ToString(),
-                                               pnl.Panel_GeorgianBar_HorizontalQty, "pc(s)",
+                                               pnl.Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
                                                pnl.Panel_GlassWidth + 5,
                                                "Glass",
                                                "");
 
                         Material_List.Rows.Add("Georgian bar P" + pnl.PanelGlass_ID + " (Vertical) " + pnl.Panel_GeorgianBarArtNo.ToString(),
-                                               pnl.Panel_GeorgianBar_VerticalQty, "pc(s)",
+                                               pnl.Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
                                                pnl.Panel_GlassHeight + 5,
                                                "Glass",
                                                "");
@@ -1955,7 +1974,7 @@ namespace ModelLayer.Model.Quotation
                                    "",
                                    "Frame");
 
-            Material_List.Rows.Add("Exp bolt",
+            Material_List.Rows.Add("Exp bolt FRA003",
                                    Expansion_BoltQty_Total,
                                    "pc(s)",
                                    "",

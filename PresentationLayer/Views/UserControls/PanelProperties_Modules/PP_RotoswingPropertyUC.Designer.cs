@@ -35,9 +35,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.cmb_Espagnolette = new System.Windows.Forms.ComboBox();
             this.pnl_RotoswingDefaultOptions = new System.Windows.Forms.Panel();
-            this.flp_RotoswingOptions = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnl_RotoswingOptions = new System.Windows.Forms.Panel();
             this.pnl_RotoswingDefaultOptions.SuspendLayout();
-            this.flp_RotoswingOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // label6
@@ -51,6 +50,8 @@
             // 
             // cmb_RotoswingNo
             // 
+            this.cmb_RotoswingNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_RotoswingNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_RotoswingNo.FormattingEnabled = true;
             this.cmb_RotoswingNo.Location = new System.Drawing.Point(67, 3);
@@ -74,6 +75,8 @@
             // 
             // cmb_MiddleCloser
             // 
+            this.cmb_MiddleCloser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_MiddleCloser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_MiddleCloser.FormattingEnabled = true;
             this.cmb_MiddleCloser.Location = new System.Drawing.Point(67, 56);
@@ -95,6 +98,8 @@
             // 
             // cmb_Espagnolette
             // 
+            this.cmb_Espagnolette.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_Espagnolette.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_Espagnolette.FormattingEnabled = true;
             this.cmb_Espagnolette.Location = new System.Drawing.Point(67, 30);
@@ -111,32 +116,32 @@
             this.pnl_RotoswingDefaultOptions.Controls.Add(this.cmb_RotoswingNo);
             this.pnl_RotoswingDefaultOptions.Controls.Add(this.label10);
             this.pnl_RotoswingDefaultOptions.Controls.Add(this.cmb_MiddleCloser);
+            this.pnl_RotoswingDefaultOptions.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_RotoswingDefaultOptions.Location = new System.Drawing.Point(0, 0);
             this.pnl_RotoswingDefaultOptions.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_RotoswingDefaultOptions.Name = "pnl_RotoswingDefaultOptions";
             this.pnl_RotoswingDefaultOptions.Size = new System.Drawing.Size(154, 84);
             this.pnl_RotoswingDefaultOptions.TabIndex = 35;
             // 
-            // flp_RotoswingOptions
+            // pnl_RotoswingOptions
             // 
-            this.flp_RotoswingOptions.Controls.Add(this.pnl_RotoswingDefaultOptions);
-            this.flp_RotoswingOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flp_RotoswingOptions.Location = new System.Drawing.Point(0, 0);
-            this.flp_RotoswingOptions.Name = "flp_RotoswingOptions";
-            this.flp_RotoswingOptions.Size = new System.Drawing.Size(154, 84);
-            this.flp_RotoswingOptions.TabIndex = 36;
+            this.pnl_RotoswingOptions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl_RotoswingOptions.Location = new System.Drawing.Point(0, 84);
+            this.pnl_RotoswingOptions.Name = "pnl_RotoswingOptions";
+            this.pnl_RotoswingOptions.Size = new System.Drawing.Size(154, 0);
+            this.pnl_RotoswingOptions.TabIndex = 36;
             // 
             // PP_RotoswingPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.flp_RotoswingOptions);
+            this.Controls.Add(this.pnl_RotoswingOptions);
+            this.Controls.Add(this.pnl_RotoswingDefaultOptions);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "PP_RotoswingPropertyUC";
             this.Size = new System.Drawing.Size(154, 84);
             this.Load += new System.EventHandler(this.PP_RotoswingPropertyUC_Load);
             this.pnl_RotoswingDefaultOptions.ResumeLayout(false);
-            this.flp_RotoswingOptions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -149,6 +154,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmb_Espagnolette;
         private System.Windows.Forms.Panel pnl_RotoswingDefaultOptions;
-        private System.Windows.Forms.FlowLayoutPanel flp_RotoswingOptions;
+        private System.Windows.Forms.Panel pnl_RotoswingOptions;
     }
 }

@@ -267,7 +267,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _fixedPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            #region Delete TransomUC
+            #region Delete Divider
             if (_multiPanelModel != null &&
                 _multiPanelModel.MPanel_DividerEnabled &&
                 _panelModel.Panel_Placement != "Last")
@@ -292,6 +292,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
                 _frameModel.AdjustPropertyPanelHeight("Div", "delete");
+
+                foreach (int cladding in div.Div_CladdingSizeList.Values)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
+                }
             }
 
             #endregion

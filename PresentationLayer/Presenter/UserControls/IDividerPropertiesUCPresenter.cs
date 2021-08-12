@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.Divider;
+﻿using System.Drawing;
+using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.Views.UserControls;
 using Unity;
 
@@ -8,5 +9,6 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IDividerPropertiesUC GetDivProperties();
         IDividerPropertiesUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel, IMainPresenter mainPresenter);
+        void SetSaveBtnColor(Color color);
     }
 }

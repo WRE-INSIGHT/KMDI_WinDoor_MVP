@@ -11,6 +11,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler cmbMiddleCloserSelectedValueEventRaised;
         event EventHandler cmbRotoswingNoSelectedValueEventRaised;
 
-        FlowLayoutPanel GetRotoswingOptionFLP();
+        Panel GetRotoswingOptionPNL();
     }
 }

@@ -33,17 +33,27 @@
             this.lbl_Height = new System.Windows.Forms.Label();
             this.num_divWidth = new System.Windows.Forms.NumericUpDown();
             this.lbl_Width = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnl_divArtNo = new System.Windows.Forms.Panel();
             this.cmb_divReinf = new System.Windows.Forms.ComboBox();
             this.lbl_divReinf = new System.Windows.Forms.Label();
             this.cmb_divArtNo = new System.Windows.Forms.ComboBox();
             this.lbl_divArtNo = new System.Windows.Forms.Label();
             this.lbl_divSpecs = new System.Windows.Forms.Label();
-            this.flp_divProp = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnl_dividerBody = new System.Windows.Forms.Panel();
+            this.pnl_AddCladding = new System.Windows.Forms.Panel();
+            this.btn_Save = new System.Windows.Forms.Button();
+            this.btn_AddCladding = new System.Windows.Forms.Button();
+            this.pnl_divName = new System.Windows.Forms.Panel();
+            this.pnl_divWd = new System.Windows.Forms.Panel();
+            this.pnl_divHt = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.flp_divProp.SuspendLayout();
+            this.pnl_divArtNo.SuspendLayout();
+            this.pnl_dividerBody.SuspendLayout();
+            this.pnl_AddCladding.SuspendLayout();
+            this.pnl_divName.SuspendLayout();
+            this.pnl_divWd.SuspendLayout();
+            this.pnl_divHt.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_divname
@@ -51,7 +61,7 @@
             this.lbl_divname.AutoSize = true;
             this.lbl_divname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_divname.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_divname.Location = new System.Drawing.Point(6, 5);
+            this.lbl_divname.Location = new System.Drawing.Point(5, 5);
             this.lbl_divname.Name = "lbl_divname";
             this.lbl_divname.Size = new System.Drawing.Size(68, 21);
             this.lbl_divname.TabIndex = 1;
@@ -61,7 +71,7 @@
             // 
             this.num_divHeight.BackColor = System.Drawing.Color.White;
             this.num_divHeight.Enabled = false;
-            this.num_divHeight.Location = new System.Drawing.Point(6, 81);
+            this.num_divHeight.Location = new System.Drawing.Point(6, 17);
             this.num_divHeight.Name = "num_divHeight";
             this.num_divHeight.ReadOnly = true;
             this.num_divHeight.Size = new System.Drawing.Size(135, 20);
@@ -70,7 +80,7 @@
             // lbl_Height
             // 
             this.lbl_Height.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Height.Location = new System.Drawing.Point(6, 65);
+            this.lbl_Height.Location = new System.Drawing.Point(2, 2);
             this.lbl_Height.Name = "lbl_Height";
             this.lbl_Height.Size = new System.Drawing.Size(150, 13);
             this.lbl_Height.TabIndex = 10;
@@ -80,7 +90,7 @@
             // 
             this.num_divWidth.BackColor = System.Drawing.Color.White;
             this.num_divWidth.Enabled = false;
-            this.num_divWidth.Location = new System.Drawing.Point(6, 42);
+            this.num_divWidth.Location = new System.Drawing.Point(6, 17);
             this.num_divWidth.Name = "num_divWidth";
             this.num_divWidth.ReadOnly = true;
             this.num_divWidth.Size = new System.Drawing.Size(135, 20);
@@ -89,24 +99,25 @@
             // lbl_Width
             // 
             this.lbl_Width.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Width.Location = new System.Drawing.Point(6, 26);
+            this.lbl_Width.Location = new System.Drawing.Point(2, 2);
             this.lbl_Width.Name = "lbl_Width";
             this.lbl_Width.Size = new System.Drawing.Size(150, 13);
             this.lbl_Width.TabIndex = 8;
             this.lbl_Width.Text = "Width";
             // 
-            // panel1
+            // pnl_divArtNo
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.cmb_divReinf);
-            this.panel1.Controls.Add(this.lbl_divReinf);
-            this.panel1.Controls.Add(this.cmb_divArtNo);
-            this.panel1.Controls.Add(this.lbl_divArtNo);
-            this.panel1.Controls.Add(this.lbl_divSpecs);
-            this.panel1.Location = new System.Drawing.Point(6, 107);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(147, 94);
-            this.panel1.TabIndex = 12;
+            this.pnl_divArtNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_divArtNo.Controls.Add(this.cmb_divReinf);
+            this.pnl_divArtNo.Controls.Add(this.lbl_divReinf);
+            this.pnl_divArtNo.Controls.Add(this.cmb_divArtNo);
+            this.pnl_divArtNo.Controls.Add(this.lbl_divArtNo);
+            this.pnl_divArtNo.Controls.Add(this.lbl_divSpecs);
+            this.pnl_divArtNo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_divArtNo.Location = new System.Drawing.Point(0, 0);
+            this.pnl_divArtNo.Name = "pnl_divArtNo";
+            this.pnl_divArtNo.Size = new System.Drawing.Size(158, 90);
+            this.pnl_divArtNo.TabIndex = 12;
             // 
             // cmb_divReinf
             // 
@@ -121,15 +132,15 @@
             "20mm",
             "22mm",
             "25mm"});
-            this.cmb_divReinf.Location = new System.Drawing.Point(65, 56);
+            this.cmb_divReinf.Location = new System.Drawing.Point(67, 56);
             this.cmb_divReinf.Name = "cmb_divReinf";
-            this.cmb_divReinf.Size = new System.Drawing.Size(72, 21);
+            this.cmb_divReinf.Size = new System.Drawing.Size(87, 21);
             this.cmb_divReinf.TabIndex = 11;
             // 
             // lbl_divReinf
             // 
             this.lbl_divReinf.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_divReinf.Location = new System.Drawing.Point(4, 56);
+            this.lbl_divReinf.Location = new System.Drawing.Point(6, 56);
             this.lbl_divReinf.Name = "lbl_divReinf";
             this.lbl_divReinf.Size = new System.Drawing.Size(55, 31);
             this.lbl_divReinf.TabIndex = 10;
@@ -148,16 +159,16 @@
             "20mm",
             "22mm",
             "25mm"});
-            this.cmb_divArtNo.Location = new System.Drawing.Point(65, 22);
+            this.cmb_divArtNo.Location = new System.Drawing.Point(67, 22);
             this.cmb_divArtNo.Name = "cmb_divArtNo";
-            this.cmb_divArtNo.Size = new System.Drawing.Size(72, 21);
+            this.cmb_divArtNo.Size = new System.Drawing.Size(87, 21);
             this.cmb_divArtNo.TabIndex = 9;
             this.cmb_divArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_divArtNo_SelectedValueChanged);
             // 
             // lbl_divArtNo
             // 
             this.lbl_divArtNo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_divArtNo.Location = new System.Drawing.Point(5, 22);
+            this.lbl_divArtNo.Location = new System.Drawing.Point(7, 22);
             this.lbl_divArtNo.Name = "lbl_divArtNo";
             this.lbl_divArtNo.Size = new System.Drawing.Size(52, 28);
             this.lbl_divArtNo.TabIndex = 8;
@@ -173,21 +184,82 @@
             this.lbl_divSpecs.TabIndex = 7;
             this.lbl_divSpecs.Text = "Article No.";
             // 
-            // flp_divProp
+            // pnl_dividerBody
             // 
-            this.flp_divProp.BackColor = System.Drawing.Color.White;
-            this.flp_divProp.Controls.Add(this.lbl_divname);
-            this.flp_divProp.Controls.Add(this.lbl_Width);
-            this.flp_divProp.Controls.Add(this.num_divWidth);
-            this.flp_divProp.Controls.Add(this.lbl_Height);
-            this.flp_divProp.Controls.Add(this.num_divHeight);
-            this.flp_divProp.Controls.Add(this.panel1);
-            this.flp_divProp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flp_divProp.Location = new System.Drawing.Point(0, 0);
-            this.flp_divProp.Name = "flp_divProp";
-            this.flp_divProp.Padding = new System.Windows.Forms.Padding(3, 5, 0, 0);
-            this.flp_divProp.Size = new System.Drawing.Size(157, 173);
-            this.flp_divProp.TabIndex = 13;
+            this.pnl_dividerBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_dividerBody.Controls.Add(this.pnl_AddCladding);
+            this.pnl_dividerBody.Controls.Add(this.pnl_divArtNo);
+            this.pnl_dividerBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl_dividerBody.Location = new System.Drawing.Point(0, 108);
+            this.pnl_dividerBody.Name = "pnl_dividerBody";
+            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 120);
+            this.pnl_dividerBody.TabIndex = 13;
+            // 
+            // pnl_AddCladding
+            // 
+            this.pnl_AddCladding.Controls.Add(this.btn_Save);
+            this.pnl_AddCladding.Controls.Add(this.btn_AddCladding);
+            this.pnl_AddCladding.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_AddCladding.Location = new System.Drawing.Point(0, 90);
+            this.pnl_AddCladding.Name = "pnl_AddCladding";
+            this.pnl_AddCladding.Size = new System.Drawing.Size(158, 27);
+            this.pnl_AddCladding.TabIndex = 13;
+            // 
+            // btn_Save
+            // 
+            this.btn_Save.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Save.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_Save.Location = new System.Drawing.Point(101, 2);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(54, 23);
+            this.btn_Save.TabIndex = 1;
+            this.btn_Save.Text = "Save";
+            this.btn_Save.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_Save.UseVisualStyleBackColor = false;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            // 
+            // btn_AddCladding
+            // 
+            this.btn_AddCladding.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_AddCladding.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_AddCladding.Location = new System.Drawing.Point(3, 2);
+            this.btn_AddCladding.Name = "btn_AddCladding";
+            this.btn_AddCladding.Size = new System.Drawing.Size(90, 23);
+            this.btn_AddCladding.TabIndex = 0;
+            this.btn_AddCladding.Text = "Add cladding";
+            this.btn_AddCladding.UseVisualStyleBackColor = true;
+            this.btn_AddCladding.Click += new System.EventHandler(this.btn_AddCladding_Click);
+            // 
+            // pnl_divName
+            // 
+            this.pnl_divName.Controls.Add(this.lbl_divname);
+            this.pnl_divName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_divName.Location = new System.Drawing.Point(0, 0);
+            this.pnl_divName.Name = "pnl_divName";
+            this.pnl_divName.Size = new System.Drawing.Size(160, 28);
+            this.pnl_divName.TabIndex = 14;
+            // 
+            // pnl_divWd
+            // 
+            this.pnl_divWd.Controls.Add(this.lbl_Width);
+            this.pnl_divWd.Controls.Add(this.num_divWidth);
+            this.pnl_divWd.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_divWd.Location = new System.Drawing.Point(0, 28);
+            this.pnl_divWd.Name = "pnl_divWd";
+            this.pnl_divWd.Size = new System.Drawing.Size(160, 40);
+            this.pnl_divWd.TabIndex = 15;
+            // 
+            // pnl_divHt
+            // 
+            this.pnl_divHt.Controls.Add(this.lbl_Height);
+            this.pnl_divHt.Controls.Add(this.num_divHeight);
+            this.pnl_divHt.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_divHt.Location = new System.Drawing.Point(0, 68);
+            this.pnl_divHt.Name = "pnl_divHt";
+            this.pnl_divHt.Size = new System.Drawing.Size(160, 40);
+            this.pnl_divHt.TabIndex = 16;
             // 
             // DividerPropertiesUC
             // 
@@ -195,17 +267,24 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.flp_divProp);
+            this.Controls.Add(this.pnl_dividerBody);
+            this.Controls.Add(this.pnl_divHt);
+            this.Controls.Add(this.pnl_divWd);
+            this.Controls.Add(this.pnl_divName);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "DividerPropertiesUC";
-            this.Size = new System.Drawing.Size(157, 173);
+            this.Size = new System.Drawing.Size(160, 228);
             this.Load += new System.EventHandler(this.DividerPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.flp_divProp.ResumeLayout(false);
-            this.flp_divProp.PerformLayout();
+            this.pnl_divArtNo.ResumeLayout(false);
+            this.pnl_divArtNo.PerformLayout();
+            this.pnl_dividerBody.ResumeLayout(false);
+            this.pnl_AddCladding.ResumeLayout(false);
+            this.pnl_divName.ResumeLayout(false);
+            this.pnl_divName.PerformLayout();
+            this.pnl_divWd.ResumeLayout(false);
+            this.pnl_divHt.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -217,12 +296,18 @@
         private System.Windows.Forms.Label lbl_Height;
         private System.Windows.Forms.NumericUpDown num_divWidth;
         private System.Windows.Forms.Label lbl_Width;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnl_divArtNo;
         private System.Windows.Forms.ComboBox cmb_divReinf;
         private System.Windows.Forms.Label lbl_divReinf;
         private System.Windows.Forms.ComboBox cmb_divArtNo;
         private System.Windows.Forms.Label lbl_divArtNo;
         private System.Windows.Forms.Label lbl_divSpecs;
-        private System.Windows.Forms.FlowLayoutPanel flp_divProp;
+        private System.Windows.Forms.Panel pnl_dividerBody;
+        private System.Windows.Forms.Panel pnl_divName;
+        private System.Windows.Forms.Panel pnl_divWd;
+        private System.Windows.Forms.Panel pnl_divHt;
+        private System.Windows.Forms.Panel pnl_AddCladding;
+        private System.Windows.Forms.Button btn_AddCladding;
+        private System.Windows.Forms.Button btn_Save;
     }
 }
