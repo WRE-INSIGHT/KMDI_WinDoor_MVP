@@ -218,7 +218,7 @@ namespace EnumerationTypeLayer
             private Rio_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class Rotoline_HandleArtNo : Enumeration<Rio_HandleArtNo, int>
+        public class Rotoline_HandleArtNo : Enumeration<Rotoline_HandleArtNo, int>
         {
             public static readonly Rotoline_HandleArtNo _K070A21725 = new Rotoline_HandleArtNo(0, "K070A21725");
 

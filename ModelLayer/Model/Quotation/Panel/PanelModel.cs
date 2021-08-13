@@ -817,6 +817,48 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private bool _panelRioOptionsVisibility;
+        public bool Panel_RioOptionsVisibility
+        {
+            get
+            {
+                return _panelRioOptionsVisibility;
+            }
+            set
+            {
+                _panelRioOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelRotolineOptionsVisibility;
+        public bool Panel_RotolineOptionsVisibility
+        {
+            get
+            {
+                return _panelRotolineOptionsVisibility;
+            }
+            set
+            {
+                _panelRotolineOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelMVDOptionsVisibility;
+        public bool Panel_MVDOptionsVisibility
+        {
+            get
+            {
+                return _panelMVDOptionsVisibility;
+            }
+            set
+            {
+                _panelMVDOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private bool _panelRotaryOptionsVisibility;
         public bool Panel_RotaryOptionsVisibility
         {
@@ -913,6 +955,48 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelRotaryArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Rio_HandleArtNo _panelRioArtNo;
+        public Rio_HandleArtNo Panel_RioArtNo
+        {
+            get
+            {
+                return _panelRioArtNo;
+            }
+            set
+            {
+                _panelRioArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Rotoline_HandleArtNo _panelRotolineArtNo;
+        public Rotoline_HandleArtNo Panel_RotolineArtNo
+        {
+            get
+            {
+                return _panelRotolineArtNo;
+            }
+            set
+            {
+                _panelRotolineArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private MVD_HandleArtNo _panelMVDArtNo;
+        public MVD_HandleArtNo Panel_MVDArtNo
+        {
+            get
+            {
+                return _panelMVDArtNo;
+            }
+            set
+            {
+                _panelMVDArtNo = value;
                 NotifyPropertyChanged();
             }
         }
@@ -1354,6 +1438,30 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_rotaryOptionsheight_default;
             }
+            else if (mode == "addRio")
+            {
+                Panel_PropertyHeight += constants.panel_property_rioOptionsheight_default;
+            }
+            else if (mode == "minusRio")
+            {
+                Panel_PropertyHeight -= constants.panel_property_rioOptionsheight_default;
+            }
+            else if (mode == "addRotoline")
+            {
+                Panel_PropertyHeight += constants.panel_property_rotolineOptionsheight_default;
+            }
+            else if (mode == "minusRotoline")
+            {
+                Panel_PropertyHeight -= constants.panel_property_rotolineOptionsheight_default;
+            }
+            else if (mode == "addMVD")
+            {
+                Panel_PropertyHeight += constants.panel_property_mvdOptionsheight_default;
+            }
+            else if (mode == "minusMVD")
+            {
+                Panel_PropertyHeight -= constants.panel_property_mvdOptionsheight_default;
+            }
             else if (mode == "addExtension")
             {
                 Panel_PropertyHeight += constants.panel_property_extensionOptionsheight;
@@ -1417,6 +1525,30 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusRotary")
             {
                 Panel_HandleOptionsHeight -= constants.panel_property_rotaryOptionsheight_default;
+            }
+            else if (mode == "addRio")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_rioOptionsheight_default;
+            }
+            else if (mode == "minusRio")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_rioOptionsheight_default;
+            }
+            else if (mode == "addRotoline")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_rotolineOptionsheight_default;
+            }
+            else if (mode == "minusRotoline")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_rotolineOptionsheight_default;
+            }
+            else if (mode == "addMVD")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_mvdOptionsheight_default;
+            }
+            else if (mode == "minusMVD")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_mvdOptionsheight_default;
             }
             else if (mode == "addExtension")
             {

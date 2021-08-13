@@ -419,6 +419,30 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_rotoswingOptionsheight_default;
                 }
+                else if (mode == "addRio")
+                {
+                    FrameProp_Height += constants.panel_property_rioOptionsheight_default;
+                }
+                else if (mode == "minusRio")
+                {
+                    FrameProp_Height -= constants.panel_property_rioOptionsheight_default;
+                }
+                else if (mode == "addRotoline")
+                {
+                    FrameProp_Height += constants.panel_property_rotolineOptionsheight_default;
+                }
+                else if (mode == "minusRotoline")
+                {
+                    FrameProp_Height -= constants.panel_property_rotolineOptionsheight_default;
+                }
+                else if (mode == "addMVD")
+                {
+                    FrameProp_Height += constants.panel_property_mvdOptionsheight_default;
+                }
+                else if (mode == "minusMVD")
+                {
+                    FrameProp_Height -= constants.panel_property_mvdOptionsheight_default;
+                }
                 else if (mode == "addCmbMotorized")
                 {
                     FrameProp_Height += constants.panel_property_motorizedCmbOptionsheight;

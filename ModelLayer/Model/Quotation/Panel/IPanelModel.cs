@@ -43,6 +43,9 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_PropertyHeight { get; set; }
         bool Panel_HandleOptionsVisibility { get; set; }
         bool Panel_RotoswingOptionsVisibility { get; set; }
+        bool Panel_RioOptionsVisibility { get; set; }
+        bool Panel_RotolineOptionsVisibility { get; set; }
+        bool Panel_MVDOptionsVisibility { get; set; }
         bool Panel_RotaryOptionsVisibility { get; set; }
         int Panel_HandleOptionsHeight { get; set; }
         #region Explosion
@@ -88,6 +91,9 @@ namespace ModelLayer.Model.Quotation.Panel
         Handle_Type Panel_HandleType { get; set; }
         Rotoswing_HandleArtNo Panel_RotoswingArtNo { get; set; }
         Rotary_HandleArtNo Panel_RotaryArtNo { get; set; }
+        Rio_HandleArtNo Panel_RioArtNo { get; set; }
+        Rotoline_HandleArtNo Panel_RotolineArtNo { get; set; }
+        MVD_HandleArtNo Panel_MVDArtNo { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
 
         Extension_ArticleNo Panel_ExtensionTopArtNo { get; set;}

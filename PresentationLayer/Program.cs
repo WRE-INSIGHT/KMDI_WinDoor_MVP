@@ -215,6 +215,15 @@ namespace PresentationLayer
                 .RegisterType<IDP_CladdingPropertyUC, DP_CladdingPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDP_CladdingPropertyUCPresenter, DP_CladdingPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPP_RioPropertyUC, PP_RioPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RioPropertyUCPresenter, PP_RioPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_RotolinePropertyUC, PP_RotolinePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RotolinePropertyUCPresenter, PP_RotolinePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_MVDPropertyUC, PP_MVDPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_MVDPropertyUCPresenter, PP_MVDPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();

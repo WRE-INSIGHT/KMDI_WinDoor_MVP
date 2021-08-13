@@ -15,26 +15,31 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
     public partial class PP_HandlePropertyUC : UserControl, IPP_HandlePropertyUC
     {
+        public PP_HandlePropertyUC()
+        {
+            InitializeComponent();
+        }
+
         private void SetHandleTypeDatasource()
         {
-            cmb_HandleType.DataBindings.Clear();
-            List<Handle_Type> hType = new List<Handle_Type>();
-            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
-                Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-            {
-                hType.Add(Handle_Type._Rotoswing);
-            }
+            //cmb_HandleType.DataBindings.Clear();
+            //List<Handle_Type> hType = new List<Handle_Type>();
+            //if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
+            //    Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+            //{
+            //    hType.Add(Handle_Type._Rotoswing);
+            //}
 
-            if (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
-                Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
-            {
-                hType.Add(Handle_Type._Rio);
-                hType.Add(Handle_Type._Rotoline);
-                hType.Add(Handle_Type._MVD);
-            }
+            //if (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+            //    Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+            //{
+            //    hType.Add(Handle_Type._Rio);
+            //    hType.Add(Handle_Type._Rotoline);
+            //    hType.Add(Handle_Type._MVD);
+            //}
 
-            hType.Add(Handle_Type._Rotary);
-            cmb_HandleType.DataSource = hType;
+            //hType.Add(Handle_Type._Rotary);
+            //cmb_HandleType.DataSource = hType;
         }
 
         private FrameProfile_ArticleNo _frameArtNO;
@@ -67,16 +72,18 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             }
         }
 
-        public PP_HandlePropertyUC()
-        {
-            InitializeComponent();
-        }
-
         public event EventHandler PPHandlePropertyLoadEventRaised;
         public event EventHandler cmbHandleTypeSelectedValueEventRaised;
 
         private void PP_HandlePropertyUC_Load(object sender, EventArgs e)
         {
+            List<Handle_Type> rio = new List<Handle_Type>();
+            foreach (Handle_Type item in Handle_Type.GetAll())
+            {
+                rio.Add(item);
+            }
+            cmb_HandleType.DataSource = rio;
+
             EventHelpers.RaiseEvent(this, PPHandlePropertyLoadEventRaised, e);
         }
 

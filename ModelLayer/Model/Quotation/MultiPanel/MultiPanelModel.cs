@@ -1583,6 +1583,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_rotoswingOptionsheight_default;
                 }
+                else if (mode == "addRio")
+                {
+                    MPanelProp_Height += constants.panel_property_rioOptionsheight_default;
+                }
+                else if (mode == "minusRio")
+                {
+                    MPanelProp_Height -= constants.panel_property_rioOptionsheight_default;
+                }
+                else if (mode == "addRotoline")
+                {
+                    MPanelProp_Height += constants.panel_property_rotolineOptionsheight_default;
+                }
+                else if (mode == "minusRotoline")
+                {
+                    MPanelProp_Height -= constants.panel_property_rotolineOptionsheight_default;
+                }
+                else if (mode == "addMVD")
+                {
+                    MPanelProp_Height += constants.panel_property_mvdOptionsheight_default;
+                }
+                else if (mode == "minusMVd")
+                {
+                    MPanelProp_Height -= constants.panel_property_mvdOptionsheight_default;
+                }
                 else if (mode == "addCmbMotorized")
                 {
                     MPanelProp_Height += constants.panel_property_motorizedCmbOptionsheight;
