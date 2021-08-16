@@ -137,7 +137,10 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_GlassPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_HandlePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_MotorizedPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_MVDPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RioPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotaryPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotolinePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotoswingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_SashPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_CornerDrivePropertyUCPresenter.cs" />
@@ -146,7 +149,10 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_GlassPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_HandlePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_MotorizedPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_MVDPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RioPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotaryPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotolinePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotoswingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_SashPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\AwningPanelUCPresenter.cs" />
@@ -363,7 +369,10 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_GlassPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HandlePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MotorizedPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MVDPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RioPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotaryPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotolinePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotoswingPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SashPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.cs">
@@ -402,11 +411,29 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.Designer.cs">
       <DependentUpon>PP_MotorizedPropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.Designer.cs">
+      <DependentUpon>PP_MVDPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.Designer.cs">
+      <DependentUpon>PP_RioPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.Designer.cs">
       <DependentUpon>PP_RotaryPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.Designer.cs">
+      <DependentUpon>PP_RotolinePropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -660,8 +687,17 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.resx">
       <DependentUpon>PP_MotorizedPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.resx">
+      <DependentUpon>PP_MVDPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.resx">
+      <DependentUpon>PP_RioPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.resx">
       <DependentUpon>PP_RotaryPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.resx">
+      <DependentUpon>PP_RotolinePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.resx">
       <DependentUpon>PP_RotoswingPropertyUC.cs</DependentUpon>

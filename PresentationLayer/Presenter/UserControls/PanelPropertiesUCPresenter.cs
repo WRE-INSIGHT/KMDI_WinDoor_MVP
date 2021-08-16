@@ -103,6 +103,13 @@ namespace PresentationLayer.Presenter.UserControls
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
             _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
+
+            IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            UserControl sashProp = (UserControl)sashPropUCP.GetPPSashPropertyUC();
+            _pnlPanelSpecs.Controls.Add(sashProp);
+            sashProp.Dock = DockStyle.Top;
+            sashProp.BringToFront();
+
             if (_panelModel.Panel_SashPropertyVisibility == true)
             {
                 IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
@@ -117,12 +124,6 @@ namespace PresentationLayer.Presenter.UserControls
                 handle.Dock = DockStyle.Top;
                 handle.BringToFront();
             }
-
-            IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-            UserControl sashProp = (UserControl)sashPropUCP.GetPPSashPropertyUC();
-            _pnlPanelSpecs.Controls.Add(sashProp);
-            sashProp.Dock = DockStyle.Top;
-            sashProp.BringToFront();
 
             IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
             UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
