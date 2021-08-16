@@ -658,7 +658,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                     fpnl.Controls.Add((UserControl)casementUC);
                     _multiPanelModel.AddControl_MPanelLstObjects((UserControl)casementUC, _frameModel.Frame_Type.ToString());
-                    casementUCP.SetInitialLoadFalse();
 
                     ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC,
                                                                                                           _panelModel,

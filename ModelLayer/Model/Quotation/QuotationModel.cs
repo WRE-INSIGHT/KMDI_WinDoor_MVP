@@ -27,6 +27,7 @@ namespace ModelLayer.Model.Quotation
         public int GlazingSeal_TotalQty { get; set; }
         public int Screws_for_Fabrication { get; set; }
         public int Screws_for_Installation { get; set; }
+        public int Screws_for_Cladding { get; set; }
         public int Expansion_BoltQty_Total { get; set; }
         public int Rebate_Qty { get; set; }
         public int Plastic_CoverQty_Total { get; set; }
@@ -501,6 +502,7 @@ namespace ModelLayer.Model.Quotation
                 glazing_spacer = 0,
                 total_screws_fabrication = 0,
                 total_screws_installation = 0,
+                total_cladding_size = 0,
                 additional_screws_fabrication = 0,
                 exp_bolt = 0,
                 frame_width = 0,
@@ -715,6 +717,8 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
                                         {
+                                            total_cladding_size += cladding_size;
+
                                             Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
                                                                    1, "pc(s)",
                                                                    cladding_size.ToString(),
@@ -754,6 +758,8 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
                                         {
+                                            total_cladding_size += cladding_size;
+
                                             Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
                                                                    1, "pc(s)",
                                                                    cladding_size.ToString(),
@@ -1973,6 +1979,7 @@ namespace ModelLayer.Model.Quotation
             int fixing_screw = (int)(Math.Ceiling((decimal)total_screws_fabrication / 300));
             Screws_for_Fabrication = fixing_screw + additional_screws_fabrication;
             Screws_for_Installation = fixing_screw + total_screws_installation;
+            Screws_for_Cladding = total_cladding_size / 300;
 
             Plastic_CoverQty_Total = (frame_width * frame_height) * 2;
             Expansion_BoltQty_Total = exp_bolt;
@@ -2025,6 +2032,9 @@ namespace ModelLayer.Model.Quotation
 
             Material_List.Rows.Add("Screws for Installation",
                                    Screws_for_Installation, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
+
+            Material_List.Rows.Add("Screws for Cladding 10 x 38",
+                                   Screws_for_Cladding, "pc(s)", "", "");
 
             var query = from r in Material_List.AsEnumerable()
                         group r by new

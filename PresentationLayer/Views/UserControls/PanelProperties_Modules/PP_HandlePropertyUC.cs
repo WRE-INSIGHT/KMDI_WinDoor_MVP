@@ -20,28 +20,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             InitializeComponent();
         }
 
-        private void SetHandleTypeDatasource()
-        {
-            //cmb_HandleType.DataBindings.Clear();
-            //List<Handle_Type> hType = new List<Handle_Type>();
-            //if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
-            //    Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-            //{
-            //    hType.Add(Handle_Type._Rotoswing);
-            //}
-
-            //if (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
-            //    Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
-            //{
-            //    hType.Add(Handle_Type._Rio);
-            //    hType.Add(Handle_Type._Rotoline);
-            //    hType.Add(Handle_Type._MVD);
-            //}
-
-            //hType.Add(Handle_Type._Rotary);
-            //cmb_HandleType.DataSource = hType;
-        }
-
         private FrameProfile_ArticleNo _frameArtNO;
         public FrameProfile_ArticleNo Frame_ArtNo
         {
@@ -53,7 +31,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             set
             {
                 _frameArtNO = value;
-                SetHandleTypeDatasource();
+                cmb_HandleType.Refresh();
             }
         }
 
@@ -68,13 +46,15 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             set
             {
                 _panelSashProfileArtNo = value;
-                SetHandleTypeDatasource();
+                cmb_HandleType.Refresh();
             }
         }
 
         public event EventHandler PPHandlePropertyLoadEventRaised;
         public event EventHandler cmbHandleTypeSelectedValueEventRaised;
 
+
+        private bool _initialLoad = true;
         private void PP_HandlePropertyUC_Load(object sender, EventArgs e)
         {
             List<Handle_Type> rio = new List<Handle_Type>();
@@ -85,10 +65,44 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_HandleType.DataSource = rio;
 
             EventHelpers.RaiseEvent(this, PPHandlePropertyLoadEventRaised, e);
+
+            _initialLoad = false;
         }
 
         private void cmb_HandleType_SelectedValueChanged(object sender, EventArgs e)
         {
+            if (!_initialLoad)
+            {
+                Handle_Type sel_handleType = (Handle_Type)((ComboBox)sender).SelectedValue;
+                if (sel_handleType == Handle_Type._Rotoswing)
+                {
+                    if ((Frame_ArtNo == FrameProfile_ArticleNo._7502 &&
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
+                        (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
+                        (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._395))
+                    {
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised","Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else if (sel_handleType == Handle_Type._Rio || sel_handleType == Handle_Type._Rotoline || sel_handleType == Handle_Type._MVD)
+                {
+                    if (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                    {
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
             EventHelpers.RaiseEvent(sender, cmbHandleTypeSelectedValueEventRaised, e);
         }
 
@@ -104,6 +118,49 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public Panel GetHandleTypePNL()
         {
             return pnl_HandleTypeOptions;
+        }
+
+        private void cmb_HandleType_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // Draw the background 
+            e.DrawBackground();
+
+            // Get the item text    
+            string text = ((ComboBox)sender).Items[e.Index].ToString();
+
+            if (text.Contains("Rotary") || text.Contains("None"))
+            {
+                e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+            }
+            else if (text.Contains("Rotoswing"))
+            {
+                if ((Frame_ArtNo == FrameProfile_ArticleNo._7502 &&
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
+                    (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
+                    (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._395))
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            else if (text.Contains("Rio") || text.Contains("Rotoline") || text.Contains("MVD"))
+            {
+                if (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            // Draw the text    
         }
     }
 }

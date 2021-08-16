@@ -187,6 +187,7 @@ namespace EnumerationTypeLayer
             public static readonly Handle_Type _Rio = new Handle_Type(2, "Rio Handle");
             public static readonly Handle_Type _Rotoline = new Handle_Type(3, "Rotoline Handle");
             public static readonly Handle_Type _MVD = new Handle_Type(4, "MVD Handle");
+            public static readonly Handle_Type _None = new Handle_Type(5, "None");
 
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
         }
