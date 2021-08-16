@@ -659,34 +659,10 @@ namespace ModelLayer.Model.Quotation.Divider
 
             SetExplosionValues_Div();
 
-            if (Div_Type == DividerType.Mullion)
-            {
-                if (Div_ExplosionHeight >= 2000)
-                {
-                    Div_PropHeight = constants.div_propertyheight_default +
-                                     constants.div_property_pnlAddcladdingOptionsHeight;
-                    Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
-                    Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
-                }
-                else
-                {
-                    Div_PropHeight = constants.div_propertyheight_default;
-                }
-            }
-            else if (Div_Type == DividerType.Transom)
-            {
-                if (Div_ExplosionWidth >= 2000)
-                {
-                    Div_PropHeight = constants.div_propertyheight_default +
-                                     constants.div_property_pnlAddcladdingOptionsHeight;
-                    Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
-                    Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
-                }
-                else
-                {
-                    Div_PropHeight = constants.div_propertyheight_default;
-                }
-            }
+            Div_PropHeight = constants.div_propertyheight_default +
+                             constants.div_property_pnlAddcladdingOptionsHeight;
+            Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+            Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
         }
     }
 }

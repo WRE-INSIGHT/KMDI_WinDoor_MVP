@@ -25,6 +25,9 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_GlassPropertyUCPresenter _pp_glassPropertyUCPresenter;
         private IPP_HandlePropertyUCPresenter _pp_handlePropertUCPresenter;
         private IPP_GeorgianBarPropertyUCPresenter _pp_georgianBarPropertUCPresenter;
+        private IPP_ExtensionPropertyUCPresenter _pp_extensionPropertyUCPresenter;
+        private IPP_CornerDrivePropertyUCPresenter _pp_cornerDrivePropertyUCPresenter;
+
         private IUnityContainer _unityC;
 
         private Panel _pnlPanelSpecs;
@@ -34,7 +37,9 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_SashPropertyUCPresenter pp_sashPropertyUCPresenter,
                                           IPP_GlassPropertyUCPresenter pp_glassPropertyUCPresenter,
                                           IPP_HandlePropertyUCPresenter pp_handlePropertUCPresenter,
-                                          IPP_GeorgianBarPropertyUCPresenter pp_georgianBarPropertUCPresenter)
+                                          IPP_GeorgianBarPropertyUCPresenter pp_georgianBarPropertUCPresenter,
+                                          IPP_ExtensionPropertyUCPresenter pp_extensionPropertyUCPresenter,
+                                          IPP_CornerDrivePropertyUCPresenter pp_cornerDrivePropertyUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -42,6 +47,8 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_glassPropertyUCPresenter = pp_glassPropertyUCPresenter;
             _pp_handlePropertUCPresenter = pp_handlePropertUCPresenter;
             _pp_georgianBarPropertUCPresenter = pp_georgianBarPropertUCPresenter;
+            _pp_extensionPropertyUCPresenter = pp_extensionPropertyUCPresenter;
+            _pp_cornerDrivePropertyUCPresenter = pp_cornerDrivePropertyUCPresenter;
             _pnlPanelSpecs = _panelPropertiesUC.GetPanelSpecsPNL();
 
             SubscribeToEventsSetup();
@@ -123,6 +130,36 @@ namespace PresentationLayer.Presenter.UserControls
                 _pnlPanelSpecs.Controls.Add(handle);
                 handle.Dock = DockStyle.Top;
                 handle.BringToFront();
+            }
+
+            IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            UserControl cdPropUC = (UserControl)cdPropUCP.GetPPCornerDriveUC();
+            _pnlPanelSpecs.Controls.Add(cdPropUC);
+            cdPropUC.Dock = DockStyle.Top;
+            cdPropUC.BringToFront();
+
+            IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            UserControl extPropUC = (UserControl)extPropUCP.GetPPExtensionUC();
+            _pnlPanelSpecs.Controls.Add(extPropUC);
+            extPropUC.Dock = DockStyle.Top;
+            extPropUC.BringToFront();
+
+            if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Height >= 2100)
+            {
+                _panelModel.Panel_ExtensionOptionsVisibility = true;
+                _panelModel.Panel_CornerDriveOptionsVisibility = true;
+
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
+
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                _panelModel.AdjustPropertyPanelHeight("addExtension");
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                }
             }
 
             IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
