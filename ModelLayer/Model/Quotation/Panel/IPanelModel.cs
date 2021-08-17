@@ -92,9 +92,13 @@ namespace ModelLayer.Model.Quotation.Panel
         Rotoswing_HandleArtNo Panel_RotoswingArtNo { get; set; }
         Rotary_HandleArtNo Panel_RotaryArtNo { get; set; }
         Rio_HandleArtNo Panel_RioArtNo { get; set; }
+        ProfileKnobCylinder_ArtNo Panel_ProfileKnobCylinderArtNo { get; set; }
+        Cylinder_CoverArtNo Panel_CylinderCoverArtNo { get; set; }
+
         Rotoline_HandleArtNo Panel_RotolineArtNo { get; set; }
         MVD_HandleArtNo Panel_MVDArtNo { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
+        bool Panel_EspagnoletteOptionsVisibility { get; set; }
 
         Extension_ArticleNo Panel_ExtensionTopArtNo { get; set;}
         Extension_ArticleNo Panel_ExtensionTop2ArtNo { get; set; }

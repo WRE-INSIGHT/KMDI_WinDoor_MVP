@@ -1679,6 +1679,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_georgianBarHeight;
                 }
+                else if (mode == "addEspagnolette")
+                {
+                    MPanelProp_Height += constants.panel_property_espagnoletteOptionsheight_default;
+                }
+                else if (mode == "minusEspagnolette")
+                {
+                    MPanelProp_Height -= constants.panel_property_espagnoletteOptionsheight_default;
+                }
             }
             else if (objtype == "Div")
             {

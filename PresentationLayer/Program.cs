@@ -224,6 +224,9 @@ namespace PresentationLayer
                 .RegisterType<IPP_MVDPropertyUC, PP_MVDPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_MVDPropertyUCPresenter, PP_MVDPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPP_EspagnolettePropertyUC, PP_EspagnolettePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_EspagnolettePropertyUCPresenter, PP_EspagnolettePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();

@@ -515,6 +515,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_georgianBarHeight;
                 }
+                else if (mode == "addEspagnolette")
+                {
+                    FrameProp_Height += constants.panel_property_espagnoletteOptionsheight_default;
+                }
+                else if (mode == "minusEspagnolette")
+                {
+                    FrameProp_Height -= constants.panel_property_espagnoletteOptionsheight_default;
+                }
             }
             else if (objtype == "Div")
             {

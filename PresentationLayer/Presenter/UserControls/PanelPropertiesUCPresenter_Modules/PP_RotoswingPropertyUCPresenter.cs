@@ -33,7 +33,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void SubscribeToEventsSetup()
         {
             _pp_rotoswingPropertyUC.PPRotoswingPropertyLoadEventRaised += _pp_rotoswingPropertyUC_PPRotoswingPropertyLoadEventRaised;
-            _pp_rotoswingPropertyUC.cmbEspagnoletteSelectedValueEventRaised += _pp_rotoswingPropertyUC_cmbEspagnoletteSelectedValueEventRaised;
             _pp_rotoswingPropertyUC.cmbMiddleCloserSelectedValueEventRaised += _pp_rotoswingPropertyUC_cmbMiddleCloserSelectedValueEventRaised;
             _pp_rotoswingPropertyUC.cmbRotoswingNoSelectedValueEventRaised += _pp_rotoswingPropertyUC_cmbRotoswingNoSelectedValueEventRaised;
         }
@@ -53,12 +52,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.Panel_MiddleCloserArtNo = (MiddleCloser_ArticleNo)((ComboBox)sender).SelectedValue;
             }
         }
-
-        private void _pp_rotoswingPropertyUC_cmbEspagnoletteSelectedValueEventRaised(object sender, EventArgs e)
-        {
-            _panelModel.Panel_EspagnoletteArtNo = (Espagnolette_ArticleNo)((ComboBox)sender).SelectedValue;
-        }
-
+        
         private void _pp_rotoswingPropertyUC_PPRotoswingPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_rotoswingPropertyUC.ThisBinding(CreateBindingDictionary());

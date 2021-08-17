@@ -143,6 +143,7 @@ namespace EnumerationTypeLayer
             public static readonly Foil_Color _GreyOak = new Foil_Color(11, "Grey Oak");
             public static readonly Foil_Color _Cacao = new Foil_Color(12, "Cacao");
             public static readonly Foil_Color _Havana = new Foil_Color(13, "Havana");
+            public static readonly Foil_Color _None = new Foil_Color(14, "None");
 
             private Foil_Color(int value, string displayName) : base(value, displayName) { }
         }
@@ -219,6 +220,24 @@ namespace EnumerationTypeLayer
             private Rio_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class ProfileKnobCylinder_ArtNo : Enumeration<ProfileKnobCylinder_ArtNo, int>
+        {
+            public static readonly ProfileKnobCylinder_ArtNo _45x45 = new ProfileKnobCylinder_ArtNo(0, "45x45");
+            public static readonly ProfileKnobCylinder_ArtNo _50p5x50p5 = new ProfileKnobCylinder_ArtNo(0, "50.5x50.5");
+
+            private ProfileKnobCylinder_ArtNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Cylinder_CoverArtNo : Enumeration<Cylinder_CoverArtNo, int>
+        {
+            public static readonly Cylinder_CoverArtNo _EPSW_7025_50992 = new Cylinder_CoverArtNo(0, "EPSW-7025/50992");
+            public static readonly Cylinder_CoverArtNo _EPSW_8022_823332 = new Cylinder_CoverArtNo(1, "EPSW-8022/823332");
+            public static readonly Cylinder_CoverArtNo _EPSW_9005_614441 = new Cylinder_CoverArtNo(2, "EPSW-9005/614441");
+            public static readonly Cylinder_CoverArtNo _EPSW_IVORY = new Cylinder_CoverArtNo(3, "EPSW-IVORY");
+
+            private Cylinder_CoverArtNo(int value, string displayName) : base(value, displayName) { }
+        }
+
         public class Rotoline_HandleArtNo : Enumeration<Rotoline_HandleArtNo, int>
         {
             public static readonly Rotoline_HandleArtNo _K070A21725 = new Rotoline_HandleArtNo(0, "K070A21725");
@@ -240,7 +259,20 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _628809 = new Espagnolette_ArticleNo(2, "628809");
             public static readonly Espagnolette_ArticleNo _741012 = new Espagnolette_ArticleNo(3, "741012");
             public static readonly Espagnolette_ArticleNo _EQ87NT = new Espagnolette_ArticleNo(4, "EQ87(NT)");
-            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(5, "None");
+            public static readonly Espagnolette_ArticleNo _642105 = new Espagnolette_ArticleNo(5, "642105");
+            public static readonly Espagnolette_ArticleNo _642089 = new Espagnolette_ArticleNo(6, "642089");
+            public static readonly Espagnolette_ArticleNo _630963 = new Espagnolette_ArticleNo(7, "630963");
+            public static readonly Espagnolette_ArticleNo _N110A00006 = new Espagnolette_ArticleNo(8, "N110A00006");
+            public static readonly Espagnolette_ArticleNo _N110A01006 = new Espagnolette_ArticleNo(9, "N110A01006");
+            public static readonly Espagnolette_ArticleNo _N110A02206 = new Espagnolette_ArticleNo(10, "N110A02206");
+            public static readonly Espagnolette_ArticleNo _N110A03206 = new Espagnolette_ArticleNo(11, "N110A03206");
+            public static readonly Espagnolette_ArticleNo _N110A04206 = new Espagnolette_ArticleNo(12, "N110A04206");
+            public static readonly Espagnolette_ArticleNo _N110A05206 = new Espagnolette_ArticleNo(13, "N110A05206");
+            public static readonly Espagnolette_ArticleNo _N110A06206 = new Espagnolette_ArticleNo(14, "N110A06206");
+            public static readonly Espagnolette_ArticleNo _625_205 = new Espagnolette_ArticleNo(15, "625-205");
+            public static readonly Espagnolette_ArticleNo _625_206 = new Espagnolette_ArticleNo(16, "625-206");
+            public static readonly Espagnolette_ArticleNo _625_207 = new Espagnolette_ArticleNo(17, "625-207");
+            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(18, "None");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -250,6 +282,9 @@ namespace EnumerationTypeLayer
             public static readonly Extension_ArticleNo _None = new Extension_ArticleNo(0, "None");
             public static readonly Extension_ArticleNo _612978 = new Extension_ArticleNo(1, "612978");
             public static readonly Extension_ArticleNo _639957 = new Extension_ArticleNo(2, "639957");
+            public static readonly Extension_ArticleNo _641798 = new Extension_ArticleNo(3, "641798");
+            public static readonly Extension_ArticleNo _567639 = new Extension_ArticleNo(4, "567639");
+            public static readonly Extension_ArticleNo _630956 = new Extension_ArticleNo(5, "630956");
 
             private Extension_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

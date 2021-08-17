@@ -22,6 +22,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPP_RioPropertyUCPresenter _pp_rioPropertyUCPresenter;
         private IPP_RotolinePropertyUCPresenter _pp_rotolinePropertyUCPresenter;
         private IPP_MVDPropertyUCPresenter _pp_mvdPropertyUCPresenter;
+        private IPP_EspagnolettePropertyUCPresenter _pp_espagnolettePropertyUCPresenter;
 
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
@@ -34,7 +35,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                             IPP_RotaryPropertyUCPresenter pp_rotaryPropertyUCPresenter,
                                             IPP_RioPropertyUCPresenter pp_rioPropertyUCPresenter,
                                             IPP_RotolinePropertyUCPresenter pp_rotolinePropertyUCPresenter,
-                                            IPP_MVDPropertyUCPresenter pp_mvdPropertyUCPresenter)
+                                            IPP_MVDPropertyUCPresenter pp_mvdPropertyUCPresenter,
+                                            IPP_EspagnolettePropertyUCPresenter pp_espagnolettePropertyUCPresenter)
         {
             _pp_handlePropertyUC = pp_handlePropertyUC;
             _pp_rotoswingPropertyUCPresenter = pp_rotoswingPropertyUCPresenter;
@@ -42,6 +44,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_rioPropertyUCPresenter = pp_rioPropertyUCPresenter;
             _pp_rotolinePropertyUCPresenter = pp_rotolinePropertyUCPresenter;
             _pp_mvdPropertyUCPresenter = pp_mvdPropertyUCPresenter;
+            _pp_espagnolettePropertyUCPresenter = pp_espagnolettePropertyUCPresenter;
             _pnlHandleType = _pp_handlePropertyUC.GetHandleTypePNL();
             SubscribeToEventsSetup();
         }
@@ -68,6 +71,37 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     fieldExtension_count = (_panelModel.Panel_ExtBotChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
                     fieldExtension_count = (_panelModel.Panel_ExtLeftChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
                     fieldExtension_count = (_panelModel.Panel_ExtRightChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+
+                    if (sel_handleType != Handle_Type._Rotary)
+                    {
+                        if (curr_handleType == Handle_Type._Rotary)
+                        {
+                            _panelModel.Panel_EspagnoletteOptionsVisibility = true;
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
+
+                            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
+                            }
+                            _panelModel.AdjustPropertyPanelHeight("addEspagnolette");
+                            _panelModel.AdjustHandlePropertyHeight("addEspagnolette");
+                        }
+                    }
+                    else if (sel_handleType == Handle_Type._Rotary)
+                    {
+                        if (curr_handleType != Handle_Type._Rotary)
+                        {
+                            _panelModel.Panel_EspagnoletteOptionsVisibility = false;
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
+
+                            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
+                            }
+                            _panelModel.AdjustPropertyPanelHeight("minusEspagnolette");
+                            _panelModel.AdjustHandlePropertyHeight("minusEspagnolette");
+                        }
+                    }
 
                     if (sel_handleType == Handle_Type._Rotoswing)
                     {
@@ -190,6 +224,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     }
                     else if (sel_handleType == Handle_Type._Rio)
                     {
+                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642105;
+
                         if (curr_handleType == Handle_Type._Rotary)
                         {
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
@@ -250,6 +286,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     }
                     else if (sel_handleType == Handle_Type._Rotoline)
                     {
+                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642089;
+
                         if (curr_handleType == Handle_Type._Rotary)
                         {
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
@@ -310,6 +348,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     }
                     else if (sel_handleType == Handle_Type._MVD)
                     {
+                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._630963;
+
                         if (curr_handleType == Handle_Type._Rotary)
                         {
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
@@ -470,7 +510,34 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             mvdPropUC.Dock = DockStyle.Top;
             mvdPropUC.BringToFront();
 
-            if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
+            IPP_EspagnolettePropertyUCPresenter espUCP = _pp_espagnolettePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            UserControl espPropUC = (UserControl)espUCP.GetPPEspagnolettePropertyUC();
+            _pnlHandleType.Controls.Add(espPropUC);
+            espPropUC.Dock = DockStyle.Top;
+            espPropUC.BringToFront();
+
+            Handle_Type handle = _panelModel.Panel_HandleType;
+
+            if (handle != Handle_Type._Rotary)
+            {
+                _panelModel.Panel_EspagnoletteOptionsVisibility = true;
+
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
+                }
+
+                _panelModel.AdjustPropertyPanelHeight("addEspagnolette");
+                _panelModel.AdjustHandlePropertyHeight("addEspagnolette");
+            }
+            else
+            {
+                _panelModel.Panel_EspagnoletteOptionsVisibility = false;
+            }
+
+            if (handle == Handle_Type._Rotoswing)
             {
                 _panelModel.Panel_RotoswingOptionsVisibility = true;
                 _panelModel.Panel_RotaryOptionsVisibility = false;
@@ -486,10 +553,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 }
 
                 _panelModel.AdjustPropertyPanelHeight("addRotoswing");
-
                 _panelModel.AdjustHandlePropertyHeight("addRotoswing");
             }
-            else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
+            else if (handle == Handle_Type._Rotary)
             {
                 _panelModel.Panel_RotaryOptionsVisibility = true;
                 _panelModel.Panel_RotoswingOptionsVisibility = false;
@@ -508,7 +574,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                 _panelModel.AdjustHandlePropertyHeight("addRotary");
             }
-            else if (_panelModel.Panel_HandleType == Handle_Type._Rio)
+            else if (handle == Handle_Type._Rio)
             {
                 _panelModel.Panel_RioOptionsVisibility = true;
                 _panelModel.Panel_RotaryOptionsVisibility = false;
@@ -527,7 +593,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                 _panelModel.AdjustHandlePropertyHeight("addRotary");
             }
-            else if (_panelModel.Panel_HandleType == Handle_Type._Rotoline)
+            else if (handle == Handle_Type._Rotoline)
             {
                 _panelModel.Panel_RotolineOptionsVisibility = true;
                 _panelModel.Panel_RioOptionsVisibility = false;
@@ -546,7 +612,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                 _panelModel.AdjustHandlePropertyHeight("addRotoline");
             }
-            else if (_panelModel.Panel_HandleType == Handle_Type._MVD)
+            else if (handle == Handle_Type._MVD)
             {
                 _panelModel.Panel_MVDOptionsVisibility = true;
                 _panelModel.Panel_RotolineOptionsVisibility = false;

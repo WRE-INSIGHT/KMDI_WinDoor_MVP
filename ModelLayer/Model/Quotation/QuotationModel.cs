@@ -1145,30 +1145,6 @@ namespace ModelLayer.Model.Quotation
 
                                         if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoswing)
                                         {
-                                            Material_List.Rows.Add("Espagnolette " + pnl_curCtrl.Panel_EspagnoletteArtNo.ToString(),
-                                                                   1, "pc (s)",
-                                                                   "",
-                                                                   "Sash",
-                                                                   @"");
-
-                                            if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                                                pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                                            {
-                                                additional_screws_fabrication += 8;
-                                            }
-                                            else if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806)
-                                            {
-                                                additional_screws_fabrication += 2;
-                                            }
-                                            else if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807)
-                                            {
-                                                additional_screws_fabrication += 4;
-                                            }
-                                            else if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                                            {
-                                                additional_screws_fabrication += 6;
-                                            }
-
                                             if (pnl_curCtrl.Panel_ExtTopQty > 0)
                                             {
                                                 Material_List.Rows.Add("Extension(Top) " + pnl_curCtrl.Panel_ExtensionTopArtNo.ToString(),
@@ -1400,6 +1376,76 @@ namespace ModelLayer.Model.Quotation
                                                                    @"");
 
                                             additional_screws_fabrication += 9;
+                                        }
+                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rio)
+                                        {
+                                            Material_List.Rows.Add("Rio handle " + pnl_curCtrl.Panel_RioArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Profile Knob Cylinder " + pnl_curCtrl.Panel_ProfileKnobCylinderArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Cylinder Cover " + pnl_curCtrl.Panel_CylinderCoverArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
+                                        }
+                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoline)
+                                        {
+                                            Material_List.Rows.Add("Rio handle " + pnl_curCtrl.Panel_RotolineArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
+                                        }
+                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._MVD)
+                                        {
+                                            Material_List.Rows.Add("MVD handle " + pnl_curCtrl.Panel_MVDArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
+
+                                            Material_List.Rows.Add("Profile Knob Cylinder " + pnl_curCtrl.Panel_ProfileKnobCylinderArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
+
+                                        }
+
+                                        if (pnl_curCtrl.Panel_HandleType != Handle_Type._Rotary)
+                                        {
+                                            Material_List.Rows.Add("Espagnolette " + pnl_curCtrl.Panel_EspagnoletteArtNo.ToString(),
+                                                                   1, "pc (s)",
+                                                                   "",
+                                                                   "Sash",
+                                                                   @"");
+
+                                            if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                                                pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                                            {
+                                                additional_screws_fabrication += 8;
+                                            }
+                                            else if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806)
+                                            {
+                                                additional_screws_fabrication += 2;
+                                            }
+                                            else if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807)
+                                            {
+                                                additional_screws_fabrication += 4;
+                                            }
+                                            else if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                                            {
+                                                additional_screws_fabrication += 6;
+                                            }
                                         }
                                     }
                                 }
@@ -1645,30 +1691,6 @@ namespace ModelLayer.Model.Quotation
 
                             if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
                             {
-                                Material_List.Rows.Add("Espagnolette " + pnl.Panel_EspagnoletteArtNo.ToString(),
-                                                       1, "pc (s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
-
-                                if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                                    pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                                {
-                                    additional_screws_fabrication += 8;
-                                }
-                                else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806)
-                                {
-                                    additional_screws_fabrication += 2;
-                                }
-                                else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807)
-                                {
-                                    additional_screws_fabrication += 4;
-                                }
-                                else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                                {
-                                    additional_screws_fabrication += 6;
-                                }
-
                                 if (pnl.Panel_ExtTopQty > 0)
                                 {
                                     Material_List.Rows.Add("Extension(Top) " + pnl.Panel_ExtensionTopArtNo.ToString(),
@@ -1900,6 +1922,33 @@ namespace ModelLayer.Model.Quotation
                                                        @"");
 
                                 additional_screws_fabrication += 9;
+                            }
+
+                            if (pnl.Panel_HandleType != Handle_Type._Rotary)
+                            {
+                                Material_List.Rows.Add("Espagnolette " + pnl.Panel_EspagnoletteArtNo.ToString(),
+                                                       1, "pc (s)",
+                                                       "",
+                                                       "Sash",
+                                                       @"");
+
+                                if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                                    pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                                {
+                                    additional_screws_fabrication += 8;
+                                }
+                                else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806)
+                                {
+                                    additional_screws_fabrication += 2;
+                                }
+                                else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807)
+                                {
+                                    additional_screws_fabrication += 4;
+                                }
+                                else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                                {
+                                    additional_screws_fabrication += 6;
+                                }
                             }
                         }
                     }

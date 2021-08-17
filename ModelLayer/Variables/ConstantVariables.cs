@@ -15,7 +15,7 @@
         public int panel_property_sashPanelHeight = 53;
         public int panel_property_handleOptionsHeight = 48;
         public int panel_property_glassOptionsHeight = 130;
-        public int panel_property_rotoswingOptionsheight_default = 84;
+        public int panel_property_rotoswingOptionsheight_default = 55;
         public int panel_property_rotaryOptionsheight_default = 56;
         public int panel_property_motorizedOptionsheight = 120;
         public int panel_property_motorizedChkOptionsheight = 31;
@@ -27,6 +27,7 @@
         public int panel_property_rioOptionsheight_default = 28;
         public int panel_property_rotolineOptionsheight_default = 28;
         public int panel_property_mvdOptionsheight_default = 28;
+        public int panel_property_espagnoletteOptionsheight_default = 28;
 
         #endregion
 
