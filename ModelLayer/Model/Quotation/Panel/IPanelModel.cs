@@ -3,7 +3,6 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
-using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Panel
 {
@@ -96,7 +95,7 @@ namespace ModelLayer.Model.Quotation.Panel
         MVD_HandleArtNo Panel_MVDArtNo { get; set; }
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
 
-        Extension_ArticleNo Panel_ExtensionTopArtNo { get; set;}
+        Extension_ArticleNo Panel_ExtensionTopArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionTop2ArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionBotArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionBot2ArtNo { get; set; }
@@ -148,6 +147,9 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_GeorgianBar_VerticalQty { get; set; }
         int Panel_GeorgianBar_HorizontalQty { get; set; }
         bool Panel_GeorgianBarOptionVisibility { get; set; }
+
+        HingeOption Panel_HingeOptions { get; set; }
+        bool Panel_HingeOptionsVisibility { get; set; }
 
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
         void AdjustPropertyPanelHeight(string mode);

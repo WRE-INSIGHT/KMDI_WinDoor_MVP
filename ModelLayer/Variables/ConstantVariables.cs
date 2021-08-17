@@ -27,6 +27,7 @@
         public int panel_property_rioOptionsheight_default = 28;
         public int panel_property_rotolineOptionsheight_default = 28;
         public int panel_property_mvdOptionsheight_default = 28;
+        public int panel_property_HingeOptionsheight_default = 30;
 
         #endregion
 
