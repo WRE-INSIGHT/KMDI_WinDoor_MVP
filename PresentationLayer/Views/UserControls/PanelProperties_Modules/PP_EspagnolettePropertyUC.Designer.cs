@@ -36,12 +36,14 @@
             // 
             this.cmb_Espagnolette.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb_Espagnolette.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_Espagnolette.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_Espagnolette.FormattingEnabled = true;
             this.cmb_Espagnolette.Location = new System.Drawing.Point(67, 3);
             this.cmb_Espagnolette.Name = "cmb_Espagnolette";
             this.cmb_Espagnolette.Size = new System.Drawing.Size(84, 21);
             this.cmb_Espagnolette.TabIndex = 30;
+            this.cmb_Espagnolette.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_Espagnolette_DrawItem);
             this.cmb_Espagnolette.SelectedValueChanged += new System.EventHandler(this.cmb_Espagnolette_SelectedValueChanged);
             // 
             // label8

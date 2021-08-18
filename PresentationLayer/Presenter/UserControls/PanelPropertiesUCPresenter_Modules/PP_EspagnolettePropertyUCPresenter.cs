@@ -44,6 +44,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_espagnolettePropertyUC_PPEspagnolettePropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_espagnolettePropertyUC.ThisBinding(CreateBindingDictionary());
+            _initialLoad = false;
         }
 
         public IPP_EspagnolettePropertyUC GetPPEspagnolettePropertyUC()
@@ -68,6 +69,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
             binding.Add("Panel_EspagnoletteOptionsVisibility", new Binding("Visible", _panelModel, "Panel_EspagnoletteOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_EspagnoletteArtNo", new Binding("Text", _panelModel, "Panel_EspagnoletteArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Frame_ArtNo", new Binding("Frame_ArtNo", _panelModel.Panel_ParentFrameModel, "Frame_ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_SashProfileArtNo", new Binding("Panel_SashProfileArtNo", _panelModel, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

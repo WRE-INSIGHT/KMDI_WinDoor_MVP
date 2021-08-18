@@ -110,8 +110,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 chk.Text = "-";
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtensionField");
                 _panelModel.AdjustPropertyPanelHeight("addExtensionField");
-                _panelModel.AdjustHandlePropertyHeight("addExtensionField");
-                _panelModel.AdjustRotoswingPropertyHeight("addExtensionField");
                 _panelModel.AdjustExtensionPropertyHeight("addExtensionField");
 
                 if (_panelModel.Panel_ParentMultiPanelModel != null)
@@ -124,8 +122,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 chk.Text = "+";
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
                 _panelModel.AdjustPropertyPanelHeight("minusExtensionField");
-                _panelModel.AdjustHandlePropertyHeight("minusExtensionField");
-                _panelModel.AdjustRotoswingPropertyHeight("minusExtensionField");
                 _panelModel.AdjustExtensionPropertyHeight("minusExtensionField");
 
                 if (_panelModel.Panel_ParentMultiPanelModel != null)
@@ -173,6 +169,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_ExtensionOptionsVisibility", new Binding("Visible", _panelModel, "Panel_ExtensionOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtensionPropertyHeight", new Binding("Height", _panelModel, "Panel_ExtensionPropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_Type", new Binding("Panel_Type", _panelModel, "Panel_Type", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            binding.Add("Frame_ArtNo", new Binding("Frame_ArtNo", _panelModel.Panel_ParentFrameModel, "Frame_ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_SashProfileArtNo", new Binding("Panel_SashProfileArtNo", _panelModel, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }
