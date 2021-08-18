@@ -227,6 +227,16 @@ namespace PresentationLayer
                 .RegisterType<IPP_HingePropertyUC, PP_HingePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_HingePropertyUCPresenter, PP_HingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPP_CenterHingePropertyUC, PP_CenterHingePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_CenterHingePropertyUCPresenter, PP_CenterHingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_NTCenterHingePropertyUC, PP_NTCenterHingePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_NTCenterHingePropertyUCPresenter, PP_NTCenterHingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_MiddleCloserPropertyUC, PP_MiddleCloserPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_MiddleCloserPropertyUCPresenter, PP_MiddleCloserPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();

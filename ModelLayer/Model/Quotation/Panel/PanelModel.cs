@@ -1243,6 +1243,21 @@ namespace ModelLayer.Model.Quotation.Panel
         }
         public int Panel_MiddleCloserPairQty { get; set; }
 
+        private bool _panel_MiddleCloserVisibility;
+        public bool Panel_MiddleCloserVisibility
+        {
+            get
+            {
+                return _panel_MiddleCloserVisibility;
+            }
+
+            set
+            {
+                _panel_MiddleCloserVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private LockingKit_ArticleNo _panelLockingKitArtno;
         public LockingKit_ArticleNo Panel_LockingKitArtNo
         {
@@ -1442,7 +1457,37 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private NTCenterHinge_ArticleNo _panel_NTCenterHingeArticleNo;
+        public NTCenterHinge_ArticleNo Panel_NTCenterHingeArticleNo
+        {
+            get
+            {
+                return _panel_NTCenterHingeArticleNo;
+            }
 
+            set
+            {
+                _panel_NTCenterHingeArticleNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_NTCenterHingeVisibility;
+        public bool Panel_NTCenterHingeVisibility
+        {
+            get
+            {
+                return _panel_NTCenterHingeVisibility;
+            }
+
+            set
+            {
+                _panel_NTCenterHingeVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+     
 
         public void AdjustPropertyPanelHeight(string mode)
         {

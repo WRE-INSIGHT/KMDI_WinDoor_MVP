@@ -1,6 +1,7 @@
 ﻿using CommonComponents;
 using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
@@ -24,11 +25,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void SubscribeToEventSetup()
         {
-            _pp_centerHingePropertyUC.CenterHingeSelectedValueChangedEventRaised += _pp_centerHingePropertyUC_CenterHingeSelectedValueChangedEventRaised;
+            _pp_centerHingePropertyUC.CmbCenterHingeSelectedValueChangedEventRaised += _pp_centerHingePropertyUC_CmbCenterHingeSelectedValueChangedEventRaised;
             _pp_centerHingePropertyUC.CenterHingePropertyUCLoadEventRaised += _pp_centerHingePropertyUC_CenterHingePropertyUCLoadEventRaised;
+
         }
 
-        private void _pp_centerHingePropertyUC_CenterHingeSelectedValueChangedEventRaised(object sender, System.EventArgs e)
+        private void _pp_centerHingePropertyUC_CmbCenterHingeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             ComboBox cmbCenterHinge = (ComboBox)sender;
             if (_initialLoad == false)
@@ -37,7 +39,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             }
         }
 
-        private void _pp_centerHingePropertyUC_CenterHingePropertyUCLoadEventRaised(object sender, System.EventArgs e)
+
+        private void _pp_centerHingePropertyUC_CenterHingePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _pp_centerHingePropertyUC.ThisBinding(CreateBindingDictionary());
             _initialLoad = false;

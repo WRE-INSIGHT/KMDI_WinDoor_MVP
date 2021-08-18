@@ -14,12 +14,12 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         }
 
         public event EventHandler CenterHingePropertyUCLoadEventRaised;
-        public event EventHandler CenterHingeSelectedValueChangedEventRaised;
+        public event EventHandler CmbCenterHingeSelectedValueChangedEventRaised;
 
 
         private void PP_CenterHingePropertyUC_Load(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, CenterHingeSelectedValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, CmbCenterHingeSelectedValueChangedEventRaised, e);
         }
 
         private void cmb_CenterHinge_SelectedValueChanged(object sender, EventArgs e)
@@ -38,7 +38,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_CenterHinge.DataBindings.Add(ModelBinding["Panel_CenterHingeOptions"]);
             this.DataBindings.Add(ModelBinding["Panel_HingeOptionsVisibility"]);
         }
-        
-            
+
+
     }
 }
