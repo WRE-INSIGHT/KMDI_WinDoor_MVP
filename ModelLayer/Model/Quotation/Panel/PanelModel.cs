@@ -1412,6 +1412,37 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
 
+        private CenterHingeOption _panel_CenterHingeOptions;
+        public CenterHingeOption Panel_CenterHingeOptions
+        {
+            get
+            {
+                return _panel_CenterHingeOptions;
+            }
+
+            set
+            {
+                _panel_CenterHingeOptions = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_CenterHingeOptionsVisibility;
+        public bool Panel_CenterHingeOptionsVisibility
+        {
+            get
+            {
+                return _panel_CenterHingeOptionsVisibility;
+            }
+
+            set
+            {
+                _panel_CenterHingeOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
 
         public void AdjustPropertyPanelHeight(string mode)
         {

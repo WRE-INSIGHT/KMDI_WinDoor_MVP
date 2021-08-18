@@ -391,5 +391,13 @@ namespace EnumerationTypeLayer
             private HingeOption(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class CenterHingeOption : Enumeration<CenterHingeOption, int>
+        {
+            public static readonly CenterHingeOption _NTCenterHinge = new CenterHingeOption(0, "NT Center Hinge");
+            public static readonly CenterHingeOption _MiddleCloser = new CenterHingeOption(1, "Middle Closer");
+
+            private CenterHingeOption(int value, string displayName) : base(value, displayName) { }
+        }
+
     }
 }

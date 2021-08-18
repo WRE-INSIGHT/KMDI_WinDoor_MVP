@@ -150,6 +150,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
         HingeOption Panel_HingeOptions { get; set; }
         bool Panel_HingeOptionsVisibility { get; set; }
+        CenterHingeOption Panel_CenterHingeOptions { get; set; }
+        bool Panel_CenterHingeOptionsVisibility { get; set; }
 
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
         void AdjustPropertyPanelHeight(string mode);
