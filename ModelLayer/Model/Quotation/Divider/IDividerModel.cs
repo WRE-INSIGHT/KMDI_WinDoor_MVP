@@ -1,11 +1,8 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
-using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Divider
 {
@@ -28,6 +25,10 @@ namespace ModelLayer.Model.Quotation.Divider
         int Div_DisplayWidth { get; set; }
         int Div_DisplayHeight { get; set; }
         int Div_PropHeight { get; set; }
+        int Div_CladdingBracketForUPVC { get; set; }
+        int Div_CladdingBracketForConcrete { get; set; }
+        bool Div_claddingBracketVisibility { get; set; }
+
         IMultiPanelModel Div_MPanelParent { get; set; }
         IFrameModel Div_FrameParent { get; set; }
 

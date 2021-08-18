@@ -1,17 +1,11 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Variables;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
-using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Divider
 {
@@ -268,6 +262,25 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divHeightToBind = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        public int Div_CladdingBracketForUPVC { get; set; }
+        public int Div_CladdingBracketForConcrete { get; set; }
+
+        private bool _div_claddingBracketVisibility;
+        public bool Div_claddingBracketVisibility
+        {
+            get
+            {
+                return _div_claddingBracketVisibility;
+            }
+
+            set
+            {
+                _div_claddingBracketVisibility = value;
                 NotifyPropertyChanged();
             }
         }
