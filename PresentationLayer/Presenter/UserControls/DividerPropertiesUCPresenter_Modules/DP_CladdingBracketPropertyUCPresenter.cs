@@ -65,8 +65,8 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
             binding.Add("Div_claddingBracketVisibility", new Binding("Visible", _dividerModel, "Div_claddingBracketVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Div_CladdingBracketForConcrete", new Binding("Text", _dividerModel, "Div_CladdingBracketForConcrete", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Div_CladdingBracketForUPVC", new Binding("Text", _dividerModel, "Div_CladdingBracketForUPVC", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Div_CladdingBracketForConcrete", new Binding("Value", _dividerModel, "Div_CladdingBracketForConcrete", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Div_CladdingBracketForUPVC", new Binding("Value", _dividerModel, "Div_CladdingBracketForUPVC", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
 

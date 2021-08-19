@@ -236,6 +236,9 @@ namespace PresentationLayer
                 .RegisterType<IPP_MiddleCloserPropertyUC, PP_MiddleCloserPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_MiddleCloserPropertyUCPresenter, PP_MiddleCloserPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IDP_CladdingBracketPropertyUC, DP_CladdingBracketPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDP_CladdingBracketPropertyUCPresenter, DP_CladdingBracketPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
