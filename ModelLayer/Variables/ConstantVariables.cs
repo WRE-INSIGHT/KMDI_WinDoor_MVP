@@ -31,6 +31,7 @@
         public int panel_property_CenterHingeOptionsheight = 30;
         public int panel_property_NTCenterHingeOptionsheight = 30;
         public int panel_property_MiddleCloserOptionsheight = 30;
+
         #endregion
 
         #region DividerModelConstants
@@ -38,6 +39,7 @@
         public int div_propertyheight_default = 161; //228 - 40(height/Width) - 27(cladding_panel)
         public int div_property_claddingOptionsHeight = 28;
         public int div_property_pnlAddcladdingOptionsHeight = 27;
+        public int div_property_claddingBracketOptionsHeight = 72;
 
         #endregion
 
