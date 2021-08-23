@@ -28,6 +28,9 @@ namespace ModelLayer.Model.Quotation.Divider
         int Div_DisplayWidth { get; set; }
         int Div_DisplayHeight { get; set; }
         int Div_PropHeight { get; set; }
+        bool Div_ChkDM { get; set; }
+        bool Div_ChkDMVisibility { get; set; }
+        bool Div_ArtVisibility { get; set; }
         IMultiPanelModel Div_MPanelParent { get; set; }
         IFrameModel Div_FrameParent { get; set; }
 

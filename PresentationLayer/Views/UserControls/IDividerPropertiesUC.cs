@@ -15,6 +15,7 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
         event EventHandler btnAddCladdingClickedEventRaised;
         event EventHandler btnSaveCladdingClickedEventRaised;
+        event EventHandler chkDMCheckedChangedEventRaised;
 
         Panel GetDividerPropertiesBodyPNL();
         void SetBtnSaveBackColor(Color color);

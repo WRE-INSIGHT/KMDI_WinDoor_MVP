@@ -1714,6 +1714,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.div_property_pnlAddcladdingOptionsHeight;
                 }
+                else if (mode == "addDivArt")
+                {
+                    MPanelProp_Height += constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "minusDivArt")
+                {
+                    MPanelProp_Height -= constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "addDM")
+                {
+                    MPanelProp_Height += constants.div_property_DMArtOptionsHeight;
+                }
+                else if (mode == "minusDM")
+                {
+                    MPanelProp_Height -= constants.div_property_DMArtOptionsHeight;
+                }
             }
             else if (objtype == "Mpanel")
             {

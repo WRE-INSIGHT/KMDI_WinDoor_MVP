@@ -550,6 +550,22 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.div_property_pnlAddcladdingOptionsHeight;
                 }
+                else if (mode == "addDivArt")
+                {
+                    FrameProp_Height += constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "minusDivArt")
+                {
+                    FrameProp_Height -= constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "addDM")
+                {
+                    FrameProp_Height += constants.div_property_DMArtOptionsHeight;
+                }
+                else if (mode == "minusDM")
+                {
+                    FrameProp_Height -= constants.div_property_DMArtOptionsHeight;
+                }
             }
             else if (objtype == "Mpanel")
             {

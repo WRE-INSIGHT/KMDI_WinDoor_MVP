@@ -33,9 +33,11 @@
 
         #region DividerModelConstants
 
-        public int div_propertyheight_default = 161; //228 - 40(height/Width) - 27(cladding_panel)
+        public int div_propertyheight_default = 68;
         public int div_property_claddingOptionsHeight = 28;
-        public int div_property_pnlAddcladdingOptionsHeight = 27;
+        public int div_property_pnlAddcladdingOptionsHeight = 28;
+        public int div_property_divArtOptionsHeight = 90;
+        public int div_property_DMArtOptionsHeight = 28;
 
         #endregion
 

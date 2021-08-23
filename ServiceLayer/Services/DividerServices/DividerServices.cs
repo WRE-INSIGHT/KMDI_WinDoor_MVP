@@ -38,7 +38,9 @@ namespace ServiceLayer.Services.DividerServices
                                                 int divDisplayHeight,
                                                 IMultiPanelModel divMPanelParent,
                                                 Dictionary<int, int> divCladdingSizeList,
-                                                IFrameModel divFrameParent)
+                                                IFrameModel divFrameParent,
+                                                bool divChkDM,
+                                                bool divArtVisibility)
         {
             DividerModel div = new DividerModel(divID,
                                                 divName,
@@ -55,7 +57,9 @@ namespace ServiceLayer.Services.DividerServices
                                                 divDisplayHeight,
                                                 divMPanelParent,
                                                 divCladdingSizeList,
-                                                divFrameParent);
+                                                divFrameParent,
+                                                divChkDM,
+                                                divArtVisibility);
 
             ValidateModel(div);
             return div;
@@ -81,7 +85,9 @@ namespace ServiceLayer.Services.DividerServices
                                              float divImageRendererZoom = 1,
                                              string divFrameType = "",
                                              string divName = "",
-                                             Dictionary<int, int> divCladdingSizeList = null)
+                                             Dictionary<int, int> divCladdingSizeList = null,
+                                             bool divChkDM = false,
+                                             bool divArtVisibility = true)
         {
             if (divName == "")
             {
@@ -117,7 +123,9 @@ namespace ServiceLayer.Services.DividerServices
                                                          divDisplayHeight,
                                                          divMPanelParent,
                                                          divCladdingSizeList,
-                                                         divFrameParent);
+                                                         divFrameParent,
+                                                         divChkDM,
+                                                         divArtVisibility);
 
             return _divModel;
         }

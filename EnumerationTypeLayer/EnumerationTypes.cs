@@ -33,6 +33,14 @@ namespace EnumerationTypeLayer
             private DividerReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class DummyMullion_ArticleNo : Enumeration<DummyMullion_ArticleNo, int>
+        {
+            public static readonly DummyMullion_ArticleNo _7533 = new DummyMullion_ArticleNo(0, "7533");
+            public static readonly DummyMullion_ArticleNo _385P = new DummyMullion_ArticleNo(1, "385P");
+
+            private DummyMullion_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
         public class Divider_MechJointArticleNo : Enumeration<Divider_MechJointArticleNo, int>
         {
             public static readonly Divider_MechJointArticleNo _9U18 = new Divider_MechJointArticleNo(0, "9U18");
@@ -293,6 +301,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly CornerDrive_ArticleNo _None = new CornerDrive_ArticleNo(0, "None");
             public static readonly CornerDrive_ArticleNo _639958 = new CornerDrive_ArticleNo(1, "639958");
+            public static readonly CornerDrive_ArticleNo _N400A01206 = new CornerDrive_ArticleNo(2, "N400A01206");
 
             private CornerDrive_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

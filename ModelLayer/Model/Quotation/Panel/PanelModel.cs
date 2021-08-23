@@ -1737,21 +1737,45 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_MotorizedMechQty = 2;
                 }
-
-                if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                {
-                    Panel_StrikerQty_A += 2;
-                }
-                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                {
-                    Panel_StrikerQty_A += 3;
-                }
-
+                
                 if (Panel_Type.Contains("Awning"))
                 {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_A += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_A += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+
                     if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None)
                     {
                         Panel_StrikerQty_C += 1;
@@ -1774,6 +1798,42 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_Type.Contains("Casement"))
                 {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_C += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_C += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+
                     if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None)
                     {
                         Panel_StrikerQty_C += 1;
@@ -2407,20 +2467,44 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_MotorizedMechQty = 2;
                 }
 
-                if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                {
-                    Panel_StrikerQty_A += 2;
-                }
-                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                {
-                    Panel_StrikerQty_A += 3;
-                }
-
                 if (Panel_Type.Contains("Awning"))
                 {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_A += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_A += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+
                     if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None)
                     {
                         Panel_StrikerQty_C += 1;
@@ -2443,6 +2527,42 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_Type.Contains("Casement"))
                 {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_C += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_C += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+
                     if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None)
                     {
                         Panel_StrikerQty_C += 1;
