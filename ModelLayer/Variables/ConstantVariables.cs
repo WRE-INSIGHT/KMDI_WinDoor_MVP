@@ -27,6 +27,10 @@
         public int panel_property_rioOptionsheight_default = 28;
         public int panel_property_rotolineOptionsheight_default = 28;
         public int panel_property_mvdOptionsheight_default = 28;
+        public int panel_property_HingeOptionsheight = 30;
+        public int panel_property_CenterHingeOptionsheight = 30;
+        public int panel_property_NTCenterHingeOptionsheight = 30;
+        public int panel_property_MiddleCloserOptionsheight = 30;
         public int panel_property_espagnoletteOptionsheight_default = 28;
 
         #endregion
@@ -35,6 +39,7 @@
 
         public int div_propertyheight_default = 68;
         public int div_property_claddingOptionsHeight = 28;
+        public int div_property_claddingBracketOptionsHeight = 72;
         public int div_property_pnlAddcladdingOptionsHeight = 28;
         public int div_property_divArtOptionsHeight = 90;
         public int div_property_DMArtOptionsHeight = 28;

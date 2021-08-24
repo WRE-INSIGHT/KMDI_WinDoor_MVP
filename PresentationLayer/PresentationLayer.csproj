@@ -105,7 +105,9 @@
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\DP_CladdingBracketPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\DP_CladdingPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\IDP_CladdingBracketPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\IDP_CladdingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\Imagers\IMullionImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\Imagers\ITransomImagerUCPresenter.cs" />
@@ -131,27 +133,35 @@
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\MultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_CenterHingePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_CornerDrivePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_EspagnolettePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_ExtensionPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_GeorgianBarPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_GlassPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_HandlePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_HingePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_MiddleCloserPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_MotorizedPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_MVDPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_NTCenterHingePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RioPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotaryPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotolinePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotoswingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_SashPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_CenterHingePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_CornerDrivePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_EspagnolettePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_ExtensionPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_GeorgianBarPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_GlassPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_HandlePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_HingePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_MiddleCloserPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_MotorizedPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_MVDPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_NTCenterHingePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RioPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotaryPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotolinePropertyUCPresenter.cs" />
@@ -284,12 +294,19 @@
     <Compile Include="Views\UserControls\DividerPropertiesUC.Designer.cs">
       <DependentUpon>DividerPropertiesUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\DividerProperties_Modules\DP_CladdingBracketPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\DividerProperties_Modules\DP_CladdingBracketPropertyUC.Designer.cs">
+      <DependentUpon>DP_CladdingBracketPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\DividerProperties_Modules\DP_CladdingPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\UserControls\DividerProperties_Modules\DP_CladdingPropertyUC.Designer.cs">
       <DependentUpon>DP_CladdingPropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\DividerProperties_Modules\IDP_CladdingBracketPropertyUC.cs" />
     <Compile Include="Views\UserControls\DividerProperties_Modules\IDP_CladdingPropertyUC.cs" />
     <Compile Include="Views\UserControls\Dividers\Imagers\IMullionImagerUC.cs" />
     <Compile Include="Views\UserControls\Dividers\Imagers\ITransomImagerUC.cs" />
@@ -365,19 +382,29 @@
     <Compile Include="Views\UserControls\PanelPropertiesUC.Designer.cs">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CenterHingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CornerDrivePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_EspagnolettePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_ExtensionPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_GeorgianBarPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_GlassPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HandlePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MiddleCloserPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MotorizedPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MVDPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_NTCenterHingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RioPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotaryPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotolinePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotoswingPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SashPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.Designer.cs">
+      <DependentUpon>PP_CenterHingePropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -414,6 +441,18 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HandlePropertyUC.Designer.cs">
       <DependentUpon>PP_HandlePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.Designer.cs">
+      <DependentUpon>PP_HingePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.Designer.cs">
+      <DependentUpon>PP_MiddleCloserPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -425,6 +464,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.Designer.cs">
       <DependentUpon>PP_MVDPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_NTCenterHingePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_NTCenterHingePropertyUC.Designer.cs">
+      <DependentUpon>PP_NTCenterHingePropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -645,6 +690,9 @@
     <EmbeddedResource Include="Views\UserControls\DividerPropertiesUC.resx">
       <DependentUpon>DividerPropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\DividerProperties_Modules\DP_CladdingBracketPropertyUC.resx">
+      <DependentUpon>DP_CladdingBracketPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\DividerProperties_Modules\DP_CladdingPropertyUC.resx">
       <DependentUpon>DP_CladdingPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -678,6 +726,9 @@
     <EmbeddedResource Include="Views\UserControls\PanelPropertiesUC.resx">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.resx">
+      <DependentUpon>PP_CenterHingePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.resx">
       <DependentUpon>PP_CornerDrivePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -696,11 +747,20 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_HandlePropertyUC.resx">
       <DependentUpon>PP_HandlePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.resx">
+      <DependentUpon>PP_HingePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.resx">
+      <DependentUpon>PP_MiddleCloserPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.resx">
       <DependentUpon>PP_MotorizedPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.resx">
       <DependentUpon>PP_MVDPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_NTCenterHingePropertyUC.resx">
+      <DependentUpon>PP_NTCenterHingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.resx">
       <DependentUpon>PP_RioPropertyUC.cs</DependentUpon>

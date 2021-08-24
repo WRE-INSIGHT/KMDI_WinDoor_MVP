@@ -2,16 +2,11 @@
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Variables;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
-using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Panel
 {
@@ -595,12 +590,12 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452;
                 }
-                else if (value == 10.0f || 
+                else if (value == 10.0f ||
                          value == 11.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2451;
                 }
-                else if (value == 12.0f || 
+                else if (value == 12.0f ||
                          value == 13.0f ||
                          value == 14.0f)
                 {
@@ -623,7 +618,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434;
                 }
-                else if (value == 23.0f || 
+                else if (value == 23.0f ||
                          value == 24.0f ||
                          value == 25.0f)
                 {
@@ -1265,6 +1260,21 @@ namespace ModelLayer.Model.Quotation.Panel
         }
         public int Panel_MiddleCloserPairQty { get; set; }
 
+        private bool _panel_MiddleCloserVisibility;
+        public bool Panel_MiddleCloserVisibility
+        {
+            get
+            {
+                return _panel_MiddleCloserVisibility;
+            }
+
+            set
+            {
+                _panel_MiddleCloserVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private LockingKit_ArticleNo _panelLockingKitArtno;
         public LockingKit_ArticleNo Panel_LockingKitArtNo
         {
@@ -1357,7 +1367,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public int Panel_MotorizedMechQty { get; set; }
 
-        public int Panel_MotorizedMechSetQty { get; set;}
+        public int Panel_MotorizedMechSetQty { get; set; }
 
         private int _panelExtensionPropertyHeight;
         public int Panel_ExtensionPropertyHeight
@@ -1403,7 +1413,98 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+        private HingeOption _panel_HingeOptions;
+        public HingeOption Panel_HingeOptions
+        {
+            get
+            {
+                return _panel_HingeOptions;
+            }
 
+            set
+            {
+                _panel_HingeOptions = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_HingeOptionsVisibility;
+        public bool Panel_HingeOptionsVisibility
+        {
+            get
+            {
+                return _panel_HingeOptionsVisibility;
+            }
+
+            set
+            {
+                _panel_HingeOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private CenterHingeOption _panel_CenterHingeOptions;
+        public CenterHingeOption Panel_CenterHingeOptions
+        {
+            get
+            {
+                return _panel_CenterHingeOptions;
+            }
+
+            set
+            {
+                _panel_CenterHingeOptions = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_CenterHingeOptionsVisibility;
+        public bool Panel_CenterHingeOptionsVisibility
+        {
+            get
+            {
+                return _panel_CenterHingeOptionsVisibility;
+            }
+
+            set
+            {
+                _panel_CenterHingeOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private NTCenterHinge_ArticleNo _panel_NTCenterHingeArticleNo;
+        public NTCenterHinge_ArticleNo Panel_NTCenterHingeArticleNo
+        {
+            get
+            {
+                return _panel_NTCenterHingeArticleNo;
+            }
+
+            set
+            {
+                _panel_NTCenterHingeArticleNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_NTCenterHingeVisibility;
+        public bool Panel_NTCenterHingeVisibility
+        {
+            get
+            {
+                return _panel_NTCenterHingeVisibility;
+            }
+
+            set
+            {
+                _panel_NTCenterHingeVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+     
 
         public void AdjustPropertyPanelHeight(string mode)
         {
@@ -2050,7 +2151,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         if (fs_weight_based.Value > fs_dimension_based.Value)
                         {
-                            Panel_FSCasementArtNo= fs_weight_based;
+                            Panel_FSCasementArtNo = fs_weight_based;
                         }
                         else if (fs_weight_based.Value < fs_dimension_based.Value)
                         {
@@ -2142,7 +2243,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void SetPanelExplosionValues_Panel(Divider_ArticleNo divNxt_artNo,
                                                   Divider_ArticleNo divPrev_artNo,
-                                                  DividerType div_type, 
+                                                  DividerType div_type,
                                                   Divider_ArticleNo divArtNo_LeftorTop = null,
                                                   Divider_ArticleNo divArtNo_RightorBot = null,
                                                   string div_type_lvl3 = "",

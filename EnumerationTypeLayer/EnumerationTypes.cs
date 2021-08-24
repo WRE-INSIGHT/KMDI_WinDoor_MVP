@@ -427,5 +427,28 @@ namespace EnumerationTypeLayer
             private PlasticWedge_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class HingeOption : Enumeration<HingeOption, int>
+        {
+            public static readonly HingeOption _2DHinge = new HingeOption(0, "2DHinge");
+            public static readonly HingeOption _FrictionStay = new HingeOption(1, "Friction Stay");
+
+            private HingeOption(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CenterHingeOption : Enumeration<CenterHingeOption, int>
+        {
+            public static readonly CenterHingeOption _NTCenterHinge = new CenterHingeOption(0, "NT Center Hinge");
+            public static readonly CenterHingeOption _MiddleCloser = new CenterHingeOption(1, "Middle Closer");
+
+            private CenterHingeOption(int value, string displayName) : base(value, displayName) { }
+        }
+
+
+        public class NTCenterHinge_ArticleNo : Enumeration<NTCenterHinge_ArticleNo, int>
+        {
+            public static readonly NTCenterHinge_ArticleNo _N610A06516 = new NTCenterHinge_ArticleNo(0, "N610A06516 ");
+
+            private NTCenterHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }
