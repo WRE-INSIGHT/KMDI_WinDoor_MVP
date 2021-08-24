@@ -42,11 +42,38 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             }
         }
 
+        SashProfile_ArticleNo curr_sash;
         private void _pp_sashPropertyUC_cmbSashProfileSelectedValueEventRaised(object sender, EventArgs e)
         {
             if (!_initialLoad)
             {
                 _panelModel.Panel_SashProfileArtNo = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+
+                SashProfile_ArticleNo sel_sash = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+                if (sel_sash != curr_sash)
+                {
+                    if (sel_sash == SashProfile_ArticleNo._7581)
+                    {
+                        _panelModel.Panel_HingeOptionsVisibility = true;
+                        _panelModel.AdjustPropertyPanelHeight("addHinge");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                        }
+                    }
+                    else
+                    {
+                        _panelModel.Panel_HingeOptionsVisibility = false;
+                        _panelModel.AdjustPropertyPanelHeight("minusHinge");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                        }
+                    }
+                    curr_sash = sel_sash;
+                }
             }
         }
 

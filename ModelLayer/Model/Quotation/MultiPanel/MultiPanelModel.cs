@@ -1687,6 +1687,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_espagnoletteOptionsheight_default;
                 }
+                else if (mode == "addHinge")
+                {
+                    MPanelProp_Height += constants.panel_property_HingeOptionsheight;
+                }
+                else if (mode == "minusHinge")
+                {
+                    MPanelProp_Height -= constants.panel_property_HingeOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {

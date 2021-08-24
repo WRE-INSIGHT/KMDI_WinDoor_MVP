@@ -40,7 +40,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 Dictionary<int, int> divCladdingSizeList,
                                                 IFrameModel divFrameParent,
                                                 bool divChkDM,
-                                                bool divArtVisibility)
+                                                bool divArtVisibility,
+                                                DummyMullion_ArticleNo divDMArtNo)
         {
             DividerModel div = new DividerModel(divID,
                                                 divName,
@@ -59,7 +60,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 divCladdingSizeList,
                                                 divFrameParent,
                                                 divChkDM,
-                                                divArtVisibility);
+                                                divArtVisibility,
+                                                divDMArtNo);
 
             ValidateModel(div);
             return div;
@@ -87,7 +89,8 @@ namespace ServiceLayer.Services.DividerServices
                                              string divName = "",
                                              Dictionary<int, int> divCladdingSizeList = null,
                                              bool divChkDM = false,
-                                             bool divArtVisibility = true)
+                                             bool divArtVisibility = true,
+                                             DummyMullion_ArticleNo divDMArtNo = null)
         {
             if (divName == "")
             {
@@ -108,6 +111,11 @@ namespace ServiceLayer.Services.DividerServices
                 divCladdingSizeList = new Dictionary<int, int>();
             }
 
+            if (divDMArtNo == null)
+            {
+                divDMArtNo = DummyMullion_ArticleNo._7533;
+            }
+
             IDividerModel _divModel = CreateDividerModel(divID,
                                                          divName,
                                                          divWD,
@@ -125,7 +133,8 @@ namespace ServiceLayer.Services.DividerServices
                                                          divCladdingSizeList,
                                                          divFrameParent,
                                                          divChkDM,
-                                                         divArtVisibility);
+                                                         divArtVisibility,
+                                                         divDMArtNo);
 
             return _divModel;
         }

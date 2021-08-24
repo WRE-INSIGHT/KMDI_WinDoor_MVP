@@ -65,6 +65,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler btnAddCladdingClickedEventRaised;
         public event EventHandler btnSaveCladdingClickedEventRaised;
         public event EventHandler chkDMCheckedChangedEventRaised;
+        public event EventHandler cmbDMArtNoSelectedValueChangedEventRaised;
 
         private void DividerPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -142,11 +143,17 @@ namespace PresentationLayer.Views.UserControls
             chk_DM.DataBindings.Add(ModelBinding["Div_ChkDMVisibility"]);
             pnl_DMArtNo.DataBindings.Add(ModelBinding["Div_ChkDM2"]);
             pnl_divArtNo.DataBindings.Add(ModelBinding["Div_ArtVisibility"]);
+            cmb_DMArtNo.DataBindings.Add(ModelBinding["Div_DMArtNo"]);
         }
 
         public void SetBtnSaveBackColor(Color color)
         {
             btn_Save.BackColor = color;
+        }
+
+        private void cmb_DMArtNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbDMArtNoSelectedValueChangedEventRaised, e);
         }
     }
 }

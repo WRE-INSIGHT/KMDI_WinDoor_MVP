@@ -695,22 +695,33 @@ namespace ModelLayer.Model.Quotation
 
                                 if (mpnl.MPanel_Type == "Mullion")
                                 {
-                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
-                                                           1, "pc(s)",
-                                                           div_nxtCtrl.Div_ExplosionHeight.ToString(),
-                                                           div_nxtCtrl.Div_Bounded,
-                                                           @"[  ]");
-                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Height " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
-                                                           1, "pc(s)",
-                                                           div_nxtCtrl.Div_ReinfHeight.ToString(),
-                                                           mpnl.MPanel_Type,
-                                                           @"|  |");
-
-                                    total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
-
-                                    if (!screws_for_inst_where.Contains("Mullion"))
+                                    if (div_nxtCtrl.Div_ChkDM == true)
                                     {
-                                        screws_for_inst_where += ", Mullion";
+                                        Material_List.Rows.Add("Dummy " + mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_DMArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               div_nxtCtrl.Div_ExplosionHeight.ToString(),
+                                                               div_nxtCtrl.Div_Bounded,
+                                                               @"[  ]");
+                                    }
+                                    else if (div_nxtCtrl.Div_ChkDM == false)
+                                    {
+                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               div_nxtCtrl.Div_ExplosionHeight.ToString(),
+                                                               div_nxtCtrl.Div_Bounded,
+                                                               @"[  ]");
+                                        Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Height " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               div_nxtCtrl.Div_ReinfHeight.ToString(),
+                                                               mpnl.MPanel_Type,
+                                                               @"|  |");
+
+                                        total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
+
+                                        if (!screws_for_inst_where.Contains("Mullion"))
+                                        {
+                                            screws_for_inst_where += ", Mullion";
+                                        }
                                     }
 
                                     if (div_nxtCtrl.Div_ExplosionHeight >= 2000)

@@ -1620,6 +1620,14 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_espagnoletteOptionsheight_default;
             }
+            else if (mode == "addHinge")
+            {
+                Panel_PropertyHeight += constants.panel_property_HingeOptionsheight;
+            }
+            else if (mode == "minusHinge")
+            {
+                Panel_PropertyHeight -= constants.panel_property_HingeOptionsheight;
+            }
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)

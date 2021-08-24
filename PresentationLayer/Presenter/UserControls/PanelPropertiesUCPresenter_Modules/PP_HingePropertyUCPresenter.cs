@@ -47,8 +47,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         public IPP_HingePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
         {
             unityC
-                 .RegisterType<IPP_HingePropertyUCPresenter, PP_HingePropertyUCPresenter>()
-                 .RegisterType<IPP_HingePropertyUC, IPP_HingePropertyUC>();
+                 .RegisterType<IPP_HingePropertyUC, PP_HingePropertyUC>()
+                 .RegisterType<IPP_HingePropertyUCPresenter, PP_HingePropertyUCPresenter>();
             PP_HingePropertyUCPresenter HingePropertyUCPresenter = unityC.Resolve<PP_HingePropertyUCPresenter>();
             HingePropertyUCPresenter._panelModel = panelModel;
             HingePropertyUCPresenter._unityC = unityC;

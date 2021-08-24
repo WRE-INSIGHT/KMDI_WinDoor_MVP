@@ -284,6 +284,20 @@ namespace ModelLayer.Model.Quotation.Divider
                 _div_claddingBracketVisibility = value;
             }
         }
+        private DummyMullion_ArticleNo _divDMArtNo;
+        public DummyMullion_ArticleNo Div_DMArtNo
+        {
+            get
+            {
+                return _divDMArtNo;
+            }
+            set
+            {
+                _divDMArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private bool _divDM;
         public bool Div_ChkDM
         {
@@ -710,7 +724,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             Dictionary<int, int> divCladdingSizeList,
                             IFrameModel divFrameParent,
                             bool divChkDM,
-                            bool divArtVisibility)
+                            bool divArtVisibility,
+                            DummyMullion_ArticleNo divDMArtNo)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -730,6 +745,7 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_FrameParent = divFrameParent;
             Div_ChkDM = divChkDM;
             Div_ArtVisibility = divArtVisibility;
+            Div_DMArtNo = divDMArtNo;
 
             if (Div_Type == DividerType.Mullion)
             {

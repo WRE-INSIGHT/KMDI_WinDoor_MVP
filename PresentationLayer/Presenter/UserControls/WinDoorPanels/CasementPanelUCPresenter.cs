@@ -207,6 +207,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
                 }
 
+                if (_panelModel.Panel_HingeOptionsVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                }
+
                 _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minus");
                 _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
                 _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
@@ -323,6 +328,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             for (int i = 0; i < fieldExtension_count; i++)
             {
                 _frameModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
+            }
+
+            if (_panelModel.Panel_HingeOptionsVisibility == true)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
             }
 
             _frameModel.AdjustPropertyPanelHeight("Panel", "minus");

@@ -46,6 +46,15 @@ namespace PresentationLayer.Presenter.UserControls
             _divProperties.btnAddCladdingClickedEventRaised += _divProperties_btnAddCladdingClickedEventRaised;
             _divProperties.btnSaveCladdingClickedEventRaised += _divProperties_btnSaveCladdingClickedEventRaised;
             _divProperties.chkDMCheckedChangedEventRaised += _divProperties_chkDMCheckedChangedEventRaised;
+            _divProperties.cmbDMArtNoSelectedValueChangedEventRaised += _divProperties_cmbDMArtNoSelectedValueChangedEventRaised;
+        }
+
+        private void _divProperties_cmbDMArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            if (!_initialLoad)
+            {
+                _divModel.Div_DMArtNo = (DummyMullion_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _divProperties_chkDMCheckedChangedEventRaised(object sender, EventArgs e)
@@ -122,7 +131,10 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _divProperties_CmbdivArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _divModel.Div_ArtNo = (Divider_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (!_initialLoad)
+            {
+                _divModel.Div_ArtNo = (Divider_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _divProperties_PanelPropertiesLoadEventRaised(object sender, EventArgs e)
@@ -165,6 +177,7 @@ namespace PresentationLayer.Presenter.UserControls
             divBinding.Add("Div_ChkDMVisibility", new Binding("Visible", _divModel, "Div_ChkDMVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_ChkDM2", new Binding("Visible", _divModel, "Div_ChkDM", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_ArtVisibility", new Binding("Visible", _divModel, "Div_ArtVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_DMArtNo", new Binding("Text", _divModel, "Div_DMArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return divBinding;
         }

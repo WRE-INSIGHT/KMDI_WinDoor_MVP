@@ -27,6 +27,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_GeorgianBarPropertyUCPresenter _pp_georgianBarPropertUCPresenter;
         private IPP_ExtensionPropertyUCPresenter _pp_extensionPropertyUCPresenter;
         private IPP_CornerDrivePropertyUCPresenter _pp_cornerDrivePropertyUCPresenter;
+        private IPP_HingePropertyUCPresenter _pp_hingePropertyUCPresenter;
 
         private IUnityContainer _unityC;
 
@@ -39,7 +40,8 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_HandlePropertyUCPresenter pp_handlePropertUCPresenter,
                                           IPP_GeorgianBarPropertyUCPresenter pp_georgianBarPropertUCPresenter,
                                           IPP_ExtensionPropertyUCPresenter pp_extensionPropertyUCPresenter,
-                                          IPP_CornerDrivePropertyUCPresenter pp_cornerDrivePropertyUCPresenter)
+                                          IPP_CornerDrivePropertyUCPresenter pp_cornerDrivePropertyUCPresenter,
+                                          IPP_HingePropertyUCPresenter pp_hingePropertyUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -49,6 +51,7 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_georgianBarPropertUCPresenter = pp_georgianBarPropertUCPresenter;
             _pp_extensionPropertyUCPresenter = pp_extensionPropertyUCPresenter;
             _pp_cornerDrivePropertyUCPresenter = pp_cornerDrivePropertyUCPresenter;
+            _pp_hingePropertyUCPresenter = pp_hingePropertyUCPresenter;
             _pnlPanelSpecs = _panelPropertiesUC.GetPanelSpecsPNL();
 
             SubscribeToEventsSetup();
@@ -116,6 +119,19 @@ namespace PresentationLayer.Presenter.UserControls
             _pnlPanelSpecs.Controls.Add(sashProp);
             sashProp.Dock = DockStyle.Top;
             sashProp.BringToFront();
+
+            if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning"))
+            {
+                _panelModel.Panel_HingeOptionsVisibility = true;
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                _panelModel.AdjustPropertyPanelHeight("addHinge");
+            }
+
+            IPP_HingePropertyUCPresenter hingePropUCP = _pp_hingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            UserControl hingeProp = (UserControl)hingePropUCP.GetPP_HingePropertyUC();
+            _pnlPanelSpecs.Controls.Add(hingeProp);
+            hingeProp.Dock = DockStyle.Top;
+            hingeProp.BringToFront();
 
             if (_panelModel.Panel_SashPropertyVisibility == true)
             {

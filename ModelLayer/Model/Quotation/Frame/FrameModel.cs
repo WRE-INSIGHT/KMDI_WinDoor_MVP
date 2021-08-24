@@ -523,6 +523,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_espagnoletteOptionsheight_default;
                 }
+                else if (mode == "addHinge")
+                {
+                    FrameProp_Height += constants.panel_property_HingeOptionsheight;
+                }
+                else if (mode == "minusHinge")
+                {
+                    FrameProp_Height -= constants.panel_property_HingeOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {

@@ -254,6 +254,7 @@
             this.cmb_DMArtNo.Name = "cmb_DMArtNo";
             this.cmb_DMArtNo.Size = new System.Drawing.Size(85, 21);
             this.cmb_DMArtNo.TabIndex = 11;
+            this.cmb_DMArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_DMArtNo_SelectedValueChanged);
             // 
             // label1
             // 

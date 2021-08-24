@@ -26,6 +26,7 @@ namespace ServiceLayer.Services.DividerServices
                                       string divName = "",
                                       Dictionary<int, int> divCladdingSizeList = null,
                                       bool divChkDM = false,
-                                      bool divArtVisibility = true);        
+                                      bool divArtVisibility = true,
+                                      DummyMullion_ArticleNo divDMArtNo = null);        
     }
 }

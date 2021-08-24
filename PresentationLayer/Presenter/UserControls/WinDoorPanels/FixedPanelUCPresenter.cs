@@ -313,6 +313,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
                 }
+
+                if (_panelModel.Panel_HingeOptionsVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                }
+
                 _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minus");
                 _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
             }
@@ -367,6 +373,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (_panelModel.Panel_Orient == true)
             {
                 _frameModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+            }
+
+            if (_panelModel.Panel_HingeOptionsVisibility == true)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
             }
 
             _frameModel.AdjustPropertyPanelHeight("Panel", "minus");

@@ -429,8 +429,8 @@ namespace EnumerationTypeLayer
 
         public class HingeOption : Enumeration<HingeOption, int>
         {
-            public static readonly HingeOption _2DHinge = new HingeOption(0, "2DHinge");
-            public static readonly HingeOption _FrictionStay = new HingeOption(1, "Friction Stay");
+            public static readonly HingeOption _FrictionStay = new HingeOption(0, "Friction Stay");
+            public static readonly HingeOption _2DHinge = new HingeOption(1, "2DHinge");
 
             private HingeOption(int value, string displayName) : base(value, displayName) { }
         }

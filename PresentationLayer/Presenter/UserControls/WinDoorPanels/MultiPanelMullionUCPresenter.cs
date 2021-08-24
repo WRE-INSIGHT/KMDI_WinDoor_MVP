@@ -637,12 +637,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
                     _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
                     _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
 
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
 
                     _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
                     _panelModel.AdjustPropertyPanelHeight("addSash");
