@@ -196,6 +196,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
                     }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._Rio)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                    }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._Rotoline)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoline");
+                    }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._MVD)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusMVD");
+                    }
+
+                    if (_panelModel.Panel_HandleType != Handle_Type._Rotary)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
+                    }
                 }
 
                 if (_panelModel.Panel_HandleOptionsVisibility == true)
@@ -293,6 +310,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
                 {
                     _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._Rio)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._Rotoline)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotoline");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._MVD)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusMVD");
+                }
+
+                if (_panelModel.Panel_HandleType != Handle_Type._Rotary)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
                 }
             }
 

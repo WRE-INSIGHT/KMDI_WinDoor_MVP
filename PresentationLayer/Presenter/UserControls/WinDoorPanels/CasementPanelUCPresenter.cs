@@ -116,10 +116,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
                 _frameModel.AdjustPropertyPanelHeight("Div", "delete");
 
+                _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+
                 foreach (int cladding in div.Div_CladdingSizeList.Values)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
                     _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
+                }
+
+                if (div.Div_ChkDM == true && div.Div_ArtVisibility == false)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDM");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDM");
+                }
+                else if (div.Div_ChkDM == false && div.Div_ArtVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
                 }
             }
             #endregion
@@ -146,6 +160,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
                     {
                         _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                    }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._Rio)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                    }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._Rotoline)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoline");
+                    }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._MVD)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusMVD");
+                    }
+
+                    if (_panelModel.Panel_HandleType != Handle_Type._Rotary)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
                     }
                 }
 
@@ -247,6 +278,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
                 {
                     _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._Rio)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._Rotoline)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotoline");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._MVD)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusMVD");
+                }
+
+                if (_panelModel.Panel_HandleType != Handle_Type._Rotary)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
                 }
             }
 
