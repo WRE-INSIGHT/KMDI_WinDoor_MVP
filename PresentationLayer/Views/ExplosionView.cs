@@ -24,9 +24,11 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(this, ExplosionViewLoadEventRaised, e);
             dgv_ExplosionMaterialList.Columns[0].Width = 963;
-            dgv_ExplosionMaterialList.Columns[1].Width = 47;
+            dgv_ExplosionMaterialList.Columns[1].Width = 60;
+            dgv_ExplosionMaterialList.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv_ExplosionMaterialList.Columns[2].Width = 58;
             dgv_ExplosionMaterialList.Columns[3].Width = 68;
+            dgv_ExplosionMaterialList.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgv_ExplosionMaterialList.Columns[4].Width = 98;
             dgv_ExplosionMaterialList.Columns[5].Width = 72;
         }
@@ -39,6 +41,18 @@ namespace PresentationLayer.Views
         public void ShowThisDialog()
         {
             this.ShowDialog();
+        }
+
+        private void dgv_ExplosionMaterialList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 3 || e.ColumnIndex == 1)
+            {
+                if (e.Value.ToString() != "")
+                {
+                    double d = double.Parse(e.Value.ToString());
+                    e.Value = d.ToString("N0");
+                }
+            }
         }
     }
 }

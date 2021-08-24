@@ -19,39 +19,22 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
 
-        private IPP_ExtensionPropertyUCPresenter _pp_extensionPropertyUCPresenter;
-        private IPP_CornerDrivePropertyUCPresenter _pp_cornerDrivePropertyUCPresenter;
-
-        FlowLayoutPanel _flpRotoswingOptions;
+        Panel _pnlRotoswingOptions;
 
         bool _initialLoad = true;
 
-        public PP_RotoswingPropertyUCPresenter(IPP_RotoswingPropertyUC pp_rotoswingPropertyUC,
-                                               IPP_ExtensionPropertyUCPresenter pp_extensionPropertyUCPresenter,
-                                               IPP_CornerDrivePropertyUCPresenter pp_cornerDrivePropertyUCPresenter)
+        public PP_RotoswingPropertyUCPresenter(IPP_RotoswingPropertyUC pp_rotoswingPropertyUC)
         {
             _pp_rotoswingPropertyUC = pp_rotoswingPropertyUC;
-            _pp_extensionPropertyUCPresenter = pp_extensionPropertyUCPresenter;
-            _pp_cornerDrivePropertyUCPresenter = pp_cornerDrivePropertyUCPresenter;
-            _flpRotoswingOptions = _pp_rotoswingPropertyUC.GetRotoswingOptionFLP();
+            _pnlRotoswingOptions = _pp_rotoswingPropertyUC.GetRotoswingOptionPNL();
             SubscribeToEventsSetup();
         }
 
         private void SubscribeToEventsSetup()
         {
             _pp_rotoswingPropertyUC.PPRotoswingPropertyLoadEventRaised += _pp_rotoswingPropertyUC_PPRotoswingPropertyLoadEventRaised;
-            _pp_rotoswingPropertyUC.cmbEspagnoletteSelectedValueEventRaised += _pp_rotoswingPropertyUC_cmbEspagnoletteSelectedValueEventRaised;
             _pp_rotoswingPropertyUC.cmbMiddleCloserSelectedValueEventRaised += _pp_rotoswingPropertyUC_cmbMiddleCloserSelectedValueEventRaised;
             _pp_rotoswingPropertyUC.cmbRotoswingNoSelectedValueEventRaised += _pp_rotoswingPropertyUC_cmbRotoswingNoSelectedValueEventRaised;
-            _pp_rotoswingPropertyUC.cmbStrikerSelectedValueEventRaised += _pp_rotoswingPropertyUC_cmbStrikerSelectedValueEventRaised;
-        }
-
-        private void _pp_rotoswingPropertyUC_cmbStrikerSelectedValueEventRaised(object sender, EventArgs e)
-        {
-            if (!_initialLoad)
-            {
-                _panelModel.Panel_StrikerArtno = (Striker_ArticleNo)((ComboBox)sender).SelectedValue;
-            }
         }
 
         private void _pp_rotoswingPropertyUC_cmbRotoswingNoSelectedValueEventRaised(object sender, EventArgs e)
@@ -69,43 +52,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.Panel_MiddleCloserArtNo = (MiddleCloser_ArticleNo)((ComboBox)sender).SelectedValue;
             }
         }
-
-        private void _pp_rotoswingPropertyUC_cmbEspagnoletteSelectedValueEventRaised(object sender, EventArgs e)
-        {
-            _panelModel.Panel_EspagnoletteArtNo = (Espagnolette_ArticleNo)((ComboBox)sender).SelectedValue;
-        }
-
+        
         private void _pp_rotoswingPropertyUC_PPRotoswingPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_rotoswingPropertyUC.ThisBinding(CreateBindingDictionary());
 
-            if (_panelModel.Panel_Height >= 2100)
-            {
-                _panelModel.Panel_ExtensionOptionsVisibility = true;
-                _panelModel.Panel_CornerDriveOptionsVisibility = true;
-
-                IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                _flpRotoswingOptions.Controls.Add((UserControl)cdPropUCP.GetPPCornerDriveUC());
-
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
-                _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
-                _panelModel.AdjustHandlePropertyHeight("addCornerDrive");
-                _panelModel.AdjustRotoswingPropertyHeight("addCornerDrive");
-
-                IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                _flpRotoswingOptions.Controls.Add((UserControl)extPropUCP.GetPPExtensionUC());
-
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
-                _panelModel.AdjustPropertyPanelHeight("addExtension");
-                _panelModel.AdjustHandlePropertyHeight("addExtension");
-                _panelModel.AdjustRotoswingPropertyHeight("addExtension");
-
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
-                }
-            }
             _initialLoad = false;
         }
 
@@ -132,7 +83,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_RotoswingOptionsVisibility", new Binding("Visible", _panelModel, "Panel_RotoswingOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_RotoswingOptionsHeight", new Binding("Height", _panelModel, "Panel_RotoswingOptionsHeight", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_EspagnoletteArtNo", new Binding("Text", _panelModel, "Panel_EspagnoletteArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Panel_StrikerArtno", new Binding("Text", _panelModel, "Panel_StrikerArtno", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_MiddleCloserArtNo", new Binding("Text", _panelModel, "Panel_MiddleCloserArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_RotoswingArtNo", new Binding("Text", _panelModel, "Panel_RotoswingArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 

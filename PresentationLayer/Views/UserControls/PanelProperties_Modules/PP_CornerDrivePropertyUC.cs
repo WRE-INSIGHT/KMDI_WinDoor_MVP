@@ -42,6 +42,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             cmb_CornerDrive.DataBindings.Add(ModelBinding["Panel_CornerDriveArtNo"]);
+            this.DataBindings.Add(ModelBinding["Panel_CornerDriveOptionsVisibility"]);
         }
     }
 }

@@ -419,6 +419,30 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_rotoswingOptionsheight_default;
                 }
+                else if (mode == "addRio")
+                {
+                    FrameProp_Height += constants.panel_property_rioOptionsheight_default;
+                }
+                else if (mode == "minusRio")
+                {
+                    FrameProp_Height -= constants.panel_property_rioOptionsheight_default;
+                }
+                else if (mode == "addRotoline")
+                {
+                    FrameProp_Height += constants.panel_property_rotolineOptionsheight_default;
+                }
+                else if (mode == "minusRotoline")
+                {
+                    FrameProp_Height -= constants.panel_property_rotolineOptionsheight_default;
+                }
+                else if (mode == "addMVD")
+                {
+                    FrameProp_Height += constants.panel_property_mvdOptionsheight_default;
+                }
+                else if (mode == "minusMVD")
+                {
+                    FrameProp_Height -= constants.panel_property_mvdOptionsheight_default;
+                }
                 else if (mode == "addCmbMotorized")
                 {
                     FrameProp_Height += constants.panel_property_motorizedCmbOptionsheight;
@@ -483,6 +507,22 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_cornerDriveOptionsheight_default;
                 }
+                else if (mode == "addGeorgianBar")
+                {
+                    FrameProp_Height += constants.panel_property_georgianBarHeight;
+                }
+                else if (mode == "minusGeorgianBar")
+                {
+                    FrameProp_Height -= constants.panel_property_georgianBarHeight;
+                }
+                else if (mode == "addEspagnolette")
+                {
+                    FrameProp_Height += constants.panel_property_espagnoletteOptionsheight_default;
+                }
+                else if (mode == "minusEspagnolette")
+                {
+                    FrameProp_Height -= constants.panel_property_espagnoletteOptionsheight_default;
+                }
             }
             else if (objtype == "Div")
             {
@@ -493,6 +533,38 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "add")
                 {
                     FrameProp_Height += constants.div_propertyheight_default;
+                }
+                else if (mode == "addCladding")
+                {
+                    FrameProp_Height += constants.div_property_claddingOptionsHeight;
+                }
+                else if (mode == "minusCladding")
+                {
+                    FrameProp_Height -= constants.div_property_claddingOptionsHeight;
+                }
+                else if (mode == "addPanelAddCladding")
+                {
+                    FrameProp_Height += constants.div_property_pnlAddcladdingOptionsHeight;
+                }
+                else if (mode == "minusPanelAddCladding")
+                {
+                    FrameProp_Height -= constants.div_property_pnlAddcladdingOptionsHeight;
+                }
+                else if (mode == "addDivArt")
+                {
+                    FrameProp_Height += constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "minusDivArt")
+                {
+                    FrameProp_Height -= constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "addDM")
+                {
+                    FrameProp_Height += constants.div_property_DMArtOptionsHeight;
+                }
+                else if (mode == "minusDM")
+                {
+                    FrameProp_Height -= constants.div_property_DMArtOptionsHeight;
                 }
             }
             else if (objtype == "Mpanel")
@@ -529,7 +601,6 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Height = frameHt;
             Frame_Type = frameType;
             Frame_Visible = frameVisible;
-            FrameProp_Height = 283;
             Lst_Panel = lst_panel;
             Lst_MultiPanel = lst_mpanel;
             FrameImageRenderer_Zoom = frameImagerZoom;
@@ -537,6 +608,8 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Zoom = frameZoom;
             Frame_ArtNo = frameArtNo;
             Frame_WindoorModel = frameWindoorModel;
+
+            FrameProp_Height = constants.frame_propertyHeight_default - constants.frame_property_concretePanelHeight;
         }
     }
 }

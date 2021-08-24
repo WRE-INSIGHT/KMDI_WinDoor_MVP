@@ -48,9 +48,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.5.3">
+      <HintPath>..\..\..\..\Pictures\icon\Bunifu_UI_v1.5.3\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
@@ -76,12 +80,18 @@
   <ItemGroup>
     <Compile Include="CommonMethods\CommonFunctions.cs" />
     <Compile Include="Presenter\ChangeItemColorPresenter.cs" />
+    <Compile Include="Presenter\CreateNewGlassColorPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassPresenter.cs" />
+    <Compile Include="Presenter\CreateNewGlassSpacerPresenter.cs" />
+    <Compile Include="Presenter\CreateNewGlassTypePresenter.cs" />
     <Compile Include="Presenter\ExplosionPresenter.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
     <Compile Include="Presenter\GlassThicknessListPresenter.cs" />
     <Compile Include="Presenter\IChangeItemColorPresenter.cs" />
+    <Compile Include="Presenter\ICreateNewGlassColorPresenter.cs" />
     <Compile Include="Presenter\ICreateNewGlassPresenter.cs" />
+    <Compile Include="Presenter\ICreateNewGlassSpacerPresenter.cs" />
+    <Compile Include="Presenter\ICreateNewGlassTypePresenter.cs" />
     <Compile Include="Presenter\IExplosionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
@@ -95,6 +105,8 @@
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\DP_CladdingPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\IDP_CladdingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\Imagers\IMullionImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\Imagers\ITransomImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\Imagers\MullionImagerUCPresenter.cs" />
@@ -120,19 +132,29 @@
     <Compile Include="Presenter\UserControls\MultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_CornerDrivePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_EspagnolettePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_ExtensionPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_GeorgianBarPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_GlassPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_HandlePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_MotorizedPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_MVDPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RioPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotaryPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotolinePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotoswingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_SashPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_CornerDrivePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_EspagnolettePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_ExtensionPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_GeorgianBarPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_GlassPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_HandlePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_MotorizedPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_MVDPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RioPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotaryPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotolinePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotoswingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_SashPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\AwningPanelUCPresenter.cs" />
@@ -167,6 +189,24 @@
     <Compile Include="Views\ChangeItemColorView.Designer.cs">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\CreateNewGlassColorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassColorView.Designer.cs">
+      <DependentUpon>CreateNewGlassColorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassSpacerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassSpacerView.Designer.cs">
+      <DependentUpon>CreateNewGlassSpacerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassTypeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateNewGlassTypeView.Designer.cs">
+      <DependentUpon>CreateNewGlassTypeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateNewGlassView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +232,9 @@
       <DependentUpon>GlassThicknessListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\IChangeItemColorView.cs" />
+    <Compile Include="Views\ICreateNewGlassColorView.cs" />
+    <Compile Include="Views\ICreateNewGlassSpacerView.cs" />
+    <Compile Include="Views\ICreateNewGlassTypeView.cs" />
     <Compile Include="Views\ICreateNewGlassView.cs" />
     <Compile Include="Views\IExplosionView.cs" />
     <Compile Include="Views\IfrmDimensionView.cs" />
@@ -241,6 +284,13 @@
     <Compile Include="Views\UserControls\DividerPropertiesUC.Designer.cs">
       <DependentUpon>DividerPropertiesUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\DividerProperties_Modules\DP_CladdingPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\DividerProperties_Modules\DP_CladdingPropertyUC.Designer.cs">
+      <DependentUpon>DP_CladdingPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\DividerProperties_Modules\IDP_CladdingPropertyUC.cs" />
     <Compile Include="Views\UserControls\Dividers\Imagers\IMullionImagerUC.cs" />
     <Compile Include="Views\UserControls\Dividers\Imagers\ITransomImagerUC.cs" />
     <Compile Include="Views\UserControls\Dividers\Imagers\MullionImagerUC.cs">
@@ -316,11 +366,16 @@
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CornerDrivePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_EspagnolettePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_ExtensionPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_GeorgianBarPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_GlassPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HandlePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MotorizedPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MVDPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RioPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotaryPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotolinePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotoswingPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SashPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.cs">
@@ -329,11 +384,23 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.Designer.cs">
       <DependentUpon>PP_CornerDrivePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_EspagnolettePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_EspagnolettePropertyUC.Designer.cs">
+      <DependentUpon>PP_EspagnolettePropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionPropertyUC.Designer.cs">
       <DependentUpon>PP_ExtensionPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_GeorgianBarPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_GeorgianBarPropertyUC.Designer.cs">
+      <DependentUpon>PP_GeorgianBarPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_GlassPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -353,11 +420,29 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.Designer.cs">
       <DependentUpon>PP_MotorizedPropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.Designer.cs">
+      <DependentUpon>PP_MVDPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.Designer.cs">
+      <DependentUpon>PP_RioPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.Designer.cs">
       <DependentUpon>PP_RotaryPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.Designer.cs">
+      <DependentUpon>PP_RotolinePropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -518,6 +603,15 @@
     <EmbeddedResource Include="Views\ChangeItemColorView.resx">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateNewGlassColorView.resx">
+      <DependentUpon>CreateNewGlassColorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateNewGlassSpacerView.resx">
+      <DependentUpon>CreateNewGlassSpacerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateNewGlassTypeView.resx">
+      <DependentUpon>CreateNewGlassTypeView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateNewGlassView.resx">
       <DependentUpon>CreateNewGlassView.cs</DependentUpon>
     </EmbeddedResource>
@@ -550,6 +644,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\DividerPropertiesUC.resx">
       <DependentUpon>DividerPropertiesUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\DividerProperties_Modules\DP_CladdingPropertyUC.resx">
+      <DependentUpon>DP_CladdingPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\Dividers\Imagers\MullionImagerUC.resx">
       <DependentUpon>MullionImagerUC.cs</DependentUpon>
@@ -584,8 +681,14 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.resx">
       <DependentUpon>PP_CornerDrivePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_EspagnolettePropertyUC.resx">
+      <DependentUpon>PP_EspagnolettePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionPropertyUC.resx">
       <DependentUpon>PP_ExtensionPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_GeorgianBarPropertyUC.resx">
+      <DependentUpon>PP_GeorgianBarPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_GlassPropertyUC.resx">
       <DependentUpon>PP_GlassPropertyUC.cs</DependentUpon>
@@ -596,8 +699,17 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.resx">
       <DependentUpon>PP_MotorizedPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.resx">
+      <DependentUpon>PP_MVDPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.resx">
+      <DependentUpon>PP_RioPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.resx">
       <DependentUpon>PP_RotaryPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.resx">
+      <DependentUpon>PP_RotolinePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.resx">
       <DependentUpon>PP_RotoswingPropertyUC.cs</DependentUpon>

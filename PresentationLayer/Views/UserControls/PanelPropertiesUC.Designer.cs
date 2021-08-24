@@ -37,41 +37,12 @@
             this.pnum_Height = new System.Windows.Forms.NumericUpDown();
             this.lbl_Height = new System.Windows.Forms.Label();
             this.lbl_PanelGlassID = new System.Windows.Forms.Label();
-            this.flp_PanelSpecs = new System.Windows.Forms.FlowLayoutPanel();
             this.lbl_pnlSpecs = new System.Windows.Forms.Label();
-            this.pnl_Sash = new System.Windows.Forms.Panel();
-            this.cmb_SashReinf = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cmb_SashProfile = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmb_GlassType = new System.Windows.Forms.ComboBox();
-            this.lbl_glassthick = new System.Windows.Forms.Label();
-            this.btn_SelectGlassthickness = new System.Windows.Forms.Button();
-            this.lbl_GlassThicknessDesc = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmb_GlazingArtNo = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmb_FilmType = new System.Windows.Forms.ComboBox();
-            this.flp_HandleOptions = new System.Windows.Forms.FlowLayoutPanel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cmb_HandleType = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cmb_HandleArtNo = new System.Windows.Forms.ComboBox();
-            this.pnl_RotoswingOptions = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.cmb_MiddleCloser = new System.Windows.Forms.ComboBox();
-            this.txt_Striker = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cmb_Espagnolette = new System.Windows.Forms.ComboBox();
-            this.pnl_RotaryOptions = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cmb_LockingKit = new System.Windows.Forms.ComboBox();
+            this.pnl_panelSpecsBody = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Height)).BeginInit();
-            this.flp_PanelSpecs.SuspendLayout();
+            this.pnl_panelSpecsBody.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_pnlname
@@ -98,7 +69,6 @@
             // 
             // chk_Orientation
             // 
-            this.chk_Orientation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_Orientation.Appearance = System.Windows.Forms.Appearance.Button;
             this.chk_Orientation.BackColor = System.Drawing.SystemColors.ControlDark;
             this.chk_Orientation.FlatAppearance.BorderSize = 0;
@@ -182,28 +152,28 @@
             this.lbl_PanelGlassID.TabIndex = 9;
             this.lbl_PanelGlassID.Text = "P1";
             // 
-            // flp_PanelSpecs
+            // lbl_pnlSpecs
             // 
-            this.flp_PanelSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flp_PanelSpecs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flp_PanelSpecs.Controls.Add(this.lbl_pnlSpecs);
-            this.flp_PanelSpecs.Location = new System.Drawing.Point(2, 144);
-            this.flp_PanelSpecs.Name = "flp_PanelSpecs";
-            this.flp_PanelSpecs.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.flp_PanelSpecs.Size = new System.Drawing.Size(155, 26);
-            this.flp_PanelSpecs.TabIndex = 14;
-            // 
-            // label7
-            // 
-            this.lbl_pnlSpecs.AutoSize = true;
+            this.lbl_pnlSpecs.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbl_pnlSpecs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_pnlSpecs.Location = new System.Drawing.Point(3, 4);
+            this.lbl_pnlSpecs.Location = new System.Drawing.Point(0, 0);
             this.lbl_pnlSpecs.Name = "lbl_pnlSpecs";
-            this.lbl_pnlSpecs.Size = new System.Drawing.Size(112, 15);
+            this.lbl_pnlSpecs.Size = new System.Drawing.Size(153, 18);
             this.lbl_pnlSpecs.TabIndex = 8;
             this.lbl_pnlSpecs.Text = "Panel Specification";
+            this.lbl_pnlSpecs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnl_panelSpecsBody
+            // 
+            this.pnl_panelSpecsBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnl_panelSpecsBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_panelSpecsBody.Controls.Add(this.lbl_pnlSpecs);
+            this.pnl_panelSpecsBody.Location = new System.Drawing.Point(2, 144);
+            this.pnl_panelSpecsBody.Name = "pnl_panelSpecsBody";
+            this.pnl_panelSpecsBody.Size = new System.Drawing.Size(155, 281);
+            this.pnl_panelSpecsBody.TabIndex = 10;
             // 
             // Panel_PropertiesUC
             // 
@@ -212,7 +182,6 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.flp_PanelSpecs);
             this.Controls.Add(this.lbl_PanelGlassID);
             this.Controls.Add(this.pnum_Height);
             this.Controls.Add(this.lbl_Height);
@@ -222,15 +191,15 @@
             this.Controls.Add(this.lbl_pnlname);
             this.Controls.Add(this.chk_Orientation);
             this.Controls.Add(this.num_BladeCount);
+            this.Controls.Add(this.pnl_panelSpecsBody);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Panel_PropertiesUC";
-            this.Size = new System.Drawing.Size(160, 175);
+            this.Size = new System.Drawing.Size(160, 430);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Height)).EndInit();
-            this.flp_PanelSpecs.ResumeLayout(false);
-            this.flp_PanelSpecs.PerformLayout();
+            this.pnl_panelSpecsBody.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,7 +216,7 @@
         private System.Windows.Forms.NumericUpDown pnum_Height;
         private System.Windows.Forms.Label lbl_Height;
         private System.Windows.Forms.Label lbl_PanelGlassID;
-        private System.Windows.Forms.FlowLayoutPanel flp_PanelSpecs;
         private System.Windows.Forms.Label lbl_pnlSpecs;
+        private System.Windows.Forms.Panel pnl_panelSpecsBody;
     }
 }

@@ -49,19 +49,22 @@ namespace PresentationLayer.Views.UserControls
                 if (value == DividerType.Mullion)
                 {
                     lbl_Width.Visible = false;
-                    num_divWidth.Visible = false;
-                    flp_divProp.BackColor = Color.RosyBrown;
+                    pnl_divWd.Visible = false;
+                    this.BackColor = Color.RosyBrown;
                 }
                 else if (value == DividerType.Transom)
                 {
                     lbl_Height.Visible = false;
-                    num_divHeight.Visible = false;
-                    flp_divProp.BackColor = Color.PowderBlue;
+                    pnl_divHt.Visible = false;
+                    this.BackColor = Color.PowderBlue;
                 }
             }
         }
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
+        public event EventHandler btnAddCladdingClickedEventRaised;
+        public event EventHandler btnSaveCladdingClickedEventRaised;
+        public event EventHandler chkDMCheckedChangedEventRaised;
 
         private void DividerPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -82,7 +85,46 @@ namespace PresentationLayer.Views.UserControls
             }
             cmb_divReinf.DataSource = dReinfArtNo;
 
+            List<DummyMullion_ArticleNo> dMArtNo = new List<DummyMullion_ArticleNo>();
+            foreach (DummyMullion_ArticleNo item in DummyMullion_ArticleNo.GetAll())
+            {
+                dMArtNo.Add(item);
+            }
+            cmb_DMArtNo.DataSource = dMArtNo;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
+        }
+
+        private void cmb_divArtNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbdivArtNoSelectedValueChangedEventRaised, e);
+        }
+
+        public Panel GetDividerPropertiesBodyPNL()
+        {
+            return pnl_dividerBody;
+        }
+        private void btn_AddCladding_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnAddCladdingClickedEventRaised, e);
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnSaveCladdingClickedEventRaised, e);
+        }
+
+        private void chk_DM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_DM.Checked == true)
+            {
+                chk_DM.Text = "DM";
+            }
+            else if (chk_DM.Checked == false)
+            {
+                chk_DM.Text = "M";
+            }
+            EventHelpers.RaiseEvent(sender, chkDMCheckedChangedEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
@@ -95,11 +137,16 @@ namespace PresentationLayer.Views.UserControls
             cmb_divArtNo.DataBindings.Add(ModelBinding["Div_ArtNo"]);
             cmb_divReinf.DataBindings.Add(ModelBinding["Div_ReinfArtNo"]);
             this.DataBindings.Add(ModelBinding["Divider_Type"]);
+            this.DataBindings.Add(ModelBinding["Div_PropHeight"]);
+            chk_DM.DataBindings.Add(ModelBinding["Div_ChkDM"]);
+            chk_DM.DataBindings.Add(ModelBinding["Div_ChkDMVisibility"]);
+            pnl_DMArtNo.DataBindings.Add(ModelBinding["Div_ChkDM2"]);
+            pnl_divArtNo.DataBindings.Add(ModelBinding["Div_ArtVisibility"]);
         }
 
-        private void cmb_divArtNo_SelectedValueChanged(object sender, EventArgs e)
+        public void SetBtnSaveBackColor(Color color)
         {
-            EventHelpers.RaiseEvent(sender, CmbdivArtNoSelectedValueChangedEventRaised, e);
+            btn_Save.BackColor = color;
         }
     }
 }

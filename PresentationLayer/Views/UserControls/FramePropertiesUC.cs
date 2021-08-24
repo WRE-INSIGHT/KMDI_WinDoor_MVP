@@ -101,11 +101,6 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseEvent(sender, RdBtnCheckedChangedEventRaised, e);
         }
 
-        public FlowLayoutPanel GetFramePropertiesFLP()
-        {
-            return flp_frameProperties;
-        }
-
         public void SetFrameTypeRadioBtnEnabled(bool frameTypeEnabled)
         {
             rdBtn_Window.Enabled = frameTypeEnabled;
@@ -121,6 +116,11 @@ namespace PresentationLayer.Views.UserControls
         private void cmb_FrameReinf_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbFrameReinfSelectedValueChangedEventRaised, e);
+        }
+
+        public Panel GetFramePropertiesPNL()
+        {
+            return pnl_frameProperties;
         }
     }
 }

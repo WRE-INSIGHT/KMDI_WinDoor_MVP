@@ -27,20 +27,12 @@ namespace PresentationLayer.Views.UserControls
         }
 
         public event EventHandler MultiPanelPropertiesLoadEventRaised;
-        //public event EventHandler NumHeightValueChangedEventRaised;
-        //public event EventHandler NumWidthValueChangedEventRaised;
-
-        public FlowLayoutPanel GetMultiPanelPropertiesFLP()
-        {
-            return flp_MultiPanelProperties;
-        }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["MPanel_ID"]);
             this.DataBindings.Add(ModelBinding["MPanelProp_Height"]);
             lbl_MultiPanelName.DataBindings.Add(ModelBinding["MPanel_Name"]);
-            //this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
             num_Width.DataBindings.Add(ModelBinding["MPanel_Width"]);
             num_Height.DataBindings.Add(ModelBinding["MPanel_Height"]);
         }
@@ -67,19 +59,14 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        private void num_Width_ValueChanged(object sender, EventArgs e)
-        {
-            //EventHelpers.RaiseEvent(sender, NumWidthValueChangedEventRaised, e);
-        }
-
-        private void num_Height_ValueChanged(object sender, EventArgs e)
-        {
-            //EventHelpers.RaiseEvent(sender, NumHeightValueChangedEventRaised, e);
-        }
-
         public void BringToFrontThis()
         {
             this.BringToFront();
+        }
+
+        public Panel GetMultiPanelPropertiesPNL()
+        {
+            return pnl_MultiPanelProperties;
         }
     }
 }

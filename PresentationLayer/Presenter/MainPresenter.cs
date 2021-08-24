@@ -1,31 +1,31 @@
-﻿using PresentationLayer.Views;
-using System;
-using ModelLayer.Model.User;
+﻿using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
-using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
-using System.IO;
-using System.Windows.Forms;
-using Microsoft.VisualBasic;
-using System.Collections.Generic;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
+using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
+using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Thumbs;
-using ServiceLayer.Services.QuotationServices;
-using ServiceLayer.Services.WindoorServices;
 using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.PanelServices;
-using Unity;
-using System.Linq;
-using ModelLayer.Model.Quotation.MultiPanel;
-using ModelLayer.Model.Quotation.Divider;
-using PresentationLayer.Presenter.UserControls.Dividers;
-using PresentationLayer.CommonMethods;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
-using static EnumerationTypeLayer.EnumerationTypes;
+using ServiceLayer.Services.QuotationServices;
+using ServiceLayer.Services.WindoorServices;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter
 {
@@ -66,11 +66,15 @@ namespace PresentationLayer.Presenter
         private IDividerPropertiesUCPresenter _divPropertiesUCP;
         private ICreateNewGlassPresenter _createNewGlassPresenter;
         private IChangeItemColorPresenter _changeItemColorPresenter;
+        private ICreateNewGlassTypePresenter _createNewGlassTypePresenter;
+        private ICreateNewGlassColorPresenter _createNewGlassColorPresenter;
+        private ICreateNewGlassSpacerPresenter _createNewGlassSpacerPresenter;
+
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
         private FrameModel.Frame_Padding frameType;
-        
+
         private string input_qrefno;
 
         CommonFunctions _commonfunc = new CommonFunctions();
@@ -83,7 +87,7 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region GetSet
-       
+
         public DataTable GlassThicknessDT
         {
             get
@@ -95,6 +99,44 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT = value;
             }
         }
+
+        public DataTable GlassTypeDT
+        {
+            get
+            {
+                return _glassTypeDT;
+            }
+            set
+            {
+                _glassTypeDT = value;
+            }
+        }
+
+
+        public DataTable GlassSpacerDT
+        {
+            get
+            {
+                return _spacerDT;
+            }
+            set
+            {
+                _spacerDT = value;
+            }
+        }
+
+        public DataTable GlassColorDT
+        {
+            get
+            {
+                return _colorDT;
+            }
+            set
+            {
+                _colorDT = value;
+            }
+        }
+
 
         public string inputted_quotationRefNo
         {
@@ -329,6 +371,9 @@ namespace PresentationLayer.Presenter
                              IExplosionPresenter explosionPresenter,
                              IDividerPropertiesUCPresenter divPropertiesUCP,
                              ICreateNewGlassPresenter createNewGlassPresenter,
+                             ICreateNewGlassTypePresenter createNewGlassTypePresenter,
+                             ICreateNewGlassColorPresenter createNewGlassColorPresenter,
+                             ICreateNewGlassSpacerPresenter createNewGlassSpacerPresenter,
                              IChangeItemColorPresenter changeItemColorPresenter)
         {
             _mainView = mainView;
@@ -348,6 +393,9 @@ namespace PresentationLayer.Presenter
             _explosionPresenter = explosionPresenter;
             _divPropertiesUCP = divPropertiesUCP;
             _createNewGlassPresenter = createNewGlassPresenter;
+            _createNewGlassTypePresenter = createNewGlassTypePresenter;
+            _createNewGlassColorPresenter = createNewGlassColorPresenter;
+            _createNewGlassSpacerPresenter = createNewGlassSpacerPresenter;
             _changeItemColorPresenter = changeItemColorPresenter;
             SubscribeToEventsSetup();
         }
@@ -417,7 +465,7 @@ namespace PresentationLayer.Presenter
 
             if (gbmode == "")
             {
-                MessageBox.Show("Cannot apply auto glass balancing" + "\n" + "You can apply auto glass balancing if all panel has sash or all panel has no sash", 
+                MessageBox.Show("Cannot apply auto glass balancing" + "\n" + "You can apply auto glass balancing if all panel has sash or all panel has no sash",
                                 "Glass balancing not available",
                                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 gb.Checked = false;
@@ -474,30 +522,41 @@ namespace PresentationLayer.Presenter
         {
             ToolStripMenuItem menu = (ToolStripMenuItem)sender;
 
-            string inputbox_title = "";
+            //  string inputbox_title = "";
             DataTable dt = new DataTable();
 
             if (menu == _mainView.Glass_Type)
             {
-                inputbox_title = "Glass Type";
-                dt = _glassTypeDT;
+
+                // inputbox_title = "Glass Type";
+                //  dt = _glassTypeDT;
+
+                ICreateNewGlassTypePresenter createNewGlassTypePresenter = _createNewGlassTypePresenter.GetNewInstance(_unityC, this, _glassTypeDT);
+                createNewGlassTypePresenter.ShowCreateNewGlassTypeView();
+
             }
             else if (menu == _mainView.Spacer)
             {
-                inputbox_title = "Spacer";
-                dt = _spacerDT;
+                //inputbox_title = "Spacer";
+                //  dt = _spacerDT;
+                ICreateNewGlassSpacerPresenter createNewGlassSpacerPresenter = _createNewGlassSpacerPresenter.GetNewInstance(_unityC, this, _spacerDT);
+                createNewGlassSpacerPresenter.ShowCreateNewGlassSpacerView();
             }
             else if (menu == _mainView.Color)
             {
-                inputbox_title = "Color";
-                dt = _colorDT;
+                // inputbox_title = "Color";
+                //  dt = _colorDT;
+                ICreateNewGlassColorPresenter createNewGlassColorPresenter = _createNewGlassColorPresenter.GetNewInstance(_unityC, this, _colorDT);
+                createNewGlassColorPresenter.ShowCreateNewGlassColorView();
             }
 
-            string input_box_str = Interaction.InputBox(inputbox_title, "Windoor Maker", "");
-            if (input_box_str != "")
-            {
-                dt.Rows.Add(input_box_str);
-            }
+
+
+            //string input_box_str = Interaction.InputBox(inputbox_title, "Windoor Maker", "");
+            //if (input_box_str != "")
+            //{
+            //    dt.Rows.Add(input_box_str);
+            //}
         }
 
         private void _mainView_ChangeItemColorClickEventRaised(object sender, EventArgs e)
@@ -531,6 +590,7 @@ namespace PresentationLayer.Presenter
             {
                 show_purpose = CreateNewGlass_ShowPurpose._TripleLaminated;
             }
+
 
             ICreateNewGlassPresenter createNewGlassPresenter = _createNewGlassPresenter.GetNewInstance(_unityC, this, show_purpose, _glassThicknessDT);
             createNewGlassPresenter.ShowCreateNewGlassView();
@@ -624,7 +684,7 @@ namespace PresentationLayer.Presenter
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     create_new = true;
-                    Scenario_Quotation(false, false, false,frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
+                    Scenario_Quotation(false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
                 }
             }
             else
@@ -637,7 +697,7 @@ namespace PresentationLayer.Presenter
                 input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
                 if (input_qrefno != "" && input_qrefno != "0")
                 {
-                    Scenario_Quotation(true, false, false,frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
+                    Scenario_Quotation(true, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
                 }
             }
         }
@@ -723,6 +783,8 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Green", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tinted Blue", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(14.0, "14 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(24.0, "24 mm Clear with Georgian Bar", true, false, false, false, false);
             //double insulated
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 + 6 mm Clear", false, true, false, true, false);
             _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear Low-e + 12 Ar + 6 mm Clear Low-e", false, true, false, true, false);
@@ -821,7 +883,7 @@ namespace PresentationLayer.Presenter
 
         #region Scenarios
 
-        public void Scenario_Quotation(bool QoutationInputBox_OkClicked, 
+        public void Scenario_Quotation(bool QoutationInputBox_OkClicked,
                                        bool NewItem_OkClicked,
                                        bool AddedFrame,
                                        frmDimensionPresenter.Show_Purpose purpose,
@@ -900,7 +962,7 @@ namespace PresentationLayer.Presenter
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
 
                         AddItemInfoUC(_windoorModel);
-                        
+
                         _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
                                          _windoorModel.WD_name,
@@ -937,7 +999,7 @@ namespace PresentationLayer.Presenter
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
 
                         AddItemInfoUC(_windoorModel); //add item information user control
-                        
+
                         _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
                                          _windoorModel.WD_name,
@@ -963,16 +1025,16 @@ namespace PresentationLayer.Presenter
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
                         int frameID = _windoorModel.frameIDCounter += 1;
-                        _frameModel = _frameServices.AddFrameModel(frmDimension_numWd, 
-                                                                   frmDimension_numHt, 
-                                                                   frameType, 
+                        _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
+                                                                   frmDimension_numHt,
+                                                                   frameType,
                                                                    _windoorModel.WD_zoom_forImageRenderer,
                                                                    _windoorModel.WD_zoom,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
                                                                    frameID);
                         AddFrameList_WindoorModel(_frameModel);
-                        IFramePropertiesUCPresenter framePropUCP =  AddFramePropertiesUC(_frameModel);
+                        IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
                         AddFrameUC(_frameModel, framePropUCP);
 
                         _basePlatformImagerUCPresenter.InvalidateBasePlatform();
@@ -981,8 +1043,6 @@ namespace PresentationLayer.Presenter
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
                                          false);
-
-                         Console.WriteLine("Visible Frames: " + _windoorModel.lst_frame.Count());
 
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
@@ -1012,7 +1072,7 @@ namespace PresentationLayer.Presenter
             _quotationModel.GetListOfMaterials(_windoorModel);
         }
 
-        private void Fit_MyControls_byControlsLocation()
+        public void Fit_MyControls_byControlsLocation()
         {
             foreach (IFrameModel frames in _windoorModel.lst_frame)
             {
@@ -1128,10 +1188,10 @@ namespace PresentationLayer.Presenter
         {
             IFrameImagerUCPresenter frameImagerUCP = (FrameImagerUCPresenter)_frameImagerUCPresenter.GetNewInstance(_unityC, frameModel, this);
 
-            IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, 
-                                                                                            frameModel, 
+            IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC,
+                                                                                            frameModel,
                                                                                             this,
-                                                                                            _basePlatformPresenter, 
+                                                                                            _basePlatformPresenter,
                                                                                             frameImagerUCP,
                                                                                             _basePlatformImagerUCPresenter,
                                                                                             framePropertiesUCP);
@@ -1164,7 +1224,7 @@ namespace PresentationLayer.Presenter
         {
             return _pnlPropertiesBody.Controls.OfType<IFramePropertiesUC>().First(ctrl => ctrl.FrameID == frameID);
         }
-    
+
         public int GetPanelCount()
         {
             return _windoorModel.panelIDCounter += 1;

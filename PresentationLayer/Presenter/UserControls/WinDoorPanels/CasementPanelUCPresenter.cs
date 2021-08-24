@@ -18,6 +18,7 @@ using PresentationLayer.Presenter.UserControls.Dividers;
 using ServiceLayer.Services.DividerServices;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -45,9 +46,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private IDividerServices _divServices;
 
-
-        bool _initialLoad;
-
         private CommonFunctions _commonFunctions = new CommonFunctions();
         Timer _tmr = new Timer();
 
@@ -73,7 +71,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void SubscribeToEventsSetup()
         {
-            _casementUC.casementPanelUCSizeChangedEventRaised += new EventHandler(OnCasementPanelUCSizeChangedEventRaised);
             _casementUC.casementPanelUCPaintEventRaised += new PaintEventHandler(OnCasementPanelUCPaintEventRaised);
             _casementUC.casementPanelUCMouseEnterEventRaised += new EventHandler(OnCasementPanelUCMouseEnterEventRaised);
             _casementUC.casementPanelUCMouseLeaveEventRaised += new EventHandler(OnCasementPanelUCMouseLeaveEventRaised);
@@ -93,7 +90,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void OnDeleteToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            #region Delete TransomUC
+            #region Delete Divider
             if (_multiPanelModel != null &&
                 _multiPanelModel.MPanel_DividerEnabled &&
                 _panelModel.Panel_Placement != "Last")
@@ -116,8 +113,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
                 _frameModel.Lst_Divider.Remove(div);
 
-                _multiPanelModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
-                _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
+                _frameModel.AdjustPropertyPanelHeight("Div", "delete");
+
+                _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+
+                foreach (int cladding in div.Div_CladdingSizeList.Values)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
+                }
+
+                if (div.Div_ChkDM == true && div.Div_ArtVisibility == false)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDM");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDM");
+                }
+                else if (div.Div_ChkDM == false && div.Div_ArtVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
+                }
             }
             #endregion
 
@@ -127,6 +144,73 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_casementUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
+
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusChkMotorized");
+
+                if (_panelModel.Panel_MotorizedOptionVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCmbMotorized");
+                }
+                else if (_panelModel.Panel_MotorizedOptionVisibility == false)
+                {
+                    if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
+                    }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                    }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._Rio)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                    }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._Rotoline)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoline");
+                    }
+                    else if (_panelModel.Panel_HandleType == Handle_Type._MVD)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusMVD");
+                    }
+
+                    if (_panelModel.Panel_HandleType != Handle_Type._Rotary)
+                    {
+                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
+                    }
+                }
+
+                if (_panelModel.Panel_HandleOptionsVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
+                }
+
+                if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                }
+
+                if (_panelModel.Panel_ExtensionOptionsVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+                }
+
+                int fieldExtension_count2 = 0;
+
+                fieldExtension_count2 = (_panelModel.Panel_ExtTopChk == true) ? fieldExtension_count2 += 1 : fieldExtension_count2;
+                fieldExtension_count2 = (_panelModel.Panel_ExtBotChk == true) ? fieldExtension_count2 += 1 : fieldExtension_count2;
+                fieldExtension_count2 = (_panelModel.Panel_ExtLeftChk == true) ? fieldExtension_count2 += 1 : fieldExtension_count2;
+                fieldExtension_count2 = (_panelModel.Panel_ExtRightChk == true) ? fieldExtension_count2 += 1 : fieldExtension_count2;
+
+                for (int i = 0; i < fieldExtension_count2; i++)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
+                }
+
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minus");
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+
             }
             if (_multiPanelMullionUCP != null)
             {
@@ -168,6 +252,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
             _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
+
             if (_frameModel != null)
             {
                 _frameModel.Lst_Panel.Remove(_panelModel);
@@ -177,9 +262,76 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
 
-            //_panelModel.Panel_Visibility = false;
-            _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
+            _frameModel.AdjustPropertyPanelHeight("Panel", "minusChkMotorized");
 
+
+            if (_panelModel.Panel_MotorizedOptionVisibility == true)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusCmbMotorized");
+            }
+            else if (_panelModel.Panel_MotorizedOptionVisibility == false)
+            {
+                if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._Rotary)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._Rio)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._Rotoline)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotoline");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._MVD)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusMVD");
+                }
+
+                if (_panelModel.Panel_HandleType != Handle_Type._Rotary)
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
+                }
+            }
+
+            if (_panelModel.Panel_HandleOptionsVisibility == true)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
+            }
+
+            if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+            }
+
+            if (_panelModel.Panel_ExtensionOptionsVisibility == true)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+            }
+
+            int fieldExtension_count = 0;
+
+            fieldExtension_count = (_panelModel.Panel_ExtTopChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+            fieldExtension_count = (_panelModel.Panel_ExtBotChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+            fieldExtension_count = (_panelModel.Panel_ExtLeftChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+            fieldExtension_count = (_panelModel.Panel_ExtRightChk == true) ? fieldExtension_count += 1 : fieldExtension_count;
+
+            for (int i = 0; i < fieldExtension_count; i++)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
+            }
+
+            _frameModel.AdjustPropertyPanelHeight("Panel", "minus");
+            _frameModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
+            _frameModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+
+            _mainPresenter.DeductPanelGlassID();
+            _mainPresenter.SetPanelGlassID();
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             #endregion
         }
 
@@ -290,47 +442,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
         }
 
-        int prev_Width = 0,
-            prev_Height = 0;
-        private void OnCasementPanelUCSizeChangedEventRaised(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    if (!_initialLoad)
-            //    {
-            //        int thisWd = ((UserControl)sender).Width,
-            //            thisHt = ((UserControl)sender).Height,
-            //            pnlModelWd = _panelModel.Panel_Width,
-            //            pnlModelHt = _panelModel.Panel_Height;
-
-            //        if (thisWd != pnlModelWd || prev_Width != pnlModelWd)
-            //        {
-            //            _panelModel.Panel_Width = thisWd;
-            //            _WidthChange = true;
-            //        }
-            //        if (thisHt != pnlModelHt || prev_Height != pnlModelHt)
-            //        {
-            //            _panelModel.Panel_Height = thisHt;
-            //            _HeightChange = true;
-            //        }
-            //    }
-
-            //    prev_Width = _panelModel.Panel_Width;
-            //    prev_Height = _panelModel.Panel_Height;
-
-            //    _tmr.Start();
-            //    ((UserControl)sender).Invalidate();
-            //    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-        }
-        
         public ICasementPanelUC GetCasementPanelUC()
         {
-            _initialLoad = true;
             _casementUC.ThisBinding(CreateBindingDictionary());
             return _casementUC;
         }
@@ -415,11 +528,5 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             return panelBinding;
         }
-
-        public void SetInitialLoadFalse()
-        {
-            _initialLoad = false;
-        }
-
     }
 }

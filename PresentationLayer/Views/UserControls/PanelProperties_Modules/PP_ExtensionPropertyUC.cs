@@ -9,11 +9,87 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
+using EnumerationTypeLayer;
 
 namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
     public partial class PP_ExtensionPropertyUC : UserControl, IPP_ExtensionPropertyUC
     {
+        private string _panelType;
+        public string Panel_Type
+        {
+            get
+            {
+                return _panelType;
+            }
+
+            set
+            {
+                _panelType = value;
+                if (_panelType.Contains("Awning"))
+                {
+                    pnl_TopExtOption.Visible = false;
+                    pnl_BotExtOption.Visible = false;
+                    pnl_LeftExtOption.Visible = true;
+                    pnl_RightExtOption.Visible = true;
+                }
+                else if (_panelType.Contains("Casement"))
+                {
+                    pnl_TopExtOption.Visible = true;
+                    pnl_BotExtOption.Visible = true;
+                    pnl_LeftExtOption.Visible = false;
+                    pnl_RightExtOption.Visible = false;
+                }
+            }
+        }
+
+
+        private FrameProfile_ArticleNo _frameArtNO;
+        public FrameProfile_ArticleNo Frame_ArtNo
+        {
+            get
+            {
+                return _frameArtNO;
+            }
+
+            set
+            {
+                _frameArtNO = value;
+                cmb_TopExt.Refresh();
+                cmb_TopExt2.Refresh();
+                cmb_BotExt.Refresh();
+                cmb_BotExt2.Refresh();
+                cmb_LeftExt.Refresh();
+                cmb_LeftExt2.Refresh();
+                cmb_RightExt.Refresh();
+                cmb_RightExt2.Refresh();
+            }
+        }
+
+        private SashProfile_ArticleNo _panelSashProfileArtNo;
+        public SashProfile_ArticleNo Panel_SashProfileArtNo
+        {
+            get
+            {
+                return _panelSashProfileArtNo;
+            }
+
+            set
+            {
+                _panelSashProfileArtNo = value;
+                cmb_TopExt.Refresh();
+                cmb_TopExt2.Refresh();
+                cmb_BotExt.Refresh();
+                cmb_BotExt2.Refresh();
+                cmb_LeftExt.Refresh();
+                cmb_LeftExt2.Refresh();
+                cmb_RightExt.Refresh();
+                cmb_RightExt2.Refresh();
+            }
+        }
+
+        private bool _initialLoad = true;
+
         public PP_ExtensionPropertyUC()
         {
             InitializeComponent();
@@ -91,6 +167,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_LeftExt2.DataSource = extArtNo7;
 
             EventHelpers.RaiseEvent(this, PPExtensionUCLoadEventRaised, e);
+
+            _initialLoad = false;
         }
 
         private void chk_ToAdd_TopExt2_CheckedChanged(object sender, EventArgs e)
@@ -216,13 +294,98 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             pnl_LeftExt2Option.DataBindings.Add(ModelBinding["Panel_ExtLeftChk_visible"]);
             pnl_RightExt2Option.DataBindings.Add(ModelBinding["Panel_ExtRightChk_visible"]);
             this.DataBindings.Add(ModelBinding["Panel_ExtensionPropertyHeight"]);
+            this.DataBindings.Add(ModelBinding["Panel_Type"]);
+            this.DataBindings.Add(ModelBinding["Panel_ExtensionOptionsVisibility"]);
+            this.DataBindings.Add(ModelBinding["Frame_ArtNo"]);
+            this.DataBindings.Add(ModelBinding["Panel_SashProfileArtNo"]);
         }
 
         private void cmbExtension_SelectedValueChanged(object sender, EventArgs e)
         {
+            if (!_initialLoad)
+            {
+                Extension_ArticleNo ext = (Extension_ArticleNo)((ComboBox)sender).SelectedValue;
+
+                if (ext == Extension_ArticleNo._639957)
+                {
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7502 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) &&
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581))
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Extension Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
+                {
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Extension Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else if (ext == Extension_ArticleNo._612978)
+                {
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7502 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) &&
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) &&
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374) &&
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._395))
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Extension Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+
             EventHelpers.RaiseEvent(sender, cmbExtensionsSelectedValueChangedEventRaised, e);
         }
 
+        private void cmb_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+
+            // Get the item text    
+            string text = ((ComboBox)sender).Items[e.Index].ToString();
+            Extension_ArticleNo ext = (Extension_ArticleNo)((ComboBox)sender).Items[e.Index];
+
+            if (ext == Extension_ArticleNo._639957)
+            {
+                if ((Frame_ArtNo == FrameProfile_ArticleNo._7502 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
+                    (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581))
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
+            {
+                if (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            else if (ext == Extension_ArticleNo._612978)
+            {
+                if ((Frame_ArtNo == FrameProfile_ArticleNo._7502 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
+                    (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
+                    (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374) ||
+                    (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._395))
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            else
+            {
+                e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+            }
+        }
 
         public Panel GetTopExt2OptionPNL()
         {

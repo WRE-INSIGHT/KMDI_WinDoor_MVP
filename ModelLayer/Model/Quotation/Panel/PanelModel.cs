@@ -685,6 +685,20 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_OriginalGlassHeight { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
 
+        private int _panelGlassPropertyHt;
+        public int Panel_GlassPropertyHeight
+        {
+            get
+            {
+                return _panelGlassPropertyHt;
+            }
+            set
+            {
+                _panelGlassPropertyHt = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private GlassFilm_Types _panelGlassFilm;
         public GlassFilm_Types Panel_GlassFilm
         {
@@ -806,6 +820,48 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private bool _panelRioOptionsVisibility;
+        public bool Panel_RioOptionsVisibility
+        {
+            get
+            {
+                return _panelRioOptionsVisibility;
+            }
+            set
+            {
+                _panelRioOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelRotolineOptionsVisibility;
+        public bool Panel_RotolineOptionsVisibility
+        {
+            get
+            {
+                return _panelRotolineOptionsVisibility;
+            }
+            set
+            {
+                _panelRotolineOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelMVDOptionsVisibility;
+        public bool Panel_MVDOptionsVisibility
+        {
+            get
+            {
+                return _panelMVDOptionsVisibility;
+            }
+            set
+            {
+                _panelMVDOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private bool _panelRotaryOptionsVisibility;
         public bool Panel_RotaryOptionsVisibility
         {
@@ -850,12 +906,15 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public FrictionStayCasement_ArticleNo Panel_FSCasementArtNo { get; set; }
+
         public SnapInKeep_ArticleNo Panel_SnapInKeepArtNo { get; set; }
         public FixedCam_ArticleNo Panel_FixedCamArtNo { get; set; }
         public _30x25Cover_ArticleNo Panel_30x25CoverArtNo { get; set; }
         public MotorizedDivider_ArticleNo Panel_MotorizedDividerArtNo { get; set; }
         public CoverForMotor_ArticleNo Panel_CoverForMotorArtNo { get; set; }
         public _2DHinge_ArticleNo Panel_2dHingeArtNo { get; set; }
+        public int Panel_2DHingeQty { get; set; }
         public PushButtonSwitch_ArticleNo Panel_PushButtonSwitchArtNo { get; set; }
         public FalsePole_ArticleNo Panel_FalsePoleArtNo { get; set; }
         public SupportingFrame_ArticleNo Panel_SupportingFrameArtNo { get; set; }
@@ -903,6 +962,51 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private Rio_HandleArtNo _panelRioArtNo;
+        public Rio_HandleArtNo Panel_RioArtNo
+        {
+            get
+            {
+                return _panelRioArtNo;
+            }
+            set
+            {
+                _panelRioArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public ProfileKnobCylinder_ArtNo Panel_ProfileKnobCylinderArtNo { get; set; }
+        public Cylinder_CoverArtNo Panel_CylinderCoverArtNo { get; set; }
+
+        private Rotoline_HandleArtNo _panelRotolineArtNo;
+        public Rotoline_HandleArtNo Panel_RotolineArtNo
+        {
+            get
+            {
+                return _panelRotolineArtNo;
+            }
+            set
+            {
+                _panelRotolineArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private MVD_HandleArtNo _panelMVDArtNo;
+        public MVD_HandleArtNo Panel_MVDArtNo
+        {
+            get
+            {
+                return _panelMVDArtNo;
+            }
+            set
+            {
+                _panelMVDArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private Espagnolette_ArticleNo _panelEspagnoletteArtno;
         public Espagnolette_ArticleNo Panel_EspagnoletteArtNo
         {
@@ -913,6 +1017,20 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelEspagnoletteArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelEspagnoletteOptionsVisibility;
+        public bool Panel_EspagnoletteOptionsVisibility
+        {
+            get
+            {
+                return _panelEspagnoletteOptionsVisibility;
+            }
+            set
+            {
+                _panelEspagnoletteOptionsVisibility = value;
                 NotifyPropertyChanged();
             }
         }
@@ -1126,22 +1244,14 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public PlasticWedge_ArticleNo Panel_PlasticWedge { get; set; }
         public int Panel_PlasticWedgeQty { get; set; }
 
-        private Striker_ArticleNo _panelStrikerArtno;
-        public Striker_ArticleNo Panel_StrikerArtno
-        {
-            get
-            {
-                return _panelStrikerArtno;
-            }
-            set
-            {
-                _panelStrikerArtno = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public int Panel_StrikerQty { get; set; }
+        public Striker_ArticleNo Panel_StrikerArtno_A { get; set; } //for Awning
+        public int Panel_StrikerQty_A { get; set; }
+
+        public Striker_ArticleNo Panel_StrikerArtno_C { get; set; } //for Casement
+        public int Panel_StrikerQty_C { get; set; }
 
         private MiddleCloser_ArticleNo _panelMiddleCloserArtno;
         public MiddleCloser_ArticleNo Panel_MiddleCloserArtNo
@@ -1207,7 +1317,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
                     }
 
-                    if (Panel_Width >= 1500)
+                    if (Panel_DisplayWidth >= 1500)
                     {
                         Panel_GlassFilm = GlassFilm_Types._4milUpera;
                     }
@@ -1250,6 +1360,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public int Panel_MotorizedMechQty { get; set; }
 
+        public int Panel_MotorizedMechSetQty { get; set;}
+
         private int _panelExtensionPropertyHeight;
         public int Panel_ExtensionPropertyHeight
         {
@@ -1263,6 +1375,38 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        private GeorgianBar_ArticleNo _panelGeorgianBarArtNo;
+        public GeorgianBar_ArticleNo Panel_GeorgianBarArtNo
+        {
+            get
+            {
+                return _panelGeorgianBarArtNo;
+            }
+            set
+            {
+                _panelGeorgianBarArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int Panel_GeorgianBar_VerticalQty { get; set; }
+        public int Panel_GeorgianBar_HorizontalQty { get; set; }
+
+        private bool _panelGeorgianBarOptionVisibility;
+        public bool Panel_GeorgianBarOptionVisibility
+        {
+            get
+            {
+                return _panelGeorgianBarOptionVisibility;
+            }
+            set
+            {
+                _panelGeorgianBarOptionVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         public void AdjustPropertyPanelHeight(string mode)
         {
@@ -1314,6 +1458,30 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_rotaryOptionsheight_default;
             }
+            else if (mode == "addRio")
+            {
+                Panel_PropertyHeight += constants.panel_property_rioOptionsheight_default;
+            }
+            else if (mode == "minusRio")
+            {
+                Panel_PropertyHeight -= constants.panel_property_rioOptionsheight_default;
+            }
+            else if (mode == "addRotoline")
+            {
+                Panel_PropertyHeight += constants.panel_property_rotolineOptionsheight_default;
+            }
+            else if (mode == "minusRotoline")
+            {
+                Panel_PropertyHeight -= constants.panel_property_rotolineOptionsheight_default;
+            }
+            else if (mode == "addMVD")
+            {
+                Panel_PropertyHeight += constants.panel_property_mvdOptionsheight_default;
+            }
+            else if (mode == "minusMVD")
+            {
+                Panel_PropertyHeight -= constants.panel_property_mvdOptionsheight_default;
+            }
             else if (mode == "addExtension")
             {
                 Panel_PropertyHeight += constants.panel_property_extensionOptionsheight;
@@ -1337,6 +1505,22 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusCornerDrive")
             {
                 Panel_PropertyHeight -= constants.panel_property_cornerDriveOptionsheight_default;
+            }
+            else if (mode == "addGeorgianBar")
+            {
+                Panel_PropertyHeight += constants.panel_property_georgianBarHeight;
+            }
+            else if (mode == "minusGeorgianBar")
+            {
+                Panel_PropertyHeight -= constants.panel_property_georgianBarHeight;
+            }
+            else if (mode == "addEspagnolette")
+            {
+                Panel_PropertyHeight += constants.panel_property_espagnoletteOptionsheight_default;
+            }
+            else if (mode == "minusEspagnolette")
+            {
+                Panel_PropertyHeight -= constants.panel_property_espagnoletteOptionsheight_default;
             }
         }
 
@@ -1370,6 +1554,30 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_HandleOptionsHeight -= constants.panel_property_rotaryOptionsheight_default;
             }
+            else if (mode == "addRio")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_rioOptionsheight_default;
+            }
+            else if (mode == "minusRio")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_rioOptionsheight_default;
+            }
+            else if (mode == "addRotoline")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_rotolineOptionsheight_default;
+            }
+            else if (mode == "minusRotoline")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_rotolineOptionsheight_default;
+            }
+            else if (mode == "addMVD")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_mvdOptionsheight_default;
+            }
+            else if (mode == "minusMVD")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_mvdOptionsheight_default;
+            }
             else if (mode == "addExtension")
             {
                 Panel_HandleOptionsHeight += constants.panel_property_extensionOptionsheight;
@@ -1393,6 +1601,14 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusCornerDrive")
             {
                 Panel_HandleOptionsHeight -= constants.panel_property_cornerDriveOptionsheight_default;
+            }
+            else if (mode == "addEspagnolette")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_espagnoletteOptionsheight_default;
+            }
+            else if (mode == "minusEspagnolette")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_espagnoletteOptionsheight_default;
             }
         }
 
@@ -1438,6 +1654,12 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void SetPanelExplosionValues_Panel(bool parentIsFrame)
         {
+            Panel_StrikerQty_A = 0;
+            Panel_StrikerQty_C = 0;
+
+            Base_Color base_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
+            Foil_Color inside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
+
             if (Panel_SashPropertyVisibility == true)
             {
                 if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
@@ -1475,23 +1697,23 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_PlateArtNo = Plate_ArticleNo._N4803LB;
                 }
 
-                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                if (base_color == Base_Color._DarkBrown)
                 {
-                    if (Panel_Height < 1551)
+                    if (Panel_DisplayHeight < 1551)
                     {
                         Panel_MiddleCloserPairQty = 1;
                     }
-                    else if (Panel_Height > 1551 && Panel_Height < 1999)
+                    else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
                     {
                         Panel_MiddleCloserPairQty = 2;
                     }
-                    else if (Panel_Height > 1999)
+                    else if (Panel_DisplayHeight > 1999)
                     {
                         Panel_MiddleCloserPairQty = 3;
                     }
                 }
-                else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
-                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                else if (base_color == Base_Color._White ||
+                         base_color == Base_Color._Ivory)
                 {
                     if (Panel_SashHeight < 1551)
                     {
@@ -1507,153 +1729,401 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                if (Panel_Width > 0 && Panel_Width <= 1499)
+                Panel_StrikerArtno_A = Striker_ArticleNo._M89ANTA;
+                Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;
+
+                if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1499)
                 {
                     Panel_MotorizedMechQty = 1;
                 }
-                else if (Panel_Width >= 1500)
+                else if (Panel_DisplayWidth >= 1500)
                 {
                     Panel_MotorizedMechQty = 2;
                 }
+                
+                if (Panel_Type.Contains("Awning"))
+                {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_A += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_A += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
 
-                if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                {
-                    Panel_StrikerQty += 2;
-                }
-                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                {
-                    Panel_StrikerQty += 3;
-                }
+                    if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
 
-                if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
+                    if (Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionRightArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                }
+                else if (Panel_Type.Contains("Casement"))
                 {
-                    Panel_StrikerQty += 1;
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_C += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_C += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+
+                    if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionBotArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
                 }
 
                 if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                 {
-                    Panel_StrikerQty += 1;
+                    Panel_StrikerQty_A += 2;
                 }
-
-                FrictionStay_ArticleNo fs_dimension_based = FrictionStay_ArticleNo._None;
-                FrictionStay_ArticleNo fs_weight_based = FrictionStay_ArticleNo._None;
 
                 int sashWD_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashWidth / 100)) * 100;
                 int sashHt_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashHeight / 100)) * 100;
 
-                if ((sashWD_floor >= 400 && sashWD_floor <= 1200) &&
-                    (Panel_SashHeight >= 350 && Panel_SashHeight <= 399))
+                if (Panel_Type.Contains("Awning"))
                 {
-                    fs_dimension_based = FrictionStay_ArticleNo._Storm8;
-                }
-                else if (sashHt_floor >= 400 && sashHt_floor <= 500)
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._477254;
-                }
-                else if ((sashWD_floor >= 400 && sashWD_floor <= 1000) &&
-                         (sashHt_floor >= 600 && sashHt_floor <= 700))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._A2121C1261;
-                }
-                else if (((sashWD_floor >= 1100 && sashWD_floor <= 1500) &&
-                         (sashHt_floor >= 600 && sashHt_floor <= 700)))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._A212C16161;
-                }
-                else if (((sashWD_floor >= 400 && sashWD_floor <= 1100) &&
-                         (sashHt_floor >= 800 && sashHt_floor <= 900)))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._A212C16161;
-                }
-                else if (((sashWD_floor >= 1200 && sashWD_floor <= 1500) &&
-                         (sashHt_floor >= 800 && sashHt_floor <= 900)))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._Storm22;
-                }
-                else if (((sashWD_floor >= 400 && sashWD_floor <= 1500) &&
-                         (sashHt_floor >= 1000 && sashHt_floor <= 1200)))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._Storm22;
-                }
-                else if (((sashWD_floor >= 400 && sashWD_floor <= 1500) &&
-                         (sashHt_floor >= 1300 && sashHt_floor <= 2300)))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._Storm26;
-                }
-                else
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._None;
-                }
+                    FrictionStay_ArticleNo fs_dimension_based = FrictionStay_ArticleNo._None;
+                    FrictionStay_ArticleNo fs_weight_based = FrictionStay_ArticleNo._None;
 
-                if (Panel_GlassThickness >= 12.0f)
-                {
-                    float sash_weight = ((((Panel_SashWidth / 1000) + (Panel_SashHeight / 1000)) * 2) * 1) * 3,
-                          glass_weight = (Panel_GlassThickness / 1000) * (Panel_GlassWidth / 1000) * (Panel_GlassHeight / 1000) * 1 * 2500;
-                    int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
+                    if ((sashWD_floor >= 400 && sashWD_floor <= 1200) &&
+                        (Panel_SashHeight >= 350 && Panel_SashHeight <= 399))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._Storm8;
+                    }
+                    else if (sashHt_floor >= 400 && sashHt_floor <= 500)
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._477254;
+                    }
+                    else if ((sashWD_floor >= 400 && sashWD_floor <= 1000) &&
+                             (sashHt_floor >= 600 && sashHt_floor <= 700))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._A2121C1261;
+                    }
+                    else if (((sashWD_floor >= 1100 && sashWD_floor <= 1500) &&
+                             (sashHt_floor >= 600 && sashHt_floor <= 700)))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._A212C16161;
+                    }
+                    else if (((sashWD_floor >= 400 && sashWD_floor <= 1100) &&
+                             (sashHt_floor >= 800 && sashHt_floor <= 900)))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._A212C16161;
+                    }
+                    else if (((sashWD_floor >= 1200 && sashWD_floor <= 1500) &&
+                             (sashHt_floor >= 800 && sashHt_floor <= 900)))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._Storm22;
+                    }
+                    else if (((sashWD_floor >= 400 && sashWD_floor <= 1500) &&
+                             (sashHt_floor >= 1000 && sashHt_floor <= 1200)))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._Storm22;
+                    }
+                    else if (((sashWD_floor >= 400 && sashWD_floor <= 1500) &&
+                             (sashHt_floor >= 1300 && sashHt_floor <= 2300)))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._Storm26;
+                    }
+                    else
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._None;
+                    }
 
-                    if (total_weight >= 1 && total_weight <= 44)
+                    if (Panel_GlassThickness >= 12.0f)
                     {
-                        fs_weight_based = FrictionStay_ArticleNo._Storm8;
-                    }
-                    else if (total_weight >= 45 && total_weight <= 49)
-                    {
-                        fs_weight_based = FrictionStay_ArticleNo._477254;
-                    }
-                    else if (total_weight >= 50 && total_weight <= 54)
-                    {
-                        fs_weight_based = FrictionStay_ArticleNo._A2121C1261;
-                    }
-                    else if (total_weight >= 55 && total_weight <= 74)
-                    {
-                        fs_weight_based = FrictionStay_ArticleNo._A212C16161;
-                    }
-                    else if (total_weight >= 75 && total_weight <= 119)
-                    {
-                        fs_weight_based = FrictionStay_ArticleNo._Storm22;
-                    }
-                    else if (total_weight >= 120)
-                    {
-                        fs_weight_based = FrictionStay_ArticleNo._Storm26;
-                    }
-                }
+                        float sash_weight = ((((Panel_SashWidth / 1000) + (Panel_SashHeight / 1000)) * 2) * 1) * 3,
+                              glass_weight = (Panel_GlassThickness / 1000) * (Panel_GlassWidth / 1000) * (Panel_GlassHeight / 1000) * 1 * 2500;
+                        int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
 
-                if (fs_weight_based != FrictionStay_ArticleNo._None)
-                {
-                    if (fs_weight_based.Value > fs_dimension_based.Value)
-                    {
-                        Panel_FrictionStayArtNo = fs_weight_based;
+                        if (total_weight >= 1 && total_weight <= 44)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._Storm8;
+                        }
+                        else if (total_weight == 45)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._477254;
+                        }
+                        else if (total_weight >= 46 && total_weight <= 50)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._A2121C1261;
+                        }
+                        else if (total_weight >= 51 && total_weight <= 55)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._A212C16161;
+                        }
+                        else if (total_weight >= 56 && total_weight <= 75)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._Storm22;
+                        }
+                        else if (total_weight >= 76)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._Storm26;
+                        }
                     }
-                    else if (fs_weight_based.Value < fs_dimension_based.Value)
+
+                    if (fs_weight_based != FrictionStay_ArticleNo._None)
+                    {
+                        if (fs_weight_based.Value > fs_dimension_based.Value)
+                        {
+                            Panel_FrictionStayArtNo = fs_weight_based;
+                        }
+                        else if (fs_weight_based.Value < fs_dimension_based.Value)
+                        {
+                            Panel_FrictionStayArtNo = fs_dimension_based;
+                        }
+                        else if (fs_weight_based.Value == fs_dimension_based.Value)
+                        {
+                            Panel_FrictionStayArtNo = fs_weight_based;
+                        }
+                    }
+                    else if (fs_weight_based == FrictionStay_ArticleNo._None)
                     {
                         Panel_FrictionStayArtNo = fs_dimension_based;
                     }
-                    else if (fs_weight_based.Value == fs_dimension_based.Value)
-                    {
-                        Panel_FrictionStayArtNo = fs_weight_based;
-                    }
                 }
-                else if (fs_weight_based == FrictionStay_ArticleNo._None)
+                else if (Panel_Type.Contains("Casement"))
                 {
-                    Panel_FrictionStayArtNo = fs_dimension_based;
+                    FrictionStayCasement_ArticleNo fs_dimension_based = FrictionStayCasement_ArticleNo._None;
+                    FrictionStayCasement_ArticleNo fs_weight_based = FrictionStayCasement_ArticleNo._None;
+
+                    if ((sashHt_floor >= 400 && sashHt_floor <= 2100) &&
+                        (Panel_SashWidth >= 350 && Panel_SashWidth <= 399))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._485770;
+                    }
+                    else if ((sashWD_floor >= 400 && sashWD_floor <= 600) &&
+                             (sashHt_floor >= 400 && sashHt_floor <= 1200))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A235B12161;
+                    }
+                    else if ((sashWD_floor >= 400 && sashWD_floor <= 600) &&
+                             (sashHt_floor >= 1300 && sashHt_floor <= 1500))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C12161;
+                    }
+                    else if ((sashWD_floor >= 400 && sashWD_floor <= 500) &&
+                             (sashHt_floor >= 1600 && sashHt_floor <= 2100))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C12161;
+                    }
+                    else if ((sashHt_floor >= 1600 && sashHt_floor <= 2200) &&
+                             (Panel_SashWidth >= 600 && Panel_SashWidth <= 699))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C16161;
+                    }
+                    else if (Panel_SashWidth >= 700 && Panel_SashWidth <= 799)
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C16161;
+                    }
+                    else if ((sashHt_floor >= 400 && sashHt_floor <= 2100) &&
+                             (Panel_SashWidth >= 800 && Panel_SashWidth <= 899))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C16161;
+                    }
+                    else if ((sashHt_floor >= 400 && sashHt_floor <= 2100) &&
+                             (Panel_SashWidth >= 900 && Panel_SashWidth <= 999))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C20161;
+                    }
+                    else if ((sashHt_floor >= 400 && sashHt_floor <= 1500) &&
+                             (Panel_SashWidth >= 1000 && Panel_SashWidth <= 1199))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C20161;
+                    }
+                    else
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._None;
+                    }
+
+                    if (Panel_GlassThickness >= 12.0f)
+                    {
+                        float sash_weight = ((((Panel_SashWidth / 1000) + (Panel_SashHeight / 1000)) * 2) * 1) * 3,
+                              glass_weight = (Panel_GlassThickness / 1000) * (Panel_GlassWidth / 1000) * (Panel_GlassHeight / 1000) * 1 * 2500;
+                        int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
+
+                        if (total_weight >= 1 && total_weight <= 18)
+                        {
+                            fs_weight_based = FrictionStayCasement_ArticleNo._A235B12161;
+                        }
+                        else if (total_weight >= 19 && total_weight <= 35)
+                        {
+                            fs_weight_based = FrictionStayCasement_ArticleNo._485770;
+                        }
+                        else if (total_weight >= 36 && total_weight <= 40)
+                        {
+                            fs_weight_based = FrictionStayCasement_ArticleNo._A212C12161;
+                        }
+                        else if (total_weight >= 41 && total_weight <= 45)
+                        {
+                            fs_weight_based = FrictionStayCasement_ArticleNo._A212C16161;
+                        }
+                        else if (total_weight >= 46)
+                        {
+                            fs_weight_based = FrictionStayCasement_ArticleNo._A212C20161;
+                        }
+                    }
+
+                    if (fs_weight_based != FrictionStayCasement_ArticleNo._None)
+                    {
+                        if (fs_weight_based.Value > fs_dimension_based.Value)
+                        {
+                            Panel_FSCasementArtNo= fs_weight_based;
+                        }
+                        else if (fs_weight_based.Value < fs_dimension_based.Value)
+                        {
+                            Panel_FSCasementArtNo = fs_dimension_based;
+                        }
+                        else if (fs_weight_based.Value == fs_dimension_based.Value)
+                        {
+                            Panel_FSCasementArtNo = fs_weight_based;
+                        }
+                    }
+                    else if (fs_weight_based == FrictionStayCasement_ArticleNo._None)
+                    {
+                        Panel_FSCasementArtNo = fs_dimension_based;
+                    }
                 }
 
                 if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                 {
-                    if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory ||
-                        Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White)
+                    Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
+
+                    if (base_color == Base_Color._Ivory ||
+                        base_color == Base_Color._White)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+                        Panel_PlasticWedge = PlasticWedge_ArticleNo._7199WHT;
                     }
-                    else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                    else if (base_color == Base_Color._DarkBrown)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
-                        Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
+                        Panel_PlasticWedge = PlasticWedge_ArticleNo._7199DB;
                     }
                 }
 
+                if (Panel_HandleType == Handle_Type._Rio)
+                {
+                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
+
+                    if (inside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_7025_50992;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_IVORY;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                    }
+                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+                    }
+                }
+                else if (Panel_HandleType == Handle_Type._MVD)
+                {
+                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+                }
             }
             else if (Panel_SashPropertyVisibility == false)
             {
@@ -1915,6 +2385,12 @@ namespace ModelLayer.Model.Quotation.Panel
                 deduction_for_ht += GB_deduction_lvl3;
             }
 
+            Panel_StrikerQty_A = 0;
+            Panel_StrikerQty_C = 0;
+
+            Base_Color base_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
+            Foil_Color inside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
+
             if (Panel_MotorizedOptionVisibility == true)
             {
                 Panel_30x25CoverArtNo = _30x25Cover_ArticleNo._1067_Milled;
@@ -1950,23 +2426,23 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
 
-                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                if (base_color == Base_Color._DarkBrown)
                 {
-                    if (Panel_Height < 1551)
+                    if (Panel_DisplayHeight < 1551)
                     {
                         Panel_MiddleCloserPairQty = 1;
                     }
-                    else if (Panel_Height > 1551 && Panel_Height < 1999)
+                    else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
                     {
                         Panel_MiddleCloserPairQty = 2;
                     }
-                    else if (Panel_Height > 1999)
+                    else if (Panel_DisplayHeight > 1999)
                     {
                         Panel_MiddleCloserPairQty = 3;
                     }
                 }
-                else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
-                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                else if (base_color == Base_Color._White ||
+                         base_color == Base_Color._Ivory)
                 {
                     if (Panel_SashHeight < 1551)
                     {
@@ -1982,151 +2458,361 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                if (Panel_Width > 0 && Panel_Width <= 1499)
+                Panel_StrikerArtno_A = Striker_ArticleNo._M89ANTA;
+                Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;
+
+                if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1499)
                 {
                     Panel_MotorizedMechQty = 1;
                 }
-                else if (Panel_Width >= 1500)
+                else if (Panel_DisplayWidth >= 1500)
                 {
                     Panel_MotorizedMechQty = 2;
                 }
 
-                if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                if (Panel_Type.Contains("Awning"))
                 {
-                    Panel_StrikerQty += 2;
-                }
-                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                {
-                    Panel_StrikerQty += 3;
-                }
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_A += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_A += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
 
-                if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
+                    if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionRightArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                }
+                else if (Panel_Type.Contains("Casement"))
                 {
-                    Panel_StrikerQty += 1;
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_C += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_C += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+
+                    if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionBotArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+
+                    if (Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
                 }
 
                 if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                 {
-                    Panel_StrikerQty += 1;
+                    Panel_StrikerQty_A += 2;
                 }
-
-                FrictionStay_ArticleNo fs_dimension_based = FrictionStay_ArticleNo._None;
-                FrictionStay_ArticleNo fs_weight_based = FrictionStay_ArticleNo._None;
 
                 int sashWD_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashWidth / 100)) * 100;
                 int sashHt_floor = Convert.ToInt32(Math.Floor((decimal)Panel_SashHeight / 100)) * 100;
 
-                if ((sashWD_floor >= 400 && sashWD_floor <= 1200) &&
-                    (Panel_SashHeight >= 350 && Panel_SashHeight <= 399))
+                if (Panel_Type.Contains("Awning"))
                 {
-                    fs_dimension_based = FrictionStay_ArticleNo._Storm8;
-                }
-                else if (sashHt_floor >= 400 && sashHt_floor <= 500)
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._477254;
-                }
-                else if ((sashWD_floor >= 400 && sashWD_floor <= 1000) &&
-                         (sashHt_floor >= 600 && sashHt_floor <= 700))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._A2121C1261;
-                }
-                else if (((sashWD_floor >= 1100 && sashWD_floor <= 1500) &&
-                         (sashHt_floor >= 600 && sashHt_floor <= 700)))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._A212C16161;
-                }
-                else if (((sashWD_floor >= 400 && sashWD_floor <= 1100) &&
-                         (sashHt_floor >= 800 && sashHt_floor <= 900)))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._A212C16161;
-                }
-                else if (((sashWD_floor >= 1200 && sashWD_floor <= 1500) &&
-                         (sashHt_floor >= 800 && sashHt_floor <= 900)))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._Storm22;
-                }
-                else if (((sashWD_floor >= 400 && sashWD_floor <= 1500) &&
-                         (sashHt_floor >= 1000 && sashHt_floor <= 1200)))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._Storm22;
-                }
-                else if (((sashWD_floor >= 400 && sashWD_floor <= 1500) &&
-                         (sashHt_floor >= 1300 && sashHt_floor <= 2300)))
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._Storm26;
-                }
-                else
-                {
-                    fs_dimension_based = FrictionStay_ArticleNo._None;
-                }
+                    FrictionStay_ArticleNo fs_dimension_based = FrictionStay_ArticleNo._None;
+                    FrictionStay_ArticleNo fs_weight_based = FrictionStay_ArticleNo._None;
 
-                if (Panel_GlassThickness >= 12.0f)
-                {
-                    float sash_weight = ((((Panel_SashWidth / 1000) + (Panel_SashHeight / 1000)) * 2) * 1) * 3,
-                          glass_weight = (Panel_GlassThickness / 1000) * (Panel_GlassWidth / 1000) * (Panel_GlassHeight / 1000) * 1 * 2500;
-                    int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
+                    if ((sashWD_floor >= 400 && sashWD_floor <= 1200) &&
+                        (Panel_SashHeight >= 350 && Panel_SashHeight <= 399))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._Storm8;
+                    }
+                    else if (sashHt_floor >= 400 && sashHt_floor <= 500)
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._477254;
+                    }
+                    else if ((sashWD_floor >= 400 && sashWD_floor <= 1000) &&
+                             (sashHt_floor >= 600 && sashHt_floor <= 700))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._A2121C1261;
+                    }
+                    else if (((sashWD_floor >= 1100 && sashWD_floor <= 1500) &&
+                             (sashHt_floor >= 600 && sashHt_floor <= 700)))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._A212C16161;
+                    }
+                    else if (((sashWD_floor >= 400 && sashWD_floor <= 1100) &&
+                             (sashHt_floor >= 800 && sashHt_floor <= 900)))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._A212C16161;
+                    }
+                    else if (((sashWD_floor >= 1200 && sashWD_floor <= 1500) &&
+                             (sashHt_floor >= 800 && sashHt_floor <= 900)))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._Storm22;
+                    }
+                    else if (((sashWD_floor >= 400 && sashWD_floor <= 1500) &&
+                             (sashHt_floor >= 1000 && sashHt_floor <= 1200)))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._Storm22;
+                    }
+                    else if (((sashWD_floor >= 400 && sashWD_floor <= 1500) &&
+                             (sashHt_floor >= 1300 && sashHt_floor <= 2300)))
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._Storm26;
+                    }
+                    else
+                    {
+                        fs_dimension_based = FrictionStay_ArticleNo._None;
+                    }
 
-                    if (total_weight >= 1 && total_weight <= 44)
+                    if (Panel_GlassThickness >= 12.0f)
                     {
-                        fs_weight_based = FrictionStay_ArticleNo._Storm8;
-                    }
-                    else if (total_weight >= 45 && total_weight <= 49)
-                    {
-                        fs_weight_based = FrictionStay_ArticleNo._477254;
-                    }
-                    else if (total_weight >= 50 && total_weight <= 54)
-                    {
-                        fs_weight_based = FrictionStay_ArticleNo._A2121C1261;
-                    }
-                    else if (total_weight >= 55 && total_weight <= 74)
-                    {
-                        fs_weight_based = FrictionStay_ArticleNo._A212C16161;
-                    }
-                    else if (total_weight >= 75 && total_weight <= 119)
-                    {
-                        fs_weight_based = FrictionStay_ArticleNo._Storm22;
-                    }
-                    else if (total_weight >= 120)
-                    {
-                        fs_weight_based = FrictionStay_ArticleNo._Storm26;
-                    }
-                }
+                        float sash_weight = ((((Panel_SashWidth / 1000) + (Panel_SashHeight / 1000)) * 2) * 1) * 3,
+                              glass_weight = (Panel_GlassThickness / 1000) * (Panel_GlassWidth / 1000) * (Panel_GlassHeight / 1000) * 1 * 2500;
+                        int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
 
-                if (fs_weight_based != FrictionStay_ArticleNo._None)
-                {
-                    if (fs_weight_based.Value > fs_dimension_based.Value)
-                    {
-                        Panel_FrictionStayArtNo = fs_weight_based;
+                        if (total_weight >= 1 && total_weight <= 44)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._Storm8;
+                        }
+                        else if (total_weight >= 45 && total_weight <= 49)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._477254;
+                        }
+                        else if (total_weight >= 50 && total_weight <= 54)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._A2121C1261;
+                        }
+                        else if (total_weight >= 55 && total_weight <= 74)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._A212C16161;
+                        }
+                        else if (total_weight >= 75 && total_weight <= 119)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._Storm22;
+                        }
+                        else if (total_weight >= 120)
+                        {
+                            fs_weight_based = FrictionStay_ArticleNo._Storm26;
+                        }
                     }
-                    else if (fs_weight_based.Value < fs_dimension_based.Value)
+
+                    if (fs_weight_based != FrictionStay_ArticleNo._None)
+                    {
+                        if (fs_weight_based.Value > fs_dimension_based.Value)
+                        {
+                            Panel_FrictionStayArtNo = fs_weight_based;
+                        }
+                        else if (fs_weight_based.Value < fs_dimension_based.Value)
+                        {
+                            Panel_FrictionStayArtNo = fs_dimension_based;
+                        }
+                        else if (fs_weight_based.Value == fs_dimension_based.Value)
+                        {
+                            Panel_FrictionStayArtNo = fs_weight_based;
+                        }
+                    }
+                    else if (fs_weight_based == FrictionStay_ArticleNo._None)
                     {
                         Panel_FrictionStayArtNo = fs_dimension_based;
                     }
-                    else if (fs_weight_based.Value == fs_dimension_based.Value)
-                    {
-                        Panel_FrictionStayArtNo = fs_weight_based;
-                    }
                 }
-                else if (fs_weight_based == FrictionStay_ArticleNo._None)
+                else if (Panel_Type.Contains("Casement"))
                 {
-                    Panel_FrictionStayArtNo = fs_dimension_based;
+                    FrictionStayCasement_ArticleNo fs_dimension_based = FrictionStayCasement_ArticleNo._None;
+                    FrictionStayCasement_ArticleNo fs_weight_based = FrictionStayCasement_ArticleNo._None;
+
+                    if ((sashHt_floor >= 400 && sashHt_floor <= 2100) &&
+                        (Panel_SashWidth >= 350 && Panel_SashWidth <= 399))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._485770;
+                    }
+                    else if ((sashWD_floor >= 400 && sashWD_floor <= 600) &&
+                             (sashHt_floor >= 400 && sashHt_floor <= 1200))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A235B12161;
+                    }
+                    else if ((sashWD_floor >= 400 && sashWD_floor <= 600) &&
+                             (sashHt_floor >= 1300 && sashHt_floor <= 1500))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C12161;
+                    }
+                    else if ((sashWD_floor >= 400 && sashWD_floor <= 500) &&
+                             (sashHt_floor >= 1600 && sashHt_floor <= 2100))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C12161;
+                    }
+                    else if ((sashHt_floor >= 1600 && sashHt_floor <= 2200) &&
+                             (Panel_SashWidth >= 600 && Panel_SashWidth <= 699))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C16161;
+                    }
+                    else if (Panel_SashWidth >= 700 && Panel_SashWidth <= 799)
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C16161;
+                    }
+                    else if ((sashHt_floor >= 400 && sashHt_floor <= 2100) &&
+                             (Panel_SashWidth >= 800 && Panel_SashWidth <= 899))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C16161;
+                    }
+                    else if ((sashHt_floor >= 400 && sashHt_floor <= 2100) &&
+                             (Panel_SashWidth >= 900 && Panel_SashWidth <= 999))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C20161;
+                    }
+                    else if ((sashHt_floor >= 400 && sashHt_floor <= 1500) &&
+                             (Panel_SashWidth >= 1000 && Panel_SashWidth <= 1199))
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._A212C20161;
+                    }
+                    else
+                    {
+                        fs_dimension_based = FrictionStayCasement_ArticleNo._None;
+                    }
+
+                    if (Panel_GlassThickness >= 12.0f)
+                    {
+                        float sash_weight = ((((Panel_SashWidth / 1000) + (Panel_SashHeight / 1000)) * 2) * 1) * 3,
+                              glass_weight = (Panel_GlassThickness / 1000) * (Panel_GlassWidth / 1000) * (Panel_GlassHeight / 1000) * 1 * 2500;
+                        int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
+
+                        if (total_weight >= 1 && total_weight <= 18)
+                        {
+                            fs_weight_based = FrictionStayCasement_ArticleNo._A235B12161;
+                        }
+                        else if (total_weight >= 19 && total_weight <= 35)
+                        {
+                            fs_weight_based = FrictionStayCasement_ArticleNo._485770;
+                        }
+                        else if (total_weight >= 36 && total_weight <= 40)
+                        {
+                            fs_weight_based = FrictionStayCasement_ArticleNo._A212C12161;
+                        }
+                        else if (total_weight >= 41 && total_weight <= 45)
+                        {
+                            fs_weight_based = FrictionStayCasement_ArticleNo._A212C16161;
+                        }
+                        else if (total_weight >= 46)
+                        {
+                            fs_weight_based = FrictionStayCasement_ArticleNo._A212C20161;
+                        }
+                    }
+
+                    if (fs_weight_based != FrictionStayCasement_ArticleNo._None)
+                    {
+                        if (fs_weight_based.Value > fs_dimension_based.Value)
+                        {
+                            Panel_FSCasementArtNo = fs_weight_based;
+                        }
+                        else if (fs_weight_based.Value < fs_dimension_based.Value)
+                        {
+                            Panel_FSCasementArtNo = fs_dimension_based;
+                        }
+                        else if (fs_weight_based.Value == fs_dimension_based.Value)
+                        {
+                            Panel_FSCasementArtNo = fs_weight_based;
+                        }
+                    }
+                    else if (fs_weight_based == FrictionStayCasement_ArticleNo._None)
+                    {
+                        Panel_FSCasementArtNo = fs_dimension_based;
+                    }
                 }
 
                 if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                 {
                     Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
 
-                    if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory ||
-                        Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White)
+                    if (base_color == Base_Color._Ivory ||
+                        base_color == Base_Color._White)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+                        Panel_PlasticWedge = PlasticWedge_ArticleNo._7199WHT;
                     }
-                    else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                    else if (base_color == Base_Color._DarkBrown)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
+                        Panel_PlasticWedge = PlasticWedge_ArticleNo._7199DB;
                     }
                 }
             }
@@ -2204,7 +2890,11 @@ namespace ModelLayer.Model.Quotation.Panel
                           int panelExtBot2Qty,
                           int panelExtLeft2Qty,
                           int panelExtRight2Qty,
-                          Rotoswing_HandleArtNo panelRotoswingArtNo)
+                          Rotoswing_HandleArtNo panelRotoswingArtNo,
+                          GeorgianBar_ArticleNo panelGeorgianBarArtNo,
+                          int panelGeorgianBarVerticalQty,
+                          int panelGeorgianBarHorizontalQty,
+                          bool panelGeorgianBarOptionVisibility)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -2236,7 +2926,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_OriginalHeight = Panel_Height;
             Panel_GlassType = panelGlassType;
             Panel_EspagnoletteArtNo = panelEspagnoletteArtNo;
-            Panel_StrikerArtno = panelStrikerArtno;
+            Panel_StrikerArtno_A = panelStrikerArtno;
             Panel_MiddleCloserArtNo = panelMiddleCloserArtno;
             Panel_LockingKitArtNo = panelLockingKitArtno;
             Panel_MotorizedMechArtNo = panelMotorizedMechArtNo;
@@ -2262,11 +2952,16 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_ExtRightQty = panelExtRightQty;
             Panel_ExtRight2Qty = panelExtRight2Qty;
             Panel_RotoswingArtNo = panelRotoswingArtNo;
+            Panel_GeorgianBarArtNo = panelGeorgianBarArtNo;
+            Panel_GeorgianBar_VerticalQty = panelGeorgianBarVerticalQty;
+            Panel_GeorgianBar_HorizontalQty = panelGeorgianBarHorizontalQty;
+            Panel_GeorgianBarOptionVisibility = panelGeorgianBarOptionVisibility;
 
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;
             Panel_RotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
             Panel_ExtensionPropertyHeight = constants.panel_property_extensionOptionsheight;
+            Panel_GlassPropertyHeight = constants.panel_property_glassOptionsHeight;
         }
     }
 }

@@ -24,22 +24,32 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_SashPropertyUCPresenter _pp_sashPropertyUCPresenter;
         private IPP_GlassPropertyUCPresenter _pp_glassPropertyUCPresenter;
         private IPP_HandlePropertyUCPresenter _pp_handlePropertUCPresenter;
+        private IPP_GeorgianBarPropertyUCPresenter _pp_georgianBarPropertUCPresenter;
+        private IPP_ExtensionPropertyUCPresenter _pp_extensionPropertyUCPresenter;
+        private IPP_CornerDrivePropertyUCPresenter _pp_cornerDrivePropertyUCPresenter;
+
         private IUnityContainer _unityC;
 
-        private FlowLayoutPanel _flpPanelSpecs;
+        private Panel _pnlPanelSpecs;
 
         public PanelPropertiesUCPresenter(IPanelPropertiesUC panelPropertiesUC,
                                           IPP_MotorizedPropertyUCPresenter pp_motorizedPropertyUCPresenter,
                                           IPP_SashPropertyUCPresenter pp_sashPropertyUCPresenter,
                                           IPP_GlassPropertyUCPresenter pp_glassPropertyUCPresenter,
-                                          IPP_HandlePropertyUCPresenter pp_handlePropertUCPresenter)
+                                          IPP_HandlePropertyUCPresenter pp_handlePropertUCPresenter,
+                                          IPP_GeorgianBarPropertyUCPresenter pp_georgianBarPropertUCPresenter,
+                                          IPP_ExtensionPropertyUCPresenter pp_extensionPropertyUCPresenter,
+                                          IPP_CornerDrivePropertyUCPresenter pp_cornerDrivePropertyUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
             _pp_sashPropertyUCPresenter = pp_sashPropertyUCPresenter;
             _pp_glassPropertyUCPresenter = pp_glassPropertyUCPresenter;
             _pp_handlePropertUCPresenter = pp_handlePropertUCPresenter;
-            _flpPanelSpecs = _panelPropertiesUC.GetPanelSpecsFLP();
+            _pp_georgianBarPropertUCPresenter = pp_georgianBarPropertUCPresenter;
+            _pp_extensionPropertyUCPresenter = pp_extensionPropertyUCPresenter;
+            _pp_cornerDrivePropertyUCPresenter = pp_cornerDrivePropertyUCPresenter;
+            _pnlPanelSpecs = _panelPropertiesUC.GetPanelSpecsPNL();
 
             SubscribeToEventsSetup();
         }
@@ -100,19 +110,69 @@ namespace PresentationLayer.Presenter.UserControls
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
             _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
+
+            IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            UserControl sashProp = (UserControl)sashPropUCP.GetPPSashPropertyUC();
+            _pnlPanelSpecs.Controls.Add(sashProp);
+            sashProp.Dock = DockStyle.Top;
+            sashProp.BringToFront();
+
             if (_panelModel.Panel_SashPropertyVisibility == true)
             {
                 IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                _flpPanelSpecs.Controls.Add((UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC());
+                UserControl motorized = (UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC();
+                _pnlPanelSpecs.Controls.Add(motorized);
+                motorized.Dock = DockStyle.Top;
+                motorized.BringToFront();
 
                 IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel);
-                _flpPanelSpecs.Controls.Add((UserControl)handlePropUCP.GetPPHandlePropertyUC());
+                UserControl handle = (UserControl)handlePropUCP.GetPPHandlePropertyUC();
+                _pnlPanelSpecs.Controls.Add(handle);
+                handle.Dock = DockStyle.Top;
+                handle.BringToFront();
             }
-            IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-            _flpPanelSpecs.Controls.Add((UserControl)sashPropUCP.GetPPSashPropertyUC());
+
+            IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            UserControl cdPropUC = (UserControl)cdPropUCP.GetPPCornerDriveUC();
+            _pnlPanelSpecs.Controls.Add(cdPropUC);
+            cdPropUC.Dock = DockStyle.Top;
+            cdPropUC.BringToFront();
+
+            IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            UserControl extPropUC = (UserControl)extPropUCP.GetPPExtensionUC();
+            _pnlPanelSpecs.Controls.Add(extPropUC);
+            extPropUC.Dock = DockStyle.Top;
+            extPropUC.BringToFront();
+
+            if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Height >= 2100)
+            {
+                _panelModel.Panel_ExtensionOptionsVisibility = true;
+                _panelModel.Panel_CornerDriveOptionsVisibility = true;
+
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
+
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                _panelModel.AdjustPropertyPanelHeight("addExtension");
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                }
+            }
 
             IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-            _flpPanelSpecs.Controls.Add((UserControl)glassPropUCP.GetPPGlassPropertyUC());
+            UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
+            _pnlPanelSpecs.Controls.Add(glassProp);
+            glassProp.Dock = DockStyle.Top;
+            glassProp.BringToFront();
+
+            IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel);
+            UserControl gbarProp = (UserControl)gbarPropUCP.GetPPGeorgianBarPropertyUC();
+            _pnlPanelSpecs.Controls.Add(gbarProp);
+            gbarProp.Dock = DockStyle.Top;
+            gbarProp.BringToFront();
 
             chkOrient_state = _panelModel.Panel_Orient;
         }

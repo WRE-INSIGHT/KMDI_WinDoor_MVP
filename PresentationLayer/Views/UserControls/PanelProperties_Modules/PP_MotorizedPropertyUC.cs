@@ -25,6 +25,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void PP_MotorizedPropertyUC_Load(object sender, EventArgs e)
         {
+            num_SetQty.Maximum = decimal.MaxValue;
+            num_2dHingeQty.Maximum = decimal.MaxValue;
+
             List<MotorizedMech_ArticleNo> motormech = new List<MotorizedMech_ArticleNo>();
             foreach (MotorizedMech_ArticleNo item in MotorizedMech_ArticleNo.GetAll())
             {
@@ -50,6 +53,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             chk_Motorized.DataBindings.Add(ModelBinding["Panel_MotorizedOptionVisibility"]);
             pnl_motorizedOptions.DataBindings.Add(ModelBinding["Panel_MotorizedOptionVisibility2"]);
             cmb_MotorizedMechanism.DataBindings.Add(ModelBinding["Panel_MotorizedMechArtNo"]);
+            num_SetQty.DataBindings.Add(ModelBinding["Panel_MotorizedMechSetQty"]);
+            num_2dHingeQty.DataBindings.Add(ModelBinding["Panel_2DHingeQty"]);
             this.DataBindings.Add(ModelBinding["Panel_MotorizedPropertyHeight"]);
         }
     }

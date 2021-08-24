@@ -1,6 +1,8 @@
 ﻿using System;
 using ModelLayer.Model.Quotation.Divider;
 using CommonComponents;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -11,5 +13,11 @@ namespace PresentationLayer.Views.UserControls
 
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
+        event EventHandler btnAddCladdingClickedEventRaised;
+        event EventHandler btnSaveCladdingClickedEventRaised;
+        event EventHandler chkDMCheckedChangedEventRaised;
+
+        Panel GetDividerPropertiesBodyPNL();
+        void SetBtnSaveBackColor(Color color);
     }
 }

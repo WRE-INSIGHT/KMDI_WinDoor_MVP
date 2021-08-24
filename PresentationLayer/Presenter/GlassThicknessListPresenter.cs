@@ -44,8 +44,37 @@ namespace PresentationLayer.Presenter
                 DataGridViewCell cell = dgv.Rows[e.RowIndex].Cells["Description"];
                 if (cell.Value.ToString() != "Insulated" && cell.Value.ToString() != "Laminated")
                 {
+                    string prev_thickness = _panelModel.Panel_GlassThicknessDesc;
+
                     _panelModel.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
                     _panelModel.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
+
+                    if (_panelModel.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
+                    {
+                        if (prev_thickness == null || !prev_thickness.Contains("Georgian Bar"))
+                        {
+                            _panelModel.Panel_GeorgianBarOptionVisibility = true;
+                            _panelModel.AdjustPropertyPanelHeight("addGeorgianBar");
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (prev_thickness != null && prev_thickness.Contains("Georgian Bar"))
+                        {
+                            _panelModel.AdjustPropertyPanelHeight("minusGeorgianBar");
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
+                            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
+                            }
+                        }
+                    }
+
                     _glassThicknessListView.CloseThisDialog();
                 }
                 else

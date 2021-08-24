@@ -192,7 +192,34 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
+            _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
 
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
@@ -206,7 +233,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(700, _panelModel.Panel_GlazingBeadWidth);
             Assert.AreEqual(2000, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(628, _panelModel.Panel_GlassWidth);
@@ -234,25 +261,23 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2451%' AND
+                             Description LIKE '%2452%' AND
                              Size = '700'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%2451%' AND
+                             Description LIKE '%2452%' AND
                              Size = '2000'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '628'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '1928'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
@@ -305,7 +330,34 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
+            _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
 
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
@@ -359,13 +411,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '428'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '1428'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
@@ -441,7 +491,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
@@ -455,8 +505,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel.Panel_Placement = "First";
+            _panelModel.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -489,7 +566,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
@@ -503,8 +580,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -521,7 +625,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(450, _panelModel.Panel_GlazingBeadWidth);
             Assert.AreEqual(1300, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(375, _panelModel.Panel_GlassWidth);
@@ -533,7 +637,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1242, divModel.Div_ExplosionHeight);
             Assert.AreEqual(1132, divModel.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(450, _panelModel2.Panel_GlazingBeadWidth);
             Assert.AreEqual(1300, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(375, _panelModel2.Panel_GlassWidth);
@@ -562,22 +666,20 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '450'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '1300'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '375'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '1228'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
@@ -663,7 +765,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    uneqpanelWD1,
                                                                    eqpanelHT,
@@ -677,8 +779,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel.Panel_Placement = "First";
+            _panelModel.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -711,7 +840,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    uneqpanelWD2,
                                                                    eqpanelHT,
@@ -725,8 +854,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -743,7 +899,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(400, _panelModel.Panel_GlazingBeadWidth);
             Assert.AreEqual(1300, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel.Panel_GlassWidth);
@@ -755,7 +911,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1242, divModel.Div_ExplosionHeight);
             Assert.AreEqual(1132, divModel.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(500, _panelModel2.Panel_GlazingBeadWidth);
             Assert.AreEqual(1300, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(425, _panelModel2.Panel_GlassWidth);
@@ -784,36 +940,33 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2451%' AND
+                             Description LIKE '%2452%' AND
                              Size = '400'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2451%' AND
+                             Description LIKE '%2452%' AND
                              Size = '500'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '1300'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '325'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '425'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '1228'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
@@ -969,7 +1122,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
@@ -983,8 +1136,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel1);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -1017,7 +1197,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
@@ -1031,8 +1211,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -1056,7 +1263,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
@@ -1070,8 +1277,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    3);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_GlassThickness = 6.0f;
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel3);
             Control fw3 = new Control();
             fw3.Name = "FixedPanelUC_3";
@@ -1104,7 +1338,7 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel2,
                                                                    eqpanelwd,
                                                                    eqpanelht,
@@ -1118,8 +1352,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    4);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_GlassThickness = 6.0f;
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel4);
             Control fw4 = new Control();
             fw4.Name = "FixedPanelUC_4";
@@ -1146,7 +1407,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(487, transomModel.Div_ExplosionWidth);
             Assert.AreEqual(407, transomModel.Div_ReinfWidth);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(275, _panelModel1.Panel_GlazingBeadWidth);
             Assert.AreEqual(600, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel1.Panel_GlassWidth);
@@ -1158,14 +1419,14 @@ namespace ModelLayer.Tests
             Assert.AreEqual(549, divModel_mullion.Div_ExplosionHeight);
             Assert.AreEqual(469, divModel_mullion.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(275, _panelModel2.Panel_GlazingBeadWidth);
             Assert.AreEqual(600, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel3.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(275, _panelModel3.Panel_GlazingBeadWidth);
             Assert.AreEqual(600, _panelModel3.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel3.Panel_GlassWidth);
@@ -1177,7 +1438,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(549, divModel_mullion2.Div_ExplosionHeight);
             Assert.AreEqual(469, divModel_mullion2.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel4.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(275, _panelModel4.Panel_GlazingBeadWidth);
             Assert.AreEqual(600, _panelModel4.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel4.Panel_GlassWidth);
@@ -1219,22 +1480,20 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '275'");
             Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '600'");
             Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '215'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '540'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
@@ -1375,7 +1634,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel1,
                                                                     p1Wd,
                                                                     p1Ht,
@@ -1389,8 +1648,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel1.Panel_Placement = "Somewhere in Between";
+            _panelModel1.Panel_GlassThickness = 6.0f;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel1);
             _panelModel1.Panel_Index_Inside_MPanel = 2;
             Control fw1 = new Control();
@@ -1555,7 +1841,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiTransomModel2,
                                                                     p2p3Wd,
                                                                     p2p3Ht,
@@ -1569,8 +1855,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _multiTransomModel2.MPanelLst_Panel.Add(_panelModel2);
             _panelModel2.Panel_Index_Inside_MPanel = 4;
             Control fw2 = new Control();
@@ -1688,7 +2001,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiTransomModel3,
                                                                     p2p3Wd,
                                                                     p2p3Ht,
@@ -1702,8 +2015,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel3.Panel_Placement = "Last";
+            _panelModel3.Panel_GlassThickness = 6.0f;
             _multiTransomModel3.MPanelLst_Panel.Add(_panelModel3);
             _panelModel3.Panel_Index_Inside_MPanel = 4;
             Control fw3 = new Control();
@@ -1730,7 +2070,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel4,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -1744,8 +2084,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel4.Panel_Placement = "First";
+            _panelModel4.Panel_GlassThickness = 24.0f;
             _multiMullionModel4.MPanelLst_Panel.Add(_panelModel4);
             _panelModel4.Panel_Index_Inside_MPanel = 0;
             Control fw4 = new Control();
@@ -1781,7 +2148,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel4,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -1795,8 +2162,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel5.Panel_Placement = "Last";
+            _panelModel5.Panel_GlassThickness = 24.0f;
             _multiMullionModel4.MPanelLst_Panel.Add(_panelModel5);
             _panelModel5.Panel_Index_Inside_MPanel = 2;
             Control fw5 = new Control();
@@ -1822,7 +2216,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel5,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -1836,8 +2230,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel6.Panel_Placement = "First";
+            _panelModel6.Panel_GlassThickness = 24.0f;
             _multiMullionModel5.MPanelLst_Panel.Add(_panelModel6);
             _panelModel6.Panel_Index_Inside_MPanel = 0;
             Control fw6 = new Control();
@@ -1873,7 +2294,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel5,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -1887,8 +2308,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel7.Panel_Placement = "Last";
+            _panelModel7.Panel_GlassThickness = 24.0f;
             _multiMullionModel5.MPanelLst_Panel.Add(_panelModel7);
             _panelModel5.Panel_Index_Inside_MPanel = 2;
             Control fw7 = new Control();
@@ -1914,7 +2362,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel6,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -1928,8 +2376,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel8.Panel_Placement = "First";
+            _panelModel8.Panel_GlassThickness = 24.0f;
             _multiMullionModel6.MPanelLst_Panel.Add(_panelModel8);
             _panelModel8.Panel_Index_Inside_MPanel = 0;
             Control fw8 = new Control();
@@ -1965,7 +2440,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel6,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -1979,8 +2454,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel9.Panel_Placement = "Last";
+            _panelModel9.Panel_GlassThickness = 24.0f;
             _multiMullionModel6.MPanelLst_Panel.Add(_panelModel9);
             _panelModel9.Panel_Index_Inside_MPanel = 2;
             Control fw9 = new Control();
@@ -2006,7 +2508,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel7,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -2020,8 +2522,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel10.Panel_Placement = "First";
+            _panelModel10.Panel_GlassThickness = 24.0f;
             _multiMullionModel7.MPanelLst_Panel.Add(_panelModel10);
             _panelModel10.Panel_Index_Inside_MPanel = 0;
             Control fw10 = new Control();
@@ -2057,7 +2586,7 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel7,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
@@ -2071,8 +2600,35 @@ namespace ModelLayer.Tests
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
-                                                                    panelID);
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel11.Panel_Placement = "Last";
+            _panelModel11.Panel_GlassThickness = 24.0f;
             _multiMullionModel7.MPanelLst_Panel.Add(_panelModel11);
             _panelModel11.Panel_Index_Inside_MPanel = 2;
             Control fw11 = new Control();
@@ -2107,7 +2663,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1842, divModel_mullion2.Div_ExplosionHeight);
             Assert.AreEqual(1732, divModel_mullion2.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel1.Panel_GlazingBeadWidth);
             Assert.AreEqual(1900, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(722, _panelModel1.Panel_GlassWidth);
@@ -2127,7 +2683,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(734, divModel_transom4.Div_ExplosionWidth);
             Assert.AreEqual(654, divModel_transom4.Div_ReinfWidth);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel2.Panel_GlazingBeadWidth);
             Assert.AreEqual(950, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(725, _panelModel2.Panel_GlassWidth);
@@ -2147,7 +2703,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(734, divModel_transom6.Div_ExplosionWidth);
             Assert.AreEqual(654, divModel_transom6.Div_ReinfWidth);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel3.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel3.Panel_GlazingBeadWidth);
             Assert.AreEqual(950, _panelModel3.Panel_GlazingBeadHeight);
             Assert.AreEqual(725, _panelModel3.Panel_GlassWidth);
@@ -2273,19 +2829,17 @@ namespace ModelLayer.Tests
             Assert.AreEqual(12, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%2451%' AND 
+                             Description LIKE '%2452%' AND 
                              Size = '1900'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND 
                              Size = '722'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%6mm%' AND 
                              Size = '1828'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
@@ -2303,22 +2857,20 @@ namespace ModelLayer.Tests
             Assert.AreEqual(8, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '800'");
             Assert.AreEqual(6, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
+                                                 Description LIKE '%2452%' AND
                                                  Size = '950'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '725'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '890'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
@@ -2333,12 +2885,10 @@ namespace ModelLayer.Tests
             Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%24mm%' AND
                                                  Size = '325'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%24mm%' AND
                                                  Size = '415'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
@@ -2353,12 +2903,10 @@ namespace ModelLayer.Tests
             Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%24mm%' AND
                                                  Size = '322'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%24mm%' AND
                                                  Size = '427'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
