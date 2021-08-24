@@ -164,7 +164,9 @@ namespace PresentationLayer.Presenter.UserControls
                 _frameModel.Lst_MultiPanel.Add(_multipanelModel);
 
                 IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP.GetNewInstance(_unityC, _multipanelModel, _mainPresenter);
-                framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)multiPropUCP.GetMultiPanelPropertiesUC());
+                UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
+                multiPropUC.Dock = DockStyle.Top;
+                framePropUC.GetFramePropertiesPNL().Controls.Add(multiPropUC);
                 _frameModel.AdjustPropertyPanelHeight("Mpanel", "add");
 
                 if (data.Contains("Mullion"))
@@ -189,7 +191,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                       multiMullionImagerUCP);
                     IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
-                    //multiUCP.SetInitialLoadFalse();
                 }
                 else if (data.Contains("Transom"))
                 {
@@ -212,7 +213,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                                     multiTransomImagerUCP);
                     IMultiPanelTransomUC multiUC = multiTransomUCP.GetMultiPanel();
                     frame.Controls.Add((UserControl)multiUC);
-                    //multiTransomUCP.SetInitialLoadFalse();
                 }
             }
             else
@@ -280,11 +280,11 @@ namespace PresentationLayer.Presenter.UserControls
                                                            _frameModel.Frame_Height,
                                                            GlazingBead_ArticleNo._2452,
                                                            GlassFilm_Types._None,
-                                                           SashProfile_ArticleNo._None,
+                                                           SashProfile_ArticleNo._7581,
                                                            SashReinf_ArticleNo._None,
                                                            GlassType._Single,
                                                            Espagnolette_ArticleNo._None,
-                                                           Striker_ArticleNo._M89ANT,
+                                                           Striker_ArticleNo._M89ANTA,
                                                            midArtNo,
                                                            LockingKit_ArticleNo._None,
                                                            motor,
@@ -310,12 +310,18 @@ namespace PresentationLayer.Presenter.UserControls
                                                            0,
                                                            0,
                                                            handleArtNo,
+                                                           GeorgianBar_ArticleNo._None,
+                                                           0,
+                                                           0,
+                                                           false,
                                                            _mainPresenter.GetPanelCount(),
                                                            _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                framePropUC.GetFramePropertiesFLP().Controls.Add((UserControl)panelPropUCP.GetPanelPropertiesUC());
+                UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
+                panelPropUC.Dock = DockStyle.Top;
+                framePropUC.GetFramePropertiesPNL().Controls.Add(panelPropUC);
 
                 if (data == "Fixed Panel")
                 {
@@ -342,6 +348,18 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (data == "Casement Panel")
                 {
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    _panelModel.AdjustPropertyPanelHeight("addSash");
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
+                    _panelModel.AdjustPropertyPanelHeight("addHandle");
+
+                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+
                     ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC, 
                                                                                         _panelModel, 
                                                                                         _frameModel, 
@@ -349,7 +367,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                         this);
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                     frame.Controls.Add((UserControl)casementUC);
-                    //casementUCP.SetInitialLoadFalse();
 
                     ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
                     ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
@@ -401,6 +418,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
             }
+            _mainPresenter.Run_GetListOfMaterials_SpecificItem();
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -424,7 +442,6 @@ namespace PresentationLayer.Presenter.UserControls
                                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 DeleteFrame();
-                //_frameUC.InvalidateThisParentsParent();
             }
         }
 

@@ -7,10 +7,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     public interface IPP_RotoswingPropertyUC : IViewCommon
     {
         event EventHandler PPRotoswingPropertyLoadEventRaised;
-        event EventHandler cmbEspagnoletteSelectedValueEventRaised;
         event EventHandler cmbMiddleCloserSelectedValueEventRaised;
         event EventHandler cmbRotoswingNoSelectedValueEventRaised;
 
-        FlowLayoutPanel GetRotoswingOptionFLP();
+        Panel GetRotoswingOptionPNL();
     }
 }

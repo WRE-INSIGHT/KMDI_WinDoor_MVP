@@ -45,6 +45,8 @@
             // 
             // cmb_RotaryArtNo
             // 
+            this.cmb_RotaryArtNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_RotaryArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_RotaryArtNo.FormattingEnabled = true;
             this.cmb_RotaryArtNo.Location = new System.Drawing.Point(62, 3);
@@ -67,6 +69,8 @@
             // 
             // cmb_LockingKit
             // 
+            this.cmb_LockingKit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_LockingKit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_LockingKit.FormattingEnabled = true;
             this.cmb_LockingKit.Location = new System.Drawing.Point(62, 30);

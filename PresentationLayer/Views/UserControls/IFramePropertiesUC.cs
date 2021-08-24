@@ -19,7 +19,7 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler cmbFrameProfileSelectedValueChangedEventRaised;
         event EventHandler cmbFrameReinfSelectedValueChangedEventRaised;
         void BringToFrontThis();
-        FlowLayoutPanel GetFramePropertiesFLP();
+        Panel GetFramePropertiesPNL();
         void SetFrameTypeRadioBtnEnabled(bool frameTypeEnabled);
     }
 }

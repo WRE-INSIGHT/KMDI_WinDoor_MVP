@@ -9,10 +9,8 @@ namespace PresentationLayer.Views.UserControls
         int MPanelID { get; set; }
 
         event EventHandler MultiPanelPropertiesLoadEventRaised; 
-        //event EventHandler NumHeightValueChangedEventRaised;
-        //event EventHandler NumWidthValueChangedEventRaised;
 
         void BringToFrontThis();
-        FlowLayoutPanel GetMultiPanelPropertiesFLP();
+        Panel GetMultiPanelPropertiesPNL();
     }
 }

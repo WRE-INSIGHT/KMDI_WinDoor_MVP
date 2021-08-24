@@ -80,6 +80,7 @@ namespace PresentationLayer.Presenter
 
         public DataRow CreateNewRow_ColorDT()
         {
+            _createNewGlassColorView.tboxGlassColorView = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_createNewGlassColorView.tboxGlassColorView.ToLower());
             DataRow newRow;
             newRow = _colorDT.NewRow();     
             newRow["Color"] = _createNewGlassColorView.tboxGlassColorView;

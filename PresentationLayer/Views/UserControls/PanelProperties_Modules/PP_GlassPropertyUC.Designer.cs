@@ -51,6 +51,8 @@
             // 
             // cmb_GlassType
             // 
+            this.cmb_GlassType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_GlassType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_GlassType.DropDownWidth = 100;
             this.cmb_GlassType.FormattingEnabled = true;
@@ -84,6 +86,8 @@
             // 
             // lbl_GlassThicknessDesc
             // 
+            this.lbl_GlassThicknessDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_GlassThicknessDesc.AutoEllipsis = true;
             this.lbl_GlassThicknessDesc.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_GlassThicknessDesc.Location = new System.Drawing.Point(2, 56);
@@ -105,6 +109,8 @@
             // 
             // cmb_GlazingArtNo
             // 
+            this.cmb_GlazingArtNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_GlazingArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_GlazingArtNo.FormattingEnabled = true;
             this.cmb_GlazingArtNo.Items.AddRange(new object[] {
@@ -134,6 +140,8 @@
             // 
             // cmb_FilmType
             // 
+            this.cmb_FilmType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_FilmType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_FilmType.DropDownWidth = 100;
             this.cmb_FilmType.FormattingEnabled = true;

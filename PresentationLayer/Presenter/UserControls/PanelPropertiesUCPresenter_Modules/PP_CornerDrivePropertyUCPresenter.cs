@@ -69,6 +69,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
             binding.Add("Panel_CornerDriveArtNo", new Binding("Text", _panelModel, "Panel_CornerDriveArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_CornerDriveOptionsVisibility", new Binding("Visible", _panelModel, "Panel_CornerDriveOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

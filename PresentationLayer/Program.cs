@@ -6,6 +6,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.Presenter;
 using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
@@ -13,6 +14,7 @@ using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.DividerProperties_Modules;
 using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
@@ -206,6 +208,39 @@ namespace PresentationLayer
 
                 .RegisterType<IPP_CornerDrivePropertyUC, PP_CornerDrivePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_CornerDrivePropertyUCPresenter, PP_CornerDrivePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_GeorgianBarPropertyUC, PP_GeorgianBarPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_GeorgianBarPropertyUCPresenter, PP_GeorgianBarPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IDP_CladdingPropertyUC, DP_CladdingPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDP_CladdingPropertyUCPresenter, DP_CladdingPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_RioPropertyUC, PP_RioPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RioPropertyUCPresenter, PP_RioPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_RotolinePropertyUC, PP_RotolinePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RotolinePropertyUCPresenter, PP_RotolinePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_MVDPropertyUC, PP_MVDPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_MVDPropertyUCPresenter, PP_MVDPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_HingePropertyUC, PP_HingePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_HingePropertyUCPresenter, PP_HingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_CenterHingePropertyUC, PP_CenterHingePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_CenterHingePropertyUCPresenter, PP_CenterHingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_NTCenterHingePropertyUC, PP_NTCenterHingePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_NTCenterHingePropertyUCPresenter, PP_NTCenterHingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_MiddleCloserPropertyUC, PP_MiddleCloserPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_MiddleCloserPropertyUCPresenter, PP_MiddleCloserPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IDP_CladdingBracketPropertyUC, DP_CladdingBracketPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDP_CladdingBracketPropertyUCPresenter, DP_CladdingBracketPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_EspagnolettePropertyUC, PP_EspagnolettePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_EspagnolettePropertyUCPresenter, PP_EspagnolettePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));

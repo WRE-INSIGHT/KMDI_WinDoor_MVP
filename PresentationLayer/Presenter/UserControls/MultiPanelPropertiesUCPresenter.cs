@@ -29,8 +29,6 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void SubscribeToEventsSetup()
         {
-            //_multiPanelPropertiesUC.NumWidthValueChangedEventRaised += _multiPanelPropertiesUC_NumFWidthValueChangedEventRaised;
-            //_multiPanelPropertiesUC.NumHeightValueChangedEventRaised += _multiPanelPropertiesUC_NumFHeightValueChangedEventRaised;
             _multiPanelPropertiesUC.MultiPanelPropertiesLoadEventRaised += _multiPanelPropertiesUC_MultiPanelPropertiesLoadEventRaised;
         }
         
@@ -38,18 +36,6 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _multiPanelPropertiesUC.ThisBinding(CreateBindingDictionary());
         }
-
-        //private void _multiPanelPropertiesUC_NumFHeightValueChangedEventRaised(object sender, EventArgs e)
-        //{
-        //    NumericUpDown numH = (NumericUpDown)sender;
-        //    _multiPanelModel.MPanel_DisplayHeight = Convert.ToInt32(numH.Value);
-        //}
-
-        //private void _multiPanelPropertiesUC_NumFWidthValueChangedEventRaised(object sender, EventArgs e)
-        //{
-        //    NumericUpDown numW = (NumericUpDown)sender;
-        //    _multiPanelModel.MPanel_DisplayWidth = Convert.ToInt32(numW.Value);
-        //}
 
         public IMultiPanelPropertiesUC GetMultiPanelPropertiesUC()
         {
@@ -75,10 +61,6 @@ namespace PresentationLayer.Presenter.UserControls
             multiPanelBinding.Add("MPanel_ID", new Binding("MPanelID", _multiPanelModel, "MPanel_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Width", new Binding("Value", _multiPanelModel, "MPanel_DisplayWidth", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Height", new Binding("Value", _multiPanelModel, "MPanel_DisplayHeight", true, DataSourceUpdateMode.OnPropertyChanged));
-            //multiPanelBinding.Add("MPanel_Width", new Binding("Value", _multiPanelModel, "MPanel_Width", true, DataSourceUpdateMode.OnPropertyChanged));
-            //multiPanelBinding.Add("MPanel_Height", new Binding("Value", _multiPanelModel, "MPanel_Height", true, DataSourceUpdateMode.OnPropertyChanged));
-            //multiPanelBinding.Add("MPanel_Width", new Binding("Value", _multiPanelModel, "MPanel_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
-            //multiPanelBinding.Add("MPanel_Height", new Binding("Value", _multiPanelModel, "MPanel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Name", new Binding("Text", _multiPanelModel, "MPanel_Name", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanelProp_Height", new Binding("Height", _multiPanelModel, "MPanelProp_Height", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -88,10 +70,9 @@ namespace PresentationLayer.Presenter.UserControls
             return multiPanelBinding;
         }
 
-        public FlowLayoutPanel GetMultiPanelPropertiesFLP()
+        public Panel GetMultiPanelPropertiesPNL()
         {
-            return _multiPanelPropertiesUC.GetMultiPanelPropertiesFLP();
+            return _multiPanelPropertiesUC.GetMultiPanelPropertiesPNL();
         }
-
     }
 }

@@ -1,20 +1,18 @@
-﻿using ModelLayer.Model.Quotation.MultiPanel;
-using System;
+﻿using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Variables;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
-using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Divider
 {
     public class DividerModel : IDividerModel, INotifyPropertyChanged
     {
+        ConstantVariables constants = new ConstantVariables();
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -268,7 +266,68 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
+
+
+        public int Div_CladdingBracketForUPVC { get; set; }
+        public int Div_CladdingBracketForConcrete { get; set; }
+
+        private bool _div_claddingBracketVisibility;
+        public bool Div_claddingBracketVisibility
+        {
+            get
+            {
+                return _div_claddingBracketVisibility;
+            }
+
+            set
+            {
+                _div_claddingBracketVisibility = value;
+            }
+        }
+        private bool _divDM;
+        public bool Div_ChkDM
+        {
+            get
+            {
+                return _divDM;
+            }
+            set
+            {
+                _divDM = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _divDMVisibility;
+        public bool Div_ChkDMVisibility
+        {
+            get
+            {
+                return _divDMVisibility;
+            }
+            set
+            {
+                _divDMVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _divArtVisibility;
+        public bool Div_ArtVisibility
+        {
+            get
+            {
+                return _divArtVisibility;
+            }
+            set
+            {
+                _divArtVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public IMultiPanelModel Div_MPanelParent { get; set; }
+        public IFrameModel Div_FrameParent { get; set; }
 
         #region Explosion
 
@@ -319,8 +378,21 @@ namespace ModelLayer.Model.Quotation.Divider
         public Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
         public CladdingProfile_ArticleNo Div_CladdingProfileArtNo { get; set; }
         public CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
+        public Dictionary<int, int> Div_CladdingSizeList { get; set; }
 
-        public int Div_CladdingProfileSize { get; set; }
+        private int _divPropHeight;
+        public int Div_PropHeight
+        {
+            get
+            {
+                return _divPropHeight;
+            }
+            set
+            {
+                _divPropHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public void SetExplosionValues_Div()
         {
@@ -353,7 +425,6 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                         Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                        Div_CladdingProfileSize = Div_ExplosionHeight + 30;
                     }
                 }
                 else if (Div_Type == DividerType.Transom)
@@ -380,7 +451,6 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                         Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                        Div_CladdingProfileSize = Div_ExplosionWidth + 30;
                     }
                 }
             }
@@ -485,7 +555,6 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                             Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                            Div_CladdingProfileSize = Div_ExplosionHeight + 30;
                         }
                     }
                 }
@@ -587,13 +656,41 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                             Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                            Div_CladdingProfileSize = Div_ExplosionWidth + 30;
                         }
                     }
                 }
             }
 
         }
+
+        public void AdjustPropertyPanelHeight(string mode)
+        {
+            if (mode == "addCladding")
+            {
+                Div_PropHeight += constants.div_property_claddingOptionsHeight;
+            }
+            else if (mode == "minusCladding")
+            {
+                Div_PropHeight -= constants.div_property_claddingOptionsHeight;
+            }
+            else if (mode == "addDivArt")
+            {
+                Div_PropHeight += constants.div_property_divArtOptionsHeight;
+            }
+            else if (mode == "minusDivArt")
+            {
+                Div_PropHeight -= constants.div_property_divArtOptionsHeight;
+            }
+            else if (mode == "addDM")
+            {
+                Div_PropHeight += constants.div_property_DMArtOptionsHeight;
+            }
+            else if (mode == "minusDM")
+            {
+                Div_PropHeight -= constants.div_property_DMArtOptionsHeight;
+            }
+        }
+
         #endregion
 
         public DividerModel(int divID,
@@ -609,7 +706,11 @@ namespace ModelLayer.Model.Quotation.Divider
                             Divider_ArticleNo divArtNo,
                             int divDisplayWidth,
                             int divDisplayHeight,
-                            IMultiPanelModel divMPanelParent)
+                            IMultiPanelModel divMPanelParent,
+                            Dictionary<int, int> divCladdingSizeList,
+                            IFrameModel divFrameParent,
+                            bool divChkDM,
+                            bool divArtVisibility)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -625,6 +726,39 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_DisplayWidth = divDisplayWidth;
             Div_DisplayHeight = divDisplayHeight;
             Div_MPanelParent = divMPanelParent;
+            Div_CladdingSizeList = divCladdingSizeList;
+            Div_FrameParent = divFrameParent;
+            Div_ChkDM = divChkDM;
+            Div_ArtVisibility = divArtVisibility;
+
+            if (Div_Type == DividerType.Mullion)
+            {
+                Div_ChkDMVisibility = true;
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                Div_ChkDMVisibility = false;
+            }
+
+            SetExplosionValues_Div();
+
+            Div_PropHeight = constants.div_propertyheight_default +
+                             constants.div_property_pnlAddcladdingOptionsHeight;
+            Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+            Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+
+            if (Div_ChkDM == true && Div_ArtVisibility == false)
+            {
+                Div_PropHeight += constants.div_property_DMArtOptionsHeight;
+                Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addDM");
+                Div_FrameParent.AdjustPropertyPanelHeight("Div", "addDM");
+            }
+            else if (Div_ChkDM == false && Div_ArtVisibility == true)
+            {
+                Div_PropHeight += constants.div_property_divArtOptionsHeight;
+                Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addDivArt");
+                Div_FrameParent.AdjustPropertyPanelHeight("Div", "addDivArt");
+            }
         }
     }
 }

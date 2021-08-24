@@ -101,6 +101,7 @@ namespace PresentationLayer.CommonMethods
                                                                      parentModel.MPanel_DisplayWidth,
                                                                      parentModel.MPanel_DisplayHeight,
                                                                      parentModel,
+                                                                     frameModel,
                                                                      divID,
                                                                      frameModel.FrameImageRenderer_Zoom,
                                                                      frameModel.Frame_Type.ToString());
@@ -111,12 +112,18 @@ namespace PresentationLayer.CommonMethods
                 if (divType == DividerModel.DividerType.Mullion)
                 {
                     IDividerPropertiesUCPresenter divPropUCP = mainPresenter.divPropertiesUCP.GetNewInstance(_unityC, divModel, mainPresenter);
-                    multiMullionUCP.multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)divPropUCP.GetDivProperties());
+                    UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
+                    divPropUC.Dock = DockStyle.Top;
+                    multiMullionUCP.multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
+                    divPropUC.BringToFront();
                 }
                 else if (divType == DividerModel.DividerType.Transom)
                 {
                     IDividerPropertiesUCPresenter divPropUCP = mainPresenter.divPropertiesUCP.GetNewInstance(_unityC, divModel, mainPresenter);
-                    multiTransomUCP.multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)divPropUCP.GetDivProperties());
+                    UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
+                    divPropUC.Dock = DockStyle.Top;
+                    multiTransomUCP.multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
+                    divPropUC.BringToFront();
                 }
 
                 parentModel.AdjustPropertyPanelHeight("Div", "add");

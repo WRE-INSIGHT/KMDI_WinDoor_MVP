@@ -37,7 +37,8 @@ namespace PresentationLayer.Presenter
         {
             _createNewGlassView.NewGlassViewLoadEventRaised += new EventHandler(OnNewGlassViewLoadEventRaised);
             _createNewGlassView.GlassThicknessTextChange += new EventHandler(OnGlassTextchangeEventRaised);
-            _createNewGlassView.BtnAddGlassClick += new EventHandler(OnBtnAddGlassClick);         
+            _createNewGlassView.BtnAddGlassClick += new EventHandler(OnBtnAddGlassClick);
+
             _createNewGlassView.GlassType1().DropDown += OnGlassType1DropDownEventRaised;
             _createNewGlassView.GlassType2().DropDown += OnGlassType2DropDownEventRaised;
             _createNewGlassView.GlassType3().DropDown += OnGlassType3DropDownEventRaised;
@@ -47,7 +48,11 @@ namespace PresentationLayer.Presenter
             _createNewGlassView.Spacer1().DropDown += OnGlassSpacer1DropDownEventRaised;
             _createNewGlassView.Spacer2().DropDown += OnGlassSpacer2DropDownEventRaised;
         }
-     
+
+
+        #region CmbEvent
+
+
         private void OnGlassType1DropDownEventRaised(object sender, EventArgs e)
         {
             _createNewGlassView.GlassType1().DataSource = _mainPresenter.Glass_Type.Copy();
@@ -89,6 +94,8 @@ namespace PresentationLayer.Presenter
             _createNewGlassView.Spacer2().DataSource = _mainPresenter.Spacer.Copy();
             _createNewGlassView.Spacer2().DisplayMember = "Spacer";
         }
+        #endregion
+
         private void OnNewGlassViewLoadEventRaised(object sender, EventArgs e)
         {
             _createNewGlassView.lblDescriptionView = string.Empty;
@@ -167,40 +174,112 @@ namespace PresentationLayer.Presenter
         string _GlassType3;
         private void OnGlassTextchangeEventRaised(object sender, EventArgs e)
         {
+
+            #region GlassDescription   
+
             _GlassType1 = _createNewGlassView.GlassType1().Text;
             _GlassType2 = _createNewGlassView.GlassType2().Text;
             _GlassType3 = _createNewGlassView.GlassType3().Text;
 
-            if (_GlassType1.Contains("Annealed"))
+            #region glass1
+            if (_GlassType1.ToUpper() == "ANNEALED")
             {
-                _GlassType1 = _GlassType1.Replace("Annealed", string.Empty);
+                _GlassType1 = _GlassType1.ToUpper().Replace("ANNEALED", string.Empty);
                 _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm" + _GlassType1 + " " + _createNewGlassView.Color1().Text;
             }
+            else if (_GlassType1.ToUpper().Contains("GEORGIAN BAR") && _GlassType1.ToUpper().Contains("LOW-E"))
+            {
+                _GlassType1 = _GlassType1.ToUpper().Replace("ANNEALED", string.Empty).Replace($" LOW-E", string.Empty).Replace($" WITH GEORGIAN BAR", string.Empty);
+                _GlassType1 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType1.ToLower());
+                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _GlassType1 + " " + _createNewGlassView.Color1().Text + " Low-e with Georgian Bar";
+
+            }
+            else if (_GlassType1.ToUpper().Contains("GEORGIAN BAR"))
+            {
+                _GlassType1 = _GlassType1.ToUpper().Replace("ANNEALED", string.Empty).Replace($" WITH GEORGIAN BAR", string.Empty);
+                _GlassType1 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType1.ToLower());
+                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _GlassType1 + " " + _createNewGlassView.Color1().Text + " with Georgian Bar";
+            }
+            else if (_GlassType1.ToUpper().Contains("LOW-E"))
+            {
+                _GlassType1 = _GlassType1.ToUpper().Replace("ANNEALED", string.Empty).Replace($" LOW-E", string.Empty);
+                _GlassType1 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType1.ToLower());
+                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _GlassType1 + " " + _createNewGlassView.Color1().Text + " Low-e";
+            }
             else
             {
-                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _createNewGlassView.GlassType1().Text + " " + _createNewGlassView.Color1().Text;
+                _GlassType1 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType1.ToLower());
+                _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _GlassType1 + " " + _createNewGlassView.Color1().Text;
             }
+            #endregion
 
-            if (_GlassType2.Contains("Annealed"))
+            #region glass2
+            if (_GlassType2.ToUpper() == "ANNEALED")
             {
-                _GlassType2 = _GlassType2.Replace("Annealed", string.Empty);
+                _GlassType2 = _GlassType2.ToUpper().Replace("ANNEALED", string.Empty);
                 _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _GlassType2 + " " + _createNewGlassView.Color2().Text;
             }
+            else if (_GlassType2.ToUpper().Contains("GEORGIAN BAR") && _GlassType2.ToUpper().Contains("LOW-E"))
+            {
+                _GlassType2 = _GlassType2.ToUpper().Replace("ANNEALED", string.Empty).Replace($" LOW-E", string.Empty).Replace($" WITH GEORGIAN BAR", string.Empty);
+                _GlassType2 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType2.ToLower());
+                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _GlassType2 + " " + _createNewGlassView.Color2().Text + " Low-e with Georgian Bar";
+
+            }
+            else if (_GlassType2.ToUpper().Contains("GEORGIAN BAR"))
+            {
+                _GlassType2 = _GlassType2.ToUpper().Replace("ANNEALED", string.Empty).Replace($" WITH GEORGIAN BAR", string.Empty);
+                _GlassType2 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType2.ToLower());
+                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _GlassType2 + " " + _createNewGlassView.Color2().Text + " with Georgian Bar";
+            }
+            else if (_GlassType2.ToUpper().Contains("LOW-E"))
+            {
+                _GlassType2 = _GlassType2.ToUpper().Replace("ANNEALED", string.Empty).Replace($" LOW-E", string.Empty);
+                _GlassType2 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType2.ToLower());
+                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _GlassType2 + " " + _createNewGlassView.Color2().Text + " Low-e";
+            }
             else
             {
-                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _createNewGlassView.GlassType2().Text + " " + _createNewGlassView.Color2().Text;
+                _GlassType2 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType2.ToLower());
+                _Glass2Description = _createNewGlassView.GlassThickness2.Value + " mm " + _GlassType2 + " " + _createNewGlassView.Color2().Text;
             }
 
+            #endregion
 
-            if (_GlassType3.Contains("Annealed"))
+            #region Glass3
+            if (_GlassType3.ToUpper() == "ANNEALED")
             {
-                _GlassType3 = _GlassType3.Replace("Annealed", string.Empty);
+                _GlassType3 = _GlassType3.ToUpper().Replace("ANNEALED", string.Empty);
                 _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _GlassType3 + " " + _createNewGlassView.Color3().Text;
             }
+            else if (_GlassType3.ToUpper().Contains("GEORGIAN BAR") && _GlassType3.ToUpper().Contains("LOW-E"))
+            {
+                _GlassType3 = _GlassType3.ToUpper().Replace("ANNEALED", string.Empty).Replace($" LOW-E", string.Empty).Replace($" WITH GEORGIAN BAR", string.Empty);
+                _GlassType3 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType3.ToLower());
+                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _GlassType3 + " " + _createNewGlassView.Color3().Text + " Low-e with Georgian Bar";
+
+            }
+            else if (_GlassType3.ToUpper().Contains("GEORGIAN BAR"))
+            {
+                _GlassType3 = _GlassType3.ToUpper().Replace("ANNEALED", string.Empty).Replace($" WITH GEORGIAN BAR", string.Empty);
+                _GlassType3 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType3.ToLower());
+                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _GlassType3 + " " + _createNewGlassView.Color3().Text + " with Georgian Bar";
+            }
+            else if (_GlassType3.ToUpper().Contains("LOW-E"))
+            {
+                _GlassType3 = _GlassType3.ToUpper().Replace("ANNEALED", string.Empty).Replace($" LOW-E", string.Empty);
+                _GlassType3 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType3.ToLower());
+                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _GlassType3 + " " + _createNewGlassView.Color3().Text + " Low-e";
+            }
             else
             {
-                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _createNewGlassView.GlassType3().Text + " " + _createNewGlassView.Color3().Text;
+                _GlassType3 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType3.ToLower());
+                _Glass3Description = _createNewGlassView.GlassThickness3.Value + " mm " + _GlassType3 + " " + _createNewGlassView.Color3().Text;
             }
+
+            #endregion
+
+            #region Spacer
 
 
             if (_createNewGlassView.Spacer1().Text == "Argon")
@@ -220,7 +299,10 @@ namespace PresentationLayer.Presenter
             {
                 _BetweenTheGlassUnit2 = string.Empty;
             }
+            #endregion
 
+
+            #endregion
 
             _BetweenTheGlass1 = _createNewGlassView.BetweenTheGlass1.Value + _BetweenTheGlassUnit;
             _BetweenTheGlass2 = _createNewGlassView.BetweenTheGlass2.Value + _BetweenTheGlassUnit2;
@@ -290,7 +372,7 @@ namespace PresentationLayer.Presenter
 
                 }
             }
-           
+
         }
 
 
@@ -388,7 +470,7 @@ namespace PresentationLayer.Presenter
             }
             return newRow;
         }
- 
+
 
         public ICreateNewGlassPresenter GetNewInstance(IUnityContainer unityC,
                                                        IMainPresenter mainPresenter,

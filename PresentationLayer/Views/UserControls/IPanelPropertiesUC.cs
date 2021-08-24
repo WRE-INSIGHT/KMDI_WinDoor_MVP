@@ -13,7 +13,6 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler ChkOrientationCheckChangedEventRaised;
 
-        FlowLayoutPanel GetPanelSpecsFLP();
-
+        Panel GetPanelSpecsPNL();
     }
 }

@@ -77,6 +77,7 @@ namespace PresentationLayer.Presenter
 
         public DataRow CreateNewRowGlassSpacerDT()
         {
+            _createNewGlassSpacerView.tboxGlassSpacerView = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_createNewGlassSpacerView.tboxGlassSpacerView.ToLower());
             DataRow newRow;
             newRow = _spacerDT.NewRow();
             newRow["Spacer"] = _createNewGlassSpacerView.tboxGlassSpacerView;

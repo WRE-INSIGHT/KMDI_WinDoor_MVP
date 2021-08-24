@@ -21,18 +21,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         public event EventHandler PPRotoswingPropertyLoadEventRaised;
         public event EventHandler cmbRotoswingNoSelectedValueEventRaised;
-        public event EventHandler cmbEspagnoletteSelectedValueEventRaised;
         public event EventHandler cmbMiddleCloserSelectedValueEventRaised;
 
         private void PP_RotoswingPropertyUC_Load(object sender, EventArgs e)
         {
-            List<Espagnolette_ArticleNo> espArtNo = new List<Espagnolette_ArticleNo>();
-            foreach (Espagnolette_ArticleNo item in Espagnolette_ArticleNo.GetAll())
-            {
-                espArtNo.Add(item);
-            }
-            cmb_Espagnolette.DataSource = espArtNo;
-
             List<MiddleCloser_ArticleNo> midArtNo = new List<MiddleCloser_ArticleNo>();
             foreach (MiddleCloser_ArticleNo item in MiddleCloser_ArticleNo.GetAll())
             {
@@ -54,12 +46,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, cmbRotoswingNoSelectedValueEventRaised, e);
         }
-
-        private void cmb_Espagnolette_SelectedValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, cmbEspagnoletteSelectedValueEventRaised, e);
-        }
-
+        
         private void cmb_MiddleCloser_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbMiddleCloserSelectedValueEventRaised, e);
@@ -69,14 +56,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             this.DataBindings.Add(ModelBinding["Panel_RotoswingOptionsVisibility"]);
             this.DataBindings.Add(ModelBinding["Panel_RotoswingOptionsHeight"]);
-            cmb_Espagnolette.DataBindings.Add(ModelBinding["Panel_EspagnoletteArtNo"]);
             cmb_MiddleCloser.DataBindings.Add(ModelBinding["Panel_MiddleCloserArtNo"]);
             cmb_RotoswingNo.DataBindings.Add(ModelBinding["Panel_RotoswingArtNo"]);
         }
 
-        public FlowLayoutPanel GetRotoswingOptionFLP()
+        public Panel GetRotoswingOptionPNL()
         {
-            return flp_RotoswingOptions;
+            return pnl_RotoswingOptions;
         }
     }
 }
