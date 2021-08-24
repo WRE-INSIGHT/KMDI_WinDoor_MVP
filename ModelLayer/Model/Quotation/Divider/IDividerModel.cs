@@ -29,6 +29,9 @@ namespace ModelLayer.Model.Quotation.Divider
         int Div_CladdingBracketForConcrete { get; set; }
         bool Div_claddingBracketVisibility { get; set; }
 
+        bool Div_ChkDM { get; set; }
+        bool Div_ChkDMVisibility { get; set; }
+        bool Div_ArtVisibility { get; set; }
         IMultiPanelModel Div_MPanelParent { get; set; }
         IFrameModel Div_FrameParent { get; set; }
 

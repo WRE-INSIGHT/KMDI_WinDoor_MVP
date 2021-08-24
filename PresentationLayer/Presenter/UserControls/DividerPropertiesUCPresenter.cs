@@ -28,6 +28,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         private Panel _divPropertiesBodyPNL;
 
+        bool _initialLoad = true;
+
         public DividerPropertiesUCPresenter(IDividerPropertiesUC divProperties,
                                             IDP_CladdingPropertyUCPresenter dp_claddingPropertyUCP)
         {
@@ -43,6 +45,38 @@ namespace PresentationLayer.Presenter.UserControls
             _divProperties.CmbdivArtNoSelectedValueChangedEventRaised += _divProperties_CmbdivArtNoSelectedValueChangedEventRaised;
             _divProperties.btnAddCladdingClickedEventRaised += _divProperties_btnAddCladdingClickedEventRaised;
             _divProperties.btnSaveCladdingClickedEventRaised += _divProperties_btnSaveCladdingClickedEventRaised;
+            _divProperties.chkDMCheckedChangedEventRaised += _divProperties_chkDMCheckedChangedEventRaised;
+        }
+
+        private void _divProperties_chkDMCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            CheckBox chk = (CheckBox)sender;
+            if (!_initialLoad)
+            {
+                _divModel.Div_ChkDM = chk.Checked;
+                _divModel.Div_ArtVisibility = !chk.Checked;
+
+                if (chk.Checked == true)
+                {
+                    _divModel.AdjustPropertyPanelHeight("addDM");
+                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addDM");
+                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addDM");
+
+                    _divModel.AdjustPropertyPanelHeight("minusDivArt");
+                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusDivArt");
+                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusDivArt");
+                }
+                else if (chk.Checked == false)
+                {
+                    _divModel.AdjustPropertyPanelHeight("addDivArt");
+                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addDivArt");
+                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addDivArt");
+
+                    _divModel.AdjustPropertyPanelHeight("minusDM");
+                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusDM");
+                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusDM");
+                }
+            }
         }
 
         private void _divProperties_btnSaveCladdingClickedEventRaised(object sender, EventArgs e)
@@ -94,6 +128,7 @@ namespace PresentationLayer.Presenter.UserControls
         private void _divProperties_PanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
             _divProperties.ThisBinding(CreateBindingDictionary());
+            _initialLoad = false;
         }
         
         public IDividerPropertiesUC GetDivProperties()
@@ -126,6 +161,10 @@ namespace PresentationLayer.Presenter.UserControls
             divBinding.Add("Div_ArtNo", new Binding("Text", _divModel, "Div_ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_ReinfArtNo", new Binding("Text", _divModel, "Div_ReinfArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_PropHeight", new Binding("Height", _divModel, "Div_PropHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_ChkDM", new Binding("Checked", _divModel, "Div_ChkDM", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_ChkDMVisibility", new Binding("Visible", _divModel, "Div_ChkDMVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_ChkDM2", new Binding("Visible", _divModel, "Div_ChkDM", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_ArtVisibility", new Binding("Visible", _divModel, "Div_ArtVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return divBinding;
         }

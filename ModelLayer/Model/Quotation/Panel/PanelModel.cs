@@ -968,6 +968,9 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public ProfileKnobCylinder_ArtNo Panel_ProfileKnobCylinderArtNo { get; set; }
+        public Cylinder_CoverArtNo Panel_CylinderCoverArtNo { get; set; }
+
         private Rotoline_HandleArtNo _panelRotolineArtNo;
         public Rotoline_HandleArtNo Panel_RotolineArtNo
         {
@@ -1006,6 +1009,20 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelEspagnoletteArtno = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelEspagnoletteOptionsVisibility;
+        public bool Panel_EspagnoletteOptionsVisibility
+        {
+            get
+            {
+                return _panelEspagnoletteOptionsVisibility;
+            }
+            set
+            {
+                _panelEspagnoletteOptionsVisibility = value;
                 NotifyPropertyChanged();
             }
         }
@@ -1595,6 +1612,14 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_georgianBarHeight;
             }
+            else if (mode == "addEspagnolette")
+            {
+                Panel_PropertyHeight += constants.panel_property_espagnoletteOptionsheight_default;
+            }
+            else if (mode == "minusEspagnolette")
+            {
+                Panel_PropertyHeight -= constants.panel_property_espagnoletteOptionsheight_default;
+            }
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
@@ -1675,6 +1700,14 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_HandleOptionsHeight -= constants.panel_property_cornerDriveOptionsheight_default;
             }
+            else if (mode == "addEspagnolette")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_espagnoletteOptionsheight_default;
+            }
+            else if (mode == "minusEspagnolette")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_espagnoletteOptionsheight_default;
+            }
         }
 
         public void AdjustRotoswingPropertyHeight(string mode)
@@ -1721,6 +1754,10 @@ namespace ModelLayer.Model.Quotation.Panel
         {
             Panel_StrikerQty_A = 0;
             Panel_StrikerQty_C = 0;
+
+            Base_Color base_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
+            Foil_Color inside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
+
             if (Panel_SashPropertyVisibility == true)
             {
                 if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
@@ -1758,7 +1795,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_PlateArtNo = Plate_ArticleNo._N4803LB;
                 }
 
-                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                if (base_color == Base_Color._DarkBrown)
                 {
                     if (Panel_DisplayHeight < 1551)
                     {
@@ -1773,8 +1810,8 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_MiddleCloserPairQty = 3;
                     }
                 }
-                else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
-                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                else if (base_color == Base_Color._White ||
+                         base_color == Base_Color._Ivory)
                 {
                     if (Panel_SashHeight < 1551)
                     {
@@ -1801,21 +1838,45 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_MotorizedMechQty = 2;
                 }
-
-                if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                {
-                    Panel_StrikerQty_A += 2;
-                }
-                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                {
-                    Panel_StrikerQty_A += 3;
-                }
-
+                
                 if (Panel_Type.Contains("Awning"))
                 {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_A += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_A += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+
                     if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None)
                     {
                         Panel_StrikerQty_C += 1;
@@ -1838,6 +1899,42 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_Type.Contains("Casement"))
                 {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_C += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_C += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+
                     if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None)
                     {
                         Panel_StrikerQty_C += 1;
@@ -2075,17 +2172,55 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
 
-                    if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory ||
-                        Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White)
+                    if (base_color == Base_Color._Ivory ||
+                        base_color == Base_Color._White)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
                         Panel_PlasticWedge = PlasticWedge_ArticleNo._7199WHT;
                     }
-                    else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                    else if (base_color == Base_Color._DarkBrown)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
                         Panel_PlasticWedge = PlasticWedge_ArticleNo._7199DB;
                     }
+                }
+
+                if (Panel_HandleType == Handle_Type._Rio)
+                {
+                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
+
+                    if (inside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_7025_50992;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_IVORY;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                    }
+                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+                    }
+                }
+                else if (Panel_HandleType == Handle_Type._MVD)
+                {
+                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
                 }
             }
             else if (Panel_SashPropertyVisibility == false)
@@ -2351,6 +2486,9 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_StrikerQty_A = 0;
             Panel_StrikerQty_C = 0;
 
+            Base_Color base_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
+            Foil_Color inside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
+
             if (Panel_MotorizedOptionVisibility == true)
             {
                 Panel_30x25CoverArtNo = _30x25Cover_ArticleNo._1067_Milled;
@@ -2386,7 +2524,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
 
-                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                if (base_color == Base_Color._DarkBrown)
                 {
                     if (Panel_DisplayHeight < 1551)
                     {
@@ -2401,8 +2539,8 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_MiddleCloserPairQty = 3;
                     }
                 }
-                else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
-                         Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                else if (base_color == Base_Color._White ||
+                         base_color == Base_Color._Ivory)
                 {
                     if (Panel_SashHeight < 1551)
                     {
@@ -2430,20 +2568,44 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_MotorizedMechQty = 2;
                 }
 
-                if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
-                    Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                {
-                    Panel_StrikerQty_A += 2;
-                }
-                else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                {
-                    Panel_StrikerQty_A += 3;
-                }
-
                 if (Panel_Type.Contains("Awning"))
                 {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_A += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_A += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_A += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_A += 2;
+                    }
+
                     if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None)
                     {
                         Panel_StrikerQty_C += 1;
@@ -2466,6 +2628,42 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_Type.Contains("Casement"))
                 {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                    {
+                        Panel_StrikerQty_C += 3;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                    {
+                        Panel_StrikerQty_C += 4;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_StrikerQty_C += 2;
+                    }
+
                     if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None)
                     {
                         Panel_StrikerQty_C += 1;
@@ -2598,13 +2796,13 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
 
-                    if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory ||
-                        Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White)
+                    if (base_color == Base_Color._Ivory ||
+                        base_color == Base_Color._White)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
                         Panel_PlasticWedge = PlasticWedge_ArticleNo._7199WHT;
                     }
-                    else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                    else if (base_color == Base_Color._DarkBrown)
                     {
                         Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
                         Panel_PlasticWedge = PlasticWedge_ArticleNo._7199DB;

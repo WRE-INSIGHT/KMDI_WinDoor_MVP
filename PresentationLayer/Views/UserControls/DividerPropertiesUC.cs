@@ -64,6 +64,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
         public event EventHandler btnAddCladdingClickedEventRaised;
         public event EventHandler btnSaveCladdingClickedEventRaised;
+        public event EventHandler chkDMCheckedChangedEventRaised;
 
         private void DividerPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -83,6 +84,13 @@ namespace PresentationLayer.Views.UserControls
                 dReinfArtNo.Add(item);
             }
             cmb_divReinf.DataSource = dReinfArtNo;
+
+            List<DummyMullion_ArticleNo> dMArtNo = new List<DummyMullion_ArticleNo>();
+            foreach (DummyMullion_ArticleNo item in DummyMullion_ArticleNo.GetAll())
+            {
+                dMArtNo.Add(item);
+            }
+            cmb_DMArtNo.DataSource = dMArtNo;
 
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
         }
@@ -106,6 +114,19 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseEvent(sender, btnSaveCladdingClickedEventRaised, e);
         }
 
+        private void chk_DM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_DM.Checked == true)
+            {
+                chk_DM.Text = "DM";
+            }
+            else if (chk_DM.Checked == false)
+            {
+                chk_DM.Text = "M";
+            }
+            EventHelpers.RaiseEvent(sender, chkDMCheckedChangedEventRaised, e);
+        }
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Div_ID"]);
@@ -117,6 +138,10 @@ namespace PresentationLayer.Views.UserControls
             cmb_divReinf.DataBindings.Add(ModelBinding["Div_ReinfArtNo"]);
             this.DataBindings.Add(ModelBinding["Divider_Type"]);
             this.DataBindings.Add(ModelBinding["Div_PropHeight"]);
+            chk_DM.DataBindings.Add(ModelBinding["Div_ChkDM"]);
+            chk_DM.DataBindings.Add(ModelBinding["Div_ChkDMVisibility"]);
+            pnl_DMArtNo.DataBindings.Add(ModelBinding["Div_ChkDM2"]);
+            pnl_divArtNo.DataBindings.Add(ModelBinding["Div_ArtVisibility"]);
         }
 
         public void SetBtnSaveBackColor(Color color)

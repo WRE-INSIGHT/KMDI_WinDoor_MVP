@@ -239,6 +239,9 @@ namespace PresentationLayer
                 .RegisterType<IDP_CladdingBracketPropertyUC, DP_CladdingBracketPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDP_CladdingBracketPropertyUCPresenter, DP_CladdingBracketPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPP_EspagnolettePropertyUC, PP_EspagnolettePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_EspagnolettePropertyUCPresenter, PP_EspagnolettePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

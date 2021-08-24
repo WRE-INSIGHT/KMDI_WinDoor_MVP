@@ -515,6 +515,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_georgianBarHeight;
                 }
+                else if (mode == "addEspagnolette")
+                {
+                    FrameProp_Height += constants.panel_property_espagnoletteOptionsheight_default;
+                }
+                else if (mode == "minusEspagnolette")
+                {
+                    FrameProp_Height -= constants.panel_property_espagnoletteOptionsheight_default;
+                }
             }
             else if (objtype == "Div")
             {
@@ -541,6 +549,22 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "minusPanelAddCladding")
                 {
                     FrameProp_Height -= constants.div_property_pnlAddcladdingOptionsHeight;
+                }
+                else if (mode == "addDivArt")
+                {
+                    FrameProp_Height += constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "minusDivArt")
+                {
+                    FrameProp_Height -= constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "addDM")
+                {
+                    FrameProp_Height += constants.div_property_DMArtOptionsHeight;
+                }
+                else if (mode == "minusDM")
+                {
+                    FrameProp_Height -= constants.div_property_DMArtOptionsHeight;
                 }
             }
             else if (objtype == "Mpanel")

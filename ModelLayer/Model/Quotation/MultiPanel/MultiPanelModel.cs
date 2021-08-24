@@ -1679,6 +1679,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_georgianBarHeight;
                 }
+                else if (mode == "addEspagnolette")
+                {
+                    MPanelProp_Height += constants.panel_property_espagnoletteOptionsheight_default;
+                }
+                else if (mode == "minusEspagnolette")
+                {
+                    MPanelProp_Height -= constants.panel_property_espagnoletteOptionsheight_default;
+                }
             }
             else if (objtype == "Div")
             {
@@ -1705,6 +1713,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 else if (mode == "minusPanelAddCladding")
                 {
                     MPanelProp_Height -= constants.div_property_pnlAddcladdingOptionsHeight;
+                }
+                else if (mode == "addDivArt")
+                {
+                    MPanelProp_Height += constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "minusDivArt")
+                {
+                    MPanelProp_Height -= constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "addDM")
+                {
+                    MPanelProp_Height += constants.div_property_DMArtOptionsHeight;
+                }
+                else if (mode == "minusDM")
+                {
+                    MPanelProp_Height -= constants.div_property_DMArtOptionsHeight;
                 }
             }
             else if (objtype == "Mpanel")

@@ -101,12 +101,14 @@
             // 
             // cmb_TopExt
             // 
+            this.cmb_TopExt.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_TopExt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_TopExt.FormattingEnabled = true;
             this.cmb_TopExt.Location = new System.Drawing.Point(29, 4);
             this.cmb_TopExt.Name = "cmb_TopExt";
-            this.cmb_TopExt.Size = new System.Drawing.Size(84, 23);
+            this.cmb_TopExt.Size = new System.Drawing.Size(84, 24);
             this.cmb_TopExt.TabIndex = 30;
+            this.cmb_TopExt.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_TopExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
             // 
             // chk_ToAdd_TopExt2
@@ -160,12 +162,14 @@
             // 
             // cmb_TopExt2
             // 
+            this.cmb_TopExt2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_TopExt2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_TopExt2.FormattingEnabled = true;
             this.cmb_TopExt2.Location = new System.Drawing.Point(29, 4);
             this.cmb_TopExt2.Name = "cmb_TopExt2";
-            this.cmb_TopExt2.Size = new System.Drawing.Size(84, 23);
+            this.cmb_TopExt2.Size = new System.Drawing.Size(84, 24);
             this.cmb_TopExt2.TabIndex = 30;
+            this.cmb_TopExt2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_TopExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
             // 
             // pnl_TopExtField2
@@ -200,12 +204,14 @@
             // 
             // cmb_BotExt
             // 
+            this.cmb_BotExt.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_BotExt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_BotExt.FormattingEnabled = true;
             this.cmb_BotExt.Location = new System.Drawing.Point(29, 4);
             this.cmb_BotExt.Name = "cmb_BotExt";
-            this.cmb_BotExt.Size = new System.Drawing.Size(84, 23);
+            this.cmb_BotExt.Size = new System.Drawing.Size(84, 24);
             this.cmb_BotExt.TabIndex = 30;
+            this.cmb_BotExt.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_BotExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
             // 
             // chk_ToAdd_BotExt2
@@ -250,12 +256,14 @@
             // 
             // cmb_BotExt2
             // 
+            this.cmb_BotExt2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_BotExt2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_BotExt2.FormattingEnabled = true;
             this.cmb_BotExt2.Location = new System.Drawing.Point(29, 4);
             this.cmb_BotExt2.Name = "cmb_BotExt2";
-            this.cmb_BotExt2.Size = new System.Drawing.Size(84, 23);
+            this.cmb_BotExt2.Size = new System.Drawing.Size(84, 24);
             this.cmb_BotExt2.TabIndex = 30;
+            this.cmb_BotExt2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_BotExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
             // 
             // pnl_BotExtField2
@@ -290,12 +298,14 @@
             // 
             // cmb_LeftExt2
             // 
+            this.cmb_LeftExt2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_LeftExt2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_LeftExt2.FormattingEnabled = true;
             this.cmb_LeftExt2.Location = new System.Drawing.Point(29, 4);
             this.cmb_LeftExt2.Name = "cmb_LeftExt2";
-            this.cmb_LeftExt2.Size = new System.Drawing.Size(84, 23);
+            this.cmb_LeftExt2.Size = new System.Drawing.Size(84, 24);
             this.cmb_LeftExt2.TabIndex = 30;
+            this.cmb_LeftExt2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_LeftExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
             // 
             // pnl_LeftExtField2
@@ -330,12 +340,14 @@
             // 
             // cmb_LeftExt
             // 
+            this.cmb_LeftExt.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_LeftExt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_LeftExt.FormattingEnabled = true;
             this.cmb_LeftExt.Location = new System.Drawing.Point(29, 4);
             this.cmb_LeftExt.Name = "cmb_LeftExt";
-            this.cmb_LeftExt.Size = new System.Drawing.Size(84, 23);
+            this.cmb_LeftExt.Size = new System.Drawing.Size(84, 24);
             this.cmb_LeftExt.TabIndex = 30;
+            this.cmb_LeftExt.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_LeftExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
             // 
             // chk_ToAdd_LeftExt2
@@ -380,12 +392,14 @@
             // 
             // cmb_RightExt2
             // 
+            this.cmb_RightExt2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_RightExt2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_RightExt2.FormattingEnabled = true;
             this.cmb_RightExt2.Location = new System.Drawing.Point(29, 4);
             this.cmb_RightExt2.Name = "cmb_RightExt2";
-            this.cmb_RightExt2.Size = new System.Drawing.Size(84, 23);
+            this.cmb_RightExt2.Size = new System.Drawing.Size(84, 24);
             this.cmb_RightExt2.TabIndex = 30;
+            this.cmb_RightExt2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_RightExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
             // 
             // pnl_RightExtField2
@@ -420,12 +434,14 @@
             // 
             // cmb_RightExt
             // 
+            this.cmb_RightExt.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_RightExt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_RightExt.FormattingEnabled = true;
             this.cmb_RightExt.Location = new System.Drawing.Point(29, 4);
             this.cmb_RightExt.Name = "cmb_RightExt";
-            this.cmb_RightExt.Size = new System.Drawing.Size(84, 23);
+            this.cmb_RightExt.Size = new System.Drawing.Size(84, 24);
             this.cmb_RightExt.TabIndex = 30;
+            this.cmb_RightExt.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_RightExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
             // 
             // chk_ToAdd_RightExt2

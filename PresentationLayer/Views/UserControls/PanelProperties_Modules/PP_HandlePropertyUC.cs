@@ -76,30 +76,22 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 Handle_Type sel_handleType = (Handle_Type)((ComboBox)sender).SelectedValue;
                 if (sel_handleType == Handle_Type._Rotoswing)
                 {
-                    if ((Frame_ArtNo == FrameProfile_ArticleNo._7502 &&
-                        Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
-                        (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
-                        Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
-                        (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7502 &&
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) &&
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) &&
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                         Panel_SashProfileArtNo == SashProfile_ArticleNo._395))
                     {
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("You've selected an incompatible item, be advised","Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else if (sel_handleType == Handle_Type._Rio || sel_handleType == Handle_Type._Rotoline || sel_handleType == Handle_Type._MVD)
                 {
-                    if (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
-                        Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
                     {
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("You've selected an incompatible item, be advised", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
