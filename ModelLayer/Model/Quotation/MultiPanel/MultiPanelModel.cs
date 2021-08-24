@@ -1745,8 +1745,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         }
         #endregion
 
-        #endregion
-
         public MultiPanelModel(int mpanelID,
                                string mpanelName,
                                int mpanelWd,
