@@ -170,6 +170,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,
                                            DividerType div_type,
+                                           bool if_divNxt_is_dummy_mullion,
+                                           bool if_divPrev_is_dummy_mullion,
                                            Divider_ArticleNo divArtNo_LeftorTop = null,
                                            Divider_ArticleNo divArtNo_RightorBot = null,
                                            string div_type_lvl3 = "",

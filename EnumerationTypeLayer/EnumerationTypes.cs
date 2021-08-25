@@ -30,6 +30,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly DividerReinf_ArticleNo _R677 = new DividerReinf_ArticleNo(0, "R677");
             public static readonly DividerReinf_ArticleNo _R686 = new DividerReinf_ArticleNo(1, "R686");
+            public static readonly DividerReinf_ArticleNo _None = new DividerReinf_ArticleNo(2, "None");
             private DividerReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -39,6 +40,14 @@ namespace EnumerationTypeLayer
             public static readonly DummyMullion_ArticleNo _385P = new DummyMullion_ArticleNo(1, "385P");
 
             private DummyMullion_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class EndcapDM_ArticleNo : Enumeration<EndcapDM_ArticleNo, int>
+        {
+            public static readonly EndcapDM_ArticleNo _K7533 = new EndcapDM_ArticleNo(0, "K7533");
+            public static readonly EndcapDM_ArticleNo _K385 = new EndcapDM_ArticleNo(1, "K385");
+
+            private EndcapDM_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class Divider_MechJointArticleNo : Enumeration<Divider_MechJointArticleNo, int>

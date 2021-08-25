@@ -1846,7 +1846,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_MotorizedMechQty = 2;
                 }
-                
+
                 if (Panel_Type.Contains("Awning"))
                 {
                     if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
@@ -2252,6 +2252,8 @@ namespace ModelLayer.Model.Quotation.Panel
         public void SetPanelExplosionValues_Panel(Divider_ArticleNo divNxt_artNo,
                                                   Divider_ArticleNo divPrev_artNo,
                                                   DividerType div_type,
+                                                  bool if_divNxt_is_dummy_mullion,
+                                                  bool if_divPrev_is_dummy_mullion,
                                                   Divider_ArticleNo divArtNo_LeftorTop = null,
                                                   Divider_ArticleNo divArtNo_RightorBot = null,
                                                   string div_type_lvl3 = "",
@@ -2511,7 +2513,18 @@ namespace ModelLayer.Model.Quotation.Panel
 
             if (Panel_SashPropertyVisibility == true)
             {
-                Panel_SashWidth = (Panel_DisplayWidth - deduction_for_sashWD) + 5;
+                int dm_deduct = 0;
+                if (if_divNxt_is_dummy_mullion)
+                {
+                    dm_deduct = 8;
+                }
+
+                if (if_divPrev_is_dummy_mullion)
+                {
+                    dm_deduct += 8;
+                }
+
+                Panel_SashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
                 Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
 
                 Panel_OriginalSashWidth = (Panel_DisplayWidth - deduction_for_sashWD) + 5;

@@ -289,6 +289,8 @@ namespace ModelLayer.Model.Quotation
                                         pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
                                                                                   divArtNo_prevCtrl,
                                                                                   div_nxtCtrl.Div_Type,
+                                                                                  div_nxtCtrl.Div_ChkDM,
+                                                                                  div_prevCtrl.Div_ChkDM,
                                                                                   divArtNo_LeftOrTop,
                                                                                   divArtNo_RightOrBot,
                                                                                   mpnl_Parent_lvl3_mpanelType,
@@ -309,13 +311,17 @@ namespace ModelLayer.Model.Quotation
                                                           divArtNo_RightOrBot = Divider_ArticleNo._None,
                                                           divArtNo_LeftOrTop_lvl3 = Divider_ArticleNo._None,
                                                           divArtNo_RightOrBot_lvl3 = Divider_ArticleNo._None;
+                                        bool divNxt_ifDM = false, divPrev_ifDM = false;
+
                                         if (div_nxtCtrl != null)
                                         {
                                             divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
+                                            divNxt_ifDM = div_nxtCtrl.Div_ChkDM;
                                         }
                                         if (div_prevCtrl != null)
                                         {
                                             divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
+                                            divPrev_ifDM = div_prevCtrl.Div_ChkDM;
                                         }
                                         if (divTopOrLeft != null)
                                         {
@@ -345,6 +351,8 @@ namespace ModelLayer.Model.Quotation
                                         pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
                                                                                   divArtNo_prevCtrl,
                                                                                   div_prevCtrl.Div_Type,
+                                                                                  divNxt_ifDM,
+                                                                                  divPrev_ifDM,
                                                                                   divArtNo_LeftOrTop,
                                                                                   divArtNo_RightOrBot,
                                                                                   mpnl_Parent_lvl3_mpanelType,
@@ -697,11 +705,31 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     if (div_nxtCtrl.Div_ChkDM == true)
                                     {
-                                        Material_List.Rows.Add("Dummy " + mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_DMArtNo.ToString(),
+                                        Material_List.Rows.Add("Dummy Mullion Height " + div_nxtCtrl.Div_DMArtNo.ToString(),
                                                                1, "pc(s)",
                                                                div_nxtCtrl.Div_ExplosionHeight.ToString(),
                                                                div_nxtCtrl.Div_Bounded,
                                                                @"[  ]");
+                                        Material_List.Rows.Add("Endcap for Dummy Mullion " + div_nxtCtrl.Div_EndcapDM.ToString(),
+                                                               2, "pc(s)",
+                                                               "",
+                                                               "Dummy Mullion");
+                                        Material_List.Rows.Add("Fixed cam " + div_nxtCtrl.Div_FixedCamDM.ToString(),
+                                                               2, "pc(s)",
+                                                               "",
+                                                               "Sash");
+                                        Material_List.Rows.Add("Snap and Keep " + div_nxtCtrl.Div_SnapNKeepDM.ToString(),
+                                                               2, "pc(s)",
+                                                               "",
+                                                               "Frame");
+                                        Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
+                                                               2, "pc(s)",
+                                                               "",
+                                                               "Dummy Mullion");
+                                        Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
+                                                               div_nxtCtrl.Div_AlumSpacer50Qty, "pc(s)",
+                                                               "",
+                                                               "Dummy Mullion");
                                     }
                                     else if (div_nxtCtrl.Div_ChkDM == false)
                                     {
@@ -799,13 +827,18 @@ namespace ModelLayer.Model.Quotation
                                                   divArtNo_RightOrBot = Divider_ArticleNo._None,
                                                   divArtNo_LeftOrTop_lvl3 = Divider_ArticleNo._None,
                                                   divArtNo_RightOrBot_lvl3 = Divider_ArticleNo._None;
+                                bool divNxt_ifDM = false,
+                                     divPrev_ifDM = false;
+
                                 if (div_nxtCtrl != null)
                                 {
                                     divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
+                                    divNxt_ifDM = div_nxtCtrl.Div_ChkDM;
                                 }
                                 if (div_prevCtrl != null)
                                 {
                                     divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
+                                    divPrev_ifDM = div_prevCtrl.Div_ChkDM;
                                 }
                                 if (divTopOrLeft != null)
                                 {
@@ -837,6 +870,8 @@ namespace ModelLayer.Model.Quotation
                                     pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
                                                                               divArtNo_prevCtrl,
                                                                               div_nxtCtrl.Div_Type,
+                                                                              divNxt_ifDM,
+                                                                              divPrev_ifDM,
                                                                               divArtNo_LeftOrTop,
                                                                               divArtNo_RightOrBot,
                                                                               mpnl_Parent_lvl3_mpanelType,
@@ -884,13 +919,18 @@ namespace ModelLayer.Model.Quotation
                                                   divArtNo_RightOrBot = Divider_ArticleNo._None,
                                                   divArtNo_LeftOrTop_lvl3 = Divider_ArticleNo._None,
                                                   divArtNo_RightOrBot_lvl3 = Divider_ArticleNo._None;
+                                bool divNxt_ifDM = false,
+                                    divPrev_ifDM = false;
+
                                 if (div_nxtCtrl != null)
                                 {
                                     divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
+                                    divNxt_ifDM = div_nxtCtrl.Div_ChkDM;
                                 }
                                 if (div_prevCtrl != null)
                                 {
                                     divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
+                                    divPrev_ifDM = div_prevCtrl.Div_ChkDM;
                                 }
                                 if (divTopOrLeft != null)
                                 {
@@ -921,6 +961,8 @@ namespace ModelLayer.Model.Quotation
                                     pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
                                                                               divArtNo_prevCtrl,
                                                                               div_prevCtrl.Div_Type,
+                                                                              divNxt_ifDM,
+                                                                              divPrev_ifDM,
                                                                               divArtNo_LeftOrTop,
                                                                               divArtNo_RightOrBot,
                                                                               mpnl_Parent_lvl3_mpanelType,

@@ -30,6 +30,10 @@ namespace ModelLayer.Model.Quotation.Divider
         bool Div_claddingBracketVisibility { get; set; }
 
         DummyMullion_ArticleNo Div_DMArtNo { get; set; }
+        int Div_AlumSpacer50Qty { get; set; }
+        EndcapDM_ArticleNo Div_EndcapDM { get; set; }
+        FixedCam_ArticleNo Div_FixedCamDM { get; set; }
+        SnapInKeep_ArticleNo Div_SnapNKeepDM { get; set; }
         bool Div_ChkDM { get; set; }
         bool Div_ChkDMVisibility { get; set; }
         bool Div_ArtVisibility { get; set; }

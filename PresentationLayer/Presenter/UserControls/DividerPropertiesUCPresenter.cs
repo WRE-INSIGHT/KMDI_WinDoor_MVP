@@ -67,6 +67,8 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (chk.Checked == true)
                 {
+                    _divModel.Div_ArtNo = Divider_ArticleNo._None;
+                    _divModel.Div_ReinfArtNo = DividerReinf_ArticleNo._None;
                     _divModel.AdjustPropertyPanelHeight("addDM");
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addDM");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addDM");
