@@ -563,6 +563,7 @@ namespace ModelLayer.Model.Quotation
 
                 if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
                 {
+                    #region MultiPanel Parent
                     foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
                     {
                         List<IPanelModel> panels = mpnl.MPanelLst_Panel;
@@ -752,26 +753,22 @@ namespace ModelLayer.Model.Quotation
                                         }
                                     }
 
-                                    if (div_nxtCtrl.Div_ExplosionHeight >= 2000)
+                                    foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
                                     {
-                                        foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
-                                        {
-                                            total_cladding_size += cladding_size;
+                                        total_cladding_size += cladding_size;
 
-                                            Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
-                                                                   1, "pc(s)",
-                                                                   cladding_size.ToString(),
-                                                                   mpnl.MPanel_Type,
-                                                                   @"|  |");
+                                        Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               cladding_size.ToString(),
+                                                               mpnl.MPanel_Type,
+                                                               @"|  |");
 
-                                            Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
-                                                                   1, "pc(s)",
-                                                                   cladding_size.ToString(),
-                                                                   "CPL",
-                                                                   @"|  |");
-                                        }
+                                        Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               cladding_size.ToString(),
+                                                               "CPL",
+                                                               @"|  |");
                                     }
-
                                 }
                                 else if (mpnl.MPanel_Type == "Transom")
                                 {
@@ -793,24 +790,21 @@ namespace ModelLayer.Model.Quotation
                                         screws_for_inst_where += ", Transom";
                                     }
 
-                                    if (div_nxtCtrl.Div_ExplosionWidth >= 2000)
+                                    foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
                                     {
-                                        foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
-                                        {
-                                            total_cladding_size += cladding_size;
+                                        total_cladding_size += cladding_size;
 
-                                            Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
-                                                                   1, "pc(s)",
-                                                                   cladding_size.ToString(),
-                                                                   mpnl.MPanel_Type,
-                                                                   @"|  |");
+                                        Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               cladding_size.ToString(),
+                                                               mpnl.MPanel_Type,
+                                                               @"|  |");
 
-                                            Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
-                                                                   1, "pc(s)",
-                                                                   cladding_size.ToString(),
-                                                                   "CPL",
-                                                                   @"|  |");
-                                        }
+                                        Material_List.Rows.Add("Cladding Reinforcement " + div_nxtCtrl.Div_CladdingReinfArtNo.ToString(),
+                                                               1, "pc(s)",
+                                                               cladding_size.ToString(),
+                                                               "CPL",
+                                                               @"|  |");
                                     }
                                 }
                                 Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
@@ -1189,11 +1183,26 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (pnl_curCtrl.Panel_Type.Contains("Casement"))
                                         {
-                                            Material_List.Rows.Add("Friction Stay " + pnl_curCtrl.Panel_FSCasementArtNo.ToString(),
-                                                                   1, "pair(s)",
-                                                                   "",
-                                                                   "Sash & Frame",
-                                                                   @"");
+                                            if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                                            {
+                                                if (pnl_curCtrl.Panel_HingeOptions == HingeOption._FrictionStay)
+                                                {
+                                                    Material_List.Rows.Add("Friction Stay " + pnl_curCtrl.Panel_FSCasementArtNo.ToString(),
+                                                                           1, "pair(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+
+                                                }
+                                                else if (pnl_curCtrl.Panel_HingeOptions == HingeOption._2DHinge)
+                                                {
+                                                    Material_List.Rows.Add("2D hinge " + pnl_curCtrl.Panel_2dHingeArtNo_nonMotorized.ToString(),
+                                                                           pnl_curCtrl.Panel_2DHingeQty_nonMotorized, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+                                                }
+                                            }
 
                                             if (pnl_curCtrl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._485770)
                                             {
@@ -1594,9 +1603,12 @@ namespace ModelLayer.Model.Quotation
                             }
                         }
                     }
+                    #endregion
                 }
                 else if (frame.Lst_Panel.Count() == 1 && frame.Lst_MultiPanel.Count() == 0)
                 {
+                    #region Frame Parent
+
                     IPanelModel pnl = frame.Lst_Panel[0];
                     pnl.SetPanelExplosionValues_Panel(true);
 
@@ -1769,11 +1781,26 @@ namespace ModelLayer.Model.Quotation
                             }
                             else if (pnl.Panel_Type.Contains("Casement"))
                             {
-                                Material_List.Rows.Add("Friction Stay " + pnl.Panel_FSCasementArtNo.ToString(),
-                                                       1, "pair(s)",
-                                                       "",
-                                                       "Sash & Frame",
-                                                       @"");
+                                if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                                {
+                                    if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
+                                    {
+                                        Material_List.Rows.Add("Friction Stay " + pnl.Panel_FSCasementArtNo.ToString(),
+                                                               1, "pair(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
+                                    }
+                                    else if (pnl.Panel_HingeOptions == HingeOption._2DHinge)
+                                    {
+                                        Material_List.Rows.Add("2D hinge " + pnl.Panel_2dHingeArtNo_nonMotorized.ToString(),
+                                                               pnl.Panel_2DHingeQty_nonMotorized, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+                                    }
+                                }
 
                                 if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._485770)
                                 {
@@ -2136,6 +2163,7 @@ namespace ModelLayer.Model.Quotation
                         glazing_seal += (pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2);
                     }
                 }
+                #endregion
 
                 exp_bolt += (int)Math.Ceiling((decimal)((frame.Frame_Width * 2) + (frame.Frame_Height * 2)) / 700);
             }

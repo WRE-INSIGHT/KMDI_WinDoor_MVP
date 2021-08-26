@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Variables;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -347,6 +348,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public IMultiPanelModel Div_MPanelParent { get; set; }
         public IFrameModel Div_FrameParent { get; set; }
+        public IPanelModel Div_DMPanel { get; set; }
 
         #region Explosion
 
@@ -480,11 +482,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
                         }
 
-                        if (Div_ExplosionHeight >= 2000)
-                        {
-                            Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
-                            Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                        }
+                        Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+                        Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
                     }
                 }
                 else if (Div_Type == DividerType.Transom)
@@ -507,11 +506,8 @@ namespace ModelLayer.Model.Quotation.Divider
                         Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
                     }
 
-                    if (Div_ExplosionWidth >= 2000)
-                    {
-                        Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
-                        Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                    }
+                    Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+                    Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
                 }
             }
             else if (Div_MPanelParent.MPanel_Parent.Name.Contains("Multi"))
@@ -627,11 +623,8 @@ namespace ModelLayer.Model.Quotation.Divider
                                 Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
                             }
 
-                            if (Div_ExplosionHeight >= 2000)
-                            {
-                                Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
-                                Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                            }
+                            Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+                            Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
                         }
                     }
                 }
@@ -729,11 +722,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
                         }
 
-                        if (Div_ExplosionWidth >= 2000)
-                        {
-                            Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
-                            Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
-                        }
+                        Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+                        Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
                     }
                 }
             }
@@ -749,6 +739,14 @@ namespace ModelLayer.Model.Quotation.Divider
             else if (mode == "minusCladding")
             {
                 Div_PropHeight -= constants.div_property_claddingOptionsHeight;
+            }
+            else if (mode == "addPanelAddCladding")
+            {
+                Div_PropHeight += constants.div_property_pnlAddcladdingOptionsHeight;
+            }
+            else if (mode == "minusPanelAddCladding")
+            {
+                Div_PropHeight -= constants.div_property_pnlAddcladdingOptionsHeight;
             }
             else if (mode == "addDivArt")
             {

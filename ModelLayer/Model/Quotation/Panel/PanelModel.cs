@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Variables;
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -559,6 +560,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private Color _panelBackColor;
+        public Color Panel_BackColor
+        {
+            get
+            {
+                return _panelBackColor;
+            }
+            set
+            {
+                _panelBackColor = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #region Explosion
 
         private int _panelGlassID;
@@ -905,8 +920,10 @@ namespace ModelLayer.Model.Quotation.Panel
         public _30x25Cover_ArticleNo Panel_30x25CoverArtNo { get; set; }
         public MotorizedDivider_ArticleNo Panel_MotorizedDividerArtNo { get; set; }
         public CoverForMotor_ArticleNo Panel_CoverForMotorArtNo { get; set; }
-        public _2DHinge_ArticleNo Panel_2dHingeArtNo { get; set; }
-        public int Panel_2DHingeQty { get; set; }
+        public _2DHinge_ArticleNo Panel_2dHingeArtNo { get; set; } //motorized purposes
+        public int Panel_2DHingeQty { get; set; } //motorized purposes
+        public _2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized { get; set; }
+        public int Panel_2DHingeQty_nonMotorized { get; set; }
         public PushButtonSwitch_ArticleNo Panel_PushButtonSwitchArtNo { get; set; }
         public FalsePole_ArticleNo Panel_FalsePoleArtNo { get; set; }
         public SupportingFrame_ArticleNo Panel_SupportingFrameArtNo { get; set; }
@@ -1801,6 +1818,20 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_FalsePoleArtNo = FalsePole_ArticleNo._N4950;
                     Panel_SupportingFrameArtNo = SupportingFrame_ArticleNo._N4703;
                     Panel_PlateArtNo = Plate_ArticleNo._N4803LB;
+                }
+
+                if (Panel_HingeOptions == HingeOption._2DHinge)
+                {
+                    Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
+
+                    if (Panel_SashHeight <= 1499)
+                    {
+                        Panel_2DHingeQty_nonMotorized = 3;
+                    }
+                    else if (Panel_SashHeight >= 1500)
+                    {
+                        Panel_2DHingeQty_nonMotorized = 4;
+                    }
                 }
 
                 if (base_color == Base_Color._DarkBrown)
@@ -3013,7 +3044,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           GeorgianBar_ArticleNo panelGeorgianBarArtNo,
                           int panelGeorgianBarVerticalQty,
                           int panelGeorgianBarHorizontalQty,
-                          bool panelGeorgianBarOptionVisibility)
+                          bool panelGeorgianBarOptionVisibility,
+                          HingeOption panelHingeOptions)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -3075,6 +3107,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GeorgianBar_VerticalQty = panelGeorgianBarVerticalQty;
             Panel_GeorgianBar_HorizontalQty = panelGeorgianBarHorizontalQty;
             Panel_GeorgianBarOptionVisibility = panelGeorgianBarOptionVisibility;
+            Panel_HingeOptions = panelHingeOptions;
+            Panel_BackColor = Color.DarkGray;
 
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;

@@ -11,6 +11,7 @@ using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
+using EnumerationTypeLayer;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -60,12 +61,29 @@ namespace PresentationLayer.Views.UserControls
                 }
             }
         }
+
+        private SashProfile_ArticleNo _panelSashProfileArtNo;
+        public SashProfile_ArticleNo Panel_SashProfileArtNo
+        {
+            get
+            {
+                return _panelSashProfileArtNo;
+            }
+
+            set
+            {
+                _panelSashProfileArtNo = value;
+                cmb_DMArtNo.Refresh();
+            }
+        }
+
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
         public event EventHandler btnAddCladdingClickedEventRaised;
         public event EventHandler btnSaveCladdingClickedEventRaised;
         public event EventHandler chkDMCheckedChangedEventRaised;
         public event EventHandler cmbDMArtNoSelectedValueChangedEventRaised;
+        public event EventHandler btnSelectDMPanelClickedEventRaised;
 
         private void DividerPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -144,6 +162,7 @@ namespace PresentationLayer.Views.UserControls
             pnl_DMArtNo.DataBindings.Add(ModelBinding["Div_ChkDM2"]);
             pnl_divArtNo.DataBindings.Add(ModelBinding["Div_ArtVisibility"]);
             cmb_DMArtNo.DataBindings.Add(ModelBinding["Div_DMArtNo"]);
+            //this.DataBindings.Add(ModelBinding["Panel_SashProfileArtNo"]);
         }
 
         public void SetBtnSaveBackColor(Color color)
@@ -154,6 +173,11 @@ namespace PresentationLayer.Views.UserControls
         private void cmb_DMArtNo_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbDMArtNoSelectedValueChangedEventRaised, e);
+        }
+
+        private void btn_SelectDMPanel_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnSelectDMPanelClickedEventRaised, e);
         }
     }
 }

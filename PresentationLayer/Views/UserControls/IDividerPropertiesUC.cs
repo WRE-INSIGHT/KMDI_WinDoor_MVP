@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.Divider;
 using CommonComponents;
 using System.Windows.Forms;
 using System.Drawing;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -10,6 +11,7 @@ namespace PresentationLayer.Views.UserControls
     {
         int Div_ID { get; set; }
         DividerModel.DividerType Divider_Type { get;  set; }
+        SashProfile_ArticleNo Panel_SashProfileArtNo { get; set; }
 
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
@@ -17,6 +19,7 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler btnSaveCladdingClickedEventRaised;
         event EventHandler chkDMCheckedChangedEventRaised;
         event EventHandler cmbDMArtNoSelectedValueChangedEventRaised;
+        event EventHandler btnSelectDMPanelClickedEventRaised;
 
         Panel GetDividerPropertiesBodyPNL();
         void SetBtnSaveBackColor(Color color);

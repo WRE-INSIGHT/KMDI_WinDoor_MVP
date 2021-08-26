@@ -72,6 +72,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Placement"]);
+            this.DataBindings.Add(ModelBinding["Panel_BackColor"]);
         }
 
         private void CasementPanelUC_Paint(object sender, PaintEventArgs e)

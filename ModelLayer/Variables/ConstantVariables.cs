@@ -42,7 +42,7 @@
         public int div_property_claddingBracketOptionsHeight = 72;
         public int div_property_pnlAddcladdingOptionsHeight = 28;
         public int div_property_divArtOptionsHeight = 90;
-        public int div_property_DMArtOptionsHeight = 28;
+        public int div_property_DMArtOptionsHeight = 56;
 
         #endregion
 

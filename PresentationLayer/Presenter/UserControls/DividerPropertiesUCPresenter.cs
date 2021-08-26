@@ -13,6 +13,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
 using PresentationLayer.Views.UserControls.DividerProperties_Modules;
 using System.Drawing;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -47,6 +48,25 @@ namespace PresentationLayer.Presenter.UserControls
             _divProperties.btnSaveCladdingClickedEventRaised += _divProperties_btnSaveCladdingClickedEventRaised;
             _divProperties.chkDMCheckedChangedEventRaised += _divProperties_chkDMCheckedChangedEventRaised;
             _divProperties.cmbDMArtNoSelectedValueChangedEventRaised += _divProperties_cmbDMArtNoSelectedValueChangedEventRaised;
+            _divProperties.btnSelectDMPanelClickedEventRaised += _divProperties_btnSelectDMPanelClickedEventRaised;
+        }
+
+        private void _divProperties_btnSelectDMPanelClickedEventRaised(object sender, EventArgs e)
+        {
+            List<Control> lst_obj = _divModel.Div_MPanelParent.MPanelLst_Objects;
+            Control div = lst_obj.Find(obj => obj.Name == _divModel.Div_Name);
+            int ndx = lst_obj.IndexOf(div);
+            string prev_pnl_str = lst_obj[ndx - 1].Name;
+            IPanelModel prev_pnl = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(prev => prev.Panel_Name == prev_pnl_str);
+            prev_pnl.Panel_BackColor = SystemColors.Highlight;
+
+            string nxt_pnl_str = "";
+            if (lst_obj.Count() >= ndx + 1)
+            {
+                nxt_pnl_str = _divModel.Div_MPanelParent.MPanelLst_Objects[ndx + 1].Name;
+                IPanelModel nxt_pnl = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(prev => prev.Panel_Name == nxt_pnl_str);
+                nxt_pnl.Panel_BackColor = SystemColors.Highlight;
+            }
         }
 
         private void _divProperties_cmbDMArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -76,6 +96,10 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.AdjustPropertyPanelHeight("minusDivArt");
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusDivArt");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusDivArt");
+
+                    _divModel.AdjustPropertyPanelHeight("minusPanelAddCladding");
+                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
                 }
                 else if (chk.Checked == false)
                 {
@@ -86,6 +110,10 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.AdjustPropertyPanelHeight("minusDM");
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusDM");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusDM");
+
+                    _divModel.AdjustPropertyPanelHeight("addPanelAddCladding");
+                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
                 }
             }
         }

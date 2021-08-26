@@ -50,6 +50,8 @@
             this.chk_DM = new System.Windows.Forms.CheckBox();
             this.pnl_divWd = new System.Windows.Forms.Panel();
             this.pnl_divHt = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btn_SelectDMPanel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).BeginInit();
             this.pnl_divArtNo.SuspendLayout();
@@ -184,7 +186,7 @@
             this.pnl_dividerBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_dividerBody.Location = new System.Drawing.Point(0, 108);
             this.pnl_dividerBody.Name = "pnl_dividerBody";
-            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 148);
+            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 176);
             this.pnl_dividerBody.TabIndex = 13;
             // 
             // pnl_AddCladding
@@ -192,7 +194,7 @@
             this.pnl_AddCladding.Controls.Add(this.btn_Save);
             this.pnl_AddCladding.Controls.Add(this.btn_AddCladding);
             this.pnl_AddCladding.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_AddCladding.Location = new System.Drawing.Point(0, 118);
+            this.pnl_AddCladding.Location = new System.Drawing.Point(0, 146);
             this.pnl_AddCladding.Name = "pnl_AddCladding";
             this.pnl_AddCladding.Size = new System.Drawing.Size(158, 28);
             this.pnl_AddCladding.TabIndex = 13;
@@ -227,12 +229,14 @@
             // pnl_DMArtNo
             // 
             this.pnl_DMArtNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_DMArtNo.Controls.Add(this.label2);
             this.pnl_DMArtNo.Controls.Add(this.cmb_DMArtNo);
             this.pnl_DMArtNo.Controls.Add(this.label1);
+            this.pnl_DMArtNo.Controls.Add(this.btn_SelectDMPanel);
             this.pnl_DMArtNo.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_DMArtNo.Location = new System.Drawing.Point(0, 90);
             this.pnl_DMArtNo.Name = "pnl_DMArtNo";
-            this.pnl_DMArtNo.Size = new System.Drawing.Size(158, 28);
+            this.pnl_DMArtNo.Size = new System.Drawing.Size(158, 56);
             this.pnl_DMArtNo.TabIndex = 14;
             // 
             // cmb_DMArtNo
@@ -241,16 +245,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_DMArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_DMArtNo.FormattingEnabled = true;
-            this.cmb_DMArtNo.Items.AddRange(new object[] {
-            "6-8mm",
-            "10mm",
-            "10.76-14mm",
-            "16mm",
-            "18mm",
-            "20mm",
-            "22mm",
-            "25mm"});
-            this.cmb_DMArtNo.Location = new System.Drawing.Point(71, 3);
+            this.cmb_DMArtNo.Location = new System.Drawing.Point(71, 29);
             this.cmb_DMArtNo.Name = "cmb_DMArtNo";
             this.cmb_DMArtNo.Size = new System.Drawing.Size(85, 21);
             this.cmb_DMArtNo.TabIndex = 11;
@@ -260,7 +255,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 6);
+            this.label1.Location = new System.Drawing.Point(4, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 10;
@@ -312,6 +307,31 @@
             this.pnl_divHt.Size = new System.Drawing.Size(160, 40);
             this.pnl_divHt.TabIndex = 16;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(4, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "DM Panel";
+            // 
+            // btn_SelectDMPanel
+            // 
+            this.btn_SelectDMPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_SelectDMPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_SelectDMPanel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_SelectDMPanel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_SelectDMPanel.Location = new System.Drawing.Point(71, 2);
+            this.btn_SelectDMPanel.Name = "btn_SelectDMPanel";
+            this.btn_SelectDMPanel.Size = new System.Drawing.Size(85, 23);
+            this.btn_SelectDMPanel.TabIndex = 14;
+            this.btn_SelectDMPanel.Text = "Select Panel";
+            this.btn_SelectDMPanel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_SelectDMPanel.UseVisualStyleBackColor = false;
+            this.btn_SelectDMPanel.Click += new System.EventHandler(this.btn_SelectDMPanel_Click);
+            // 
             // DividerPropertiesUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -324,7 +344,7 @@
             this.Controls.Add(this.pnl_divName);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "DividerPropertiesUC";
-            this.Size = new System.Drawing.Size(160, 256);
+            this.Size = new System.Drawing.Size(160, 284);
             this.Load += new System.EventHandler(this.DividerPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).EndInit();
@@ -366,5 +386,7 @@
         private System.Windows.Forms.Panel pnl_DMArtNo;
         private System.Windows.Forms.ComboBox cmb_DMArtNo;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_SelectDMPanel;
     }
 }

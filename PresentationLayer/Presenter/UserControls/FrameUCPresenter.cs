@@ -281,7 +281,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            GlazingBead_ArticleNo._2452,
                                                            GlassFilm_Types._None,
                                                            SashProfile_ArticleNo._7581,
-                                                           SashReinf_ArticleNo._None,
+                                                           SashReinf_ArticleNo._R675,
                                                            GlassType._Single,
                                                            Espagnolette_ArticleNo._None,
                                                            Striker_ArticleNo._M89ANTA,

@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -39,7 +40,7 @@ namespace ModelLayer.Model.Quotation.Divider
         bool Div_ArtVisibility { get; set; }
         IMultiPanelModel Div_MPanelParent { get; set; }
         IFrameModel Div_FrameParent { get; set; }
-
+        IPanelModel Div_DMPanel { get; set; }
         #region Explosion
 
         Divider_ArticleNo Div_ArtNo { get; set; }

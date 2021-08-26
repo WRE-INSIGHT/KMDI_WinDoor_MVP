@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using System.Drawing;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
@@ -47,6 +48,8 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_MVDOptionsVisibility { get; set; }
         bool Panel_RotaryOptionsVisibility { get; set; }
         int Panel_HandleOptionsHeight { get; set; }
+        Color Panel_BackColor { get; set; }
+
         #region Explosion
 
         int PanelGlass_ID { get; set; }
@@ -146,6 +149,8 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_MotorizedMechQty { get; set; }
         int Panel_MotorizedMechSetQty { get; set; }
         int Panel_2DHingeQty { get; set; }
+        _2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized { get; set; }
+        int Panel_2DHingeQty_nonMotorized { get; set; }
         int Panel_ExtensionPropertyHeight { get; set; }
         GeorgianBar_ArticleNo Panel_GeorgianBarArtNo { get; set; }
         int Panel_GeorgianBar_VerticalQty { get; set; }

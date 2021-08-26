@@ -10,6 +10,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using static EnumerationTypeLayer.EnumerationTypes;
+using System.Drawing;
 
 namespace ServiceLayer.Services.PanelServices
 {
@@ -78,7 +79,8 @@ namespace ServiceLayer.Services.PanelServices
                                             GeorgianBar_ArticleNo panelGeorgianBarArtNo,
                                             int panelGeorgianBarVerticalQty,
                                             int panelGeorgianBarHorizontalQty,
-                                            bool panelGeorgianBarOptionVisibility)
+                                            bool panelGeorgianBarOptionVisibility,
+                                            HingeOption panelHingeOptions)
         {
             IPanelModel pnl = new PanelModel(panelID,
                                              panelName,
@@ -135,7 +137,8 @@ namespace ServiceLayer.Services.PanelServices
                                              panelGeorgianBarArtNo,
                                              panelGeorgianBarVerticalQty,
                                              panelGeorgianBarHorizontalQty,
-                                             panelGeorgianBarOptionVisibility);
+                                             panelGeorgianBarOptionVisibility,
+                                             panelHingeOptions);
 
             ValidateModel(pnl);
             return pnl;
@@ -201,11 +204,17 @@ namespace ServiceLayer.Services.PanelServices
                                          int panelIndexInsideMPanel = 0,
                                          DockStyle panelDock = DockStyle.Fill,
                                          string panelName = "",
-                                         bool panelOrient = false)
+                                         bool panelOrient = false,
+                                         HingeOption panelHingeOptions = null)
         {
             if (panelName == "")
             {
                 panelName = panelType.Replace(" Panel", "") + "PanelUC_" + panelID;
+            }
+
+            if (panelHingeOptions == null)
+            {
+                panelHingeOptions = HingeOption._FrictionStay;
             }
 
             IPanelModel _panelModel = CreatePanelModel(panelID,
@@ -263,7 +272,8 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelGeorgianBarArtNo,
                                                        panelGeorgianBarVerticalQty,
                                                        panelGeorgianBarHorizontalQty,
-                                                       panelGeorgianBarOptionVisibility);
+                                                       panelGeorgianBarOptionVisibility,
+                                                       panelHingeOptions);
 
             return _panelModel;
         }
