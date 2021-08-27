@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.Presenter.UserControls;
@@ -15,6 +16,10 @@ namespace PresentationLayer.Presenter
 {
     public interface IMainPresenter
     {
+        Control ControlRaised_forDMSelection { get; }
+        IDividerModel DivModel_forDMSelection { get; }
+        IPanelModel PrevPnlModel_forDMSelection { get; }
+        IPanelModel NxtPnlModel_forDMSelection { get; }
         DataTable GlassThicknessDT { get; set; }
         DataTable GlassTypeDT { get; set; }
         DataTable GlassColorDT { get; set; }
@@ -41,6 +46,11 @@ namespace PresentationLayer.Presenter
         IMainView GetMainView();
         IFramePropertiesUC GetFrameProperties(int frameID);
 
+        void SetLblStatus(string status, bool visibility, 
+                          Control controlRaised = null, 
+                          IDividerModel divModel = null,
+                          IPanelModel prev_pnl = null,
+                          IPanelModel nxt_pnl = null);
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);
         void AddWndrList_QuotationModel(IWindoorModel wndr);

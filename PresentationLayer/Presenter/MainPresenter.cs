@@ -84,6 +84,15 @@ namespace PresentationLayer.Presenter
         private DataTable _spacerDT = new DataTable();
         private DataTable _colorDT = new DataTable();
 
+        private ToolStripLabel _tsLblStatus;
+        private ToolStrip _tsMain;
+        private MenuStrip _msMainMenu;
+
+        private Control _controlRaised_forDMSelection;
+        private IDividerModel _divModel_forDMSelection;
+        private IPanelModel _prevPanelModel_forDMSelection;
+        private IPanelModel _nxtPanelModel_forDMSelection;
+
         #endregion
 
         #region GetSet
@@ -352,6 +361,38 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public IDividerModel DivModel_forDMSelection
+        {
+            get
+            {
+                return _divModel_forDMSelection;
+            }
+        }
+
+        public IPanelModel PrevPnlModel_forDMSelection
+        {
+            get
+            {
+                return _prevPanelModel_forDMSelection;
+            }
+        }
+
+        public IPanelModel NxtPnlModel_forDMSelection
+        {
+            get
+            {
+                return _nxtPanelModel_forDMSelection;
+            }
+        }
+
+        public Control ControlRaised_forDMSelection
+        {
+            get
+            {
+                return _controlRaised_forDMSelection;
+            }
+        }
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -404,6 +445,39 @@ namespace PresentationLayer.Presenter
             return _mainView;
         }
 
+        public void SetLblStatus(string status, 
+                                 bool visibility, 
+                                 Control controlRaised = null, 
+                                 IDividerModel divModel = null,
+                                 IPanelModel prev_pnl = null, //selected panelModel / prevPanel
+                                 IPanelModel nxt_pnl = null)
+        {
+            _tsLblStatus.Visible = visibility;
+
+            if (status == "DMSelect")
+            {
+                _tsLblStatus.Text = "Select one of the highlighted panel";
+                _controlRaised_forDMSelection = controlRaised;
+                _pnlControlSub.Enabled = false;
+                _msMainMenu.Enabled = false;
+                _pnlPropertiesBody.Enabled = false;
+                _tsMain.Enabled = false;
+                _divModel_forDMSelection = divModel;
+                _prevPanelModel_forDMSelection = prev_pnl;
+                _nxtPanelModel_forDMSelection = nxt_pnl;
+            }
+            else if (status == "DMDeselect")
+            {
+                _tsLblStatus.Text = "";
+                _pnlControlSub.Enabled = true;
+                _msMainMenu.Enabled = true;
+                _pnlPropertiesBody.Enabled = true;
+                _tsMain.Enabled = true;
+                _controlRaised_forDMSelection.Text = "P" + prev_pnl.PanelGlass_ID;
+                _controlRaised_forDMSelection.BackColor = System.Drawing.Color.PaleGreen;
+            }
+        }
+
         public void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC)
         {
             _userModel = userModel;
@@ -412,6 +486,10 @@ namespace PresentationLayer.Presenter
             _pnlItems = _mainView.GetPanelItems();
             _pnlPropertiesBody = _mainView.GetPanelPropertiesBody();
             _pnlControlSub = _mainView.GetPanelControlSub();
+            _tsLblStatus = _mainView.GetLblSelectedDivider();
+            _tsMain = _mainView.GetTSMain();
+            _msMainMenu = _mainView.GetMNSMainMenu();
+
             _unityC = unityC;
         }
         private void SubscribeToEventsSetup()
@@ -1262,8 +1340,8 @@ namespace PresentationLayer.Presenter
                                        ITransomUCPresenter transomUCP = null,
                                        IMullionUCPresenter mullionUCP = null)
         {
-            _mainView.GetLblSelectedDivider().Visible = true;
-            _mainView.GetLblSelectedDivider().Text = divModel.Div_Name + " Selected";
+            _tsLblStatus.Visible = true;
+            _tsLblStatus.Text = divModel.Div_Name + " Selected";
             if (transomUCP != null)
             {
                 if (current_transom != null)

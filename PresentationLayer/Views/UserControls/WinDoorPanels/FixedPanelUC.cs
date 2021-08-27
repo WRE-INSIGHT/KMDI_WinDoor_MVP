@@ -73,6 +73,14 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        public Color Panel_BackColor
+        {
+            get
+            {
+                return this.BackColor;
+            }
+        }
+
         public event EventHandler deleteToolStripClickedEventRaised;
         public event PaintEventHandler fixedPanelUCPaintEventRaised;
         public event EventHandler fixedPanelMouseEnterEventRaised;

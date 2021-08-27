@@ -37,6 +37,8 @@ namespace PresentationLayer.Views
         Panel GetPanelBot();
         Panel GetPanelControlSub();
         Label GetLblSize();
+        MenuStrip GetMNSMainMenu();
+        ToolStrip GetTSMain();
         ToolStripLabel GetLblSelectedDivider();
         ToolStripMenuItem Glass_Single { get; }
         ToolStripMenuItem Glass_DoubleInsulated { get; }

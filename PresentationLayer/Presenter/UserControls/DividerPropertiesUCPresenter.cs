@@ -28,6 +28,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IDP_CladdingPropertyUCPresenter _dp_claddingPropertyUCP;
 
         private Panel _divPropertiesBodyPNL;
+        private Button _btnSelectDMPanel;
 
         bool _initialLoad = true;
 
@@ -37,6 +38,7 @@ namespace PresentationLayer.Presenter.UserControls
             _divProperties = divProperties;
             _dp_claddingPropertyUCP = dp_claddingPropertyUCP;
             _divPropertiesBodyPNL = _divProperties.GetDividerPropertiesBodyPNL();
+            _btnSelectDMPanel = _divProperties.GetBtnSelectDMPanel();
             SubscribeToEventsSetup();
         }
 
@@ -55,18 +57,22 @@ namespace PresentationLayer.Presenter.UserControls
         {
             List<Control> lst_obj = _divModel.Div_MPanelParent.MPanelLst_Objects;
             Control div = lst_obj.Find(obj => obj.Name == _divModel.Div_Name);
+            IPanelModel prev_pnl = null, nxt_pnl =  null;
             int ndx = lst_obj.IndexOf(div);
             string prev_pnl_str = lst_obj[ndx - 1].Name;
-            IPanelModel prev_pnl = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(prev => prev.Panel_Name == prev_pnl_str);
+
+            prev_pnl = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(prev => prev.Panel_Name == prev_pnl_str);
             prev_pnl.Panel_BackColor = SystemColors.Highlight;
 
             string nxt_pnl_str = "";
             if (lst_obj.Count() >= ndx + 1)
             {
                 nxt_pnl_str = _divModel.Div_MPanelParent.MPanelLst_Objects[ndx + 1].Name;
-                IPanelModel nxt_pnl = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(prev => prev.Panel_Name == nxt_pnl_str);
+                nxt_pnl = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(prev => prev.Panel_Name == nxt_pnl_str);
                 nxt_pnl.Panel_BackColor = SystemColors.Highlight;
             }
+
+            _mainPresenter.SetLblStatus("DMSelect", true, (Control)sender, _divModel, prev_pnl, nxt_pnl);
         }
 
         private void _divProperties_cmbDMArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -114,6 +120,10 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.AdjustPropertyPanelHeight("addPanelAddCladding");
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+
+                    _divModel.Div_DMPanel = null;
+                    _btnSelectDMPanel.Text = "Select";
+                    _btnSelectDMPanel.BackColor = SystemColors.Control;
                 }
             }
         }

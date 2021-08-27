@@ -179,5 +179,10 @@ namespace PresentationLayer.Views.UserControls
         {
             EventHelpers.RaiseEvent(sender, btnSelectDMPanelClickedEventRaised, e);
         }
+
+        public Button GetBtnSelectDMPanel()
+        {
+            return btn_SelectDMPanel;
+        }
     }
 }

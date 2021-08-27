@@ -44,14 +44,14 @@
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_AddCladding = new System.Windows.Forms.Button();
             this.pnl_DMArtNo = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.cmb_DMArtNo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btn_SelectDMPanel = new System.Windows.Forms.Button();
             this.pnl_divName = new System.Windows.Forms.Panel();
             this.chk_DM = new System.Windows.Forms.CheckBox();
             this.pnl_divWd = new System.Windows.Forms.Panel();
             this.pnl_divHt = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btn_SelectDMPanel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).BeginInit();
             this.pnl_divArtNo.SuspendLayout();
@@ -239,6 +239,16 @@
             this.pnl_DMArtNo.Size = new System.Drawing.Size(158, 56);
             this.pnl_DMArtNo.TabIndex = 14;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(4, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "DM Panel";
+            // 
             // cmb_DMArtNo
             // 
             this.cmb_DMArtNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -260,6 +270,21 @@
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "DM Art No";
+            // 
+            // btn_SelectDMPanel
+            // 
+            this.btn_SelectDMPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_SelectDMPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_SelectDMPanel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_SelectDMPanel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_SelectDMPanel.Location = new System.Drawing.Point(71, 2);
+            this.btn_SelectDMPanel.Name = "btn_SelectDMPanel";
+            this.btn_SelectDMPanel.Size = new System.Drawing.Size(85, 23);
+            this.btn_SelectDMPanel.TabIndex = 14;
+            this.btn_SelectDMPanel.Text = "Select Panel";
+            this.btn_SelectDMPanel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_SelectDMPanel.UseVisualStyleBackColor = false;
+            this.btn_SelectDMPanel.Click += new System.EventHandler(this.btn_SelectDMPanel_Click);
             // 
             // pnl_divName
             // 
@@ -306,31 +331,6 @@
             this.pnl_divHt.Name = "pnl_divHt";
             this.pnl_divHt.Size = new System.Drawing.Size(160, 40);
             this.pnl_divHt.TabIndex = 16;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(4, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "DM Panel";
-            // 
-            // btn_SelectDMPanel
-            // 
-            this.btn_SelectDMPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_SelectDMPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_SelectDMPanel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_SelectDMPanel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_SelectDMPanel.Location = new System.Drawing.Point(71, 2);
-            this.btn_SelectDMPanel.Name = "btn_SelectDMPanel";
-            this.btn_SelectDMPanel.Size = new System.Drawing.Size(85, 23);
-            this.btn_SelectDMPanel.TabIndex = 14;
-            this.btn_SelectDMPanel.Text = "Select Panel";
-            this.btn_SelectDMPanel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_SelectDMPanel.UseVisualStyleBackColor = false;
-            this.btn_SelectDMPanel.Click += new System.EventHandler(this.btn_SelectDMPanel_Click);
             // 
             // DividerPropertiesUC
             // 

@@ -11,5 +11,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler casementPanelUCMouseLeaveEventRaised;
         event EventHandler deleteToolStripClickedEventRaised;
         event PaintEventHandler casementPanelUCPaintEventRaised;
+        event MouseEventHandler casementPanelUCMouseClickEventRaised;
     }
 }

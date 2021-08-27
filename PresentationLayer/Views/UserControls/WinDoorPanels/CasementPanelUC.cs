@@ -50,6 +50,14 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        public Color Panel_BackColor
+        {
+            get
+            {
+                return this.BackColor;
+            }
+        }
+
         public CasementPanelUC()
         {
             InitializeComponent();
@@ -60,6 +68,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler casementPanelUCMouseEnterEventRaised;
         public event EventHandler casementPanelUCMouseLeaveEventRaised;
         public event EventHandler deleteToolStripClickedEventRaised;
+        public event MouseEventHandler casementPanelUCMouseClickEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -105,6 +114,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             if (e.Button == MouseButtons.Right)
             {
                 cmenu_casement.Show(new Point(MousePosition.X, MousePosition.Y));
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                EventHelpers.RaiseMouseEvent(sender, casementPanelUCMouseClickEventRaised, e);
             }
         }
 

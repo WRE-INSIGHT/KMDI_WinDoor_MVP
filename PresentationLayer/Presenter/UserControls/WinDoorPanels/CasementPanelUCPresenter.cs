@@ -75,7 +75,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _casementUC.casementPanelUCMouseEnterEventRaised += new EventHandler(OnCasementPanelUCMouseEnterEventRaised);
             _casementUC.casementPanelUCMouseLeaveEventRaised += new EventHandler(OnCasementPanelUCMouseLeaveEventRaised);
             _casementUC.deleteToolStripClickedEventRaised += new EventHandler(OnDeleteToolStripClickedEventRaised);
+            _casementUC.casementPanelUCMouseClickEventRaised += _casementUC_casementPanelUCMouseClickEventRaised;
             _tmr.Tick += _tmr_Tick;
+        }
+
+        private void _casementUC_casementPanelUCMouseClickEventRaised(object sender, MouseEventArgs e)
+        {
+            if (_panelModel.Panel_BackColor == SystemColors.Highlight)
+            {
+                _mainPresenter.DivModel_forDMSelection.Div_DMPanel = _panelModel;
+                _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                _mainPresenter.SetLblStatus("DMDeselect", false, null, null, _panelModel);
+            }
         }
 
         int _timer_count;

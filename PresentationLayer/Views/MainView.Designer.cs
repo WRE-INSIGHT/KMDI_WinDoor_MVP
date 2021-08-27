@@ -76,7 +76,7 @@
             this.deleteItemToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tsp_Sync = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
-            this.tsLbl_SelectedDivider = new System.Windows.Forms.ToolStripLabel();
+            this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.pnlItems = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -401,7 +401,7 @@
             this.deleteItemToolStripButton1,
             this.tsp_Sync,
             this.tsLbl_Loading,
-            this.tsLbl_SelectedDivider});
+            this.tsLbl_Status});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -545,14 +545,14 @@
             this.tsLbl_Loading.Text = "Initializing";
             this.tsLbl_Loading.Visible = false;
             // 
-            // tsLbl_SelectedDivider
+            // tsLbl_Status
             // 
-            this.tsLbl_SelectedDivider.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsLbl_SelectedDivider.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.tsLbl_SelectedDivider.Name = "tsLbl_SelectedDivider";
-            this.tsLbl_SelectedDivider.Size = new System.Drawing.Size(134, 29);
-            this.tsLbl_SelectedDivider.Text = "TransomUC_1 Selected";
-            this.tsLbl_SelectedDivider.Visible = false;
+            this.tsLbl_Status.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsLbl_Status.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tsLbl_Status.Name = "tsLbl_Status";
+            this.tsLbl_Status.Size = new System.Drawing.Size(134, 29);
+            this.tsLbl_Status.Text = "TransomUC_1 Selected";
+            this.tsLbl_Status.Visible = false;
             // 
             // pnlRight
             // 
@@ -898,7 +898,7 @@
         private System.Windows.Forms.Label lblZoom;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Panel pnlControlSub;
-        private System.Windows.Forms.ToolStripLabel tsLbl_SelectedDivider;
+        private System.Windows.Forms.ToolStripLabel tsLbl_Status;
         private System.Windows.Forms.Button btnMinusZoom;
         private System.Windows.Forms.Button btnPlusZoom;
         private System.Windows.Forms.ToolStripMenuItem listOfMaterialsToolStripMenuItem;
