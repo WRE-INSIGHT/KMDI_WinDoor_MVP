@@ -45,12 +45,15 @@ namespace PresentationLayer.Views
 
         private void dgv_ExplosionMaterialList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 3 || e.ColumnIndex == 1)
+            if (e.ColumnIndex == 3 || e.ColumnIndex == 1) //column QTY and Size
             {
                 if (e.Value.ToString() != "")
                 {
-                    double d = double.Parse(e.Value.ToString());
-                    e.Value = d.ToString("N0");
+                    if (dgv_ExplosionMaterialList[2,e.RowIndex].Value.ToString() != "kg")
+                    {
+                        double d = double.Parse(e.Value.ToString());
+                        e.Value = d.ToString("N0");
+                    }
                 }
             }
         }

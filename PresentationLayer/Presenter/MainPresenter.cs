@@ -92,6 +92,7 @@ namespace PresentationLayer.Presenter
         private IDividerModel _divModel_forDMSelection;
         private IPanelModel _prevPanelModel_forDMSelection;
         private IPanelModel _nxtPanelModel_forDMSelection;
+        private IDividerPropertiesUC _divProp_forDMSelection;
 
         #endregion
 
@@ -450,7 +451,8 @@ namespace PresentationLayer.Presenter
                                  Control controlRaised = null, 
                                  IDividerModel divModel = null,
                                  IPanelModel prev_pnl = null, //selected panelModel / prevPanel
-                                 IPanelModel nxt_pnl = null)
+                                 IPanelModel nxt_pnl = null,
+                                 IDividerPropertiesUC divProp = null)
         {
             _tsLblStatus.Visible = visibility;
 
@@ -465,6 +467,7 @@ namespace PresentationLayer.Presenter
                 _divModel_forDMSelection = divModel;
                 _prevPanelModel_forDMSelection = prev_pnl;
                 _nxtPanelModel_forDMSelection = nxt_pnl;
+                _divProp_forDMSelection = divProp;
             }
             else if (status == "DMDeselect")
             {
@@ -475,6 +478,11 @@ namespace PresentationLayer.Presenter
                 _tsMain.Enabled = true;
                 _controlRaised_forDMSelection.Text = "P" + prev_pnl.PanelGlass_ID;
                 _controlRaised_forDMSelection.BackColor = System.Drawing.Color.PaleGreen;
+
+                Dictionary<string, Binding> divBinding = new Dictionary<string, Binding>();
+                divBinding.Add("Panel_SashProfileArtNo", new Binding("Panel_SashProfileArtNo", prev_pnl, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+
+                _divProp_forDMSelection.Bind_DMPanelModel(divBinding);
             }
         }
 

@@ -38,6 +38,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         Base_Color WD_BaseColor { get; set; }
         Foil_Color WD_InsideColor { get; set; }
         Foil_Color WD_OutsideColor { get; set; }
+        decimal WD_PlasticCover { get; set; }
 
         float GetZoom_forRendering();
         void SetImageRenderingZoom();

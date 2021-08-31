@@ -47,6 +47,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdWidth = value;
+                WD_PlasticCover = (decimal)(((value * WD_height) * 2) * 0.00012) / 1000;
+
                 WD_Dimension = value.ToString() + " x " + WD_height.ToString();
                 WD_width_4basePlatform_forImageRenderer = value + 70;
                 WD_zoom_forImageRenderer = GetZoom_forRendering();
@@ -98,6 +100,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdHeight = value;
+                WD_PlasticCover = (decimal)(((value * WD_width) * 2) * 0.00012D) / 1000;
+
                 WD_Dimension = WD_width.ToString() + " x " + value.ToString();
                 WD_height_4basePlatform_forImageRenderer = value + 35;
                 WD_zoom_forImageRenderer = GetZoom_forRendering(); //1.0f; //GetZoom_forRendering();
@@ -378,6 +382,21 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public Base_Color WD_BaseColor { get; set; }
         public Foil_Color WD_InsideColor { get; set; }
         public Foil_Color WD_OutsideColor { get; set; }
+
+        private decimal _wdPlasticCover;
+        [Description("Plastic Cover in kG")]
+        public decimal WD_PlasticCover
+        {
+            get
+            {
+                return _wdPlasticCover;
+            }
+
+            set
+            {
+                _wdPlasticCover = value;
+            }
+        }
 
         public float GetZoom_forRendering()
         {

@@ -50,7 +50,8 @@ namespace PresentationLayer.Presenter
                           Control controlRaised = null, 
                           IDividerModel divModel = null,
                           IPanelModel prev_pnl = null,
-                          IPanelModel nxt_pnl = null);
+                          IPanelModel nxt_pnl = null,
+                          IDividerPropertiesUC divProp = null);
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);
         void AddWndrList_QuotationModel(IWindoorModel wndr);

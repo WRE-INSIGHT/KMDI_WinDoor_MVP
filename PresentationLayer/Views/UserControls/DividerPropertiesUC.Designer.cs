@@ -253,12 +253,14 @@
             // 
             this.cmb_DMArtNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb_DMArtNo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_DMArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_DMArtNo.FormattingEnabled = true;
             this.cmb_DMArtNo.Location = new System.Drawing.Point(71, 29);
             this.cmb_DMArtNo.Name = "cmb_DMArtNo";
             this.cmb_DMArtNo.Size = new System.Drawing.Size(85, 21);
             this.cmb_DMArtNo.TabIndex = 11;
+            this.cmb_DMArtNo.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DMArtNo_DrawItem);
             this.cmb_DMArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_DMArtNo_SelectedValueChanged);
             // 
             // label1

@@ -4,6 +4,7 @@ using CommonComponents;
 using System.Windows.Forms;
 using System.Drawing;
 using static EnumerationTypeLayer.EnumerationTypes;
+using System.Collections.Generic;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -24,5 +25,6 @@ namespace PresentationLayer.Views.UserControls
         Panel GetDividerPropertiesBodyPNL();
         Button GetBtnSelectDMPanel();
         void SetBtnSaveBackColor(Color color);
+        void Bind_DMPanelModel(Dictionary<string, Binding> ModelBinding);
     }
 }

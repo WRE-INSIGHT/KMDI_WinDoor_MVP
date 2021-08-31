@@ -72,7 +72,7 @@ namespace PresentationLayer.Presenter.UserControls
                 nxt_pnl.Panel_BackColor = SystemColors.Highlight;
             }
 
-            _mainPresenter.SetLblStatus("DMSelect", true, (Control)sender, _divModel, prev_pnl, nxt_pnl);
+            _mainPresenter.SetLblStatus("DMSelect", true, (Control)sender, _divModel, prev_pnl, nxt_pnl, _divProperties);
         }
 
         private void _divProperties_cmbDMArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Variables;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -450,17 +451,8 @@ namespace ModelLayer.Model.Quotation.Divider
                 {
                     if (Div_ChkDM == true)
                     {
-                        int sash_deduct = 0;
-                        if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                        {
-                            sash_deduct = (26 * 2) - 5;
-                        }
-                        else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            sash_deduct = (40 * 2) + 5;
-                        }
-                        Div_ExplosionHeight = ((Div_DisplayHeight - sash_deduct) - (38 * 2)) - 5;
-                        Div_AlumSpacer50Qty = (Div_ExplosionHeight / 300) - 2;
+                        Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (38 * 2)) - 5;
+                        Div_AlumSpacer50Qty = (int)(Math.Ceiling(((decimal)Div_ExplosionHeight / 300)) - 2);
                     }
                     else if (Div_ChkDM == false)
                     {
@@ -591,17 +583,8 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         if (Div_ChkDM == true)
                         {
-                            int sash_deduct = 0;
-                            if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                            {
-                                sash_deduct = (26 * 2) + 5;
-                            }
-                            else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                            {
-                                sash_deduct = (40 * 2) + 5;
-                            }
-                            Div_ExplosionHeight = ((Div_DisplayHeight - (38 * 2)) - 5) - sash_deduct;
-                            Div_AlumSpacer50Qty = (Div_ExplosionHeight / 300) - 2;
+                            Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (38 * 2)) - 5;
+                            Div_AlumSpacer50Qty = (int)(Math.Ceiling(((decimal)Div_ExplosionHeight / 300)) - 2);
                         }
                         else if (Div_ChkDM == false)
                         {
