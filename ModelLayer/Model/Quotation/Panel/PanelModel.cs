@@ -1839,33 +1839,103 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (base_color == Base_Color._DarkBrown)
                 {
-                    if (Panel_DisplayHeight < 1551)
+                    if (Panel_Type.Contains("Awning"))
                     {
-                        Panel_MiddleCloserPairQty = 1;
+                        if (Panel_DisplayHeight < 1551)
+                        {
+                            Panel_MiddleCloserPairQty = 1;
+                        }
+                        else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
+                        {
+                            Panel_MiddleCloserPairQty = 2;
+                        }
+                        else if (Panel_DisplayHeight > 1999)
+                        {
+                            Panel_MiddleCloserPairQty = 3;
+                        }
                     }
-                    else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
+                    else if (Panel_Type.Contains("Casement"))
                     {
-                        Panel_MiddleCloserPairQty = 2;
-                    }
-                    else if (Panel_DisplayHeight > 1999)
-                    {
-                        Panel_MiddleCloserPairQty = 3;
+                        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                        {
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_MiddleCloserPairQty = 1;
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            {
+                                Panel_MiddleCloserPairQty = 0;
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                            {
+                                if (Panel_SashHeight < 1201)
+                                {
+                                    Panel_MiddleCloserPairQty = 1;
+                                }
+                                else if (Panel_SashHeight > 1200)
+                                {
+                                    Panel_MiddleCloserPairQty = 0;
+                                }
+                            }
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+                        {
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_MiddleCloserPairQty = 1;
+                            }
+                        }
                     }
                 }
                 else if (base_color == Base_Color._White ||
                          base_color == Base_Color._Ivory)
                 {
-                    if (Panel_SashHeight < 1551)
+                    if (Panel_Type.Contains("Awning"))
                     {
-                        Panel_MiddleCloserPairQty = 1;
+                        if (Panel_SashHeight < 1551)
+                        {
+                            Panel_MiddleCloserPairQty = 1;
+                        }
+                        else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
+                        {
+                            Panel_MiddleCloserPairQty = 2;
+                        }
+                        else if (Panel_SashHeight > 1999)
+                        {
+                            Panel_MiddleCloserPairQty = 3;
+                        }
                     }
-                    else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
+                    else if (Panel_Type.Contains("Casement"))
                     {
-                        Panel_MiddleCloserPairQty = 2;
-                    }
-                    else if (Panel_SashHeight > 1999)
-                    {
-                        Panel_MiddleCloserPairQty = 3;
+                        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                        {
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_MiddleCloserPairQty = 1;
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            {
+                                Panel_MiddleCloserPairQty = 0;
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                            {
+                                if (Panel_SashHeight < 1201)
+                                {
+                                    Panel_MiddleCloserPairQty = 1;
+                                }
+                                else if (Panel_SashHeight > 1200)
+                                {
+                                    Panel_MiddleCloserPairQty = 0;
+                                }
+                            }
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+                        {
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_MiddleCloserPairQty = 1;
+                            }
+                        }
                     }
                 }
 
@@ -1919,22 +1989,22 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_StrikerQty_A += 2;
                     }
 
-                    if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
-                    if (Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
-                    if (Panel_ExtensionRightArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionRightArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
-                    if (Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
@@ -1982,28 +2052,31 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_StrikerQty_C += 2;
                     }
 
-                    if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
-                    if (Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
-                    if (Panel_ExtensionBotArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionBotArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
-                    if (Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
-                    Panel_StrikerQty_C -= 1;
-
+                    if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                    {
+                        Panel_StrikerQty_C += 1;
+                    }
+                    
                     if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                     {
                         Panel_StrikerQty_A += 1;
@@ -2602,33 +2675,103 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (base_color == Base_Color._DarkBrown)
                 {
-                    if (Panel_DisplayHeight < 1551)
+                    if (Panel_Type.Contains("Awning"))
                     {
-                        Panel_MiddleCloserPairQty = 1;
+                        if (Panel_DisplayHeight < 1551)
+                        {
+                            Panel_MiddleCloserPairQty = 1;
+                        }
+                        else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
+                        {
+                            Panel_MiddleCloserPairQty = 2;
+                        }
+                        else if (Panel_DisplayHeight > 1999)
+                        {
+                            Panel_MiddleCloserPairQty = 3;
+                        }
                     }
-                    else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
+                    else if (Panel_Type.Contains("Casement"))
                     {
-                        Panel_MiddleCloserPairQty = 2;
-                    }
-                    else if (Panel_DisplayHeight > 1999)
-                    {
-                        Panel_MiddleCloserPairQty = 3;
+                        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                        {
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_MiddleCloserPairQty = 1;
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            {
+                                Panel_MiddleCloserPairQty = 0;
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                            {
+                                if (Panel_SashHeight < 1201)
+                                {
+                                    Panel_MiddleCloserPairQty = 1;
+                                }
+                                else if (Panel_SashHeight > 1200)
+                                {
+                                    Panel_MiddleCloserPairQty = 0;
+                                }
+                            }
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+                        {
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_MiddleCloserPairQty = 1;
+                            }
+                        }
                     }
                 }
                 else if (base_color == Base_Color._White ||
                          base_color == Base_Color._Ivory)
                 {
-                    if (Panel_SashHeight < 1551)
+                    if (Panel_Type.Contains("Awning"))
                     {
-                        Panel_MiddleCloserPairQty = 1;
+                        if (Panel_SashHeight < 1551)
+                        {
+                            Panel_MiddleCloserPairQty = 1;
+                        }
+                        else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
+                        {
+                            Panel_MiddleCloserPairQty = 2;
+                        }
+                        else if (Panel_SashHeight > 1999)
+                        {
+                            Panel_MiddleCloserPairQty = 3;
+                        }
                     }
-                    else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
+                    else if (Panel_Type.Contains("Casement"))
                     {
-                        Panel_MiddleCloserPairQty = 2;
-                    }
-                    else if (Panel_SashHeight > 1999)
-                    {
-                        Panel_MiddleCloserPairQty = 3;
+                        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                        {
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_MiddleCloserPairQty = 1;
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            {
+                                Panel_MiddleCloserPairQty = 0;
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                            {
+                                if (Panel_SashHeight < 1201)
+                                {
+                                    Panel_MiddleCloserPairQty = 1;
+                                }
+                                else if (Panel_SashHeight > 1200)
+                                {
+                                    Panel_MiddleCloserPairQty = 0;
+                                }
+                            }
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+                        {
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_MiddleCloserPairQty = 1;
+                            }
+                        }
                     }
                 }
 
@@ -2745,33 +2888,31 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_StrikerQty_C += 2;
                     }
 
-                    if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
-                    if (Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
-                    if (Panel_ExtensionBotArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionBotArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
-                    if (Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None)
+                    if (Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957)
                     {
                         Panel_StrikerQty_C += 1;
                     }
 
                     if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                     {
-                        Panel_StrikerQty_C += 2;
+                        Panel_StrikerQty_C += 1;
                     }
-
-                    Panel_StrikerQty_C -= 1;
-
+                    
                     if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                     {
                         Panel_StrikerQty_A += 1;

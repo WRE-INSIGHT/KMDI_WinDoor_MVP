@@ -83,6 +83,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             if (_panelModel.Panel_BackColor == SystemColors.Highlight)
             {
+                _panelModel.Panel_HandleType = Handle_Type._None;
                 _mainPresenter.DivModel_forDMSelection.Div_DMPanel = _panelModel;
                 _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
                 _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
