@@ -459,5 +459,29 @@ namespace EnumerationTypeLayer
 
             private NTCenterHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class _3dHinge_ArticleNo : Enumeration<_3dHinge_ArticleNo, int>
+        {
+            public static readonly _3dHinge_ArticleNo _3DHinge_WHT = new _3dHinge_ArticleNo(0, "492596");
+            public static readonly _3dHinge_ArticleNo _3DHinge_IVORY = new _3dHinge_ArticleNo(1, "492592");
+            public static readonly _3dHinge_ArticleNo _3DHinge_BL = new _3dHinge_ArticleNo(2, "492592");
+            public static readonly _3dHinge_ArticleNo _3DHinge_DB = new _3dHinge_ArticleNo(3, "492594");
+
+            private _3dHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class RestrictorStay_ArticleNo : Enumeration<RestrictorStay_ArticleNo, int>
+        {
+            public static readonly RestrictorStay_ArticleNo _613249 = new RestrictorStay_ArticleNo(0, "613249");
+
+            private RestrictorStay_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class AdjustableStriker_ArticleNo : Enumeration<AdjustableStriker_ArticleNo, int>
+        {
+            public static readonly AdjustableStriker_ArticleNo _332439 = new AdjustableStriker_ArticleNo(0, "332439");
+
+            private AdjustableStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

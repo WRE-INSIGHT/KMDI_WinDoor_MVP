@@ -418,7 +418,16 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void SetExplosionValues_Div()
         {
-            const int frame_deduction = 33;
+            int frame_deduction = 0;
+
+            if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+            {
+                frame_deduction = 33;
+            }
+            else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+            {
+                frame_deduction = 47;
+            }
 
             if (Div_ChkDM == true)
             {

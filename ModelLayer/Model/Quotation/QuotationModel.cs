@@ -522,6 +522,7 @@ namespace ModelLayer.Model.Quotation
                 add_screws_fab_alum = 0,
                 add_screws_fab_fxdcam = 0,
                 add_screws_fab_endcap = 0,
+                add_screws_fab_2dHinge = 0,
                 exp_bolt = 0,
                 frame_width = 0,
                 frame_height = 0;
@@ -1250,14 +1251,37 @@ namespace ModelLayer.Model.Quotation
                                                                            "",
                                                                            "Sash & Frame",
                                                                            @"");
-                                                }
-                                            }
 
-                                            Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
-                                                                   pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
-                                                                   "",
-                                                                   "Frame",
-                                                                   @"");
+                                                    add_screws_fab_2dHinge += (3 * pnl_curCtrl.Panel_2DHingeQty_nonMotorized);
+                                                }
+
+                                                Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
+                                                                       pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
+                                                                       "",
+                                                                       "Frame",
+                                                                       @"");
+                                            }
+                                            else if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 &&
+                                                     frame.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                                            {
+                                                Material_List.Rows.Add("3D hinge " + pnl_curCtrl.Panel_3dHingeArtNo.DisplayName,
+                                                                       pnl_curCtrl.Panel_3dHingeQty, "pc(s)",
+                                                                       "",
+                                                                       "Sash & Frame",
+                                                                       @"");
+
+                                                Material_List.Rows.Add("Restrictor Stay " + pnl_curCtrl.Panel_RestrictorStayArtNo.DisplayName,
+                                                                       pnl_curCtrl.Panel_RestrictorStayQty, "pc(s)",
+                                                                       "",
+                                                                       "Sash & Frame",
+                                                                       @"");
+
+                                                Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
+                                                                       pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
+                                                                       "",
+                                                                       "Frame",
+                                                                       @"");
+                                            }
                                         }
 
                                         if (pnl_curCtrl.Panel_MiddleCloserPairQty > 0)
@@ -1851,14 +1875,38 @@ namespace ModelLayer.Model.Quotation
                                                                "",
                                                                "Sash & Frame",
                                                                @"");
+
+                                        add_screws_fab_2dHinge += (3 * pnl.Panel_2DHingeQty_nonMotorized);
                                     }
+
+                                    Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
+                                                           pnl.Panel_PlasticWedgeQty, "pc (s)",
+                                                           "",
+                                                           "Frame",
+                                                           @"");
+                                }
+                                else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 && 
+                                         frame.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                                {
+                                    Material_List.Rows.Add("3D hinge " + pnl.Panel_3dHingeArtNo.DisplayName,
+                                                           pnl.Panel_3dHingeQty, "pc(s)",
+                                                           "",
+                                                           "Sash & Frame",
+                                                           @"");
+
+                                    Material_List.Rows.Add("Restrictor Stay " + pnl.Panel_RestrictorStayArtNo.DisplayName,
+                                                           pnl.Panel_RestrictorStayQty, "pc(s)",
+                                                           "",
+                                                           "Sash & Frame",
+                                                           @"");
+
+                                    Material_List.Rows.Add("Adjustable Striker " + pnl.Panel_AdjStrikerArtNo.DisplayName,
+                                                           pnl.Panel_AdjStrikerQty, "pc(s)",
+                                                           "",
+                                                           "Frame",
+                                                           @"");
                                 }
 
-                                Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
-                                                       pnl.Panel_PlasticWedgeQty, "pc (s)",
-                                                       "",
-                                                       "Frame",
-                                                       @"");
                             }
 
                             if (pnl.Panel_MiddleCloserPairQty > 0)
@@ -2221,7 +2269,8 @@ namespace ModelLayer.Model.Quotation
                                                                                     add_screws_fab_fs +
                                                                                     add_screws_fab_alum +
                                                                                     add_screws_fab_fxdcam +
-                                                                                    add_screws_fab_endcap;
+                                                                                    add_screws_fab_endcap + 
+                                                                                    add_screws_fab_2dHinge;
             Screws_for_Installation = fixing_screw + total_screws_installation;
             Screws_for_Cladding = total_cladding_size / 300;
 
