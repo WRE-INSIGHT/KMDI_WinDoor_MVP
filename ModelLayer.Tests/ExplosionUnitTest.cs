@@ -188,7 +188,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -246,41 +246,41 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '705'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '2005'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '632'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1932'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '700'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '2000'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Size = '628'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
                              Size = '1928'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             #endregion
 
@@ -326,7 +326,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -384,41 +384,41 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '505'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1505'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '432'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1432'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '500'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '1500'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Size = '428'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
                              Size = '1428'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             #endregion
 
@@ -501,7 +501,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -549,9 +549,15 @@ namespace ModelLayer.Tests
                                                                       _multipanelModel.MPanel_DisplayWidth,
                                                                       _multipanelModel.MPanel_DisplayHeight,
                                                                       _multipanelModel,
+                                                                      _frameModel,
                                                                       1,
                                                                       _frameModel.FrameImageRenderer_Zoom,
-                                                                      _frameModel.Frame_Type.ToString());
+                                                                      _frameModel.Frame_Type.ToString(),
+                                                                      "MullionUC_1",
+                                                                      null,
+                                                                      false,
+                                                                      true,
+                                                                      null);
             _multipanelModel.MPanelLst_Divider.Add(divModel);
             Control div1 = new Control();
             div1.Name = "MullionUC_1";
@@ -576,7 +582,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -651,49 +657,49 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '905'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1305'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '832'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1232'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2452%' AND
                                                  Size = '450'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            Assert.AreEqual("4", Convert.ToString(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
+            sumObject = dt.Compute("Sum(Qty)",@"Description LIKE '%Glazing Bead Height%' AND
                                                  Description LIKE '%2452%' AND
                                                  Size = '1300'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            Assert.AreEqual("4", Convert.ToString(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
                                                  Size = '375'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            Assert.AreEqual("2", Convert.ToString(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
                                                  Size = '1228'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            Assert.AreEqual("2", Convert.ToString(sumObject));
 
             dr = dt.Select("Description = 'Mullion Height 7538' AND Size = '1242'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Reinforcement Height R686' AND Size = '1132'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Mechanical Joint AV585'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             #endregion
 
@@ -775,7 +781,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -823,9 +829,15 @@ namespace ModelLayer.Tests
                                                                       _multipanelModel.MPanel_DisplayWidth,
                                                                       _multipanelModel.MPanel_DisplayHeight,
                                                                       _multipanelModel,
+                                                                      _frameModel,
                                                                       1,
                                                                       _frameModel.FrameImageRenderer_Zoom,
-                                                                      _frameModel.Frame_Type.ToString());
+                                                                      _frameModel.Frame_Type.ToString(),
+                                                                      "MullionUC_1",
+                                                                      null,
+                                                                      false,
+                                                                      true,
+                                                                      null);
             _multipanelModel.MPanelLst_Divider.Add(divModel);
             Control div1 = new Control();
             div1.Name = "MullionUC_1";
@@ -850,7 +862,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -925,31 +937,31 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '905'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1305'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '832'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1232'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '400'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '500'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
                                                  Description LIKE '%2452%' AND
@@ -959,12 +971,12 @@ namespace ModelLayer.Tests
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Size = '325'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Size = '425'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
                                                  Size = '1228'");
@@ -972,15 +984,15 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Mullion Height 7538' AND Size = '1242'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Reinforcement Height R686' AND Size = '1132'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Mechanical Joint AV585'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             #endregion
 
@@ -1073,9 +1085,15 @@ namespace ModelLayer.Tests
                                                                       _multiTransomModel.MPanel_DisplayWidth,
                                                                       _multiTransomModel.MPanel_DisplayHeight,
                                                                       _multiTransomModel,
+                                                                      _frameModel,
                                                                       1,
                                                                       _frameModel.FrameImageRenderer_Zoom,
-                                                                      _frameModel.Frame_Type.ToString());
+                                                                      _frameModel.Frame_Type.ToString(),
+                                                                      "TransomUC_1",
+                                                                      null,
+                                                                      false,
+                                                                      true,
+                                                                      null);
             _multiTransomModel.MPanelLst_Divider.Add(transomModel);
             Control div1 = new Control();
             div1.Name = "TransomUC_1";
@@ -1132,7 +1150,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -1180,9 +1198,15 @@ namespace ModelLayer.Tests
                                                                       _multiMullionModel1.MPanel_DisplayWidth,
                                                                       _multiMullionModel1.MPanel_DisplayHeight,
                                                                       _multiMullionModel1,
+                                                                      _frameModel,
                                                                       2,
                                                                       _frameModel.FrameImageRenderer_Zoom,
-                                                                      _frameModel.Frame_Type.ToString());
+                                                                      _frameModel.Frame_Type.ToString(),
+                                                                      "MullionUC_2",
+                                                                      null,
+                                                                      false,
+                                                                      true,
+                                                                      null);
             _multiMullionModel1.MPanelLst_Divider.Add(divModel_mullion);
             Control div_mullion = new Control();
             div_mullion.Name = "MullionUC_2";
@@ -1207,7 +1231,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -1273,7 +1297,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -1321,9 +1345,15 @@ namespace ModelLayer.Tests
                                                                       _multiMullionModel2.MPanel_DisplayWidth,
                                                                       _multiMullionModel2.MPanel_DisplayHeight,
                                                                       _multiMullionModel2,
+                                                                      _frameModel,
                                                                       3,
                                                                       _frameModel.FrameImageRenderer_Zoom,
-                                                                      _frameModel.Frame_Type.ToString());
+                                                                      _frameModel.Frame_Type.ToString(),
+                                                                      "MullionUC_3",
+                                                                      null,
+                                                                      false,
+                                                                      true,
+                                                                      null);
             _multiMullionModel2.MPanelLst_Divider.Add(divModel_mullion2);
             Control div_mullion2 = new Control();
             div_mullion2.Name = "MullionUC_3";
@@ -1348,7 +1378,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -1453,31 +1483,31 @@ namespace ModelLayer.Tests
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '555'");
 
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1205'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '482'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1132'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Width 7536' AND Size = '487'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Reinforcement Width R677' AND Size = '407'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2452%' AND
@@ -1499,15 +1529,15 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Mullion Height 7536' AND Size = '549'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Reinforcement Height R677' AND Size = '469'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             #endregion
         }
@@ -1616,9 +1646,15 @@ namespace ModelLayer.Tests
                                                                               _multiMullionModel1.MPanel_DisplayWidth,
                                                                               _multiMullionModel1.MPanel_DisplayHeight,
                                                                               _multiMullionModel1,
+                                                                              _frameModel,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_" + divID,
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiMullionModel1.MPanelLst_Divider.Add(divModel_mullion1);
             Control div_mullion1 = new Control();
             div_mullion1.Name = "MullionUC_" + divID;
@@ -1644,7 +1680,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -1694,9 +1730,15 @@ namespace ModelLayer.Tests
                                                                               _multiMullionModel1.MPanel_DisplayWidth,
                                                                               _multiMullionModel1.MPanel_DisplayHeight,
                                                                               _multiMullionModel1,
+                                                                              _frameModel,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_" + divID,
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiMullionModel1.MPanelLst_Divider.Add(divModel_mullion2);
             Control div_mullion2 = new Control();
             div_mullion2.Name = "MullionUC_" + divID;
@@ -1777,9 +1819,15 @@ namespace ModelLayer.Tests
                                                                               _multiTransomModel2.MPanel_DisplayWidth,
                                                                               _multiTransomModel2.MPanel_DisplayHeight,
                                                                               _multiTransomModel2,
+                                                                              _frameModel,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "TransomUC_" + divID,
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiTransomModel2.MPanelLst_Divider.Add(divModel_transom3);
             Control div_mullion3 = new Control();
             div_mullion3.Name = "TransomUC_" + divID;
@@ -1823,9 +1871,15 @@ namespace ModelLayer.Tests
                                                                               _multiTransomModel2.MPanel_DisplayWidth,
                                                                               _multiTransomModel2.MPanel_DisplayHeight,
                                                                               _multiTransomModel2,
+                                                                              _frameModel,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "TransomUC_" + divID,
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiTransomModel2.MPanelLst_Divider.Add(divModel_transom4);
             Control div_transom4 = new Control();
             div_transom4.Name = "TransomUC_" + divID;
@@ -1851,7 +1905,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -1937,9 +1991,15 @@ namespace ModelLayer.Tests
                                                                               _multiTransomModel3.MPanel_DisplayWidth,
                                                                               _multiTransomModel3.MPanel_DisplayHeight,
                                                                               _multiTransomModel3,
+                                                                              _frameModel,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "TransomUC_" + divID,
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiTransomModel3.MPanelLst_Divider.Add(divModel_transom5);
             Control div_mullion5 = new Control();
             div_mullion5.Name = "TransomUC_" + divID;
@@ -1983,9 +2043,15 @@ namespace ModelLayer.Tests
                                                                               _multiTransomModel3.MPanel_DisplayWidth,
                                                                               _multiTransomModel3.MPanel_DisplayHeight,
                                                                               _multiTransomModel3,
+                                                                              _frameModel,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "TransomUC_" + divID,
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiTransomModel3.MPanelLst_Divider.Add(divModel_transom6);
             Control div_mullion6 = new Control();
             div_mullion6.Name = "TransomUC_" + divID;
@@ -2011,7 +2077,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -2080,7 +2146,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -2130,9 +2196,15 @@ namespace ModelLayer.Tests
                                                                               _multiMullionModel4.MPanel_DisplayWidth,
                                                                               _multiMullionModel4.MPanel_DisplayHeight,
                                                                               _multiMullionModel4,
+                                                                              _frameModel,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_" + divID,
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiMullionModel4.MPanelLst_Divider.Add(divModel_mullion7);
             Control div_mullion7 = new Control();
             div_mullion7.Name = "MullionUC_" + divID;
@@ -2158,7 +2230,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -2226,7 +2298,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -2276,9 +2348,15 @@ namespace ModelLayer.Tests
                                                                               _multiMullionModel5.MPanel_DisplayWidth,
                                                                               _multiMullionModel5.MPanel_DisplayHeight,
                                                                               _multiMullionModel5,
+                                                                              _frameModel,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_" + divID,
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiMullionModel5.MPanelLst_Divider.Add(divModel_mullion8);
             Control div_mullion8 = new Control();
             div_mullion8.Name = "MullionUC_" + divID;
@@ -2304,7 +2382,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -2372,7 +2450,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -2422,9 +2500,15 @@ namespace ModelLayer.Tests
                                                                               _multiMullionModel6.MPanel_DisplayWidth,
                                                                               _multiMullionModel6.MPanel_DisplayHeight,
                                                                               _multiMullionModel6,
+                                                                              _frameModel,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_" + divID,
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiMullionModel6.MPanelLst_Divider.Add(divModel_mullion9);
             Control div_mullion9 = new Control();
             div_mullion9.Name = "MullionUC_" + divID;
@@ -2450,7 +2534,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -2518,7 +2602,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -2568,9 +2652,15 @@ namespace ModelLayer.Tests
                                                                               _multiMullionModel7.MPanel_DisplayWidth,
                                                                               _multiMullionModel7.MPanel_DisplayHeight,
                                                                               _multiMullionModel7,
+                                                                              _frameModel,
                                                                               divID,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_" + divID,
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiMullionModel7.MPanelLst_Divider.Add(divModel_mullion10);
             Control div_mullion10 = new Control();
             div_mullion10.Name = "MullionUC_" + divID;
@@ -2596,7 +2686,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._T244002KMW,
                                                                    MotorizedMech_ArticleNo._41556C,
@@ -2802,59 +2892,59 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '2405'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1905'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '2332'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1832'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Height 7538' AND Size = '1842'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Reinforcement Height R686' AND Size = '1732'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Mechanical Joint AV585'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(12, dr[0]["Qty"]);
+            Assert.AreEqual("12", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2452%' AND 
                              Size = '1900'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Size = '722'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
                              Size = '1828'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Width 7536' AND Size = '734'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Reinforcement Width R677' AND Size = '654'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(8, dr[0]["Qty"]);
+            Assert.AreEqual("8", dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2452%' AND
