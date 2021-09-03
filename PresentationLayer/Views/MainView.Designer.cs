@@ -647,7 +647,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.pnlMain);
             this.splitContainer2.Size = new System.Drawing.Size(778, 495);
-            this.splitContainer2.SplitterDistance = 130;
+            this.splitContainer2.SplitterDistance = 150;
             this.splitContainer2.TabIndex = 5;
             // 
             // pnlProperties
@@ -661,7 +661,7 @@
             this.pnlProperties.Location = new System.Drawing.Point(0, 0);
             this.pnlProperties.Margin = new System.Windows.Forms.Padding(2);
             this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.Size = new System.Drawing.Size(130, 495);
+            this.pnlProperties.Size = new System.Drawing.Size(150, 495);
             this.pnlProperties.TabIndex = 4;
             // 
             // chkView
@@ -673,7 +673,7 @@
             this.chkView.FlatAppearance.BorderSize = 0;
             this.chkView.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
             this.chkView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkView.Location = new System.Drawing.Point(84, 3);
+            this.chkView.Location = new System.Drawing.Point(104, 3);
             this.chkView.Margin = new System.Windows.Forms.Padding(2);
             this.chkView.Name = "chkView";
             this.chkView.Size = new System.Drawing.Size(40, 23);
@@ -688,7 +688,7 @@
             this.pnlPropertiesBody.Location = new System.Drawing.Point(0, 29);
             this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPropertiesBody.Name = "pnlPropertiesBody";
-            this.pnlPropertiesBody.Size = new System.Drawing.Size(128, 464);
+            this.pnlPropertiesBody.Size = new System.Drawing.Size(148, 464);
             this.pnlPropertiesBody.TabIndex = 1;
             // 
             // label2
@@ -699,7 +699,7 @@
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 29);
+            this.label2.Size = new System.Drawing.Size(148, 29);
             this.label2.TabIndex = 0;
             this.label2.Text = "Properties";
             // 
@@ -711,7 +711,7 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(644, 495);
+            this.pnlMain.Size = new System.Drawing.Size(624, 495);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.SizeChanged += new System.EventHandler(this.pnlMain_SizeChanged);
             // 

@@ -1,4 +1,5 @@
 ﻿using Headspring;
+using System.ComponentModel;
 
 namespace EnumerationTypeLayer
 {
@@ -176,9 +177,9 @@ namespace EnumerationTypeLayer
         public class FrictionStay_ArticleNo : Enumeration<FrictionStay_ArticleNo, int> //AW
         {
             public static readonly FrictionStay_ArticleNo _Storm8 = new FrictionStay_ArticleNo(0, "Storm 8 (8\"HD)");
-            public static readonly FrictionStay_ArticleNo _477254 = new FrictionStay_ArticleNo(1, "477254 (10\"HD)");
-            public static readonly FrictionStay_ArticleNo _A2121C1261 = new FrictionStay_ArticleNo(2, "A2121C1261 (12\"HD)");
-            public static readonly FrictionStay_ArticleNo _A212C16161 = new FrictionStay_ArticleNo(3, "A212C16161 (16\"HD)");
+            public static readonly FrictionStay_ArticleNo _10HD = new FrictionStay_ArticleNo(1, "477254 (10\"HD)");
+            public static readonly FrictionStay_ArticleNo _12HD = new FrictionStay_ArticleNo(2, "A2121C1261 (12\"HD)");
+            public static readonly FrictionStay_ArticleNo _16HD = new FrictionStay_ArticleNo(3, "A212C16161 (16\"HD)");
             public static readonly FrictionStay_ArticleNo _Storm22 = new FrictionStay_ArticleNo(4, "Storm 22 (22\"HD)");
             public static readonly FrictionStay_ArticleNo _Storm26 = new FrictionStay_ArticleNo(5, "Storm 26 (26\"HD)");
             public static readonly FrictionStay_ArticleNo _None = new FrictionStay_ArticleNo(6, "None");
@@ -188,11 +189,11 @@ namespace EnumerationTypeLayer
 
         public class FrictionStayCasement_ArticleNo : Enumeration<FrictionStayCasement_ArticleNo, int> //CW
         {
-            public static readonly FrictionStayCasement_ArticleNo _485770 = new FrictionStayCasement_ArticleNo(0, "485770 (10\"HD)");
-            public static readonly FrictionStayCasement_ArticleNo _A235B12161 = new FrictionStayCasement_ArticleNo(1, "A235B12161 (12\"FS)");
-            public static readonly FrictionStayCasement_ArticleNo _A212C12161 = new FrictionStayCasement_ArticleNo(2, "A212C12161 (12\"HD)");
-            public static readonly FrictionStayCasement_ArticleNo _A212C16161 = new FrictionStayCasement_ArticleNo(3, "A212C16161 (16\"HD)");
-            public static readonly FrictionStayCasement_ArticleNo _A212C20161 = new FrictionStayCasement_ArticleNo(4, "A212C20161 (20\"HD)");
+            public static FrictionStayCasement_ArticleNo _10HD = new FrictionStayCasement_ArticleNo(0, "485770 (10\"HD)");
+            public static readonly FrictionStayCasement_ArticleNo _12FS = new FrictionStayCasement_ArticleNo(1, "A235B12161 (12\"FS)");
+            public static readonly FrictionStayCasement_ArticleNo _12HD = new FrictionStayCasement_ArticleNo(2, "A212C12161 (12\"HD)");
+            public static readonly FrictionStayCasement_ArticleNo _16HD = new FrictionStayCasement_ArticleNo(3, "A212C16161 (16\"HD)");
+            public static readonly FrictionStayCasement_ArticleNo _20HD = new FrictionStayCasement_ArticleNo(4, "A212C20161 (20\"HD)");
             public static readonly FrictionStayCasement_ArticleNo _None = new FrictionStayCasement_ArticleNo(5, "None");
 
             private FrictionStayCasement_ArticleNo(int value, string displayName) : base(value, displayName) { }

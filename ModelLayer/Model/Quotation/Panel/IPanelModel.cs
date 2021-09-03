@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.Frame;
+﻿using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -184,6 +185,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                            DividerType div_type,
                                            bool if_divNxt_is_dummy_mullion,
                                            bool if_divPrev_is_dummy_mullion,
+                                           IDividerModel divNxt,
+                                           IDividerModel divPrev,
                                            Divider_ArticleNo divArtNo_LeftorTop = null,
                                            Divider_ArticleNo divArtNo_RightorBot = null,
                                            string div_type_lvl3 = "",
