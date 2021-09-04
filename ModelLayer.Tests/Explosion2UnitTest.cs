@@ -10250,7 +10250,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
-            // Assert.AreEqual(142, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(142, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(56, _qouteModel.Screws_for_Installation);
 
             #region Multimullion(2)
@@ -10288,6 +10288,27 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _panelModel1.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1.Panel_MiddleCloserArtNo);
 
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(2, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
 
 
 
@@ -10334,7 +10355,26 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _panelModel1.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel2.Panel_MiddleCloserArtNo);
 
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
 
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(2, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
 
             #endregion
 
@@ -10525,7 +10565,6 @@ namespace ModelLayer.Tests
 
             #region MultiMullionModel
 
-
             IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
                                                                    suggest_HT,
                                                                    new Control(),
@@ -10601,7 +10640,7 @@ namespace ModelLayer.Tests
                                                                               DividerModel.DividerType.Mullion,
                                                                               true,
                                                                               _frameModel.Frame_Zoom,
-                                                                              Divider_ArticleNo._7536,
+                                                                              Divider_ArticleNo._None,
                                                                               _multiMullionModel.MPanel_DisplayWidth,
                                                                               _multiMullionModel.MPanel_DisplayHeight,
                                                                               _multiMullionModel,
@@ -10614,7 +10653,14 @@ namespace ModelLayer.Tests
                                                                               false,
                                                                               true,
                                                                               DummyMullion_ArticleNo._7533);
+
+            _divDummyMullionModel.Div_ChkDM = true;
             _divDummyMullionModel.Div_DMPanel = _panelModel1;
+            _divDummyMullionModel.Div_ArtVisibility = true;
+            _divDummyMullionModel.Div_DMPanel.Panel_SashHeight = 1553;
+            _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K7533;
+            _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+            _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
             _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_1";
@@ -10638,7 +10684,7 @@ namespace ModelLayer.Tests
                                                                       SashProfile_ArticleNo._7581,
                                                                       SashReinf_ArticleNo._R675,
                                                                       GlassType._Single,
-                                                                      Espagnolette_ArticleNo._741012,
+                                                                      Espagnolette_ArticleNo._None,
                                                                       Striker_ArticleNo._M89ANTC,
                                                                       MiddleCloser_ArticleNo._1WC70WHT,
                                                                       LockingKit_ArticleNo._None,
@@ -10689,7 +10735,7 @@ namespace ModelLayer.Tests
             Casement2.Name = "CasementPanelUC_2";
             _multiMullionModel.MPanelLst_Objects.Add(Casement2);
 
-            #endregion 
+            #endregion
 
 
 
@@ -10711,7 +10757,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(132, _qouteModel.Screws_for_Fabrication);
+            // Assert.AreEqual(132, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(56, _qouteModel.Screws_for_Installation);
 
             #region Multimullion(2)
@@ -10735,7 +10781,7 @@ namespace ModelLayer.Tests
 
 
 
-            //ACCESSORIES
+            //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
             Assert.AreEqual(FrictionStayCasement_ArticleNo._A212C12161, _panelModel1.Panel_FSCasementArtNo);
@@ -10749,7 +10795,26 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _panelModel1.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1.Panel_MiddleCloserArtNo);
 
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTop2Qty);
 
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
 
 
 
@@ -10762,6 +10827,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(FixedCam_ArticleNo._1481413, _divDummyMullionModel.Div_FixedCamDM);
             Assert.AreEqual(SnapInKeep_ArticleNo._0400205, _divDummyMullionModel.Div_SnapNKeepDM);
             Assert.AreEqual(EndcapDM_ArticleNo._K7533, _divDummyMullionModel.Div_EndcapDM);
+
+
             #endregion
 
             #region CW2
@@ -10781,20 +10848,40 @@ namespace ModelLayer.Tests
             Assert.AreEqual(575, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(1432, _panelModel2.Panel_GlassHeight);
 
-            //ACCESSORIES
+            //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
-            Assert.AreEqual(FrictionStayCasement_ArticleNo._None, _panelModel2.Panel_FSCasementArtNo);
-            Assert.AreEqual(0, _panelModel2.Panel_PlasticWedgeQty);
+            Assert.AreEqual(FrictionStayCasement_ArticleNo._A212C12161, _panelModel2.Panel_FSCasementArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel2.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._None, _panelModel2.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel2.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel1.Panel_StrikerArtno_C);
-            Assert.AreEqual(0, _panelModel1.Panel_StrikerQty_C);
-            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1.Panel_StrikerArtno_A);
-            Assert.AreEqual(0, _panelModel1.Panel_StrikerQty_A);
-            Assert.AreEqual(MiddleCloser_ArticleNo._None, _panelModel2.Panel_MiddleCloserArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel2.Panel_StrikerArtno_C);
+            Assert.AreEqual(0, _panelModel2.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel2.Panel_StrikerArtno_A);
+            Assert.AreEqual(0, _panelModel2.Panel_StrikerQty_A);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel2.Panel_MiddleCloserArtNo);
 
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
 
 
             #endregion
@@ -10825,7 +10912,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '690'");
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '696'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
@@ -10833,7 +10920,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '565'");
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '571'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
@@ -10845,7 +10932,7 @@ namespace ModelLayer.Tests
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%(P1)%' AND
                              Description LIKE '%2453%' AND
-                             Size = '690'");
+                             Size = '696'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -10859,7 +10946,7 @@ namespace ModelLayer.Tests
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%(P2)%' AND
                              Description LIKE '%2453%' AND
-                             Size = '690'");
+                             Size = '696'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -10872,7 +10959,7 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Description LIKE '%(P1- )%' AND
-                             Size = '569'");
+                             Size = '575'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
@@ -10885,7 +10972,7 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Description LIKE '%(P2- )%' AND
-                             Size = '569'");
+                             Size = '575'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
@@ -10896,18 +10983,46 @@ namespace ModelLayer.Tests
             Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-
+            //accesories and hardwares
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT-C%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("12", dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT-A%'");
             Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Fixed cam%' AND
+                             Description LIKE '%1481413%'");
+            Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
+
+            dr = dt.Select(@"Description LIKE '%Snap-in Keep%' AND
+                             Description LIKE '%0400205%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Endcap for Dummy Mullion%' AND
+                             Description LIKE '%K7533%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Aluminum spacer for Dummy Mullion%' AND
+                             Description LIKE '%FC770 (80mm)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Aluminum spacer for Dummy Mullion%' AND
+                             Description LIKE '%FC770 (50mm)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
             #endregion
 
         }
