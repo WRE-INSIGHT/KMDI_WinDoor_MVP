@@ -12,7 +12,7 @@
         #region PanelModelConstants
 
         public int panel_propertyHeight_default = 175;
-        public int panel_property_sashPanelHeight = 53;
+        public int panel_property_sashPanelHeight = 81;
         public int panel_property_handleOptionsHeight = 48;
         public int panel_property_glassOptionsHeight = 130;
         public int panel_property_rotoswingOptionsheight_default = 55;

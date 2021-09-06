@@ -1867,25 +1867,38 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_AdjStrikerQty += 4;
                     }
 
-                    if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
+                    if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957 ||
+                        Panel_ExtensionTopArtNo == Extension_ArticleNo._567639 ||
+                        Panel_ExtensionTopArtNo == Extension_ArticleNo._630956 ||
+                        Panel_ExtensionTopArtNo == Extension_ArticleNo._641798)
                     {
-                        Panel_AdjStrikerQty += 1;
+                        Panel_AdjStrikerQty += (1 * Panel_ExtTopQty);
                     }
 
-                    if (Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957)
+                    if (Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957 ||
+                        Panel_ExtensionTop2ArtNo == Extension_ArticleNo._567639 ||
+                        Panel_ExtensionTop2ArtNo == Extension_ArticleNo._630956 ||
+                        Panel_ExtensionTop2ArtNo == Extension_ArticleNo._641798)
                     {
-                        Panel_AdjStrikerQty += 1;
+                        Panel_AdjStrikerQty += (1 * Panel_ExtTop2Qty);
                     }
 
-                    if (Panel_ExtensionBotArtNo == Extension_ArticleNo._639957)
+                    if (Panel_ExtensionBotArtNo == Extension_ArticleNo._639957 ||
+                        Panel_ExtensionBotArtNo == Extension_ArticleNo._567639 ||
+                        Panel_ExtensionBotArtNo == Extension_ArticleNo._630956 ||
+                        Panel_ExtensionBotArtNo == Extension_ArticleNo._641798)
                     {
-                        Panel_AdjStrikerQty += 1;
+                        Panel_AdjStrikerQty += (1 * Panel_ExtBotQty);
                     }
 
-                    if (Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957)
+                    if (Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957 ||
+                        Panel_ExtensionBot2ArtNo == Extension_ArticleNo._567639 ||
+                        Panel_ExtensionBot2ArtNo == Extension_ArticleNo._630956 ||
+                        Panel_ExtensionBot2ArtNo == Extension_ArticleNo._641798)
                     {
-                        Panel_AdjStrikerQty += 1;
+                        Panel_AdjStrikerQty += (1 * Panel_ExtBot2Qty);
                     }
+
 
                     if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                     {
@@ -2969,24 +2982,36 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_AdjStrikerQty += 4;
                     }
 
-                    if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
+                    if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957 ||
+                        Panel_ExtensionTopArtNo == Extension_ArticleNo._567639 ||
+                        Panel_ExtensionTopArtNo == Extension_ArticleNo._630956 ||
+                        Panel_ExtensionTopArtNo == Extension_ArticleNo._641798)
                     {
-                        Panel_AdjStrikerQty += 1;
+                        Panel_AdjStrikerQty += (1 * Panel_ExtTopQty);
                     }
 
-                    if (Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957)
+                    if (Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957 ||
+                        Panel_ExtensionTop2ArtNo == Extension_ArticleNo._567639 ||
+                        Panel_ExtensionTop2ArtNo == Extension_ArticleNo._630956 ||
+                        Panel_ExtensionTop2ArtNo == Extension_ArticleNo._641798)
                     {
-                        Panel_AdjStrikerQty += 1;
+                        Panel_AdjStrikerQty += (1 * Panel_ExtTop2Qty);
                     }
 
-                    if (Panel_ExtensionBotArtNo == Extension_ArticleNo._639957)
+                    if (Panel_ExtensionBotArtNo == Extension_ArticleNo._639957 ||
+                        Panel_ExtensionBotArtNo == Extension_ArticleNo._567639 ||
+                        Panel_ExtensionBotArtNo == Extension_ArticleNo._630956 ||
+                        Panel_ExtensionBotArtNo == Extension_ArticleNo._641798)
                     {
-                        Panel_AdjStrikerQty += 1;
+                        Panel_AdjStrikerQty += (1 * Panel_ExtBotQty);
                     }
 
-                    if (Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957)
+                    if (Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957 ||
+                        Panel_ExtensionBot2ArtNo == Extension_ArticleNo._567639 ||
+                        Panel_ExtensionBot2ArtNo == Extension_ArticleNo._630956 ||
+                        Panel_ExtensionBot2ArtNo == Extension_ArticleNo._641798)
                     {
-                        Panel_AdjStrikerQty += 1;
+                        Panel_AdjStrikerQty += (1 * Panel_ExtBot2Qty);
                     }
 
                     if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)

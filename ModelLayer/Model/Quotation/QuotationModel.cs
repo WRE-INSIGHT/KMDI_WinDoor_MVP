@@ -67,11 +67,11 @@ namespace ModelLayer.Model.Quotation
                 add_screws_fab_snapInKeep = 0,
                 add_screws_fab_striker = 0,
                 add_screws_fab_mc = 0,
-                add_screws_fab_fs = 0,
+                add_screws_fab_fs_or_rs = 0,
                 add_screws_fab_alum = 0,
                 add_screws_fab_fxdcam = 0,
                 add_screws_fab_endcap = 0,
-                add_screws_fab_2dHinge = 0,
+                add_screws_fab_hinges = 0,
                 exp_bolt = 0,
                 frame_width = 0,
                 frame_height = 0;
@@ -727,7 +727,7 @@ namespace ModelLayer.Model.Quotation
 
                                             if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                             {
-                                                add_screws_fab_fs += 6; //for Storm26
+                                                add_screws_fab_fs_or_rs += 6; //for Storm26
 
                                                 Material_List.Rows.Add("Snap-in Keep " + pnl_curCtrl.Panel_SnapInKeepArtNo.ToString(),
                                                                        2, "pc(s)",
@@ -753,20 +753,20 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8)
                                             {
-                                                add_screws_fab_fs += 3;
+                                                add_screws_fab_fs_or_rs += 3;
                                             }
                                             else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
                                                      pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD)
                                             {
-                                                add_screws_fab_fs += 4;
+                                                add_screws_fab_fs_or_rs += 4;
                                             }
                                             else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD)
                                             {
-                                                add_screws_fab_fs += 5;
+                                                add_screws_fab_fs_or_rs += 5;
                                             }
                                             else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22)
                                             {
-                                                add_screws_fab_fs += 6;
+                                                add_screws_fab_fs_or_rs += 6;
                                             }
                                         }
                                         else if (pnl_curCtrl.Panel_Type.Contains("Casement"))
@@ -783,20 +783,20 @@ namespace ModelLayer.Model.Quotation
 
                                                     if (pnl_curCtrl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD)
                                                     {
-                                                        add_screws_fab_fs += 3;
+                                                        add_screws_fab_fs_or_rs += 3;
                                                     }
                                                     else if (pnl_curCtrl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
                                                              pnl_curCtrl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD)
                                                     {
-                                                        add_screws_fab_fs += 4;
+                                                        add_screws_fab_fs_or_rs += 4;
                                                     }
                                                     else if (pnl_curCtrl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD)
                                                     {
-                                                        add_screws_fab_fs += 5;
+                                                        add_screws_fab_fs_or_rs += 5;
                                                     }
                                                     else if (pnl_curCtrl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
                                                     {
-                                                        add_screws_fab_fs += 6;
+                                                        add_screws_fab_fs_or_rs += 6;
                                                     }
                                                 }
                                                 else if (pnl_curCtrl.Panel_HingeOptions == HingeOption._2DHinge)
@@ -807,7 +807,7 @@ namespace ModelLayer.Model.Quotation
                                                                            "Sash & Frame",
                                                                            @"");
 
-                                                    add_screws_fab_2dHinge += (3 * pnl_curCtrl.Panel_2DHingeQty_nonMotorized);
+                                                    add_screws_fab_hinges += (3 * pnl_curCtrl.Panel_2DHingeQty_nonMotorized);
                                                 }
 
                                                 Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
@@ -824,18 +824,21 @@ namespace ModelLayer.Model.Quotation
                                                                        "",
                                                                        "Sash & Frame",
                                                                        @"");
+                                                add_screws_fab_hinges += (6 * pnl_curCtrl.Panel_3dHingeQty);
 
                                                 Material_List.Rows.Add("Restrictor Stay " + pnl_curCtrl.Panel_RestrictorStayArtNo.DisplayName,
                                                                        pnl_curCtrl.Panel_RestrictorStayQty, "pc(s)",
                                                                        "",
                                                                        "Sash & Frame",
                                                                        @"");
+                                                add_screws_fab_fs_or_rs += (6 * pnl_curCtrl.Panel_RestrictorStayQty);
 
                                                 Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
                                                                        pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
                                                                        "",
                                                                        "Frame",
                                                                        @"");
+                                                add_screws_fab_striker += (1 * pnl_curCtrl.Panel_AdjStrikerQty);
                                             }
                                         }
 
@@ -853,7 +856,7 @@ namespace ModelLayer.Model.Quotation
                                         if (pnl_curCtrl.Panel_HandleType != Handle_Type._Rotary && 
                                             pnl_curCtrl.Panel_HandleType != Handle_Type._None)
                                         {
-                                            if (pnl_curCtrl.Panel_ExtTopQty > 0)
+                                            if (pnl_curCtrl.Panel_ExtensionTopArtNo != Extension_ArticleNo._None && pnl_curCtrl.Panel_ExtTopQty > 0)
                                             {
                                                 Material_List.Rows.Add("Extension(Top) " + pnl_curCtrl.Panel_ExtensionTopArtNo.ToString(),
                                                                        pnl_curCtrl.Panel_ExtTopQty, "pc (s)",
@@ -869,8 +872,17 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     add_screws_fab_ext += (5 * pnl_curCtrl.Panel_ExtTopQty);
                                                 }
+                                                else if (pnl_curCtrl.Panel_ExtensionTopArtNo == Extension_ArticleNo._567639)
+                                                {
+                                                    add_screws_fab_ext += (2 * pnl_curCtrl.Panel_ExtTopQty);
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionTopArtNo == Extension_ArticleNo._630956 ||
+                                                         pnl_curCtrl.Panel_ExtensionTopArtNo == Extension_ArticleNo._641798)
+                                                {
+                                                    add_screws_fab_ext += (4 * pnl_curCtrl.Panel_ExtTopQty);
+                                                }
                                             }
-                                            if (pnl_curCtrl.Panel_ExtTop2Qty > 0 && pnl_curCtrl.Panel_ExtTopChk == true)
+                                            if (pnl_curCtrl.Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None && pnl_curCtrl.Panel_ExtTop2Qty > 0 && pnl_curCtrl.Panel_ExtTopChk == true)
                                             {
                                                 Material_List.Rows.Add("Extension_2(Top) " + pnl_curCtrl.Panel_ExtensionTop2ArtNo.ToString(),
                                                                        pnl_curCtrl.Panel_ExtTop2Qty, "pc (s)",
@@ -886,8 +898,17 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     add_screws_fab_ext += (5 * pnl_curCtrl.Panel_ExtTop2Qty);
                                                 }
+                                                else if (pnl_curCtrl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._567639)
+                                                {
+                                                    add_screws_fab_ext += (2 * pnl_curCtrl.Panel_ExtTop2Qty);
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._630956 ||
+                                                         pnl_curCtrl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._641798)
+                                                {
+                                                    add_screws_fab_ext += (4 * pnl_curCtrl.Panel_ExtTop2Qty);
+                                                }
                                             }
-                                            if (pnl_curCtrl.Panel_ExtBotQty > 0)
+                                            if (pnl_curCtrl.Panel_ExtensionBotArtNo != Extension_ArticleNo._None && pnl_curCtrl.Panel_ExtBotQty > 0)
                                             {
                                                 Material_List.Rows.Add("Extension(Bot) " + pnl_curCtrl.Panel_ExtensionBotArtNo.ToString(),
                                                                        pnl_curCtrl.Panel_ExtBotQty, "pc (s)",
@@ -903,8 +924,17 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     add_screws_fab_ext += (5 * pnl_curCtrl.Panel_ExtBotQty);
                                                 }
+                                                else if (pnl_curCtrl.Panel_ExtensionBotArtNo == Extension_ArticleNo._567639)
+                                                {
+                                                    add_screws_fab_ext += (2 * pnl_curCtrl.Panel_ExtBotQty);
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionBotArtNo == Extension_ArticleNo._630956 ||
+                                                         pnl_curCtrl.Panel_ExtensionBotArtNo == Extension_ArticleNo._641798)
+                                                {
+                                                    add_screws_fab_ext += (4 * pnl_curCtrl.Panel_ExtBotQty);
+                                                }
                                             }
-                                            if (pnl_curCtrl.Panel_ExtBot2Qty > 0 && pnl_curCtrl.Panel_ExtBotChk == true)
+                                            if (pnl_curCtrl.Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None && pnl_curCtrl.Panel_ExtBot2Qty > 0 && pnl_curCtrl.Panel_ExtBotChk == true)
                                             {
                                                 Material_List.Rows.Add("Extension_2(Bot) " + pnl_curCtrl.Panel_ExtensionBot2ArtNo.ToString(),
                                                                        pnl_curCtrl.Panel_ExtBot2Qty, "pc (s)",
@@ -920,8 +950,17 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     add_screws_fab_ext += (5 * pnl_curCtrl.Panel_ExtBot2Qty);
                                                 }
+                                                else if (pnl_curCtrl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._567639)
+                                                {
+                                                    add_screws_fab_ext += (2 * pnl_curCtrl.Panel_ExtBot2Qty);
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._630956 ||
+                                                         pnl_curCtrl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._641798)
+                                                {
+                                                    add_screws_fab_ext += (4 * pnl_curCtrl.Panel_ExtBot2Qty);
+                                                }
                                             }
-                                            if (pnl_curCtrl.Panel_ExtLeftQty > 0)
+                                            if (pnl_curCtrl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None && pnl_curCtrl.Panel_ExtLeftQty > 0)
                                             {
                                                 Material_List.Rows.Add("Extension(Left) " + pnl_curCtrl.Panel_ExtensionLeftArtNo.ToString(),
                                                                        pnl_curCtrl.Panel_ExtLeftQty, "pc (s)",
@@ -937,8 +976,17 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     add_screws_fab_ext += (5 * pnl_curCtrl.Panel_ExtLeftQty);
                                                 }
+                                                else if (pnl_curCtrl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._567639)
+                                                {
+                                                    add_screws_fab_ext += (2 * pnl_curCtrl.Panel_ExtLeftQty);
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._630956 ||
+                                                         pnl_curCtrl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._641798)
+                                                {
+                                                    add_screws_fab_ext += (4 * pnl_curCtrl.Panel_ExtLeftQty);
+                                                }
                                             }
-                                            if (pnl_curCtrl.Panel_ExtLeft2Qty > 0 && pnl_curCtrl.Panel_ExtLeftChk == true)
+                                            if (pnl_curCtrl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None && pnl_curCtrl.Panel_ExtLeft2Qty > 0 && pnl_curCtrl.Panel_ExtLeftChk == true)
                                             {
                                                 Material_List.Rows.Add("Extension_2(Left) " + pnl_curCtrl.Panel_ExtensionLeft2ArtNo.ToString(),
                                                                        pnl_curCtrl.Panel_ExtLeft2Qty, "pc (s)",
@@ -954,8 +1002,17 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     add_screws_fab_ext += (5 * pnl_curCtrl.Panel_ExtLeft2Qty);
                                                 }
+                                                else if (pnl_curCtrl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._567639)
+                                                {
+                                                    add_screws_fab_ext += (2 * pnl_curCtrl.Panel_ExtLeft2Qty);
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._630956 ||
+                                                         pnl_curCtrl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._641798)
+                                                {
+                                                    add_screws_fab_ext += (4 * pnl_curCtrl.Panel_ExtLeft2Qty);
+                                                }
                                             }
-                                            if (pnl_curCtrl.Panel_ExtRightQty > 0)
+                                            if (pnl_curCtrl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None && pnl_curCtrl.Panel_ExtRightQty > 0)
                                             {
                                                 Material_List.Rows.Add("Extension(Right) " + pnl_curCtrl.Panel_ExtensionRightArtNo.ToString(),
                                                                        pnl_curCtrl.Panel_ExtRightQty, "pc (s)",
@@ -971,8 +1028,17 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     add_screws_fab_ext += (5 * pnl_curCtrl.Panel_ExtRightQty);
                                                 }
+                                                else if (pnl_curCtrl.Panel_ExtensionRightArtNo == Extension_ArticleNo._567639)
+                                                {
+                                                    add_screws_fab_ext += (2 * pnl_curCtrl.Panel_ExtRightQty);
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionRightArtNo == Extension_ArticleNo._630956 ||
+                                                         pnl_curCtrl.Panel_ExtensionRightArtNo == Extension_ArticleNo._641798)
+                                                {
+                                                    add_screws_fab_ext += (4 * pnl_curCtrl.Panel_ExtRightQty);
+                                                }
                                             }
-                                            if (pnl_curCtrl.Panel_ExtRight2Qty > 0 && pnl_curCtrl.Panel_ExtRightChk == true)
+                                            if (pnl_curCtrl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None && pnl_curCtrl.Panel_ExtRight2Qty > 0 && pnl_curCtrl.Panel_ExtRightChk == true)
                                             {
                                                 Material_List.Rows.Add("Extension_2(Right) " + pnl_curCtrl.Panel_ExtensionRight2ArtNo.ToString(),
                                                                        pnl_curCtrl.Panel_ExtRight2Qty, "pc (s)",
@@ -987,6 +1053,15 @@ namespace ModelLayer.Model.Quotation
                                                 else if (pnl_curCtrl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
                                                 {
                                                     add_screws_fab_ext += (5 * pnl_curCtrl.Panel_ExtRight2Qty);
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._567639)
+                                                {
+                                                    add_screws_fab_ext += (2 * pnl_curCtrl.Panel_ExtRight2Qty);
+                                                }
+                                                else if (pnl_curCtrl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._630956 ||
+                                                         pnl_curCtrl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._641798)
+                                                {
+                                                    add_screws_fab_ext += (4 * pnl_curCtrl.Panel_ExtRight2Qty);
                                                 }
                                             }
 
@@ -1355,7 +1430,7 @@ namespace ModelLayer.Model.Quotation
 
                                 if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                 {
-                                    add_screws_fab_fs += 6; //for Storm26
+                                    add_screws_fab_fs_or_rs += 6; //for Storm26
 
                                     Material_List.Rows.Add("Snap-in Keep " + pnl.Panel_SnapInKeepArtNo.ToString(),
                                                            2, "pc(s)",
@@ -1381,20 +1456,20 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8)
                                 {
-                                    add_screws_fab_fs += 3;
+                                    add_screws_fab_fs_or_rs += 3;
                                 }
                                 else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
                                          pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD)
                                 {
-                                    add_screws_fab_fs += 4;
+                                    add_screws_fab_fs_or_rs += 4;
                                 }
                                 else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
                                 {
-                                    add_screws_fab_fs += 5;
+                                    add_screws_fab_fs_or_rs += 5;
                                 }
                                 else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22)
                                 {
-                                    add_screws_fab_fs += 6;
+                                    add_screws_fab_fs_or_rs += 6;
                                 }
                             }
                             else if (pnl.Panel_Type.Contains("Casement"))
@@ -1411,20 +1486,20 @@ namespace ModelLayer.Model.Quotation
 
                                         if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD)
                                         {
-                                            add_screws_fab_fs += 3;
+                                            add_screws_fab_fs_or_rs += 3;
                                         }
                                         else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
                                                  pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD)
                                         {
-                                            add_screws_fab_fs += 4;
+                                            add_screws_fab_fs_or_rs += 4;
                                         }
                                         else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
                                         {
-                                            add_screws_fab_fs += 5;
+                                            add_screws_fab_fs_or_rs += 5;
                                         }
                                         else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
                                         {
-                                            add_screws_fab_fs += 6;
+                                            add_screws_fab_fs_or_rs += 6;
                                         }
                                     }
                                     else if (pnl.Panel_HingeOptions == HingeOption._2DHinge)
@@ -1435,7 +1510,7 @@ namespace ModelLayer.Model.Quotation
                                                                "Sash & Frame",
                                                                @"");
 
-                                        add_screws_fab_2dHinge += (3 * pnl.Panel_2DHingeQty_nonMotorized);
+                                        add_screws_fab_hinges += (3 * pnl.Panel_2DHingeQty_nonMotorized);
                                     }
 
                                     Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
@@ -1452,18 +1527,22 @@ namespace ModelLayer.Model.Quotation
                                                            "",
                                                            "Sash & Frame",
                                                            @"");
+                                    add_screws_fab_hinges += (6 * pnl.Panel_3dHingeQty);
 
                                     Material_List.Rows.Add("Restrictor Stay " + pnl.Panel_RestrictorStayArtNo.DisplayName,
                                                            pnl.Panel_RestrictorStayQty, "pc(s)",
                                                            "",
                                                            "Sash & Frame",
                                                            @"");
+                                    add_screws_fab_fs_or_rs += (6 * pnl.Panel_RestrictorStayQty);
 
                                     Material_List.Rows.Add("Adjustable Striker " + pnl.Panel_AdjStrikerArtNo.DisplayName,
                                                            pnl.Panel_AdjStrikerQty, "pc(s)",
                                                            "",
                                                            "Frame",
                                                            @"");
+
+                                    add_screws_fab_striker += (1 * pnl.Panel_AdjStrikerQty);
                                 }
 
                             }
@@ -1482,7 +1561,7 @@ namespace ModelLayer.Model.Quotation
                             if (pnl.Panel_HandleType != Handle_Type._Rotary &&
                                 pnl.Panel_HandleType != Handle_Type._None)
                             {
-                                if (pnl.Panel_ExtTopQty > 0)
+                                if (pnl.Panel_ExtensionTopArtNo != Extension_ArticleNo._None && pnl.Panel_ExtTopQty > 0)
                                 {
                                     Material_List.Rows.Add("Extension(Top) " + pnl.Panel_ExtensionTopArtNo.ToString(),
                                                            pnl.Panel_ExtTopQty, "pc (s)",
@@ -1498,8 +1577,17 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         add_screws_fab_ext += (5 * pnl.Panel_ExtTopQty);
                                     }
+                                    else if (pnl.Panel_ExtensionTopArtNo == Extension_ArticleNo._567639)
+                                    {
+                                        add_screws_fab_ext += (2 * pnl.Panel_ExtTopQty);
+                                    }
+                                    else if (pnl.Panel_ExtensionTopArtNo == Extension_ArticleNo._630956 ||
+                                             pnl.Panel_ExtensionTopArtNo == Extension_ArticleNo._641798)
+                                    {
+                                        add_screws_fab_ext += (4 * pnl.Panel_ExtTopQty);
+                                    }
                                 }
-                                if (pnl.Panel_ExtTop2Qty > 0 && pnl.Panel_ExtTopChk == true)
+                                if (pnl.Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None && pnl.Panel_ExtTop2Qty > 0 && pnl.Panel_ExtTopChk == true)
                                 {
                                     Material_List.Rows.Add("Extension_2(Top) " + pnl.Panel_ExtensionTop2ArtNo.ToString(),
                                                            pnl.Panel_ExtTop2Qty, "pc (s)",
@@ -1515,8 +1603,17 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         add_screws_fab_ext += (5 * pnl.Panel_ExtTop2Qty);
                                     }
+                                    else if (pnl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._567639)
+                                    {
+                                        add_screws_fab_ext += (2 * pnl.Panel_ExtTop2Qty);
+                                    }
+                                    else if (pnl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._630956 ||
+                                             pnl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._641798)
+                                    {
+                                        add_screws_fab_ext += (4 * pnl.Panel_ExtTop2Qty);
+                                    }
                                 }
-                                if (pnl.Panel_ExtBotQty > 0)
+                                if (pnl.Panel_ExtensionBotArtNo != Extension_ArticleNo._None && pnl.Panel_ExtBotQty > 0)
                                 {
                                     Material_List.Rows.Add("Extension(Bot) " + pnl.Panel_ExtensionBotArtNo.ToString(),
                                                            pnl.Panel_ExtBotQty, "pc (s)",
@@ -1532,8 +1629,17 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         add_screws_fab_ext += (5 * pnl.Panel_ExtBotQty);
                                     }
+                                    else if (pnl.Panel_ExtensionBotArtNo == Extension_ArticleNo._567639)
+                                    {
+                                        add_screws_fab_ext += (2 * pnl.Panel_ExtBotQty);
+                                    }
+                                    else if (pnl.Panel_ExtensionBotArtNo == Extension_ArticleNo._630956 ||
+                                             pnl.Panel_ExtensionBotArtNo == Extension_ArticleNo._641798)
+                                    {
+                                        add_screws_fab_ext += (4 * pnl.Panel_ExtBotQty);
+                                    }
                                 }
-                                if (pnl.Panel_ExtBot2Qty > 0 && pnl.Panel_ExtBotChk == true)
+                                if (pnl.Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None && pnl.Panel_ExtBot2Qty > 0 && pnl.Panel_ExtBotChk == true)
                                 {
                                     Material_List.Rows.Add("Extension_2(Bot) " + pnl.Panel_ExtensionBot2ArtNo.ToString(),
                                                            pnl.Panel_ExtBot2Qty, "pc (s)",
@@ -1549,8 +1655,17 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         add_screws_fab_ext += (5 * pnl.Panel_ExtBot2Qty);
                                     }
+                                    else if (pnl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._567639)
+                                    {
+                                        add_screws_fab_ext += (2 * pnl.Panel_ExtBot2Qty);
+                                    }
+                                    else if (pnl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._630956 ||
+                                             pnl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._641798)
+                                    {
+                                        add_screws_fab_ext += (4 * pnl.Panel_ExtBot2Qty);
+                                    }
                                 }
-                                if (pnl.Panel_ExtLeftQty > 0)
+                                if (pnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None && pnl.Panel_ExtLeftQty > 0)
                                 {
                                     Material_List.Rows.Add("Extension(Left) " + pnl.Panel_ExtensionLeftArtNo.ToString(),
                                                            pnl.Panel_ExtLeftQty, "pc (s)",
@@ -1566,8 +1681,17 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         add_screws_fab_ext += (5 * pnl.Panel_ExtLeftQty);
                                     }
+                                    else if (pnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._567639)
+                                    {
+                                        add_screws_fab_ext += (2 * pnl.Panel_ExtLeftQty);
+                                    }
+                                    else if (pnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._630956 ||
+                                             pnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._641798)
+                                    {
+                                        add_screws_fab_ext += (4 * pnl.Panel_ExtLeftQty);
+                                    }
                                 }
-                                if (pnl.Panel_ExtLeft2Qty > 0 && pnl.Panel_ExtLeftChk == true)
+                                if (pnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None && pnl.Panel_ExtLeft2Qty > 0 && pnl.Panel_ExtLeftChk == true)
                                 {
                                     Material_List.Rows.Add("Extension_2(Left) " + pnl.Panel_ExtensionLeft2ArtNo.ToString(),
                                                            pnl.Panel_ExtLeft2Qty, "pc (s)",
@@ -1583,8 +1707,17 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         add_screws_fab_ext += (5 * pnl.Panel_ExtLeft2Qty);
                                     }
+                                    else if (pnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._567639)
+                                    {
+                                        add_screws_fab_ext += (2 * pnl.Panel_ExtLeft2Qty);
+                                    }
+                                    else if (pnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._630956 ||
+                                             pnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._641798)
+                                    {
+                                        add_screws_fab_ext += (4 * pnl.Panel_ExtLeft2Qty);
+                                    }
                                 }
-                                if (pnl.Panel_ExtRightQty > 0)
+                                if (pnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None && pnl.Panel_ExtRightQty > 0)
                                 {
                                     Material_List.Rows.Add("Extension(Right) " + pnl.Panel_ExtensionRightArtNo.ToString(),
                                                            pnl.Panel_ExtRightQty, "pc (s)",
@@ -1600,8 +1733,17 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         add_screws_fab_ext += (5 * pnl.Panel_ExtRightQty);
                                     }
+                                    else if (pnl.Panel_ExtensionRightArtNo == Extension_ArticleNo._567639)
+                                    {
+                                        add_screws_fab_ext += (2 * pnl.Panel_ExtRightQty);
+                                    }
+                                    else if (pnl.Panel_ExtensionRightArtNo == Extension_ArticleNo._630956 ||
+                                             pnl.Panel_ExtensionRightArtNo == Extension_ArticleNo._641798)
+                                    {
+                                        add_screws_fab_ext += (4 * pnl.Panel_ExtRightQty);
+                                    }
                                 }
-                                if (pnl.Panel_ExtRight2Qty > 0 && pnl.Panel_ExtRightChk == true)
+                                if (pnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None && pnl.Panel_ExtRight2Qty > 0 && pnl.Panel_ExtRightChk == true)
                                 {
                                     Material_List.Rows.Add("Extension_2(Right) " + pnl.Panel_ExtensionRight2ArtNo.ToString(),
                                                            pnl.Panel_ExtRight2Qty, "pc (s)",
@@ -1616,6 +1758,15 @@ namespace ModelLayer.Model.Quotation
                                     else if (pnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
                                     {
                                         add_screws_fab_ext += (5 * pnl.Panel_ExtRight2Qty);
+                                    }
+                                    else if (pnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._567639)
+                                    {
+                                        add_screws_fab_ext += (2 * pnl.Panel_ExtRight2Qty);
+                                    }
+                                    else if (pnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._630956 ||
+                                             pnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._641798)
+                                    {
+                                        add_screws_fab_ext += (4 * pnl.Panel_ExtRight2Qty);
                                     }
                                 }
 
@@ -1871,11 +2022,11 @@ namespace ModelLayer.Model.Quotation
                                                                                     add_screws_fab_snapInKeep +
                                                                                     add_screws_fab_striker +
                                                                                     add_screws_fab_mc +
-                                                                                    add_screws_fab_fs +
+                                                                                    add_screws_fab_fs_or_rs +
                                                                                     add_screws_fab_alum +
                                                                                     add_screws_fab_fxdcam +
-                                                                                    add_screws_fab_endcap + 
-                                                                                    add_screws_fab_2dHinge;
+                                                                                    add_screws_fab_endcap +
+                                                                                    add_screws_fab_hinges;
             Screws_for_Installation = fixing_screw + total_screws_installation;
             Screws_for_Cladding = total_cladding_size / 300;
 
