@@ -2417,25 +2417,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_FSCasementArtNo = fs_dimension_based;
                     }
 
-
-                    if (Panel_HingeOptions == HingeOption._2DHinge)
-                    {
-                        Panel_PlasticWedgeQty = 1;
-                    }
-                    else if (Panel_HingeOptions == HingeOption._FrictionStay)
-                    {
-                        if (Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
-                            Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS)
-                        {
-                            Panel_PlasticWedgeQty = 1;
-                        }
-                        else if (Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
-                                 Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD ||
-                                 Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
-                        {
-                            Panel_PlasticWedgeQty = 2;
-                        }
-                    }
+                    Panel_PlasticWedgeQty = 1;
                 }
 
                 if (Panel_HandleType == Handle_Type._Rio)
@@ -2932,11 +2914,12 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
 
                 int handle_deduct = 0, glass_deduct = 0;
-                if (Panel_SashReinfArtNo == SashReinf_ArticleNo._R675)
+                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     handle_deduct = 55;
                 }
-                else if (Panel_SashReinfArtNo == SashReinf_ArticleNo._655)
+                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                 {
                     handle_deduct = 40;
                 }
@@ -3510,25 +3493,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_FSCasementArtNo = fs_dimension_based;
                     }
 
-
-                    if (Panel_HingeOptions == HingeOption._2DHinge)
-                    {
-                        Panel_PlasticWedgeQty = 1;
-                    }
-                    else if (Panel_HingeOptions == HingeOption._FrictionStay)
-                    {
-                        if (Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
-                            Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS)
-                        {
-                            Panel_PlasticWedgeQty = 1;
-                        }
-                        else if (Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
-                                 Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD ||
-                                 Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
-                        {
-                            Panel_PlasticWedgeQty = 2;
-                        }
-                    }
+                    Panel_PlasticWedgeQty = 1;
                 }
 
                 if (base_color == Base_Color._Ivory ||
