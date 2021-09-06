@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using PresentationLayer.CommonMethods;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,8 @@ namespace PresentationLayer.Views
         }
 
         public event EventHandler ExplosionViewLoadEventRaised;
+
+        CommonFunctions common_func = new CommonFunctions();
 
         private void ExplosionView_Load(object sender, EventArgs e)
         {
@@ -56,6 +59,11 @@ namespace PresentationLayer.Views
                     }
                 }
             }
+        }
+
+        private void dgv_ExplosionMaterialList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            common_func.rowpostpaint(sender, e);
         }
     }
 }

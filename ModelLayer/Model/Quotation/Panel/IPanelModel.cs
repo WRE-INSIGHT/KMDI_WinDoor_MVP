@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.Frame;
+﻿using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -151,6 +152,13 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_2DHingeQty { get; set; }
         _2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized { get; set; }
         int Panel_2DHingeQty_nonMotorized { get; set; }
+        _3dHinge_ArticleNo Panel_3dHingeArtNo { get; set; }
+        int Panel_3dHingeQty { get; set; }
+        AdjustableStriker_ArticleNo Panel_AdjStrikerArtNo { get; set; }
+        int Panel_AdjStrikerQty { get; set; }
+        RestrictorStay_ArticleNo Panel_RestrictorStayArtNo { get; set; }
+        int Panel_RestrictorStayQty { get; set; }
+
         int Panel_ExtensionPropertyHeight { get; set; }
         GeorgianBar_ArticleNo Panel_GeorgianBarArtNo { get; set; }
         int Panel_GeorgianBar_VerticalQty { get; set; }
@@ -177,6 +185,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                            DividerType div_type,
                                            bool if_divNxt_is_dummy_mullion,
                                            bool if_divPrev_is_dummy_mullion,
+                                           IDividerModel divNxt,
+                                           IDividerModel divPrev,
                                            Divider_ArticleNo divArtNo_LeftorTop = null,
                                            Divider_ArticleNo divArtNo_RightorBot = null,
                                            string div_type_lvl3 = "",
