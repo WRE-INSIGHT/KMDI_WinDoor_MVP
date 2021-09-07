@@ -2885,20 +2885,6 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_PlateArtNo = Plate_ArticleNo._N4803LB;
             }
 
-            if (Panel_HingeOptions == HingeOption._2DHinge)
-            {
-                Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
-
-                if (Panel_SashHeight <= 1499)
-                {
-                    Panel_2DHingeQty_nonMotorized = 3;
-                }
-                else if (Panel_SashHeight >= 1500)
-                {
-                    Panel_2DHingeQty_nonMotorized = 4;
-                }
-            }
-
             if (Panel_SashPropertyVisibility == true)
             {
                 int dm_deduct = 0;
@@ -2970,6 +2956,20 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
+
+                if (Panel_HingeOptions == HingeOption._2DHinge)
+                {
+                    Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
+
+                    if (Panel_SashHeight <= 1499)
+                    {
+                        Panel_2DHingeQty_nonMotorized = 3;
+                    }
+                    else if (Panel_SashHeight >= 1500)
+                    {
+                        Panel_2DHingeQty_nonMotorized = 4;
+                    }
+                }
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                     Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
