@@ -816,22 +816,33 @@ namespace ModelLayer.Model.Quotation
                                                                        "Frame",
                                                                        @"");
                                             }
-                                            else if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 &&
-                                                     frame.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                                            else if (frame.Frame_ArtNo == FrameProfile_ArticleNo._7507)
                                             {
-                                                Material_List.Rows.Add("3D hinge " + pnl_curCtrl.Panel_3dHingeArtNo.DisplayName,
-                                                                       pnl_curCtrl.Panel_3dHingeQty, "pc(s)",
-                                                                       "",
-                                                                       "Sash & Frame",
-                                                                       @"");
-                                                add_screws_fab_hinges += (6 * pnl_curCtrl.Panel_3dHingeQty);
+                                                if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                                {
+                                                    Material_List.Rows.Add("3D hinge " + pnl_curCtrl.Panel_3dHingeArtNo.DisplayName,
+                                                                           pnl_curCtrl.Panel_3dHingeQty, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+                                                    add_screws_fab_hinges += (6 * pnl_curCtrl.Panel_3dHingeQty);
 
-                                                Material_List.Rows.Add("Restrictor Stay " + pnl_curCtrl.Panel_RestrictorStayArtNo.DisplayName,
-                                                                       pnl_curCtrl.Panel_RestrictorStayQty, "pc(s)",
-                                                                       "",
-                                                                       "Sash & Frame",
-                                                                       @"");
-                                                add_screws_fab_fs_or_rs += (6 * pnl_curCtrl.Panel_RestrictorStayQty);
+                                                    Material_List.Rows.Add("Restrictor Stay " + pnl_curCtrl.Panel_RestrictorStayArtNo.DisplayName,
+                                                                           pnl_curCtrl.Panel_RestrictorStayQty, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+                                                    add_screws_fab_fs_or_rs += (6 * pnl_curCtrl.Panel_RestrictorStayQty);
+
+                                                }
+                                                else if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                                {
+                                                    Material_List.Rows.Add("NT Center Hinge " + pnl_curCtrl.Panel_NTCenterHingeArticleNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+                                                }
 
                                                 Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
                                                                        pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
@@ -1519,23 +1530,33 @@ namespace ModelLayer.Model.Quotation
                                                            "Frame",
                                                            @"");
                                 }
-                                else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 && 
-                                         frame.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                                else if (frame.Frame_ArtNo == FrameProfile_ArticleNo._7507)
                                 {
-                                    Material_List.Rows.Add("3D hinge " + pnl.Panel_3dHingeArtNo.DisplayName,
-                                                           pnl.Panel_3dHingeQty, "pc(s)",
-                                                           "",
-                                                           "Sash & Frame",
-                                                           @"");
-                                    add_screws_fab_hinges += (6 * pnl.Panel_3dHingeQty);
+                                    if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                    {
+                                        Material_List.Rows.Add("3D hinge " + pnl.Panel_3dHingeArtNo.DisplayName,
+                                                               pnl.Panel_3dHingeQty, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+                                        add_screws_fab_hinges += (6 * pnl.Panel_3dHingeQty);
 
-                                    Material_List.Rows.Add("Restrictor Stay " + pnl.Panel_RestrictorStayArtNo.DisplayName,
-                                                           pnl.Panel_RestrictorStayQty, "pc(s)",
-                                                           "",
-                                                           "Sash & Frame",
-                                                           @"");
-                                    add_screws_fab_fs_or_rs += (6 * pnl.Panel_RestrictorStayQty);
+                                        Material_List.Rows.Add("Restrictor Stay " + pnl.Panel_RestrictorStayArtNo.DisplayName,
+                                                               pnl.Panel_RestrictorStayQty, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+                                        add_screws_fab_fs_or_rs += (6 * pnl.Panel_RestrictorStayQty);
 
+                                    }
+                                    else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                    {
+                                        Material_List.Rows.Add("NT Center Hinge " + pnl.Panel_NTCenterHingeArticleNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+                                    }
                                     Material_List.Rows.Add("Adjustable Striker " + pnl.Panel_AdjStrikerArtNo.DisplayName,
                                                            pnl.Panel_AdjStrikerQty, "pc(s)",
                                                            "",

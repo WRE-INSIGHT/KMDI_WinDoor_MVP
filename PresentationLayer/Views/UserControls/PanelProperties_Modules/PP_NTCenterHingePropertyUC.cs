@@ -18,17 +18,17 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void cmb_NTCenterHinge_SelectedValueChanged(object sender, EventArgs e)
         {
+            EventHelpers.RaiseEvent(sender, CmbNTCenterHingeSelectedValueChangedEventRaised, e);
+        }
+
+        private void PP_NTCenterHingePropertyUC_Load(object sender, EventArgs e)
+        {
             List<NTCenterHinge_ArticleNo> NTCenterHingeArticleNo = new List<NTCenterHinge_ArticleNo>();
             foreach (NTCenterHinge_ArticleNo item in NTCenterHinge_ArticleNo.GetAll())
             {
                 NTCenterHingeArticleNo.Add(item);
             }
             cmb_NTCenterHinge.DataSource = NTCenterHingeArticleNo;
-            EventHelpers.RaiseEvent(sender, CmbNTCenterHingeSelectedValueChangedEventRaised, e);
-        }
-
-        private void PP_NTCenterHingePropertyUC_Load(object sender, EventArgs e)
-        {
             EventHelpers.RaiseEvent(sender, NTCenterHingePropertyUCLoadEventRaised, e);
         }
 

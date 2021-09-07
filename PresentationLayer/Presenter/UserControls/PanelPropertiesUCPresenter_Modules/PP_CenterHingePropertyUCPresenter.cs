@@ -30,12 +30,38 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         }
 
+        CenterHingeOption curr_centerHinge;
         private void _pp_centerHingePropertyUC_CmbCenterHingeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             ComboBox cmbCenterHinge = (ComboBox)sender;
             if (_initialLoad == false)
             {
                 _panelModel.Panel_CenterHingeOptions = (CenterHingeOption)cmbCenterHinge.SelectedValue;
+                CenterHingeOption sel_centerHinge = (CenterHingeOption)cmbCenterHinge.SelectedValue;
+                if (curr_centerHinge != sel_centerHinge)
+                {
+                    if (sel_centerHinge == CenterHingeOption._NTCenterHinge)
+                    {
+                        _panelModel.Panel_NTCenterHingeVisibility = true;
+                        _panelModel.AdjustPropertyPanelHeight("addNTCenterHinge");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addNTCenterHinge");
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addNTCenterHinge");
+                        }
+                    }
+                    else if (sel_centerHinge == CenterHingeOption._MiddleCloser)
+                    {
+                        _panelModel.Panel_NTCenterHingeVisibility = false;
+                        _panelModel.AdjustPropertyPanelHeight("minusNTCenterHinge");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
+                        }
+                    }
+                    curr_centerHinge = sel_centerHinge;
+                }
             }
         }
 
@@ -43,6 +69,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_centerHingePropertyUC_CenterHingePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _pp_centerHingePropertyUC.ThisBinding(CreateBindingDictionary());
+            curr_centerHinge = CenterHingeOption._NTCenterHinge;
+            _panelModel.Panel_CenterHingeOptions = CenterHingeOption._NTCenterHinge;
             _initialLoad = false;
         }
 
@@ -67,7 +95,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
             binding.Add("Panel_CenterHingeOptions", new Binding("Text", _panelModel, "Panel_CenterHingeOptions", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Panel_HingeOptionsVisibility", new Binding("Visible", _panelModel, "Panel_HingeOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_CenterHingeOptionsVisibility", new Binding("Visible", _panelModel, "Panel_CenterHingeOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             return binding;
         }
 

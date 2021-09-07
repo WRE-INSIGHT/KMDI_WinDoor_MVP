@@ -1656,6 +1656,22 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_HingeOptionsheight;
             }
+            else if (mode == "addCenterHinge")
+            {
+                Panel_PropertyHeight += constants.panel_property_CenterHingeOptionsheight;
+            }
+            else if (mode == "minusCenterHinge")
+            {
+                Panel_PropertyHeight -= constants.panel_property_CenterHingeOptionsheight;
+            }
+            else if (mode == "addNTCenterHinge")
+            {
+                Panel_PropertyHeight += constants.panel_property_NTCenterHingeOptionsheight;
+            }
+            else if (mode == "minusNTCenterHinge")
+            {
+                Panel_PropertyHeight -= constants.panel_property_NTCenterHingeOptionsheight;
+            }
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
@@ -2431,6 +2447,16 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
 
                     Panel_PlasticWedgeQty = 1;
+                }
+
+                if (base_color == Base_Color._Ivory ||
+                    base_color == Base_Color._White)
+                {
+                    Panel_PlasticWedge = PlasticWedge_ArticleNo._7199WHT;
+                }
+                else if (base_color == Base_Color._DarkBrown)
+                {
+                    Panel_PlasticWedge = PlasticWedge_ArticleNo._7199DB;
                 }
 
                 if (Panel_HandleType == Handle_Type._Rio)
@@ -3530,7 +3556,6 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_PlasticWedge = PlasticWedge_ArticleNo._7199DB;
                 }
-
 
                 if (Panel_HandleType == Handle_Type._Rio)
                 {

@@ -778,7 +778,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             IFrameModel divFrameParent,
                             bool divChkDM,
                             bool divArtVisibility,
-                            DummyMullion_ArticleNo divDMArtNo)
+                            DummyMullion_ArticleNo divDMArtNo,
+                            IPanelModel divDMPanel)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -799,6 +800,7 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_ChkDM = divChkDM;
             Div_ArtVisibility = divArtVisibility;
             Div_DMArtNo = divDMArtNo;
+            Div_DMPanel = divDMPanel;
 
             if (Div_Type == DividerType.Mullion)
             {

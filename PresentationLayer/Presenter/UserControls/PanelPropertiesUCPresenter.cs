@@ -28,6 +28,8 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_ExtensionPropertyUCPresenter _pp_extensionPropertyUCPresenter;
         private IPP_CornerDrivePropertyUCPresenter _pp_cornerDrivePropertyUCPresenter;
         private IPP_HingePropertyUCPresenter _pp_hingePropertyUCPresenter;
+        private IPP_CenterHingePropertyUCPresenter _pp_centerHingePropertyUCPresenter;
+        private IPP_NTCenterHingePropertyUCPresenter _pp_ntCenterHingePropertyUCPresenter;
 
         private IUnityContainer _unityC;
 
@@ -41,7 +43,9 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_GeorgianBarPropertyUCPresenter pp_georgianBarPropertUCPresenter,
                                           IPP_ExtensionPropertyUCPresenter pp_extensionPropertyUCPresenter,
                                           IPP_CornerDrivePropertyUCPresenter pp_cornerDrivePropertyUCPresenter,
-                                          IPP_HingePropertyUCPresenter pp_hingePropertyUCPresenter)
+                                          IPP_HingePropertyUCPresenter pp_hingePropertyUCPresenter,
+                                          IPP_CenterHingePropertyUCPresenter pp_centerHingePropertyUCPresenter,
+                                          IPP_NTCenterHingePropertyUCPresenter pp_ntCenterHingePropertyUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -52,6 +56,8 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_extensionPropertyUCPresenter = pp_extensionPropertyUCPresenter;
             _pp_cornerDrivePropertyUCPresenter = pp_cornerDrivePropertyUCPresenter;
             _pp_hingePropertyUCPresenter = pp_hingePropertyUCPresenter;
+            _pp_centerHingePropertyUCPresenter = pp_centerHingePropertyUCPresenter;
+            _pp_ntCenterHingePropertyUCPresenter = pp_ntCenterHingePropertyUCPresenter;
             _pnlPanelSpecs = _panelPropertiesUC.GetPanelSpecsPNL();
 
             SubscribeToEventsSetup();
@@ -125,6 +131,25 @@ namespace PresentationLayer.Presenter.UserControls
                 _panelModel.Panel_HingeOptionsVisibility = true;
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
                 _panelModel.AdjustPropertyPanelHeight("addHinge");
+
+                if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
+                    _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                {
+                    _panelModel.Panel_CenterHingeOptionsVisibility = false;
+                }
+                else if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                {
+                    _panelModel.Panel_CenterHingeOptionsVisibility = true;
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCenterHinge");
+                    _panelModel.AdjustPropertyPanelHeight("addCenterHinge");
+
+                    if (_panelModel.Panel_CenterHingeOptions == CenterHingeOption._NTCenterHinge)
+                    {
+                        _panelModel.Panel_NTCenterHingeVisibility = true;
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addNTCenterHinge");
+                        _panelModel.AdjustPropertyPanelHeight("addNTCenterHinge");
+                    }
+                }
             }
 
             IPP_HingePropertyUCPresenter hingePropUCP = _pp_hingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
@@ -132,6 +157,18 @@ namespace PresentationLayer.Presenter.UserControls
             _pnlPanelSpecs.Controls.Add(hingeProp);
             hingeProp.Dock = DockStyle.Top;
             hingeProp.BringToFront();
+
+            IPP_CenterHingePropertyUCPresenter centerHingePropUCP = _pp_centerHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
+            UserControl centerHingeProp = (UserControl)centerHingePropUCP.GetCenterHingePropertyUC();
+            _pnlPanelSpecs.Controls.Add(centerHingeProp);
+            centerHingeProp.Dock = DockStyle.Top;
+            centerHingeProp.BringToFront();
+
+            IPP_NTCenterHingePropertyUCPresenter ntcenterHingePropUCP = _pp_ntCenterHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
+            UserControl ntcenterHingeProp = (UserControl)ntcenterHingePropUCP.GetNTCenterHingePropertyUC();
+            _pnlPanelSpecs.Controls.Add(ntcenterHingeProp);
+            ntcenterHingeProp.Dock = DockStyle.Top;
+            ntcenterHingeProp.BringToFront();
 
             if (_panelModel.Panel_SashPropertyVisibility == true)
             {

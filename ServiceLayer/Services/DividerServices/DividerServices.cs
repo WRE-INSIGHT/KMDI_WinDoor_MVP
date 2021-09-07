@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
 using ServiceLayer.CommonServices;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 IFrameModel divFrameParent,
                                                 bool divChkDM,
                                                 bool divArtVisibility,
-                                                DummyMullion_ArticleNo divDMArtNo)
+                                                DummyMullion_ArticleNo divDMArtNo,
+                                                IPanelModel divDMPanel)
         {
             DividerModel div = new DividerModel(divID,
                                                 divName,
@@ -61,7 +63,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 divFrameParent,
                                                 divChkDM,
                                                 divArtVisibility,
-                                                divDMArtNo);
+                                                divDMArtNo,
+                                                divDMPanel);
 
             ValidateModel(div);
             return div;
@@ -90,7 +93,8 @@ namespace ServiceLayer.Services.DividerServices
                                              Dictionary<int, int> divCladdingSizeList = null,
                                              bool divChkDM = false,
                                              bool divArtVisibility = true,
-                                             DummyMullion_ArticleNo divDMArtNo = null)
+                                             DummyMullion_ArticleNo divDMArtNo = null,
+                                             IPanelModel divDMPanel = null)
         {
             if (divName == "")
             {
@@ -134,7 +138,8 @@ namespace ServiceLayer.Services.DividerServices
                                                          divFrameParent,
                                                          divChkDM,
                                                          divArtVisibility,
-                                                         divDMArtNo);
+                                                         divDMArtNo,
+                                                         divDMPanel);
 
             return _divModel;
         }

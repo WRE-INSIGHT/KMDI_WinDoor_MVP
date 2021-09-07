@@ -531,6 +531,22 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_HingeOptionsheight;
                 }
+                else if (mode == "addCenterHinge")
+                {
+                    FrameProp_Height += constants.panel_property_CenterHingeOptionsheight;
+                }
+                else if (mode == "minusCenterHinge")
+                {
+                    FrameProp_Height -= constants.panel_property_CenterHingeOptionsheight;
+                }
+                else if (mode == "addNTCenterHinge")
+                {
+                    FrameProp_Height += constants.panel_property_NTCenterHingeOptionsheight;
+                }
+                else if (mode == "minusNTCenterHinge")
+                {
+                    FrameProp_Height -= constants.panel_property_NTCenterHingeOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {
