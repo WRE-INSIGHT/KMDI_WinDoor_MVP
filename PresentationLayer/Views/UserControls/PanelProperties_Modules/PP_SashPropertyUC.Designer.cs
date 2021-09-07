@@ -32,6 +32,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmb_SashProfile = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.lbl_InOutOrient = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmb_SashReinf
@@ -40,7 +41,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_SashReinf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_SashReinf.FormattingEnabled = true;
-            this.cmb_SashReinf.Location = new System.Drawing.Point(76, 28);
+            this.cmb_SashReinf.Location = new System.Drawing.Point(76, 53);
             this.cmb_SashReinf.Name = "cmb_SashReinf";
             this.cmb_SashReinf.Size = new System.Drawing.Size(72, 21);
             this.cmb_SashReinf.TabIndex = 16;
@@ -49,7 +50,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 33);
+            this.label4.Location = new System.Drawing.Point(4, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 15;
@@ -61,7 +62,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_SashProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_SashProfile.FormattingEnabled = true;
-            this.cmb_SashProfile.Location = new System.Drawing.Point(76, 3);
+            this.cmb_SashProfile.Location = new System.Drawing.Point(76, 26);
             this.cmb_SashProfile.Name = "cmb_SashProfile";
             this.cmb_SashProfile.Size = new System.Drawing.Size(72, 21);
             this.cmb_SashProfile.TabIndex = 14;
@@ -70,24 +71,37 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 8);
+            this.label3.Location = new System.Drawing.Point(4, 31);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 13;
             this.label3.Text = "Sash Profile";
+            // 
+            // lbl_InOutOrient
+            // 
+            this.lbl_InOutOrient.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lbl_InOutOrient.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_InOutOrient.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_InOutOrient.Location = new System.Drawing.Point(0, 0);
+            this.lbl_InOutOrient.Name = "lbl_InOutOrient";
+            this.lbl_InOutOrient.Size = new System.Drawing.Size(154, 20);
+            this.lbl_InOutOrient.TabIndex = 17;
+            this.lbl_InOutOrient.Text = "Inward/Outward Orient";
+            this.lbl_InOutOrient.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PP_SashPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.lbl_InOutOrient);
             this.Controls.Add(this.cmb_SashReinf);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmb_SashProfile);
             this.Controls.Add(this.label3);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "PP_SashPropertyUC";
-            this.Size = new System.Drawing.Size(154, 53);
+            this.Size = new System.Drawing.Size(154, 81);
             this.Load += new System.EventHandler(this.PP_SashPropertyUC_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -100,5 +114,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmb_SashProfile;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_InOutOrient;
     }
 }
