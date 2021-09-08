@@ -671,23 +671,48 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '450'");
-            Assert.AreEqual("4", Convert.ToString(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2452%' AND
+                              Size = '450'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)",@"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '1300'");
-            Assert.AreEqual("4", Convert.ToString(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2452%' AND
+                              Size = '1300'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '375'");
-            Assert.AreEqual("2", Convert.ToString(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
-                                                 Size = '1228'");
-            Assert.AreEqual("2", Convert.ToString(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass Width%' AND 
+                              Size = '375'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass Height%' AND 
+                              Size = '1228'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
+            //                                     Description LIKE '%2452%' AND
+            //                                     Size = '450'");
+            //Assert.AreEqual("4", Convert.ToString(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)",@"Description LIKE '%Glazing Bead Height%' AND
+            //                                     Description LIKE '%2452%' AND
+            //                                     Size = '1300'");
+            //Assert.AreEqual("4", Convert.ToString(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
+            //                                     Size = '375'");
+            //Assert.AreEqual("2", Convert.ToString(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
+            //                                     Size = '1228'");
+            //Assert.AreEqual("2", Convert.ToString(sumObject));
 
             dr = dt.Select("Description = 'Mullion Height 7538' AND Size = '1242'");
             Assert.AreEqual(1, dr.Length);
@@ -963,10 +988,16 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '1300'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1300'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
+            //                                     Description LIKE '%2452%' AND
+            //                                     Size = '1300'");
+            //Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Size = '325'");
@@ -978,9 +1009,14 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
-                                                 Size = '1228'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass Height%' AND 
+                             Size = '1228'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
+            //                                     Size = '1228'");
+            //Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             dr = dt.Select("Description = 'Mullion Height 7538' AND Size = '1242'");
             Assert.AreEqual(1, dr.Length);
@@ -1509,23 +1545,41 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '275'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '600'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '275'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '215'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
-                                                 Size = '540'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+                             Size = '215'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+                             Size = '540'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
+            //                                     Description LIKE '%2452%' AND
+            //                                     Size = '275'");
+            //Assert.AreEqual(8, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
+            //                                     Description LIKE '%2452%' AND
+            //                                     Size = '600'");
+            //Assert.AreEqual(8, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
+            //                                     Size = '215'");
+            //Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
+            //                                     Size = '540'");
+            //Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             dr = dt.Select("Description = 'Mullion Height 7536' AND Size = '549'");
             Assert.AreEqual(1, dr.Length);
@@ -2946,59 +3000,127 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("8", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '800'");
-            Assert.AreEqual(6, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '800'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '950'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '950'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '725'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '890'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass Width%' AND 
+                             Size = '725'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2435%' AND
-                                                 Size = '400'");
-            Assert.AreEqual(16, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+                             Size = '890'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2435%' AND
-                                                 Size = '475'");
-            Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '325'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2435%' AND
+                             Size = '400'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("16", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '415'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2435%' AND
+                             Size = '475'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("16", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2435%' AND
-                                                 Size = '400'");
-            Assert.AreEqual(16, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass Width%' AND 
+                             Size = '325'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2435%' AND
-                                                 Size = '475'");
-            Assert.AreEqual(16, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+                             Size = '415'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '322'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '427'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2435%' AND
+                             Size = '400'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("16", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2435%' AND
+                             Size = '475'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("16", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Width%' AND 
+                             Size = '322'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+                             Size = '427'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
+            //                                     Description LIKE '%2452%' AND
+            //                                     Size = '800'");
+            //Assert.AreEqual(6, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
+            //                                     Description LIKE '%2452%' AND
+            //                                     Size = '950'");
+            //Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
+            //                                     Size = '725'");
+            //Assert.AreEqual(2, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
+            //                                     Size = '890'");
+            //Assert.AreEqual(2, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
+            //                                     Description LIKE '%2435%' AND
+            //                                     Size = '400'");
+            //Assert.AreEqual(16, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
+            //                                     Description LIKE '%2435%' AND
+            //                                     Size = '475'");
+            //Assert.AreEqual(16, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
+            //                                     Size = '325'");
+            //Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
+            //                                     Size = '415'");
+            //Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
+            //                                     Description LIKE '%2435%' AND
+            //                                     Size = '400'");
+            //Assert.AreEqual(16, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
+            //                                     Description LIKE '%2435%' AND
+            //                                     Size = '475'");
+            //Assert.AreEqual(16, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
+            //                                     Size = '322'");
+            //Assert.AreEqual(4, Convert.ToInt32(sumObject));
+
+            //sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
+            //                                     Size = '427'");
+            //Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             #endregion
         }

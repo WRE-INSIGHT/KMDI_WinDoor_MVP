@@ -5372,7 +5372,7 @@ namespace ModelLayer.Tests
             //ACCESSORIES AND HARDWARES 
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
-                             Description LIKE '%M89A-NT%'");
+                             Description LIKE '%M89A-NT-A%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("7", dr[0]["Qty"]);
 
@@ -10661,7 +10661,7 @@ namespace ModelLayer.Tests
             _panelModel1.Panel_GlassThickness = 13.0f;
             _panelModel1.Panel_FSCasementArtNo = FrictionStayCasement_ArticleNo._12HD;
             _panelModel1.Panel_CornerDriveOptionsVisibility = true;
-            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958; 
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
             Control Casement1 = new Control();
@@ -10674,7 +10674,7 @@ namespace ModelLayer.Tests
                                                                               DividerModel.DividerType.Mullion,
                                                                               true,
                                                                               _frameModel.Frame_Zoom,
-                                                                              Divider_ArticleNo._7536,
+                                                                              Divider_ArticleNo._None,
                                                                               _multiMullionModel.MPanel_DisplayWidth,
                                                                               _multiMullionModel.MPanel_DisplayHeight,
                                                                               _multiMullionModel,
@@ -10687,10 +10687,10 @@ namespace ModelLayer.Tests
                                                                               false,
                                                                               true,
                                                                               DummyMullion_ArticleNo._7533);
-
-            _divDummyMullionModel.Div_ArtNo = Divider_ArticleNo._None;
-            _divDummyMullionModel.Div_ChkDM = true;
+           
+            _divDummyMullionModel.Div_ChkDM = true; 
             _divDummyMullionModel.Div_DMPanel = _panelModel1;
+            // _divDummyMullionModel.Div_DMPanel.Panel_SashHeight = 1553;
             _divDummyMullionModel.Div_ArtVisibility = true;
             _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K7533;
             _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
@@ -10768,6 +10768,7 @@ namespace ModelLayer.Tests
             Control Casement2 = new Control();
             Casement2.Name = "CasementPanelUC_2";
             _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
 
             #endregion
 
@@ -13237,6 +13238,6 @@ namespace ModelLayer.Tests
 
         }
 
-
+        // CW Inward
     }
 }
