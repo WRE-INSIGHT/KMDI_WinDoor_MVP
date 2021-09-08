@@ -1516,6 +1516,18 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+        
+        public StayBearingK_ArticleNo Panel_StayBearingKArtNo { get; set; }
+        public StayBearingPin_ArticleNo Panel_StayBearingPinArtNo { get; set; }
+        public StayBearingCover_ArticleNo Panel_StayBearingCoverArtNo { get; set; }
+        public TopCornerHingeCover_ArticleNo Panel_TopCornerHingeCoverArtNo { get; set; }
+        public TopCornerHinge_ArticleNo Panel_TopCornerHingeArtNo { get; set; }
+        public TopCornerHingeSpacer_ArticleNo Panel_TopCornerHingeSpacerArtNo { get; set; }
+        public CornerHingeK_ArticleNo Panel_CornerHingeKArtNo { get; set; }
+        public CornerPivotRestK_ArticleNo Panel_CornerPivotRestKArtNo { get; set; }
+        public CornerHingeCoverK_ArticleNo Panel_CornerHingeCoverKArtNo { get; set; }
+        public CoverForCornerPivotRestVertical_ArticleNo Panel_CoverForCornerPivotRestVerticalArtNo { get; set; }
+        public CoverForCornerPivotRest_ArticleNo Panel_CoverForCornerPivotRestArtNo { get; set; }
 
         private bool _panel_NTCenterHingeVisibility;
         public bool Panel_NTCenterHingeVisibility
@@ -1531,8 +1543,6 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-
-     
 
         public void AdjustPropertyPanelHeight(string mode)
         {
@@ -1964,6 +1974,62 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (Panel_SashHeight > 2699 && Panel_SashHeight < 3200)
                     {
                         Panel_3dHingeQty = 5;
+                    }
+                }
+
+                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_AdjStrikerQty += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_AdjStrikerQty += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
+                    {
+                        Panel_AdjStrikerQty += 4;
+                    }
+
+                    Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+                    Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
+                    Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+                    Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
+                    Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
+                    Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+
+                    if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
+                    {
+                        Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._WhiteIvory;
+                        Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._WhiteIvory;
+                        Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
+                        Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._WhiteIvory;
+                        Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._WhiteIvory;
+                        Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
+                    }
+                    else if (base_color == Base_Color._DarkBrown)
+                    {
+                        Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._DB;
+                        Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._DB;
+                        Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._DB;
+                        Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._DB;
+                        Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._DB;
+                        Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._DB;
+                    }
+
+                    if (Panel_ChkText == "L")
+                    {
+                        Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
+                    }
+                    else if (Panel_ChkText == "R")
+                    {
+                        Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Right;
                     }
                 }
 
@@ -3088,6 +3154,62 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (Panel_SashHeight > 2699 && Panel_SashHeight < 3200)
                     {
                         Panel_3dHingeQty = 5;
+                    }
+                }
+
+                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                {
+                    if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                    {
+                        Panel_AdjStrikerQty += 1;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206 ||
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                    {
+                        Panel_AdjStrikerQty += 2;
+                    }
+                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
+                    {
+                        Panel_AdjStrikerQty += 4;
+                    }
+
+                    Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+                    Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
+                    Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+                    Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
+                    Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
+                    Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+
+                    if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
+                    {
+                        Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._WhiteIvory;
+                        Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._WhiteIvory;
+                        Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
+                        Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._WhiteIvory;
+                        Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._WhiteIvory;
+                        Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
+                    }
+                    else if (base_color == Base_Color._DarkBrown)
+                    {
+                        Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._DB;
+                        Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._DB;
+                        Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._DB;
+                        Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._DB;
+                        Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._DB;
+                        Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._DB;
+                    }
+
+                    if (Panel_ChkText == "L")
+                    {
+                        Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
+                    }
+                    else if (Panel_ChkText == "R")
+                    {
+                        Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Right;
                     }
                 }
 

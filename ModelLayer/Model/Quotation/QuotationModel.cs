@@ -842,6 +842,95 @@ namespace ModelLayer.Model.Quotation
                                                                            "",
                                                                            "Sash & Frame",
                                                                            @"");
+
+                                                    Material_List.Rows.Add("Stay Bearing, K " + pnl_curCtrl.Panel_StayBearingKArtNo.DisplayName,
+                                                                           2, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+
+                                                    Material_List.Rows.Add("Stay Bearing Pin " + pnl_curCtrl.Panel_StayBearingPinArtNo.DisplayName,
+                                                                           2, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+
+                                                    string basecol = "";
+                                                    if (item.WD_BaseColor == Base_Color._Ivory || item.WD_BaseColor == Base_Color._White)
+                                                    {
+                                                        basecol = "W/Ivory";
+                                                    }
+                                                    else if (item.WD_BaseColor == Base_Color._DarkBrown)
+                                                    {
+                                                        basecol = "DB";
+                                                    }
+
+                                                    Material_List.Rows.Add("Stay Bearing Cover, " + basecol + " " + pnl_curCtrl.Panel_StayBearingCoverArtNo.DisplayName,
+                                                                           2, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+
+                                                    Material_List.Rows.Add("Top Corner Hinge Cover, " + basecol + " " + pnl_curCtrl.Panel_TopCornerHingeCoverArtNo.DisplayName,
+                                                                           2, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+
+                                                    if (pnl_curCtrl.Panel_ChkText == "L")
+                                                    {
+                                                        Material_List.Rows.Add("Top Corner Hinge, Left" + pnl_curCtrl.Panel_TopCornerHingeArtNo.DisplayName,
+                                                                               1, "pc(s)",
+                                                                               "",
+                                                                               "Sash & Frame",
+                                                                               @"");
+
+                                                    }
+                                                    else if (pnl_curCtrl.Panel_ChkText == "R")
+                                                    {
+                                                        Material_List.Rows.Add("Top Corner Hinge, Right" + pnl_curCtrl.Panel_TopCornerHingeArtNo.DisplayName,
+                                                                               1, "pc(s)",
+                                                                               "",
+                                                                               "Sash & Frame",
+                                                                               @"");
+                                                    }
+
+
+                                                    Material_List.Rows.Add("Top Corner Hinge Spacer " + pnl_curCtrl.Panel_TopCornerHingeCoverArtNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+
+                                                    Material_List.Rows.Add("Corner Hinge, K" + pnl_curCtrl.Panel_CornerHingeKArtNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+
+                                                    Material_List.Rows.Add("Corner Pivot Rest, K" + pnl_curCtrl.Panel_CornerPivotRestKArtNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+
+                                                    Material_List.Rows.Add("Corner Hinge Cover K, " + basecol + " " + pnl_curCtrl.Panel_CornerHingeCoverKArtNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+
+                                                    Material_List.Rows.Add("Cover for corner pivot rest, vertical, " + basecol + " " + pnl_curCtrl.Panel_CornerHingeCoverKArtNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
+
+                                                    Material_List.Rows.Add("Cover for corner pivot rest, " + basecol + " " + pnl_curCtrl.Panel_CornerHingeCoverKArtNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash & Frame",
+                                                                           @"");
                                                 }
 
                                                 Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
@@ -1552,10 +1641,100 @@ namespace ModelLayer.Model.Quotation
                                     else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                                     {
                                         Material_List.Rows.Add("NT Center Hinge " + pnl.Panel_NTCenterHingeArticleNo.DisplayName,
-                                                                           1, "pc(s)",
-                                                                           "",
-                                                                           "Sash & Frame",
-                                                                           @"");
+                                                                1, "pc(s)",
+                                                                "",
+                                                                "Sash & Frame",
+                                                                @"");
+
+                                        Material_List.Rows.Add("Stay Bearing, K " + pnl.Panel_StayBearingKArtNo.DisplayName,
+                                                               2, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Stay Bearing Pin " + pnl.Panel_StayBearingPinArtNo.DisplayName,
+                                                               2, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
+                                        string basecol = "";
+                                        if (item.WD_BaseColor == Base_Color._Ivory || item.WD_BaseColor == Base_Color._White)
+                                        {
+                                            basecol = "W/Ivory";
+                                        }
+                                        else if (item.WD_BaseColor == Base_Color._DarkBrown)
+                                        {
+                                            basecol = "DB";
+                                        }
+
+                                        Material_List.Rows.Add("Stay Bearing Cover, " + basecol + " " + pnl.Panel_StayBearingCoverArtNo.DisplayName,
+                                                               2, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Top Corner Hinge Cover, " + basecol + " " + pnl.Panel_TopCornerHingeCoverArtNo.DisplayName,
+                                                               2, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
+                                        if (pnl.Panel_ChkText == "L")
+                                        {
+                                            Material_List.Rows.Add("Top Corner Hinge, Left" + pnl.Panel_TopCornerHingeArtNo.DisplayName,
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Sash & Frame",
+                                                                   @"");
+
+                                        }
+                                        else if (pnl.Panel_ChkText == "R")
+                                        {
+                                            Material_List.Rows.Add("Top Corner Hinge, Right" + pnl.Panel_TopCornerHingeArtNo.DisplayName,
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Sash & Frame",
+                                                                   @"");
+                                        }
+
+
+                                        Material_List.Rows.Add("Top Corner Hinge Spacer " + pnl.Panel_TopCornerHingeCoverArtNo.DisplayName,
+                                                               1, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Corner Hinge, K" + pnl.Panel_CornerHingeKArtNo.DisplayName,
+                                                               1, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Corner Pivot Rest, K" + pnl.Panel_CornerPivotRestKArtNo.DisplayName,
+                                                               1, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Corner Hinge Cover K, " + basecol + " " + pnl.Panel_CornerHingeCoverKArtNo.DisplayName,
+                                                               1, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Cover for corner pivot rest, vertical, " + basecol + " " + pnl.Panel_CornerHingeCoverKArtNo.DisplayName,
+                                                               1, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
+                                        Material_List.Rows.Add("Cover for corner pivot rest, " + basecol + " " + pnl.Panel_CornerHingeCoverKArtNo.DisplayName,
+                                                               1, "pc(s)",
+                                                               "",
+                                                               "Sash & Frame",
+                                                               @"");
+
                                     }
                                     Material_List.Rows.Add("Adjustable Striker " + pnl.Panel_AdjStrikerArtNo.DisplayName,
                                                            pnl.Panel_AdjStrikerQty, "pc(s)",
