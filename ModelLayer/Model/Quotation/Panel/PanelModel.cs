@@ -1656,6 +1656,22 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_HingeOptionsheight;
             }
+            else if (mode == "addCenterHinge")
+            {
+                Panel_PropertyHeight += constants.panel_property_CenterHingeOptionsheight;
+            }
+            else if (mode == "minusCenterHinge")
+            {
+                Panel_PropertyHeight -= constants.panel_property_CenterHingeOptionsheight;
+            }
+            else if (mode == "addNTCenterHinge")
+            {
+                Panel_PropertyHeight += constants.panel_property_NTCenterHingeOptionsheight;
+            }
+            else if (mode == "minusNTCenterHinge")
+            {
+                Panel_PropertyHeight -= constants.panel_property_NTCenterHingeOptionsheight;
+            }
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
@@ -2433,6 +2449,16 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_PlasticWedgeQty = 1;
                 }
 
+                if (base_color == Base_Color._Ivory ||
+                    base_color == Base_Color._White)
+                {
+                    Panel_PlasticWedge = PlasticWedge_ArticleNo._7199WHT;
+                }
+                else if (base_color == Base_Color._DarkBrown)
+                {
+                    Panel_PlasticWedge = PlasticWedge_ArticleNo._7199DB;
+                }
+
                 if (Panel_HandleType == Handle_Type._Rio)
                 {
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
@@ -2885,20 +2911,6 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_PlateArtNo = Plate_ArticleNo._N4803LB;
             }
 
-            if (Panel_HingeOptions == HingeOption._2DHinge)
-            {
-                Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
-
-                if (Panel_SashHeight <= 1499)
-                {
-                    Panel_2DHingeQty_nonMotorized = 3;
-                }
-                else if (Panel_SashHeight >= 1500)
-                {
-                    Panel_2DHingeQty_nonMotorized = 4;
-                }
-            }
-
             if (Panel_SashPropertyVisibility == true)
             {
                 int dm_deduct = 0;
@@ -2970,6 +2982,20 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
+
+                if (Panel_HingeOptions == HingeOption._2DHinge)
+                {
+                    Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
+
+                    if (Panel_SashHeight <= 1499)
+                    {
+                        Panel_2DHingeQty_nonMotorized = 3;
+                    }
+                    else if (Panel_SashHeight >= 1500)
+                    {
+                        Panel_2DHingeQty_nonMotorized = 4;
+                    }
+                }
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                     Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
@@ -3530,7 +3556,6 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_PlasticWedge = PlasticWedge_ArticleNo._7199DB;
                 }
-
 
                 if (Panel_HandleType == Handle_Type._Rio)
                 {

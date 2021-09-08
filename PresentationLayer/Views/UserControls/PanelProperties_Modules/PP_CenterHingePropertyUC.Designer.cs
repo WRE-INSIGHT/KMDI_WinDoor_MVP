@@ -39,10 +39,10 @@
             this.cmb_CenterHinge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_CenterHinge.DropDownWidth = 69;
             this.cmb_CenterHinge.FormattingEnabled = true;
-            this.cmb_CenterHinge.Location = new System.Drawing.Point(69, 5);
+            this.cmb_CenterHinge.Location = new System.Drawing.Point(69, 4);
             this.cmb_CenterHinge.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.cmb_CenterHinge.Name = "cmb_CenterHinge";
-            this.cmb_CenterHinge.Size = new System.Drawing.Size(84, 21);
+            this.cmb_CenterHinge.Size = new System.Drawing.Size(82, 21);
             this.cmb_CenterHinge.TabIndex = 37;
             this.cmb_CenterHinge.SelectedValueChanged += new System.EventHandler(this.cmb_CenterHinge_SelectedValueChanged);
             // 
@@ -50,7 +50,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(-3, 8);
+            this.label1.Location = new System.Drawing.Point(-3, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 36;
@@ -60,11 +60,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.cmb_CenterHinge);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "PP_CenterHingePropertyUC";
-            this.Size = new System.Drawing.Size(154, 30);
+            this.Size = new System.Drawing.Size(152, 28);
             this.Load += new System.EventHandler(this.PP_CenterHingePropertyUC_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

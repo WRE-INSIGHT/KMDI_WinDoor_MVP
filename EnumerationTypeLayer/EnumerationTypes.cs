@@ -456,7 +456,7 @@ namespace EnumerationTypeLayer
 
         public class NTCenterHinge_ArticleNo : Enumeration<NTCenterHinge_ArticleNo, int>
         {
-            public static readonly NTCenterHinge_ArticleNo _N610A06516 = new NTCenterHinge_ArticleNo(0, "N610A06516 ");
+            public static readonly NTCenterHinge_ArticleNo _N610A06516 = new NTCenterHinge_ArticleNo(0, "N610A06516");
 
             private NTCenterHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
