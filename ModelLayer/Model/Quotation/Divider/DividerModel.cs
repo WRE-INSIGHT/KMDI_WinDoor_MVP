@@ -415,6 +415,22 @@ namespace ModelLayer.Model.Quotation.Divider
                 NotifyPropertyChanged();
             }
         }
+        
+        private LeverEspagnolette_ArticleNo _divLeverEspagArtNo;
+        public LeverEspagnolette_ArticleNo Div_LeverEspagArtNo
+        {
+            get
+            {
+                return _divLeverEspagArtNo;
+            }
+            set
+            {
+                _divLeverEspagArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public ShootboltStriker_ArticleNo Div_ShootboltStrikerArtNo { get; set; }
+        public ShootboltNonReverse_ArticleNo Div_ShootboltNonReverseArtNo { get; set; }
 
         public void SetExplosionValues_Div()
         {
@@ -755,6 +771,14 @@ namespace ModelLayer.Model.Quotation.Divider
             else if (mode == "minusDM")
             {
                 Div_PropHeight -= constants.div_property_DMArtOptionsHeight;
+            }
+            else if (mode == "addLeverEspag")
+            {
+                Div_PropHeight += constants.div_property_leverEspagOptionsHeight;
+            }
+            else if (mode == "minusLeverEspag")
+            {
+                Div_PropHeight -= constants.div_property_leverEspagOptionsHeight;
             }
         }
 

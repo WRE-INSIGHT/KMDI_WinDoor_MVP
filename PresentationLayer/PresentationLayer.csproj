@@ -107,8 +107,10 @@
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\DP_CladdingBracketPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\DP_CladdingPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\DP_LeverEspagnolettePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\IDP_CladdingBracketPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\IDP_CladdingPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\IDP_LeverEspagnolettePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\Imagers\IMullionImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\Imagers\ITransomImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\Dividers\Imagers\MullionImagerUCPresenter.cs" />
@@ -306,8 +308,15 @@
     <Compile Include="Views\UserControls\DividerProperties_Modules\DP_CladdingPropertyUC.Designer.cs">
       <DependentUpon>DP_CladdingPropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\DividerProperties_Modules\DP_LeverEspagnolettePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\DividerProperties_Modules\DP_LeverEspagnolettePropertyUC.Designer.cs">
+      <DependentUpon>DP_LeverEspagnolettePropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\DividerProperties_Modules\IDP_CladdingBracketPropertyUC.cs" />
     <Compile Include="Views\UserControls\DividerProperties_Modules\IDP_CladdingPropertyUC.cs" />
+    <Compile Include="Views\UserControls\DividerProperties_Modules\IDP_LeverEspagnolettePropertyUC.cs" />
     <Compile Include="Views\UserControls\Dividers\Imagers\IMullionImagerUC.cs" />
     <Compile Include="Views\UserControls\Dividers\Imagers\ITransomImagerUC.cs" />
     <Compile Include="Views\UserControls\Dividers\Imagers\MullionImagerUC.cs">
@@ -695,6 +704,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\DividerProperties_Modules\DP_CladdingPropertyUC.resx">
       <DependentUpon>DP_CladdingPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\DividerProperties_Modules\DP_LeverEspagnolettePropertyUC.resx">
+      <DependentUpon>DP_LeverEspagnolettePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\Dividers\Imagers\MullionImagerUC.resx">
       <DependentUpon>MullionImagerUC.cs</DependentUpon>

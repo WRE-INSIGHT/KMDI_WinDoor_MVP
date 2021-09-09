@@ -86,8 +86,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _panelModel.Panel_HandleType = Handle_Type._None;
                 _mainPresenter.DivModel_forDMSelection.Div_DMPanel = _panelModel;
                 _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
-                _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
-                _mainPresenter.SetLblStatus("DMDeselect", false, null, null, _panelModel);
+                if (_mainPresenter.NxtPnlModel_forDMSelection != null)
+                {
+                    _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                }
+                _mainPresenter.SetLblStatus("DMSelection", false, null, null, _panelModel);
             }
         }
 

@@ -590,6 +590,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.div_property_DMArtOptionsHeight;
                 }
+                else if (mode == "addLeverEspag")
+                {
+                    FrameProp_Height += constants.div_property_leverEspagOptionsHeight;
+                }
+                else if (mode == "minusLeverEspag")
+                {
+                    FrameProp_Height -= constants.div_property_leverEspagOptionsHeight;
+                }
             }
             else if (objtype == "Mpanel")
             {

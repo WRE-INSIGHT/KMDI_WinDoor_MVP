@@ -287,10 +287,7 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _N110A04206 = new Espagnolette_ArticleNo(12, "N110A04206");
             public static readonly Espagnolette_ArticleNo _N110A05206 = new Espagnolette_ArticleNo(13, "N110A05206");
             public static readonly Espagnolette_ArticleNo _N110A06206 = new Espagnolette_ArticleNo(14, "N110A06206");
-            public static readonly Espagnolette_ArticleNo _625_205 = new Espagnolette_ArticleNo(15, "625-205");
-            public static readonly Espagnolette_ArticleNo _625_206 = new Espagnolette_ArticleNo(16, "625-206");
-            public static readonly Espagnolette_ArticleNo _625_207 = new Espagnolette_ArticleNo(17, "625-207");
-            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(18, "None");
+            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(15, "None");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -538,10 +535,33 @@ namespace EnumerationTypeLayer
 
         public class CoverForCornerPivotRest_ArticleNo : Enumeration<CoverForCornerPivotRest_ArticleNo, int>
         {
-            public static readonly CoverForCornerPivotRest_ArticleNo _DB = new CoverForCornerPivotRest_ArticleNo(0, "N591A01558");
-            public static readonly CoverForCornerPivotRest_ArticleNo _WhiteIvory = new CoverForCornerPivotRest_ArticleNo(1, "N591A01718");
+            public static readonly CoverForCornerPivotRest_ArticleNo _DB = new CoverForCornerPivotRest_ArticleNo(0, "N591B12556");
+            public static readonly CoverForCornerPivotRest_ArticleNo _WhiteIvory = new CoverForCornerPivotRest_ArticleNo(1, "N591B02718");
 
             private CoverForCornerPivotRest_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LeverEspagnolette_ArticleNo : Enumeration<LeverEspagnolette_ArticleNo, int>
+        {
+            public static readonly LeverEspagnolette_ArticleNo _625_205 = new LeverEspagnolette_ArticleNo(0, "625-205");
+            public static readonly LeverEspagnolette_ArticleNo _625_206 = new LeverEspagnolette_ArticleNo(1, "625-206");
+            public static readonly LeverEspagnolette_ArticleNo _625_207 = new LeverEspagnolette_ArticleNo(2, "625-207");
+            public static readonly LeverEspagnolette_ArticleNo _None = new LeverEspagnolette_ArticleNo(3, "None");
+
+            private LeverEspagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class ShootboltStriker_ArticleNo : Enumeration<LeverEspagnolette_ArticleNo, int>
+        {
+            public static readonly ShootboltStriker_ArticleNo _N705A20106 = new ShootboltStriker_ArticleNo(0, "N705A20106");
+
+            private ShootboltStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class ShootboltNonReverse_ArticleNo : Enumeration<ShootboltNonReverse_ArticleNo, int>
+        {
+            public static readonly ShootboltNonReverse_ArticleNo _349187 = new ShootboltNonReverse_ArticleNo(0, "349187");
+
+            private ShootboltNonReverse_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class _3dHinge_ArticleNo : Enumeration<_3dHinge_ArticleNo, int>

@@ -1980,15 +1980,12 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
-                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206 ||
-                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
-                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
                     {
                         Panel_AdjStrikerQty += 1;
                     }
                     else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
-                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206 ||
-                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
                     {
                         Panel_AdjStrikerQty += 2;
                     }
@@ -2201,15 +2198,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_StrikerQty_A += 2;
                     }
-                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
-                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
-                    {
-                        Panel_StrikerQty_A += 1;
-                    }
-                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
-                    {
-                        Panel_StrikerQty_A += 2;
-                    }
 
                     if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957)
                     {
@@ -2261,15 +2249,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
                              Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
-                    {
-                        Panel_StrikerQty_C += 2;
-                    }
-                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
-                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
-                    {
-                        Panel_StrikerQty_C += 1;
-                    }
-                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
                     {
                         Panel_StrikerQty_C += 2;
                     }
@@ -3160,15 +3139,12 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
-                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206 ||
-                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
-                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
+                        Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
                     {
                         Panel_AdjStrikerQty += 1;
                     }
                     else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
-                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206 ||
-                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
+                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
                     {
                         Panel_AdjStrikerQty += 2;
                     }
@@ -3355,15 +3331,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_StrikerQty_A += 2;
                     }
-                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
-                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
-                    {
-                        Panel_StrikerQty_A += 1;
-                    }
-                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
-                    {
-                        Panel_StrikerQty_A += 2;
-                    }
 
                     if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957)
                     {
@@ -3415,15 +3382,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
                              Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
-                    {
-                        Panel_StrikerQty_C += 2;
-                    }
-                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_205 ||
-                             Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_206)
-                    {
-                        Panel_StrikerQty_C += 1;
-                    }
-                    else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._625_207)
                     {
                         Panel_StrikerQty_C += 2;
                     }

@@ -1754,6 +1754,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.div_property_DMArtOptionsHeight;
                 }
+                else if (mode == "addLeverEspag")
+                {
+                    MPanelProp_Height += constants.div_property_leverEspagOptionsHeight;
+                }
+                else if (mode == "minusLeverEspag")
+                {
+                    MPanelProp_Height -= constants.div_property_leverEspagOptionsHeight;
+                }
             }
             else if (objtype == "Mpanel")
             {
