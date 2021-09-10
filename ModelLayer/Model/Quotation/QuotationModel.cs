@@ -74,6 +74,7 @@ namespace ModelLayer.Model.Quotation
                 add_screws_fab_hinges = 0,
                 add_screws_fab_stayBearing = 0,
                 add_screws_fab_pivotRest = 0,
+                add_screws_fab_shootbolt = 0,
                 exp_bolt = 0,
                 frame_width = 0,
                 frame_height = 0;
@@ -168,7 +169,6 @@ namespace ModelLayer.Model.Quotation
                                 div_prevctrl = mpnl_Parent.MPanelLst_Objects[mpnl_ndx - 1];
                                 divTopOrLeft = mpnl_Parent.MPanelLst_Divider.Find(div => div.Div_Name == div_prevctrl.Name);
                             }
-
                         }
 
                         if (mpnl.MPanel_ParentModel != null)
@@ -218,6 +218,8 @@ namespace ModelLayer.Model.Quotation
 
                             if (pnl_curCtrl != null)
                             {
+                                pnl_curCtrl.Panel_AdjStrikerQty = 0;
+
                                 if (pnl_curCtrl.Panel_Placement == "First")
                                 {
                                     nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i + 1];
@@ -314,6 +316,38 @@ namespace ModelLayer.Model.Quotation
 
                                             add_screws_fab_alum += (3 * 2); //3 * 2pcs (80mm)
                                             add_screws_fab_alum += (3 * div_nxtCtrl.Div_AlumSpacer50Qty); //3 (50mm)
+                                        }
+
+                                        if (div_nxtCtrl.Div_DMPanel != null && 
+                                            div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                        {
+                                            Material_List.Rows.Add("Lever Espagnolette " + div_nxtCtrl.Div_LeverEspagArtNo.DisplayName,
+                                                                   1, "pc(s)",
+                                                                   "",
+                                                                   "Dummy Mullion");
+                                            add_screws_fab_espag += 8; //Lever Espagnolette
+
+                                            Material_List.Rows.Add("Shootbolt, non-reverse " + div_nxtCtrl.Div_ShootboltNonReverseArtNo.DisplayName,
+                                                                   2, "pc(s)",
+                                                                   "",
+                                                                   "Dummy Mullion");
+                                            add_screws_fab_shootbolt += (2 * 2); //(qty * 2)
+
+                                            int qty_sbStriker = 0;
+                                            if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_205 ||
+                                                div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_206)
+                                            {
+                                                qty_sbStriker = 1;
+                                            }
+                                            else if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_207)
+                                            {
+                                                qty_sbStriker = 2;
+                                            }
+                                            Material_List.Rows.Add("Shootbolt striker " + div_nxtCtrl.Div_ShootboltStrikerArtNo.DisplayName,
+                                                                   qty_sbStriker, "pc(s)",
+                                                                   "",
+                                                                   "Sash");
+                                            add_screws_fab_shootbolt += qty_sbStriker; //Shootbolt striker
                                         }
                                     }
                                     else if (div_nxtCtrl.Div_ChkDM == false)
@@ -2252,7 +2286,8 @@ namespace ModelLayer.Model.Quotation
                                                                                     add_screws_fab_endcap +
                                                                                     add_screws_fab_hinges +
                                                                                     add_screws_fab_stayBearing +
-                                                                                    add_screws_fab_pivotRest;
+                                                                                    add_screws_fab_pivotRest + 
+                                                                                    add_screws_fab_shootbolt;
             Screws_for_Installation = fixing_screw + total_screws_installation;
             Screws_for_Cladding = total_cladding_size / 300;
 

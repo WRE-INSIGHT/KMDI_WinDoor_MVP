@@ -67,7 +67,6 @@
             this.Name = "DP_LeverEspagnolettePropertyUC";
             this.Size = new System.Drawing.Size(152, 28);
             this.Load += new System.EventHandler(this.DP_LeverEspagnolettePropertyUC_Load);
-            this.VisibleChanged += new System.EventHandler(this.DP_LeverEspagnolettePropertyUC_VisibleChanged);
             this.ResumeLayout(false);
 
         }

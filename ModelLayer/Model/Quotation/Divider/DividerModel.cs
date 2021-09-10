@@ -415,7 +415,20 @@ namespace ModelLayer.Model.Quotation.Divider
                 NotifyPropertyChanged();
             }
         }
-        
+
+        private bool _divLeverEspagVisibility;
+        public bool Div_LeverEspagVisibility
+        {
+            get
+            {
+                return _divLeverEspagVisibility;
+            }
+            set
+            {
+                _divLeverEspagVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
         private LeverEspagnolette_ArticleNo _divLeverEspagArtNo;
         public LeverEspagnolette_ArticleNo Div_LeverEspagArtNo
         {
@@ -467,6 +480,23 @@ namespace ModelLayer.Model.Quotation.Divider
                     Div_EndcapDM = EndcapDM_ArticleNo._K385;
                 }
 
+                if (Div_DMPanel != null)
+                {
+                    if (Div_LeverEspagVisibility == true)
+                    {
+                        if (Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_205 ||
+                            Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_206)
+                        {
+                            Div_DMPanel.Panel_AdjStrikerQty += 1;
+                        }
+                        else if (Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_207)
+                        {
+                            Div_DMPanel.Panel_AdjStrikerQty += 2;
+                        }
+                        Div_ShootboltNonReverseArtNo = ShootboltNonReverse_ArticleNo._349187;
+                        Div_ShootboltStrikerArtNo = ShootboltStriker_ArticleNo._N705A20106;
+                    }
+                }
             }
 
             if (Div_MPanelParent.MPanel_Parent.Name.Contains("Frame"))
@@ -803,7 +833,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             bool divChkDM,
                             bool divArtVisibility,
                             DummyMullion_ArticleNo divDMArtNo,
-                            IPanelModel divDMPanel)
+                            IPanelModel divDMPanel,
+                            bool divLeverEspagVisibility)
         {
             Div_ID = divID;
             Div_Name = divName;
@@ -825,6 +856,7 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_ArtVisibility = divArtVisibility;
             Div_DMArtNo = divDMArtNo;
             Div_DMPanel = divDMPanel;
+            Div_LeverEspagVisibility = divLeverEspagVisibility;
 
             if (Div_Type == DividerType.Mullion)
             {

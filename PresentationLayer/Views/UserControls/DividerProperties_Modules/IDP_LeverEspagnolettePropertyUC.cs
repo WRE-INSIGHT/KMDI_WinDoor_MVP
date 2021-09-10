@@ -9,7 +9,6 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
     {
         event EventHandler cmbLeverEspagSelectedValueChangedEventRaised;
         event EventHandler DPLeverEspagnolettePropertyUCLoadEventRaised;
-        event EventHandler DPLeverEspagnolettePropertyUCVisibleChangedEventRaised;
         event EventHandler SashProfileChangedEventRaised;
 
         void SashPropBinding(Dictionary<string, Binding> sashBinding);

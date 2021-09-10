@@ -32,32 +32,36 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
         {
             _dp_leverEspagnolettePropertyUC.DPLeverEspagnolettePropertyUCLoadEventRaised += _dp_leverEspagnolettePropertyUC_DPLeverEspagnolettePropertyUCLoadEventRaised;
             _dp_leverEspagnolettePropertyUC.cmbLeverEspagSelectedValueChangedEventRaised += _dp_leverEspagnolettePropertyUC_cmbLeverEspagSelectedValueChangedEventRaised;
-            _dp_leverEspagnolettePropertyUC.DPLeverEspagnolettePropertyUCVisibleChangedEventRaised += _dp_leverEspagnolettePropertyUC_DPLeverEspagnolettePropertyUCVisibleChangedEventRaised;
             _dp_leverEspagnolettePropertyUC.SashProfileChangedEventRaised += _dp_leverEspagnolettePropertyUC_SashProfileChangedEventRaised;
         }
 
+        SashProfile_ArticleNo curr_sashProfileArtNo;
         private void _dp_leverEspagnolettePropertyUC_SashProfileChangedEventRaised(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-        private void _dp_leverEspagnolettePropertyUC_DPLeverEspagnolettePropertyUCVisibleChangedEventRaised(object sender, EventArgs e)
-        {
-            UserControl leverEspag = (UserControl)sender;
-            if (!_initialLoad)
+            SashProfile_ArticleNo sel_sashProfileArtNo = (SashProfile_ArticleNo)sender;
+            if (!_initialLoad && curr_sashProfileArtNo != sel_sashProfileArtNo)
             {
-                if (leverEspag.Visible == true)
+                if (sel_sashProfileArtNo == SashProfile_ArticleNo._395)
                 {
-                    _divModel.AdjustPropertyPanelHeight("addLeverEspag");
-                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
-                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                    if (curr_sashProfileArtNo != SashProfile_ArticleNo._395)
+                    {
+                        _divModel.Div_LeverEspagVisibility = true;
+                        _divModel.AdjustPropertyPanelHeight("addLeverEspag");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                    }
                 }
-                else if (leverEspag.Visible == false)
+                else if (sel_sashProfileArtNo != SashProfile_ArticleNo._395)
                 {
-                    _divModel.AdjustPropertyPanelHeight("minusLeverEspag");
-                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
-                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                    if (curr_sashProfileArtNo == SashProfile_ArticleNo._395)
+                    {
+                        _divModel.Div_LeverEspagVisibility = false;
+                        _divModel.AdjustPropertyPanelHeight("minusLeverEspag");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                    }
                 }
+                curr_sashProfileArtNo = sel_sashProfileArtNo;
             }
         }
 
@@ -73,6 +77,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
         {
             _dp_leverEspagnolettePropertyUC.ThisBinding(CreateBindingDictionary());
             _divModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._625_205;
+            curr_sashProfileArtNo = SashProfile_ArticleNo._7581;
             _initialLoad = false;
         }
 
@@ -96,6 +101,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
         public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
+            binding.Add("Div_LeverEspagVisibility", new Binding("Visible", _divModel, "Div_LeverEspagVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Div_LeverEspagArtNo", new Binding("Text", _divModel, "Div_LeverEspagArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
@@ -108,12 +114,12 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
 
             _dp_leverEspagnolettePropertyUC.SashPropBinding(binding);
 
-            if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-            {
-                _divModel.AdjustPropertyPanelHeight("addLeverEspag");
-                _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
-                _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
-            }
+            //if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+            //{
+            //    _divModel.AdjustPropertyPanelHeight("addLeverEspag");
+            //    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+            //    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+            //}
         }
     }
 }
