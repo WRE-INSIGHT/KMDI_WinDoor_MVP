@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_NTCenterHingePropertyUC_NTCenterHingePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _pp_NTCenterHingePropertyUC.ThisBinding(CreateBindingDictionary());
+            _panelModel.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
             _initialLoad = false;
         }
 

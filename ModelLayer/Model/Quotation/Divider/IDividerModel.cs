@@ -41,6 +41,10 @@ namespace ModelLayer.Model.Quotation.Divider
         IMultiPanelModel Div_MPanelParent { get; set; }
         IFrameModel Div_FrameParent { get; set; }
         IPanelModel Div_DMPanel { get; set; }
+        LeverEspagnolette_ArticleNo Div_LeverEspagArtNo { get; set; }
+        ShootboltStriker_ArticleNo Div_ShootboltStrikerArtNo { get; set; }
+        ShootboltNonReverse_ArticleNo Div_ShootboltNonReverseArtNo { get; set; }
+
         #region Explosion
 
         Divider_ArticleNo Div_ArtNo { get; set; }

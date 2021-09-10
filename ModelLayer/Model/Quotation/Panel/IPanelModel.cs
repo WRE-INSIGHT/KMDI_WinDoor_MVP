@@ -170,6 +170,18 @@ namespace ModelLayer.Model.Quotation.Panel
         CenterHingeOption Panel_CenterHingeOptions { get; set; }
         bool Panel_CenterHingeOptionsVisibility { get; set; }
         NTCenterHinge_ArticleNo Panel_NTCenterHingeArticleNo { get; set; }
+        StayBearingK_ArticleNo Panel_StayBearingKArtNo { get; set; }
+        StayBearingPin_ArticleNo Panel_StayBearingPinArtNo { get; set; }
+        StayBearingCover_ArticleNo Panel_StayBearingCoverArtNo { get; set; }
+        TopCornerHinge_ArticleNo Panel_TopCornerHingeArtNo { get; set; }
+        TopCornerHingeCover_ArticleNo Panel_TopCornerHingeCoverArtNo { get; set; }
+        TopCornerHingeSpacer_ArticleNo Panel_TopCornerHingeSpacerArtNo { get; set; }
+        CornerHingeK_ArticleNo Panel_CornerHingeKArtNo { get; set; }
+        CornerPivotRestK_ArticleNo Panel_CornerPivotRestKArtNo { get; set; }
+        CornerHingeCoverK_ArticleNo Panel_CornerHingeCoverKArtNo { get; set; }
+        CoverForCornerPivotRestVertical_ArticleNo Panel_CoverForCornerPivotRestVerticalArtNo { get; set; }
+        CoverForCornerPivotRest_ArticleNo Panel_CoverForCornerPivotRestArtNo { get; set; }
+
         bool Panel_NTCenterHingeVisibility { get; set; }
         bool Panel_MiddleCloserVisibility { get; set; }
 

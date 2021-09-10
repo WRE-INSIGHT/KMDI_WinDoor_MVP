@@ -23,6 +23,7 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler btnSelectDMPanelClickedEventRaised;
 
         Panel GetDividerPropertiesBodyPNL();
+        Panel GetDMArtNoPNL();
         Button GetBtnSelectDMPanel();
         void SetBtnSaveBackColor(Color color);
         void Bind_DMPanelModel(Dictionary<string, Binding> ModelBinding);

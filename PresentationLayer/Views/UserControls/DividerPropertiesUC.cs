@@ -258,5 +258,10 @@ namespace PresentationLayer.Views.UserControls
                 }
             }
         }
+
+        public Panel GetDMArtNoPNL()
+        {
+            return pnl_DMArtNo;
+        }
     }
 }

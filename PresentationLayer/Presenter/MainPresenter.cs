@@ -92,7 +92,7 @@ namespace PresentationLayer.Presenter
         private IDividerModel _divModel_forDMSelection;
         private IPanelModel _prevPanelModel_forDMSelection;
         private IPanelModel _nxtPanelModel_forDMSelection;
-        private IDividerPropertiesUC _divProp_forDMSelection;
+        private IDividerPropertiesUCPresenter _divPropUCP_forDMSelection;
 
         #endregion
 
@@ -452,11 +452,11 @@ namespace PresentationLayer.Presenter
                                  IDividerModel divModel = null,
                                  IPanelModel prev_pnl = null, //selected panelModel / prevPanel
                                  IPanelModel nxt_pnl = null,
-                                 IDividerPropertiesUC divProp = null)
+                                 IDividerPropertiesUCPresenter divPropUCP = null)
         {
             _tsLblStatus.Visible = visibility;
 
-            if (status == "DMSelect")
+            if (status == "DMPreSelection")
             {
                 _tsLblStatus.Text = "Select one of the highlighted panel";
                 _controlRaised_forDMSelection = controlRaised;
@@ -467,9 +467,9 @@ namespace PresentationLayer.Presenter
                 _divModel_forDMSelection = divModel;
                 _prevPanelModel_forDMSelection = prev_pnl;
                 _nxtPanelModel_forDMSelection = nxt_pnl;
-                _divProp_forDMSelection = divProp;
+                _divPropUCP_forDMSelection = divPropUCP;
             }
-            else if (status == "DMDeselect")
+            else if (status == "DMSelection")
             {
                 _tsLblStatus.Text = "";
                 _pnlControlSub.Enabled = true;
@@ -482,7 +482,8 @@ namespace PresentationLayer.Presenter
                 Dictionary<string, Binding> divBinding = new Dictionary<string, Binding>();
                 divBinding.Add("Panel_SashProfileArtNo", new Binding("Panel_SashProfileArtNo", prev_pnl, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
-                _divProp_forDMSelection.Bind_DMPanelModel(divBinding);
+                _divPropUCP_forDMSelection.GetDivProperties().Bind_DMPanelModel(divBinding);
+                _divPropUCP_forDMSelection.GetLeverEspagUCP().BindSashProfileArtNo();
             }
         }
 

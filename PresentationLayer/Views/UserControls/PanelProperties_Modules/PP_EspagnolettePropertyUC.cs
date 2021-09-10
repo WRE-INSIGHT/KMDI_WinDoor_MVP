@@ -95,8 +95,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 else if (espag == Espagnolette_ArticleNo._N110A00006 || espag == Espagnolette_ArticleNo._N110A01006 ||
                          espag == Espagnolette_ArticleNo._N110A02206 || espag == Espagnolette_ArticleNo._N110A03206 ||
                          espag == Espagnolette_ArticleNo._N110A04206 || espag == Espagnolette_ArticleNo._N110A05206 ||
-                         espag == Espagnolette_ArticleNo._N110A06206 || espag == Espagnolette_ArticleNo._625_205 ||
-                         espag == Espagnolette_ArticleNo._625_206 || espag == Espagnolette_ArticleNo._625_207)
+                         espag == Espagnolette_ArticleNo._N110A06206)
                 {
                     if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._395))
                     {
@@ -153,8 +152,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             else if (espag == Espagnolette_ArticleNo._N110A00006 || espag == Espagnolette_ArticleNo._N110A01006 ||
                      espag == Espagnolette_ArticleNo._N110A02206 || espag == Espagnolette_ArticleNo._N110A03206 ||
                      espag == Espagnolette_ArticleNo._N110A04206 || espag == Espagnolette_ArticleNo._N110A05206 ||
-                     espag == Espagnolette_ArticleNo._N110A06206 || espag == Espagnolette_ArticleNo._625_205 ||
-                     espag == Espagnolette_ArticleNo._625_206 || espag == Espagnolette_ArticleNo._625_207)
+                     espag == Espagnolette_ArticleNo._N110A06206)
             {
                 if (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
