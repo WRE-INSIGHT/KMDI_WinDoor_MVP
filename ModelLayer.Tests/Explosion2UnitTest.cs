@@ -10663,6 +10663,7 @@ namespace ModelLayer.Tests
             _panelModel1.Panel_CornerDriveOptionsVisibility = true;
             _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958; 
             _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _panelModel1.SetPanelExplosionValues_Panel(true);
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
             Control Casement1 = new Control();
             Casement1.Name = "CasementPanelUC_1";
@@ -10674,7 +10675,7 @@ namespace ModelLayer.Tests
                                                                               DividerModel.DividerType.Mullion,
                                                                               true,
                                                                               _frameModel.Frame_Zoom,
-                                                                              Divider_ArticleNo._None,
+                                                                              Divider_ArticleNo._7536,
                                                                               _multiMullionModel.MPanel_DisplayWidth,
                                                                               _multiMullionModel.MPanel_DisplayHeight,
                                                                               _multiMullionModel,
@@ -10685,13 +10686,18 @@ namespace ModelLayer.Tests
                                                                               "MullionUC_1",
                                                                               null,
                                                                               false,
-                                                                              true,
-                                                                              DummyMullion_ArticleNo._7533);
-           
-            _divDummyMullionModel.Div_ChkDM = true; 
-            _divDummyMullionModel.Div_DMPanel = _panelModel1;
-            // _divDummyMullionModel.Div_DMPanel.Panel_SashHeight = 1553;
+                                                                              false,
+                                                                              DummyMullion_ArticleNo._7533,
+                                                                              _panelModel1
+                                                                              );
+            _divDummyMullionModel.SetExplosionValues_Div();
+            _divDummyMullionModel.Div_ArtNo = Divider_ArticleNo._None;
+            _divDummyMullionModel.Div_ChkDM = true;
             _divDummyMullionModel.Div_ArtVisibility = true;
+            _divDummyMullionModel.Div_DMPanel = _panelModel1;
+            //_divDummyMullionModel.AdjustPropertyPanelHeight("addDM");
+            //_divDummyMullionModel.AdjustPropertyPanelHeight("minusDivArt");
+            //_divDummyMullionModel.Div_DMPanel.Panel_SashHeight = 1553; 
             _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K7533;
             _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
             _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
@@ -11337,7 +11343,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
-            // Assert.AreEqual(157, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(157, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
 
             #region Multimullion(2)
