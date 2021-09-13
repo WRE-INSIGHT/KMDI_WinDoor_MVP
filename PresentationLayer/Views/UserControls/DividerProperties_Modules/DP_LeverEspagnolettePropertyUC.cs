@@ -69,6 +69,11 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
 
         public void SashPropBinding(Dictionary<string, Binding> sashBinding)
         {
+            Binding sash = this.DataBindings["Panel_SashProfileArtNo"];
+            if (sash != null)
+            {
+                this.DataBindings.Remove(sash);
+            }
             this.DataBindings.Add(sashBinding["Panel_SashProfileArtNo"]);
         }
 

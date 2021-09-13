@@ -587,5 +587,20 @@ namespace EnumerationTypeLayer
 
             private AdjustableStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class WeldableCornerJoint_ArticleNo : Enumeration<WeldableCornerJoint_ArticleNo, int>
+        {
+            public static readonly WeldableCornerJoint_ArticleNo _498N = new WeldableCornerJoint_ArticleNo(0, "498N");
+
+            private WeldableCornerJoint_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LatchDeadboltStriker_ArticleNo : Enumeration<LatchDeadboltStriker_ArticleNo, int>
+        {
+            public static readonly LatchDeadboltStriker_ArticleNo _Right = new LatchDeadboltStriker_ArticleNo(0, "390660");
+            public static readonly LatchDeadboltStriker_ArticleNo _Left = new LatchDeadboltStriker_ArticleNo(1, "390659");
+
+            private LatchDeadboltStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

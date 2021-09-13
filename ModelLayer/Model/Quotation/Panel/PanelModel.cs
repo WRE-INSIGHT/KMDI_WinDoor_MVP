@@ -1528,6 +1528,9 @@ namespace ModelLayer.Model.Quotation.Panel
         public CornerHingeCoverK_ArticleNo Panel_CornerHingeCoverKArtNo { get; set; }
         public CoverForCornerPivotRestVertical_ArticleNo Panel_CoverForCornerPivotRestVerticalArtNo { get; set; }
         public CoverForCornerPivotRest_ArticleNo Panel_CoverForCornerPivotRestArtNo { get; set; }
+        public WeldableCornerJoint_ArticleNo Panel_WeldableCArtNo { get; set; }
+        public int Panel_WeldableCQTY { get; set; }
+        public LatchDeadboltStriker_ArticleNo Panel_LatchDeadboltStrikerArtNo { get; set; }
 
         private bool _panel_NTCenterHingeVisibility;
         public bool Panel_NTCenterHingeVisibility
@@ -2540,6 +2543,16 @@ namespace ModelLayer.Model.Quotation.Panel
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+
+                    Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
+                    if (Panel_ChkText == "L")
+                    {
+                        Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Left;
+                    }
+                    else if (Panel_ChkText == "R")
+                    {
+                        Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Right;
+                    }
                 }
             }
             else if (Panel_SashPropertyVisibility == false)
@@ -3672,6 +3685,16 @@ namespace ModelLayer.Model.Quotation.Panel
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+
+                    Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
+                    if (Panel_ChkText == "L")
+                    {
+                        Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Left;
+                    }
+                    else if (Panel_ChkText == "R")
+                    {
+                        Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Right;
+                    }
                 }
             }
             else if (Panel_SashPropertyVisibility == false)
