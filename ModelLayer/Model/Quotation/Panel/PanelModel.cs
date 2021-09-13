@@ -2938,7 +2938,6 @@ namespace ModelLayer.Model.Quotation.Panel
 
             Panel_StrikerQty_A = 0;
             Panel_StrikerQty_C = 0;
-            Panel_AdjStrikerQty = 0;
 
             Base_Color base_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
             Foil_Color inside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;

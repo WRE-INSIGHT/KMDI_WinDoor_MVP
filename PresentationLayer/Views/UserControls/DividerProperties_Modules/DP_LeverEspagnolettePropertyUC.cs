@@ -26,15 +26,7 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
             set
             {
                 _sashProfileArtNo = value;
-                if (_sashProfileArtNo != SashProfile_ArticleNo._395)
-                {
-                    this.Visible = false;
-                }
-                else if (_sashProfileArtNo == SashProfile_ArticleNo._395)
-                {
-                    this.Visible = true;
-                }
-                SashProfileChanged(Panel_SashProfileArtNo, new EventArgs());
+                SashProfileChanged(_sashProfileArtNo, new EventArgs());
             }
         }
 
@@ -45,7 +37,6 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
 
         public event EventHandler DPLeverEspagnolettePropertyUCLoadEventRaised;
         public event EventHandler cmbLeverEspagSelectedValueChangedEventRaised;
-        public event EventHandler DPLeverEspagnolettePropertyUCVisibleChangedEventRaised;
         public event EventHandler SashProfileChangedEventRaised;
 
         private void DP_LeverEspagnolettePropertyUC_Load(object sender, EventArgs e)
@@ -72,17 +63,13 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
+            this.DataBindings.Add(ModelBinding["Div_LeverEspagVisibility"]);
             cmb_LeverEspag.DataBindings.Add(ModelBinding["Div_LeverEspagArtNo"]);
         }
 
         public void SashPropBinding(Dictionary<string, Binding> sashBinding)
         {
             this.DataBindings.Add(sashBinding["Panel_SashProfileArtNo"]);
-        }
-
-        private void DP_LeverEspagnolettePropertyUC_VisibleChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, DPLeverEspagnolettePropertyUCVisibleChangedEventRaised, e);
         }
 
         private void SashProfileChanged(object sender, EventArgs e)

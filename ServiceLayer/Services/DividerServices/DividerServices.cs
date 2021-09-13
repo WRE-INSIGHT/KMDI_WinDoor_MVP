@@ -43,7 +43,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 bool divChkDM,
                                                 bool divArtVisibility,
                                                 DummyMullion_ArticleNo divDMArtNo,
-                                                IPanelModel divDMPanel)
+                                                IPanelModel divDMPanel,
+                                                bool divLeverEspagVisibility)
         {
             DividerModel div = new DividerModel(divID,
                                                 divName,
@@ -64,7 +65,8 @@ namespace ServiceLayer.Services.DividerServices
                                                 divChkDM,
                                                 divArtVisibility,
                                                 divDMArtNo,
-                                                divDMPanel);
+                                                divDMPanel,
+                                                divLeverEspagVisibility);
 
             ValidateModel(div);
             return div;
@@ -94,7 +96,8 @@ namespace ServiceLayer.Services.DividerServices
                                              bool divChkDM = false,
                                              bool divArtVisibility = true,
                                              DummyMullion_ArticleNo divDMArtNo = null,
-                                             IPanelModel divDMPanel = null)
+                                             IPanelModel divDMPanel = null,
+                                             bool divLeverEspagVisibility = false)
         {
             if (divName == "")
             {
@@ -139,7 +142,8 @@ namespace ServiceLayer.Services.DividerServices
                                                          divChkDM,
                                                          divArtVisibility,
                                                          divDMArtNo,
-                                                         divDMPanel);
+                                                         divDMPanel,
+                                                         divLeverEspagVisibility);
 
             return _divModel;
         }

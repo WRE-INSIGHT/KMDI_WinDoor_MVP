@@ -29,6 +29,7 @@ namespace ServiceLayer.Services.DividerServices
                                       bool divChkDM = false,
                                       bool divArtVisibility = true,
                                       DummyMullion_ArticleNo divDMArtNo = null,
-                                      IPanelModel divDMPanel = null);        
+                                      IPanelModel divDMPanel = null,
+                                      bool divLeverEspagVisibility = false);        
     }
 }
