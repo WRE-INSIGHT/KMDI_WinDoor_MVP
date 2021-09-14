@@ -26,8 +26,8 @@ namespace ModelLayer.Model.Quotation.Divider
         int Div_DisplayWidth { get; set; }
         int Div_DisplayHeight { get; set; }
         int Div_PropHeight { get; set; }
-        int Div_CladdingBracketForUPVC { get; set; }
-        int Div_CladdingBracketForConcrete { get; set; }
+        int Div_CladdingBracketForUPVCQTY { get; set; }
+        int Div_CladdingBracketForConcreteQTY { get; set; }
         bool Div_claddingBracketVisibility { get; set; }
 
         DummyMullion_ArticleNo Div_DMArtNo { get; set; }

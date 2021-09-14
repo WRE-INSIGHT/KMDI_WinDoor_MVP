@@ -182,7 +182,6 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverForCornerPivotRestVertical_ArticleNo Panel_CoverForCornerPivotRestVerticalArtNo { get; set; }
         CoverForCornerPivotRest_ArticleNo Panel_CoverForCornerPivotRestArtNo { get; set; }
         WeldableCornerJoint_ArticleNo Panel_WeldableCArtNo { get; set; }
-        int Panel_WeldableCQTY { get; set; }
         LatchDeadboltStriker_ArticleNo Panel_LatchDeadboltStrikerArtNo { get; set; }
 
         bool Panel_NTCenterHingeVisibility { get; set; }

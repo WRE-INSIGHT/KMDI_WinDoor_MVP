@@ -269,9 +269,33 @@ namespace ModelLayer.Model.Quotation.Divider
         }
 
 
+        private int _divCladdingBracketUPVCQty;
+        public int Div_CladdingBracketForUPVCQTY
+        {
+            get
+            {
+                return _divCladdingBracketUPVCQty;
+            }
+            set
+            {
+                _divCladdingBracketUPVCQty = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-        public int Div_CladdingBracketForUPVC { get; set; }
-        public int Div_CladdingBracketForConcrete { get; set; }
+        private int _divCladdingBracketConcreteQty;
+        public int Div_CladdingBracketForConcreteQTY
+        {
+            get
+            {
+                return _divCladdingBracketConcreteQty;
+            }
+            set
+            {
+                _divCladdingBracketConcreteQty = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private bool _div_claddingBracketVisibility;
         public bool Div_claddingBracketVisibility
@@ -284,6 +308,7 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _div_claddingBracketVisibility = value;
+                NotifyPropertyChanged();
             }
         }
         private DummyMullion_ArticleNo _divDMArtNo;
@@ -809,6 +834,14 @@ namespace ModelLayer.Model.Quotation.Divider
             else if (mode == "minusLeverEspag")
             {
                 Div_PropHeight -= constants.div_property_leverEspagOptionsHeight;
+            }
+            else if (mode == "addCladdingBracket")
+            {
+                Div_PropHeight += constants.div_property_claddingBracketOptionsHeight;
+            }
+            else if (mode == "minusCladdingBracket")
+            {
+                Div_PropHeight -= constants.div_property_claddingBracketOptionsHeight;
             }
         }
 

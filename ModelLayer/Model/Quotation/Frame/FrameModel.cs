@@ -598,6 +598,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.div_property_leverEspagOptionsHeight;
                 }
+                else if (mode == "addCladdingBracket")
+                {
+                    FrameProp_Height += constants.div_property_claddingBracketOptionsHeight;
+                }
+                else if (mode == "minusCladdingBracket")
+                {
+                    FrameProp_Height -= constants.div_property_claddingBracketOptionsHeight;
+                }
             }
             else if (objtype == "Mpanel")
             {
