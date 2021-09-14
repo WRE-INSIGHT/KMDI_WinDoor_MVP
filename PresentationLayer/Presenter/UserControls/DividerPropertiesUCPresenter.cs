@@ -27,6 +27,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private IDP_CladdingPropertyUCPresenter _dp_claddingPropertyUCP;
         private IDP_LeverEspagnolettePropertyUCPresenter _dp_leverEspagPropertyUCP;
+        private IDP_CladdingBracketPropertyUCPresenter _dp_claddingBracketPropertyUCP;
 
         private Panel _divPropertiesBodyPNL;
         private Button _btnSelectDMPanel;
@@ -35,11 +36,13 @@ namespace PresentationLayer.Presenter.UserControls
 
         public DividerPropertiesUCPresenter(IDividerPropertiesUC divProperties,
                                             IDP_CladdingPropertyUCPresenter dp_claddingPropertyUCP,
-                                            IDP_LeverEspagnolettePropertyUCPresenter dp_leverEspagPropertyUCP)
+                                            IDP_LeverEspagnolettePropertyUCPresenter dp_leverEspagPropertyUCP,
+                                            IDP_CladdingBracketPropertyUCPresenter dp_claddingBracketPropertyUCP)
         {
             _divProperties = divProperties;
             _dp_claddingPropertyUCP = dp_claddingPropertyUCP;
             _dp_leverEspagPropertyUCP = dp_leverEspagPropertyUCP;
+            _dp_claddingBracketPropertyUCP = dp_claddingBracketPropertyUCP;
             _divPropertiesBodyPNL = _divProperties.GetDividerPropertiesBodyPNL();
             _btnSelectDMPanel = _divProperties.GetBtnSelectDMPanel();
             SubscribeToEventsSetup();
@@ -170,6 +173,15 @@ namespace PresentationLayer.Presenter.UserControls
             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
             claddingUC.BringToFront();
 
+            if (_divModel.Div_claddingBracketVisibility == false)
+            {
+                _divModel.Div_claddingBracketVisibility = true;
+                _divModel.AdjustPropertyPanelHeight("addCladdingBracket");
+                _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingBracket");
+                _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingBracket");
+            }
+            _dp_claddingBracketPropertyUCP.BringToFrontUC();
+
             _divProperties.SetBtnSaveBackColor(Color.White);
         }
 
@@ -196,6 +208,13 @@ namespace PresentationLayer.Presenter.UserControls
                 _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
                 _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
             }
+
+            IDP_CladdingBracketPropertyUCPresenter bracketUCP = _dp_claddingBracketPropertyUCP.GetNewInstance(_unityC, _divModel);
+            _dp_claddingBracketPropertyUCP = bracketUCP;
+            UserControl bracketProp = (UserControl)bracketUCP.GetCladdingBracketPropertyUC();
+            _divPropertiesBodyPNL.Controls.Add(bracketProp);
+            bracketProp.Dock = DockStyle.Top;
+            bracketProp.BringToFront();
 
             _divProperties.ThisBinding(CreateBindingDictionary());
             _initialLoad = false;

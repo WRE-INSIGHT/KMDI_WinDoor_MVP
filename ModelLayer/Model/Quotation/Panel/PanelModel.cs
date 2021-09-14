@@ -1529,7 +1529,6 @@ namespace ModelLayer.Model.Quotation.Panel
         public CoverForCornerPivotRestVertical_ArticleNo Panel_CoverForCornerPivotRestVerticalArtNo { get; set; }
         public CoverForCornerPivotRest_ArticleNo Panel_CoverForCornerPivotRestArtNo { get; set; }
         public WeldableCornerJoint_ArticleNo Panel_WeldableCArtNo { get; set; }
-        public int Panel_WeldableCQTY { get; set; }
         public LatchDeadboltStriker_ArticleNo Panel_LatchDeadboltStrikerArtNo { get; set; }
 
         private bool _panel_NTCenterHingeVisibility;
@@ -1827,6 +1826,14 @@ namespace ModelLayer.Model.Quotation.Panel
 
             if (Panel_SashPropertyVisibility == true)
             {
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                {
+                    if (Panel_ParentFrameModel.Frame_Height > 2499)
+                    {
+                        Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
+                    }
+                }
+
                 if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
                 {
                     Panel_SashWidth = Panel_DisplayWidth - (26 * 2) + 5;
@@ -2544,14 +2551,16 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
 
-                    Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
-                    if (Panel_ChkText == "L")
+                    if (Panel_ParentFrameModel.Frame_Height > 2499)
                     {
-                        Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Left;
-                    }
-                    else if (Panel_ChkText == "R")
-                    {
-                        Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Right;
+                        if (Panel_ChkText == "L")
+                        {
+                            Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Left;
+                        }
+                        else if (Panel_ChkText == "R")
+                        {
+                            Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Right;
+                        }
                     }
                 }
             }
@@ -2970,6 +2979,14 @@ namespace ModelLayer.Model.Quotation.Panel
 
             if (Panel_SashPropertyVisibility == true)
             {
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                {
+                    if (Panel_ParentFrameModel.Frame_Height > 2499)
+                    {
+                        Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
+                    }
+                }
+
                 int dm_deduct = 0;
                 if (if_divNxt_is_dummy_mullion)
                 {
@@ -3687,13 +3704,16 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
 
                     Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
-                    if (Panel_ChkText == "L")
+                    if (Panel_ParentFrameModel.Frame_Height > 2499)
                     {
-                        Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Left;
-                    }
-                    else if (Panel_ChkText == "R")
-                    {
-                        Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Right;
+                        if (Panel_ChkText == "L")
+                        {
+                            Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Left;
+                        }
+                        else if (Panel_ChkText == "R")
+                        {
+                            Panel_LatchDeadboltStrikerArtNo = LatchDeadboltStriker_ArticleNo._Right;
+                        }
                     }
                 }
             }

@@ -1762,6 +1762,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.div_property_leverEspagOptionsHeight;
                 }
+                else if (mode == "addCladdingBracket")
+                {
+                    MPanelProp_Height += constants.div_property_claddingBracketOptionsHeight;
+                }
+                else if (mode == "minusCladdingBracket")
+                {
+                    MPanelProp_Height -= constants.div_property_claddingBracketOptionsHeight;
+                }
             }
             else if (objtype == "Mpanel")
             {

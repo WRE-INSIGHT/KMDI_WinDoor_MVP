@@ -9,5 +9,6 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
     {
         IDP_CladdingBracketPropertyUC GetCladdingBracketPropertyUC();
         IDP_CladdingBracketPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel dividerModel);
+        void BringToFrontUC();
     }
 }

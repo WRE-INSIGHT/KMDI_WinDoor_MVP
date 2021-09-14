@@ -25,18 +25,6 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
         private void SubscribeToEventSetup()
         {
             _dp_CladdingBracketPropertyUC.CladdingBracketPropertyUCLoadEventRaised += _dp_CladdingBracketPropertyUC_CladdingBracketPropertyUCLoadEventRaised;
-            _dp_CladdingBracketPropertyUC.nudBracketForConcreteValueChangedEventRaised += _dp_CladdingBracketPropertyUC_nudBracketForConcreteValueChangedEventRaised;
-            _dp_CladdingBracketPropertyUC.nudBracketForUPVCValueChangedEventRaised += _dp_CladdingBracketPropertyUC_nudBracketForUPVCValueChangedEventRaised;
-        }
-
-        private void _dp_CladdingBracketPropertyUC_nudBracketForUPVCValueChangedEventRaised(object sender, EventArgs e)
-        {
-            //TODO
-        }
-
-        private void _dp_CladdingBracketPropertyUC_nudBracketForConcreteValueChangedEventRaised(object sender, EventArgs e)
-        {
-            //TODO
         }
 
         private void _dp_CladdingBracketPropertyUC_CladdingBracketPropertyUCLoadEventRaised(object sender, EventArgs e)
@@ -65,12 +53,16 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
             binding.Add("Div_claddingBracketVisibility", new Binding("Visible", _dividerModel, "Div_claddingBracketVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Div_CladdingBracketForConcrete", new Binding("Value", _dividerModel, "Div_CladdingBracketForConcrete", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Div_CladdingBracketForUPVC", new Binding("Value", _dividerModel, "Div_CladdingBracketForUPVC", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Div_CladdingBracketForConcreteQTY", new Binding("Value", _dividerModel, "Div_CladdingBracketForConcreteQTY", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Div_CladdingBracketForUPVCQTY", new Binding("Value", _dividerModel, "Div_CladdingBracketForUPVCQTY", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
 
         }
 
+        public void BringToFrontUC()
+        {
+            ((UserControl)_dp_CladdingBracketPropertyUC).BringToFront();
+        }
     }
 }

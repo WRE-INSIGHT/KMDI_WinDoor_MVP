@@ -75,6 +75,7 @@ namespace ModelLayer.Model.Quotation
                 add_screws_fab_stayBearing = 0,
                 add_screws_fab_pivotRest = 0,
                 add_screws_fab_shootbolt = 0,
+                add_screws_fab_weldableCJ = 0,
                 exp_bolt = 0,
                 frame_width = 0,
                 frame_height = 0;
@@ -264,10 +265,10 @@ namespace ModelLayer.Model.Quotation
 
                             if (i + 1 < obj_count)
                             {
-                                div_nxtCtrl.SetExplosionValues_Div();
-
                                 if (mpnl.MPanel_Type == "Transom")
                                 {
+                                    div_nxtCtrl.SetExplosionValues_Div();
+
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Width " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                            1, "pc(s)",
                                                            div_nxtCtrl.Div_ExplosionWidth.ToString(),
@@ -503,10 +504,10 @@ namespace ModelLayer.Model.Quotation
                             {
                                 if (div_nxtCtrl != null)
                                 {
-                                    div_nxtCtrl.SetExplosionValues_Div();
-
                                     if (mpnl.MPanel_Type == "Mullion")
                                     {
+                                        div_nxtCtrl.SetExplosionValues_Div();
+
                                         if (div_nxtCtrl.Div_ChkDM == true)
                                         {
                                             Material_List.Rows.Add("Dummy Mullion Height " + div_nxtCtrl.Div_DMArtNo.ToString(),
@@ -878,6 +879,15 @@ namespace ModelLayer.Model.Quotation
                                                                            @"");
                                                     add_screws_fab_fs_or_rs += (6 * pnl_curCtrl.Panel_RestrictorStayQty);
 
+                                                    if (frame.Frame_Height > 2499)
+                                                    {
+                                                        Material_List.Rows.Add("Weldable corner joint " + pnl_curCtrl.Panel_WeldableCArtNo.DisplayName,
+                                                                               8, "pc(s)",
+                                                                               "",
+                                                                               "Sash",
+                                                                               @"");
+                                                        add_screws_fab_weldableCJ += (8 * 2);
+                                                    }
                                                 }
                                                 else if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                                                 {
@@ -1346,12 +1356,6 @@ namespace ModelLayer.Model.Quotation
                                                                    "Sash",
                                                                    @"");
 
-                                            Material_List.Rows.Add("Weldable corner joint " + pnl_curCtrl.Panel_WeldableCArtNo.DisplayName,
-                                                                   pnl_curCtrl.Panel_WeldableCQTY, "pc(s)",
-                                                                   "",
-                                                                   "Sash",
-                                                                   @"");
-
                                             string orient = "";
                                             if (pnl_curCtrl.Panel_ChkText == "L")
                                             {
@@ -1367,6 +1371,7 @@ namespace ModelLayer.Model.Quotation
                                                                    "",
                                                                    "Frame",
                                                                    @"");
+                                            add_screws_fab_striker += 2;
                                         }
 
                                         if (pnl_curCtrl.Panel_HandleType != Handle_Type._Rotary)
@@ -2184,10 +2189,11 @@ namespace ModelLayer.Model.Quotation
                                                        @"");
 
                                 Material_List.Rows.Add("Weldable corner joint " + pnl.Panel_WeldableCArtNo.DisplayName,
-                                                       pnl.Panel_WeldableCQTY, "pc(s)",
+                                                       8, "pc(s)",
                                                        "",
                                                        "Sash",
                                                        @"");
+                                add_screws_fab_weldableCJ += (8 * 2);
 
                                 string orient = "";
                                 if (pnl.Panel_ChkText == "L")
@@ -2204,6 +2210,7 @@ namespace ModelLayer.Model.Quotation
                                                        "",
                                                        "Frame",
                                                        @"");
+                                add_screws_fab_striker += 2;
                             }
 
                             if (pnl.Panel_HandleType != Handle_Type._Rotary)
@@ -2335,7 +2342,8 @@ namespace ModelLayer.Model.Quotation
                                                                                     add_screws_fab_hinges +
                                                                                     add_screws_fab_stayBearing +
                                                                                     add_screws_fab_pivotRest + 
-                                                                                    add_screws_fab_shootbolt;
+                                                                                    add_screws_fab_shootbolt +
+                                                                                    add_screws_fab_weldableCJ;
             Screws_for_Installation = fixing_screw + total_screws_installation;
             Screws_for_Cladding = total_cladding_size / 300;
 
@@ -2433,8 +2441,9 @@ namespace ModelLayer.Model.Quotation
 
             Material_List = dt;
 
+            decimal rounded = Math.Round(item.WD_PlasticCover, 2);
             Material_List.Rows.Add("Plastic Cover",
-                                   item.WD_PlasticCover.ToString(),
+                                   rounded.ToString(),
                                    "kg",
                                    "",
                                    "Frame");
