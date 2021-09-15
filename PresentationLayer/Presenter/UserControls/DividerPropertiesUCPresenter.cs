@@ -33,6 +33,37 @@ namespace PresentationLayer.Presenter.UserControls
         private Button _btnSelectDMPanel;
 
         bool _initialLoad = true;
+        int cladding_count = 0;
+
+        public int Cladding_Count
+        {
+            get
+            {
+                return cladding_count;
+            }
+            set
+            {
+                cladding_count = value;
+                if (cladding_count == 0)
+                {
+                    _divModel.Div_claddingBracketVisibility = false;
+                    _divModel.AdjustPropertyPanelHeight("minusCladdingBracket");
+                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
+                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
+                }
+                else if (cladding_count > 0)
+                {
+                    if (_divModel.Div_claddingBracketVisibility == false)
+                    {
+                        _divModel.Div_claddingBracketVisibility = true;
+                        _divModel.AdjustPropertyPanelHeight("addCladdingBracket");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingBracket");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingBracket");
+                    }
+                }
+
+            }
+        }
 
         public DividerPropertiesUCPresenter(IDividerPropertiesUC divProperties,
                                             IDP_CladdingPropertyUCPresenter dp_claddingPropertyUCP,
@@ -113,6 +144,20 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.AdjustPropertyPanelHeight("minusPanelAddCladding");
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+
+                    if (cladding_count > 0)
+                    {
+                        _divModel.AdjustPropertyPanelHeight("minusCladdingBracket");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
+                    }
+
+                    for (int i = 0; i < cladding_count; i++)
+                    {
+                        _divModel.AdjustPropertyPanelHeight("minusCladding");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladding");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
+                    }
                 }
                 else if (chk.Checked == false)
                 {
@@ -127,6 +172,20 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.AdjustPropertyPanelHeight("addPanelAddCladding");
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+
+                    if (cladding_count > 0)
+                    {
+                        _divModel.AdjustPropertyPanelHeight("addCladdingBracket");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingBracket");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingBracket");
+                    }
+
+                    for (int i = 0; i < cladding_count; i++)
+                    {
+                        _divModel.AdjustPropertyPanelHeight("addCladding");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladding");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
+                    }
 
                     _divModel.Div_DMPanel = null;
                     _btnSelectDMPanel.Text = "Select";
@@ -173,13 +232,8 @@ namespace PresentationLayer.Presenter.UserControls
             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
             claddingUC.BringToFront();
 
-            if (_divModel.Div_claddingBracketVisibility == false)
-            {
-                _divModel.Div_claddingBracketVisibility = true;
-                _divModel.AdjustPropertyPanelHeight("addCladdingBracket");
-                _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingBracket");
-                _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingBracket");
-            }
+            Cladding_Count++;
+
             _dp_claddingBracketPropertyUCP.BringToFrontUC();
 
             _divProperties.SetBtnSaveBackColor(Color.White);

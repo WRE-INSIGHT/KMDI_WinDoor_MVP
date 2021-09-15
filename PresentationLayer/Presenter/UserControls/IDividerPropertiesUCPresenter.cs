@@ -8,6 +8,8 @@ namespace PresentationLayer.Presenter.UserControls
 {
     public interface IDividerPropertiesUCPresenter
     {
+        int Cladding_Count { get; set; }
+
         IDividerPropertiesUC GetDivProperties();
         IDividerPropertiesUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel, IMainPresenter mainPresenter);
         IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP();

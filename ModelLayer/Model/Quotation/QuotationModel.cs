@@ -76,6 +76,8 @@ namespace ModelLayer.Model.Quotation
                 add_screws_fab_pivotRest = 0,
                 add_screws_fab_shootbolt = 0,
                 add_screws_fab_weldableCJ = 0,
+                add_screws_fab_cladingBracket = 0,
+                add_screws_fab_handle = 0,
                 exp_bolt = 0,
                 frame_width = 0,
                 frame_height = 0;
@@ -303,6 +305,28 @@ namespace ModelLayer.Model.Quotation
                                                                "CPL",
                                                                @"|  |");
                                     }
+
+                                    if (div_nxtCtrl.Div_claddingBracketVisibility == true)
+                                    {
+                                        if (div_nxtCtrl.Div_CladdingBracketForConcreteQTY > 0)
+                                        {
+                                            Material_List.Rows.Add("Bracket for concrete (10mm)",
+                                                                   div_nxtCtrl.Div_CladdingBracketForConcreteQTY, "pc(s)",
+                                                                   "",
+                                                                   "CPL",
+                                                                   @"|  |");
+                                        }
+
+                                        
+                                        if (div_nxtCtrl.Div_CladdingBracketForUPVCQTY > 0)
+                                        {
+                                            Material_List.Rows.Add("Bracket for upvc(5mm)",
+                                                                   div_nxtCtrl.Div_CladdingBracketForUPVCQTY, "pc(s)",
+                                                                   "",
+                                                                   "CPL",
+                                                                   @"|  |");
+                                        }
+                                    }
                                 }
                                 if (div_nxtCtrl.Div_ChkDM == false)
                                 {
@@ -311,7 +335,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (div_nxtCtrl.Div_MechJoinArtNo == Divider_MechJointArticleNo._AV585)
                                 {
-                                    additional_screws_fabrication += 2;
+                                    additional_screws_fabrication += (2 * 2); //qty * 2
                                 }
 
                                 Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
@@ -626,6 +650,29 @@ namespace ModelLayer.Model.Quotation
                                                                    cladding_size.ToString(),
                                                                    "CPL",
                                                                    @"|  |");
+                                        }
+
+                                        if (div_nxtCtrl.Div_claddingBracketVisibility == true)
+                                        {
+                                            if (div_nxtCtrl.Div_CladdingBracketForConcreteQTY > 0)
+                                            {
+                                                Material_List.Rows.Add("Bracket for concrete (10mm)",
+                                                                       div_nxtCtrl.Div_CladdingBracketForConcreteQTY, "pc(s)",
+                                                                       "",
+                                                                       "CPL",
+                                                                       @"|  |");
+                                                add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForConcreteQTY * 3);
+                                            }
+
+                                            if (div_nxtCtrl.Div_CladdingBracketForUPVCQTY > 0)
+                                            {
+                                                Material_List.Rows.Add("Bracket for upvc(5mm)",
+                                                                       div_nxtCtrl.Div_CladdingBracketForUPVCQTY, "pc(s)",
+                                                                       "",
+                                                                       "CPL",
+                                                                       @"|  |");
+                                                add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForUPVCQTY * 4);
+                                            }
                                         }
                                     }
                                 }
@@ -1312,7 +1359,7 @@ namespace ModelLayer.Model.Quotation
                                                                    "Sash",
                                                                    @"");
 
-                                            additional_screws_fabrication += 9;
+                                            add_screws_fab_handle += 9;
                                         }
                                         else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rio)
                                         {
@@ -1419,17 +1466,43 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
 
+                                string where = "";
+                                if (pnl_curCtrl.Panel_SashPropertyVisibility == true)
+                                {
+                                    where = "Sash";
+                                }
+                                else if (pnl_curCtrl.Panel_SashPropertyVisibility == false)
+                                {
+                                    where = "Frame";
+                                }
+
                                 Material_List.Rows.Add("Glazing Bead Width (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
                                                        pnl_curCtrl.Panel_GlazingBeadWidth.ToString(),
-                                                       "Frame",
+                                                       where,
                                                        @"\  /");
 
                                 Material_List.Rows.Add("Glazing Bead Height (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
                                                        pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
-                                                       "Frame",
+                                                       where,
                                                        @"\  /");
+
+                                if (pnl_curCtrl.Panel_ChkGlazingAdaptor == true)
+                                {
+
+                                    Material_List.Rows.Add("Glazing Adaptor Width (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.Panel_GlazingAdaptorArtNo.DisplayName,
+                                                           2, "pc(s)",
+                                                           pnl_curCtrl.Panel_GlazingBeadWidth.ToString(),
+                                                           where,
+                                                           @"\  /");
+
+                                    Material_List.Rows.Add("Glazing Adaptor Height (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.Panel_GlazingAdaptorArtNo.DisplayName,
+                                                           2, "pc(s)",
+                                                           pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
+                                                           where,
+                                                           @"\  /");
+                                }
 
                                 string glassFilm = "";
                                 if (pnl_curCtrl.Panel_GlassFilm != GlassFilm_Types._None)
@@ -1440,13 +1513,13 @@ namespace ModelLayer.Model.Quotation
                                 Material_List.Rows.Add("Glass Width (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassWidth.ToString(),
-                                                       "Frame",
+                                                       where,
                                                        @"\  /");
 
                                 Material_List.Rows.Add("Glass Height (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassHeight.ToString(),
-                                                       "Frame",
+                                                       where,
                                                        @"\  /");
 
                                 if (pnl_curCtrl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
@@ -2255,17 +2328,42 @@ namespace ModelLayer.Model.Quotation
                         }
                     }
 
+                    string where = "";
+                    if (pnl.Panel_SashPropertyVisibility == true)
+                    {
+                        where = "Sash";
+                    }
+                    else if (pnl.Panel_SashPropertyVisibility == false)
+                    {
+                        where = "Frame";
+                    }
+
                     Material_List.Rows.Add("Glazing Bead Width (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",
                                            pnl.Panel_GlazingBeadWidth.ToString(),
-                                           "Frame",
+                                           where,
                                            @"\  /");
 
                     Material_List.Rows.Add("Glazing Bead Height (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",
                                            pnl.Panel_GlazingBeadHeight.ToString(),
-                                           "Frame",
+                                           where,
                                            @"\  /");
+
+                    if (pnl.Panel_ChkGlazingAdaptor == true)
+                    {
+                        Material_List.Rows.Add("Glazing Adaptor Width (P" + pnl.PanelGlass_ID + ") " + pnl.Panel_GlazingAdaptorArtNo.DisplayName,
+                                               2, "pc(s)",
+                                               pnl.Panel_GlazingBeadWidth.ToString(),
+                                               where,
+                                               @"\  /");
+
+                        Material_List.Rows.Add("Glazing Adaptor Height (P" + pnl.PanelGlass_ID + ") " + pnl.Panel_GlazingAdaptorArtNo.DisplayName,
+                                               2, "pc(s)",
+                                               pnl.Panel_GlazingBeadHeight.ToString(),
+                                               where,
+                                               @"\  /");
+                    }
 
                     string glassFilm = "";
                     if (pnl.Panel_GlassFilm != GlassFilm_Types._None)
@@ -2276,13 +2374,13 @@ namespace ModelLayer.Model.Quotation
                     Material_List.Rows.Add("Glass Width (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassWidth.ToString(),
-                                           "Frame",
+                                           where,
                                            @"\  /");
 
                     Material_List.Rows.Add("Glass Height (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
                                            1, "pc(s)",
                                            pnl.Panel_GlassHeight.ToString(),
-                                           "Frame",
+                                           where,
                                            @"\  /");
 
                     if (pnl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
@@ -2341,11 +2439,13 @@ namespace ModelLayer.Model.Quotation
                                                                                     add_screws_fab_endcap +
                                                                                     add_screws_fab_hinges +
                                                                                     add_screws_fab_stayBearing +
-                                                                                    add_screws_fab_pivotRest + 
+                                                                                    add_screws_fab_pivotRest +
                                                                                     add_screws_fab_shootbolt +
-                                                                                    add_screws_fab_weldableCJ;
+                                                                                    add_screws_fab_weldableCJ +
+                                                                                    add_screws_fab_cladingBracket +
+                                                                                    add_screws_fab_handle;
             Screws_for_Installation = fixing_screw + total_screws_installation;
-            Screws_for_Cladding = total_cladding_size / 300;
+            Screws_for_Cladding = (int)(Math.Ceiling((decimal)total_cladding_size / 300));
 
             Plastic_CoverQty_Total = (frame_width * frame_height) * 2;
             Expansion_BoltQty_Total = exp_bolt;

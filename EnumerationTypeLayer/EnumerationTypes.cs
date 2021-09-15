@@ -602,5 +602,12 @@ namespace EnumerationTypeLayer
 
             private LatchDeadboltStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class GlazingAdaptor_ArticleNo : Enumeration<GlazingAdaptor_ArticleNo, int>
+        {
+            public static readonly GlazingAdaptor_ArticleNo _6418 = new GlazingAdaptor_ArticleNo(0, "6418");
+
+            private GlazingAdaptor_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

@@ -40,11 +40,11 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
             _dividerModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladding");
             _dividerModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
 
+            _divPropUCP.Cladding_Count--;
             _divPropUCP.SetSaveBtnColor(Color.White);
 
             Control pnl_parent = ((UserControl)_dp_claddingPropertyUC).Parent;
             pnl_parent.Controls.Remove((UserControl)_dp_claddingPropertyUC);
-
         }
 
         private void _dp_claddingPropertyUC_numCladdingSizeValueChangedEventRaised(object sender, EventArgs e)
