@@ -53,6 +53,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_rotaryPropertyUC_PPRotaryPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_rotaryPropertyUC.ThisBinding(CreateBindingDictionary());
+            _panelModel.Panel_RotaryArtNo = Rotary_HandleArtNo._T511155KMWSS;
             _initialLoad = false;
         }
 

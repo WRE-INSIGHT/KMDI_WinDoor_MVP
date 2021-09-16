@@ -37,6 +37,7 @@
             this.cmb_GlazingArtNo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cmb_FilmType = new System.Windows.Forms.ComboBox();
+            this.chk_GlazingAdaptor = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label5
@@ -152,10 +153,22 @@
             this.cmb_FilmType.TabIndex = 30;
             this.cmb_FilmType.SelectedValueChanged += new System.EventHandler(this.cmb_FilmType_SelectedValueChanged);
             // 
+            // chk_GlazingAdaptor
+            // 
+            this.chk_GlazingAdaptor.AutoSize = true;
+            this.chk_GlazingAdaptor.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_GlazingAdaptor.Location = new System.Drawing.Point(8, 132);
+            this.chk_GlazingAdaptor.Name = "chk_GlazingAdaptor";
+            this.chk_GlazingAdaptor.Size = new System.Drawing.Size(110, 17);
+            this.chk_GlazingAdaptor.TabIndex = 35;
+            this.chk_GlazingAdaptor.Text = "Glazing Adaptor";
+            this.chk_GlazingAdaptor.UseVisualStyleBackColor = true;
+            // 
             // PP_GlassPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chk_GlazingAdaptor);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cmb_GlassType);
             this.Controls.Add(this.lbl_glassthick);
@@ -166,9 +179,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmb_FilmType);
             this.Name = "PP_GlassPropertyUC";
-            this.Size = new System.Drawing.Size(154, 130);
+            this.Size = new System.Drawing.Size(154, 153);
             this.Load += new System.EventHandler(this.PP_GlassPropertyUC_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -183,5 +197,6 @@
         private System.Windows.Forms.ComboBox cmb_GlazingArtNo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmb_FilmType;
+        private System.Windows.Forms.CheckBox chk_GlazingAdaptor;
     }
 }

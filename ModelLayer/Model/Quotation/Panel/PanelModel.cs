@@ -672,6 +672,21 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public GlazingAdaptor_ArticleNo Panel_GlazingAdaptorArtNo { get; set; }
+        private bool _panelChkGlazingAdaptor;
+        public bool Panel_ChkGlazingAdaptor
+        {
+            get
+            {
+                return _panelChkGlazingAdaptor;
+            }
+            set
+            {
+                _panelChkGlazingAdaptor = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private GlazingBead_ArticleNo _panelGlazingBeadArtNo;
         public GlazingBead_ArticleNo PanelGlazingBead_ArtNo
         {

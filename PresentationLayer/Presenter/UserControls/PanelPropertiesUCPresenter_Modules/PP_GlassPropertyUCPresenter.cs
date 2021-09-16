@@ -74,6 +74,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_glassPropertyUC_PPGlassPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_glassPropertyUC.ThisBinding(CreateBindingDictionary());
+            _panelModel.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;
             _initialLoad = false;
         }
 
@@ -103,6 +104,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_GlassType", new Binding("Text", _panelModel, "Panel_GlassType", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_GlassThicknessDesc", new Binding("Text", _panelModel, "Panel_GlassThicknessDesc", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_GlassPropertyHeight", new Binding("Height", _panelModel, "Panel_GlassPropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ChkGlazingAdaptor", new Binding("Checked", _panelModel, "Panel_ChkGlazingAdaptor", true, DataSourceUpdateMode.OnPropertyChanged));
             
             return binding;
         }

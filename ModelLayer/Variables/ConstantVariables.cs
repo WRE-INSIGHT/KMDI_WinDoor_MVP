@@ -14,7 +14,7 @@
         public int panel_propertyHeight_default = 175;
         public int panel_property_sashPanelHeight = 81;
         public int panel_property_handleOptionsHeight = 48;
-        public int panel_property_glassOptionsHeight = 130;
+        public int panel_property_glassOptionsHeight = 153;
         public int panel_property_rotoswingOptionsheight_default = 55;
         public int panel_property_rotaryOptionsheight_default = 56;
         public int panel_property_motorizedOptionsheight = 120;
