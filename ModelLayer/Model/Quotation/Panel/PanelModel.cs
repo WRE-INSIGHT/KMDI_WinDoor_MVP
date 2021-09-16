@@ -1561,6 +1561,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private bool _panelCmenuDeleteVisibility;
+        public bool Panel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _panelCmenuDeleteVisibility;
+            }
+            set
+            {
+                _panelCmenuDeleteVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public void AdjustPropertyPanelHeight(string mode)
         {
             if (mode == "addChkMotorized")
@@ -3874,7 +3888,9 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GeorgianBar_HorizontalQty = panelGeorgianBarHorizontalQty;
             Panel_GeorgianBarOptionVisibility = panelGeorgianBarOptionVisibility;
             Panel_HingeOptions = panelHingeOptions;
+
             Panel_BackColor = Color.DarkGray;
+            Panel_CmenuDeleteVisibility = true;
 
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;

@@ -11,6 +11,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
     {
         int Panel_ID { get; set; }
         bool pnl_Orientation { get; set; }
+        bool Panel_CmenuDeleteVisibility { get; set; }
         string Panel_Placement { get; }
         Color Panel_BackColor { get; }
 

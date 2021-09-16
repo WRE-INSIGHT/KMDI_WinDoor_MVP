@@ -135,6 +135,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     }
                 }
 
+                if (_panelModel.Panel_HingeOptionsVisibility == true)
+                {
+                    if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                    {
+                        _panelModel.Panel_HingeOptionsVisibility = false;
+                        _panelModel.AdjustPropertyPanelHeight("minusHinge");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                    }
+                }
             }
             else if (chk.Checked == false)
             {
@@ -216,6 +225,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     }
                 }
 
+                if (_panelModel.Panel_HingeOptionsVisibility == false)
+                {
+                    if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                    {
+                        _panelModel.Panel_HingeOptionsVisibility = true;
+                        _panelModel.AdjustPropertyPanelHeight("addHinge");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                    }
+                }
             }
         }
 

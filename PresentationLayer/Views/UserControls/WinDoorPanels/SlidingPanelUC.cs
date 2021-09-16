@@ -67,6 +67,20 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private bool _panelCmenuDeleteVisibility;
+        public bool Panel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _panelCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _panelCmenuDeleteVisibility = value;
+            }
+        }
+
         public event EventHandler deleteToolStripClickedEventRaised;
         public event EventHandler slidingPanelUCMouseEnterEventRaised;
         public event EventHandler slidingPanelUCMouseLeaveEventRaised;
@@ -84,6 +98,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Placement"]);
+            this.DataBindings.Add(ModelBinding["Panel_CmenuDeleteVisibility"]);
         }
 
         private void SlidingPanelUC_Paint(object sender, PaintEventArgs e)
@@ -108,7 +123,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void SlidingPanelUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
             {
                 cmenu_sliding.Show(new Point(MousePosition.X, MousePosition.Y));
             }

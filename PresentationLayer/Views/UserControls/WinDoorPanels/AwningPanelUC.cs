@@ -101,6 +101,20 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private bool _panelCmenuDeleteVisibility;
+        public bool Panel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _panelCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _panelCmenuDeleteVisibility = value;
+            }
+        }
+
         public event EventHandler deleteToolStripClickedEventRaised;
         public event EventHandler awningPanelUCMouseEnterEventRaised;
         public event EventHandler awningPanelUCMouseLeaveEventRaised;
@@ -120,6 +134,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Placement"]);
             this.DataBindings.Add(ModelBinding["Panel_ExtensionOptionsVisibility"]);
+            this.DataBindings.Add(ModelBinding["Panel_CmenuDeleteVisibility"]);
         }
 
         private void AwningPanelUC_Paint(object sender, PaintEventArgs e)
@@ -139,7 +154,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void AwningPanelUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
             {
                 cmenu_awning.Show(new Point(MousePosition.X, MousePosition.Y));
             }
