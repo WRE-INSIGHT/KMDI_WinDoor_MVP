@@ -3068,7 +3068,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_SashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
                 Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
 
-                Panel_OriginalSashWidth = (Panel_DisplayWidth - deduction_for_sashWD) + 5;
+                Panel_OriginalSashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
                 Panel_OriginalSashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
 
                 Panel_SashReinfWidth = Panel_SashWidth - 5 - (handle_deduct * 2) - 10;

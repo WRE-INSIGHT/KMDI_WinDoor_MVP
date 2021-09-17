@@ -372,6 +372,21 @@ namespace ModelLayer.Model.Quotation.Frame
         public int Frame_ReinfWidth { get; set; }
         public int Frame_ReinfHeight { get; set; }
 
+        private bool _frameCmenuDeleteVisibility;
+        public bool Frame_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _frameCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _frameCmenuDeleteVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public void SetExplosionValues_Frame()
         {
             Frame_ExplosionWidth = _frameWidth + 5;
@@ -648,6 +663,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Zoom = frameZoom;
             Frame_ArtNo = frameArtNo;
             Frame_WindoorModel = frameWindoorModel;
+            Frame_CmenuDeleteVisibility = true;
 
             FrameProp_Height = constants.frame_propertyHeight_default - constants.frame_property_concretePanelHeight;
         }

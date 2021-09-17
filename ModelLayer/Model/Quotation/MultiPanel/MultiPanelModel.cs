@@ -1222,10 +1222,27 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public int MPanel_OriginalGlassWidth { get; set; }
         public int MPanel_OriginalGlassHeight { get; set; }
 
+        private bool _mpanelCmenuDeleteVisibility;
+        public bool MPanel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _mpanelCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _mpanelCmenuDeleteVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public void SetEqualGlassDimension(string mode)
         {
             int Equal_GlassSize = 0,
                 div_deduction = 0,
+                divDM_deduction = 0,
+                DM_sashBite_deduction = 0,
                 frame_deduction = 0,
                 totalPanels = MPanel_Divisions + 1;
 
@@ -1247,17 +1264,33 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
-                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                            if (div.Div_ChkDM == false)
                             {
-                                div_deduction += 42;
+                                if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                {
+                                    div_deduction += 42;
+                                }
+                                else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                {
+                                    div_deduction += 72;
+                                }
                             }
-                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                            else if (div.Div_ChkDM == true)
                             {
-                                div_deduction += 72;
+                                if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                {
+                                    divDM_deduction += 16;
+                                    DM_sashBite_deduction += 7;
+                                }
+                                else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
+                                {
+                                    divDM_deduction += 8;
+                                    DM_sashBite_deduction += 8;
+                                }
                             }
                         }
 
-                        Equal_GlassSize = (((MPanel_DisplayWidth - (frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (frame_deduction * 2) - divDM_deduction - (div_deduction - DM_sashBite_deduction))) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1324,17 +1357,33 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
-                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                            if (div.Div_ChkDM == false)
                             {
-                                div_deduction += (42 - 14);
+                                if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                {
+                                    div_deduction += 42;
+                                }
+                                else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                {
+                                    div_deduction += 72;
+                                }
                             }
-                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                            else if (div.Div_ChkDM == true)
                             {
-                                div_deduction += (72 - 14);
+                                if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                {
+                                    divDM_deduction += 16;
+                                    DM_sashBite_deduction += 7;
+                                }
+                                else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
+                                {
+                                    divDM_deduction += 8;
+                                    DM_sashBite_deduction += 8;
+                                }
                             }
                         }
 
-                        Equal_GlassSize = (((MPanel_DisplayWidth - (frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (frame_deduction * 2) - divDM_deduction - (div_deduction - DM_sashBite_deduction))) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1834,6 +1883,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_OriginalDisplayWidth = mpanelDisplayWidth;
             MPanel_OriginalDisplayHeight = mpanelDisplayHeight;
             MPanel_StackNo = mpanelStackNo;
+            MPanel_CmenuDeleteVisibility = true;
 
             if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
             {

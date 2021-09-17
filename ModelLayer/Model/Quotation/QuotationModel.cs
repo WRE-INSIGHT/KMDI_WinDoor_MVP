@@ -803,6 +803,21 @@ namespace ModelLayer.Model.Quotation
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
+
+                                            if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 && perFrame)
+                                            {
+                                                Material_List.Rows.Add("Milled Frame 7502-Milled",
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width.ToString(),
+                                                                       "Frame",
+                                                                       @"|  |");
+
+                                                Material_List.Rows.Add("Milled Frame Reinf R676",
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width.ToString(),
+                                                                       "Frame",
+                                                                       @"|  |");
+                                            }
                                         }
                                         perFrame = false;
                                     }
@@ -1671,6 +1686,22 @@ namespace ModelLayer.Model.Quotation
                                                    "",
                                                    "Concrete",
                                                    @"");
+
+                            if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 && perFrame)
+                            {
+                                Material_List.Rows.Add("Milled Frame 7502-Milled",
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width.ToString(),
+                                                       "Frame",
+                                                       @"|  |");
+
+                                Material_List.Rows.Add("Milled Frame Reinf R676",
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width.ToString(),
+                                                       "Frame",
+                                                       @"|  |");
+                                perFrame = false;
+                            }
                         }
                         else if (pnl.Panel_MotorizedOptionVisibility == false)
                         {

@@ -458,20 +458,7 @@ namespace PresentationLayer.Presenter
 
             if (status == "DMPreSelection")
             {
-                foreach (IFrameModel frame in _windoorModel.lst_frame)
-                {
-                    foreach (IPanelModel pnl in frame.Lst_Panel)
-                    {
-                        pnl.Panel_CmenuDeleteVisibility = false;
-                    }
-                    foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
-                    {
-                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                        {
-                            pnl.Panel_CmenuDeleteVisibility = false;
-                        }
-                    }
-                }
+                _windoorModel.WD_CmenuDeleteVisibility = false;
 
                 _tsLblStatus.Text = "Select one of the highlighted panel";
                 _controlRaised_forDMSelection = controlRaised;
@@ -486,20 +473,7 @@ namespace PresentationLayer.Presenter
             }
             else if (status == "DMSelection")
             {
-                foreach (IFrameModel frame in _windoorModel.lst_frame)
-                {
-                    foreach (IPanelModel pnl in frame.Lst_Panel)
-                    {
-                        pnl.Panel_CmenuDeleteVisibility = true;
-                    }
-                    foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
-                    {
-                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                        {
-                            pnl.Panel_CmenuDeleteVisibility = true;
-                        }
-                    }
-                }
+                _windoorModel.WD_CmenuDeleteVisibility = true;
 
                 _tsLblStatus.Text = "";
                 _pnlControlSub.Enabled = true;

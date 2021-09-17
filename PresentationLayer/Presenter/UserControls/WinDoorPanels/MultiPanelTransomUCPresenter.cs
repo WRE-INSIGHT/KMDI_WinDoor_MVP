@@ -3333,6 +3333,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiPanelBinding.Add("MPanel_Height", new Binding("Height", _multiPanelModel, "MPanel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Placement", new Binding("MPanel_Placement", _multiPanelModel, "MPanel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
+            multiPanelBinding.Add("MPanel_CmenuDeleteVisibility", new Binding("MPanel_CmenuDeleteVisibility", _multiPanelModel, "MPanel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return multiPanelBinding;
         }
