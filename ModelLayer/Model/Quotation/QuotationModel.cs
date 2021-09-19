@@ -716,17 +716,17 @@ namespace ModelLayer.Model.Quotation
 
                                     if (pnl_curCtrl.Panel_Type.Contains("Fixed") == false)
                                     {
-                                        Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.ToString(),
+                                        Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.DisplayName,
                                                                    1, "pc(s)",
-                                                                   frame.Frame_Width.ToString(),
+                                                                   pnl_curCtrl.Panel_DisplayWidth.ToString(),
                                                                    "Frame",
                                                                    @"|  |");
 
                                         if (pnl_curCtrl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
                                         {
-                                            Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.ToString(),
+                                            Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.DisplayName,
                                                                    1, "pc(s)",
-                                                                   frame.Frame_Width.ToString(),
+                                                                   pnl_curCtrl.Panel_DisplayWidth.ToString(),
                                                                    "Frame",
                                                                    @"|  |");
                                         }
@@ -760,7 +760,7 @@ namespace ModelLayer.Model.Quotation
                                                                    "Sash & Frame",
                                                                    @"");
 
-                                            additional_screws_fabrication += 3;
+                                            add_screws_fab_hinges += (pnl_curCtrl.Panel_2DHingeQty * 3); //qty * 3
 
                                             Material_List.Rows.Add("Motorized Mechanism " + pnl_curCtrl.Panel_MotorizedMechArtNo.ToString(),
                                                                    pnl_curCtrl.Panel_MotorizedMechQty, "pc(s)",
@@ -803,6 +803,21 @@ namespace ModelLayer.Model.Quotation
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
+
+                                            if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 && perFrame)
+                                            {
+                                                Material_List.Rows.Add("Milled Frame 7502-Milled",
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width.ToString(),
+                                                                       "Frame",
+                                                                       @"|  |");
+
+                                                Material_List.Rows.Add("Milled Frame Reinf R676",
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width.ToString(),
+                                                                       "Frame",
+                                                                       @"|  |");
+                                            }
                                         }
                                         perFrame = false;
                                     }
@@ -1350,7 +1365,7 @@ namespace ModelLayer.Model.Quotation
                                             Material_List.Rows.Add("Rotary handle " + pnl_curCtrl.Panel_RotaryArtNo.ToString(),
                                                                    1, "set (s)",
                                                                    "",
-                                                                   "Frame & Sash",
+                                                                   "Sash",
                                                                    @"");
 
                                             Material_List.Rows.Add("Locking Kit " + pnl_curCtrl.Panel_LockingKitArtNo.ToString(),
@@ -1476,13 +1491,13 @@ namespace ModelLayer.Model.Quotation
                                     where = "Frame";
                                 }
 
-                                Material_List.Rows.Add("Glazing Bead Width (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
+                                Material_List.Rows.Add("Glazing Bead (P" + pnl_curCtrl.PanelGlass_ID + ") Width " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
                                                        pnl_curCtrl.Panel_GlazingBeadWidth.ToString(),
                                                        where,
                                                        @"\  /");
 
-                                Material_List.Rows.Add("Glazing Bead Height (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
+                                Material_List.Rows.Add("Glazing Bead (P" + pnl_curCtrl.PanelGlass_ID + ") Height " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
                                                        pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
                                                        where,
@@ -1491,13 +1506,13 @@ namespace ModelLayer.Model.Quotation
                                 if (pnl_curCtrl.Panel_ChkGlazingAdaptor == true)
                                 {
 
-                                    Material_List.Rows.Add("Glazing Adaptor Width (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.Panel_GlazingAdaptorArtNo.DisplayName,
+                                    Material_List.Rows.Add("Glazing Adaptor (P" + pnl_curCtrl.PanelGlass_ID + ") Width " + pnl_curCtrl.Panel_GlazingAdaptorArtNo.DisplayName,
                                                            2, "pc(s)",
                                                            pnl_curCtrl.Panel_GlazingBeadWidth.ToString(),
                                                            where,
                                                            @"\  /");
 
-                                    Material_List.Rows.Add("Glazing Adaptor Height (P" + pnl_curCtrl.PanelGlass_ID + ") " + pnl_curCtrl.Panel_GlazingAdaptorArtNo.DisplayName,
+                                    Material_List.Rows.Add("Glazing Adaptor (P" + pnl_curCtrl.PanelGlass_ID + ") Height " + pnl_curCtrl.Panel_GlazingAdaptorArtNo.DisplayName,
                                                            2, "pc(s)",
                                                            pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
                                                            where,
@@ -1510,13 +1525,13 @@ namespace ModelLayer.Model.Quotation
                                     glassFilm = pnl_curCtrl.Panel_GlassFilm.DisplayName;
                                 }
 
-                                Material_List.Rows.Add("Glass Width (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
+                                Material_List.Rows.Add("Glass (P" + pnl_curCtrl.PanelGlass_ID + ") Width - " + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm,
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassWidth.ToString(),
                                                        where,
                                                        @"\  /");
 
-                                Material_List.Rows.Add("Glass Height (P" + pnl_curCtrl.PanelGlass_ID + "-" + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
+                                Material_List.Rows.Add("Glass (P" + pnl_curCtrl.PanelGlass_ID + ") Height - " + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm,
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassHeight.ToString(),
                                                        where,
@@ -1587,17 +1602,17 @@ namespace ModelLayer.Model.Quotation
 
                         if (pnl.Panel_Type.Contains("Fixed") == false)
                         {
-                            Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo.ToString(),
+                            Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo.DisplayName,
                                                    1, "pc(s)",
-                                                   frame.Frame_Width.ToString(),
+                                                   pnl.Panel_DisplayWidth.ToString(),
                                                    "Frame",
                                                    @"|  |");
 
                             if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
                             {
-                                Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.ToString(),
+                                Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.DisplayName,
                                                        1, "pc(s)",
-                                                       frame.Frame_Width.ToString(),
+                                                       pnl.Panel_DisplayWidth.ToString(),
                                                        "Frame",
                                                        @"|  |");
                             }
@@ -1628,14 +1643,13 @@ namespace ModelLayer.Model.Quotation
                                                    "",
                                                    "Sash & Frame",
                                                    @"");
+                            add_screws_fab_hinges += (pnl.Panel_2DHingeQty * 3); //qty * 3
 
                             Material_List.Rows.Add("Motorized Mechanism " + pnl.Panel_MotorizedMechArtNo.ToString(),
                                                    pnl.Panel_MotorizedMechQty, "pc(s)",
                                                    "",
                                                    "Sash",
                                                    @"");
-
-                            additional_screws_fabrication += 3;
 
                             if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                             {
@@ -1672,6 +1686,22 @@ namespace ModelLayer.Model.Quotation
                                                    "",
                                                    "Concrete",
                                                    @"");
+
+                            if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 && perFrame)
+                            {
+                                Material_List.Rows.Add("Milled Frame 7502-Milled",
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width.ToString(),
+                                                       "Frame",
+                                                       @"|  |");
+
+                                Material_List.Rows.Add("Milled Frame Reinf R676",
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width.ToString(),
+                                                       "Frame",
+                                                       @"|  |");
+                                perFrame = false;
+                            }
                         }
                         else if (pnl.Panel_MotorizedOptionVisibility == false)
                         {
@@ -2208,7 +2238,7 @@ namespace ModelLayer.Model.Quotation
                                 Material_List.Rows.Add("Rotary handle " + pnl.Panel_RotaryArtNo.ToString(),
                                                        1, "set (s)",
                                                        "",
-                                                       "Frame & Sash",
+                                                       "Sash",
                                                        @"");
 
                                 Material_List.Rows.Add("Locking Kit " + pnl.Panel_LockingKitArtNo.ToString(),
@@ -2338,13 +2368,13 @@ namespace ModelLayer.Model.Quotation
                         where = "Frame";
                     }
 
-                    Material_List.Rows.Add("Glazing Bead Width (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
+                    Material_List.Rows.Add("Glazing Bead (P" + pnl.PanelGlass_ID + ") Width " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",
                                            pnl.Panel_GlazingBeadWidth.ToString(),
                                            where,
                                            @"\  /");
 
-                    Material_List.Rows.Add("Glazing Bead Height (P" + pnl.PanelGlass_ID + ") " + pnl.PanelGlazingBead_ArtNo.ToString(),
+                    Material_List.Rows.Add("Glazing Bead (P" + pnl.PanelGlass_ID + ") Height " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",
                                            pnl.Panel_GlazingBeadHeight.ToString(),
                                            where,
@@ -2352,13 +2382,13 @@ namespace ModelLayer.Model.Quotation
 
                     if (pnl.Panel_ChkGlazingAdaptor == true)
                     {
-                        Material_List.Rows.Add("Glazing Adaptor Width (P" + pnl.PanelGlass_ID + ") " + pnl.Panel_GlazingAdaptorArtNo.DisplayName,
+                        Material_List.Rows.Add("Glazing Adaptor (P" + pnl.PanelGlass_ID + ") Width" + pnl.Panel_GlazingAdaptorArtNo.DisplayName,
                                                2, "pc(s)",
                                                pnl.Panel_GlazingBeadWidth.ToString(),
                                                where,
                                                @"\  /");
 
-                        Material_List.Rows.Add("Glazing Adaptor Height (P" + pnl.PanelGlass_ID + ") " + pnl.Panel_GlazingAdaptorArtNo.DisplayName,
+                        Material_List.Rows.Add("Glazing Adaptor (P" + pnl.PanelGlass_ID + ") Height " + pnl.Panel_GlazingAdaptorArtNo.DisplayName,
                                                2, "pc(s)",
                                                pnl.Panel_GlazingBeadHeight.ToString(),
                                                where,
@@ -2371,13 +2401,13 @@ namespace ModelLayer.Model.Quotation
                         glassFilm = pnl.Panel_GlassFilm.DisplayName;
                     }
 
-                    Material_List.Rows.Add("Glass Width (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
+                    Material_List.Rows.Add("Glass (P" + pnl.PanelGlass_ID + ") Width - " + pnl.Panel_GlassThicknessDesc + " " + glassFilm,
                                            1, "pc(s)",
                                            pnl.Panel_GlassWidth.ToString(),
                                            where,
                                            @"\  /");
 
-                    Material_List.Rows.Add("Glass Height (P" + pnl.PanelGlass_ID + "-" + pnl.Panel_GlassThicknessDesc + " " + glassFilm + ")",
+                    Material_List.Rows.Add("Glass (P" + pnl.PanelGlass_ID + ") Height - " + pnl.Panel_GlassThicknessDesc + " " + glassFilm,
                                            1, "pc(s)",
                                            pnl.Panel_GlassHeight.ToString(),
                                            where,

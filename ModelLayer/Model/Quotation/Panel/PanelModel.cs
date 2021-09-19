@@ -1561,6 +1561,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private bool _panelCmenuDeleteVisibility;
+        public bool Panel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _panelCmenuDeleteVisibility;
+            }
+            set
+            {
+                _panelCmenuDeleteVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public void AdjustPropertyPanelHeight(string mode)
         {
             if (mode == "addChkMotorized")
@@ -3054,7 +3068,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_SashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
                 Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
 
-                Panel_OriginalSashWidth = (Panel_DisplayWidth - deduction_for_sashWD) + 5;
+                Panel_OriginalSashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
                 Panel_OriginalSashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
 
                 Panel_SashReinfWidth = Panel_SashWidth - 5 - (handle_deduct * 2) - 10;
@@ -3874,7 +3888,9 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GeorgianBar_HorizontalQty = panelGeorgianBarHorizontalQty;
             Panel_GeorgianBarOptionVisibility = panelGeorgianBarOptionVisibility;
             Panel_HingeOptions = panelHingeOptions;
+
             Panel_BackColor = Color.DarkGray;
+            Panel_CmenuDeleteVisibility = true;
 
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;

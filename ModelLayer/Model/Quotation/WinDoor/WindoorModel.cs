@@ -398,6 +398,38 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        private bool _wdCmenuDeleteVisibility;
+        public bool WD_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _wdCmenuDeleteVisibility;
+            }
+            set
+            {
+                _wdCmenuDeleteVisibility = value;
+                foreach (IFrameModel frame in lst_frame)
+                {
+                    frame.Frame_CmenuDeleteVisibility = _wdCmenuDeleteVisibility;
+
+                    foreach (IPanelModel pnl in frame.Lst_Panel)
+                    {
+                        pnl.Panel_CmenuDeleteVisibility = _wdCmenuDeleteVisibility;
+                    }
+                    foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                    {
+                        mpnl.MPanel_CmenuDeleteVisibility = _wdCmenuDeleteVisibility;
+
+                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                        {
+                            pnl.Panel_CmenuDeleteVisibility = _wdCmenuDeleteVisibility;
+                        }
+                    }
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
         public float GetZoom_forRendering()
         {
             int area = _wdHeight * _wdWidth;
@@ -574,6 +606,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             WD_BaseColor = wd_basecolor;
             WD_InsideColor = wd_insidecolor;
             WD_OutsideColor = wd_outisdecolor;
+
+            WD_CmenuDeleteVisibility = true;
         }
     }
 }

@@ -31,6 +31,20 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        private bool _frameCmenuDeleteVisibility;
+        public bool Frame_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _frameCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _frameCmenuDeleteVisibility = value;
+            }
+        }
+
         //public Padding thisPadding
         //{
         //    get
@@ -72,7 +86,10 @@ namespace PresentationLayer.Views.UserControls
 
         private void frame_MouseClick(object sender, MouseEventArgs e)
         {
-            EventHelpers.RaiseMouseEvent(sender, frameMouseClickEventRaised, e);
+            if (_frameCmenuDeleteVisibility == true)
+            {
+                EventHelpers.RaiseMouseEvent(sender, frameMouseClickEventRaised, e);
+            }
         }
 
         public ContextMenuStrip GetFrameCmenu()
@@ -103,6 +120,7 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(binding["Frame_Height"]);
             this.DataBindings.Add(binding["Frame_Padding"]);
             this.DataBindings.Add(binding["Frame_Name"]);
+            this.DataBindings.Add(binding["Frame_CmenuDeleteVisibility"]);
         }
 
         private void FrameUC_DragDrop(object sender, DragEventArgs e)

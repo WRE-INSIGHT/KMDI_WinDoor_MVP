@@ -186,6 +186,7 @@ namespace ModelLayer.Model.Quotation.Panel
         WeldableCornerJoint_ArticleNo Panel_WeldableCArtNo { get; set; }
         LatchDeadboltStriker_ArticleNo Panel_LatchDeadboltStrikerArtNo { get; set; }
 
+        bool Panel_CmenuDeleteVisibility { get; set; }
         bool Panel_NTCenterHingeVisibility { get; set; }
         bool Panel_MiddleCloserVisibility { get; set; }
 

@@ -458,6 +458,8 @@ namespace PresentationLayer.Presenter
 
             if (status == "DMPreSelection")
             {
+                _windoorModel.WD_CmenuDeleteVisibility = false;
+
                 _tsLblStatus.Text = "Select one of the highlighted panel";
                 _controlRaised_forDMSelection = controlRaised;
                 _pnlControlSub.Enabled = false;
@@ -471,6 +473,8 @@ namespace PresentationLayer.Presenter
             }
             else if (status == "DMSelection")
             {
+                _windoorModel.WD_CmenuDeleteVisibility = true;
+
                 _tsLblStatus.Text = "";
                 _pnlControlSub.Enabled = true;
                 _msMainMenu.Enabled = true;

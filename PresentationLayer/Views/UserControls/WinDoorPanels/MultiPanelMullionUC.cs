@@ -46,6 +46,20 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private bool _mpanelCmenuDeleteVisibility;
+        public bool MPanel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _mpanelCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _mpanelCmenuDeleteVisibility = value;
+            }
+        }
+
         public event PaintEventHandler flpMulltiPaintEventRaised;
         public event EventHandler flpMultiMouseEnterEventRaised;
         public event EventHandler flpMultiMouseLeaveEventRaised;
@@ -70,7 +84,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["MPanel_Height"]);
             this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
             this.DataBindings.Add(ModelBinding["MPanel_Placement"]);
-            //this.DataBindings.Add(ModelBinding["MPanel_Margin"]);
+            this.DataBindings.Add(ModelBinding["MPanel_CmenuDeleteVisibility"]);
         }
 
         private void flp_MultiMullion_MouseEnter(object sender, EventArgs e)
@@ -90,7 +104,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void flp_MultiMullion_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && _mpanelCmenuDeleteVisibility == true)
             {
                 cmenu_mulltiP.Show(new Point(MousePosition.X, MousePosition.Y));
             }
