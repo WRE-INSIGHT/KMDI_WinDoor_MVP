@@ -12444,7 +12444,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(159, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(161, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
 
             #region Multimullion(2)
@@ -14075,7 +14075,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(115, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(117, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
 
             #region Multimullion(2)
