@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity;
 using System.Windows.Forms;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -30,8 +31,99 @@ namespace PresentationLayer.Presenter.UserControls
         private void SubscribeToEventsSetup()
         {
             _multiPanelPropertiesUC.MultiPanelPropertiesLoadEventRaised += _multiPanelPropertiesUC_MultiPanelPropertiesLoadEventRaised;
+            _multiPanelPropertiesUC.glassbalancingClickedEventRaised += _multiPanelPropertiesUC_glassbalancingClickedEventRaised;
         }
-        
+
+        private void _multiPanelPropertiesUC_glassbalancingClickedEventRaised(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmGB = (ToolStripMenuItem)sender;
+
+            if (_multiPanelModel.MPanelLst_Panel.Count > 0)
+            {
+                _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+
+                string panel_GlassID = "";
+                foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                {
+                    panel_GlassID += ", P" + pnl.PanelGlass_ID;
+                }
+                string gbmode = "";
+
+                bool allWithSash = _multiPanelModel.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
+                bool allNoSash = _multiPanelModel.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
+                if (allWithSash == true && allNoSash == false)
+                {
+                    gbmode = "withSash";
+                }
+                else if (allWithSash == false && allNoSash == true)
+                {
+                    gbmode = "noSash";
+                }
+                else if (allWithSash == false && allNoSash == false)
+                {
+                    gbmode = "";
+                }
+
+                if (gbmode == "")
+                {
+                    MessageBox.Show("Cannot apply auto glass balancing" + "\n" + "You can apply auto glass balancing if all panel has sash or all panel has no sash",
+                                    "Glass balancing not available",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    tsmGB.Checked = false;
+                }
+                else if (gbmode != "")
+                {
+                    if (tsmGB.Checked == false)
+                    {
+                        DialogResult dr = MessageBox.Show("Confirm glass balancing on panel(s) " + panel_GlassID.Remove(0, 2) + "?", "Glass balancing", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dr == DialogResult.Yes)
+                        {
+                           if (tsmGB.Checked == false)
+                            {
+                                foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                                {
+                                    pnl.Panel_Width = pnl.Panel_OriginalWidth;
+                                    pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                                }
+
+                                _multiPanelModel.SetEqualGlassDimension(gbmode);
+                                tsmGB.Checked = false;
+                            }
+                            tsmGB.Checked = true;
+                        }
+                    }
+                    else if (tsmGB.Checked == true)
+                    {
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            pnl.Panel_Width = pnl.Panel_OriginalWidth;
+                            pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                        }
+
+                        foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                        {
+                            mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth;
+                            mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight;
+
+                            mpnl.Fit_MyControls_Dimensions();
+                            mpnl.Fit_MyControls_ToBindDimensions();
+                            mpnl.Adjust_ControlDisplaySize();
+                        }
+                    }
+
+                    _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                    _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
+                    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                    _mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No available panel(s)", "Glass balancing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tsmGB.Checked = false;
+            }
+        }
+
         private void _multiPanelPropertiesUC_MultiPanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
             _multiPanelPropertiesUC.ThisBinding(CreateBindingDictionary());

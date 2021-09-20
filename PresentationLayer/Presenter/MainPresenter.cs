@@ -529,6 +529,8 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_glassBalancingToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
+            _quotationModel.GetListOfMaterials(_windoorModel);
+
             ToolStripMenuItem gb = (ToolStripMenuItem)sender;
 
             string gbmode = "";
