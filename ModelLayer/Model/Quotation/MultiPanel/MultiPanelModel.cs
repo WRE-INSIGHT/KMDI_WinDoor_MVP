@@ -1237,15 +1237,36 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
-        public void SetEqualGlassDimension(string mode)
+        public void SetEqualGlassDimension(string mode, SashProfile_ArticleNo sash)
         {
             int Equal_GlassSize = 0,
                 div_deduction = 0,
                 divDM_deduction = 0,
                 DM_sashBite_deduction = 0,
-                frame_deduction = 0,
+                total_frame_deduction = 0,
+                frame_thickness = 0,
+                sash_bite = 0,
                 totalPanels = MPanel_Divisions + 1;
 
+            if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+            {
+                frame_thickness = 33;
+            }
+            else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+            {
+                frame_thickness = 47;
+            }
+
+            if (sash == SashProfile_ArticleNo._7581)
+            {
+                sash_bite = 7;
+            }
+            else if (sash == SashProfile_ArticleNo._374 || sash == SashProfile_ArticleNo._395)
+            {
+                sash_bite = 8;
+            }
+
+            total_frame_deduction = frame_thickness - sash_bite;
 
             if (mode == "noSash")
             {
@@ -1253,15 +1274,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
-                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                        {
-                            frame_deduction = 33;
-                        }
-                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            frame_deduction = 47;
-                        }
-
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
                             if (div.Div_ChkDM == false)
@@ -1290,7 +1302,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (frame_deduction * 2) - divDM_deduction - (div_deduction - DM_sashBite_deduction))) / totalPanels) + 5;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - DM_sashBite_deduction))) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1306,15 +1318,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
-                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                        {
-                            frame_deduction = 33;
-                        }
-                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            frame_deduction = 47;
-                        }
-
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
                             if (div.Div_ArtNo == Divider_ArticleNo._7536)
@@ -1327,7 +1330,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (((MPanel_DisplayHeight - (frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = (((MPanel_DisplayHeight - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1346,15 +1349,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
-                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                        {
-                            frame_deduction = 26;
-                        }
-                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            frame_deduction = 40;
-                        }
-
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
                             if (div.Div_ChkDM == false)
@@ -1383,7 +1377,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (frame_deduction * 2) - divDM_deduction - (div_deduction - DM_sashBite_deduction))) / totalPanels) + 5;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - DM_sashBite_deduction))) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1399,15 +1393,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
-                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                        {
-                            frame_deduction = 26;
-                        }
-                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            frame_deduction = 40;
-                        }
-
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
                             if (div.Div_ArtNo == Divider_ArticleNo._7536)
@@ -1420,7 +1405,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (((MPanel_DisplayHeight - (frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
+                        Equal_GlassSize = (((MPanel_DisplayHeight - (total_frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {

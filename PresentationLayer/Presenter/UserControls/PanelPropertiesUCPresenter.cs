@@ -197,7 +197,7 @@ namespace PresentationLayer.Presenter.UserControls
             extPropUC.Dock = DockStyle.Top;
             extPropUC.BringToFront();
 
-            if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Height >= 2100)
+            if (_panelModel.Panel_Type.Contains("Casement"))
             {
                 _panelModel.Panel_ExtensionOptionsVisibility = true;
                 _panelModel.Panel_CornerDriveOptionsVisibility = true;

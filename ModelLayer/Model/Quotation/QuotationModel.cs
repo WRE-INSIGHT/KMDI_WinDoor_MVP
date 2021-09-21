@@ -60,7 +60,6 @@ namespace ModelLayer.Model.Quotation
                 total_screws_fabrication = 0,
                 total_screws_installation = 0,
                 total_cladding_size = 0,
-                additional_screws_fabrication = 0,
                 add_screws_fab_espag = 0,
                 add_screws_fab_ext = 0,
                 add_screws_fab_corDrive = 0,
@@ -78,6 +77,7 @@ namespace ModelLayer.Model.Quotation
                 add_screws_fab_weldableCJ = 0,
                 add_screws_fab_cladingBracket = 0,
                 add_screws_fab_handle = 0,
+                add_screws_fab_mech_joint = 0,
                 exp_bolt = 0,
                 frame_width = 0,
                 frame_height = 0;
@@ -315,6 +315,10 @@ namespace ModelLayer.Model.Quotation
                                                                    "",
                                                                    "CPL",
                                                                    @"|  |");
+
+                                            add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForConcreteQTY * 3);
+
+                                            exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
                                         }
 
                                         
@@ -324,7 +328,11 @@ namespace ModelLayer.Model.Quotation
                                                                    div_nxtCtrl.Div_CladdingBracketForUPVCQTY, "pc(s)",
                                                                    "",
                                                                    "CPL",
+
                                                                    @"|  |");
+                                            add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForConcreteQTY * 3);
+
+                                            exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
                                         }
                                     }
                                 }
@@ -332,10 +340,11 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                            2, "pc(s)", "");
-                                }
-                                if (div_nxtCtrl.Div_MechJoinArtNo == Divider_MechJointArticleNo._AV585)
-                                {
-                                    additional_screws_fabrication += (2 * 2); //qty * 2
+
+                                    if (div_nxtCtrl.Div_MechJoinArtNo == Divider_MechJointArticleNo._AV585)
+                                    {
+                                        add_screws_fab_mech_joint += (2 * 2); //qty * 2
+                                    }
                                 }
 
                                 Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
@@ -661,7 +670,10 @@ namespace ModelLayer.Model.Quotation
                                                                        "",
                                                                        "CPL",
                                                                        @"|  |");
+
                                                 add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForConcreteQTY * 3);
+
+                                                exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
                                             }
 
                                             if (div_nxtCtrl.Div_CladdingBracketForUPVCQTY > 0)
@@ -671,7 +683,10 @@ namespace ModelLayer.Model.Quotation
                                                                        "",
                                                                        "CPL",
                                                                        @"|  |");
+
                                                 add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForUPVCQTY * 4);
+
+                                                exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
                                             }
                                         }
                                     }
@@ -1398,7 +1413,7 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoline)
                                         {
-                                            Material_List.Rows.Add("Rio handle " + pnl_curCtrl.Panel_RotolineArtNo.ToString(),
+                                            Material_List.Rows.Add("Rotoline handle " + pnl_curCtrl.Panel_RotolineArtNo.ToString(),
                                                                    1, "pc(s)",
                                                                    "",
                                                                    "Sash",
@@ -2247,7 +2262,7 @@ namespace ModelLayer.Model.Quotation
                                                        "Sash",
                                                        @"");
 
-                                additional_screws_fabrication += 9;
+                                add_screws_fab_handle += 9;
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._Rio)
                             {
@@ -2271,7 +2286,7 @@ namespace ModelLayer.Model.Quotation
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._Rotoline)
                             {
-                                Material_List.Rows.Add("Rio handle " + pnl.Panel_RotolineArtNo.ToString(),
+                                Material_List.Rows.Add("Rotoline handle " + pnl.Panel_RotolineArtNo.ToString(),
                                                        1, "pc(s)",
                                                        "",
                                                        "Sash",
@@ -2457,23 +2472,25 @@ namespace ModelLayer.Model.Quotation
             GlazingSeal_TotalQty = glazing_seal;
 
             int fixing_screw = (int)(Math.Ceiling((decimal)total_screws_fabrication / 300));
-            Screws_for_Fabrication = fixing_screw + additional_screws_fabrication + add_screws_fab_espag +
-                                                                                    add_screws_fab_ext +
-                                                                                    add_screws_fab_corDrive +
-                                                                                    add_screws_fab_snapInKeep +
-                                                                                    add_screws_fab_striker +
-                                                                                    add_screws_fab_mc +
-                                                                                    add_screws_fab_fs_or_rs +
-                                                                                    add_screws_fab_alum +
-                                                                                    add_screws_fab_fxdcam +
-                                                                                    add_screws_fab_endcap +
-                                                                                    add_screws_fab_hinges +
-                                                                                    add_screws_fab_stayBearing +
-                                                                                    add_screws_fab_pivotRest +
-                                                                                    add_screws_fab_shootbolt +
-                                                                                    add_screws_fab_weldableCJ +
-                                                                                    add_screws_fab_cladingBracket +
-                                                                                    add_screws_fab_handle;
+            int add_screws = add_screws_fab_espag +
+                             add_screws_fab_ext +
+                             add_screws_fab_corDrive +
+                             add_screws_fab_snapInKeep +
+                             add_screws_fab_striker +
+                             add_screws_fab_mc +
+                             add_screws_fab_fs_or_rs +
+                             add_screws_fab_alum +
+                             add_screws_fab_fxdcam +
+                             add_screws_fab_endcap +
+                             add_screws_fab_hinges +
+                             add_screws_fab_stayBearing +
+                             add_screws_fab_pivotRest +
+                             add_screws_fab_shootbolt +
+                             add_screws_fab_weldableCJ +
+                             add_screws_fab_cladingBracket +
+                             add_screws_fab_handle +
+                             add_screws_fab_mech_joint;
+            Screws_for_Fabrication = fixing_screw + add_screws;
             Screws_for_Installation = fixing_screw + total_screws_installation;
             Screws_for_Cladding = (int)(Math.Ceiling((decimal)total_cladding_size / 300));
 

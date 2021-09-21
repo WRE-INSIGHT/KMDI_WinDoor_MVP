@@ -64,7 +64,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanel_OriginalGlassHeight { get; set; }
         bool MPanel_CmenuDeleteVisibility { get; set; }
 
-        void SetEqualGlassDimension(string mode);
+        void SetEqualGlassDimension(string mode, SashProfile_ArticleNo sash);
+
         void SetMPanelExplosionValues_Panel(Divider_ArticleNo divNxt_artNo,
                                             Divider_ArticleNo divPrev_artNo,
                                             DividerType div_type,

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Unity;
 using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -48,12 +49,23 @@ namespace PresentationLayer.Presenter.UserControls
                     panel_GlassID += ", P" + pnl.PanelGlass_ID;
                 }
                 string gbmode = "";
+                SashProfile_ArticleNo ref_sash = _multiPanelModel.MPanelLst_Panel[0].Panel_SashProfileArtNo;
+                bool same_sash = false;
 
                 bool allWithSash = _multiPanelModel.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
                 bool allNoSash = _multiPanelModel.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
                 if (allWithSash == true && allNoSash == false)
                 {
                     gbmode = "withSash";
+                    int ref_sash_count = _multiPanelModel.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
+                    if (ref_sash_count == _multiPanelModel.MPanelLst_Panel.Count)
+                    {
+                        same_sash = true;
+                    }
+                    else
+                    {
+                        same_sash = false;
+                    }
                 }
                 else if (allWithSash == false && allNoSash == true)
                 {
@@ -73,48 +85,57 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (gbmode != "")
                 {
-                    if (tsmGB.Checked == false)
+                    if (same_sash == true)
                     {
-                        DialogResult dr = MessageBox.Show("Confirm glass balancing on panel(s) " + panel_GlassID.Remove(0, 2) + "?", "Glass balancing", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (dr == DialogResult.Yes)
+                        if (tsmGB.Checked == false)
                         {
-                           if (tsmGB.Checked == false)
+                            DialogResult dr = MessageBox.Show("Confirm glass balancing on panel(s) " + panel_GlassID.Remove(0, 2) + "?", "Glass balancing", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (dr == DialogResult.Yes)
                             {
-                                foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                                if (tsmGB.Checked == false)
                                 {
-                                    pnl.Panel_Width = pnl.Panel_OriginalWidth;
-                                    pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                                    foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                                    {
+                                        pnl.Panel_Width = pnl.Panel_OriginalWidth;
+                                        pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                                    }
+
+                                    _multiPanelModel.SetEqualGlassDimension(gbmode, ref_sash);
+                                    tsmGB.Checked = false;
                                 }
-
-                                _multiPanelModel.SetEqualGlassDimension(gbmode);
-                                tsmGB.Checked = false;
+                                tsmGB.Checked = true;
                             }
-                            tsmGB.Checked = true;
                         }
+                        else if (tsmGB.Checked == true)
+                        {
+                            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                            {
+                                pnl.Panel_Width = pnl.Panel_OriginalWidth;
+                                pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                            }
+
+                            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                            {
+                                mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth;
+                                mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight;
+
+                                mpnl.Fit_MyControls_Dimensions();
+                                mpnl.Fit_MyControls_ToBindDimensions();
+                                mpnl.Adjust_ControlDisplaySize();
+                            }
+                        }
+
+                        _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                        _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
+                        _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                        _mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
                     }
-                    else if (tsmGB.Checked == true)
+                    else
                     {
-                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-                        {
-                            pnl.Panel_Width = pnl.Panel_OriginalWidth;
-                            pnl.Panel_Height = pnl.Panel_OriginalHeight;
-                        }
-
-                        foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-                        {
-                            mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth;
-                            mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight;
-
-                            mpnl.Fit_MyControls_Dimensions();
-                            mpnl.Fit_MyControls_ToBindDimensions();
-                            mpnl.Adjust_ControlDisplaySize();
-                        }
+                        MessageBox.Show("Cannot apply auto glass balancing" + "\n" + "You can apply auto glass balancing if all panel has same sash profile",
+                                        "Glass balancing not available",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-
-                    _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                    _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
-                    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-                    _mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
                 }
             }
             else
