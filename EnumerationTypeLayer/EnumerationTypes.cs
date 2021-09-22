@@ -609,5 +609,26 @@ namespace EnumerationTypeLayer
 
             private GlazingAdaptor_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class ButtHinge_ArticleNo : Enumeration<ButtHinge_ArticleNo, int>
+        {
+            public static readonly ButtHinge_ArticleNo _770725 = new ButtHinge_ArticleNo(0, "770725");
+
+            private ButtHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MilledFrame_ArticleNo : Enumeration<MilledFrame_ArticleNo, int>
+        {
+            public static readonly MilledFrame_ArticleNo _7502Milled = new MilledFrame_ArticleNo(0, "7502-Milled");
+
+            private MilledFrame_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MilledFrameReinf_ArticleNo : Enumeration<MilledFrameReinf_ArticleNo, int>
+        {
+            public static readonly MilledFrameReinf_ArticleNo _R_676 = new MilledFrameReinf_ArticleNo(0, "R-676");
+
+            private MilledFrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

@@ -88,6 +88,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
                             }
                         }
+                        else if (_panelModel.Panel_MotorizedOptionVisibility == true)
+                        {
+                            _panelModel.Panel_2dHingeVisibility = true;
+                            _panelModel.Panel_ButtHingeVisibility = false;
+                        }
                     }
                     else if (sel_sash == SashProfile_ArticleNo._374)
                     {
@@ -95,7 +100,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                         if (_panelModel.Panel_MotorizedOptionVisibility == false)
                         {
-
                             if (curr_sash == SashProfile_ArticleNo._7581)
                             {
                                 _panelModel.Panel_HingeOptionsVisibility = false;
@@ -128,6 +132,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     }
                                 }
                             }
+                        }
+                        else if (_panelModel.Panel_MotorizedOptionVisibility == true)
+                        {
+                            _panelModel.Panel_2dHingeVisibility = true;
+                            _panelModel.Panel_ButtHingeVisibility = false;
                         }
                     }
                     else if(sel_sash == SashProfile_ArticleNo._395)
@@ -167,6 +176,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 }
                             }
                         }
+                        else if (_panelModel.Panel_MotorizedOptionVisibility == true)
+                        {
+                            _panelModel.Panel_2dHingeVisibility = false;
+                            _panelModel.Panel_ButtHingeVisibility = true;
+                        }
                     }
                     curr_sash = sel_sash;
                 }
@@ -177,6 +191,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_sashPropertyUC.ThisBinding(CreateBindingDictionary());
             curr_sash = SashProfile_ArticleNo._7581;
+            _panelModel.Panel_2dHingeVisibility = true;
+            _panelModel.Panel_ButtHingeVisibility = false;
+
             _initialLoad = false;
         }
 

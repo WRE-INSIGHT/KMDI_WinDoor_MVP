@@ -127,6 +127,21 @@ namespace ModelLayer.Model.Quotation
                                        "Frame",
                                        @"|  |");
 
+                if (frame.Frame_If_InwardCasement)
+                {
+                    Material_List.Rows.Add("Milled Frame " + frame.Frame_MilledArtNo.DisplayName,
+                                           1, "pc(s)",
+                                           frame.Frame_Width.ToString(),
+                                           "Frame",
+                                           @"|  |");
+
+                    Material_List.Rows.Add("Milled Frame Reinf " + frame.Frame_MilledReinfArtNo.DisplayName,
+                                           1, "pc(s)",
+                                           frame.Frame_Width.ToString(),
+                                           "Frame",
+                                           @"|  |");
+                }
+
                 if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
                 {
                     #region MultiPanel Parent
@@ -737,7 +752,8 @@ namespace ModelLayer.Model.Quotation
                                                                    "Frame",
                                                                    @"|  |");
 
-                                        if (pnl_curCtrl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                        if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 &&
+                                            pnl_curCtrl.Panel_MotorizedOptionVisibility == true)
                                         {
                                             Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.DisplayName,
                                                                    1, "pc(s)",
@@ -753,29 +769,44 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
                                                    1, "pc(s)",
-                                                   frame.Frame_Width,
+                                                   frame.Frame_Width + 150,
                                                    "Frame",
                                                    @"");
 
                                             Material_List.Rows.Add("Divider " + pnl_curCtrl.Panel_MotorizedDividerArtNo.ToString(),
                                                                    1, "pc(s)",
-                                                                   frame.Frame_Width,
+                                                                   frame.Frame_Width + 150,
                                                                    "Frame",
                                                                    @"");
 
                                             Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
                                                                    1, "pc(s)",
                                                                    frame.Frame_Width + 150,
-                                                                   "Frame",
+                                                                   "Motorized Mechanism",
                                                                    @"");
 
-                                            Material_List.Rows.Add("2D Hinge " + pnl_curCtrl.Panel_2dHingeArtNo.ToString(),
-                                                                   pnl_curCtrl.Panel_2DHingeQty, "pair(s)",
-                                                                   "",
-                                                                   "Sash & Frame",
-                                                                   @"");
+                                            if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
+                                                pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                            {
+                                                Material_List.Rows.Add("2D Hinge " + pnl_curCtrl.Panel_2dHingeArtNo.DisplayName,
+                                                                       pnl_curCtrl.Panel_2DHingeQty, "pair(s)",
+                                                                       "",
+                                                                       "Sash & Frame",
+                                                                       @"");
 
-                                            add_screws_fab_hinges += (pnl_curCtrl.Panel_2DHingeQty * 3); //qty * 3
+                                                add_screws_fab_hinges += (pnl_curCtrl.Panel_2DHingeQty * 3); //qty * 3
+
+                                            }
+                                            else if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                            {
+                                                Material_List.Rows.Add("Butt Hinge " + pnl_curCtrl.Panel_ButtHingeArtNo.DisplayName,
+                                                                       pnl_curCtrl.Panel_ButtHingeQty, "pc(s)",
+                                                                       "",
+                                                                       "",
+                                                                       @"");
+
+                                                add_screws_fab_hinges += (pnl_curCtrl.Panel_ButtHingeQty * 3); //qty * 3
+                                            }
 
                                             Material_List.Rows.Add("Motorized Mechanism " + pnl_curCtrl.Panel_MotorizedMechArtNo.ToString(),
                                                                    pnl_curCtrl.Panel_MotorizedMechQty, "pc(s)",
@@ -818,21 +849,6 @@ namespace ModelLayer.Model.Quotation
                                                                    "",
                                                                    "Concrete",
                                                                    @"");
-
-                                            if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 && perFrame)
-                                            {
-                                                Material_List.Rows.Add("Milled Frame 7502-Milled",
-                                                                       1, "pc(s)",
-                                                                       frame.Frame_Width.ToString(),
-                                                                       "Frame",
-                                                                       @"|  |");
-
-                                                Material_List.Rows.Add("Milled Frame Reinf R676",
-                                                                       1, "pc(s)",
-                                                                       frame.Frame_Width.ToString(),
-                                                                       "Frame",
-                                                                       @"|  |");
-                                            }
                                         }
                                         perFrame = false;
                                     }
@@ -1623,7 +1639,8 @@ namespace ModelLayer.Model.Quotation
                                                    "Frame",
                                                    @"|  |");
 
-                            if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                            if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 &&
+                                pnl.Panel_MotorizedOptionVisibility == true)
                             {
                                 Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.DisplayName,
                                                        1, "pc(s)",
@@ -1637,30 +1654,45 @@ namespace ModelLayer.Model.Quotation
                         {
                             Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
                                                    1, "pc(s)",
-                                                   frame.Frame_Width,
+                                                   frame.Frame_Width + 150,
                                                    "Frame",
                                                    @"");
 
                             Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
                                                    1, "pc(s)",
-                                                   frame.Frame_Width,
+                                                   frame.Frame_Width + 150,
                                                    "Frame",
                                                    @"");
 
                             Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
                                                    1, "pc(s)",
                                                    frame.Frame_Width + 150,
-                                                   "Frame",
+                                                   "Motorized Mechanism",
                                                    @"");
 
-                            Material_List.Rows.Add("2D Hinge " + pnl.Panel_2dHingeArtNo.ToString(),
-                                                   pnl.Panel_2DHingeQty, "pair(s)",
-                                                   "",
-                                                   "Sash & Frame",
-                                                   @"");
-                            add_screws_fab_hinges += (pnl.Panel_2DHingeQty * 3); //qty * 3
+                            if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
+                                pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            {
+                                Material_List.Rows.Add("2D Hinge " + pnl.Panel_2dHingeArtNo.DisplayName,
+                                                       pnl.Panel_2DHingeQty, "pair(s)",
+                                                       "",
+                                                       "Sash & Frame",
+                                                       @"");
 
-                            Material_List.Rows.Add("Motorized Mechanism " + pnl.Panel_MotorizedMechArtNo.ToString(),
+                                add_screws_fab_hinges += (pnl.Panel_2DHingeQty * 3); //qty * 3
+
+                            }
+                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                            {
+                                Material_List.Rows.Add("Butt Hinge " + pnl.Panel_ButtHingeArtNo.DisplayName,
+                                                       pnl.Panel_ButtHingeQty, "pc(s)",
+                                                       "",
+                                                       "",
+                                                       @"");
+
+                                add_screws_fab_hinges += (pnl.Panel_ButtHingeQty * 3); //qty * 3
+                            }
+                            Material_List.Rows.Add("Motorized Mechanism " + pnl.Panel_MotorizedMechArtNo.DisplayName,
                                                    pnl.Panel_MotorizedMechQty, "pc(s)",
                                                    "",
                                                    "Sash",
@@ -1701,22 +1733,6 @@ namespace ModelLayer.Model.Quotation
                                                    "",
                                                    "Concrete",
                                                    @"");
-
-                            if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 && perFrame)
-                            {
-                                Material_List.Rows.Add("Milled Frame 7502-Milled",
-                                                       1, "pc(s)",
-                                                       frame.Frame_Width.ToString(),
-                                                       "Frame",
-                                                       @"|  |");
-
-                                Material_List.Rows.Add("Milled Frame Reinf R676",
-                                                       1, "pc(s)",
-                                                       frame.Frame_Width.ToString(),
-                                                       "Frame",
-                                                       @"|  |");
-                                perFrame = false;
-                            }
                         }
                         else if (pnl.Panel_MotorizedOptionVisibility == false)
                         {

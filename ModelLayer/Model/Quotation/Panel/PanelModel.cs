@@ -945,6 +945,37 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_2DHingeQty_nonMotorized { get; set; }
         public _3dHinge_ArticleNo Panel_3dHingeArtNo { get; set; }
         public int Panel_3dHingeQty { get; set; }
+        public ButtHinge_ArticleNo Panel_ButtHingeArtNo { get; set; }
+        public int Panel_ButtHingeQty { get; set; }
+
+        private bool _panel2dHingeVisibility; //motorized purposes
+        public bool Panel_2dHingeVisibility //motorized purposes
+        {
+            get
+            {
+                return _panel2dHingeVisibility;
+            }
+            set
+            {
+                _panel2dHingeVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelButtHingeVisibility; //motorized purposes
+        public bool Panel_ButtHingeVisibility //motorized purposes
+        {
+            get
+            {
+                return _panelButtHingeVisibility;
+            }
+            set
+            {
+                _panelButtHingeVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public AdjustableStriker_ArticleNo Panel_AdjStrikerArtNo { get; set; }
         public int Panel_AdjStrikerQty { get; set; }
         public RestrictorStay_ArticleNo Panel_RestrictorStayArtNo { get; set; }
@@ -1347,6 +1378,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         private bool _panelMotorizedOptionVisibility;
+        [Description("Used on chk_Motorized on MotorizedProperty"), Category("Appearance")]
         public bool Panel_MotorizedOptionVisibility
         {
             get
@@ -1863,6 +1895,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
+                int inward_motorized_deduction = 0;
+
                 if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
                 {
                     Panel_SashWidth = Panel_DisplayWidth - (26 * 2) + 5;
@@ -1890,11 +1924,16 @@ namespace ModelLayer.Model.Quotation.Panel
                         else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                         {
                             glass_deduct = 57;
+                            if (Panel_MotorizedOptionVisibility == true)
+                            {
+                                inward_motorized_deduction = 35;
+                            }
                         }
                     }
 
                     Panel_SashWidth = Panel_DisplayWidth - (sash_deduct * 2) + 5;
-                    Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 5;
+                    Panel_SashHeight = Panel_DisplayHeight - inward_motorized_deduction - (sash_deduct * 2) + 5;
+                    
 
                     Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
                     Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
@@ -2075,6 +2114,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_MotorizedDividerArtNo = MotorizedDivider_ArticleNo._0505;
                     Panel_CoverForMotorArtNo = CoverForMotor_ArticleNo._1182;
                     Panel_2dHingeArtNo = _2DHinge_ArticleNo._614293;
+                    Panel_ButtHingeArtNo = ButtHinge_ArticleNo._770725;
                     Panel_PushButtonSwitchArtNo = PushButtonSwitch_ArticleNo._N4037;
                     Panel_FalsePoleArtNo = FalsePole_ArticleNo._N4950;
                     Panel_SupportingFrameArtNo = SupportingFrame_ArticleNo._N4703;
@@ -3064,6 +3104,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_MotorizedDividerArtNo = MotorizedDivider_ArticleNo._0505;
                 Panel_CoverForMotorArtNo = CoverForMotor_ArticleNo._1182;
                 Panel_2dHingeArtNo = _2DHinge_ArticleNo._614293;
+                Panel_ButtHingeArtNo = ButtHinge_ArticleNo._770725;
                 Panel_PushButtonSwitchArtNo = PushButtonSwitch_ArticleNo._N4037;
                 Panel_FalsePoleArtNo = FalsePole_ArticleNo._N4950;
                 Panel_SupportingFrameArtNo = SupportingFrame_ArticleNo._N4703;
@@ -3105,7 +3146,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                int handle_deduct = 0, glass_deduct = 0;
+                int handle_deduct = 0, glass_deduct = 0, inward_motorized_deduction = 0;
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
                     Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
@@ -3127,10 +3168,15 @@ namespace ModelLayer.Model.Quotation.Panel
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     glass_deduct = 57;
+
+                    if (Panel_MotorizedOptionVisibility == true)
+                    {
+                        inward_motorized_deduction = 35;
+                    }
                 }
 
                 Panel_SashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
-                Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
+                Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT - inward_motorized_deduction) + 5;
 
                 Panel_OriginalSashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
                 Panel_OriginalSashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;

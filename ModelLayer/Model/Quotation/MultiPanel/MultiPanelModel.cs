@@ -117,7 +117,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
-        [Description("Virtual Width that is dependent on MPanel_Width and MPanel_Zoomand varies accordingly. (not intended for user to use)")]
+        [Description("Virtual Width that is dependent on MPanel_Width and MPanel_Zoom and varies accordingly. (not intended for user to use)")]
         private int _mpanelWidthToBind;
         public int MPanel_WidthToBind
         {
