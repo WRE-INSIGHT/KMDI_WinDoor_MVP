@@ -1941,7 +1941,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 int handle_deduct = 0;
 
-                if (Panel_SashReinfArtNo == SashReinf_ArticleNo._R675)
+                if (Panel_SashReinfArtNo == SashReinf_ArticleNo._R675 || Panel_SashReinfArtNo == SashReinf_ArticleNo._207)
                 {
                     handle_deduct = 55;
                 }
@@ -2114,11 +2114,43 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_MotorizedDividerArtNo = MotorizedDivider_ArticleNo._0505;
                     Panel_CoverForMotorArtNo = CoverForMotor_ArticleNo._1182;
                     Panel_2dHingeArtNo = _2DHinge_ArticleNo._614293;
-                    Panel_ButtHingeArtNo = ButtHinge_ArticleNo._770725;
                     Panel_PushButtonSwitchArtNo = PushButtonSwitch_ArticleNo._N4037;
                     Panel_FalsePoleArtNo = FalsePole_ArticleNo._N4950;
                     Panel_SupportingFrameArtNo = SupportingFrame_ArticleNo._N4703;
                     Panel_PlateArtNo = Plate_ArticleNo._N4803LB;
+
+                    if (outside_color != Foil_Color._None)
+                    {
+                        if (outside_color == Foil_Color._FossilGray || outside_color == Foil_Color._BeechOak ||
+                            outside_color == Foil_Color._DriftWood || outside_color == Foil_Color._Graphite ||
+                            outside_color == Foil_Color._JetBlack || outside_color == Foil_Color._ChestnutOak ||
+                            outside_color == Foil_Color._WashedOak || outside_color == Foil_Color._GreyOak ||
+                            outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray)
+                        {
+                            Panel_ButtHingeArtNo = ButtHinge_ArticleNo._BL;
+                        }
+                        else if (outside_color == Foil_Color._Walnut || outside_color == Foil_Color._GoldenOak ||
+                                 outside_color == Foil_Color._Mahogany || outside_color == Foil_Color._Havana)
+                        {
+                            Panel_ButtHingeArtNo = ButtHinge_ArticleNo._DB;
+                        }
+                    }
+                    else if (outside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            Panel_ButtHingeArtNo = ButtHinge_ArticleNo._WHT;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            Panel_ButtHingeArtNo = ButtHinge_ArticleNo._PC;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            Panel_ButtHingeArtNo = ButtHinge_ArticleNo._DB;
+                        }
+                    }
+
                 }
 
                 if (Panel_HingeOptions == HingeOption._2DHinge)
@@ -3104,11 +3136,42 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_MotorizedDividerArtNo = MotorizedDivider_ArticleNo._0505;
                 Panel_CoverForMotorArtNo = CoverForMotor_ArticleNo._1182;
                 Panel_2dHingeArtNo = _2DHinge_ArticleNo._614293;
-                Panel_ButtHingeArtNo = ButtHinge_ArticleNo._770725;
                 Panel_PushButtonSwitchArtNo = PushButtonSwitch_ArticleNo._N4037;
                 Panel_FalsePoleArtNo = FalsePole_ArticleNo._N4950;
                 Panel_SupportingFrameArtNo = SupportingFrame_ArticleNo._N4703;
                 Panel_PlateArtNo = Plate_ArticleNo._N4803LB;
+
+                if (outside_color != Foil_Color._None)
+                {
+                    if (outside_color == Foil_Color._FossilGray || outside_color == Foil_Color._BeechOak ||
+                        outside_color == Foil_Color._DriftWood || outside_color == Foil_Color._Graphite ||
+                        outside_color == Foil_Color._JetBlack || outside_color == Foil_Color._ChestnutOak ||
+                        outside_color == Foil_Color._WashedOak || outside_color == Foil_Color._GreyOak ||
+                        outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray)
+                    {
+                        Panel_ButtHingeArtNo = ButtHinge_ArticleNo._BL;
+                    }
+                    else if (outside_color == Foil_Color._Walnut || outside_color == Foil_Color._GoldenOak ||
+                             outside_color == Foil_Color._Mahogany || outside_color == Foil_Color._Havana)
+                    {
+                        Panel_ButtHingeArtNo = ButtHinge_ArticleNo._DB;
+                    }
+                }
+                else if (outside_color == Foil_Color._None)
+                {
+                    if (base_color == Base_Color._White)
+                    {
+                        Panel_ButtHingeArtNo = ButtHinge_ArticleNo._WHT;
+                    }
+                    else if (base_color == Base_Color._Ivory)
+                    {
+                        Panel_ButtHingeArtNo = ButtHinge_ArticleNo._PC;
+                    }
+                    else if (base_color == Base_Color._DarkBrown)
+                    {
+                        Panel_ButtHingeArtNo = ButtHinge_ArticleNo._DB;
+                    }
+                }
             }
 
             if (Panel_SashPropertyVisibility == true)
@@ -3147,15 +3210,16 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
 
                 int handle_deduct = 0, glass_deduct = 0, inward_motorized_deduction = 0;
-                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
-                    Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+
+                if (Panel_SashReinfArtNo == SashReinf_ArticleNo._R675 || Panel_SashReinfArtNo == SashReinf_ArticleNo._207)
                 {
                     handle_deduct = 55;
                 }
-                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                else if (Panel_SashReinfArtNo == SashReinf_ArticleNo._655)
                 {
                     handle_deduct = 40;
                 }
+
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
                 {

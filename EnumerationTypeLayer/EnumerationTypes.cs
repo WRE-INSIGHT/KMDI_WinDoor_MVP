@@ -612,7 +612,10 @@ namespace EnumerationTypeLayer
 
         public class ButtHinge_ArticleNo : Enumeration<ButtHinge_ArticleNo, int>
         {
-            public static readonly ButtHinge_ArticleNo _770725 = new ButtHinge_ArticleNo(0, "770725");
+            public static readonly ButtHinge_ArticleNo _WHT = new ButtHinge_ArticleNo(0, "770725-WHT"); //white-based
+            public static readonly ButtHinge_ArticleNo _PC = new ButtHinge_ArticleNo(1, "770725-PC"); //Ivory-based
+            public static readonly ButtHinge_ArticleNo _BL = new ButtHinge_ArticleNo(2, "770725-BL");
+            public static readonly ButtHinge_ArticleNo _DB = new ButtHinge_ArticleNo(3, "770725-DB"); //Dark brown
 
             private ButtHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

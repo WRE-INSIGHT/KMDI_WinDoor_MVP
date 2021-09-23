@@ -108,11 +108,21 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         else if (tsmGB.Checked == true)
                         {
+                            _multiPanelModel.MPanel_DisplayWidth = _multiPanelModel.MPanel_OriginalDisplayWidth;
+                            _multiPanelModel.MPanel_DisplayHeight = _multiPanelModel.MPanel_OriginalDisplayHeight;
+
                             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                             {
                                 pnl.Panel_Width = pnl.Panel_OriginalWidth;
                                 pnl.Panel_Height = pnl.Panel_OriginalHeight;
+
+                                pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth;
+                                pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight;
                             }
+
+                            _multiPanelModel.Fit_MyControls_Dimensions();
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                            _multiPanelModel.Adjust_ControlDisplaySize();
 
                             foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
                             {
@@ -123,6 +133,8 @@ namespace PresentationLayer.Presenter.UserControls
                                 mpnl.Fit_MyControls_ToBindDimensions();
                                 mpnl.Adjust_ControlDisplaySize();
                             }
+
+                            tsmGB.Checked = false;
                         }
 
                         _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();

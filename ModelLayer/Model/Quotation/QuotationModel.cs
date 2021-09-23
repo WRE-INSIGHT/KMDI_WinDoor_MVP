@@ -140,6 +140,8 @@ namespace ModelLayer.Model.Quotation
                                            frame.Frame_Width.ToString(),
                                            "Frame",
                                            @"|  |");
+
+                    total_screws_fabrication += frame.Frame_Width;
                 }
 
                 if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
@@ -752,8 +754,7 @@ namespace ModelLayer.Model.Quotation
                                                                    "Frame",
                                                                    @"|  |");
 
-                                        if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 &&
-                                            pnl_curCtrl.Panel_MotorizedOptionVisibility == true)
+                                        if (pnl_curCtrl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
                                         {
                                             Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.DisplayName,
                                                                    1, "pc(s)",
@@ -1639,8 +1640,7 @@ namespace ModelLayer.Model.Quotation
                                                    "Frame",
                                                    @"|  |");
 
-                            if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 &&
-                                pnl.Panel_MotorizedOptionVisibility == true)
+                            if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
                             {
                                 Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.DisplayName,
                                                        1, "pc(s)",

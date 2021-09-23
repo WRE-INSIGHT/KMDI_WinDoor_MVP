@@ -1242,7 +1242,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             int Equal_GlassSize = 0,
                 div_deduction = 0,
                 divDM_deduction = 0,
-                DM_sashBite_deduction = 0,
+                TM_sashBite_deduction = 0,
                 total_frame_deduction = 0,
                 frame_thickness = 0,
                 sash_bite = 0,
@@ -1281,10 +1281,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 if (div.Div_ArtNo == Divider_ArticleNo._7536)
                                 {
                                     div_deduction += 42;
+                                    TM_sashBite_deduction += 14;
                                 }
                                 else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                                 {
                                     div_deduction += 72;
+                                    TM_sashBite_deduction += 16;
                                 }
                             }
                             else if (div.Div_ChkDM == true)
@@ -1292,17 +1294,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                 {
                                     divDM_deduction += 16;
-                                    DM_sashBite_deduction += 7;
                                 }
                                 else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
                                 {
                                     divDM_deduction += 8;
-                                    DM_sashBite_deduction += 8;
                                 }
                             }
                         }
 
-                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - DM_sashBite_deduction))) / totalPanels) + 5;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - TM_sashBite_deduction))) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1356,10 +1356,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 if (div.Div_ArtNo == Divider_ArticleNo._7536)
                                 {
                                     div_deduction += 42;
+                                    TM_sashBite_deduction += 14;
                                 }
                                 else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                                 {
                                     div_deduction += 72;
+                                    TM_sashBite_deduction += 16;
                                 }
                             }
                             else if (div.Div_ChkDM == true)
@@ -1367,17 +1369,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                 {
                                     divDM_deduction += 16;
-                                    DM_sashBite_deduction += 7;
                                 }
                                 else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
                                 {
                                     divDM_deduction += 8;
-                                    DM_sashBite_deduction += 8;
                                 }
                             }
                         }
 
-                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - DM_sashBite_deduction))) / totalPanels) + 5;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - TM_sashBite_deduction))) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
