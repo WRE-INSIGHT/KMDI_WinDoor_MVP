@@ -263,5 +263,38 @@ namespace PresentationLayer.Views.UserControls
         {
             return pnl_DMArtNo;
         }
+
+        public void SetLblTotalCladdingLength_Text(string total)
+        {
+            lbl_totalCladdingLength.Text = total;
+            SetLblTotalCladdingLength_BackColor();
+        }
+
+        private void SetLblTotalCladdingLength_BackColor()
+        {
+            int cladTotal = Convert.ToInt32(lbl_totalCladdingLength.Text);
+            if (_dividerType == DividerType.Mullion)
+            {
+                if (cladTotal == num_divHeight.Value)
+                {
+                    lbl_totalCladdingLength.BackColor = Color.Green;
+                }
+                else
+                {
+                    lbl_totalCladdingLength.BackColor = Color.IndianRed;
+                }
+            }
+            else if (_dividerType == DividerType.Transom)
+            {
+                if (cladTotal == num_divWidth.Value)
+                {
+                    lbl_totalCladdingLength.BackColor = Color.Green;
+                }
+                else
+                {
+                    lbl_totalCladdingLength.BackColor = Color.IndianRed;
+                }
+            }
+        }
     }
 }

@@ -42,6 +42,8 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
 
             _divPropUCP.Cladding_Count--;
             _divPropUCP.SetSaveBtnColor(Color.White);
+            _divPropUCP.Remove_CladdingUCP(this);
+            _divPropUCP.Refresh_LblTotalCladdingLength();
 
             Control pnl_parent = ((UserControl)_dp_claddingPropertyUC).Parent;
             pnl_parent.Controls.Remove((UserControl)_dp_claddingPropertyUC);
@@ -50,6 +52,8 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
         private void _dp_claddingPropertyUC_numCladdingSizeValueChangedEventRaised(object sender, EventArgs e)
         {
             _divPropUCP.SetSaveBtnColor(Color.White);
+            int claddLength = Convert.ToInt16(((NumericUpDown)sender).Value);
+            _divPropUCP.Refresh_LblTotalCladdingLength();
         }
 
         private void _dp_claddingPropertyUC_DPCladdingPropertyUCLoadEventRaised(object sender, EventArgs e)

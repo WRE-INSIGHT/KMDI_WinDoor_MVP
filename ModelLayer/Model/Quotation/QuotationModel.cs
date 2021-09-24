@@ -2526,7 +2526,7 @@ namespace ModelLayer.Model.Quotation
                                    "",
                                    "Frame"); // Frame or Sash
 
-            Material_List.Rows.Add("Exp bolt FRA003",
+            Material_List.Rows.Add("Expansion Bolts FRA003",
                                    Expansion_BoltQty_Total,
                                    "pc(s)",
                                    "",

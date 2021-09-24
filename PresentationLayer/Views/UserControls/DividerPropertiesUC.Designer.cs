@@ -41,6 +41,8 @@
             this.lbl_divSpecs = new System.Windows.Forms.Label();
             this.pnl_dividerBody = new System.Windows.Forms.Panel();
             this.pnl_AddCladding = new System.Windows.Forms.Panel();
+            this.lbl_totalCladdingLength = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_AddCladding = new System.Windows.Forms.Button();
             this.pnl_DMArtNo = new System.Windows.Forms.Panel();
@@ -186,18 +188,45 @@
             this.pnl_dividerBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_dividerBody.Location = new System.Drawing.Point(0, 108);
             this.pnl_dividerBody.Name = "pnl_dividerBody";
-            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 176);
+            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 204);
             this.pnl_dividerBody.TabIndex = 13;
             // 
             // pnl_AddCladding
             // 
+            this.pnl_AddCladding.Controls.Add(this.lbl_totalCladdingLength);
+            this.pnl_AddCladding.Controls.Add(this.label3);
             this.pnl_AddCladding.Controls.Add(this.btn_Save);
             this.pnl_AddCladding.Controls.Add(this.btn_AddCladding);
             this.pnl_AddCladding.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_AddCladding.Location = new System.Drawing.Point(0, 146);
             this.pnl_AddCladding.Name = "pnl_AddCladding";
-            this.pnl_AddCladding.Size = new System.Drawing.Size(158, 28);
+            this.pnl_AddCladding.Size = new System.Drawing.Size(158, 56);
             this.pnl_AddCladding.TabIndex = 13;
+            // 
+            // lbl_totalCladdingLength
+            // 
+            this.lbl_totalCladdingLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_totalCladdingLength.AutoEllipsis = true;
+            this.lbl_totalCladdingLength.BackColor = System.Drawing.Color.IndianRed;
+            this.lbl_totalCladdingLength.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_totalCladdingLength.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_totalCladdingLength.Location = new System.Drawing.Point(98, 3);
+            this.lbl_totalCladdingLength.Name = "lbl_totalCladdingLength";
+            this.lbl_totalCladdingLength.Size = new System.Drawing.Size(54, 26);
+            this.lbl_totalCladdingLength.TabIndex = 12;
+            this.lbl_totalCladdingLength.Text = "0";
+            this.lbl_totalCladdingLength.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(0, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(94, 26);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Total\r\nCladding Length";
             // 
             // btn_Save
             // 
@@ -205,7 +234,7 @@
             this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Save.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_Save.Location = new System.Drawing.Point(101, 1);
+            this.btn_Save.Location = new System.Drawing.Point(101, 30);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(54, 23);
             this.btn_Save.TabIndex = 1;
@@ -218,7 +247,7 @@
             // 
             this.btn_AddCladding.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_AddCladding.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_AddCladding.Location = new System.Drawing.Point(3, 1);
+            this.btn_AddCladding.Location = new System.Drawing.Point(3, 30);
             this.btn_AddCladding.Name = "btn_AddCladding";
             this.btn_AddCladding.Size = new System.Drawing.Size(90, 23);
             this.btn_AddCladding.TabIndex = 0;
@@ -346,7 +375,7 @@
             this.Controls.Add(this.pnl_divName);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "DividerPropertiesUC";
-            this.Size = new System.Drawing.Size(160, 284);
+            this.Size = new System.Drawing.Size(160, 312);
             this.Load += new System.EventHandler(this.DividerPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).EndInit();
@@ -354,6 +383,7 @@
             this.pnl_divArtNo.PerformLayout();
             this.pnl_dividerBody.ResumeLayout(false);
             this.pnl_AddCladding.ResumeLayout(false);
+            this.pnl_AddCladding.PerformLayout();
             this.pnl_DMArtNo.ResumeLayout(false);
             this.pnl_DMArtNo.PerformLayout();
             this.pnl_divName.ResumeLayout(false);
@@ -387,8 +417,10 @@
         private System.Windows.Forms.CheckBox chk_DM;
         private System.Windows.Forms.Panel pnl_DMArtNo;
         private System.Windows.Forms.ComboBox cmb_DMArtNo;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_SelectDMPanel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_totalCladdingLength;
+        private System.Windows.Forms.Label label1;
     }
 }

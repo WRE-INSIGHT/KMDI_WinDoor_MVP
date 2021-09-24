@@ -14,5 +14,7 @@ namespace PresentationLayer.Presenter.UserControls
         IDividerPropertiesUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel, IMainPresenter mainPresenter);
         IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP();
         void SetSaveBtnColor(Color color);
+        void Refresh_LblTotalCladdingLength();
+        void Remove_CladdingUCP(IDP_CladdingPropertyUCPresenter claddUCP);
     }
 }

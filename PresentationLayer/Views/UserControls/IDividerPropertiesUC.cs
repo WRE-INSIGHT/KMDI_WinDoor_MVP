@@ -27,5 +27,6 @@ namespace PresentationLayer.Views.UserControls
         Button GetBtnSelectDMPanel();
         void SetBtnSaveBackColor(Color color);
         void Bind_DMPanelModel(Dictionary<string, Binding> ModelBinding);
+        void SetLblTotalCladdingLength_Text(string total);
     }
 }

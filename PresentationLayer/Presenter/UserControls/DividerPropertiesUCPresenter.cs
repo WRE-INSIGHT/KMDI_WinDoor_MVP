@@ -31,6 +31,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private Panel _divPropertiesBodyPNL;
         private Button _btnSelectDMPanel;
+        private List<IDP_CladdingPropertyUCPresenter> _lst_claddUCP = new List<IDP_CladdingPropertyUCPresenter>();
 
         bool _initialLoad = true;
         int cladding_count = 0;
@@ -217,13 +218,14 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else
             {
-                MessageBox.Show("Invalid save");
+                MessageBox.Show("Cladding length must be added before saving");
             }
         }
 
         private void _divProperties_btnAddCladdingClickedEventRaised(object sender, EventArgs e)
         {
             IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, this);
+            _lst_claddUCP.Add(claddingUCP);
             UserControl claddingUC = (UserControl)claddingUCP.GetCladdingPropertyUC();
             claddingUC.Dock = DockStyle.Top;
             _divPropertiesBodyPNL.Controls.Add(claddingUC);
@@ -321,6 +323,21 @@ namespace PresentationLayer.Presenter.UserControls
         public IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP()
         {
             return _dp_leverEspagPropertyUCP;
+        }
+
+        public void Refresh_LblTotalCladdingLength()
+        {
+            int totalCladdLength = 0;
+            foreach (IDP_CladdingPropertyUCPresenter clad in _lst_claddUCP)
+            {
+                totalCladdLength += clad.GetCladdingPropertyUC().Cladding_Size;
+            }
+            _divProperties.SetLblTotalCladdingLength_Text(totalCladdLength.ToString());
+        }
+
+        public void Remove_CladdingUCP(IDP_CladdingPropertyUCPresenter claddUCP)
+        {
+            _lst_claddUCP.Remove(claddUCP);
         }
     }
 }
