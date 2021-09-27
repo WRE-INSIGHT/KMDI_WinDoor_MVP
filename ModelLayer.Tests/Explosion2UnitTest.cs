@@ -12,6 +12,7 @@ using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
 using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -10423,62 +10424,52 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
-
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND 
                              Description LIKE '%2453%' AND
                              Size = '690'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND 
                              Description LIKE '%2453%' AND
                              Size = '1553'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND 
                              Description LIKE '%2453%' AND
                              Size = '690'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND 
                              Description LIKE '%2453%' AND
                              Size = '1553'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
                              Size = '569'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1432'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '569'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '1432'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-
-
+            //HARDWARE & ACCESSORIES
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT-C%'");
@@ -10967,55 +10958,48 @@ namespace ModelLayer.Tests
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND 
                              Description LIKE '%2453%' AND
                              Size = '696'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1553'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '696'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1553'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '575'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1432'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Description LIKE '%%' AND
                              Size = '575'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '1432'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
@@ -11082,6 +11066,536 @@ namespace ModelLayer.Tests
 
         }
 
+        [TestMethod]
+        public void ChkVar_2Panel_1CW_1FW_Sample_A1_UsingMullion_UsingRotaryHandle()
+        {
+            /*          _________________
+            *           |      /|       |
+            *           |    /  |       |
+            *           |  /    |       |
+            *           |/      |   F   |
+            *           |\      |       |
+            *           |  \    |       |
+            *           |    \  |       |
+            *           |______\|_______|
+            */
+
+
+
+            int total_wd = 1900,
+                total_ht = 2147,
+                eqpanelWD = 950;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rotary,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   2,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
+            _panelModel1.Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
+            _panelModel1.Panel_FSCasementArtNo = FrictionStayCasement_ArticleNo._20HD;
+            _panelModel1.Panel_RotaryOptionsVisibility = true;
+            _panelModel1.Panel_RotaryArtNo = Rotary_HandleArtNo._T511155KMWSS;
+            _panelModel1.Panel_LockingKitArtNo = LockingKit_ArticleNo._T244002KMW;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_ChkGlazingAdaptor = true;
+            _panelModel1.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+            Dictionary<int, int> CladList;
+            CladList = new Dictionary<int, int>()
+            {
+                {1,2147}
+            };
+            IDividerModel _divMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7538,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              CladList,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._7533);
+
+            _divMullionModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+            _divMullionModel.Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
+            _divMullionModel.Div_claddingBracketVisibility = true;
+            _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Fixed Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2452,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._None,
+                                                                      SashReinf_ArticleNo._None,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._None,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._None,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      false,
+                                                                      false,
+                                                                      false,
+                                                                      false,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "FixedPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._FrictionStay
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel2.Panel_ChkGlazingAdaptor = true;
+            _panelModel2.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control FW2 = new Control();
+            FW2.Name = "FixedPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(FW2);
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1905, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(2152, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1832, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(2079, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.98, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(14, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(56, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(83, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(54, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(8, _qouteModel.Screws_for_Cladding);
+
+            #region Multimullion(2)
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(900, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(2100, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(900, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(2100, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(565, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1428, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(775, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1975, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(FrictionStayCasement_ArticleNo._20HD, _panelModel1.Panel_FSCasementArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Handle_Type._Rotary, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rotary_HandleArtNo._T511155KMWSS, _panelModel1.Panel_RotaryArtNo);
+            Assert.AreEqual(LockingKit_ArticleNo._T244002KMW, _panelModel1.Panel_LockingKitArtNo);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1.Panel_MiddleCloserArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+
+
+            #endregion
+
+            #region MullionUC1
+
+            Assert.AreEqual(Divider_ArticleNo._7538, _divMullionModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, _divMullionModel.Div_ReinfArtNo);
+            Assert.AreEqual(2089, _divMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(1979, _divMullionModel.Div_ReinfHeight);
+            Assert.AreEqual(CladdingProfile_ArticleNo._1338, _divMullionModel.Div_CladdingProfileArtNo);
+            Assert.AreEqual(CladdingReinf_ArticleNo._9120, _divMullionModel.Div_CladdingReinfArtNo);
+            Assert.AreEqual(CladList, _divMullionModel.Div_CladdingSizeList);
+
+            #endregion
+
+            #region FW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(690, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1553, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(569, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1432, _panelModel2.Panel_GlassHeight);
+
+            //ACCESSORIES 
+            Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
+            Assert.AreEqual(1, _panelModel2.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Handle_Type._None, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(MiddleCloser_ArticleNo._None, _panelModel2.Panel_MiddleCloserArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
+
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+            #endregion 
+            #endregion 
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1905'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7502' AND Size = '2152'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1832'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '2079'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '900'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '2100'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '775'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1975'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND 
+                             Description LIKE '%2453%' AND
+                             Size = '900'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND 
+                             Description LIKE '%2453%' AND
+                             Size = '2100'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND 
+                             Description LIKE '%2453%' AND
+                             Size = '950'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND 
+                             Description LIKE '%2453%' AND
+                             Size = '2147'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Adaptor (P1) Width%' AND 
+                             Description LIKE '%6418%' AND
+                             Size = '900'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Adaptor (P1) Height%' AND 
+                             Description LIKE '%6418%' AND
+                             Size = '2100'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Adaptor (P2) Width%' AND 
+                             Description LIKE '%6418%' AND
+                             Size = '950'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Adaptor (P2) Height%' AND 
+                             Description LIKE '%6418%' AND
+                             Size = '2147'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
+                             Size = '779'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1979'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '875'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '2075'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //HARDWARE & ACCESSORIES
+
+            dr = dt.Select(@"Description LIKE '%Rotary handle%' AND
+                             Description LIKE '%T-51.1155 KM-W-SS%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Locking Kit%' AND
+                             Description LIKE '%T-24.40.02 KM-W%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Middle Closer%' AND
+                             Description LIKE '%1WC70-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Mechanical Joint%' AND
+                             Description LIKE '%AV585%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Bracket for concrete (10mm)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            #endregion
+
+        }
         //Sample 7507 - 7581
         [TestMethod]
         public void ChkVar_2PanelCasementWindowSample_B1_UsingMullion()
@@ -11516,55 +12030,48 @@ namespace ModelLayer.Tests
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '676'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1525'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '676'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1525'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Description LIKE '%%' AND
                              Size = '555'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1404'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '555'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '1404'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
@@ -12059,55 +12566,47 @@ namespace ModelLayer.Tests
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '682'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1525'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '682'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND 
                              Description LIKE '%2453%' AND
                              Size = '1525'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
                              Size = '561'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND 
                              Size = '1404'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND 
                              Size = '561'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND 
                              Size = '1404'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
@@ -12614,55 +13113,47 @@ namespace ModelLayer.Tests
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '663'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1527'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '663'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1527'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '480'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1344'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '480'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '1344'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
@@ -13162,55 +13653,47 @@ namespace ModelLayer.Tests
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '687'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1527'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '687'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1527'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '504'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1344'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '504'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '1344'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
@@ -13539,7 +14022,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(787, _panelModel1.Panel_SashReinfWidth);
             Assert.AreEqual(2482, _panelModel1.Panel_SashReinfHeight);
-            
+
             Assert.AreEqual(699, _panelModel1.Panel_GlassWidth);
             Assert.AreEqual(2394, _panelModel1.Panel_GlassHeight);
 
@@ -13548,7 +14031,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
             Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel1.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._None, _panelModel1.Panel_HandleType);
-            Assert.AreEqual(WeldableCornerJoint_ArticleNo._498N, _panelModel1.Panel_WeldableCArtNo); 
+            Assert.AreEqual(WeldableCornerJoint_ArticleNo._498N, _panelModel1.Panel_WeldableCArtNo);
             Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel1.Panel_AdjStrikerArtNo);
             Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel1.Panel_3dHingeArtNo);
             Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel1.Panel_RestrictorStayArtNo);
@@ -13584,7 +14067,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(DummyMullion_ArticleNo._385P, _divDummyMullionModel.Div_DMArtNo);
             Assert.AreEqual(2496, _divDummyMullionModel.Div_ExplosionHeight);
             Assert.AreEqual(EndcapDM_ArticleNo._K385, _divDummyMullionModel.Div_EndcapDM);
-            
+
 
             #endregion
 
@@ -13688,55 +14171,47 @@ namespace ModelLayer.Tests
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '882'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '2577'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '882'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '2577'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '699'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '2394'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '699'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '2394'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
@@ -14263,55 +14738,47 @@ namespace ModelLayer.Tests
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '663'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1527'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '663'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1527'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '538'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1402'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '538'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '1402'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
@@ -14911,55 +15378,47 @@ namespace ModelLayer.Tests
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '687'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P1)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1527'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '687'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%(P2)%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1527'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '562'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P1- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1402'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '562'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%(P2- )%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '1402'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
