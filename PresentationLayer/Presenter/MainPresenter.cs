@@ -529,6 +529,8 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_glassBalancingToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
+            _quotationModel.GetListOfMaterials(_windoorModel);
+
             ToolStripMenuItem gb = (ToolStripMenuItem)sender;
 
             string gbmode = "";
@@ -575,7 +577,7 @@ namespace PresentationLayer.Presenter
                                 pnl.Panel_Width = pnl.Panel_OriginalWidth;
                                 pnl.Panel_Height = pnl.Panel_OriginalHeight;
                             }
-                            mpnl.SetEqualGlassDimension(gbmode);
+                            //mpnl.SetEqualGlassDimension(gbmode);
                         }
                     }
                 }

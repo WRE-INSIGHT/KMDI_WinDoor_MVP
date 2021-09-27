@@ -387,10 +387,47 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        public bool Frame_If_InwardCasement { get; set; }
+        public MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
+        public MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
+
         public void SetExplosionValues_Frame()
         {
+            if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
+            {
+                if (Lst_Panel[0].Panel_SashProfileArtNo == SashProfile_ArticleNo._395 &&
+                    Lst_Panel[0].Panel_MotorizedOptionVisibility == true)
+                {
+                    Frame_If_InwardCasement = true;
+                }
+            }
+            else if (Lst_Panel.Count == 0 && Lst_MultiPanel.Count >= 1) //multipanel
+            {
+                foreach (IMultiPanelModel mpnl in Lst_MultiPanel)
+                {
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                    {
+                        if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 &&
+                            pnl.Panel_MotorizedOptionVisibility == true)
+                        {
+                            Frame_If_InwardCasement = true;
+                        }
+                    }
+                }
+            }
+
             Frame_ExplosionWidth = _frameWidth + 5;
-            Frame_ExplosionHeight = _frameHeight + 5;
+
+            if (Frame_If_InwardCasement)
+            {
+                Frame_ExplosionHeight = _frameHeight - 35 + 5;
+                Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
+                Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
+            }
+            else
+            {
+                Frame_ExplosionHeight = _frameHeight + 5;
+            }
 
             int reinf_size = 0;
             if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
@@ -403,7 +440,16 @@ namespace ModelLayer.Model.Quotation.Frame
             }
 
             Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
-            Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
+            if (Frame_If_InwardCasement)
+            {
+                Frame_ReinfHeight = _frameHeight - 35 - (reinf_size * 2) - 10;
+                Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
+                Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
+            }
+            else
+            {
+                Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
+            }
         }
 
         public void AdjustPropertyPanelHeight(string objtype, string mode)

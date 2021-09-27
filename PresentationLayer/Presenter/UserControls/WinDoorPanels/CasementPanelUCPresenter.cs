@@ -386,26 +386,50 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             int w = 1;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            int outer_line = 10,
+            int font_size = 30,
+                outer_line = 10,
                 inner_line = 15;
 
             int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
 
-            if (ndx_zoomPercentage == 2)
+            if (ndx_zoomPercentage == 3)
             {
+                font_size = 25;
+            }
+            else if (ndx_zoomPercentage == 2)
+            {
+                font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
             }
             else if (ndx_zoomPercentage == 1)
             {
+                font_size = 13;
                 outer_line = 3;
                 inner_line = 7;
             }
             else if (ndx_zoomPercentage == 0)
             {
+                font_size = 8;
                 outer_line = 3;
                 inner_line = 7;
             }
+
+            Font drawFont = new Font("Times New Roman", font_size);
+            StringFormat drawFormat = new StringFormat();
+            drawFormat.Alignment = StringAlignment.Center;
+            drawFormat.LineAlignment = StringAlignment.Center;
+
+            RectangleF rect = new RectangleF(0,
+                                            (casement.ClientRectangle.Height / 2) + 15,
+                                             casement.ClientRectangle.Width,
+                                            10);
+
+            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm",
+                         new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                         new SolidBrush(Color.Black),
+                         rect,
+                         drawFormat);
 
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                            0,

@@ -470,7 +470,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 curr_lst_wd = lst_wd[i];
                 total_wd += curr_lst_wd;
-                if (total_wd <= flpMain_width)
+                if (total_wd <= flpMain_width || total_wd-2 <= flpMain_width)
                 {
                     Width_List.Add(curr_lst_wd);
                 }

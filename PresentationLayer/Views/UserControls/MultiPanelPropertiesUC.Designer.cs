@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbl_MultiPanelName = new System.Windows.Forms.Label();
             this.lbl_Width = new System.Windows.Forms.Label();
             this.num_Width = new System.Windows.Forms.NumericUpDown();
@@ -35,9 +36,12 @@
             this.num_Height = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnl_MultiPanelProperties = new System.Windows.Forms.Panel();
+            this.cmenu_mpanel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.glassBalancingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.num_Width)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_Height)).BeginInit();
             this.panel1.SuspendLayout();
+            this.cmenu_mpanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_MultiPanelName
@@ -118,6 +122,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(154, 120);
             this.panel1.TabIndex = 8;
+            this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseClick);
             // 
             // pnl_MultiPanelProperties
             // 
@@ -126,6 +131,20 @@
             this.pnl_MultiPanelProperties.Name = "pnl_MultiPanelProperties";
             this.pnl_MultiPanelProperties.Size = new System.Drawing.Size(154, 9);
             this.pnl_MultiPanelProperties.TabIndex = 9;
+            // 
+            // cmenu_mpanel
+            // 
+            this.cmenu_mpanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.glassBalancingToolStripMenuItem});
+            this.cmenu_mpanel.Name = "cmenu_mpanel";
+            this.cmenu_mpanel.Size = new System.Drawing.Size(157, 26);
+            // 
+            // glassBalancingToolStripMenuItem
+            // 
+            this.glassBalancingToolStripMenuItem.Name = "glassBalancingToolStripMenuItem";
+            this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.glassBalancingToolStripMenuItem.Text = "Glass Balancing";
+            this.glassBalancingToolStripMenuItem.Click += new System.EventHandler(this.glassBalancingToolStripMenuItem_Click);
             // 
             // MultiPanelPropertiesUC
             // 
@@ -141,6 +160,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_Height)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.cmenu_mpanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -153,5 +173,7 @@
         private System.Windows.Forms.NumericUpDown num_Height;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnl_MultiPanelProperties;
+        private System.Windows.Forms.ContextMenuStrip cmenu_mpanel;
+        private System.Windows.Forms.ToolStripMenuItem glassBalancingToolStripMenuItem;
     }
 }

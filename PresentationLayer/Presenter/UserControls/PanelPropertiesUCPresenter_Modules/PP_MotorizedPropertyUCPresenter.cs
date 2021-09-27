@@ -169,6 +169,17 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         }
                     }
                 }
+
+                if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                {
+                    _panelModel.Panel_2dHingeVisibility = false;
+                    _panelModel.Panel_ButtHingeVisibility = true;
+                }
+                else if (_panelModel.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                {
+                    _panelModel.Panel_2dHingeVisibility = true;
+                    _panelModel.Panel_ButtHingeVisibility = false;
+                }
             }
             else if (chk.Checked == false)
             {
@@ -319,6 +330,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_MotorizedPropertyHeight", new Binding("Height", _panelModel, "Panel_MotorizedPropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_MotorizedMechSetQty", new Binding("Value", _panelModel, "Panel_MotorizedMechSetQty", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_2DHingeQty", new Binding("Value", _panelModel, "Panel_2DHingeQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ButtHingeQty", new Binding("Value", _panelModel, "Panel_ButtHingeQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_2dHingeVisibility", new Binding("Visible", _panelModel, "Panel_2dHingeVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ButtHingeVisibility", new Binding("Visible", _panelModel, "Panel_ButtHingeVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

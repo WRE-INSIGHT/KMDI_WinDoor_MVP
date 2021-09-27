@@ -380,6 +380,7 @@
             this.glassBalancingToolStripMenuItem.Name = "glassBalancingToolStripMenuItem";
             this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.glassBalancingToolStripMenuItem.Text = "Glass Balancing";
+            this.glassBalancingToolStripMenuItem.Visible = false;
             this.glassBalancingToolStripMenuItem.Click += new System.EventHandler(this.glassBalancingToolStripMenuItem_Click);
             // 
             // tsMain

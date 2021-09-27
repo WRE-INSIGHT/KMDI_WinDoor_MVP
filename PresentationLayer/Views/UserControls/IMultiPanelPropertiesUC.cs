@@ -8,7 +8,8 @@ namespace PresentationLayer.Views.UserControls
     {
         int MPanelID { get; set; }
 
-        event EventHandler MultiPanelPropertiesLoadEventRaised; 
+        event EventHandler MultiPanelPropertiesLoadEventRaised;
+        event EventHandler glassbalancingClickedEventRaised;
 
         void BringToFrontThis();
         Panel GetMultiPanelPropertiesPNL();
