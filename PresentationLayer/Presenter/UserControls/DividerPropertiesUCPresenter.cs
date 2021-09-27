@@ -234,6 +234,7 @@ namespace PresentationLayer.Presenter.UserControls
             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
             claddingUC.BringToFront();
 
+            _divModel.Div_CladdingCount++;
             Cladding_Count++;
 
             _dp_claddingBracketPropertyUCP.BringToFrontUC();

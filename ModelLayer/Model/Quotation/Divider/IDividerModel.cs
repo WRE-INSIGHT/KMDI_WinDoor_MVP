@@ -62,6 +62,7 @@ namespace ModelLayer.Model.Quotation.Divider
         CladdingProfile_ArticleNo Div_CladdingProfileArtNo { get; set; }
         CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
         Dictionary<int, int> Div_CladdingSizeList { get; set; }
+        int Div_CladdingCount { get; set; }
 
         void SetExplosionValues_Div();
         void AdjustPropertyPanelHeight(string mode);

@@ -36,6 +36,8 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
 
         private void _dp_claddingPropertyUC_btnDeleteCladdingClickedEventRaised(object sender, EventArgs e)
         {
+            _dividerModel.Div_CladdingCount--;
+
             _dividerModel.AdjustPropertyPanelHeight("minusCladding");
             _dividerModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladding");
             _dividerModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
