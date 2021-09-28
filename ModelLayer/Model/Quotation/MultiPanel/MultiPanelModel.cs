@@ -1237,6 +1237,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        public bool MPanel_GlassBalanced { get; set; }
+
         public void SetEqualGlassDimension(string mode, SashProfile_ArticleNo sash)
         {
             int Equal_GlassSize = 0,
@@ -1274,6 +1276,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
+                        MPanel_GlassBalanced = true;
+
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
                             if (div.Div_ChkDM == false)
@@ -1318,6 +1322,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
+                        MPanel_GlassBalanced = true;
+
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
                             if (div.Div_ArtNo == Divider_ArticleNo._7536)
@@ -1349,6 +1355,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
+                        MPanel_GlassBalanced = true;
+
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
                             if (div.Div_ChkDM == false)
@@ -1393,6 +1401,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
+                        MPanel_GlassBalanced = true;
+
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
                             if (div.Div_ArtNo == Divider_ArticleNo._7536)

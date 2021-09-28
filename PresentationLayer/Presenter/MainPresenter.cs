@@ -674,7 +674,8 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            int incompatibility_cnt = Check_Incompatibility();
+            int incompatibility_cnt = Check_Incompatibility(),
+                unbalancedGlass_cnt = Check_UnbalancedGlass();
             bool proceed = false;
 
             if (incompatibility_cnt >= 1)
@@ -692,6 +693,19 @@ namespace PresentationLayer.Presenter
             else
             {
                 proceed = true;
+            }
+
+            if (unbalancedGlass_cnt >= 1)
+            {
+                DialogResult dr = MessageBox.Show("Unbalanced Glass detected, Do you wish to proceed?", "Unbalanced Glass Check", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    proceed = true;
+                }
+                else if (dr == DialogResult.No)
+                {
+                    proceed = false;
+                }
             }
 
             if (proceed)
@@ -1374,6 +1388,59 @@ namespace PresentationLayer.Presenter
             }
 
             return incompatibility_cnt;
+        }
+
+        private int Check_UnbalancedGlass()
+        {
+            int unbalancedGlass_cnt = 0;
+
+            foreach (IFrameModel frame in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                {
+                    string gbmode = "";
+                    bool same_sash = false;
+                    SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
+                    bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
+                    bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
+
+                    if (allWithSash == true && allNoSash == false)
+                    {
+                        gbmode = "withSash";
+                        int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
+                        if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
+                        {
+                            same_sash = true;
+                        }
+                        else
+                        {
+                            same_sash = false;
+                        }
+                    }
+                    else if (allWithSash == false && allNoSash == true)
+                    {
+                        gbmode = "noSash";
+                    }
+                    else if (allWithSash == false && allNoSash == false)
+                    {
+                        gbmode = "";
+                    }
+
+                    if (gbmode != "")
+                    {
+                        if (same_sash == true || gbmode == "noSash")
+                        {
+                            if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                            {
+                                unbalancedGlass_cnt++;
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            return unbalancedGlass_cnt;
         }
 
         public void Run_GetListOfMaterials_SpecificItem()
