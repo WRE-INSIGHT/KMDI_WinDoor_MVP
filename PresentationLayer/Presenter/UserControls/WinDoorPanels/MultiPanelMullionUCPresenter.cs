@@ -604,6 +604,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (data == "Fixed Panel")
                 {
+                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._None;
+                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._None;
+
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
 

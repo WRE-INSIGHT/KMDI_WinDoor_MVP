@@ -1285,12 +1285,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 if (div.Div_ArtNo == Divider_ArticleNo._7536)
                                 {
                                     div_deduction += 42;
-                                    TM_sashBite_deduction += 14;
                                 }
                                 else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                                 {
                                     div_deduction += 72;
-                                    TM_sashBite_deduction += 16;
                                 }
                             }
                             else if (div.Div_ChkDM == true)
@@ -1306,7 +1304,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - TM_sashBite_deduction))) / totalPanels) + 5;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - div_deduction)) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
