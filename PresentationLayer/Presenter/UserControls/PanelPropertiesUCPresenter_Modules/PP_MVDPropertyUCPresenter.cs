@@ -44,6 +44,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_mvdPropertyUC_PPMVDPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_mvdPropertyUC.ThisBinding(CreateBindingDictionary());
+            _panelModel.Panel_MVDArtNo = MVD_HandleArtNo._046366M;
             _initialLoad = false;
         }
 

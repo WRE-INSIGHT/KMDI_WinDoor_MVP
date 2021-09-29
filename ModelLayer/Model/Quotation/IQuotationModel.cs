@@ -20,7 +20,6 @@ namespace ModelLayer.Model.Quotation
         int Rebate_Qty { get; set; }
         int Plastic_CoverQty_Total { get; set; }
         List<IWindoorModel> Lst_Windoor { get; set; }
-        DataTable GetListOfMaterials();
         DataTable GetListOfMaterials(IWindoorModel item);
     }
 }

@@ -258,7 +258,7 @@ namespace PresentationLayer.Views
 
         public ToolStripLabel GetLblSelectedDivider()
         {
-            return tsLbl_SelectedDivider;
+            return tsLbl_Status;
         }
 
         private void btnMinusZoom_Click(object sender, EventArgs e)
@@ -299,6 +299,16 @@ namespace PresentationLayer.Views
         private void glassBalancingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, glassBalancingToolStripMenuItemClickEventRaised, e);
+        }
+
+        public ToolStrip GetTSMain()
+        {
+            return tsMain;
+        }
+
+        public MenuStrip GetMNSMainMenu()
+        {
+            return mnsMainMenu;
         }
     }
 }

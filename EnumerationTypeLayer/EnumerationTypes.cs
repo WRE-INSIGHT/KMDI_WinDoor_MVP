@@ -1,4 +1,5 @@
 ﻿using Headspring;
+using System.ComponentModel;
 
 namespace EnumerationTypeLayer
 {
@@ -30,6 +31,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly DividerReinf_ArticleNo _R677 = new DividerReinf_ArticleNo(0, "R677");
             public static readonly DividerReinf_ArticleNo _R686 = new DividerReinf_ArticleNo(1, "R686");
+            public static readonly DividerReinf_ArticleNo _None = new DividerReinf_ArticleNo(2, "None");
             private DividerReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -39,6 +41,14 @@ namespace EnumerationTypeLayer
             public static readonly DummyMullion_ArticleNo _385P = new DummyMullion_ArticleNo(1, "385P");
 
             private DummyMullion_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class EndcapDM_ArticleNo : Enumeration<EndcapDM_ArticleNo, int>
+        {
+            public static readonly EndcapDM_ArticleNo _K7533 = new EndcapDM_ArticleNo(0, "K7533");
+            public static readonly EndcapDM_ArticleNo _K385 = new EndcapDM_ArticleNo(1, "K385");
+
+            private EndcapDM_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class Divider_MechJointArticleNo : Enumeration<Divider_MechJointArticleNo, int>
@@ -166,12 +176,12 @@ namespace EnumerationTypeLayer
 
         public class FrictionStay_ArticleNo : Enumeration<FrictionStay_ArticleNo, int> //AW
         {
-            public static readonly FrictionStay_ArticleNo _Storm8 = new FrictionStay_ArticleNo(0, "Storm 8");
-            public static readonly FrictionStay_ArticleNo _477254 = new FrictionStay_ArticleNo(1, "477254");
-            public static readonly FrictionStay_ArticleNo _A2121C1261 = new FrictionStay_ArticleNo(2, "A2121C1261");
-            public static readonly FrictionStay_ArticleNo _A212C16161 = new FrictionStay_ArticleNo(3, "A212C16161");
-            public static readonly FrictionStay_ArticleNo _Storm22 = new FrictionStay_ArticleNo(4, "Storm 22");
-            public static readonly FrictionStay_ArticleNo _Storm26 = new FrictionStay_ArticleNo(5, "Storm 26");
+            public static readonly FrictionStay_ArticleNo _Storm8 = new FrictionStay_ArticleNo(0, "Storm 8 (8\"HD)");
+            public static readonly FrictionStay_ArticleNo _10HD = new FrictionStay_ArticleNo(1, "477254 (10\"HD)");
+            public static readonly FrictionStay_ArticleNo _12HD = new FrictionStay_ArticleNo(2, "A2121C1261 (12\"HD)");
+            public static readonly FrictionStay_ArticleNo _16HD = new FrictionStay_ArticleNo(3, "A212C16161 (16\"HD)");
+            public static readonly FrictionStay_ArticleNo _Storm22 = new FrictionStay_ArticleNo(4, "Storm 22 (22\"HD)");
+            public static readonly FrictionStay_ArticleNo _Storm26 = new FrictionStay_ArticleNo(5, "Storm 26 (26\"HD)");
             public static readonly FrictionStay_ArticleNo _None = new FrictionStay_ArticleNo(6, "None");
 
             private FrictionStay_ArticleNo(int value, string displayName) : base(value, displayName) { }
@@ -179,11 +189,11 @@ namespace EnumerationTypeLayer
 
         public class FrictionStayCasement_ArticleNo : Enumeration<FrictionStayCasement_ArticleNo, int> //CW
         {
-            public static readonly FrictionStayCasement_ArticleNo _485770 = new FrictionStayCasement_ArticleNo(0, "485770");
-            public static readonly FrictionStayCasement_ArticleNo _A235B12161 = new FrictionStayCasement_ArticleNo(1, "A235B12161");
-            public static readonly FrictionStayCasement_ArticleNo _A212C12161 = new FrictionStayCasement_ArticleNo(2, "A212C12161");
-            public static readonly FrictionStayCasement_ArticleNo _A212C16161 = new FrictionStayCasement_ArticleNo(3, "A212C16161");
-            public static readonly FrictionStayCasement_ArticleNo _A212C20161 = new FrictionStayCasement_ArticleNo(4, "A212C20161");
+            public static FrictionStayCasement_ArticleNo _10HD = new FrictionStayCasement_ArticleNo(0, "485770 (10\"HD)");
+            public static readonly FrictionStayCasement_ArticleNo _12FS = new FrictionStayCasement_ArticleNo(1, "A235B12161 (12\"FS)");
+            public static readonly FrictionStayCasement_ArticleNo _12HD = new FrictionStayCasement_ArticleNo(2, "A212C12161 (12\"HD)");
+            public static readonly FrictionStayCasement_ArticleNo _16HD = new FrictionStayCasement_ArticleNo(3, "A212C16161 (16\"HD)");
+            public static readonly FrictionStayCasement_ArticleNo _20HD = new FrictionStayCasement_ArticleNo(4, "A212C20161 (20\"HD)");
             public static readonly FrictionStayCasement_ArticleNo _None = new FrictionStayCasement_ArticleNo(5, "None");
 
             private FrictionStayCasement_ArticleNo(int value, string displayName) : base(value, displayName) { }
@@ -277,10 +287,7 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _N110A04206 = new Espagnolette_ArticleNo(12, "N110A04206");
             public static readonly Espagnolette_ArticleNo _N110A05206 = new Espagnolette_ArticleNo(13, "N110A05206");
             public static readonly Espagnolette_ArticleNo _N110A06206 = new Espagnolette_ArticleNo(14, "N110A06206");
-            public static readonly Espagnolette_ArticleNo _625_205 = new Espagnolette_ArticleNo(15, "625-205");
-            public static readonly Espagnolette_ArticleNo _625_206 = new Espagnolette_ArticleNo(16, "625-206");
-            public static readonly Espagnolette_ArticleNo _625_207 = new Espagnolette_ArticleNo(17, "625-207");
-            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(18, "None");
+            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(15, "None");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -427,5 +434,204 @@ namespace EnumerationTypeLayer
             private PlasticWedge_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class HingeOption : Enumeration<HingeOption, int>
+        {
+            public static readonly HingeOption _FrictionStay = new HingeOption(0, "Friction Stay");
+            public static readonly HingeOption _2DHinge = new HingeOption(1, "2DHinge");
+
+            private HingeOption(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CenterHingeOption : Enumeration<CenterHingeOption, int>
+        {
+            public static readonly CenterHingeOption _NTCenterHinge = new CenterHingeOption(0, "NT Center Hinge");
+            public static readonly CenterHingeOption _MiddleCloser = new CenterHingeOption(1, "Middle Closer");
+
+            private CenterHingeOption(int value, string displayName) : base(value, displayName) { }
+        }
+
+
+        public class NTCenterHinge_ArticleNo : Enumeration<NTCenterHinge_ArticleNo, int>
+        {
+            public static readonly NTCenterHinge_ArticleNo _N610A06516 = new NTCenterHinge_ArticleNo(0, "N610A06516");
+
+            private NTCenterHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class StayBearingK_ArticleNo : Enumeration<StayBearingK_ArticleNo, int>
+        {
+            public static readonly StayBearingK_ArticleNo _N390A0001 = new StayBearingK_ArticleNo(0, "N390A0001");
+
+            private StayBearingK_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class StayBearingPin_ArticleNo : Enumeration<StayBearingPin_ArticleNo, int>
+        {
+            public static readonly StayBearingPin_ArticleNo _F710D52026 = new StayBearingPin_ArticleNo(0, "F710D52026");
+
+            private StayBearingPin_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class StayBearingCover_ArticleNo : Enumeration<StayBearingCover_ArticleNo, int>
+        {
+            public static readonly StayBearingCover_ArticleNo _WhiteIvory = new StayBearingCover_ArticleNo(0, "N391A03718");
+            public static readonly StayBearingCover_ArticleNo _DB = new StayBearingCover_ArticleNo(1, "N391A01558");
+
+            private StayBearingCover_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class TopCornerHinge_ArticleNo : Enumeration<TopCornerHinge_ArticleNo, int>
+        {
+            public static readonly TopCornerHinge_ArticleNo _Right = new TopCornerHinge_ArticleNo(0, "N620A6116R");
+            public static readonly TopCornerHinge_ArticleNo _Left = new TopCornerHinge_ArticleNo(1, "N620A6116L");
+
+            private TopCornerHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class TopCornerHingeCover_ArticleNo : Enumeration<TopCornerHingeCover_ArticleNo, int>
+        {
+            public static readonly TopCornerHingeCover_ArticleNo _WhiteIvory = new TopCornerHingeCover_ArticleNo(0, "N391A03718");
+            public static readonly TopCornerHingeCover_ArticleNo _DB = new TopCornerHingeCover_ArticleNo(1, "N391A03558");
+
+            private TopCornerHingeCover_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class TopCornerHingeSpacer_ArticleNo : Enumeration<TopCornerHingeSpacer_ArticleNo, int>
+        {
+            public static readonly TopCornerHingeSpacer_ArticleNo _331488 = new TopCornerHingeSpacer_ArticleNo(0, "331488");
+
+            private TopCornerHingeSpacer_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CornerHingeK_ArticleNo : Enumeration<CornerHingeK_ArticleNo, int>
+        {
+            public static readonly CornerHingeK_ArticleNo _N510A0011 = new CornerHingeK_ArticleNo(0, "N510A0011");
+
+            private CornerHingeK_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CornerPivotRestK_ArticleNo : Enumeration<CornerPivotRestK_ArticleNo, int>
+        {
+            public static readonly CornerPivotRestK_ArticleNo _N510A0001 = new CornerPivotRestK_ArticleNo(0, "N510A0001");
+
+            private CornerPivotRestK_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CornerHingeCoverK_ArticleNo : Enumeration<CornerHingeCoverK_ArticleNo, int>
+        {
+            public static readonly CornerHingeCoverK_ArticleNo _DB = new CornerHingeCoverK_ArticleNo(0, "N591A04558");
+            public static readonly CornerHingeCoverK_ArticleNo _WhiteIvory = new CornerHingeCoverK_ArticleNo(1, "N591A04718");
+
+            private CornerHingeCoverK_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CoverForCornerPivotRestVertical_ArticleNo : Enumeration<CoverForCornerPivotRestVertical_ArticleNo, int>
+        {
+            public static readonly CoverForCornerPivotRestVertical_ArticleNo _DB = new CoverForCornerPivotRestVertical_ArticleNo(0, "N591A01558");
+            public static readonly CoverForCornerPivotRestVertical_ArticleNo _WhiteIvory = new CoverForCornerPivotRestVertical_ArticleNo(1, "N591A01718");
+
+            private CoverForCornerPivotRestVertical_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CoverForCornerPivotRest_ArticleNo : Enumeration<CoverForCornerPivotRest_ArticleNo, int>
+        {
+            public static readonly CoverForCornerPivotRest_ArticleNo _DB = new CoverForCornerPivotRest_ArticleNo(0, "N591B12556");
+            public static readonly CoverForCornerPivotRest_ArticleNo _WhiteIvory = new CoverForCornerPivotRest_ArticleNo(1, "N591B02718");
+
+            private CoverForCornerPivotRest_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LeverEspagnolette_ArticleNo : Enumeration<LeverEspagnolette_ArticleNo, int>
+        {
+            public static readonly LeverEspagnolette_ArticleNo _625_205 = new LeverEspagnolette_ArticleNo(0, "625-205");
+            public static readonly LeverEspagnolette_ArticleNo _625_206 = new LeverEspagnolette_ArticleNo(1, "625-206");
+            public static readonly LeverEspagnolette_ArticleNo _625_207 = new LeverEspagnolette_ArticleNo(2, "625-207");
+            public static readonly LeverEspagnolette_ArticleNo _None = new LeverEspagnolette_ArticleNo(3, "None");
+
+            private LeverEspagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class ShootboltStriker_ArticleNo : Enumeration<LeverEspagnolette_ArticleNo, int>
+        {
+            public static readonly ShootboltStriker_ArticleNo _N705A20106 = new ShootboltStriker_ArticleNo(0, "N705A20106");
+
+            private ShootboltStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class ShootboltNonReverse_ArticleNo : Enumeration<ShootboltNonReverse_ArticleNo, int>
+        {
+            public static readonly ShootboltNonReverse_ArticleNo _349187 = new ShootboltNonReverse_ArticleNo(0, "349187");
+
+            private ShootboltNonReverse_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class _3dHinge_ArticleNo : Enumeration<_3dHinge_ArticleNo, int>
+        {
+            public static readonly _3dHinge_ArticleNo _3DHinge_WHT = new _3dHinge_ArticleNo(0, "492596");
+            public static readonly _3dHinge_ArticleNo _3DHinge_IVORY = new _3dHinge_ArticleNo(1, "492592");
+            public static readonly _3dHinge_ArticleNo _3DHinge_BL = new _3dHinge_ArticleNo(2, "492592");
+            public static readonly _3dHinge_ArticleNo _3DHinge_DB = new _3dHinge_ArticleNo(3, "492594");
+
+            private _3dHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class RestrictorStay_ArticleNo : Enumeration<RestrictorStay_ArticleNo, int>
+        {
+            public static readonly RestrictorStay_ArticleNo _613249 = new RestrictorStay_ArticleNo(0, "613249");
+
+            private RestrictorStay_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class AdjustableStriker_ArticleNo : Enumeration<AdjustableStriker_ArticleNo, int>
+        {
+            public static readonly AdjustableStriker_ArticleNo _332439 = new AdjustableStriker_ArticleNo(0, "332439");
+
+            private AdjustableStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class WeldableCornerJoint_ArticleNo : Enumeration<WeldableCornerJoint_ArticleNo, int>
+        {
+            public static readonly WeldableCornerJoint_ArticleNo _498N = new WeldableCornerJoint_ArticleNo(0, "498N");
+
+            private WeldableCornerJoint_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LatchDeadboltStriker_ArticleNo : Enumeration<LatchDeadboltStriker_ArticleNo, int>
+        {
+            public static readonly LatchDeadboltStriker_ArticleNo _Right = new LatchDeadboltStriker_ArticleNo(0, "390660");
+            public static readonly LatchDeadboltStriker_ArticleNo _Left = new LatchDeadboltStriker_ArticleNo(1, "390659");
+
+            private LatchDeadboltStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GlazingAdaptor_ArticleNo : Enumeration<GlazingAdaptor_ArticleNo, int>
+        {
+            public static readonly GlazingAdaptor_ArticleNo _6418 = new GlazingAdaptor_ArticleNo(0, "6418");
+
+            private GlazingAdaptor_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class ButtHinge_ArticleNo : Enumeration<ButtHinge_ArticleNo, int>
+        {
+            public static readonly ButtHinge_ArticleNo _WHT = new ButtHinge_ArticleNo(0, "770725-WHT"); //white-based
+            public static readonly ButtHinge_ArticleNo _PC = new ButtHinge_ArticleNo(1, "770725-PC"); //Ivory-based
+            public static readonly ButtHinge_ArticleNo _BL = new ButtHinge_ArticleNo(2, "770725-BL");
+            public static readonly ButtHinge_ArticleNo _DB = new ButtHinge_ArticleNo(3, "770725-DB"); //Dark brown
+
+            private ButtHinge_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MilledFrame_ArticleNo : Enumeration<MilledFrame_ArticleNo, int>
+        {
+            public static readonly MilledFrame_ArticleNo _7502Milled = new MilledFrame_ArticleNo(0, "7502-Milled");
+
+            private MilledFrame_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MilledFrameReinf_ArticleNo : Enumeration<MilledFrameReinf_ArticleNo, int>
+        {
+            public static readonly MilledFrameReinf_ArticleNo _R_676 = new MilledFrameReinf_ArticleNo(0, "R-676");
+
+            private MilledFrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

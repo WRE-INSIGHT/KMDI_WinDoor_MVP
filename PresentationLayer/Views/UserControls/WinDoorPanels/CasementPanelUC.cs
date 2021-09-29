@@ -50,6 +50,28 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        public Color Panel_BackColor
+        {
+            get
+            {
+                return this.BackColor;
+            }
+        }
+
+        private bool _panelCmenuDeleteVisibility;
+        public bool Panel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _panelCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _panelCmenuDeleteVisibility = value;
+            }
+        }
+
         public CasementPanelUC()
         {
             InitializeComponent();
@@ -60,6 +82,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler casementPanelUCMouseEnterEventRaised;
         public event EventHandler casementPanelUCMouseLeaveEventRaised;
         public event EventHandler deleteToolStripClickedEventRaised;
+        public event MouseEventHandler casementPanelUCMouseClickEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -72,6 +95,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Placement"]);
+            this.DataBindings.Add(ModelBinding["Panel_BackColor"]);
+            this.DataBindings.Add(ModelBinding["Panel_CmenuDeleteVisibility"]);
         }
 
         private void CasementPanelUC_Paint(object sender, PaintEventArgs e)
@@ -101,9 +126,13 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void CasementPanelUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
             {
                 cmenu_casement.Show(new Point(MousePosition.X, MousePosition.Y));
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                EventHelpers.RaiseMouseEvent(sender, casementPanelUCMouseClickEventRaised, e);
             }
         }
 

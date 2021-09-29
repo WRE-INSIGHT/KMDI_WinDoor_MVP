@@ -78,6 +78,7 @@
             this.dgv_ExplosionMaterialList.Size = new System.Drawing.Size(928, 442);
             this.dgv_ExplosionMaterialList.TabIndex = 0;
             this.dgv_ExplosionMaterialList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_ExplosionMaterialList_CellFormatting);
+            this.dgv_ExplosionMaterialList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_ExplosionMaterialList_RowPostPaint);
             // 
             // ExplosionView
             // 

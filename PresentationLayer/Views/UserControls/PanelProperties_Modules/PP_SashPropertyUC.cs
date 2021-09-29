@@ -44,6 +44,19 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void cmb_SashProfile_SelectedValueChanged(object sender, EventArgs e)
         {
+            SashProfile_ArticleNo sel_sash = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (sel_sash == SashProfile_ArticleNo._7581 ||
+                sel_sash == SashProfile_ArticleNo._374)
+            {
+                lbl_InOutOrient.Text = "Outward";
+                lbl_InOutOrient.ForeColor = Color.Black;
+            }
+            else if (sel_sash == SashProfile_ArticleNo._395)
+            {
+                lbl_InOutOrient.Text = "Inward";
+                lbl_InOutOrient.ForeColor = Color.CadetBlue;
+            }
+
             EventHelpers.RaiseEvent(sender, cmbSashProfileSelectedValueEventRaised, e);
         }
 

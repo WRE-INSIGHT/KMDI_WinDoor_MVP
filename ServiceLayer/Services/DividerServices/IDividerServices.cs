@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using static EnumerationTypeLayer.EnumerationTypes;
 using System.Collections.Generic;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.Panel;
 
 namespace ServiceLayer.Services.DividerServices
 {
@@ -26,6 +27,9 @@ namespace ServiceLayer.Services.DividerServices
                                       string divName = "",
                                       Dictionary<int, int> divCladdingSizeList = null,
                                       bool divChkDM = false,
-                                      bool divArtVisibility = true);        
+                                      bool divArtVisibility = true,
+                                      DummyMullion_ArticleNo divDMArtNo = null,
+                                      IPanelModel divDMPanel = null,
+                                      bool divLeverEspagVisibility = false);        
     }
 }

@@ -65,6 +65,7 @@ namespace ServiceLayer.Services.PanelServices
                                   int panelIndexInsideMPanel = 0,
                                   DockStyle panelDock = DockStyle.Fill,
                                   string panelName = "",
-                                  bool panelOrient = false);
+                                  bool panelOrient = false,
+                                  HingeOption panelHingeOptions = null);
     }
 }

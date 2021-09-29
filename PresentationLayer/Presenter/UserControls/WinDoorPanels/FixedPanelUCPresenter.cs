@@ -293,10 +293,31 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
                 _frameModel.AdjustPropertyPanelHeight("Div", "delete");
 
-                foreach (int cladding in div.Div_CladdingSizeList.Values)
+                _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+
+                for (int i = 0; i < div.Div_CladdingCount; i++)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
                     _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
+                }
+
+                if (div.Div_claddingBracketVisibility == true)
+                {
+                    div.Div_claddingBracketVisibility = false;
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
+                }
+
+                if (div.Div_ChkDM == true && div.Div_ArtVisibility == false)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDM");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDM");
+                }
+                else if (div.Div_ChkDM == false && div.Div_ArtVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
                 }
             }
 
@@ -313,6 +334,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
                 }
+
+                if (_panelModel.Panel_HingeOptionsVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                }
+
                 _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minus");
                 _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
             }
@@ -367,6 +394,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (_panelModel.Panel_Orient == true)
             {
                 _frameModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+            }
+
+            if (_panelModel.Panel_HingeOptionsVisibility == true)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
             }
 
             _frameModel.AdjustPropertyPanelHeight("Panel", "minus");
@@ -462,7 +494,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_MarginToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelGlass_ID", new Binding("PanelGlass_ID", _panelModel, "PanelGlass_ID", true, DataSourceUpdateMode.OnPropertyChanged));
-            
+            panelBinding.Add("Panel_CmenuDeleteVisibility", new Binding("Panel_CmenuDeleteVisibility", _panelModel, "Panel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+
             return panelBinding;
         }
     }
