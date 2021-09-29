@@ -35,6 +35,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         List<IDividerModel> MPanelLst_Divider { get; set; }
         List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
         List<Control> MPanelLst_Objects { get; set; }
+        List<Control> MPanelLst_Imagers { get; set; }
         float MPanel_Zoom { get; set; }
         int MPanel_WidthToBind { get; set; }
         int MPanel_AddPixel { get; }

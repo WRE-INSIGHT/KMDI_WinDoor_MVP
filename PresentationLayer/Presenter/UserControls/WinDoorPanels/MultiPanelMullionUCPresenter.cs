@@ -306,6 +306,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         IMultiPanelMullionImagerUC multiMullionUC = multiMullionImagerUCP.GetMultiPanelImager();
                         _multiMullionImagerUCP.AddControl((UserControl)multiMullionUC);
                         _basePlatformImagerUCP.InvalidateBasePlatform();
+                        _multiPanelModel.MPanelLst_Imagers.Add((UserControl)multiMullionUC);
 
                         IMultiPanelMullionUCPresenter multiUCP = GetNewInstance(_unityC,
                                                                                 mPanelModel,
@@ -378,6 +379,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                           mullionUC);
                             IMullionImagerUC mullionImagerUC = mullionImagerUCP.GetMullionImager();
                             _multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
+                            _multiPanelModel.MPanelLst_Imagers.Add((UserControl)mullionImagerUC);
+
                             _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                     }
@@ -390,6 +393,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
                         _multiMullionImagerUCP.AddControl((UserControl)multiTransomImagerUC);
                         _basePlatformImagerUCP.InvalidateBasePlatform();
+                        _multiPanelModel.MPanelLst_Imagers.Add((UserControl)multiTransomImagerUC);
 
                         IMultiPanelTransomUCPresenter multiTransom = _multiPanelTransomUCP.GetNewInstance(_unityC,
                                                                                                           mPanelModel,
@@ -461,6 +465,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                           mullionUC);
                             IMullionImagerUC mullionImagerUC = mullionImagerUCP.GetMullionImager();
                             _multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
+                            _multiPanelModel.MPanelLst_Imagers.Add((UserControl)mullionImagerUC);
+
                             _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                     }
@@ -631,6 +637,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                  _multiMullionImagerUCP);
                     IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
                     _multiMullionImagerUCP.AddControl((UserControl)fixedImagerUC);
+                    _multiPanelModel.MPanelLst_Imagers.Add((UserControl)fixedImagerUC);
+
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
                 else if (data == "Casement Panel")
@@ -671,6 +679,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                           _multiMullionImagerUCP);
                     ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
                     _multiMullionImagerUCP.AddControl((UserControl)casementImagerUC);
+                    _multiPanelModel.MPanelLst_Imagers.Add((UserControl)casementImagerUC);
+
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
                 else if (data == "Awning Panel")
@@ -711,6 +721,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                     _multiMullionImagerUCP);
                     IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
                     _multiMullionImagerUCP.AddControl((UserControl)awningImagerUC);
+                    _multiPanelModel.MPanelLst_Imagers.Add((UserControl)awningImagerUC);
+
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
                 else if (data == "Sliding Panel")
@@ -735,6 +747,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                        _multiMullionImagerUCP);
                     ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
                     _multiMullionImagerUCP.AddControl((UserControl)slidingImagerUC);
+                    _multiPanelModel.MPanelLst_Imagers.Add((UserControl)slidingImagerUC);
+
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
 
@@ -745,6 +759,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                     _multiPanelModel.Adjust_ControlDisplaySize();
                     _mainPresenter.Fit_MyControls_byControlsLocation();
+                    _mainPresenter.Fit_MyImager_byImagersLocation();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                 }
                 else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
@@ -795,6 +810,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                   mullionUC);
                     IMullionImagerUC mullionImagerUC = mullionImagerUCP.GetMullionImager();
                     _multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
+                    _multiPanelModel.MPanelLst_Imagers.Add((UserControl)mullionImagerUC);
+
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
             }

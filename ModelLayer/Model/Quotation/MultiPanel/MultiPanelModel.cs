@@ -518,6 +518,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        public List<Control> MPanelLst_Imagers { get; set; }
+
         private int _mpanelPropHeight;
         public int MPanelProp_Height
         {
@@ -894,20 +896,16 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         if (prev_ctrl.Name.Contains("TransomUC"))
                         {
                             divModel.Div_Height -= _mpnl_add;
-                            //prev_ctrl.Height -= pixels_count;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                             {
-                                //current_control.Height += pixels_count;
                                 multiModel.MPanel_Height += _mpnl_add;
                             }
                         }
                         else if (prev_ctrl.Name.Contains("MullionUC"))
                         {
                             divModel.Div_Width -= _mpnl_add;
-                            //prev_ctrl.Width -= pixels_count;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                             {
-                                //current_control.Width += pixels_count;
                                 multiModel.MPanel_Width += _mpnl_add;
                             }
                         }
@@ -929,20 +927,16 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             if (!if_auto_added)
                             {
                                 multiModel.MPanel_Height += _mpnl_add;
-                                //prev_ctrl.Height += pixels_count;
                             }
                             divModel.Div_Height -= _mpnl_add;
-                            //current_control.Height -= pixels_count;
                         }
                         else if (current_control.Name.Contains("MullionUC"))
                         {
                             if (!if_auto_added)
                             {
                                 multiModel.MPanel_Width += _mpnl_add;
-                                //prev_ctrl.Width += pixels_count;
                             }
                             divModel.Div_Width -= _mpnl_add;
-                            //current_control.Width -= pixels_count;
                         }
                     }
                 }
@@ -1831,6 +1825,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                List<IMultiPanelModel> mpanelLstMultiPanel,
                                int mpanelIndexInsideMPanel,
                                List<Control> mpanelLstObjects,
+                               List<Control> mpanelLstImagers,
                                IMultiPanelModel mpanelParentModel,
                                float mpanelImageRendererZoom,
                                float mpanelZoom,
@@ -1855,6 +1850,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_Index_Inside_MPanel = mpanelIndexInsideMPanel;
             MPanelProp_Height = 129;
             MPanelLst_Objects = mpanelLstObjects;
+            MPanelLst_Imagers = mpanelLstImagers;
             MPanel_ParentModel = mpanelParentModel;
             MPanel_DividerEnabled = true;
             MPanelImageRenderer_Zoom = mpanelImageRendererZoom;

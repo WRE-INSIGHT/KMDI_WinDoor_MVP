@@ -168,6 +168,8 @@ namespace PresentationLayer.CommonMethods
                                                                         transomUC);
                     ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
                     multiTransomImagerUCP.AddControl((UserControl)transomImagerUC);
+                    parentModel.MPanelLst_Imagers.Add((UserControl)transomImagerUC);
+
                 }
                 else if (parentModel.MPanel_Type == "Mullion")
                 {
@@ -210,6 +212,8 @@ namespace PresentationLayer.CommonMethods
 
                     IMullionImagerUC mullionImagerUC = mullionImagerUCP.GetMullionImager();
                     multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
+                    parentModel.MPanelLst_Imagers.Add((UserControl)mullionImagerUC);
+
                 }
             }
         }

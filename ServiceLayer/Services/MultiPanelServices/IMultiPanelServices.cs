@@ -30,6 +30,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                             int mpanelDivisions = 1,
                                             List<IPanelModel> mpanelLstPanel = null,
                                             List<IDividerModel> mpanelLstDivider = null,
-                                            List<IMultiPanelModel> mpanelLstMultiPanel = null);
+                                            List<IMultiPanelModel> mpanelLstMultiPanel = null,
+                                            List<Control> mpanelLstObjects = null,
+                                            List<Control> mpanelLstImagers = null);
     }
 }

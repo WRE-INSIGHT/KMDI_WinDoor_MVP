@@ -36,6 +36,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  List<IMultiPanelModel> mpanelLstMultiPanel,
                                                  int mpanelIndexInsideMPanel,
                                                  List<Control> mpanelLstObjects,
+                                                 List<Control> mpanelLstImagers,
                                                  IMultiPanelModel mpanelParentModel,
                                                  float mpanelImageRendererZoom,
                                                  float mpanelZoom,
@@ -59,6 +60,7 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                       mpanelLstMultiPanel,
                                                       mpanelIndexInsideMPanel,
                                                       mpanelLstObjects,
+                                                      mpanelLstImagers,
                                                       mpanelParentModel,
                                                       mpanelImageRendererZoom,
                                                       mpanelZoom,
@@ -95,7 +97,9 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                    int mpanelDivisions = 1,
                                                    List<IPanelModel> mpanelLstPanel = null,
                                                    List<IDividerModel> mpanelLstDivider = null,
-                                                   List<IMultiPanelModel> mpanelLstMultiPanel = null)
+                                                   List<IMultiPanelModel> mpanelLstMultiPanel = null,
+                                                   List<Control> mpanelLstObjects = null,
+                                                   List<Control> mpanelLstImagers = null)
         {
             if (mname == "")
             {
@@ -120,6 +124,16 @@ namespace ServiceLayer.Services.MultiPanelServices
             {
                 mpanelLstMultiPanel = new List<IMultiPanelModel>();
             }
+            if (mpanelLstObjects == null)
+            {
+                mpanelLstObjects = new List<Control>();
+            }
+            if (mpanelLstImagers == null)
+            {
+                mpanelLstImagers = new List<Control>();
+            }
+
+
             IMultiPanelModel _multipanelModel = CreateMultiPanel(mid,
                                                                  mname,
                                                                  mwidth,
@@ -134,7 +148,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mpanelLstDivider,
                                                                  mpanelLstMultiPanel,
                                                                  mpanelIndexInsideMPanel,
-                                                                 new List<Control>(),
+                                                                 mpanelLstObjects,
+                                                                 mpanelLstImagers,
                                                                  mpanelParentModel, 
                                                                  mpanelImageRendererZoom,
                                                                  mpanelZoom,

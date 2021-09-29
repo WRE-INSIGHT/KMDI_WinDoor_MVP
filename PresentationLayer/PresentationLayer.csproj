@@ -554,6 +554,7 @@
     <Compile Include="Views\UserControls\WinDoorPanels\IFixedPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IMultiPanelMullionImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IMultiPanelTransomImagerUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\ISlidingPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\MultiPanelMullionImagerUC.cs">
       <SubType>UserControl</SubType>

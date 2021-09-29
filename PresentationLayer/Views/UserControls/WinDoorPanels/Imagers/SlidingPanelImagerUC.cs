@@ -11,7 +11,7 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 {
-    public partial class SlidingPanelImagerUC : UserControl, ISlidingPanelImagerUC
+    public partial class SlidingPanelImagerUC : UserControl, ISlidingPanelImagerUC, IPanelImagerUC
     {
         public SlidingPanelImagerUC()
         {
@@ -46,6 +46,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+            set
+            {
+                _panelPlacement = value;
+            }
+        }
+
         public event PaintEventHandler slidingPanelImagerUCPaintEventRaised;
         public event EventHandler slidingPanelImagerUCVisibleChangedEventRaised;
 
@@ -63,6 +76,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
+            this.DataBindings.Add(ModelBinding["Panel_Placement"]);
         }
 
         private void SlidingPanelImagerUC_Paint(object sender, PaintEventArgs e)

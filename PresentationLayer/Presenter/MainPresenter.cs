@@ -13,6 +13,7 @@ using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
+using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Thumbs;
 using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.PanelServices;
@@ -1509,6 +1510,49 @@ namespace PresentationLayer.Presenter
                                     {
                                         mpnlModel.MPanel_HeightToBind--;
                                         if (ctrl.Location.X == ctrl.Margin.Left)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public void Fit_MyImager_byImagersLocation()
+        {
+            foreach (IFrameModel frames in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpnl in frames.Lst_MultiPanel)
+                {
+                    foreach (Control imager in mpnl.MPanelLst_Imagers)
+                    {
+                        if (imager is IPanelImagerUC)
+                        {
+                            IPanelImagerUC imgr = (IPanelImagerUC)imager;
+                            if (imgr.Panel_Placement == "Last")
+                            {
+                                IPanelModel pnlModel = mpnl.MPanelLst_Panel.Find(pnl => pnl.Panel_ID == imgr.Panel_ID);
+                                if (mpnl.MPanel_Type == "Mullion")
+                                {
+                                    while (imager.Location.Y > imager.Margin.Top)
+                                    {
+                                        pnlModel.PanelImageRenderer_Width--;
+                                        if (imager.Location.Y == imager.Margin.Top)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (mpnl.MPanel_Type == "Transom")
+                                {
+                                    while (imager.Location.X > imager.Margin.Left)
+                                    {
+                                        pnlModel.PanelImageRenderer_Height--;
+                                        if (imager.Location.X == imager.Margin.Left)
                                         {
                                             break;
                                         }

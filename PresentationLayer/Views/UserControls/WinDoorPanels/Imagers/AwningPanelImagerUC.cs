@@ -11,7 +11,7 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 {
-    public partial class AwningPanelImagerUC : UserControl, IAwningPanelImagerUC
+    public partial class AwningPanelImagerUC : UserControl, IAwningPanelImagerUC, IPanelImagerUC
     {
         public AwningPanelImagerUC()
         {
@@ -46,6 +46,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+            set
+            {
+                _panelPlacement = value;
+            }
+        }
+
         public event PaintEventHandler awningPanelImagerUCPaintEventRaised;
         public event EventHandler awningPanelImagerUCVisibleChangedEventRaised;
 
@@ -63,6 +76,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
+            this.DataBindings.Add(ModelBinding["Panel_Placement"]);
         }
 
         private void AwningPanelImagerUC_Paint(object sender, PaintEventArgs e)

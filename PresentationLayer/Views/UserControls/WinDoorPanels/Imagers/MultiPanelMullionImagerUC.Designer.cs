@@ -34,7 +34,7 @@
             // flp_MultiMullionImager
             // 
             this.flp_MultiMullionImager.AllowDrop = true;
-            this.flp_MultiMullionImager.BackColor = System.Drawing.SystemColors.Control;
+            this.flp_MultiMullionImager.BackColor = System.Drawing.Color.White;
             this.flp_MultiMullionImager.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_MultiMullionImager.Location = new System.Drawing.Point(0, 0);
             this.flp_MultiMullionImager.Margin = new System.Windows.Forms.Padding(0);
@@ -47,6 +47,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.flp_MultiMullionImager);
             this.Name = "MultiPanelMullionImagerUC";
             this.Size = new System.Drawing.Size(300, 300);
