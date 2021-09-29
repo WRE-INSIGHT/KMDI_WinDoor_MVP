@@ -768,23 +768,46 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         if (pnl_curCtrl.Panel_MotorizedOptionVisibility == true)
                                         {
-                                            Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Frame",
-                                                   @"");
+                                            if (pnl_curCtrl.Panel_Type == "Awning Panel")
+                                            {
+                                                Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width + 150,
+                                                                       "Frame",
+                                                                       @"");
 
-                                            Material_List.Rows.Add("Divider " + pnl_curCtrl.Panel_MotorizedDividerArtNo.ToString(),
-                                                                   1, "pc(s)",
-                                                                   frame.Frame_Width + 150,
-                                                                   "Frame",
-                                                                   @"");
+                                                Material_List.Rows.Add("Divider " + pnl_curCtrl.Panel_MotorizedDividerArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width + 150,
+                                                                       "Frame",
+                                                                       @"");
 
-                                            Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
-                                                                   1, "pc(s)",
-                                                                   frame.Frame_Width + 150,
-                                                                   "Motorized Mechanism",
-                                                                   @"");
+                                                Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width + 150,
+                                                                       "Motorized Mechanism",
+                                                                       @"");
+                                            }
+                                            else if (pnl_curCtrl.Panel_Type == "Casement Panel")
+                                            {
+                                                Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Height + 150,
+                                                                       "Frame",
+                                                                       @"");
+
+                                                Material_List.Rows.Add("Divider " + pnl_curCtrl.Panel_MotorizedDividerArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Height + 150,
+                                                                       "Frame",
+                                                                       @"");
+
+                                                Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Height + 150,
+                                                                       "Motorized Mechanism",
+                                                                       @"");
+                                            }
 
                                             if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
                                                 pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
@@ -1652,23 +1675,47 @@ namespace ModelLayer.Model.Quotation
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)
                         {
-                            Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Frame",
-                                                   @"");
+                            if (pnl.Panel_Type == "Awning Panel")
+                            {
+                                Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width + 150,
+                                                       "Frame",
+                                                       @"");
 
-                            Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Frame",
-                                                   @"");
+                                Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width + 150,
+                                                       "Frame",
+                                                       @"");
 
-                            Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Motorized Mechanism",
-                                                   @"");
+                                Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width + 150,
+                                                       "Motorized Mechanism",
+                                                       @"");
+
+                            }
+                            else if (pnl.Panel_Type == "Casement Panel")
+                            {
+                                Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Height + 150,
+                                                       "Frame",
+                                                       @"");
+
+                                Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Height + 150,
+                                                       "Frame",
+                                                       @"");
+
+                                Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Height + 150,
+                                                       "Motorized Mechanism",
+                                                       @"");
+                            }
 
                             if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
                                 pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)

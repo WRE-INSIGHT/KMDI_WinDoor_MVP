@@ -188,7 +188,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         private string _panelType;
-        public string Panel_Type
+        public string Panel_Type // panelType + " Panel"
         {
             get
             {
