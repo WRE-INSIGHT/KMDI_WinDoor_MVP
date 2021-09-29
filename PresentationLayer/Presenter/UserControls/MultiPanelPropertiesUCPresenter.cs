@@ -85,7 +85,20 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (gbmode != "")
                 {
-                    if (same_sash == true)
+                    bool proceed = false;
+
+                    if (same_sash == true || gbmode == "noSash")
+                    {
+                        proceed = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cannot apply auto glass balancing" + "\n" + "You can apply auto glass balancing if all panel has same sash profile",
+                                        "Glass balancing not available",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+
+                    if (proceed)
                     {
                         if (tsmGB.Checked == false)
                         {
@@ -96,8 +109,14 @@ namespace PresentationLayer.Presenter.UserControls
                                 {
                                     foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                                     {
-                                        pnl.Panel_Width = pnl.Panel_OriginalWidth;
-                                        pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                                        if (_multiPanelModel.MPanel_Type == "Mullion")
+                                        {
+                                            pnl.Panel_Width = pnl.Panel_OriginalWidth;
+                                        }
+                                        else if (_multiPanelModel.MPanel_Type == "Transom")
+                                        {
+                                            pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                                        }
                                     }
 
                                     _multiPanelModel.SetEqualGlassDimension(gbmode, ref_sash);
@@ -113,40 +132,47 @@ namespace PresentationLayer.Presenter.UserControls
 
                             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                             {
-                                pnl.Panel_Width = pnl.Panel_OriginalWidth;
-                                pnl.Panel_Height = pnl.Panel_OriginalHeight;
-
-                                pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth;
-                                pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight;
+                                if (_multiPanelModel.MPanel_Type == "Mullion")
+                                {
+                                    pnl.Panel_Width = pnl.Panel_OriginalWidth;
+                                    pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth;
+                                }
+                                else if (_multiPanelModel.MPanel_Type == "Transom")
+                                {
+                                    pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                                    pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight;
+                                }
                             }
-
-                            _multiPanelModel.Fit_MyControls_Dimensions();
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                            _multiPanelModel.Adjust_ControlDisplaySize();
 
                             foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
                             {
-                                mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth;
-                                mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight;
+                                if (_multiPanelModel.MPanel_Type == "Mullion")
+                                {
+                                    mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth;
+                                }
+                                else if (_multiPanelModel.MPanel_Type == "Transom")
+                                {
+                                    mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight;
+                                }
 
                                 mpnl.Fit_MyControls_Dimensions();
                                 mpnl.Fit_MyControls_ToBindDimensions();
                                 mpnl.Adjust_ControlDisplaySize();
                             }
 
+                            _multiPanelModel.MPanel_GlassBalanced = false;
+
                             tsmGB.Checked = false;
                         }
+
+                        _multiPanelModel.Fit_MyControls_Dimensions();
+                        _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                        _multiPanelModel.Adjust_ControlDisplaySize();
 
                         _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                         _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
                         _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                         _mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Cannot apply auto glass balancing" + "\n" + "You can apply auto glass balancing if all panel has same sash profile",
-                                        "Glass balancing not available",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
             }

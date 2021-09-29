@@ -63,6 +63,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanel_OriginalGlassWidth { get; set; }
         int MPanel_OriginalGlassHeight { get; set; }
         bool MPanel_CmenuDeleteVisibility { get; set; }
+        bool MPanel_GlassBalanced { get; set; }
 
         void SetEqualGlassDimension(string mode, SashProfile_ArticleNo sash);
 

@@ -530,7 +530,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 Div_Bounded = "Frame";
                 if (Div_Type == DividerType.Mullion)
                 {
-                    if (Div_ChkDM == true)
+                    if (Div_ChkDM == true && Div_DMPanel != null)
                     {
                         Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (38 * 2)) - 5;
                         Div_AlumSpacer50Qty = (int)(Math.Ceiling(((decimal)Div_ExplosionHeight / 300)) - 2);

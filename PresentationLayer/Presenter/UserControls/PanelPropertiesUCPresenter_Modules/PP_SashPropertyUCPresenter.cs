@@ -190,9 +190,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_sashPropertyUC_PPSashPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_sashPropertyUC.ThisBinding(CreateBindingDictionary());
-            curr_sash = SashProfile_ArticleNo._7581;
-            _panelModel.Panel_2dHingeVisibility = true;
-            _panelModel.Panel_ButtHingeVisibility = false;
+            if (_panelModel.Panel_Type.Contains("Fixed") == false)
+            {
+                curr_sash = SashProfile_ArticleNo._7581;
+                _panelModel.Panel_2dHingeVisibility = true;
+                _panelModel.Panel_ButtHingeVisibility = false;
+            }
+            else
+            {
+                curr_sash = SashProfile_ArticleNo._None;
+                _panelModel.Panel_2dHingeVisibility = false;
+                _panelModel.Panel_ButtHingeVisibility = false;
+            }
 
             _initialLoad = false;
         }

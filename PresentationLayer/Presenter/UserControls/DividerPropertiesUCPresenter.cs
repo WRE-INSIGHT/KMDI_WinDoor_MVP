@@ -110,7 +110,14 @@ namespace PresentationLayer.Presenter.UserControls
                 nxt_pnl.Panel_BackColor = SystemColors.Highlight;
             }
 
-            _mainPresenter.SetLblStatus("DMPreSelection", true, (Control)sender, _divModel, prev_pnl, nxt_pnl, this);
+            if (prev_pnl.Panel_Name.Contains("Fixed") == false || nxt_pnl.Panel_Name.Contains("Fixed") == false)
+            {
+                _mainPresenter.SetLblStatus("DMPreSelection", true, (Control)sender, _divModel, prev_pnl, nxt_pnl, this);
+            }
+            else
+            {
+                MessageBox.Show("Not applicable on fixed panels","", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
 
         private void _divProperties_cmbDMArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
