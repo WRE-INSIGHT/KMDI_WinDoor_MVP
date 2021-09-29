@@ -117,7 +117,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
-        [Description("Virtual Width that is dependent on MPanel_Width and MPanel_Zoomand varies accordingly. (not intended for user to use)")]
+        [Description("Virtual Width that is dependent on MPanel_Width and MPanel_Zoom and varies accordingly. (not intended for user to use)")]
         private int _mpanelWidthToBind;
         public int MPanel_WidthToBind
         {
@@ -1222,13 +1222,53 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public int MPanel_OriginalGlassWidth { get; set; }
         public int MPanel_OriginalGlassHeight { get; set; }
 
-        public void SetEqualGlassDimension(string mode)
+        private bool _mpanelCmenuDeleteVisibility;
+        public bool MPanel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _mpanelCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _mpanelCmenuDeleteVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool MPanel_GlassBalanced { get; set; }
+
+        public void SetEqualGlassDimension(string mode, SashProfile_ArticleNo sash)
         {
             int Equal_GlassSize = 0,
                 div_deduction = 0,
-                frame_deduction = 0,
+                divDM_deduction = 0,
+                TM_sashBite_deduction = 0,
+                total_frame_deduction = 0,
+                frame_thickness = 0,
+                sash_bite = 0,
                 totalPanels = MPanel_Divisions + 1;
 
+            if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+            {
+                frame_thickness = 33;
+            }
+            else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+            {
+                frame_thickness = 47;
+            }
+
+            if (sash == SashProfile_ArticleNo._7581)
+            {
+                sash_bite = 7;
+            }
+            else if (sash == SashProfile_ArticleNo._374 || sash == SashProfile_ArticleNo._395)
+            {
+                sash_bite = 8;
+            }
+
+            total_frame_deduction = frame_thickness - sash_bite;
 
             if (mode == "noSash")
             {
@@ -1236,28 +1276,24 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
-                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                        {
-                            frame_deduction = 33;
-                        }
-                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            frame_deduction = 47;
-                        }
+                        MPanel_GlassBalanced = true;
 
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
-                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                            if (div.Div_ChkDM == false)
                             {
-                                div_deduction += 42;
-                            }
-                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
-                            {
-                                div_deduction += 72;
+                                if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                {
+                                    div_deduction += 42;
+                                }
+                                else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                {
+                                    div_deduction += 72;
+                                }
                             }
                         }
 
-                        Equal_GlassSize = (((MPanel_DisplayWidth - (frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1273,14 +1309,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
-                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                        {
-                            frame_deduction = 33;
-                        }
-                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            frame_deduction = 47;
-                        }
+                        MPanel_GlassBalanced = true;
 
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
@@ -1294,7 +1323,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (((MPanel_DisplayHeight - (frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayHeight - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1313,28 +1342,37 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
-                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                        {
-                            frame_deduction = 26;
-                        }
-                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            frame_deduction = 40;
-                        }
+                        MPanel_GlassBalanced = true;
 
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
-                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                            if (div.Div_ChkDM == false)
                             {
-                                div_deduction += (42 - 14);
+                                if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                {
+                                    div_deduction += 42;
+                                    TM_sashBite_deduction += 14;
+                                }
+                                else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                {
+                                    div_deduction += 72;
+                                    TM_sashBite_deduction += 16;
+                                }
                             }
-                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                            else if (div.Div_ChkDM == true)
                             {
-                                div_deduction += (72 - 14);
+                                if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                {
+                                    divDM_deduction += 16;
+                                }
+                                else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
+                                {
+                                    divDM_deduction += 8;
+                                }
                             }
                         }
 
-                        Equal_GlassSize = (((MPanel_DisplayWidth - (frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - TM_sashBite_deduction))) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1350,14 +1388,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     if (MPanel_Divisions >= 2)
                     {
-                        if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                        {
-                            frame_deduction = 26;
-                        }
-                        else if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            frame_deduction = 40;
-                        }
+                        MPanel_GlassBalanced = true;
 
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
@@ -1371,7 +1402,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (((MPanel_DisplayHeight - (frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayHeight - (total_frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1687,6 +1718,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_espagnoletteOptionsheight_default;
                 }
+                else if (mode == "addHinge")
+                {
+                    MPanelProp_Height += constants.panel_property_HingeOptionsheight;
+                }
+                else if (mode == "minusHinge")
+                {
+                    MPanelProp_Height -= constants.panel_property_HingeOptionsheight;
+                }
+                else if (mode == "addCenterHinge")
+                {
+                    MPanelProp_Height += constants.panel_property_CenterHingeOptionsheight;
+                }
+                else if (mode == "minusCenterHinge")
+                {
+                    MPanelProp_Height -= constants.panel_property_CenterHingeOptionsheight;
+                }
+                else if (mode == "addNTCenterHinge")
+                {
+                    MPanelProp_Height += constants.panel_property_NTCenterHingeOptionsheight;
+                }
+                else if (mode == "minusNTCenterHinge")
+                {
+                    MPanelProp_Height -= constants.panel_property_NTCenterHingeOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {
@@ -1729,6 +1784,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 else if (mode == "minusDM")
                 {
                     MPanelProp_Height -= constants.div_property_DMArtOptionsHeight;
+                }
+                else if (mode == "addLeverEspag")
+                {
+                    MPanelProp_Height += constants.div_property_leverEspagOptionsHeight;
+                }
+                else if (mode == "minusLeverEspag")
+                {
+                    MPanelProp_Height -= constants.div_property_leverEspagOptionsHeight;
+                }
+                else if (mode == "addCladdingBracket")
+                {
+                    MPanelProp_Height += constants.div_property_claddingBracketOptionsHeight;
+                }
+                else if (mode == "minusCladdingBracket")
+                {
+                    MPanelProp_Height -= constants.div_property_claddingBracketOptionsHeight;
                 }
             }
             else if (objtype == "Mpanel")
@@ -1794,6 +1865,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_OriginalDisplayWidth = mpanelDisplayWidth;
             MPanel_OriginalDisplayHeight = mpanelDisplayHeight;
             MPanel_StackNo = mpanelStackNo;
+            MPanel_CmenuDeleteVisibility = true;
 
             if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
             {

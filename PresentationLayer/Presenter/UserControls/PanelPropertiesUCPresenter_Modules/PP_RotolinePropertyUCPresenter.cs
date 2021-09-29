@@ -44,6 +44,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_rotolinePropertyUC_PPRotolinePropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_rotolinePropertyUC.ThisBinding(CreateBindingDictionary());
+            _panelModel.Panel_RotolineArtNo = Rotoline_HandleArtNo._K070A21725;
             _initialLoad = false;
         }
 

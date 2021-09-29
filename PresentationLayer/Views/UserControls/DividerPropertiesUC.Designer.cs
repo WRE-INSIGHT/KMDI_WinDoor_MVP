@@ -41,11 +41,15 @@
             this.lbl_divSpecs = new System.Windows.Forms.Label();
             this.pnl_dividerBody = new System.Windows.Forms.Panel();
             this.pnl_AddCladding = new System.Windows.Forms.Panel();
+            this.lbl_totalCladdingLength = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_AddCladding = new System.Windows.Forms.Button();
             this.pnl_DMArtNo = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.cmb_DMArtNo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btn_SelectDMPanel = new System.Windows.Forms.Button();
             this.pnl_divName = new System.Windows.Forms.Panel();
             this.chk_DM = new System.Windows.Forms.CheckBox();
             this.pnl_divWd = new System.Windows.Forms.Panel();
@@ -184,18 +188,45 @@
             this.pnl_dividerBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_dividerBody.Location = new System.Drawing.Point(0, 108);
             this.pnl_dividerBody.Name = "pnl_dividerBody";
-            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 148);
+            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 204);
             this.pnl_dividerBody.TabIndex = 13;
             // 
             // pnl_AddCladding
             // 
+            this.pnl_AddCladding.Controls.Add(this.lbl_totalCladdingLength);
+            this.pnl_AddCladding.Controls.Add(this.label3);
             this.pnl_AddCladding.Controls.Add(this.btn_Save);
             this.pnl_AddCladding.Controls.Add(this.btn_AddCladding);
             this.pnl_AddCladding.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_AddCladding.Location = new System.Drawing.Point(0, 118);
+            this.pnl_AddCladding.Location = new System.Drawing.Point(0, 146);
             this.pnl_AddCladding.Name = "pnl_AddCladding";
-            this.pnl_AddCladding.Size = new System.Drawing.Size(158, 28);
+            this.pnl_AddCladding.Size = new System.Drawing.Size(158, 56);
             this.pnl_AddCladding.TabIndex = 13;
+            // 
+            // lbl_totalCladdingLength
+            // 
+            this.lbl_totalCladdingLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_totalCladdingLength.AutoEllipsis = true;
+            this.lbl_totalCladdingLength.BackColor = System.Drawing.Color.IndianRed;
+            this.lbl_totalCladdingLength.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_totalCladdingLength.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_totalCladdingLength.Location = new System.Drawing.Point(98, 3);
+            this.lbl_totalCladdingLength.Name = "lbl_totalCladdingLength";
+            this.lbl_totalCladdingLength.Size = new System.Drawing.Size(54, 26);
+            this.lbl_totalCladdingLength.TabIndex = 12;
+            this.lbl_totalCladdingLength.Text = "0";
+            this.lbl_totalCladdingLength.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(0, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(94, 26);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Total\r\nCladding Length";
             // 
             // btn_Save
             // 
@@ -203,7 +234,7 @@
             this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Save.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_Save.Location = new System.Drawing.Point(101, 1);
+            this.btn_Save.Location = new System.Drawing.Point(101, 30);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(54, 23);
             this.btn_Save.TabIndex = 1;
@@ -216,7 +247,7 @@
             // 
             this.btn_AddCladding.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_AddCladding.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_AddCladding.Location = new System.Drawing.Point(3, 1);
+            this.btn_AddCladding.Location = new System.Drawing.Point(3, 30);
             this.btn_AddCladding.Name = "btn_AddCladding";
             this.btn_AddCladding.Size = new System.Drawing.Size(90, 23);
             this.btn_AddCladding.TabIndex = 0;
@@ -227,43 +258,64 @@
             // pnl_DMArtNo
             // 
             this.pnl_DMArtNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_DMArtNo.Controls.Add(this.label2);
             this.pnl_DMArtNo.Controls.Add(this.cmb_DMArtNo);
             this.pnl_DMArtNo.Controls.Add(this.label1);
+            this.pnl_DMArtNo.Controls.Add(this.btn_SelectDMPanel);
             this.pnl_DMArtNo.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_DMArtNo.Location = new System.Drawing.Point(0, 90);
             this.pnl_DMArtNo.Name = "pnl_DMArtNo";
-            this.pnl_DMArtNo.Size = new System.Drawing.Size(158, 28);
+            this.pnl_DMArtNo.Size = new System.Drawing.Size(158, 56);
             this.pnl_DMArtNo.TabIndex = 14;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(4, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "DM Panel";
             // 
             // cmb_DMArtNo
             // 
             this.cmb_DMArtNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb_DMArtNo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_DMArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_DMArtNo.FormattingEnabled = true;
-            this.cmb_DMArtNo.Items.AddRange(new object[] {
-            "6-8mm",
-            "10mm",
-            "10.76-14mm",
-            "16mm",
-            "18mm",
-            "20mm",
-            "22mm",
-            "25mm"});
-            this.cmb_DMArtNo.Location = new System.Drawing.Point(71, 3);
+            this.cmb_DMArtNo.Location = new System.Drawing.Point(71, 29);
             this.cmb_DMArtNo.Name = "cmb_DMArtNo";
             this.cmb_DMArtNo.Size = new System.Drawing.Size(85, 21);
             this.cmb_DMArtNo.TabIndex = 11;
+            this.cmb_DMArtNo.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DMArtNo_DrawItem);
+            this.cmb_DMArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_DMArtNo_SelectedValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 6);
+            this.label1.Location = new System.Drawing.Point(4, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "DM Art No";
+            // 
+            // btn_SelectDMPanel
+            // 
+            this.btn_SelectDMPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_SelectDMPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_SelectDMPanel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_SelectDMPanel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_SelectDMPanel.Location = new System.Drawing.Point(71, 2);
+            this.btn_SelectDMPanel.Name = "btn_SelectDMPanel";
+            this.btn_SelectDMPanel.Size = new System.Drawing.Size(85, 23);
+            this.btn_SelectDMPanel.TabIndex = 14;
+            this.btn_SelectDMPanel.Text = "Select Panel";
+            this.btn_SelectDMPanel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_SelectDMPanel.UseVisualStyleBackColor = false;
+            this.btn_SelectDMPanel.Click += new System.EventHandler(this.btn_SelectDMPanel_Click);
             // 
             // pnl_divName
             // 
@@ -323,7 +375,7 @@
             this.Controls.Add(this.pnl_divName);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "DividerPropertiesUC";
-            this.Size = new System.Drawing.Size(160, 256);
+            this.Size = new System.Drawing.Size(160, 312);
             this.Load += new System.EventHandler(this.DividerPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).EndInit();
@@ -331,6 +383,7 @@
             this.pnl_divArtNo.PerformLayout();
             this.pnl_dividerBody.ResumeLayout(false);
             this.pnl_AddCladding.ResumeLayout(false);
+            this.pnl_AddCladding.PerformLayout();
             this.pnl_DMArtNo.ResumeLayout(false);
             this.pnl_DMArtNo.PerformLayout();
             this.pnl_divName.ResumeLayout(false);
@@ -364,6 +417,10 @@
         private System.Windows.Forms.CheckBox chk_DM;
         private System.Windows.Forms.Panel pnl_DMArtNo;
         private System.Windows.Forms.ComboBox cmb_DMArtNo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_SelectDMPanel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_totalCladdingLength;
         private System.Windows.Forms.Label label1;
     }
 }

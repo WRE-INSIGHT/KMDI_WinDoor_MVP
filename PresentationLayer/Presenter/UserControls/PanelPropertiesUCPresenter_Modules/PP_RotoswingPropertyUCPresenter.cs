@@ -56,7 +56,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_rotoswingPropertyUC_PPRotoswingPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_rotoswingPropertyUC.ThisBinding(CreateBindingDictionary());
-
             _initialLoad = false;
         }
 

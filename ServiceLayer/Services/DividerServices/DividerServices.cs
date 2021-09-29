@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
 using ServiceLayer.CommonServices;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,10 @@ namespace ServiceLayer.Services.DividerServices
                                                 Dictionary<int, int> divCladdingSizeList,
                                                 IFrameModel divFrameParent,
                                                 bool divChkDM,
-                                                bool divArtVisibility)
+                                                bool divArtVisibility,
+                                                DummyMullion_ArticleNo divDMArtNo,
+                                                IPanelModel divDMPanel,
+                                                bool divLeverEspagVisibility)
         {
             DividerModel div = new DividerModel(divID,
                                                 divName,
@@ -59,7 +63,10 @@ namespace ServiceLayer.Services.DividerServices
                                                 divCladdingSizeList,
                                                 divFrameParent,
                                                 divChkDM,
-                                                divArtVisibility);
+                                                divArtVisibility,
+                                                divDMArtNo,
+                                                divDMPanel,
+                                                divLeverEspagVisibility);
 
             ValidateModel(div);
             return div;
@@ -87,7 +94,10 @@ namespace ServiceLayer.Services.DividerServices
                                              string divName = "",
                                              Dictionary<int, int> divCladdingSizeList = null,
                                              bool divChkDM = false,
-                                             bool divArtVisibility = true)
+                                             bool divArtVisibility = true,
+                                             DummyMullion_ArticleNo divDMArtNo = null,
+                                             IPanelModel divDMPanel = null,
+                                             bool divLeverEspagVisibility = false)
         {
             if (divName == "")
             {
@@ -108,6 +118,11 @@ namespace ServiceLayer.Services.DividerServices
                 divCladdingSizeList = new Dictionary<int, int>();
             }
 
+            if (divDMArtNo == null)
+            {
+                divDMArtNo = DummyMullion_ArticleNo._7533;
+            }
+
             IDividerModel _divModel = CreateDividerModel(divID,
                                                          divName,
                                                          divWD,
@@ -125,7 +140,10 @@ namespace ServiceLayer.Services.DividerServices
                                                          divCladdingSizeList,
                                                          divFrameParent,
                                                          divChkDM,
-                                                         divArtVisibility);
+                                                         divArtVisibility,
+                                                         divDMArtNo,
+                                                         divDMPanel,
+                                                         divLeverEspagVisibility);
 
             return _divModel;
         }

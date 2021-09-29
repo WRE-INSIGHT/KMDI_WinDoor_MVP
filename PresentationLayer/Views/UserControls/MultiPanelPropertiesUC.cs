@@ -27,6 +27,7 @@ namespace PresentationLayer.Views.UserControls
         }
 
         public event EventHandler MultiPanelPropertiesLoadEventRaised;
+        public event EventHandler glassbalancingClickedEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -67,6 +68,19 @@ namespace PresentationLayer.Views.UserControls
         public Panel GetMultiPanelPropertiesPNL()
         {
             return pnl_MultiPanelProperties;
+        }
+
+        private void glassBalancingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, glassbalancingClickedEventRaised, e);
+        }
+
+        private void panel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                cmenu_mpanel.Show(new Point(MousePosition.X, MousePosition.Y));
+            }
         }
     }
 }

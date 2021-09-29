@@ -76,7 +76,7 @@
             this.deleteItemToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tsp_Sync = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
-            this.tsLbl_SelectedDivider = new System.Windows.Forms.ToolStripLabel();
+            this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.pnlItems = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -380,6 +380,7 @@
             this.glassBalancingToolStripMenuItem.Name = "glassBalancingToolStripMenuItem";
             this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.glassBalancingToolStripMenuItem.Text = "Glass Balancing";
+            this.glassBalancingToolStripMenuItem.Visible = false;
             this.glassBalancingToolStripMenuItem.Click += new System.EventHandler(this.glassBalancingToolStripMenuItem_Click);
             // 
             // tsMain
@@ -401,7 +402,7 @@
             this.deleteItemToolStripButton1,
             this.tsp_Sync,
             this.tsLbl_Loading,
-            this.tsLbl_SelectedDivider});
+            this.tsLbl_Status});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -545,14 +546,14 @@
             this.tsLbl_Loading.Text = "Initializing";
             this.tsLbl_Loading.Visible = false;
             // 
-            // tsLbl_SelectedDivider
+            // tsLbl_Status
             // 
-            this.tsLbl_SelectedDivider.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsLbl_SelectedDivider.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.tsLbl_SelectedDivider.Name = "tsLbl_SelectedDivider";
-            this.tsLbl_SelectedDivider.Size = new System.Drawing.Size(134, 29);
-            this.tsLbl_SelectedDivider.Text = "TransomUC_1 Selected";
-            this.tsLbl_SelectedDivider.Visible = false;
+            this.tsLbl_Status.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsLbl_Status.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tsLbl_Status.Name = "tsLbl_Status";
+            this.tsLbl_Status.Size = new System.Drawing.Size(134, 29);
+            this.tsLbl_Status.Text = "TransomUC_1 Selected";
+            this.tsLbl_Status.Visible = false;
             // 
             // pnlRight
             // 
@@ -647,7 +648,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.pnlMain);
             this.splitContainer2.Size = new System.Drawing.Size(778, 495);
-            this.splitContainer2.SplitterDistance = 130;
+            this.splitContainer2.SplitterDistance = 150;
             this.splitContainer2.TabIndex = 5;
             // 
             // pnlProperties
@@ -661,7 +662,7 @@
             this.pnlProperties.Location = new System.Drawing.Point(0, 0);
             this.pnlProperties.Margin = new System.Windows.Forms.Padding(2);
             this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.Size = new System.Drawing.Size(130, 495);
+            this.pnlProperties.Size = new System.Drawing.Size(150, 495);
             this.pnlProperties.TabIndex = 4;
             // 
             // chkView
@@ -673,7 +674,7 @@
             this.chkView.FlatAppearance.BorderSize = 0;
             this.chkView.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
             this.chkView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkView.Location = new System.Drawing.Point(84, 3);
+            this.chkView.Location = new System.Drawing.Point(104, 3);
             this.chkView.Margin = new System.Windows.Forms.Padding(2);
             this.chkView.Name = "chkView";
             this.chkView.Size = new System.Drawing.Size(40, 23);
@@ -688,7 +689,7 @@
             this.pnlPropertiesBody.Location = new System.Drawing.Point(0, 29);
             this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPropertiesBody.Name = "pnlPropertiesBody";
-            this.pnlPropertiesBody.Size = new System.Drawing.Size(128, 464);
+            this.pnlPropertiesBody.Size = new System.Drawing.Size(148, 464);
             this.pnlPropertiesBody.TabIndex = 1;
             // 
             // label2
@@ -699,7 +700,7 @@
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 29);
+            this.label2.Size = new System.Drawing.Size(148, 29);
             this.label2.TabIndex = 0;
             this.label2.Text = "Properties";
             // 
@@ -711,7 +712,7 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(644, 495);
+            this.pnlMain.Size = new System.Drawing.Size(624, 495);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.SizeChanged += new System.EventHandler(this.pnlMain_SizeChanged);
             // 
@@ -898,7 +899,7 @@
         private System.Windows.Forms.Label lblZoom;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Panel pnlControlSub;
-        private System.Windows.Forms.ToolStripLabel tsLbl_SelectedDivider;
+        private System.Windows.Forms.ToolStripLabel tsLbl_Status;
         private System.Windows.Forms.Button btnMinusZoom;
         private System.Windows.Forms.Button btnPlusZoom;
         private System.Windows.Forms.ToolStripMenuItem listOfMaterialsToolStripMenuItem;

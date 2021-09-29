@@ -46,7 +46,12 @@ namespace ModelLayer.Model.Quotation.Frame
         FrameReinf_ArticleNo Frame_ReinfArtNo { get; set; }
         int Frame_ReinfWidth { get; set; }
         int Frame_ReinfHeight { get; set; }
-        
+        bool Frame_CmenuDeleteVisibility { get; set; }
+
+        bool Frame_If_InwardCasement { get; set; }
+        MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
+        MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
+
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         #endregion

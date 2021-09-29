@@ -1,9 +1,10 @@
-﻿using ModelLayer.Model.Quotation.Frame;
+﻿using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using System.Drawing;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
-using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace ModelLayer.Model.Quotation.Panel
 {
@@ -48,12 +49,16 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_MVDOptionsVisibility { get; set; }
         bool Panel_RotaryOptionsVisibility { get; set; }
         int Panel_HandleOptionsHeight { get; set; }
+        Color Panel_BackColor { get; set; }
+
         #region Explosion
 
         int PanelGlass_ID { get; set; }
         string Panel_GlassThicknessDesc { get; set; }
         float Panel_GlassThickness { get; set; }
         GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
+        GlazingAdaptor_ArticleNo Panel_GlazingAdaptorArtNo { get; set; }
+        bool Panel_ChkGlazingAdaptor { get; set; }
         int Panel_GlazingBeadWidth { get; set; }
         int Panel_GlazingBeadHeight { get; set; }
         int Panel_GlassWidth { get; set; }
@@ -100,7 +105,7 @@ namespace ModelLayer.Model.Quotation.Panel
         Espagnolette_ArticleNo Panel_EspagnoletteArtNo { get; set; }
         bool Panel_EspagnoletteOptionsVisibility { get; set; }
 
-        Extension_ArticleNo Panel_ExtensionTopArtNo { get; set;}
+        Extension_ArticleNo Panel_ExtensionTopArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionTop2ArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionBotArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionBot2ArtNo { get; set; }
@@ -147,11 +152,47 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_MotorizedMechQty { get; set; }
         int Panel_MotorizedMechSetQty { get; set; }
         int Panel_2DHingeQty { get; set; }
+        _2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized { get; set; }
+        int Panel_2DHingeQty_nonMotorized { get; set; }
+        _3dHinge_ArticleNo Panel_3dHingeArtNo { get; set; }
+        int Panel_3dHingeQty { get; set; }
+        ButtHinge_ArticleNo Panel_ButtHingeArtNo { get; set; }
+        int Panel_ButtHingeQty { get; set; }
+        bool Panel_2dHingeVisibility { get; set; }
+        bool Panel_ButtHingeVisibility { get; set; }
+        AdjustableStriker_ArticleNo Panel_AdjStrikerArtNo { get; set; }
+        int Panel_AdjStrikerQty { get; set; }
+        RestrictorStay_ArticleNo Panel_RestrictorStayArtNo { get; set; }
+        int Panel_RestrictorStayQty { get; set; }
+
         int Panel_ExtensionPropertyHeight { get; set; }
         GeorgianBar_ArticleNo Panel_GeorgianBarArtNo { get; set; }
         int Panel_GeorgianBar_VerticalQty { get; set; }
         int Panel_GeorgianBar_HorizontalQty { get; set; }
         bool Panel_GeorgianBarOptionVisibility { get; set; }
+
+        HingeOption Panel_HingeOptions { get; set; }
+        bool Panel_HingeOptionsVisibility { get; set; }
+        CenterHingeOption Panel_CenterHingeOptions { get; set; }
+        bool Panel_CenterHingeOptionsVisibility { get; set; }
+        NTCenterHinge_ArticleNo Panel_NTCenterHingeArticleNo { get; set; }
+        StayBearingK_ArticleNo Panel_StayBearingKArtNo { get; set; }
+        StayBearingPin_ArticleNo Panel_StayBearingPinArtNo { get; set; }
+        StayBearingCover_ArticleNo Panel_StayBearingCoverArtNo { get; set; }
+        TopCornerHinge_ArticleNo Panel_TopCornerHingeArtNo { get; set; }
+        TopCornerHingeCover_ArticleNo Panel_TopCornerHingeCoverArtNo { get; set; }
+        TopCornerHingeSpacer_ArticleNo Panel_TopCornerHingeSpacerArtNo { get; set; }
+        CornerHingeK_ArticleNo Panel_CornerHingeKArtNo { get; set; }
+        CornerPivotRestK_ArticleNo Panel_CornerPivotRestKArtNo { get; set; }
+        CornerHingeCoverK_ArticleNo Panel_CornerHingeCoverKArtNo { get; set; }
+        CoverForCornerPivotRestVertical_ArticleNo Panel_CoverForCornerPivotRestVerticalArtNo { get; set; }
+        CoverForCornerPivotRest_ArticleNo Panel_CoverForCornerPivotRestArtNo { get; set; }
+        WeldableCornerJoint_ArticleNo Panel_WeldableCArtNo { get; set; }
+        LatchDeadboltStriker_ArticleNo Panel_LatchDeadboltStrikerArtNo { get; set; }
+
+        bool Panel_CmenuDeleteVisibility { get; set; }
+        bool Panel_NTCenterHingeVisibility { get; set; }
+        bool Panel_MiddleCloserVisibility { get; set; }
 
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
         void AdjustPropertyPanelHeight(string mode);
@@ -163,6 +204,10 @@ namespace ModelLayer.Model.Quotation.Panel
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,
                                            DividerType div_type,
+                                           bool if_divNxt_is_dummy_mullion,
+                                           bool if_divPrev_is_dummy_mullion,
+                                           IDividerModel divNxt,
+                                           IDividerModel divPrev,
                                            Divider_ArticleNo divArtNo_LeftorTop = null,
                                            Divider_ArticleNo divArtNo_RightorBot = null,
                                            string div_type_lvl3 = "",

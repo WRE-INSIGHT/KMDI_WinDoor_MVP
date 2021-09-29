@@ -281,7 +281,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            GlazingBead_ArticleNo._2452,
                                                            GlassFilm_Types._None,
                                                            SashProfile_ArticleNo._7581,
-                                                           SashReinf_ArticleNo._None,
+                                                           SashReinf_ArticleNo._R675,
                                                            GlassType._Single,
                                                            Espagnolette_ArticleNo._None,
                                                            Striker_ArticleNo._M89ANTA,
@@ -470,7 +470,8 @@ namespace PresentationLayer.Presenter.UserControls
             frameBinding.Add("Frame_Padding", new Binding("Padding", _frameModel, "Frame_Padding_int", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_ID", new Binding("frameID", _frameModel, "Frame_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Name", new Binding("Name", _frameModel, "Frame_Name", true, DataSourceUpdateMode.OnPropertyChanged));
-
+            frameBinding.Add("Frame_CmenuDeleteVisibility", new Binding("Frame_CmenuDeleteVisibility", _frameModel, "Frame_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            
             return frameBinding;
         }
 
