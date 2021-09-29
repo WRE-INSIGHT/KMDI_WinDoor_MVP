@@ -144,10 +144,6 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
                             }
 
-                            _multiPanelModel.Fit_MyControls_Dimensions();
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                            _multiPanelModel.Adjust_ControlDisplaySize();
-
                             foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
                             {
                                 if (_multiPanelModel.MPanel_Type == "Mullion")
@@ -168,6 +164,10 @@ namespace PresentationLayer.Presenter.UserControls
 
                             tsmGB.Checked = false;
                         }
+
+                        _multiPanelModel.Fit_MyControls_Dimensions();
+                        _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                        _multiPanelModel.Adjust_ControlDisplaySize();
 
                         _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                         _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();

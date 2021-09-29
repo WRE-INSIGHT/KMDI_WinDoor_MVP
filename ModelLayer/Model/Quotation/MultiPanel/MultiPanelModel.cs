@@ -1291,20 +1291,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     div_deduction += 72;
                                 }
                             }
-                            else if (div.Div_ChkDM == true)
-                            {
-                                if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
-                                {
-                                    divDM_deduction += 16;
-                                }
-                                else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
-                                {
-                                    divDM_deduction += 8;
-                                }
-                            }
                         }
 
-                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - div_deduction)) / totalPanels) + 5;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1334,7 +1323,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (((MPanel_DisplayHeight - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayHeight - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1413,7 +1402,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (((MPanel_DisplayHeight - (total_frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
+                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayHeight - (total_frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
