@@ -18,6 +18,10 @@ namespace PresentationLayer.Views
         event EventHandler ButtonMinusZoomClickEventRaised;
         event EventHandler DeleteToolStripButtonClickEventRaised;
         event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
+        event EventHandler CreateNewGlassClickEventRaised;
+        event EventHandler ChangeItemColorClickEventRaised;
+        event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
+        event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
 
         string Nickname { set; }
         string mainview_title { get; set; }
@@ -33,7 +37,17 @@ namespace PresentationLayer.Views
         Panel GetPanelBot();
         Panel GetPanelControlSub();
         Label GetLblSize();
+        MenuStrip GetMNSMainMenu();
+        ToolStrip GetTSMain();
         ToolStripLabel GetLblSelectedDivider();
+        ToolStripMenuItem Glass_Single { get; }
+        ToolStripMenuItem Glass_DoubleInsulated { get; }
+        ToolStripMenuItem Glass_DoubleLaminated { get; }
+        ToolStripMenuItem Glass_TripleInsulated { get; }
+        ToolStripMenuItem Glass_TripleLaminated { get; }
+        ToolStripMenuItem Glass_Type { get; }
+        ToolStripMenuItem Spacer { get; }
+        ToolStripMenuItem Color { get; }
         Form GetThis();
     }
 }

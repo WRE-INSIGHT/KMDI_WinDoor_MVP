@@ -10,8 +10,9 @@ using System.Windows.Forms;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
-using static ModelLayer.Model.Quotation.QuotationModel;
 using static EnumerationTypeLayer.EnumerationTypes;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Variables;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -32,6 +33,8 @@ namespace ModelLayer.Model.Quotation.Frame
                 return _frame_basicDeduction;
             }
         }
+
+        private ConstantVariables constants = new ConstantVariables();
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -152,7 +155,8 @@ namespace ModelLayer.Model.Quotation.Frame
         public bool Frame_Visible
         {
             get { return _frameVisible; }
-            set { _frameVisible = value; NotifyPropertyChanged(); }
+            set { _frameVisible = value; }
+            //NotifyPropertyChanged(); }
         }
 
         private Padding _framePadding;
@@ -276,12 +280,12 @@ namespace ModelLayer.Model.Quotation.Frame
 
         private void SetZoom()
         {
-            foreach (IMultiPanelModel mpnl in Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+            foreach (IMultiPanelModel mpnl in Lst_MultiPanel)
             {
                 mpnl.MPanel_Zoom = Frame_Zoom;
             }
 
-            foreach (IPanelModel pnl in Lst_Panel.Where(pnl => pnl.Panel_Visibility == true))
+            foreach (IPanelModel pnl in Lst_Panel)
             {
                 pnl.Panel_Zoom = Frame_Zoom;
             }
@@ -322,20 +326,12 @@ namespace ModelLayer.Model.Quotation.Frame
                 FramePadding_Default();
             }
         }
-
-        public IEnumerable<IPanelModel> GetVisiblePanels()
-        {
-            return Lst_Panel.Where(pnl => pnl.Panel_Visibility == true);
-        }
-
-        public IEnumerable<IMultiPanelModel> GetVisibleMultiPanels()
-        {
-            return Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true);
-        }
+        
+        public IWindoorModel Frame_WindoorModel { get; set; }
 
         #region Explosion
 
-        FrameProfile_ArticleNo _frameArtNo;
+        private FrameProfile_ArticleNo _frameArtNo;
         public FrameProfile_ArticleNo Frame_ArtNo
         {
             get
@@ -349,23 +345,341 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._R676;
                 }
+                else if (value == FrameProfile_ArticleNo._7507)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._R677;
+                }
+                NotifyPropertyChanged();
             }
         }
         public int Frame_ExplosionWidth { get; set; }
         public int Frame_ExplosionHeight { get; set; }
 
-        public FrameReinf_ArticleNo Frame_ReinfArtNo { get; set; }
+        private FrameReinf_ArticleNo _frameReinfArtNo;
+        public FrameReinf_ArticleNo Frame_ReinfArtNo
+        {
+            get
+            {
+                return _frameReinfArtNo;
+            }
+            set
+            {
+                _frameReinfArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Frame_ReinfWidth { get; set; }
         public int Frame_ReinfHeight { get; set; }
 
-        public void SetExplosionValues_Frame()
+        private bool _frameCmenuDeleteVisibility;
+        public bool Frame_CmenuDeleteVisibility
         {
-            Frame_ExplosionWidth = _frameWidth + 5;
-            Frame_ExplosionHeight = _frameHeight + 5;
-            Frame_ReinfWidth = _frameWidth - (29 * 2) - 10;
-            Frame_ReinfHeight = _frameHeight - (29 * 2) - 10;
+            get
+            {
+                return _frameCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _frameCmenuDeleteVisibility = value;
+                NotifyPropertyChanged();
+            }
         }
 
+        public bool Frame_If_InwardCasement { get; set; }
+        public MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
+        public MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
+
+        public void SetExplosionValues_Frame()
+        {
+            if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
+            {
+                if (Lst_Panel[0].Panel_SashProfileArtNo == SashProfile_ArticleNo._395 &&
+                    Lst_Panel[0].Panel_MotorizedOptionVisibility == true)
+                {
+                    Frame_If_InwardCasement = true;
+                }
+            }
+            else if (Lst_Panel.Count == 0 && Lst_MultiPanel.Count >= 1) //multipanel
+            {
+                foreach (IMultiPanelModel mpnl in Lst_MultiPanel)
+                {
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                    {
+                        if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 &&
+                            pnl.Panel_MotorizedOptionVisibility == true)
+                        {
+                            Frame_If_InwardCasement = true;
+                        }
+                    }
+                }
+            }
+
+            Frame_ExplosionWidth = _frameWidth + 5;
+
+            if (Frame_If_InwardCasement)
+            {
+                Frame_ExplosionHeight = _frameHeight - 35 + 5;
+                Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
+                Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
+            }
+            else
+            {
+                Frame_ExplosionHeight = _frameHeight + 5;
+            }
+
+            int reinf_size = 0;
+            if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+            {
+                reinf_size = 29;
+            }
+            else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+            {
+                reinf_size = 43;
+            }
+
+            Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
+            if (Frame_If_InwardCasement)
+            {
+                Frame_ReinfHeight = _frameHeight - 35 - (reinf_size * 2) - 10;
+                Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
+                Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
+            }
+            else
+            {
+                Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
+            }
+        }
+
+        public void AdjustPropertyPanelHeight(string objtype, string mode)
+        {
+            if (objtype == "Panel")
+            {
+                if (mode == "add")
+                {
+                    FrameProp_Height += constants.panel_propertyHeight_default;
+                }
+                if (mode == "minus")
+                {
+                    FrameProp_Height -= constants.panel_propertyHeight_default;
+                }
+                else if (mode == "addRotary")
+                {
+                    FrameProp_Height += constants.panel_property_rotaryOptionsheight_default;
+                }
+                else if (mode == "minusRotary")
+                {
+                    FrameProp_Height -= constants.panel_property_rotaryOptionsheight_default;
+                }
+                else if (mode == "addRotoswing")
+                {
+                    FrameProp_Height += constants.panel_property_rotoswingOptionsheight_default;
+                }
+                else if (mode == "minusRotoswing")
+                {
+                    FrameProp_Height -= constants.panel_property_rotoswingOptionsheight_default;
+                }
+                else if (mode == "addRio")
+                {
+                    FrameProp_Height += constants.panel_property_rioOptionsheight_default;
+                }
+                else if (mode == "minusRio")
+                {
+                    FrameProp_Height -= constants.panel_property_rioOptionsheight_default;
+                }
+                else if (mode == "addRotoline")
+                {
+                    FrameProp_Height += constants.panel_property_rotolineOptionsheight_default;
+                }
+                else if (mode == "minusRotoline")
+                {
+                    FrameProp_Height -= constants.panel_property_rotolineOptionsheight_default;
+                }
+                else if (mode == "addMVD")
+                {
+                    FrameProp_Height += constants.panel_property_mvdOptionsheight_default;
+                }
+                else if (mode == "minusMVD")
+                {
+                    FrameProp_Height -= constants.panel_property_mvdOptionsheight_default;
+                }
+                else if (mode == "addCmbMotorized")
+                {
+                    FrameProp_Height += constants.panel_property_motorizedCmbOptionsheight;
+                }
+                else if (mode == "minusCmbMotorized")
+                {
+                    FrameProp_Height -= constants.panel_property_motorizedCmbOptionsheight;
+                }
+                else if (mode == "addHandle")
+                {
+                    FrameProp_Height += constants.panel_property_handleOptionsHeight;
+                }
+                else if (mode == "minusHandle")
+                {
+                    FrameProp_Height -= constants.panel_property_handleOptionsHeight;
+                }
+                else if (mode == "addChkMotorized")
+                {
+                    FrameProp_Height += constants.panel_property_motorizedChkOptionsheight;
+                }
+                else if (mode == "minusChkMotorized")
+                {
+                    FrameProp_Height -= constants.panel_property_motorizedChkOptionsheight;
+                }
+                else if (mode == "addSash")
+                {
+                    FrameProp_Height += constants.panel_property_sashPanelHeight;
+                }
+                else if (mode == "minusSash")
+                {
+                    FrameProp_Height -= constants.panel_property_sashPanelHeight;
+                }
+                else if (mode == "addGlass")
+                {
+                    FrameProp_Height += constants.panel_property_glassOptionsHeight;
+                }
+                else if (mode == "minusGlass")
+                {
+                    FrameProp_Height -= constants.panel_property_glassOptionsHeight;
+                }
+                else if (mode == "addExtension")
+                {
+                    FrameProp_Height += constants.panel_property_extensionOptionsheight;
+                }
+                else if (mode == "minusExtension")
+                {
+                    FrameProp_Height -= constants.panel_property_extensionOptionsheight;
+                }
+                else if (mode == "addExtensionField")
+                {
+                    FrameProp_Height += constants.panel_property_extensionFieldsheight;
+                }
+                else if (mode == "minusExtensionField")
+                {
+                    FrameProp_Height -= constants.panel_property_extensionFieldsheight;
+                }
+                else if (mode == "addCornerDrive")
+                {
+                    FrameProp_Height += constants.panel_property_cornerDriveOptionsheight_default;
+                }
+                else if (mode == "minusCornerDrive")
+                {
+                    FrameProp_Height -= constants.panel_property_cornerDriveOptionsheight_default;
+                }
+                else if (mode == "addGeorgianBar")
+                {
+                    FrameProp_Height += constants.panel_property_georgianBarHeight;
+                }
+                else if (mode == "minusGeorgianBar")
+                {
+                    FrameProp_Height -= constants.panel_property_georgianBarHeight;
+                }
+                else if (mode == "addEspagnolette")
+                {
+                    FrameProp_Height += constants.panel_property_espagnoletteOptionsheight_default;
+                }
+                else if (mode == "minusEspagnolette")
+                {
+                    FrameProp_Height -= constants.panel_property_espagnoletteOptionsheight_default;
+                }
+                else if (mode == "addHinge")
+                {
+                    FrameProp_Height += constants.panel_property_HingeOptionsheight;
+                }
+                else if (mode == "minusHinge")
+                {
+                    FrameProp_Height -= constants.panel_property_HingeOptionsheight;
+                }
+                else if (mode == "addCenterHinge")
+                {
+                    FrameProp_Height += constants.panel_property_CenterHingeOptionsheight;
+                }
+                else if (mode == "minusCenterHinge")
+                {
+                    FrameProp_Height -= constants.panel_property_CenterHingeOptionsheight;
+                }
+                else if (mode == "addNTCenterHinge")
+                {
+                    FrameProp_Height += constants.panel_property_NTCenterHingeOptionsheight;
+                }
+                else if (mode == "minusNTCenterHinge")
+                {
+                    FrameProp_Height -= constants.panel_property_NTCenterHingeOptionsheight;
+                }
+            }
+            else if (objtype == "Div")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= constants.div_propertyheight_default;
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += constants.div_propertyheight_default;
+                }
+                else if (mode == "addCladding")
+                {
+                    FrameProp_Height += constants.div_property_claddingOptionsHeight;
+                }
+                else if (mode == "minusCladding")
+                {
+                    FrameProp_Height -= constants.div_property_claddingOptionsHeight;
+                }
+                else if (mode == "addPanelAddCladding")
+                {
+                    FrameProp_Height += constants.div_property_pnlAddcladdingOptionsHeight;
+                }
+                else if (mode == "minusPanelAddCladding")
+                {
+                    FrameProp_Height -= constants.div_property_pnlAddcladdingOptionsHeight;
+                }
+                else if (mode == "addDivArt")
+                {
+                    FrameProp_Height += constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "minusDivArt")
+                {
+                    FrameProp_Height -= constants.div_property_divArtOptionsHeight;
+                }
+                else if (mode == "addDM")
+                {
+                    FrameProp_Height += constants.div_property_DMArtOptionsHeight;
+                }
+                else if (mode == "minusDM")
+                {
+                    FrameProp_Height -= constants.div_property_DMArtOptionsHeight;
+                }
+                else if (mode == "addLeverEspag")
+                {
+                    FrameProp_Height += constants.div_property_leverEspagOptionsHeight;
+                }
+                else if (mode == "minusLeverEspag")
+                {
+                    FrameProp_Height -= constants.div_property_leverEspagOptionsHeight;
+                }
+                else if (mode == "addCladdingBracket")
+                {
+                    FrameProp_Height += constants.div_property_claddingBracketOptionsHeight;
+                }
+                else if (mode == "minusCladdingBracket")
+                {
+                    FrameProp_Height -= constants.div_property_claddingBracketOptionsHeight;
+                }
+            }
+            else if (objtype == "Mpanel")
+            {
+                if (mode == "delete")
+                {
+                    FrameProp_Height -= constants.mpnl_propertyHeight_default;
+                }
+                else if (mode == "add")
+                {
+                    FrameProp_Height += constants.mpnl_propertyHeight_default;
+                }
+            }
+        }
         #endregion
 
         public FrameModel(int frameID,
@@ -379,7 +693,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           float frameImagerZoom,
                           List<IDividerModel> lst_divider,
                           float frameZoom,
-                          FrameProfile_ArticleNo frameArtNo)
+                          FrameProfile_ArticleNo frameArtNo,
+                          IWindoorModel frameWindoorModel)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -387,13 +702,16 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_Height = frameHt;
             Frame_Type = frameType;
             Frame_Visible = frameVisible;
-            FrameProp_Height = 283;
             Lst_Panel = lst_panel;
             Lst_MultiPanel = lst_mpanel;
             FrameImageRenderer_Zoom = frameImagerZoom;
             Lst_Divider = lst_divider;
             Frame_Zoom = frameZoom;
             Frame_ArtNo = frameArtNo;
+            Frame_WindoorModel = frameWindoorModel;
+            Frame_CmenuDeleteVisibility = true;
+
+            FrameProp_Height = constants.frame_propertyHeight_default - constants.frame_property_concretePanelHeight;
         }
     }
 }

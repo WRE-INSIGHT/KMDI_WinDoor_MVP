@@ -11,6 +11,7 @@ using static ModelLayer.Model.Quotation.Divider.DividerModel;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
+using EnumerationTypeLayer;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -49,19 +50,42 @@ namespace PresentationLayer.Views.UserControls
                 if (value == DividerType.Mullion)
                 {
                     lbl_Width.Visible = false;
-                    num_divWidth.Visible = false;
-                    flp_divProp.BackColor = Color.RosyBrown;
+                    pnl_divWd.Visible = false;
+                    this.BackColor = Color.RosyBrown;
                 }
                 else if (value == DividerType.Transom)
                 {
                     lbl_Height.Visible = false;
-                    num_divHeight.Visible = false;
-                    flp_divProp.BackColor = Color.PowderBlue;
+                    pnl_divHt.Visible = false;
+                    this.BackColor = Color.PowderBlue;
                 }
             }
         }
+
+        private SashProfile_ArticleNo _panelSashProfileArtNo;
+        public SashProfile_ArticleNo Panel_SashProfileArtNo
+        {
+            get
+            {
+                return _panelSashProfileArtNo;
+            }
+
+            set
+            {
+                _panelSashProfileArtNo = value;
+                cmb_DMArtNo.Refresh();
+            }
+        }
+
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
+        public event EventHandler btnAddCladdingClickedEventRaised;
+        public event EventHandler btnSaveCladdingClickedEventRaised;
+        public event EventHandler chkDMCheckedChangedEventRaised;
+        public event EventHandler cmbDMArtNoSelectedValueChangedEventRaised;
+        public event EventHandler btnSelectDMPanelClickedEventRaised;
+
+        private bool _initialLoad = true;
 
         private void DividerPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -82,7 +106,56 @@ namespace PresentationLayer.Views.UserControls
             }
             cmb_divReinf.DataSource = dReinfArtNo;
 
+            List<DummyMullion_ArticleNo> dMArtNo = new List<DummyMullion_ArticleNo>();
+            foreach (DummyMullion_ArticleNo item in DummyMullion_ArticleNo.GetAll())
+            {
+                dMArtNo.Add(item);
+            }
+            cmb_DMArtNo.DataSource = dMArtNo;
+
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
+
+            _initialLoad = false;
+        }
+
+        private void cmb_divArtNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbdivArtNoSelectedValueChangedEventRaised, e);
+        }
+
+        public Panel GetDividerPropertiesBodyPNL()
+        {
+            return pnl_dividerBody;
+        }
+        private void btn_AddCladding_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnAddCladdingClickedEventRaised, e);
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnSaveCladdingClickedEventRaised, e);
+        }
+
+        private void chk_DM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_DM.Checked == true)
+            {
+                chk_DM.Text = "DM";
+            }
+            else if (chk_DM.Checked == false)
+            {
+                Binding sash = this.DataBindings["Panel_SashProfileArtNo"];
+                if (sash != null)
+                {
+                    this.DataBindings.Remove(sash);
+                }
+                _panelSashProfileArtNo = null;
+                cmb_DMArtNo.Refresh();
+
+                chk_DM.Text = "M";
+            }
+            EventHelpers.RaiseEvent(sender, chkDMCheckedChangedEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
@@ -95,11 +168,133 @@ namespace PresentationLayer.Views.UserControls
             cmb_divArtNo.DataBindings.Add(ModelBinding["Div_ArtNo"]);
             cmb_divReinf.DataBindings.Add(ModelBinding["Div_ReinfArtNo"]);
             this.DataBindings.Add(ModelBinding["Divider_Type"]);
+            this.DataBindings.Add(ModelBinding["Div_PropHeight"]);
+            chk_DM.DataBindings.Add(ModelBinding["Div_ChkDM"]);
+            chk_DM.DataBindings.Add(ModelBinding["Div_ChkDMVisibility"]);
+            pnl_DMArtNo.DataBindings.Add(ModelBinding["Div_ChkDM2"]);
+            pnl_divArtNo.DataBindings.Add(ModelBinding["Div_ArtVisibility"]);
+            cmb_DMArtNo.DataBindings.Add(ModelBinding["Div_DMArtNo"]);
         }
 
-        private void cmb_divArtNo_SelectedValueChanged(object sender, EventArgs e)
+        public void SetBtnSaveBackColor(Color color)
         {
-            EventHelpers.RaiseEvent(sender, CmbdivArtNoSelectedValueChangedEventRaised, e);
+            btn_Save.BackColor = color;
+        }
+
+        private void cmb_DMArtNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (!_initialLoad)
+            {
+                DummyMullion_ArticleNo dm = (DummyMullion_ArticleNo)((ComboBox)sender).SelectedValue;
+                if (dm == DummyMullion_ArticleNo._7533)
+                {
+                    if (!(Panel_SashProfileArtNo == SashProfile_ArticleNo._7581))
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", Divider_Type.ToString() + " Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else if (dm == DummyMullion_ArticleNo._385P)
+                {
+                    if (!(Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395))
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", Divider_Type.ToString() + " Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+            EventHelpers.RaiseEvent(sender, cmbDMArtNoSelectedValueChangedEventRaised, e);
+        }
+
+        private void btn_SelectDMPanel_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnSelectDMPanelClickedEventRaised, e);
+        }
+
+        public Button GetBtnSelectDMPanel()
+        {
+            return btn_SelectDMPanel;
+        }
+
+        public void Bind_DMPanelModel(Dictionary<string, Binding> ModelBinding)
+        {
+            Binding sash = this.DataBindings["Panel_SashProfileArtNo"];
+            if (sash != null)
+            {
+                this.DataBindings.Remove(sash);
+            }
+            this.DataBindings.Add(ModelBinding["Panel_SashProfileArtNo"]);
+        }
+
+        private void cmb_DMArtNo_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // Draw the background 
+            e.DrawBackground();
+
+            // Get the item text    
+            string text = ((ComboBox)sender).Items[e.Index].ToString();
+            DummyMullion_ArticleNo dm = (DummyMullion_ArticleNo)((ComboBox)sender).Items[e.Index];
+
+            if (dm == DummyMullion_ArticleNo._7533)
+            {
+                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            else if (dm == DummyMullion_ArticleNo._385P)
+            {
+                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+        }
+
+        public Panel GetDMArtNoPNL()
+        {
+            return pnl_DMArtNo;
+        }
+
+        public void SetLblTotalCladdingLength_Text(string total)
+        {
+            lbl_totalCladdingLength.Text = total;
+            SetLblTotalCladdingLength_BackColor();
+        }
+
+        private void SetLblTotalCladdingLength_BackColor()
+        {
+            int cladTotal = Convert.ToInt32(lbl_totalCladdingLength.Text);
+            if (_dividerType == DividerType.Mullion)
+            {
+                if (cladTotal == num_divHeight.Value)
+                {
+                    lbl_totalCladdingLength.BackColor = Color.Green;
+                }
+                else
+                {
+                    lbl_totalCladdingLength.BackColor = Color.IndianRed;
+                }
+            }
+            else if (_dividerType == DividerType.Transom)
+            {
+                if (cladTotal == num_divWidth.Value)
+                {
+                    lbl_totalCladdingLength.BackColor = Color.Green;
+                }
+                else
+                {
+                    lbl_totalCladdingLength.BackColor = Color.IndianRed;
+                }
+            }
         }
     }
 }

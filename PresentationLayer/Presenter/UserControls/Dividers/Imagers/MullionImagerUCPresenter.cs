@@ -60,44 +60,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers.Imagers
             UserControl mul = (UserControl)sender;
             Graphics g = e.Graphics;
 
-            //int lineHT = mul.ClientRectangle.Height - 6,
-            //    lineWd = mul.ClientRectangle.Width - 2;
-
             g.SmoothingMode = SmoothingMode.HighQuality;
-
-            //GraphicsPath gpath = new GraphicsPath();
-
-            //int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_mullionUC);
-            //int prev_obj_ndx = this_ndx - 1,
-            //    next_obj_ndx = this_ndx + 1;
-            //string prev_obj_name = "",
-            //       next_obj_name = "";
-
-            //if (prev_obj_ndx >= 0)
-            //{
-            //    prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
-            //}
-            //if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
-            //{
-            //    next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
-            //}
-
-            //List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints(mul.Width,
-            //                                                            mul.Height,
-            //                                                            prev_obj_name,
-            //                                                            next_obj_name,
-            //                                                            _frameModel,
-            //                                                            _divModel.DivImageRenderer_Zoom);
-
-            //gpath.AddLine(TPoints[0][0], TPoints[0][1]);
-            //gpath.AddCurve(TPoints[1]);
-            //gpath.AddLine(TPoints[2][0], TPoints[2][1]);
-            //gpath.AddCurve(TPoints[3]);
-
-            //Pen pen = new Pen(Color.Black, 2);
-
-            //g.DrawPath(pen, gpath);
-            //g.FillPath(Brushes.PowderBlue, gpath);
 
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));

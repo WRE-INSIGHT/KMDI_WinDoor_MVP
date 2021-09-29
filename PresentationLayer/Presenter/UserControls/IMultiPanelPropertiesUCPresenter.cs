@@ -12,6 +12,6 @@ namespace PresentationLayer.Presenter.UserControls
         IMultiPanelPropertiesUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMainPresenter mainPresenter);
-        FlowLayoutPanel GetMultiPanelPropertiesFLP();
+        Panel GetMultiPanelPropertiesPNL();
     }
 }

@@ -57,7 +57,6 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "FixedPanelUC";
             this.Padding = new System.Windows.Forms.Padding(10);
-            this.SizeChanged += new System.EventHandler(this.FixedPanelUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FixedPanelUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseClick);
             this.MouseEnter += new System.EventHandler(this.FixedPanelUC_MouseEnter);

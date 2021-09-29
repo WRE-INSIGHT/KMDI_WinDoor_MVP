@@ -67,9 +67,43 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         private void _mullionUC_mullionUCKeyDownEventRaised(object sender, KeyEventArgs e)
         {
             UserControl me = (UserControl)sender;
+            int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)sender);
             FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
 
-            int me_indx = flp.Controls.IndexOf(me);
+            Control prev_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx - 1];
+            Control nxt_ctrl = null;
+
+            if (_multiPanelModel.MPanelLst_Objects.Count() > me_indx + 1)
+            {
+                nxt_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx + 1];
+            }
+
+            int expected_Panel1MinWd = 0,
+                expected_Panel2MinWd = 0;
+
+            IMultiPanelModel prev_mpanel = null,
+                             nxt_mpnl = null;
+
+            IPanelModel prev_pnl = null,
+                        nxt_pnl = null;
+
+            if (prev_ctrl is IMultiPanelUC)
+            {
+                prev_mpanel = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prev_ctrl.Name);
+            }
+            else if (prev_ctrl is IPanelUC)
+            {
+                prev_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_ctrl.Name);
+            }
+
+            if (nxt_ctrl is IMultiPanelUC)
+            {
+                nxt_mpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == nxt_ctrl.Name);
+            }
+            else if (nxt_ctrl is IPanelUC)
+            {
+                nxt_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == nxt_ctrl.Name);
+            }
 
             if (_keydown)
             {
@@ -81,22 +115,85 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         break;
 
                     case Keys.Up:
-                        flp.Controls[me_indx - 1].Width++;
-                        flp.Controls[me_indx + 1].Width--;
+                        if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
+                        {
+                            if (nxt_ctrl is IMultiPanelUC)
+                            {
+                                expected_Panel2MinWd = nxt_mpnl.MPanel_Width - 1;
+                            }
+                            else if (nxt_ctrl is IPanelUC)
+                            {
+                                expected_Panel2MinWd = nxt_pnl.Panel_Width - 1;
+                            }
 
-                        flp.Controls[me_indx - 1].Invalidate();
-                        flp.Controls[me_indx + 1].Invalidate();
+                            if (expected_Panel2MinWd >= 30)
+                            {
+                                if (prev_ctrl is IMultiPanelUC)
+                                {
+                                    prev_mpanel.MPanel_Width++;
+                                    prev_mpanel.MPanel_DisplayWidth++;
+                                }
+                                else if (prev_ctrl is IPanelUC)
+                                {
+                                    prev_pnl.Panel_Width++;
+                                    prev_pnl.Panel_DisplayWidth++;
+                                }
+
+                                if (nxt_ctrl is IMultiPanelUC)
+                                {
+                                    nxt_mpnl.MPanel_Width--;
+                                    nxt_mpnl.MPanel_DisplayWidth--;
+                                }
+                                else if (nxt_ctrl is IPanelUC)
+                                {
+                                    nxt_pnl.Panel_Width--;
+                                    nxt_pnl.Panel_DisplayWidth--;
+                                }
+                            }
+                        }
                         break;
 
                     case Keys.Down:
-                        flp.Controls[me_indx - 1].Width--;
-                        flp.Controls[me_indx + 1].Width++;
+                        if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
+                        {
+                            if (prev_ctrl is IMultiPanelUC)
+                            {
+                                expected_Panel1MinWd = prev_mpanel.MPanel_Width - 1;
+                            }
+                            else if (prev_ctrl is IPanelUC)
+                            {
+                                expected_Panel1MinWd = prev_pnl.Panel_Width - 1;
+                            }
 
-                        flp.Controls[me_indx - 1].Invalidate();
-                        flp.Controls[me_indx + 1].Invalidate();
+                            if (expected_Panel1MinWd >= 30)
+                            {
+                                if (prev_ctrl is IMultiPanelUC)
+                                {
+                                    prev_mpanel.MPanel_Width--;
+                                    prev_mpanel.MPanel_DisplayWidth--;
+                                }
+                                else if (prev_ctrl is IPanelUC)
+                                {
+                                    prev_pnl.Panel_Width--;
+                                    prev_pnl.Panel_DisplayWidth--;
+                                }
+
+                                if (nxt_ctrl is IMultiPanelUC)
+                                {
+                                    nxt_mpnl.MPanel_Width++;
+                                    nxt_mpnl.MPanel_DisplayWidth++;
+                                }
+                                else if (nxt_ctrl is IPanelUC)
+                                {
+                                    nxt_pnl.Panel_Width++;
+                                    nxt_pnl.Panel_DisplayWidth++;
+                                }
+                            }
+                        }
                         break;
                 }
             }
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
         }
 
         private void _mullionUC_mullionUCMouseDoubleClickedEventRaised(object sender, MouseEventArgs e)
@@ -155,61 +252,10 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             UserControl mul = (UserControl)sender;
             Graphics g = e.Graphics;
 
-            //int lineHT = mul.ClientRectangle.Height - 6,
-            //    lineWd = mul.ClientRectangle.Width - 2;
-
             g.SmoothingMode = SmoothingMode.HighQuality;
-
-            //GraphicsPath gpath = new GraphicsPath();
-
-            //int this_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mul);
-            //int prev_obj_ndx = this_ndx - 1,
-            //    next_obj_ndx = this_ndx + 1;
-            //string prev_obj_name = "",
-            //       next_obj_name = "";
-
-            //UserControl prev_obj = null, 
-            //            nxt_obj = null;
-
-            //if (prev_obj_ndx >= 0)
-            //{
-            //    prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
-            //    prev_obj = (UserControl)_multiPanelModel.MPanelLst_Objects[prev_obj_ndx];
-            //}
-            //if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
-            //{
-            //    next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
-            //    nxt_obj = (UserControl)_multiPanelModel.MPanelLst_Objects[next_obj_ndx];
-            //}
-
-            //List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints(mul.Width,
-            //                                                            mul.Height,
-            //                                                            prev_obj_name,
-            //                                                            next_obj_name,
-            //                                                            _frameModel,
-            //                                                            _divModel.Div_Zoom);
-
-            //List<Point[]> TPoints = _commonfunc.GetMullionDrawingPoints2(mul.Width,
-            //                                                             mul.Height,
-            //                                                             prev_obj,
-            //                                                             nxt_obj,
-            //                                                             _frameModel.Frame_Type,
-            //                                                             _divModel.Div_Zoom);
-
-            //gpath.AddLine(TPoints[0][0], TPoints[0][1]);
-            //gpath.AddCurve(TPoints[1]);
-            //gpath.AddLine(TPoints[2][0], TPoints[2][1]);
-            //gpath.AddCurve(TPoints[3]);
-
-            //Pen pen = new Pen(penColor, 2);
-
-            //g.DrawPath(pen, gpath);
-            //g.FillPath(Brushes.PowderBlue, gpath);
 
             Font drawFont = new Font("Segoe UI", 6.5f, FontStyle.Bold); //* zoom);
             Size s2 = TextRenderer.MeasureText(_divModel.Div_Name, drawFont);
-
-            //int point_Y = (mul.Height / 2) - (s2.Height / 2); //0;
 
             SizeF sz = e.Graphics.VisibleClipBounds.Size;
 
@@ -355,6 +401,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         }
                     }
                 }
+                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             }
             catch (Exception ex)
             {

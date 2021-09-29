@@ -19,6 +19,7 @@ using ServiceLayer.Services.DividerServices;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Views.UserControls;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -47,8 +48,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private IDividerServices _divServices;
         
-        bool _initialLoad;
-
         private CommonFunctions _commonFunctions = new CommonFunctions();
         Timer _tmr = new Timer();
 
@@ -74,7 +73,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void SubscribeToEventsSetup()
         {
-            _fixedPanelUC.fixedPanelUCSizeChangedEventRaised += new EventHandler(OnFixedPanelUCSizeChangedEventRaised);
             _fixedPanelUC.deleteToolStripClickedEventRaised += _fixedPanelUC_deleteToolStripClickedEventRaised;
             _fixedPanelUC.fixedPanelUCPaintEventRaised += _fixedPanelUC_fixedPanelUCPaintEventRaised;
             _fixedPanelUC.fixedPanelMouseLeaveEventRaised += _fixedPanelUC_fixedPanelMouseLeaveEventRaised;
@@ -147,6 +145,69 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 inner_line = 7;
             }
 
+            #region Georgian Bar
+
+            int GBpointResultX, GBpointResultY,
+                penThickness = 0, penThicknessResult = 0,
+                pInnerWd = fixedpnl.ClientRectangle.Width,
+                pInnerHt = fixedpnl.ClientRectangle.Height,
+                verticalQty = _panelModel.Panel_GeorgianBar_VerticalQty,
+                horizontalQty = _panelModel.Panel_GeorgianBar_HorizontalQty,
+                GeorgianBar_GapX = 0,
+                GeorgianBar_GapY = 0,
+                pInnerX = 0,
+                pInnerY = 0;
+
+            if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+            {
+                penThickness = 10;
+                penThicknessResult = penThickness + 10;
+            }
+            else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+            {
+                penThickness = 20;
+                penThicknessResult = penThickness - 10;
+            }
+
+            Pen pCadetBlue = new Pen(Color.CadetBlue, penThickness);
+
+            //vertical
+            for (int ii = 0; ii < verticalQty; ii++)
+            {
+                GBpointResultX = ((pInnerX + pInnerWd) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
+                GeorgianBar_GapX += (pInnerWd + (pInnerX)) / (verticalQty + 1);
+                Point[] GeorgianBar_PointsX = new[]
+              {
+
+                  new Point(GBpointResultX,pInnerX+1),
+                  new Point(GBpointResultX,pInnerX + pInnerHt-1),
+             };
+                for (int i = 0; i < GeorgianBar_PointsX.Length - 1; i += 2)
+                {
+                    g.DrawLine(pCadetBlue, GeorgianBar_PointsX[i], GeorgianBar_PointsX[i + 1]);
+                }
+            }
+
+            //Horizontal
+
+            for (int ii = 0; ii < horizontalQty; ii++)
+            {
+                GBpointResultY = ((pInnerY + pInnerHt) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
+                GeorgianBar_GapY += (pInnerHt + (pInnerY)) / (horizontalQty + 1);
+                Point[] GeorgianBar_PointsY = new[]
+              {
+
+                  new Point(pInnerY+1,GBpointResultY ),
+                  new Point(pInnerY-1 + pInnerWd,GBpointResultY),
+             };
+                for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pCadetBlue, GeorgianBar_PointsY[i], GeorgianBar_PointsY[i + 1]);
+                }
+            }
+
+            #endregion
+
             Font drawFont = new Font("Times New Roman", font_size);
             StringFormat drawFormat = new StringFormat();
             drawFormat.Alignment = StringAlignment.Center;
@@ -158,7 +219,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             fixedpnl.ClientRectangle.Width,
                                             10);
 
-            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString(),
+            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm",
                          new Font("Segoe UI", 8.0f, FontStyle.Bold),
                          new SolidBrush(Color.Black),
                          rect,
@@ -206,7 +267,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _fixedPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            #region Delete TransomUC
+            #region Delete Divider
             if (_multiPanelModel != null &&
                 _multiPanelModel.MPanel_DividerEnabled &&
                 _panelModel.Panel_Placement != "Last")
@@ -225,10 +286,41 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
 
                 IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
-                div.Div_Visible = false;
-                _multiPanelModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
-                _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _mainPresenter.DeleteDividerPropertiesUC(div.Div_ID);
+                div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
+                _frameModel.Lst_Divider.Remove(div);
+
+                _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
+                _frameModel.AdjustPropertyPanelHeight("Div", "delete");
+
+                _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+
+                for (int i = 0; i < div.Div_CladdingCount; i++)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
+                }
+
+                if (div.Div_claddingBracketVisibility == true)
+                {
+                    div.Div_claddingBracketVisibility = false;
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
+                }
+
+                if (div.Div_ChkDM == true && div.Div_ArtVisibility == false)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDM");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDM");
+                }
+                else if (div.Div_ChkDM == false && div.Div_ArtVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
+                }
             }
+
             #endregion
 
             #region Delete Fixed
@@ -237,6 +329,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_fixedPanelUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
+
+                if (_panelModel.Panel_Orient == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+                }
+
+                if (_panelModel.Panel_HingeOptionsVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                }
+
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minus");
+                _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
             }
             if (_multiPanelMullionUCP != null)
             {
@@ -275,71 +380,34 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
-            _panelModel.Panel_Visibility = false;
+            _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
 
-            _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
+            if (_frameModel != null)
+            {
+                _frameModel.Lst_Panel.Remove(_panelModel);
+            }
+            if (_multiPanelModel != null)
+            {
+                _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
+            }
+
+            if (_panelModel.Panel_Orient == true)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+            }
+
+            if (_panelModel.Panel_HingeOptionsVisibility == true)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+            }
+
+            _frameModel.AdjustPropertyPanelHeight("Panel", "minus");
+            _frameModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
 
             _mainPresenter.DeductPanelGlassID();
             _mainPresenter.SetPanelGlassID();
-
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             #endregion
-        }
-
-        int prev_Width = 0,
-            prev_Height = 0;
-        private void OnFixedPanelUCSizeChangedEventRaised(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    if (!_initialLoad)
-            //    {
-            //int thisWd = 0,
-            //    thisHt = 0,
-            //    pnlModelWd = _panelModel.Panel_Width,
-            //    pnlModelHt = _panelModel.Panel_Height;
-
-            //        if (_multiPanelModel != null) 
-            //        {
-            //            if (_multiPanelModel.MPanel_Type == "Mullion")
-            //            {
-            //                thisWd = (int)(((UserControl)sender).Width / _panelModel.Panel_Zoom);
-            //                thisHt = (int)(pnlModelHt * _panelModel.Panel_Zoom);
-            //            }
-            //            else if (_multiPanelModel.MPanel_Type == "Transom")
-            //            {
-            //                thisWd = (int)(pnlModelWd * _panelModel.Panel_Zoom);
-            //                thisHt = (int)(((UserControl)sender).Height / _panelModel.Panel_Zoom);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            thisWd = (int)((UserControl)sender).Width;
-            //            thisHt = (int)((UserControl)sender).Height;
-            //        }
-
-            //        if (prev_Width != pnlModelWd || thisWd != pnlModelWd)
-            //        {
-            //            _panelModel.Panel_Width = thisWd;
-            //            _WidthChange = true;
-            //        }
-            //        if (prev_Height != pnlModelHt || thisHt != pnlModelHt)
-            //        {
-            //            _panelModel.Panel_Height = thisHt;
-            //            _HeightChange = true;
-            //        }
-            //    }
-
-            //    prev_Width = _panelModel.Panel_Width;
-            //    prev_Height = _panelModel.Panel_Height;
-
-            //    _tmr.Start();
-            //    ((UserControl)sender).Invalidate();
-            //    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
         }
 
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
@@ -409,7 +477,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public IFixedPanelUC GetFixedPanelUC()
         {
-            _initialLoad = true;
             _fixedPanelUC.ThisBinding(CreateBindingDictionary());
             return _fixedPanelUC;
         }
@@ -427,26 +494,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_MarginToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelGlass_ID", new Binding("PanelGlass_ID", _panelModel, "PanelGlass_ID", true, DataSourceUpdateMode.OnPropertyChanged));
-            
+            panelBinding.Add("Panel_CmenuDeleteVisibility", new Binding("Panel_CmenuDeleteVisibility", _panelModel, "Panel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+
             return panelBinding;
         }
-
-        public void SetInitialLoadFalse()
-        {
-            _initialLoad = false;
-        }
-
-        //for Testing
-        //public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel)
-        //{ 
-        //    unityC
-        //        .RegisterType<IFixedPanelUC, FixedPanelUC>()
-        //        .RegisterType<IFixedPanelUCPresenter, FixedPanelUCPresenter>();
-        //    FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
-        //    fixedPanelUCP._panelModel = panelModel;
-        //    fixedPanelUCP._frameModel = frameModel;
-
-        //    return fixedPanelUCP;
-        //}
     }
 }

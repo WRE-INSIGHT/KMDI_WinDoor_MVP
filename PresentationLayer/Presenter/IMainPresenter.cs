@@ -1,24 +1,29 @@
-﻿using PresentationLayer.Views;
-using PresentationLayer.Views.UserControls;
-using PresentationLayer.Presenter.UserControls;
-using ModelLayer.Model.User;
-using System;
-using System.Collections.Generic;
-using ModelLayer.Model.Quotation;
-using ModelLayer.Model.Quotation.WinDoor;
+﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
+using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Presenter.UserControls.Dividers;
+using PresentationLayer.Views;
+using PresentationLayer.Views.UserControls;
+using System.Data;
 using System.Windows.Forms;
 using Unity;
-using ModelLayer.Model.Quotation.Panel;
-using ModelLayer.Model.Quotation.MultiPanel;
-using System.Drawing;
-using ModelLayer.Model.Quotation.Divider;
-using PresentationLayer.Presenter.UserControls.Dividers;
 
 namespace PresentationLayer.Presenter
 {
     public interface IMainPresenter
     {
+        Control ControlRaised_forDMSelection { get; }
+        IDividerModel DivModel_forDMSelection { get; }
+        IPanelModel PrevPnlModel_forDMSelection { get; }
+        IPanelModel NxtPnlModel_forDMSelection { get; }
+        DataTable GlassThicknessDT { get; set; }
+        DataTable GlassTypeDT { get; set; }
+        DataTable GlassColorDT { get; set; }
+        DataTable GlassSpacerDT { get; set; }
         string inputted_quotationRefNo { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }
@@ -34,10 +39,19 @@ namespace PresentationLayer.Presenter
         Panel pnlItems_MainPresenter { get; set; }
         Panel pnlPropertiesBody_MainPresenter { get; set; }
         IDividerPropertiesUCPresenter divPropertiesUCP { get; }
+        DataTable Glass_Type { get; }
+        DataTable Spacer { get; }
+        DataTable Color { get; }
 
         IMainView GetMainView();
         IFramePropertiesUC GetFrameProperties(int frameID);
 
+        void SetLblStatus(string status, bool visibility, 
+                          Control controlRaised = null, 
+                          IDividerModel divModel = null,
+                          IPanelModel prev_pnl = null,
+                          IPanelModel nxt_pnl = null,
+                          IDividerPropertiesUCPresenter divPropUCP = null);
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);
         void AddWndrList_QuotationModel(IWindoorModel wndr);
@@ -65,6 +79,11 @@ namespace PresentationLayer.Presenter
                                 ITransomUCPresenter transomUCP = null,
                                 IMullionUCPresenter mullionUCP = null);
         void DeselectDivider();
-        void DeletePropertiesUC(int multiPanelID);
+        void Run_GetListOfMaterials_SpecificItem();
+        void DeleteMultiPanelPropertiesUC(int multiPanelID);
+        void DeleteDividerPropertiesUC(int divID);
+        void DeletePanelPropertiesUC(int panelID);
+        void DeleteFramePropertiesUC(int frameID);
+        void Fit_MyControls_byControlsLocation();
     }
 }

@@ -19,6 +19,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IUnityContainer _unityC;
 
         private IFrameModel _frameModel;
+        private IMainPresenter _mainPresenter;
 
         public FrameImagerUCPresenter(IFrameImagerUC frameImagerUC)
         {
@@ -30,6 +31,15 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _frameImagerUC.frameLoadEventRaised += _frameImagerUC_frameLoadEventRaised;
             _frameImagerUC.outerFramePaintEventRaised += _frameImagerUC_outerFramePaintEventRaised;
+            _frameImagerUC.frameVisibleChangedEventRaised += _frameImagerUC_frameVisibleChangedEventRaised;
+        }
+
+        private void _frameImagerUC_frameVisibleChangedEventRaised(object sender, EventArgs e)
+        {
+            if (((UserControl)sender).Visible == false)
+            {
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.DeleteControl((UserControl)_frameImagerUC);
+            }
         }
 
         private void _frameImagerUC_outerFramePaintEventRaised(object sender, PaintEventArgs e)
@@ -94,14 +104,14 @@ namespace PresentationLayer.Presenter.UserControls
             return _frameImagerUC;
         }
 
-        public IFrameImagerUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel)//, IMainPresenter mainPresenter)
+        public IFrameImagerUCPresenter GetNewInstance(IUnityContainer unityC, IFrameModel frameModel, IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IFrameImagerUC, FrameImagerUC>()
                 .RegisterType<IFrameImagerUCPresenter, FrameImagerUCPresenter>();
             FrameImagerUCPresenter frameImagerPresenter = unityC.Resolve<FrameImagerUCPresenter>();
             frameImagerPresenter._frameModel = frameModel;
-            //framePresenter._mainPresenter = mainPresenter;
+            frameImagerPresenter._mainPresenter = mainPresenter;
             frameImagerPresenter._unityC = unityC;
 
             return frameImagerPresenter;

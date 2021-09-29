@@ -9,6 +9,7 @@ using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -46,6 +47,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdWidth = value;
+                WD_PlasticCover = (decimal)(((value * WD_height) * 2) * 0.00012) / 1000;
+
                 WD_Dimension = value.ToString() + " x " + WD_height.ToString();
                 WD_width_4basePlatform_forImageRenderer = value + 70;
                 WD_zoom_forImageRenderer = GetZoom_forRendering();
@@ -97,6 +100,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdHeight = value;
+                WD_PlasticCover = (decimal)(((value * WD_width) * 2) * 0.00012D) / 1000;
+
                 WD_Dimension = WD_width.ToString() + " x " + value.ToString();
                 WD_height_4basePlatform_forImageRenderer = value + 35;
                 WD_zoom_forImageRenderer = GetZoom_forRendering(); //1.0f; //GetZoom_forRendering();
@@ -311,11 +316,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public IEnumerable<IFrameModel> GetAllVisibleFrames()
-        {
-            return lst_frame.Where(frame => frame.Frame_Visible == true);
-        }
-
         private float[] _arr_zoomPercentage = { 0.10f, 0.13f, 0.17f, 0.26f, 0.50f, 1.0f };
         public float[] Arr_ZoomPercentage
         {
@@ -378,6 +378,57 @@ namespace ModelLayer.Model.Quotation.WinDoor
         }
 
         public int PanelGlassID_Counter { get; set; }
+
+        public Base_Color WD_BaseColor { get; set; }
+        public Foil_Color WD_InsideColor { get; set; }
+        public Foil_Color WD_OutsideColor { get; set; }
+
+        private decimal _wdPlasticCover;
+        [Description("Plastic Cover in kG")]
+        public decimal WD_PlasticCover
+        {
+            get
+            {
+                return _wdPlasticCover;
+            }
+
+            set
+            {
+                _wdPlasticCover = value;
+            }
+        }
+
+        private bool _wdCmenuDeleteVisibility;
+        public bool WD_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _wdCmenuDeleteVisibility;
+            }
+            set
+            {
+                _wdCmenuDeleteVisibility = value;
+                foreach (IFrameModel frame in lst_frame)
+                {
+                    frame.Frame_CmenuDeleteVisibility = _wdCmenuDeleteVisibility;
+
+                    foreach (IPanelModel pnl in frame.Lst_Panel)
+                    {
+                        pnl.Panel_CmenuDeleteVisibility = _wdCmenuDeleteVisibility;
+                    }
+                    foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                    {
+                        mpnl.MPanel_CmenuDeleteVisibility = _wdCmenuDeleteVisibility;
+
+                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                        {
+                            pnl.Panel_CmenuDeleteVisibility = _wdCmenuDeleteVisibility;
+                        }
+                    }
+                }
+                NotifyPropertyChanged();
+            }
+        }
 
         public float GetZoom_forRendering()
         {
@@ -449,7 +500,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             if (lst_frame != null)
             {
-                foreach (IFrameModel fr in lst_frame.Where(fr => fr.Frame_Visible == true))
+                foreach (IFrameModel fr in lst_frame)
                 {
                     fr.Frame_Zoom = WD_zoom;
                 }
@@ -461,7 +512,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             int i = 0;
             foreach (IFrameModel fr in lst_frame)
             {
-                foreach (IPanelModel pnl in fr.GetVisiblePanels())
+                foreach (IPanelModel pnl in fr.Lst_Panel)
                 {
                     pnl.PanelGlass_ID = i;
                     i++;
@@ -470,9 +521,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
                         break;
                     }
                 }
-                foreach (IMultiPanelModel mpnl in fr.GetVisibleMultiPanels())
+                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                 {
-                    foreach (IPanelModel pnl in mpnl.GetVisiblePanels())
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                     {
                         i++;
                         pnl.PanelGlass_ID = i;
@@ -493,5 +544,70 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        public void SetMiddleCloser_onPanel()
+        {
+            MiddleCloser_ArticleNo midArt = MiddleCloser_ArticleNo._None;
+            if (WD_BaseColor == Base_Color._DarkBrown)
+            {
+                midArt = MiddleCloser_ArticleNo._1WC70DB;
+            }
+            else if (WD_BaseColor == Base_Color._White ||
+                     WD_BaseColor == Base_Color._Ivory)
+            {
+                midArt = MiddleCloser_ArticleNo._1WC70WHT;
+            }
+
+            foreach (IFrameModel fr in lst_frame)
+            {
+                foreach (IPanelModel pnl in fr.Lst_Panel)
+                {
+                    pnl.Panel_MiddleCloserArtNo = midArt;
+                }
+                foreach (IMultiPanelModel mpnl  in fr.Lst_MultiPanel)
+                {
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                    {
+                        pnl.Panel_MiddleCloserArtNo = midArt;
+                    }
+                }
+            }
+        }
+
+        public WindoorModel(int wd_id,
+                            string wd_name,
+                            string wd_description,
+                            int wd_width,
+                            int wd_height,
+                            int wd_price,
+                            int wd_quantity,
+                            decimal wd_discount,
+                            bool wd_visibility,
+                            bool wd_orientation,
+                            //float wd_zoom,
+                            string wd_Profile,
+                            List<IFrameModel> wdlstframe,
+                            Base_Color wd_basecolor,
+                            Foil_Color wd_insidecolor,
+                            Foil_Color wd_outisdecolor)
+        {
+            WD_id = wd_id;
+            WD_name = wd_name;
+            WD_description = wd_description;
+            WD_width = wd_width;
+            WD_height = wd_height;
+            WD_price = wd_price;
+            WD_quantity = wd_quantity;
+            WD_discount = wd_discount;
+            WD_visibility = wd_visibility;
+            WD_orientation = wd_orientation;
+            //WD_zoom = wd_zoom;
+            WD_profile = wd_Profile;
+            lst_frame = wdlstframe;
+            WD_BaseColor = wd_basecolor;
+            WD_InsideColor = wd_insidecolor;
+            WD_OutsideColor = wd_outisdecolor;
+
+            WD_CmenuDeleteVisibility = true;
+        }
     }
 }

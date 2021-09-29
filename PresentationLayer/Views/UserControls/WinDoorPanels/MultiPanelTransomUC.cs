@@ -47,6 +47,20 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        private bool _mpanelCmenuDeleteVisibility;
+        public bool MPanel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _mpanelCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _mpanelCmenuDeleteVisibility = value;
+            }
+        }
+
         public event PaintEventHandler flpMulltiPaintEventRaised;
         public event EventHandler flpMultiMouseEnterEventRaised;
         public event EventHandler flpMultiMouseLeaveEventRaised;
@@ -55,6 +69,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event DragEventHandler flpMultiDragDropEventRaised;
         public event EventHandler multiMullionSizeChangedEventRaised;
         public event EventHandler dividerEnabledCheckedChangedEventRaised;
+        public event DragEventHandler flpMultiDragOverEventRaised;
 
         public void InvalidateFlp()
         {
@@ -73,8 +88,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["MPanel_Dock"]);
             this.DataBindings.Add(ModelBinding["MPanel_Width"]);
             this.DataBindings.Add(ModelBinding["MPanel_Height"]);
-            //this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
+            this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
             this.DataBindings.Add(ModelBinding["MPanel_Placement"]);
+            this.DataBindings.Add(ModelBinding["MPanel_CmenuDeleteVisibility"]);
         }
 
         private void flp_MultiTransom_Paint(object sender, PaintEventArgs e)
@@ -94,7 +110,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void flp_MultiTransom_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && _mpanelCmenuDeleteVisibility == true)
             {
                 cmenu_mulltiP.Show(new Point(MousePosition.X, MousePosition.Y));
             }
@@ -112,7 +128,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void flp_MultiTransom_DragOver(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            EventHelpers.RaiseDragEvent(sender, flpMultiDragOverEventRaised, e);
         }
 
         private void flp_MultiTransom_DragDrop(object sender, DragEventArgs e)

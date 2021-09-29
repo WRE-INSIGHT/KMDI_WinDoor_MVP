@@ -59,33 +59,87 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        public bool Panel_ExtensionOptionsVisibility
+        {
+            get
+            {
+                return extensionToolStripMenuItem.Checked;
+            }
+
+            set
+            {
+                extensionToolStripMenuItem.Checked = value;
+            }
+        }
+
+        private int _panelHeight;
+        public int Panel_DisplayHeight
+        {
+            get
+            {
+                return _panelHeight;
+            }
+            set
+            {
+                _panelHeight = value;
+                if (_panelHeight >= 2100)
+                {
+                    extensionToolStripMenuItem.Visible = true;
+                }
+                else if (_panelHeight < 2100)
+                {
+                    extensionToolStripMenuItem.Visible = false;
+                }
+            }
+        }
+
+        public Color Panel_BackColor
+        {
+            get
+            {
+                return this.BackColor;
+            }
+        }
+
+        private bool _panelCmenuDeleteVisibility;
+        public bool Panel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _panelCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _panelCmenuDeleteVisibility = value;
+            }
+        }
+
         public event EventHandler deleteToolStripClickedEventRaised;
         public event EventHandler awningPanelUCMouseEnterEventRaised;
         public event EventHandler awningPanelUCMouseLeaveEventRaised;
         public event PaintEventHandler awningPanelUCPaintEventRaised;
-        public event EventHandler awningPanelUCSizeChangedEventRaised;
+        public event EventHandler extensionToolStripMenuItemClickedEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_Name"]);
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
-            this.DataBindings.Add(ModelBinding["Panel_Width"]);
-            this.DataBindings.Add(ModelBinding["Panel_Height"]);
+            this.DataBindings.Add(ModelBinding["Panel_WidthToBind"]);
+            this.DataBindings.Add(ModelBinding["Panel_HeightToBind"]);
+            this.DataBindings.Add(ModelBinding["Panel_DisplayHeight"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Placement"]);
+            this.DataBindings.Add(ModelBinding["Panel_ExtensionOptionsVisibility"]);
+            this.DataBindings.Add(ModelBinding["Panel_CmenuDeleteVisibility"]);
         }
 
         private void AwningPanelUC_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(this, awningPanelUCPaintEventRaised, e);
-        }
-
-        private void AwningPanelUC_SizeChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(this, awningPanelUCSizeChangedEventRaised, e);
         }
 
         private void AwningPanelUC_MouseEnter(object sender, EventArgs e)
@@ -100,7 +154,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void AwningPanelUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
             {
                 cmenu_awning.Show(new Point(MousePosition.X, MousePosition.Y));
             }
@@ -114,6 +168,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public void InvalidateThis()
         {
             this.Invalidate();
+        }
+
+        private void extensionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, extensionToolStripMenuItemClickedEventRaised, e);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -34,7 +35,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
         void SetDeductFramePadding(bool mode);
         int Frame_Deduction { get; }
-        //IEnumerable<IPanelModel> GetVisiblePanels();
+        IWindoorModel Frame_WindoorModel { get; set; }
 
         #region Explosion
 
@@ -45,10 +46,15 @@ namespace ModelLayer.Model.Quotation.Frame
         FrameReinf_ArticleNo Frame_ReinfArtNo { get; set; }
         int Frame_ReinfWidth { get; set; }
         int Frame_ReinfHeight { get; set; }
-        
-        IEnumerable<IPanelModel> GetVisiblePanels();
-        IEnumerable<IMultiPanelModel> GetVisibleMultiPanels();
+        bool Frame_CmenuDeleteVisibility { get; set; }
+
+        bool Frame_If_InwardCasement { get; set; }
+        MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
+        MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
+
         void SetExplosionValues_Frame();
+        void AdjustPropertyPanelHeight(string objtype, string mode);
+
         #endregion
     }
 }

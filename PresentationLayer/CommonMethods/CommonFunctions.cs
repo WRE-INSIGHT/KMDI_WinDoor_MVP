@@ -101,6 +101,7 @@ namespace PresentationLayer.CommonMethods
                                                                      parentModel.MPanel_DisplayWidth,
                                                                      parentModel.MPanel_DisplayHeight,
                                                                      parentModel,
+                                                                     frameModel,
                                                                      divID,
                                                                      frameModel.FrameImageRenderer_Zoom,
                                                                      frameModel.Frame_Type.ToString());
@@ -111,16 +112,22 @@ namespace PresentationLayer.CommonMethods
                 if (divType == DividerModel.DividerType.Mullion)
                 {
                     IDividerPropertiesUCPresenter divPropUCP = mainPresenter.divPropertiesUCP.GetNewInstance(_unityC, divModel, mainPresenter);
-                    multiMullionUCP.multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)divPropUCP.GetDivProperties());
+                    UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
+                    divPropUC.Dock = DockStyle.Top;
+                    multiMullionUCP.multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
+                    divPropUC.BringToFront();
                 }
                 else if (divType == DividerModel.DividerType.Transom)
                 {
                     IDividerPropertiesUCPresenter divPropUCP = mainPresenter.divPropertiesUCP.GetNewInstance(_unityC, divModel, mainPresenter);
-                    multiTransomUCP.multiPropUCP2_given.GetMultiPanelPropertiesFLP().Controls.Add((UserControl)divPropUCP.GetDivProperties());
+                    UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
+                    divPropUC.Dock = DockStyle.Top;
+                    multiTransomUCP.multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
+                    divPropUC.BringToFront();
                 }
 
-                frameModel.FrameProp_Height += (173 + 1); //+1 on margin
-                parentModel.MPanelProp_Height += (173 + 1); //+1 on margin
+                parentModel.AdjustPropertyPanelHeight("Div", "add");
+                frameModel.AdjustPropertyPanelHeight("Div", "add");
 
                 if (parentModel.MPanel_Type == "Transom")
                 {
@@ -215,7 +222,7 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for HEIGHT
-            string dmnsion_h = multiPanelModel.MPanel_Height.ToString();
+            string dmnsion_h = multiPanelModel.MPanel_DisplayHeight.ToString();
             Point dmnsion_h_startP = new Point(multiPanelModel.MPanel_Width - 20, 10);
             Point dmnsion_h_endP = new Point(multiPanelModel.MPanel_Width - 20, multiPanelModel.MPanel_Height - 10);
 
@@ -259,7 +266,7 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for HEIGHT
-            string dmnsion_h = panelModel.Panel_Height.ToString();
+            string dmnsion_h = panelModel.Panel_DisplayHeight.ToString();
             Point dmnsion_h_startP = new Point(panelModel.Panel_Width - 20, 1);
             Point dmnsion_h_endP = new Point(panelModel.Panel_Width - 20, panelModel.Panel_Height - 1);
 
@@ -304,7 +311,7 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for WIDTH
-            string dmnsion_w = multiPanelModel.MPanel_Width.ToString();
+            string dmnsion_w = multiPanelModel.MPanel_DisplayWidth.ToString();
             Point dmnsion_w_startP = new Point(10, multiPanelModel.MPanel_Height - 20);
             Point dmnsion_w_endP = new Point(multiPanelModel.MPanel_Width - 10, multiPanelModel.MPanel_Height - 20);
 
@@ -347,7 +354,7 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for WIDTH
-            string dmnsion_w = panelModel.Panel_Width.ToString();
+            string dmnsion_w = panelModel.Panel_DisplayWidth.ToString();
             Point dmnsion_w_startP = new Point(1, panelModel.Panel_Height - 20);
             Point dmnsion_w_endP = new Point(panelModel.Panel_Width - 1, panelModel.Panel_Height - 20);
 
@@ -713,6 +720,22 @@ namespace PresentationLayer.CommonMethods
                                       .Concat(controls)
                                       .Where(c => c.Visible == true)
                                       .Where(c => c.Name.Contains(name));
+        }
+
+        public void rowpostpaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DataGridView grid = (DataGridView)sender;
+            e.PaintHeader(DataGridViewPaintParts.Background);
+            string rowIdx = (e.RowIndex + 1).ToString();
+            Font rowFont = new Font("Segoe UI", 9.0f,
+                                    FontStyle.Regular,
+                                    GraphicsUnit.Point);
+            StringFormat centerFormat = new StringFormat();
+            centerFormat.Alignment = StringAlignment.Far;
+            centerFormat.LineAlignment = StringAlignment.Near;
+
+            Rectangle headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
+            e.Graphics.DrawString(rowIdx, rowFont, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
     }
 }

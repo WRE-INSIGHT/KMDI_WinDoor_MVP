@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -27,15 +28,21 @@ namespace ModelLayer.Model.Quotation.WinDoor
         float WD_zoom_forImageRenderer { get; }
         Image WD_image { get; set; }
         List<IFrameModel> lst_frame { get; set; }
-        IEnumerable<IFrameModel> GetAllVisibleFrames();
 
         int frameIDCounter { get;  set; }
         int panelIDCounter { get;  set; }
         int mpanelIDCounter { get; set; }
         int divIDCounter { get; set; }
         int PanelGlassID_Counter { get; set; }
+
+        Base_Color WD_BaseColor { get; set; }
+        Foil_Color WD_InsideColor { get; set; }
+        Foil_Color WD_OutsideColor { get; set; }
+        decimal WD_PlasticCover { get; set; }
+        bool WD_CmenuDeleteVisibility { get; set; }
         float GetZoom_forRendering();
         void SetImageRenderingZoom();
         void SetPanelGlassID();
+        void SetMiddleCloser_onPanel();
     }
 }

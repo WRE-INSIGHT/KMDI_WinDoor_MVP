@@ -71,23 +71,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                 outer_line = 10,
                 inner_line = 15;
 
-            if (_panelModel.Panel_Zoom == 0.28f)
+            if (_panelModel.PanelImageRenderer_Zoom == 0.28f)
             {
                 font_size = 25;
             }
-            else if (_panelModel.Panel_Zoom == 0.19f)
+            else if (_panelModel.PanelImageRenderer_Zoom == 0.19f)
             {
                 font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
             }
-            else if (_panelModel.Panel_Zoom == 0.14f)
+            else if (_panelModel.PanelImageRenderer_Zoom == 0.14f)
             {
                 font_size = 13;
                 outer_line = 3;
                 inner_line = 7;
             }
-            else if (_panelModel.Panel_Zoom == 0.10f)
+            else if (_panelModel.PanelImageRenderer_Zoom == 0.10f)
             {
                 font_size = 8;
                 outer_line = 3;

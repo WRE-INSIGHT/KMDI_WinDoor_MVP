@@ -153,7 +153,7 @@ namespace ModelLayer.Tests
         {
             int total_wd = 700, total_height = 2000;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -162,6 +162,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -181,9 +182,44 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
+            _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
 
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
@@ -197,9 +233,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(634, _panelModel.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1934, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(700, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(2000, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(628, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1928, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
@@ -225,25 +261,23 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2451%' AND
-                             Size = '634'");
+                             Description LIKE '%2452%' AND
+                             Size = '700'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%2451%' AND
-                             Size = '1934'");
+                             Description LIKE '%2452%' AND
+                             Size = '2000'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '628'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '1928'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
@@ -257,7 +291,7 @@ namespace ModelLayer.Tests
         {
             int total_wd = 500, total_height = 1500;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -266,6 +300,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -285,9 +320,44 @@ namespace ModelLayer.Tests
                                                                    null,
                                                                    total_wd,
                                                                    total_height,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
+            _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
 
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
@@ -302,8 +372,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(434, _panelModel.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1434, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(500, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1500, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(428, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1428, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
@@ -330,24 +400,22 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2452%' AND
-                             Size = '434'");
+                             Size = '500'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2452%' AND
-                             Size = '1434'");
+                             Size = '1500'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '428'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '1428'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
@@ -362,7 +430,7 @@ namespace ModelLayer.Tests
             int total_wd = 900, total_height = 1300,
                 eqpanelWD = 450, eqpanelHT = 1300;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
 
@@ -372,6 +440,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -393,6 +462,7 @@ namespace ModelLayer.Tests
                                                                                        _frameModel.Frame_Zoom,
                                                                                        1,
                                                                                        DockStyle.Fill,
+                                                                                       1,
                                                                                        0,
                                                                                        null,
                                                                                        _frameModel.FrameImageRenderer_Zoom);
@@ -421,14 +491,49 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel.Panel_Placement = "First";
+            _panelModel.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -461,14 +566,49 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
                                                                    eqpanelHT,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -485,9 +625,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(381, _panelModel.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1234, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(450, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1300, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(375, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
@@ -497,9 +637,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1242, divModel.Div_ExplosionHeight);
             Assert.AreEqual(1132, divModel.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(381, _panelModel2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1234, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(450, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1300, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(375, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
@@ -526,22 +666,20 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
-                                                 Size = '381'");
+                                                 Description LIKE '%2452%' AND
+                                                 Size = '450'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
-                                                 Size = '1234'");
+                                                 Description LIKE '%2452%' AND
+                                                 Size = '1300'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '375'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '1228'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
@@ -567,7 +705,7 @@ namespace ModelLayer.Tests
             int total_wd = 900, total_height = 1300,
                 uneqpanelWD1 = 400, uneqpanelWD2 = 500, eqpanelHT = 1300;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -576,6 +714,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -597,6 +736,7 @@ namespace ModelLayer.Tests
                                                                                        _frameModel.Frame_Zoom,
                                                                                        1,
                                                                                        DockStyle.Fill,
+                                                                                       1,
                                                                                        0,
                                                                                        null,
                                                                                        _frameModel.FrameImageRenderer_Zoom);
@@ -625,14 +765,49 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    uneqpanelWD1,
                                                                    eqpanelHT,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel.Panel_Placement = "First";
+            _panelModel.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -665,14 +840,49 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multipanelModel,
                                                                    uneqpanelWD2,
                                                                    eqpanelHT,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -689,9 +899,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(331, _panelModel.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1234, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(400, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1300, _panelModel.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
@@ -701,9 +911,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1242, divModel.Div_ExplosionHeight);
             Assert.AreEqual(1132, divModel.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(431, _panelModel2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1234, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(500, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1300, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(425, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(1228, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
@@ -730,36 +940,33 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2451%' AND
-                             Size = '331'");
+                             Description LIKE '%2452%' AND
+                             Size = '400'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2451%' AND
-                             Size = '431'");
+                             Description LIKE '%2452%' AND
+                             Size = '500'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
-                                                 Size = '1234'");
+                                                 Description LIKE '%2452%' AND
+                                                 Size = '1300'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '325'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND
                              Size = '425'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '1228'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
@@ -785,7 +992,7 @@ namespace ModelLayer.Tests
             int total_wd = 550, total_ht = 1200,
                 eqpanelwd = 275, eqpanelht = 600;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -794,6 +1001,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -815,6 +1023,7 @@ namespace ModelLayer.Tests
                                                                                        _frameModel.Frame_Zoom,
                                                                                        1,
                                                                                        DockStyle.Fill,
+                                                                                       1,
                                                                                        0,
                                                                                        null,
                                                                                        _frameModel.FrameImageRenderer_Zoom);
@@ -843,6 +1052,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           2,
                                                                                           DockStyle.None,
+                                                                                          2,
                                                                                           0,
                                                                                           _multiTransomModel,
                                                                                           _frameModel.FrameImageRenderer_Zoom);
@@ -883,6 +1093,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           3,
                                                                                           DockStyle.None,
+                                                                                          2,
                                                                                           0,
                                                                                           _multiTransomModel,
                                                                                           _frameModel.FrameImageRenderer_Zoom);
@@ -911,14 +1122,49 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    1);
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel1);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -951,14 +1197,49 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    2);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -982,14 +1263,49 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel1,
                                                                    eqpanelwd,
                                                                    eqpanelht,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    3);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_GlassThickness = 6.0f;
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel3);
             Control fw3 = new Control();
             fw3.Name = "FixedPanelUC_3";
@@ -1022,14 +1338,49 @@ namespace ModelLayer.Tests
                                                                    "Fixed Panel",
                                                                    true,
                                                                    1.0f,
-                                                                   null,
+                                                                   _frameModel,
                                                                    _multiMullionModel2,
                                                                    eqpanelwd,
                                                                    eqpanelht,
-                                                                   Glass_Thickness._6mm,
                                                                    GlazingBead_ArticleNo._2451,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._None,
+                                                                   SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
                                                                    4);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_GlassThickness = 6.0f;
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel4);
             Control fw4 = new Control();
             fw4.Name = "FixedPanelUC_4";
@@ -1056,9 +1407,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(487, transomModel.Div_ExplosionWidth);
             Assert.AreEqual(407, transomModel.Div_ReinfWidth);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel1.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(221, _panelModel1.Panel_GlazingBeadWidth);
-            Assert.AreEqual(546, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(275, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(600, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel1.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel1.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
@@ -1068,16 +1419,16 @@ namespace ModelLayer.Tests
             Assert.AreEqual(549, divModel_mullion.Div_ExplosionHeight);
             Assert.AreEqual(469, divModel_mullion.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(221, _panelModel2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(546, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(275, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(600, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel3.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(221, _panelModel3.Panel_GlazingBeadWidth);
-            Assert.AreEqual(546, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(275, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(600, _panelModel3.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel3.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel3.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel3.Panel_GlazingSpacerQty);
@@ -1087,9 +1438,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(549, divModel_mullion2.Div_ExplosionHeight);
             Assert.AreEqual(469, divModel_mullion2.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel4.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(221, _panelModel4.Panel_GlazingBeadWidth);
-            Assert.AreEqual(546, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(275, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(600, _panelModel4.Panel_GlazingBeadHeight);
             Assert.AreEqual(215, _panelModel4.Panel_GlassWidth);
             Assert.AreEqual(540, _panelModel4.Panel_GlassHeight);
             Assert.AreEqual(1, _panelModel4.Panel_GlazingSpacerQty);
@@ -1129,22 +1480,20 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
-                                                 Size = '221'");
+                                                 Description LIKE '%2452%' AND
+                                                 Size = '275'");
             Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
-                                                 Size = '546'");
+                                                 Description LIKE '%2452%' AND
+                                                 Size = '600'");
             Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '215'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '540'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
@@ -1173,7 +1522,7 @@ namespace ModelLayer.Tests
                 p4p11Wd = 400, p4p11Ht = 475,
                 panelID = 0, mpanelID = 0, divID = 0;
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -1182,6 +1531,7 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
                                                                    1);
             _windoorModel.lst_frame.Add(_frameModel);
 
@@ -1207,6 +1557,7 @@ namespace ModelLayer.Tests
                                                                                          _frameModel.Frame_Zoom,
                                                                                          mpanelID,
                                                                                          DockStyle.Fill,
+                                                                                         1,
                                                                                          0,
                                                                                          null,
                                                                                          _frameModel.FrameImageRenderer_Zoom,
@@ -1240,6 +1591,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          2,
                                                                                           0,
                                                                                           _multiMullionModel1,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1282,14 +1634,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel1,
                                                                     p1Wd,
                                                                     p1Ht,
-                                                                    Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel1.Panel_Placement = "Somewhere in Between";
+            _panelModel1.Panel_GlassThickness = 6.0f;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel1);
             _panelModel1.Panel_Index_Inside_MPanel = 2;
             Control fw1 = new Control();
@@ -1328,6 +1715,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          2,
                                                                                           0,
                                                                                           _multiMullionModel1,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1364,6 +1752,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          3,
                                                                                           0,
                                                                                           _multiTransomModel2,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1409,6 +1798,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          3,
                                                                                           0,
                                                                                           _multiTransomModel2,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1451,14 +1841,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiTransomModel2,
                                                                     p2p3Wd,
                                                                     p2p3Ht,
-                                                                    Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
             _multiTransomModel2.MPanelLst_Panel.Add(_panelModel2);
             _panelModel2.Panel_Index_Inside_MPanel = 4;
             Control fw2 = new Control();
@@ -1487,6 +1912,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          3,
                                                                                           0,
                                                                                           _multiTransomModel3,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1532,6 +1958,7 @@ namespace ModelLayer.Tests
                                                                                           _frameModel.Frame_Zoom,
                                                                                           mpanelID,
                                                                                           DockStyle.Fill,
+                                                                                          3,
                                                                                           0,
                                                                                           _multiTransomModel3,
                                                                                           _frameModel.FrameImageRenderer_Zoom,
@@ -1574,14 +2001,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiTransomModel3,
                                                                     p2p3Wd,
                                                                     p2p3Ht,
-                                                                    Glass_Thickness._6mm,
                                                                     GlazingBead_ArticleNo._2451,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel3.Panel_Placement = "Last";
+            _panelModel3.Panel_GlassThickness = 6.0f;
             _multiTransomModel3.MPanelLst_Panel.Add(_panelModel3);
             _panelModel3.Panel_Index_Inside_MPanel = 4;
             Control fw3 = new Control();
@@ -1608,14 +2070,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel4,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel4.Panel_Placement = "First";
+            _panelModel4.Panel_GlassThickness = 24.0f;
             _multiMullionModel4.MPanelLst_Panel.Add(_panelModel4);
             _panelModel4.Panel_Index_Inside_MPanel = 0;
             Control fw4 = new Control();
@@ -1651,14 +2148,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel4,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel5.Panel_Placement = "Last";
+            _panelModel5.Panel_GlassThickness = 24.0f;
             _multiMullionModel4.MPanelLst_Panel.Add(_panelModel5);
             _panelModel5.Panel_Index_Inside_MPanel = 2;
             Control fw5 = new Control();
@@ -1684,14 +2216,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel5,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel6.Panel_Placement = "First";
+            _panelModel6.Panel_GlassThickness = 24.0f;
             _multiMullionModel5.MPanelLst_Panel.Add(_panelModel6);
             _panelModel6.Panel_Index_Inside_MPanel = 0;
             Control fw6 = new Control();
@@ -1727,14 +2294,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel5,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel7.Panel_Placement = "Last";
+            _panelModel7.Panel_GlassThickness = 24.0f;
             _multiMullionModel5.MPanelLst_Panel.Add(_panelModel7);
             _panelModel5.Panel_Index_Inside_MPanel = 2;
             Control fw7 = new Control();
@@ -1760,14 +2362,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel6,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel8.Panel_Placement = "First";
+            _panelModel8.Panel_GlassThickness = 24.0f;
             _multiMullionModel6.MPanelLst_Panel.Add(_panelModel8);
             _panelModel8.Panel_Index_Inside_MPanel = 0;
             Control fw8 = new Control();
@@ -1803,14 +2440,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel6,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel9.Panel_Placement = "Last";
+            _panelModel9.Panel_GlassThickness = 24.0f;
             _multiMullionModel6.MPanelLst_Panel.Add(_panelModel9);
             _panelModel9.Panel_Index_Inside_MPanel = 2;
             Control fw9 = new Control();
@@ -1836,14 +2508,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel7,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel10.Panel_Placement = "First";
+            _panelModel10.Panel_GlassThickness = 24.0f;
             _multiMullionModel7.MPanelLst_Panel.Add(_panelModel10);
             _panelModel10.Panel_Index_Inside_MPanel = 0;
             Control fw10 = new Control();
@@ -1879,14 +2586,49 @@ namespace ModelLayer.Tests
                                                                     "Fixed Panel",
                                                                     true,
                                                                     1.0f,
-                                                                    null,
+                                                                    _frameModel,
                                                                     _multiMullionModel7,
                                                                     p4p11Wd,
                                                                     p4p11Ht,
-                                                                    Glass_Thickness._24mm,
                                                                     GlazingBead_ArticleNo._2435,
-                                                                    panelID);
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANT,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   panelID);
             _panelModel11.Panel_Placement = "Last";
+            _panelModel11.Panel_GlassThickness = 24.0f;
             _multiMullionModel7.MPanelLst_Panel.Add(_panelModel11);
             _panelModel11.Panel_Index_Inside_MPanel = 2;
             Control fw11 = new Control();
@@ -1907,7 +2649,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(4, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(11, _qouteModel.GlazingSpacer_TotalQty);
-            Assert.AreEqual(12104, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual(14000, _qouteModel.GlazingSeal_TotalQty);
 
             #region multimullion_1 controls
 
@@ -1921,9 +2663,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1842, divModel_mullion2.Div_ExplosionHeight);
             Assert.AreEqual(1732, divModel_mullion2.Div_ReinfHeight);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel1.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(728, _panelModel1.Panel_GlazingBeadWidth);
-            Assert.AreEqual(1834, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(800, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1900, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(722, _panelModel1.Panel_GlassWidth);
             Assert.AreEqual(1828, _panelModel1.Panel_GlassHeight);
 
@@ -1941,9 +2683,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(734, divModel_transom4.Div_ExplosionWidth);
             Assert.AreEqual(654, divModel_transom4.Div_ReinfWidth);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(731, _panelModel2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(896, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(800, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(950, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(725, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(890, _panelModel2.Panel_GlassHeight);
 
@@ -1961,9 +2703,9 @@ namespace ModelLayer.Tests
             Assert.AreEqual(734, divModel_transom6.Div_ExplosionWidth);
             Assert.AreEqual(654, divModel_transom6.Div_ReinfWidth);
 
-            Assert.AreEqual(GlazingBead_ArticleNo._2451, _panelModel3.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(731, _panelModel3.Panel_GlazingBeadWidth);
-            Assert.AreEqual(896, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(800, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(950, _panelModel3.Panel_GlazingBeadHeight);
             Assert.AreEqual(725, _panelModel3.Panel_GlassWidth);
             Assert.AreEqual(890, _panelModel3.Panel_GlassHeight);
 
@@ -1972,8 +2714,8 @@ namespace ModelLayer.Tests
             #region multiMullion_4 controls
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel4.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(331, _panelModel4.Panel_GlazingBeadWidth);
-            Assert.AreEqual(421, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel4.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel4.Panel_GlassWidth);
             Assert.AreEqual(415, _panelModel4.Panel_GlassHeight);
 
@@ -1983,8 +2725,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(319, divModel_mullion7.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel5.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(328, _panelModel5.Panel_GlazingBeadWidth);
-            Assert.AreEqual(421, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel5.Panel_GlazingBeadHeight);
             Assert.AreEqual(322, _panelModel5.Panel_GlassWidth);
             Assert.AreEqual(415, _panelModel5.Panel_GlassHeight);
 
@@ -1993,8 +2735,8 @@ namespace ModelLayer.Tests
             #region multiMullion_5 controls
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel6.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(331, _panelModel6.Panel_GlazingBeadWidth);
-            Assert.AreEqual(433, _panelModel6.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel6.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel6.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel6.Panel_GlassWidth);
             Assert.AreEqual(427, _panelModel6.Panel_GlassHeight);
 
@@ -2004,8 +2746,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(331, divModel_mullion8.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel7.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(328, _panelModel7.Panel_GlazingBeadWidth);
-            Assert.AreEqual(433, _panelModel7.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel7.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel7.Panel_GlazingBeadHeight);
             Assert.AreEqual(322, _panelModel7.Panel_GlassWidth);
             Assert.AreEqual(427, _panelModel7.Panel_GlassHeight);
 
@@ -2014,8 +2756,8 @@ namespace ModelLayer.Tests
             #region multiMullion_6 controls
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel8.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(328, _panelModel8.Panel_GlazingBeadWidth);
-            Assert.AreEqual(421, _panelModel8.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel8.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel8.Panel_GlazingBeadHeight);
             Assert.AreEqual(322, _panelModel8.Panel_GlassWidth);
             Assert.AreEqual(415, _panelModel8.Panel_GlassHeight);
 
@@ -2025,8 +2767,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(319, divModel_mullion9.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel9.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(331, _panelModel9.Panel_GlazingBeadWidth);
-            Assert.AreEqual(421, _panelModel9.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel9.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel9.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel9.Panel_GlassWidth);
             Assert.AreEqual(415, _panelModel9.Panel_GlassHeight);
 
@@ -2035,8 +2777,8 @@ namespace ModelLayer.Tests
             #region multiMullion_7 controls
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel10.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(328, _panelModel10.Panel_GlazingBeadWidth);
-            Assert.AreEqual(433, _panelModel10.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel10.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel10.Panel_GlazingBeadHeight);
             Assert.AreEqual(322, _panelModel10.Panel_GlassWidth);
             Assert.AreEqual(427, _panelModel10.Panel_GlassHeight);
 
@@ -2046,8 +2788,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(331, divModel_mullion10.Div_ReinfHeight);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel11.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(331, _panelModel11.Panel_GlazingBeadWidth);
-            Assert.AreEqual(433, _panelModel11.Panel_GlazingBeadHeight);
+            Assert.AreEqual(400, _panelModel11.Panel_GlazingBeadWidth);
+            Assert.AreEqual(475, _panelModel11.Panel_GlazingBeadHeight);
             Assert.AreEqual(325, _panelModel11.Panel_GlassWidth);
             Assert.AreEqual(427, _panelModel11.Panel_GlassHeight);
 
@@ -2086,26 +2828,18 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(12, dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2451%' AND 
-                             Size = '728'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
-
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%2451%' AND 
-                             Size = '1834'");
+                             Description LIKE '%2452%' AND 
+                             Size = '1900'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(2, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Description LIKE '%6mm%' AND 
                              Size = '722'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Description LIKE '%6mm%' AND 
                              Size = '1828'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual(1, dr[0]["Qty"]);
@@ -2123,62 +2857,56 @@ namespace ModelLayer.Tests
             Assert.AreEqual(8, dr[0]["Qty"]);
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2451%' AND
-                                                 Size = '731'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+                                                 Description LIKE '%2452%' AND
+                                                 Size = '800'");
+            Assert.AreEqual(6, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2451%' AND
-                                                 Size = '896'");
+                                                 Description LIKE '%2452%' AND
+                                                 Size = '950'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '725'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%6mm%' AND
                                                  Size = '890'");
             Assert.AreEqual(2, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2435%' AND
-                                                 Size = '331'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
+                                                 Size = '400'");
+            Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
                                                  Description LIKE '%2435%' AND
-                                                 Size = '421'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
+                                                 Size = '475'");
+            Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%24mm%' AND
                                                  Size = '325'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%24mm%' AND
                                                  Size = '415'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
                                                  Description LIKE '%2435%' AND
-                                                 Size = '328'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
+                                                 Size = '400'");
+            Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
                                                  Description LIKE '%2435%' AND
-                                                 Size = '433'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
+                                                 Size = '475'");
+            Assert.AreEqual(16, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Description LIKE '%24mm%' AND
                                                  Size = '322'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
             sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Description LIKE '%24mm%' AND
                                                  Size = '427'");
             Assert.AreEqual(4, Convert.ToInt32(sumObject));
 

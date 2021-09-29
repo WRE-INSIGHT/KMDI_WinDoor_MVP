@@ -74,6 +74,70 @@ namespace PresentationLayer.Views
             }
         }
 
+        public ToolStripMenuItem Glass_Single
+        {
+            get
+            {
+                return singleToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Glass_DoubleInsulated
+        {
+            get
+            {
+                return DoubleInsulatedToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Glass_DoubleLaminated
+        {
+            get
+            {
+                return DoubleLaminatedToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Glass_TripleInsulated
+        {
+            get
+            {
+                return TripleInsulatedToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Glass_TripleLaminated
+        {
+            get
+            {
+                return TripleLaminatedToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Glass_Type
+        {
+            get
+            {
+                return glassTypeToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Spacer
+        {
+            get
+            {
+                return spacerToolStripMenuItem;
+            }
+        }
+
+        public ToolStripMenuItem Color
+        {
+            get
+            {
+                return colorToolStripMenuItem;
+            }
+        }
+
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
@@ -86,6 +150,10 @@ namespace PresentationLayer.Views
         public event EventHandler ButtonMinusZoomClickEventRaised;
         public event EventHandler DeleteToolStripButtonClickEventRaised;
         public event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
+        public event EventHandler CreateNewGlassClickEventRaised;
+        public event EventHandler ChangeItemColorClickEventRaised;
+        public event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
+        public event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -190,7 +258,7 @@ namespace PresentationLayer.Views
 
         public ToolStripLabel GetLblSelectedDivider()
         {
-            return tsLbl_SelectedDivider;
+            return tsLbl_Status;
         }
 
         private void btnMinusZoom_Click(object sender, EventArgs e)
@@ -211,6 +279,36 @@ namespace PresentationLayer.Views
         private void listOfMaterialsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, ListOfMaterialsToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void CreateNewGlass_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CreateNewGlassClickEventRaised, e);
+        }
+
+        private void changeItemColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ChangeItemColorClickEventRaised, e);
+        }
+
+        private void glassTypeColorSpacerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, glassTypeColorSpacerToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void glassBalancingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, glassBalancingToolStripMenuItemClickEventRaised, e);
+        }
+
+        public ToolStrip GetTSMain()
+        {
+            return tsMain;
+        }
+
+        public MenuStrip GetMNSMainMenu()
+        {
+            return mnsMainMenu;
         }
     }
 }

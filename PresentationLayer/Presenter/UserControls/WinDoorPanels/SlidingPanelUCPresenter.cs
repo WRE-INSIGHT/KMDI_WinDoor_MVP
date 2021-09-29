@@ -149,7 +149,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
 
                 IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
-                div.Div_Visible = false;
+                _mainPresenter.DeleteDividerPropertiesUC(div.Div_ID);
+                div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
+                _frameModel.Lst_Divider.Remove(div);
+
+                _multiPanelModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
             }
             #endregion
 
@@ -195,10 +200,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _multiPanelMullionImagerUCP,
                                                         _multiPanelTransomImagerUCP);
             }
-            _panelModel.Panel_Visibility = false;
-            _frameModel.FrameProp_Height -= 148;
-
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+
+            _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
+            if (_frameModel != null)
+            {
+                _frameModel.Lst_Panel.Remove(_panelModel);
+            }
+            if (_multiPanelModel != null)
+            {
+                _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
+            }
+
+            //_panelModel.Panel_Visibility = false;
+            _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
+
             #endregion
         }
 
@@ -413,6 +429,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_MarginToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_CmenuDeleteVisibility", new Binding("Panel_CmenuDeleteVisibility", _panelModel, "Panel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

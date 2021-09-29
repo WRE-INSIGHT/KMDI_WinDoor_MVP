@@ -1,30 +1,30 @@
-﻿using PresentationLayer.Views;
-using System;
-using ModelLayer.Model.User;
+﻿using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
-using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
-using System.IO;
-using System.Windows.Forms;
-using Microsoft.VisualBasic;
-using System.Collections.Generic;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
+using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
+using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Thumbs;
-using ServiceLayer.Services.QuotationServices;
-using ServiceLayer.Services.WindoorServices;
 using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.PanelServices;
-using CommonComponents;
-using Unity;
+using ServiceLayer.Services.QuotationServices;
+using ServiceLayer.Services.WindoorServices;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
-using ModelLayer.Model.Quotation.MultiPanel;
-using ModelLayer.Model.Quotation.Divider;
-using PresentationLayer.Presenter.UserControls.Dividers;
-using PresentationLayer.CommonMethods;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
+using System.Windows.Forms;
+using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter
@@ -41,7 +41,6 @@ namespace PresentationLayer.Presenter
         private IQuotationModel _quotationModel;
         private IWindoorModel _windoorModel;
         private IFrameModel _frameModel;
-        //private IPanelModel _panelModel;
 
         private ILoginView _loginView;
         private IItemInfoUC _itemInfoUC;
@@ -65,18 +64,90 @@ namespace PresentationLayer.Presenter
         private IFixedPanelUCPresenter _fixedPanelUCPresenter;
         private IExplosionPresenter _explosionPresenter;
         private IDividerPropertiesUCPresenter _divPropertiesUCP;
+        private ICreateNewGlassPresenter _createNewGlassPresenter;
+        private IChangeItemColorPresenter _changeItemColorPresenter;
+        private ICreateNewGlassTypePresenter _createNewGlassTypePresenter;
+        private ICreateNewGlassColorPresenter _createNewGlassColorPresenter;
+        private ICreateNewGlassSpacerPresenter _createNewGlassSpacerPresenter;
+
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
         private FrameModel.Frame_Padding frameType;
-        
+
         private string input_qrefno;
 
         CommonFunctions _commonfunc = new CommonFunctions();
 
+        private DataTable _glassThicknessDT = new DataTable();
+        private DataTable _glassTypeDT = new DataTable();
+        private DataTable _spacerDT = new DataTable();
+        private DataTable _colorDT = new DataTable();
+
+        private ToolStripLabel _tsLblStatus;
+        private ToolStrip _tsMain;
+        private MenuStrip _msMainMenu;
+
+        private Control _controlRaised_forDMSelection;
+        private IDividerModel _divModel_forDMSelection;
+        private IPanelModel _prevPanelModel_forDMSelection;
+        private IPanelModel _nxtPanelModel_forDMSelection;
+        private IDividerPropertiesUCPresenter _divPropUCP_forDMSelection;
+
         #endregion
 
         #region GetSet
+
+        public DataTable GlassThicknessDT
+        {
+            get
+            {
+                return _glassThicknessDT;
+            }
+            set
+            {
+                _glassThicknessDT = value;
+            }
+        }
+
+        public DataTable GlassTypeDT
+        {
+            get
+            {
+                return _glassTypeDT;
+            }
+            set
+            {
+                _glassTypeDT = value;
+            }
+        }
+
+
+        public DataTable GlassSpacerDT
+        {
+            get
+            {
+                return _spacerDT;
+            }
+            set
+            {
+                _spacerDT = value;
+            }
+        }
+
+        public DataTable GlassColorDT
+        {
+            get
+            {
+                return _colorDT;
+            }
+            set
+            {
+                _colorDT = value;
+            }
+        }
+
+
         public string inputted_quotationRefNo
         {
             get
@@ -267,6 +338,62 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public DataTable Glass_Type
+        {
+            get
+            {
+                return _glassTypeDT;
+            }
+        }
+
+        public DataTable Spacer
+        {
+            get
+            {
+                return _spacerDT;
+            }
+        }
+
+        public DataTable Color
+        {
+            get
+            {
+                return _colorDT;
+            }
+        }
+
+        public IDividerModel DivModel_forDMSelection
+        {
+            get
+            {
+                return _divModel_forDMSelection;
+            }
+        }
+
+        public IPanelModel PrevPnlModel_forDMSelection
+        {
+            get
+            {
+                return _prevPanelModel_forDMSelection;
+            }
+        }
+
+        public IPanelModel NxtPnlModel_forDMSelection
+        {
+            get
+            {
+                return _nxtPanelModel_forDMSelection;
+            }
+        }
+
+        public Control ControlRaised_forDMSelection
+        {
+            get
+            {
+                return _controlRaised_forDMSelection;
+            }
+        }
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -284,7 +411,12 @@ namespace PresentationLayer.Presenter
                              IBasePlatformImagerUCPresenter basePlatformImagerUCPresenter,
                              IFrameImagerUCPresenter frameImagerUCPresenter,
                              IExplosionPresenter explosionPresenter,
-                             IDividerPropertiesUCPresenter divPropertiesUCP)
+                             IDividerPropertiesUCPresenter divPropertiesUCP,
+                             ICreateNewGlassPresenter createNewGlassPresenter,
+                             ICreateNewGlassTypePresenter createNewGlassTypePresenter,
+                             ICreateNewGlassColorPresenter createNewGlassColorPresenter,
+                             ICreateNewGlassSpacerPresenter createNewGlassSpacerPresenter,
+                             IChangeItemColorPresenter changeItemColorPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -302,11 +434,61 @@ namespace PresentationLayer.Presenter
             _basePlatformImagerUCPresenter = basePlatformImagerUCPresenter;
             _explosionPresenter = explosionPresenter;
             _divPropertiesUCP = divPropertiesUCP;
+            _createNewGlassPresenter = createNewGlassPresenter;
+            _createNewGlassTypePresenter = createNewGlassTypePresenter;
+            _createNewGlassColorPresenter = createNewGlassColorPresenter;
+            _createNewGlassSpacerPresenter = createNewGlassSpacerPresenter;
+            _changeItemColorPresenter = changeItemColorPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
         {
             return _mainView;
+        }
+
+        public void SetLblStatus(string status, 
+                                 bool visibility, 
+                                 Control controlRaised = null, 
+                                 IDividerModel divModel = null,
+                                 IPanelModel prev_pnl = null, //selected panelModel / prevPanel
+                                 IPanelModel nxt_pnl = null,
+                                 IDividerPropertiesUCPresenter divPropUCP = null)
+        {
+            _tsLblStatus.Visible = visibility;
+
+            if (status == "DMPreSelection")
+            {
+                _windoorModel.WD_CmenuDeleteVisibility = false;
+
+                _tsLblStatus.Text = "Select one of the highlighted panel";
+                _controlRaised_forDMSelection = controlRaised;
+                _pnlControlSub.Enabled = false;
+                _msMainMenu.Enabled = false;
+                _pnlPropertiesBody.Enabled = false;
+                _tsMain.Enabled = false;
+                _divModel_forDMSelection = divModel;
+                _prevPanelModel_forDMSelection = prev_pnl;
+                _nxtPanelModel_forDMSelection = nxt_pnl;
+                _divPropUCP_forDMSelection = divPropUCP;
+            }
+            else if (status == "DMSelection")
+            {
+                _windoorModel.WD_CmenuDeleteVisibility = true;
+
+                _tsLblStatus.Text = "";
+                _pnlControlSub.Enabled = true;
+                _msMainMenu.Enabled = true;
+                _pnlPropertiesBody.Enabled = true;
+                _tsMain.Enabled = true;
+                _controlRaised_forDMSelection.Text = "P" + prev_pnl.PanelGlass_ID;
+                _controlRaised_forDMSelection.BackColor = System.Drawing.Color.PaleGreen;
+
+                Dictionary<string, Binding> divBinding = new Dictionary<string, Binding>();
+                divBinding.Add("Panel_SashProfileArtNo", new Binding("Panel_SashProfileArtNo", prev_pnl, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+
+                _divPropUCP_forDMSelection.GetDivProperties().Bind_DMPanelModel(divBinding);
+                _divPropUCP_forDMSelection.GetLeverEspagUCP().BindSashProfileArtNo();
+            }
         }
 
         public void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC)
@@ -317,6 +499,10 @@ namespace PresentationLayer.Presenter
             _pnlItems = _mainView.GetPanelItems();
             _pnlPropertiesBody = _mainView.GetPanelPropertiesBody();
             _pnlControlSub = _mainView.GetPanelControlSub();
+            _tsLblStatus = _mainView.GetLblSelectedDivider();
+            _tsMain = _mainView.GetTSMain();
+            _msMainMenu = _mainView.GetMNSMainMenu();
+
             _unityC = unityC;
         }
         private void SubscribeToEventsSetup()
@@ -333,51 +519,940 @@ namespace PresentationLayer.Presenter
             _mainView.ButtonPlusZoomClickEventRaised += _mainView_ButtonPlusZoomClickEventRaised;
             _mainView.DeleteToolStripButtonClickEventRaised += _mainView_DeleteToolStripButtonClickEventRaised;
             _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised;
+            _mainView.CreateNewGlassClickEventRaised += _mainView_CreateNewGlassClickEventRaised;
+            _mainView.ChangeItemColorClickEventRaised += _mainView_ChangeItemColorClickEventRaised;
+            _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised;
+            _mainView.glassBalancingToolStripMenuItemClickEventRaised += _mainView_glassBalancingToolStripMenuItemClickEventRaised;
+        }
+
+        #region Events
+
+        private void _mainView_glassBalancingToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            _quotationModel.GetListOfMaterials(_windoorModel);
+
+            ToolStripMenuItem gb = (ToolStripMenuItem)sender;
+
+            string gbmode = "";
+
+            foreach (IFrameModel fr in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                {
+                    bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
+                    bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
+                    if (allWithSash == true && allNoSash == false)
+                    {
+                        gbmode = "withSash";
+                    }
+                    else if (allWithSash == false && allNoSash == true)
+                    {
+                        gbmode = "noSash";
+                    }
+                    else if (allWithSash == false && allNoSash == false)
+                    {
+                        gbmode = "";
+                    }
+                }
+            }
+
+            if (gbmode == "")
+            {
+                MessageBox.Show("Cannot apply auto glass balancing" + "\n" + "You can apply auto glass balancing if all panel has sash or all panel has no sash",
+                                "Glass balancing not available",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                gb.Checked = false;
+            }
+            else if (gbmode != "")
+            {
+
+                if (gb.Checked == true)
+                {
+                    foreach (IFrameModel fr in _windoorModel.lst_frame)
+                    {
+                        foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                        {
+                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                            {
+                                pnl.Panel_Width = pnl.Panel_OriginalWidth;
+                                pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                            }
+                            //mpnl.SetEqualGlassDimension(gbmode);
+                        }
+                    }
+                }
+                else if (gb.Checked == false)
+                {
+                    foreach (IFrameModel fr in _windoorModel.lst_frame)
+                    {
+                        foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                        {
+                            mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth;
+                            mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight;
+
+                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                            {
+                                pnl.Panel_Width = pnl.Panel_OriginalWidth;
+                                pnl.Panel_Height = pnl.Panel_OriginalHeight;
+                                pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth;
+                                pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight;
+                            }
+
+                            mpnl.Fit_MyControls_Dimensions();
+                            mpnl.Fit_MyControls_ToBindDimensions();
+                            mpnl.Adjust_ControlDisplaySize();
+                        }
+                    }
+                }
+                _basePlatformPresenter.InvalidateBasePlatform();
+                _basePlatformPresenter.Invalidate_flpMainControls();
+                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                _basePlatformImagerUCPresenter.Invalidate_flpMain();
+            }
+        }
+
+        private void _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
+
+            DataTable dt = new DataTable();
+
+            if (menu == _mainView.Glass_Type)
+            {
+                ICreateNewGlassTypePresenter createNewGlassTypePresenter = _createNewGlassTypePresenter.GetNewInstance(_unityC, this, _glassTypeDT);
+                createNewGlassTypePresenter.ShowCreateNewGlassTypeView();
+
+            }
+            else if (menu == _mainView.Spacer)
+            {
+                ICreateNewGlassSpacerPresenter createNewGlassSpacerPresenter = _createNewGlassSpacerPresenter.GetNewInstance(_unityC, this, _spacerDT);
+                createNewGlassSpacerPresenter.ShowCreateNewGlassSpacerView();
+            }
+            else if (menu == _mainView.Color)
+            {
+                ICreateNewGlassColorPresenter createNewGlassColorPresenter = _createNewGlassColorPresenter.GetNewInstance(_unityC, this, _colorDT);
+                createNewGlassColorPresenter.ShowCreateNewGlassColorView();
+            }
+        }
+
+        private void _mainView_ChangeItemColorClickEventRaised(object sender, EventArgs e)
+        {
+            IChangeItemColorPresenter presenter = _changeItemColorPresenter.GetNewInstance(_unityC, this, _windoorModel);
+            presenter.ShowView();
+        }
+
+        private void _mainView_CreateNewGlassClickEventRaised(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
+            CreateNewGlass_ShowPurpose show_purpose = CreateNewGlass_ShowPurpose._DefaultNone;
+
+            if (menu == _mainView.Glass_Single)
+            {
+                show_purpose = CreateNewGlass_ShowPurpose._Single;
+            }
+            else if (menu == _mainView.Glass_DoubleInsulated)
+            {
+                show_purpose = CreateNewGlass_ShowPurpose._DoubleInsulated;
+            }
+            else if (menu == _mainView.Glass_DoubleLaminated)
+            {
+                show_purpose = CreateNewGlass_ShowPurpose._DoubleLaminated;
+            }
+            else if (menu == _mainView.Glass_TripleInsulated)
+            {
+                show_purpose = CreateNewGlass_ShowPurpose._TripleInsulated;
+            }
+            else if (menu == _mainView.Glass_TripleLaminated)
+            {
+                show_purpose = CreateNewGlass_ShowPurpose._TripleLaminated;
+            }
+
+
+            ICreateNewGlassPresenter createNewGlassPresenter = _createNewGlassPresenter.GetNewInstance(_unityC, this, show_purpose, _glassThicknessDT);
+            createNewGlassPresenter.ShowCreateNewGlassView();
         }
 
         private void _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            IExplosionPresenter explosionPresenter = _explosionPresenter.GetNewInstance(_unityC, _quotationModel, this, _windoorModel);
-            explosionPresenter.ShowExplosionView();
+            int incompatibility_cnt = Check_Incompatibility(),
+                unbalancedGlass_cnt = Check_UnbalancedGlass();
+            bool proceed = false;
+
+            if (incompatibility_cnt >= 1)
+            {
+                DialogResult dr =  MessageBox.Show("Incompatibility(s) detected, Do you wish to proceed?", "Incompatibility Check", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    proceed = true;
+                }
+                else if (dr == DialogResult.No)
+                {
+                    proceed = false;
+                }
+            }
+            else
+            {
+                proceed = true;
+            }
+
+            if (unbalancedGlass_cnt >= 1)
+            {
+                DialogResult dr = MessageBox.Show("Unbalanced Glass detected, Do you wish to proceed?", "Unbalanced Glass Check", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    proceed = true;
+                }
+                else if (dr == DialogResult.No)
+                {
+                    proceed = false;
+                }
+            }
+
+            if (proceed)
+            {
+                IExplosionPresenter explosionPresenter = _explosionPresenter.GetNewInstance(_unityC, _quotationModel, this, _windoorModel);
+                explosionPresenter.ShowExplosionView();
+            }
         }
 
+        bool toggle;
         private void _mainView_DeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-            //FitControls_InsideMultiPanel();
-
-            //foreach (IFrameModel fr in _windoorModel.lst_frame)
-            //{
-            //    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
-            //    {
-            //        Console.WriteLine(mpnl.MPanel_Name + " WD:" + mpnl.MPanel_WidthToBind);
-            //        Console.WriteLine("Margin:" + mpnl.MPanel_Margin.ToString());
-
-            //        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-            //        {
-            //            Console.WriteLine(pnl.Panel_Name + " WD:" + pnl.Panel_WidthToBind);
-            //            Console.WriteLine("Margin:" + pnl.Panel_MarginToBind.ToString());
-            //        }
-            //        foreach (IDividerModel div in mpnl.MPanelLst_Divider)
-            //        {
-            //            Console.WriteLine(div.Div_Name + " WD:" + div.Div_WidthToBind);
-            //        }
-
-            //        Console.WriteLine();
-
-            //        foreach (Control item in mpnl.MPanelLst_Objects)
-            //        {
-            //            Console.WriteLine(item.Name + " WD:" + item.Width);
-            //            Console.WriteLine("Margin:" + item.Margin.ToString());
-            //        }
-            //    }
-            //}
+            toggle = !toggle;
+            if (toggle == true)
+            {
+                _basePlatformImagerUCPresenter.BringToFront_baseImager();
+            }
+            else if (toggle == false)
+            {
+                _basePlatformImagerUCPresenter.SendToBack_baseImager();
+            }
         }
 
-        private void Fit_MyControls_byControlsLocation()
+        private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
-            foreach (IFrameModel frames in _windoorModel.lst_frame.Where(fr => fr.Frame_Visible == true))
+            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
+
+            if (ndx_zoomPercentage < _windoorModel.Arr_ZoomPercentage.Count() - 1)
             {
-                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                ndx_zoomPercentage++;
+                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                FitControls_InsideMultiPanel();
+                Fit_MyControls_byControlsLocation();
+            }
+            _basePlatformPresenter.InvalidateBasePlatform();
+            _basePlatformPresenter.Invalidate_flpMainControls();
+        }
+
+        private void _mainView_ButtonMinusZoomClickEventRaised(object sender, EventArgs e)
+        {
+            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
+
+            if (ndx_zoomPercentage > 0)
+            {
+                ndx_zoomPercentage--;
+                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                FitControls_InsideMultiPanel();
+                Fit_MyControls_byControlsLocation();
+            }
+            _basePlatformPresenter.InvalidateBasePlatform();
+            _basePlatformPresenter.Invalidate_flpMainControls();
+        }
+
+        private void OnLabelSizeClickEventRaised(object sender, EventArgs e)
+        {
+            _frmDimensionPresenter.SetPresenters(this);
+            _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.ChangeBasePlatformSize;
+            _frmDimensionPresenter.SetProfileType(_windoorModel.WD_profile);
+            _frmDimensionPresenter.SetHeight();
+            _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
+            _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+        }
+
+        private void OnCreateNewItemClickEventRaised(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmItem = (ToolStripMenuItem)sender;
+            if (tsmItem.Name == "C70ToolStripMenuItem")
+            {
+                Scenario_Quotation(false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile");
+            }
+            else if (tsmItem.Name == "PremiLineToolStripMenuItem")
+            {
+                Scenario_Quotation(false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile");
+            }
+        }
+
+        private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)
+        {
+            //Panel pnlMain = (Panel)sender;
+            //pnlMain.PerformLayout();
+        }
+
+        private void OnNewQuotationMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            bool create_new = false;
+
+            if (_quotationModel != null)
+            {
+                if (MessageBox.Show("Are you sure want to create new Quotation?", "Delete progress",
+                                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    create_new = true;
+                    Scenario_Quotation(false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
+                }
+            }
+            else
+            {
+                create_new = true;
+            }
+
+            if (create_new == true)
+            {
+                input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
+                if (input_qrefno != "" && input_qrefno != "0")
+                {
+                    Scenario_Quotation(true, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
+                }
+            }
+        }
+
+        private void OnNewFrameButtonClickEventRaised(object sender, EventArgs e)
+        {
+            ToolStripButton tsb = (ToolStripButton)sender;
+            if (tsb.Name == "tsBtnNwin")
+            {
+                frameType = FrameModel.Frame_Padding.Window;
+            }
+            else if (tsb.Name == "tsBtnNdoor")
+            {
+                frameType = FrameModel.Frame_Padding.Door;
+            }
+            Scenario_Quotation(false, false, true, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "");
+        }
+
+        private void OnOpenToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            // dito ilagay ang loading ng wndr file
+        }
+
+        private void OnMainViewClosingEventRaised(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            _loginView.CloseLoginView();
+        }
+
+        private void OnMainViewLoadEventRaised(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.FirstTym == true)
+            {
+                string defDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Windoor Maker files";
+                Directory.CreateDirectory(defDir);
+                MessageBox.Show("Your default sync directory >> " + defDir + "\n\nYou can change sync directory anytime at 'Tools' > 'Change sync directory'",
+                                "Sync directory",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                Properties.Settings.Default.WndrDir = defDir;
+                Properties.Settings.Default.FirstTym = false;
+            }
+            _mainView.Nickname = _userModel.Nickname;
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Multi-Panel (Mullion)", new Thumbs_MultiPanelMullionUC()).GetControlUC());
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Sliding Panel", new Thumbs_SlidingPanelUC()).GetControlUC());
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Awning Panel", new Thumbs_AwningPanelUC()).GetControlUC());
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Casement Panel", new Thumbs_CasementPanelUC()).GetControlUC());
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Fixed Panel", new Thumbs_FixedPanelUC()).GetControlUC());
+
+            _glassThicknessDT.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Description", "Description", "System.String"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Single", "Single", "System.Boolean"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Double", "Double", "System.Boolean"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Triple", "Triple", "System.Boolean"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Insulated", "Insulated", "System.Boolean"));
+            _glassThicknessDT.Columns.Add(CreateColumn("Laminated", "Laminated", "System.Boolean"));
+
+            //single
+            _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Green", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Blue", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Bronze", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear with Georgian Bar", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Green", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tinted Blue", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(13.0, "13 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(14.0, "14 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(24.0, "24 mm Clear with Georgian Bar", true, false, false, false, false);
+            //double insulated
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 + 6 mm Clear", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear Low-e + 12 Ar + 6 mm Clear Low-e", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Clear + 12 + 5 mm Tempered Clear", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Clear Low-e + 12 + 5 mm Tempered Tinted Gray", false, true, false, true, false);
+            //double laminated
+            _glassThicknessDT.Rows.Add(11.76f, "6 mm Clear + 0.76 + 5 mm Clear", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76f, "6 mm Tinted Black+ 0.76 + 5 mm Clear", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear Low-e + 1.52 + 6 mm Tempered Clear Low-e", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.58f, "4 mm Tempered Clear Low-e + 1.52 + 4 mm Tempered Clear Low-e", false, true, false, false, true);
+            //triple insulated
+            _glassThicknessDT.Rows.Add(41.0f, "6 mm Tempered Clear Low-e + 12 + 5 mm Tempered Tinted Gray + 12 + 6 mm Tempered Clear Low-e", false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(33.0f, "4 mm Tinted Black + 10 + 5 mm Clear + 10 + 4 mm Tinted Black", false, false, true, true, false);
+            //triple laminated
+            _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", false, false, true, false, true);
+            _glassThicknessDT.Rows.Add(23.04f, "8 mm Tempered Tinted Green + 1.52 + 4 mm Tempered Clear + 1.52 + 8 mm Tempered Tinted Green", false, false, true, false, true);
+
+            _glassTypeDT.Columns.Add(CreateColumn("GlassType", "GlassType", "System.String"));
+            _spacerDT.Columns.Add(CreateColumn("Spacer", "Spacer", "System.String"));
+            _colorDT.Columns.Add(CreateColumn("Color", "Color", "System.String"));
+
+            _glassTypeDT.Rows.Add("Annealed");
+            _glassTypeDT.Rows.Add("Tempered");
+
+            _spacerDT.Rows.Add("Air");
+            _spacerDT.Rows.Add("Argon");
+
+            _colorDT.Rows.Add("Clear");
+            _colorDT.Rows.Add("Tinted Gray");
+            _colorDT.Rows.Add("Tinted Bronze");
+            _colorDT.Rows.Add("Tinted Green");
+        }
+
+        #endregion
+
+        #region ViewUpdate(Controls)
+
+        private void Clearing_Operation()
+        {
+            _quotationModel = null;
+            _pnlItems.Controls.Clear();
+            _pnlPropertiesBody.Controls.Clear();
+            _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
+            SetMainViewTitle("");
+            CreateNewWindoorBtn_Disable();
+            ItemToolStrip_Disable();
+            //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
+        }
+
+        private void ItemToolStrip_Enable()
+        {
+            _mainView.ItemToolStripEnabled = true;
+        }
+
+        private void ItemToolStrip_Disable()
+        {
+            _mainView.ItemToolStripEnabled = false;
+        }
+
+        private void BotToolStrip_Enable()
+        {
+            _mainView.GetPanelBot().Enabled = true;
+        }
+
+        private void BotToolStrip_Disable()
+        {
+            _mainView.GetPanelBot().Enabled = false;
+        }
+
+        private void SetMainViewTitle(string qrefno, string itemname, string profiletype, bool saved)
+        {
+            _mainView.mainview_title = qrefno.ToUpper() + " >> " + itemname + " (" + profiletype + ")";
+            _mainView.mainview_title = (saved == false) ? _mainView.mainview_title + "*" : _mainView.mainview_title.Replace("*", "");
+        }
+        private void SetMainViewTitle(string qrefno)
+        {
+            _mainView.mainview_title = qrefno;
+        }
+
+        public void Invalidate_pnlMain()
+        {
+            _pnlMain.Invalidate();
+        }
+
+        private void CreateNewWindoorBtn_Enable()
+        {
+            _mainView.CreateNewWindoorBtnEnabled = true;
+        }
+
+        private void CreateNewWindoorBtn_Disable()
+        {
+            _mainView.CreateNewWindoorBtnEnabled = false;
+        }
+
+        #endregion
+
+        #region Scenarios
+
+        public void Scenario_Quotation(bool QoutationInputBox_OkClicked,
+                                       bool NewItem_OkClicked,
+                                       bool AddedFrame,
+                                       frmDimensionPresenter.Show_Purpose purpose,
+                                       int frmDimension_numWd,
+                                       int frmDimension_numHt,
+                                       string frmDimension_profileType)
+        {
+            if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
+            {
+                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame)
+                {
+                    Clearing_Operation();
+                }
+                else if (QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame)
+                {
+                    SetMainViewTitle(input_qrefno.ToUpper());
+                    ItemToolStrip_Enable();
+                    _quotationModel = _quotationServices.AddQuotationModel(input_qrefno);
+
+                    _frmDimensionPresenter.SetPresenters(this);
+                    _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
+                    _frmDimensionPresenter.SetProfileType("C70 Profile");
+                    _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = true;
+                    _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = true;
+                    _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
+                    _frmDimensionPresenter.SetHeight();
+                    _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                }
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame)
+                {
+                    _frmDimensionPresenter.SetPresenters(this);
+                    _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Item;
+                    _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
+                    _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
+                    _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = true;
+                    _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
+                    _frmDimensionPresenter.SetHeight();
+                    _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                }
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame)
+                {
+                    _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
+                    _frmDimensionPresenter.SetPresenters(this);
+                    _frmDimensionPresenter.purpose = purpose;
+                    _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
+                    _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
+                    _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
+                    _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = true;
+                    _frmDimensionPresenter.SetHeight();
+                    _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                }
+            }
+            else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //from frmDimension to here
+            {
+                if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame)
+                {
+                    if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
+                    {
+                        _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
+                                                                         frmDimension_numHt,
+                                                                         frmDimension_profileType,
+                                                                         _quotationModel.Lst_Windoor.Count() + 1,
+                                                                         Base_Color._Ivory,
+                                                                         Foil_Color._Walnut,
+                                                                         Foil_Color._Walnut);
+                        AddWndrList_QuotationModel(_windoorModel);
+
+                        _mainView.Zoom = _windoorModel.WD_zoom;
+
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                        _mainView.GetThis().Controls.Add(bpUC);
+                        //bpUC.BringToFront();
+
+                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+
+                        AddItemInfoUC(_windoorModel);
+
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        SetMainViewTitle(input_qrefno,
+                                         _windoorModel.WD_name,
+                                         _windoorModel.WD_profile,
+                                         false);
+                        ItemToolStrip_Enable();
+                        CreateNewWindoorBtn_Enable();
+                        BotToolStrip_Enable();
+
+                        _mainView.RemoveBinding(_mainView.GetLblSize());
+                        _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                    }
+                }
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame) //Add new Item
+                {
+                    if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
+                    {
+                        _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
+                                                                         frmDimension_numHt,
+                                                                         frmDimension_profileType,
+                                                                         _quotationModel.Lst_Windoor.Count() + 1,
+                                                                         Base_Color._Ivory,
+                                                                         Foil_Color._Walnut,
+                                                                         Foil_Color._Walnut);
+                        AddWndrList_QuotationModel(_windoorModel);
+
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                        _mainView.GetThis().Controls.Add(bpUC);
+                        //bpUC.BringToFront();
+
+                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+
+                        AddItemInfoUC(_windoorModel); //add item information user control
+
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        SetMainViewTitle(input_qrefno,
+                                         _windoorModel.WD_name,
+                                         _windoorModel.WD_profile,
+                                         false);
+
+                        BotToolStrip_Enable();
+                        CreateNewWindoorBtn_Enable();
+
+                        _mainView.RemoveBinding(_mainView.GetLblSize());
+                        _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+
+                        _pnlPropertiesBody.Controls.Clear(); //Clearing Operation
+                        _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
+                        _pnlItems.VerticalScroll.Value = _pnlItems.VerticalScroll.Maximum;
+                        _pnlItems.PerformLayout();
+
+                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                    }
+                }
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame) //add frame
+                {
+                    if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
+                    {
+                        int frameID = _windoorModel.frameIDCounter += 1;
+                        _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
+                                                                   frmDimension_numHt,
+                                                                   frameType,
+                                                                   _windoorModel.WD_zoom_forImageRenderer,
+                                                                   _windoorModel.WD_zoom,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
+                                                                   frameID);
+                        AddFrameList_WindoorModel(_frameModel);
+                        IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
+                        AddFrameUC(_frameModel, framePropUCP);
+
+                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        SetMainViewTitle(input_qrefno,
+                                         _windoorModel.WD_name,
+                                         _windoorModel.WD_profile,
+                                         false);
+
+                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                    }
+                }
+            }
+        }
+
+        public void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
+                                       int frmDimension_numWd,
+                                       int frmDimension_numHt)
+        {
+            if (purpose == frmDimensionPresenter.Show_Purpose.ChangeBasePlatformSize)
+            {
+                _windoorModel.WD_width = frmDimension_numWd;
+                _windoorModel.WD_height = frmDimension_numHt;
+                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                _basePlatformPresenter.InvalidateBasePlatform();
+                _basePlatformPresenter.Invalidate_flpMainControls();
+            }
+        }
+        #endregion
+
+        #region Functions
+
+        private int Check_Incompatibility()
+        {
+            int incompatibility_cnt = 0;
+
+            foreach (IFrameModel frame in _windoorModel.lst_frame)
+            {
+                FrameProfile_ArticleNo frame_art = frame.Frame_ArtNo;
+
+                foreach (IPanelModel pnl in frame.Lst_Panel)
+                {
+                    SashProfile_ArticleNo sash_art = pnl.Panel_SashProfileArtNo;
+                    Handle_Type handletype = pnl.Panel_HandleType;
+                    Espagnolette_ArticleNo espag_art = pnl.Panel_EspagnoletteArtNo;
+                    
+                    if (handletype == Handle_Type._Rotoswing)
+                    {
+                        if (!(frame_art == FrameProfile_ArticleNo._7502 &&
+                              sash_art == SashProfile_ArticleNo._7581) &&
+                            !(frame_art == FrameProfile_ArticleNo._7507 &&
+                              sash_art == SashProfile_ArticleNo._7581) &&
+                            !(frame_art == FrameProfile_ArticleNo._7507 &&
+                              sash_art == SashProfile_ArticleNo._395))
+                        {
+                            incompatibility_cnt++;
+                        }
+                    }
+                    else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
+                    {
+                        if (!(frame_art == FrameProfile_ArticleNo._7507 &&
+                              sash_art == SashProfile_ArticleNo._374))
+                        {
+                            incompatibility_cnt++;
+                        }
+                    }
+
+                    if (espag_art == Espagnolette_ArticleNo._741012 || espag_art == Espagnolette_ArticleNo._EQ87NT ||
+                        espag_art == Espagnolette_ArticleNo._628806 || espag_art == Espagnolette_ArticleNo._628807 ||
+                        espag_art == Espagnolette_ArticleNo._628809)
+                    {
+                        if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
+                            !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
+                        {
+                            incompatibility_cnt++;
+                        }
+                    }
+                    else if (espag_art == Espagnolette_ArticleNo._642105 || espag_art == Espagnolette_ArticleNo._642089 ||
+                             espag_art == Espagnolette_ArticleNo._630963)
+                    {
+                        if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                        {
+                            incompatibility_cnt++;
+                        }
+                    }
+                    else if (espag_art == Espagnolette_ArticleNo._N110A00006 || espag_art == Espagnolette_ArticleNo._N110A01006 ||
+                             espag_art == Espagnolette_ArticleNo._N110A02206 || espag_art == Espagnolette_ArticleNo._N110A03206 ||
+                             espag_art == Espagnolette_ArticleNo._N110A04206 || espag_art == Espagnolette_ArticleNo._N110A05206 ||
+                             espag_art == Espagnolette_ArticleNo._N110A06206)
+                    {
+                        if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
+                        {
+                            incompatibility_cnt++;
+                        }
+                    }
+
+                    List<Extension_ArticleNo> lst_extArt = new List<Extension_ArticleNo>();
+                    lst_extArt.Add(pnl.Panel_ExtensionTopArtNo);
+                    lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                    lst_extArt.Add(pnl.Panel_ExtensionBotArtNo);
+                    lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                    lst_extArt.Add(pnl.Panel_ExtensionLeftArtNo);
+                    lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                    lst_extArt.Add(pnl.Panel_ExtensionRightArtNo);
+                    lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+
+                    foreach (Extension_ArticleNo ext in lst_extArt)
+                    {
+                        if (ext == Extension_ArticleNo._639957)
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
+                                !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
+                            {
+                                incompatibility_cnt++;
+                            }
+                        }
+                        else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                            {
+                                incompatibility_cnt++;
+                            }
+                        }
+                        else if (ext == Extension_ArticleNo._612978)
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
+                                !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
+                                !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374) &&
+                                !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
+                            {
+                                incompatibility_cnt++;
+                            }
+                        }
+                    }
+                }
+                foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                {
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                    {
+                        SashProfile_ArticleNo sash_art = pnl.Panel_SashProfileArtNo;
+                        Handle_Type handletype = pnl.Panel_HandleType;
+                        Espagnolette_ArticleNo espag_art = pnl.Panel_EspagnoletteArtNo;
+
+                        if (handletype == Handle_Type._Rotoswing)
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._7502 &&
+                                  sash_art == SashProfile_ArticleNo._7581) &&
+                                !(frame_art == FrameProfile_ArticleNo._7507 &&
+                                  sash_art == SashProfile_ArticleNo._7581) &&
+                                !(frame_art == FrameProfile_ArticleNo._7507 &&
+                                  sash_art == SashProfile_ArticleNo._395))
+                            {
+                                incompatibility_cnt++;
+                            }
+                        }
+                        else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._7507 &&
+                                  sash_art == SashProfile_ArticleNo._374))
+                            {
+                                incompatibility_cnt++;
+                            }
+                        }
+
+
+                        if (espag_art == Espagnolette_ArticleNo._741012 || espag_art == Espagnolette_ArticleNo._EQ87NT ||
+                            espag_art == Espagnolette_ArticleNo._628806 || espag_art == Espagnolette_ArticleNo._628807 ||
+                            espag_art == Espagnolette_ArticleNo._628809)
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
+                                !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
+                            {
+                                incompatibility_cnt++;
+                            }
+                        }
+                        else if (espag_art == Espagnolette_ArticleNo._642105 || espag_art == Espagnolette_ArticleNo._642089 ||
+                                 espag_art == Espagnolette_ArticleNo._630963)
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                            {
+                                incompatibility_cnt++;
+                            }
+                        }
+                        else if (espag_art == Espagnolette_ArticleNo._N110A00006 || espag_art == Espagnolette_ArticleNo._N110A01006 ||
+                                 espag_art == Espagnolette_ArticleNo._N110A02206 || espag_art == Espagnolette_ArticleNo._N110A03206 ||
+                                 espag_art == Espagnolette_ArticleNo._N110A04206 || espag_art == Espagnolette_ArticleNo._N110A05206 ||
+                                 espag_art == Espagnolette_ArticleNo._N110A06206)
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
+                            {
+                                incompatibility_cnt++;
+                            }
+                        }
+
+
+                        List<Extension_ArticleNo> lst_extArt = new List<Extension_ArticleNo>();
+                        lst_extArt.Add(pnl.Panel_ExtensionTopArtNo);
+                        lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                        lst_extArt.Add(pnl.Panel_ExtensionBotArtNo);
+                        lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                        lst_extArt.Add(pnl.Panel_ExtensionLeftArtNo);
+                        lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                        lst_extArt.Add(pnl.Panel_ExtensionRightArtNo);
+                        lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+
+                        foreach (Extension_ArticleNo ext in lst_extArt)
+                        {
+                            if (ext == Extension_ArticleNo._639957)
+                            {
+                                if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
+                                    !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
+                                {
+                                    incompatibility_cnt++;
+                                }
+                            }
+                            else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
+                            {
+                                if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                                {
+                                    incompatibility_cnt++;
+                                }
+                            }
+                            else if (ext == Extension_ArticleNo._612978)
+                            {
+                                if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
+                                    !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
+                                    !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374) &&
+                                    !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
+                                {
+                                    incompatibility_cnt++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return incompatibility_cnt;
+        }
+
+        private int Check_UnbalancedGlass()
+        {
+            int unbalancedGlass_cnt = 0;
+
+            foreach (IFrameModel frame in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                {
+                    string gbmode = "";
+                    bool same_sash = false;
+                    SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
+                    bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
+                    bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
+
+                    if (allWithSash == true && allNoSash == false)
+                    {
+                        gbmode = "withSash";
+                        int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
+                        if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
+                        {
+                            same_sash = true;
+                        }
+                        else
+                        {
+                            same_sash = false;
+                        }
+                    }
+                    else if (allWithSash == false && allNoSash == true)
+                    {
+                        gbmode = "noSash";
+                    }
+                    else if (allWithSash == false && allNoSash == false)
+                    {
+                        gbmode = "";
+                    }
+
+                    if (gbmode != "")
+                    {
+                        if (same_sash == true || gbmode == "noSash")
+                        {
+                            if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                            {
+                                unbalancedGlass_cnt++;
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            return unbalancedGlass_cnt;
+        }
+
+        public void Run_GetListOfMaterials_SpecificItem()
+        {
+            _quotationModel.GetListOfMaterials(_windoorModel);
+        }
+
+        public void Fit_MyControls_byControlsLocation()
+        {
+            foreach (IFrameModel frames in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
                 {
                     foreach (Control ctrl in mpanel.MPanelLst_Objects)
                     {
@@ -448,9 +1523,9 @@ namespace PresentationLayer.Presenter
 
         private void FitControls_InsideMultiPanel()
         {
-            foreach (IFrameModel frames in _windoorModel.lst_frame.Where(fr => fr.Frame_Visible == true))
+            foreach (IFrameModel frames in _windoorModel.lst_frame)
             {
-                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel.Where(mpnl => mpnl.MPanel_Visibility == true))
+                foreach (IMultiPanelModel mpanel in frames.Lst_MultiPanel)
                 {
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {
@@ -459,404 +1534,7 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
-        private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
-        {
-            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
 
-            if (ndx_zoomPercentage < _windoorModel.Arr_ZoomPercentage.Count() - 1)
-            {
-                ndx_zoomPercentage++;
-                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
-                FitControls_InsideMultiPanel();
-                Fit_MyControls_byControlsLocation();
-            }
-            _basePlatformPresenter.InvalidateBasePlatform();
-            _basePlatformPresenter.Invalidate_flpMainControls();
-        }
-
-        private void _mainView_ButtonMinusZoomClickEventRaised(object sender, EventArgs e)
-        {
-            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
-
-            if (ndx_zoomPercentage > 0)
-            {
-                ndx_zoomPercentage--;
-                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
-                FitControls_InsideMultiPanel();
-                Fit_MyControls_byControlsLocation();
-            }
-            _basePlatformPresenter.InvalidateBasePlatform();
-            _basePlatformPresenter.Invalidate_flpMainControls();
-        }
-        #region Events
-
-        private void OnLabelSizeClickEventRaised(object sender, EventArgs e)
-        {
-            _frmDimensionPresenter.SetPresenters(this);
-            _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.ChangeBasePlatformSize;
-            _frmDimensionPresenter.SetProfileType(_windoorModel.WD_profile);
-            _frmDimensionPresenter.SetHeight();
-            _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
-            _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-        }
-
-        private void OnCreateNewItemClickEventRaised(object sender, EventArgs e)
-        {
-            ToolStripMenuItem tsmItem = (ToolStripMenuItem)sender;
-            if (tsmItem.Name == "C70ToolStripMenuItem")
-            {
-                Scenario_Quotation(false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile");
-            }
-            else if (tsmItem.Name == "PremiLineToolStripMenuItem")
-            {
-                Scenario_Quotation(false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile");
-            }
-        }
-
-        private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)
-        {
-            //Panel pnlMain = (Panel)sender;
-            //pnlMain.PerformLayout();
-        }
-
-        private void OnNewQuotationMenuItemClickEventRaised(object sender, EventArgs e)
-        {
-            bool create_new = false;
-
-            if (_quotationModel != null)
-            {
-                if (MessageBox.Show("Are you sure want to create new Quotation?", "Delete progress",
-                                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    create_new = true;
-                    Scenario_Quotation(false, false, false,frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
-                }
-            }
-            else
-            {
-                create_new = true;
-            }
-
-            if (create_new == true)
-            {
-                input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
-                if (input_qrefno != "" && input_qrefno != "0")
-                {
-                    Scenario_Quotation(true, false, false,frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
-                }
-            }
-        }
-
-        private void OnNewFrameButtonClickEventRaised(object sender, EventArgs e)
-        {
-            ToolStripButton tsb = (ToolStripButton)sender;
-            if (tsb.Name == "tsBtnNwin")
-            {
-                frameType = FrameModel.Frame_Padding.Window;
-            }
-            else if (tsb.Name == "tsBtnNdoor")
-            {
-                frameType = FrameModel.Frame_Padding.Door;
-            }
-            Scenario_Quotation(false, false, true, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "");
-        }
-
-        private void OnOpenToolStripButtonClickEventRaised(object sender, EventArgs e)
-        {
-            // dito ilagay ang loading ng wndr file
-        }
-
-        private void OnMainViewClosingEventRaised(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.Save();
-            _loginView.CloseLoginView();
-        }
-
-        private void OnMainViewLoadEventRaised(object sender, EventArgs e)
-        {
-            if (Properties.Settings.Default.FirstTym == true)
-            {
-                string defDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Windoor Maker files";
-                Directory.CreateDirectory(defDir);
-                MessageBox.Show("Your default sync directory >> " + defDir + "\n\nYou can change sync directory anytime at 'Tools' > 'Change sync directory'",
-                                "Sync directory",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-                Properties.Settings.Default.WndrDir = defDir;
-                Properties.Settings.Default.FirstTym = false;
-            }
-            _mainView.Nickname = _userModel.Nickname;
-
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
-
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Multi-Panel (Mullion)", new Thumbs_MultiPanelMullionUC()).GetControlUC());
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Sliding Panel", new Thumbs_SlidingPanelUC()).GetControlUC());
-
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Awning Panel", new Thumbs_AwningPanelUC()).GetControlUC());
-
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Casement Panel", new Thumbs_CasementPanelUC()).GetControlUC());
-
-            _pnlControlSub.Controls.Add(
-                (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Fixed Panel", new Thumbs_FixedPanelUC()).GetControlUC());
-
-        }
-
-        #endregion
-
-        #region ViewUpdate(Controls)
-
-        private void Clearing_Operation()
-        {
-            _quotationModel = null;
-            _pnlItems.Controls.Clear();
-            _pnlPropertiesBody.Controls.Clear();
-            _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
-            SetMainViewTitle("");
-            CreateNewWindoorBtn_Disable();
-            ItemToolStrip_Disable();
-            //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
-        }
-
-        private void ItemToolStrip_Enable()
-        {
-            _mainView.ItemToolStripEnabled = true;
-        }
-
-        private void ItemToolStrip_Disable()
-        {
-            _mainView.ItemToolStripEnabled = false;
-        }
-
-        private void BotToolStrip_Enable()
-        {
-            _mainView.GetPanelBot().Enabled = true;
-        }
-
-        private void BotToolStrip_Disable()
-        {
-            _mainView.GetPanelBot().Enabled = false;
-        }
-
-        private void SetMainViewTitle(string qrefno, string itemname, string profiletype, bool saved)
-        {
-            _mainView.mainview_title = qrefno.ToUpper() + " >> " + itemname + " (" + profiletype + ")";
-            _mainView.mainview_title = (saved == false) ? _mainView.mainview_title + "*" : _mainView.mainview_title.Replace("*", "");
-        }
-        private void SetMainViewTitle(string qrefno)
-        {
-            _mainView.mainview_title = qrefno;
-        }
-
-        public void Invalidate_pnlMain()
-        {
-            _pnlMain.Invalidate();
-        }
-
-        private void CreateNewWindoorBtn_Enable()
-        {
-            _mainView.CreateNewWindoorBtnEnabled = true;
-        }
-
-        private void CreateNewWindoorBtn_Disable()
-        {
-            _mainView.CreateNewWindoorBtnEnabled = false;
-        }
-
-        #endregion
-
-        #region Scenarios
-
-        public void Scenario_Quotation(bool QoutationInputBox_OkClicked, 
-                                       bool NewItem_OkClicked,
-                                       bool AddedFrame,
-                                       frmDimensionPresenter.Show_Purpose purpose,
-                                       int frmDimension_numWd,
-                                       int frmDimension_numHt,
-                                       string frmDimension_profileType)
-        {
-            if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
-            {
-                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame)
-                {
-                    Clearing_Operation();
-                }
-                else if (QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame)
-                {
-                    SetMainViewTitle(input_qrefno.ToUpper());
-                    ItemToolStrip_Enable();
-                    _quotationModel = _quotationServices.AddQuotationModel(input_qrefno);
-
-                    _frmDimensionPresenter.SetPresenters(this);
-                    _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
-                    _frmDimensionPresenter.SetProfileType("C70 Profile");
-                    _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = true;
-                    _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = true;
-                    _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
-                    _frmDimensionPresenter.SetHeight();
-                    _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame)
-                {
-                    _frmDimensionPresenter.SetPresenters(this);
-                    _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Item;
-                    _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
-                    _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
-                    _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = true;
-                    _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
-                    _frmDimensionPresenter.SetHeight();
-                    _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame)
-                {
-                    _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
-                    _frmDimensionPresenter.SetPresenters(this);
-                    _frmDimensionPresenter.purpose = purpose;
-                    _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
-                    _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
-                    _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
-                    _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = true;
-                    _frmDimensionPresenter.SetHeight();
-                    _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                }
-            }
-            else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //from frmDimension to here
-            {
-                if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame)
-                {
-                    if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
-                    {
-                        _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
-                                                                         frmDimension_numHt,
-                                                                         frmDimension_profileType,
-                                                                         _quotationModel.Lst_Windoor.Count() + 1);
-                        AddWndrList_QuotationModel(_windoorModel);
-
-                        _mainView.Zoom = _windoorModel.WD_zoom;
-
-                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel);
-                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-                        _mainView.GetThis().Controls.Add(bpUC);
-                        //bpUC.BringToFront();
-
-                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
-                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-
-                        AddItemInfoUC(_windoorModel);
-                        
-                        _basePlatformPresenter.InvalidateBasePlatform();
-                        SetMainViewTitle(input_qrefno,
-                                         _windoorModel.WD_name,
-                                         _windoorModel.WD_profile,
-                                         false);
-                        ItemToolStrip_Enable();
-                        CreateNewWindoorBtn_Enable();
-                        BotToolStrip_Enable();
-
-                        _mainView.RemoveBinding(_mainView.GetLblSize());
-                        _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
-                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                    }
-                }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame) //Add new Item
-                {
-                    if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
-                    {
-                        _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
-                                                                         frmDimension_numHt,
-                                                                         frmDimension_profileType,
-                                                                         _quotationModel.Lst_Windoor.Count() + 1);
-                        AddWndrList_QuotationModel(_windoorModel);
-
-                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel);
-                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-                        _mainView.GetThis().Controls.Add(bpUC);
-                        //bpUC.BringToFront();
-
-                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel);
-                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-
-                        AddItemInfoUC(_windoorModel); //add item information user control
-                        
-                        _basePlatformPresenter.InvalidateBasePlatform();
-                        SetMainViewTitle(input_qrefno,
-                                         _windoorModel.WD_name,
-                                         _windoorModel.WD_profile,
-                                         false);
-
-                        BotToolStrip_Enable();
-                        CreateNewWindoorBtn_Enable();
-
-                        _mainView.RemoveBinding(_mainView.GetLblSize());
-                        _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
-
-                        _pnlPropertiesBody.Controls.Clear(); //Clearing Operation
-                        _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
-                        _pnlItems.VerticalScroll.Value = _pnlItems.VerticalScroll.Maximum;
-                        _pnlItems.PerformLayout();
-
-                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                    }
-                }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame) //add frame
-                {
-                    if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
-                    {
-                        int frameID = _windoorModel.frameIDCounter += 1;
-                        _frameModel = _frameServices.AddFrameModel(frmDimension_numWd, 
-                                                                   frmDimension_numHt, 
-                                                                   frameType, 
-                                                                   _windoorModel.WD_zoom_forImageRenderer,
-                                                                   _windoorModel.WD_zoom,
-                                                                   FrameProfile_ArticleNo._7502,
-                                                                   frameID);
-                        AddFrameList_WindoorModel(_frameModel);
-                        IFramePropertiesUCPresenter framePropUCP =  AddFramePropertiesUC(_frameModel);
-                        AddFrameUC(_frameModel, framePropUCP);
-
-                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                        _basePlatformPresenter.InvalidateBasePlatform();
-                        SetMainViewTitle(input_qrefno,
-                                         _windoorModel.WD_name,
-                                         _windoorModel.WD_profile,
-                                         false);
-
-                         Console.WriteLine("Visible Frames: " + _windoorModel.GetAllVisibleFrames().Count());
-
-                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                    }
-                }
-            }
-        }
-
-        public void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
-                                       int frmDimension_numWd,
-                                       int frmDimension_numHt)
-        {
-            if (purpose == frmDimensionPresenter.Show_Purpose.ChangeBasePlatformSize)
-            {
-                _windoorModel.WD_width = frmDimension_numWd;
-                _windoorModel.WD_height = frmDimension_numHt;
-                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                _basePlatformPresenter.InvalidateBasePlatform();
-                _basePlatformPresenter.Invalidate_flpMainControls();
-                //_basePlatformPresenter_willRenderImg.InvalidateBasePlatform();
-                //_basePlatformPresenter_willRenderImg.Invalidate_flpMain();
-            }
-        }
-        #endregion
-
-        #region Functions
         private Dictionary<string, Binding> CreateBindingDictionary_MainPresenter()
         {
             Dictionary<string, Binding> mainPresenterBinding = new Dictionary<string, Binding>();
@@ -885,12 +1563,12 @@ namespace PresentationLayer.Presenter
 
         public void AddFrameUC(IFrameModel frameModel, IFramePropertiesUCPresenter framePropertiesUCP)
         {
-            IFrameImagerUCPresenter frameImagerUCP = (FrameImagerUCPresenter)_frameImagerUCPresenter.GetNewInstance(_unityC, frameModel);
+            IFrameImagerUCPresenter frameImagerUCP = (FrameImagerUCPresenter)_frameImagerUCPresenter.GetNewInstance(_unityC, frameModel, this);
 
-            IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC, 
-                                                                                            frameModel, 
+            IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC,
+                                                                                            frameModel,
                                                                                             this,
-                                                                                            _basePlatformPresenter, 
+                                                                                            _basePlatformPresenter,
                                                                                             frameImagerUCP,
                                                                                             _basePlatformImagerUCPresenter,
                                                                                             framePropertiesUCP);
@@ -916,15 +1594,14 @@ namespace PresentationLayer.Presenter
 
         public void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel)
         {
-            frameModel.Frame_Visible = false;
-            //_windoorModel.lst_frame.Remove(frameModel);
+            _windoorModel.lst_frame.Remove(frameModel);
         }
 
         public IFramePropertiesUC GetFrameProperties(int frameID)
         {
             return _pnlPropertiesBody.Controls.OfType<IFramePropertiesUC>().First(ctrl => ctrl.FrameID == frameID);
         }
-    
+
         public int GetPanelCount()
         {
             return _windoorModel.panelIDCounter += 1;
@@ -962,8 +1639,8 @@ namespace PresentationLayer.Presenter
                                        ITransomUCPresenter transomUCP = null,
                                        IMullionUCPresenter mullionUCP = null)
         {
-            _mainView.GetLblSelectedDivider().Visible = true;
-            _mainView.GetLblSelectedDivider().Text = divModel.Div_Name + " Selected";
+            _tsLblStatus.Visible = true;
+            _tsLblStatus.Text = divModel.Div_Name + " Selected";
             if (transomUCP != null)
             {
                 if (current_transom != null)
@@ -1005,7 +1682,7 @@ namespace PresentationLayer.Presenter
             _mainView.GetLblSelectedDivider().Text = "";
         }
 
-        public void DeletePropertiesUC(int multiPanelID)
+        public void DeleteMultiPanelPropertiesUC(int multiPanelID)
         {
             var propertiesUC = _commonfunc.GetAll(_pnlPropertiesBody, "MultiPanelPropertiesUC");
             foreach (IMultiPanelPropertiesUC mpnlProperties in propertiesUC)
@@ -1015,6 +1692,51 @@ namespace PresentationLayer.Presenter
                     ((UserControl)mpnlProperties).Parent.Controls.Remove((UserControl)mpnlProperties);
                 }
             }
+        }
+
+        public void DeleteDividerPropertiesUC(int divID)
+        {
+            var propertiesUC = _commonfunc.GetAll(_pnlPropertiesBody, "DividerPropertiesUC");
+            foreach (IDividerPropertiesUC divProperties in propertiesUC)
+            {
+                if (divProperties.Div_ID == divID)
+                {
+                    ((UserControl)divProperties).Parent.Controls.Remove((UserControl)divProperties);
+                }
+            }
+        }
+
+        public void DeletePanelPropertiesUC(int panelID)
+        {
+            var propertiesUC = _commonfunc.GetAll(_pnlPropertiesBody, "Panel_PropertiesUC");
+            foreach (IPanelPropertiesUC pnlProperties in propertiesUC)
+            {
+                if (pnlProperties.Panel_ID == panelID)
+                {
+                    ((UserControl)pnlProperties).Parent.Controls.Remove((UserControl)pnlProperties);
+                }
+            }
+        }
+
+        public void DeleteFramePropertiesUC(int frameID)
+        {
+            var propertiesUC = _commonfunc.GetAll(_pnlPropertiesBody, "FramePropertiesUC");
+            foreach (IFramePropertiesUC frameProperties in propertiesUC)
+            {
+                if (frameProperties.FrameID == frameID)
+                {
+                    ((UserControl)frameProperties).Parent.Controls.Remove((UserControl)frameProperties);
+                }
+            }
+        }
+
+        private DataColumn CreateColumn(string columname, string caption, string type)
+        {
+            DataColumn col = new DataColumn();
+            col.DataType = Type.GetType(type);
+            col.ColumnName = columname;
+            col.Caption = caption;
+            return col;
         }
 
         #endregion

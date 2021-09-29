@@ -73,7 +73,28 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
-        public event EventHandler fixedPanelUCSizeChangedEventRaised;
+        public Color Panel_BackColor
+        {
+            get
+            {
+                return this.BackColor;
+            }
+        }
+
+        private bool _panelCmenuDeleteVisibility;
+        public bool Panel_CmenuDeleteVisibility
+        {
+            get
+            {
+                return _panelCmenuDeleteVisibility;
+            }
+
+            set
+            {
+                _panelCmenuDeleteVisibility = value;
+            }
+        }
+
         public event EventHandler deleteToolStripClickedEventRaised;
         public event PaintEventHandler fixedPanelUCPaintEventRaised;
         public event EventHandler fixedPanelMouseEnterEventRaised;
@@ -96,16 +117,12 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(binding["Panel_Margin"]);
             this.DataBindings.Add(binding["Panel_Placement"]);
             this.DataBindings.Add(binding["PanelGlass_ID"]);
-        }
-
-        private void FixedPanelUC_SizeChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(this, fixedPanelUCSizeChangedEventRaised, e);
+            this.DataBindings.Add(binding["Panel_CmenuDeleteVisibility"]);
         }
 
         private void FixedPanelUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
             {
                 cmenu_fxd.Show(new Point(MousePosition.X, MousePosition.Y));
             }

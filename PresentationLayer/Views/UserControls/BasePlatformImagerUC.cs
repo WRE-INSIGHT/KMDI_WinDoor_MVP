@@ -58,5 +58,15 @@ namespace PresentationLayer.Views.UserControls
         {
             return flp_frameDragDrop;
         }
+
+        public void BringToFront_baseImager()
+        {
+            this.BringToFront();
+        }
+
+        public void SendToBack_baseImager()
+        {
+            this.SendToBack();
+        }
     }
 }

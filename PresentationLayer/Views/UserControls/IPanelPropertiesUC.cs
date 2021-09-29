@@ -1,5 +1,7 @@
 ﻿using CommonComponents;
 using System;
+using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -10,8 +12,7 @@ namespace PresentationLayer.Views.UserControls
 
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler ChkOrientationCheckChangedEventRaised;
-        event EventHandler CmbGlassThickSelectedValueChangedEventRaised;
-        //event EventHandler PnumWidthValueChangedEventRaised;
-        //event EventHandler PnumHeightValueChangedEventRaised;
+
+        Panel GetPanelSpecsPNL();
     }
 }
