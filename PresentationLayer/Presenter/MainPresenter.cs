@@ -601,6 +601,7 @@ namespace PresentationLayer.Presenter
 
                             mpnl.Fit_MyControls_Dimensions();
                             mpnl.Fit_MyControls_ToBindDimensions();
+                            mpnl.Fit_MyControls_ImagersToBindDimensions();
                             mpnl.Adjust_ControlDisplaySize();
                         }
                     }
@@ -1560,6 +1561,36 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
+                        else if (imager is IMultiPanelImagerUC)
+                        {
+                            IMultiPanelImagerUC multi = (IMultiPanelImagerUC)imager;
+                            if (multi.MPanel_Placement == "Last")
+                            {
+                                IMultiPanelModel mpnlModel = mpnl.MPanelLst_MultiPanel.Find(mpanl => mpanl.MPanel_ID == multi.MPanel_ID);
+                                if (mpnl.MPanel_Type == "Mullion")
+                                {
+                                    while (imager.Location.Y > imager.Margin.Top)
+                                    {
+                                        mpnlModel.MPanelImageRenderer_Width--;
+                                        if (imager.Location.Y == imager.Margin.Top)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (mpnl.MPanel_Type == "Transom")
+                                {
+                                    while (imager.Location.X > imager.Margin.Left)
+                                    {
+                                        mpnlModel.MPanelImageRenderer_Height--;
+                                        if (imager.Location.X == imager.Margin.Left)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1574,6 +1605,7 @@ namespace PresentationLayer.Presenter
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {
                         mpanel.Fit_MyControls_ToBindDimensions();
+                        mpanel.Fit_MyControls_ImagersToBindDimensions();
                     }
                 }
             }

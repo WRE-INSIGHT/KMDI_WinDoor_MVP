@@ -982,7 +982,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
             MPanelLst_Objects.Remove(control);
         }
-
+        
         private void Adjust_prev_obj_dimension(Control control, 
                                                int previous_indx, 
                                                int pixel_count)
@@ -992,12 +992,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 if (MPanelLst_Objects[previous_indx].Name.Contains("MullionUC"))
                 {
                     MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_Width += pixel_count;
-                    //MPanelLst_Objects[previous_indx].Width += pixel_count;
                 }
                 else if (MPanelLst_Objects[previous_indx].Name.Contains("TransomUC"))
                 {
                     MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_Height += pixel_count;
-                    //MPanelLst_Objects[previous_indx].Height += pixel_count;
                 }
             }
         }
@@ -1063,6 +1061,67 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
         
+        public void Fit_MyControls_ImagersToBindDimensions()
+        {
+            if (MPanelLst_Objects.Count() > 0)
+            {
+                if (MPanel_Type == "Transom")
+                {
+                    int totalHeight_Imagers = MPanelLst_Panel.Sum(pnl => pnl.PanelImageRenderer_Height + pnl.PanelImageRenderer_Margin.Top + pnl.PanelImageRenderer_Margin.Bottom) +
+                                              MPanelLst_Divider.Sum(div => div.DivImageRenderer_Height) +
+                                              MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanelImageRenderer_Height);
+                    int diff_MPanelImagerHt_VS_MyImagersHeight = MPanelImageRenderer_Height - totalHeight_Imagers;
+
+                    while (diff_MPanelImagerHt_VS_MyImagersHeight > 0)
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (diff_MPanelImagerHt_VS_MyImagersHeight > 0)
+                            {
+                                pnl.PanelImageRenderer_Height++;
+                                diff_MPanelImagerHt_VS_MyImagersHeight--;
+                            }
+                        }
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
+                        {
+                            if (diff_MPanelImagerHt_VS_MyImagersHeight > 0)
+                            {
+                                mpnl.MPanelImageRenderer_Height++;
+                                diff_MPanelImagerHt_VS_MyImagersHeight--;
+                            }
+                        }
+                    }
+                }
+                else if (MPanel_Type == "Mullion")
+                {
+                    int totalWidth_Imagers = MPanelLst_Panel.Sum(pnl => pnl.PanelImageRenderer_Width + pnl.PanelImageRenderer_Margin.Right + pnl.PanelImageRenderer_Margin.Left) +
+                                             MPanelLst_Divider.Sum(div => div.DivImageRenderer_Width) +
+                                             MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanelImageRenderer_Width);
+                    int diff_MPanelImagerWd_VS_MyImagersWidth = MPanelImageRenderer_Width - totalWidth_Imagers;
+
+                    while (diff_MPanelImagerWd_VS_MyImagersWidth > 0)
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (diff_MPanelImagerWd_VS_MyImagersWidth > 0)
+                            {
+                                pnl.PanelImageRenderer_Width++;
+                                diff_MPanelImagerWd_VS_MyImagersWidth--;
+                            }
+                        }
+                        foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
+                        {
+                            if (diff_MPanelImagerWd_VS_MyImagersWidth > 0)
+                            {
+                                mpnl.MPanelImageRenderer_Width++;
+                                diff_MPanelImagerWd_VS_MyImagersWidth--;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public void Fit_MyControls_Dimensions()
         {
             if (MPanelLst_Objects.Count() > 0)

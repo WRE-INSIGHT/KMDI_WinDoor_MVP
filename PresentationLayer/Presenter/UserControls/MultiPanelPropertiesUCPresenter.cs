@@ -157,6 +157,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                                 mpnl.Fit_MyControls_Dimensions();
                                 mpnl.Fit_MyControls_ToBindDimensions();
+                                mpnl.Fit_MyControls_ImagersToBindDimensions();
                                 mpnl.Adjust_ControlDisplaySize();
                             }
 
@@ -167,6 +168,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                         _multiPanelModel.Fit_MyControls_Dimensions();
                         _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                        _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                         _multiPanelModel.Adjust_ControlDisplaySize();
 
                         _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();

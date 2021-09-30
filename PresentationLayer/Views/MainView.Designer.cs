@@ -362,6 +362,7 @@
             // 
             // listOfMaterialsToolStripMenuItem
             // 
+            this.listOfMaterialsToolStripMenuItem.Enabled = false;
             this.listOfMaterialsToolStripMenuItem.Name = "listOfMaterialsToolStripMenuItem";
             this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.listOfMaterialsToolStripMenuItem.Text = "List of Materials";
@@ -369,6 +370,7 @@
             // 
             // changeItemColorToolStripMenuItem
             // 
+            this.changeItemColorToolStripMenuItem.Enabled = false;
             this.changeItemColorToolStripMenuItem.Name = "changeItemColorToolStripMenuItem";
             this.changeItemColorToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.changeItemColorToolStripMenuItem.Text = "Change Item Color";

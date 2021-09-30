@@ -66,21 +66,29 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
 
-            int outer_line = 10,
+            int font_size = 30,
+                outer_line = 10,
                 inner_line = 15;
 
-            if (_panelModel.Panel_Zoom == 0.19f)
+            if (_panelModel.PanelImageRenderer_Zoom == 0.28f)
             {
+                font_size = 25;
+            }
+            else if (_panelModel.PanelImageRenderer_Zoom == 0.19f)
+            {
+                font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
             }
-            else if (_panelModel.Panel_Zoom == 0.14f)
+            else if (_panelModel.PanelImageRenderer_Zoom == 0.14f)
             {
+                font_size = 13;
                 outer_line = 3;
                 inner_line = 7;
             }
-            else if (_panelModel.Panel_Zoom == 0.10f)
+            else if (_panelModel.PanelImageRenderer_Zoom == 0.10f)
             {
+                font_size = 8;
                 outer_line = 3;
                 inner_line = 7;
             }
@@ -200,7 +208,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             panelBinding.Add("PanelImageRenderer_Width", new Binding("Width", _panelModel, "PanelImageRenderer_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelImageRenderer_Height", new Binding("Height", _panelModel, "PanelImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "PanelImageRenderer_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("PanelImageRenderer_Margin", new Binding("Margin", _panelModel, "PanelImageRenderer_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("pnl_Orientation", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
 

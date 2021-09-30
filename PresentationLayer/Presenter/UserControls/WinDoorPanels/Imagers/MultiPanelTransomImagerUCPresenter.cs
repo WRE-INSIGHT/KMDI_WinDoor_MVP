@@ -2107,6 +2107,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
             multiPanelBinding.Add("MPanelImageRenderer_Height", new Binding("Height", _multiPanelModel, "MPanelImageRenderer_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Margin", new Binding("Margin", _multiPanelModel, "MPanelImageRenderer_Margin", true, DataSourceUpdateMode.OnPropertyChanged));
+            multiPanelBinding.Add("MPanel_Placement", new Binding("MPanel_Placement", _multiPanelModel, "MPanel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return multiPanelBinding;
         }

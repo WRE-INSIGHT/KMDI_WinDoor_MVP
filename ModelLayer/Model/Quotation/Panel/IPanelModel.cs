@@ -38,6 +38,7 @@ namespace ModelLayer.Model.Quotation.Panel
         string Panel_Placement { get; set; }
         Padding Panel_Margin { get; set; }
         Padding Panel_MarginToBind { get; set; }
+        Padding PanelImageRenderer_Margin { get; set; }
         float Panel_Zoom { get; set; }
         IFrameModel Panel_ParentFrameModel { get; set; }
         IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }

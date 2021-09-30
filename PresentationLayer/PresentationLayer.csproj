@@ -552,6 +552,7 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\ICasementPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IFixedPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\IFixedPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IMultiPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IMultiPanelMullionImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IMultiPanelTransomImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IPanelImagerUC.cs" />

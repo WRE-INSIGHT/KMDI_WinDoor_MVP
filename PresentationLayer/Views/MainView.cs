@@ -31,6 +31,16 @@ namespace PresentationLayer.Views
             set
             {
                 this.Text = value;
+                if (this.Text.Contains(">>"))
+                {
+                    listOfMaterialsToolStripMenuItem.Enabled = true;
+                    changeItemColorToolStripMenuItem.Enabled = true;
+                }
+                else
+                {
+                    listOfMaterialsToolStripMenuItem.Enabled = false;
+                    changeItemColorToolStripMenuItem.Enabled = false;
+                }
             }
         }
 

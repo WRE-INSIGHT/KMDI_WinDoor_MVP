@@ -328,6 +328,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             _multiPanelModel.Fit_MyControls_Dimensions();
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                            _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                             _multiPanelModel.Adjust_ControlDisplaySize();
                             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                         }
@@ -415,6 +416,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             _multiPanelModel.Fit_MyControls_Dimensions();
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                            _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                             _multiPanelModel.Adjust_ControlDisplaySize();
                             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                         }
@@ -757,6 +759,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.Fit_MyControls_Dimensions();
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                     _multiPanelModel.Adjust_ControlDisplaySize();
                     _mainPresenter.Fit_MyControls_byControlsLocation();
                     _mainPresenter.Fit_MyImager_byImagersLocation();
@@ -843,6 +846,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)divUC);
 
                 IDividerModel div = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
+
+                Control div_imager = _commonFunctions.FindImagerControl(div.Div_ID, "TransomImager", _multiPanelModel.MPanel_ParentModel);
+                _multiPanelModel.MPanel_ParentModel.MPanelLst_Imagers.Remove(div_imager);
 
                 _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
                 _frameModel.AdjustPropertyPanelHeight("Div", "delete");
@@ -1092,6 +1098,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelMullionUC, 
                                                                                    _frameModel.Frame_Type.ToString(),
                                                                                    _multiPanelModel.MPanel_Placement);
+
+                Control imager = _commonFunctions.FindImagerControl(_multiPanelModel.MPanel_ID, "MPanel", _multiPanelModel.MPanel_ParentModel);
+                _multiPanelModel.MPanel_ParentModel.MPanelLst_Imagers.Remove(imager);
             }
 
             if (_multiPanelModel.MPanel_Parent is IFrameUC)

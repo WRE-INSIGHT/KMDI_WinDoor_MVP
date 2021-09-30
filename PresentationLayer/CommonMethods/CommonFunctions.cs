@@ -12,6 +12,7 @@ using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
+using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using ServiceLayer.Services.DividerServices;
 using System;
 using System.Collections.Generic;
@@ -740,6 +741,51 @@ namespace PresentationLayer.CommonMethods
 
             Rectangle headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString(rowIdx, rowFont, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+
+        public Control FindImagerControl(int id, string type, IMultiPanelModel mpanelParent)
+        {
+            Control imgr = new Control();
+
+            foreach (Control item in mpanelParent.MPanelLst_Imagers)
+            {
+                int imgr_id = 0;
+
+                if (type == "Panel" && item is IPanelImagerUC)
+                {
+                    imgr_id = ((IPanelImagerUC)item).Panel_ID;
+                    if (id == imgr_id)
+                    {
+                        imgr = item;
+                    }
+                }
+                else if (type == "MPanel" && item is IMultiPanelImagerUC)
+                {
+                    imgr_id = ((IMultiPanelImagerUC)item).MPanel_ID;
+                    if (id == imgr_id)
+                    {
+                        imgr = item;
+                    }
+                }
+                else if (type == "MullionImager" && item is IMullionImagerUC)
+                {
+                    imgr_id = ((IMullionImagerUC)item).Div_ID;
+                    if (id == imgr_id)
+                    {
+                        imgr = item;
+                    }
+                }
+                else if (type == "TransomImager" && item is ITransomImagerUC)
+                {
+                    imgr_id = ((ITransomImagerUC)item).Div_ID;
+                    if (id == imgr_id)
+                    {
+                        imgr = item;
+                    }
+                }
+            }
+
+            return imgr;
         }
     }
 }

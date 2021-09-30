@@ -15,7 +15,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         string MPanel_Type { get; set; }
         DockStyle MPanel_Dock { get; set; }
         int MPanel_Width { get; set; }
+        int MPanelImageRenderer_Width { get; set; }
         int MPanel_Height { get; set; }
+        int MPanelImageRenderer_Height { get; set; }
         int MPanel_HeightToBind { get; set; }
         FlowDirection MPanel_FlowDirection { get; set; }
         bool MPanel_Visibility { get; set; }
@@ -52,6 +54,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                          bool if_auto_added = false);
         void DeleteControl_MPanelLstObjects(Control control, string frameType, string placement = "");
         void Fit_MyControls_ToBindDimensions();
+        void Fit_MyControls_ImagersToBindDimensions();
         void Fit_MyControls_Dimensions();
         void Object_Indexer();
         void Adjust_ControlDisplaySize();
