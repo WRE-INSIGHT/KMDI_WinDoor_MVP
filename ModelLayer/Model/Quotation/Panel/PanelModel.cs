@@ -2499,6 +2499,22 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_FrictionStayArtNo = fs_dimension_based;
                     }
+
+                    if (Panel_Type == "Awning Panel")
+                    {
+                        if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                        {
+                            if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
+                            {
+                                Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+                            }
+                            else if (base_color == Base_Color._DarkBrown)
+                            {
+                                Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
+                            }
+                        }
+                        Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
+                    }
                 }
                 else if (Panel_Type.Contains("Casement"))
                 {
@@ -3752,6 +3768,22 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (fs_weight_based == FrictionStay_ArticleNo._None)
                     {
                         Panel_FrictionStayArtNo = fs_dimension_based;
+                    }
+
+                    if (Panel_Type == "Awning Panel")
+                    {
+                        if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                        {
+                            if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
+                            {
+                                Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+                            }
+                            else if (base_color == Base_Color._DarkBrown)
+                            {
+                                Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
+                            }
+                            Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
+                        }
                     }
                 }
                 else if (Panel_Type.Contains("Casement"))

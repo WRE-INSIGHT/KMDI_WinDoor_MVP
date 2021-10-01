@@ -899,12 +899,6 @@ namespace ModelLayer.Model.Quotation
 
                                                 add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
 
-                                                Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
-                                                                       pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
-                                                                       "",
-                                                                       "Frame",
-                                                                       @"");
-
                                                 Material_List.Rows.Add("Fixed Cam " + pnl_curCtrl.Panel_FixedCamArtNo.ToString(),
                                                                        2, "pc(s)",
                                                                        "",
@@ -930,6 +924,13 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 add_screws_fab_fs_or_rs += 6;
                                             }
+
+                                            Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
+                                                                   pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+
                                         }
                                         else if (pnl_curCtrl.Panel_Type.Contains("Casement"))
                                         {
@@ -1803,12 +1804,6 @@ namespace ModelLayer.Model.Quotation
 
                                     add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
 
-                                    Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
-                                                           pnl.Panel_PlasticWedgeQty, "pc (s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
-
                                     Material_List.Rows.Add("Fixed Cam " + pnl.Panel_FixedCamArtNo.ToString(),
                                                            2, "pc(s)",
                                                            "",
@@ -1834,6 +1829,13 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     add_screws_fab_fs_or_rs += 6;
                                 }
+
+                                Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
+                                                       pnl.Panel_PlasticWedgeQty, "pc (s)",
+                                                       "",
+                                                       "Frame",
+                                                       @"");
+
                             }
                             else if (pnl.Panel_Type.Contains("Casement"))
                             {
