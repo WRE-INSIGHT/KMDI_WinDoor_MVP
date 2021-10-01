@@ -434,41 +434,28 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             int area = _wdHeight * _wdWidth;
             float zm = 1.0f;
-
-            //if (area <= 1500000)
-            //{
-            //    zm = 1.00f;
-            //}
-            //else if (area > 1500000 && area <= 2500000)
-            //{
-            //    zm = 0.50f;
-            //}
-            //else if (area > 2500000)
-            //{
-            //    zm = 0.28f;
-            //}
-
-            if (area <= 360000)
+            
+            if (area <= 360000) //400w x 400h to 600w x 600h
             {
                 zm = _arr_zoomPercentage[5];
             }
-            else if (area > 360000 && area <= 1000000)
+            else if (area > 360000 && area <= 1000000) //(600w x 601h / 601w x 600h) to 1000w x 1000h
             {
                 zm = _arr_zoomPercentage[4];
             }
-            else if (area > 1000000 && area <= 4000000)
+            else if (area > 1000000 && area <= 4000000) // (1000w x 1001h / 1001w x 1000h) to 2000w x 2000h
             {
                 zm = _arr_zoomPercentage[3];
             }
-            else if (area > 4000000 && area <= 9000000)
+            else if (area > 4000000 && area <= 9000000) // (2000w x 2001h / 2001w x 2000h) to 3000w x 3000h
             {
                 zm = _arr_zoomPercentage[2];
             }
-            else if (area > 9000000 && area <= 16000000)
+            else if (area > 9000000 && area <= 16000000) // (3000w x 3001h / 3001w x 3000h) to 4000w x 4000h
             {
                 zm = _arr_zoomPercentage[1];
             }
-            else if (area > 16000000)
+            else if (area > 16000000) // more than (4000w x 4001h / 4001w x 4000h)
             {
                 zm = _arr_zoomPercentage[0];
             }

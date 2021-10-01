@@ -220,8 +220,6 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
-        private int[] _arr_divSizes = { 26, 33, 20 }; //even index - Window ; odd index - Door
-
         private float _divZoom;
         public float Div_Zoom
         {
