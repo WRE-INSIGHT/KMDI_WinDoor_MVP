@@ -355,6 +355,17 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (div_nxtCtrl.Div_ChkDM == false)
                                 {
+                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           div_nxtCtrl.Div_ExplosionHeight.ToString(),
+                                                           div_nxtCtrl.Div_Bounded,
+                                                           @"[  ]");
+                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Height " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           div_nxtCtrl.Div_ReinfHeight.ToString(),
+                                                           mpnl.MPanel_Type,
+                                                           @"|  |");
+
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                            2, "pc(s)", "");
 
@@ -652,6 +663,9 @@ namespace ModelLayer.Model.Quotation
                                                                    div_nxtCtrl.Div_ReinfHeight.ToString(),
                                                                    mpnl.MPanel_Type,
                                                                    @"|  |");
+
+                                            Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
+                                                                   2, "pc(s)", "");
 
                                             if (!screws_for_inst_where.Contains("Mullion"))
                                             {

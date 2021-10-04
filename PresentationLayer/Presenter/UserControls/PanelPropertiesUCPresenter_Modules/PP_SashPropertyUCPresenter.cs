@@ -193,12 +193,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             if (_panelModel.Panel_Type.Contains("Fixed") == false)
             {
                 curr_sash = SashProfile_ArticleNo._7581;
+                _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._7581;
                 _panelModel.Panel_2dHingeVisibility = true;
                 _panelModel.Panel_ButtHingeVisibility = false;
             }
             else
             {
                 curr_sash = SashProfile_ArticleNo._None;
+                _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._None;
                 _panelModel.Panel_2dHingeVisibility = false;
                 _panelModel.Panel_ButtHingeVisibility = false;
             }
