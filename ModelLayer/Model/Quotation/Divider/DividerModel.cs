@@ -78,8 +78,24 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divWd = value;
-                Div_WidthToBind = (int)(value * Div_Zoom);
-                DivImageRenderer_Width = (int)(value * DivImageRenderer_Zoom);
+                if (Div_Type == DividerType.Mullion)
+                {
+                    if (_divZoom <= 0.26f)
+                    {
+                        Div_WidthToBind = 13;
+                        DivImageRenderer_Width = 13;
+                    }
+                    else if (_divZoom > 0.26f)
+                    {
+                        Div_WidthToBind = (int)(Div_Zoom * value);
+                        DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * value);
+                    }
+                }
+                else if (Div_Type == DividerType.Transom)
+                {
+                    Div_WidthToBind = (int)(Div_Zoom * value);
+                    DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * value);
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -109,8 +125,24 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divHt = value;
-                Div_HeightToBind = (int)(value * Div_Zoom);
-                DivImageRenderer_Height = (int)(value * DivImageRenderer_Zoom);
+                if (Div_Type == DividerType.Mullion)
+                {
+                    if (_divZoom <= 0.26f)
+                    {
+                        Div_HeightToBind = 13;
+                        DivImageRenderer_Height = 13;
+                    }
+                    else if (_divZoom > 0.26f)
+                    {
+                        Div_HeightToBind = (int)(Div_Zoom * value);
+                        DivImageRenderer_Height = (int)(DivImageRenderer_Width * value);
+                    }
+                }
+                else if (Div_Type == DividerType.Transom)
+                {
+                    Div_HeightToBind = (int)(Div_Zoom * value);
+                    DivImageRenderer_Height = (int)(DivImageRenderer_Width * value);
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -183,8 +215,31 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divImageRenderedZoom = value;
-                DivImageRenderer_Width = (int)(Div_Width * value);
-                DivImageRenderer_Height = (int)(Div_Height * value);
+
+                if (Div_Type == DividerType.Mullion)
+                {
+                    DivImageRenderer_Height = (int)(Div_Height * value);
+                    if (_divZoom <= 0.26f)
+                    {
+                        DivImageRenderer_Width = 13;
+                    }
+                    else if (_divZoom > 0.26f)
+                    {
+                        DivImageRenderer_Width = (int)(Div_Width * value);
+                    }
+                }
+                else if (Div_Type == DividerType.Transom)
+                {
+                    DivImageRenderer_Width = (int)(Div_Width * value);
+                    if (_divZoom <= 0.26f)
+                    {
+                        DivImageRenderer_Height = 13;
+                    }
+                    else if (_divZoom > 0.26f)
+                    {
+                        DivImageRenderer_Height = (int)(Div_Height * value);
+                    }
+                }
 
                 NotifyPropertyChanged();
             }
@@ -231,8 +286,31 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divZoom = value;
-                Div_HeightToBind = (int)(value * Div_Height);
-                Div_WidthToBind = (int)(value * Div_Width);
+
+                if (Div_Type == DividerType.Mullion)
+                {
+                    Div_HeightToBind = (int)(value * Div_Height);
+                    if (_divZoom <= 0.26f)
+                    {
+                        Div_WidthToBind = 13;
+                    }
+                    else if (_divZoom > 0.26f)
+                    {
+                        Div_WidthToBind = (int)(value * Div_Width);
+                    }
+                }
+                else if (Div_Type == DividerType.Transom)
+                {
+                    Div_WidthToBind = (int)(value * Div_Width);
+                    if (_divZoom <= 0.26f)
+                    {
+                        Div_HeightToBind = 13;
+                    }
+                    else if (_divZoom > 0.26f)
+                    {
+                        Div_HeightToBind = (int)(value * Div_Height);
+                    }
+                }
             }
         }
 

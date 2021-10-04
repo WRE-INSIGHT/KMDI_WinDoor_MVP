@@ -170,7 +170,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         private float _wdZoom;
         [Required(ErrorMessage = "Zoom value is Required")]
-        [Range(0.1, 200.0, ErrorMessage = "Please enter a zoom value bigger than or equal to {1}")]
+        [Range(0.1, 100.0, ErrorMessage = "Please enter a zoom value bigger than or equal to {1}")]
         public float WD_zoom
         {
             get

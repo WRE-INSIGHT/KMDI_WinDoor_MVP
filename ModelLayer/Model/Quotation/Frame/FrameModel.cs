@@ -303,14 +303,30 @@ namespace ModelLayer.Model.Quotation.Frame
         private void FramePadding_Deduct()
         {
             _frameDeduction = (int)(_frame_basicDeduction * Frame_Zoom);
-            Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom) - _frameDeduction);
-            FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
+            if (Frame_Zoom == 0.26f)
+            {
+                Frame_Padding_int = new Padding(10);
+                FrameImageRenderer_Padding_int = new Padding(10);
+            }
+            else
+            {
+                Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom) - _frameDeduction);
+                FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
+            }
         }
 
         private void FramePadding_Default()
         {
-            Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom));
-            FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type) * FrameImageRenderer_Zoom));
+            if (Frame_Zoom == 0.26f)
+            {
+                Frame_Padding_int = new Padding(10);
+                FrameImageRenderer_Padding_int = new Padding(10);
+            }
+            else
+            {
+                Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom));
+                FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type) * FrameImageRenderer_Zoom));
+            }
         }
 
         private bool _deductFramePadding_bool;
