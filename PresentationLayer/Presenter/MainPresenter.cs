@@ -1195,104 +1195,9 @@ namespace PresentationLayer.Presenter
                     SashProfile_ArticleNo sash_art = pnl.Panel_SashProfileArtNo;
                     Handle_Type handletype = pnl.Panel_HandleType;
                     Espagnolette_ArticleNo espag_art = pnl.Panel_EspagnoletteArtNo;
-                    
-                    if (handletype == Handle_Type._Rotoswing)
-                    {
-                        if (!(frame_art == FrameProfile_ArticleNo._7502 &&
-                              sash_art == SashProfile_ArticleNo._7581) &&
-                            !(frame_art == FrameProfile_ArticleNo._7507 &&
-                              sash_art == SashProfile_ArticleNo._7581) &&
-                            !(frame_art == FrameProfile_ArticleNo._7507 &&
-                              sash_art == SashProfile_ArticleNo._395))
-                        {
-                            incompatibility_cnt++;
-                        }
-                    }
-                    else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
-                    {
-                        if (!(frame_art == FrameProfile_ArticleNo._7507 &&
-                              sash_art == SashProfile_ArticleNo._374))
-                        {
-                            incompatibility_cnt++;
-                        }
-                    }
 
-                    if (espag_art == Espagnolette_ArticleNo._741012 || espag_art == Espagnolette_ArticleNo._EQ87NT ||
-                        espag_art == Espagnolette_ArticleNo._628806 || espag_art == Espagnolette_ArticleNo._628807 ||
-                        espag_art == Espagnolette_ArticleNo._628809)
+                    if (pnl.Panel_Type.Contains("Fixed") == false)
                     {
-                        if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
-                            !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
-                        {
-                            incompatibility_cnt++;
-                        }
-                    }
-                    else if (espag_art == Espagnolette_ArticleNo._642105 || espag_art == Espagnolette_ArticleNo._642089 ||
-                             espag_art == Espagnolette_ArticleNo._630963)
-                    {
-                        if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
-                        {
-                            incompatibility_cnt++;
-                        }
-                    }
-                    else if (espag_art == Espagnolette_ArticleNo._N110A00006 || espag_art == Espagnolette_ArticleNo._N110A01006 ||
-                             espag_art == Espagnolette_ArticleNo._N110A02206 || espag_art == Espagnolette_ArticleNo._N110A03206 ||
-                             espag_art == Espagnolette_ArticleNo._N110A04206 || espag_art == Espagnolette_ArticleNo._N110A05206 ||
-                             espag_art == Espagnolette_ArticleNo._N110A06206)
-                    {
-                        if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
-                        {
-                            incompatibility_cnt++;
-                        }
-                    }
-
-                    List<Extension_ArticleNo> lst_extArt = new List<Extension_ArticleNo>();
-                    lst_extArt.Add(pnl.Panel_ExtensionTopArtNo);
-                    lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
-                    lst_extArt.Add(pnl.Panel_ExtensionBotArtNo);
-                    lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
-                    lst_extArt.Add(pnl.Panel_ExtensionLeftArtNo);
-                    lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
-                    lst_extArt.Add(pnl.Panel_ExtensionRightArtNo);
-                    lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
-
-                    foreach (Extension_ArticleNo ext in lst_extArt)
-                    {
-                        if (ext == Extension_ArticleNo._639957)
-                        {
-                            if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
-                                !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
-                            {
-                                incompatibility_cnt++;
-                            }
-                        }
-                        else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
-                        {
-                            if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
-                            {
-                                incompatibility_cnt++;
-                            }
-                        }
-                        else if (ext == Extension_ArticleNo._612978)
-                        {
-                            if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
-                                !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
-                                !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374) &&
-                                !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
-                            {
-                                incompatibility_cnt++;
-                            }
-                        }
-                    }
-                }
-                foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
-                {
-                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                    {
-                        SashProfile_ArticleNo sash_art = pnl.Panel_SashProfileArtNo;
-                        Handle_Type handletype = pnl.Panel_HandleType;
-                        Espagnolette_ArticleNo espag_art = pnl.Panel_EspagnoletteArtNo;
-
                         if (handletype == Handle_Type._Rotoswing)
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._7502 &&
@@ -1313,7 +1218,6 @@ namespace PresentationLayer.Presenter
                                 incompatibility_cnt++;
                             }
                         }
-
 
                         if (espag_art == Espagnolette_ArticleNo._741012 || espag_art == Espagnolette_ArticleNo._EQ87NT ||
                             espag_art == Espagnolette_ArticleNo._628806 || espag_art == Espagnolette_ArticleNo._628807 ||
@@ -1344,7 +1248,6 @@ namespace PresentationLayer.Presenter
                             }
                         }
 
-
                         List<Extension_ArticleNo> lst_extArt = new List<Extension_ArticleNo>();
                         lst_extArt.Add(pnl.Panel_ExtensionTopArtNo);
                         lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
@@ -1355,9 +1258,74 @@ namespace PresentationLayer.Presenter
                         lst_extArt.Add(pnl.Panel_ExtensionRightArtNo);
                         lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
 
-                        foreach (Extension_ArticleNo ext in lst_extArt)
+                        if (pnl.Panel_ExtensionOptionsVisibility == true)
                         {
-                            if (ext == Extension_ArticleNo._639957)
+                            foreach (Extension_ArticleNo ext in lst_extArt)
+                            {
+                                if (ext == Extension_ArticleNo._639957)
+                                {
+                                    if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
+                                        !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
+                                    {
+                                        incompatibility_cnt++;
+                                    }
+                                }
+                                else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
+                                {
+                                    if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                                    {
+                                        incompatibility_cnt++;
+                                    }
+                                }
+                                else if (ext == Extension_ArticleNo._612978)
+                                {
+                                    if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
+                                        !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
+                                        !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374) &&
+                                        !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
+                                    {
+                                        incompatibility_cnt++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                {
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                    {
+                        SashProfile_ArticleNo sash_art = pnl.Panel_SashProfileArtNo;
+                        Handle_Type handletype = pnl.Panel_HandleType;
+                        Espagnolette_ArticleNo espag_art = pnl.Panel_EspagnoletteArtNo;
+
+                        if (pnl.Panel_Type.Contains("Fixed") == false)
+                        {
+                            if (handletype == Handle_Type._Rotoswing)
+                            {
+                                if (!(frame_art == FrameProfile_ArticleNo._7502 &&
+                                      sash_art == SashProfile_ArticleNo._7581) &&
+                                    !(frame_art == FrameProfile_ArticleNo._7507 &&
+                                      sash_art == SashProfile_ArticleNo._7581) &&
+                                    !(frame_art == FrameProfile_ArticleNo._7507 &&
+                                      sash_art == SashProfile_ArticleNo._395))
+                                {
+                                    incompatibility_cnt++;
+                                }
+                            }
+                            else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
+                            {
+                                if (!(frame_art == FrameProfile_ArticleNo._7507 &&
+                                      sash_art == SashProfile_ArticleNo._374))
+                                {
+                                    incompatibility_cnt++;
+                                }
+                            }
+
+
+                            if (espag_art == Espagnolette_ArticleNo._741012 || espag_art == Espagnolette_ArticleNo._EQ87NT ||
+                                espag_art == Espagnolette_ArticleNo._628806 || espag_art == Espagnolette_ArticleNo._628807 ||
+                                espag_art == Espagnolette_ArticleNo._628809)
                             {
                                 if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
                                     !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
@@ -1365,21 +1333,65 @@ namespace PresentationLayer.Presenter
                                     incompatibility_cnt++;
                                 }
                             }
-                            else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
+                            else if (espag_art == Espagnolette_ArticleNo._642105 || espag_art == Espagnolette_ArticleNo._642089 ||
+                                     espag_art == Espagnolette_ArticleNo._630963)
                             {
                                 if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
                                 {
                                     incompatibility_cnt++;
                                 }
                             }
-                            else if (ext == Extension_ArticleNo._612978)
+                            else if (espag_art == Espagnolette_ArticleNo._N110A00006 || espag_art == Espagnolette_ArticleNo._N110A01006 ||
+                                     espag_art == Espagnolette_ArticleNo._N110A02206 || espag_art == Espagnolette_ArticleNo._N110A03206 ||
+                                     espag_art == Espagnolette_ArticleNo._N110A04206 || espag_art == Espagnolette_ArticleNo._N110A05206 ||
+                                     espag_art == Espagnolette_ArticleNo._N110A06206)
                             {
-                                if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
-                                    !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
-                                    !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374) &&
-                                    !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
+                                if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
                                 {
                                     incompatibility_cnt++;
+                                }
+                            }
+
+
+                            List<Extension_ArticleNo> lst_extArt = new List<Extension_ArticleNo>();
+                            lst_extArt.Add(pnl.Panel_ExtensionTopArtNo);
+                            lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                            lst_extArt.Add(pnl.Panel_ExtensionBotArtNo);
+                            lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                            lst_extArt.Add(pnl.Panel_ExtensionLeftArtNo);
+                            lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                            lst_extArt.Add(pnl.Panel_ExtensionRightArtNo);
+                            lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+
+                            if (pnl.Panel_ExtensionOptionsVisibility == true)
+                            {
+                                foreach (Extension_ArticleNo ext in lst_extArt)
+                                {
+                                    if (ext == Extension_ArticleNo._639957)
+                                    {
+                                        if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
+                                            !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
+                                        {
+                                            incompatibility_cnt++;
+                                        }
+                                    }
+                                    else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
+                                    {
+                                        if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                                        {
+                                            incompatibility_cnt++;
+                                        }
+                                    }
+                                    else if (ext == Extension_ArticleNo._612978)
+                                    {
+                                        if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
+                                            !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
+                                            !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374) &&
+                                            !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
+                                        {
+                                            incompatibility_cnt++;
+                                        }
+                                    }
                                 }
                             }
                         }
