@@ -172,6 +172,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_GeorgianBarOptionVisibility { get; set; }
 
         HingeOption Panel_HingeOptions { get; set; }
+        int Panel_HingeOptionsPropertyHeight { get; set; }
         bool Panel_HingeOptionsVisibility { get; set; }
         CenterHingeOption Panel_CenterHingeOptions { get; set; }
         bool Panel_CenterHingeOptionsVisibility { get; set; }
@@ -200,6 +201,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void AdjustHandlePropertyHeight(string mode);
         void AdjustRotoswingPropertyHeight(string mode);
         void AdjustExtensionPropertyHeight(string mode);
+        void AdjustHingeOptionPropertyHeight(string mode);
         void SetPanelExplosionValues_Panel(bool parentIsFrame);
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,

@@ -18,6 +18,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void PP_HingePropertyUC_Load(object sender, EventArgs e)
         {
+            num_2dHingeQtyNonMotorized.Maximum = decimal.MaxValue;
+
             List<HingeOption> Hinge_Option = new List<HingeOption>();
             foreach (HingeOption item in HingeOption.GetAll())
             {
@@ -35,7 +37,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             cmb_Hinge.DataBindings.Add(ModelBinding["Panel_HingeOptions"]);
+            num_2dHingeQtyNonMotorized.DataBindings.Add(ModelBinding["Panel_2DHingeQty_nonMotorized"]);
             this.DataBindings.Add(ModelBinding["Panel_HingeOptionsVisibility"]);
+            this.DataBindings.Add(ModelBinding["Panel_HingeOptionsPropertyHeight"]);
         }
     }
 }

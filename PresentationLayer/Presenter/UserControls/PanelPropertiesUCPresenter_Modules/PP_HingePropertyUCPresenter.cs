@@ -41,6 +41,29 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             if (_initialLoad == false)
             {
                 _panelModel.Panel_HingeOptions = (HingeOption)cmbHinge.SelectedValue;
+                if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
+                {
+                    _panelModel.Panel_MiddleCloserArtNo = MiddleCloser_ArticleNo._None;
+                    _panelModel.AdjustHingeOptionPropertyHeight("add2dHingeField");
+                    _panelModel.AdjustPropertyPanelHeight("add2dHingeField");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                    }
+                }
+                else if (_panelModel.Panel_HingeOptions == HingeOption._FrictionStay)
+                {
+                    _panelModel.AdjustHingeOptionPropertyHeight("minus2dHingeField");
+                    _panelModel.AdjustPropertyPanelHeight("minus2dHingeField");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                    }
+                }
             }
         }
 
@@ -67,7 +90,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             binding.Add("Panel_HingeOptions", new Binding("Text", _panelModel, "Panel_HingeOptions", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_HingeOptionsVisibility", new Binding("Visible", _panelModel, "Panel_HingeOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-
+            binding.Add("Panel_2DHingeQty_nonMotorized", new Binding("Value", _panelModel, "Panel_2DHingeQty_nonMotorized", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_HingeOptionsPropertyHeight", new Binding("Height", _panelModel, "Panel_HingeOptionsPropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            
             return binding;
         }
 

@@ -1503,6 +1503,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private int _panelHingeOptionsPropertyHeight;
+        public int Panel_HingeOptionsPropertyHeight
+        {
+            get
+            {
+                return _panelHingeOptionsPropertyHeight;
+            }
+            set
+            {
+                _panelHingeOptionsPropertyHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private bool _panel_HingeOptionsVisibility;
         public bool Panel_HingeOptionsVisibility
         {
@@ -1745,6 +1759,14 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_NTCenterHingeOptionsheight;
             }
+            else if (mode == "add2dHingeField")
+            {
+                Panel_PropertyHeight += constants.panel_property_HingeOptionsheight_2dHingefield;
+            }
+            else if (mode == "minus2dHingeField")
+            {
+                Panel_PropertyHeight -= constants.panel_property_HingeOptionsheight_2dHingefield;
+            }
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
@@ -1872,6 +1894,18 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusExtensionField")
             {
                 Panel_ExtensionPropertyHeight -= constants.panel_property_extensionFieldsheight;
+            }
+        }
+
+        public void AdjustHingeOptionPropertyHeight(string mode)
+        {
+            if (mode == "add2dHingeField")
+            {
+                Panel_HingeOptionsPropertyHeight += constants.panel_property_HingeOptionsheight_2dHingefield;
+            }
+            else if (mode == "minus2dHingeField")
+            {
+                Panel_HingeOptionsPropertyHeight -= constants.panel_property_HingeOptionsheight_2dHingefield;
             }
         }
 
@@ -4103,6 +4137,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_RotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
             Panel_ExtensionPropertyHeight = constants.panel_property_extensionOptionsheight;
             Panel_GlassPropertyHeight = constants.panel_property_glassOptionsHeight;
+            Panel_HingeOptionsPropertyHeight = constants.panel_property_HingeOptionsheight;
         }
     }
 }

@@ -608,6 +608,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_NTCenterHingeOptionsheight;
                 }
+                else if (mode == "add2dHingeField")
+                {
+                    FrameProp_Height += constants.panel_property_HingeOptionsheight_2dHingefield;
+                }
+                else if (mode == "minus2dHingeField")
+                {
+                    FrameProp_Height -= constants.panel_property_HingeOptionsheight_2dHingefield;
+                }
             }
             else if (objtype == "Div")
             {

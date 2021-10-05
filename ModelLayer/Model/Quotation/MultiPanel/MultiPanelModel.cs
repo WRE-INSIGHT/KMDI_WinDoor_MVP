@@ -1742,6 +1742,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_NTCenterHingeOptionsheight;
                 }
+                else if (mode == "add2dHingeField")
+                {
+                    MPanelProp_Height += constants.panel_property_HingeOptionsheight_2dHingefield;
+                }
+                else if (mode == "minus2dHingeField")
+                {
+                    MPanelProp_Height -= constants.panel_property_HingeOptionsheight_2dHingefield;
+                }
             }
             else if (objtype == "Div")
             {

@@ -236,6 +236,8 @@ namespace ModelLayer.Model.Quotation
                                           div_prevCtrl = null;
                             Control nxt_ctrl, prevCtrl;
 
+                            bool mullion_already_added = false;
+
                             if (pnl_curCtrl != null)
                             {
                                 pnl_curCtrl.Panel_AdjStrikerQty = 0;
@@ -353,8 +355,10 @@ namespace ModelLayer.Model.Quotation
                                         }
                                     }
                                 }
-                                if (div_nxtCtrl.Div_ChkDM == false)
+                                if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added)
                                 {
+                                    mullion_already_added = true;
+
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                            1, "pc(s)",
                                                            div_nxtCtrl.Div_ExplosionHeight.ToString(),
@@ -658,8 +662,10 @@ namespace ModelLayer.Model.Quotation
                                                 add_screws_fab_shootbolt += qty_sbStriker; //Shootbolt striker
                                             }
                                         }
-                                        else if (div_nxtCtrl.Div_ChkDM == false)
+                                        else if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added)
                                         {
+                                            mullion_already_added = true;
+
                                             Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                                    1, "pc(s)",
                                                                    div_nxtCtrl.Div_ExplosionHeight.ToString(),
@@ -681,8 +687,6 @@ namespace ModelLayer.Model.Quotation
                                                 screws_for_inst_where += ", Mullion";
                                             }
                                         }
-
-                                        total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
 
                                         foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
                                         {
@@ -836,7 +840,7 @@ namespace ModelLayer.Model.Quotation
                                                 pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                                             {
                                                 Material_List.Rows.Add("2D Hinge " + pnl_curCtrl.Panel_2dHingeArtNo.DisplayName,
-                                                                       pnl_curCtrl.Panel_2DHingeQty, "pair(s)",
+                                                                       pnl_curCtrl.Panel_2DHingeQty, "pc(s)",
                                                                        "",
                                                                        "Sash & Frame",
                                                                        @"");
@@ -1745,7 +1749,7 @@ namespace ModelLayer.Model.Quotation
                                 pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                             {
                                 Material_List.Rows.Add("2D Hinge " + pnl.Panel_2dHingeArtNo.DisplayName,
-                                                       pnl.Panel_2DHingeQty, "pair(s)",
+                                                       pnl.Panel_2DHingeQty, "pc(s)",
                                                        "",
                                                        "Sash & Frame",
                                                        @"");
