@@ -366,6 +366,13 @@ namespace ModelLayer.Model.Quotation
                                                            mpnl.MPanel_Type,
                                                            @"|  |");
 
+                                    total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
+
+                                    if (!screws_for_inst_where.Contains("Mullion"))
+                                    {
+                                        screws_for_inst_where += ", Mullion";
+                                    }
+
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                            2, "pc(s)", "");
 
@@ -666,6 +673,8 @@ namespace ModelLayer.Model.Quotation
 
                                             Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                                    2, "pc(s)", "");
+
+                                            total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
 
                                             if (!screws_for_inst_where.Contains("Mullion"))
                                             {
