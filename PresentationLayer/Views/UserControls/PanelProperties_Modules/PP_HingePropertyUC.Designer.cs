@@ -30,9 +30,6 @@
         {
             this.cmb_Hinge = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.num_2dHingeQtyNonMotorized = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.num_2dHingeQtyNonMotorized)).BeginInit();
             this.SuspendLayout();
             // 
             // cmb_Hinge
@@ -59,39 +56,17 @@
             this.label1.TabIndex = 34;
             this.label1.Text = "Hinge";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(-1, 32);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 13);
-            this.label2.TabIndex = 36;
-            this.label2.Text = "2D Hinge Qty";
-            // 
-            // num_2dHingeQtyNonMotorized
-            // 
-            this.num_2dHingeQtyNonMotorized.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.num_2dHingeQtyNonMotorized.Location = new System.Drawing.Point(73, 28);
-            this.num_2dHingeQtyNonMotorized.Name = "num_2dHingeQtyNonMotorized";
-            this.num_2dHingeQtyNonMotorized.Size = new System.Drawing.Size(77, 22);
-            this.num_2dHingeQtyNonMotorized.TabIndex = 37;
-            // 
             // PP_HingePropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.num_2dHingeQtyNonMotorized);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.cmb_Hinge);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "PP_HingePropertyUC";
-            this.Size = new System.Drawing.Size(152, 52);
+            this.Size = new System.Drawing.Size(152, 30);
             this.Load += new System.EventHandler(this.PP_HingePropertyUC_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.num_2dHingeQtyNonMotorized)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -101,7 +76,5 @@
 
         private System.Windows.Forms.ComboBox cmb_Hinge;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown num_2dHingeQtyNonMotorized;
     }
 }

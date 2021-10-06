@@ -1744,11 +1744,19 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (mode == "add2dHingeField")
                 {
-                    MPanelProp_Height += constants.panel_property_HingeOptionsheight_2dHingefield;
+                    MPanelProp_Height += constants.panel_property_2dHingeOptionsheight;
                 }
                 else if (mode == "minus2dHingeField")
                 {
-                    MPanelProp_Height -= constants.panel_property_HingeOptionsheight_2dHingefield;
+                    MPanelProp_Height -= constants.panel_property_2dHingeOptionsheight;
+                }
+                else if (mode == "add3dHinge")
+                {
+                    MPanelProp_Height += constants.panel_property_3dHingeOptionsheight;
+                }
+                else if (mode == "minus3dHinge")
+                {
+                    MPanelProp_Height -= constants.panel_property_3dHingeOptionsheight;
                 }
             }
             else if (objtype == "Div")

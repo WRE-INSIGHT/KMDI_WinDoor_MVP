@@ -30,6 +30,8 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_HingePropertyUCPresenter _pp_hingePropertyUCPresenter;
         private IPP_CenterHingePropertyUCPresenter _pp_centerHingePropertyUCPresenter;
         private IPP_NTCenterHingePropertyUCPresenter _pp_ntCenterHingePropertyUCPresenter;
+        private IPP_3dHingePropertyUCPresenter _pp_3dHingePropertyUCPresenter;
+        private IPP_2dHingePropertyUCPresenter _pp_2dHingePropertyUCPresenter;
 
         private IUnityContainer _unityC;
 
@@ -45,7 +47,9 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_CornerDrivePropertyUCPresenter pp_cornerDrivePropertyUCPresenter,
                                           IPP_HingePropertyUCPresenter pp_hingePropertyUCPresenter,
                                           IPP_CenterHingePropertyUCPresenter pp_centerHingePropertyUCPresenter,
-                                          IPP_NTCenterHingePropertyUCPresenter pp_ntCenterHingePropertyUCPresenter)
+                                          IPP_NTCenterHingePropertyUCPresenter pp_ntCenterHingePropertyUCPresenter,
+                                          IPP_3dHingePropertyUCPresenter pp_3dHingePropertyUCPresenter,
+                                          IPP_2dHingePropertyUCPresenter pp_2dHingePropertyUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -58,6 +62,8 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_hingePropertyUCPresenter = pp_hingePropertyUCPresenter;
             _pp_centerHingePropertyUCPresenter = pp_centerHingePropertyUCPresenter;
             _pp_ntCenterHingePropertyUCPresenter = pp_ntCenterHingePropertyUCPresenter;
+            _pp_3dHingePropertyUCPresenter = pp_3dHingePropertyUCPresenter;
+            _pp_2dHingePropertyUCPresenter = pp_2dHingePropertyUCPresenter;
             _pnlPanelSpecs = _panelPropertiesUC.GetPanelSpecsPNL();
 
             SubscribeToEventsSetup();
@@ -204,11 +210,40 @@ namespace PresentationLayer.Presenter.UserControls
                 _panelModel.Panel_HingeOptionsVisibility = true;
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
                 _panelModel.AdjustPropertyPanelHeight("addHinge");
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                }
+
+                if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
+                {
+                    _panelModel.Panel_2dHingeVisibility_nonMotorized = true;
+                    _panelModel.AdjustPropertyPanelHeight("add2dHingeField");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                    }
+                }
 
                 if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
                     _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                 {
                     _panelModel.Panel_CenterHingeOptionsVisibility = false;
+
+                    if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                    {
+                        _panelModel.Panel_3dHingePropertyVisibility = true;
+
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add3dHinge");
+                        _panelModel.AdjustPropertyPanelHeight("add3dHinge");
+
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add3dHinge");
+                        }
+                    }
                 }
                 else if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
@@ -230,6 +265,12 @@ namespace PresentationLayer.Presenter.UserControls
             _pnlPanelSpecs.Controls.Add(hingeProp);
             hingeProp.Dock = DockStyle.Top;
             hingeProp.BringToFront();
+
+            IPP_2dHingePropertyUCPresenter _2dHingePropUCP = _pp_2dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            UserControl _2dhingeProp = (UserControl)_2dHingePropUCP.GetPP_2dHingePropertyUC();
+            _pnlPanelSpecs.Controls.Add(_2dhingeProp);
+            _2dhingeProp.Dock = DockStyle.Top;
+            _2dhingeProp.BringToFront();
 
             IPP_CenterHingePropertyUCPresenter centerHingePropUCP = _pp_centerHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
             UserControl centerHingeProp = (UserControl)centerHingePropUCP.GetCenterHingePropertyUC();
@@ -256,6 +297,12 @@ namespace PresentationLayer.Presenter.UserControls
                 _pnlPanelSpecs.Controls.Add(handle);
                 handle.Dock = DockStyle.Top;
                 handle.BringToFront();
+
+                IPP_3dHingePropertyUCPresenter _3dPropUCP = _pp_3dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                UserControl _3dprop = (UserControl)_3dPropUCP.GetPP_3dHingePropertyUC();
+                _pnlPanelSpecs.Controls.Add(_3dprop);
+                _3dprop.Dock = DockStyle.Top;
+                _3dprop.BringToFront();
             }
 
             IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);

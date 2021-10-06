@@ -610,11 +610,19 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
                 else if (mode == "add2dHingeField")
                 {
-                    FrameProp_Height += constants.panel_property_HingeOptionsheight_2dHingefield;
+                    FrameProp_Height += constants.panel_property_2dHingeOptionsheight;
                 }
                 else if (mode == "minus2dHingeField")
                 {
-                    FrameProp_Height -= constants.panel_property_HingeOptionsheight_2dHingefield;
+                    FrameProp_Height -= constants.panel_property_2dHingeOptionsheight;
+                }
+                else if (mode == "add3dHinge")
+                {
+                    FrameProp_Height += constants.panel_property_3dHingeOptionsheight;
+                }
+                else if (mode == "minus3dHinge")
+                {
+                    FrameProp_Height -= constants.panel_property_3dHingeOptionsheight;
                 }
             }
             else if (objtype == "Div")

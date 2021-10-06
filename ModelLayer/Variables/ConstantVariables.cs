@@ -28,11 +28,12 @@
         public int panel_property_rotolineOptionsheight_default = 28;
         public int panel_property_mvdOptionsheight_default = 28;
         public int panel_property_HingeOptionsheight = 30;
-        public int panel_property_HingeOptionsheight_2dHingefield = 22;
+        public int panel_property_2dHingeOptionsheight = 30;
         public int panel_property_CenterHingeOptionsheight = 30;
         public int panel_property_NTCenterHingeOptionsheight = 30;
         public int panel_property_MiddleCloserOptionsheight = 30;
         public int panel_property_espagnoletteOptionsheight_default = 28;
+        public int panel_property_3dHingeOptionsheight = 30;
 
         #endregion
 

@@ -943,8 +943,36 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_2DHingeQty { get; set; } //motorized purposes
         public _2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized { get; set; }
         public int Panel_2DHingeQty_nonMotorized { get; set; }
+
+        private bool _panel2dHingeVisibility_nonMotorized;
+        public bool Panel_2dHingeVisibility_nonMotorized
+        {
+            get
+            {
+                return _panel2dHingeVisibility_nonMotorized;
+            }
+            set
+            {
+                _panel2dHingeVisibility_nonMotorized = value;
+                NotifyPropertyChanged();
+            }
+        }
         public _3dHinge_ArticleNo Panel_3dHingeArtNo { get; set; }
         public int Panel_3dHingeQty { get; set; }
+
+        private bool _panel3dHingePropertyVisibility;
+        public bool Panel_3dHingePropertyVisibility
+        {
+            get
+            {
+                return _panel3dHingePropertyVisibility;
+            }
+            set
+            {
+                _panel3dHingePropertyVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
         public ButtHinge_ArticleNo Panel_ButtHingeArtNo { get; set; }
         public int Panel_ButtHingeQty { get; set; }
 
@@ -1761,11 +1789,19 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (mode == "add2dHingeField")
             {
-                Panel_PropertyHeight += constants.panel_property_HingeOptionsheight_2dHingefield;
+                Panel_PropertyHeight += constants.panel_property_2dHingeOptionsheight;
             }
             else if (mode == "minus2dHingeField")
             {
-                Panel_PropertyHeight -= constants.panel_property_HingeOptionsheight_2dHingefield;
+                Panel_PropertyHeight -= constants.panel_property_2dHingeOptionsheight;
+            }
+            else if (mode == "add3dHinge")
+            {
+                Panel_PropertyHeight += constants.panel_property_3dHingeOptionsheight;
+            }
+            else if (mode == "minus3dHinge")
+            {
+                Panel_PropertyHeight -= constants.panel_property_3dHingeOptionsheight;
             }
         }
 
@@ -1894,18 +1930,6 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusExtensionField")
             {
                 Panel_ExtensionPropertyHeight -= constants.panel_property_extensionFieldsheight;
-            }
-        }
-
-        public void AdjustHingeOptionPropertyHeight(string mode)
-        {
-            if (mode == "add2dHingeField")
-            {
-                Panel_HingeOptionsPropertyHeight += constants.panel_property_HingeOptionsheight_2dHingefield;
-            }
-            else if (mode == "minus2dHingeField")
-            {
-                Panel_HingeOptionsPropertyHeight -= constants.panel_property_HingeOptionsheight_2dHingefield;
             }
         }
 
