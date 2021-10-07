@@ -136,6 +136,27 @@ namespace PresentationLayer.Presenter.UserControls
                 _divModel.Div_ChkDM = chk.Checked;
                 _divModel.Div_ArtVisibility = !chk.Checked;
 
+                Control div_obj = _divModel.Div_MPanelParent.MPanelLst_Objects.Find(obj => obj.Name == _divModel.Div_Name);
+                int div_ndx = _divModel.Div_MPanelParent.MPanelLst_Objects.IndexOf(div_obj);
+                Control prev_pnl = _divModel.Div_MPanelParent.MPanelLst_Objects[div_ndx - 1],
+                        nxt_pnl = null;
+                IPanelModel prev_pnlModel = null, nxt_pnlModel = null;
+
+                if (prev_pnl.Name.Contains("MultiPanel") == false)
+                {
+                    prev_pnlModel = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(panel => panel.Panel_Name == prev_pnl.Name);
+                }
+
+                if (div_ndx + 1 < _divModel.Div_MPanelParent.MPanelLst_Objects.Count())
+                {
+                    nxt_pnl = _divModel.Div_MPanelParent.MPanelLst_Objects[div_ndx + 1];
+
+                    if (nxt_pnl.Name.Contains("MultiPanel") == false)
+                    {
+                        nxt_pnlModel = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(panel => panel.Panel_Name == nxt_pnl.Name);
+                    }
+                }
+
                 if (chk.Checked == true)
                 {
                     _divProperties.GetDMArtNoPNL().SendToBack();
@@ -153,6 +174,11 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
 
+                    _divModel.Div_LeverEspagVisibility = true;
+                    _divModel.AdjustPropertyPanelHeight("addLeverEspag");
+                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+
                     if (cladding_count > 0)
                     {
                         _divModel.AdjustPropertyPanelHeight("minusCladdingBracket");
@@ -165,6 +191,28 @@ namespace PresentationLayer.Presenter.UserControls
                         _divModel.AdjustPropertyPanelHeight("minusCladding");
                         _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladding");
                         _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
+                    }
+
+                    if (prev_pnlModel != null)
+                    {
+                        if (prev_pnlModel.Panel_CornerDriveOptionsVisibility == false)
+                        {
+                            prev_pnlModel.Panel_CornerDriveOptionsVisibility = true;
+                            prev_pnlModel.AdjustPropertyPanelHeight("addCornerDrive");
+                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                        }
+                    }
+
+                    if (nxt_pnlModel != null)
+                    {
+                        if (nxt_pnlModel.Panel_CornerDriveOptionsVisibility == false)
+                        {
+                            nxt_pnlModel.Panel_CornerDriveOptionsVisibility = true;
+                            nxt_pnlModel.AdjustPropertyPanelHeight("addCornerDrive");
+                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                        }
                     }
                 }
                 else if (chk.Checked == false)
@@ -180,6 +228,11 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.AdjustPropertyPanelHeight("addPanelAddCladding");
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+
+                    _divModel.Div_LeverEspagVisibility = false;
+                    _divModel.AdjustPropertyPanelHeight("minusLeverEspag");
+                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
 
                     if (cladding_count > 0)
                     {
@@ -198,6 +251,28 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_DMPanel = null;
                     _btnSelectDMPanel.Text = "Select";
                     _btnSelectDMPanel.BackColor = SystemColors.Control;
+
+                    if (prev_pnlModel != null)
+                    {
+                        if (prev_pnlModel.Panel_CornerDriveOptionsVisibility == true)
+                        {
+                            prev_pnlModel.Panel_CornerDriveOptionsVisibility = false;
+                            prev_pnlModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                        }
+                    }
+
+                    if (nxt_pnlModel != null)
+                    {
+                        if (nxt_pnlModel.Panel_CornerDriveOptionsVisibility == true)
+                        {
+                            nxt_pnlModel.Panel_CornerDriveOptionsVisibility = false;
+                            nxt_pnlModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                        }
+                    }
                 }
             }
         }

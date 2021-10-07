@@ -320,17 +320,21 @@ namespace PresentationLayer.Presenter.UserControls
             if (_panelModel.Panel_Type.Contains("Casement"))
             {
                 _panelModel.Panel_ExtensionOptionsVisibility = true;
-                _panelModel.Panel_CornerDriveOptionsVisibility = true;
 
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
-                _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
-
+                if (_panelModel.Panel_CornerDriveOptionsVisibility)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                    _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
+                }
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                 _panelModel.AdjustPropertyPanelHeight("addExtension");
 
                 if (_panelModel.Panel_ParentMultiPanelModel != null)
                 {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                    if (_panelModel.Panel_CornerDriveOptionsVisibility)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                    }
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                 }
             }

@@ -593,6 +593,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        _frameModel.FrameImageRenderer_Zoom,
                                                                        _multiPanelModel.GetNextIndex(),
                                                                        DockStyle.None);
+                _panelModel.Panel_CornerDriveOptionsVisibility = false;
                 _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                 _multiPanelModel.Reload_PanelMargin();
 

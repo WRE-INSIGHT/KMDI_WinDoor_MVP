@@ -1321,7 +1321,19 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public bool Panel_CornerDriveOptionsVisibility { get; set; }
+        private bool _panelCornerDriveOptionsVisibility;
+        public bool Panel_CornerDriveOptionsVisibility
+        {
+            get
+            {
+                return _panelCornerDriveOptionsVisibility;
+            }
+            set
+            {
+                _panelCornerDriveOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
         public bool Panel_ExtensionOptionsVisibility { get; set; }
 
         private int _panelRotoswingOptionsHeight;

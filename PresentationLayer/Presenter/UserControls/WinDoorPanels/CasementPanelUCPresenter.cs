@@ -226,6 +226,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
                 }
 
+                if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                }
+
+                if (_panelModel.Panel_3dHingePropertyVisibility == true)
+                {
+                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minus3dHinge");
+                }
+
                 int fieldExtension_count2 = 0;
 
                 fieldExtension_count2 = (_panelModel.Panel_ExtTopChk == true) ? fieldExtension_count2 += 1 : fieldExtension_count2;
@@ -347,6 +357,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (_panelModel.Panel_ExtensionOptionsVisibility == true)
             {
                 _frameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+            }
+
+            if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+            }
+
+            if (_panelModel.Panel_3dHingePropertyVisibility == true)
+            {
+                _frameModel.AdjustPropertyPanelHeight("Panel", "minus3dHinge");
             }
 
             int fieldExtension_count = 0;
