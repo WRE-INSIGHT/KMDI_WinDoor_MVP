@@ -1141,12 +1141,12 @@ namespace ModelLayer.Model.Quotation
                                                     add_screws_fab_pivotRest += 1;
                                                 }
 
-                                                Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
-                                                                       pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
-                                                                       "",
-                                                                       "Frame",
-                                                                       @"");
-                                                add_screws_fab_striker += (1 * pnl_curCtrl.Panel_AdjStrikerQty);
+                                                //Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
+                                                //                       pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
+                                                //                       "",
+                                                //                       "Frame",
+                                                //                       @"");
+                                                //add_screws_fab_striker += (1 * pnl_curCtrl.Panel_AdjStrikerQty);
                                             }
                                         }
 

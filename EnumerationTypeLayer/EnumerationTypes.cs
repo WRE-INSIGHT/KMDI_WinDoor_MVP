@@ -543,12 +543,12 @@ namespace EnumerationTypeLayer
 
         public class LeverEspagnolette_ArticleNo : Enumeration<LeverEspagnolette_ArticleNo, int>
         {
-            public static readonly LeverEspagnolette_ArticleNo _625_205 = new LeverEspagnolette_ArticleNo(0, "625-205");
-            public static readonly LeverEspagnolette_ArticleNo _625_206 = new LeverEspagnolette_ArticleNo(1, "625-206");
-            public static readonly LeverEspagnolette_ArticleNo _625_207 = new LeverEspagnolette_ArticleNo(2, "625-207");
-            public static readonly LeverEspagnolette_ArticleNo _631153 = new LeverEspagnolette_ArticleNo(3, "631153");
-            public static readonly LeverEspagnolette_ArticleNo _476518 = new LeverEspagnolette_ArticleNo(4, "476518");
-            public static readonly LeverEspagnolette_ArticleNo _None = new LeverEspagnolette_ArticleNo(3, "None");
+            public static readonly LeverEspagnolette_ArticleNo _None = new LeverEspagnolette_ArticleNo(0, "None");
+            public static readonly LeverEspagnolette_ArticleNo _625_205 = new LeverEspagnolette_ArticleNo(1, "625-205");
+            public static readonly LeverEspagnolette_ArticleNo _625_206 = new LeverEspagnolette_ArticleNo(2, "625-206");
+            public static readonly LeverEspagnolette_ArticleNo _625_207 = new LeverEspagnolette_ArticleNo(3, "625-207");
+            public static readonly LeverEspagnolette_ArticleNo _631153 = new LeverEspagnolette_ArticleNo(4, "631153");
+            public static readonly LeverEspagnolette_ArticleNo _476518 = new LeverEspagnolette_ArticleNo(5, "476518");
 
             private LeverEspagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

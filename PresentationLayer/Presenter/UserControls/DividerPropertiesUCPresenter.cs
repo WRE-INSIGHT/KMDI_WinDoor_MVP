@@ -89,6 +89,39 @@ namespace PresentationLayer.Presenter.UserControls
             _divProperties.chkDMCheckedChangedEventRaised += _divProperties_chkDMCheckedChangedEventRaised;
             _divProperties.cmbDMArtNoSelectedValueChangedEventRaised += _divProperties_cmbDMArtNoSelectedValueChangedEventRaised;
             _divProperties.btnSelectDMPanelClickedEventRaised += _divProperties_btnSelectDMPanelClickedEventRaised;
+            _divProperties.SashProfileChangedEventRaised += _divProperties_SashProfileChangedEventRaised;
+        }
+
+        SashProfile_ArticleNo curr_sashProfileArtNo;
+        private void _divProperties_SashProfileChangedEventRaised(object sender, EventArgs e)
+        {
+            SashProfile_ArticleNo sel_sashProfileArtNo = (SashProfile_ArticleNo)sender;
+            if (!_initialLoad && curr_sashProfileArtNo != sel_sashProfileArtNo)
+            {
+                if (sel_sashProfileArtNo == SashProfile_ArticleNo._395)
+                {
+                    if (curr_sashProfileArtNo != SashProfile_ArticleNo._395)
+                    {
+                        _divModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._631153;
+
+                        _divModel.Div_LeverEspagVisibility = true;
+                        _divModel.AdjustPropertyPanelHeight("addLeverEspag");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                    }
+                }
+                else if (sel_sashProfileArtNo != SashProfile_ArticleNo._395)
+                {
+                    if (curr_sashProfileArtNo == SashProfile_ArticleNo._395)
+                    {
+                        _divModel.Div_LeverEspagVisibility = false;
+                        _divModel.AdjustPropertyPanelHeight("minusLeverEspag");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                    }
+                }
+                curr_sashProfileArtNo = sel_sashProfileArtNo;
+            }
         }
 
         private void _divProperties_btnSelectDMPanelClickedEventRaised(object sender, EventArgs e)
@@ -174,10 +207,13 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
 
-                    _divModel.Div_LeverEspagVisibility = true;
-                    _divModel.AdjustPropertyPanelHeight("addLeverEspag");
-                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
-                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                    if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                    {
+                        _divModel.Div_LeverEspagVisibility = true;
+                        _divModel.AdjustPropertyPanelHeight("addLeverEspag");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                    }
 
                     if (cladding_count > 0)
                     {
@@ -229,10 +265,13 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
 
-                    _divModel.Div_LeverEspagVisibility = false;
-                    _divModel.AdjustPropertyPanelHeight("minusLeverEspag");
-                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
-                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                    if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                    {
+                        _divModel.Div_LeverEspagVisibility = false;
+                        _divModel.AdjustPropertyPanelHeight("minusLeverEspag");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                    }
 
                     if (cladding_count > 0)
                     {

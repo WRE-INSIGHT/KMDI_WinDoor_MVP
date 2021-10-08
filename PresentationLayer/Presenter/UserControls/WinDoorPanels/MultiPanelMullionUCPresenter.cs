@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private IMultiPanelModel _multiPanelModel;
         private IFrameModel _frameModel;
+        private IDividerModel _prev_divModel;
 
         private IMainPresenter _mainPresenter;
         private IFixedPanelUCPresenter _fixedUCP;
@@ -593,7 +594,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        _frameModel.FrameImageRenderer_Zoom,
                                                                        _multiPanelModel.GetNextIndex(),
                                                                        DockStyle.None);
-                _panelModel.Panel_CornerDriveOptionsVisibility = false;
+
+                if (_prev_divModel != null)
+                {
+                    _panelModel.Panel_CornerDriveOptionsVisibility = _prev_divModel.Div_ChkDM;
+                }
+
                 _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                 _multiPanelModel.Reload_PanelMargin();
 
@@ -764,7 +770,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                           _mainPresenter.GetDividerCount(),
                                                                           _frameModel.FrameImageRenderer_Zoom,
                                                                           _frameModel.Frame_Type.ToString());
-
+                    _prev_divModel = divModel;
                     _frameModel.Lst_Divider.Add(divModel);
                     _multiPanelModel.MPanelLst_Divider.Add(divModel);
 
@@ -831,9 +837,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
                 _frameModel.AdjustPropertyPanelHeight("Div", "delete");
 
-                _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-                _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-
                 for (int i = 0; i < div.Div_CladdingCount; i++)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
@@ -847,6 +850,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _frameModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
                 }
 
+                if (div.Div_LeverEspagVisibility == true)
+                {
+                    div.Div_LeverEspagVisibility = false;
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                }
+
                 if (div.Div_ChkDM == true && div.Div_ArtVisibility == false)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDM");
@@ -856,6 +866,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
                     _frameModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
+
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
                 }
 
                 _mainPresenter.DeleteDividerPropertiesUC(div.Div_ID);
@@ -942,7 +955,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _frameModel.AdjustPropertyPanelHeight("Panel", "minusMVD");
                         }
 
-                        if (pnlModel.Panel_HandleType != Handle_Type._Rotary)
+                        if (pnlModel.Panel_HandleType != Handle_Type._Rotary && pnlModel.Panel_HandleType != Handle_Type._None)
                         {
                             _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
                             _frameModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
@@ -1004,9 +1017,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
                 _frameModel.AdjustPropertyPanelHeight("Div", "delete");
 
-                _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-                _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-
                 for (int i = 0; i < div.Div_CladdingCount; i++)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
@@ -1020,6 +1030,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _frameModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
                 }
 
+                if (div.Div_LeverEspagVisibility == true)
+                {
+                    div.Div_LeverEspagVisibility = false;
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                }
+
                 if (div.Div_ChkDM == true && div.Div_ArtVisibility == false)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDM");
@@ -1029,6 +1046,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
                     _frameModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
+
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+
                 }
             }
 
@@ -1040,10 +1061,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
                 _frameModel.AdjustPropertyPanelHeight("Div", "delete");
 
-                _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-                _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-
-
                 for (int i = 0; i < div.Div_CladdingCount; i++)
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
@@ -1066,6 +1083,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
                     _frameModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
+
+                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                    _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+
                 }
             }
 
