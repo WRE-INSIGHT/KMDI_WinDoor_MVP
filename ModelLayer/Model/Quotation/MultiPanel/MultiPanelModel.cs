@@ -1830,6 +1830,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
             }
         }
+
+        public void DeductPropertyPanelHeight(int propertyHeight)
+        {
+            MPanelProp_Height -= propertyHeight;
+        }
         #endregion
 
         public MultiPanelModel(int mpanelID,

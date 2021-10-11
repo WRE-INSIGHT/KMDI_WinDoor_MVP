@@ -696,6 +696,11 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
             }
         }
+
+        public void DeductPropertyPanelHeight(int propertyHeight)
+        {
+            FrameProp_Height -= propertyHeight;
+        }
         #endregion
 
         public FrameModel(int frameID,
