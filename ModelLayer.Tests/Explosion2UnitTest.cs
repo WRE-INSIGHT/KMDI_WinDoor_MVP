@@ -1718,41 +1718,41 @@ namespace ModelLayer.Tests
                                                              MiddleCloser_ArticleNo._None,
                                                              LockingKit_ArticleNo._None,
                                                              MotorizedMech_ArticleNo._41555B,
-                                                              Handle_Type._Rotary,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              false,
-                                                              false,
-                                                              false,
-                                                              false,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              Rotoswing_HandleArtNo._RSC773451,
-                                                              GeorgianBar_ArticleNo._None,
-                                                              0,
-                                                              0,
-                                                              false,
-                                                              5,
-                                                              5,
-                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                              0,
-                                                              DockStyle.Fill,
-                                                              "FixedPanelUC_5",
-                                                              true,
-                                                              HingeOption._FrictionStay
-                                                              );
+                                                             Handle_Type._Rotary,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             false,
+                                                             false,
+                                                             false,
+                                                             false,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             Rotoswing_HandleArtNo._RSC773451,
+                                                             GeorgianBar_ArticleNo._None,
+                                                             0,
+                                                             0,
+                                                             false,
+                                                             5,
+                                                             5,
+                                                             _frameModel.FrameImageRenderer_Zoom,
+                                                             0,
+                                                             DockStyle.Fill,
+                                                             "FixedPanelUC_5",
+                                                             true,
+                                                             HingeOption._FrictionStay
+                                                             );
             _panelModel5.Panel_Placement = "First";
             _panelModel5.Panel_SashPropertyVisibility = false;
             _panelModel5.Panel_GlassThickness = 6.0f;
@@ -2106,47 +2106,76 @@ namespace ModelLayer.Tests
             Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%%' AND
                              Size = '544'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("6", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%%' AND
                              Size = '544'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("6", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%%' AND
                              Size = '544'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("6", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Width%%' AND
                              Size = '544'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("6", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P5) Width%%' AND
                              Size = '544'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("6", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P6) Width%%' AND
                              Size = '544'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("6", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) height%%' AND
                              Size = '740'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("6", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
+            dr = dt.Select(@"Description LIKE '%Glass (P4) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P6) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
             #endregion
 
         }
@@ -6662,7 +6691,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(5400000, _qouteModel.Plastic_CoverQty_Total);
             Assert.AreEqual(10, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(40, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(71, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(73, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(45, _qouteModel.Screws_for_Installation);
 
             #region MultiMullion
