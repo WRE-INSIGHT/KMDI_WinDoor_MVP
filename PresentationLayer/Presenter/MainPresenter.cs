@@ -1182,6 +1182,12 @@ namespace PresentationLayer.Presenter
 
         #region Functions
 
+        public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
+        {
+            _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
+            _pnlPropertiesBody.PerformLayout();
+        }
+
         private int Check_Incompatibility()
         {
             int incompatibility_cnt = 0;

@@ -127,7 +127,7 @@ namespace ModelLayer.Model.Quotation
                                        "Frame",
                                        @"|  |");
 
-                if (frame.Frame_If_InwardCasement)
+                if (frame.Frame_If_InwardMotorizedCasement)
                 {
                     Material_List.Rows.Add("Milled Frame " + frame.Frame_MilledArtNo.DisplayName,
                                            1, "pc(s)",
@@ -1140,13 +1140,6 @@ namespace ModelLayer.Model.Quotation
                                                                            @"");
                                                     add_screws_fab_pivotRest += 1;
                                                 }
-
-                                                //Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
-                                                //                       pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
-                                                //                       "",
-                                                //                       "Frame",
-                                                //                       @"");
-                                                //add_screws_fab_striker += (1 * pnl_curCtrl.Panel_AdjStrikerQty);
                                             }
                                         }
 

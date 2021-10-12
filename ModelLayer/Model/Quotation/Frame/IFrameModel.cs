@@ -48,7 +48,7 @@ namespace ModelLayer.Model.Quotation.Frame
         int Frame_ReinfHeight { get; set; }
         bool Frame_CmenuDeleteVisibility { get; set; }
 
-        bool Frame_If_InwardCasement { get; set; }
+        bool Frame_If_InwardMotorizedCasement { get; set; }
         MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
         MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
 

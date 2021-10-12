@@ -14,6 +14,7 @@ using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modu
 using PresentationLayer.Views.UserControls.DividerProperties_Modules;
 using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Variables;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -35,6 +36,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         bool _initialLoad = true;
         int cladding_count = 0;
+
+        ConstantVariables const_var = new ConstantVariables();
 
         public int Cladding_Count
         {
@@ -350,6 +353,7 @@ namespace PresentationLayer.Presenter.UserControls
             UserControl claddingUC = (UserControl)claddingUCP.GetCladdingPropertyUC();
             claddingUC.Dock = DockStyle.Top;
             _divPropertiesBodyPNL.Controls.Add(claddingUC);
+
             _divModel.AdjustPropertyPanelHeight("addCladding");
             _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladding");
             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
@@ -359,6 +363,10 @@ namespace PresentationLayer.Presenter.UserControls
             Cladding_Count++;
 
             _dp_claddingBracketPropertyUCP.BringToFrontUC();
+
+            int locY = ((UserControl)_divProperties).Location.Y;
+
+            _mainPresenter.Set_pnlPropertiesBody_ScrollView(locY + const_var.div_property_claddingOptionsHeight);
 
             _divProperties.SetBtnSaveBackColor(Color.White);
         }

@@ -39,7 +39,7 @@
 
         #region DividerModelConstants
 
-        public int div_propertyheight_default = 68;
+        public int div_propertyheight_default = 72; //68(base) + 4(allowance) 
         public int div_property_claddingOptionsHeight = 28;
         public int div_property_claddingBracketOptionsHeight = 72;
         public int div_property_pnlAddcladdingOptionsHeight = 56;

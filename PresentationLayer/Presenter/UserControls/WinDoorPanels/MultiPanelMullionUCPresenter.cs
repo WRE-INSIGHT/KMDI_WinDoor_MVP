@@ -642,26 +642,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 else if (data == "Casement Panel")
                 {
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
-
-                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
-                    _panelModel.AdjustPropertyPanelHeight("addSash");
-                    _panelModel.AdjustPropertyPanelHeight("addGlass");
-                    _panelModel.AdjustPropertyPanelHeight("addHandle");
-
-                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
-
                     ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC,
                                                                                         _panelModel,
                                                                                         _frameModel,
@@ -687,7 +667,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
 
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                     _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
@@ -847,38 +826,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #region Delete MultiPanel Mullion
             Control parent_ctrl = ((UserControl)_multiPanelMullionUC).Parent;
 
-            _frameModel.AdjustPropertyPanelHeight("Mpanel", "delete");
+            _multiPanelModel.MPanel_FrameModelParent.DeductPropertyPanelHeight(_multiPanelModel.MPanelProp_Height);
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
-                _multiPanelModel.AdjustPropertyPanelHeight("Mpanel", "delete");
-            }
-
-            foreach (IMultiPanelModel mpanel in _multiPanelModel.MPanelLst_MultiPanel)
-            {
-                _multiPanelModel.MPanel_FrameModelParent.DeductPropertyPanelHeight(mpanel.MPanelProp_Height);
-                if (_multiPanelModel.MPanel_ParentModel != null)
-                {
-                    _multiPanelModel.MPanel_ParentModel.DeductPropertyPanelHeight(mpanel.MPanelProp_Height);
-                }
-                _mainPresenter.DeductPanelGlassID();
-            }
-
-            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-            {
-                _multiPanelModel.MPanel_FrameModelParent.DeductPropertyPanelHeight(pnl.Panel_PropertyHeight);
-                if (_multiPanelModel.MPanel_ParentModel != null)
-                {
-                    _multiPanelModel.MPanel_ParentModel.DeductPropertyPanelHeight(pnl.Panel_PropertyHeight);
-                }
-            }
-
-            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
-            {
-                _multiPanelModel.MPanel_FrameModelParent.DeductPropertyPanelHeight(div.Div_PropHeight);
-                if (_multiPanelModel.MPanel_ParentModel != null)
-                {
-                    _multiPanelModel.MPanel_ParentModel.DeductPropertyPanelHeight(div.Div_PropHeight);
-                }
+                _multiPanelModel.MPanel_ParentModel.DeductPropertyPanelHeight(_multiPanelModel.MPanelProp_Height);
             }
 
             _mainPresenter.DeleteMultiPanelPropertiesUC(_multiPanelModel.MPanel_ID);

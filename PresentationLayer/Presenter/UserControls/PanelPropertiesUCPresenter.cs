@@ -199,6 +199,29 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
 
+            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add");
+            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+            if (_panelModel.Panel_ParentMultiPanelModel != null)
+            {
+                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+            }
+
+            _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
+            _panelModel.AdjustPropertyPanelHeight("addSash");
+            _panelModel.AdjustPropertyPanelHeight("addGlass");
+            _panelModel.AdjustPropertyPanelHeight("addHandle");
+
+            _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+
+
             IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
             UserControl sashProp = (UserControl)sashPropUCP.GetPPSashPropertyUC();
             _pnlPanelSpecs.Controls.Add(sashProp);
