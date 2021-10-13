@@ -996,6 +996,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Control fpnlParent = fpnl.Parent.Parent; //Parent ng mismong usercontrol, Its either Frame or Multi-Panel
             IMultiPanelModel parent_mpnl = _multiPanelModel.MPanel_ParentModel;
 
+            float zoom = _multiPanelModel.MPanel_Zoom;
 
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -1004,10 +1005,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 pInnerWd = fpnl.ClientRectangle.Width - (_frameModel.Frame_Deduction * 2),
                 pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction * 2);
 
+            if (zoom == 0.26f)
+            {
+                pInnerX = 15;
+                pInnerY = 15;
+                pInnerWd = fpnl.ClientRectangle.Width - 30;
+                pInnerHt = fpnl.ClientRectangle.Height - 30;
+            }
+
             int ht_ToBind = _multiPanelModel.MPanel_HeightToBind,
                 wd_ToBind = _multiPanelModel.MPanel_WidthToBind;
-
-            float zoom = _multiPanelModel.MPanel_Zoom;
 
             Point[] upperLine = new Point[2];
             Point[] botLine = new Point[2];
@@ -1051,7 +1058,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                new Rectangle(new Point(wd_ToBind - (int)(pixels_count * zoom), 0), new Size((int)(pixels_count * zoom), ht_ToBind - 1)), //right
                                                new Rectangle(new Point(-1, 0), new Size((int)(pixels_count * zoom), ht_ToBind - 1)) //left
                                              };
-
+            
             Rectangle divider_bounds_Bot = new Rectangle();
             Rectangle divider_bounds_Top = new Rectangle();
             Rectangle divider_bounds_Right = new Rectangle();
@@ -1072,8 +1079,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int bPoints = (int)(10 * _frameModel.Frame_Zoom),
                     bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom);
 
-                bounds = new Rectangle(new Point(bPoints, bPoints),
-                                       new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
+                if (zoom == 0.26f)
+                {
+                    bounds = new Rectangle(new Point(5, 5),
+                                           new Size(fpnl.ClientRectangle.Width - 10, fpnl.ClientRectangle.Height - 10));
+                }
+                else
+                {
+                    bounds = new Rectangle(new Point(bPoints, bPoints),
+                                           new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
+                }
+                
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
             {

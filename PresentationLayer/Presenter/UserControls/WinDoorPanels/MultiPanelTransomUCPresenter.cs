@@ -1000,6 +1000,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 pInnerWd = fpnl.ClientRectangle.Width - (int)(20 * zoom),
                 pInnerHt = fpnl.ClientRectangle.Height - (int)(20 * zoom);
 
+            if (zoom == 0.26f)
+            {
+                pInnerX = 15;
+                pInnerY = 15;
+                pInnerWd = fpnl.ClientRectangle.Width - 30;
+                pInnerHt = fpnl.ClientRectangle.Height - 30;
+            }
+
             int ht_ToBind = _multiPanelModel.MPanel_HeightToBind,
                 wd_ToBind = _multiPanelModel.MPanel_WidthToBind;
 
@@ -1065,13 +1073,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                 }
 
-
                 int bPoints = (int)(10 * _frameModel.Frame_Zoom),
                     bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom);
 
-                bounds = new Rectangle(new Point(bPoints, bPoints),
-                                       new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
-
+                if (zoom == 0.26f)
+                {
+                    bounds = new Rectangle(new Point(5, 5),
+                                           new Size(fpnl.ClientRectangle.Width - 10, fpnl.ClientRectangle.Height - 10));
+                }
+                else
+                {
+                    bounds = new Rectangle(new Point(bPoints, bPoints),
+                                           new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
+                }
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
             {

@@ -486,10 +486,20 @@ namespace PresentationLayer.Presenter.UserControls
 
 
             int fr_pads = _frameModel.Frame_Padding_int.All;
-            
-            Rectangle pnl_inner = new Rectangle(new Point(fr_pads , fr_pads), 
-                                                new Size(pfr.ClientRectangle.Width - (fr_pads * 2), 
+            Rectangle pnl_inner = new Rectangle();
+
+            if (_frameModel.Frame_Zoom == 0.26f)
+            {
+                pnl_inner = new Rectangle(new Point(15, 15),
+                                          new Size(pfr.ClientRectangle.Width - (15 * 2),
+                                                   pfr.ClientRectangle.Height - (15 * 2)));
+            }
+            else
+            {
+                pnl_inner = new Rectangle(new Point(fr_pads, fr_pads),
+                                                new Size(pfr.ClientRectangle.Width - (fr_pads * 2),
                                                          pfr.ClientRectangle.Height - (fr_pads * 2)));
+            }
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
