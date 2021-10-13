@@ -188,7 +188,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         private string _panelType;
-        public string Panel_Type
+        public string Panel_Type // panelType + " Panel"
         {
             get
             {
@@ -943,8 +943,36 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_2DHingeQty { get; set; } //motorized purposes
         public _2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized { get; set; }
         public int Panel_2DHingeQty_nonMotorized { get; set; }
+
+        private bool _panel2dHingeVisibility_nonMotorized;
+        public bool Panel_2dHingeVisibility_nonMotorized
+        {
+            get
+            {
+                return _panel2dHingeVisibility_nonMotorized;
+            }
+            set
+            {
+                _panel2dHingeVisibility_nonMotorized = value;
+                NotifyPropertyChanged();
+            }
+        }
         public _3dHinge_ArticleNo Panel_3dHingeArtNo { get; set; }
         public int Panel_3dHingeQty { get; set; }
+
+        private bool _panel3dHingePropertyVisibility;
+        public bool Panel_3dHingePropertyVisibility
+        {
+            get
+            {
+                return _panel3dHingePropertyVisibility;
+            }
+            set
+            {
+                _panel3dHingePropertyVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
         public ButtHinge_ArticleNo Panel_ButtHingeArtNo { get; set; }
         public int Panel_ButtHingeQty { get; set; }
 
@@ -1293,7 +1321,19 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public bool Panel_CornerDriveOptionsVisibility { get; set; }
+        private bool _panelCornerDriveOptionsVisibility;
+        public bool Panel_CornerDriveOptionsVisibility
+        {
+            get
+            {
+                return _panelCornerDriveOptionsVisibility;
+            }
+            set
+            {
+                _panelCornerDriveOptionsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
         public bool Panel_ExtensionOptionsVisibility { get; set; }
 
         private int _panelRotoswingOptionsHeight;
@@ -1499,6 +1539,20 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panel_HingeOptions = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelHingeOptionsPropertyHeight;
+        public int Panel_HingeOptionsPropertyHeight
+        {
+            get
+            {
+                return _panelHingeOptionsPropertyHeight;
+            }
+            set
+            {
+                _panelHingeOptionsPropertyHeight = value;
                 NotifyPropertyChanged();
             }
         }
@@ -1744,6 +1798,22 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusNTCenterHinge")
             {
                 Panel_PropertyHeight -= constants.panel_property_NTCenterHingeOptionsheight;
+            }
+            else if (mode == "add2dHingeField")
+            {
+                Panel_PropertyHeight += constants.panel_property_2dHingeOptionsheight;
+            }
+            else if (mode == "minus2dHingeField")
+            {
+                Panel_PropertyHeight -= constants.panel_property_2dHingeOptionsheight;
+            }
+            else if (mode == "add3dHinge")
+            {
+                Panel_PropertyHeight += constants.panel_property_3dHingeOptionsheight;
+            }
+            else if (mode == "minus3dHinge")
+            {
+                Panel_PropertyHeight -= constants.panel_property_3dHingeOptionsheight;
             }
         }
 
@@ -2498,6 +2568,22 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (fs_weight_based == FrictionStay_ArticleNo._None)
                     {
                         Panel_FrictionStayArtNo = fs_dimension_based;
+                    }
+
+                    if (Panel_Type == "Awning Panel")
+                    {
+                        if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                        {
+                            if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
+                            {
+                                Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+                            }
+                            else if (base_color == Base_Color._DarkBrown)
+                            {
+                                Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
+                            }
+                        }
+                        Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
                     }
                 }
                 else if (Panel_Type.Contains("Casement"))
@@ -3753,6 +3839,22 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_FrictionStayArtNo = fs_dimension_based;
                     }
+
+                    if (Panel_Type == "Awning Panel")
+                    {
+                        if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                        {
+                            if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
+                            {
+                                Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+                            }
+                            else if (base_color == Base_Color._DarkBrown)
+                            {
+                                Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
+                            }
+                            Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
+                        }
+                    }
                 }
                 else if (Panel_Type.Contains("Casement"))
                 {
@@ -4071,6 +4173,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_RotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;
             Panel_ExtensionPropertyHeight = constants.panel_property_extensionOptionsheight;
             Panel_GlassPropertyHeight = constants.panel_property_glassOptionsHeight;
+            Panel_HingeOptionsPropertyHeight = constants.panel_property_HingeOptionsheight;
         }
     }
 }

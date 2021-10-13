@@ -1795,6 +1795,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_NTCenterHingeOptionsheight;
                 }
+                else if (mode == "add2dHingeField")
+                {
+                    MPanelProp_Height += constants.panel_property_2dHingeOptionsheight;
+                }
+                else if (mode == "minus2dHingeField")
+                {
+                    MPanelProp_Height -= constants.panel_property_2dHingeOptionsheight;
+                }
+                else if (mode == "add3dHinge")
+                {
+                    MPanelProp_Height += constants.panel_property_3dHingeOptionsheight;
+                }
+                else if (mode == "minus3dHinge")
+                {
+                    MPanelProp_Height -= constants.panel_property_3dHingeOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {
@@ -1866,6 +1882,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     MPanelProp_Height += constants.mpnl_propertyHeight_default; // (129 + 3); // +3 for MultiPanelProperties' Margin
                 }
             }
+        }
+
+        public void DeductPropertyPanelHeight(int propertyHeight)
+        {
+            MPanelProp_Height -= propertyHeight;
         }
         #endregion
 

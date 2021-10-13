@@ -83,6 +83,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                             string mpanel_placement = "", //1st level
                                             string mpanelparent_placement = ""); //2nd level
         void AdjustPropertyPanelHeight(string objtype, string mode);
+        void DeductPropertyPanelHeight(int propertyHeight);
 
         #endregion
     }

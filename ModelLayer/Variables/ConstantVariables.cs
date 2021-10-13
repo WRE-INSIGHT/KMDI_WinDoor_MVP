@@ -28,16 +28,18 @@
         public int panel_property_rotolineOptionsheight_default = 28;
         public int panel_property_mvdOptionsheight_default = 28;
         public int panel_property_HingeOptionsheight = 30;
+        public int panel_property_2dHingeOptionsheight = 30;
         public int panel_property_CenterHingeOptionsheight = 30;
         public int panel_property_NTCenterHingeOptionsheight = 30;
         public int panel_property_MiddleCloserOptionsheight = 30;
         public int panel_property_espagnoletteOptionsheight_default = 28;
+        public int panel_property_3dHingeOptionsheight = 30;
 
         #endregion
 
         #region DividerModelConstants
 
-        public int div_propertyheight_default = 68;
+        public int div_propertyheight_default = 72; //68(base) + 4(allowance) 
         public int div_property_claddingOptionsHeight = 28;
         public int div_property_claddingBracketOptionsHeight = 72;
         public int div_property_pnlAddcladdingOptionsHeight = 56;

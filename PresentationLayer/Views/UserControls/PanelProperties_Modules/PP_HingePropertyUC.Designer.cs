@@ -39,10 +39,10 @@
             this.cmb_Hinge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_Hinge.DropDownWidth = 69;
             this.cmb_Hinge.FormattingEnabled = true;
-            this.cmb_Hinge.Location = new System.Drawing.Point(68, 3);
+            this.cmb_Hinge.Location = new System.Drawing.Point(73, 2);
             this.cmb_Hinge.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.cmb_Hinge.Name = "cmb_Hinge";
-            this.cmb_Hinge.Size = new System.Drawing.Size(82, 21);
+            this.cmb_Hinge.Size = new System.Drawing.Size(77, 21);
             this.cmb_Hinge.TabIndex = 35;
             this.cmb_Hinge.SelectedValueChanged += new System.EventHandler(this.cmb_Hinge_SelectedValueChanged);
             // 
@@ -65,7 +65,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "PP_HingePropertyUC";
-            this.Size = new System.Drawing.Size(152, 28);
+            this.Size = new System.Drawing.Size(152, 30);
             this.Load += new System.EventHandler(this.PP_HingePropertyUC_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

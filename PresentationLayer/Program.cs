@@ -245,6 +245,11 @@ namespace PresentationLayer
                 .RegisterType<IDP_LeverEspagnolettePropertyUC, DP_LeverEspagnolettePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDP_LeverEspagnolettePropertyUCPresenter, DP_LeverEspagnolettePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPP_3dHingePropertyUC, PP_3dHingePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_3dHingePropertyUCPresenter, PP_3dHingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_2dHingePropertyUC, PP_2dHingePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_2dHingePropertyUCPresenter, PP_2dHingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 

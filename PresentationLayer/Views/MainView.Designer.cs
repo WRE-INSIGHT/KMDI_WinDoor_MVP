@@ -693,6 +693,7 @@
             this.pnlPropertiesBody.Name = "pnlPropertiesBody";
             this.pnlPropertiesBody.Size = new System.Drawing.Size(148, 464);
             this.pnlPropertiesBody.TabIndex = 1;
+            this.pnlPropertiesBody.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlPropertiesBody_Scroll);
             // 
             // label2
             // 

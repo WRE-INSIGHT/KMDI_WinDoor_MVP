@@ -594,9 +594,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
                         _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
-
-                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
-                        _panelModel.AdjustPropertyPanelHeight("minusEspagnolette");
+                        
                         _panelModel.AdjustHandlePropertyHeight("minusEspagnolette");
 
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
@@ -604,6 +602,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
                         }
 
@@ -675,7 +674,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             Handle_Type handle = _panelModel.Panel_HandleType;
 
-            if (handle != Handle_Type._Rotary)
+            if (handle != Handle_Type._Rotary && handle != Handle_Type._None)
             {
                 _panelModel.Panel_EspagnoletteOptionsVisibility = true;
 

@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private IMultiPanelModel _multiPanelModel;
         private IFrameModel _frameModel;
+        private IDividerModel _prev_divModel;
 
         private IMainPresenter _mainPresenter;
         private IFixedPanelUCPresenter _fixedUCP;
@@ -601,6 +602,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        _frameModel.FrameImageRenderer_Zoom,
                                                                        _multiPanelModel.GetNextIndex(),
                                                                        DockStyle.None);
+
+                if (_prev_divModel != null)
+                {
+                    _panelModel.Panel_CornerDriveOptionsVisibility = _prev_divModel.Div_ChkDM;
+                }
+
                 _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                 _multiPanelModel.Reload_PanelMargin();
 
@@ -645,26 +652,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 else if (data == "Casement Panel")
                 {
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
-
-                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
-                    _panelModel.AdjustPropertyPanelHeight("addSash");
-                    _panelModel.AdjustPropertyPanelHeight("addGlass");
-                    _panelModel.AdjustPropertyPanelHeight("addHandle");
-
-                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
-
                     ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC,
                                                                                         _panelModel,
                                                                                         _frameModel,
@@ -692,7 +679,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
                     _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
 
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                     _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
@@ -781,7 +767,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                           _mainPresenter.GetDividerCount(),
                                                                           _frameModel.FrameImageRenderer_Zoom,
                                                                           _frameModel.Frame_Type.ToString());
-
+                    _prev_divModel = divModel;
                     _frameModel.Lst_Divider.Add(divModel);
                     _multiPanelModel.MPanelLst_Divider.Add(divModel);
 
@@ -847,248 +833,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 IDividerModel div = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
 
-                Control div_imager = _commonFunctions.FindImagerControl(div.Div_ID, "TransomImager", _multiPanelModel.MPanel_ParentModel);
-                _multiPanelModel.MPanel_ParentModel.MPanelLst_Imagers.Remove(div_imager);
-
-                _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
-                _frameModel.AdjustPropertyPanelHeight("Div", "delete");
-
-                _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-                _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-
-                for (int i = 0; i < div.Div_CladdingCount; i++)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
-                }
-
-                if (div.Div_claddingBracketVisibility == true)
-                {
-                    div.Div_claddingBracketVisibility = false;
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
-                }
-
-                if (div.Div_ChkDM == true && div.Div_ArtVisibility == false)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDM");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDM");
-                }
-                else if (div.Div_ChkDM == false && div.Div_ArtVisibility == true)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
-                }
+                _multiPanelModel.MPanel_ParentModel.DeductPropertyPanelHeight(div.Div_PropHeight);
+                _multiPanelModel.MPanel_FrameModelParent.DeductPropertyPanelHeight(div.Div_PropHeight);
 
                 _mainPresenter.DeleteDividerPropertiesUC(div.Div_ID);
                 div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
                 _frameModel.Lst_Divider.Remove(div);
             }
+
             #endregion
 
             #region Delete MultiPanel Mullion
-            FlowLayoutPanel innerFlp = (FlowLayoutPanel)((UserControl)_multiPanelMullionUC).Controls[0];
             Control parent_ctrl = ((UserControl)_multiPanelMullionUC).Parent;
 
-            var multiPanels = _mpnlCommons.GetAll(innerFlp, "Multi", "flp");
-            foreach (var mpnl in multiPanels)
+            _multiPanelModel.MPanel_FrameModelParent.DeductPropertyPanelHeight(_multiPanelModel.MPanelProp_Height);
+            if (_multiPanelModel.MPanel_ParentModel != null)
             {
-                _multiPanelModel.AdjustPropertyPanelHeight("Mpanel", "delete");
-                _frameModel.AdjustPropertyPanelHeight("Mpanel", "delete");
-            }
-
-            var panels = _mpnlCommons.GetAll(innerFlp, "PanelUC");
-            foreach (var pnl in panels)
-            {
-                IPanelUC pnlUC = (IPanelUC)pnl;
-                IPanelModel pnlModel = _multiPanelModel.MPanelLst_Panel.Find(panel => panel.Panel_Name == pnl.Name);
-
-                if (pnl.Name.Contains("Fixed"))
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minus");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "minus");
-
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
-
-                    if (pnlUC.pnl_Orientation == true)
-                    {
-                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
-                        _frameModel.AdjustPropertyPanelHeight("Panel", "minusSash");
-                    }
-                }
-                else if (pnl.Name.Contains("Awning") || pnl.Name.Contains("Casement"))
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minus");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "minus");
-
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusGlass");
-
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusSash");
-
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusChkMotorized");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusChkMotorized");
-
-                    if (pnlModel.Panel_MotorizedOptionVisibility == true)
-                    {
-                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCmbMotorized");
-                        _frameModel.AdjustPropertyPanelHeight("Panel", "minusCmbMotorized");
-                    }
-                    else if (pnlModel.Panel_MotorizedOptionVisibility == false)
-                    {
-                        if (pnlModel.Panel_HandleType == Handle_Type._Rotoswing)
-                        {
-                            _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
-                            _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
-                        }
-                        else if (pnlModel.Panel_HandleType == Handle_Type._Rotary)
-                        {
-                            _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
-                            _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotary");
-                        }
-                        else if (pnlModel.Panel_HandleType == Handle_Type._Rio)
-                        {
-                            _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
-                            _frameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
-                        }
-                        else if (pnlModel.Panel_HandleType == Handle_Type._Rotoline)
-                        {
-                            _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoline");
-                            _frameModel.AdjustPropertyPanelHeight("Panel", "minusRotoline");
-                        }
-                        else if (pnlModel.Panel_HandleType == Handle_Type._MVD)
-                        {
-                            _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusMVD");
-                            _frameModel.AdjustPropertyPanelHeight("Panel", "minusMVD");
-                        }
-
-                        if (pnlModel.Panel_HandleType != Handle_Type._Rotary)
-                        {
-                            _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
-                            _frameModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
-                        }
-                    }
-
-                    if (pnlModel.Panel_HandleOptionsVisibility == true)
-                    {
-                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
-                        _frameModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
-                    }
-
-                    if (pnlModel.Panel_CornerDriveOptionsVisibility == true)
-                    {
-                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
-                        _frameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
-                    }
-
-                    if (pnlModel.Panel_GeorgianBarOptionVisibility == true)
-                    {
-                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
-                        _frameModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
-                    }
-
-                    if (pnlModel.Panel_ExtensionOptionsVisibility == true)
-                    {
-                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
-                        _frameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
-
-                        int fieldExtension_count2 = 0;
-
-                        fieldExtension_count2 = (pnlModel.Panel_ExtTopChk == true) ? fieldExtension_count2 += 1 : fieldExtension_count2;
-                        fieldExtension_count2 = (pnlModel.Panel_ExtBotChk == true) ? fieldExtension_count2 += 1 : fieldExtension_count2;
-                        fieldExtension_count2 = (pnlModel.Panel_ExtLeftChk == true) ? fieldExtension_count2 += 1 : fieldExtension_count2;
-                        fieldExtension_count2 = (pnlModel.Panel_ExtRightChk == true) ? fieldExtension_count2 += 1 : fieldExtension_count2;
-
-                        for (int i = 0; i < fieldExtension_count2; i++)
-                        {
-                            _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
-                            _frameModel.AdjustPropertyPanelHeight("Panel", "minusExtensionField");
-                        }
-                    }
-
-                    if (pnlModel.Panel_HingeOptionsVisibility == true)
-                    {
-                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
-                        _frameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
-                    }
-
-                }
-                _mainPresenter.DeductPanelGlassID();
-            }
-
-            var mullions = _mpnlCommons.GetAll(innerFlp, "MullionUC");
-            foreach (var mul in mullions)
-            {
-                IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == mul.Name);
-
-                _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
-                _frameModel.AdjustPropertyPanelHeight("Div", "delete");
-
-                _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-                _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-
-                for (int i = 0; i < div.Div_CladdingCount; i++)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
-                }
-
-                if (div.Div_claddingBracketVisibility == true)
-                {
-                    div.Div_claddingBracketVisibility = false;
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
-                }
-
-                if (div.Div_ChkDM == true && div.Div_ArtVisibility == false)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDM");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDM");
-                }
-                else if (div.Div_ChkDM == false && div.Div_ArtVisibility == true)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
-                }
-            }
-
-            var transoms = _mpnlCommons.GetAll(innerFlp, "TransomUC");
-            foreach (var transom in transoms)
-            {
-                IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == transom.Name);
-
-                _multiPanelModel.AdjustPropertyPanelHeight("Div", "delete");
-                _frameModel.AdjustPropertyPanelHeight("Div", "delete");
-
-                _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-                _frameModel.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-
-
-                for (int i = 0; i < div.Div_CladdingCount; i++)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladding");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladding");
-                }
-
-                if (div.Div_claddingBracketVisibility == true)
-                {
-                    div.Div_claddingBracketVisibility = false;
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
-                }
-
-                if (div.Div_ChkDM == true && div.Div_ArtVisibility == false)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDM");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDM");
-                }
-                else if (div.Div_ChkDM == false && div.Div_ArtVisibility == true)
-                {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
-                    _frameModel.AdjustPropertyPanelHeight("Div", "minusDivArt");
-                }
+                _multiPanelModel.MPanel_ParentModel.DeductPropertyPanelHeight(_multiPanelModel.MPanelProp_Height);
             }
 
             _mainPresenter.DeleteMultiPanelPropertiesUC(_multiPanelModel.MPanel_ID);
@@ -1136,8 +897,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_multiPanelModel.MPanel_Parent != null)
             {
-                _multiPanelModel.AdjustPropertyPanelHeight("Mpanel", "delete");
-                _frameModel.AdjustPropertyPanelHeight("Mpanel", "delete");
                 _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)_multiPanelMullionUC);
             }
 

@@ -32,8 +32,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_HingePropertyUC_PPHingeLoadEventRaised(object sender, EventArgs e)
         {
             _pp_HingePropertyUC.ThisBinding(CreateBindingDictionary());
+
+            curr_hinge = HingeOption._FrictionStay;
             _initialLoad = false;
         }
+
+        HingeOption curr_hinge;
 
         private void _pp_HingePropertyUC_cmbHingeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
@@ -41,6 +45,36 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             if (_initialLoad == false)
             {
                 _panelModel.Panel_HingeOptions = (HingeOption)cmbHinge.SelectedValue;
+                HingeOption sel_hinge = (HingeOption)cmbHinge.SelectedValue;
+
+                if (sel_hinge != curr_hinge)
+                {
+                    if (sel_hinge == HingeOption._2DHinge)
+                    {
+                        _panelModel.Panel_MiddleCloserArtNo = MiddleCloser_ArticleNo._None;
+
+                        _panelModel.Panel_2dHingeVisibility_nonMotorized = true;
+                        _panelModel.AdjustPropertyPanelHeight("add2dHingeField");
+
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                        }
+                    }
+                    else if (sel_hinge == HingeOption._FrictionStay)
+                    {
+                        _panelModel.Panel_2dHingeVisibility_nonMotorized = false;
+                        _panelModel.AdjustPropertyPanelHeight("minus2dHingeField");
+
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                        }
+                    }
+                    curr_hinge = sel_hinge;
+                }
             }
         }
 
@@ -67,7 +101,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             binding.Add("Panel_HingeOptions", new Binding("Text", _panelModel, "Panel_HingeOptions", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_HingeOptionsVisibility", new Binding("Visible", _panelModel, "Panel_HingeOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-
+            binding.Add("Panel_HingeOptionsPropertyHeight", new Binding("Height", _panelModel, "Panel_HingeOptionsPropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+            
             return binding;
         }
 

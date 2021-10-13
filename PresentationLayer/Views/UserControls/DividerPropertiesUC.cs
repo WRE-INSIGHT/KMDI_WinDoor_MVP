@@ -74,6 +74,7 @@ namespace PresentationLayer.Views.UserControls
             {
                 _panelSashProfileArtNo = value;
                 cmb_DMArtNo.Refresh();
+                SashProfileChanged(_panelSashProfileArtNo, new EventArgs());
             }
         }
 
@@ -84,6 +85,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler chkDMCheckedChangedEventRaised;
         public event EventHandler cmbDMArtNoSelectedValueChangedEventRaised;
         public event EventHandler btnSelectDMPanelClickedEventRaised;
+        public event EventHandler SashProfileChangedEventRaised;
 
         private bool _initialLoad = true;
 
@@ -295,6 +297,11 @@ namespace PresentationLayer.Views.UserControls
                     lbl_totalCladdingLength.BackColor = Color.IndianRed;
                 }
             }
+        }
+
+        private void SashProfileChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, SashProfileChangedEventRaised, e);
         }
     }
 }

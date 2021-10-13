@@ -14,6 +14,7 @@ using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modu
 using PresentationLayer.Views.UserControls.DividerProperties_Modules;
 using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Variables;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -35,6 +36,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         bool _initialLoad = true;
         int cladding_count = 0;
+
+        ConstantVariables const_var = new ConstantVariables();
 
         public int Cladding_Count
         {
@@ -89,6 +92,39 @@ namespace PresentationLayer.Presenter.UserControls
             _divProperties.chkDMCheckedChangedEventRaised += _divProperties_chkDMCheckedChangedEventRaised;
             _divProperties.cmbDMArtNoSelectedValueChangedEventRaised += _divProperties_cmbDMArtNoSelectedValueChangedEventRaised;
             _divProperties.btnSelectDMPanelClickedEventRaised += _divProperties_btnSelectDMPanelClickedEventRaised;
+            _divProperties.SashProfileChangedEventRaised += _divProperties_SashProfileChangedEventRaised;
+        }
+
+        SashProfile_ArticleNo curr_sashProfileArtNo;
+        private void _divProperties_SashProfileChangedEventRaised(object sender, EventArgs e)
+        {
+            SashProfile_ArticleNo sel_sashProfileArtNo = (SashProfile_ArticleNo)sender;
+            if (!_initialLoad && curr_sashProfileArtNo != sel_sashProfileArtNo)
+            {
+                if (sel_sashProfileArtNo == SashProfile_ArticleNo._395)
+                {
+                    if (curr_sashProfileArtNo != SashProfile_ArticleNo._395)
+                    {
+                        _divModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._631153;
+
+                        _divModel.Div_LeverEspagVisibility = true;
+                        _divModel.AdjustPropertyPanelHeight("addLeverEspag");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                    }
+                }
+                else if (sel_sashProfileArtNo != SashProfile_ArticleNo._395)
+                {
+                    if (curr_sashProfileArtNo == SashProfile_ArticleNo._395)
+                    {
+                        _divModel.Div_LeverEspagVisibility = false;
+                        _divModel.AdjustPropertyPanelHeight("minusLeverEspag");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                    }
+                }
+                curr_sashProfileArtNo = sel_sashProfileArtNo;
+            }
         }
 
         private void _divProperties_btnSelectDMPanelClickedEventRaised(object sender, EventArgs e)
@@ -136,6 +172,27 @@ namespace PresentationLayer.Presenter.UserControls
                 _divModel.Div_ChkDM = chk.Checked;
                 _divModel.Div_ArtVisibility = !chk.Checked;
 
+                Control div_obj = _divModel.Div_MPanelParent.MPanelLst_Objects.Find(obj => obj.Name == _divModel.Div_Name);
+                int div_ndx = _divModel.Div_MPanelParent.MPanelLst_Objects.IndexOf(div_obj);
+                Control prev_pnl = _divModel.Div_MPanelParent.MPanelLst_Objects[div_ndx - 1],
+                        nxt_pnl = null;
+                IPanelModel prev_pnlModel = null, nxt_pnlModel = null;
+
+                if (prev_pnl.Name.Contains("MultiPanel") == false)
+                {
+                    prev_pnlModel = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(panel => panel.Panel_Name == prev_pnl.Name);
+                }
+
+                if (div_ndx + 1 < _divModel.Div_MPanelParent.MPanelLst_Objects.Count())
+                {
+                    nxt_pnl = _divModel.Div_MPanelParent.MPanelLst_Objects[div_ndx + 1];
+
+                    if (nxt_pnl.Name.Contains("MultiPanel") == false)
+                    {
+                        nxt_pnlModel = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(panel => panel.Panel_Name == nxt_pnl.Name);
+                    }
+                }
+
                 if (chk.Checked == true)
                 {
                     _divProperties.GetDMArtNoPNL().SendToBack();
@@ -153,6 +210,14 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
 
+                    if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                    {
+                        _divModel.Div_LeverEspagVisibility = true;
+                        _divModel.AdjustPropertyPanelHeight("addLeverEspag");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+                    }
+
                     if (cladding_count > 0)
                     {
                         _divModel.AdjustPropertyPanelHeight("minusCladdingBracket");
@@ -165,6 +230,28 @@ namespace PresentationLayer.Presenter.UserControls
                         _divModel.AdjustPropertyPanelHeight("minusCladding");
                         _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladding");
                         _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
+                    }
+
+                    if (prev_pnlModel != null)
+                    {
+                        if (prev_pnlModel.Panel_CornerDriveOptionsVisibility == false)
+                        {
+                            prev_pnlModel.Panel_CornerDriveOptionsVisibility = true;
+                            prev_pnlModel.AdjustPropertyPanelHeight("addCornerDrive");
+                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                        }
+                    }
+
+                    if (nxt_pnlModel != null)
+                    {
+                        if (nxt_pnlModel.Panel_CornerDriveOptionsVisibility == false)
+                        {
+                            nxt_pnlModel.Panel_CornerDriveOptionsVisibility = true;
+                            nxt_pnlModel.AdjustPropertyPanelHeight("addCornerDrive");
+                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                        }
                     }
                 }
                 else if (chk.Checked == false)
@@ -180,6 +267,14 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.AdjustPropertyPanelHeight("addPanelAddCladding");
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+
+                    if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                    {
+                        _divModel.Div_LeverEspagVisibility = false;
+                        _divModel.AdjustPropertyPanelHeight("minusLeverEspag");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusLeverEspag");
+                    }
 
                     if (cladding_count > 0)
                     {
@@ -198,6 +293,28 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_DMPanel = null;
                     _btnSelectDMPanel.Text = "Select";
                     _btnSelectDMPanel.BackColor = SystemColors.Control;
+
+                    if (prev_pnlModel != null)
+                    {
+                        if (prev_pnlModel.Panel_CornerDriveOptionsVisibility == true)
+                        {
+                            prev_pnlModel.Panel_CornerDriveOptionsVisibility = false;
+                            prev_pnlModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                        }
+                    }
+
+                    if (nxt_pnlModel != null)
+                    {
+                        if (nxt_pnlModel.Panel_CornerDriveOptionsVisibility == true)
+                        {
+                            nxt_pnlModel.Panel_CornerDriveOptionsVisibility = false;
+                            nxt_pnlModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                        }
+                    }
                 }
             }
         }
@@ -236,6 +353,7 @@ namespace PresentationLayer.Presenter.UserControls
             UserControl claddingUC = (UserControl)claddingUCP.GetCladdingPropertyUC();
             claddingUC.Dock = DockStyle.Top;
             _divPropertiesBodyPNL.Controls.Add(claddingUC);
+
             _divModel.AdjustPropertyPanelHeight("addCladding");
             _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladding");
             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
@@ -245,6 +363,10 @@ namespace PresentationLayer.Presenter.UserControls
             Cladding_Count++;
 
             _dp_claddingBracketPropertyUCP.BringToFrontUC();
+
+            int locY = ((UserControl)_divProperties).Location.Y;
+
+            _mainPresenter.Set_pnlPropertiesBody_ScrollView(locY + const_var.div_property_claddingOptionsHeight);
 
             _divProperties.SetBtnSaveBackColor(Color.White);
         }

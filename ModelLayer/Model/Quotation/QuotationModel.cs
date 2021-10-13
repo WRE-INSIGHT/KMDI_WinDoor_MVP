@@ -127,7 +127,7 @@ namespace ModelLayer.Model.Quotation
                                        "Frame",
                                        @"|  |");
 
-                if (frame.Frame_If_InwardCasement)
+                if (frame.Frame_If_InwardMotorizedCasement)
                 {
                     Material_List.Rows.Add("Milled Frame " + frame.Frame_MilledArtNo.DisplayName,
                                            1, "pc(s)",
@@ -235,6 +235,8 @@ namespace ModelLayer.Model.Quotation
                             IDividerModel div_nxtCtrl = null,
                                           div_prevCtrl = null;
                             Control nxt_ctrl, prevCtrl;
+
+                            bool mullion_already_added = false;
 
                             if (pnl_curCtrl != null)
                             {
@@ -353,8 +355,28 @@ namespace ModelLayer.Model.Quotation
                                         }
                                     }
                                 }
-                                if (div_nxtCtrl.Div_ChkDM == false)
+                                if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added)
                                 {
+                                    mullion_already_added = true;
+
+                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           div_nxtCtrl.Div_ExplosionHeight.ToString(),
+                                                           div_nxtCtrl.Div_Bounded,
+                                                           @"[  ]");
+                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Height " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           div_nxtCtrl.Div_ReinfHeight.ToString(),
+                                                           mpnl.MPanel_Type,
+                                                           @"|  |");
+
+                                    total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
+
+                                    if (!screws_for_inst_where.Contains("Mullion"))
+                                    {
+                                        screws_for_inst_where += ", Mullion";
+                                    }
+
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                            2, "pc(s)", "");
 
@@ -640,8 +662,10 @@ namespace ModelLayer.Model.Quotation
                                                 add_screws_fab_shootbolt += qty_sbStriker; //Shootbolt striker
                                             }
                                         }
-                                        else if (div_nxtCtrl.Div_ChkDM == false)
+                                        else if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added)
                                         {
+                                            mullion_already_added = true;
+
                                             Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                                    1, "pc(s)",
                                                                    div_nxtCtrl.Div_ExplosionHeight.ToString(),
@@ -653,13 +677,16 @@ namespace ModelLayer.Model.Quotation
                                                                    mpnl.MPanel_Type,
                                                                    @"|  |");
 
+                                            Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
+                                                                   2, "pc(s)", "");
+
+                                            total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
+
                                             if (!screws_for_inst_where.Contains("Mullion"))
                                             {
                                                 screws_for_inst_where += ", Mullion";
                                             }
                                         }
-
-                                        total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
 
                                         foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
                                         {
@@ -768,29 +795,52 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         if (pnl_curCtrl.Panel_MotorizedOptionVisibility == true)
                                         {
-                                            Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Frame",
-                                                   @"");
+                                            if (pnl_curCtrl.Panel_Type == "Awning Panel")
+                                            {
+                                                Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width + 150,
+                                                                       "Frame",
+                                                                       @"");
 
-                                            Material_List.Rows.Add("Divider " + pnl_curCtrl.Panel_MotorizedDividerArtNo.ToString(),
-                                                                   1, "pc(s)",
-                                                                   frame.Frame_Width + 150,
-                                                                   "Frame",
-                                                                   @"");
+                                                Material_List.Rows.Add("Divider " + pnl_curCtrl.Panel_MotorizedDividerArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width + 150,
+                                                                       "Frame",
+                                                                       @"");
 
-                                            Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
-                                                                   1, "pc(s)",
-                                                                   frame.Frame_Width + 150,
-                                                                   "Motorized Mechanism",
-                                                                   @"");
+                                                Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width + 150,
+                                                                       "Motorized Mechanism",
+                                                                       @"");
+                                            }
+                                            else if (pnl_curCtrl.Panel_Type == "Casement Panel")
+                                            {
+                                                Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Height + 150,
+                                                                       "Frame",
+                                                                       @"");
+
+                                                Material_List.Rows.Add("Divider " + pnl_curCtrl.Panel_MotorizedDividerArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Height + 150,
+                                                                       "Frame",
+                                                                       @"");
+
+                                                Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Height + 150,
+                                                                       "Motorized Mechanism",
+                                                                       @"");
+                                            }
 
                                             if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
                                                 pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                                             {
                                                 Material_List.Rows.Add("2D Hinge " + pnl_curCtrl.Panel_2dHingeArtNo.DisplayName,
-                                                                       pnl_curCtrl.Panel_2DHingeQty, "pair(s)",
+                                                                       pnl_curCtrl.Panel_2DHingeQty, "pc(s)",
                                                                        "",
                                                                        "Sash & Frame",
                                                                        @"");
@@ -876,12 +926,6 @@ namespace ModelLayer.Model.Quotation
 
                                                 add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
 
-                                                Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
-                                                                       pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
-                                                                       "",
-                                                                       "Frame",
-                                                                       @"");
-
                                                 Material_List.Rows.Add("Fixed Cam " + pnl_curCtrl.Panel_FixedCamArtNo.ToString(),
                                                                        2, "pc(s)",
                                                                        "",
@@ -907,6 +951,13 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 add_screws_fab_fs_or_rs += 6;
                                             }
+
+                                            Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
+                                                                   pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+
                                         }
                                         else if (pnl_curCtrl.Panel_Type.Contains("Casement"))
                                         {
@@ -1089,13 +1140,6 @@ namespace ModelLayer.Model.Quotation
                                                                            @"");
                                                     add_screws_fab_pivotRest += 1;
                                                 }
-
-                                                Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
-                                                                       pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
-                                                                       "",
-                                                                       "Frame",
-                                                                       @"");
-                                                add_screws_fab_striker += (1 * pnl_curCtrl.Panel_AdjStrikerQty);
                                             }
                                         }
 
@@ -1652,29 +1696,53 @@ namespace ModelLayer.Model.Quotation
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)
                         {
-                            Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Frame",
-                                                   @"");
+                            if (pnl.Panel_Type == "Awning Panel")
+                            {
+                                Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width + 150,
+                                                       "Frame",
+                                                       @"");
 
-                            Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Frame",
-                                                   @"");
+                                Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width + 150,
+                                                       "Frame",
+                                                       @"");
 
-                            Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Motorized Mechanism",
-                                                   @"");
+                                Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width + 150,
+                                                       "Motorized Mechanism",
+                                                       @"");
+
+                            }
+                            else if (pnl.Panel_Type == "Casement Panel")
+                            {
+                                Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Height + 150,
+                                                       "Frame",
+                                                       @"");
+
+                                Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Height + 150,
+                                                       "Frame",
+                                                       @"");
+
+                                Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Height + 150,
+                                                       "Motorized Mechanism",
+                                                       @"");
+                            }
 
                             if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
                                 pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                             {
                                 Material_List.Rows.Add("2D Hinge " + pnl.Panel_2dHingeArtNo.DisplayName,
-                                                       pnl.Panel_2DHingeQty, "pair(s)",
+                                                       pnl.Panel_2DHingeQty, "pc(s)",
                                                        "",
                                                        "Sash & Frame",
                                                        @"");
@@ -1756,12 +1824,6 @@ namespace ModelLayer.Model.Quotation
 
                                     add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
 
-                                    Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
-                                                           pnl.Panel_PlasticWedgeQty, "pc (s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
-
                                     Material_List.Rows.Add("Fixed Cam " + pnl.Panel_FixedCamArtNo.ToString(),
                                                            2, "pc(s)",
                                                            "",
@@ -1787,6 +1849,13 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     add_screws_fab_fs_or_rs += 6;
                                 }
+
+                                Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
+                                                       pnl.Panel_PlasticWedgeQty, "pc (s)",
+                                                       "",
+                                                       "Frame",
+                                                       @"");
+
                             }
                             else if (pnl.Panel_Type.Contains("Casement"))
                             {

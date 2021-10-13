@@ -135,6 +135,8 @@
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\MultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_2dHingePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_3dHingePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_CenterHingePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_CornerDrivePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_EspagnolettePropertyUCPresenter.cs" />
@@ -152,6 +154,8 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotolinePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotoswingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_SashPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_2dHingePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_3dHingePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_CenterHingePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_CornerDrivePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_EspagnolettePropertyUCPresenter.cs" />
@@ -391,6 +395,8 @@
     <Compile Include="Views\UserControls\PanelPropertiesUC.Designer.cs">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_2dHingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_3dHingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CenterHingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CornerDrivePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_EspagnolettePropertyUC.cs" />
@@ -408,6 +414,18 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotolinePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotoswingPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SashPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_2dHingePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_2dHingePropertyUC.Designer.cs">
+      <DependentUpon>PP_2dHingePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_3dHingePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_3dHingePropertyUC.Designer.cs">
+      <DependentUpon>PP_3dHingePropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -739,6 +757,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelPropertiesUC.resx">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_2dHingePropertyUC.resx">
+      <DependentUpon>PP_2dHingePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_3dHingePropertyUC.resx">
+      <DependentUpon>PP_3dHingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.resx">
       <DependentUpon>PP_CenterHingePropertyUC.cs</DependentUpon>
