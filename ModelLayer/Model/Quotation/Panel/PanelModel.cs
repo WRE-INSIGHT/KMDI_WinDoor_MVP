@@ -75,31 +75,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelWidth = value;
                 PanelImageRenderer_Width = Convert.ToInt32(value * PanelImageRenderer_Zoom);
-
-                if (Panel_Zoom == 0.26f)
-                {
-                    int right = (Panel_Margin.Right != 0) ? 5 : 0,
-                        left = (Panel_Margin.Left != 0) ? 5 : 0,
-                        top = (Panel_Margin.Top != 0) ? 5 : 0,
-                        bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
-
-                    if (Panel_ParentMultiPanelModel != null)
-                    {
-                        if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-                        {
-                            Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom) - right - left - 7;
-                        }
-                        else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
-                        {
-                            Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom) - right - left;
-                        }
-                    }
-                }
-                else
-                {
-                    Panel_WidthToBind = (int)(value * Panel_Zoom);
-                }
-                //NotifyPropertyChanged();
+                Panel_WidthToBind = (int)(value * Panel_Zoom);
             }
         }
 
@@ -160,30 +136,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelHeight = value;
                 PanelImageRenderer_Height = Convert.ToInt32(value * PanelImageRenderer_Zoom);
-                if (Panel_Zoom == 0.26f)
-                {
-                    int right = (Panel_Margin.Right != 0) ? 5 : 0,
-                        left = (Panel_Margin.Left != 0) ? 5 : 0,
-                        top = (Panel_Margin.Top != 0) ? 5 : 0,
-                        bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
-
-                    if (Panel_ParentMultiPanelModel != null)
-                    {
-                        if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-                        {
-                            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom) - top - bot - 7;
-                        }
-                        else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
-                        {
-                            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom) - top - bot;
-                        }
-                    }
-                }
-                else
-                {
-                    Panel_HeightToBind = (int)(value * Panel_Zoom);
-                }
-                //NotifyPropertyChanged();
+                Panel_HeightToBind = (int)(value * Panel_Zoom);
             }
         }
 
@@ -498,35 +451,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_Zoom == 0.26f)
                 {
                     int right = (Panel_Margin.Right != 0) ? 5 : 0,
-                        left = (Panel_Margin.Left != 0) ? 5 : 0,
-                        top = (Panel_Margin.Top != 0) ? 5 : 0,
-                        bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+                    left = (Panel_Margin.Left != 0) ? 5 : 0,
+                    top = (Panel_Margin.Top != 0) ? 5 : 0,
+                    bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
                     Panel_MarginToBind = new Padding(left, top, right, bot);
-
-                    if (Panel_ParentMultiPanelModel != null)
-                    {
-                        if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-                        {
-                            Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom) - right - left;
-                            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom) - top - bot - 7;
-                        }
-                        else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
-                        {
-                            Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom) - right - left - 5;
-                            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom) - top - bot;
-                        }
-                    }
                 }
-                else
-                {
-                    Panel_MarginToBind = new Padding((int)(Panel_Margin.Left * Panel_Zoom),
-                                                     (int)(Panel_Margin.Top * Panel_Zoom),
-                                                     (int)(Panel_Margin.Right * Panel_Zoom),
-                                                     (int)(Panel_Margin.Bottom * Panel_Zoom));
 
-                    Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
-                    Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
-                }
+                Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
+                Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
 
                 PanelImageRenderer_Margin = new Padding((int)(Panel_Margin.Left * PanelImageRenderer_Zoom),
                                                         (int)(Panel_Margin.Top * PanelImageRenderer_Zoom),
@@ -611,27 +543,11 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_Zoom == 0.26f)
                 {
                     int right = (Panel_Margin.Right != 0) ? 5 : 0,
-                        left = (Panel_Margin.Left != 0) ? 5 : 0,
-                        top = (Panel_Margin.Top != 0) ? 5 : 0,
-                        bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+                    left = (Panel_Margin.Left != 0) ? 5 : 0,
+                    top = (Panel_Margin.Top != 0) ? 5 : 0,
+                    bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
                     Panel_MarginToBind = new Padding(left, top, right, bot);
-
-                    if (Panel_ParentMultiPanelModel != null)
-                    {
-                        if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-                        {
-                            Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom) - right - left;
-                            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom) - top - bot - 7;
-                        }
-                        else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
-                        {
-                            Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom) - right - left - 5;
-                            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom) - top - bot;
-                        }
-                    }
                 }
-                else
-                {
                     Panel_WidthToBind = (int)(Panel_Width * value);
                     Panel_HeightToBind = (int)(Panel_Height * value);
 
@@ -639,7 +555,6 @@ namespace ModelLayer.Model.Quotation.Panel
                                                      (int)(Panel_Margin.Top * Panel_Zoom),
                                                      (int)(Panel_Margin.Right * Panel_Zoom),
                                                      (int)(Panel_Margin.Bottom * Panel_Zoom));
-                }
             }
         }
 

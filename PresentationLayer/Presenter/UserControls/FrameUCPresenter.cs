@@ -144,7 +144,16 @@ namespace PresentationLayer.Presenter.UserControls
                 }
 
                 _frameModel.SetDeductFramePadding(true);
-                
+
+                if (_frameModel.Frame_Zoom == 0.26f)
+                {
+                    int reversed_wd = (int)Math.Ceiling(_frameModel.Frame_Width * 0.26f) - 20, //padding
+                        reversed_ht = (int)Math.Ceiling(_frameModel.Frame_Height * 0.26f) - 20; //padding
+
+                    wd = (int)(reversed_wd / 0.26f);
+                    ht = (int)(reversed_ht / 0.26f);
+                }
+
                 _multipanelModel = _multipanelServices.AddMultiPanelModel(wd,
                                                                           ht,
                                                                           _frameModel.Frame_Width,

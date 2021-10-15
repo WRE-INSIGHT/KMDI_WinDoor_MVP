@@ -332,7 +332,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 Control prev_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx - 1];
                 Control nxt_ctrl = null;
 
-
                 if (_multiPanelModel.MPanelLst_Objects.Count() > me_indx + 1)
                 {
                     nxt_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx + 1];
