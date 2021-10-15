@@ -254,39 +254,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            //GraphicsPath gpath = new GraphicsPath();
-
-            //int this_ndx  = _multiPanelModel.MPanelLst_Objects.IndexOf(transom);
-            //int prev_obj_ndx = this_ndx - 1,
-            //    next_obj_ndx = this_ndx + 1;
-            //string prev_obj_name = "",
-            //       next_obj_name = "";
-
-            //if (prev_obj_ndx >= 0)
-            //{
-            //    prev_obj_name = _multiPanelModel.MPanelLst_Objects[prev_obj_ndx].Name;
-            //}
-            //if (next_obj_ndx <= _multiPanelModel.MPanelLst_Objects.Count - 1)
-            //{
-            //    next_obj_name = _multiPanelModel.MPanelLst_Objects[next_obj_ndx].Name;
-            //}
-
-            //List<Point[]> TPoints = _commonfunc.GetTransomDrawingPoints(transom.Width,
-            //                                                            transom.Height,
-            //                                                            prev_obj_name,
-            //                                                            next_obj_name,
-            //                                                            _frameModel);
-
-            //gpath.AddLine(TPoints[0][0], TPoints[0][1]);
-            //gpath.AddCurve(TPoints[1]);
-            //gpath.AddLine(TPoints[2][0], TPoints[2][1]);
-            //gpath.AddCurve(TPoints[3]);
-
-            //Pen pen = new Pen(penColor, 2);
-
-            //g.DrawPath(pen, gpath);
-            //g.FillPath(Brushes.PowderBlue, gpath);
-
             Font drawFont = new Font("Segoe UI", 6.5f, FontStyle.Bold); //* zoom);
             Size s2 = TextRenderer.MeasureText(_divModel.Div_Name, drawFont);
 
@@ -318,7 +285,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             }
 
 
-            if (_divModel.Div_Height == (int)_frameModel.Frame_Type)
+            if (_divModel.Div_Height == (int)_frameModel.Frame_Type || _divModel.Div_Height == 13)
             {
                 g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
                                                                        0,

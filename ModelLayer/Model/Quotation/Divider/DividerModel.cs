@@ -292,7 +292,7 @@ namespace ModelLayer.Model.Quotation.Divider
                     if (_divZoom == 0.26f)
                     {
                         Div_WidthToBind = 13;
-                        Div_HeightToBind = (int)(value * Div_Height) - 12;
+                        Div_HeightToBind = (int)(value * Div_Height);
                     }
                     else if (_divZoom > 0.26f)
                     {
@@ -304,7 +304,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 {
                     if (_divZoom == 0.26f)
                     {
-                        Div_WidthToBind = (int)(value * Div_Width) - 12;
+                        Div_WidthToBind = (int)(value * Div_Width);
                         Div_HeightToBind = 13;
                     }
                     else if (_divZoom > 0.26f)

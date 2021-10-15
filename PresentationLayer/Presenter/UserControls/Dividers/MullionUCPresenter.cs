@@ -284,7 +284,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             }
             
 
-            if (_divModel.Div_Width == (int)_frameModel.Frame_Type)
+            if (_divModel.Div_Width == (int)_frameModel.Frame_Type || _divModel.Div_Width == 13)
             {
                 g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
                                                                        0,

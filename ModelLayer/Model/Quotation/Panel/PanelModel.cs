@@ -73,13 +73,37 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             set
             {
-                _panelWidth = value;
+                if (Panel_Zoom == 0.26f)
+                {
+                    if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                    {
+                        int totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1,
+                            reversed_wd = (((int)(Math.Ceiling(Panel_ParentMultiPanelModel.MPanel_Width * 0.26f) - 10) - (13 * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel);
+                        _panelWidth = (int)(reversed_wd / 0.26f);
+                    }
+                }
+                else
+                {
+                    _panelWidth = value;
+                }
+
                 PanelImageRenderer_Width = Convert.ToInt32(value * PanelImageRenderer_Zoom);
                 Panel_WidthToBind = (int)(value * Panel_Zoom);
             }
         }
 
-        public int Panel_OriginalWidth { get; set; }
+        private int _panelOriginalWidth;
+        public int Panel_OriginalWidth
+        {
+            get
+            {
+                return _panelOriginalWidth;
+            }
+            set
+            {
+                _panelOriginalWidth = value;
+            }
+        }
 
         [Description("Virtual Width that is dependent on Panel_Width and Panel_Zoomand varies accordingly. (not intended for user to use)")]
         private int _panelWidthToBind;
@@ -134,6 +158,18 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             set
             {
+                if (Panel_Zoom == 0.26f)
+                {
+                    if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                    {
+                        int reversed_ht = ((int)Math.Ceiling(Panel_ParentMultiPanelModel.MPanel_Height * 0.26f) - 10);
+                        _panelHeight = (int)(reversed_ht / 0.26f);
+                    }
+                }
+                else
+                {
+                    _panelHeight = value;
+                }
                 _panelHeight = value;
                 PanelImageRenderer_Height = Convert.ToInt32(value * PanelImageRenderer_Zoom);
                 Panel_HeightToBind = (int)(value * Panel_Zoom);
@@ -455,10 +491,26 @@ namespace ModelLayer.Model.Quotation.Panel
                     top = (Panel_Margin.Top != 0) ? 5 : 0,
                     bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
                     Panel_MarginToBind = new Padding(left, top, right, bot);
+
+                    if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                    {
+                        int totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1,
+                            reversed_wd = (((int)(Math.Ceiling(Panel_ParentMultiPanelModel.MPanel_Width * 0.26f) - 10) - (13 * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel);
+                        int reversed_ht = ((int)Math.Ceiling(Panel_ParentMultiPanelModel.MPanel_Height * 0.26f) - 10);
+
+                        Panel_Width = (int)(reversed_wd / 0.26f);
+                        Panel_Height = (int)(reversed_ht / 0.26f);
+                    }
+
+                    Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
+                    Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+                }
+                else
+                {
+                    Panel_WidthToBind = (int)(Panel_OriginalWidth * Panel_Zoom);
+                    Panel_HeightToBind = (int)(Panel_OriginalHeight * Panel_Zoom);
                 }
 
-                Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
-                Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
 
                 PanelImageRenderer_Margin = new Padding((int)(Panel_Margin.Left * PanelImageRenderer_Zoom),
                                                         (int)(Panel_Margin.Top * PanelImageRenderer_Zoom),
@@ -547,14 +599,26 @@ namespace ModelLayer.Model.Quotation.Panel
                     top = (Panel_Margin.Top != 0) ? 5 : 0,
                     bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
                     Panel_MarginToBind = new Padding(left, top, right, bot);
-                }
-                    Panel_WidthToBind = (int)(Panel_Width * value);
-                    Panel_HeightToBind = (int)(Panel_Height * value);
 
-                    Panel_MarginToBind = new Padding((int)(Panel_Margin.Left * Panel_Zoom),
-                                                     (int)(Panel_Margin.Top * Panel_Zoom),
-                                                     (int)(Panel_Margin.Right * Panel_Zoom),
-                                                     (int)(Panel_Margin.Bottom * Panel_Zoom));
+                    if (Panel_ParentMultiPanelModel != null && Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                    {
+
+                        int totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1,
+                                reversed_wd = (((int)(Math.Ceiling(Panel_ParentMultiPanelModel.MPanel_Width * 0.26f) - 10) - (13 * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel);
+                        int reversed_ht = ((int)Math.Ceiling(Panel_ParentMultiPanelModel.MPanel_Height * 0.26f) - 10);
+
+                        Panel_Width = (int)(reversed_wd / 0.26f);
+                        Panel_Height = (int)(reversed_ht / 0.26f);
+                    }
+                }
+                else
+                {
+                    Panel_Width = Panel_OriginalWidth;
+                    Panel_Height = Panel_OriginalHeight;
+                }
+
+                Panel_WidthToBind = (int)(Panel_Width * value);
+                Panel_HeightToBind = (int)(Panel_Height * value);
             }
         }
 
