@@ -1758,6 +1758,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_3dHingeOptionsheight;
                 }
+                else if (mode == "addMC")
+                {
+                    MPanelProp_Height += constants.panel_property_MiddleCloserOptionsheight;
+                }
+                else if (mode == "minusMC")
+                {
+                    MPanelProp_Height -= constants.panel_property_MiddleCloserOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {

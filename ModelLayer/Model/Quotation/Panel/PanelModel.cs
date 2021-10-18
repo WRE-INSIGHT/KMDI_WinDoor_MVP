@@ -1815,6 +1815,14 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_3dHingeOptionsheight;
             }
+            else if (mode == "addMC")
+            {
+                Panel_PropertyHeight += constants.panel_property_MiddleCloserOptionsheight;
+            }
+            else if (mode == "minusMC")
+            {
+                Panel_PropertyHeight -= constants.panel_property_MiddleCloserOptionsheight;
+            }
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)

@@ -63,8 +63,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
-            binding.Add("Panel_MiddleCloserVisibilitys", new Binding("Visible", _panelModel, "Panel_MiddleCloserVisibilitys", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_MiddleCloserVisibility", new Binding("Visible", _panelModel, "Panel_MiddleCloserVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_MiddleCloserArtNo", new Binding("Text", _panelModel, "Panel_MiddleCloserArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_MiddleCloserPairQty", new Binding("Value", _panelModel, "Panel_MiddleCloserPairQty", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }
