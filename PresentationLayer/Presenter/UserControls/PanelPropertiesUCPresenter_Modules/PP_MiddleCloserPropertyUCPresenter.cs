@@ -33,7 +33,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             ComboBox cmbMC = (ComboBox)sender;
             if (_initialLoad == false)
             {
-                _panelModel.Panel_MiddleCloserArtNo = (MiddleCloser_ArticleNo)cmbMC.SelectedValue;
+                MiddleCloser_ArticleNo sel_mc = (MiddleCloser_ArticleNo)cmbMC.SelectedValue;
+                _panelModel.Panel_MiddleCloserArtNo = sel_mc;
+                if (sel_mc == MiddleCloser_ArticleNo._None)
+                {
+                    _panelModel.Panel_MiddleCloserPairQty = 0;
+                }
             }
         }
 

@@ -1401,7 +1401,20 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-        public int Panel_MiddleCloserPairQty { get; set; }
+
+        private int _panelMiddleCloserPairQty;
+        public int Panel_MiddleCloserPairQty
+        {
+            get
+            {
+                return _panelMiddleCloserPairQty;
+            }
+            set
+            {
+                _panelMiddleCloserPairQty = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private bool _panel_MiddleCloserVisibility;
         public bool Panel_MiddleCloserVisibility
@@ -2180,11 +2193,11 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
 
                     Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
-                    Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
-                    Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+                    Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+                    Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
                     Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
                     Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
-                    Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+                    Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
 
                     if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
                     {
@@ -3509,11 +3522,11 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
 
                     Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
-                    Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
-                    Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+                    Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+                    Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
                     Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
                     Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
-                    Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+                    Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
 
                     if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
                     {

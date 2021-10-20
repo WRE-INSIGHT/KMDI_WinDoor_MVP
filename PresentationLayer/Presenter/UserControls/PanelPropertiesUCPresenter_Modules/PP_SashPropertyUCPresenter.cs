@@ -98,6 +98,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
                             }
 
+                            _panelModel.Panel_MiddleCloserVisibility = true;
+                            _panelModel.AdjustPropertyPanelHeight("addMC");
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                            }
+
                             if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
                             {
                                 _panelModel.Panel_2dHingeVisibility_nonMotorized = true;
@@ -139,6 +147,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 if (_panelModel.Panel_ParentMultiPanelModel != null)
                                 {
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                                }
+
+                                _panelModel.Panel_MiddleCloserVisibility = false;
+
+                                _panelModel.AdjustPropertyPanelHeight("minusMC");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusMC");
+                                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusMC");
                                 }
 
                                 if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
@@ -196,6 +213,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 if (_panelModel.Panel_ParentMultiPanelModel != null)
                                 {
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                                }
+
+                                _panelModel.Panel_MiddleCloserVisibility = false;
+
+                                _panelModel.AdjustPropertyPanelHeight("minusMC");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusMC");
+                                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusMC");
                                 }
 
                                 if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
