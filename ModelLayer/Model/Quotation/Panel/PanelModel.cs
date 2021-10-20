@@ -1157,6 +1157,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private Extension_ArticleNo _panelExtensionTop3ArtNo;
+        public Extension_ArticleNo Panel_ExtensionTop3ArtNo
+        {
+            get
+            {
+                return _panelExtensionTop3ArtNo;
+            }
+            set
+            {
+                _panelExtensionTop3ArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private Extension_ArticleNo _panelExtensionBotArtNo;
         public Extension_ArticleNo Panel_ExtensionBotArtNo
         {
@@ -1255,6 +1269,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private bool _panelExtTop2Chk;
+        public bool Panel_ExtTop2Chk
+        {
+            get
+            {
+                return _panelExtTop2Chk;
+            }
+            set
+            {
+                _panelExtTop2Chk = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private bool _panelExtBotChk;
         public bool Panel_ExtBotChk
         {
@@ -1303,6 +1331,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_ExtRightQty { get; set; }
 
         public int Panel_ExtTop2Qty { get; set; }
+        public int Panel_ExtTop3Qty { get; set; }
         public int Panel_ExtBot2Qty { get; set; }
         public int Panel_ExtLeft2Qty { get; set; }
         public int Panel_ExtRight2Qty { get; set; }

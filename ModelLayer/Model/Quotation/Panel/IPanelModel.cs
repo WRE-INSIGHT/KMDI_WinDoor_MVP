@@ -107,6 +107,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         Extension_ArticleNo Panel_ExtensionTopArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionTop2ArtNo { get; set; }
+        Extension_ArticleNo Panel_ExtensionTop3ArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionBotArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionBot2ArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionLeftArtNo { get; set; }
@@ -115,6 +116,7 @@ namespace ModelLayer.Model.Quotation.Panel
         Extension_ArticleNo Panel_ExtensionRight2ArtNo { get; set; }
 
         bool Panel_ExtTopChk { get; set; }
+        bool Panel_ExtTop2Chk { get; set; }
         bool Panel_ExtBotChk { get; set; }
         bool Panel_ExtLeftChk { get; set; }
 
@@ -125,6 +127,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_ExtRightQty { get; set; }
 
         int Panel_ExtTop2Qty { get; set; }
+        int Panel_ExtTop3Qty { get; set; }
         int Panel_ExtBot2Qty { get; set; }
         int Panel_ExtLeft2Qty { get; set; }
         int Panel_ExtRight2Qty { get; set; }

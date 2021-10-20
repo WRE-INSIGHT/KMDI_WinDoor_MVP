@@ -56,10 +56,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_2dHingeVisibility_nonMotorized = true;
                         _panelModel.AdjustPropertyPanelHeight("add2dHingeField");
 
+                        _panelModel.Panel_MiddleCloserVisibility = false;
+                        _panelModel.AdjustPropertyPanelHeight("minusMC");
+
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusMC");
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusMC");
                         }
                     }
                     else if (sel_hinge == HingeOption._FrictionStay)
@@ -67,10 +72,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_2dHingeVisibility_nonMotorized = false;
                         _panelModel.AdjustPropertyPanelHeight("minus2dHingeField");
 
+                        _panelModel.Panel_MiddleCloserVisibility = true;
+                        _panelModel.AdjustPropertyPanelHeight("addMC");
+
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
                         }
                     }
                     curr_hinge = sel_hinge;

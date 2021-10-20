@@ -50,7 +50,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.Panel_SashProfileArtNo = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
 
                 SashProfile_ArticleNo sel_sash = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
-                if (sel_sash != curr_sash)
+                if (sel_sash != curr_sash && _panelModel.Panel_Type.Contains("Fixed") == false)
                 {
                     if (sel_sash == SashProfile_ArticleNo._7581)
                     {
