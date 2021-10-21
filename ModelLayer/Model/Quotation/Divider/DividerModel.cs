@@ -470,6 +470,7 @@ namespace ModelLayer.Model.Quotation.Divider
         }
         public ShootboltStriker_ArticleNo Div_ShootboltStrikerArtNo { get; set; }
         public ShootboltNonReverse_ArticleNo Div_ShootboltNonReverseArtNo { get; set; }
+        public ShootboltReverse_ArticleNo Div_ShootboltReverseArtNo { get; set; }
 
         public void SetExplosionValues_Div()
         {
@@ -486,20 +487,20 @@ namespace ModelLayer.Model.Quotation.Divider
 
             if (Div_ChkDM == true)
             {
+                Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+                if (Div_FrameParent.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                {
+                    Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400215;
+                }
+                else if (Div_FrameParent.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                         Div_FrameParent.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                {
+                    Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
+                }
+
                 if (Div_DMArtNo == DummyMullion_ArticleNo._7533)
                 {
                     Div_EndcapDM = EndcapDM_ArticleNo._K7533;
-                    Div_FixedCamDM = FixedCam_ArticleNo._1481413;
-
-                    if (Div_FrameParent.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
-                    {
-                        Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400215;
-                    }
-                    else if (Div_FrameParent.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
-                             Div_FrameParent.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
-                    {
-                        Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
-                    }
                 }
                 else if (Div_DMArtNo == DummyMullion_ArticleNo._385P)
                 {
@@ -508,6 +509,10 @@ namespace ModelLayer.Model.Quotation.Divider
 
                 if (Div_DMPanel != null)
                 {
+                    Div_ShootboltNonReverseArtNo = ShootboltNonReverse_ArticleNo._349187;
+                    Div_ShootboltReverseArtNo = ShootboltReverse_ArticleNo._312033;
+                    Div_ShootboltStrikerArtNo = ShootboltStriker_ArticleNo._N705A20106;
+
                     if (Div_LeverEspagVisibility == true)
                     {
                         if (Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_205 ||
@@ -519,8 +524,6 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_DMPanel.Panel_AdjStrikerQty += 2;
                         }
-                        Div_ShootboltNonReverseArtNo = ShootboltNonReverse_ArticleNo._349187;
-                        Div_ShootboltStrikerArtNo = ShootboltStriker_ArticleNo._N705A20106;
                     }
                 }
             }

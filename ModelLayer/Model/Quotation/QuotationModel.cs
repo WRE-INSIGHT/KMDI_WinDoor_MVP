@@ -580,6 +580,14 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         div_nxtCtrl.SetExplosionValues_Div();
 
+                                        Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
+                                                               pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
+                                                               "",
+                                                               "Frame",
+                                                               @"");
+
+                                        add_screws_fab_striker += (1 * pnl.Panel_AdjStrikerQty);
+
                                         if (div_nxtCtrl.Div_ChkDM == true && div_nxtCtrl.Div_DMPanel == pnl_curCtrl)
                                         {
                                             Material_List.Rows.Add("Dummy Mullion Height " + div_nxtCtrl.Div_DMArtNo.ToString(),
@@ -601,7 +609,7 @@ namespace ModelLayer.Model.Quotation
                                                 add_screws_fab_endcap += (1 * 2); // 1 * 2pcs
                                             }
 
-                                            if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                            if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
                                             {
                                                 Material_List.Rows.Add("Fixed cam " + div_nxtCtrl.Div_FixedCamDM.ToString(),
                                                                        2, "pc(s)",
@@ -633,6 +641,7 @@ namespace ModelLayer.Model.Quotation
                                                 add_screws_fab_alum += (3 * div_nxtCtrl.Div_AlumSpacer50Qty); //3 (50mm)
                                             }
 
+                                            int qty_sbStriker = 0;
                                             if (div_nxtCtrl.Div_DMPanel != null &&
                                                 div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                                             {
@@ -642,13 +651,6 @@ namespace ModelLayer.Model.Quotation
                                                                        "Dummy Mullion");
                                                 add_screws_fab_espag += 8; //Lever Espagnolette
 
-                                                Material_List.Rows.Add("Shootbolt, non-reverse " + div_nxtCtrl.Div_ShootboltNonReverseArtNo.DisplayName,
-                                                                       2, "pc(s)",
-                                                                       "",
-                                                                       "Dummy Mullion");
-                                                add_screws_fab_shootbolt += (2 * 2); //(qty * 2)
-
-                                                int qty_sbStriker = 0;
                                                 if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_205 ||
                                                     div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_206)
                                                 {
@@ -658,11 +660,39 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     qty_sbStriker = 2;
                                                 }
+                                            }
+
+                                            if (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                            {
+                                                qty_sbStriker = 2;
+                                            }
+
+                                            if (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
+                                                div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                                div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                            {
                                                 Material_List.Rows.Add("Shootbolt striker " + div_nxtCtrl.Div_ShootboltStrikerArtNo.DisplayName,
                                                                        qty_sbStriker, "pc(s)",
                                                                        "",
                                                                        "Sash");
                                                 add_screws_fab_shootbolt += qty_sbStriker; //Shootbolt striker
+
+                                                if (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                                    div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                                {
+
+                                                    Material_List.Rows.Add("Shootbolt, Reverse " + div_nxtCtrl.Div_ShootboltReverseArtNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash");
+                                                    add_screws_fab_shootbolt += (2 * 2); //(qty * 2)
+                                                }
+
+                                                Material_List.Rows.Add("Shootbolt, non-reverse " + div_nxtCtrl.Div_ShootboltNonReverseArtNo.DisplayName,
+                                                                       2, "pc(s)",
+                                                                       "",
+                                                                       "Sash");
+                                                add_screws_fab_shootbolt += (2 * 2); //(qty * 2)
                                             }
                                         }
                                         else if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added)
@@ -745,6 +775,12 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         div_prevCtrl.SetExplosionValues_Div();
 
+                                        Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
+                                                               pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
+                                                               "",
+                                                               "Frame",
+                                                               @"");
+
                                         if (div_prevCtrl.Div_ChkDM == true && div_prevCtrl.Div_DMPanel == pnl_curCtrl)
                                         {
                                             Material_List.Rows.Add("Dummy Mullion Height " + div_prevCtrl.Div_DMArtNo.ToString(),
@@ -766,7 +802,7 @@ namespace ModelLayer.Model.Quotation
                                                 add_screws_fab_endcap += (1 * 2); // 1 * 2pcs
                                             }
 
-                                            if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                            if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
                                             {
                                                 Material_List.Rows.Add("Fixed cam " + div_prevCtrl.Div_FixedCamDM.ToString(),
                                                                        2, "pc(s)",
@@ -798,6 +834,7 @@ namespace ModelLayer.Model.Quotation
                                                 add_screws_fab_alum += (3 * div_prevCtrl.Div_AlumSpacer50Qty); //3 (50mm)
                                             }
 
+                                            int qty_sbStriker = 0;
                                             if (div_prevCtrl.Div_DMPanel != null &&
                                                 div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                                             {
@@ -807,13 +844,6 @@ namespace ModelLayer.Model.Quotation
                                                                        "Dummy Mullion");
                                                 add_screws_fab_espag += 8; //Lever Espagnolette
 
-                                                Material_List.Rows.Add("Shootbolt, non-reverse " + div_prevCtrl.Div_ShootboltNonReverseArtNo.DisplayName,
-                                                                       2, "pc(s)",
-                                                                       "",
-                                                                       "Dummy Mullion");
-                                                add_screws_fab_shootbolt += (2 * 2); //(qty * 2)
-
-                                                int qty_sbStriker = 0;
                                                 if (div_prevCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_205 ||
                                                     div_prevCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_206)
                                                 {
@@ -823,11 +853,39 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     qty_sbStriker = 2;
                                                 }
+                                            }
+
+                                            if (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                            {
+                                                qty_sbStriker = 2;
+                                            }
+
+                                            if (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
+                                                div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                                div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                            {
                                                 Material_List.Rows.Add("Shootbolt striker " + div_prevCtrl.Div_ShootboltStrikerArtNo.DisplayName,
                                                                        qty_sbStriker, "pc(s)",
                                                                        "",
                                                                        "Sash");
                                                 add_screws_fab_shootbolt += qty_sbStriker; //Shootbolt striker
+
+                                                if (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                                    div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                                {
+
+                                                    Material_List.Rows.Add("Shootbolt, Reverse " + div_prevCtrl.Div_ShootboltReverseArtNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash");
+                                                    add_screws_fab_shootbolt += 2; //(qty * 2)
+                                                }
+
+                                                Material_List.Rows.Add("Shootbolt, non-reverse " + div_prevCtrl.Div_ShootboltNonReverseArtNo.DisplayName,
+                                                                       2, "pc(s)",
+                                                                       "",
+                                                                       "Sash");
+                                                add_screws_fab_shootbolt += (2 * 2); //(qty * 2)
                                             }
                                         }
                                     }
