@@ -352,7 +352,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 }
                 else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
                 {
-                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                          (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                           Panel_SashProfileArtNo == SashProfile_ArticleNo._373)))
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", "Extension Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -394,7 +396,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             }
             else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
             {
-                if (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                if (Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                   (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }

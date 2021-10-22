@@ -1219,7 +1219,8 @@ namespace PresentationLayer.Presenter
                         else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._7507 &&
-                                  sash_art == SashProfile_ArticleNo._374))
+                                  (sash_art == SashProfile_ArticleNo._374 ||
+                                   sash_art == SashProfile_ArticleNo._373)))
                             {
                                 incompatibility_cnt++;
                             }
@@ -1238,7 +1239,9 @@ namespace PresentationLayer.Presenter
                         else if (espag_art == Espagnolette_ArticleNo._642105 || espag_art == Espagnolette_ArticleNo._642089 ||
                                  espag_art == Espagnolette_ArticleNo._630963)
                         {
-                            if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                            if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                 (sash_art == SashProfile_ArticleNo._374 ||
+                                  sash_art == SashProfile_ArticleNo._373)))
                             {
                                 incompatibility_cnt++;
                             }
@@ -1278,7 +1281,9 @@ namespace PresentationLayer.Presenter
                                 }
                                 else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
                                 {
-                                    if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                                    if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                         (sash_art == SashProfile_ArticleNo._374 ||
+                                          sash_art == SashProfile_ArticleNo._373)))
                                     {
                                         incompatibility_cnt++;
                                     }
@@ -1288,6 +1293,7 @@ namespace PresentationLayer.Presenter
                                     if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
                                         !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
                                         !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374) &&
+                                        !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._373) &&
                                         !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
                                     {
                                         incompatibility_cnt++;
@@ -1322,7 +1328,8 @@ namespace PresentationLayer.Presenter
                             else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
                             {
                                 if (!(frame_art == FrameProfile_ArticleNo._7507 &&
-                                      sash_art == SashProfile_ArticleNo._374))
+                                      (sash_art == SashProfile_ArticleNo._374 ||
+                                       sash_art == SashProfile_ArticleNo._373)))
                                 {
                                     incompatibility_cnt++;
                                 }
@@ -1342,7 +1349,9 @@ namespace PresentationLayer.Presenter
                             else if (espag_art == Espagnolette_ArticleNo._642105 || espag_art == Espagnolette_ArticleNo._642089 ||
                                      espag_art == Espagnolette_ArticleNo._630963)
                             {
-                                if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                                if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                     (sash_art == SashProfile_ArticleNo._374 ||
+                                      sash_art == SashProfile_ArticleNo._373)))
                                 {
                                     incompatibility_cnt++;
                                 }
@@ -1383,7 +1392,9 @@ namespace PresentationLayer.Presenter
                                     }
                                     else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
                                     {
-                                        if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                                        if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                            (sash_art == SashProfile_ArticleNo._374 ||
+                                             sash_art == SashProfile_ArticleNo._373)))
                                         {
                                             incompatibility_cnt++;
                                         }
@@ -1393,6 +1404,7 @@ namespace PresentationLayer.Presenter
                                         if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
                                             !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
                                             !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374) &&
+                                            !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._373) &&
                                             !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
                                         {
                                             incompatibility_cnt++;

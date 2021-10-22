@@ -198,6 +198,7 @@ namespace PresentationLayer.Views.UserControls
                 else if (dm == DummyMullion_ArticleNo._385P)
                 {
                     if (!(Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                          Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                           Panel_SashProfileArtNo == SashProfile_ArticleNo._395))
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", Divider_Type.ToString() + " Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -250,6 +251,7 @@ namespace PresentationLayer.Views.UserControls
             else if (dm == DummyMullion_ArticleNo._385P)
             {
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                     Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);

@@ -2007,7 +2007,10 @@ namespace ModelLayer.Model.Quotation.Panel
 
             if (Panel_SashPropertyVisibility == true)
             {
-                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                    (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
                     if (Panel_ParentFrameModel.Frame_Height > 2499)
                     {
@@ -2034,10 +2037,12 @@ namespace ModelLayer.Model.Quotation.Panel
                         glass_deduct = 55;
                     }
                     else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                             Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                              Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                     {
                         sash_deduct = 39;
-                        if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                        if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                            Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                         {
                             glass_deduct = 86;
                         }
@@ -2079,12 +2084,12 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
 
+                Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
-                    Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                 {
-                    Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
-
                     if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
                     {
@@ -2192,7 +2197,6 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_AdjStrikerQty += 4;
                     }
 
-                    Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
                     Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
                     Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
                     Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
@@ -2312,7 +2316,8 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 Panel_MiddleCloserPairQty = 1;
                             }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                             {
                                 Panel_MiddleCloserPairQty = 0;
                             }
@@ -2363,7 +2368,8 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 Panel_MiddleCloserPairQty = 1;
                             }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                             {
                                 Panel_MiddleCloserPairQty = 0;
                             }
@@ -2855,6 +2861,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forNxtPrev -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forNxtPrev -= 8; //sash bite allowance
@@ -2869,7 +2876,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forNxtPrev -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
-                         Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._395 )
                 {
                     Sash_deduction_forNxtPrev -= 8; //sash bite allowance
                 }
@@ -2898,6 +2906,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             Sash_deduction_forNxtPrev += 40;
                         }
                         else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                 Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                  Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                         {
                             Sash_deduction_forNxtPrev += 39;
@@ -2928,6 +2937,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += 40;
                             }
                             else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                      Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                             {
                                 Sash_deduction_forNxtPrev += 39;
@@ -2959,6 +2969,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += 40;
                             }
                             else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                      Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                             {
                                 Sash_deduction_forNxtPrev += 39;
@@ -2977,6 +2988,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forNxtPrev -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forNxtPrev -= 8; //sash bite allowance
@@ -2991,6 +3003,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forNxtPrev -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forNxtPrev -= 8; //sash bite allowance
@@ -3020,6 +3033,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             Sash_deduction_forNxtPrev += 40;
                         }
                         else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                 Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                  Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                         {
                             Sash_deduction_forNxtPrev += 39;
@@ -3050,6 +3064,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += 40;
                             }
                             else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                      Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                             {
                                 Sash_deduction_forNxtPrev += 39;
@@ -3081,6 +3096,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += 40;
                             }
                             else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                      Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                             {
                                 Sash_deduction_forNxtPrev += 39;
@@ -3099,6 +3115,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forLeftorTopRightorBot -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
@@ -3114,6 +3131,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forLeftorTopRightorBot -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
@@ -3145,6 +3163,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             Sash_deduction_forLeftorTopRightorBot += 40;
                         }
                         else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                 Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                  Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                         {
                             Sash_deduction_forLeftorTopRightorBot += 39;
@@ -3162,6 +3181,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forLeftorTopRightorBot -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
@@ -3176,6 +3196,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forLeftorTopRightorBot -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
@@ -3207,6 +3228,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             Sash_deduction_forLeftorTopRightorBot += 40;
                         }
                         else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                 Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                  Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                         {
                             Sash_deduction_forLeftorTopRightorBot += 39;
@@ -3312,7 +3334,9 @@ namespace ModelLayer.Model.Quotation.Panel
 
             if (Panel_SashPropertyVisibility == true)
             {
-                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                    (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
                     if (Panel_ParentFrameModel.Frame_Height > 2499)
                     {
@@ -3361,7 +3385,8 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     glass_deduct = 55;
                 }
-                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                 {
                     glass_deduct = 86;
                 }
@@ -3410,10 +3435,12 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
+                Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
-                    Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                    (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
-                    Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
 
                     if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
@@ -3521,7 +3548,6 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_AdjStrikerQty += 4;
                     }
 
-                    Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
                     Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
                     Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
                     Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
@@ -3582,7 +3608,8 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 Panel_MiddleCloserPairQty = 1;
                             }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                             {
                                 Panel_MiddleCloserPairQty = 0;
                             }
@@ -3633,7 +3660,8 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 Panel_MiddleCloserPairQty = 1;
                             }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                             {
                                 Panel_MiddleCloserPairQty = 0;
                             }

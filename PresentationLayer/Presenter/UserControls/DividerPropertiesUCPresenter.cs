@@ -101,9 +101,13 @@ namespace PresentationLayer.Presenter.UserControls
             SashProfile_ArticleNo sel_sashProfileArtNo = (SashProfile_ArticleNo)sender;
             if (!_initialLoad && curr_sashProfileArtNo != sel_sashProfileArtNo)
             {
-                if (sel_sashProfileArtNo == SashProfile_ArticleNo._395)
+                if (sel_sashProfileArtNo == SashProfile_ArticleNo._395 || 
+                    sel_sashProfileArtNo == SashProfile_ArticleNo._374 ||
+                    sel_sashProfileArtNo == SashProfile_ArticleNo._373)
                 {
-                    if (curr_sashProfileArtNo != SashProfile_ArticleNo._395)
+                    if (curr_sashProfileArtNo != SashProfile_ArticleNo._395 &&
+                        curr_sashProfileArtNo != SashProfile_ArticleNo._374 &&
+                        curr_sashProfileArtNo != SashProfile_ArticleNo._373)
                     {
                         _divModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._631153;
 
@@ -113,9 +117,13 @@ namespace PresentationLayer.Presenter.UserControls
                         _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
                     }
                 }
-                else if (sel_sashProfileArtNo != SashProfile_ArticleNo._395)
+                else if (sel_sashProfileArtNo != SashProfile_ArticleNo._395 &&
+                         sel_sashProfileArtNo != SashProfile_ArticleNo._374 &&
+                         sel_sashProfileArtNo != SashProfile_ArticleNo._373)
                 {
-                    if (curr_sashProfileArtNo == SashProfile_ArticleNo._395)
+                    if (curr_sashProfileArtNo == SashProfile_ArticleNo._395 ||
+                        curr_sashProfileArtNo == SashProfile_ArticleNo._374 ||
+                        curr_sashProfileArtNo == SashProfile_ArticleNo._373)
                     {
                         _divModel.Div_LeverEspagVisibility = false;
                         _divModel.AdjustPropertyPanelHeight("minusLeverEspag");

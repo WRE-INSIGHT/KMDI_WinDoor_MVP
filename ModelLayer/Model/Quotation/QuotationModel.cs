@@ -586,7 +586,7 @@ namespace ModelLayer.Model.Quotation
                                                                "Frame",
                                                                @"");
 
-                                        add_screws_fab_striker += (1 * pnl.Panel_AdjStrikerQty);
+                                        add_screws_fab_striker += (1 * pnl_curCtrl.Panel_AdjStrikerQty);
 
                                         if (div_nxtCtrl.Div_ChkDM == true && div_nxtCtrl.Div_DMPanel == pnl_curCtrl)
                                         {
@@ -628,22 +628,25 @@ namespace ModelLayer.Model.Quotation
                                                     add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
                                                 }
 
-                                                Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
-                                                                       2, "pc(s)",
-                                                                       "",
-                                                                       "Dummy Mullion");
-                                                Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
-                                                                       div_nxtCtrl.Div_AlumSpacer50Qty, "pc(s)",
-                                                                       "",
-                                                                       "Dummy Mullion");
+                                                if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                                {
+                                                    Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
+                                                                           2, "pc(s)",
+                                                                           "",
+                                                                           "Dummy Mullion");
+                                                    Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
+                                                                           div_nxtCtrl.Div_AlumSpacer50Qty, "pc(s)",
+                                                                           "",
+                                                                           "Dummy Mullion");
 
-                                                add_screws_fab_alum += (3 * 2); //3 * 2pcs (80mm)
-                                                add_screws_fab_alum += (3 * div_nxtCtrl.Div_AlumSpacer50Qty); //3 (50mm)
+                                                    add_screws_fab_alum += (3 * 2); //3 * 2pcs (80mm)
+                                                    add_screws_fab_alum += (3 * div_nxtCtrl.Div_AlumSpacer50Qty); //3 (50mm)
+                                                }
                                             }
 
-                                            int qty_sbStriker = 0;
                                             if (div_nxtCtrl.Div_DMPanel != null &&
-                                                div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                                (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
+                                                 div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
                                             {
                                                 Material_List.Rows.Add("Lever Espagnolette " + div_nxtCtrl.Div_LeverEspagArtNo.DisplayName,
                                                                        1, "pc(s)",
@@ -651,20 +654,6 @@ namespace ModelLayer.Model.Quotation
                                                                        "Dummy Mullion");
                                                 add_screws_fab_espag += 8; //Lever Espagnolette
 
-                                                if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_205 ||
-                                                    div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_206)
-                                                {
-                                                    qty_sbStriker = 1;
-                                                }
-                                                else if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_207)
-                                                {
-                                                    qty_sbStriker = 2;
-                                                }
-                                            }
-
-                                            if (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
-                                            {
-                                                qty_sbStriker = 2;
                                             }
 
                                             if (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
@@ -672,10 +661,10 @@ namespace ModelLayer.Model.Quotation
                                                 div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                                             {
                                                 Material_List.Rows.Add("Shootbolt striker " + div_nxtCtrl.Div_ShootboltStrikerArtNo.DisplayName,
-                                                                       qty_sbStriker, "pc(s)",
+                                                                       2, "pc(s)",
                                                                        "",
                                                                        "Sash");
-                                                add_screws_fab_shootbolt += qty_sbStriker; //Shootbolt striker
+                                                add_screws_fab_shootbolt += 2; //Shootbolt striker
 
                                                 if (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                                                     div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
@@ -685,14 +674,14 @@ namespace ModelLayer.Model.Quotation
                                                                            1, "pc(s)",
                                                                            "",
                                                                            "Sash");
-                                                    add_screws_fab_shootbolt += (2 * 2); //(qty * 2)
+                                                    add_screws_fab_shootbolt += 2; //(qty * 2)
                                                 }
 
                                                 Material_List.Rows.Add("Shootbolt, non-reverse " + div_nxtCtrl.Div_ShootboltNonReverseArtNo.DisplayName,
-                                                                       2, "pc(s)",
+                                                                       3, "pc(s)",
                                                                        "",
-                                                                       "Sash");
-                                                add_screws_fab_shootbolt += (2 * 2); //(qty * 2)
+                                                                       "Sash & DM");
+                                                add_screws_fab_shootbolt += (3 * 2); //(qty * 2)
                                             }
                                         }
                                         else if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added)
@@ -821,43 +810,31 @@ namespace ModelLayer.Model.Quotation
                                                     add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
                                                 }
 
-                                                Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
-                                                                       2, "pc(s)",
-                                                                       "",
-                                                                       "Dummy Mullion");
-                                                Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
-                                                                       div_prevCtrl.Div_AlumSpacer50Qty, "pc(s)",
-                                                                       "",
-                                                                       "Dummy Mullion");
+                                                if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                                {
+                                                    Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
+                                                                           2, "pc(s)",
+                                                                           "",
+                                                                           "Dummy Mullion");
+                                                    Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
+                                                                           div_prevCtrl.Div_AlumSpacer50Qty, "pc(s)",
+                                                                           "",
+                                                                           "Dummy Mullion");
 
-                                                add_screws_fab_alum += (3 * 2); //3 * 2pcs (80mm)
-                                                add_screws_fab_alum += (3 * div_prevCtrl.Div_AlumSpacer50Qty); //3 (50mm)
+                                                    add_screws_fab_alum += (3 * 2); //3 * 2pcs (80mm)
+                                                    add_screws_fab_alum += (3 * div_prevCtrl.Div_AlumSpacer50Qty); //3 (50mm)
+                                                }
                                             }
 
-                                            int qty_sbStriker = 0;
                                             if (div_prevCtrl.Div_DMPanel != null &&
-                                                div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                                (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
+                                                 div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
                                             {
                                                 Material_List.Rows.Add("Lever Espagnolette " + div_prevCtrl.Div_LeverEspagArtNo.DisplayName,
                                                                        1, "pc(s)",
                                                                        "",
                                                                        "Dummy Mullion");
                                                 add_screws_fab_espag += 8; //Lever Espagnolette
-
-                                                if (div_prevCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_205 ||
-                                                    div_prevCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_206)
-                                                {
-                                                    qty_sbStriker = 1;
-                                                }
-                                                else if (div_prevCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_207)
-                                                {
-                                                    qty_sbStriker = 2;
-                                                }
-                                            }
-
-                                            if (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
-                                            {
-                                                qty_sbStriker = 2;
                                             }
 
                                             if (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
@@ -865,10 +842,10 @@ namespace ModelLayer.Model.Quotation
                                                 div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                                             {
                                                 Material_List.Rows.Add("Shootbolt striker " + div_prevCtrl.Div_ShootboltStrikerArtNo.DisplayName,
-                                                                       qty_sbStriker, "pc(s)",
+                                                                       2, "pc(s)",
                                                                        "",
                                                                        "Sash");
-                                                add_screws_fab_shootbolt += qty_sbStriker; //Shootbolt striker
+                                                add_screws_fab_shootbolt += 2; //Shootbolt striker
 
                                                 if (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                                                     div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
@@ -882,10 +859,10 @@ namespace ModelLayer.Model.Quotation
                                                 }
 
                                                 Material_List.Rows.Add("Shootbolt, non-reverse " + div_prevCtrl.Div_ShootboltNonReverseArtNo.DisplayName,
-                                                                       2, "pc(s)",
+                                                                       3, "pc(s)",
                                                                        "",
-                                                                       "Sash");
-                                                add_screws_fab_shootbolt += (2 * 2); //(qty * 2)
+                                                                       "Sash & DM");
+                                                add_screws_fab_shootbolt += (3 * 2); //(qty * 2)
                                             }
                                         }
                                     }
