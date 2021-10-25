@@ -359,6 +359,8 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     mullion_already_added = true;
 
+                                    div_nxtCtrl.SetExplosionValues_Div();
+
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                            1, "pc(s)",
                                                            div_nxtCtrl.Div_ExplosionHeight.ToString(),
@@ -580,13 +582,16 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         div_nxtCtrl.SetExplosionValues_Div();
 
-                                        Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
-                                                               pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
-                                                               "",
-                                                               "Frame",
-                                                               @"");
+                                        if (div_nxtCtrl.Div_ChkDM == false)
+                                        {
+                                            Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
+                                                                   pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+                                            add_screws_fab_striker += pnl_curCtrl.Panel_AdjStrikerQty;
+                                        }
 
-                                        add_screws_fab_striker += (1 * pnl_curCtrl.Panel_AdjStrikerQty);
 
                                         if (div_nxtCtrl.Div_ChkDM == true && div_nxtCtrl.Div_DMPanel == pnl_curCtrl)
                                         {
@@ -652,8 +657,18 @@ namespace ModelLayer.Model.Quotation
                                                                        1, "pc(s)",
                                                                        "",
                                                                        "Dummy Mullion");
-                                                add_screws_fab_espag += 8; //Lever Espagnolette
-
+                                                if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153)
+                                                {
+                                                    add_screws_fab_espag += 3; //Lever Espagnolette
+                                                }
+                                                else if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._476518)
+                                                {
+                                                    add_screws_fab_espag += 3; //Lever Espagnolette
+                                                }
+                                                else
+                                                {
+                                                    add_screws_fab_espag += 8; //Lever Espagnolette
+                                                }
                                             }
 
                                             if (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
@@ -764,11 +779,16 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         div_prevCtrl.SetExplosionValues_Div();
 
-                                        Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
-                                                               pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
-                                                               "",
-                                                               "Frame",
-                                                               @"");
+                                        if (div_prevCtrl.Div_ChkDM == false)
+                                        {
+                                            Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
+                                                                   pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+
+                                            add_screws_fab_striker += pnl_curCtrl.Panel_AdjStrikerQty;
+                                        }
 
                                         if (div_prevCtrl.Div_ChkDM == true && div_prevCtrl.Div_DMPanel == pnl_curCtrl)
                                         {
@@ -834,7 +854,19 @@ namespace ModelLayer.Model.Quotation
                                                                        1, "pc(s)",
                                                                        "",
                                                                        "Dummy Mullion");
-                                                add_screws_fab_espag += 8; //Lever Espagnolette
+
+                                                if (div_prevCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153)
+                                                {
+                                                    add_screws_fab_espag += 3; //Lever Espagnolette
+                                                }
+                                                else if (div_prevCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._476518)
+                                                {
+                                                    add_screws_fab_espag += 3; //Lever Espagnolette
+                                                }
+                                                else
+                                                {
+                                                    add_screws_fab_espag += 8; //Lever Espagnolette
+                                                }
                                             }
 
                                             if (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||

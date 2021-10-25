@@ -661,12 +661,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             if ((div_nxt != null && div_nxt.Div_ChkDM == true) ||
                                 (div_prev != null && div_prev.Div_ChkDM == true))
                             {
-                                _panelModel.Panel_CornerDriveOptionsVisibility = false;
+                                if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
+                                {
+                                    _panelModel.Panel_CornerDriveOptionsVisibility = false;
 
-                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
-                                _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                                    _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
 
-                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                                }
                             }
 
                         }

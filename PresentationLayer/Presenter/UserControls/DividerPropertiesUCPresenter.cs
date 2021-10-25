@@ -218,7 +218,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
 
-                    if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                    if (_divModel.Div_DMPanel != null && _divModel.Div_LeverEspagVisibility == false)
                     {
                         _divModel.Div_LeverEspagVisibility = true;
                         _divModel.AdjustPropertyPanelHeight("addLeverEspag");
@@ -276,7 +276,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
 
-                    if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                    if (_divModel.Div_DMPanel != null && _divModel.Div_LeverEspagVisibility == true)
                     {
                         _divModel.Div_LeverEspagVisibility = false;
                         _divModel.AdjustPropertyPanelHeight("minusLeverEspag");

@@ -851,6 +851,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
             {
                 _frameModel.Lst_Panel.Remove(pnl);
+                _mainPresenter.DeductPanelGlassID();
             }
             foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
             {
