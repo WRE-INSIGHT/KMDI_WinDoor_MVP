@@ -79,7 +79,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     }
                                 }
                             }
-                            else if (curr_sash == SashProfile_ArticleNo._374 || curr_sash == SashProfile_ArticleNo._374)
+                            else if (curr_sash == SashProfile_ArticleNo._373 || curr_sash == SashProfile_ArticleNo._374)
                             {
                                 _panelModel.Panel_3dHingePropertyVisibility = false;
                                 _panelModel.AdjustPropertyPanelHeight("minus3dHinge");

@@ -301,6 +301,14 @@ namespace ModelLayer.Model.Quotation
                                                            mpnl.MPanel_Type,
                                                            @"|  |");
 
+                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
+                                                           2, "pc(s)", "");
+
+                                    if (div_nxtCtrl.Div_MechJoinArtNo == Divider_MechJointArticleNo._AV585)
+                                    {
+                                        add_screws_fab_mech_joint += (2 * 2); //qty * 2
+                                    }
+
                                     total_screws_fabrication += div_nxtCtrl.Div_ExplosionWidth;
 
                                     if (!screws_for_inst_where.Contains("Transom"))
@@ -355,7 +363,8 @@ namespace ModelLayer.Model.Quotation
                                         }
                                     }
                                 }
-                                if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added)
+
+                                if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added && mpnl.MPanel_Type == "Mullion")
                                 {
                                     mullion_already_added = true;
 
@@ -582,7 +591,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         div_nxtCtrl.SetExplosionValues_Div();
 
-                                        if (div_nxtCtrl.Div_ChkDM == false)
+                                        if (div_nxtCtrl.Div_ChkDM == false && pnl_curCtrl.Panel_AdjStrikerQty > 0)
                                         {
                                             Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
                                                                    pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
@@ -779,7 +788,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         div_prevCtrl.SetExplosionValues_Div();
 
-                                        if (div_prevCtrl.Div_ChkDM == false)
+                                        if (div_prevCtrl.Div_ChkDM == false && pnl_curCtrl.Panel_AdjStrikerQty > 0)
                                         {
                                             Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
                                                                    pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
@@ -1304,7 +1313,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                         }
 
-                                        if (pnl_curCtrl.Panel_MiddleCloserPairQty > 0)
+                                        if (pnl_curCtrl.Panel_HingeOptions == HingeOption._FrictionStay && pnl_curCtrl.Panel_MiddleCloserPairQty > 0)
                                         {
                                             Material_List.Rows.Add("Middle Closer " + pnl_curCtrl.Panel_MiddleCloserArtNo.ToString(),
                                                                    pnl_curCtrl.Panel_MiddleCloserPairQty, "pair (s)",
@@ -1739,6 +1748,17 @@ namespace ModelLayer.Model.Quotation
                                                        pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
                                                        where,
                                                        @"\  /");
+
+                                if ((pnl_curCtrl.Panel_Type.Contains("Awning") || pnl_curCtrl.Panel_Type.Contains("Casement")) &&
+                                    pnl_curCtrl.Panel_GlassThickness == 6.0f && 
+                                    pnl_curCtrl.Panel_SashPropertyVisibility == true)
+                                {
+                                    Material_List.Rows.Add("GB SPACER FOR 6mm GLASS " + pnl_curCtrl.Panel_GBSpacerArtNo.DisplayName,
+                                                           8, "pc(s)",
+                                                           "",
+                                                           "Sash",
+                                                           "");
+                                }
 
                                 if (pnl_curCtrl.Panel_ChkGlazingAdaptor == true)
                                 {
@@ -2199,7 +2219,7 @@ namespace ModelLayer.Model.Quotation
 
                             }
 
-                            if (pnl.Panel_MiddleCloserPairQty > 0)
+                            if (pnl.Panel_HingeOptions == HingeOption._FrictionStay && pnl.Panel_MiddleCloserPairQty > 0)
                             {
                                 Material_List.Rows.Add("Middle Closer " + pnl.Panel_MiddleCloserArtNo.ToString(),
                                                        pnl.Panel_MiddleCloserPairQty, "pair (s)",
@@ -2638,6 +2658,17 @@ namespace ModelLayer.Model.Quotation
                                            pnl.Panel_GlazingBeadHeight.ToString(),
                                            where,
                                            @"\  /");
+
+                    if ((pnl.Panel_Type.Contains("Awning") || pnl.Panel_Type.Contains("Casement")) &&
+                        pnl.Panel_GlassThickness == 6.0f &&
+                        pnl.Panel_SashPropertyVisibility == true)
+                    {
+                        Material_List.Rows.Add("GB SPACER FOR 6mm GLASS " + pnl.Panel_GBSpacerArtNo.DisplayName,
+                                               8, "pc(s)",
+                                               "",
+                                               "Sash",
+                                               "");
+                    }
 
                     if (pnl.Panel_ChkGlazingAdaptor == true)
                     {

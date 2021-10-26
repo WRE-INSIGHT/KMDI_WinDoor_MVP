@@ -58,6 +58,7 @@ namespace ModelLayer.Model.Quotation.Panel
         float Panel_GlassThickness { get; set; }
         GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
         GlazingAdaptor_ArticleNo Panel_GlazingAdaptorArtNo { get; set; }
+        GBSpacer_ArticleNo Panel_GBSpacerArtNo { get; set; }
         bool Panel_ChkGlazingAdaptor { get; set; }
         int Panel_GlazingBeadWidth { get; set; }
         int Panel_GlazingBeadHeight { get; set; }

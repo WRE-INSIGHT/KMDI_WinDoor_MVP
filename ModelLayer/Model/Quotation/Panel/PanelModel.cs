@@ -1703,6 +1703,8 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public GBSpacer_ArticleNo Panel_GBSpacerArtNo { get; set; }
+
         public void AdjustPropertyPanelHeight(string mode)
         {
             if (mode == "addChkMotorized")
@@ -2007,6 +2009,11 @@ namespace ModelLayer.Model.Quotation.Panel
 
             if (Panel_SashPropertyVisibility == true)
             {
+                if ((Panel_Type.Contains("Awning") || Panel_Type.Contains("Casement")) && Panel_GlassThickness == 6.0f)
+                {
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+                }
+
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
                     (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                      Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
@@ -3334,6 +3341,11 @@ namespace ModelLayer.Model.Quotation.Panel
 
             if (Panel_SashPropertyVisibility == true)
             {
+                if ((Panel_Type.Contains("Awning") || Panel_Type.Contains("Casement")) && Panel_GlassThickness == 6.0f)
+                {
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+                }
+
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
                     (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                      Panel_SashProfileArtNo == SashProfile_ArticleNo._373))

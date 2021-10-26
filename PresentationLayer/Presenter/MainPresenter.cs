@@ -1439,7 +1439,7 @@ namespace PresentationLayer.Presenter
                 }
             }
 
-            return incompatibility;
+            return incompatibility.Trim();
         }
 
         private int Check_UnbalancedGlass()
