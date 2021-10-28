@@ -651,5 +651,12 @@ namespace EnumerationTypeLayer
 
             private GBSpacer_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class DummyMullionStriker_ArticleNo : Enumeration<DummyMullionStriker_ArticleNo, int>
+        {
+            public static readonly DummyMullionStriker_ArticleNo _339395 = new DummyMullionStriker_ArticleNo(0, "339395");
+
+            private DummyMullionStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

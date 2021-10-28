@@ -471,6 +471,7 @@ namespace ModelLayer.Model.Quotation.Divider
         public ShootboltStriker_ArticleNo Div_ShootboltStrikerArtNo { get; set; }
         public ShootboltNonReverse_ArticleNo Div_ShootboltNonReverseArtNo { get; set; }
         public ShootboltReverse_ArticleNo Div_ShootboltReverseArtNo { get; set; }
+        public DummyMullionStriker_ArticleNo Div_DMStrikerArtNo { get; set; }
 
         public void SetExplosionValues_Div()
         {
@@ -505,6 +506,50 @@ namespace ModelLayer.Model.Quotation.Divider
                 else if (Div_DMArtNo == DummyMullion_ArticleNo._385P)
                 {
                     Div_EndcapDM = EndcapDM_ArticleNo._K385;
+
+                    #region Algo for dummy mullion striker
+
+                    int indx = Div_MPanelParent.MPanelLst_Objects.FindIndex(div => div.Name == Div_Name);
+                    int prev_div_indx = 0, nxt_div_indx = 0, 
+                        obj_count = Div_MPanelParent.GetCount_MPanelLst_Object();
+                    bool allow_dmStriker = true;
+
+                    IDividerModel prev_div = null, nxt_div = null;
+
+                    if (indx > 1)
+                    {
+                        prev_div_indx = indx - 2;
+                        string prev_div_name = Div_MPanelParent.MPanelLst_Objects[prev_div_indx].Name;
+                        prev_div = Div_MPanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name);
+
+                        if (prev_div.Div_LeverEspagVisibility == true && prev_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153)
+                        {
+                            allow_dmStriker = false;
+                        }
+
+                        nxt_div_indx = indx + 2;
+                        if (nxt_div_indx < obj_count)
+                        {
+                            string nxt_div_name = Div_MPanelParent.MPanelLst_Objects[nxt_div_indx].Name;
+                            nxt_div = Div_MPanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxt_div_name);
+
+                            if (nxt_div.Div_LeverEspagVisibility == true && nxt_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153)
+                            {
+                                allow_dmStriker = false;
+                            }
+                        }
+
+                        if (allow_dmStriker)
+                        {
+                            Div_DMStrikerArtNo = DummyMullionStriker_ArticleNo._339395;
+                        }
+                    }
+                    else
+                    {
+                        Div_DMStrikerArtNo = DummyMullionStriker_ArticleNo._339395;
+                    }
+
+                    #endregion
                 }
 
                 if (Div_DMPanel != null)
