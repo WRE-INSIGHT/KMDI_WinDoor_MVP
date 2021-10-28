@@ -591,7 +591,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         div_nxtCtrl.SetExplosionValues_Div();
 
-                                        if (div_nxtCtrl.Div_ChkDM == false && pnl_curCtrl.Panel_AdjStrikerQty > 0)
+                                        if (div_nxtCtrl.Div_ChkDM == false && pnl_curCtrl.Panel_AdjStrikerArtNo != null && pnl_curCtrl.Panel_AdjStrikerQty > 0)
                                         {
                                             Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
                                                                    pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
@@ -655,7 +655,7 @@ namespace ModelLayer.Model.Quotation
                                                     add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
                                                 }
 
-                                                if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                                if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                                 {
                                                     Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
                                                                            2, "pc(s)",
@@ -801,7 +801,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         div_prevCtrl.SetExplosionValues_Div();
 
-                                        if (div_prevCtrl.Div_ChkDM == false && pnl_curCtrl.Panel_AdjStrikerQty > 0)
+                                        if (div_prevCtrl.Div_ChkDM == false && pnl_curCtrl.Panel_AdjStrikerArtNo != null && pnl_curCtrl.Panel_AdjStrikerQty > 0)
                                         {
                                             Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
                                                                    pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",

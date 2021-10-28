@@ -522,7 +522,8 @@ namespace ModelLayer.Model.Quotation.Divider
                         string prev_div_name = Div_MPanelParent.MPanelLst_Objects[prev_div_indx].Name;
                         prev_div = Div_MPanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name);
 
-                        if (prev_div.Div_LeverEspagVisibility == true && prev_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153)
+                        if ((prev_div.Div_LeverEspagVisibility == true && prev_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153) ||
+                            prev_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._None)
                         {
                             allow_dmStriker = false;
                         }
@@ -533,7 +534,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             string nxt_div_name = Div_MPanelParent.MPanelLst_Objects[nxt_div_indx].Name;
                             nxt_div = Div_MPanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxt_div_name);
 
-                            if (nxt_div.Div_LeverEspagVisibility == true && nxt_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153)
+                            if ((nxt_div.Div_LeverEspagVisibility == true && nxt_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153) ||
+                                prev_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._None)
                             {
                                 allow_dmStriker = false;
                             }
@@ -544,9 +546,13 @@ namespace ModelLayer.Model.Quotation.Divider
                             Div_DMStrikerArtNo = DummyMullionStriker_ArticleNo._339395;
                         }
                     }
-                    else
+                    else if (indx == 1)
                     {
-                        Div_DMStrikerArtNo = DummyMullionStriker_ArticleNo._339395;
+                        if ((Div_LeverEspagVisibility == true && Div_LeverEspagArtNo != LeverEspagnolette_ArticleNo._631153) &&
+                             Div_LeverEspagArtNo != LeverEspagnolette_ArticleNo._None)
+                        {
+                            Div_DMStrikerArtNo = DummyMullionStriker_ArticleNo._339395;
+                        }
                     }
 
                     #endregion
