@@ -85,5 +85,7 @@ namespace PresentationLayer.Presenter
         void DeletePanelPropertiesUC(int panelID);
         void DeleteFramePropertiesUC(int frameID);
         void Fit_MyControls_byControlsLocation();
+        void Fit_MyImager_byImagersLocation();
+        void Set_pnlPropertiesBody_ScrollView(int addTo_scroll_value);
     }
 }
