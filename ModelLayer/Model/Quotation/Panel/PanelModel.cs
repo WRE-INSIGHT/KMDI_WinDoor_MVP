@@ -2801,6 +2801,35 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
 
+                    if (inside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_7025_50992;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_IVORY;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                    }
+                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+                    }
+
                     if (Panel_ParentFrameModel.Frame_Height > 2499)
                     {
                         if (Panel_ChkText == "L")
@@ -3447,7 +3476,81 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+
+                #region Algo for Adjustable Striker
+
+                int obj_count = Panel_ParentMultiPanelModel.GetCount_MPanelLst_Object();
+                bool allow_adjStriker = true;
+
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                {
+                    Panel_AdjStrikerArtNo = null;
+
+                    int nxt_pnl_ndx = Panel_Index_Inside_MPanel + 2;
+                    if (Panel_Index_Inside_MPanel == 0 && nxt_pnl_ndx < obj_count)
+                    {
+                        string nxt_pnl_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[nxt_pnl_ndx].Name;
+                        IPanelModel nxt_pnl = Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == nxt_pnl_name);
+
+                        string nxt_div_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[Panel_Index_Inside_MPanel + 1].Name;
+                        IDividerModel nxt_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == nxt_div_name);
+
+                        if (nxt_divModel.Div_DMPanel == nxt_pnl)
+                        {
+                            allow_adjStriker = false;
+                        }
+
+                        int nxt_div_indx_after_nxtPnl = Panel_Index_Inside_MPanel + 3;
+
+                        if (nxt_div_indx_after_nxtPnl < obj_count)
+                        {
+                            string nxt_div_name_after_nxtPnl = Panel_ParentMultiPanelModel.MPanelLst_Objects[nxt_div_indx_after_nxtPnl].Name;
+                            IDividerModel nxt_divModel_after_nxtPnl = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == nxt_div_name_after_nxtPnl);
+
+                            if (nxt_divModel_after_nxtPnl.Div_DMPanel == nxt_pnl)
+                            {
+                                allow_adjStriker = false;
+                            }
+                        }
+
+                    }
+
+                    int prev_pnl_ndx = Panel_Index_Inside_MPanel - 2;
+                    if (Panel_Index_Inside_MPanel > 1 && prev_pnl_ndx > 0)
+                    {
+                        string prev_pnl_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[prev_pnl_ndx].Name;
+                        IPanelModel prev_pnl = Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_pnl_name);
+
+                        string prev_div_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[Panel_Index_Inside_MPanel - 1].Name;
+                        IDividerModel prev_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name);
+
+                        if (prev_divModel.Div_DMPanel == prev_pnl)
+                        {
+                            allow_adjStriker = false;
+                        }
+
+                        int prev_div_indx_before_prevPnl = Panel_Index_Inside_MPanel - 3;
+
+                        if (prev_div_indx_before_prevPnl > 0)
+                        {
+                            string prev_div_name_before_prevPnl = Panel_ParentMultiPanelModel.MPanelLst_Objects[prev_div_indx_before_prevPnl].Name;
+                            IDividerModel prev_divModel_before_prevPnl = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name_before_prevPnl);
+
+                            if (prev_divModel_before_prevPnl.Div_DMPanel == prev_pnl)
+                            {
+                                allow_adjStriker = false;
+                            }
+                        }
+
+                    }
+
+                    if (allow_adjStriker)
+                    {
+                        Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+                    }
+                }
+
+                #endregion
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                     (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
@@ -4097,6 +4200,35 @@ namespace ModelLayer.Model.Quotation.Panel
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+
+                    if (inside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_7025_50992;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_IVORY;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                    }
+                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+                    }
 
                     Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
                     if (Panel_ParentFrameModel.Frame_Height > 2499)
