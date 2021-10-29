@@ -11520,6 +11520,8 @@ namespace ModelLayer.Tests
             Casement1.Name = "CasementPanelUC_1";
             _multiMullionModel.MPanelLst_Objects.Add(Casement1);
 
+            Dictionary<int, int> CladdingLst;
+            CladdingLst = new Dictionary<int, int> { { 0,0 } };
             IDividerModel _divDummyMullionModel = _dividerServices.AddDividerModel(divSize,
                                                                               _multiMullionModel.MPanel_Height,
                                                                               new Control(),
@@ -11535,20 +11537,23 @@ namespace ModelLayer.Tests
                                                                               _frameModel.FrameImageRenderer_Zoom,
                                                                               _frameModel.Frame_Type.ToString(),
                                                                               "MullionUC_1",
-                                                                              null,
+                                                                              CladdingLst,
                                                                               false,
                                                                               false,
                                                                               DummyMullion_ArticleNo._7533,
                                                                               _panelModel1
                                                                               );
-
+           
             _divDummyMullionModel.Div_ArtNo = Divider_ArticleNo._None;
             _divDummyMullionModel.Div_ChkDM = true;
             _divDummyMullionModel.Div_ArtVisibility = true;
             _divDummyMullionModel.Div_DMPanel = _panelModel1;
+            _divDummyMullionModel.Div_DMArtNo = DummyMullion_ArticleNo._7533;
             _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K7533;
             _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
             _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
+        
+
             _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_1";
@@ -17485,15 +17490,15 @@ namespace ModelLayer.Tests
             _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
             _panelModel1.Panel_NTCenterHingeVisibility = true;
             _panelModel1.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
-            _panelModel1.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
-            _panelModel1.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+            _panelModel1.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+            _panelModel1.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
             _panelModel1.Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._WhiteIvory;
             _panelModel1.Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._WhiteIvory;
             _panelModel1.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
             _panelModel1.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Right;
             _panelModel1.Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
             _panelModel1.Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
-            _panelModel1.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+            _panelModel1.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
             _panelModel1.Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._WhiteIvory;
             _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
             _panelModel1.Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._WhiteIvory;
@@ -17594,15 +17599,15 @@ namespace ModelLayer.Tests
             _panelModel2.Panel_Orient = false;
             _panelModel2.Panel_NTCenterHingeVisibility = true;
             _panelModel2.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
-            _panelModel2.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
-            _panelModel2.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+            _panelModel2.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+            _panelModel2.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
             _panelModel2.Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._WhiteIvory;
             _panelModel2.Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._WhiteIvory;
             _panelModel2.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
             _panelModel2.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Right;
             _panelModel2.Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
             _panelModel2.Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
-            _panelModel2.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+            _panelModel2.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
             _panelModel2.Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._WhiteIvory;
             _panelModel2.Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
             _panelModel2.Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._WhiteIvory;
@@ -17666,14 +17671,14 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
 
             Assert.AreEqual(NTCenterHinge_ArticleNo._N610A06516, _panelModel1.Panel_NTCenterHingeArticleNo);
-            Assert.AreEqual(StayBearingK_ArticleNo._N390A0001, _panelModel1.Panel_StayBearingKArtNo);
-            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52026, _panelModel1.Panel_StayBearingPinArtNo);
+            Assert.AreEqual(StayBearingK_ArticleNo._N390A00106_230177, _panelModel1.Panel_StayBearingKArtNo);
+            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52008_227354, _panelModel1.Panel_StayBearingPinArtNo);
             Assert.AreEqual(StayBearingCover_ArticleNo._WhiteIvory, _panelModel1.Panel_StayBearingCoverArtNo);
             Assert.AreEqual(TopCornerHingeCover_ArticleNo._WhiteIvory, _panelModel1.Panel_TopCornerHingeCoverArtNo);
             Assert.AreEqual(TopCornerHinge_ArticleNo._Left, _panelModel1.Panel_TopCornerHingeArtNo);
             Assert.AreEqual(TopCornerHingeSpacer_ArticleNo._331488, _panelModel1.Panel_TopCornerHingeSpacerArtNo);
             Assert.AreEqual(CornerHingeK_ArticleNo._N510A0011, _panelModel1.Panel_CornerHingeKArtNo);
-            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001, _panelModel1.Panel_CornerPivotRestKArtNo);
+            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001_258590, _panelModel1.Panel_CornerPivotRestKArtNo);
             Assert.AreEqual(CornerHingeCoverK_ArticleNo._WhiteIvory, _panelModel1.Panel_CornerHingeCoverKArtNo);
             Assert.AreEqual(CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory, _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo);
             Assert.AreEqual(CoverForCornerPivotRest_ArticleNo._WhiteIvory, _panelModel1.Panel_CoverForCornerPivotRestArtNo);
@@ -17742,14 +17747,14 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
 
             Assert.AreEqual(NTCenterHinge_ArticleNo._N610A06516, _panelModel2.Panel_NTCenterHingeArticleNo);
-            Assert.AreEqual(StayBearingK_ArticleNo._N390A0001, _panelModel2.Panel_StayBearingKArtNo);
-            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52026, _panelModel2.Panel_StayBearingPinArtNo);
+            Assert.AreEqual(StayBearingK_ArticleNo._N390A00106_230177, _panelModel2.Panel_StayBearingKArtNo);
+            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52008_227354, _panelModel2.Panel_StayBearingPinArtNo);
             Assert.AreEqual(StayBearingCover_ArticleNo._WhiteIvory, _panelModel2.Panel_StayBearingCoverArtNo);
             Assert.AreEqual(TopCornerHingeCover_ArticleNo._WhiteIvory, _panelModel2.Panel_TopCornerHingeCoverArtNo);
             Assert.AreEqual(TopCornerHinge_ArticleNo._Right, _panelModel2.Panel_TopCornerHingeArtNo);
             Assert.AreEqual(TopCornerHingeSpacer_ArticleNo._331488, _panelModel2.Panel_TopCornerHingeSpacerArtNo);
             Assert.AreEqual(CornerHingeK_ArticleNo._N510A0011, _panelModel2.Panel_CornerHingeKArtNo);
-            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001, _panelModel2.Panel_CornerPivotRestKArtNo);
+            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001_258590, _panelModel2.Panel_CornerPivotRestKArtNo);
             Assert.AreEqual(CornerHingeCoverK_ArticleNo._WhiteIvory, _panelModel2.Panel_CornerHingeCoverKArtNo);
             Assert.AreEqual(CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory, _panelModel2.Panel_CoverForCornerPivotRestVerticalArtNo);
             Assert.AreEqual(CoverForCornerPivotRest_ArticleNo._WhiteIvory, _panelModel2.Panel_CoverForCornerPivotRestArtNo);
@@ -18113,15 +18118,15 @@ namespace ModelLayer.Tests
             _panelModel1.Panel_HingeOptionsVisibility = false;
             _panelModel1.Panel_NTCenterHingeVisibility = true;
             _panelModel1.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
-            _panelModel1.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
-            _panelModel1.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+            _panelModel1.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+            _panelModel1.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
             _panelModel1.Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._WhiteIvory;
             _panelModel1.Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._WhiteIvory;
             _panelModel1.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
             _panelModel1.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Right;
             _panelModel1.Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
             _panelModel1.Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
-            _panelModel1.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+            _panelModel1.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
             _panelModel1.Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._WhiteIvory;
             _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
             _panelModel1.Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._WhiteIvory;
@@ -18232,15 +18237,15 @@ namespace ModelLayer.Tests
             _panelModel1.Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
             _panelModel2.Panel_NTCenterHingeVisibility = true;
             _panelModel2.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
-            _panelModel2.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
-            _panelModel2.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+            _panelModel2.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+            _panelModel2.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
             _panelModel2.Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._WhiteIvory;
             _panelModel2.Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._WhiteIvory;
             _panelModel2.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
             _panelModel2.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Right;
             _panelModel2.Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
             _panelModel2.Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
-            _panelModel2.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+            _panelModel2.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
             _panelModel2.Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._WhiteIvory;
             _panelModel2.Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
             _panelModel2.Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._WhiteIvory;
@@ -18303,14 +18308,14 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
 
             Assert.AreEqual(NTCenterHinge_ArticleNo._N610A06516, _panelModel1.Panel_NTCenterHingeArticleNo);
-            Assert.AreEqual(StayBearingK_ArticleNo._N390A0001, _panelModel1.Panel_StayBearingKArtNo);
-            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52026, _panelModel1.Panel_StayBearingPinArtNo);
+            Assert.AreEqual(StayBearingK_ArticleNo._N390A00106_230177, _panelModel1.Panel_StayBearingKArtNo);
+            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52008_227354, _panelModel1.Panel_StayBearingPinArtNo);
             Assert.AreEqual(StayBearingCover_ArticleNo._WhiteIvory, _panelModel1.Panel_StayBearingCoverArtNo);
             Assert.AreEqual(TopCornerHingeCover_ArticleNo._WhiteIvory, _panelModel1.Panel_TopCornerHingeCoverArtNo);
             Assert.AreEqual(TopCornerHinge_ArticleNo._Left, _panelModel1.Panel_TopCornerHingeArtNo);
             Assert.AreEqual(TopCornerHingeSpacer_ArticleNo._331488, _panelModel1.Panel_TopCornerHingeSpacerArtNo);
             Assert.AreEqual(CornerHingeK_ArticleNo._N510A0011, _panelModel1.Panel_CornerHingeKArtNo);
-            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001, _panelModel1.Panel_CornerPivotRestKArtNo);
+            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001_258590, _panelModel1.Panel_CornerPivotRestKArtNo);
             Assert.AreEqual(CornerHingeCoverK_ArticleNo._WhiteIvory, _panelModel1.Panel_CornerHingeCoverKArtNo);
             Assert.AreEqual(CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory, _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo);
             Assert.AreEqual(CoverForCornerPivotRest_ArticleNo._WhiteIvory, _panelModel1.Panel_CoverForCornerPivotRestArtNo);
@@ -18382,14 +18387,14 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
 
             Assert.AreEqual(NTCenterHinge_ArticleNo._N610A06516, _panelModel2.Panel_NTCenterHingeArticleNo);
-            Assert.AreEqual(StayBearingK_ArticleNo._N390A0001, _panelModel2.Panel_StayBearingKArtNo);
-            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52026, _panelModel2.Panel_StayBearingPinArtNo);
+            Assert.AreEqual(StayBearingK_ArticleNo._N390A00106_230177, _panelModel2.Panel_StayBearingKArtNo);
+            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52008_227354, _panelModel2.Panel_StayBearingPinArtNo);
             Assert.AreEqual(StayBearingCover_ArticleNo._WhiteIvory, _panelModel2.Panel_StayBearingCoverArtNo);
             Assert.AreEqual(TopCornerHingeCover_ArticleNo._WhiteIvory, _panelModel2.Panel_TopCornerHingeCoverArtNo);
             Assert.AreEqual(TopCornerHinge_ArticleNo._Right, _panelModel2.Panel_TopCornerHingeArtNo);
             Assert.AreEqual(TopCornerHingeSpacer_ArticleNo._331488, _panelModel2.Panel_TopCornerHingeSpacerArtNo);
             Assert.AreEqual(CornerHingeK_ArticleNo._N510A0011, _panelModel2.Panel_CornerHingeKArtNo);
-            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001, _panelModel2.Panel_CornerPivotRestKArtNo);
+            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001_258590, _panelModel2.Panel_CornerPivotRestKArtNo);
             Assert.AreEqual(CornerHingeCoverK_ArticleNo._WhiteIvory, _panelModel2.Panel_CornerHingeCoverKArtNo);
             Assert.AreEqual(CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory, _panelModel2.Panel_CoverForCornerPivotRestVerticalArtNo);
             Assert.AreEqual(CoverForCornerPivotRest_ArticleNo._WhiteIvory, _panelModel2.Panel_CoverForCornerPivotRestArtNo);
@@ -20249,14 +20254,14 @@ namespace ModelLayer.Tests
             _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
             _panelModel1.Panel_NTCenterHingeVisibility = true;
             _panelModel1.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
-            _panelModel1.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
-            _panelModel1.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+            _panelModel1.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+            _panelModel1.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
             _panelModel1.Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._DB;
             _panelModel1.Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._DB;
             _panelModel1.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
             _panelModel1.Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
             _panelModel1.Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
-            _panelModel1.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+            _panelModel1.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
             _panelModel1.Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._DB;
             _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._DB;
             _panelModel1.Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._DB;
@@ -20311,14 +20316,14 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
 
             Assert.AreEqual(NTCenterHinge_ArticleNo._N610A06516, _panelModel1.Panel_NTCenterHingeArticleNo);
-            Assert.AreEqual(StayBearingK_ArticleNo._N390A0001, _panelModel1.Panel_StayBearingKArtNo);
-            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52026, _panelModel1.Panel_StayBearingPinArtNo);
+            Assert.AreEqual(StayBearingK_ArticleNo._N390A00106_230177, _panelModel1.Panel_StayBearingKArtNo);
+            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52008_227354, _panelModel1.Panel_StayBearingPinArtNo);
             Assert.AreEqual(StayBearingCover_ArticleNo._DB, _panelModel1.Panel_StayBearingCoverArtNo);
             Assert.AreEqual(TopCornerHingeCover_ArticleNo._DB, _panelModel1.Panel_TopCornerHingeCoverArtNo);
             Assert.AreEqual(TopCornerHinge_ArticleNo._Left, _panelModel1.Panel_TopCornerHingeArtNo);
             Assert.AreEqual(TopCornerHingeSpacer_ArticleNo._331488, _panelModel1.Panel_TopCornerHingeSpacerArtNo);
             Assert.AreEqual(CornerHingeK_ArticleNo._N510A0011, _panelModel1.Panel_CornerHingeKArtNo);
-            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001, _panelModel1.Panel_CornerPivotRestKArtNo);
+            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001_258590, _panelModel1.Panel_CornerPivotRestKArtNo);
             Assert.AreEqual(CornerHingeCoverK_ArticleNo._DB, _panelModel1.Panel_CornerHingeCoverKArtNo);
             Assert.AreEqual(CoverForCornerPivotRestVertical_ArticleNo._DB, _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo);
             Assert.AreEqual(CoverForCornerPivotRest_ArticleNo._DB, _panelModel1.Panel_CoverForCornerPivotRestArtNo);
