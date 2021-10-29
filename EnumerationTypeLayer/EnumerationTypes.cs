@@ -647,7 +647,7 @@ namespace EnumerationTypeLayer
 
         public class GBSpacer_ArticleNo : Enumeration<GBSpacer_ArticleNo, int>
         {
-            public static readonly GBSpacer_ArticleNo _GBSpacer = new GBSpacer_ArticleNo(0, "GB Spacer");
+            public static readonly GBSpacer_ArticleNo _GBSpacer = new GBSpacer_ArticleNo(0, "GB SPACER");
 
             private GBSpacer_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
