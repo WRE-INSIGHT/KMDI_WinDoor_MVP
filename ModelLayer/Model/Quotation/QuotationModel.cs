@@ -345,7 +345,7 @@ namespace ModelLayer.Model.Quotation
 
                                             add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForConcreteQTY * 3);
 
-                                            exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
+                                            exp_bolt += div_nxtCtrl.Div_CladdingBracketForConcreteQTY;
                                         }
 
                                         
@@ -359,7 +359,7 @@ namespace ModelLayer.Model.Quotation
                                                                    @"|  |");
                                             add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForConcreteQTY * 3);
 
-                                            exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
+                                            exp_bolt += div_nxtCtrl.Div_CladdingBracketForConcreteQTY;
                                         }
                                     }
                                 }
@@ -776,7 +776,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForConcreteQTY * 3);
 
-                                                exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
+                                                exp_bolt += div_nxtCtrl.Div_CladdingBracketForConcreteQTY;
                                             }
 
                                             if (div_nxtCtrl.Div_CladdingBracketForUPVCQTY > 0)
@@ -789,7 +789,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForUPVCQTY * 4);
 
-                                                exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
+                                                exp_bolt += div_nxtCtrl.Div_CladdingBracketForConcreteQTY;
                                             }
                                         }
                                     }
