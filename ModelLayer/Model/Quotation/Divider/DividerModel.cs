@@ -523,7 +523,9 @@ namespace ModelLayer.Model.Quotation.Divider
                         prev_div = Div_MPanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name);
 
                         if ((prev_div.Div_LeverEspagVisibility == true && prev_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153) ||
-                            prev_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._None)
+                            prev_div.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._None &&
+                            (Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
+                             Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
                         {
                             allow_dmStriker = false;
                         }
@@ -549,7 +551,9 @@ namespace ModelLayer.Model.Quotation.Divider
                     else if (indx == 1)
                     {
                         if ((Div_LeverEspagVisibility == true && Div_LeverEspagArtNo != LeverEspagnolette_ArticleNo._631153) &&
-                             Div_LeverEspagArtNo != LeverEspagnolette_ArticleNo._None)
+                             Div_LeverEspagArtNo != LeverEspagnolette_ArticleNo._None &&
+                            (Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
+                             Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
                         {
                             Div_DMStrikerArtNo = DummyMullionStriker_ArticleNo._339395;
                         }
