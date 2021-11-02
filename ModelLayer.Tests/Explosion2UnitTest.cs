@@ -13727,7 +13727,7 @@ namespace ModelLayer.Tests
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
                                                                    Striker_ArticleNo._M89ANTC,
-                                                                   MiddleCloser_ArticleNo._1WC70DB,
+                                                                   MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
                                                                    Handle_Type._None,
@@ -13828,7 +13828,7 @@ namespace ModelLayer.Tests
                                                                       GlassType._Single,
                                                                       Espagnolette_ArticleNo._741012,
                                                                       Striker_ArticleNo._M89ANTC,
-                                                                      MiddleCloser_ArticleNo._1WC70DB,
+                                                                      MiddleCloser_ArticleNo._None,
                                                                       LockingKit_ArticleNo._None,
                                                                       MotorizedMech_ArticleNo._41555B,
                                                                       Handle_Type._Rotoswing,
@@ -13930,7 +13930,7 @@ namespace ModelLayer.Tests
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
                                                                    Striker_ArticleNo._M89ANTC,
-                                                                   MiddleCloser_ArticleNo._1WC70DB,
+                                                                   MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
                                                                    Handle_Type._None,
@@ -14031,7 +14031,7 @@ namespace ModelLayer.Tests
                                                                       GlassType._Single,
                                                                       Espagnolette_ArticleNo._741012,
                                                                       Striker_ArticleNo._M89ANTC,
-                                                                      MiddleCloser_ArticleNo._1WC70DB,
+                                                                      MiddleCloser_ArticleNo._None,
                                                                       LockingKit_ArticleNo._None,
                                                                       MotorizedMech_ArticleNo._41555B,
                                                                       Handle_Type._Rotoswing,
@@ -14099,8 +14099,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(4, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
             Assert.AreEqual((decimal)1.300032, _windoorModel.WD_PlasticCover);
-            Assert.AreEqual(16, _qouteModel.Expansion_BoltQty_Total);
-            Assert.AreEqual(64, _qouteModel.Rebate_Qty);
+            //Assert.AreEqual(16, _qouteModel.Expansion_BoltQty_Total);
+            //Assert.AreEqual(64, _qouteModel.Rebate_Qty);
             Assert.AreEqual(319, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(121, _qouteModel.Screws_for_Installation);
             Assert.AreEqual(9, _qouteModel.Screws_for_Cladding);
@@ -14726,20 +14726,20 @@ namespace ModelLayer.Tests
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
                                                                    Handle_Type._Rio,
-                                                                   Extension_ArticleNo._None,
-                                                                   Extension_ArticleNo._None,
                                                                    Extension_ArticleNo._641798,
                                                                    Extension_ArticleNo._None,
                                                                    Extension_ArticleNo._None,
                                                                    Extension_ArticleNo._None,
                                                                    Extension_ArticleNo._None,
                                                                    Extension_ArticleNo._None,
-                                                                   false,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
                                                                    true,
                                                                    false,
                                                                    false,
-                                                                   0,
+                                                                   false,
                                                                    1,
+                                                                   0,
                                                                    0,
                                                                    0,
                                                                    0,
@@ -14796,6 +14796,7 @@ namespace ModelLayer.Tests
                                                                               false,
                                                                               true,
                                                                               DummyMullion_ArticleNo._7533);
+
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_1";
@@ -14826,20 +14827,20 @@ namespace ModelLayer.Tests
                                                                       LockingKit_ArticleNo._None,
                                                                       MotorizedMech_ArticleNo._41555B,
                                                                       Handle_Type._Rio,
-                                                                      Extension_ArticleNo._None,
-                                                                      Extension_ArticleNo._None,
                                                                       Extension_ArticleNo._641798,
                                                                       Extension_ArticleNo._None,
                                                                       Extension_ArticleNo._None,
                                                                       Extension_ArticleNo._None,
                                                                       Extension_ArticleNo._None,
                                                                       Extension_ArticleNo._None,
-                                                                      false,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
                                                                       true,
                                                                       false,
                                                                       false,
-                                                                      0,
+                                                                      false,
                                                                       1,
+                                                                      0,
                                                                       0,
                                                                       0,
                                                                       0,
@@ -14936,13 +14937,13 @@ namespace ModelLayer.Tests
 
             //EXTENSION
 
-            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
-            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTopQty);
             Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
             Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
 
-            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel1.Panel_ExtensionBotArtNo);
-            Assert.AreEqual(1, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
             Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
             Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
 
@@ -15001,13 +15002,13 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
 
             //EXTENSIONS
-            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTopArtNo);
-            Assert.AreEqual(0, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTopQty);
             Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
             Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
 
-            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel2.Panel_ExtensionBotArtNo);
-            Assert.AreEqual(1, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
             Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
             Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
 
@@ -15265,7 +15266,7 @@ namespace ModelLayer.Tests
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
                                                                    Striker_ArticleNo._M89ANTC,
-                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
                                                                    Handle_Type._None,
@@ -15339,6 +15340,13 @@ namespace ModelLayer.Tests
             _divDummyMullionModel.Div_DMPanel = _panelModel1;
             _divDummyMullionModel.Div_ArtVisibility = true;
             _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K385;
+            _divDummyMullionModel.Div_LeverEspagVisibility = true;
+            _divDummyMullionModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._631153;
+            _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+            _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
+            _divDummyMullionModel.Div_ShootboltReverseArtNo = ShootboltReverse_ArticleNo._312033;
+            _divDummyMullionModel.Div_ShootboltNonReverseArtNo = ShootboltNonReverse_ArticleNo._349187;
+            _divDummyMullionModel.Div_ShootboltStrikerArtNo = ShootboltStriker_ArticleNo._N705A20106;
             _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_1";
@@ -15364,24 +15372,24 @@ namespace ModelLayer.Tests
                                                                       GlassType._Single,
                                                                       Espagnolette_ArticleNo._642105,
                                                                       Striker_ArticleNo._M89ANTC,
-                                                                      MiddleCloser_ArticleNo._1WC70WHT,
+                                                                      MiddleCloser_ArticleNo._None,
                                                                       LockingKit_ArticleNo._None,
                                                                       MotorizedMech_ArticleNo._41555B,
                                                                       Handle_Type._Rio,
-                                                                      Extension_ArticleNo._None,
-                                                                      Extension_ArticleNo._None,
                                                                       Extension_ArticleNo._641798,
                                                                       Extension_ArticleNo._None,
                                                                       Extension_ArticleNo._None,
                                                                       Extension_ArticleNo._None,
                                                                       Extension_ArticleNo._None,
                                                                       Extension_ArticleNo._None,
-                                                                      false,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
                                                                       true,
                                                                       false,
                                                                       false,
-                                                                      0,
+                                                                      false,
                                                                       1,
+                                                                      0,
                                                                       0,
                                                                       0,
                                                                       0,
@@ -15438,7 +15446,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(138, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(154, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
 
             #region Multimullion(2)
@@ -15502,7 +15510,12 @@ namespace ModelLayer.Tests
             Assert.AreEqual(DummyMullion_ArticleNo._385P, _divDummyMullionModel.Div_DMArtNo);
             Assert.AreEqual(1446, _divDummyMullionModel.Div_ExplosionHeight);
             Assert.AreEqual(EndcapDM_ArticleNo._K385, _divDummyMullionModel.Div_EndcapDM);
-
+            Assert.AreEqual(LeverEspagnolette_ArticleNo._631153, _divDummyMullionModel.Div_LeverEspagArtNo);
+            Assert.AreEqual(FixedCam_ArticleNo._1481413, _divDummyMullionModel.Div_FixedCamDM);
+            Assert.AreEqual(SnapInKeep_ArticleNo._0400205, _divDummyMullionModel.Div_SnapNKeepDM);
+            Assert.AreEqual(ShootboltReverse_ArticleNo._312033, _divDummyMullionModel.Div_ShootboltReverseArtNo);
+            Assert.AreEqual(ShootboltNonReverse_ArticleNo._349187, _divDummyMullionModel.Div_ShootboltNonReverseArtNo);
+            Assert.AreEqual(ShootboltStriker_ArticleNo._N705A20106, _divDummyMullionModel.Div_ShootboltStrikerArtNo);
 
             #endregion
 
@@ -15539,13 +15552,13 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
 
             //EXTENSIONS
-            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTopArtNo);
-            Assert.AreEqual(0, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTopQty);
             Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
             Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
 
-            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel2.Panel_ExtensionBotArtNo);
-            Assert.AreEqual(1, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
             Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
             Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
 
@@ -15663,12 +15676,7 @@ namespace ModelLayer.Tests
                              Description LIKE '%492594%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("6", dr[0]["Qty"]);
-
-            dr = dt.Select(@"Description LIKE '%Adjustable Striker%' AND
-                             Description LIKE '%332439%'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("5", dr[0]["Qty"]);
-
+              
             dr = dt.Select(@"Description LIKE '%Restrictor Stay%' AND
                              Description LIKE '%613249%'");
             Assert.AreEqual(1, dr.Length);
@@ -17870,7 +17878,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Top Corner Hinge Cover%' AND
-                             Description LIKE '%N391A03718%'");
+                             Description LIKE '%N391A03718/230252%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
@@ -17896,7 +17904,7 @@ namespace ModelLayer.Tests
 
 
             dr = dt.Select(@"Description LIKE '%Corner Pivot Rest, K%' AND
-                             Description LIKE '%N510A0001%'");
+                             Description LIKE '%N510A0001/258590%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -17908,7 +17916,7 @@ namespace ModelLayer.Tests
 
 
             dr = dt.Select(@"Description LIKE '%Cover for corner pivot rest, vertical%' AND
-                             Description LIKE '%N591A01718%'");
+                             Description LIKE '%N591A01718/230426%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -18480,19 +18488,14 @@ namespace ModelLayer.Tests
             dr = dt.Select(@"Description LIKE '%Shootbolt, non-reverse%' AND
                              Description LIKE '%349187%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("2", dr[0]["Qty"]);
+            Assert.AreEqual("3", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Shootbolt Striker%' AND
                              Description LIKE '%N705A20106%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-
-            dr = dt.Select(@"Description LIKE '%Adjustable Striker%' AND
-                             Description LIKE '%332439%'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("3", dr[0]["Qty"]);
-
+ 
             dr = dt.Select(@"Description LIKE '%Endcap for Dummy Mullion%' AND
                              Description LIKE '%K385%'");
             Assert.AreEqual(1, dr.Length);
@@ -18506,24 +18509,24 @@ namespace ModelLayer.Tests
 
 
             dr = dt.Select(@"Description LIKE '%Stay Bearing, K%' AND
-                             Description LIKE '%N390A0001%'");
+                             Description LIKE '%N390A00106/230177%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Stay Bearing Pin%' AND
-                             Description LIKE '%F710D52026%'");
+                             Description LIKE '%F710D52008/227354%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Stay Bearing Cover%' AND
-                             Description LIKE '%N391A03718%'");
+                             Description LIKE '%N391A03718/230252%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Top Corner Hinge Cover%' AND
-                             Description LIKE '%N391A03718%'");
+                             Description LIKE '%N391A03718/230252%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
@@ -18549,7 +18552,7 @@ namespace ModelLayer.Tests
 
 
             dr = dt.Select(@"Description LIKE '%Corner Pivot Rest, K%' AND
-                             Description LIKE '%N510A0001%'");
+                             Description LIKE '%N510A0001/258590%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -18561,13 +18564,13 @@ namespace ModelLayer.Tests
 
 
             dr = dt.Select(@"Description LIKE '%Cover for corner pivot rest, vertical%' AND
-                             Description LIKE '%N591A01718%'");
+                             Description LIKE '%N591A01718/230426%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Cover for corner pivot rest,%' AND
-                             Description LIKE '%N591B02718%'");
+                             Description LIKE '%N591A01718/230426%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
