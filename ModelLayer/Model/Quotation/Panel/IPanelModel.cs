@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -224,6 +225,11 @@ namespace ModelLayer.Model.Quotation.Panel
                                            string mpanel_placement = "", //1st level
                                            string mpanelparent_placement = ""); //2nd level
 
+        void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion);
+
+        int Add_SashPerimeter_screws4fab();
         #endregion
     }
 }

@@ -96,52 +96,20 @@ namespace ModelLayer.Model.Quotation
                 frame_height += frame.Frame_Height;
                 totalFrames_width += (frame.Frame_Width * 2);
                 totalFrames_height += (frame.Frame_Height * 2);
-                total_screws_fabrication += ((frame.Frame_Width * 2) + (frame.Frame_Height * 2));
+
+                total_screws_fabrication += frame.Add_framePerimeter_screws4fab();
 
                 if (!screws_for_inst_where.Contains("Frame"))
                 {
                     screws_for_inst_where = "Frame";
                 }
 
-                Material_List.Rows.Add("Frame Width " + frame.Frame_ArtNo.ToString(),
-                                       2, "pc(s)",
-                                       frame.Frame_ExplosionWidth.ToString(),
-                                       "Frame",
-                                       @"\  /");
-
-                Material_List.Rows.Add("Frame Height " + frame.Frame_ArtNo.ToString(),
-                                       2, "pc(s)",
-                                       frame.Frame_ExplosionHeight,
-                                       "Frame",
-                                       @"\  /");
-
-                Material_List.Rows.Add("Frame Reinf Width " + frame.Frame_ReinfArtNo.ToString(),
-                                       2, "pc(s)",
-                                       frame.Frame_ReinfWidth.ToString(),
-                                       "Frame",
-                                       @"|  |");
-
-                Material_List.Rows.Add("Frame Reinf Height " + frame.Frame_ReinfArtNo.ToString(),
-                                       2, "pc(s)",
-                                       frame.Frame_ReinfHeight.ToString(),
-                                       "Frame",
-                                       @"|  |");
+                frame.Insert_frameInfo_MaterialList(Material_List);
 
                 if (frame.Frame_If_InwardMotorizedCasement)
                 {
-                    Material_List.Rows.Add("Milled Frame " + frame.Frame_MilledArtNo.DisplayName,
-                                           1, "pc(s)",
-                                           frame.Frame_Width.ToString(),
-                                           "Frame",
-                                           @"|  |");
-
-                    Material_List.Rows.Add("Milled Frame Reinf " + frame.Frame_MilledReinfArtNo.DisplayName,
-                                           1, "pc(s)",
-                                           frame.Frame_Width.ToString(),
-                                           "Frame",
-                                           @"|  |");
-
-                    total_screws_fabrication += frame.Frame_Width;
+                    frame.Insert_MilledFrameInfo_MaterialList(Material_List);
+                    total_screws_fabrication += frame.Add_MilledFrameWidth_screws4fab();
                 }
 
                 if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
@@ -1863,119 +1831,28 @@ namespace ModelLayer.Model.Quotation
 
                     if (pnl.Panel_SashPropertyVisibility == true)
                     {
-                        total_screws_fabrication += ((pnl.Panel_SashWidth * 2) + (pnl.Panel_SashHeight * 2));
-
-                        Material_List.Rows.Add("Sash Width " + pnl.Panel_SashProfileArtNo.ToString(),
-                                               2, "pc(s)",
-                                               pnl.Panel_SashWidth.ToString(),
-                                               "Sash",
-                                               @"\  /");
-
-                        Material_List.Rows.Add("Sash Height " + pnl.Panel_SashProfileArtNo.ToString(),
-                                               2, "pc(s)",
-                                               pnl.Panel_SashHeight.ToString(),
-                                               "Sash",
-                                               @"\  /");
-
-                        Material_List.Rows.Add("Sash Reinf Width " + pnl.Panel_SashReinfArtNo.ToString(),
-                                               2, "pc(s)",
-                                               pnl.Panel_SashReinfWidth.ToString(),
-                                               "Sash",
-                                               @"|  |");
-
-                        Material_List.Rows.Add("Sash Reinf Height " + pnl.Panel_SashReinfArtNo.ToString(),
-                                               2, "pc(s)",
-                                               pnl.Panel_SashReinfHeight.ToString(),
-                                               "Sash",
-                                               @"|  |");
+                        total_screws_fabrication += pnl.Add_SashPerimeter_screws4fab();
+                        pnl.Insert_SashInfo_MaterialList(Material_List);
 
                         if (pnl.Panel_Type.Contains("Fixed") == false)
                         {
-                            Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo.DisplayName,
-                                                   1, "pc(s)",
-                                                   pnl.Panel_DisplayWidth.ToString(),
-                                                   "Frame",
-                                                   @"|  |");
-
-                            Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.DisplayName,
-                                                   1, "pc(s)",
-                                                   pnl.Panel_DisplayWidth.ToString(),
-                                                   "Frame",
-                                                   @"|  |");
+                            pnl.Insert_CoverProfileInfo_MaterialList(Material_List);
                             
                         }
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)
                         {
-                            if (pnl.Panel_Type == "Awning Panel")
-                            {
-                                Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       frame.Frame_Width + 150,
-                                                       "Frame",
-                                                       @"");
-
-                                Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       frame.Frame_Width + 150,
-                                                       "Frame",
-                                                       @"");
-
-                                Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       frame.Frame_Width + 150,
-                                                       "Motorized Mechanism",
-                                                       @"");
-
-                            }
-                            else if (pnl.Panel_Type == "Casement Panel")
-                            {
-                                Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       frame.Frame_Height + 150,
-                                                       "Frame",
-                                                       @"");
-
-                                Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       frame.Frame_Height + 150,
-                                                       "Frame",
-                                                       @"");
-
-                                Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       frame.Frame_Height + 150,
-                                                       "Motorized Mechanism",
-                                                       @"");
-                            }
+                            pnl.Insert_MotorizedInfo_MaterialList(Material_List);
 
                             if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
                                 pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                             {
-                                Material_List.Rows.Add("2D Hinge " + pnl.Panel_2dHingeArtNo.DisplayName,
-                                                       pnl.Panel_2DHingeQty, "pc(s)",
-                                                       "",
-                                                       "Sash & Frame",
-                                                       @"");
-
                                 add_screws_fab_hinges += (pnl.Panel_2DHingeQty * 3); //qty * 3
-
                             }
                             else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                             {
-                                Material_List.Rows.Add("Butt Hinge " + pnl.Panel_ButtHingeArtNo.DisplayName,
-                                                       pnl.Panel_ButtHingeQty, "pc(s)",
-                                                       "",
-                                                       "",
-                                                       @"");
-
                                 add_screws_fab_hinges += (pnl.Panel_ButtHingeQty * 3); //qty * 3
                             }
-                            Material_List.Rows.Add("Motorized Mechanism " + pnl.Panel_MotorizedMechArtNo.DisplayName,
-                                                   pnl.Panel_MotorizedMechQty, "pc(s)",
-                                                   "",
-                                                   "Sash",
-                                                   @"");
 
                             if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                             {
@@ -1987,31 +1864,7 @@ namespace ModelLayer.Model.Quotation
                                 total_screws_installation += (10 * pnl.Panel_MotorizedMechQty);
                             }
 
-                            Material_List.Rows.Add("Push Button Switch " + pnl.Panel_PushButtonSwitchArtNo.ToString(),
-                                                   pnl.Panel_MotorizedMechSetQty, "pc(s)",
-                                                   "",
-                                                   "Concrete",
-                                                   @"");
-
-                            Material_List.Rows.Add("False pole " + pnl.Panel_FalsePoleArtNo.ToString(),
-                                                   pnl.Panel_MotorizedMechSetQty * 2, "pc(s)",
-                                                   "",
-                                                   "Concrete",
-                                                   @"");
-
-                            total_screws_installation += 4;
-
-                            Material_List.Rows.Add("Supporting Frame " + pnl.Panel_SupportingFrameArtNo.ToString(),
-                                                   pnl.Panel_MotorizedMechSetQty, "pc(s)",
-                                                   "",
-                                                   "Concrete",
-                                                   @"");
-
-                            Material_List.Rows.Add("Plate " + pnl.Panel_PlateArtNo.ToString(),
-                                                   pnl.Panel_MotorizedMechSetQty, "pc(s)",
-                                                   "",
-                                                   "Concrete",
-                                                   @"");
+                            total_screws_installation += 4; //False pole screws
                         }
                         else if (pnl.Panel_MotorizedOptionVisibility == false)
                         {

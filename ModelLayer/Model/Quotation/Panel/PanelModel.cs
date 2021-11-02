@@ -4,6 +4,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Variables;
 using System;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
@@ -4263,6 +4264,150 @@ namespace ModelLayer.Model.Quotation.Panel
             }
 
             Panel_GlazingSpacerQty = 1;
+        }
+
+        public void Insert_SashInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Sash Width " + Panel_SashProfileArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashWidth.ToString(),
+                                   "Sash",
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Sash Height " + Panel_SashProfileArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashHeight.ToString(),
+                                   "Sash",
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Sash Reinf Width " + Panel_SashReinfArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashReinfWidth.ToString(),
+                                   "Sash",
+                                   @"|  |");
+
+            tbl_explosion.Rows.Add("Sash Reinf Height " + Panel_SashReinfArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashReinfHeight.ToString(),
+                                   "Sash",
+                                   @"|  |");
+        }
+
+        public void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cover Profile " + Panel_CoverProfileArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   Panel_DisplayWidth.ToString(),
+                                   "Frame",
+                                   @"|  |");
+
+            tbl_explosion.Rows.Add("Cover Profile " + Panel_CoverProfileArtNo2.DisplayName,
+                                   1, "pc(s)",
+                                   Panel_DisplayWidth.ToString(),
+                                   "Frame",
+                                   @"|  |");
+        }
+
+        public void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_Type == "Awning Panel")
+            {
+                tbl_explosion.Rows.Add("30X25 Cover " + Panel_30x25CoverArtNo.ToString(),
+                                       1, "pc(s)",
+                                       Panel_ParentFrameModel.Frame_Width + 150,
+                                       "Frame",
+                                       @"");
+
+                tbl_explosion.Rows.Add("Divider " + Panel_MotorizedDividerArtNo.ToString(),
+                                       1, "pc(s)",
+                                       Panel_ParentFrameModel.Frame_Width + 150,
+                                       "Frame",
+                                       @"");
+
+                tbl_explosion.Rows.Add("Cover for motor " + Panel_CoverForMotorArtNo.ToString(),
+                                       1, "pc(s)",
+                                       Panel_ParentFrameModel.Frame_Width + 150,
+                                       "Motorized Mechanism",
+                                       @"");
+
+            }
+            else if (Panel_Type == "Casement Panel")
+            {
+                tbl_explosion.Rows.Add("30X25 Cover " + Panel_30x25CoverArtNo.ToString(),
+                                       1, "pc(s)",
+                                       Panel_ParentFrameModel.Frame_Height + 150,
+                                       "Frame",
+                                       @"");
+
+                tbl_explosion.Rows.Add("Divider " + Panel_MotorizedDividerArtNo.ToString(),
+                                       1, "pc(s)",
+                                       Panel_ParentFrameModel.Frame_Height + 150,
+                                       "Frame",
+                                       @"");
+
+                tbl_explosion.Rows.Add("Cover for motor " + Panel_CoverForMotorArtNo.ToString(),
+                                       1, "pc(s)",
+                                       Panel_ParentFrameModel.Frame_Height + 150,
+                                       "Motorized Mechanism",
+                                       @"");
+            }
+
+            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
+                Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+            {
+                tbl_explosion.Rows.Add("2D Hinge " + Panel_2dHingeArtNo.DisplayName,
+                                       Panel_2DHingeQty, "pc(s)",
+                                       "",
+                                       "Sash & Frame",
+                                       @"");
+
+                //add_screws_fab_hinges += (pnl.Panel_2DHingeQty * 3); //qty * 3
+
+            }
+            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+            {
+                tbl_explosion.Rows.Add("Butt Hinge " + Panel_ButtHingeArtNo.DisplayName,
+                                       Panel_ButtHingeQty, "pc(s)",
+                                       "",
+                                       "",
+                                       @"");
+
+                //add_screws_fab_hinges += (pnl.Panel_ButtHingeQty * 3); //qty * 3
+            }
+            tbl_explosion.Rows.Add("Motorized Mechanism " + Panel_MotorizedMechArtNo.DisplayName,
+                                   Panel_MotorizedMechQty, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Push Button Switch " + Panel_PushButtonSwitchArtNo.ToString(),
+                                   Panel_MotorizedMechSetQty, "pc(s)",
+                                   "",
+                                   "Concrete",
+                                   @"");
+
+            tbl_explosion.Rows.Add("False pole " + Panel_FalsePoleArtNo.ToString(),
+                                   Panel_MotorizedMechSetQty * 2, "pc(s)",
+                                   "",
+                                   "Concrete",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Supporting Frame " + Panel_SupportingFrameArtNo.ToString(),
+                                   Panel_MotorizedMechSetQty, "pc(s)",
+                                   "",
+                                   "Concrete",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Plate " + Panel_PlateArtNo.ToString(),
+                                   Panel_MotorizedMechSetQty, "pc(s)",
+                                   "",
+                                   "Concrete",
+                                   @"");
+        }
+
+        public int Add_SashPerimeter_screws4fab()
+        {
+            return (Panel_SashWidth * 2) + (Panel_SashHeight * 2);
         }
 
         #endregion
