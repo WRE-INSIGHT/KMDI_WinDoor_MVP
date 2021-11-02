@@ -216,21 +216,11 @@ namespace PresentationLayer.Presenter.UserControls
 
             if (_panelModel.Panel_ParentMultiPanelModel != null)
             {
-                if (_panelModel.Panel_Type.Contains("Fixed") == false)
-                {
-                    if (_panelModel.Panel_ParentFrameModel != null)
-                    {
-                        if (_panelModel.Panel_Type.Contains("Casement"))
-                        {
-                            _panelModel.AdjustPropertyPanelHeight("addGlass");
-
-                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add");
-                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                        }
-                    }
-                }
-
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add");
                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+
+                _panelModel.AdjustPropertyPanelHeight("addGlass");
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
             }
 
@@ -238,7 +228,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 if (_panelModel.Panel_ParentFrameModel != null && _panelModel.Panel_ParentMultiPanelModel != null)
                 {
-                    if (_panelModel.Panel_Type.Contains("Casement"))
+                    if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning"))
                     {
                         _panelModel.AdjustPropertyPanelHeight("addSash");
 
@@ -256,7 +246,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 if (_panelModel.Panel_ParentFrameModel != null && _panelModel.Panel_ParentMultiPanelModel != null)
                 {
-                    if (_panelModel.Panel_Type.Contains("Casement"))
+                    if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning"))
                     {
                         _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
                         _panelModel.AdjustPropertyPanelHeight("addHandle");

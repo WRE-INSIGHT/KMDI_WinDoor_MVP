@@ -1785,7 +1785,7 @@ namespace ModelLayer.Model.Quotation
                                     pnl_curCtrl.Panel_GlassThickness == 6.0f && 
                                     pnl_curCtrl.Panel_SashPropertyVisibility == true)
                                 {
-                                    Material_List.Rows.Add("GB SPACER FOR 6mm GLASS " + pnl_curCtrl.Panel_GBSpacerArtNo.DisplayName,
+                                    Material_List.Rows.Add("Gb spacer for 6mm glass " + pnl_curCtrl.Panel_GBSpacerArtNo.DisplayName,
                                                            8, "pc(s)",
                                                            "",
                                                            "Sash",
