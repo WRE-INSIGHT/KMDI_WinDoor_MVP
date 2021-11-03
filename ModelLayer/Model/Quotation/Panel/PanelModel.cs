@@ -4266,6 +4266,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GlazingSpacerQty = 1;
         }
 
+        #region Material_List
+
         public void Insert_SashInfo_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("Sash Width " + Panel_SashProfileArtNo.DisplayName,
@@ -4360,9 +4362,6 @@ namespace ModelLayer.Model.Quotation.Panel
                                        "",
                                        "Sash & Frame",
                                        @"");
-
-                //add_screws_fab_hinges += (pnl.Panel_2DHingeQty * 3); //qty * 3
-
             }
             else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
             {
@@ -4371,8 +4370,6 @@ namespace ModelLayer.Model.Quotation.Panel
                                        "",
                                        "",
                                        @"");
-
-                //add_screws_fab_hinges += (pnl.Panel_ButtHingeQty * 3); //qty * 3
             }
             tbl_explosion.Rows.Add("Motorized Mechanism " + Panel_MotorizedMechArtNo.DisplayName,
                                    Panel_MotorizedMechQty, "pc(s)",
@@ -4405,10 +4402,318 @@ namespace ModelLayer.Model.Quotation.Panel
                                    @"");
         }
 
+        public void Insert_FrictionStay_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_Type.Contains("Awning"))
+            {
+                tbl_explosion.Rows.Add("Friction Stay " + Panel_FrictionStayArtNo.DisplayName,
+                                       1, "pair(s)",
+                                       "",
+                                       "Sash & Frame",
+                                       @"");
+            }
+            else if (Panel_Type.Contains("Casement"))
+            {
+                tbl_explosion.Rows.Add("Friction Stay " + Panel_FSCasementArtNo.DisplayName,
+                                       1, "pair(s)",
+                                       "",
+                                       "Sash & Frame",
+                                       @"");
+
+            }
+        }
+
+        public void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Snap-in Keep " + Panel_SnapInKeepArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+
+        }
+
+        public void Insert_FixedCam_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Fixed Cam " + Panel_FixedCamArtNo.ToString(),
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_PlasticWedge_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Plastic Wedge " + Panel_PlasticWedge.DisplayName,
+                                   Panel_PlasticWedgeQty, "pc (s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+
+        }
+
+        public void Insert_2dHinge_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("2D hinge " + Panel_2dHingeArtNo_nonMotorized.DisplayName,
+                                   Panel_2DHingeQty_nonMotorized, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_3dHinge_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("3D hinge " + Panel_3dHingeArtNo.DisplayName,
+                                   Panel_3dHingeQty, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+        
+        public void Insert_RestrictorStay_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Restrictor Stay " + Panel_RestrictorStayArtNo.DisplayName,
+                                   Panel_RestrictorStayQty, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_NTCenterHinge_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("NT Center Hinge " + Panel_NTCenterHingeArticleNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_StayBearingK_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Stay Bearing, K " + Panel_StayBearingKArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_StayBearingPin_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Stay Bearing Pin " + Panel_StayBearingPinArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+
+        }
+
+        public void Insert_StayBearingCover_MaterialList(DataTable tbl_explosion, string basecol)
+        {
+            tbl_explosion.Rows.Add("Stay Bearing Cover, " + basecol + " " + Panel_StayBearingCoverArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_TopCornerHingeCover_MaterialList(DataTable tbl_explosion, string basecol)
+        {
+            tbl_explosion.Rows.Add("Top Corner Hinge Cover, " + basecol + " " + Panel_TopCornerHingeCoverArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+
+        }
+
+        public void Insert_TopCornerHinge_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_ChkText == "L")
+            {
+                tbl_explosion.Rows.Add("Top Corner Hinge, Left " + Panel_TopCornerHingeArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       "",
+                                       "Sash & Frame",
+                                       @"");
+            }
+            else if (Panel_ChkText == "R")
+            {
+                tbl_explosion.Rows.Add("Top Corner Hinge, Right " + Panel_TopCornerHingeArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       "",
+                                       "Sash & Frame",
+                                       @"");
+            }
+        }
+
+        public void Insert_TopCornerHingeSpacer_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Top Corner Hinge Spacer " + Panel_TopCornerHingeSpacerArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_CornerHingeK_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Corner Hinge, K " + Panel_CornerHingeKArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_CornerPivotRestK_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Corner Pivot Rest, K " + Panel_CornerPivotRestKArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_CornerHingeCoverK_MaterialList(DataTable tbl_explosion, string basecol)
+        {
+            tbl_explosion.Rows.Add("Corner Hinge Cover K, " + basecol + " " + Panel_CornerHingeCoverKArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_CoverForCornerPivotRestVertical_MaterialList(DataTable tbl_explosion, string basecol)
+        {
+            tbl_explosion.Rows.Add("Cover for corner pivot rest, vertical, " + basecol + " " + Panel_CoverForCornerPivotRestVerticalArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_CoverForCornerPivotRest_MaterialList(DataTable tbl_explosion, string basecol)
+        {
+            tbl_explosion.Rows.Add("Cover for corner pivot rest, " + basecol + " " + Panel_CoverForCornerPivotRestArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_AdjustableStriker_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Adjustable Striker " + Panel_AdjStrikerArtNo.DisplayName,
+                                   Panel_AdjStrikerQty, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_MiddleCloser_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Middle Closer " + Panel_MiddleCloserArtNo.DisplayName,
+                                   Panel_MiddleCloserPairQty, "pair (s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_Extension_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None && Panel_ExtTopQty > 0)
+            {
+                tbl_explosion.Rows.Add("Extension(Top) " + Panel_ExtensionTopArtNo.DisplayName,
+                                       Panel_ExtTopQty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+
+            }
+            if (Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None && Panel_ExtTop2Qty > 0 && Panel_ExtTopChk == true)
+            {
+                tbl_explosion.Rows.Add("Extension_2(Top) " + Panel_ExtensionTop2ArtNo.DisplayName,
+                                       Panel_ExtTop2Qty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+
+            }
+            if (Panel_ExtensionBotArtNo != Extension_ArticleNo._None && Panel_ExtBotQty > 0)
+            {
+                tbl_explosion.Rows.Add("Extension(Bot) " + Panel_ExtensionBotArtNo.DisplayName,
+                                       Panel_ExtBotQty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+            }
+            if (Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None && Panel_ExtBot2Qty > 0 && Panel_ExtBotChk == true)
+            {
+                tbl_explosion.Rows.Add("Extension_2(Bot) " + Panel_ExtensionBot2ArtNo.DisplayName,
+                                       Panel_ExtBot2Qty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+
+            }
+            if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None && Panel_ExtLeftQty > 0)
+            {
+                tbl_explosion.Rows.Add("Extension(Left) " + Panel_ExtensionLeftArtNo.ToString(),
+                                       Panel_ExtLeftQty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+            }
+            if (Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None && Panel_ExtLeft2Qty > 0 && Panel_ExtLeftChk == true)
+            {
+                tbl_explosion.Rows.Add("Extension_2(Left) " + Panel_ExtensionLeft2ArtNo.ToString(),
+                                       Panel_ExtLeft2Qty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+            }
+            if (Panel_ExtensionRightArtNo != Extension_ArticleNo._None && Panel_ExtRightQty > 0)
+            {
+                tbl_explosion.Rows.Add("Extension(Right) " + Panel_ExtensionRightArtNo.ToString(),
+                                       Panel_ExtRightQty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+            }
+            if (Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None && Panel_ExtRight2Qty > 0 && Panel_ExtRightChk == true)
+            {
+                tbl_explosion.Rows.Add("Extension_2(Right) " + Panel_ExtensionRight2ArtNo.ToString(),
+                                       Panel_ExtRight2Qty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+            }
+        }
+
+        public void Insert_CornerDrive_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Corner Drive " + Panel_CornerDriveArtNo.DisplayName,
+                                   2, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_RotoswingHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Rotoswing handle " + Panel_RotoswingArtNo.ToString(),
+                                   1, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+        }
+
         public int Add_SashPerimeter_screws4fab()
         {
             return (Panel_SashWidth * 2) + (Panel_SashHeight * 2);
         }
+
+        #endregion
 
         #endregion
 

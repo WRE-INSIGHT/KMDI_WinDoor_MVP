@@ -313,7 +313,7 @@ namespace ModelLayer.Model.Quotation
 
                                             add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForConcreteQTY * 3);
 
-                                            exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
+                                            exp_bolt += div_nxtCtrl.Div_CladdingBracketForConcreteQTY;
                                         }
 
                                         
@@ -327,7 +327,7 @@ namespace ModelLayer.Model.Quotation
                                                                    @"|  |");
                                             add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForConcreteQTY * 3);
 
-                                            exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
+                                            exp_bolt += div_nxtCtrl.Div_CladdingBracketForConcreteQTY;
                                         }
                                     }
                                 }
@@ -744,7 +744,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForConcreteQTY * 3);
 
-                                                exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
+                                                exp_bolt += div_nxtCtrl.Div_CladdingBracketForConcreteQTY;
                                             }
 
                                             if (div_nxtCtrl.Div_CladdingBracketForUPVCQTY > 0)
@@ -757,7 +757,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForUPVCQTY * 4);
 
-                                                exp_bolt += (2 * div_nxtCtrl.Div_CladdingBracketForConcreteQTY);
+                                                exp_bolt += div_nxtCtrl.Div_CladdingBracketForConcreteQTY;
                                             }
                                         }
                                     }
@@ -1870,29 +1870,17 @@ namespace ModelLayer.Model.Quotation
                         {
                             if (pnl.Panel_Type.Contains("Awning"))
                             {
-                                Material_List.Rows.Add("Friction Stay " + pnl.Panel_FrictionStayArtNo.ToString(),
-                                                       1, "pair(s)",
-                                                       "",
-                                                       "Sash & Frame",
-                                                       @"");
+                                pnl.Insert_FrictionStay_MaterialList(Material_List);
 
                                 if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                 {
                                     add_screws_fab_fs_or_rs += 6; //for Storm26
 
-                                    Material_List.Rows.Add("Snap-in Keep " + pnl.Panel_SnapInKeepArtNo.ToString(),
-                                                           2, "pc(s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
+                                    pnl.Insert_SnapNKeep_MaterialList(Material_List);
 
                                     add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
 
-                                    Material_List.Rows.Add("Fixed Cam " + pnl.Panel_FixedCamArtNo.ToString(),
-                                                           2, "pc(s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
+                                    pnl.Insert_FixedCam_MaterialList(Material_List);
 
                                     add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs
                                 }
@@ -1914,11 +1902,7 @@ namespace ModelLayer.Model.Quotation
                                     add_screws_fab_fs_or_rs += 6;
                                 }
 
-                                Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
-                                                       pnl.Panel_PlasticWedgeQty, "pc (s)",
-                                                       "",
-                                                       "Frame",
-                                                       @"");
+                                pnl.Insert_PlasticWedge_MaterialList(Material_List);
 
                             }
                             else if (pnl.Panel_Type.Contains("Casement"))
@@ -1927,11 +1911,7 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
-                                        Material_List.Rows.Add("Friction Stay " + pnl.Panel_FSCasementArtNo.ToString(),
-                                                               1, "pair(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
+                                        pnl.Insert_FrictionStay_MaterialList(Material_List);
 
                                         if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD)
                                         {
@@ -1953,62 +1933,36 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (pnl.Panel_HingeOptions == HingeOption._2DHinge)
                                     {
-                                        Material_List.Rows.Add("2D hinge " + pnl.Panel_2dHingeArtNo_nonMotorized.ToString(),
-                                                               pnl.Panel_2DHingeQty_nonMotorized, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
+                                        pnl.Insert_2dHinge_MaterialList(Material_List);
 
                                         add_screws_fab_hinges += (3 * pnl.Panel_2DHingeQty_nonMotorized);
                                     }
 
-                                    Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
-                                                           pnl.Panel_PlasticWedgeQty, "pc (s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
+                                    pnl.Insert_PlasticWedge_MaterialList(Material_List);
                                 }
                                 else if (frame.Frame_ArtNo == FrameProfile_ArticleNo._7507)
                                 {
                                     if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                                     {
-                                        Material_List.Rows.Add("3D hinge " + pnl.Panel_3dHingeArtNo.DisplayName,
-                                                               pnl.Panel_3dHingeQty, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
+                                        pnl.Insert_3dHinge_MaterialList(Material_List);
+
                                         add_screws_fab_hinges += (6 * pnl.Panel_3dHingeQty);
 
-                                        Material_List.Rows.Add("Restrictor Stay " + pnl.Panel_RestrictorStayArtNo.DisplayName,
-                                                               pnl.Panel_RestrictorStayQty, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
-                                        add_screws_fab_fs_or_rs += (6 * pnl.Panel_RestrictorStayQty);
+                                        pnl.Insert_RestrictorStay_MaterialList(Material_List);
 
+                                        add_screws_fab_fs_or_rs += (6 * pnl.Panel_RestrictorStayQty);
                                     }
                                     else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                                     {
-                                        Material_List.Rows.Add("NT Center Hinge " + pnl.Panel_NTCenterHingeArticleNo.DisplayName,
-                                                                1, "pc(s)",
-                                                                "",
-                                                                "Sash & Frame",
-                                                                @"");
-                                        add_screws_fab_hinges += (2 * 1); //2 * qty
+                                        pnl.Insert_NTCenterHinge_MaterialList(Material_List);
 
+                                        add_screws_fab_hinges += (2 * 1); //NT Center Hinge
 
-                                        Material_List.Rows.Add("Stay Bearing, K " + pnl.Panel_StayBearingKArtNo.DisplayName,
-                                                               2, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
-                                        add_screws_fab_stayBearing += (4 * 2); //4 * qty
+                                        pnl.Insert_StayBearingK_MaterialList(Material_List);
 
-                                        Material_List.Rows.Add("Stay Bearing Pin " + pnl.Panel_StayBearingPinArtNo.DisplayName,
-                                                               2, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
+                                        add_screws_fab_stayBearing += (4 * 2); //Stay Bearing K
+
+                                        pnl.Insert_StayBearingPin_MaterialList(Material_List);
 
                                         string basecol = "";
                                         if (item.WD_BaseColor == Base_Color._Ivory || item.WD_BaseColor == Base_Color._White)
@@ -2020,97 +1974,49 @@ namespace ModelLayer.Model.Quotation
                                             basecol = "DB";
                                         }
 
-                                        Material_List.Rows.Add("Stay Bearing Cover, " + basecol + " " + pnl.Panel_StayBearingCoverArtNo.DisplayName,
-                                                               2, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
+                                        pnl.Insert_StayBearingCover_MaterialList(Material_List, basecol);
 
-                                        Material_List.Rows.Add("Top Corner Hinge Cover, " + basecol + " " + pnl.Panel_TopCornerHingeCoverArtNo.DisplayName,
-                                                               2, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
+                                        pnl.Insert_TopCornerHingeCover_MaterialList(Material_List, basecol);
+
+                                        pnl.Insert_TopCornerHinge_MaterialList(Material_List);
 
                                         if (pnl.Panel_ChkText == "L")
                                         {
-                                            Material_List.Rows.Add("Top Corner Hinge, Left " + pnl.Panel_TopCornerHingeArtNo.DisplayName,
-                                                                   1, "pc(s)",
-                                                                   "",
-                                                                   "Sash & Frame",
-                                                                   @"");
-                                            add_screws_fab_hinges += (1 * 2); //qty * 2
+                                            add_screws_fab_hinges += (1 * 2); //qty * 2 //Top Corner Hinge, Left 
 
                                         }
                                         else if (pnl.Panel_ChkText == "R")
                                         {
-                                            Material_List.Rows.Add("Top Corner Hinge, Right " + pnl.Panel_TopCornerHingeArtNo.DisplayName,
-                                                                   1, "pc(s)",
-                                                                   "",
-                                                                   "Sash & Frame",
-                                                                   @"");
-                                            add_screws_fab_hinges += (1 * 2); //qty * 2
+                                            add_screws_fab_hinges += (1 * 2); //qty * 2 //Top Corner Hinge, Right
                                         }
 
-                                        Material_List.Rows.Add("Top Corner Hinge Spacer " + pnl.Panel_TopCornerHingeSpacerArtNo.DisplayName,
-                                                               1, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
-                                        add_screws_fab_hinges += (1 * 3); //qty * 3
+                                        pnl.Insert_TopCornerHingeSpacer_MaterialList(Material_List);
+                                        add_screws_fab_hinges += (1 * 3); //qty * 3 //TopCornerHingeSpacer
 
-                                        Material_List.Rows.Add("Corner Hinge, K " + pnl.Panel_CornerHingeKArtNo.DisplayName,
-                                                               1, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
-                                        add_screws_fab_hinges += (1 * 2); //qty * 2
+                                        pnl.Insert_CornerHingeK_MaterialList(Material_List);
+                                        add_screws_fab_hinges += (1 * 2); //qty * 2 //Corner Hinge, K
 
-                                        Material_List.Rows.Add("Corner Pivot Rest, K " + pnl.Panel_CornerPivotRestKArtNo.DisplayName,
-                                                               1, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
-                                        add_screws_fab_pivotRest += (1 * 4); //qty * 1
+                                        pnl.Insert_CornerPivotRestK_MaterialList(Material_List);
+                                        add_screws_fab_pivotRest += (1 * 4); //qty * 1 //CornerPivotRestK
 
-                                        Material_List.Rows.Add("Corner Hinge Cover K, " + basecol + " " + pnl.Panel_CornerHingeCoverKArtNo.DisplayName,
-                                                               1, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
+                                        pnl.Insert_CornerHingeCoverK_MaterialList(Material_List, basecol);
 
-                                        Material_List.Rows.Add("Cover for corner pivot rest, vertical, " + basecol + " " + pnl.Panel_CoverForCornerPivotRestVerticalArtNo.DisplayName,
-                                                               1, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
-                                        add_screws_fab_pivotRest += 1;
+                                        pnl.Insert_CoverForCornerPivotRestVertical_MaterialList(Material_List, basecol);
+                                        add_screws_fab_pivotRest += 1; //Cover for corner pivot rest, vertical
 
-                                        Material_List.Rows.Add("Cover for corner pivot rest, " + basecol + " " + pnl.Panel_CoverForCornerPivotRestArtNo.DisplayName,
-                                                               1, "pc(s)",
-                                                               "",
-                                                               "Sash & Frame",
-                                                               @"");
+                                        pnl.Insert_CoverForCornerPivotRest_MaterialList(Material_List, basecol);
 
                                     }
-                                    Material_List.Rows.Add("Adjustable Striker " + pnl.Panel_AdjStrikerArtNo.DisplayName,
-                                                           pnl.Panel_AdjStrikerQty, "pc(s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
 
-                                    add_screws_fab_striker += (1 * pnl.Panel_AdjStrikerQty);
+                                    pnl.Insert_AdjustableStriker_MaterialList(Material_List);
+                                    add_screws_fab_striker += (1 * pnl.Panel_AdjStrikerQty); //Adjustable Striker
                                 }
 
                             }
 
                             if (pnl.Panel_HingeOptions == HingeOption._FrictionStay && pnl.Panel_MiddleCloserPairQty > 0)
                             {
-                                Material_List.Rows.Add("Middle Closer " + pnl.Panel_MiddleCloserArtNo.ToString(),
-                                                       pnl.Panel_MiddleCloserPairQty, "pair (s)",
-                                                       "",
-                                                       "Sash & Frame",
-                                                       @"");
+                                pnl.Insert_MiddleCloser_MaterialList(Material_List);
 
                                 add_screws_fab_mc += (4 * pnl.Panel_MiddleCloserPairQty);
                             }
@@ -2118,14 +2024,10 @@ namespace ModelLayer.Model.Quotation
                             if (pnl.Panel_HandleType != Handle_Type._Rotary &&
                                 pnl.Panel_HandleType != Handle_Type._None)
                             {
+                                pnl.Insert_Extension_MaterialList(Material_List);
+
                                 if (pnl.Panel_ExtensionTopArtNo != Extension_ArticleNo._None && pnl.Panel_ExtTopQty > 0)
                                 {
-                                    Material_List.Rows.Add("Extension(Top) " + pnl.Panel_ExtensionTopArtNo.ToString(),
-                                                           pnl.Panel_ExtTopQty, "pc (s)",
-                                                           "",
-                                                           "Sash",
-                                                           @"");
-
                                     if (pnl.Panel_ExtensionTopArtNo == Extension_ArticleNo._612978)
                                     {
                                         add_screws_fab_ext += (3 * pnl.Panel_ExtTopQty);
@@ -2146,12 +2048,6 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (pnl.Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None && pnl.Panel_ExtTop2Qty > 0 && pnl.Panel_ExtTopChk == true)
                                 {
-                                    Material_List.Rows.Add("Extension_2(Top) " + pnl.Panel_ExtensionTop2ArtNo.ToString(),
-                                                           pnl.Panel_ExtTop2Qty, "pc (s)",
-                                                           "",
-                                                           "Sash",
-                                                           @"");
-
                                     if (pnl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._612978)
                                     {
                                         add_screws_fab_ext += (3 * pnl.Panel_ExtTop2Qty);
@@ -2172,12 +2068,6 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (pnl.Panel_ExtensionBotArtNo != Extension_ArticleNo._None && pnl.Panel_ExtBotQty > 0)
                                 {
-                                    Material_List.Rows.Add("Extension(Bot) " + pnl.Panel_ExtensionBotArtNo.ToString(),
-                                                           pnl.Panel_ExtBotQty, "pc (s)",
-                                                           "",
-                                                           "Sash",
-                                                           @"");
-
                                     if (pnl.Panel_ExtensionBotArtNo == Extension_ArticleNo._612978)
                                     {
                                         add_screws_fab_ext += (3 * pnl.Panel_ExtBotQty);
@@ -2198,12 +2088,6 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (pnl.Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None && pnl.Panel_ExtBot2Qty > 0 && pnl.Panel_ExtBotChk == true)
                                 {
-                                    Material_List.Rows.Add("Extension_2(Bot) " + pnl.Panel_ExtensionBot2ArtNo.ToString(),
-                                                           pnl.Panel_ExtBot2Qty, "pc (s)",
-                                                           "",
-                                                           "Sash",
-                                                           @"");
-
                                     if (pnl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._612978)
                                     {
                                         add_screws_fab_ext += (3 * pnl.Panel_ExtBot2Qty);
@@ -2224,12 +2108,6 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (pnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None && pnl.Panel_ExtLeftQty > 0)
                                 {
-                                    Material_List.Rows.Add("Extension(Left) " + pnl.Panel_ExtensionLeftArtNo.ToString(),
-                                                           pnl.Panel_ExtLeftQty, "pc (s)",
-                                                           "",
-                                                           "Sash",
-                                                           @"");
-
                                     if (pnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._612978)
                                     {
                                         add_screws_fab_ext += (3 * pnl.Panel_ExtLeftQty);
@@ -2250,12 +2128,6 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (pnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None && pnl.Panel_ExtLeft2Qty > 0 && pnl.Panel_ExtLeftChk == true)
                                 {
-                                    Material_List.Rows.Add("Extension_2(Left) " + pnl.Panel_ExtensionLeft2ArtNo.ToString(),
-                                                           pnl.Panel_ExtLeft2Qty, "pc (s)",
-                                                           "",
-                                                           "Sash",
-                                                           @"");
-
                                     if (pnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._612978)
                                     {
                                         add_screws_fab_ext += (3 * pnl.Panel_ExtLeft2Qty);
@@ -2276,12 +2148,6 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (pnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None && pnl.Panel_ExtRightQty > 0)
                                 {
-                                    Material_List.Rows.Add("Extension(Right) " + pnl.Panel_ExtensionRightArtNo.ToString(),
-                                                           pnl.Panel_ExtRightQty, "pc (s)",
-                                                           "",
-                                                           "Sash",
-                                                           @"");
-
                                     if (pnl.Panel_ExtensionRightArtNo == Extension_ArticleNo._612978)
                                     {
                                         add_screws_fab_ext += (3 * pnl.Panel_ExtRightQty);
@@ -2302,12 +2168,6 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 if (pnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None && pnl.Panel_ExtRight2Qty > 0 && pnl.Panel_ExtRightChk == true)
                                 {
-                                    Material_List.Rows.Add("Extension_2(Right) " + pnl.Panel_ExtensionRight2ArtNo.ToString(),
-                                                           pnl.Panel_ExtRight2Qty, "pc (s)",
-                                                           "",
-                                                           "Sash",
-                                                           @"");
-
                                     if (pnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._612978)
                                     {
                                         add_screws_fab_ext += (3 * pnl.Panel_ExtRight2Qty);
@@ -2330,23 +2190,14 @@ namespace ModelLayer.Model.Quotation
                                 if (pnl.Panel_CornerDriveArtNo != CornerDrive_ArticleNo._None &&
                                     pnl.Panel_CornerDriveArtNo != null)
                                 {
-                                    Material_List.Rows.Add("Corner Drive " + pnl.Panel_CornerDriveArtNo.ToString(),
-                                                           2, "pc (s)",
-                                                           "",
-                                                           "Sash",
-                                                           @"");
-
+                                    pnl.Insert_CornerDrive_MaterialList(Material_List);
                                     add_screws_fab_corDrive += (2 * 2); //2 * 2pcs
                                 }
                             }
 
                             if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
                             {
-                                Material_List.Rows.Add("Rotoswing handle " + pnl.Panel_RotoswingArtNo.ToString(),
-                                                       1, "pc (s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
+                                pnl.Insert_RotoswingHandle_MaterialList(Material_List);
 
                                 if (pnl.Panel_Type.Contains("Awning"))
                                 {
@@ -2461,23 +2312,6 @@ namespace ModelLayer.Model.Quotation
                                                        "Sash",
                                                        @"");
                                 add_screws_fab_weldableCJ += (8 * 2);
-
-                                //string orient = "";
-                                //if (pnl.Panel_ChkText == "L")
-                                //{
-                                //    orient = "Left";
-                                //}
-                                //else if (pnl.Panel_ChkText == "R")
-                                //{
-                                //    orient = "Right";
-                                //}
-
-                                //Material_List.Rows.Add("Latch and deadbolt striker, " + orient + " " + pnl.Panel_LatchDeadboltStrikerArtNo.DisplayName,
-                                //                       1, "pc(s)",
-                                //                       "",
-                                //                       "Frame",
-                                //                       @"");
-                                //add_screws_fab_striker += 2;
                             }
 
                             if (pnl.Panel_HandleType != Handle_Type._Rotary)

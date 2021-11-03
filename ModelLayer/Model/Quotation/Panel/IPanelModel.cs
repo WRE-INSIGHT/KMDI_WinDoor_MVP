@@ -228,6 +228,30 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
         void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
         void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_FrictionStay_MaterialList(DataTable tbl_explosion);
+        void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
+        void Insert_FixedCam_MaterialList(DataTable tbl_explosion);
+        void Insert_PlasticWedge_MaterialList(DataTable tbl_explosion);
+        void Insert_2dHinge_MaterialList(DataTable tbl_explosion);
+        void Insert_3dHinge_MaterialList(DataTable tbl_explosion);
+        void Insert_RestrictorStay_MaterialList(DataTable tbl_explosion);
+        void Insert_NTCenterHinge_MaterialList(DataTable tbl_explosion);
+        void Insert_StayBearingK_MaterialList(DataTable tbl_explosion);
+        void Insert_StayBearingPin_MaterialList(DataTable tbl_explosion);
+        void Insert_StayBearingCover_MaterialList(DataTable tbl_explosion, string basecol);
+        void Insert_TopCornerHingeCover_MaterialList(DataTable tbl_explosion, string basecol);
+        void Insert_TopCornerHinge_MaterialList(DataTable tbl_explosion);
+        void Insert_TopCornerHingeSpacer_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerHingeK_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerPivotRestK_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerHingeCoverK_MaterialList(DataTable tbl_explosion, string basecol);
+        void Insert_CoverForCornerPivotRestVertical_MaterialList(DataTable tbl_explosion, string basecol);
+        void Insert_CoverForCornerPivotRest_MaterialList(DataTable tbl_explosion, string basecol);
+        void Insert_AdjustableStriker_MaterialList(DataTable tbl_explosion);
+        void Insert_MiddleCloser_MaterialList(DataTable tbl_explosion);
+        void Insert_Extension_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerDrive_MaterialList(DataTable tbl_explosion);
+        void Insert_RotoswingHandle_MaterialList(DataTable tbl_explosion);
 
         int Add_SashPerimeter_screws4fab();
         #endregion
