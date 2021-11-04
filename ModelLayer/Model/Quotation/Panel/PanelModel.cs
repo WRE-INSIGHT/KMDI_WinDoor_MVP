@@ -3516,7 +3516,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
 
                     int prev_pnl_ndx = Panel_Index_Inside_MPanel - 2;
-                    if (Panel_Index_Inside_MPanel > 1 && prev_pnl_ndx > 0)
+                    if (Panel_Index_Inside_MPanel > 1 && prev_pnl_ndx >= 0)
                     {
                         string prev_pnl_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[prev_pnl_ndx].Name;
                         IPanelModel prev_pnl = Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_pnl_name);
