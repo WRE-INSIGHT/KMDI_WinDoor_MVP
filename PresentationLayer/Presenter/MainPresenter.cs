@@ -1202,7 +1202,7 @@ namespace PresentationLayer.Presenter
                     Handle_Type handletype = pnl.Panel_HandleType;
                     Espagnolette_ArticleNo espag_art = pnl.Panel_EspagnoletteArtNo;
 
-                    if (pnl.Panel_Type.Contains("Fixed") == false)
+                    if (pnl.Panel_Type.Contains("Fixed") == false && pnl.Panel_HandleOptionsVisibility == true)
                     {
                         if (handletype == Handle_Type._Rotoswing)
                         {
@@ -1311,7 +1311,7 @@ namespace PresentationLayer.Presenter
                         Handle_Type handletype = pnl.Panel_HandleType;
                         Espagnolette_ArticleNo espag_art = pnl.Panel_EspagnoletteArtNo;
 
-                        if (pnl.Panel_Type.Contains("Fixed") == false)
+                        if (pnl.Panel_Type.Contains("Fixed") == false && pnl.Panel_HandleOptionsVisibility == true)
                         {
                             if (handletype == Handle_Type._Rotoswing)
                             {
