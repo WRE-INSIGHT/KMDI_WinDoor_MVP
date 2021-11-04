@@ -4335,23 +4335,28 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (Panel_Type == "Casement Panel")
             {
-                tbl_explosion.Rows.Add("30X25 Cover " + Panel_30x25CoverArtNo.ToString(),
-                                       1, "pc(s)",
-                                       Panel_ParentFrameModel.Frame_Height + 150,
-                                       "Frame",
-                                       @"");
+                if (Panel_SashProfileArtNo != SashProfile_ArticleNo._395 &&
+                    Panel_SashProfileArtNo != SashProfile_ArticleNo._373 &&
+                    Panel_SashProfileArtNo != SashProfile_ArticleNo._None)
+                {
+                    tbl_explosion.Rows.Add("30X25 Cover " + Panel_30x25CoverArtNo.ToString(),
+                                           1, "pc(s)",
+                                           Panel_ParentFrameModel.Frame_Height + 150,
+                                           "Frame",
+                                           @"");
 
-                tbl_explosion.Rows.Add("Divider " + Panel_MotorizedDividerArtNo.ToString(),
-                                       1, "pc(s)",
-                                       Panel_ParentFrameModel.Frame_Height + 150,
-                                       "Frame",
-                                       @"");
+                    tbl_explosion.Rows.Add("Divider " + Panel_MotorizedDividerArtNo.ToString(),
+                                           1, "pc(s)",
+                                           Panel_ParentFrameModel.Frame_Height + 150,
+                                           "Frame",
+                                           @"");
 
-                tbl_explosion.Rows.Add("Cover for motor " + Panel_CoverForMotorArtNo.ToString(),
-                                       1, "pc(s)",
-                                       Panel_ParentFrameModel.Frame_Height + 150,
-                                       "Motorized Mechanism",
-                                       @"");
+                    tbl_explosion.Rows.Add("Cover for motor " + Panel_CoverForMotorArtNo.ToString(),
+                                           1, "pc(s)",
+                                           Panel_ParentFrameModel.Frame_Height + 150,
+                                           "Motorized Mechanism",
+                                           @"");
+                }
             }
 
             if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
@@ -4371,6 +4376,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                        "",
                                        @"");
             }
+
             tbl_explosion.Rows.Add("Motorized Mechanism " + Panel_MotorizedMechArtNo.DisplayName,
                                    Panel_MotorizedMechQty, "pc(s)",
                                    "",
@@ -4700,7 +4706,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_RotoswingHandle_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Rotoswing handle " + Panel_RotoswingArtNo.ToString(),
+            tbl_explosion.Rows.Add("Rotoswing handle " + Panel_RotoswingArtNo.DisplayName,
                                    1, "pc (s)",
                                    "",
                                    "Sash",
@@ -4708,9 +4714,209 @@ namespace ModelLayer.Model.Quotation.Panel
 
         }
 
+        public void Insert_StrikerA_MaterialList(DataTable tbl_explosion)
+        {
+            bool allow_insert = false;
+
+            if (Panel_Type.Contains("Awning"))
+            {
+                allow_insert = true;
+            }
+
+            if (Panel_Type.Contains("Casement") && Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+            {
+                allow_insert = true;
+            }
+
+            if (allow_insert)
+            {
+                tbl_explosion.Rows.Add("Striker " + Panel_StrikerArtno_A.DisplayName,
+                                       Panel_StrikerQty_A, "pc (s)",
+                                       "",
+                                       "Frame",
+                                       @"");
+            }
+        }
+
+        public void Insert_StrikerC_MaterialList(DataTable tbl_explosion)
+        {
+            bool allow_insert = false;
+            if (Panel_Type.Contains("Awning"))
+            {
+                if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957 ||
+                    Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957 ||
+                    Panel_ExtensionRightArtNo == Extension_ArticleNo._639957 ||
+                    Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
+                {
+                    allow_insert = true;
+                }
+            }
+            else if (Panel_Type.Contains("Casement") && Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+            {
+                allow_insert = true;
+            }
+
+            if (allow_insert)
+            {
+                tbl_explosion.Rows.Add("Striker " + Panel_StrikerArtno_C.DisplayName,
+                                           Panel_StrikerQty_C, "pc (s)",
+                                           "",
+                                           "Frame",
+                                           @"");
+            }
+        }
+
+        public void Insert_RotaryHandle_LockingKit_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Rotary handle " + Panel_RotaryArtNo.DisplayName,
+                                   1, "set (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Locking Kit " + Panel_LockingKitArtNo.DisplayName,
+                                   1, "set (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_RioHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Rio handle " + Panel_RioArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_ProfileKnobCylinder_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Profile Knob Cylinder " + Panel_ProfileKnobCylinderArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_CylinderCover_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cylinder Cover " + Panel_CylinderCoverArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_RotolineHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Rotoline handle " + Panel_RotolineArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_MVDHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("MVD handle " + Panel_MVDArtNo.DisplayName,
+                                   1, "set",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_WeldableCornerJoint_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Weldable corner joint " + Panel_WeldableCArtNo.DisplayName,
+                                   8, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_Espagnolette_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Espagnolette " + Panel_EspagnoletteArtNo.ToString(),
+                                   1, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
         public int Add_SashPerimeter_screws4fab()
         {
             return (Panel_SashWidth * 2) + (Panel_SashHeight * 2);
+        }
+
+        public int Add_StrikerAC_screws4fab()
+        {
+            int strikerAC_screws = 0;
+
+            if (Panel_Type.Contains("Awning"))
+            {
+                strikerAC_screws += Panel_StrikerQty_A;
+
+                if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957 ||
+                    Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957 ||
+                    Panel_ExtensionRightArtNo == Extension_ArticleNo._639957 ||
+                    Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
+                {
+                    strikerAC_screws += Panel_StrikerQty_C;
+                }
+            }
+            else if (Panel_Type.Contains("Casement"))
+            {
+                if (Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                {
+                    strikerAC_screws += Panel_StrikerQty_C;
+
+                    if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                    {
+                        strikerAC_screws += Panel_StrikerQty_A;
+                    }
+                }
+            }
+
+            return strikerAC_screws;
+        }
+
+        public int Add_Espagnolette_screws4fab()
+        {
+            int espag_screws = 0;
+
+            if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+            {
+                espag_screws += 8;
+            }
+            else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._630963)
+            {
+                espag_screws += 2;
+            }
+            else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807)
+            {
+                espag_screws += 4;
+            }
+            else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A01006 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
+            {
+                espag_screws += 6;
+            }
+            else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+            {
+                espag_screws += 12;
+            }
+
+            return espag_screws;
         }
 
         #endregion

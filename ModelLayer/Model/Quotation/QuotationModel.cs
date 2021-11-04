@@ -2199,159 +2199,43 @@ namespace ModelLayer.Model.Quotation
                             {
                                 pnl.Insert_RotoswingHandle_MaterialList(Material_List);
 
-                                if (pnl.Panel_Type.Contains("Awning"))
-                                {
-                                    Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_A.ToString(),
-                                                           pnl.Panel_StrikerQty_A, "pc (s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
+                                pnl.Insert_StrikerA_MaterialList(Material_List);
+                                pnl.Insert_StrikerC_MaterialList(Material_List);
 
-                                    add_screws_fab_striker += pnl.Panel_StrikerQty_A;
+                                int striker_screws = pnl.Add_StrikerAC_screws4fab();
 
-                                    if (pnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957 ||
-                                            pnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957 ||
-                                            pnl.Panel_ExtensionRightArtNo == Extension_ArticleNo._639957 ||
-                                            pnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
-                                    {
-                                        Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_C.ToString(),
-                                                           pnl.Panel_StrikerQty_C, "pc (s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
-
-                                        add_screws_fab_striker += pnl.Panel_StrikerQty_C;
-                                    }
-                                }
-                                else if (pnl.Panel_Type.Contains("Casement"))
-                                {
-                                    if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
-                                    {
-                                        Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_C.ToString(),
-                                                               pnl.Panel_StrikerQty_C, "pc (s)",
-                                                               "",
-                                                               "Frame",
-                                                               @"");
-
-                                        add_screws_fab_striker += pnl.Panel_StrikerQty_C;
-
-                                        if (pnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
-                                        {
-                                            Material_List.Rows.Add("Striker " + pnl.Panel_StrikerArtno_A.ToString(),
-                                                               pnl.Panel_StrikerQty_A, "pc (s)",
-                                                               "",
-                                                               "Frame",
-                                                               @"");
-
-                                            add_screws_fab_striker += pnl.Panel_StrikerQty_A;
-                                        }
-                                    }
-                                }
+                                add_screws_fab_striker += striker_screws;
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._Rotary)
                             {
-                                Material_List.Rows.Add("Rotary handle " + pnl.Panel_RotaryArtNo.ToString(),
-                                                       1, "set (s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
-
-                                Material_List.Rows.Add("Locking Kit " + pnl.Panel_LockingKitArtNo.ToString(),
-                                                       1, "set (s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
-
+                                pnl.Insert_RotaryHandle_LockingKit_MaterialList(Material_List);
                                 add_screws_fab_handle += 9;
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._Rio)
                             {
-                                Material_List.Rows.Add("Rio handle " + pnl.Panel_RioArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
-
-                                Material_List.Rows.Add("Profile Knob Cylinder " + pnl.Panel_ProfileKnobCylinderArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
-
-                                Material_List.Rows.Add("Cylinder Cover " + pnl.Panel_CylinderCoverArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
+                                pnl.Insert_RioHandle_MaterialList(Material_List);
+                                pnl.Insert_ProfileKnobCylinder_MaterialList(Material_List);
+                                pnl.Insert_CylinderCover_MaterialList(Material_List);
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._Rotoline)
                             {
-                                Material_List.Rows.Add("Rotoline handle " + pnl.Panel_RotolineArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
+                                pnl.Insert_RotolineHandle_MaterialList(Material_List);
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._MVD)
                             {
-                                Material_List.Rows.Add("MVD handle " + pnl.Panel_MVDArtNo.ToString(),
-                                                       1, "set",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
+                                pnl.Insert_MVDHandle_MaterialList(Material_List);
+                                pnl.Insert_ProfileKnobCylinder_MaterialList(Material_List);
+                                pnl.Insert_WeldableCornerJoint_MaterialList(Material_List);
 
-                                Material_List.Rows.Add("Profile Knob Cylinder " + pnl.Panel_ProfileKnobCylinderArtNo.ToString(),
-                                                       1, "pc(s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
-
-                                Material_List.Rows.Add("Weldable corner joint " + pnl.Panel_WeldableCArtNo.DisplayName,
-                                                       8, "pc(s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
-                                add_screws_fab_weldableCJ += (8 * 2);
+                                add_screws_fab_weldableCJ += (8 * 2); //Weldable corner joint 
                             }
 
                             if (pnl.Panel_HandleType != Handle_Type._Rotary)
                             {
-                                Material_List.Rows.Add("Espagnolette " + pnl.Panel_EspagnoletteArtNo.ToString(),
-                                                       1, "pc (s)",
-                                                       "",
-                                                       "Sash",
-                                                       @"");
+                                pnl.Insert_Espagnolette_MaterialList(Material_List);
 
-                                if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                                    pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                                {
-                                    add_screws_fab_espag += 8;
-                                }
-                                else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                                         pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._630963)
-                                {
-                                    add_screws_fab_espag += 2;
-                                }
-                                else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807)
-                                {
-                                    add_screws_fab_espag += 4;
-                                }
-                                else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809 ||
-                                         pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006 ||
-                                         pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A01006 ||
-                                         pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
-                                         pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206 ||
-                                         pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
-                                         pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206 ||
-                                         pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
-                                {
-                                    add_screws_fab_espag += 6;
-                                }
-                                else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
-                                         pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
-                                {
-                                    add_screws_fab_espag += 12;
-                                }
+                                int espag_screws = pnl.Add_Espagnolette_screws4fab();
+                                add_screws_fab_espag += espag_screws;
                             }
                         }
                     }

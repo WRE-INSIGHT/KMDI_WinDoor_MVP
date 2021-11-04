@@ -252,8 +252,20 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_Extension_MaterialList(DataTable tbl_explosion);
         void Insert_CornerDrive_MaterialList(DataTable tbl_explosion);
         void Insert_RotoswingHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_StrikerA_MaterialList(DataTable tbl_explosion);
+        void Insert_StrikerC_MaterialList(DataTable tbl_explosion);
+        void Insert_RotaryHandle_LockingKit_MaterialList(DataTable tbl_explosion);
+        void Insert_RioHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_ProfileKnobCylinder_MaterialList(DataTable tbl_explosion);
+        void Insert_CylinderCover_MaterialList(DataTable tbl_explosion);
+        void Insert_RotolineHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_MVDHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_WeldableCornerJoint_MaterialList(DataTable tbl_explosion);
+        void Insert_Espagnolette_MaterialList(DataTable tbl_explosion);
 
         int Add_SashPerimeter_screws4fab();
+        int Add_StrikerAC_screws4fab();
+        int Add_Espagnolette_screws4fab();
         #endregion
     }
 }
