@@ -74,6 +74,7 @@ namespace PresentationLayer.Views.UserControls
             {
                 _panelSashProfileArtNo = value;
                 cmb_DMArtNo.Refresh();
+                SashProfileChanged(_panelSashProfileArtNo, new EventArgs());
             }
         }
 
@@ -84,6 +85,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler chkDMCheckedChangedEventRaised;
         public event EventHandler cmbDMArtNoSelectedValueChangedEventRaised;
         public event EventHandler btnSelectDMPanelClickedEventRaised;
+        public event EventHandler SashProfileChangedEventRaised;
 
         private bool _initialLoad = true;
 
@@ -196,6 +198,7 @@ namespace PresentationLayer.Views.UserControls
                 else if (dm == DummyMullion_ArticleNo._385P)
                 {
                     if (!(Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                          Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                           Panel_SashProfileArtNo == SashProfile_ArticleNo._395))
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", Divider_Type.ToString() + " Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -248,6 +251,7 @@ namespace PresentationLayer.Views.UserControls
             else if (dm == DummyMullion_ArticleNo._385P)
             {
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                     Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
@@ -295,6 +299,11 @@ namespace PresentationLayer.Views.UserControls
                     lbl_totalCladdingLength.BackColor = Color.IndianRed;
                 }
             }
+        }
+
+        private void SashProfileChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, SashProfileChangedEventRaised, e);
         }
     }
 }

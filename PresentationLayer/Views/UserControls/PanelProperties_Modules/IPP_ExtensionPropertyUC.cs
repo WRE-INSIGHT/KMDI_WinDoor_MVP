@@ -16,6 +16,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler cmbExtensionsSelectedValueChangedEventRaised;
 
         Panel GetTopExt2OptionPNL();
+        Panel GetTopExt3OptionPNL();
         Panel GetBotExt2OptionPNL();
         Panel GetLeftExt2OptionPNL();
         Panel GetRightExt2OptionPNL();

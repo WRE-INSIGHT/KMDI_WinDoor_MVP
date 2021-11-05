@@ -127,7 +127,7 @@ namespace ModelLayer.Model.Quotation
                                        "Frame",
                                        @"|  |");
 
-                if (frame.Frame_If_InwardCasement)
+                if (frame.Frame_If_InwardMotorizedCasement)
                 {
                     Material_List.Rows.Add("Milled Frame " + frame.Frame_MilledArtNo.DisplayName,
                                            1, "pc(s)",
@@ -236,6 +236,8 @@ namespace ModelLayer.Model.Quotation
                                           div_prevCtrl = null;
                             Control nxt_ctrl, prevCtrl;
 
+                            bool mullion_already_added = false;
+
                             if (pnl_curCtrl != null)
                             {
                                 pnl_curCtrl.Panel_AdjStrikerQty = 0;
@@ -299,6 +301,14 @@ namespace ModelLayer.Model.Quotation
                                                            mpnl.MPanel_Type,
                                                            @"|  |");
 
+                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
+                                                           2, "pc(s)", "");
+
+                                    if (div_nxtCtrl.Div_MechJoinArtNo == Divider_MechJointArticleNo._AV585)
+                                    {
+                                        add_screws_fab_mech_joint += (2 * 2); //qty * 2
+                                    }
+
                                     total_screws_fabrication += div_nxtCtrl.Div_ExplosionWidth;
 
                                     if (!screws_for_inst_where.Contains("Transom"))
@@ -353,8 +363,31 @@ namespace ModelLayer.Model.Quotation
                                         }
                                     }
                                 }
-                                if (div_nxtCtrl.Div_ChkDM == false)
+
+                                if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added && mpnl.MPanel_Type == "Mullion")
                                 {
+                                    mullion_already_added = true;
+
+                                    div_nxtCtrl.SetExplosionValues_Div();
+
+                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           div_nxtCtrl.Div_ExplosionHeight.ToString(),
+                                                           div_nxtCtrl.Div_Bounded,
+                                                           @"[  ]");
+                                    Material_List.Rows.Add(mpnl.MPanel_Type + " Reinforcement Height " + div_nxtCtrl.Div_ReinfArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           div_nxtCtrl.Div_ReinfHeight.ToString(),
+                                                           mpnl.MPanel_Type,
+                                                           @"|  |");
+
+                                    total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
+
+                                    if (!screws_for_inst_where.Contains("Mullion"))
+                                    {
+                                        screws_for_inst_where += ", Mullion";
+                                    }
+
                                     Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
                                                            2, "pc(s)", "");
 
@@ -558,7 +591,18 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         div_nxtCtrl.SetExplosionValues_Div();
 
-                                        if (div_nxtCtrl.Div_ChkDM == true)
+                                        if (div_nxtCtrl.Div_ChkDM == false && pnl_curCtrl.Panel_AdjStrikerArtNo != null && pnl_curCtrl.Panel_AdjStrikerQty > 0)
+                                        {
+                                            Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
+                                                                   pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+                                            add_screws_fab_striker += pnl_curCtrl.Panel_AdjStrikerQty;
+                                        }
+
+
+                                        if (div_nxtCtrl.Div_ChkDM == true && div_nxtCtrl.Div_DMPanel == pnl_curCtrl)
                                         {
                                             Material_List.Rows.Add("Dummy Mullion Height " + div_nxtCtrl.Div_DMArtNo.ToString(),
                                                                    1, "pc(s)",
@@ -570,13 +614,29 @@ namespace ModelLayer.Model.Quotation
                                                                    2, "pc(s)",
                                                                    "",
                                                                    "Dummy Mullion");
+
+                                            total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
+
+                                            if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._385P)
+                                            {
+                                                if (div_nxtCtrl.Div_DMStrikerArtNo != null)
+                                                {
+                                                    Material_List.Rows.Add("Dummy Mullion Striker " + div_nxtCtrl.Div_DMStrikerArtNo.DisplayName,
+                                                                           4, "pc(s)",
+                                                                           "",
+                                                                           "Frame",
+                                                                           " ");
+                                                    add_screws_fab_striker += 8;
+                                                }
+                                            }
+
                                             if (div_nxtCtrl.Div_EndcapDM == EndcapDM_ArticleNo._K385 ||
                                                 div_nxtCtrl.Div_EndcapDM == EndcapDM_ArticleNo._K7533)
                                             {
                                                 add_screws_fab_endcap += (1 * 2); // 1 * 2pcs
                                             }
 
-                                            if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                            if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
                                             {
                                                 Material_List.Rows.Add("Fixed cam " + div_nxtCtrl.Div_FixedCamDM.ToString(),
                                                                        2, "pc(s)",
@@ -595,53 +655,76 @@ namespace ModelLayer.Model.Quotation
                                                     add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
                                                 }
 
-                                                Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
-                                                                       2, "pc(s)",
-                                                                       "",
-                                                                       "Dummy Mullion");
-                                                Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
-                                                                       div_nxtCtrl.Div_AlumSpacer50Qty, "pc(s)",
-                                                                       "",
-                                                                       "Dummy Mullion");
+                                                if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                                {
+                                                    Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
+                                                                           2, "pc(s)",
+                                                                           "",
+                                                                           "Dummy Mullion");
+                                                    Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
+                                                                           div_nxtCtrl.Div_AlumSpacer50Qty, "pc(s)",
+                                                                           "",
+                                                                           "Dummy Mullion");
 
-                                                add_screws_fab_alum += (3 * 2); //3 * 2pcs (80mm)
-                                                add_screws_fab_alum += (3 * div_nxtCtrl.Div_AlumSpacer50Qty); //3 (50mm)
+                                                    add_screws_fab_alum += (3 * 2); //3 * 2pcs (80mm)
+                                                    add_screws_fab_alum += (3 * div_nxtCtrl.Div_AlumSpacer50Qty); //3 (50mm)
+                                                }
                                             }
 
                                             if (div_nxtCtrl.Div_DMPanel != null &&
-                                                div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                                (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
+                                                 div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
                                             {
                                                 Material_List.Rows.Add("Lever Espagnolette " + div_nxtCtrl.Div_LeverEspagArtNo.DisplayName,
                                                                        1, "pc(s)",
                                                                        "",
                                                                        "Dummy Mullion");
-                                                add_screws_fab_espag += 8; //Lever Espagnolette
+                                                if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153)
+                                                {
+                                                    add_screws_fab_espag += 3; //Lever Espagnolette
+                                                }
+                                                else if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._476518)
+                                                {
+                                                    add_screws_fab_espag += 3; //Lever Espagnolette
+                                                }
+                                                else
+                                                {
+                                                    add_screws_fab_espag += 8; //Lever Espagnolette
+                                                }
+                                            }
 
-                                                Material_List.Rows.Add("Shootbolt, non-reverse " + div_nxtCtrl.Div_ShootboltNonReverseArtNo.DisplayName,
+                                            if (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
+                                                div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                                div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                            {
+                                                Material_List.Rows.Add("Shootbolt striker " + div_nxtCtrl.Div_ShootboltStrikerArtNo.DisplayName,
                                                                        2, "pc(s)",
                                                                        "",
-                                                                       "Dummy Mullion");
-                                                add_screws_fab_shootbolt += (2 * 2); //(qty * 2)
-
-                                                int qty_sbStriker = 0;
-                                                if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_205 ||
-                                                    div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_206)
-                                                {
-                                                    qty_sbStriker = 1;
-                                                }
-                                                else if (div_nxtCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._625_207)
-                                                {
-                                                    qty_sbStriker = 2;
-                                                }
-                                                Material_List.Rows.Add("Shootbolt striker " + div_nxtCtrl.Div_ShootboltStrikerArtNo.DisplayName,
-                                                                       qty_sbStriker, "pc(s)",
-                                                                       "",
                                                                        "Sash");
-                                                add_screws_fab_shootbolt += qty_sbStriker; //Shootbolt striker
+                                                add_screws_fab_shootbolt += 2; //Shootbolt striker
+
+                                                if (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                                    div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                                {
+
+                                                    Material_List.Rows.Add("Shootbolt, Reverse " + div_nxtCtrl.Div_ShootboltReverseArtNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash");
+                                                    add_screws_fab_shootbolt += 2; //(qty * 2)
+                                                }
+
+                                                Material_List.Rows.Add("Shootbolt, non-reverse " + div_nxtCtrl.Div_ShootboltNonReverseArtNo.DisplayName,
+                                                                       3, "pc(s)",
+                                                                       "",
+                                                                       "Sash & DM");
+                                                add_screws_fab_shootbolt += (3 * 2); //(qty * 2)
                                             }
                                         }
-                                        else if (div_nxtCtrl.Div_ChkDM == false)
+                                        else if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added)
                                         {
+                                            mullion_already_added = true;
+
                                             Material_List.Rows.Add(mpnl.MPanel_Type + " Height " + div_nxtCtrl.Div_ArtNo.ToString(),
                                                                    1, "pc(s)",
                                                                    div_nxtCtrl.Div_ExplosionHeight.ToString(),
@@ -653,13 +736,16 @@ namespace ModelLayer.Model.Quotation
                                                                    mpnl.MPanel_Type,
                                                                    @"|  |");
 
+                                            Material_List.Rows.Add(mpnl.MPanel_Type + " Mechanical Joint " + div_nxtCtrl.Div_MechJoinArtNo.ToString(),
+                                                                   2, "pc(s)", "");
+
+                                            total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
+
                                             if (!screws_for_inst_where.Contains("Mullion"))
                                             {
                                                 screws_for_inst_where += ", Mullion";
                                             }
                                         }
-
-                                        total_screws_fabrication += div_nxtCtrl.Div_ExplosionHeight;
 
                                         foreach (int cladding_size in div_nxtCtrl.Div_CladdingSizeList.Values)
                                         {
@@ -704,6 +790,146 @@ namespace ModelLayer.Model.Quotation
                                                 add_screws_fab_cladingBracket += (div_nxtCtrl.Div_CladdingBracketForUPVCQTY * 4);
 
                                                 exp_bolt += div_nxtCtrl.Div_CladdingBracketForConcreteQTY;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (div_prevCtrl != null)
+                                {
+                                    if (mpnl.MPanel_Type == "Mullion")
+                                    {
+                                        div_prevCtrl.SetExplosionValues_Div();
+
+                                        if (div_prevCtrl.Div_ChkDM == false && pnl_curCtrl.Panel_AdjStrikerArtNo != null && pnl_curCtrl.Panel_AdjStrikerQty > 0)
+                                        {
+                                            Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
+                                                                   pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+
+                                            add_screws_fab_striker += pnl_curCtrl.Panel_AdjStrikerQty;
+                                        }
+
+                                        if (div_prevCtrl.Div_ChkDM == true && div_prevCtrl.Div_DMPanel == pnl_curCtrl)
+                                        {
+                                            Material_List.Rows.Add("Dummy Mullion Height " + div_prevCtrl.Div_DMArtNo.ToString(),
+                                                                   1, "pc(s)",
+                                                                   div_prevCtrl.Div_ExplosionHeight.ToString(),
+                                                                   div_prevCtrl.Div_Bounded,
+                                                                   @"[  ]");
+
+                                            Material_List.Rows.Add("Endcap for Dummy Mullion " + div_prevCtrl.Div_EndcapDM.ToString(),
+                                                                   2, "pc(s)",
+                                                                   "",
+                                                                   "Dummy Mullion");
+
+                                            total_screws_fabrication += div_prevCtrl.Div_ExplosionHeight;
+
+                                            if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._385P)
+                                            {
+                                                if (div_prevCtrl.Div_DMStrikerArtNo != null)
+                                                {
+                                                    Material_List.Rows.Add("Dummy Mullion Striker " + div_prevCtrl.Div_DMStrikerArtNo.DisplayName,
+                                                                           4, "pc(s)",
+                                                                           "",
+                                                                           "Frame",
+                                                                           " ");
+                                                    add_screws_fab_striker += 8;
+                                                }
+                                            }
+
+                                            if (div_prevCtrl.Div_EndcapDM == EndcapDM_ArticleNo._K385 ||
+                                                div_prevCtrl.Div_EndcapDM == EndcapDM_ArticleNo._K7533)
+                                            {
+                                                add_screws_fab_endcap += (1 * 2); // 1 * 2pcs
+                                            }
+
+                                            if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
+                                            {
+                                                Material_List.Rows.Add("Fixed cam " + div_prevCtrl.Div_FixedCamDM.ToString(),
+                                                                       2, "pc(s)",
+                                                                       "",
+                                                                       "Sash");
+                                                add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs
+
+                                                Material_List.Rows.Add("Snap-in Keep " + div_prevCtrl.Div_SnapNKeepDM.ToString(),
+                                                                       2, "pc(s)",
+                                                                       "",
+                                                                       "Frame");
+
+                                                if (div_prevCtrl.Div_SnapNKeepDM == SnapInKeep_ArticleNo._0400205 ||
+                                                    div_prevCtrl.Div_SnapNKeepDM == SnapInKeep_ArticleNo._0400215)
+                                                {
+                                                    add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
+                                                }
+
+                                                if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                                {
+                                                    Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
+                                                                           2, "pc(s)",
+                                                                           "",
+                                                                           "Dummy Mullion");
+                                                    Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
+                                                                           div_prevCtrl.Div_AlumSpacer50Qty, "pc(s)",
+                                                                           "",
+                                                                           "Dummy Mullion");
+
+                                                    add_screws_fab_alum += (3 * 2); //3 * 2pcs (80mm)
+                                                    add_screws_fab_alum += (3 * div_prevCtrl.Div_AlumSpacer50Qty); //3 (50mm)
+                                                }
+                                            }
+
+                                            if (div_prevCtrl.Div_DMPanel != null &&
+                                                (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
+                                                 div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
+                                            {
+                                                Material_List.Rows.Add("Lever Espagnolette " + div_prevCtrl.Div_LeverEspagArtNo.DisplayName,
+                                                                       1, "pc(s)",
+                                                                       "",
+                                                                       "Dummy Mullion");
+
+                                                if (div_prevCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153)
+                                                {
+                                                    add_screws_fab_espag += 3; //Lever Espagnolette
+                                                }
+                                                else if (div_prevCtrl.Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._476518)
+                                                {
+                                                    add_screws_fab_espag += 3; //Lever Espagnolette
+                                                }
+                                                else
+                                                {
+                                                    add_screws_fab_espag += 8; //Lever Espagnolette
+                                                }
+                                            }
+
+                                            if (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
+                                                div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                                div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                            {
+                                                Material_List.Rows.Add("Shootbolt striker " + div_prevCtrl.Div_ShootboltStrikerArtNo.DisplayName,
+                                                                       2, "pc(s)",
+                                                                       "",
+                                                                       "Sash");
+                                                add_screws_fab_shootbolt += 2; //Shootbolt striker
+
+                                                if (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                                    div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                                {
+
+                                                    Material_List.Rows.Add("Shootbolt, Reverse " + div_prevCtrl.Div_ShootboltReverseArtNo.DisplayName,
+                                                                           1, "pc(s)",
+                                                                           "",
+                                                                           "Sash");
+                                                    add_screws_fab_shootbolt += 2; //(qty * 2)
+                                                }
+
+                                                Material_List.Rows.Add("Shootbolt, non-reverse " + div_prevCtrl.Div_ShootboltNonReverseArtNo.DisplayName,
+                                                                       3, "pc(s)",
+                                                                       "",
+                                                                       "Sash & DM");
+                                                add_screws_fab_shootbolt += (3 * 2); //(qty * 2)
                                             }
                                         }
                                     }
@@ -754,43 +980,68 @@ namespace ModelLayer.Model.Quotation
                                                                    "Frame",
                                                                    @"|  |");
 
-                                        if (pnl_curCtrl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
-                                        {
-                                            Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.DisplayName,
+                                        Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.DisplayName,
                                                                    1, "pc(s)",
                                                                    pnl_curCtrl.Panel_DisplayWidth.ToString(),
                                                                    "Frame",
                                                                    @"|  |");
-                                        }
                                     }
 
                                     if (perFrame == true)
                                     {
                                         if (pnl_curCtrl.Panel_MotorizedOptionVisibility == true)
                                         {
-                                            Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Frame",
-                                                   @"");
+                                            if (pnl_curCtrl.Panel_Type == "Awning Panel")
+                                            {
+                                                Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width + 150,
+                                                                       "Frame",
+                                                                       @"");
 
-                                            Material_List.Rows.Add("Divider " + pnl_curCtrl.Panel_MotorizedDividerArtNo.ToString(),
-                                                                   1, "pc(s)",
-                                                                   frame.Frame_Width + 150,
-                                                                   "Frame",
-                                                                   @"");
+                                                Material_List.Rows.Add("Divider " + pnl_curCtrl.Panel_MotorizedDividerArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width + 150,
+                                                                       "Frame",
+                                                                       @"");
 
-                                            Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
-                                                                   1, "pc(s)",
-                                                                   frame.Frame_Width + 150,
-                                                                   "Motorized Mechanism",
-                                                                   @"");
+                                                Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
+                                                                       1, "pc(s)",
+                                                                       frame.Frame_Width + 150,
+                                                                       "Motorized Mechanism",
+                                                                       @"");
+                                            }
+                                            else if (pnl_curCtrl.Panel_Type == "Casement Panel")
+                                            {
+                                                if (pnl_curCtrl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395 &&
+                                                    pnl_curCtrl.Panel_SashProfileArtNo != SashProfile_ArticleNo._373 &&
+                                                    pnl_curCtrl.Panel_SashProfileArtNo != SashProfile_ArticleNo._None)
+                                                {
+                                                    Material_List.Rows.Add("30X25 Cover " + pnl_curCtrl.Panel_30x25CoverArtNo.ToString(),
+                                                                           1, "pc(s)",
+                                                                           frame.Frame_Height + 150,
+                                                                           "Frame",
+                                                                           @"");
+
+                                                    Material_List.Rows.Add("Divider " + pnl_curCtrl.Panel_MotorizedDividerArtNo.ToString(),
+                                                                           1, "pc(s)",
+                                                                           frame.Frame_Height + 150,
+                                                                           "Frame",
+                                                                           @"");
+
+                                                    Material_List.Rows.Add("Cover for motor " + pnl_curCtrl.Panel_CoverForMotorArtNo.ToString(),
+                                                                           1, "pc(s)",
+                                                                           frame.Frame_Height + 150,
+                                                                           "Motorized Mechanism",
+                                                                           @"");
+                                                }
+                                            }
 
                                             if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
                                                 pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                                             {
                                                 Material_List.Rows.Add("2D Hinge " + pnl_curCtrl.Panel_2dHingeArtNo.DisplayName,
-                                                                       pnl_curCtrl.Panel_2DHingeQty, "pair(s)",
+                                                                       pnl_curCtrl.Panel_2DHingeQty, "pc(s)",
                                                                        "",
                                                                        "Sash & Frame",
                                                                        @"");
@@ -876,12 +1127,6 @@ namespace ModelLayer.Model.Quotation
 
                                                 add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
 
-                                                Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
-                                                                       pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
-                                                                       "",
-                                                                       "Frame",
-                                                                       @"");
-
                                                 Material_List.Rows.Add("Fixed Cam " + pnl_curCtrl.Panel_FixedCamArtNo.ToString(),
                                                                        2, "pc(s)",
                                                                        "",
@@ -907,6 +1152,13 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 add_screws_fab_fs_or_rs += 6;
                                             }
+
+                                            Material_List.Rows.Add("Plastic Wedge " + pnl_curCtrl.Panel_PlasticWedge.DisplayName,
+                                                                   pnl_curCtrl.Panel_PlasticWedgeQty, "pc (s)",
+                                                                   "",
+                                                                   "Frame",
+                                                                   @"");
+
                                         }
                                         else if (pnl_curCtrl.Panel_Type.Contains("Casement"))
                                         {
@@ -1008,7 +1260,7 @@ namespace ModelLayer.Model.Quotation
                                                     string basecol = "";
                                                     if (item.WD_BaseColor == Base_Color._Ivory || item.WD_BaseColor == Base_Color._White)
                                                     {
-                                                        basecol = "W/Ivory";
+                                                        basecol = "W/White";
                                                     }
                                                     else if (item.WD_BaseColor == Base_Color._DarkBrown)
                                                     {
@@ -1089,17 +1341,10 @@ namespace ModelLayer.Model.Quotation
                                                                            @"");
                                                     add_screws_fab_pivotRest += 1;
                                                 }
-
-                                                Material_List.Rows.Add("Adjustable Striker " + pnl_curCtrl.Panel_AdjStrikerArtNo.DisplayName,
-                                                                       pnl_curCtrl.Panel_AdjStrikerQty, "pc(s)",
-                                                                       "",
-                                                                       "Frame",
-                                                                       @"");
-                                                add_screws_fab_striker += (1 * pnl_curCtrl.Panel_AdjStrikerQty);
                                             }
                                         }
 
-                                        if (pnl_curCtrl.Panel_MiddleCloserPairQty > 0)
+                                        if (pnl_curCtrl.Panel_HingeOptions == HingeOption._FrictionStay && pnl_curCtrl.Panel_MiddleCloserPairQty > 0)
                                         {
                                             Material_List.Rows.Add("Middle Closer " + pnl_curCtrl.Panel_MiddleCloserArtNo.ToString(),
                                                                    pnl_curCtrl.Panel_MiddleCloserPairQty, "pair (s)",
@@ -1450,22 +1695,28 @@ namespace ModelLayer.Model.Quotation
                                                                    "Sash",
                                                                    @"");
 
-                                            string orient = "";
-                                            if (pnl_curCtrl.Panel_ChkText == "L")
-                                            {
-                                                orient = "Left";
-                                            }
-                                            else if (pnl_curCtrl.Panel_ChkText == "R")
-                                            {
-                                                orient = "Right";
-                                            }
-
-                                            Material_List.Rows.Add("Latch and deadbolt striker, " + orient + " " + pnl_curCtrl.Panel_LatchDeadboltStrikerArtNo.DisplayName,
+                                            Material_List.Rows.Add("Cylinder Cover " + pnl_curCtrl.Panel_CylinderCoverArtNo.ToString(),
                                                                    1, "pc(s)",
                                                                    "",
-                                                                   "Frame",
+                                                                   "Sash",
                                                                    @"");
-                                            add_screws_fab_striker += 2;
+
+                                            //string orient = "";
+                                            //if (pnl_curCtrl.Panel_ChkText == "L")
+                                            //{
+                                            //    orient = "Left";
+                                            //}
+                                            //else if (pnl_curCtrl.Panel_ChkText == "R")
+                                            //{
+                                            //    orient = "Right";
+                                            //}
+
+                                            //Material_List.Rows.Add("Latch and deadbolt striker, " + orient + " " + pnl_curCtrl.Panel_LatchDeadboltStrikerArtNo.DisplayName,
+                                            //                       1, "pc(s)",
+                                            //                       "",
+                                            //                       "Frame",
+                                            //                       @"");
+                                            //add_screws_fab_striker += 2;
                                         }
 
                                         if (pnl_curCtrl.Panel_HandleType != Handle_Type._Rotary)
@@ -1534,6 +1785,17 @@ namespace ModelLayer.Model.Quotation
                                                        pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
                                                        where,
                                                        @"\  /");
+
+                                if ((pnl_curCtrl.Panel_Type.Contains("Awning") || pnl_curCtrl.Panel_Type.Contains("Casement")) &&
+                                    pnl_curCtrl.Panel_GlassThickness == 6.0f && 
+                                    pnl_curCtrl.Panel_SashPropertyVisibility == true)
+                                {
+                                    Material_List.Rows.Add("Gb spacer for 6mm glass " + pnl_curCtrl.Panel_GBSpacerArtNo.DisplayName,
+                                                           8, "pc(s)",
+                                                           "",
+                                                           "Sash",
+                                                           "");
+                                }
 
                                 if (pnl_curCtrl.Panel_ChkGlazingAdaptor == true)
                                 {
@@ -1640,41 +1902,68 @@ namespace ModelLayer.Model.Quotation
                                                    "Frame",
                                                    @"|  |");
 
-                            if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
-                            {
-                                Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.DisplayName,
-                                                       1, "pc(s)",
-                                                       pnl.Panel_DisplayWidth.ToString(),
-                                                       "Frame",
-                                                       @"|  |");
-                            }
+                            Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.DisplayName,
+                                                   1, "pc(s)",
+                                                   pnl.Panel_DisplayWidth.ToString(),
+                                                   "Frame",
+                                                   @"|  |");
+                            
                         }
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)
                         {
-                            Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Frame",
-                                                   @"");
+                            if (pnl.Panel_Type == "Awning Panel")
+                            {
+                                Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width + 150,
+                                                       "Frame",
+                                                       @"");
 
-                            Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Frame",
-                                                   @"");
+                                Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width + 150,
+                                                       "Frame",
+                                                       @"");
 
-                            Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
-                                                   1, "pc(s)",
-                                                   frame.Frame_Width + 150,
-                                                   "Motorized Mechanism",
-                                                   @"");
+                                Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
+                                                       1, "pc(s)",
+                                                       frame.Frame_Width + 150,
+                                                       "Motorized Mechanism",
+                                                       @"");
+
+                            }
+                            else if (pnl.Panel_Type == "Casement Panel")
+                            {
+                                if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395 && 
+                                    pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._373 &&
+                                    pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._None)
+                                {
+                                    Material_List.Rows.Add("30X25 Cover " + pnl.Panel_30x25CoverArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           frame.Frame_Height + 150,
+                                                           "Frame",
+                                                           @"");
+
+                                    Material_List.Rows.Add("Divider " + pnl.Panel_MotorizedDividerArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           frame.Frame_Height + 150,
+                                                           "Frame",
+                                                           @"");
+
+                                    Material_List.Rows.Add("Cover for motor " + pnl.Panel_CoverForMotorArtNo.ToString(),
+                                                           1, "pc(s)",
+                                                           frame.Frame_Height + 150,
+                                                           "Motorized Mechanism",
+                                                           @"");
+                                }
+                            }
 
                             if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
                                 pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                             {
                                 Material_List.Rows.Add("2D Hinge " + pnl.Panel_2dHingeArtNo.DisplayName,
-                                                       pnl.Panel_2DHingeQty, "pair(s)",
+                                                       pnl.Panel_2DHingeQty, "pc(s)",
                                                        "",
                                                        "Sash & Frame",
                                                        @"");
@@ -1756,12 +2045,6 @@ namespace ModelLayer.Model.Quotation
 
                                     add_screws_fab_snapInKeep += (2 * 2); //2 * 2pcs
 
-                                    Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
-                                                           pnl.Panel_PlasticWedgeQty, "pc (s)",
-                                                           "",
-                                                           "Frame",
-                                                           @"");
-
                                     Material_List.Rows.Add("Fixed Cam " + pnl.Panel_FixedCamArtNo.ToString(),
                                                            2, "pc(s)",
                                                            "",
@@ -1787,6 +2070,13 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     add_screws_fab_fs_or_rs += 6;
                                 }
+
+                                Material_List.Rows.Add("Plastic Wedge " + pnl.Panel_PlasticWedge.DisplayName,
+                                                       pnl.Panel_PlasticWedgeQty, "pc (s)",
+                                                       "",
+                                                       "Frame",
+                                                       @"");
+
                             }
                             else if (pnl.Panel_Type.Contains("Casement"))
                             {
@@ -1971,7 +2261,7 @@ namespace ModelLayer.Model.Quotation
 
                             }
 
-                            if (pnl.Panel_MiddleCloserPairQty > 0)
+                            if (pnl.Panel_HingeOptions == HingeOption._FrictionStay && pnl.Panel_MiddleCloserPairQty > 0)
                             {
                                 Material_List.Rows.Add("Middle Closer " + pnl.Panel_MiddleCloserArtNo.ToString(),
                                                        pnl.Panel_MiddleCloserPairQty, "pair (s)",
@@ -2329,22 +2619,22 @@ namespace ModelLayer.Model.Quotation
                                                        @"");
                                 add_screws_fab_weldableCJ += (8 * 2);
 
-                                string orient = "";
-                                if (pnl.Panel_ChkText == "L")
-                                {
-                                    orient = "Left";
-                                }
-                                else if (pnl.Panel_ChkText == "R")
-                                {
-                                    orient = "Right";
-                                }
+                                //string orient = "";
+                                //if (pnl.Panel_ChkText == "L")
+                                //{
+                                //    orient = "Left";
+                                //}
+                                //else if (pnl.Panel_ChkText == "R")
+                                //{
+                                //    orient = "Right";
+                                //}
 
-                                Material_List.Rows.Add("Latch and deadbolt striker, " + orient + " " + pnl.Panel_LatchDeadboltStrikerArtNo.DisplayName,
-                                                       1, "pc(s)",
-                                                       "",
-                                                       "Frame",
-                                                       @"");
-                                add_screws_fab_striker += 2;
+                                //Material_List.Rows.Add("Latch and deadbolt striker, " + orient + " " + pnl.Panel_LatchDeadboltStrikerArtNo.DisplayName,
+                                //                       1, "pc(s)",
+                                //                       "",
+                                //                       "Frame",
+                                //                       @"");
+                                //add_screws_fab_striker += 2;
                             }
 
                             if (pnl.Panel_HandleType != Handle_Type._Rotary)
@@ -2411,6 +2701,17 @@ namespace ModelLayer.Model.Quotation
                                            where,
                                            @"\  /");
 
+                    if ((pnl.Panel_Type.Contains("Awning") || pnl.Panel_Type.Contains("Casement")) &&
+                        pnl.Panel_GlassThickness == 6.0f &&
+                        pnl.Panel_SashPropertyVisibility == true)
+                    {
+                        Material_List.Rows.Add("GB SPACER FOR 6mm GLASS " + pnl.Panel_GBSpacerArtNo.DisplayName,
+                                               8, "pc(s)",
+                                               "",
+                                               "Sash",
+                                               "");
+                    }
+
                     if (pnl.Panel_ChkGlazingAdaptor == true)
                     {
                         Material_List.Rows.Add("Glazing Adaptor (P" + pnl.PanelGlass_ID + ") Width" + pnl.Panel_GlazingAdaptorArtNo.DisplayName,
@@ -2475,8 +2776,8 @@ namespace ModelLayer.Model.Quotation
                     {
                         glazing_seal += (pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2);
                     }
-                }
                 #endregion
+                }
 
                 exp_bolt += (int)Math.Ceiling((decimal)((frame.Frame_Width * 2) + (frame.Frame_Height * 2)) / 700);
             }

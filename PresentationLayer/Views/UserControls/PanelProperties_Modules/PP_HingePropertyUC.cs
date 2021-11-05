@@ -36,6 +36,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             cmb_Hinge.DataBindings.Add(ModelBinding["Panel_HingeOptions"]);
             this.DataBindings.Add(ModelBinding["Panel_HingeOptionsVisibility"]);
+            this.DataBindings.Add(ModelBinding["Panel_HingeOptionsPropertyHeight"]);
         }
     }
 }

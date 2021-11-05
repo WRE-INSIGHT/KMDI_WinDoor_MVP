@@ -76,7 +76,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _slidingPanelUC.slidingPanelUCMouseEnterEventRaised += _slidingPanelUC_slidingPanelUCMouseEnterEventRaised;
             _slidingPanelUC.slidingPanelUCMouseLeaveEventRaised += _slidingPanelUC_slidingPanelUCMouseLeaveEventRaised;
             _slidingPanelUC.deleteToolStripClickedEventRaised += _slidingPanelUC_deleteToolStripClickedEventRaised;
-            _slidingPanelUC.slidingPanelUCSizeChangedEventRaised += _slidingPanelUC_slidingPanelUCSizeChangedEventRaised;
+            //_slidingPanelUC.slidingPanelUCSizeChangedEventRaised += _slidingPanelUC_slidingPanelUCSizeChangedEventRaised;
             _tmr.Tick += _tmr_Tick;
         }
 
@@ -88,44 +88,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 ((IPanelUC)_slidingPanelUC).InvalidateThis();
             }
-        }
-
-        int prev_Width = 0,
-            prev_Height = 0;
-        private void _slidingPanelUC_slidingPanelUCSizeChangedEventRaised(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    if (!_initialLoad)
-            //    {
-            //        int thisWd = ((UserControl)sender).Width,
-            //            thisHt = ((UserControl)sender).Height,
-            //            pnlModelWd = _panelModel.Panel_Width,
-            //            pnlModelHt = _panelModel.Panel_Height;
-
-            //        if (thisWd != pnlModelWd || prev_Width != pnlModelWd)
-            //        {
-            //            _panelModel.Panel_Width = thisWd;
-            //            _WidthChange = true;
-            //        }
-            //        if (thisHt != pnlModelHt || prev_Height != pnlModelHt)
-            //        {
-            //            _panelModel.Panel_Height = thisHt;
-            //            _HeightChange = true;
-            //        }
-            //    }
-
-            //    prev_Width = _panelModel.Panel_Width;
-            //    prev_Height = _panelModel.Panel_Height;
-
-            //    _tmr.Start();
-            //    ((UserControl)sender).Invalidate();
-            //    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
         }
 
         private void _slidingPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
@@ -153,8 +115,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
                 _frameModel.Lst_Divider.Remove(div);
 
-                _multiPanelModel.MPanelProp_Height -= (173 + 1); //+1 on margin (divProperties)
-                _frameModel.FrameProp_Height -= (173 + 1); //+1 on margin (divProperties)
+                _multiPanelModel.DeductPropertyPanelHeight(div.Div_PropHeight);
+                _frameModel.DeductPropertyPanelHeight(div.Div_PropHeight);
             }
             #endregion
 
@@ -164,6 +126,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_slidingPanelUC, _frameModel.Frame_Type.ToString());
                 _multiPanelModel.Reload_PanelMargin();
+                _multiPanelModel.DeductPropertyPanelHeight(_panelModel.Panel_PropertyHeight);
             }
             if (_multiPanelMullionUCP != null)
             {
@@ -180,6 +143,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_multiPanelModel != null && _multiPanelModel.MPanel_DividerEnabled)
             {
+
                 _multiPanelModel.Object_Indexer();
                 _multiPanelModel.Reload_PanelMargin();
                 _multiPanelModel.Reload_MultiPanelMargin();
@@ -203,6 +167,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
             _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
+
+            _frameModel.DeductPropertyPanelHeight(_panelModel.Panel_PropertyHeight);
+
             if (_frameModel != null)
             {
                 _frameModel.Lst_Panel.Remove(_panelModel);
@@ -211,9 +178,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
-
-            //_panelModel.Panel_Visibility = false;
-            _frameModel.FrameProp_Height -= (228 + 1); //+1 on margin (PanelProperties)
 
             #endregion
         }

@@ -58,6 +58,7 @@ namespace ModelLayer.Model.Quotation.Panel
         float Panel_GlassThickness { get; set; }
         GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
         GlazingAdaptor_ArticleNo Panel_GlazingAdaptorArtNo { get; set; }
+        GBSpacer_ArticleNo Panel_GBSpacerArtNo { get; set; }
         bool Panel_ChkGlazingAdaptor { get; set; }
         int Panel_GlazingBeadWidth { get; set; }
         int Panel_GlazingBeadHeight { get; set; }
@@ -107,6 +108,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         Extension_ArticleNo Panel_ExtensionTopArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionTop2ArtNo { get; set; }
+        Extension_ArticleNo Panel_ExtensionTop3ArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionBotArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionBot2ArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionLeftArtNo { get; set; }
@@ -115,6 +117,7 @@ namespace ModelLayer.Model.Quotation.Panel
         Extension_ArticleNo Panel_ExtensionRight2ArtNo { get; set; }
 
         bool Panel_ExtTopChk { get; set; }
+        bool Panel_ExtTop2Chk { get; set; }
         bool Panel_ExtBotChk { get; set; }
         bool Panel_ExtLeftChk { get; set; }
 
@@ -125,6 +128,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_ExtRightQty { get; set; }
 
         int Panel_ExtTop2Qty { get; set; }
+        int Panel_ExtTop3Qty { get; set; }
         int Panel_ExtBot2Qty { get; set; }
         int Panel_ExtLeft2Qty { get; set; }
         int Panel_ExtRight2Qty { get; set; }
@@ -154,8 +158,10 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_2DHingeQty { get; set; }
         _2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized { get; set; }
         int Panel_2DHingeQty_nonMotorized { get; set; }
+        bool Panel_2dHingeVisibility_nonMotorized { get; set; }
         _3dHinge_ArticleNo Panel_3dHingeArtNo { get; set; }
         int Panel_3dHingeQty { get; set; }
+        bool Panel_3dHingePropertyVisibility { get; set; }
         ButtHinge_ArticleNo Panel_ButtHingeArtNo { get; set; }
         int Panel_ButtHingeQty { get; set; }
         bool Panel_2dHingeVisibility { get; set; }
@@ -172,6 +178,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_GeorgianBarOptionVisibility { get; set; }
 
         HingeOption Panel_HingeOptions { get; set; }
+        int Panel_HingeOptionsPropertyHeight { get; set; }
         bool Panel_HingeOptionsVisibility { get; set; }
         CenterHingeOption Panel_CenterHingeOptions { get; set; }
         bool Panel_CenterHingeOptionsVisibility { get; set; }

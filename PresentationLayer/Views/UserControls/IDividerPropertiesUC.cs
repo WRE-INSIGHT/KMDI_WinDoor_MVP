@@ -21,6 +21,7 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler chkDMCheckedChangedEventRaised;
         event EventHandler cmbDMArtNoSelectedValueChangedEventRaised;
         event EventHandler btnSelectDMPanelClickedEventRaised;
+        event EventHandler SashProfileChangedEventRaised;
 
         Panel GetDividerPropertiesBodyPNL();
         Panel GetDMArtNoPNL();

@@ -20,6 +20,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IUnityContainer _unityC;
 
         Panel _pnlTopExt2Option;
+        Panel _pnlTopExt3Option;
         Panel _pnlBotExt2Option;
         Panel _pnlLeftExt2Option;
         Panel _pnlRightExt2Option;
@@ -30,6 +31,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_extensionUC = pp_extensionUC;
             _pnlTopExt2Option = _pp_extensionUC.GetTopExt2OptionPNL();
+            _pnlTopExt3Option = _pp_extensionUC.GetTopExt3OptionPNL();
             _pnlBotExt2Option = _pp_extensionUC.GetBotExt2OptionPNL();
             _pnlLeftExt2Option = _pp_extensionUC.GetLeftExt2OptionPNL();
             _pnlRightExt2Option = _pp_extensionUC.GetRightExt2OptionPNL();
@@ -56,6 +58,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 else if (cmb.Name == "cmb_TopExt2")
                 {
                     _panelModel.Panel_ExtensionTop2ArtNo = extArtNo;
+                }
+                else if (cmb.Name == "cmb_TopExt3")
+                {
+                    _panelModel.Panel_ExtensionTop3ArtNo = extArtNo;
                 }
                 else if (cmb.Name == "cmb_BotExt")
                 {
@@ -90,7 +96,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             if (chk.Name == "chk_ToAdd_TopExt2")
             {
-                _panelModel.Panel_ExtTopChk = chk.Checked;
+                if (chk.Checked == false && _panelModel.Panel_ExtTop2Chk == false)
+                {
+                    _panelModel.Panel_ExtTopChk = chk.Checked;
+                }
+                else if (chk.Checked == true)
+                {
+                    _panelModel.Panel_ExtTopChk = chk.Checked;
+                }
+            }
+            else if (chk.Name == "chk_ToAdd_TopExt3")
+            {
+                _panelModel.Panel_ExtTop2Chk = chk.Checked;
             }
             else if (chk.Name == "chk_ToAdd_BotExt2")
             {
@@ -146,11 +163,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_ExtLeftQty", new Binding("Value", _panelModel, "Panel_ExtLeftQty", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtRightQty", new Binding("Value", _panelModel, "Panel_ExtRightQty", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtTop2Qty", new Binding("Value", _panelModel, "Panel_ExtTop2Qty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtTop3Qty", new Binding("Value", _panelModel, "Panel_ExtTop3Qty", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtBot2Qty", new Binding("Value", _panelModel, "Panel_ExtBot2Qty", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtLeft2Qty", new Binding("Value", _panelModel, "Panel_ExtLeft2Qty", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtRight2Qty", new Binding("Value", _panelModel, "Panel_ExtRight2Qty", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtensionTopArtNo", new Binding("Text", _panelModel, "Panel_ExtensionTopArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtensionTop2ArtNo", new Binding("Text", _panelModel, "Panel_ExtensionTop2ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtensionTop3ArtNo", new Binding("Text", _panelModel, "Panel_ExtensionTop3ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtensionBotArtNo", new Binding("Text", _panelModel, "Panel_ExtensionBotArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtensionBot2ArtNo", new Binding("Text", _panelModel, "Panel_ExtensionBot2ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtensionLeftArtNo", new Binding("Text", _panelModel, "Panel_ExtensionLeftArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -158,7 +177,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_ExtensionRightArtNo", new Binding("Text", _panelModel, "Panel_ExtensionRightArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtensionRight2ArtNo", new Binding("Text", _panelModel, "Panel_ExtensionRight2ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtTopChk", new Binding("Checked", _panelModel, "Panel_ExtTopChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtTop2Chk", new Binding("Checked", _panelModel, "Panel_ExtTop2Chk", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtTopChk_visible", new Binding("Visible", _panelModel, "Panel_ExtTopChk", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_ExtTop2Chk_visible", new Binding("Visible", _panelModel, "Panel_ExtTop2Chk", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtBotChk", new Binding("Checked", _panelModel, "Panel_ExtBotChk", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtBotChk_visible", new Binding("Visible", _panelModel, "Panel_ExtBotChk", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ExtLeftChk", new Binding("Checked", _panelModel, "Panel_ExtLeftChk", true, DataSourceUpdateMode.OnPropertyChanged));
