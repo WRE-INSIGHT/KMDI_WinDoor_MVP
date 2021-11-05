@@ -16028,6 +16028,7 @@ namespace ModelLayer.Tests
             _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400215;
             _divDummyMullionModel.Div_LeverEspagVisibility = true;
             _divDummyMullionModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._631153;
+            _divDummyMullionModel.Div_DMStrikerArtNo = null;
             _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
             Control div_DummyMullion2 = new Control();
             div_DummyMullion2.Name = "MullionUC_2";
@@ -16241,6 +16242,7 @@ namespace ModelLayer.Tests
             _divDummyMullionModel4.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400215;
             _divDummyMullionModel4.Div_LeverEspagVisibility = true;
             _divDummyMullionModel4.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._631153;
+            _divDummyMullionModel4.Div_DMStrikerArtNo = null;
             _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel4);
 
             Control div_DummyMullion4 = new Control();
@@ -16456,7 +16458,6 @@ namespace ModelLayer.Tests
             Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_BL, _panelModel3.Panel_3dHingeArtNo);
             Assert.AreEqual(1, _panelModel3.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._642089, _panelModel3.Panel_EspagnoletteArtNo);
-            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel3.Panel_AdjStrikerArtNo);
             Assert.AreEqual(Handle_Type._Rotoline, _panelModel3.Panel_HandleType);
             Assert.AreEqual(Rotoline_HandleArtNo._K070A21725, _panelModel3.Panel_RotolineArtNo);
             Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel3.Panel_RestrictorStayArtNo);
@@ -16464,15 +16465,15 @@ namespace ModelLayer.Tests
 
             //EXTENSIONS
 
-            Assert.AreEqual(Extension_ArticleNo._567639, _panelModel3.Panel_ExtensionTopArtNo);
-            Assert.AreEqual(1, _panelModel3.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtTopQty);
             Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionTop2ArtNo);
             Assert.AreEqual(0, _panelModel3.Panel_ExtTop2Qty);
 
-            Assert.AreEqual(Extension_ArticleNo._567639, _panelModel3.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel3.Panel_ExtensionBotArtNo);
             Assert.AreEqual(1, _panelModel3.Panel_ExtBotQty);
-            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel3.Panel_ExtensionBot2ArtNo);
-            Assert.AreEqual(1, _panelModel3.Panel_ExtBot2Qty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtBot2Qty);
 
             Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionLeftArtNo);
             Assert.AreEqual(0, _panelModel3.Panel_ExtLeftQty);
@@ -16579,21 +16580,20 @@ namespace ModelLayer.Tests
             Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_BL, _panelModel5.Panel_3dHingeArtNo);
             Assert.AreEqual(1, _panelModel5.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._642089, _panelModel5.Panel_EspagnoletteArtNo);
-            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel5.Panel_AdjStrikerArtNo);
             Assert.AreEqual(Handle_Type._Rotoline, _panelModel5.Panel_HandleType);
             Assert.AreEqual(Rotoline_HandleArtNo._K070A21725, _panelModel5.Panel_RotolineArtNo);
             Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel5.Panel_RestrictorStayArtNo);
 
             //EXTENSIONS 
-            Assert.AreEqual(Extension_ArticleNo._567639, _panelModel5.Panel_ExtensionTopArtNo);
-            Assert.AreEqual(1, _panelModel5.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtTopQty);
             Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionTop2ArtNo);
             Assert.AreEqual(0, _panelModel5.Panel_ExtTop2Qty);
 
-            Assert.AreEqual(Extension_ArticleNo._567639, _panelModel5.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel5.Panel_ExtensionBotArtNo);
             Assert.AreEqual(1, _panelModel5.Panel_ExtBotQty);
-            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel5.Panel_ExtensionBot2ArtNo);
-            Assert.AreEqual(1, _panelModel5.Panel_ExtBot2Qty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtBot2Qty);
 
             Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionLeftArtNo);
             Assert.AreEqual(0, _panelModel5.Panel_ExtLeftQty);
