@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 
@@ -68,6 +69,12 @@ namespace ModelLayer.Model.Quotation.Divider
 
         void SetExplosionValues_Div();
         void AdjustPropertyPanelHeight(string mode);
+
+        void Insert_DivProfile_DivReinf_Info_MaterialList(DataTable tbl_explosion);
+        void Insert_MechJoint_MaterialList(DataTable tbl_explosion);
+
+        int Add_ExplosionLength_screws4fab();
+        int Add_MechJoint_screws4fab();
 
         #endregion
     }

@@ -5,6 +5,7 @@ using ModelLayer.Variables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -903,6 +904,72 @@ namespace ModelLayer.Model.Quotation.Divider
                 Div_PropHeight -= constants.div_property_claddingBracketOptionsHeight;
             }
         }
+
+        #region MaterialList
+
+        public void Insert_DivProfile_DivReinf_Info_MaterialList(DataTable tbl_explosion)
+        {
+            string div_side = "", explosion_length = "";
+            if (Div_Type == DividerType.Transom)
+            {
+                div_side = "Width";
+                explosion_length = Div_ExplosionWidth.ToString();
+            }
+            else if (Div_Type == DividerType.Mullion)
+            {
+                div_side = "Height";
+                explosion_length = Div_ExplosionHeight.ToString();
+            }
+
+            tbl_explosion.Rows.Add(Div_Type.ToString() + " " + div_side + " " + Div_ArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   explosion_length,
+                                   Div_Bounded,
+                                   @"[  ]");
+
+            tbl_explosion.Rows.Add(Div_Type.ToString() + " Reinforcement " + div_side + " " + Div_ReinfArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   explosion_length,
+                                   Div_Type.ToString(),
+                                   @"|  |");
+        }
+
+        public void Insert_MechJoint_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add(Div_Type.ToString() + " Mechanical Joint " + Div_MechJoinArtNo.DisplayName,
+                                   2, "pc(s)", "");
+        }
+
+
+        public int Add_ExplosionLength_screws4fab()
+        {
+            int explosionLength_screws = 0;
+
+            if (Div_Type == DividerType.Transom)
+            {
+                explosionLength_screws += Div_ExplosionWidth;
+            }
+            else if (Div_Type == DividerType.Mullion)
+            {
+                explosionLength_screws += Div_ExplosionHeight;
+            }
+
+            return explosionLength_screws;
+        }
+
+        public int Add_MechJoint_screws4fab()
+        {
+            int mj_screws = 0;
+
+            if (Div_MechJoinArtNo == Divider_MechJointArticleNo._AV585)
+            {
+                mj_screws += (2 * 2); //qty * 2
+            }
+
+            return mj_screws;
+        }
+
+        #endregion
 
         #endregion
 

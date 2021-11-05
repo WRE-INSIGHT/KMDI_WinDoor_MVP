@@ -262,10 +262,21 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_MVDHandle_MaterialList(DataTable tbl_explosion);
         void Insert_WeldableCornerJoint_MaterialList(DataTable tbl_explosion);
         void Insert_Espagnolette_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingBead_MaterialList(DataTable tbl_explosion, string location);
+        void Insert_GBSpacer_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingAdapator_MaterialList(DataTable tbl_explosion, string location);
+        void Insert_GlassInfo_MaterialList(DataTable tbl_explosion, string location, string glassFilm);
+        void Insert_GeorgianBar_MaterialList(DataTable tbl_explosion);
 
         int Add_SashPerimeter_screws4fab();
         int Add_StrikerAC_screws4fab();
         int Add_Espagnolette_screws4fab();
+        int Add_Extension_screws4fab();
+        int Add_FSCasement_screws4fab();
+        int Add_FGAwning_screws4fab();
+        int Add_Hinges_screws4fab();
+
+        int Add_MotorizedMech_screws4Inst();
         #endregion
     }
 }
