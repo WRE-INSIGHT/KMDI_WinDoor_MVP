@@ -6292,7 +6292,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("2", dr[0]["Qty"]);
             #endregion
 
-        } // no mullion in dt
+        } 
 
 
         [TestMethod]
@@ -6796,69 +6796,69 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            //p1
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //p2
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '800'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
-
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+  
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '400'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '725'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '340'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
-            //p2
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //p3
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '750'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1365'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%' AND
                              Size = '629'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Height%' AND
                              Size = '1244'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
-            //p3
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //p1
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '700'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1800'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '625'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1728'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
@@ -15557,7 +15557,6 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Rio_HandleArtNo._C050C108019, _panelModel2.Panel_RioArtNo);
             Assert.AreEqual(ProfileKnobCylinder_ArtNo._45x45, _panelModel2.Panel_ProfileKnobCylinderArtNo);
             Assert.AreEqual(Cylinder_CoverArtNo._EPSW_8022_823332, _panelModel2.Panel_CylinderCoverArtNo);
-            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel2.Panel_AdjStrikerArtNo);
             Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel2.Panel_3dHingeArtNo);
             Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel2.Panel_RestrictorStayArtNo);
             Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
@@ -16132,6 +16131,7 @@ namespace ModelLayer.Tests
                                                                            _panelModel1);
 
             _divMullionModel3.Div_ChkDM = false;
+            _divMullionModel3.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._None;
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel3);
             Control div_Mullion3 = new Control();
             div_Mullion3.Name = "MullionUC_3";
