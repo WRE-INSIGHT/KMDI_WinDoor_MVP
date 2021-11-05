@@ -26,7 +26,6 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
             set
             {
                 _sashProfileArtNo = value;
-                SashProfileChanged(_sashProfileArtNo, new EventArgs());
             }
         }
 
@@ -37,7 +36,6 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
 
         public event EventHandler DPLeverEspagnolettePropertyUCLoadEventRaised;
         public event EventHandler cmbLeverEspagSelectedValueChangedEventRaised;
-        public event EventHandler SashProfileChangedEventRaised;
 
         private void DP_LeverEspagnolettePropertyUC_Load(object sender, EventArgs e)
         {
@@ -75,11 +73,6 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
                 this.DataBindings.Remove(sash);
             }
             this.DataBindings.Add(sashBinding["Panel_SashProfileArtNo"]);
-        }
-
-        private void SashProfileChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, SashProfileChangedEventRaised, e);
         }
     }
 }

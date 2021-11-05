@@ -310,5 +310,10 @@ namespace PresentationLayer.Views
         {
             return mnsMainMenu;
         }
+
+        private void pnlPropertiesBody_Scroll(object sender, ScrollEventArgs e)
+        {
+            //Console.WriteLine("Scroll_val: " + pnlPropertiesBody.VerticalScroll.Value);
+        }
     }
 }

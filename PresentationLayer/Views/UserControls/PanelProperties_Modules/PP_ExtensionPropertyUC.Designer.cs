@@ -36,7 +36,7 @@
             this.pnl_TopExt2Option = new System.Windows.Forms.Panel();
             this.num_TopExtQty2 = new System.Windows.Forms.NumericUpDown();
             this.cmb_TopExt2 = new System.Windows.Forms.ComboBox();
-            this.pnl_TopExtField2 = new System.Windows.Forms.Panel();
+            this.chk_ToAdd_TopExt3 = new System.Windows.Forms.CheckBox();
             this.pnl_BotExtOption = new System.Windows.Forms.Panel();
             this.num_BotExtQty = new System.Windows.Forms.NumericUpDown();
             this.cmb_BotExt = new System.Windows.Forms.ComboBox();
@@ -61,6 +61,10 @@
             this.num_RightExtQty = new System.Windows.Forms.NumericUpDown();
             this.cmb_RightExt = new System.Windows.Forms.ComboBox();
             this.chk_ToAdd_RightExt2 = new System.Windows.Forms.CheckBox();
+            this.pnl_TopExt3Option = new System.Windows.Forms.Panel();
+            this.num_TopExtQty3 = new System.Windows.Forms.NumericUpDown();
+            this.cmb_TopExt3 = new System.Windows.Forms.ComboBox();
+            this.pnl_TopExtField3 = new System.Windows.Forms.Panel();
             this.pnl_TopExtOption.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_TopExtQty)).BeginInit();
             this.pnl_TopExt2Option.SuspendLayout();
@@ -77,6 +81,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_RightExtQty2)).BeginInit();
             this.pnl_RightExtOption.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_RightExtQty)).BeginInit();
+            this.pnl_TopExt3Option.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_TopExtQty3)).BeginInit();
             this.SuspendLayout();
             // 
             // pnl_TopExtOption
@@ -144,7 +150,7 @@
             // 
             this.pnl_TopExt2Option.Controls.Add(this.num_TopExtQty2);
             this.pnl_TopExt2Option.Controls.Add(this.cmb_TopExt2);
-            this.pnl_TopExt2Option.Controls.Add(this.pnl_TopExtField2);
+            this.pnl_TopExt2Option.Controls.Add(this.chk_ToAdd_TopExt3);
             this.pnl_TopExt2Option.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_TopExt2Option.Location = new System.Drawing.Point(0, 48);
             this.pnl_TopExt2Option.Name = "pnl_TopExt2Option";
@@ -172,15 +178,25 @@
             this.cmb_TopExt2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_TopExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
             // 
-            // pnl_TopExtField2
+            // chk_ToAdd_TopExt3
             // 
-            this.pnl_TopExtField2.BackColor = System.Drawing.SystemColors.Control;
-            this.pnl_TopExtField2.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionTop;
-            this.pnl_TopExtField2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pnl_TopExtField2.Location = new System.Drawing.Point(3, 5);
-            this.pnl_TopExtField2.Name = "pnl_TopExtField2";
-            this.pnl_TopExtField2.Size = new System.Drawing.Size(21, 21);
-            this.pnl_TopExtField2.TabIndex = 29;
+            this.chk_ToAdd_TopExt3.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chk_ToAdd_TopExt3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.chk_ToAdd_TopExt3.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionTop;
+            this.chk_ToAdd_TopExt3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chk_ToAdd_TopExt3.FlatAppearance.BorderSize = 0;
+            this.chk_ToAdd_TopExt3.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
+            this.chk_ToAdd_TopExt3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chk_ToAdd_TopExt3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_ToAdd_TopExt3.Location = new System.Drawing.Point(3, 5);
+            this.chk_ToAdd_TopExt3.Name = "chk_ToAdd_TopExt3";
+            this.chk_ToAdd_TopExt3.Size = new System.Drawing.Size(21, 21);
+            this.chk_ToAdd_TopExt3.TabIndex = 35;
+            this.chk_ToAdd_TopExt3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chk_ToAdd_TopExt3.UseVisualStyleBackColor = false;
+            this.chk_ToAdd_TopExt3.CheckedChanged += new System.EventHandler(this.chk_ToAdd_TopExt3_CheckedChanged);
+            this.chk_ToAdd_TopExt3.MouseLeave += new System.EventHandler(this.chk_ToAdd_TopExt3_MouseLeave);
+            this.chk_ToAdd_TopExt3.MouseHover += new System.EventHandler(this.chk_ToAdd_TopExt3_MouseHover);
             // 
             // pnl_BotExtOption
             // 
@@ -188,7 +204,7 @@
             this.pnl_BotExtOption.Controls.Add(this.cmb_BotExt);
             this.pnl_BotExtOption.Controls.Add(this.chk_ToAdd_BotExt2);
             this.pnl_BotExtOption.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_BotExtOption.Location = new System.Drawing.Point(0, 79);
+            this.pnl_BotExtOption.Location = new System.Drawing.Point(0, 172);
             this.pnl_BotExtOption.Name = "pnl_BotExtOption";
             this.pnl_BotExtOption.Size = new System.Drawing.Size(154, 31);
             this.pnl_BotExtOption.TabIndex = 4;
@@ -240,7 +256,7 @@
             this.pnl_BotExt2Option.Controls.Add(this.cmb_BotExt2);
             this.pnl_BotExt2Option.Controls.Add(this.pnl_BotExtField2);
             this.pnl_BotExt2Option.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_BotExt2Option.Location = new System.Drawing.Point(0, 110);
+            this.pnl_BotExt2Option.Location = new System.Drawing.Point(0, 203);
             this.pnl_BotExt2Option.Name = "pnl_BotExt2Option";
             this.pnl_BotExt2Option.Size = new System.Drawing.Size(154, 31);
             this.pnl_BotExt2Option.TabIndex = 5;
@@ -282,7 +298,7 @@
             this.pnl_LeftExt2Option.Controls.Add(this.cmb_LeftExt2);
             this.pnl_LeftExt2Option.Controls.Add(this.pnl_LeftExtField2);
             this.pnl_LeftExt2Option.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_LeftExt2Option.Location = new System.Drawing.Point(0, 172);
+            this.pnl_LeftExt2Option.Location = new System.Drawing.Point(0, 265);
             this.pnl_LeftExt2Option.Name = "pnl_LeftExt2Option";
             this.pnl_LeftExt2Option.Size = new System.Drawing.Size(154, 31);
             this.pnl_LeftExt2Option.TabIndex = 7;
@@ -324,7 +340,7 @@
             this.pnl_LeftExtOption.Controls.Add(this.cmb_LeftExt);
             this.pnl_LeftExtOption.Controls.Add(this.chk_ToAdd_LeftExt2);
             this.pnl_LeftExtOption.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_LeftExtOption.Location = new System.Drawing.Point(0, 141);
+            this.pnl_LeftExtOption.Location = new System.Drawing.Point(0, 234);
             this.pnl_LeftExtOption.Name = "pnl_LeftExtOption";
             this.pnl_LeftExtOption.Size = new System.Drawing.Size(154, 31);
             this.pnl_LeftExtOption.TabIndex = 6;
@@ -376,7 +392,7 @@
             this.pnl_RightExt2Option.Controls.Add(this.cmb_RightExt2);
             this.pnl_RightExt2Option.Controls.Add(this.pnl_RightExtField2);
             this.pnl_RightExt2Option.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_RightExt2Option.Location = new System.Drawing.Point(0, 234);
+            this.pnl_RightExt2Option.Location = new System.Drawing.Point(0, 141);
             this.pnl_RightExt2Option.Name = "pnl_RightExt2Option";
             this.pnl_RightExt2Option.Size = new System.Drawing.Size(154, 31);
             this.pnl_RightExt2Option.TabIndex = 9;
@@ -418,7 +434,7 @@
             this.pnl_RightExtOption.Controls.Add(this.cmb_RightExt);
             this.pnl_RightExtOption.Controls.Add(this.chk_ToAdd_RightExt2);
             this.pnl_RightExtOption.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_RightExtOption.Location = new System.Drawing.Point(0, 203);
+            this.pnl_RightExtOption.Location = new System.Drawing.Point(0, 110);
             this.pnl_RightExtOption.Name = "pnl_RightExtOption";
             this.pnl_RightExtOption.Size = new System.Drawing.Size(154, 31);
             this.pnl_RightExtOption.TabIndex = 8;
@@ -464,24 +480,67 @@
             this.chk_ToAdd_RightExt2.MouseLeave += new System.EventHandler(this.chk_ToAdd_RightExt2_MouseLeave);
             this.chk_ToAdd_RightExt2.MouseHover += new System.EventHandler(this.chk_ToAdd_RightExt2_MouseHover);
             // 
+            // pnl_TopExt3Option
+            // 
+            this.pnl_TopExt3Option.Controls.Add(this.num_TopExtQty3);
+            this.pnl_TopExt3Option.Controls.Add(this.cmb_TopExt3);
+            this.pnl_TopExt3Option.Controls.Add(this.pnl_TopExtField3);
+            this.pnl_TopExt3Option.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_TopExt3Option.Location = new System.Drawing.Point(0, 79);
+            this.pnl_TopExt3Option.Name = "pnl_TopExt3Option";
+            this.pnl_TopExt3Option.Size = new System.Drawing.Size(154, 31);
+            this.pnl_TopExt3Option.TabIndex = 10;
+            // 
+            // num_TopExtQty3
+            // 
+            this.num_TopExtQty3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num_TopExtQty3.Location = new System.Drawing.Point(119, 4);
+            this.num_TopExtQty3.Name = "num_TopExtQty3";
+            this.num_TopExtQty3.Size = new System.Drawing.Size(30, 23);
+            this.num_TopExtQty3.TabIndex = 28;
+            this.num_TopExtQty3.ThousandsSeparator = true;
+            // 
+            // cmb_TopExt3
+            // 
+            this.cmb_TopExt3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmb_TopExt3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_TopExt3.FormattingEnabled = true;
+            this.cmb_TopExt3.Location = new System.Drawing.Point(29, 4);
+            this.cmb_TopExt3.Name = "cmb_TopExt3";
+            this.cmb_TopExt3.Size = new System.Drawing.Size(84, 24);
+            this.cmb_TopExt3.TabIndex = 30;
+            this.cmb_TopExt3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
+            this.cmb_TopExt3.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            // 
+            // pnl_TopExtField3
+            // 
+            this.pnl_TopExtField3.BackColor = System.Drawing.SystemColors.Control;
+            this.pnl_TopExtField3.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionTop;
+            this.pnl_TopExtField3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pnl_TopExtField3.Location = new System.Drawing.Point(3, 5);
+            this.pnl_TopExtField3.Name = "pnl_TopExtField3";
+            this.pnl_TopExtField3.Size = new System.Drawing.Size(21, 21);
+            this.pnl_TopExtField3.TabIndex = 29;
+            // 
             // PP_ExtensionPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.pnl_RightExt2Option);
-            this.Controls.Add(this.pnl_RightExtOption);
             this.Controls.Add(this.pnl_LeftExt2Option);
             this.Controls.Add(this.pnl_LeftExtOption);
             this.Controls.Add(this.pnl_BotExt2Option);
             this.Controls.Add(this.pnl_BotExtOption);
+            this.Controls.Add(this.pnl_RightExt2Option);
+            this.Controls.Add(this.pnl_RightExtOption);
+            this.Controls.Add(this.pnl_TopExt3Option);
             this.Controls.Add(this.pnl_TopExt2Option);
             this.Controls.Add(this.pnl_TopExtOption);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "PP_ExtensionPropertyUC";
-            this.Size = new System.Drawing.Size(154, 81);
+            this.Size = new System.Drawing.Size(154, 300);
             this.Load += new System.EventHandler(this.PP_ExtensionUC_Load);
             this.pnl_TopExtOption.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.num_TopExtQty)).EndInit();
@@ -499,6 +558,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_RightExtQty2)).EndInit();
             this.pnl_RightExtOption.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.num_RightExtQty)).EndInit();
+            this.pnl_TopExt3Option.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.num_TopExtQty3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -512,7 +573,6 @@
         private System.Windows.Forms.NumericUpDown num_TopExtQty2;
         private System.Windows.Forms.ComboBox cmb_TopExt2;
         private System.Windows.Forms.CheckBox chk_ToAdd_TopExt2;
-        private System.Windows.Forms.Panel pnl_TopExtField2;
         private System.Windows.Forms.Panel pnl_BotExtOption;
         private System.Windows.Forms.NumericUpDown num_BotExtQty;
         private System.Windows.Forms.ComboBox cmb_BotExt;
@@ -537,5 +597,10 @@
         private System.Windows.Forms.NumericUpDown num_RightExtQty;
         private System.Windows.Forms.ComboBox cmb_RightExt;
         private System.Windows.Forms.CheckBox chk_ToAdd_RightExt2;
+        private System.Windows.Forms.CheckBox chk_ToAdd_TopExt3;
+        private System.Windows.Forms.Panel pnl_TopExt3Option;
+        private System.Windows.Forms.NumericUpDown num_TopExtQty3;
+        private System.Windows.Forms.ComboBox cmb_TopExt3;
+        private System.Windows.Forms.Panel pnl_TopExtField3;
     }
 }

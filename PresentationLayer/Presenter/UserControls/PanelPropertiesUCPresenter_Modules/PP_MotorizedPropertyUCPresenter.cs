@@ -64,6 +64,16 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.AdjustPropertyPanelHeight("addCmbMotorized");
                 _panelModel.AdjustPropertyPanelHeight("minusHandle");
 
+                if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                {
+                    if (_panelModel.Panel_MiddleCloserVisibility == true)
+                    {
+                        _panelModel.Panel_MiddleCloserVisibility = false;
+                        _panelModel.AdjustPropertyPanelHeight("minusMC");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusMC");
+                    }
+                }
+
                 if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
                 {
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
@@ -110,9 +120,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.AdjustPropertyPanelHeight("minusExtensionField");
                     }
 
-                    _panelModel.Panel_CornerDriveOptionsVisibility = false;
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
-                    _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                    if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
+                    {
+                        _panelModel.Panel_CornerDriveOptionsVisibility = false;
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                        _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                    }
                 }
                 else
                 {
@@ -129,6 +142,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                         if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
                         {
+                            _panelModel.Panel_CornerDriveOptionsVisibility = false;
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
                             _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
                         }
@@ -190,6 +204,16 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.AdjustPropertyPanelHeight("minusCmbMotorized");
                 _panelModel.AdjustPropertyPanelHeight("addHandle");
 
+                if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                {
+                    if (_panelModel.Panel_MiddleCloserVisibility == false)
+                    {
+                        _panelModel.Panel_MiddleCloserVisibility = true;
+                        _panelModel.AdjustPropertyPanelHeight("addMC");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                    }
+                }
+
                 if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
                 {
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
@@ -236,9 +260,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.AdjustPropertyPanelHeight("addExtensionField");
                     }
 
-                    _panelModel.Panel_CornerDriveOptionsVisibility = true;
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
-                    _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
+                    if (_panelModel.Panel_CornerDriveOptionsVisibility == false)
+                    {
+                        _panelModel.Panel_CornerDriveOptionsVisibility = true;
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                        _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
+                    }
                 }
                 else
                 {
@@ -253,8 +280,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("addExtensionField");
                         }
 
-                        if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
+                        if (_panelModel.Panel_CornerDriveOptionsVisibility == false)
                         {
+                            _panelModel.Panel_CornerDriveOptionsVisibility = true;
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
                             _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
                         }
