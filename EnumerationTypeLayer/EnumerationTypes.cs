@@ -122,8 +122,9 @@ namespace EnumerationTypeLayer
         {
             public static readonly SashProfile_ArticleNo _None = new SashProfile_ArticleNo(0, "None");
             public static readonly SashProfile_ArticleNo _7581 = new SashProfile_ArticleNo(1, "7581");
-            public static readonly SashProfile_ArticleNo _374 = new SashProfile_ArticleNo(2, "374");
-            public static readonly SashProfile_ArticleNo _395 = new SashProfile_ArticleNo(3, "395"); //inward
+            public static readonly SashProfile_ArticleNo _373 = new SashProfile_ArticleNo(2, "373");
+            public static readonly SashProfile_ArticleNo _374 = new SashProfile_ArticleNo(3, "374");
+            public static readonly SashProfile_ArticleNo _395 = new SashProfile_ArticleNo(4, "395"); //inward
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -460,22 +461,22 @@ namespace EnumerationTypeLayer
 
         public class StayBearingK_ArticleNo : Enumeration<StayBearingK_ArticleNo, int>
         {
-            public static readonly StayBearingK_ArticleNo _N390A0001 = new StayBearingK_ArticleNo(0, "N390A0001");
+            public static readonly StayBearingK_ArticleNo _N390A00106_230177 = new StayBearingK_ArticleNo(0, "N390A00106/230177");
 
             private StayBearingK_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class StayBearingPin_ArticleNo : Enumeration<StayBearingPin_ArticleNo, int>
         {
-            public static readonly StayBearingPin_ArticleNo _F710D52026 = new StayBearingPin_ArticleNo(0, "F710D52026");
+            public static readonly StayBearingPin_ArticleNo _F710D52008_227354 = new StayBearingPin_ArticleNo(0, "F710D52008/227354");
 
             private StayBearingPin_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class StayBearingCover_ArticleNo : Enumeration<StayBearingCover_ArticleNo, int>
         {
-            public static readonly StayBearingCover_ArticleNo _WhiteIvory = new StayBearingCover_ArticleNo(0, "N391A03718");
-            public static readonly StayBearingCover_ArticleNo _DB = new StayBearingCover_ArticleNo(1, "N391A01558");
+            public static readonly StayBearingCover_ArticleNo _WhiteIvory = new StayBearingCover_ArticleNo(0, "N391A03718/230252");
+            public static readonly StayBearingCover_ArticleNo _DB = new StayBearingCover_ArticleNo(1, "N391A015580/230204");
 
             private StayBearingCover_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -490,8 +491,8 @@ namespace EnumerationTypeLayer
 
         public class TopCornerHingeCover_ArticleNo : Enumeration<TopCornerHingeCover_ArticleNo, int>
         {
-            public static readonly TopCornerHingeCover_ArticleNo _WhiteIvory = new TopCornerHingeCover_ArticleNo(0, "N391A03718");
-            public static readonly TopCornerHingeCover_ArticleNo _DB = new TopCornerHingeCover_ArticleNo(1, "N391A03558");
+            public static readonly TopCornerHingeCover_ArticleNo _WhiteIvory = new TopCornerHingeCover_ArticleNo(0, "N391A03718/230252");
+            public static readonly TopCornerHingeCover_ArticleNo _DB = new TopCornerHingeCover_ArticleNo(1, "N391A03558/230251");
 
             private TopCornerHingeCover_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -512,7 +513,7 @@ namespace EnumerationTypeLayer
 
         public class CornerPivotRestK_ArticleNo : Enumeration<CornerPivotRestK_ArticleNo, int>
         {
-            public static readonly CornerPivotRestK_ArticleNo _N510A0001 = new CornerPivotRestK_ArticleNo(0, "N510A0001");
+            public static readonly CornerPivotRestK_ArticleNo _N510A0001_258590 = new CornerPivotRestK_ArticleNo(0, "N510A0001/258590");
 
             private CornerPivotRestK_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -528,7 +529,7 @@ namespace EnumerationTypeLayer
         public class CoverForCornerPivotRestVertical_ArticleNo : Enumeration<CoverForCornerPivotRestVertical_ArticleNo, int>
         {
             public static readonly CoverForCornerPivotRestVertical_ArticleNo _DB = new CoverForCornerPivotRestVertical_ArticleNo(0, "N591A01558");
-            public static readonly CoverForCornerPivotRestVertical_ArticleNo _WhiteIvory = new CoverForCornerPivotRestVertical_ArticleNo(1, "N591A01718");
+            public static readonly CoverForCornerPivotRestVertical_ArticleNo _WhiteIvory = new CoverForCornerPivotRestVertical_ArticleNo(1, "N591A01718/230426");
 
             private CoverForCornerPivotRestVertical_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -536,17 +537,19 @@ namespace EnumerationTypeLayer
         public class CoverForCornerPivotRest_ArticleNo : Enumeration<CoverForCornerPivotRest_ArticleNo, int>
         {
             public static readonly CoverForCornerPivotRest_ArticleNo _DB = new CoverForCornerPivotRest_ArticleNo(0, "N591B12556");
-            public static readonly CoverForCornerPivotRest_ArticleNo _WhiteIvory = new CoverForCornerPivotRest_ArticleNo(1, "N591B02718");
+            public static readonly CoverForCornerPivotRest_ArticleNo _WhiteIvory = new CoverForCornerPivotRest_ArticleNo(1, "N591A02718");
 
             private CoverForCornerPivotRest_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class LeverEspagnolette_ArticleNo : Enumeration<LeverEspagnolette_ArticleNo, int>
         {
-            public static readonly LeverEspagnolette_ArticleNo _625_205 = new LeverEspagnolette_ArticleNo(0, "625-205");
-            public static readonly LeverEspagnolette_ArticleNo _625_206 = new LeverEspagnolette_ArticleNo(1, "625-206");
-            public static readonly LeverEspagnolette_ArticleNo _625_207 = new LeverEspagnolette_ArticleNo(2, "625-207");
-            public static readonly LeverEspagnolette_ArticleNo _None = new LeverEspagnolette_ArticleNo(3, "None");
+            public static readonly LeverEspagnolette_ArticleNo _None = new LeverEspagnolette_ArticleNo(0, "None");
+            public static readonly LeverEspagnolette_ArticleNo _625_205 = new LeverEspagnolette_ArticleNo(1, "625-205");
+            public static readonly LeverEspagnolette_ArticleNo _625_206 = new LeverEspagnolette_ArticleNo(2, "625-206");
+            public static readonly LeverEspagnolette_ArticleNo _625_207 = new LeverEspagnolette_ArticleNo(3, "625-207");
+            public static readonly LeverEspagnolette_ArticleNo _631153 = new LeverEspagnolette_ArticleNo(4, "631153");
+            public static readonly LeverEspagnolette_ArticleNo _476518 = new LeverEspagnolette_ArticleNo(5, "476518");
 
             private LeverEspagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -557,6 +560,14 @@ namespace EnumerationTypeLayer
 
             private ShootboltStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class ShootboltReverse_ArticleNo : Enumeration<ShootboltReverse_ArticleNo, int>
+        {
+            public static readonly ShootboltReverse_ArticleNo _312033 = new ShootboltReverse_ArticleNo(0, "312033");
+
+            private ShootboltReverse_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
         public class ShootboltNonReverse_ArticleNo : Enumeration<ShootboltNonReverse_ArticleNo, int>
         {
             public static readonly ShootboltNonReverse_ArticleNo _349187 = new ShootboltNonReverse_ArticleNo(0, "349187");
@@ -632,6 +643,20 @@ namespace EnumerationTypeLayer
             public static readonly MilledFrameReinf_ArticleNo _R_676 = new MilledFrameReinf_ArticleNo(0, "R-676");
 
             private MilledFrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GBSpacer_ArticleNo : Enumeration<GBSpacer_ArticleNo, int>
+        {
+            public static readonly GBSpacer_ArticleNo _GBSpacer = new GBSpacer_ArticleNo(0, "GB SPACER");
+
+            private GBSpacer_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class DummyMullionStriker_ArticleNo : Enumeration<DummyMullionStriker_ArticleNo, int>
+        {
+            public static readonly DummyMullionStriker_ArticleNo _339395 = new DummyMullionStriker_ArticleNo(0, "339395");
+
+            private DummyMullionStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

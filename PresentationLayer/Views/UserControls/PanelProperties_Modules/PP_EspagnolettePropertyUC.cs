@@ -87,7 +87,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 else if (espag == Espagnolette_ArticleNo._642105 || espag == Espagnolette_ArticleNo._642089 ||
                      espag == Espagnolette_ArticleNo._630963)
                 {
-                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                        (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373)))
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -140,7 +142,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             else if (espag == Espagnolette_ArticleNo._642105 || espag == Espagnolette_ArticleNo._642089 ||
                      espag == Espagnolette_ArticleNo._630963)
             {
-                if (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                if (Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                    (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }
