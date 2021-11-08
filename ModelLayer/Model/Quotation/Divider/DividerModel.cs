@@ -940,6 +940,94 @@ namespace ModelLayer.Model.Quotation.Divider
                                    2, "pc(s)", "");
         }
 
+        public void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion)
+        {
+            foreach (int cladding_size in Div_CladdingSizeList.Values)
+            {
+                tbl_explosion.Rows.Add("Cladding Profile " + Div_CladdingProfileArtNo.ToString(),
+                                       1, "pc(s)",
+                                       cladding_size.ToString(),
+                                       Div_Type.ToString(),
+                                       @"|  |");
+
+                tbl_explosion.Rows.Add("Cladding Reinforcement " + Div_CladdingReinfArtNo.ToString(),
+                                       1, "pc(s)",
+                                       cladding_size.ToString(),
+                                       "CPL",
+                                       @"|  |");
+            }
+        }
+
+        public void Insert_CladdingBracket4Concrete_MaterialList(DataTable tbl_explosion)
+        {
+            if (Div_CladdingBracketForConcreteQTY > 0)
+            {
+                tbl_explosion.Rows.Add("Bracket for concrete (10mm)",
+                                       Div_CladdingBracketForConcreteQTY, "pc(s)",
+                                       "",
+                                       "CPL",
+                                       @"|  |");
+            }
+        }
+
+        public void Insert_CladdingBracket4UPVC_MaterialList(DataTable tbl_explosion)
+        {
+            if (Div_CladdingBracketForUPVCQTY > 0)
+            {
+                tbl_explosion.Rows.Add("Bracket for upvc(5mm)",
+                                       Div_CladdingBracketForUPVCQTY, "pc(s)",
+                                       "",
+                                       "CPL",
+                                       @"|  |");
+            }
+        }
+
+        public void Insert_DummyMullion_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Dummy Mullion Height " + Div_DMArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   Div_ExplosionHeight.ToString(),
+                                   Div_Bounded,
+                                   @"[  ]");
+        }
+
+        public void Insert_Endcap4DM_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Endcap for Dummy Mullion " + Div_EndcapDM.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Dummy Mullion");
+        }
+
+        public void Insert_DMStriker_MaterialList(DataTable tbl_explosion)
+        {
+            if (Div_DMStrikerArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Dummy Mullion Striker " + Div_DMStrikerArtNo.DisplayName,
+                                       4, "pc(s)",
+                                       "",
+                                       "Frame",
+                                       " ");
+            }
+        }
+
+        public void Insert_FixedCam_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Fixed cam " + Div_FixedCamDM.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash");
+        }
+
+        public void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Snap-in Keep " + Div_SnapNKeepDM.ToString(),
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame");
+        }
+
+
 
         public int Add_ExplosionLength_screws4fab()
         {
@@ -967,6 +1055,117 @@ namespace ModelLayer.Model.Quotation.Divider
             }
 
             return mj_screws;
+        }
+
+        public int Add_TotalCladdingSize_Screws4Cladding()
+        {
+            int total_clad = 0;
+            foreach (int cladding_size in Div_CladdingSizeList.Values)
+            {
+                total_clad += cladding_size;
+            }
+
+            return total_clad;
+        }
+
+        public int Add_CladdingBracket4Concrete_screws4fab()
+        {
+            int cladConcrete_screws = 0;
+
+            if (Div_claddingBracketVisibility == true)
+            {
+                if (Div_CladdingBracketForConcreteQTY > 0)
+                {
+                    cladConcrete_screws += (Div_CladdingBracketForConcreteQTY * 3);
+                }
+            }
+
+            return cladConcrete_screws;
+        }
+
+        public int Add_CladdingBracket4UPVC_screws4fab()
+        {
+            int cladUPVC_screws = 0;
+
+            if (Div_claddingBracketVisibility == true)
+            {
+                if (Div_CladdingBracketForUPVCQTY > 0)
+                {
+                    cladUPVC_screws += (Div_CladdingBracketForUPVCQTY * 3);
+                }
+            }
+
+            return cladUPVC_screws;
+        }
+
+        public int Add_DMStriker_screws4fab()
+        {
+            int dmStriker_screws = 0;
+            if (Div_DMArtNo == DummyMullion_ArticleNo._385P)
+            {
+                if (Div_DMStrikerArtNo != null)
+                {
+                    dmStriker_screws += 8;
+                }
+            }
+
+            return dmStriker_screws;
+        }
+
+        public int Add_EndCapDM_screws4fab()
+        {
+            int endcap_screws = 0;
+
+            if (Div_EndcapDM == EndcapDM_ArticleNo._K385 ||
+                Div_EndcapDM == EndcapDM_ArticleNo._K7533)
+            {
+                endcap_screws += 2;
+            }
+
+            return endcap_screws;
+        }
+
+        public int Add_SnapNKeep_screws4fab()
+        {
+            int snap_screws = 0;
+
+            if (Div_SnapNKeepDM == SnapInKeep_ArticleNo._0400205 ||
+                Div_SnapNKeepDM == SnapInKeep_ArticleNo._0400215)
+            {
+                snap_screws += (2 * 2); //2 * 2pcs
+            }
+
+            return snap_screws;
+        }
+
+        public int Add_CladdBracket4Concrete_expbolts()
+        {
+            int cladConcrete_xpbolts = 0;
+
+            if (Div_claddingBracketVisibility == true)
+            {
+                if (Div_CladdingBracketForConcreteQTY > 0)
+                {
+                    cladConcrete_xpbolts += Div_CladdingBracketForConcreteQTY;
+                }
+            }
+
+            return cladConcrete_xpbolts;
+        }
+
+        public int Add_CladdBracket4UPVC_expbolts()
+        {
+            int cladUPVC_xpbolts = 0;
+
+            if (Div_claddingBracketVisibility == true)
+            {
+                if (Div_CladdingBracketForUPVCQTY > 0)
+                {
+                    cladUPVC_xpbolts += Div_CladdingBracketForUPVCQTY;
+                }
+            }
+
+            return cladUPVC_xpbolts;
         }
 
         #endregion

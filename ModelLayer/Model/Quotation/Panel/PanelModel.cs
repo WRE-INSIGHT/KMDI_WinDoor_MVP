@@ -4441,7 +4441,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_FixedCam_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Fixed Cam " + Panel_FixedCamArtNo.ToString(),
+            tbl_explosion.Rows.Add("Fixed Cam " + Panel_FixedCamArtNo.DisplayName,
                                    2, "pc(s)",
                                    "",
                                    "Frame",
@@ -4716,54 +4716,20 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_StrikerA_MaterialList(DataTable tbl_explosion)
         {
-            bool allow_insert = false;
-
-            if (Panel_Type.Contains("Awning"))
-            {
-                allow_insert = true;
-            }
-
-            if (Panel_Type.Contains("Casement") && Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
-            {
-                allow_insert = true;
-            }
-
-            if (allow_insert)
-            {
-                tbl_explosion.Rows.Add("Striker " + Panel_StrikerArtno_A.DisplayName,
-                                       Panel_StrikerQty_A, "pc (s)",
-                                       "",
-                                       "Frame",
-                                       @"");
-            }
+            tbl_explosion.Rows.Add("Striker " + Panel_StrikerArtno_A.DisplayName,
+                                   Panel_StrikerQty_A, "pc (s)",
+                                   "",
+                                   "Frame",
+                                   @"");
         }
 
         public void Insert_StrikerC_MaterialList(DataTable tbl_explosion)
         {
-            bool allow_insert = false;
-            if (Panel_Type.Contains("Awning"))
-            {
-                if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957 ||
-                    Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957 ||
-                    Panel_ExtensionRightArtNo == Extension_ArticleNo._639957 ||
-                    Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
-                {
-                    allow_insert = true;
-                }
-            }
-            else if (Panel_Type.Contains("Casement") && Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
-            {
-                allow_insert = true;
-            }
-
-            if (allow_insert)
-            {
-                tbl_explosion.Rows.Add("Striker " + Panel_StrikerArtno_C.DisplayName,
-                                           Panel_StrikerQty_C, "pc (s)",
-                                           "",
-                                           "Frame",
-                                           @"");
-            }
+            tbl_explosion.Rows.Add("Striker " + Panel_StrikerArtno_C.DisplayName,
+                                   Panel_StrikerQty_C, "pc (s)",
+                                   "",
+                                   "Frame",
+                                   @"");
         }
 
         public void Insert_RotaryHandle_LockingKit_MaterialList(DataTable tbl_explosion)
@@ -4862,35 +4828,26 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_GBSpacer_MaterialList(DataTable tbl_explosion)
         {
-            if ((Panel_Type.Contains("Awning") || Panel_Type.Contains("Casement")) &&
-                 Panel_GlassThickness == 6.0f &&
-                 Panel_SashPropertyVisibility == true)
-            {
-                tbl_explosion.Rows.Add("GB SPACER FOR 6mm GLASS " + Panel_GBSpacerArtNo.DisplayName,
-                                       8, "pc(s)",
-                                       "",
-                                       "Sash",
-                                       "");
-            }
-
+            tbl_explosion.Rows.Add("GB SPACER FOR 6mm GLASS " + Panel_GBSpacerArtNo.DisplayName,
+                                   8, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   "");
         }
 
         public void Insert_GlazingAdapator_MaterialList(DataTable tbl_explosion, string location)
         {
-            if (Panel_ChkGlazingAdaptor == true)
-            {
-                tbl_explosion.Rows.Add("Glazing Adaptor (P" + PanelGlass_ID + ") Width" + Panel_GlazingAdaptorArtNo.DisplayName,
-                                       2, "pc(s)",
-                                       Panel_GlazingBeadWidth.ToString(),
-                                       location,
-                                       @"\  /");
+            tbl_explosion.Rows.Add("Glazing Adaptor (P" + PanelGlass_ID + ") Width" + Panel_GlazingAdaptorArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_GlazingBeadWidth.ToString(),
+                                   location,
+                                   @"\  /");
 
-                tbl_explosion.Rows.Add("Glazing Adaptor (P" + PanelGlass_ID + ") Height " + Panel_GlazingAdaptorArtNo.DisplayName,
-                                       2, "pc(s)",
-                                       Panel_GlazingBeadHeight.ToString(),
-                                       location,
-                                       @"\  /");
-            }
+            tbl_explosion.Rows.Add("Glazing Adaptor (P" + PanelGlass_ID + ") Height " + Panel_GlazingAdaptorArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_GlazingBeadHeight.ToString(),
+                                   location,
+                                   @"\  /");
         }
 
         public void Insert_GlassInfo_MaterialList(DataTable tbl_explosion, string location, string glassFilm)
@@ -4910,20 +4867,17 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_GeorgianBar_MaterialList(DataTable tbl_explosion)
         {
-            if (Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
-            {
-                tbl_explosion.Rows.Add("Georgian bar P" + PanelGlass_ID + " (Horizontal) " + Panel_GeorgianBarArtNo.DisplayName,
-                                       Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
-                                       Panel_GlassWidth + 5,
-                                       "Glass",
-                                       "");
+            tbl_explosion.Rows.Add("Georgian bar P" + PanelGlass_ID + " (Horizontal) " + Panel_GeorgianBarArtNo.DisplayName,
+                                   Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
+                                   Panel_GlassWidth + 5,
+                                   "Glass",
+                                   "");
 
-                tbl_explosion.Rows.Add("Georgian bar P" + PanelGlass_ID + " (Vertical) " + Panel_GeorgianBarArtNo.DisplayName,
-                                       Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
-                                       Panel_GlassHeight + 5,
-                                       "Glass",
-                                       "");
-            }
+            tbl_explosion.Rows.Add("Georgian bar P" + PanelGlass_ID + " (Vertical) " + Panel_GeorgianBarArtNo.DisplayName,
+                                   Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
+                                   Panel_GlassHeight + 5,
+                                   "Glass",
+                                   "");
         }
 
 
