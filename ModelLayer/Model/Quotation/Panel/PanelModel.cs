@@ -2063,8 +2063,8 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
 
-                    Panel_SashWidth = Panel_DisplayWidth - (sash_deduct * 2) + 5;
-                    Panel_SashHeight = Panel_DisplayHeight - inward_motorized_deduction - (sash_deduct * 2) + 5;
+                    Panel_SashWidth = Panel_DisplayWidth - inward_motorized_deduction -(sash_deduct * 2) + 5;
+                    Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 5;
                     
 
                     Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
@@ -3441,8 +3441,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                Panel_SashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
-                Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT - inward_motorized_deduction) + 5;
+                Panel_SashWidth = (((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) - inward_motorized_deduction) + 5;
+                Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
 
                 Panel_OriginalSashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
                 Panel_OriginalSashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
