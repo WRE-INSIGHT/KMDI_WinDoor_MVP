@@ -2013,7 +2013,7 @@ namespace ModelLayer.Model.Quotation
                                                    "Concrete",
                                                    @"");
 
-                            total_screws_installation += (4 * pnl.Panel_MotorizedMechSetQty * 2;
+                            total_screws_installation += (4 * pnl.Panel_MotorizedMechSetQty * 2);
 
                             Material_List.Rows.Add("Supporting Frame " + pnl.Panel_SupportingFrameArtNo.ToString(),
                                                    pnl.Panel_MotorizedMechSetQty, "pc(s)",

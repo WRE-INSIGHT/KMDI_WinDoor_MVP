@@ -475,8 +475,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 int suggest_Wd = 0,
                     suggest_HT = _multiPanelModel.MPanel_Height - 20,
-                    suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth / totalPanelCount,
                     suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight;
+                decimal DisplayWD_dec = (decimal)_multiPanelModel.MPanel_DisplayWidth / totalPanelCount;
+
+                int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
+                int DisplayWD_singleDecimalPlace = 0;
+
+                string[] DisplayWD_dec_split = decimal.Round(DisplayWD_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                if (DisplayWD_dec_split.Count() > 1)
+                {
+                    DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
+                }
 
                 if (_multiPanelModel.MPanel_DividerEnabled)
                 {
@@ -594,6 +604,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        _frameModel.FrameImageRenderer_Zoom,
                                                                        _multiPanelModel.GetNextIndex(),
                                                                        DockStyle.None);
+
+                _panelModel.Panel_DisplayWidthDecimal = DisplayWD_singleDecimalPlace;
 
                 if (_prev_divModel != null)
                 {

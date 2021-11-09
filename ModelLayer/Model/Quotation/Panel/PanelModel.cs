@@ -111,6 +111,21 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        private int _panelDisplayWidthDecimal;
+        public int Panel_DisplayWidthDecimal
+        {
+            get
+            {
+                return _panelDisplayWidthDecimal;
+            }
+            set
+            {
+                _panelDisplayWidthDecimal = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private int _panelDisplayWidth_orig;
         public int Panel_OriginalDisplayWidth
         {
@@ -173,6 +188,22 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        private int _panelDisplayHeightDecimal;
+        public int Panel_DisplayHeightDecimal
+        {
+            get
+            {
+                return _panelDisplayHeightDecimal;
+            }
+            set
+            {
+                _panelDisplayHeightDecimal = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         private int _panelDisplayHeight_orig;
         public int Panel_OriginalDisplayHeight
         {

@@ -21,6 +21,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int PanelImageRenderer_Height { get; set; }
         int Panel_HeightToBind { get; set; }
         int Panel_DisplayHeight { get; set; }
+        int Panel_DisplayHeightDecimal { get; set; }
         int Panel_OriginalDisplayHeight { get; set; }
         int Panel_ID { get; set; }
         string Panel_Name { get; set; }
@@ -31,6 +32,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int PanelImageRenderer_Width { get; set; }
         int Panel_WidthToBind { get; set; }
         int Panel_DisplayWidth { get; set; }
+        int Panel_DisplayWidthDecimal { get; set; }
         int Panel_OriginalDisplayWidth { get; set; }
         bool Panel_Visibility { get; set; }
         float PanelImageRenderer_Zoom { get; set; }
