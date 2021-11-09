@@ -320,9 +320,11 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         total_cladding_size += cladding_size;
 
+                                        int claddProfile_size = cladding_size + 30;
+
                                         Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
                                                                1, "pc(s)",
-                                                               cladding_size.ToString(),
+                                                               claddProfile_size.ToString(),
                                                                mpnl.MPanel_Type,
                                                                @"|  |");
 
@@ -751,9 +753,11 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             total_cladding_size += cladding_size;
 
+                                            int claddProfile_size = cladding_size + 30;
+
                                             Material_List.Rows.Add("Cladding Profile " + div_nxtCtrl.Div_CladdingProfileArtNo.ToString(),
                                                                    1, "pc(s)",
-                                                                   cladding_size.ToString(),
+                                                                   claddProfile_size.ToString(),
                                                                    mpnl.MPanel_Type,
                                                                    @"|  |");
 
@@ -1088,7 +1092,7 @@ namespace ModelLayer.Model.Quotation
                                                                    "Concrete",
                                                                    @"");
 
-                                            total_screws_installation += 4;
+                                            total_screws_installation += (4 * pnl_curCtrl.Panel_MotorizedMechSetQty * 2);
 
                                             Material_List.Rows.Add("Supporting Frame " + pnl_curCtrl.Panel_SupportingFrameArtNo.ToString(),
                                                                    pnl_curCtrl.Panel_MotorizedMechSetQty, "pc(s)",
@@ -2009,7 +2013,7 @@ namespace ModelLayer.Model.Quotation
                                                    "Concrete",
                                                    @"");
 
-                            total_screws_installation += 4;
+                            total_screws_installation += (4 * pnl.Panel_MotorizedMechSetQty * 2;
 
                             Material_List.Rows.Add("Supporting Frame " + pnl.Panel_SupportingFrameArtNo.ToString(),
                                                    pnl.Panel_MotorizedMechSetQty, "pc(s)",
