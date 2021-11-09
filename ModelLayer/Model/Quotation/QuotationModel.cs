@@ -982,7 +982,7 @@ namespace ModelLayer.Model.Quotation
                                                                    "Concrete",
                                                                    @"");
 
-                                            total_screws_installation += 4;
+                                            total_screws_installation += (4 * pnl_curCtrl.Panel_MotorizedMechSetQty * 2);
 
                                             Material_List.Rows.Add("Supporting Frame " + pnl_curCtrl.Panel_SupportingFrameArtNo.ToString(),
                                                                    pnl_curCtrl.Panel_MotorizedMechSetQty, "pc(s)",
@@ -1781,7 +1781,7 @@ namespace ModelLayer.Model.Quotation
                             int motor_screws = pnl.Add_MotorizedMech_screws4Inst();
                             total_screws_installation += motor_screws;
 
-                            total_screws_installation += 4; //False pole screws
+                            total_screws_installation += (4 * pnl.Panel_MotorizedMechSetQty * 2);
                         }
                         else if (pnl.Panel_MotorizedOptionVisibility == false)
                         {
