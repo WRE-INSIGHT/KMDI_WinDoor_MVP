@@ -107,7 +107,9 @@ namespace PresentationLayer.Presenter.UserControls
             int ctrl_Y = 35;
             Pen redP = new Pen(Color.Red);
             redP.Width = 3.5f;
-            Font dmnsion_font = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+            Font dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+
+            Font dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
 
             int total_panel = 0, total_mpanel = 0;
             foreach (IFrameModel frame in _windoorModel.lst_frame)
@@ -184,15 +186,24 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     string dmnsion_w = wd.ToString();
 
-                    string DispWd_str = wd.ToString();
-                    float DispWd_float = float.Parse(DispWd_str);
+                    if (dmnsion_w.Contains(".0"))
+                    {
+                        dmnsion_w = dmnsion_w.Replace(".0", "");
+                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                    }
+                    else
+                    {
+                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                    }
+
+                    float DispWd_float = float.Parse(dmnsion_w);
 
                     PointF dmnsion_w_startP = new PointF(_flpMain.Location.X + (locX * _windoorModel.WD_zoom),
                                                          (ctrl_Y - 17));// * _windoorModel.WD_zoom);
                     PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + DispWd_float) * _windoorModel.WD_zoom),
                                                        (ctrl_Y - 17)); // * _windoorModel.WD_zoom);
 
-                    Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
+                    Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
                     double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
 
                     //arrow for WIDTH
@@ -217,7 +228,7 @@ namespace PresentationLayer.Presenter.UserControls
                         g.DrawLines(redP, arrwhd_pnts_W2);
                         TextRenderer.DrawText(g,
                                               dmnsion_w,
-                                              dmnsion_font,
+                                              dmnsion_font_wd,
                                               new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
                                                             new Size(s.Width, s.Height)),
                                               Color.Black,
@@ -228,15 +239,28 @@ namespace PresentationLayer.Presenter.UserControls
                     locX += DispWd_float;
                 }
 
-                int locY = 0;
-                foreach (int ht in hts)
+                float locY = 0;
+                foreach (decimal ht in hts)
                 {
                     //arrow for HEIGHT
                     string dmnsion_h = ht.ToString();
-                    PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.WD_zoom));
-                    PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + ht) * _windoorModel.WD_zoom));
+                    float DispHt_float = float.Parse(dmnsion_h);
 
-                    Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
+                    PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.WD_zoom));
+                    PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.WD_zoom));
+
+                    if (dmnsion_h.Contains(".0"))
+                    {
+                        dmnsion_h = dmnsion_h.Replace(".0", "");
+                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                    }
+                    else
+                    {
+                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                    }
+
+                    Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);
+
                     double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
 
                     PointF[] arrwhd_pnts_H1 =
@@ -260,7 +284,7 @@ namespace PresentationLayer.Presenter.UserControls
                         g.DrawLines(redP, arrwhd_pnts_H2);
                         TextRenderer.DrawText(g,
                                               dmnsion_h,
-                                              dmnsion_font,
+                                              dmnsion_font_ht,
                                               new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
                                                             new Size(s2.Width, s2.Height)),
                                               Color.Black,
@@ -268,7 +292,7 @@ namespace PresentationLayer.Presenter.UserControls
                                               TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                     }
                     //arrow for HEIGHT
-                    locY += ht;
+                    locY += DispHt_float;
                 }
             }
             else if (total_panel == 1 && total_mpanel == 0)
@@ -277,7 +301,7 @@ namespace PresentationLayer.Presenter.UserControls
                 Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
                 Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
 
-                Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
+                Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
                 double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
 
                 //arrow for WIDTH
@@ -302,7 +326,7 @@ namespace PresentationLayer.Presenter.UserControls
                     g.DrawLines(redP, arrwhd_pnts_W2);
                     TextRenderer.DrawText(g,
                                           dmnsion_w,
-                                          dmnsion_font,
+                                          dmnsion_font_wd,
                                           new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
                                                         new Size(s.Width, s.Height)),
                                           Color.Black,
@@ -317,7 +341,7 @@ namespace PresentationLayer.Presenter.UserControls
                 Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
                 Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
 
-                Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
+                Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);
                 double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
 
                 Point[] arrwhd_pnts_H1 =
@@ -341,7 +365,7 @@ namespace PresentationLayer.Presenter.UserControls
                     g.DrawLines(redP, arrwhd_pnts_H2);
                     TextRenderer.DrawText(g,
                                           dmnsion_h,
-                                          dmnsion_font,
+                                          dmnsion_font_ht,
                                           new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
                                                         new Size(s2.Width, s2.Height)),
                                           Color.Black,
