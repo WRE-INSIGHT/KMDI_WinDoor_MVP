@@ -1148,7 +1148,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 add_screws_fab_fs_or_rs += 4;
                                             }
-                                            else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD)
+                                            else if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
                                             {
                                                 add_screws_fab_fs_or_rs += 5;
                                             }
@@ -1185,7 +1185,7 @@ namespace ModelLayer.Model.Quotation
                                                     {
                                                         add_screws_fab_fs_or_rs += 4;
                                                     }
-                                                    else if (pnl_curCtrl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD)
+                                                    else if (pnl_curCtrl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
                                                     {
                                                         add_screws_fab_fs_or_rs += 5;
                                                     }
