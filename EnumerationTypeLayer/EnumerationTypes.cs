@@ -242,7 +242,7 @@ namespace EnumerationTypeLayer
         public class ProfileKnobCylinder_ArtNo : Enumeration<ProfileKnobCylinder_ArtNo, int>
         {
             public static readonly ProfileKnobCylinder_ArtNo _45x45 = new ProfileKnobCylinder_ArtNo(0, "45x45");
-            public static readonly ProfileKnobCylinder_ArtNo _50p5x50p5 = new ProfileKnobCylinder_ArtNo(0, "50.5x50.5");
+            //public static readonly ProfileKnobCylinder_ArtNo _50p5x50p5 = new ProfileKnobCylinder_ArtNo(0, "50.5x50.5");
 
             private ProfileKnobCylinder_ArtNo(int value, string displayName) : base(value, displayName) { }
         }

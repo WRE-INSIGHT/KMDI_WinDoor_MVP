@@ -2799,7 +2799,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
-                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
 
                     if (inside_color == Foil_Color._None)
                     {
@@ -4199,7 +4199,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
-                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
 
                     if (inside_color == Foil_Color._None)
                     {

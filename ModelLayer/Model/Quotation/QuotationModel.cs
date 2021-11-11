@@ -964,17 +964,24 @@ namespace ModelLayer.Model.Quotation
                                                            "Sash",
                                                            @"\  /");
 
+                                    string cut_str = @"|  |";
+
+                                    if (pnl_curCtrl.Panel_SashReinfArtNo == SashReinf_ArticleNo._655)
+                                    {
+                                        cut_str = @"\  /";
+                                    }
+
                                     Material_List.Rows.Add("Sash Reinf Width " + pnl_curCtrl.Panel_SashReinfArtNo.ToString(),
                                                            2, "pc(s)",
                                                            pnl_curCtrl.Panel_SashReinfWidth.ToString(),
                                                            "Sash",
-                                                           @"|  |");
+                                                           cut_str);
 
                                     Material_List.Rows.Add("Sash Reinf Height " + pnl_curCtrl.Panel_SashReinfArtNo.ToString(),
                                                            2, "pc(s)",
                                                            pnl_curCtrl.Panel_SashReinfHeight.ToString(),
                                                            "Sash",
-                                                           @"|  |");
+                                                           cut_str);
 
                                     if (pnl_curCtrl.Panel_Type.Contains("Fixed") == false)
                                     {
@@ -1782,13 +1789,13 @@ namespace ModelLayer.Model.Quotation
                                                        2, "pc(s)",
                                                        pnl_curCtrl.Panel_GlazingBeadWidth.ToString(),
                                                        where,
-                                                       @"\  /");
+                                                       @"|  |");
 
                                 Material_List.Rows.Add("Glazing Bead (P" + pnl_curCtrl.PanelGlass_ID + ") Height " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
                                                        pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
                                                        where,
-                                                       @"\  /");
+                                                       @"|  |");
 
                                 if ((pnl_curCtrl.Panel_Type.Contains("Awning") || pnl_curCtrl.Panel_Type.Contains("Casement")) &&
                                     pnl_curCtrl.Panel_GlassThickness == 6.0f && 
@@ -1827,13 +1834,13 @@ namespace ModelLayer.Model.Quotation
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassWidth.ToString(),
                                                        where,
-                                                       @"\  /");
+                                                       "");
 
                                 Material_List.Rows.Add("Glass (P" + pnl_curCtrl.PanelGlass_ID + ") Height - " + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm,
                                                        1, "pc(s)",
                                                        pnl_curCtrl.Panel_GlassHeight.ToString(),
                                                        where,
-                                                       @"\  /");
+                                                       "");
 
                                 if (pnl_curCtrl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
                                 {
@@ -2697,13 +2704,13 @@ namespace ModelLayer.Model.Quotation
                                            2, "pc(s)",
                                            pnl.Panel_GlazingBeadWidth.ToString(),
                                            where,
-                                           @"\  /");
+                                           @"|  |");
 
                     Material_List.Rows.Add("Glazing Bead (P" + pnl.PanelGlass_ID + ") Height " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",
                                            pnl.Panel_GlazingBeadHeight.ToString(),
                                            where,
-                                           @"\  /");
+                                           @"|  |");
 
                     if ((pnl.Panel_Type.Contains("Awning") || pnl.Panel_Type.Contains("Casement")) &&
                         pnl.Panel_GlassThickness == 6.0f &&
@@ -2741,13 +2748,13 @@ namespace ModelLayer.Model.Quotation
                                            1, "pc(s)",
                                            pnl.Panel_GlassWidth.ToString(),
                                            where,
-                                           @"\  /");
+                                           "");
 
                     Material_List.Rows.Add("Glass (P" + pnl.PanelGlass_ID + ") Height - " + pnl.Panel_GlassThicknessDesc + " " + glassFilm,
                                            1, "pc(s)",
                                            pnl.Panel_GlassHeight.ToString(),
                                            where,
-                                           @"\  /");
+                                           "");
 
                     if (pnl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
                     {
