@@ -212,7 +212,7 @@ namespace PresentationLayer.Presenter.UserControls
                             new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
                             dmnsion_w_startP,
                             new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
-                        };
+                    };
 
                     PointF[] arrwhd_pnts_W2 =
                     {

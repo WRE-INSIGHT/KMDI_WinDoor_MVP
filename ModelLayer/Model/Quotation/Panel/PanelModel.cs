@@ -140,6 +140,19 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private int _panelDisplayWidth_orig_decimal;
+        public int Panel_OriginalDisplayWidthDecimal
+        {
+            get
+            {
+                return _panelDisplayWidth_orig_decimal;
+            }
+            set
+            {
+                _panelDisplayWidth_orig_decimal = value;
+            }
+        }
+
         [Description("Virtual Height that represents the definite given value and used by the program only. (not intended for user to use)")]
         private int _panelHeight;
         public int Panel_Height
@@ -203,7 +216,6 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-
         private int _panelDisplayHeight_orig;
         public int Panel_OriginalDisplayHeight
         {
@@ -215,6 +227,19 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelDisplayHeight_orig = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelDisplayHeight_orig_decimal;
+        public int Panel_OriginalDisplayHeightDecimal
+        {
+            get
+            {
+                return _panelDisplayHeight_orig_decimal;
+            }
+            set
+            {
+                _panelDisplayHeight_orig_decimal = value;
             }
         }
 
@@ -734,9 +759,11 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_GlazingBeadWidth { get; set; }
         public int Panel_GlazingBeadHeight { get; set; }
         public int Panel_OriginalGlassWidth { get; set; }
+        public int Panel_OriginalGlassWidthDecimal { get; set; }
         public int Panel_GlassWidth { get; set; }
         public int Panel_GlassHeight { get; set; }
         public int Panel_OriginalGlassHeight { get; set; }
+        public int Panel_OriginalGlassHeightDecimal { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
 
         private int _panelGlassPropertyHt;

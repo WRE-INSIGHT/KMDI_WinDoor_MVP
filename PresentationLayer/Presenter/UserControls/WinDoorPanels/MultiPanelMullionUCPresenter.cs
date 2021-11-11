@@ -475,8 +475,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 int suggest_Wd = 0,
                     suggest_HT = _multiPanelModel.MPanel_Height - 20,
-                    suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight;
-                decimal DisplayWD_dec = (decimal)_multiPanelModel.MPanel_DisplayWidth / totalPanelCount;
+                    suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight,
+                    suggest_DisplayHTDecimal = _multiPanelModel.MPanel_DisplayHeightDecimal;
+
+                string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
+                decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
 
                 int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
                 int DisplayWD_singleDecimalPlace = 0;
@@ -607,6 +610,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 _panelModel.Panel_DisplayWidthDecimal = DisplayWD_singleDecimalPlace;
 
+                _panelModel.Panel_DisplayHeightDecimal = suggest_DisplayHTDecimal;
+
                 if (_prev_divModel != null)
                 {
                     _panelModel.Panel_CornerDriveOptionsVisibility = _prev_divModel.Div_ChkDM;
@@ -714,7 +719,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.Fit_MyControls_Dimensions();
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                    _multiPanelModel.Adjust_ControlDisplaySize();
+                    //_multiPanelModel.Adjust_ControlDisplaySize();
                     _mainPresenter.Fit_MyControls_byControlsLocation();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                 }

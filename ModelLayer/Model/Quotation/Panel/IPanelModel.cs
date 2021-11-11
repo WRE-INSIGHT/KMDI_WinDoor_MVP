@@ -23,6 +23,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_DisplayHeight { get; set; }
         int Panel_DisplayHeightDecimal { get; set; }
         int Panel_OriginalDisplayHeight { get; set; }
+        int Panel_OriginalDisplayHeightDecimal { get; set; }
         int Panel_ID { get; set; }
         string Panel_Name { get; set; }
         bool Panel_Orient { get; set; }
@@ -34,6 +35,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_DisplayWidth { get; set; }
         int Panel_DisplayWidthDecimal { get; set; }
         int Panel_OriginalDisplayWidth { get; set; }
+        int Panel_OriginalDisplayWidthDecimal { get; set; }
         bool Panel_Visibility { get; set; }
         float PanelImageRenderer_Zoom { get; set; }
         int Panel_Index_Inside_MPanel { get; set; }
@@ -66,8 +68,10 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_GlazingBeadHeight { get; set; }
         int Panel_GlassWidth { get; set; }
         int Panel_OriginalGlassWidth { get; set; }
+        int Panel_OriginalGlassWidthDecimal { get; set; }
         int Panel_GlassHeight { get; set; }
         int Panel_OriginalGlassHeight { get; set; }
+        int Panel_OriginalGlassHeightDecimal { get; set; }
         int Panel_GlassPropertyHeight { get; set; }
         int Panel_GlazingSpacerQty { get; set; }
         GlassFilm_Types Panel_GlassFilm { get; set; }

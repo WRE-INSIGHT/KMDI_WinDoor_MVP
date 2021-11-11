@@ -39,7 +39,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanel_WidthToBind { get; set; }
         int MPanel_AddPixel { get; }
         int MPanel_DisplayWidth { get; set; }
+        int MPanel_DisplayWidthDecimal { get; set; }
         int MPanel_DisplayHeight { get; set; }
+        int MPanel_DisplayHeightDecimal { get; set; }
         int MPanel_StackNo { get; set; }
 
         int GetNextIndex();
