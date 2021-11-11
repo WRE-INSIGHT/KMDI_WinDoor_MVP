@@ -122,7 +122,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly SashProfile_ArticleNo _None = new SashProfile_ArticleNo(0, "None");
             public static readonly SashProfile_ArticleNo _7581 = new SashProfile_ArticleNo(1, "7581");
-            public static readonly SashProfile_ArticleNo _373 = new SashProfile_ArticleNo(2, "373");
+            public static readonly SashProfile_ArticleNo _373 = new SashProfile_ArticleNo(2, "373"); //inward
             public static readonly SashProfile_ArticleNo _374 = new SashProfile_ArticleNo(3, "374");
             public static readonly SashProfile_ArticleNo _395 = new SashProfile_ArticleNo(4, "395"); //inward
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
