@@ -264,7 +264,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         suggest_HT = (((_multiPanelModel.MPanel_Height) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
 
                     int mpanelDisplayWidth = _multiPanelModel.MPanel_DisplayWidth,
+                        mpanelDisplayWidthDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal,
                         mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight / (_multiPanelModel.MPanel_Divisions + 1);
+
+                    string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
+                    decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
+
+                    int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
+                    int DisplayHT_singleDecimalPlace = 0;
+
+                    string[] DisplayHT_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                    if (DisplayHT_dec_split.Count() > 1)
+                    {
+                        DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
+                    }
 
                     FlowDirection flow = FlowDirection.LeftToRight;
                     if (data.Contains("Transom"))
@@ -277,7 +291,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     IMultiPanelModel mPanelModel = _multipanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           mpanelDisplayWidth,
+                                                                                          mpanelDisplayWidthDecimal,
                                                                                           mpanelDisplayHeight,
+                                                                                          DisplayHT_singleDecimalPlace,
                                                                                           fpnl,
                                                                                           (UserControl)_frameUCP.GetFrameUC(),
                                                                                           _frameModel,
@@ -484,7 +500,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int suggest_Wd = _multiPanelModel.MPanel_Width - 20,
                     suggest_HT = 0,
                     suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth,
-                    suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight / totalPanelCount;
+                    suggest_DisplayWDDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal;
+
+                string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
+                decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
+
+                int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
+                int DisplayHT_singleDecimalPlace = 0;
+
+                string[] DisplayWD_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                if (DisplayWD_dec_split.Count() > 1)
+                {
+                    DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
+                }
 
                 if (_multiPanelModel.MPanel_DividerEnabled)
                 {
@@ -563,7 +592,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                _frameModel,
                                                                _multiPanelModel,
                                                                suggest_DisplayWD,
+                                                               suggest_DisplayWDDecimal,
                                                                suggest_DisplayHT,
+                                                               DisplayHT_singleDecimalPlace,
                                                                GlazingBead_ArticleNo._2452,
                                                                GlassFilm_Types._None,
                                                                SashProfile_ArticleNo._7581,

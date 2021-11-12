@@ -65,11 +65,15 @@ namespace ModelLayer.Model.Quotation.Panel
         GBSpacer_ArticleNo Panel_GBSpacerArtNo { get; set; }
         bool Panel_ChkGlazingAdaptor { get; set; }
         int Panel_GlazingBeadWidth { get; set; }
+        int Panel_GlazingBeadWidthDecimal { get; set; }
         int Panel_GlazingBeadHeight { get; set; }
+        int Panel_GlazingBeadHeightDecimal { get; set; }
         int Panel_GlassWidth { get; set; }
+        int Panel_GlassWidthDecimal { get; set; }
         int Panel_OriginalGlassWidth { get; set; }
         int Panel_OriginalGlassWidthDecimal { get; set; }
         int Panel_GlassHeight { get; set; }
+        int Panel_GlassHeightDecimal { get; set; }
         int Panel_OriginalGlassHeight { get; set; }
         int Panel_OriginalGlassHeightDecimal { get; set; }
         int Panel_GlassPropertyHeight { get; set; }
@@ -79,11 +83,17 @@ namespace ModelLayer.Model.Quotation.Panel
         SashProfile_ArticleNo Panel_SashProfileArtNo { get; set; }
         SashReinf_ArticleNo Panel_SashReinfArtNo { get; set; }
         int Panel_SashWidth { get; set; }
+        int Panel_SashWidthDecimal { get; set; }
         int Panel_SashHeight { get; set; }
+        int Panel_SashHeightDecimal { get; set; }
         int Panel_OriginalSashWidth { get; set; }
+        int Panel_OriginalSashWidthDecimal { get; set; }
         int Panel_OriginalSashHeight { get; set; }
+        int Panel_OriginalSashHeightDecimal { get; set; }
         int Panel_SashReinfWidth { get; set; }
+        int Panel_SashReinfWidthDecimal { get; set; }
         int Panel_SashReinfHeight { get; set; }
+        int Panel_SashReinfHeightDecimal { get; set; }
 
         CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }

@@ -61,9 +61,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         #region Explosion
 
         int MPanel_OriginalDisplayWidth { get; set; }
+        int MPanel_OriginalDisplayWidthDecimal { get; set; }
         int MPanel_OriginalDisplayHeight { get; set; }
+        int MPanel_OriginalDisplayHeightDecimal { get; set; }
         int MPanel_OriginalGlassWidth { get; set; }
+        int MPanel_OriginalGlassWidthDecimal { get; set; }
         int MPanel_OriginalGlassHeight { get; set; }
+        int MPanel_OriginalGlassHeightDecimal { get; set; }
         bool MPanel_CmenuDeleteVisibility { get; set; }
         bool MPanel_GlassBalanced { get; set; }
 

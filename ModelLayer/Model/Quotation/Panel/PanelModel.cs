@@ -5,6 +5,7 @@ using ModelLayer.Variables;
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -757,11 +758,15 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
         public int Panel_GlazingBeadWidth { get; set; }
+        public int Panel_GlazingBeadWidthDecimal { get; set; }
         public int Panel_GlazingBeadHeight { get; set; }
+        public int Panel_GlazingBeadHeightDecimal { get; set; }
         public int Panel_OriginalGlassWidth { get; set; }
         public int Panel_OriginalGlassWidthDecimal { get; set; }
         public int Panel_GlassWidth { get; set; }
+        public int Panel_GlassWidthDecimal { get; set; }
         public int Panel_GlassHeight { get; set; }
+        public int Panel_GlassHeightDecimal { get; set; }
         public int Panel_OriginalGlassHeight { get; set; }
         public int Panel_OriginalGlassHeightDecimal { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
@@ -837,13 +842,20 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         public int Panel_SashWidth { get; set; }
+        public int Panel_SashWidthDecimal { get; set; }
 
         public int Panel_SashHeight { get; set; }
+        public int Panel_SashHeightDecimal { get; set; }
+
         public int Panel_OriginalSashWidth { get; set; }
+        public int Panel_OriginalSashWidthDecimal { get; set; }
         public int Panel_OriginalSashHeight { get; set; }
+        public int Panel_OriginalSashHeightDecimal { get; set; }
 
         public int Panel_SashReinfWidth { get; set; }
+        public int Panel_SashReinfWidthDecimal { get; set; }
         public int Panel_SashReinfHeight { get; set; }
+        public int Panel_SashReinfHeightDecimal { get; set; }
 
         private bool _panelSashPropertyVisibility;
         public bool Panel_SashPropertyVisibility
@@ -2124,7 +2136,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_SashWidth = Panel_DisplayWidth - inward_motorized_deduction -(sash_deduct * 2) + 5;
                     Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 5;
                     
-
                     Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
                     Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
                 }
@@ -3500,22 +3511,34 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
 
                 Panel_SashWidth = (((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) - inward_motorized_deduction) + 5;
+                Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
                 Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
+                Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
-                Panel_OriginalSashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
-                Panel_OriginalSashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
+                Panel_OriginalSashWidth = Panel_SashWidth;
+                Panel_OriginalSashWidthDecimal = Panel_SashWidthDecimal;
+                Panel_OriginalSashHeight = Panel_SashHeight;
+                Panel_OriginalSashHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_SashReinfWidth = Panel_SashWidth - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfWidthDecimal = Panel_SashWidthDecimal;
                 Panel_SashReinfHeight = Panel_SashHeight - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_GlazingBeadWidth = Panel_SashWidth;
+                Panel_GlazingBeadWidthDecimal = Panel_SashWidthDecimal;
                 Panel_GlazingBeadHeight = Panel_SashHeight;
+                Panel_GlazingBeadHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
+                Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                 Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
+                Panel_GlassHeight = Panel_SashHeightDecimal;
 
                 Panel_OriginalGlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
+                Panel_OriginalGlassWidthDecimal = Panel_SashWidthDecimal;
                 Panel_OriginalGlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
+                Panel_OriginalGlassHeight = Panel_SashHeightDecimal;
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
@@ -4344,7 +4367,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           IMultiPanelModel panelMultiPanelParent,
                           GlazingBead_ArticleNo panelGlazingBeadArtNo,
                           int panelDisplayWidth,
+                          int panelDisplayWidthDecimal,
                           int panelDisplayHeight,
+                          int panelDisplayHeightDecimal,
                           int panelGlassID,
                           GlassFilm_Types panelGlassFilm,
                           SashProfile_ArticleNo panelSash,
@@ -4402,10 +4427,14 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_ParentMultiPanelModel = panelMultiPanelParent;
             PanelGlazingBead_ArtNo = panelGlazingBeadArtNo;
             Panel_DisplayWidth = panelDisplayWidth;
+            Panel_DisplayWidthDecimal = panelDisplayWidthDecimal;
             Panel_DisplayHeight = panelDisplayHeight;
+            Panel_DisplayHeightDecimal = panelDisplayHeightDecimal;
             PanelGlass_ID = panelGlassID;
             Panel_OriginalDisplayWidth = panelDisplayWidth;
+            Panel_OriginalDisplayWidthDecimal = panelDisplayWidthDecimal;
             Panel_OriginalDisplayHeight = panelDisplayHeight;
+            Panel_OriginalDisplayHeightDecimal = panelDisplayHeightDecimal;
             Panel_GlassFilm = panelGlassFilm;
             Panel_SashProfileArtNo = panelSash;
             Panel_SashReinfArtNo = panelSashReinf;
