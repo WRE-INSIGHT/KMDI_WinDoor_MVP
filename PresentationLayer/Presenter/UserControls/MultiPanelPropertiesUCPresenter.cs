@@ -163,7 +163,6 @@ namespace PresentationLayer.Presenter.UserControls
 
                                 mpnl.Fit_MyControls_Dimensions();
                                 mpnl.Fit_MyControls_ToBindDimensions();
-                                mpnl.Adjust_ControlDisplaySize();
                             }
 
                             _multiPanelModel.MPanel_GlassBalanced = false;
@@ -173,7 +172,6 @@ namespace PresentationLayer.Presenter.UserControls
 
                         _multiPanelModel.Fit_MyControls_Dimensions();
                         _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                        _multiPanelModel.Adjust_ControlDisplaySize();
 
                         _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                         _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();

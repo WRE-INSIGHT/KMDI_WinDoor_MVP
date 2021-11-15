@@ -194,6 +194,10 @@ namespace PresentationLayer.Presenter.UserControls
                     else
                     {
                         dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                        if (_windoorModel.WD_zoom == 0.26f)
+                        {
+                            dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                        }
                     }
 
                     float DispWd_float = float.Parse(dmnsion_w);
@@ -257,6 +261,10 @@ namespace PresentationLayer.Presenter.UserControls
                     else
                     {
                         dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                        if (_windoorModel.WD_zoom == 0.26f)
+                        {
+                            dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                        }
                     }
 
                     Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);

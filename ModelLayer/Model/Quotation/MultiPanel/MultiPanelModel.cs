@@ -1327,6 +1327,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         decimal disp_wd_dec = Convert.ToDecimal(MPanel_DisplayWidth + "." + MPanel_DisplayWidthDecimal);
 
                         Equal_GlassSize = (((disp_wd_dec - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = Math.Round(Equal_GlassSize, 1, MidpointRounding.AwayFromZero);
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1384,6 +1385,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
                         decimal disp_ht_dec = Convert.ToDecimal(MPanel_DisplayHeight + "." + MPanel_DisplayHeightDecimal);
                         Equal_GlassSize = (((disp_ht_dec - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = Math.Round(Equal_GlassSize, 1, MidpointRounding.AwayFromZero);
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1437,12 +1439,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 if (div.Div_ArtNo == Divider_ArticleNo._7536)
                                 {
                                     div_deduction += 42;
-                                    TM_sashBite_deduction += 14;
+                                    if (sash == SashProfile_ArticleNo._7581)
+                                    {
+                                        TM_sashBite_deduction += 14;
+                                    }
+                                    else if (sash == SashProfile_ArticleNo._374 ||
+                                             sash == SashProfile_ArticleNo._395 ||
+                                             sash == SashProfile_ArticleNo._373)
+                                    {
+                                        TM_sashBite_deduction += 16;
+                                    }
                                 }
                                 else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                                 {
                                     div_deduction += 72;
-                                    TM_sashBite_deduction += 16;
+                                    if (sash == SashProfile_ArticleNo._7581)
+                                    {
+                                        TM_sashBite_deduction += 14;
+                                    }
+                                    else if (sash == SashProfile_ArticleNo._374 ||
+                                             sash == SashProfile_ArticleNo._395 ||
+                                             sash == SashProfile_ArticleNo._373)
+                                    {
+                                        TM_sashBite_deduction += 16;
+                                    }
                                 }
                             }
                             else if (div.Div_ChkDM == true)
@@ -1459,14 +1479,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
 
                         decimal disp_wd_dec = Convert.ToDecimal(MPanel_DisplayWidth + "." + MPanel_DisplayWidthDecimal);
-                        Equal_GlassSize = (((disp_wd_dec - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = (((disp_wd_dec - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - TM_sashBite_deduction))) / totalPanels) + 5;
+                        Equal_GlassSize = Math.Round(Equal_GlassSize, 1, MidpointRounding.AwayFromZero);
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
                             decimal orig_disp_wd_dec = Convert.ToDecimal(pnl.Panel_OriginalDisplayWidth + "." + pnl.Panel_OriginalDisplayWidthDecimal);
-                            decimal orig_glass_wd_dec = Convert.ToDecimal(pnl.Panel_OriginalGlassWidth + "." + pnl.Panel_OriginalGlassWidthDecimal);
+                            decimal orig_sash_wd_dec = Convert.ToDecimal(pnl.Panel_OriginalSashWidth + "." + pnl.Panel_OriginalSashWidthDecimal);
 
-                            decimal panel_disp_wd_dec = orig_disp_wd_dec + (Equal_GlassSize - orig_glass_wd_dec);
+                            decimal panel_disp_wd_dec = orig_disp_wd_dec + (Equal_GlassSize - orig_sash_wd_dec);
 
                             int panel_disp_wd = (int)Math.Truncate(panel_disp_wd_dec);
                             pnl.Panel_DisplayWidth = panel_disp_wd;
@@ -1517,6 +1538,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
                         decimal disp_ht_dec = Convert.ToDecimal(MPanel_DisplayHeight + "." + MPanel_DisplayHeightDecimal);
                         Equal_GlassSize = (((disp_ht_dec - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = Math.Round(Equal_GlassSize, 1, MidpointRounding.AwayFromZero);
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {

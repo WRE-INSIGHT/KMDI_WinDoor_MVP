@@ -2100,10 +2100,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
                 {
                     Panel_SashWidth = Panel_DisplayWidth - (26 * 2) + 5;
+                    Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
                     Panel_SashHeight = Panel_DisplayHeight - (26 * 2) + 5;
+                    Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
                     Panel_GlassWidth = Panel_SashWidth - 5 - (55 * 2) - 6;
+                    Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                     Panel_GlassHeight = Panel_SashHeight - 5 - (55 * 2) - 6;
+                    Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
                 }
                 else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
                 {
@@ -2134,10 +2138,14 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
 
                     Panel_SashWidth = Panel_DisplayWidth - inward_motorized_deduction -(sash_deduct * 2) + 5;
+                    Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
                     Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 5;
-                    
+                    Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
+
                     Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
+                    Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                     Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
+                    Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
                 }
 
                 int handle_deduct = 0;
@@ -2152,10 +2160,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
 
                 Panel_SashReinfWidth = Panel_SashWidth - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfWidthDecimal = Panel_SashWidthDecimal;
                 Panel_SashReinfHeight = Panel_SashHeight - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_GlazingBeadWidth = Panel_SashWidth;
+                Panel_GlazingBeadWidthDecimal = Panel_SashWidthDecimal;
                 Panel_GlazingBeadHeight = Panel_SashHeight;
+                Panel_GlazingBeadHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
@@ -2921,10 +2933,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_SashReinfHeight = 0;
 
                 Panel_GlazingBeadWidth = Panel_DisplayWidth; //- (33 * 2);
+                Panel_GlazingBeadWidthDecimal = Panel_DisplayWidthDecimal; //- (33 * 2);
                 Panel_GlazingBeadHeight = Panel_DisplayHeight; //- (33 * 2);
+                Panel_GlazingBeadHeightDecimal = Panel_DisplayHeightDecimal; //- (33 * 2);
 
                 Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
+                Panel_GlassWidthDecimal = Panel_DisplayWidthDecimal;
                 Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
+                Panel_GlassHeightDecimal = Panel_DisplayHeightDecimal;
             }
 
             Panel_GlazingSpacerQty = 1;
@@ -3530,15 +3546,15 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_GlazingBeadHeight = Panel_SashHeight;
                 Panel_GlazingBeadHeightDecimal = Panel_SashHeightDecimal;
 
-                Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
+                Panel_GlassWidth = ((Panel_SashWidth - 5) - (glass_deduct * 2)) - 6;
                 Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                 Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
-                Panel_GlassHeight = Panel_SashHeightDecimal;
+                Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
 
-                Panel_OriginalGlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
-                Panel_OriginalGlassWidthDecimal = Panel_SashWidthDecimal;
-                Panel_OriginalGlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
-                Panel_OriginalGlassHeight = Panel_SashHeightDecimal;
+                Panel_OriginalGlassWidth = Panel_GlassWidth;
+                Panel_OriginalGlassWidthDecimal = Panel_GlassWidthDecimal;
+                Panel_OriginalGlassHeight = Panel_GlassHeight;
+                Panel_OriginalGlassHeightDecimal = Panel_GlassHeightDecimal;
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
