@@ -1027,6 +1027,18 @@ namespace ModelLayer.Model.Quotation.Divider
                                    "Frame");
         }
 
+        public void Insert_AlumSpacer_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
+                                   2, "pc(s)",
+                                   "",
+                                   "Dummy Mullion");
+            tbl_explosion.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
+                                   Div_AlumSpacer50Qty, "pc(s)",
+                                   "",
+                                   "Dummy Mullion");
+        }
+
 
 
         public int Add_ExplosionLength_screws4fab()
@@ -1137,6 +1149,18 @@ namespace ModelLayer.Model.Quotation.Divider
 
             return snap_screws;
         }
+
+        public int Add_AlumSpacer_screws4fab()
+        {
+            int alumSpacer_screws = 0;
+
+            alumSpacer_screws += (3 * 2); //3 * 2pcs (80mm)
+            alumSpacer_screws += (3 * Div_AlumSpacer50Qty); //3 (50mm)
+
+            return alumSpacer_screws;
+        }
+
+
 
         public int Add_CladdBracket4Concrete_expbolts()
         {

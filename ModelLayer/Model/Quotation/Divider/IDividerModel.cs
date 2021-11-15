@@ -80,6 +80,7 @@ namespace ModelLayer.Model.Quotation.Divider
         void Insert_DMStriker_MaterialList(DataTable tbl_explosion);
         void Insert_FixedCam_MaterialList(DataTable tbl_explosion);
         void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
+        void Insert_AlumSpacer_MaterialList(DataTable tbl_explosion);
 
 
         int Add_ExplosionLength_screws4fab();
@@ -90,6 +91,7 @@ namespace ModelLayer.Model.Quotation.Divider
         int Add_DMStriker_screws4fab();
         int Add_EndCapDM_screws4fab();
         int Add_SnapNKeep_screws4fab();
+        int Add_AlumSpacer_screws4fab();
 
         int Add_CladdBracket4Concrete_expbolts();
         int Add_CladdBracket4UPVC_expbolts();

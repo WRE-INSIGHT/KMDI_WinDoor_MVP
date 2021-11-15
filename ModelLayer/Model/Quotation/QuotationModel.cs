@@ -556,17 +556,10 @@ namespace ModelLayer.Model.Quotation
 
                                                 if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                                 {
-                                                    Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
-                                                                           2, "pc(s)",
-                                                                           "",
-                                                                           "Dummy Mullion");
-                                                    Material_List.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
-                                                                           div_nxtCtrl.Div_AlumSpacer50Qty, "pc(s)",
-                                                                           "",
-                                                                           "Dummy Mullion");
+                                                    div_nxtCtrl.Insert_AlumSpacer_MaterialList(Material_List);
 
-                                                    add_screws_fab_alum += (3 * 2); //3 * 2pcs (80mm)
-                                                    add_screws_fab_alum += (3 * div_nxtCtrl.Div_AlumSpacer50Qty); //3 (50mm)
+                                                    int alumSpacer_screws = div_nxtCtrl.Add_AlumSpacer_screws4fab();
+                                                    add_screws_fab_alum += alumSpacer_screws;
                                                 }
                                             }
 
