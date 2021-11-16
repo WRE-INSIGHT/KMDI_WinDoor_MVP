@@ -1660,7 +1660,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-        
+
         public StayBearingK_ArticleNo Panel_StayBearingKArtNo { get; set; }
         public StayBearingPin_ArticleNo Panel_StayBearingPinArtNo { get; set; }
         public StayBearingCover_ArticleNo Panel_StayBearingCoverArtNo { get; set; }
@@ -2015,7 +2015,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
                 }
 
-                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                     (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                      Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                      Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
@@ -2066,7 +2066,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                     Panel_SashWidth = Panel_DisplayWidth - (sash_deduct * 2) + 5;
                     Panel_SashHeight = Panel_DisplayHeight - inward_motorized_deduction - (sash_deduct * 2) + 5;
-                    
+
 
                     Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
                     Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
@@ -2522,7 +2522,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_StrikerQty_C += 1;
                     }
-                    
+
                     if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                     {
                         Panel_StrikerQty_A += 1;
@@ -2914,7 +2914,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
-                         Panel_SashProfileArtNo == SashProfile_ArticleNo._395 )
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forNxtPrev -= 8; //sash bite allowance
                 }
@@ -3376,7 +3376,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
                 }
 
-                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                     (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                      Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
@@ -3922,7 +3922,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_StrikerQty_C += 1;
                     }
-                    
+
                     if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                     {
                         Panel_StrikerQty_A += 1;
@@ -4475,7 +4475,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "Sash & Frame",
                                    @"");
         }
-        
+
         public void Insert_RestrictorStay_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("Restrictor Stay " + Panel_RestrictorStayArtNo.DisplayName,
@@ -4829,7 +4829,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Insert_GBSpacer_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("GB SPACER FOR 6mm GLASS " + Panel_GBSpacerArtNo.DisplayName,
-                                   8, "pc(s)",
+                                   4, "pc(s)",
                                    "",
                                    "Sash",
                                    "");
@@ -5198,6 +5198,19 @@ namespace ModelLayer.Model.Quotation.Panel
 
             return hinge_screws;
         }
+
+
+
+        public int Add_RestrictorStay_screws4fab()
+        {
+            int restrictorStay_screws = 0;
+
+            restrictorStay_screws += (6 * Panel_RestrictorStayQty);
+
+            return restrictorStay_screws;
+        }
+
+
 
 
         public int Add_MotorizedMech_screws4Inst()

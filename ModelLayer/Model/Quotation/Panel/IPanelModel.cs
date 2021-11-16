@@ -276,6 +276,10 @@ namespace ModelLayer.Model.Quotation.Panel
         int Add_FGAwning_screws4fab();
         int Add_Hinges_screws4fab();
 
+
+
+
+
         int Add_MotorizedMech_screws4Inst();
         #endregion
     }

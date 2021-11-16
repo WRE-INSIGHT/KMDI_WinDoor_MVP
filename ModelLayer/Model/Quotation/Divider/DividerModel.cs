@@ -511,7 +511,7 @@ namespace ModelLayer.Model.Quotation.Divider
                     #region Algo for dummy mullion striker
 
                     int indx = Div_MPanelParent.MPanelLst_Objects.FindIndex(div => div.Name == Div_Name);
-                    int prev_div_indx = 0, nxt_div_indx = 0, 
+                    int prev_div_indx = 0, nxt_div_indx = 0,
                         obj_count = Div_MPanelParent.GetCount_MPanelLst_Object();
                     bool allow_dmStriker = true;
 
@@ -1039,6 +1039,39 @@ namespace ModelLayer.Model.Quotation.Divider
                                    "Dummy Mullion");
         }
 
+        public void Insert_LeverEspag_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Lever Espagnolette " + Div_LeverEspagArtNo.DisplayName,
+                                    1, "pc(s)",
+                                    "",
+                                    "Dummy Mullion");
+        }
+
+
+
+        public void Insert_ShootboltStriker_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Shootbolt striker " + Div_ShootboltStrikerArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash");
+        }
+
+        public void Insert_ShootboltReverse_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Shootbolt, Reverse " + Div_ShootboltReverseArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash");
+        }
+
+        public void Insert_ShootboltNonReverse_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Shootbolt, non-reverse " + Div_ShootboltNonReverseArtNo.DisplayName,
+                                   3, "pc(s)",
+                                   "",
+                                   "Sash & DM");
+        }
 
 
         public int Add_ExplosionLength_screws4fab()
@@ -1150,6 +1183,7 @@ namespace ModelLayer.Model.Quotation.Divider
             return snap_screws;
         }
 
+
         public int Add_AlumSpacer_screws4fab()
         {
             int alumSpacer_screws = 0;
@@ -1160,7 +1194,25 @@ namespace ModelLayer.Model.Quotation.Divider
             return alumSpacer_screws;
         }
 
+        public int Add_LeverEspag_screws4fab()
+        {
+            int leverEspag_screws = 0;
 
+            if (Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153)
+            {
+                leverEspag_screws += 3; //Lever Espagnolette
+            }
+            else if (Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._476518)
+            {
+                leverEspag_screws += 3; //Lever Espagnolette
+            }
+            else
+            {
+                leverEspag_screws += 8; //Lever Espagnolette
+            }
+
+            return leverEspag_screws;
+        }
 
         public int Add_CladdBracket4Concrete_expbolts()
         {
@@ -1191,6 +1243,9 @@ namespace ModelLayer.Model.Quotation.Divider
 
             return cladUPVC_xpbolts;
         }
+
+
+
 
         #endregion
 
