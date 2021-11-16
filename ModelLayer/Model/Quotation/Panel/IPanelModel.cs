@@ -21,7 +21,9 @@ namespace ModelLayer.Model.Quotation.Panel
         int PanelImageRenderer_Height { get; set; }
         int Panel_HeightToBind { get; set; }
         int Panel_DisplayHeight { get; set; }
+        int Panel_DisplayHeightDecimal { get; set; }
         int Panel_OriginalDisplayHeight { get; set; }
+        int Panel_OriginalDisplayHeightDecimal { get; set; }
         int Panel_ID { get; set; }
         string Panel_Name { get; set; }
         bool Panel_Orient { get; set; }
@@ -31,7 +33,9 @@ namespace ModelLayer.Model.Quotation.Panel
         int PanelImageRenderer_Width { get; set; }
         int Panel_WidthToBind { get; set; }
         int Panel_DisplayWidth { get; set; }
+        int Panel_DisplayWidthDecimal { get; set; }
         int Panel_OriginalDisplayWidth { get; set; }
+        int Panel_OriginalDisplayWidthDecimal { get; set; }
         bool Panel_Visibility { get; set; }
         float PanelImageRenderer_Zoom { get; set; }
         int Panel_Index_Inside_MPanel { get; set; }
@@ -58,13 +62,20 @@ namespace ModelLayer.Model.Quotation.Panel
         float Panel_GlassThickness { get; set; }
         GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
         GlazingAdaptor_ArticleNo Panel_GlazingAdaptorArtNo { get; set; }
+        GBSpacer_ArticleNo Panel_GBSpacerArtNo { get; set; }
         bool Panel_ChkGlazingAdaptor { get; set; }
         int Panel_GlazingBeadWidth { get; set; }
+        int Panel_GlazingBeadWidthDecimal { get; set; }
         int Panel_GlazingBeadHeight { get; set; }
+        int Panel_GlazingBeadHeightDecimal { get; set; }
         int Panel_GlassWidth { get; set; }
+        int Panel_GlassWidthDecimal { get; set; }
         int Panel_OriginalGlassWidth { get; set; }
+        int Panel_OriginalGlassWidthDecimal { get; set; }
         int Panel_GlassHeight { get; set; }
+        int Panel_GlassHeightDecimal { get; set; }
         int Panel_OriginalGlassHeight { get; set; }
+        int Panel_OriginalGlassHeightDecimal { get; set; }
         int Panel_GlassPropertyHeight { get; set; }
         int Panel_GlazingSpacerQty { get; set; }
         GlassFilm_Types Panel_GlassFilm { get; set; }
@@ -72,11 +83,17 @@ namespace ModelLayer.Model.Quotation.Panel
         SashProfile_ArticleNo Panel_SashProfileArtNo { get; set; }
         SashReinf_ArticleNo Panel_SashReinfArtNo { get; set; }
         int Panel_SashWidth { get; set; }
+        int Panel_SashWidthDecimal { get; set; }
         int Panel_SashHeight { get; set; }
+        int Panel_SashHeightDecimal { get; set; }
         int Panel_OriginalSashWidth { get; set; }
+        int Panel_OriginalSashWidthDecimal { get; set; }
         int Panel_OriginalSashHeight { get; set; }
+        int Panel_OriginalSashHeightDecimal { get; set; }
         int Panel_SashReinfWidth { get; set; }
+        int Panel_SashReinfWidthDecimal { get; set; }
         int Panel_SashReinfHeight { get; set; }
+        int Panel_SashReinfHeightDecimal { get; set; }
 
         CoverProfile_ArticleNo Panel_CoverProfileArtNo { get; set; }
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
@@ -107,6 +124,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         Extension_ArticleNo Panel_ExtensionTopArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionTop2ArtNo { get; set; }
+        Extension_ArticleNo Panel_ExtensionTop3ArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionBotArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionBot2ArtNo { get; set; }
         Extension_ArticleNo Panel_ExtensionLeftArtNo { get; set; }
@@ -115,6 +133,7 @@ namespace ModelLayer.Model.Quotation.Panel
         Extension_ArticleNo Panel_ExtensionRight2ArtNo { get; set; }
 
         bool Panel_ExtTopChk { get; set; }
+        bool Panel_ExtTop2Chk { get; set; }
         bool Panel_ExtBotChk { get; set; }
         bool Panel_ExtLeftChk { get; set; }
 
@@ -125,6 +144,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_ExtRightQty { get; set; }
 
         int Panel_ExtTop2Qty { get; set; }
+        int Panel_ExtTop3Qty { get; set; }
         int Panel_ExtBot2Qty { get; set; }
         int Panel_ExtLeft2Qty { get; set; }
         int Panel_ExtRight2Qty { get; set; }

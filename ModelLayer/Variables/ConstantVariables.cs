@@ -15,7 +15,7 @@
         public int panel_property_sashPanelHeight = 81;
         public int panel_property_handleOptionsHeight = 48;
         public int panel_property_glassOptionsHeight = 153;
-        public int panel_property_rotoswingOptionsheight_default = 55;
+        public int panel_property_rotoswingOptionsheight_default = 28;
         public int panel_property_rotaryOptionsheight_default = 56;
         public int panel_property_motorizedOptionsheight = 114;
         public int panel_property_motorizedChkOptionsheight = 31;
@@ -31,7 +31,7 @@
         public int panel_property_2dHingeOptionsheight = 30;
         public int panel_property_CenterHingeOptionsheight = 30;
         public int panel_property_NTCenterHingeOptionsheight = 30;
-        public int panel_property_MiddleCloserOptionsheight = 30;
+        public int panel_property_MiddleCloserOptionsheight = 50;
         public int panel_property_espagnoletteOptionsheight_default = 28;
         public int panel_property_3dHingeOptionsheight = 30;
 

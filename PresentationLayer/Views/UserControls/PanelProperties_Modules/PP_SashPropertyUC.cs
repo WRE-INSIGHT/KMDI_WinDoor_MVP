@@ -51,7 +51,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 lbl_InOutOrient.Text = "Outward";
                 lbl_InOutOrient.ForeColor = Color.Black;
             }
-            else if (sel_sash == SashProfile_ArticleNo._395)
+            else if (sel_sash == SashProfile_ArticleNo._395 ||
+                     sel_sash == SashProfile_ArticleNo._373)
             {
                 lbl_InOutOrient.Text = "Inward";
                 lbl_InOutOrient.ForeColor = Color.CadetBlue;

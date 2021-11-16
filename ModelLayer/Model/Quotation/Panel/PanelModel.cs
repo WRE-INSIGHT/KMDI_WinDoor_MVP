@@ -5,6 +5,7 @@ using ModelLayer.Variables;
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -111,6 +112,21 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        private int _panelDisplayWidthDecimal;
+        public int Panel_DisplayWidthDecimal
+        {
+            get
+            {
+                return _panelDisplayWidthDecimal;
+            }
+            set
+            {
+                _panelDisplayWidthDecimal = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private int _panelDisplayWidth_orig;
         public int Panel_OriginalDisplayWidth
         {
@@ -122,6 +138,19 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelDisplayWidth_orig = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelDisplayWidth_orig_decimal;
+        public int Panel_OriginalDisplayWidthDecimal
+        {
+            get
+            {
+                return _panelDisplayWidth_orig_decimal;
+            }
+            set
+            {
+                _panelDisplayWidth_orig_decimal = value;
             }
         }
 
@@ -173,6 +202,21 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        private int _panelDisplayHeightDecimal;
+        public int Panel_DisplayHeightDecimal
+        {
+            get
+            {
+                return _panelDisplayHeightDecimal;
+            }
+            set
+            {
+                _panelDisplayHeightDecimal = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private int _panelDisplayHeight_orig;
         public int Panel_OriginalDisplayHeight
         {
@@ -184,6 +228,19 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelDisplayHeight_orig = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelDisplayHeight_orig_decimal;
+        public int Panel_OriginalDisplayHeightDecimal
+        {
+            get
+            {
+                return _panelDisplayHeight_orig_decimal;
+            }
+            set
+            {
+                _panelDisplayHeight_orig_decimal = value;
             }
         }
 
@@ -701,11 +758,17 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
         public int Panel_GlazingBeadWidth { get; set; }
+        public int Panel_GlazingBeadWidthDecimal { get; set; }
         public int Panel_GlazingBeadHeight { get; set; }
+        public int Panel_GlazingBeadHeightDecimal { get; set; }
         public int Panel_OriginalGlassWidth { get; set; }
+        public int Panel_OriginalGlassWidthDecimal { get; set; }
         public int Panel_GlassWidth { get; set; }
+        public int Panel_GlassWidthDecimal { get; set; }
         public int Panel_GlassHeight { get; set; }
+        public int Panel_GlassHeightDecimal { get; set; }
         public int Panel_OriginalGlassHeight { get; set; }
+        public int Panel_OriginalGlassHeightDecimal { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
 
         private int _panelGlassPropertyHt;
@@ -779,13 +842,20 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         public int Panel_SashWidth { get; set; }
+        public int Panel_SashWidthDecimal { get; set; }
 
         public int Panel_SashHeight { get; set; }
+        public int Panel_SashHeightDecimal { get; set; }
+
         public int Panel_OriginalSashWidth { get; set; }
+        public int Panel_OriginalSashWidthDecimal { get; set; }
         public int Panel_OriginalSashHeight { get; set; }
+        public int Panel_OriginalSashHeightDecimal { get; set; }
 
         public int Panel_SashReinfWidth { get; set; }
+        public int Panel_SashReinfWidthDecimal { get; set; }
         public int Panel_SashReinfHeight { get; set; }
+        public int Panel_SashReinfHeightDecimal { get; set; }
 
         private bool _panelSashPropertyVisibility;
         public bool Panel_SashPropertyVisibility
@@ -1157,6 +1227,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private Extension_ArticleNo _panelExtensionTop3ArtNo;
+        public Extension_ArticleNo Panel_ExtensionTop3ArtNo
+        {
+            get
+            {
+                return _panelExtensionTop3ArtNo;
+            }
+            set
+            {
+                _panelExtensionTop3ArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private Extension_ArticleNo _panelExtensionBotArtNo;
         public Extension_ArticleNo Panel_ExtensionBotArtNo
         {
@@ -1255,6 +1339,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private bool _panelExtTop2Chk;
+        public bool Panel_ExtTop2Chk
+        {
+            get
+            {
+                return _panelExtTop2Chk;
+            }
+            set
+            {
+                _panelExtTop2Chk = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private bool _panelExtBotChk;
         public bool Panel_ExtBotChk
         {
@@ -1303,6 +1401,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_ExtRightQty { get; set; }
 
         public int Panel_ExtTop2Qty { get; set; }
+        public int Panel_ExtTop3Qty { get; set; }
         public int Panel_ExtBot2Qty { get; set; }
         public int Panel_ExtLeft2Qty { get; set; }
         public int Panel_ExtRight2Qty { get; set; }
@@ -1372,7 +1471,20 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-        public int Panel_MiddleCloserPairQty { get; set; }
+
+        private int _panelMiddleCloserPairQty;
+        public int Panel_MiddleCloserPairQty
+        {
+            get
+            {
+                return _panelMiddleCloserPairQty;
+            }
+            set
+            {
+                _panelMiddleCloserPairQty = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private bool _panel_MiddleCloserVisibility;
         public bool Panel_MiddleCloserVisibility
@@ -1661,6 +1773,8 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public GBSpacer_ArticleNo Panel_GBSpacerArtNo { get; set; }
+
         public void AdjustPropertyPanelHeight(string mode)
         {
             if (mode == "addChkMotorized")
@@ -1815,6 +1929,14 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_3dHingeOptionsheight;
             }
+            else if (mode == "addMC")
+            {
+                Panel_PropertyHeight += constants.panel_property_MiddleCloserOptionsheight;
+            }
+            else if (mode == "minusMC")
+            {
+                Panel_PropertyHeight -= constants.panel_property_MiddleCloserOptionsheight;
+            }
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
@@ -1957,7 +2079,15 @@ namespace ModelLayer.Model.Quotation.Panel
 
             if (Panel_SashPropertyVisibility == true)
             {
-                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                if ((Panel_Type.Contains("Awning") || Panel_Type.Contains("Casement")) && Panel_GlassThickness == 6.0f)
+                {
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+                }
+
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                    (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
                     if (Panel_ParentFrameModel.Frame_Height > 2499)
                     {
@@ -1970,10 +2100,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
                 {
                     Panel_SashWidth = Panel_DisplayWidth - (26 * 2) + 5;
+                    Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
                     Panel_SashHeight = Panel_DisplayHeight - (26 * 2) + 5;
+                    Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
                     Panel_GlassWidth = Panel_SashWidth - 5 - (55 * 2) - 6;
+                    Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                     Panel_GlassHeight = Panel_SashHeight - 5 - (55 * 2) - 6;
+                    Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
                 }
                 else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
                 {
@@ -1984,10 +2118,12 @@ namespace ModelLayer.Model.Quotation.Panel
                         glass_deduct = 55;
                     }
                     else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                             Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                              Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                     {
                         sash_deduct = 39;
-                        if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                        if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                            Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                         {
                             glass_deduct = 86;
                         }
@@ -2001,12 +2137,15 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
 
-                    Panel_SashWidth = Panel_DisplayWidth - (sash_deduct * 2) + 5;
-                    Panel_SashHeight = Panel_DisplayHeight - inward_motorized_deduction - (sash_deduct * 2) + 5;
-                    
+                    Panel_SashWidth = Panel_DisplayWidth - inward_motorized_deduction -(sash_deduct * 2) + 5;
+                    Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
+                    Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 5;
+                    Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
                     Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
+                    Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                     Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
+                    Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
                 }
 
                 int handle_deduct = 0;
@@ -2021,20 +2160,24 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
 
                 Panel_SashReinfWidth = Panel_SashWidth - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfWidthDecimal = Panel_SashWidthDecimal;
                 Panel_SashReinfHeight = Panel_SashHeight - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_GlazingBeadWidth = Panel_SashWidth;
+                Panel_GlazingBeadWidthDecimal = Panel_SashWidthDecimal;
                 Panel_GlazingBeadHeight = Panel_SashHeight;
+                Panel_GlazingBeadHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
 
+                Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
-                    Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                 {
-                    Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
-
                     if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
                     {
@@ -2142,12 +2285,11 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_AdjStrikerQty += 4;
                     }
 
-                    Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
-                    Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
-                    Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+                    Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+                    Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
                     Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
                     Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
-                    Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+                    Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
 
                     if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
                     {
@@ -2262,7 +2404,8 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 Panel_MiddleCloserPairQty = 1;
                             }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                             {
                                 Panel_MiddleCloserPairQty = 0;
                             }
@@ -2313,7 +2456,8 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 Panel_MiddleCloserPairQty = 1;
                             }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                             {
                                 Panel_MiddleCloserPairQty = 0;
                             }
@@ -2736,7 +2880,36 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
-                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
+
+                    if (inside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_7025_50992;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_IVORY;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                    }
+                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+                    }
 
                     if (Panel_ParentFrameModel.Frame_Height > 2499)
                     {
@@ -2760,10 +2933,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_SashReinfHeight = 0;
 
                 Panel_GlazingBeadWidth = Panel_DisplayWidth; //- (33 * 2);
+                Panel_GlazingBeadWidthDecimal = Panel_DisplayWidthDecimal; //- (33 * 2);
                 Panel_GlazingBeadHeight = Panel_DisplayHeight; //- (33 * 2);
+                Panel_GlazingBeadHeightDecimal = Panel_DisplayHeightDecimal; //- (33 * 2);
 
                 Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
+                Panel_GlassWidthDecimal = Panel_DisplayWidthDecimal;
                 Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
+                Panel_GlassHeightDecimal = Panel_DisplayHeightDecimal;
             }
 
             Panel_GlazingSpacerQty = 1;
@@ -2805,6 +2982,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forNxtPrev -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forNxtPrev -= 8; //sash bite allowance
@@ -2819,7 +2997,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forNxtPrev -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
-                         Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._395 )
                 {
                     Sash_deduction_forNxtPrev -= 8; //sash bite allowance
                 }
@@ -2848,6 +3027,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             Sash_deduction_forNxtPrev += 40;
                         }
                         else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                 Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                  Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                         {
                             Sash_deduction_forNxtPrev += 39;
@@ -2878,6 +3058,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += 40;
                             }
                             else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                      Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                             {
                                 Sash_deduction_forNxtPrev += 39;
@@ -2909,6 +3090,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += 40;
                             }
                             else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                      Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                             {
                                 Sash_deduction_forNxtPrev += 39;
@@ -2927,6 +3109,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forNxtPrev -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forNxtPrev -= 8; //sash bite allowance
@@ -2941,6 +3124,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forNxtPrev -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forNxtPrev -= 8; //sash bite allowance
@@ -2970,6 +3154,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             Sash_deduction_forNxtPrev += 40;
                         }
                         else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                 Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                  Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                         {
                             Sash_deduction_forNxtPrev += 39;
@@ -3000,6 +3185,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += 40;
                             }
                             else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                      Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                             {
                                 Sash_deduction_forNxtPrev += 39;
@@ -3031,6 +3217,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += 40;
                             }
                             else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                      Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                             {
                                 Sash_deduction_forNxtPrev += 39;
@@ -3049,6 +3236,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forLeftorTopRightorBot -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
@@ -3064,6 +3252,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forLeftorTopRightorBot -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
@@ -3095,6 +3284,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             Sash_deduction_forLeftorTopRightorBot += 40;
                         }
                         else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                 Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                  Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                         {
                             Sash_deduction_forLeftorTopRightorBot += 39;
@@ -3112,6 +3302,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forLeftorTopRightorBot -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
@@ -3126,6 +3317,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Sash_deduction_forLeftorTopRightorBot -= 7; //sash bite allowance
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
@@ -3157,6 +3349,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             Sash_deduction_forLeftorTopRightorBot += 40;
                         }
                         else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                 Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                                  Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                         {
                             Sash_deduction_forLeftorTopRightorBot += 39;
@@ -3262,7 +3455,14 @@ namespace ModelLayer.Model.Quotation.Panel
 
             if (Panel_SashPropertyVisibility == true)
             {
-                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                if ((Panel_Type.Contains("Awning") || Panel_Type.Contains("Casement")) && Panel_GlassThickness == 6.0f)
+                {
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+                }
+
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                    (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
                     if (Panel_ParentFrameModel.Frame_Height > 2499)
                     {
@@ -3311,7 +3511,8 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     glass_deduct = 55;
                 }
-                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                 {
                     glass_deduct = 86;
                 }
@@ -3325,23 +3526,35 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                Panel_SashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
-                Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT - inward_motorized_deduction) + 5;
+                Panel_SashWidth = (((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) - inward_motorized_deduction) + 5;
+                Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
+                Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
+                Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
-                Panel_OriginalSashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
-                Panel_OriginalSashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
+                Panel_OriginalSashWidth = Panel_SashWidth;
+                Panel_OriginalSashWidthDecimal = Panel_SashWidthDecimal;
+                Panel_OriginalSashHeight = Panel_SashHeight;
+                Panel_OriginalSashHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_SashReinfWidth = Panel_SashWidth - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfWidthDecimal = Panel_SashWidthDecimal;
                 Panel_SashReinfHeight = Panel_SashHeight - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_GlazingBeadWidth = Panel_SashWidth;
+                Panel_GlazingBeadWidthDecimal = Panel_SashWidthDecimal;
                 Panel_GlazingBeadHeight = Panel_SashHeight;
+                Panel_GlazingBeadHeightDecimal = Panel_SashHeightDecimal;
 
-                Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
+                Panel_GlassWidth = ((Panel_SashWidth - 5) - (glass_deduct * 2)) - 6;
+                Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                 Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
+                Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
 
-                Panel_OriginalGlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
-                Panel_OriginalGlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
+                Panel_OriginalGlassWidth = Panel_GlassWidth;
+                Panel_OriginalGlassWidthDecimal = Panel_GlassWidthDecimal;
+                Panel_OriginalGlassHeight = Panel_GlassHeight;
+                Panel_OriginalGlassHeightDecimal = Panel_GlassHeightDecimal;
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
@@ -3360,10 +3573,86 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
-                    Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+
+                #region Algo for Adjustable Striker
+
+                int obj_count = Panel_ParentMultiPanelModel.GetCount_MPanelLst_Object();
+                bool allow_adjStriker = true;
+
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
                 {
-                    Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+                    Panel_AdjStrikerArtNo = null;
+
+                    int nxt_pnl_ndx = Panel_Index_Inside_MPanel + 2;
+                    if (Panel_Index_Inside_MPanel == 0 && nxt_pnl_ndx < obj_count)
+                    {
+                        string nxt_pnl_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[nxt_pnl_ndx].Name;
+                        IPanelModel nxt_pnl = Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == nxt_pnl_name);
+
+                        string nxt_div_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[Panel_Index_Inside_MPanel + 1].Name;
+                        IDividerModel nxt_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == nxt_div_name);
+
+                        if (nxt_divModel.Div_DMPanel == nxt_pnl)
+                        {
+                            allow_adjStriker = false;
+                        }
+
+                        int nxt_div_indx_after_nxtPnl = Panel_Index_Inside_MPanel + 3;
+
+                        if (nxt_div_indx_after_nxtPnl < obj_count)
+                        {
+                            string nxt_div_name_after_nxtPnl = Panel_ParentMultiPanelModel.MPanelLst_Objects[nxt_div_indx_after_nxtPnl].Name;
+                            IDividerModel nxt_divModel_after_nxtPnl = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == nxt_div_name_after_nxtPnl);
+
+                            if (nxt_divModel_after_nxtPnl.Div_DMPanel == nxt_pnl)
+                            {
+                                allow_adjStriker = false;
+                            }
+                        }
+
+                    }
+
+                    int prev_pnl_ndx = Panel_Index_Inside_MPanel - 2;
+                    if (Panel_Index_Inside_MPanel > 1 && prev_pnl_ndx >= 0)
+                    {
+                        string prev_pnl_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[prev_pnl_ndx].Name;
+                        IPanelModel prev_pnl = Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_pnl_name);
+
+                        string prev_div_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[Panel_Index_Inside_MPanel - 1].Name;
+                        IDividerModel prev_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name);
+
+                        if (prev_divModel.Div_DMPanel == prev_pnl)
+                        {
+                            allow_adjStriker = false;
+                        }
+
+                        int prev_div_indx_before_prevPnl = Panel_Index_Inside_MPanel - 3;
+
+                        if (prev_div_indx_before_prevPnl > 0)
+                        {
+                            string prev_div_name_before_prevPnl = Panel_ParentMultiPanelModel.MPanelLst_Objects[prev_div_indx_before_prevPnl].Name;
+                            IDividerModel prev_divModel_before_prevPnl = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name_before_prevPnl);
+
+                            if (prev_divModel_before_prevPnl.Div_DMPanel == prev_pnl)
+                            {
+                                allow_adjStriker = false;
+                            }
+                        }
+
+                    }
+
+                    if (allow_adjStriker)
+                    {
+                        Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+                    }
+                }
+
+                #endregion
+
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                    (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
+                {
 
                     if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
                         Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
@@ -3471,12 +3760,11 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_AdjStrikerQty += 4;
                     }
 
-                    Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
-                    Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A0001;
-                    Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52026;
+                    Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+                    Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
                     Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
                     Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
-                    Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001;
+                    Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
 
                     if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
                     {
@@ -3532,7 +3820,8 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 Panel_MiddleCloserPairQty = 1;
                             }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                             {
                                 Panel_MiddleCloserPairQty = 0;
                             }
@@ -3583,7 +3872,8 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 Panel_MiddleCloserPairQty = 1;
                             }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
                             {
                                 Panel_MiddleCloserPairQty = 0;
                             }
@@ -4006,7 +4296,36 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
-                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
+
+                    if (inside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_7025_50992;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_IVORY;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                    }
+                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                    {
+                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+                    }
 
                     Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
                     if (Panel_ParentFrameModel.Frame_Height > 2499)
@@ -4064,7 +4383,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           IMultiPanelModel panelMultiPanelParent,
                           GlazingBead_ArticleNo panelGlazingBeadArtNo,
                           int panelDisplayWidth,
+                          int panelDisplayWidthDecimal,
                           int panelDisplayHeight,
+                          int panelDisplayHeightDecimal,
                           int panelGlassID,
                           GlassFilm_Types panelGlassFilm,
                           SashProfile_ArticleNo panelSash,
@@ -4122,10 +4443,14 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_ParentMultiPanelModel = panelMultiPanelParent;
             PanelGlazingBead_ArtNo = panelGlazingBeadArtNo;
             Panel_DisplayWidth = panelDisplayWidth;
+            Panel_DisplayWidthDecimal = panelDisplayWidthDecimal;
             Panel_DisplayHeight = panelDisplayHeight;
+            Panel_DisplayHeightDecimal = panelDisplayHeightDecimal;
             PanelGlass_ID = panelGlassID;
             Panel_OriginalDisplayWidth = panelDisplayWidth;
+            Panel_OriginalDisplayWidthDecimal = panelDisplayWidthDecimal;
             Panel_OriginalDisplayHeight = panelDisplayHeight;
+            Panel_OriginalDisplayHeightDecimal = panelDisplayHeightDecimal;
             Panel_GlassFilm = panelGlassFilm;
             Panel_SashProfileArtNo = panelSash;
             Panel_SashReinfArtNo = panelSashReinf;

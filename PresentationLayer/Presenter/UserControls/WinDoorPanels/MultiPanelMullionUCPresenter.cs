@@ -256,10 +256,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (_multiPanelModel.MPanel_StackNo < 3)
                 {
                     int suggest_Wd = (((_multiPanelModel.MPanel_Width) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount),
-                        suggest_HT = _multiPanelModel.MPanel_Height;
+                        suggest_HT = _multiPanelModel.MPanel_Height,
+                        mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight,
+                        suggest_DisplayHTDecimal = _multiPanelModel.MPanel_DisplayHeightDecimal;
 
-                    int mpanelDisplayWidth = _multiPanelModel.MPanel_DisplayWidth / (_multiPanelModel.MPanel_Divisions + 1),
-                        mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight;
+                    string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
+                    decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
+
+                    int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
+                    int DisplayWD_singleDecimalPlace = 0;
+
+                    string[] DisplayWD_dec_split = decimal.Round(DisplayWD_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                    if (DisplayWD_dec_split.Count() > 1)
+                    {
+                        DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
+                    }
 
                     FlowDirection flow = FlowDirection.LeftToRight;
                     if (data.Contains("Transom"))
@@ -271,8 +283,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     IMultiPanelModel mPanelModel = _multipanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
-                                                                                          mpanelDisplayWidth,
+                                                                                          suggest_DisplayWD,
+                                                                                          DisplayWD_singleDecimalPlace,
                                                                                           mpanelDisplayHeight,
+                                                                                          suggest_DisplayHTDecimal,
                                                                                           fpnl,
                                                                                           (UserControl)_frameUCP.GetFrameUC(),
                                                                                           _frameModel,
@@ -475,8 +489,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 int suggest_Wd = 0,
                     suggest_HT = _multiPanelModel.MPanel_Height - 20,
-                    suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth / totalPanelCount,
-                    suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight;
+                    suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight,
+                    suggest_DisplayHTDecimal = _multiPanelModel.MPanel_DisplayHeightDecimal;
+
+                string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
+                decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
+
+                int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
+                int DisplayWD_singleDecimalPlace = 0;
+
+                string[] DisplayWD_dec_split = decimal.Round(DisplayWD_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                if (DisplayWD_dec_split.Count() > 1)
+                {
+                    DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
+                }
 
                 if (_multiPanelModel.MPanel_DividerEnabled)
                 {
@@ -552,7 +579,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        _frameModel,
                                                                        _multiPanelModel,
                                                                        suggest_DisplayWD,
+                                                                       DisplayWD_singleDecimalPlace,
                                                                        suggest_DisplayHT,
+                                                                       suggest_DisplayHTDecimal,
                                                                        GlazingBead_ArticleNo._2452,
                                                                        GlassFilm_Types._None,
                                                                        SashProfile_ArticleNo._7581,
@@ -594,7 +623,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        _frameModel.FrameImageRenderer_Zoom,
                                                                        _multiPanelModel.GetNextIndex(),
                                                                        DockStyle.None);
-
                 if (_prev_divModel != null)
                 {
                     _panelModel.Panel_CornerDriveOptionsVisibility = _prev_divModel.Div_ChkDM;
@@ -613,14 +641,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._None;
                     _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._None;
-
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-
-                    _panelModel.AdjustPropertyPanelHeight("addGlass");
 
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
                                                                                _panelModel,
@@ -662,25 +682,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 else if (data == "Awning Panel")
                 {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-
-                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
-                    _panelModel.AdjustPropertyPanelHeight("addSash");
-                    _panelModel.AdjustPropertyPanelHeight("addGlass");
-                    _panelModel.AdjustPropertyPanelHeight("addHandle");
-
-                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
-
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
                                                                                   _panelModel,
                                                                                   _frameModel,
@@ -729,7 +730,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.Fit_MyControls_Dimensions();
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                    _multiPanelModel.Adjust_ControlDisplaySize();
+                    //_multiPanelModel.Adjust_ControlDisplaySize();
                     _mainPresenter.Fit_MyControls_byControlsLocation();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                 }
@@ -827,6 +828,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Control parent_ctrl = ((UserControl)_multiPanelMullionUC).Parent;
 
             _multiPanelModel.MPanel_FrameModelParent.DeductPropertyPanelHeight(_multiPanelModel.MPanelProp_Height);
+
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
                 _multiPanelModel.MPanel_ParentModel.DeductPropertyPanelHeight(_multiPanelModel.MPanelProp_Height);
@@ -849,6 +851,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
             {
                 _frameModel.Lst_Panel.Remove(pnl);
+                _mainPresenter.DeductPanelGlassID();
             }
             foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
             {

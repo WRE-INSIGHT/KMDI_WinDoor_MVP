@@ -101,9 +101,13 @@ namespace PresentationLayer.Presenter.UserControls
             SashProfile_ArticleNo sel_sashProfileArtNo = (SashProfile_ArticleNo)sender;
             if (!_initialLoad && curr_sashProfileArtNo != sel_sashProfileArtNo)
             {
-                if (sel_sashProfileArtNo == SashProfile_ArticleNo._395)
+                if (sel_sashProfileArtNo == SashProfile_ArticleNo._395 || 
+                    sel_sashProfileArtNo == SashProfile_ArticleNo._374 ||
+                    sel_sashProfileArtNo == SashProfile_ArticleNo._373)
                 {
-                    if (curr_sashProfileArtNo != SashProfile_ArticleNo._395)
+                    if (curr_sashProfileArtNo != SashProfile_ArticleNo._395 &&
+                        curr_sashProfileArtNo != SashProfile_ArticleNo._374 &&
+                        curr_sashProfileArtNo != SashProfile_ArticleNo._373)
                     {
                         _divModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._631153;
 
@@ -113,9 +117,13 @@ namespace PresentationLayer.Presenter.UserControls
                         _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
                     }
                 }
-                else if (sel_sashProfileArtNo != SashProfile_ArticleNo._395)
+                else if (sel_sashProfileArtNo != SashProfile_ArticleNo._395 &&
+                         sel_sashProfileArtNo != SashProfile_ArticleNo._374 &&
+                         sel_sashProfileArtNo != SashProfile_ArticleNo._373)
                 {
-                    if (curr_sashProfileArtNo == SashProfile_ArticleNo._395)
+                    if (curr_sashProfileArtNo == SashProfile_ArticleNo._395 ||
+                        curr_sashProfileArtNo == SashProfile_ArticleNo._374 ||
+                        curr_sashProfileArtNo == SashProfile_ArticleNo._373)
                     {
                         _divModel.Div_LeverEspagVisibility = false;
                         _divModel.AdjustPropertyPanelHeight("minusLeverEspag");
@@ -169,6 +177,8 @@ namespace PresentationLayer.Presenter.UserControls
             CheckBox chk = (CheckBox)sender;
             if (!_initialLoad)
             {
+                int orig_locY = ((UserControl)_divProperties).Location.Y;
+
                 _divModel.Div_ChkDM = chk.Checked;
                 _divModel.Div_ArtVisibility = !chk.Checked;
 
@@ -210,12 +220,13 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
 
-                    if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                    if (_divModel.Div_DMPanel != null && _divModel.Div_LeverEspagVisibility == false)
                     {
                         _divModel.Div_LeverEspagVisibility = true;
                         _divModel.AdjustPropertyPanelHeight("addLeverEspag");
                         _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
                         _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+
                     }
 
                     if (cladding_count > 0)
@@ -223,6 +234,7 @@ namespace PresentationLayer.Presenter.UserControls
                         _divModel.AdjustPropertyPanelHeight("minusCladdingBracket");
                         _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
                         _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
+
                     }
 
                     for (int i = 0; i < cladding_count; i++)
@@ -230,6 +242,7 @@ namespace PresentationLayer.Presenter.UserControls
                         _divModel.AdjustPropertyPanelHeight("minusCladding");
                         _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladding");
                         _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
+
                     }
 
                     if (prev_pnlModel != null)
@@ -240,6 +253,7 @@ namespace PresentationLayer.Presenter.UserControls
                             prev_pnlModel.AdjustPropertyPanelHeight("addCornerDrive");
                             _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
                             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+
                         }
                     }
 
@@ -251,6 +265,8 @@ namespace PresentationLayer.Presenter.UserControls
                             nxt_pnlModel.AdjustPropertyPanelHeight("addCornerDrive");
                             _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
                             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+
+                            //added_scrollView += const_var.panel_property_cornerDriveOptionsheight_default;
                         }
                     }
                 }
@@ -268,7 +284,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
 
-                    if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                    if (_divModel.Div_DMPanel != null && _divModel.Div_LeverEspagVisibility == true)
                     {
                         _divModel.Div_LeverEspagVisibility = false;
                         _divModel.AdjustPropertyPanelHeight("minusLeverEspag");
@@ -316,6 +332,10 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                     }
                 }
+
+                int new_locY = ((UserControl)_divProperties).Location.Y;
+
+                _mainPresenter.Set_pnlPropertiesBody_ScrollView(orig_locY + (new_locY - orig_locY));
             }
         }
 

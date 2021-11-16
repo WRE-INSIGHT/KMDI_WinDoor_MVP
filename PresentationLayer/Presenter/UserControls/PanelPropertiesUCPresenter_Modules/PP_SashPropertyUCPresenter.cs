@@ -50,7 +50,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.Panel_SashProfileArtNo = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
 
                 SashProfile_ArticleNo sel_sash = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
-                if (sel_sash != curr_sash)
+                if (sel_sash != curr_sash && _panelModel.Panel_Type.Contains("Fixed") == false)
                 {
                     if (sel_sash == SashProfile_ArticleNo._7581)
                     {
@@ -79,7 +79,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     }
                                 }
                             }
-                            else if (curr_sash == SashProfile_ArticleNo._374)
+                            else if (curr_sash == SashProfile_ArticleNo._373 || curr_sash == SashProfile_ArticleNo._374)
                             {
                                 _panelModel.Panel_3dHingePropertyVisibility = false;
                                 _panelModel.AdjustPropertyPanelHeight("minus3dHinge");
@@ -96,6 +96,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             if (_panelModel.Panel_ParentMultiPanelModel != null)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                            }
+
+                            _panelModel.Panel_MiddleCloserVisibility = true;
+                            _panelModel.AdjustPropertyPanelHeight("addMC");
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
                             }
 
                             if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
@@ -116,69 +124,82 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.Panel_ButtHingeVisibility = false;
                         }
                     }
-                    else if (sel_sash == SashProfile_ArticleNo._374)
+                    else if (sel_sash == SashProfile_ArticleNo._374 || sel_sash == SashProfile_ArticleNo._373)
                     {
-                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._655;
-
-                        if (_panelModel.Panel_MotorizedOptionVisibility == false)
+                        if ((sel_sash == SashProfile_ArticleNo._374 && curr_sash != SashProfile_ArticleNo._373) ||
+                            (sel_sash == SashProfile_ArticleNo._373 && curr_sash != SashProfile_ArticleNo._374))
                         {
-                            _panelModel.Panel_3dHingePropertyVisibility = true;
-                            _panelModel.AdjustPropertyPanelHeight("add3dHinge");
-                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add3dHinge");
-                            if (_panelModel.Panel_ParentMultiPanelModel != null)
-                            {
-                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add3dHinge");
-                            }
+                            _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._655;
 
-                            if (curr_sash == SashProfile_ArticleNo._7581)
+                            if (_panelModel.Panel_MotorizedOptionVisibility == false)
                             {
-                                _panelModel.Panel_HingeOptionsVisibility = false;
-
-                                _panelModel.AdjustPropertyPanelHeight("minusHinge");
-                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                                _panelModel.Panel_3dHingePropertyVisibility = true;
+                                _panelModel.AdjustPropertyPanelHeight("add3dHinge");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add3dHinge");
                                 if (_panelModel.Panel_ParentMultiPanelModel != null)
                                 {
-                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add3dHinge");
                                 }
 
-                                if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
+                                if (curr_sash == SashProfile_ArticleNo._7581)
                                 {
-                                    _panelModel.Panel_2dHingeVisibility_nonMotorized = false;
-                                    _panelModel.AdjustPropertyPanelHeight("minus2dHingeField");
+                                    _panelModel.Panel_HingeOptionsVisibility = false;
 
-                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                                    _panelModel.AdjustPropertyPanelHeight("minusHinge");
+                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
                                     if (_panelModel.Panel_ParentMultiPanelModel != null)
                                     {
-                                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                                    }
+
+                                    _panelModel.Panel_MiddleCloserVisibility = false;
+
+                                    _panelModel.AdjustPropertyPanelHeight("minusMC");
+                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusMC");
+                                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                    {
+                                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusMC");
+                                    }
+
+                                    if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
+                                    {
+                                        _panelModel.Panel_2dHingeVisibility_nonMotorized = false;
+                                        _panelModel.AdjustPropertyPanelHeight("minus2dHingeField");
+
+                                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                        {
+                                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
+                                        }
+                                    }
+                                }
+                                else if (curr_sash == SashProfile_ArticleNo._395)
+                                {
+                                    _panelModel.Panel_CenterHingeOptionsVisibility = false;
+                                    _panelModel.AdjustPropertyPanelHeight("minusCenterHinge");
+                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCenterHinge");
+                                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                    {
+                                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCenterHinge");
+                                    }
+
+                                    if (_panelModel.Panel_NTCenterHingeVisibility == true)
+                                    {
+                                        _panelModel.Panel_NTCenterHingeVisibility = false;
+                                        _panelModel.AdjustPropertyPanelHeight("minusNTCenterHinge");
+                                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
+                                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                        {
+                                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
+                                        }
                                     }
                                 }
                             }
-                            else if (curr_sash == SashProfile_ArticleNo._395)
+                            else if (_panelModel.Panel_MotorizedOptionVisibility == true)
                             {
-                                _panelModel.Panel_CenterHingeOptionsVisibility = false;
-                                _panelModel.AdjustPropertyPanelHeight("minusCenterHinge");
-                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCenterHinge");
-                                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                                {
-                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCenterHinge");
-                                }
-
-                                if (_panelModel.Panel_NTCenterHingeVisibility == true)
-                                {
-                                    _panelModel.Panel_NTCenterHingeVisibility = false;
-                                    _panelModel.AdjustPropertyPanelHeight("minusNTCenterHinge");
-                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
-                                    if (_panelModel.Panel_ParentMultiPanelModel != null)
-                                    {
-                                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
-                                    }
-                                }
+                                _panelModel.Panel_2dHingeVisibility = true;
+                                _panelModel.Panel_ButtHingeVisibility = false;
                             }
-                        }
-                        else if (_panelModel.Panel_MotorizedOptionVisibility == true)
-                        {
-                            _panelModel.Panel_2dHingeVisibility = true;
-                            _panelModel.Panel_ButtHingeVisibility = false;
                         }
                     }
                     else if(sel_sash == SashProfile_ArticleNo._395)
@@ -198,6 +219,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
                                 }
 
+                                _panelModel.Panel_MiddleCloserVisibility = false;
+
+                                _panelModel.AdjustPropertyPanelHeight("minusMC");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusMC");
+                                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusMC");
+                                }
+
                                 if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
                                 {
                                     _panelModel.Panel_2dHingeVisibility_nonMotorized = false;
@@ -210,7 +240,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     }
                                 }
                             }
-                            else if (curr_sash == SashProfile_ArticleNo._374)
+                            else if (curr_sash == SashProfile_ArticleNo._373 || curr_sash == SashProfile_ArticleNo._374)
                             {
                                 _panelModel.Panel_3dHingePropertyVisibility = false;
                                 _panelModel.AdjustPropertyPanelHeight("minus3dHinge");

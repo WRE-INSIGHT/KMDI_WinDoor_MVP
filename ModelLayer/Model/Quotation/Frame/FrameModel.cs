@@ -624,6 +624,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_3dHingeOptionsheight;
                 }
+                else if (mode == "addMC")
+                {
+                    FrameProp_Height += constants.panel_property_MiddleCloserOptionsheight;
+                }
+                else if (mode == "minusMC")
+                {
+                    FrameProp_Height -= constants.panel_property_MiddleCloserOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {
