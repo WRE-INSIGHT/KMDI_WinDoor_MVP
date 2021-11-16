@@ -954,13 +954,13 @@ namespace ModelLayer.Model.Quotation
 
                                     Material_List.Rows.Add("Sash Width " + pnl_curCtrl.Panel_SashProfileArtNo.ToString(),
                                                            2, "pc(s)",
-                                                           pnl_curCtrl.Panel_SashWidth.ToString(),
+                                                           pnl_curCtrl.Panel_SashWidth.ToString() + "." + pnl_curCtrl.Panel_SashWidthDecimal.ToString(),
                                                            "Sash",
                                                            @"\  /");
 
                                     Material_List.Rows.Add("Sash Height " + pnl_curCtrl.Panel_SashProfileArtNo.ToString(),
                                                            2, "pc(s)",
-                                                           pnl_curCtrl.Panel_SashHeight.ToString(),
+                                                           pnl_curCtrl.Panel_SashHeight.ToString() + "." + pnl_curCtrl.Panel_SashHeightDecimal.ToString(),
                                                            "Sash",
                                                            @"\  /");
 
@@ -973,13 +973,13 @@ namespace ModelLayer.Model.Quotation
 
                                     Material_List.Rows.Add("Sash Reinf Width " + pnl_curCtrl.Panel_SashReinfArtNo.ToString(),
                                                            2, "pc(s)",
-                                                           pnl_curCtrl.Panel_SashReinfWidth.ToString(),
+                                                           pnl_curCtrl.Panel_SashReinfWidth.ToString() + "." + pnl_curCtrl.Panel_SashReinfWidthDecimal.ToString(),
                                                            "Sash",
                                                            cut_str);
 
                                     Material_List.Rows.Add("Sash Reinf Height " + pnl_curCtrl.Panel_SashReinfArtNo.ToString(),
                                                            2, "pc(s)",
-                                                           pnl_curCtrl.Panel_SashReinfHeight.ToString(),
+                                                           pnl_curCtrl.Panel_SashReinfHeight.ToString() + "." + pnl_curCtrl.Panel_SashReinfHeightDecimal.ToString(),
                                                            "Sash",
                                                            cut_str);
 
@@ -987,13 +987,13 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo.DisplayName,
                                                                    1, "pc(s)",
-                                                                   pnl_curCtrl.Panel_DisplayWidth.ToString(),
+                                                                   pnl_curCtrl.Panel_DisplayWidth.ToString() + "." + pnl_curCtrl.Panel_DisplayWidthDecimal.ToString(),
                                                                    "Frame",
                                                                    @"|  |");
 
                                         Material_List.Rows.Add("Cover Profile " + pnl_curCtrl.Panel_CoverProfileArtNo2.DisplayName,
                                                                    1, "pc(s)",
-                                                                   pnl_curCtrl.Panel_DisplayWidth.ToString(),
+                                                                   pnl_curCtrl.Panel_DisplayWidth.ToString() + "." + pnl_curCtrl.Panel_DisplayWidthDecimal.ToString(),
                                                                    "Frame",
                                                                    @"|  |");
                                     }
@@ -1787,13 +1787,13 @@ namespace ModelLayer.Model.Quotation
 
                                 Material_List.Rows.Add("Glazing Bead (P" + pnl_curCtrl.PanelGlass_ID + ") Width " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
-                                                       pnl_curCtrl.Panel_GlazingBeadWidth.ToString(),
+                                                       pnl_curCtrl.Panel_GlazingBeadWidth.ToString() + "." + pnl_curCtrl.Panel_GlazingBeadWidthDecimal.ToString(),
                                                        where,
                                                        @"|  |");
 
                                 Material_List.Rows.Add("Glazing Bead (P" + pnl_curCtrl.PanelGlass_ID + ") Height " + pnl_curCtrl.PanelGlazingBead_ArtNo.ToString(),
                                                        2, "pc(s)",
-                                                       pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
+                                                       pnl_curCtrl.Panel_GlazingBeadHeight.ToString() + "." + pnl_curCtrl.Panel_GlazingBeadHeightDecimal.ToString(),
                                                        where,
                                                        @"|  |");
 
@@ -1813,13 +1813,13 @@ namespace ModelLayer.Model.Quotation
 
                                     Material_List.Rows.Add("Glazing Adaptor (P" + pnl_curCtrl.PanelGlass_ID + ") Width " + pnl_curCtrl.Panel_GlazingAdaptorArtNo.DisplayName,
                                                            2, "pc(s)",
-                                                           pnl_curCtrl.Panel_GlazingBeadWidth.ToString(),
+                                                           pnl_curCtrl.Panel_GlazingBeadWidth.ToString() + "." + pnl_curCtrl.Panel_GlazingBeadWidthDecimal.ToString(),
                                                            where,
                                                            @"\  /");
 
                                     Material_List.Rows.Add("Glazing Adaptor (P" + pnl_curCtrl.PanelGlass_ID + ") Height " + pnl_curCtrl.Panel_GlazingAdaptorArtNo.DisplayName,
                                                            2, "pc(s)",
-                                                           pnl_curCtrl.Panel_GlazingBeadHeight.ToString(),
+                                                           pnl_curCtrl.Panel_GlazingBeadHeight.ToString() + "." + pnl_curCtrl.Panel_GlazingBeadHeightDecimal.ToString(),
                                                            where,
                                                            @"\  /");
                                 }
@@ -1832,13 +1832,13 @@ namespace ModelLayer.Model.Quotation
 
                                 Material_List.Rows.Add("Glass (P" + pnl_curCtrl.PanelGlass_ID + ") Width - " + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm,
                                                        1, "pc(s)",
-                                                       pnl_curCtrl.Panel_GlassWidth.ToString(),
+                                                       pnl_curCtrl.Panel_GlassWidth.ToString() + "." + pnl_curCtrl.Panel_GlassWidthDecimal.ToString(),
                                                        where,
                                                        "");
 
                                 Material_List.Rows.Add("Glass (P" + pnl_curCtrl.PanelGlass_ID + ") Height - " + pnl_curCtrl.Panel_GlassThicknessDesc + " " + glassFilm,
                                                        1, "pc(s)",
-                                                       pnl_curCtrl.Panel_GlassHeight.ToString(),
+                                                       pnl_curCtrl.Panel_GlassHeight.ToString() + "." + pnl_curCtrl.Panel_GlassHeightDecimal.ToString(),
                                                        where,
                                                        "");
 
@@ -1846,13 +1846,13 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     Material_List.Rows.Add("Georgian bar P" + pnl_curCtrl.PanelGlass_ID + " (Horizontal) " + pnl_curCtrl.Panel_GeorgianBarArtNo.ToString(),
                                                            pnl_curCtrl.Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
-                                                           pnl_curCtrl.Panel_GlassWidth + 5,
+                                                           pnl_curCtrl.Panel_GlassWidth + 5 + "." + pnl_curCtrl.Panel_GlassWidthDecimal.ToString(),
                                                            "Glass",
                                                            "");
 
                                     Material_List.Rows.Add("Georgian bar P" + pnl_curCtrl.PanelGlass_ID + " (Vertical) " + pnl_curCtrl.Panel_GeorgianBarArtNo.ToString(),
                                                            pnl_curCtrl.Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
-                                                           pnl_curCtrl.Panel_GlassHeight + 5,
+                                                           pnl_curCtrl.Panel_GlassHeight + 5 + "." + pnl_curCtrl.Panel_GlassHeightDecimal.ToString(),
                                                            "Glass",
                                                            "");
                                 }
@@ -1883,25 +1883,25 @@ namespace ModelLayer.Model.Quotation
 
                         Material_List.Rows.Add("Sash Width " + pnl.Panel_SashProfileArtNo.ToString(),
                                                2, "pc(s)",
-                                               pnl.Panel_SashWidth.ToString(),
+                                               pnl.Panel_SashWidth.ToString() + "." + pnl.Panel_SashWidthDecimal.ToString(),
                                                "Sash",
                                                @"\  /");
 
                         Material_List.Rows.Add("Sash Height " + pnl.Panel_SashProfileArtNo.ToString(),
                                                2, "pc(s)",
-                                               pnl.Panel_SashHeight.ToString(),
+                                               pnl.Panel_SashHeight.ToString() + "." + pnl.Panel_SashHeightDecimal.ToString(),
                                                "Sash",
                                                @"\  /");
 
                         Material_List.Rows.Add("Sash Reinf Width " + pnl.Panel_SashReinfArtNo.ToString(),
                                                2, "pc(s)",
-                                               pnl.Panel_SashReinfWidth.ToString(),
+                                               pnl.Panel_SashReinfWidth.ToString() + "." + pnl.Panel_SashReinfWidthDecimal.ToString(),
                                                "Sash",
                                                @"|  |");
 
                         Material_List.Rows.Add("Sash Reinf Height " + pnl.Panel_SashReinfArtNo.ToString(),
                                                2, "pc(s)",
-                                               pnl.Panel_SashReinfHeight.ToString(),
+                                               pnl.Panel_SashReinfHeight.ToString() + "." + pnl.Panel_SashReinfHeightDecimal.ToString(),
                                                "Sash",
                                                @"|  |");
 
@@ -1909,13 +1909,13 @@ namespace ModelLayer.Model.Quotation
                         {
                             Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo.DisplayName,
                                                    1, "pc(s)",
-                                                   pnl.Panel_DisplayWidth.ToString(),
+                                                   pnl.Panel_DisplayWidth.ToString() + "." + pnl.Panel_DisplayWidthDecimal.ToString(),
                                                    "Frame",
                                                    @"|  |");
 
                             Material_List.Rows.Add("Cover Profile " + pnl.Panel_CoverProfileArtNo2.DisplayName,
                                                    1, "pc(s)",
-                                                   pnl.Panel_DisplayWidth.ToString(),
+                                                   pnl.Panel_DisplayWidth.ToString() + "." + pnl.Panel_DisplayWidthDecimal.ToString(),
                                                    "Frame",
                                                    @"|  |");
                             
@@ -2702,13 +2702,13 @@ namespace ModelLayer.Model.Quotation
 
                     Material_List.Rows.Add("Glazing Bead (P" + pnl.PanelGlass_ID + ") Width " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",
-                                           pnl.Panel_GlazingBeadWidth.ToString(),
+                                           pnl.Panel_GlazingBeadWidth.ToString() + "." + pnl.Panel_GlazingBeadWidthDecimal.ToString(),
                                            where,
                                            @"|  |");
 
                     Material_List.Rows.Add("Glazing Bead (P" + pnl.PanelGlass_ID + ") Height " + pnl.PanelGlazingBead_ArtNo.ToString(),
                                            2, "pc(s)",
-                                           pnl.Panel_GlazingBeadHeight.ToString(),
+                                           pnl.Panel_GlazingBeadHeight.ToString() + "." + pnl.Panel_GlazingBeadHeightDecimal.ToString(),
                                            where,
                                            @"|  |");
 
@@ -2727,13 +2727,13 @@ namespace ModelLayer.Model.Quotation
                     {
                         Material_List.Rows.Add("Glazing Adaptor (P" + pnl.PanelGlass_ID + ") Width" + pnl.Panel_GlazingAdaptorArtNo.DisplayName,
                                                2, "pc(s)",
-                                               pnl.Panel_GlazingBeadWidth.ToString(),
+                                               pnl.Panel_GlazingBeadWidth.ToString() + "." + pnl.Panel_GlazingBeadWidthDecimal.ToString(),
                                                where,
                                                @"\  /");
 
                         Material_List.Rows.Add("Glazing Adaptor (P" + pnl.PanelGlass_ID + ") Height " + pnl.Panel_GlazingAdaptorArtNo.DisplayName,
                                                2, "pc(s)",
-                                               pnl.Panel_GlazingBeadHeight.ToString(),
+                                               pnl.Panel_GlazingBeadHeight.ToString() + "." + pnl.Panel_GlazingBeadHeightDecimal.ToString(),
                                                where,
                                                @"\  /");
                     }
@@ -2746,13 +2746,13 @@ namespace ModelLayer.Model.Quotation
 
                     Material_List.Rows.Add("Glass (P" + pnl.PanelGlass_ID + ") Width - " + pnl.Panel_GlassThicknessDesc + " " + glassFilm,
                                            1, "pc(s)",
-                                           pnl.Panel_GlassWidth.ToString(),
+                                           pnl.Panel_GlassWidth.ToString() + "." + pnl.Panel_GlassWidthDecimal.ToString(),
                                            where,
                                            "");
 
                     Material_List.Rows.Add("Glass (P" + pnl.PanelGlass_ID + ") Height - " + pnl.Panel_GlassThicknessDesc + " " + glassFilm,
                                            1, "pc(s)",
-                                           pnl.Panel_GlassHeight.ToString(),
+                                           pnl.Panel_GlassHeight.ToString() + "." + pnl.Panel_GlassHeightDecimal.ToString(),
                                            where,
                                            "");
 
@@ -2760,13 +2760,13 @@ namespace ModelLayer.Model.Quotation
                     {
                         Material_List.Rows.Add("Georgian bar P" + pnl.PanelGlass_ID + " (Horizontal) " + pnl.Panel_GeorgianBarArtNo.ToString(),
                                                pnl.Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
-                                               pnl.Panel_GlassWidth + 5,
+                                               pnl.Panel_GlassWidth + 5 + "." + pnl.Panel_GlassWidthDecimal.ToString(),
                                                "Glass",
                                                "");
 
                         Material_List.Rows.Add("Georgian bar P" + pnl.PanelGlass_ID + " (Vertical) " + pnl.Panel_GeorgianBarArtNo.ToString(),
                                                pnl.Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
-                                               pnl.Panel_GlassHeight + 5,
+                                               pnl.Panel_GlassHeight + 5 + "." + pnl.Panel_GlassHeightDecimal.ToString(),
                                                "Glass",
                                                "");
                     }

@@ -577,7 +577,6 @@ namespace PresentationLayer.Presenter
                                 pnl.Panel_Width = pnl.Panel_OriginalWidth;
                                 pnl.Panel_Height = pnl.Panel_OriginalHeight;
                             }
-                            //mpnl.SetEqualGlassDimension(gbmode);
                         }
                     }
                 }
