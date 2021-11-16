@@ -199,6 +199,8 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_MiddleCloserVisibility { get; set; }
 
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
+
+        void SetDimensions_using_ZoomPercetage();
         void AdjustPropertyPanelHeight(string mode);
         void AdjustMotorizedPropertyHeight(string mode);
         void AdjustHandlePropertyHeight(string mode);

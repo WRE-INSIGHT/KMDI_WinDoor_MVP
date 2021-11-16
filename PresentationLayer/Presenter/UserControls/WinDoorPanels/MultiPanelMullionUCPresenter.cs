@@ -623,6 +623,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        _multiPanelModel.GetNextIndex(),
                                                                        DockStyle.None);
 
+
                 if (_prev_divModel != null)
                 {
                     _panelModel.Panel_CornerDriveOptionsVisibility = _prev_divModel.Div_ChkDM;
@@ -630,6 +631,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                 _multiPanelModel.Reload_PanelMargin();
+
+                _panelModel.SetDimensions_using_ZoomPercetage();
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();

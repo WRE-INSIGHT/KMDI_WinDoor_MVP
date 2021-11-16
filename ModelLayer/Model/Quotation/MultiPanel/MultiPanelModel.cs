@@ -1033,9 +1033,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Type == "Mullion")
                 {
-                    int totalWidth_Controls = MPanelLst_Panel.Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left) + 
-                                              MPanelLst_Divider.Sum(div => div.Div_WidthToBind) +
-                                              MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
+                    int totalWd_panelModel = MPanelLst_Panel.Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left),
+                        totalWd_divModel = MPanelLst_Divider.Sum(div => div.Div_WidthToBind),
+                        totalWd_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
+
+                    int totalWidth_Controls = totalWd_panelModel + totalWd_divModel + totalWd_MpanelModel;
+
                     int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
 
                     while (diff_MPanelWd_VS_MyCtrlsWidth > 0)
