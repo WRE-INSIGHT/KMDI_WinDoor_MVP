@@ -156,6 +156,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_HingeOptionsVisibility = false;
                         _panelModel.AdjustPropertyPanelHeight("minusHinge");
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+
+                        if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
+                        {
+                            _panelModel.Panel_HingeOptions = HingeOption._FrictionStay;
+                        }
                     }
                 }
 

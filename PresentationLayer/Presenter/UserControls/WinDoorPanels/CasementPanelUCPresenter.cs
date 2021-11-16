@@ -264,6 +264,70 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 inner_line = 7;
             }
 
+            #region Georgian Bar
+
+            int GBpointResultX, GBpointResultY,
+                penThickness = 0, penThicknessResult = 0,
+                pInnerWd = casement.ClientRectangle.Width,
+                pInnerHt = casement.ClientRectangle.Height,
+                verticalQty = _panelModel.Panel_GeorgianBar_VerticalQty,
+                horizontalQty = _panelModel.Panel_GeorgianBar_HorizontalQty,
+                GeorgianBar_GapX = 0,
+                GeorgianBar_GapY = 0,
+                pInnerX = 0,
+                pInnerY = 0;
+
+            if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+            {
+                penThickness = 10;
+                penThicknessResult = penThickness + 10;
+            }
+            else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+            {
+                penThickness = 20;
+                penThicknessResult = penThickness - 10;
+            }
+
+            Pen pCadetBlue = new Pen(Color.CadetBlue, penThickness);
+
+            //vertical
+            for (int ii = 0; ii < verticalQty; ii++)
+            {
+                GBpointResultX = ((pInnerX + pInnerWd) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
+                GeorgianBar_GapX += (pInnerWd + (pInnerX)) / (verticalQty + 1);
+                Point[] GeorgianBar_PointsX = new[]
+              {
+
+                  new Point(GBpointResultX,pInnerX+1),
+                  new Point(GBpointResultX,pInnerX + pInnerHt-1),
+             };
+                for (int i = 0; i < GeorgianBar_PointsX.Length - 1; i += 2)
+                {
+                    g.DrawLine(pCadetBlue, GeorgianBar_PointsX[i], GeorgianBar_PointsX[i + 1]);
+                }
+            }
+
+            //Horizontal
+
+            for (int ii = 0; ii < horizontalQty; ii++)
+            {
+                GBpointResultY = ((pInnerY + pInnerHt) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
+                GeorgianBar_GapY += (pInnerHt + (pInnerY)) / (horizontalQty + 1);
+                Point[] GeorgianBar_PointsY = new[]
+              {
+
+                  new Point(pInnerY+1,GBpointResultY ),
+                  new Point(pInnerY-1 + pInnerWd,GBpointResultY),
+             };
+                for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pCadetBlue, GeorgianBar_PointsY[i], GeorgianBar_PointsY[i + 1]);
+                }
+            }
+
+            #endregion
+
+
             Font drawFont = new Font("Times New Roman", font_size);
             StringFormat drawFormat = new StringFormat();
             drawFormat.Alignment = StringAlignment.Center;
@@ -274,10 +338,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                              casement.ClientRectangle.Width,
                                             10);
 
+            RectangleF inwardStr_rect = new RectangleF(0,
+                                                      (casement.ClientRectangle.Height / 2) + 30,
+                                                       casement.ClientRectangle.Width,
+                                                      10);
+
+            string in_or_out = "";
+            if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
+                _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+            {
+                in_or_out = "Inward";
+            }
+
             g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm",
                          new Font("Segoe UI", 8.0f, FontStyle.Bold),
                          new SolidBrush(Color.Black),
                          rect,
+                         drawFormat);
+
+            g.DrawString(in_or_out,
+                         new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                         new SolidBrush(Color.Black),
+                         inwardStr_rect,
                          drawFormat);
 
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,

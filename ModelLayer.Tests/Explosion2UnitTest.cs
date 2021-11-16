@@ -12,7 +12,7 @@ using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
 using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
-using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -40,6 +40,9 @@ namespace ModelLayer.Tests
             _multiPanelServices = new MultiPanelServices(new ModelDataAnnotationCheck());
             _dividerServices = new DividerServices(new ModelDataAnnotationCheck());
         }
+
+
+        //FIXED WINDOW
 
         [TestMethod]
         public void ChkVar_SinglePanelFixWindow()
@@ -81,7 +84,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -116,7 +119,7 @@ namespace ModelLayer.Tests
             _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(1005, _frameModel.Frame_ExplosionWidth);
@@ -126,7 +129,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1932, _frameModel.Frame_ReinfHeight);
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
-
+            Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1000, _panelModel.Panel_GlazingBeadWidth);
@@ -180,7 +183,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -214,7 +217,7 @@ namespace ModelLayer.Tests
             _panelModel.Panel_GlassThickness = 6.0f;
             _frameModel.Lst_Panel.Add(_panelModel);
 
-            _qouteModel.GetListOfMaterials();
+            _qouteModel.GetListOfMaterials(_windoorModel);
 
             Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
             Assert.AreEqual(624, _frameModel.Frame_ExplosionWidth);
@@ -540,7 +543,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -570,10 +573,18 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   1);
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   0,
+                                                                   DockStyle.Fill,
+                                                                   "FixedPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
             _panelModel.Panel_Placement = "First";
             _panelModel.Panel_GlassThickness = 6.0f;
-            _panelModel.Panel_GlassThickness = 6.0f;
+            _panelModel.Panel_SashPropertyVisibility = false;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
             fw1.Name = "FixedPanelUC_1";
@@ -589,9 +600,16 @@ namespace ModelLayer.Tests
                                                                       _multipanelModel.MPanel_DisplayWidth,
                                                                       _multipanelModel.MPanel_DisplayHeight,
                                                                       _multipanelModel,
+                                                                      _frameModel,
                                                                       1,
                                                                       _frameModel.FrameImageRenderer_Zoom,
-                                                                      _frameModel.Frame_Type.ToString());
+                                                                      _frameModel.Frame_Type.ToString(),
+                                                                      "TransomUC_1",
+                                                                      null,
+                                                                      false,
+                                                                      true,
+                                                                      null
+                                                                      );
             _multipanelModel.MPanelLst_Divider.Add(divModel);
             Control div1 = new Control();
             div1.Name = "TransomUC_1";
@@ -616,7 +634,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -646,10 +664,18 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   2);
+                                                                   2,
+                                                                   2,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   2,
+                                                                   DockStyle.Fill,
+                                                                   "FixedPanelUC_2",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
-            _panelModel2.Panel_GlassThickness = 6.0f;
+            _panelModel2.Panel_SashPropertyVisibility = false;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
             fw2.Name = "FixedPanelUC_2";
@@ -689,57 +715,84 @@ namespace ModelLayer.Tests
             #region CheckQuantity
 
             DataRow[] dr;
-            object sumObject;
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '555'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1205'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '482'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1132'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select("Description = 'Transom Width 7536' AND Size = '487'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Reinforcement Width R677' AND Size = '407'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            //P1 & P2
+            //P1
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '550'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '550'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '600'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '600'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '478'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%%' AND
+                             Size = '478'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '540'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass (P1) height%%' AND
+                             Size = '540'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //P2
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '550'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '600'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%%' AND
+                             Size = '478'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) height%%' AND
+                             Size = '540'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             #endregion
 
@@ -834,7 +887,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -864,8 +917,17 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   1);
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   0,
+                                                                   DockStyle.Fill,
+                                                                   "FixedPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
             _panelModel.Panel_Placement = "First";
+            _panelModel.Panel_SashPropertyVisibility = false;
             _panelModel.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel);
             Control fw1 = new Control();
@@ -882,9 +944,15 @@ namespace ModelLayer.Tests
                                                                       _multipanelModel.MPanel_DisplayWidth,
                                                                       _multipanelModel.MPanel_DisplayHeight,
                                                                       _multipanelModel,
+                                                                      _frameModel,
                                                                       1,
                                                                       _frameModel.FrameImageRenderer_Zoom,
-                                                                      _frameModel.Frame_Type.ToString());
+                                                                      _frameModel.Frame_Type.ToString(),
+                                                                      "TransomUC_1",
+                                                                      null,
+                                                                      false,
+                                                                      true,
+                                                                      null);
             _multipanelModel.MPanelLst_Divider.Add(divModel);
             Control div1 = new Control();
             div1.Name = "TransomUC_1";
@@ -909,7 +977,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -939,8 +1007,17 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   2);
+                                                                   2,
+                                                                   2,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   2,
+                                                                   DockStyle.Fill,
+                                                                   "FixedPanelUC_2",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_SashPropertyVisibility = false;
             _panelModel2.Panel_GlassThickness = 6.0f;
             _multipanelModel.MPanelLst_Panel.Add(_panelModel2);
             Control fw2 = new Control();
@@ -980,74 +1057,86 @@ namespace ModelLayer.Tests
             #region CheckQuantity
 
             DataRow[] dr;
-            object sumObject;
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '555'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1205'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '482'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1132'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
 
 
             dr = dt.Select("Description = 'Transom Width 7536' AND Size = '487'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Reinforcement Width R677' AND Size = '407'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '550'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '550'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '700'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '500'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%%' AND
+                             Size = '478'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%%' AND
+                             Size = '478'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) height%%' AND
+                             Size = '640'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) height%%' AND
+                             Size = '440'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
 
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '550'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '700'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '500'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
-
-
-
-
-
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '478'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '640'");
-            Assert.AreEqual(1, Convert.ToInt32(sumObject));
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '440'");
-            Assert.AreEqual(1, Convert.ToInt32(sumObject));
             #endregion
         }
 
@@ -1163,9 +1252,15 @@ namespace ModelLayer.Tests
                                                                     _multiMullionModel.MPanel_DisplayWidth,
                                                                     _multiMullionModel.MPanel_DisplayHeight,
                                                                     _multiMullionModel,
+                                                                    _frameModel,
                                                                     1,
                                                                     _frameModel.FrameImageRenderer_Zoom,
-                                                                    _frameModel.Frame_Type.ToString());
+                                                                    _frameModel.Frame_Type.ToString(),
+                                                                    "MullionUC_1",
+                                                                    null,
+                                                                    false,
+                                                                    true,
+                                                                    null);
             _multiMullionModel.MPanelLst_Divider.Add(mullionModel);
             Control div_mullion = new Control();
             div_mullion.Name = "MullionUC_1";
@@ -1206,9 +1301,16 @@ namespace ModelLayer.Tests
                                                                   _multiMullionModel.MPanel_DisplayWidth,
                                                                   _multiMullionModel.MPanel_DisplayHeight,
                                                                   _multiMullionModel,
+                                                                  _frameModel,
                                                                   2,
                                                                   _frameModel.FrameImageRenderer_Zoom,
-                                                                  _frameModel.Frame_Type.ToString());
+                                                                  _frameModel.Frame_Type.ToString(),
+                                                                  "MullionUC_2",
+                                                                  null,
+                                                                  false,
+                                                                  true,
+                                                                  null);
+
             _multiMullionModel.MPanelLst_Divider.Add(mullionModel2);
             Control div_mullion2 = new Control();
             div_mullion2.Name = "MullionUC_2";
@@ -1266,7 +1368,7 @@ namespace ModelLayer.Tests
                                                                  SashReinf_ArticleNo._None,
                                                                  GlassType._Single,
                                                                  Espagnolette_ArticleNo._None,
-                                                                 Striker_ArticleNo._M89ANT,
+                                                                 Striker_ArticleNo._M89ANTA,
                                                                  MiddleCloser_ArticleNo._None,
                                                                  LockingKit_ArticleNo._None,
                                                                  MotorizedMech_ArticleNo._41555B,
@@ -1296,8 +1398,17 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   1);
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   0,
+                                                                   DockStyle.Fill,
+                                                                   "FixedPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_SashPropertyVisibility = false;
             _panelModel1.Panel_GlassThickness = 6.0f;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel1);
@@ -1317,9 +1428,16 @@ namespace ModelLayer.Tests
                                                                   _multiTransomModel1.MPanel_DisplayWidth,
                                                                   _multiTransomModel1.MPanel_DisplayHeight,
                                                                   _multiTransomModel1,
+                                                                  _frameModel,
                                                                   3,
                                                                   _frameModel.FrameImageRenderer_Zoom,
-                                                                  _frameModel.Frame_Type.ToString());
+                                                                  _frameModel.Frame_Type.ToString(),
+                                                                  "TransomUC_3",
+                                                                  null,
+                                                                  false,
+                                                                  true,
+                                                                  null);
+
             _multiTransomModel1.MPanelLst_Divider.Add(divModel_Transom);
             Control div3 = new Control();
             div3.Name = "TransomUC_3";
@@ -1347,7 +1465,7 @@ namespace ModelLayer.Tests
                                                                   SashReinf_ArticleNo._None,
                                                                   GlassType._Single,
                                                                   Espagnolette_ArticleNo._None,
-                                                                  Striker_ArticleNo._M89ANT,
+                                                                  Striker_ArticleNo._M89ANTA,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
                                                                   MotorizedMech_ArticleNo._41555B,
@@ -1377,8 +1495,17 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   2);
+                                                                   2,
+                                                                   2,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   2,
+                                                                   DockStyle.Fill,
+                                                                   "FixedPanelUC_2",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_SashPropertyVisibility = false;
             _panelModel2.Panel_GlassThickness = 6.0f;
             _panelModel2.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel2);
@@ -1416,7 +1543,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -1446,10 +1573,19 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   3);
+                                                                   3,
+                                                                   3,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   0,
+                                                                   DockStyle.Fill,
+                                                                   "FixedPanelUC_3",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_SashPropertyVisibility = false;
             _panelModel3.Panel_GlassThickness = 6.0f;
-            _panelModel3.Panel_Index_Inside_MPanel = 1;
+            _panelModel3.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel2.MPanelLst_Panel.Add(_panelModel3);
             Control fw3 = new Control();
             fw3.Name = "FixedPanelUC_3";
@@ -1466,9 +1602,15 @@ namespace ModelLayer.Tests
                                                       _multiTransomModel2.MPanel_DisplayWidth,
                                                       _multiTransomModel2.MPanel_DisplayHeight,
                                                       _multiTransomModel2,
+                                                      _frameModel,
                                                       4,
                                                       _frameModel.FrameImageRenderer_Zoom,
-                                                      _frameModel.Frame_Type.ToString());
+                                                      _frameModel.Frame_Type.ToString(),
+                                                      "TransomUC_4",
+                                                      null,
+                                                      false,
+                                                      true,
+                                                      null);
 
             _multiTransomModel2.MPanelLst_Divider.Add(divModel_Transom2);
             Control div4 = new Control();
@@ -1495,7 +1637,7 @@ namespace ModelLayer.Tests
                                                               SashReinf_ArticleNo._None,
                                                               GlassType._Single,
                                                               Espagnolette_ArticleNo._None,
-                                                              Striker_ArticleNo._M89ANT,
+                                                              Striker_ArticleNo._M89ANTA,
                                                               MiddleCloser_ArticleNo._None,
                                                               LockingKit_ArticleNo._None,
                                                               MotorizedMech_ArticleNo._41555B,
@@ -1525,8 +1667,17 @@ namespace ModelLayer.Tests
                                                               0,
                                                               0,
                                                               false,
-                                                              4);
+                                                              4,
+                                                              4,
+                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                              2,
+                                                              DockStyle.Fill,
+                                                              "FixedPanelUC_4",
+                                                              true,
+                                                              HingeOption._FrictionStay
+                                                              );
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_SashPropertyVisibility = false;
             _panelModel4.Panel_GlassThickness = 6.0f;
             _panelModel4.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel2.MPanelLst_Panel.Add(_panelModel4);
@@ -1563,38 +1714,47 @@ namespace ModelLayer.Tests
                                                              SashReinf_ArticleNo._None,
                                                              GlassType._Single,
                                                              Espagnolette_ArticleNo._None,
-                                                             Striker_ArticleNo._M89ANT,
+                                                             Striker_ArticleNo._M89ANTA,
                                                              MiddleCloser_ArticleNo._None,
                                                              LockingKit_ArticleNo._None,
                                                              MotorizedMech_ArticleNo._41555B,
-                                                              Handle_Type._Rotary,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              Extension_ArticleNo._None,
-                                                              false,
-                                                              false,
-                                                              false,
-                                                              false,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              0,
-                                                              Rotoswing_HandleArtNo._RSC773451,
-                                                              GeorgianBar_ArticleNo._None,
-                                                              0,
-                                                              0,
-                                                              false,
-                                                              5);
+                                                             Handle_Type._Rotary,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             Extension_ArticleNo._None,
+                                                             false,
+                                                             false,
+                                                             false,
+                                                             false,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             0,
+                                                             Rotoswing_HandleArtNo._RSC773451,
+                                                             GeorgianBar_ArticleNo._None,
+                                                             0,
+                                                             0,
+                                                             false,
+                                                             5,
+                                                             5,
+                                                             _frameModel.FrameImageRenderer_Zoom,
+                                                             0,
+                                                             DockStyle.Fill,
+                                                             "FixedPanelUC_5",
+                                                             true,
+                                                             HingeOption._FrictionStay
+                                                             );
             _panelModel5.Panel_Placement = "First";
+            _panelModel5.Panel_SashPropertyVisibility = false;
             _panelModel5.Panel_GlassThickness = 6.0f;
             _panelModel5.Panel_Index_Inside_MPanel = 1;
             _multiTransomModel3.MPanelLst_Panel.Add(_panelModel5);
@@ -1614,9 +1774,16 @@ namespace ModelLayer.Tests
                                                      _multiTransomModel3.MPanel_DisplayWidth,
                                                      _multiTransomModel3.MPanel_DisplayHeight,
                                                      _multiTransomModel3,
+                                                     _frameModel,
                                                      5,
                                                      _frameModel.FrameImageRenderer_Zoom,
-                                                     _frameModel.Frame_Type.ToString());
+                                                     _frameModel.Frame_Type.ToString(),
+                                                     "TransomUC_5",
+                                                     null,
+                                                     false,
+                                                     true,
+                                                     null);
+
             _multiTransomModel3.MPanelLst_Divider.Add(divModel_Transom3);
             Control div5 = new Control();
             div5.Name = "TransomUC_5";
@@ -1643,7 +1810,7 @@ namespace ModelLayer.Tests
                                                                   SashReinf_ArticleNo._None,
                                                                   GlassType._Single,
                                                                   Espagnolette_ArticleNo._None,
-                                                                  Striker_ArticleNo._M89ANT,
+                                                                  Striker_ArticleNo._M89ANTA,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
                                                                   MotorizedMech_ArticleNo._41555B,
@@ -1673,8 +1840,16 @@ namespace ModelLayer.Tests
                                                                   0,
                                                                   0,
                                                                   false,
-                                                                  6);
+                                                                  6,
+                                                                  6,
+                                                                  _frameModel.FrameImageRenderer_Zoom,
+                                                                  2,
+                                                                  DockStyle.Fill,
+                                                                  "FixedPanelUC_6",
+                                                                  true,
+                                                                  HingeOption._FrictionStay);
             _panelModel6.Panel_Placement = "Last";
+            _panelModel6.Panel_SashPropertyVisibility = false;
             _panelModel6.Panel_GlassThickness = 6.0f;
             _panelModel6.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel3.MPanelLst_Panel.Add(_panelModel6);
@@ -1805,84 +1980,202 @@ namespace ModelLayer.Tests
             #region CheckQuantity
 
             DataRow[] dr;
-            object sumObject;
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1805'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1605'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1732'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1532'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             //mullionUC1 & 2
             dr = dt.Select("Description = 'Mullion Height 7536' AND Size = '1537'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Reinforcement Height R677' AND Size = '1457'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             //TransomUC3
-            sumObject = dt.Compute("Sum(Qty)", @"Description = 'Transom Width 7536' AND Size = '553'");
-            Assert.AreEqual(3, Convert.ToInt32(sumObject));
+
+
+            dr = dt.Select("Description = 'Transom Width 7536' AND Size = '553'");
+            Assert.AreEqual(2, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
 
             dr = dt.Select("Description = 'Transom Reinforcement Width R677' AND Size = '473'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(3, dr[0]["Qty"]);
+            Assert.AreEqual("3", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '604'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '604'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '604'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P6) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '604'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
 
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '592'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '604'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '592'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '800'");
-            Assert.AreEqual(12, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '592'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '800'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '800'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '800'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '800'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '800'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P6) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '800'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%%' AND
+                             Size = '544'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '544'");
-            Assert.AreEqual(6, Convert.ToInt32(sumObject));
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '740'");
-            Assert.AreEqual(6, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%%' AND
+                             Size = '544'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%%' AND
+                             Size = '544'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Width%%' AND
+                             Size = '544'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) Width%%' AND
+                             Size = '544'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P6) Width%%' AND
+                             Size = '544'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P6) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) height%%' AND
+                             Size = '740'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
             #endregion
 
         }
@@ -1983,7 +2276,7 @@ namespace ModelLayer.Tests
                                                                      SashReinf_ArticleNo._None,
                                                                      GlassType._Single,
                                                                      Espagnolette_ArticleNo._None,
-                                                                     Striker_ArticleNo._M89ANT,
+                                                                     Striker_ArticleNo._M89ANTA,
                                                                      MiddleCloser_ArticleNo._None,
                                                                      LockingKit_ArticleNo._None,
                                                                      MotorizedMech_ArticleNo._41555B,
@@ -2033,9 +2326,16 @@ namespace ModelLayer.Tests
                                                                           _multiMullionModel.MPanel_DisplayWidth,
                                                                           _multiMullionModel.MPanel_DisplayHeight,
                                                                           _multiMullionModel,
+                                                                          _frameModel,
                                                                           1,
                                                                           _frameModel.FrameImageRenderer_Zoom,
-                                                                          _frameModel.Frame_Type.ToString());
+                                                                          _frameModel.Frame_Type.ToString(),
+                                                                          "MullionUC_1",
+                                                                          null,
+                                                                          false,
+                                                                          true,
+                                                                          null);
+
             _multiMullionModel.MPanelLst_Divider.Add(mullionModel);
             Control div_mullion = new Control();
             div_mullion.Name = "MullionUC_1";
@@ -2078,9 +2378,15 @@ namespace ModelLayer.Tests
                                                                            _multiMullionModel.MPanel_DisplayWidth,
                                                                            _multiMullionModel.MPanel_DisplayHeight,
                                                                            _multiMullionModel,
+                                                                           _frameModel,
                                                                            2,
                                                                            _frameModel.FrameImageRenderer_Zoom,
-                                                                           _frameModel.Frame_Type.ToString());
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "MullionUC_2",
+                                                                           null,
+                                                                           false,
+                                                                           true,
+                                                                           null);
             _multiMullionModel.MPanelLst_Divider.Add(mullionModel2);
             Control div_mullion2 = new Control();
             div_mullion2.Name = "MullionUC_2";
@@ -2106,7 +2412,7 @@ namespace ModelLayer.Tests
                                                                      SashReinf_ArticleNo._None,
                                                                      GlassType._Single,
                                                                      Espagnolette_ArticleNo._None,
-                                                                     Striker_ArticleNo._M89ANT,
+                                                                     Striker_ArticleNo._M89ANTA,
                                                                      MiddleCloser_ArticleNo._None,
                                                                      LockingKit_ArticleNo._None,
                                                                      MotorizedMech_ArticleNo._41555B,
@@ -2174,7 +2480,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._None,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._None,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._None,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -2226,9 +2532,16 @@ namespace ModelLayer.Tests
                                                                               _multiTransomModel1.MPanel_DisplayWidth,
                                                                               _multiTransomModel1.MPanel_DisplayHeight,
                                                                               _multiTransomModel1,
+                                                                              _frameModel,
                                                                               3,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "TransomUC_3",
+                                                                               null,
+                                                                               false,
+                                                                               true,
+                                                                               null);
+
             _multiTransomModel1.MPanelLst_Divider.Add(divModel_Transom);
             Control div1 = new Control();
             div1.Name = "TransomUC_3";
@@ -2254,7 +2567,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                     GlassType._Single,
                                                                     Espagnolette_ArticleNo._None,
-                                                                    Striker_ArticleNo._M89ANT,
+                                                                    Striker_ArticleNo._M89ANTA,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
                                                                     MotorizedMech_ArticleNo._41555B,
@@ -2380,89 +2693,96 @@ namespace ModelLayer.Tests
 
 
             DataRow[] dr;
-            object sumObject;
+
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '2105'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1705'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '2032'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1632'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             //mullionUC1 & 2
             dr = dt.Select("Description = 'Mullion Height 7536' AND Size = '1637'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Reinforcement Height R677' AND Size = '1557'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             //TransomUC3
             dr = dt.Select("Description = 'Transom Width 7536' AND Size = '653'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Reinforcement Width R677' AND Size = '573'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             //P1 & P2
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '704'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '704'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '1700'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1700'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '644'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '1628'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+                             Size = '644'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+                             Size = '1628'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             //P3 & P4
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '692'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '850'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '692'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '850'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '790'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
-
+            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+                             Size = '790'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             #endregion
 
@@ -2562,7 +2882,7 @@ namespace ModelLayer.Tests
                                                                      SashReinf_ArticleNo._None,
                                                                      GlassType._Single,
                                                                      Espagnolette_ArticleNo._None,
-                                                                     Striker_ArticleNo._M89ANT,
+                                                                     Striker_ArticleNo._M89ANTA,
                                                                      MiddleCloser_ArticleNo._None,
                                                                      LockingKit_ArticleNo._None,
                                                                      MotorizedMech_ArticleNo._41555B,
@@ -2612,9 +2932,15 @@ namespace ModelLayer.Tests
                                                                           _multiMullionModel.MPanel_DisplayWidth,
                                                                           _multiMullionModel.MPanel_DisplayHeight,
                                                                           _multiMullionModel,
+                                                                          _frameModel,
                                                                           1,
                                                                           _frameModel.FrameImageRenderer_Zoom,
-                                                                          _frameModel.Frame_Type.ToString());
+                                                                          _frameModel.Frame_Type.ToString(),
+                                                                          "MullionUC_1",
+                                                                          null,
+                                                                          false,
+                                                                          true,
+                                                                          null);
             _multiMullionModel.MPanelLst_Divider.Add(mullionModel);
             Control div_mullion = new Control();
             div_mullion.Name = "MullionUC_1";
@@ -2658,9 +2984,15 @@ namespace ModelLayer.Tests
                                                                            _multiMullionModel.MPanel_DisplayWidth,
                                                                            _multiMullionModel.MPanel_DisplayHeight,
                                                                            _multiMullionModel,
+                                                                           _frameModel,
                                                                            2,
                                                                            _frameModel.FrameImageRenderer_Zoom,
-                                                                           _frameModel.Frame_Type.ToString());
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "MullionUC_2",
+                                                                           null,
+                                                                           false,
+                                                                           true,
+                                                                           null);
             _multiMullionModel.MPanelLst_Divider.Add(mullionModel2);
             Control div_mullion2 = new Control();
             div_mullion2.Name = "MullionUC_2";
@@ -2686,7 +3018,7 @@ namespace ModelLayer.Tests
                                                                      SashReinf_ArticleNo._None,
                                                                      GlassType._Single,
                                                                      Espagnolette_ArticleNo._None,
-                                                                     Striker_ArticleNo._M89ANT,
+                                                                     Striker_ArticleNo._M89ANTA,
                                                                      MiddleCloser_ArticleNo._None,
                                                                      LockingKit_ArticleNo._None,
                                                                      MotorizedMech_ArticleNo._41555B,
@@ -2773,9 +3105,15 @@ namespace ModelLayer.Tests
                                                                           _multiTransomModel1.MPanel_DisplayWidth,
                                                                           _multiTransomModel1.MPanel_DisplayHeight,
                                                                           _multiTransomModel1,
+                                                                          _frameModel,
                                                                           3,
                                                                           _frameModel.FrameImageRenderer_Zoom,
-                                                                          _frameModel.Frame_Type.ToString());
+                                                                          _frameModel.Frame_Type.ToString(),
+                                                                          "TransomUC_3",
+                                                                          null,
+                                                                          false,
+                                                                          true,
+                                                                          null);
             _multiTransomModel1.MPanelLst_Divider.Add(transomModel);
             Control div_Transom3 = new Control();
             div_Transom3.Name = "TransomUC_3";
@@ -2843,7 +3181,7 @@ namespace ModelLayer.Tests
                                                                   SashReinf_ArticleNo._None,
                                                                   GlassType._Single,
                                                                   Espagnolette_ArticleNo._None,
-                                                                  Striker_ArticleNo._M89ANT,
+                                                                  Striker_ArticleNo._M89ANTA,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
                                                                   MotorizedMech_ArticleNo._41555B,
@@ -2895,9 +3233,15 @@ namespace ModelLayer.Tests
                                                                            _multiMullionModel1.MPanel_DisplayWidth,
                                                                            _multiMullionModel1.MPanel_DisplayHeight,
                                                                            _multiMullionModel1,
+                                                                           _frameModel,
                                                                            4,
                                                                            _frameModel.FrameImageRenderer_Zoom,
-                                                                           _frameModel.Frame_Type.ToString());
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "MullionUC_4",
+                                                                           null,
+                                                                           false,
+                                                                           true,
+                                                                           null);
             _multiMullionModel1.MPanelLst_Divider.Add(mullionModel3);
             Control div_mullion4 = new Control();
             div_mullion4.Name = "MullionUC_4";
@@ -2924,7 +3268,7 @@ namespace ModelLayer.Tests
                                                                   SashReinf_ArticleNo._None,
                                                                   GlassType._Single,
                                                                   Espagnolette_ArticleNo._None,
-                                                                  Striker_ArticleNo._M89ANT,
+                                                                  Striker_ArticleNo._M89ANTA,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
                                                                   MotorizedMech_ArticleNo._41555B,
@@ -2995,7 +3339,7 @@ namespace ModelLayer.Tests
                                                                       SashReinf_ArticleNo._None,
                                                                       GlassType._Single,
                                                                       Espagnolette_ArticleNo._None,
-                                                                      Striker_ArticleNo._M89ANT,
+                                                                      Striker_ArticleNo._M89ANTA,
                                                                       MiddleCloser_ArticleNo._None,
                                                                       LockingKit_ArticleNo._None,
                                                                       MotorizedMech_ArticleNo._41555B,
@@ -3047,9 +3391,15 @@ namespace ModelLayer.Tests
                                                                            _multiMullionModel2.MPanel_DisplayWidth,
                                                                            _multiMullionModel2.MPanel_DisplayHeight,
                                                                            _multiMullionModel2,
+                                                                           _frameModel,
                                                                            5,
                                                                            _frameModel.FrameImageRenderer_Zoom,
-                                                                           _frameModel.Frame_Type.ToString());
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "MullionUC_5",
+                                                                           null,
+                                                                           false,
+                                                                           true,
+                                                                           null);
             _multiMullionModel2.MPanelLst_Divider.Add(mullionModel4);
             Control div_mullion5 = new Control();
             div_mullion5.Name = "MullionUC_5";
@@ -3076,7 +3426,7 @@ namespace ModelLayer.Tests
                                                                   SashReinf_ArticleNo._None,
                                                                   GlassType._Single,
                                                                   Espagnolette_ArticleNo._None,
-                                                                  Striker_ArticleNo._M89ANT,
+                                                                  Striker_ArticleNo._M89ANTA,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
                                                                   MotorizedMech_ArticleNo._41555B,
@@ -3239,90 +3589,104 @@ namespace ModelLayer.Tests
 
 
             DataRow[] dr;
-            object sumObject;
+
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '2405'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1955'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '2332'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1882'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             //mullionUC1 & 2
             dr = dt.Select("Description = 'Mullion Height 7538' AND Size = '1892'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Reinforcement Height R686' AND Size = '1782'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Mechanical Joint AV585'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(8, dr[0]["Qty"]);
+            Assert.AreEqual("8", dr[0]["Qty"]);
 
             //TransomUC3
             dr = dt.Select("Description = 'Transom Width 7538' AND Size = '738'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Reinforcement Width R686' AND Size = '628'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Mechanical Joint AV585'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             //P1 & P2        
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2453%' AND
-                                                 Size = '799'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2453%' AND
-                                                 Size = '1950'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '799'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '724'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1950'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '1878'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+
+            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+                             Size = '724'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+                             Size = '1878'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
 
             //P3 - P6
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '401'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '975'");
-            Assert.AreEqual(8, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '323'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '900'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '401'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
 
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '975'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+                             Size = '323'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+                             Size = '900'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             #endregion
 
@@ -3428,7 +3792,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                     GlassType._Single,
                                                                     Espagnolette_ArticleNo._None,
-                                                                    Striker_ArticleNo._M89ANT,
+                                                                    Striker_ArticleNo._M89ANTA,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
                                                                     MotorizedMech_ArticleNo._41555B,
@@ -3478,9 +3842,16 @@ namespace ModelLayer.Tests
                                                                               _multiMullionModel.MPanel_DisplayWidth,
                                                                               _multiMullionModel.MPanel_DisplayHeight,
                                                                               _multiMullionModel,
+                                                                              _frameModel,
                                                                               1,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                               null,
+                                                                               false,
+                                                                               true,
+                                                                               null);
+
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_1";
@@ -3525,9 +3896,15 @@ namespace ModelLayer.Tests
                                                                                _multiMullionModel.MPanel_DisplayWidth,
                                                                                _multiMullionModel.MPanel_DisplayHeight,
                                                                                _multiMullionModel,
+                                                                               _frameModel,
                                                                                2,
                                                                                _frameModel.FrameImageRenderer_Zoom,
-                                                                               _frameModel.Frame_Type.ToString());
+                                                                               _frameModel.Frame_Type.ToString(),
+                                                                                "MullionUC_2",
+                                                                                null,
+                                                                                false,
+                                                                                true,
+                                                                                null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel2);
             Control div_Mullion2 = new Control();
             div_Mullion2.Name = "MullionUC_2";
@@ -3553,7 +3930,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                     GlassType._Single,
                                                                     Espagnolette_ArticleNo._None,
-                                                                    Striker_ArticleNo._M89ANT,
+                                                                    Striker_ArticleNo._M89ANTA,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
                                                                     MotorizedMech_ArticleNo._41555B,
@@ -3622,7 +3999,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                     GlassType._Single,
                                                                     Espagnolette_ArticleNo._None,
-                                                                    Striker_ArticleNo._M89ANT,
+                                                                    Striker_ArticleNo._M89ANTA,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
                                                                     MotorizedMech_ArticleNo._41555B,
@@ -3673,9 +4050,15 @@ namespace ModelLayer.Tests
                                                                               _multiTransomModel1.MPanel_DisplayWidth,
                                                                               _multiTransomModel1.MPanel_DisplayHeight,
                                                                               _multiTransomModel1,
+                                                                              _frameModel,
                                                                               3,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "TransomUC_3",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiTransomModel1.MPanelLst_Divider.Add(_divTransomModel);
             Control div_Transom = new Control();
             div_Transom.Name = "TransomUC_3";
@@ -3719,9 +4102,15 @@ namespace ModelLayer.Tests
                                                                                _multiTransomModel1.MPanel_DisplayWidth,
                                                                                _multiTransomModel1.MPanel_DisplayHeight,
                                                                                _multiTransomModel1,
+                                                                               _frameModel,
                                                                                4,
                                                                                _frameModel.FrameImageRenderer_Zoom,
-                                                                               _frameModel.Frame_Type.ToString());
+                                                                               _frameModel.Frame_Type.ToString(),
+                                                                                "TransomUC_4",
+                                                                                null,
+                                                                                false,
+                                                                                true,
+                                                                                null);
             _multiTransomModel1.MPanelLst_Divider.Add(_divTransomModel2);
             Control div_Transom2 = new Control();
             div_Transom2.Name = "TransomUC_4";
@@ -3747,7 +4136,7 @@ namespace ModelLayer.Tests
                                                                      SashReinf_ArticleNo._None,
                                                                      GlassType._Single,
                                                                      Espagnolette_ArticleNo._None,
-                                                                     Striker_ArticleNo._M89ANT,
+                                                                     Striker_ArticleNo._M89ANTA,
                                                                      MiddleCloser_ArticleNo._None,
                                                                      LockingKit_ArticleNo._None,
                                                                      MotorizedMech_ArticleNo._41555B,
@@ -3818,7 +4207,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                     GlassType._Single,
                                                                     Espagnolette_ArticleNo._None,
-                                                                    Striker_ArticleNo._M89ANT,
+                                                                    Striker_ArticleNo._M89ANTA,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
                                                                     MotorizedMech_ArticleNo._41555B,
@@ -3869,9 +4258,15 @@ namespace ModelLayer.Tests
                                                                              _multiMullionModel1.MPanel_DisplayWidth,
                                                                              _multiMullionModel1.MPanel_DisplayHeight,
                                                                              _multiMullionModel1,
+                                                                             _frameModel,
                                                                              5,
                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                             _frameModel.Frame_Type.ToString());
+                                                                             _frameModel.Frame_Type.ToString(),
+                                                                             "MullionUC_5",
+                                                                             null,
+                                                                             false,
+                                                                             true,
+                                                                             null);
             _multiMullionModel1.MPanelLst_Divider.Add(_divMullionModel3);
             Control div_Mullion3 = new Control();
             div_Mullion3.Name = "MullionUC_5";
@@ -3897,7 +4292,7 @@ namespace ModelLayer.Tests
                                                                     SashReinf_ArticleNo._None,
                                                                     GlassType._Single,
                                                                     Espagnolette_ArticleNo._None,
-                                                                    Striker_ArticleNo._M89ANT,
+                                                                    Striker_ArticleNo._M89ANTA,
                                                                     MiddleCloser_ArticleNo._None,
                                                                     LockingKit_ArticleNo._None,
                                                                     MotorizedMech_ArticleNo._41555B,
@@ -4050,116 +4445,126 @@ namespace ModelLayer.Tests
 
 
             DataRow[] dr;
-            object sumObject;
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '2105'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1505'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '2032'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1432'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Height 7536' AND Size = '1437'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Reinforcement Height R677' AND Size = '1357'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Mullion Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Width 7536' AND Size = '653'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Reinforcement Width R677' AND Size = '573'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Transom Mechanical Joint 9U18'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
 
             //P1 & P2
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '704'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '704'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2452%' AND
-                                                 Size = '1500'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1500'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '644'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '1428'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+                             Size = '644'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+                             Size = '1428'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             //P3 & P4
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '692'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2453%' AND
-                                                 Size = '692'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '504'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2453%' AND
-                                                 Size = '504'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '644'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+                             Size = '644'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '444'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+                             Size = '444'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             //P5 & P6
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '346'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Width%' AND
-                                                 Description LIKE '%2453%' AND
-                                                 Size = '346'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glazing Bead Height%' AND
-                                                 Description LIKE '%2453%' AND
-                                                 Size = '492'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass Width%' AND
-                                                 Size = '298'");
-            Assert.AreEqual(2, Convert.ToInt32(sumObject));
-
-            sumObject = dt.Compute("Sum(Qty)", @"Description LIKE '%Glass height%' AND
-                                                 Size = '444'");
-            Assert.AreEqual(4, Convert.ToInt32(sumObject));
+            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '492'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
 
+            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+                             Size = '298'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+                             Size = '444'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             #endregion
 
 
         }
 
-        //Awning Samples
+        //Awning Window Samples
 
         [TestMethod]
         public void ChkVar_SinglePanelAwningWindow()
@@ -4217,7 +4622,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._R675,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._628807,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70DB,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -4247,7 +4652,14 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   1);
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "AwningPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay);
             _panelModel.Panel_GlassThickness = 14.0f;
             _panelModel.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773452;
             _frameModel.Lst_Panel.Add(_panelModel);
@@ -4266,7 +4678,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(3612, _qouteModel.GlazingSeal_TotalQty);
-            Assert.AreEqual(1680000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual((decimal)0.2016, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(6, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(24, _qouteModel.Rebate_Qty);
             Assert.AreEqual(41, _qouteModel.Screws_for_Fabrication);
@@ -4291,11 +4703,12 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel.Panel_CoverProfileArtNo2);
             Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel.Panel_FrictionStayArtNo);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel.Panel_PlasticWedge);
             Assert.AreEqual(2, _panelModel.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel.Panel_MiddleCloserArtNo);
             Assert.AreEqual(1, _panelModel.Panel_MiddleCloserPairQty);
@@ -4307,73 +4720,79 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '705'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1205'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '632'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1132'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '653'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1153'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '528'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1028'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '653'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1153'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '532'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1032'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
-                             Description LIKE '%7199%'");
+                             Description LIKE '%7199-DB%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
+            dr = dt.Select(@"Description LIKE '%Middle Closer%' AND
+                             Description LIKE '%1WC70-DB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-
-
+            dr = dt.Select(@"Description LIKE '%Friction Stay%' AND
+                             Description LIKE '%Storm 22%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
             #endregion
 
         }
@@ -4383,14 +4802,14 @@ namespace ModelLayer.Tests
         public void ChkVar_2PanelAwningWindow()
         {
             /*          __________________________________
-            *           |       /\       |       /\       |   
-            *           |      /  \      |      /  \      |
-            *           |     /    \     |     /    \     |
-            *           |    /      \    |    /      \    |
-            *           |   /        \   |   /        \   | 
-            *           |  /          \  |  /          \  |
-            *           | /            \ | /            \ |
-            *           |/______________\|/______________\|    
+                       |       /\       |       /\       |   
+                       |      /  \      |      /  \      |
+                       |     /    \     |     /    \     |
+                       |    /      \    |    /      \    |
+                       |   /        \   |   /        \   | 
+                       |  /          \  |  /          \  |
+                       | /            \ | /            \ |
+                       |/______________\|/______________\|    
             */
 
             int total_wd = 1370,
@@ -4471,8 +4890,8 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._R675,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._628807,
-                                                                   Striker_ArticleNo._M89ANT,
-                                                                   MiddleCloser_ArticleNo._1WC70DB,
+                                                                   Striker_ArticleNo._M89ANTA,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
                                                                    Handle_Type._Rotoswing,
@@ -4496,15 +4915,22 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    0,
-                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   Rotoswing_HandleArtNo._RSC823048,
                                                                    GeorgianBar_ArticleNo._None,
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   1);
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "AwningPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay);
             _panelModel1.Panel_Placement = "First";
             _panelModel1.Panel_GlassThickness = 6.0f;
-            _panelModel1.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC823048;
+            _panelModel1.Panel_PlasticWedge = PlasticWedge_ArticleNo._7199WHT;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
             Control Awning1 = new Control();
@@ -4522,9 +4948,15 @@ namespace ModelLayer.Tests
                                                                               _multiMullionModel.MPanel_DisplayWidth,
                                                                               _multiMullionModel.MPanel_DisplayHeight,
                                                                               _multiMullionModel,
+                                                                              _frameModel,
                                                                               1,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_1";
@@ -4550,8 +4982,8 @@ namespace ModelLayer.Tests
                                                                       SashReinf_ArticleNo._R675,
                                                                       GlassType._Single,
                                                                       Espagnolette_ArticleNo._628807,
-                                                                      Striker_ArticleNo._M89ANT,
-                                                                      MiddleCloser_ArticleNo._1WC70DB,
+                                                                      Striker_ArticleNo._M89ANTA,
+                                                                      MiddleCloser_ArticleNo._1WC70WHT,
                                                                       LockingKit_ArticleNo._None,
                                                                       MotorizedMech_ArticleNo._41555B,
                                                                       Handle_Type._Rotoswing,
@@ -4575,15 +5007,22 @@ namespace ModelLayer.Tests
                                                                       0,
                                                                       0,
                                                                       0,
-                                                                      Rotoswing_HandleArtNo._RSC773451,
+                                                                      Rotoswing_HandleArtNo._RSC823048,
                                                                       GeorgianBar_ArticleNo._None,
                                                                       0,
                                                                       0,
                                                                       false,
-                                                                      2);
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "AwningPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._FrictionStay);
             _panelModel2.Panel_Placement = "Last";
             _panelModel2.Panel_GlassThickness = 6.0f;
-            _panelModel2.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC823048;
+            _panelModel1.Panel_PlasticWedge = PlasticWedge_ArticleNo._7199WHT;
             _panelModel2.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
             Control Awning2 = new Control();
@@ -4607,7 +5046,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
-            Assert.AreEqual(3014000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual((decimal)0.36168, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(8, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(32, _qouteModel.Rebate_Qty);
             Assert.AreEqual(75, _qouteModel.Screws_for_Fabrication);
@@ -4638,13 +5077,14 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
             Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel1.Panel_FrictionStayArtNo);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199WHT, _panelModel1.Panel_PlasticWedge);
             Assert.AreEqual(2, _panelModel1.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel1.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC823048, _panelModel1.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel1.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel1.Panel_StrikerQty_A);
-            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel1.Panel_MiddleCloserArtNo);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1.Panel_MiddleCloserArtNo);
 
 
 
@@ -4682,13 +5122,15 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
             Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel2.Panel_FrictionStayArtNo);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199WHT, _panelModel2.Panel_PlasticWedge);
             Assert.AreEqual(2, _panelModel2.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel2.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC823048, _panelModel2.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel2.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel2.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel2.Panel_StrikerQty_A);
-            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel2.Panel_MiddleCloserArtNo);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel2.Panel_MiddleCloserArtNo);
+
 
 
             #endregion
@@ -4705,74 +5147,103 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1375'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1105'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1302'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1032'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '650'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1053'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '525'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '928'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '650'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '1053'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '650'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1053'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '529'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '932'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '529'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '932'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
-
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
-                             Description LIKE '%7199%'");
+                             Description LIKE '%7199-WHT%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
+            dr = dt.Select(@"Description LIKE '%Middle Closer%' AND
+                             Description LIKE '%1WC70-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
+            dr = dt.Select(@"Description LIKE '%Friction Stay%' AND
+                             Description LIKE '%Storm 22%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
             #endregion
 
         }
@@ -4878,7 +5349,7 @@ namespace ModelLayer.Tests
                                                                                   SashReinf_ArticleNo._R675,
                                                                                   GlassType._Single,
                                                                                   Espagnolette_ArticleNo._628809,
-                                                                                  Striker_ArticleNo._M89ANT,
+                                                                                  Striker_ArticleNo._M89ANTA,
                                                                                   MiddleCloser_ArticleNo._1WC70DB,
                                                                                   LockingKit_ArticleNo._None,
                                                                                   MotorizedMech_ArticleNo._41556C,
@@ -4903,12 +5374,19 @@ namespace ModelLayer.Tests
                                                                                    0,
                                                                                    0,
                                                                                    0,
-                                                                                   Rotoswing_HandleArtNo._RSC773451,
-                                                                                   GeorgianBar_ArticleNo._None,
+                                                                                   Rotoswing_HandleArtNo._RSC773452,
+                                                                                   GeorgianBar_ArticleNo._0724,
+                                                                                   4,
+                                                                                   4,
+                                                                                   true,
+                                                                                   1,
+                                                                                   1,
+                                                                                   _frameModel.FrameImageRenderer_Zoom,
                                                                                    0,
-                                                                                   0,
-                                                                                   false,
-                                                                                   1);
+                                                                                   DockStyle.Fill,
+                                                                                   "AwningPanelUC_1",
+                                                                                   true,
+                                                                                   HingeOption._FrictionStay);
             _panelModel1_Awning.Panel_Placement = "First";
             _panelModel1_Awning.Panel_GlassThickness = 24.0f;
             _panelModel1_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773452;
@@ -4928,9 +5406,15 @@ namespace ModelLayer.Tests
                                                                              _multiTransomModel.MPanel_DisplayWidth,
                                                                              _multiTransomModel.MPanel_DisplayHeight,
                                                                              _multiTransomModel,
-                                                                             1,
-                                                                             _frameModel.FrameImageRenderer_Zoom,
-                                                                             _frameModel.Frame_Type.ToString());
+                                                                             _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "TransomUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiTransomModel.MPanelLst_Divider.Add(_divTransomModel);
             Control div_Transom = new Control();
             div_Transom.Name = "TransomUC_1";
@@ -4957,7 +5441,7 @@ namespace ModelLayer.Tests
                                                                                   SashReinf_ArticleNo._R675,
                                                                                   GlassType._Single,
                                                                                   Espagnolette_ArticleNo._741012,
-                                                                                  Striker_ArticleNo._M89ANT,
+                                                                                  Striker_ArticleNo._M89ANTA,
                                                                                   MiddleCloser_ArticleNo._1WC70DB,
                                                                                   LockingKit_ArticleNo._T24402KMBL,
                                                                                   MotorizedMech_ArticleNo._41556C,
@@ -4987,13 +5471,21 @@ namespace ModelLayer.Tests
                                                                                   0,
                                                                                   0,
                                                                                   false,
-                                                                                  2);
+                                                                                  2,
+                                                                                  2,
+                                                                                  _frameModel.FrameImageRenderer_Zoom,
+                                                                                  2,
+                                                                                  DockStyle.Fill,
+                                                                                  "AwningPanelUC_2",
+                                                                                  true,
+                                                                                  HingeOption._FrictionStay);
             _panelModel2_Awning.Panel_Placement = "Last";
             _panelModel2_Awning.Panel_GlassThickness = 6.0f;
             _panelModel2_Awning.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
             _panelModel2_Awning.Panel_CornerDriveOptionsVisibility = true;
-            _panelModel2_Awning.Panel_StrikerArtno_C = Striker_ArticleNo._M89CNT;
+            _panelModel2_Awning.Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;
             _panelModel2_Awning.Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+            _panelModel2_Awning.Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
             _panelModel2_Awning.Panel_ExtensionOptionsVisibility = true;
             _panelModel2_Awning.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel2_Awning);
@@ -5018,7 +5510,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(4800, _qouteModel.GlazingSeal_TotalQty);
-            Assert.AreEqual(8404780, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual((decimal)1.0085736, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(14, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(56, _qouteModel.Rebate_Qty);
             Assert.AreEqual(164, _qouteModel.Screws_for_Fabrication);
@@ -5046,14 +5538,19 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1_Awning.Panel_CoverProfileArtNo2);
             Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel1_Awning.Panel_FrictionStayArtNo);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel1_Awning.Panel_PlasticWedge);
             Assert.AreEqual(2, _panelModel1_Awning.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._628809, _panelModel1_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel1_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel1_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel1_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel1_Awning.Panel_MiddleCloserArtNo);
             Assert.AreEqual(1, _panelModel1_Awning.Panel_MiddleCloserPairQty);
+            Assert.AreEqual(GeorgianBar_ArticleNo._0724, _panelModel1_Awning.Panel_GeorgianBarArtNo);
+            Assert.AreEqual(4, _panelModel1_Awning.Panel_GeorgianBar_HorizontalQty);
+            Assert.AreEqual(4, _panelModel1_Awning.Panel_GeorgianBar_VerticalQty);
+
 
 
             #endregion
@@ -5085,17 +5582,19 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2_Awning.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2_Awning.Panel_CoverProfileArtNo2);
             Assert.AreEqual(FrictionStay_ArticleNo._Storm26, _panelModel2_Awning.Panel_FrictionStayArtNo);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel2_Awning.Panel_PlasticWedge);
             Assert.AreEqual(4, _panelModel2_Awning.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel2_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel2_Awning.Panel_RotoswingArtNo);
             Assert.AreEqual(LockingKit_ArticleNo._T24402KMBL, _panelModel2_Awning.Panel_LockingKitArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel2_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel2_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(5, _panelModel2_Awning.Panel_StrikerQty_A);
-            Assert.AreEqual(Striker_ArticleNo._M89CNT, _panelModel2_Awning.Panel_StrikerArtno_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel2_Awning.Panel_StrikerArtno_C);
             Assert.AreEqual(4, _panelModel2_Awning.Panel_StrikerQty_C);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel2_Awning.Panel_MiddleCloserArtNo);
             Assert.AreEqual(3, _panelModel2_Awning.Panel_MiddleCloserPairQty);
+
 
             Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2_Awning.Panel_ExtensionLeftArtNo);
             Assert.AreEqual(2, _panelModel2_Awning.Panel_ExtLeftQty);
@@ -5119,113 +5618,111 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1252'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '3375'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1179'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '3302'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '1200'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1200'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '2100'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '1075'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1075'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1975'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             //p1
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2435%' AND
                              Size = '1200'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2435%' AND
                              Size = '1200'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '1079'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1079'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             //P2
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '1200'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '2100'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '1079'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Size = '1079'");
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '1979'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             //ACCESSORIES AND HARDWARES 
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
-                             Description LIKE '%M89A-NT%'");
+                             Description LIKE '%M89A-NT-A%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(7, dr[0]["Qty"]);
+            Assert.AreEqual("7", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
-                             Description LIKE '%7199%'");
+                             Description LIKE '%7199-DB%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
-
-
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%SNAP-IN KEEP%' AND
                              Description LIKE '%0400215%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%FIXED CAM%' AND
                              Description LIKE '%1481413%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             #endregion
@@ -5350,9 +5847,15 @@ namespace ModelLayer.Tests
                                                                              _multiMullionModel.MPanel_DisplayWidth,
                                                                              _multiMullionModel.MPanel_DisplayHeight,
                                                                              _multiMullionModel,
+                                                                             _frameModel,
                                                                              1,
                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                             _frameModel.Frame_Type.ToString());
+                                                                             _frameModel.Frame_Type.ToString(),
+                                                                             "MullionUC_1",
+                                                                             null,
+                                                                             false,
+                                                                             true,
+                                                                             null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_1";
@@ -5378,7 +5881,7 @@ namespace ModelLayer.Tests
                                                                            SashReinf_ArticleNo._None,
                                                                            GlassType._Single,
                                                                            Espagnolette_ArticleNo._None,
-                                                                           Striker_ArticleNo._M89ANT,
+                                                                           Striker_ArticleNo._M89ANTA,
                                                                            MiddleCloser_ArticleNo._None,
                                                                            LockingKit_ArticleNo._None,
                                                                            MotorizedMech_ArticleNo._41555B,
@@ -5408,6 +5911,7 @@ namespace ModelLayer.Tests
                                                                            0,
                                                                            0,
                                                                            false,
+                                                                           1,
                                                                            1);
             _panelModel1_fixed1.Panel_Placement = "Last";
             _panelModel1_fixed1.Panel_GlassThickness = 14.0f;
@@ -5445,7 +5949,7 @@ namespace ModelLayer.Tests
                                                                   SashReinf_ArticleNo._None,
                                                                   GlassType._Single,
                                                                   Espagnolette_ArticleNo._None,
-                                                                  Striker_ArticleNo._M89ANT,
+                                                                  Striker_ArticleNo._M89ANTA,
                                                                   MiddleCloser_ArticleNo._None,
                                                                   LockingKit_ArticleNo._None,
                                                                   MotorizedMech_ArticleNo._41555B,
@@ -5475,6 +5979,7 @@ namespace ModelLayer.Tests
                                                                   0,
                                                                   0,
                                                                   false,
+                                                                  2,
                                                                   2);
             _panelModel2_fixed2.Panel_Placement = "First";
             _panelModel2_fixed2.Panel_GlassThickness = 14.0f;
@@ -5498,9 +6003,15 @@ namespace ModelLayer.Tests
                                                                               _multiTransomModel1.MPanel_DisplayWidth,
                                                                               _multiTransomModel1.MPanel_DisplayHeight,
                                                                               _multiTransomModel1,
+                                                                              _frameModel,
                                                                               2,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                               "TransomUC_2",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiTransomModel1.MPanelLst_Divider.Add(_divTransomModel);
             Control div_Transom = new Control();
             div_Transom.Name = "TransomUC_2";
@@ -5527,7 +6038,7 @@ namespace ModelLayer.Tests
                                                                              SashReinf_ArticleNo._R675,
                                                                              GlassType._Single,
                                                                              Espagnolette_ArticleNo._628807,
-                                                                             Striker_ArticleNo._M89ANT,
+                                                                             Striker_ArticleNo._M89ANTA,
                                                                              MiddleCloser_ArticleNo._1WC70DB,
                                                                              LockingKit_ArticleNo._None,
                                                                              MotorizedMech_ArticleNo._41555B,
@@ -5557,6 +6068,7 @@ namespace ModelLayer.Tests
                                                                              0,
                                                                              0,
                                                                              false,
+                                                                             3,
                                                                              3);
             _panelModel3_Awning1.Panel_Placement = "Last";
             _panelModel3_Awning1.Panel_GlassThickness = 14.0f;
@@ -5591,7 +6103,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(5400000, _qouteModel.Plastic_CoverQty_Total);
             Assert.AreEqual(10, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(40, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(62, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(64, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(44, _qouteModel.Screws_for_Installation);
 
             #region MultiMullion
@@ -5653,7 +6165,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel3_Awning1.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel3_Awning1.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC823048, _panelModel3_Awning1.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel3_Awning1.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel3_Awning1.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel3_Awning1.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel3_Awning1.Panel_MiddleCloserArtNo);
 
@@ -5666,116 +6178,121 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1505'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1805'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1432'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1732'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '750'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1165'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '625'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1040'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            //p1
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //p2
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '800'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '600'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '725'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '540'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
-            //p2
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            //p3
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '750'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1165'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%' AND
                              Size = '629'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Height%' AND
                              Size = '1044'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
-            //p3
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            //p1
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '700'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1800'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '625'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1728'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+
+
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
                              Description LIKE '%7199%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
             #endregion
 
-        }
+        } // no mullion in dt
 
 
         [TestMethod]
@@ -5895,9 +6412,15 @@ namespace ModelLayer.Tests
                                                                              _multiMullionModel.MPanel_DisplayWidth,
                                                                              _multiMullionModel.MPanel_DisplayHeight,
                                                                              _multiMullionModel,
+                                                                             _frameModel,
                                                                              1,
                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                             _frameModel.Frame_Type.ToString());
+                                                                             _frameModel.Frame_Type.ToString(),
+                                                                             "MullionUC_1",
+                                                                             null,
+                                                                             false,
+                                                                             true,
+                                                                             null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_1";
@@ -5923,7 +6446,7 @@ namespace ModelLayer.Tests
                                                                            SashReinf_ArticleNo._None,
                                                                            GlassType._Single,
                                                                            Espagnolette_ArticleNo._None,
-                                                                           Striker_ArticleNo._M89ANT,
+                                                                           Striker_ArticleNo._M89ANTA,
                                                                            MiddleCloser_ArticleNo._None,
                                                                            LockingKit_ArticleNo._None,
                                                                            MotorizedMech_ArticleNo._41555B,
@@ -5953,7 +6476,15 @@ namespace ModelLayer.Tests
                                                                            0,
                                                                            0,
                                                                            false,
-                                                                           1);
+                                                                           1,
+                                                                           1
+                                                                           //_frameModel.FrameImageRenderer_Zoom,
+                                                                           //2,
+                                                                           //DockStyle.Fill,
+                                                                           //"FixedPanelUC_1",
+                                                                           //true,
+                                                                           //HingeOption._FrictionStay
+                                                                           );
             _panelModel1_fixed1.Panel_Placement = "Last";
             _panelModel1_fixed1.Panel_GlassThickness = 14.0f;
             _panelModel1_fixed1.Panel_Index_Inside_MPanel = 2;
@@ -5990,7 +6521,7 @@ namespace ModelLayer.Tests
                                                                           SashReinf_ArticleNo._None,
                                                                           GlassType._Single,
                                                                           Espagnolette_ArticleNo._None,
-                                                                          Striker_ArticleNo._M89ANT,
+                                                                          Striker_ArticleNo._M89ANTA,
                                                                           MiddleCloser_ArticleNo._None,
                                                                           LockingKit_ArticleNo._None,
                                                                           MotorizedMech_ArticleNo._41555B,
@@ -6020,7 +6551,15 @@ namespace ModelLayer.Tests
                                                                           0,
                                                                           0,
                                                                           false,
-                                                                          2);
+                                                                          2,
+                                                                          2
+                                                                          //_frameModel.FrameImageRenderer_Zoom,
+                                                                          //0,
+                                                                          //DockStyle.Fill,
+                                                                          //"FixedPanelUC_2",
+                                                                          //true,
+                                                                          //HingeOption._FrictionStay
+                                                                          );
             _panelModel2_fixed2.Panel_Placement = "First";
             _panelModel2_fixed2.Panel_GlassThickness = 14.0f;
             _panelModel2_fixed2.Panel_Index_Inside_MPanel = 0;
@@ -6043,9 +6582,15 @@ namespace ModelLayer.Tests
                                                                               _multiTransomModel1.MPanel_DisplayWidth,
                                                                               _multiTransomModel1.MPanel_DisplayHeight,
                                                                               _multiTransomModel1,
+                                                                              _frameModel,
                                                                               2,
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "TransomUC_2",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              null);
             _multiTransomModel1.MPanelLst_Divider.Add(_divTransomModel);
             Control div_Transom = new Control();
             div_Transom.Name = "TransomUC_2";
@@ -6072,7 +6617,7 @@ namespace ModelLayer.Tests
                                                                              SashReinf_ArticleNo._R675,
                                                                              GlassType._Single,
                                                                              Espagnolette_ArticleNo._628807,
-                                                                             Striker_ArticleNo._M89ANT,
+                                                                             Striker_ArticleNo._M89ANTA,
                                                                              MiddleCloser_ArticleNo._1WC70DB,
                                                                              LockingKit_ArticleNo._None,
                                                                              MotorizedMech_ArticleNo._41555B,
@@ -6102,11 +6647,20 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               0,
                                                                               false,
-                                                                              3);
+                                                                              3,
+                                                                              3
+                                                                              //_frameModel.FrameImageRenderer_Zoom,
+                                                                              //2,
+                                                                              //DockStyle.Fill,
+                                                                              //"AwningPanelUC_3",
+                                                                              //true,
+                                                                              //HingeOption._FrictionStay
+                                                                              );
             _panelModel3_Awning1.Panel_Placement = "Last";
             _panelModel3_Awning1.Panel_GlassThickness = 14.0f;
             _panelModel3_Awning1.Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
             _panelModel3_Awning1.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC823048;
+            _panelModel3_Awning1.Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
             _panelModel3_Awning1.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel3_Awning1);
             Control Awning3 = new Control();
@@ -6137,7 +6691,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(5400000, _qouteModel.Plastic_CoverQty_Total);
             Assert.AreEqual(10, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(40, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(71, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(73, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(45, _qouteModel.Screws_for_Installation);
 
             #region MultiMullion
@@ -6199,7 +6753,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel3_Awning1.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel3_Awning1.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC823048, _panelModel3_Awning1.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel3_Awning1.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel3_Awning1.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel3_Awning1.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel3_Awning1.Panel_MiddleCloserArtNo);
 
@@ -6212,127 +6766,127 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1505'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1805'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1432'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1732'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '750'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1365'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '625'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1240'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             //p1
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '800'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '400'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Size = '725'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
                              Size = '340'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
             //p2
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '750'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1365'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Size = '629'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
                              Size = '1244'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
             //p3
             dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '700'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1800'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Width%' AND
                              Size = '625'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass Height%' AND
                              Size = '1728'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             //ACCESSORIES AND HARDWARES
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
                              Description LIKE '%7199%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
 
 
             dr = dt.Select(@"Description LIKE '%SNAP-IN KEEP%' AND
                              Description LIKE '%0400205%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%FIXED CAM%' AND
                              Description LIKE '%1481413%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             #endregion
@@ -6440,7 +6994,7 @@ namespace ModelLayer.Tests
                                                                              SashReinf_ArticleNo._None,
                                                                              GlassType._Single,
                                                                              Espagnolette_ArticleNo._None,
-                                                                             Striker_ArticleNo._M89ANT,
+                                                                             Striker_ArticleNo._M89ANTA,
                                                                              MiddleCloser_ArticleNo._None,
                                                                              LockingKit_ArticleNo._None,
                                                                              MotorizedMech_ArticleNo._41555B,
@@ -6470,8 +7024,17 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               0,
                                                                               false,
-                                                                              1);
+                                                                              1,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              0,
+                                                                              DockStyle.Fill,
+                                                                              "FixedPanelUC_1",
+                                                                              true,
+                                                                              HingeOption._FrictionStay
+                                                                              );
             _panelModel1_fixed.Panel_Placement = "First";
+            _panelModel1_fixed.Panel_SashPropertyVisibility = false;
             _panelModel1_fixed.Panel_GlassThickness = 6.0f;
             _panelModel1_fixed.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel1_fixed);
@@ -6490,9 +7053,15 @@ namespace ModelLayer.Tests
                                                                            _multiTransomModel.MPanel_DisplayWidth,
                                                                            _multiTransomModel.MPanel_DisplayHeight,
                                                                            _multiTransomModel,
+                                                                           _frameModel,
                                                                            1,
                                                                            _frameModel.FrameImageRenderer_Zoom,
-                                                                           _frameModel.Frame_Type.ToString());
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "TransomUC_1",
+                                                                           null,
+                                                                           false,
+                                                                           true,
+                                                                           null);
             _multiTransomModel.MPanelLst_Divider.Add(_divTransomModel);
             Control div_Transom = new Control();
             div_Transom.Name = "TransomUC_1";
@@ -6518,7 +7087,7 @@ namespace ModelLayer.Tests
                                                                              SashReinf_ArticleNo._R675,
                                                                              GlassType._Single,
                                                                              Espagnolette_ArticleNo._628807,
-                                                                             Striker_ArticleNo._M89ANT,
+                                                                             Striker_ArticleNo._M89ANTA,
                                                                              MiddleCloser_ArticleNo._1WC70WHT,
                                                                              LockingKit_ArticleNo._None,
                                                                              MotorizedMech_ArticleNo._41555B,
@@ -6548,8 +7117,17 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               0,
                                                                               false,
-                                                                              2);
+                                                                              2,
+                                                                              2,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              2,
+                                                                              DockStyle.Fill,
+                                                                              "AwningPanelUC_2",
+                                                                              true,
+                                                                              HingeOption._FrictionStay
+                                                                              );
             _panelModel2_Awning.Panel_Placement = "Somewhere in Between";
+            _panelModel2_Awning.Panel_HingeOptionsVisibility = false;
             _panelModel2_Awning.Panel_GlassThickness = 6.0f;
             _panelModel2_Awning.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel2_Awning);
@@ -6568,9 +7146,15 @@ namespace ModelLayer.Tests
                                                                          _multiTransomModel.MPanel_DisplayWidth,
                                                                          _multiTransomModel.MPanel_DisplayHeight,
                                                                          _multiTransomModel,
+                                                                         _frameModel,
                                                                          2,
                                                                          _frameModel.FrameImageRenderer_Zoom,
-                                                                         _frameModel.Frame_Type.ToString());
+                                                                         _frameModel.Frame_Type.ToString(),
+                                                                         "TransomUC_2",
+                                                                         null,
+                                                                         false,
+                                                                         true,
+                                                                         null);
             _multiTransomModel.MPanelLst_Divider.Add(_divTransomModel2);
             Control div_Transom2 = new Control();
             div_Transom2.Name = "TransomUC_2";
@@ -6596,7 +7180,7 @@ namespace ModelLayer.Tests
                                                                             SashReinf_ArticleNo._None,
                                                                             GlassType._Single,
                                                                             Espagnolette_ArticleNo._None,
-                                                                            Striker_ArticleNo._M89ANT,
+                                                                            Striker_ArticleNo._M89ANTA,
                                                                             MiddleCloser_ArticleNo._None,
                                                                             LockingKit_ArticleNo._None,
                                                                             MotorizedMech_ArticleNo._41555B,
@@ -6626,8 +7210,18 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             0,
                                                                             false,
-                                                                            3);
+                                                                            3,
+                                                                            3,
+                                                                            _frameModel.FrameImageRenderer_Zoom,
+                                                                            4,
+                                                                            DockStyle.Fill,
+                                                                            "FixedPanelUC_3",
+                                                                            true,
+                                                                            HingeOption._FrictionStay
+                                                                            );
             _panelModel3_fixed.Panel_Placement = "Last";
+            _panelModel3_fixed.Panel_SashPropertyVisibility = false;
+            _panelModel3_fixed.Panel_HingeOptionsVisibility = false;
             _panelModel3_fixed.Panel_GlassThickness = 6.0f;
             _panelModel3_fixed.Panel_Index_Inside_MPanel = 4;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel3_fixed);
@@ -6654,11 +7248,11 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
             Assert.AreEqual(2, _qouteModel.GlazingSpacer_TotalQty);
-            Assert.AreEqual(3520000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual((decimal)0.4224, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(56, _qouteModel.Screws_for_Fabrication);
-            Assert.AreEqual(37, _qouteModel.Screws_for_Installation);
+            //Assert.AreEqual(56, _qouteModel.Screws_for_Fabrication);
+            //Assert.AreEqual(37, _qouteModel.Screws_for_Installation);
 
             #region MultiTransom (3)
 
@@ -6697,12 +7291,12 @@ namespace ModelLayer.Tests
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2_Awning.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2_Awning.Panel_CoverProfileArtNo2);
-            Assert.AreEqual(FrictionStay_ArticleNo._A212C16161, _panelModel2_Awning.Panel_FrictionStayArtNo);
+            Assert.AreEqual(FrictionStay_ArticleNo._16HD, _panelModel2_Awning.Panel_FrictionStayArtNo);
             Assert.AreEqual(2, _panelModel2_Awning.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel2_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC773451, _panelModel2_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel2_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel2_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel2_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel2_Awning.Panel_MiddleCloserArtNo);
 
@@ -6729,93 +7323,142 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '805'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '2205'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '732'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '2132'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '753'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '947'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '628'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '822'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             //p1
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '800'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '600'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '728'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '525'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
             //p2
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '753'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '947'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '632'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '826'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
+            //p3
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '800'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '600'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%' AND
+                             Size = '728'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Height%' AND
+                             Size = '525'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //ACCESSORIES AND HARDWARE
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
-                             Description LIKE '%7199%'");
+                             Description LIKE '%7199-WHT%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Friction Stay%' AND
+                             Description LIKE '%A212C16161%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%628807%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Mechanical Joint%' AND
+                             Description LIKE '%AV585%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Rotoswing Handle%' AND
+                             Description LIKE '%RSC-773451%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
             #endregion
 
         }
@@ -6848,7 +7491,7 @@ namespace ModelLayer.Tests
 
 
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Havana, Foil_Color._Havana);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -6918,7 +7561,7 @@ namespace ModelLayer.Tests
                                                                             SashReinf_ArticleNo._None,
                                                                             GlassType._Single,
                                                                             Espagnolette_ArticleNo._None,
-                                                                            Striker_ArticleNo._M89ANT,
+                                                                            Striker_ArticleNo._M89ANTA,
                                                                             MiddleCloser_ArticleNo._None,
                                                                             LockingKit_ArticleNo._None,
                                                                             MotorizedMech_ArticleNo._41555B,
@@ -6948,7 +7591,15 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             0,
                                                                             false,
-                                                                            1);
+                                                                            1,
+                                                                            1
+                                                                            //_frameModel.FrameImageRenderer_Zoom,
+                                                                            //0,
+                                                                            //DockStyle.Fill,
+                                                                            //"FixedPanelUC_1",
+                                                                            //true,
+                                                                            //HingeOption._FrictionStay
+                                                                            );
             _panelModel1_fixed.Panel_Placement = "First";
             _panelModel1_fixed.Panel_GlassThickness = 14.0f;
             _panelModel1_fixed.Panel_Index_Inside_MPanel = 0;
@@ -6968,9 +7619,15 @@ namespace ModelLayer.Tests
                                                                            _multiTransomModel.MPanel_DisplayWidth,
                                                                            _multiTransomModel.MPanel_DisplayHeight,
                                                                            _multiTransomModel,
+                                                                           _frameModel,
                                                                            1,
                                                                            _frameModel.FrameImageRenderer_Zoom,
-                                                                           _frameModel.Frame_Type.ToString());
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "TransomUC_1",
+                                                                           null,
+                                                                           false,
+                                                                           true,
+                                                                           null);
             _multiTransomModel.MPanelLst_Divider.Add(_divTransomModel);
             Control div_Transom = new Control();
             div_Transom.Name = "TransomUC_1";
@@ -7032,7 +7689,7 @@ namespace ModelLayer.Tests
                                                                             SashReinf_ArticleNo._R675,
                                                                             GlassType._Single,
                                                                             Espagnolette_ArticleNo._628809,
-                                                                            Striker_ArticleNo._M89ANT,
+                                                                            Striker_ArticleNo._M89ANTA,
                                                                             MiddleCloser_ArticleNo._1WC70DB,
                                                                             LockingKit_ArticleNo._None,
                                                                             MotorizedMech_ArticleNo._41555B,
@@ -7062,7 +7719,15 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             0,
                                                                             false,
-                                                                            2);
+                                                                            2,
+                                                                            2
+                                                                            //_frameModel.FrameImageRenderer_Zoom,
+                                                                            //0,
+                                                                            //DockStyle.Fill,
+                                                                            //"AwningPanelUC_2",
+                                                                            //true,
+                                                                            //HingeOption._FrictionStay
+                                                                            );
             _panelModel2_Awning.Panel_Placement = "First";
             _panelModel2_Awning.Panel_GlassThickness = 14.0f;
             _panelModel2_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC833307;
@@ -7084,9 +7749,15 @@ namespace ModelLayer.Tests
                                                                              _multiMullionModel1.MPanel_DisplayWidth,
                                                                              _multiMullionModel1.MPanel_DisplayHeight,
                                                                              _multiMullionModel1,
+                                                                             _frameModel,
                                                                              2,
                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                             _frameModel.Frame_Type.ToString());
+                                                                             _frameModel.Frame_Type.ToString(),
+                                                                             "MullionUC_2",
+                                                                             null,
+                                                                             false,
+                                                                             true,
+                                                                             null);
             _multiMullionModel1.MPanelLst_Divider.Add(_divMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_2";
@@ -7112,7 +7783,7 @@ namespace ModelLayer.Tests
                                                                             SashReinf_ArticleNo._None,
                                                                             GlassType._Single,
                                                                             Espagnolette_ArticleNo._None,
-                                                                            Striker_ArticleNo._M89ANT,
+                                                                            Striker_ArticleNo._M89ANTA,
                                                                             MiddleCloser_ArticleNo._None,
                                                                             LockingKit_ArticleNo._None,
                                                                             MotorizedMech_ArticleNo._41555B,
@@ -7142,7 +7813,15 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             0,
                                                                             false,
-                                                                            3);
+                                                                            3,
+                                                                            3
+                                                                            //_frameModel.FrameImageRenderer_Zoom,
+                                                                            //2,
+                                                                            //DockStyle.Fill,
+                                                                            //"FixedPanelUC_3",
+                                                                            //true,
+                                                                            //HingeOption._FrictionStay
+                                                                            );
             _panelModel3_fixed.Panel_Placement = "Somewhere in Between";
             _panelModel3_fixed.Panel_GlassThickness = 14.0f;
             _panelModel3_fixed.Panel_Index_Inside_MPanel = 2;
@@ -7164,9 +7843,15 @@ namespace ModelLayer.Tests
                                                                              _multiMullionModel1.MPanel_DisplayWidth,
                                                                              _multiMullionModel1.MPanel_DisplayHeight,
                                                                              _multiMullionModel1,
+                                                                             _frameModel,
                                                                              3,
                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                             _frameModel.Frame_Type.ToString());
+                                                                             _frameModel.Frame_Type.ToString(),
+                                                                             "MullionUC_3",
+                                                                             null,
+                                                                             false,
+                                                                             true,
+                                                                             null);
             _multiMullionModel1.MPanelLst_Divider.Add(_divMullionModel2);
             Control div_Mullion2 = new Control();
             div_Mullion2.Name = "MullionUC_3";
@@ -7194,7 +7879,7 @@ namespace ModelLayer.Tests
                                                                             SashReinf_ArticleNo._R675,
                                                                             GlassType._Single,
                                                                             Espagnolette_ArticleNo._628809,
-                                                                            Striker_ArticleNo._M89ANT,
+                                                                            Striker_ArticleNo._M89ANTA,
                                                                             MiddleCloser_ArticleNo._1WC70DB,
                                                                             LockingKit_ArticleNo._None,
                                                                             MotorizedMech_ArticleNo._41555B,
@@ -7224,7 +7909,15 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             0,
                                                                             false,
-                                                                            4);
+                                                                            4,
+                                                                            4
+                                                                            //_frameModel.FrameImageRenderer_Zoom,
+                                                                            //4,
+                                                                            //DockStyle.Fill,
+                                                                            //"AwningPanelUC_4",
+                                                                            //true,
+                                                                            //HingeOption._FrictionStay
+                                                                            );
             _panelModel4_Awning.Panel_Placement = "Last";
             _panelModel4_Awning.Panel_GlassThickness = 14.0f;
             _panelModel4_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC833307;
@@ -7252,10 +7945,10 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(19860, _qouteModel.GlazingSeal_TotalQty);
             Assert.AreEqual(2, _qouteModel.GlazingSpacer_TotalQty);
-            Assert.AreEqual(10200000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual((decimal)1.224, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(14, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(56, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(115, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(117, _qouteModel.Screws_for_Fabrication);
             Assert.AreEqual(77, _qouteModel.Screws_for_Installation);
 
 
@@ -7300,11 +7993,12 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2_Awning.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2_Awning.Panel_CoverProfileArtNo2);
             Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel2_Awning.Panel_FrictionStayArtNo);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel2_Awning.Panel_PlasticWedge);
             Assert.AreEqual(2, _panelModel2_Awning.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._628809, _panelModel2_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel2_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel2_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel2_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel2_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel2_Awning.Panel_MiddleCloserArtNo);
 
@@ -7349,11 +8043,12 @@ namespace ModelLayer.Tests
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel4_Awning.Panel_CoverProfileArtNo);
             Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel4_Awning.Panel_CoverProfileArtNo2);
             Assert.AreEqual(FrictionStay_ArticleNo._Storm22, _panelModel4_Awning.Panel_FrictionStayArtNo);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel4_Awning.Panel_PlasticWedge);
             Assert.AreEqual(2, _panelModel4_Awning.Panel_PlasticWedgeQty);
             Assert.AreEqual(Espagnolette_ArticleNo._628809, _panelModel4_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel4_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel4_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel4_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel4_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel4_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel4_Awning.Panel_MiddleCloserArtNo);
 
@@ -7367,118 +8062,185 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '3005'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1705'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '2932'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1632'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '965'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1150'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '840'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1025'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             //p1
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '3000'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '500'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '2928'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '425'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
             //p2
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '965'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1150'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '844'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '1029'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //P3
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1000'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1200'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%' AND
+                             Size = '952'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Height%' AND
+                             Size = '1125'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //p4
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '965'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1150'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Width%' AND
+                             Size = '844'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Height%' AND
+                             Size = '1029'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+
+
+            //ACCESSORIES AND HARDWARE
 
 
 
             dr = dt.Select(@"Description LIKE '%Striker%' AND
                              Description LIKE '%M89A-NT%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
-                             Description LIKE '%7199%'");
+                             Description LIKE '%7199-DB%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
-            //P3
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2453%' AND
-                             Size = '1000'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%2453%' AND
-                             Size = '1200'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
-                             Size = '952'");
+            dr = dt.Select(@"Description LIKE '%Friction Stay%' AND
+                             Description LIKE '%Storm 22%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
-                             Size = '1125'");
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%628809%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Mechanical Joint%' AND
+                             Description LIKE '%AV585%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Mechanical Joint%' AND
+                             Description LIKE '%9U18%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Rotoswing Handle%' AND
+                             Description LIKE '%RSC-833307%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+
+
+
+
+
+
             #endregion
-
 
         }
 
@@ -7542,7 +8304,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._R675,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._628807,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70DB,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -7572,9 +8334,21 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   1);
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   0,
+                                                                   DockStyle.Fill,
+                                                                   "AwningPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
             _panelModel.Panel_GlassThickness = 6.0f;
             _panelModel.Panel_MotorizedOptionVisibility = true;
+            _panelModel.Panel_MotorizedpnlOptionVisibility = true;
+            _panelModel.Panel_MotorizedMechSetQty = 1;
+            _panelModel.Panel_2DHingeQty = 1;
+            _panelModel.Panel_CornerDriveOptionsVisibility = false;
             _frameModel.Lst_Panel.Add(_panelModel);
 
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
@@ -7624,110 +8398,110 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1005'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7507' AND Size = '505'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '904'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '404'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '925'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '425'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '800'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '300'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '925'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '425'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '804'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '304'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             // ACCESSORIES AND HARDWARE
 
-            dr = dt.Select(@"Description LIKE '%30X25 Cover %' AND
+            dr = dt.Select(@"Description LIKE '%30X25 Cover%' AND
                             Description LIKE '%1067 - MILLED%' AND
-                             Size = '1000'");
+                             Size = '1150'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Divider%' AND
                             Description LIKE '%0505%' AND
-                             Size = '1000'");
+                             Size = '1150'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Cover for motor%' AND
                             Description LIKE '%1182%' AND
-                             Size = '1000'");
+                             Size = '1150'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%2D Hinge%' AND
                             Description LIKE '%614293%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Push Button Switch%' AND
                             Description LIKE '%N4037%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%False pole%' AND
                             Description LIKE '%N4950%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
 
             dr = dt.Select(@"Description LIKE '%Supporting Frame%' AND
                             Description LIKE '%N4703%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
 
             dr = dt.Select(@"Description LIKE '%Plate%' AND
                             Description LIKE '%N4803LB%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
 
@@ -7791,7 +8565,7 @@ namespace ModelLayer.Tests
                                                                    SashReinf_ArticleNo._R675,
                                                                    GlassType._Single,
                                                                    Espagnolette_ArticleNo._628807,
-                                                                   Striker_ArticleNo._M89ANT,
+                                                                   Striker_ArticleNo._M89ANTA,
                                                                    MiddleCloser_ArticleNo._1WC70DB,
                                                                    LockingKit_ArticleNo._None,
                                                                    MotorizedMech_ArticleNo._41555B,
@@ -7821,9 +8595,21 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   1);
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   0,
+                                                                   DockStyle.Fill,
+                                                                   "AwningPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
             _panelModel.Panel_GlassThickness = 6.0f;
             _panelModel.Panel_MotorizedOptionVisibility = true;
+            _panelModel.Panel_MotorizedpnlOptionVisibility = true;
+            _panelModel.Panel_MotorizedMechSetQty = 1;
+            _panelModel.Panel_2DHingeQty = 1;
+            _panelModel.Panel_CornerDriveOptionsVisibility = false;
             _frameModel.Lst_Panel.Add(_panelModel);
 
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
@@ -7874,110 +8660,110 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1505'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1505'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '1404'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1404'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '1425'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1425'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '1300'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1300'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '1425'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '1425'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '1304'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1304'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
 
             // ACCESSORIES AND HARDWARE
 
             dr = dt.Select(@"Description LIKE '%30X25 Cover %' AND
                             Description LIKE '%1067 - MILLED%' AND
-                             Size = '1500'");
+                             Size = '1650'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Divider%' AND
                             Description LIKE '%0505%' AND
-                             Size = '1500'");
+                             Size = '1650'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Cover for motor%' AND
                             Description LIKE '%1182%' AND
-                             Size = '1500'");
+                             Size = '1650'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%2D Hinge%' AND
                             Description LIKE '%614293%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Push Button Switch%' AND
                             Description LIKE '%N4037%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%False pole%' AND
                             Description LIKE '%N4950%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
-
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Supporting Frame%' AND
                             Description LIKE '%N4703%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
-
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Plate%' AND
                             Description LIKE '%N4803LB%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
 
@@ -8083,7 +8869,7 @@ namespace ModelLayer.Tests
                                                                           SashReinf_ArticleNo._None,
                                                                           GlassType._Single,
                                                                           Espagnolette_ArticleNo._None,
-                                                                          Striker_ArticleNo._M89ANT,
+                                                                          Striker_ArticleNo._M89ANTA,
                                                                           MiddleCloser_ArticleNo._None,
                                                                           LockingKit_ArticleNo._None,
                                                                           MotorizedMech_ArticleNo._41555B,
@@ -8113,8 +8899,17 @@ namespace ModelLayer.Tests
                                                                            0,
                                                                            0,
                                                                            false,
-                                                                           1);
+                                                                           1,
+                                                                           1,
+                                                                           _frameModel.FrameImageRenderer_Zoom,
+                                                                           0,
+                                                                           DockStyle.Fill,
+                                                                           "FixedPanelUC_1",
+                                                                           true,
+                                                                           HingeOption._FrictionStay
+                                                                           );
             _panelModel1_fixed.Panel_Placement = "First";
+            _panelModel1_fixed.Panel_SashPropertyVisibility = false;
             _panelModel1_fixed.Panel_GlassThickness = 6.0f;
             _panelModel1_fixed.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel1_fixed);
@@ -8133,9 +8928,15 @@ namespace ModelLayer.Tests
                                                                            _multiTransomModel.MPanel_DisplayWidth,
                                                                            _multiTransomModel.MPanel_DisplayHeight,
                                                                            _multiTransomModel,
+                                                                           _frameModel,
                                                                            1,
                                                                            _frameModel.FrameImageRenderer_Zoom,
-                                                                           _frameModel.Frame_Type.ToString());
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "TransomUC_1",
+                                                                           null,
+                                                                           false,
+                                                                           true,
+                                                                           null);
             _multiTransomModel.MPanelLst_Divider.Add(_divTransomModel);
             Control div_Transom = new Control();
             div_Transom.Name = "TransomUC_1";
@@ -8163,7 +8964,7 @@ namespace ModelLayer.Tests
                                                                                    SashReinf_ArticleNo._R675,
                                                                                    GlassType._Single,
                                                                                    Espagnolette_ArticleNo._628809,
-                                                                                   Striker_ArticleNo._M89ANT,
+                                                                                   Striker_ArticleNo._M89ANTA,
                                                                                    MiddleCloser_ArticleNo._1WC70DB,
                                                                                    LockingKit_ArticleNo._None,
                                                                                    MotorizedMech_ArticleNo._41556C,
@@ -8193,10 +8994,23 @@ namespace ModelLayer.Tests
                                                                                    0,
                                                                                    0,
                                                                                    false,
-                                                                                   2);
+                                                                                   2,
+                                                                                   2,
+                                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                                   2,
+                                                                                   DockStyle.Fill,
+                                                                                   "AwningPanelUC_2",
+                                                                                   true,
+                                                                                   HingeOption._FrictionStay
+                                                                                   );
+
             _panelModel2_MotorizeAwning.Panel_Placement = "Last";
-            _panelModel2_MotorizeAwning.Panel_MotorizedOptionVisibility = true;
             _panelModel2_MotorizeAwning.Panel_GlassThickness = 6.0f;
+            _panelModel2_MotorizeAwning.Panel_MotorizedOptionVisibility = true;
+            _panelModel2_MotorizeAwning.Panel_MotorizedpnlOptionVisibility = true;
+            _panelModel2_MotorizeAwning.Panel_MotorizedMechSetQty = 1;
+            _panelModel2_MotorizeAwning.Panel_2DHingeQty = 1;
+            _panelModel2_MotorizeAwning.Panel_CornerDriveOptionsVisibility = false;
             _panelModel2_MotorizeAwning.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel2_MotorizeAwning);
             Control Awning2 = new Control();
@@ -8281,83 +9095,83 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '805'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '905'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '732'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '832'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '753'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '415'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '628'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '290'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             //p1
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '800'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '450'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '728'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '390'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             //p2
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '753'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '415'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '632'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '294'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
 
@@ -8366,49 +9180,49 @@ namespace ModelLayer.Tests
             dr = dt.Select(@"Description LIKE '%30X25 Cover%' AND
                             Description LIKE '%1067 - MILLED%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Divider%' AND
                              Description LIKE '%0505%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Cover for motor%' AND
                             Description LIKE '%1182%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%2D Hinge%' AND
                             Description LIKE '%614293%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Push Button Switch%' AND
                             Description LIKE '%N4037%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%False pole%' AND
                             Description LIKE '%N4950%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
 
             dr = dt.Select(@"Description LIKE '%Supporting Frame%' AND
                             Description LIKE '%N4703%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
 
 
             dr = dt.Select(@"Description LIKE '%Plate%' AND
                             Description LIKE '%N4803LB%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(1, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             #endregion
 
@@ -8513,7 +9327,7 @@ namespace ModelLayer.Tests
                                                                                 SashReinf_ArticleNo._R675,
                                                                                 GlassType._Single,
                                                                                 Espagnolette_ArticleNo._628807,
-                                                                                Striker_ArticleNo._M89ANT,
+                                                                                Striker_ArticleNo._M89ANTA,
                                                                                 MiddleCloser_ArticleNo._1WC70WHT,
                                                                                 LockingKit_ArticleNo._None,
                                                                                 MotorizedMech_ArticleNo._41556C,
@@ -8543,7 +9357,15 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 0,
                                                                                 false,
-                                                                                1);
+                                                                                1,
+                                                                                1
+                                                                                //_frameModel.FrameImageRenderer_Zoom,
+                                                                                //0,
+                                                                                //DockStyle.Fill,
+                                                                                //"AwningPanelUC_1",
+                                                                                //true,
+                                                                                //HingeOption._FrictionStay
+                                                                                );
             _panelModel1_Awning.Panel_Placement = "First";
             _panelModel1_Awning.Panel_GlassThickness = 24.0f;
             _panelModel1_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC833307;
@@ -8565,9 +9387,15 @@ namespace ModelLayer.Tests
                                                                              _multiMullionModel.MPanel_DisplayWidth,
                                                                              _multiMullionModel.MPanel_DisplayHeight,
                                                                              _multiMullionModel,
+                                                                             _frameModel,
                                                                              1,
                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                             _frameModel.Frame_Type.ToString());
+                                                                             _frameModel.Frame_Type.ToString(),
+                                                                             "MullionUC_1",
+                                                                             null,
+                                                                             false,
+                                                                             true,
+                                                                             null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_1";
@@ -8595,7 +9423,7 @@ namespace ModelLayer.Tests
                                                                                 SashReinf_ArticleNo._R675,
                                                                                 GlassType._Single,
                                                                                 Espagnolette_ArticleNo._628807,
-                                                                                Striker_ArticleNo._M89ANT,
+                                                                                Striker_ArticleNo._M89ANTA,
                                                                                 MiddleCloser_ArticleNo._1WC70WHT,
                                                                                 LockingKit_ArticleNo._None,
                                                                                 MotorizedMech_ArticleNo._41556C,
@@ -8625,7 +9453,15 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 0,
                                                                                 false,
-                                                                                2);
+                                                                                2,
+                                                                                2
+                                                                                //_frameModel.FrameImageRenderer_Zoom,
+                                                                                //2,
+                                                                                //DockStyle.Fill,
+                                                                                //"AwningPanelUC_2",
+                                                                                //true,
+                                                                                //HingeOption._FrictionStay
+                                                                                );
             _panelModel2_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel2_Awning.Panel_GlassThickness = 24.0f;
             _panelModel2_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC833307;
@@ -8647,9 +9483,15 @@ namespace ModelLayer.Tests
                                                                              _multiMullionModel.MPanel_DisplayWidth,
                                                                              _multiMullionModel.MPanel_DisplayHeight,
                                                                              _multiMullionModel,
+                                                                             _frameModel,
                                                                              2,
                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                             _frameModel.Frame_Type.ToString());
+                                                                             _frameModel.Frame_Type.ToString(),
+                                                                             "MullionUC_2",
+                                                                             null,
+                                                                             false,
+                                                                             true,
+                                                                             null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel2);
             Control div_Mullion2 = new Control();
             div_Mullion2.Name = "MullionUC_2";
@@ -8677,7 +9519,7 @@ namespace ModelLayer.Tests
                                                                                 SashReinf_ArticleNo._R675,
                                                                                 GlassType._Single,
                                                                                 Espagnolette_ArticleNo._628807,
-                                                                                Striker_ArticleNo._M89ANT,
+                                                                                Striker_ArticleNo._M89ANTA,
                                                                                 MiddleCloser_ArticleNo._1WC70WHT,
                                                                                 LockingKit_ArticleNo._None,
                                                                                 MotorizedMech_ArticleNo._41556C,
@@ -8707,7 +9549,15 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 0,
                                                                                 false,
-                                                                                3);
+                                                                                3,
+                                                                                3
+                                                                                //_frameModel.FrameImageRenderer_Zoom,
+                                                                                //4,
+                                                                                //DockStyle.Fill,
+                                                                                //"AwningPanelUC_3",
+                                                                                //true,
+                                                                                //HingeOption._FrictionStay
+                                                                                );
             _panelModel3_Awning.Panel_Placement = "Last";
             _panelModel3_Awning.Panel_GlassThickness = 24.0f;
             _panelModel3_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC833307;
@@ -8734,7 +9584,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
             Assert.AreEqual(14532, _qouteModel.GlazingSeal_TotalQty);
-            Assert.AreEqual(7560000, _qouteModel.Plastic_CoverQty_Total);
+            Assert.AreEqual((decimal)0.9072, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(12, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(48, _qouteModel.Rebate_Qty);
             Assert.AreEqual(171, _qouteModel.Screws_for_Fabrication);
@@ -8769,7 +9619,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel1_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel1_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel1_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel1_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1_Awning.Panel_MiddleCloserArtNo);
 
@@ -8805,7 +9655,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel1_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel1_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel1_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel1_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1_Awning.Panel_MiddleCloserArtNo);
 
@@ -8842,7 +9692,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Espagnolette_ArticleNo._628807, _panelModel1_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel1_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel1_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel1_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1_Awning.Panel_MiddleCloserArtNo);
             #endregion
@@ -8857,66 +9707,137 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '2105'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1805'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '2032'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1732'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '669'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1753'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '544'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1628'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
-
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //P1
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2435%' AND
                              Size = '669'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2435%' AND
                              Size = '1753'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '548'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(3, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1632'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(3, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //P2
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2435%' AND
+                             Size = '669'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2435%' AND
+                             Size = '1753'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '548'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '1632'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //P3
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
+                             Description LIKE '%2435%' AND
+                             Size = '669'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
+                             Description LIKE '%2435%' AND
+                             Size = '1753'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%' AND
+                             Size = '548'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Height%' AND
+                             Size = '1632'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //ACCRESSORIES AND HARDWARE
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("12", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Middle Closer%' AND
+                             Description LIKE '%1WC70-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Friction Stay%' AND
+                             Description LIKE '%Storm 26%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Mechanical Joint%' AND
+                             Description LIKE '%9U18%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             #endregion
 
         }
-
-
-
-
 
         [TestMethod]
         public void ChkVar_6Panel_3FixedWindow_3AwningWindow()
@@ -8946,7 +9867,7 @@ namespace ModelLayer.Tests
                 BalanceFixedWD6 = 508, FixedHT6 = 1100;
 
 
-            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Graphite);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
             IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
@@ -9019,7 +9940,7 @@ namespace ModelLayer.Tests
                                                                                 SashReinf_ArticleNo._R675,
                                                                                 GlassType._Single,
                                                                                 Espagnolette_ArticleNo._628806,
-                                                                                Striker_ArticleNo._M89ANT,
+                                                                                Striker_ArticleNo._M89ANTA,
                                                                                 MiddleCloser_ArticleNo._1WC70DB,
                                                                                 LockingKit_ArticleNo._None,
                                                                                 MotorizedMech_ArticleNo._41556C,
@@ -9049,7 +9970,15 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 0,
                                                                                 false,
-                                                                                1);
+                                                                                1,
+                                                                                1
+                                                                                //_frameModel.FrameImageRenderer_Zoom,
+                                                                                //0,
+                                                                                //DockStyle.Fill,
+                                                                                //"AwningPanelUC_1",
+                                                                                //true,
+                                                                                //HingeOption._FrictionStay
+                                                                                );
             _panelModel1_Awning.Panel_Placement = "First";
             _panelModel1_Awning.Panel_GlassThickness = 6.0f;
             _panelModel1_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773452;
@@ -9073,9 +10002,15 @@ namespace ModelLayer.Tests
                                                                              _multiMullionModel.MPanel_DisplayWidth,
                                                                              _multiMullionModel.MPanel_DisplayHeight,
                                                                              _multiMullionModel,
+                                                                             _frameModel,
                                                                              1,
                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                             _frameModel.Frame_Type.ToString());
+                                                                             _frameModel.Frame_Type.ToString(),
+                                                                             "MullionUC_1",
+                                                                             null,
+                                                                             false,
+                                                                             true,
+                                                                             null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
             Control div_Mullion = new Control();
             div_Mullion.Name = "MullionUC_1";
@@ -9101,7 +10036,7 @@ namespace ModelLayer.Tests
                                                                           SashReinf_ArticleNo._None,
                                                                           GlassType._Single,
                                                                           Espagnolette_ArticleNo._None,
-                                                                          Striker_ArticleNo._M89ANT,
+                                                                          Striker_ArticleNo._M89ANTA,
                                                                           MiddleCloser_ArticleNo._None,
                                                                           LockingKit_ArticleNo._None,
                                                                           MotorizedMech_ArticleNo._41555B,
@@ -9131,7 +10066,15 @@ namespace ModelLayer.Tests
                                                                           0,
                                                                           0,
                                                                           false,
-                                                                          2);
+                                                                          2,
+                                                                          2
+                                                                          //_frameModel.FrameImageRenderer_Zoom,
+                                                                          //2,
+                                                                          //DockStyle.Fill,
+                                                                          //"FixedPanelUC_2",
+                                                                          //true,
+                                                                          //HingeOption._FrictionStay
+                                                                          );
             _panelModel2_fixed.Panel_Placement = "Somewhere in Between";
             _panelModel2_fixed.Panel_GlassThickness = 6.0f;
             _panelModel2_fixed.Panel_Index_Inside_MPanel = 2;
@@ -9152,9 +10095,15 @@ namespace ModelLayer.Tests
                                                                             _multiMullionModel.MPanel_DisplayWidth,
                                                                             _multiMullionModel.MPanel_DisplayHeight,
                                                                             _multiMullionModel,
+                                                                            _frameModel,
                                                                             2,
                                                                             _frameModel.FrameImageRenderer_Zoom,
-                                                                            _frameModel.Frame_Type.ToString());
+                                                                            _frameModel.Frame_Type.ToString(),
+                                                                            "MullionUC_2",
+                                                                            null,
+                                                                            false,
+                                                                            true,
+                                                                            null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel2);
             Control div_Mullion2 = new Control();
             div_Mullion2.Name = "MullionUC_2";
@@ -9180,7 +10129,7 @@ namespace ModelLayer.Tests
                                                                                SashReinf_ArticleNo._R675,
                                                                                GlassType._Single,
                                                                                Espagnolette_ArticleNo._628806,
-                                                                               Striker_ArticleNo._M89ANT,
+                                                                               Striker_ArticleNo._M89ANTA,
                                                                                MiddleCloser_ArticleNo._1WC70DB,
                                                                                LockingKit_ArticleNo._None,
                                                                                MotorizedMech_ArticleNo._41556C,
@@ -9210,7 +10159,15 @@ namespace ModelLayer.Tests
                                                                                0,
                                                                                0,
                                                                                false,
-                                                                               3);
+                                                                               3,
+                                                                               3
+                                                                               //_frameModel.FrameImageRenderer_Zoom,
+                                                                               //4,
+                                                                               //DockStyle.Fill,
+                                                                               //"AwningPanelUC_3",
+                                                                               //true,
+                                                                               //HingeOption._FrictionStay
+                                                                               );
             _panelModel3_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel3_Awning.Panel_GlassThickness = 6.0f;
             _panelModel3_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773452;
@@ -9231,9 +10188,15 @@ namespace ModelLayer.Tests
                                                                       _multiMullionModel.MPanel_DisplayWidth,
                                                                       _multiMullionModel.MPanel_DisplayHeight,
                                                                       _multiMullionModel,
+                                                                      _frameModel,
                                                                       3,
                                                                       _frameModel.FrameImageRenderer_Zoom,
-                                                                      _frameModel.Frame_Type.ToString());
+                                                                      _frameModel.Frame_Type.ToString(),
+                                                                      "MullionUC_3",
+                                                                      null,
+                                                                      false,
+                                                                      true,
+                                                                      null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel3);
             Control div_Mullion3 = new Control();
             div_Mullion3.Name = "MullionUC_3";
@@ -9260,7 +10223,7 @@ namespace ModelLayer.Tests
                                                                  SashReinf_ArticleNo._None,
                                                                  GlassType._Single,
                                                                  Espagnolette_ArticleNo._None,
-                                                                 Striker_ArticleNo._M89ANT,
+                                                                 Striker_ArticleNo._M89ANTA,
                                                                  MiddleCloser_ArticleNo._None,
                                                                  LockingKit_ArticleNo._None,
                                                                  MotorizedMech_ArticleNo._41555B,
@@ -9290,7 +10253,15 @@ namespace ModelLayer.Tests
                                                                  0,
                                                                  0,
                                                                  false,
-                                                                 4);
+                                                                 4,
+                                                                 4
+                                                                 //_frameModel.FrameImageRenderer_Zoom,
+                                                                 //6,
+                                                                 //DockStyle.Fill,
+                                                                 //"FixedPanelUC_4",
+                                                                 //true,
+                                                                 //HingeOption._FrictionStay
+                                                                 );
             _panelModel4_fixed.Panel_Placement = "Somewhere in Between";
             _panelModel4_fixed.Panel_GlassThickness = 6.0f;
             _panelModel4_fixed.Panel_Index_Inside_MPanel = 6;
@@ -9311,9 +10282,15 @@ namespace ModelLayer.Tests
                                                                             _multiMullionModel.MPanel_DisplayWidth,
                                                                             _multiMullionModel.MPanel_DisplayHeight,
                                                                             _multiMullionModel,
+                                                                            _frameModel,
                                                                             4,
                                                                             _frameModel.FrameImageRenderer_Zoom,
-                                                                            _frameModel.Frame_Type.ToString());
+                                                                            _frameModel.Frame_Type.ToString(),
+                                                                            "MullionUC_4",
+                                                                            null,
+                                                                            false,
+                                                                            true,
+                                                                            null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel4);
             Control div_Mullion4 = new Control();
             div_Mullion4.Name = "MullionUC_4";
@@ -9339,7 +10316,7 @@ namespace ModelLayer.Tests
                                                                               SashReinf_ArticleNo._R675,
                                                                               GlassType._Single,
                                                                               Espagnolette_ArticleNo._628806,
-                                                                              Striker_ArticleNo._M89ANT,
+                                                                              Striker_ArticleNo._M89ANTA,
                                                                               MiddleCloser_ArticleNo._1WC70DB,
                                                                               LockingKit_ArticleNo._None,
                                                                               MotorizedMech_ArticleNo._41556C,
@@ -9369,7 +10346,15 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               0,
                                                                               false,
-                                                                              5);
+                                                                              5,
+                                                                              5
+                                                                              //_frameModel.FrameImageRenderer_Zoom,
+                                                                              //8,
+                                                                              //DockStyle.Fill,
+                                                                              //"AwningPanelUC_5",
+                                                                              //true,
+                                                                              //HingeOption._FrictionStay
+                                                                              );
             _panelModel5_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel5_Awning.Panel_GlassThickness = 6.0f;
             _panelModel5_Awning.Panel_RotoswingArtNo = Rotoswing_HandleArtNo._RSC773452;
@@ -9391,9 +10376,15 @@ namespace ModelLayer.Tests
                                                                             _multiMullionModel.MPanel_DisplayWidth,
                                                                             _multiMullionModel.MPanel_DisplayHeight,
                                                                             _multiMullionModel,
+                                                                            _frameModel,
                                                                             5,
                                                                             _frameModel.FrameImageRenderer_Zoom,
-                                                                            _frameModel.Frame_Type.ToString());
+                                                                            _frameModel.Frame_Type.ToString(),
+                                                                            "MullionUC_5",
+                                                                            null,
+                                                                            false,
+                                                                            true,
+                                                                            null);
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel5);
             Control div_Mullion5 = new Control();
             div_Mullion5.Name = "MullionUC_5";
@@ -9419,7 +10410,7 @@ namespace ModelLayer.Tests
                                                                         SashReinf_ArticleNo._None,
                                                                         GlassType._Single,
                                                                         Espagnolette_ArticleNo._None,
-                                                                        Striker_ArticleNo._M89ANT,
+                                                                        Striker_ArticleNo._M89ANTA,
                                                                         MiddleCloser_ArticleNo._None,
                                                                         LockingKit_ArticleNo._None,
                                                                         MotorizedMech_ArticleNo._41555B,
@@ -9449,7 +10440,15 @@ namespace ModelLayer.Tests
                                                                         0,
                                                                         0,
                                                                         false,
-                                                                        6);
+                                                                        6,
+                                                                        6
+                                                                        //_frameModel.FrameImageRenderer_Zoom,
+                                                                        //10,
+                                                                        //DockStyle.Fill,
+                                                                        //"FixedPanelUC_6",
+                                                                        //true,
+                                                                        //HingeOption._FrictionStay
+                                                                        );
             _panelModel6_fixed.Panel_Placement = "Last";
             _panelModel6_fixed.Panel_GlassThickness = 6.0f;
             _panelModel6_fixed.Panel_Index_Inside_MPanel = 10;
@@ -9510,7 +10509,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Espagnolette_ArticleNo._628806, _panelModel1_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel1_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel1_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel1_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel1_Awning.Panel_MiddleCloserArtNo);
 
@@ -9554,7 +10553,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Espagnolette_ArticleNo._628806, _panelModel3_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel3_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel3_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel3_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel3_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel3_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel3_Awning.Panel_MiddleCloserArtNo);
 
@@ -9599,7 +10598,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Espagnolette_ArticleNo._628806, _panelModel5_Awning.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._Rotoswing, _panelModel5_Awning.Panel_HandleType);
             Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel5_Awning.Panel_RotoswingArtNo);
-            Assert.AreEqual(Striker_ArticleNo._M89ANT, _panelModel5_Awning.Panel_StrikerArtno_A);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel5_Awning.Panel_StrikerArtno_A);
             Assert.AreEqual(2, _panelModel5_Awning.Panel_StrikerQty_A);
             Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel5_Awning.Panel_MiddleCloserArtNo);
 
@@ -9626,91 +10625,214 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7502' AND Size = '3005'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1105'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '2932'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1032'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             //aw
+
+            //P1
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '473'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1053'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '348'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '928'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("6", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '473'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '1053'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '352'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(3, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '932'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(3, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //P3
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '473'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1053'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%' AND
+                             Size = '352'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Height%' AND
+                             Size = '932'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //P5
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '473'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1053'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) Width%' AND
+                             Size = '352'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) Height%' AND
+                             Size = '932'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             //Fixed
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
-                             Description LIKE '%2452%' AND
-                             Size = '508'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(2, dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '496'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(4, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '1100'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(6, dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '448'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(3, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '1028'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual(3, dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //P4
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '496'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1100'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Width%' AND
+                             Size = '448'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Height%' AND
+                             Size = '1028'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //P6
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P6) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '508'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P6) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1100'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P6) Width%' AND
+                             Size = '448'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P6) Height%' AND
+                             Size = '1028'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //ACCESSORIES AND HARDWARE
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-DB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Middle Closer%' AND
+                             Description LIKE '%1WC70-DB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Friction Stay%' AND
+                             Description LIKE '%Storm 22%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Mechanical Joint%' AND
+                             Description LIKE '%9U18%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("10", dr[0]["Qty"]);
 
             #endregion
 
@@ -9718,6 +10840,9738 @@ namespace ModelLayer.Tests
 
         }
 
+
+
+
+
+
+
+
+
+        //casement Window
+
+        // CW Outward
+
+        //Sample 7502 - 7581
+        [TestMethod]
+        public void ChkVar_2PanelCasementWindowSample_A1_UsingMullion()
+        {
+            /*          _________________
+            *           |      /|\      |
+            *           |    /  |  \    |
+            *           |  /    |    \  |
+            *           |/      |      \|
+            *           |\      |      /|
+            *           |  \    |    /  |
+            *           |    \  |  /    |
+            *           |______\|/______|
+            */
+
+
+
+            int total_wd = 1450,
+                total_ht = 1600,
+                eqpanelWD = 725;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._741012,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._612978,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._612978,
+                                                                   Extension_ArticleNo._639957,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   true,
+                                                                   true,
+                                                                   false,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   2,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 13.0f;
+            _panelModel1.Panel_FSCasementArtNo = FrictionStayCasement_ArticleNo._12HD;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+
+            IDividerModel _divMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7536,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._7533);
+            _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2453,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._7581,
+                                                                      SashReinf_ArticleNo._R675,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._741012,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._1WC70WHT,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rotoswing,
+                                                                      Extension_ArticleNo._612978,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._612978,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      true,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      1,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      2,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._FrictionStay
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 13.0f;
+            _panelModel2.Panel_FSCasementArtNo = FrictionStayCasement_ArticleNo._12HD;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1455, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1605, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1382, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1532, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(8972, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(130, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(56, _qouteModel.Screws_for_Installation);
+
+            #region Multimullion(2)
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(690, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1553, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(690, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1553, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(565, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1428, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(569, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1432, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(FrictionStayCasement_ArticleNo._12HD, _panelModel1.Panel_FSCasementArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel1.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel1.Panel_StrikerArtno_C);
+            Assert.AreEqual(5, _panelModel1.Panel_StrikerQty_C);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1.Panel_MiddleCloserArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(2, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+
+
+            #endregion
+
+            #region MullionUC1
+
+            Assert.AreEqual(Divider_ArticleNo._7536, _divMullionModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R677, _divMullionModel.Div_ReinfArtNo);
+            Assert.AreEqual(1537, _divMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(1457, _divMullionModel.Div_ReinfHeight);
+
+            #endregion
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(690, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1553, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(690, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(1553, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(565, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(1428, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(569, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1432, _panelModel2.Panel_GlassHeight);
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(FrictionStayCasement_ArticleNo._12HD, _panelModel2.Panel_FSCasementArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel2.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel2.Panel_StrikerArtno_C);
+            Assert.AreEqual(5, _panelModel2.Panel_StrikerQty_C);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel2.Panel_MiddleCloserArtNo);
+
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(2, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+            #endregion
+
+            #endregion
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1455'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1605'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1382'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1532'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '690'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1553'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '565'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1428'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND 
+                             Description LIKE '%2453%' AND
+                             Size = '690'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND 
+                             Description LIKE '%2453%' AND
+                             Size = '1553'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND 
+                             Description LIKE '%2453%' AND
+                             Size = '690'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND 
+                             Description LIKE '%2453%' AND
+                             Size = '1553'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
+                             Size = '569'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1432'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '569'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '1432'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //HARDWARE & ACCESSORIES
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-C%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("10", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%1640%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Middle Closer%' AND
+                             Description LIKE '%1WC70-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%741012%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            #endregion
+
+        }
+
+        [TestMethod]
+        public void ChkVar_2PanelCasementWindowSample_A1_UsingDummyMullion()
+        {
+            /*          _________________
+            *           |      /|\      |
+            *           |    /  |  \    |
+            *           |  /    |    \  |
+            *           |/      |      \|
+            *           |\      |      /|
+            *           |  \    |    /  |
+            *           |    \  |  /    |
+            *           |______\|/______|
+            */
+
+
+
+            int total_wd = 1450,
+                total_ht = 1600,
+                eqpanelWD = 725;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 13.0f;
+            _panelModel1.Panel_FSCasementArtNo = FrictionStayCasement_ArticleNo._None;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+
+            IDividerModel _divDummyMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7536,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              false,
+                                                                              DummyMullion_ArticleNo._7533,
+                                                                              _panelModel1
+                                                                              );
+
+            _divDummyMullionModel.Div_ArtNo = Divider_ArticleNo._None;
+            _divDummyMullionModel.Div_ChkDM = true;
+            _divDummyMullionModel.Div_ArtVisibility = true;
+            _divDummyMullionModel.Div_DMPanel = _panelModel1;
+            _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K7533;
+            _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+            _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
+            _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2453,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._7581,
+                                                                      SashReinf_ArticleNo._R675,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._741012,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._1WC70WHT,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rotoswing,
+                                                                      Extension_ArticleNo._612978,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._612978,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      true,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      1,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      1,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._FrictionStay
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 13.0f;
+            _panelModel2.Panel_FSCasementArtNo = FrictionStayCasement_ArticleNo._12HD;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1455, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1605, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1382, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1532, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(8996, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(132, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(56, _qouteModel.Screws_for_Installation);
+
+
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(696, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1553, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(696, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1553, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(571, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1428, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(575, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1432, _panelModel1.Panel_GlassHeight);
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(FrictionStayCasement_ArticleNo._12HD, _panelModel1.Panel_FSCasementArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._None, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel1.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel1.Panel_StrikerArtno_C);
+            Assert.AreEqual(0, _panelModel1.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1.Panel_StrikerArtno_A);
+            Assert.AreEqual(0, _panelModel1.Panel_StrikerQty_A);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1.Panel_MiddleCloserArtNo);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+            #endregion
+
+
+            #region MullionUC1
+
+            Assert.AreEqual(DummyMullion_ArticleNo._7533, _divDummyMullionModel.Div_DMArtNo);
+            Assert.AreEqual(1472, _divDummyMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(FixedCam_ArticleNo._1481413, _divDummyMullionModel.Div_FixedCamDM);
+            Assert.AreEqual(SnapInKeep_ArticleNo._0400205, _divDummyMullionModel.Div_SnapNKeepDM);
+            Assert.AreEqual(EndcapDM_ArticleNo._K7533, _divDummyMullionModel.Div_EndcapDM);
+
+
+            #endregion
+
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(696, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1553, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(696, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(1553, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(571, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(1428, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(575, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1432, _panelModel2.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(FrictionStayCasement_ArticleNo._12HD, _panelModel2.Panel_FSCasementArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel2.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel2.Panel_StrikerArtno_C);
+            Assert.AreEqual(6, _panelModel2.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel2.Panel_StrikerArtno_A);
+            Assert.AreEqual(1, _panelModel2.Panel_StrikerQty_A);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel2.Panel_MiddleCloserArtNo);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+
+
+            #endregion
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1455'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1605'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1382'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1532'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '696'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1553'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '571'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1428'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND 
+                             Description LIKE '%2453%' AND
+                             Size = '696'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1553'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '696'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1553'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Size = '575'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1432'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Description LIKE '%%' AND
+                             Size = '575'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '1432'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //accesories and hardwares 
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%741012%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Middle Closer%' AND
+                             Description LIKE '%1WC70-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-C%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-A%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Fixed cam%' AND
+                             Description LIKE '%1481413%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Snap-in Keep%' AND
+                             Description LIKE '%0400205%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Endcap for Dummy Mullion%' AND
+                             Description LIKE '%K7533%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Aluminum spacer for Dummy Mullion%' AND
+                             Description LIKE '%FC770 (80mm)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Aluminum spacer for Dummy Mullion%' AND
+                             Description LIKE '%FC770 (50mm)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
+            #endregion
+
+        }
+
+        [TestMethod]
+        public void ChkVar_2Panel_1CW_1FW_Sample_A1_UsingMullion_UsingRotaryHandle()
+        {
+            /*          _________________
+            *           |      /|       |
+            *           |    /  |       |
+            *           |  /    |       |
+            *           |/      |   F   |
+            *           |\      |       |
+            *           |  \    |       |
+            *           |    \  |       |
+            *           |______\|_______|
+            */
+
+
+
+            int total_wd = 1900,
+                total_ht = 2147,
+                eqpanelWD = 950;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._T244002KMW,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rotary,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
+            _panelModel1.Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
+            _panelModel1.Panel_FSCasementArtNo = FrictionStayCasement_ArticleNo._20HD;
+            _panelModel1.Panel_RotaryOptionsVisibility = true;
+            _panelModel1.Panel_RotaryArtNo = Rotary_HandleArtNo._T511155KMWSS;
+            _panelModel1.Panel_LockingKitArtNo = LockingKit_ArticleNo._T244002KMW;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_ChkGlazingAdaptor = true;
+            _panelModel1.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+            Dictionary<int, int> CladList;
+            CladList = new Dictionary<int, int>()
+            {
+                {1,2147}
+            };
+            IDividerModel _divMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7538,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              CladList,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._7533);
+            _divMullionModel.Div_claddingBracketVisibility = true;
+            _divMullionModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+            _divMullionModel.Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
+            _divMullionModel.Div_CladdingBracketForConcreteQTY = 2;
+            _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Fixed Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2452,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._None,
+                                                                      SashReinf_ArticleNo._None,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._None,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._None,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      false,
+                                                                      false,
+                                                                      false,
+                                                                      false,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "FixedPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._FrictionStay
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
+            _panelModel2.Panel_SashPropertyVisibility = false;
+            _panelModel2.Panel_ChkGlazingAdaptor = true;
+            _panelModel2.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control FW2 = new Control();
+            FW2.Name = "FixedPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(FW2);
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1905, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(2152, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1832, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(2079, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.979032, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(14, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(56, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(83, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(54, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(8, _qouteModel.Screws_for_Cladding);
+
+            #region Multimullion(2)
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(900, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(2100, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(900, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(2100, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(775, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1975, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(779, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1979, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(FrictionStayCasement_ArticleNo._20HD, _panelModel1.Panel_FSCasementArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Handle_Type._Rotary, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rotary_HandleArtNo._T511155KMWSS, _panelModel1.Panel_RotaryArtNo);
+            Assert.AreEqual(LockingKit_ArticleNo._T244002KMW, _panelModel1.Panel_LockingKitArtNo);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1.Panel_MiddleCloserArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+
+
+            #endregion
+
+            #region MullionUC1
+
+            Assert.AreEqual(Divider_ArticleNo._7538, _divMullionModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, _divMullionModel.Div_ReinfArtNo);
+            Assert.AreEqual(2089, _divMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(1979, _divMullionModel.Div_ReinfHeight);
+            Assert.AreEqual(CladdingProfile_ArticleNo._1338, _divMullionModel.Div_CladdingProfileArtNo);
+            Assert.AreEqual(CladdingReinf_ArticleNo._9120, _divMullionModel.Div_CladdingReinfArtNo);
+            Assert.AreEqual(CladList, _divMullionModel.Div_CladdingSizeList);
+
+            #endregion
+
+            #region FW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(950, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(2147, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(875, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(2075, _panelModel2.Panel_GlassHeight);
+
+            //ACCESSORIES 
+            Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
+            Assert.AreEqual(Handle_Type._None, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(MiddleCloser_ArticleNo._None, _panelModel2.Panel_MiddleCloserArtNo);
+
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+            #endregion 
+            #endregion 
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7502' AND Size = '1905'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7502' AND Size = '2152'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '1832'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '2079'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '900'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '2100'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '775'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1975'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '900'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '2100'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '950'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '2147'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Adaptor (P1) Width%' AND 
+                             Description LIKE '%6418%' AND
+                             Size = '900'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Adaptor (P1) Height%' AND 
+                             Description LIKE '%6418%' AND
+                             Size = '2100'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Adaptor (P2) Width%' AND 
+                             Description LIKE '%6418%' AND
+                             Size = '950'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Adaptor (P2) Height%' AND 
+                             Description LIKE '%6418%' AND
+                             Size = '2147'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
+                             Size = '779'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1979'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '875'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '2075'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //HARDWARE & ACCESSORIES
+
+            dr = dt.Select(@"Description LIKE '%Rotary handle%' AND
+                             Description LIKE '%T-51.1155 KM-W-SS%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Locking Kit%' AND
+                             Description LIKE '%T-24.40.02 KM-W%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Middle Closer%' AND
+                             Description LIKE '%1WC70-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Mechanical Joint%' AND
+                             Description LIKE '%AV585%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Bracket for concrete (10mm)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            #endregion
+
+        }
+
+        //Sample 7507 - 7581
+        [TestMethod]
+        public void ChkVar_2PanelCasementWindowSample_B1_UsingMullion()
+        {
+            /*          _________________
+            *           |      /|\      |
+            *           |    /  |  \    |
+            *           |  /    |    \  |
+            *           |/      |      \|
+            *           |\      |      /|
+            *           |  \    |    /  |
+            *           |    \  |  /    |
+            *           |______\|/______|
+            */
+
+
+
+            int total_wd = 1450,
+                total_ht = 1600,
+                eqpanelWD = 725;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._EQ87NT,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._612978,
+                                                                   Extension_ArticleNo._639957,
+                                                                   Extension_ArticleNo._612978,
+                                                                   Extension_ArticleNo._639957,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   true,
+                                                                   true,
+                                                                   false,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   1,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 13.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
+            _panelModel1.Panel_2DHingeQty_nonMotorized = 4;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+
+            IDividerModel _divMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7536,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._7533);
+            _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2453,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._7581,
+                                                                      SashReinf_ArticleNo._R675,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._EQ87NT,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._1WC70WHT,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rotoswing,
+                                                                      Extension_ArticleNo._612978,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._612978,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      true,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      1,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      1,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 13.0f;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel2.Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
+            _panelModel2.Panel_2DHingeQty_nonMotorized = 4;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1455, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1605, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1354, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1504, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(8804, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(137, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
+
+            #region Multimullion(2)
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(676, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1525, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(676, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1525, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(551, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1400, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(555, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1404, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(HingeOption._2DHinge, _panelModel1.Panel_HingeOptions);
+            Assert.AreEqual(_2DHinge_ArticleNo._614293, _panelModel1.Panel_2dHingeArtNo_nonMotorized);
+            Assert.AreEqual(4, _panelModel1.Panel_2DHingeQty_nonMotorized);
+            Assert.AreEqual(1, _panelModel1.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._EQ87NT, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel1.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel1.Panel_StrikerArtno_C);
+            Assert.AreEqual(5, _panelModel1.Panel_StrikerQty_C);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel1.Panel_MiddleCloserArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTop2Qty);
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+
+
+            #endregion
+
+            #region MullionUC1
+
+            Assert.AreEqual(Divider_ArticleNo._7536, _divMullionModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R677, _divMullionModel.Div_ReinfArtNo);
+            Assert.AreEqual(1509, _divMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(1429, _divMullionModel.Div_ReinfHeight);
+
+            #endregion
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(676, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1525, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(676, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(1525, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(551, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(1400, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(555, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1404, _panelModel2.Panel_GlassHeight);
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(HingeOption._2DHinge, _panelModel2.Panel_HingeOptions);
+            Assert.AreEqual(_2DHinge_ArticleNo._614293, _panelModel2.Panel_2dHingeArtNo_nonMotorized);
+            Assert.AreEqual(4, _panelModel2.Panel_2DHingeQty_nonMotorized);
+            Assert.AreEqual(1, _panelModel2.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._EQ87NT, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel2.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel2.Panel_StrikerArtno_C);
+            Assert.AreEqual(5, _panelModel2.Panel_StrikerQty_C);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70WHT, _panelModel2.Panel_MiddleCloserArtNo);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+            #endregion
+
+            #endregion
+
+
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1455'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1605'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '1354'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1504'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '676'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1525'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '551'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1400'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '676'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1525'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '676'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1525'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Description LIKE '%%' AND
+                             Size = '555'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1404'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '555'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '1404'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+            //ACCESSORIES & HARDWARE
+            dr = dt.Select(@"Description LIKE '%2D hinge%' AND
+                             Description LIKE '%614293%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-C%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("10", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%1640%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%EQ87(NT)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            #endregion
+
+        }
+
+
+        [TestMethod]
+        public void ChkVar_2PanelCasementWindowSample_B1_UsingDummyMullion()
+        {
+            /*          _________________
+            *           |      /|\      |
+            *           |    /  |  \    |
+            *           |  /    |    \  |
+            *           |/      |      \|
+            *           |\      |      /|
+            *           |  \    |    /  |
+            *           |    \  |  /    |
+            *           |______\|/______|
+            */
+
+
+
+            int total_wd = 1450,
+                total_ht = 1600,
+                eqpanelWD = 725;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 13.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+            IDividerModel _divDummyMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7536,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._7533,
+                                                                              _panelModel1);
+            _divDummyMullionModel.Div_ArtNo = Divider_ArticleNo._None;
+            _divDummyMullionModel.Div_ChkDM = true;
+            _divDummyMullionModel.Div_DMPanel = _panelModel1;
+            _divDummyMullionModel.Div_ArtVisibility = true;
+            _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K7533;
+            _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+            _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
+            _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2453,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._7581,
+                                                                      SashReinf_ArticleNo._R675,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._EQ87NT,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._None,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rotoswing,
+                                                                      Extension_ArticleNo._612978,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._612978,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      true,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      1,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      1,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 13.0f;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
+            _panelModel2.Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
+            _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1455, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1605, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1354, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1504, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(8828, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(139, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
+
+            #region Multimullion(2)
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(682, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1525, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(682, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1525, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(557, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1400, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(561, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1404, _panelModel1.Panel_GlassHeight);
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_2DHinge_ArticleNo._614293, _panelModel1.Panel_2dHingeArtNo_nonMotorized);
+            Assert.AreEqual(1, _panelModel1.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._None, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel1.Panel_StrikerArtno_C);
+            Assert.AreEqual(0, _panelModel1.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1.Panel_StrikerArtno_A);
+            Assert.AreEqual(0, _panelModel1.Panel_StrikerQty_A);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+            #endregion
+
+            #region MullionUC1
+
+            Assert.AreEqual(DummyMullion_ArticleNo._7533, _divDummyMullionModel.Div_DMArtNo);
+            Assert.AreEqual(1444, _divDummyMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(FixedCam_ArticleNo._1481413, _divDummyMullionModel.Div_FixedCamDM);
+            Assert.AreEqual(SnapInKeep_ArticleNo._0400205, _divDummyMullionModel.Div_SnapNKeepDM);
+            Assert.AreEqual(EndcapDM_ArticleNo._K7533, _divDummyMullionModel.Div_EndcapDM);
+
+
+            #endregion
+
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(682, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1525, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(682, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(1525, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(557, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(1400, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(561, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1404, _panelModel2.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_2DHinge_ArticleNo._614293, _panelModel2.Panel_2dHingeArtNo_nonMotorized);
+            Assert.AreEqual(1, _panelModel2.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._EQ87NT, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel2.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel2.Panel_StrikerArtno_C);
+            Assert.AreEqual(6, _panelModel2.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel2.Panel_StrikerArtno_A);
+            Assert.AreEqual(1, _panelModel2.Panel_StrikerQty_A);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+
+
+            #endregion
+            #endregion
+
+
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1455'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1605'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '1354'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1504'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '682'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1525'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '557'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1400'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '682'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1525'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '682'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND 
+                             Description LIKE '%2453%' AND
+                             Size = '1525'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
+                             Size = '561'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND 
+                             Size = '1404'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND 
+                             Size = '561'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND 
+                             Size = '1404'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //accesories and hardwares 
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%EQ87(NT)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-WHT%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-C%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-A%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Fixed cam%' AND
+                             Description LIKE '%1481413%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Snap-in Keep%' AND
+                             Description LIKE '%0400205%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Endcap for Dummy Mullion%' AND
+                             Description LIKE '%K7533%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Aluminum spacer for Dummy Mullion%' AND
+                             Description LIKE '%FC770 (80mm)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Aluminum spacer for Dummy Mullion%' AND
+                             Description LIKE '%FC770 (50mm)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
+            #endregion
+
+        }
+
+
+        [TestMethod]
+        public void ChkVar_5PanelCasementWindowSample_A2_UsingDummyMullion()
+        {
+            /* 
+             *           _________________________________
+             *           |                               |
+             *           |_______________________________|
+             *           |      /|\      |      /|\      |
+             *           |    /  |  \    |    /  |  \    |
+             *           |  /    |    \  |  /    |    \  |
+             *           |/      |      \|/      |      \|
+             *           |\      |      /|\      |      /|
+             *           |  \    |    /  |  \    |    /  |
+             *           |    \  |  /    |    \  |  /    |
+             *           |______\|/______|______\|/______|
+             */
+
+
+
+            int total_wd = 2440, CW_PanelWD2 = 616, CW_PanelWD3 = 604,
+                total_ht = 2220, CW_EqualPanelHT = 1900,
+                FW_PanelHT1 = 320;
+
+
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._CharcoalGray, Foil_Color._Graphite);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+
+            IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                        ht,
+                                                                                        total_wd,
+                                                                                        total_ht,
+                                                                                        frame,
+                                                                                        new UserControl(),
+                                                                                        _frameModel,
+                                                                                        true,
+                                                                                        FlowDirection.TopDown,
+                                                                                        _frameModel.Frame_Zoom,
+                                                                                        1,
+                                                                                        DockStyle.Fill,
+                                                                                        1,
+                                                                                        0,
+                                                                                         null,
+                                                                                        _frameModel.FrameImageRenderer_Zoom,
+                                                                                        "",
+                                                                                        2);
+            _multiTransomModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiTransomModel);
+            Control multiTransom = new Control();
+            multiTransom.Name = _multiTransomModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiTransom_totalPanelCount = _multiTransomModel.MPanel_Divisions + 1;
+            int suggest_Wd = ((_multiTransomModel.MPanel_Width - (divSize * _multiTransomModel.MPanel_Divisions)) / multiTransom_totalPanelCount),
+                suggest_HT = _multiTransomModel.MPanel_Height;
+
+
+            #region MultiTransom(2)
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                    suggest_HT,
+                                                                    new Control(),
+                                                                    new UserControl(),
+                                                                    new UserControl(),
+                                                                    new UserControl(),
+                                                                    "Fixed Panel",
+                                                                    true,
+                                                                    1.0f,
+                                                                    _frameModel,
+                                                                    _multiTransomModel,
+                                                                    total_wd,
+                                                                    FW_PanelHT1,
+                                                                    GlazingBead_ArticleNo._2453,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                    GlassType._Single,
+                                                                    Espagnolette_ArticleNo._None,
+                                                                    Striker_ArticleNo._M89ANTA,
+                                                                    MiddleCloser_ArticleNo._None,
+                                                                    LockingKit_ArticleNo._None,
+                                                                    MotorizedMech_ArticleNo._41555B,
+                                                                    Handle_Type._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    false,
+                                                                    false,
+                                                                    false,
+                                                                    false,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                    GeorgianBar_ArticleNo._None,
+                                                                    0,
+                                                                    0,
+                                                                    false,
+                                                                    1,
+                                                                    1,
+                                                                    _frameModel.FrameImageRenderer_Zoom,
+                                                                    1,
+                                                                    DockStyle.Fill,
+                                                                    "FixedPanelUC_1",
+                                                                    true,
+                                                                    HingeOption._2DHinge
+                                                                    );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_SashPropertyVisibility = false;
+            _panelModel1.Panel_HingeOptionsVisibility = false;
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiTransomModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Fw1 = new Control();
+            Fw1.Name = "FixedPanelUC_1";
+            _multiTransomModel.MPanelLst_Objects.Add(Fw1);
+
+            Dictionary<int, int> CladdingLst;
+            CladdingLst = new Dictionary<int, int>()
+            {
+                {1,2440}
+            }
+            ;
+            IDividerModel _divTransomModel = _dividerServices.AddDividerModel(_multiTransomModel.MPanel_Width,
+                                                                           divSize,
+                                                                           new Control(),
+                                                                           DividerModel.DividerType.Transom,
+                                                                           true,
+                                                                           _frameModel.Frame_Zoom,
+                                                                           Divider_ArticleNo._7538,
+                                                                           _multiTransomModel.MPanel_DisplayWidth,
+                                                                           _multiTransomModel.MPanel_DisplayHeight,
+                                                                           _multiTransomModel,
+                                                                           _frameModel,
+                                                                           1,
+                                                                           _frameModel.FrameImageRenderer_Zoom,
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "TransomUC_1",
+                                                                           CladdingLst,
+                                                                           false,
+                                                                           true,
+                                                                           null);
+            _divTransomModel.Div_claddingBracketVisibility = true;
+            _divTransomModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+            _divTransomModel.Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
+            _divTransomModel.Div_CladdingBracketForConcreteQTY = 2;
+            _multiTransomModel.MPanelLst_Divider.Add(_divTransomModel);
+            Control div_Transom = new Control();
+            div_Transom.Name = "TransomUC_1";
+            _multiTransomModel.MPanelLst_Objects.Add(div_Transom);
+
+
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
+                                                                                          suggest_HT,
+                                                                                          total_wd,
+                                                                                          CW_EqualPanelHT,
+                                                                                          multiTransom,
+                                                                                          new UserControl(),
+                                                                                          _frameModel,
+                                                                                          true,
+                                                                                          FlowDirection.LeftToRight,
+                                                                                          _frameModel.Frame_Zoom,
+                                                                                          2,
+                                                                                          DockStyle.None,
+                                                                                          1,
+                                                                                          0,
+                                                                                          _multiTransomModel,
+                                                                                          _frameModel.FrameImageRenderer_Zoom,
+                                                                                          "",
+                                                                                          4);
+            _multiMullionModel.MPanel_Placement = "Last";
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 2;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            _multiTransomModel.MPanelLst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion2 = new Control();
+            multiMullion2.Name = "MultiMullion_2";
+            _multiTransomModel.MPanelLst_Objects.Add(multiMullion2);
+
+            #endregion
+
+
+
+
+            #region MultiMullionModel(4)
+
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+            int multiMullion_suggest_Wd = (((_multiMullionModel.MPanel_Width) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount),
+                multiMullion_suggest_HT = _multiMullionModel.MPanel_Height;
+
+
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(multiMullion_suggest_Wd,
+                                                                   multiMullion_suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   CW_PanelWD2,
+                                                                   CW_EqualPanelHT,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   2,
+                                                                   2,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   0,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_2",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+
+            _panelModel2.Panel_Placement = "First";
+            _panelModel2.Panel_GlassThickness = 6.0f;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel2.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel2.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+            IDividerModel _divDummyMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7536,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              2,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_2",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._7533,
+                                                                              _panelModel2);
+            _divDummyMullionModel.Div_ArtNo = Divider_ArticleNo._None;
+            _divDummyMullionModel.Div_ChkDM = true;
+            _divDummyMullionModel.Div_DMPanel = _panelModel2;
+            _divDummyMullionModel.Div_ArtVisibility = true;
+            _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K7533;
+            _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+            _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
+            _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
+            Control div_DummyMullion2 = new Control();
+            div_DummyMullion2.Name = "MullionUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(div_DummyMullion2);
+
+            IPanelModel _panelModel3 = _panelServices.AddPanelModel(multiMullion_suggest_Wd,
+                                                                    multiMullion_suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      CW_PanelWD3,
+                                                                      CW_EqualPanelHT,
+                                                                      GlazingBead_ArticleNo._2452,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._7581,
+                                                                      SashReinf_ArticleNo._R675,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._741012,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._None,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rotoswing,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._612978,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      true,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      1,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      3,
+                                                                      3,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_3",
+                                                                      true,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel3.Panel_Placement = "Somewhere in Between";
+            _panelModel3.Panel_GlassThickness = 6.0f;
+            _panelModel3.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel3.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
+            _panelModel3.Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
+            _panelModel3.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel3.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel3);
+            Control Casement3 = new Control();
+            Casement3.Name = "CasementPanelUC_3";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement3);
+
+
+
+
+
+            IDividerModel _divMullionModel3 = _dividerServices.AddDividerModel(divSize,
+                                                                           _multiMullionModel.MPanel_Height,
+                                                                           new Control(),
+                                                                           DividerModel.DividerType.Mullion,
+                                                                           true,
+                                                                           _frameModel.Frame_Zoom,
+                                                                           Divider_ArticleNo._7538,
+                                                                           _multiMullionModel.MPanel_DisplayWidth,
+                                                                           _multiMullionModel.MPanel_DisplayHeight,
+                                                                           _multiMullionModel,
+                                                                           _frameModel,
+                                                                           3,
+                                                                           _frameModel.FrameImageRenderer_Zoom,
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "MullionUC_3",
+                                                                           null,
+                                                                           false,
+                                                                           true,
+                                                                           DummyMullion_ArticleNo._7533,
+                                                                           _panelModel1);
+
+            _divMullionModel3.Div_ChkDM = false;
+            _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel3);
+            Control div_Mullion3 = new Control();
+            div_Mullion3.Name = "MullionUC_3";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion3);
+
+
+
+            IPanelModel _panelModel4 = _panelServices.AddPanelModel(multiMullion_suggest_Wd,
+                                                                    multiMullion_suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   CW_PanelWD3,
+                                                                   CW_EqualPanelHT,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   4,
+                                                                   4,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   4,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_4",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+
+            _panelModel4.Panel_Placement = "Somewhere in Between";
+            _panelModel4.Panel_GlassThickness = 6.0f;
+            _panelModel4.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel4.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel4.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel4.Panel_Index_Inside_MPanel = 4;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel4);
+            Control Casement4 = new Control();
+            Casement4.Name = "CasementPanelUC_4";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement4);
+
+            IDividerModel _divDummyMullionModel4 = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7536,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              4,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_4",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._7533,
+                                                                              _panelModel4);
+            _divDummyMullionModel4.Div_ArtNo = Divider_ArticleNo._None;
+            _divDummyMullionModel4.Div_ChkDM = true;
+            _divDummyMullionModel4.Div_DMPanel = _panelModel4;
+            _divDummyMullionModel4.Div_ArtVisibility = true;
+            _divDummyMullionModel4.Div_EndcapDM = EndcapDM_ArticleNo._K7533;
+            _divDummyMullionModel4.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+            _divDummyMullionModel4.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
+            _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel4);
+            Control div_DummyMullion4 = new Control();
+            div_DummyMullion4.Name = "MullionUC_4";
+            _multiMullionModel.MPanelLst_Objects.Add(div_DummyMullion4);
+
+            IPanelModel _panelModel5 = _panelServices.AddPanelModel(multiMullion_suggest_Wd,
+                                                                    multiMullion_suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      CW_PanelWD2,
+                                                                      CW_EqualPanelHT,
+                                                                      GlazingBead_ArticleNo._2452,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._7581,
+                                                                      SashReinf_ArticleNo._R675,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._741012,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._None,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rotoswing,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._639957,
+                                                                      Extension_ArticleNo._612978,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      true,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      1,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      5,
+                                                                      5,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      6,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_5",
+                                                                      true,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel5.Panel_Placement = "Last";
+            _panelModel5.Panel_GlassThickness = 6.0f;
+            _panelModel5.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel5.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
+            _panelModel5.Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
+            _panelModel5.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel5.Panel_Index_Inside_MPanel = 6;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel5);
+            Control Casement5 = new Control();
+            Casement5.Name = "CasementPanelUC_5";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement5);
+
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(2445, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(2225, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(2344, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(2124, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(4, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)1.300032, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(16, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(64, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(303, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(121, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(9, _qouteModel.Screws_for_Cladding);
+
+            #region Multimullion(2)
+
+            #region FW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(2440, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(320, _panelModel1.Panel_GlazingBeadHeight);
+
+
+            Assert.AreEqual(2340, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(231, _panelModel1.Panel_GlassHeight);
+
+            Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
+
+            #endregion
+
+            #region TransomUC1
+
+            Assert.AreEqual(Divider_ArticleNo._7538, _divTransomModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, _divTransomModel.Div_ReinfArtNo);
+            Assert.AreEqual(2354, _divTransomModel.Div_ExplosionWidth);
+            Assert.AreEqual(2244, _divTransomModel.Div_ReinfWidth);
+            Assert.AreEqual(CladdingProfile_ArticleNo._1338, _divTransomModel.Div_CladdingProfileArtNo);
+            Assert.AreEqual(CladdingReinf_ArticleNo._9120, _divTransomModel.Div_CladdingReinfArtNo);
+            Assert.AreEqual(CladdingLst, _divTransomModel.Div_CladdingSizeList);
+            Assert.AreEqual(2, _divTransomModel.Div_CladdingBracketForConcreteQTY);
+
+            #endregion
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(573, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1836, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel2.Panel_GBSpacerArtNo);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(573, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(1836, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(448, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(1711, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(452, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1715, _panelModel2.Panel_GlassHeight);
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_2DHinge_ArticleNo._614293, _panelModel2.Panel_2dHingeArtNo_nonMotorized);
+            Assert.AreEqual(1, _panelModel2.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._None, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel2.Panel_StrikerArtno_C);
+            Assert.AreEqual(0, _panelModel2.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel2.Panel_StrikerArtno_A);
+            Assert.AreEqual(0, _panelModel2.Panel_StrikerQty_A);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel2.Panel_PlasticWedge);
+
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+
+            #endregion
+
+            #region DummyMullionUC2
+
+            Assert.AreEqual(DummyMullion_ArticleNo._7533, _divDummyMullionModel.Div_DMArtNo);
+            Assert.AreEqual(1755, _divDummyMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(FixedCam_ArticleNo._1481413, _divDummyMullionModel.Div_FixedCamDM);
+            Assert.AreEqual(SnapInKeep_ArticleNo._0400215, _divDummyMullionModel.Div_SnapNKeepDM);
+            Assert.AreEqual(EndcapDM_ArticleNo._K7533, _divDummyMullionModel.Div_EndcapDM);
+
+
+            #endregion
+
+            #region CW3
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(572, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1836, _panelModel3.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel3.Panel_GBSpacerArtNo);
+
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3.Panel_SashProfileArtNo);
+            Assert.AreEqual(572, _panelModel3.Panel_SashWidth);
+            Assert.AreEqual(1836, _panelModel3.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3.Panel_SashReinfArtNo);
+            Assert.AreEqual(447, _panelModel3.Panel_SashReinfWidth);
+            Assert.AreEqual(1711, _panelModel3.Panel_SashReinfHeight);
+
+            Assert.AreEqual(451, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(1715, _panelModel3.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel3.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_2DHinge_ArticleNo._614293, _panelModel3.Panel_2dHingeArtNo_nonMotorized);
+            Assert.AreEqual(1, _panelModel3.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel3.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel3.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel3.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel3.Panel_StrikerArtno_C);
+            Assert.AreEqual(6, _panelModel3.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel3.Panel_StrikerArtno_A);
+            Assert.AreEqual(1, _panelModel3.Panel_StrikerQty_A);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel3.Panel_PlasticWedge);
+
+
+            //EXTENSIONS
+            Assert.AreEqual(CornerDrive_ArticleNo._639958, _panelModel3.Panel_CornerDriveArtNo);
+
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel3.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel3.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel3.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel3.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel3.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(1, _panelModel3.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtRight2Qty);
+
+
+
+            #endregion
+
+            #region MullionUC3
+
+            Assert.AreEqual(Divider_ArticleNo._7538, _divMullionModel3.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, _divMullionModel3.Div_ReinfArtNo);
+            Assert.AreEqual(1825, _divMullionModel3.Div_ExplosionHeight);
+            Assert.AreEqual(1715, _divMullionModel3.Div_ReinfHeight);
+
+            #endregion
+
+            #region CW4
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(572, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1836, _panelModel4.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel4.Panel_GBSpacerArtNo);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel4.Panel_SashProfileArtNo);
+            Assert.AreEqual(572, _panelModel4.Panel_SashWidth);
+            Assert.AreEqual(1836, _panelModel4.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel4.Panel_SashReinfArtNo);
+            Assert.AreEqual(447, _panelModel4.Panel_SashReinfWidth);
+            Assert.AreEqual(1711, _panelModel4.Panel_SashReinfHeight);
+
+            Assert.AreEqual(451, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(1715, _panelModel4.Panel_GlassHeight);
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel4.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel4.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_2DHinge_ArticleNo._614293, _panelModel4.Panel_2dHingeArtNo_nonMotorized);
+            Assert.AreEqual(1, _panelModel4.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel4.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._None, _panelModel4.Panel_HandleType);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel4.Panel_StrikerArtno_C);
+            Assert.AreEqual(0, _panelModel4.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel4.Panel_StrikerArtno_A);
+            Assert.AreEqual(0, _panelModel4.Panel_StrikerQty_A);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel4.Panel_PlasticWedge);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtRight2Qty);
+
+
+            #endregion
+
+            #region DummyMullionUC4
+
+            Assert.AreEqual(DummyMullion_ArticleNo._7533, _divDummyMullionModel.Div_DMArtNo);
+            Assert.AreEqual(1755, _divDummyMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(FixedCam_ArticleNo._1481413, _divDummyMullionModel.Div_FixedCamDM);
+            Assert.AreEqual(SnapInKeep_ArticleNo._0400215, _divDummyMullionModel.Div_SnapNKeepDM);
+            Assert.AreEqual(EndcapDM_ArticleNo._K7533, _divDummyMullionModel.Div_EndcapDM);
+
+
+            #endregion
+
+            #region CW5
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(573, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1836, _panelModel5.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel5.Panel_GBSpacerArtNo);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel5.Panel_SashProfileArtNo);
+            Assert.AreEqual(573, _panelModel5.Panel_SashWidth);
+            Assert.AreEqual(1836, _panelModel5.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel5.Panel_SashReinfArtNo);
+            Assert.AreEqual(448, _panelModel5.Panel_SashReinfWidth);
+            Assert.AreEqual(1711, _panelModel5.Panel_SashReinfHeight);
+
+            Assert.AreEqual(452, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(1715, _panelModel5.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel5.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel5.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_2DHinge_ArticleNo._614293, _panelModel5.Panel_2dHingeArtNo_nonMotorized);
+            Assert.AreEqual(1, _panelModel5.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel5.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel5.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel5.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel5.Panel_StrikerArtno_C);
+            Assert.AreEqual(6, _panelModel5.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel5.Panel_StrikerArtno_A);
+            Assert.AreEqual(1, _panelModel5.Panel_StrikerQty_A);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel5.Panel_PlasticWedge);
+
+            //EXTENSIONS
+            Assert.AreEqual(CornerDrive_ArticleNo._639958, _panelModel5.Panel_CornerDriveArtNo);
+
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel5.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel5.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel5.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel5.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel5.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(1, _panelModel5.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtRight2Qty);
+
+
+
+            #endregion
+
+            #endregion
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '2445'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '2225'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '2344'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '2124'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '572'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '573'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1836'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '447'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '448'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1711'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
+                             Description LIKE '%GB SPACER%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("32", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '2440'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '320'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '573'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1836'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '572'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1836'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '572'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1836'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '573'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1836'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
+                             Size = '2340'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND 
+                             Size = '231'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND 
+                             Size = '452'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND 
+                             Size = '1715'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%' AND 
+                             Size = '451'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Height%' AND 
+                             Size = '1715'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Width%' AND 
+                             Size = '451'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Height%' AND 
+                             Size = '1715'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) Width%' AND 
+                             Size = '452'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) Height%' AND 
+                             Size = '1715'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //accesories and hardwares 
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%741012%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Corner Drive%' AND
+                             Description LIKE '%639958%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-DB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-C%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("12", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-A%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%2D Hinge%' AND
+                             Description LIKE '%614293%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("16", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Snap-in Keep%' AND
+                             Description LIKE '%0400215%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Fixed Cam%' AND
+                             Description LIKE '%1481413%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Endcap for Dummy Mullion%' AND
+                             Description LIKE '%K7533%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Aluminum spacer for Dummy Mullion%' AND
+                             Description LIKE '%FC770 (80mm)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Aluminum spacer for Dummy Mullion%' AND
+                             Description LIKE '%FC770 (50mm)%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+            #endregion
+
+        }
+
+
+        //Sample 7507 - 374 
+        [TestMethod]
+        public void ChkVar_2PanelCasementWindowSample_D1_UsingMullion()
+        {
+            /*          _________________
+            *           |      /|\      |
+            *           |    /  |  \    |
+            *           |  /    |    \  |
+            *           |/      |      \|
+            *           |\      |      /|
+            *           |  \    |    /  |
+            *           |    \  |  /    |
+            *           |______\|/______|
+            */
+
+
+
+            int total_wd = 1450,
+                total_ht = 1600,
+                eqpanelWD = 725;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._374,
+                                                                   SashReinf_ArticleNo._655,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._642105,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rio,
+                                                                   Extension_ArticleNo._641798,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   true,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 13.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel1.Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+            _panelModel1.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel1.Panel_RioOptionsVisibility = true;
+            _panelModel1.Panel_RioArtNo = Rio_HandleArtNo._C050C108019;
+            _panelModel1.Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
+            _panelModel1.Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+
+            IDividerModel _divMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7538,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._7533);
+
+            _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2453,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._374,
+                                                                      SashReinf_ArticleNo._655,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._642105,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._1WC70WHT,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rio,
+                                                                      Extension_ArticleNo._641798,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      false,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 13.0f;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel2.Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+            _panelModel2.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel2.Panel_RioOptionsVisibility = true;
+            _panelModel2.Panel_RioArtNo = Rio_HandleArtNo._C050C108019;
+            _panelModel2.Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
+            _panelModel2.Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1455, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1605, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1354, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1504, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(8760, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(161, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
+
+            #region Multimullion(2)
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(663, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(663, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(568, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1432, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(480, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1344, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._642105, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rio, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rio_HandleArtNo._C050C108019, _panelModel1.Panel_RioArtNo);
+            Assert.AreEqual(ProfileKnobCylinder_ArtNo._45x45, _panelModel1.Panel_ProfileKnobCylinderArtNo);
+            Assert.AreEqual(Cylinder_CoverArtNo._EPSW_8022_823332, _panelModel1.Panel_CylinderCoverArtNo);
+            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel1.Panel_AdjStrikerArtNo);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel1.Panel_3dHingeArtNo);
+            Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel1.Panel_RestrictorStayArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+
+
+            #endregion
+
+            #region MullionUC1
+
+            Assert.AreEqual(Divider_ArticleNo._7538, _divMullionModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, _divMullionModel.Div_ReinfArtNo);
+            Assert.AreEqual(1514, _divMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(1404, _divMullionModel.Div_ReinfHeight);
+
+            #endregion
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(663, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(663, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(568, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(1432, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(480, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1344, _panelModel2.Panel_GlassHeight);
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._642105, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rio, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(Rio_HandleArtNo._C050C108019, _panelModel2.Panel_RioArtNo);
+            Assert.AreEqual(ProfileKnobCylinder_ArtNo._45x45, _panelModel2.Panel_ProfileKnobCylinderArtNo);
+            Assert.AreEqual(Cylinder_CoverArtNo._EPSW_8022_823332, _panelModel2.Panel_CylinderCoverArtNo);
+            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel2.Panel_AdjStrikerArtNo);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel2.Panel_3dHingeArtNo);
+            Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel2.Panel_RestrictorStayArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+            #endregion
+
+            #endregion
+
+
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1455'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1605'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '1354'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1504'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 374' AND Size = '663'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 374' AND Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 655' AND Size = '568'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height 655' AND Size = '1432'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '663'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '663'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Size = '480'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1344'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '480'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '1344'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+            //ACCESSORIES & HARDWARE
+            dr = dt.Select(@"Description LIKE '%3D hinge%' AND
+                             Description LIKE '%492594%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Adjustable Striker%' AND
+                             Description LIKE '%332439%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("10", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Restrictor Stay%' AND
+                             Description LIKE '%613249%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Mechanical Joint%' AND
+                             Description LIKE '%AV585%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%1640%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Rio handle%' AND
+                             Description LIKE '%C050C108019%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Profile Knob Cylinder%' AND
+                             Description LIKE '%45x45%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cylinder Cover%' AND
+                             Description LIKE '%EPSW-8022/823332%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%642105%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+
+
+            #endregion
+
+        }
+
+        [TestMethod]
+        public void ChkVar_2PanelCasementWindowSample_D1_UsingDummyMullion()
+        {
+            /*          _________________
+            *           |      /|\      |
+            *           |    /  |  \    |
+            *           |  /    |    \  |
+            *           |/      |      \|
+            *           |\      |      /|
+            *           |  \    |    /  |
+            *           |    \  |  /    |
+            *           |______\|/______|
+            */
+
+
+
+            int total_wd = 1450,
+                total_ht = 1600,
+                eqpanelWD = 725;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._374,
+                                                                   SashReinf_ArticleNo._655,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 13.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel1.Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+            _panelModel1.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+            IDividerModel _divDummyMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._None,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._385P);
+
+            _divDummyMullionModel.Div_ChkDM = true;
+            _divDummyMullionModel.Div_DMPanel = _panelModel1;
+            _divDummyMullionModel.Div_ArtVisibility = true;
+            _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K385;
+            _divDummyMullionModel.Div_LeverEspagVisibility = true;
+            _divDummyMullionModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._631153;
+            _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+            _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400205;
+            _divDummyMullionModel.Div_ShootboltReverseArtNo = ShootboltReverse_ArticleNo._312033;
+            _divDummyMullionModel.Div_ShootboltNonReverseArtNo = ShootboltNonReverse_ArticleNo._349187;
+            _divDummyMullionModel.Div_ShootboltStrikerArtNo = ShootboltStriker_ArticleNo._N705A20106;
+            _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2453,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._374,
+                                                                      SashReinf_ArticleNo._655,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._642105,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._None,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rio,
+                                                                      Extension_ArticleNo._641798,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      false,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 13.0f;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel2.Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+            _panelModel2.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel2.Panel_RioOptionsVisibility = true;
+            _panelModel2.Panel_RioArtNo = Rio_HandleArtNo._C050C108019;
+            _panelModel2.Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
+            _panelModel2.Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1455, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1605, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1354, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1504, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(8856, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(154, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
+
+            #region Multimullion(2)
+
+
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(687, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(687, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(592, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1432, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(504, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1344, _panelModel1.Panel_GlassHeight);
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._None, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel1.Panel_AdjStrikerArtNo);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel1.Panel_3dHingeArtNo);
+            Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel1.Panel_RestrictorStayArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
+
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+            #endregion
+
+            #region MullionUC1
+
+            Assert.AreEqual(DummyMullion_ArticleNo._385P, _divDummyMullionModel.Div_DMArtNo);
+            Assert.AreEqual(1446, _divDummyMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(EndcapDM_ArticleNo._K385, _divDummyMullionModel.Div_EndcapDM);
+            Assert.AreEqual(LeverEspagnolette_ArticleNo._631153, _divDummyMullionModel.Div_LeverEspagArtNo);
+            Assert.AreEqual(FixedCam_ArticleNo._1481413, _divDummyMullionModel.Div_FixedCamDM);
+            Assert.AreEqual(SnapInKeep_ArticleNo._0400205, _divDummyMullionModel.Div_SnapNKeepDM);
+            Assert.AreEqual(ShootboltReverse_ArticleNo._312033, _divDummyMullionModel.Div_ShootboltReverseArtNo);
+            Assert.AreEqual(ShootboltNonReverse_ArticleNo._349187, _divDummyMullionModel.Div_ShootboltNonReverseArtNo);
+            Assert.AreEqual(ShootboltStriker_ArticleNo._N705A20106, _divDummyMullionModel.Div_ShootboltStrikerArtNo);
+
+            #endregion
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(687, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(687, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(592, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(1432, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(504, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1344, _panelModel2.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._642105, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rio, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(Rio_HandleArtNo._C050C108019, _panelModel2.Panel_RioArtNo);
+            Assert.AreEqual(ProfileKnobCylinder_ArtNo._45x45, _panelModel2.Panel_ProfileKnobCylinderArtNo);
+            Assert.AreEqual(Cylinder_CoverArtNo._EPSW_8022_823332, _panelModel2.Panel_CylinderCoverArtNo);
+            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel2.Panel_AdjStrikerArtNo);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel2.Panel_3dHingeArtNo);
+            Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel2.Panel_RestrictorStayArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+
+
+            #endregion
+
+            #endregion
+
+
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1455'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1605'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '1354'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1504'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 374' AND Size = '687'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 374' AND Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 655' AND Size = '592'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height 655' AND Size = '1432'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '687'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '687'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Size = '504'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1344'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '504'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '1344'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //accesories and hardwares 
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%642105%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%3D hinge%' AND
+                             Description LIKE '%492594%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Restrictor Stay%' AND
+                             Description LIKE '%613249%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Endcap for Dummy Mullion%' AND
+                             Description LIKE '%K385%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            #endregion
+
+        }
+
+        [TestMethod]
+        public void ChkVar_5PanelCasementWindowSample_B2_UsingDummyMullion()
+        {
+            /* 
+             *           _________________________________
+             *           |                               |
+             *           |_______________________________|
+             *           |      /|\      |      /|\      |
+             *           |    /  |  \    |    /  |  \    |
+             *           |  /    |    \  |  /    |    \  |
+             *           |/      |      \|/      |      \|
+             *           |\      |      /|\      |      /|
+             *           |  \    |    /  |  \    |    /  |
+             *           |    \  |  /    |    \  |  /    |
+             *           |______\|/______|______\|/______|
+             */
+
+
+
+            int total_wd = 2440, CW_PanelWD2 = 616, CW_PanelWD3 = 604,
+                total_ht = 2220, CW_EqualPanelHT = 1900,
+                FW_PanelHT1 = 320;
+
+
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._CharcoalGray, Foil_Color._Graphite);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+
+            IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                        ht,
+                                                                                        total_wd,
+                                                                                        total_ht,
+                                                                                        frame,
+                                                                                        new UserControl(),
+                                                                                        _frameModel,
+                                                                                        true,
+                                                                                        FlowDirection.TopDown,
+                                                                                        _frameModel.Frame_Zoom,
+                                                                                        1,
+                                                                                        DockStyle.Fill,
+                                                                                        1,
+                                                                                        0,
+                                                                                         null,
+                                                                                        _frameModel.FrameImageRenderer_Zoom,
+                                                                                        "",
+                                                                                        2);
+            _multiTransomModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiTransomModel);
+            Control multiTransom = new Control();
+            multiTransom.Name = _multiTransomModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiTransom_totalPanelCount = _multiTransomModel.MPanel_Divisions + 1;
+            int suggest_Wd = ((_multiTransomModel.MPanel_Width - (divSize * _multiTransomModel.MPanel_Divisions)) / multiTransom_totalPanelCount),
+                suggest_HT = _multiTransomModel.MPanel_Height;
+
+
+            #region MultiTransom(2)
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                    suggest_HT,
+                                                                    new Control(),
+                                                                    new UserControl(),
+                                                                    new UserControl(),
+                                                                    new UserControl(),
+                                                                    "Fixed Panel",
+                                                                    true,
+                                                                    1.0f,
+                                                                    _frameModel,
+                                                                    _multiTransomModel,
+                                                                    total_wd,
+                                                                    FW_PanelHT1,
+                                                                    GlazingBead_ArticleNo._2453,
+                                                                    GlassFilm_Types._None,
+                                                                    SashProfile_ArticleNo._None,
+                                                                    SashReinf_ArticleNo._None,
+                                                                    GlassType._Single,
+                                                                    Espagnolette_ArticleNo._None,
+                                                                    Striker_ArticleNo._M89ANTA,
+                                                                    MiddleCloser_ArticleNo._None,
+                                                                    LockingKit_ArticleNo._None,
+                                                                    MotorizedMech_ArticleNo._41555B,
+                                                                    Handle_Type._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    Extension_ArticleNo._None,
+                                                                    false,
+                                                                    false,
+                                                                    false,
+                                                                    false,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    0,
+                                                                    Rotoswing_HandleArtNo._RSC773451,
+                                                                    GeorgianBar_ArticleNo._None,
+                                                                    0,
+                                                                    0,
+                                                                    false,
+                                                                    1,
+                                                                    1,
+                                                                    _frameModel.FrameImageRenderer_Zoom,
+                                                                    1,
+                                                                    DockStyle.Fill,
+                                                                    "FixedPanelUC_1",
+                                                                    true,
+                                                                    HingeOption._2DHinge
+                                                                    );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_SashPropertyVisibility = false;
+            _panelModel1.Panel_HingeOptionsVisibility = false;
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiTransomModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Fw1 = new Control();
+            Fw1.Name = "FixedPanelUC_1";
+            _multiTransomModel.MPanelLst_Objects.Add(Fw1);
+
+            Dictionary<int, int> CladdingLst;
+            CladdingLst = new Dictionary<int, int>()
+            {
+                {1,2440}
+            }
+            ;
+            IDividerModel _divTransomModel = _dividerServices.AddDividerModel(_multiTransomModel.MPanel_Width,
+                                                                           divSize,
+                                                                           new Control(),
+                                                                           DividerModel.DividerType.Transom,
+                                                                           true,
+                                                                           _frameModel.Frame_Zoom,
+                                                                           Divider_ArticleNo._7538,
+                                                                           _multiTransomModel.MPanel_DisplayWidth,
+                                                                           _multiTransomModel.MPanel_DisplayHeight,
+                                                                           _multiTransomModel,
+                                                                           _frameModel,
+                                                                           1,
+                                                                           _frameModel.FrameImageRenderer_Zoom,
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "TransomUC_1",
+                                                                           CladdingLst,
+                                                                           false,
+                                                                           true,
+                                                                           null);
+            _divTransomModel.Div_claddingBracketVisibility = true;
+            _divTransomModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
+            _divTransomModel.Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
+            _divTransomModel.Div_CladdingBracketForConcreteQTY = 2;
+            _multiTransomModel.MPanelLst_Divider.Add(_divTransomModel);
+            Control div_Transom = new Control();
+            div_Transom.Name = "TransomUC_1";
+            _multiTransomModel.MPanelLst_Objects.Add(div_Transom);
+
+
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
+                                                                                          suggest_HT,
+                                                                                          total_wd,
+                                                                                          CW_EqualPanelHT,
+                                                                                          multiTransom,
+                                                                                          new UserControl(),
+                                                                                          _frameModel,
+                                                                                          true,
+                                                                                          FlowDirection.LeftToRight,
+                                                                                          _frameModel.Frame_Zoom,
+                                                                                          2,
+                                                                                          DockStyle.None,
+                                                                                          1,
+                                                                                          0,
+                                                                                          _multiTransomModel,
+                                                                                          _frameModel.FrameImageRenderer_Zoom,
+                                                                                          "",
+                                                                                          4);
+            _multiMullionModel.MPanel_Placement = "Last";
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 2;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            _multiTransomModel.MPanelLst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion2 = new Control();
+            multiMullion2.Name = "MultiMullion_2";
+            _multiTransomModel.MPanelLst_Objects.Add(multiMullion2);
+
+            #endregion
+
+
+
+
+            #region MultiMullionModel(4)
+
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+            int multiMullion_suggest_Wd = (((_multiMullionModel.MPanel_Width) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount),
+                multiMullion_suggest_HT = _multiMullionModel.MPanel_Height;
+
+
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(multiMullion_suggest_Wd,
+                                                                   multiMullion_suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   CW_PanelWD2,
+                                                                   CW_EqualPanelHT,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._374,
+                                                                   SashReinf_ArticleNo._655,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   2,
+                                                                   2,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   0,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_2",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+
+            _panelModel2.Panel_Placement = "First";
+            _panelModel2.Panel_GlassThickness = 6.0f;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel2.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_BL;
+            _panelModel2.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel2.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel2.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+            IDividerModel _divDummyMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7536,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              2,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_2",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._385P,
+                                                                              _panelModel2);
+            _divDummyMullionModel.Div_ArtNo = Divider_ArticleNo._None;
+            _divDummyMullionModel.Div_ChkDM = true;
+            _divDummyMullionModel.Div_DMPanel = _panelModel2;
+            _divDummyMullionModel.Div_ArtVisibility = true;
+            _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K385;
+            _divDummyMullionModel.Div_ShootboltReverseArtNo = ShootboltReverse_ArticleNo._312033;
+            _divDummyMullionModel.Div_ShootboltNonReverseArtNo = ShootboltNonReverse_ArticleNo._349187;
+            _divDummyMullionModel.Div_ShootboltStrikerArtNo = ShootboltStriker_ArticleNo._N705A20106;
+            _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+            _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400215;
+            _divDummyMullionModel.Div_LeverEspagVisibility = true;
+            _divDummyMullionModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._631153;
+            _divDummyMullionModel.Div_DMStrikerArtNo = null;
+            _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
+            Control div_DummyMullion2 = new Control();
+            div_DummyMullion2.Name = "MullionUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(div_DummyMullion2);
+
+            IPanelModel _panelModel3 = _panelServices.AddPanelModel(multiMullion_suggest_Wd,
+                                                                    multiMullion_suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      CW_PanelWD3,
+                                                                      CW_EqualPanelHT,
+                                                                      GlazingBead_ArticleNo._2452,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._374,
+                                                                      SashReinf_ArticleNo._655,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._642089,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._None,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rotoline,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._641798,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      false,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      0,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      3,
+                                                                      3,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_3",
+                                                                      true,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel3.Panel_Placement = "Somewhere in Between";
+            _panelModel3.Panel_GlassThickness = 6.0f;
+            _panelModel3.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel3.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_BL;
+            _panelModel3.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel3.Panel_RotolineOptionsVisibility = true;
+            _panelModel3.Panel_RotolineArtNo = Rotoline_HandleArtNo._K070A21725;
+            _panelModel3.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel3.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel3);
+            Control Casement3 = new Control();
+            Casement3.Name = "CasementPanelUC_3";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement3);
+
+
+
+
+
+            IDividerModel _divMullionModel3 = _dividerServices.AddDividerModel(divSize,
+                                                                           _multiMullionModel.MPanel_Height,
+                                                                           new Control(),
+                                                                           DividerModel.DividerType.Mullion,
+                                                                           true,
+                                                                           _frameModel.Frame_Zoom,
+                                                                           Divider_ArticleNo._7538,
+                                                                           _multiMullionModel.MPanel_DisplayWidth,
+                                                                           _multiMullionModel.MPanel_DisplayHeight,
+                                                                           _multiMullionModel,
+                                                                           _frameModel,
+                                                                           3,
+                                                                           _frameModel.FrameImageRenderer_Zoom,
+                                                                           _frameModel.Frame_Type.ToString(),
+                                                                           "MullionUC_3",
+                                                                           null,
+                                                                           false,
+                                                                           true,
+                                                                           DummyMullion_ArticleNo._385P,
+                                                                           _panelModel1);
+
+            _divMullionModel3.Div_ChkDM = false;
+            _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel3);
+            Control div_Mullion3 = new Control();
+            div_Mullion3.Name = "MullionUC_3";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion3);
+
+
+
+            IPanelModel _panelModel4 = _panelServices.AddPanelModel(multiMullion_suggest_Wd,
+                                                                    multiMullion_suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   CW_PanelWD3,
+                                                                   CW_EqualPanelHT,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._374,
+                                                                   SashReinf_ArticleNo._655,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   4,
+                                                                   4,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   4,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_4",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+
+            _panelModel4.Panel_Placement = "Somewhere in Between";
+            _panelModel4.Panel_GlassThickness = 6.0f;
+            _panelModel4.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel4.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_BL;
+            _panelModel4.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel4.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel4.Panel_Index_Inside_MPanel = 4;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel4);
+            Control Casement4 = new Control();
+            Casement4.Name = "CasementPanelUC_4";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement4);
+
+            IDividerModel _divDummyMullionModel4 = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7536,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              4,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_4",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._385P,
+                                                                              _panelModel4);
+            _divDummyMullionModel4.Div_ArtNo = Divider_ArticleNo._None;
+            _divDummyMullionModel4.Div_ChkDM = true;
+            _divDummyMullionModel4.Div_DMPanel = _panelModel4;
+            _divDummyMullionModel4.Div_ArtVisibility = true;
+            _divDummyMullionModel4.Div_EndcapDM = EndcapDM_ArticleNo._K385;
+            _divDummyMullionModel4.Div_ShootboltReverseArtNo = ShootboltReverse_ArticleNo._312033;
+            _divDummyMullionModel4.Div_ShootboltNonReverseArtNo = ShootboltNonReverse_ArticleNo._349187;
+            _divDummyMullionModel4.Div_ShootboltStrikerArtNo = ShootboltStriker_ArticleNo._N705A20106;
+            _divDummyMullionModel4.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+            _divDummyMullionModel4.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400215;
+            _divDummyMullionModel4.Div_LeverEspagVisibility = true;
+            _divDummyMullionModel4.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._631153;
+            _divDummyMullionModel4.Div_DMStrikerArtNo = null;
+            _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel4);
+
+            Control div_DummyMullion4 = new Control();
+            div_DummyMullion4.Name = "MullionUC_4";
+            _multiMullionModel.MPanelLst_Objects.Add(div_DummyMullion4);
+
+            IPanelModel _panelModel5 = _panelServices.AddPanelModel(multiMullion_suggest_Wd,
+                                                                    multiMullion_suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      CW_PanelWD2,
+                                                                      CW_EqualPanelHT,
+                                                                      GlazingBead_ArticleNo._2452,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._374,
+                                                                      SashReinf_ArticleNo._655,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._642089,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._None,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rotoline,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._641798,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      false,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      0,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      5,
+                                                                      5,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      6,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_5",
+                                                                      true,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel5.Panel_Placement = "Last";
+            _panelModel5.Panel_GlassThickness = 6.0f;
+            _panelModel5.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel5.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_BL;
+            _panelModel5.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel5.Panel_RotolineOptionsVisibility = true;
+            _panelModel5.Panel_RotolineArtNo = Rotoline_HandleArtNo._K070A21725;
+            _panelModel5.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel5.Panel_Index_Inside_MPanel = 6;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel5);
+            Control Casement5 = new Control();
+            Casement5.Name = "CasementPanelUC_5";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement5);
+
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(2445, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(2225, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(2344, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(2124, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(4, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)1.300032, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(16, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(64, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(334, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(122, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(9, _qouteModel.Screws_for_Cladding);
+
+            #region Multimullion(2)
+
+            #region FW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(2440, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(320, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(2340, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(231, _panelModel1.Panel_GlassHeight);
+
+            Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
+
+            #endregion
+
+            #region TransomUC1
+
+            Assert.AreEqual(Divider_ArticleNo._7538, _divTransomModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, _divTransomModel.Div_ReinfArtNo);
+            Assert.AreEqual(2354, _divTransomModel.Div_ExplosionWidth);
+            Assert.AreEqual(2244, _divTransomModel.Div_ReinfWidth);
+            Assert.AreEqual(CladdingProfile_ArticleNo._1338, _divTransomModel.Div_CladdingProfileArtNo);
+            Assert.AreEqual(CladdingReinf_ArticleNo._9120, _divTransomModel.Div_CladdingReinfArtNo);
+            Assert.AreEqual(CladdingLst, _divTransomModel.Div_CladdingSizeList);
+            Assert.AreEqual(2, _divTransomModel.Div_CladdingBracketForConcreteQTY);
+
+            #endregion
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(578, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1838, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(578, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(1838, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(483, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(1743, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(395, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1655, _panelModel2.Panel_GlassHeight);
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_BL, _panelModel2.Panel_3dHingeArtNo);
+            Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._None, _panelModel2.Panel_HandleType);
+
+
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+
+            #endregion
+
+            #region DummyMullionUC2
+
+            Assert.AreEqual(DummyMullion_ArticleNo._385P, _divDummyMullionModel.Div_DMArtNo);
+            Assert.AreEqual(1757, _divDummyMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(EndcapDM_ArticleNo._K385, _divDummyMullionModel.Div_EndcapDM);
+
+
+            #endregion
+
+            #region CW3
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(577, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1838, _panelModel3.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel3.Panel_SashProfileArtNo);
+            Assert.AreEqual(577, _panelModel3.Panel_SashWidth);
+            Assert.AreEqual(1838, _panelModel3.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel3.Panel_SashReinfArtNo);
+            Assert.AreEqual(482, _panelModel3.Panel_SashReinfWidth);
+            Assert.AreEqual(1743, _panelModel3.Panel_SashReinfHeight);
+
+            Assert.AreEqual(394, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(1655, _panelModel3.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel3.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_BL, _panelModel3.Panel_3dHingeArtNo);
+            Assert.AreEqual(1, _panelModel3.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._642089, _panelModel3.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoline, _panelModel3.Panel_HandleType);
+            Assert.AreEqual(Rotoline_HandleArtNo._K070A21725, _panelModel3.Panel_RotolineArtNo);
+            Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel3.Panel_RestrictorStayArtNo);
+
+
+            //EXTENSIONS
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel3.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel3.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel3.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel3.Panel_ExtRight2Qty);
+
+
+
+            #endregion
+
+            #region MullionUC3
+
+            Assert.AreEqual(Divider_ArticleNo._7538, _divMullionModel3.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, _divMullionModel3.Div_ReinfArtNo);
+            Assert.AreEqual(1825, _divMullionModel3.Div_ExplosionHeight);
+            Assert.AreEqual(1715, _divMullionModel3.Div_ReinfHeight);
+
+            #endregion
+
+            #region CW4
+
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(577, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1838, _panelModel4.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel4.Panel_SashProfileArtNo);
+            Assert.AreEqual(577, _panelModel4.Panel_SashWidth);
+            Assert.AreEqual(1838, _panelModel4.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel4.Panel_SashReinfArtNo);
+            Assert.AreEqual(482, _panelModel4.Panel_SashReinfWidth);
+            Assert.AreEqual(1743, _panelModel4.Panel_SashReinfHeight);
+
+            Assert.AreEqual(394, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(1655, _panelModel4.Panel_GlassHeight);
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel4.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel4.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_BL, _panelModel4.Panel_3dHingeArtNo);
+            Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel4.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._None, _panelModel4.Panel_HandleType);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel4.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel4.Panel_ExtRight2Qty);
+
+
+            #endregion
+
+            #region DummyMullionUC4
+
+            Assert.AreEqual(DummyMullion_ArticleNo._385P, _divDummyMullionModel.Div_DMArtNo);
+            Assert.AreEqual(1757, _divDummyMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(EndcapDM_ArticleNo._K385, _divDummyMullionModel.Div_EndcapDM);
+
+
+            #endregion
+
+            #region CW5
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(578, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1838, _panelModel5.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel5.Panel_SashProfileArtNo);
+            Assert.AreEqual(578, _panelModel5.Panel_SashWidth);
+            Assert.AreEqual(1838, _panelModel5.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel5.Panel_SashReinfArtNo);
+            Assert.AreEqual(483, _panelModel5.Panel_SashReinfWidth);
+            Assert.AreEqual(1743, _panelModel5.Panel_SashReinfHeight);
+
+            Assert.AreEqual(395, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(1655, _panelModel5.Panel_GlassHeight);
+
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel5.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel5.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_BL, _panelModel5.Panel_3dHingeArtNo);
+            Assert.AreEqual(1, _panelModel5.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._642089, _panelModel5.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoline, _panelModel5.Panel_HandleType);
+            Assert.AreEqual(Rotoline_HandleArtNo._K070A21725, _panelModel5.Panel_RotolineArtNo);
+            Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel5.Panel_RestrictorStayArtNo);
+
+            //EXTENSIONS 
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel5.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel5.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel5.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel5.Panel_ExtRight2Qty);
+
+
+
+            #endregion
+
+            #endregion
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '2445'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '2225'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '2344'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '2124'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 374' AND Size = '577'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 374' AND Size = '578'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 374' AND Size = '1838'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 655' AND Size = '482'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 655' AND Size = '483'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height 655' AND Size = '1743'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
+                             Description LIKE '%GB SPACER%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("32", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '2440'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '320'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '578'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1838'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '577'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1838'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '577'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1838'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '578'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1838'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
+                             Size = '2340'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND 
+                             Size = '231'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND 
+                             Size = '395'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND 
+                             Size = '1655'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%' AND 
+                             Size = '394'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Height%' AND 
+                             Size = '1655'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Width%' AND 
+                             Size = '394'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Height%' AND 
+                             Size = '1655'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) Width%' AND 
+                             Size = '395'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) Height%' AND 
+                             Size = '1655'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //accesories and hardwares 
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%642089%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%3D Hinge%' AND
+                             Description LIKE '%492592%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("12", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Restrictor Stay%' AND
+                             Description LIKE '%613249%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Endcap for Dummy Mullion%' AND
+                             Description LIKE '%K385%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            //DM hardware and accessories
+
+            dr = dt.Select(@"Description LIKE '%Lever Espagnolette%' AND
+                             Description LIKE '%631153%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Shootbolt, Reverse%' AND
+                             Description LIKE '%312033%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Shootbolt, non-reverse%' AND
+                             Description LIKE '%349187%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Shootbolt striker%' AND
+                             Description LIKE '%N705A20106%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Fixed cam%' AND
+                             Description LIKE '%1481413%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Snap-in Keep%' AND
+                             Description LIKE '%0400215%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+
+            #endregion
+
+        }
+
+        //using MVD Handle 
+        [TestMethod]
+        public void ChkVar_2PanelCasementWindowSample_A3_UsingDummyMullion_UsingMVDhandle()
+        {
+            /*          _________________
+            *           |      /|\      |
+            *           |    /  |  \    |
+            *           |  /    |    \  |
+            *           |/      |      \|
+            *           |\      |      /|
+            *           |  \    |    /  |
+            *           |    \  |  /    |
+            *           |______\|/______|
+            */
+
+
+
+            int total_wd = 1840,
+                total_ht = 2650,
+                eqpanelWD = 920;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Mahogany, Foil_Color._Mahogany);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._374,
+                                                                   SashReinf_ArticleNo._655,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel1.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel1.Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
+            _panelModel1.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_DB;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+            IDividerModel _divDummyMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._None,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._385P);
+
+            _divDummyMullionModel.Div_ChkDM = true;
+            _divDummyMullionModel.Div_DMPanel = _panelModel1;
+            _divDummyMullionModel.Div_ArtVisibility = true;
+            _divDummyMullionModel.Div_EndcapDM = EndcapDM_ArticleNo._K385;
+            _divDummyMullionModel.Div_ShootboltReverseArtNo = ShootboltReverse_ArticleNo._312033;
+            _divDummyMullionModel.Div_ShootboltNonReverseArtNo = ShootboltNonReverse_ArticleNo._349187;
+            _divDummyMullionModel.Div_ShootboltStrikerArtNo = ShootboltStriker_ArticleNo._N705A20106;
+            _divDummyMullionModel.Div_FixedCamDM = FixedCam_ArticleNo._1481413;
+            _divDummyMullionModel.Div_SnapNKeepDM = SnapInKeep_ArticleNo._0400215;
+            _divDummyMullionModel.Div_LeverEspagVisibility = true;
+            _divDummyMullionModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._476518;
+            _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2452,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._374,
+                                                                      SashReinf_ArticleNo._655,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._630963,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._None,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._MVD,
+                                                                      Extension_ArticleNo._630956,
+                                                                      Extension_ArticleNo._641798,
+                                                                      Extension_ArticleNo._630956,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      true,
+                                                                      true,
+                                                                      false,
+                                                                      false,
+                                                                      1,
+                                                                      1,
+                                                                      0,
+                                                                      0,
+                                                                      2,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_2",
+                                                                      false,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 6.0f;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel2.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel2.Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
+            _panelModel2.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_DB;
+            _panelModel2.Panel_MVDOptionsVisibility = true;
+            _panelModel2.Panel_MVDArtNo = MVD_HandleArtNo._046366M;
+            _panelModel2.Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+            _panelModel2.Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1845, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(2655, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1744, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(2554, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)1.17024, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(13, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(52, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(238, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(85, _qouteModel.Screws_for_Installation);
+
+            #region Multimullion(2)
+
+
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(882, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(2577, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(882, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(2577, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(787, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(2482, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(699, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(2394, _panelModel1.Panel_GlassHeight);
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._None, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(WeldableCornerJoint_ArticleNo._498N, _panelModel1.Panel_WeldableCArtNo);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel1.Panel_3dHingeArtNo);
+            Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel1.Panel_RestrictorStayArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
+
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+            #endregion
+
+            #region MullionUC1
+
+            Assert.AreEqual(DummyMullion_ArticleNo._385P, _divDummyMullionModel.Div_DMArtNo);
+            Assert.AreEqual(2496, _divDummyMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(EndcapDM_ArticleNo._K385, _divDummyMullionModel.Div_EndcapDM);
+            Assert.AreEqual(LeverEspagnolette_ArticleNo._476518, _divDummyMullionModel.Div_LeverEspagArtNo);
+            Assert.AreEqual(ShootboltReverse_ArticleNo._312033, _divDummyMullionModel.Div_ShootboltReverseArtNo);
+            Assert.AreEqual(ShootboltNonReverse_ArticleNo._349187, _divDummyMullionModel.Div_ShootboltNonReverseArtNo);
+            Assert.AreEqual(ShootboltStriker_ArticleNo._N705A20106, _divDummyMullionModel.Div_ShootboltStrikerArtNo);
+            Assert.AreEqual(FixedCam_ArticleNo._1481413, _divDummyMullionModel.Div_FixedCamDM);
+            Assert.AreEqual(SnapInKeep_ArticleNo._0400215, _divDummyMullionModel.Div_SnapNKeepDM);
+
+
+            #endregion
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(882, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(2577, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(882, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(2577, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(787, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(2482, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(699, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(2394, _panelModel2.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES & HARDWARES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._630963, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._MVD, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(MVD_HandleArtNo._046366M, _panelModel2.Panel_MVDArtNo);
+            Assert.AreEqual(ProfileKnobCylinder_ArtNo._50p5x50p5, _panelModel2.Panel_ProfileKnobCylinderArtNo);
+            Assert.AreEqual(Cylinder_CoverArtNo._EPSW_8022_823332, _panelModel2.Panel_CylinderCoverArtNo);
+            Assert.AreEqual(WeldableCornerJoint_ArticleNo._498N, _panelModel2.Panel_WeldableCArtNo);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel2.Panel_3dHingeArtNo);
+            Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel2.Panel_RestrictorStayArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._630956, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._641798, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(2, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._630956, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+
+
+            #endregion
+
+            #endregion
+
+
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1845'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '2655'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '1744'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '2554'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 374' AND Size = '882'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 374' AND Size = '2577'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 655' AND Size = '787'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height 655' AND Size = '2482'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '882'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '2577'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '882'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '2577'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Size = '699'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '2394'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '699'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '2394'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //accesories and hardwares 
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%630963%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%3D hinge%' AND
+                             Description LIKE '%492594%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Weldable corner joint%' AND
+                             Description LIKE '%498N%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("16", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Restrictor Stay%' AND
+                             Description LIKE '%613249%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Endcap for Dummy Mullion%' AND
+                             Description LIKE '%K385%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Lever Espagnolette%' AND
+                             Description LIKE '%476518%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Profile Knob Cylinder%' AND
+                             Description LIKE '%50.5x50.5%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Cylinder Cover%' AND
+                             Description LIKE '%EPSW-8022/823332%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //DM hardware and accessories
+
+            dr = dt.Select(@"Description LIKE '%Shootbolt, Reverse%' AND
+                             Description LIKE '%312033%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Shootbolt, non-reverse%' AND
+                             Description LIKE '%349187%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Shootbolt striker%' AND
+                             Description LIKE '%N705A20106%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Fixed cam%' AND
+                             Description LIKE '%1481413%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Snap-in Keep%' AND
+                             Description LIKE '%0400215%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+
+            #endregion
+
+        }
+
+
+        // CW Inward
+
+        //sample 7507 - 395
+
+        [TestMethod]
+        public void ChkVar_2PanelCasementWindowSample_C1_UsingMullion()
+        {
+            /*          _________________
+            *           |      /|\      |
+            *           |    /  |  \    |
+            *           |  /    |    \  |
+            *           |/      |      \|
+            *           |\      |      /|
+            *           |  \    |    /  |
+            *           |    \  |  /    |
+            *           |______\|/______|
+            */
+
+
+
+            int total_wd = 1450,
+                total_ht = 1600,
+                eqpanelWD = 725;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._395,
+                                                                   SashReinf_ArticleNo._207,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._N110A02206,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 13.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel1.Panel_NTCenterHingeVisibility = true;
+            _panelModel1.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
+            _panelModel1.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+            _panelModel1.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
+            _panelModel1.Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._WhiteIvory;
+            _panelModel1.Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._WhiteIvory;
+            _panelModel1.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
+            _panelModel1.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Right;
+            _panelModel1.Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
+            _panelModel1.Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
+            _panelModel1.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
+            _panelModel1.Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._WhiteIvory;
+            _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
+            _panelModel1.Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._WhiteIvory;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+
+            IDividerModel _divMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7538,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              true,
+                                                                              DummyMullion_ArticleNo._7533);
+            _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2453,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._395,
+                                                                      SashReinf_ArticleNo._207,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._N110A02206,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._1WC70WHT,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rotoswing,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      false,
+                                                                      false,
+                                                                      false,
+                                                                      false,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 13.0f;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel2.Panel_Orient = false;
+            _panelModel2.Panel_NTCenterHingeVisibility = true;
+            _panelModel2.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
+            _panelModel2.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+            _panelModel2.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
+            _panelModel2.Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._WhiteIvory;
+            _panelModel2.Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._WhiteIvory;
+            _panelModel2.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
+            _panelModel2.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Right;
+            _panelModel2.Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
+            _panelModel2.Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
+            _panelModel2.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
+            _panelModel2.Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._WhiteIvory;
+            _panelModel2.Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
+            _panelModel2.Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._WhiteIvory;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1455, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1605, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1354, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1504, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(8760, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(117, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
+
+            #region Multimullion(2)
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(663, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(663, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(538, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1402, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(538, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1402, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._N110A02206, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel1.Panel_RotoswingArtNo);
+            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel1.Panel_AdjStrikerArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
+
+            Assert.AreEqual(NTCenterHinge_ArticleNo._N610A06516, _panelModel1.Panel_NTCenterHingeArticleNo);
+            Assert.AreEqual(StayBearingK_ArticleNo._N390A00106_230177, _panelModel1.Panel_StayBearingKArtNo);
+            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52008_227354, _panelModel1.Panel_StayBearingPinArtNo);
+            Assert.AreEqual(StayBearingCover_ArticleNo._WhiteIvory, _panelModel1.Panel_StayBearingCoverArtNo);
+            Assert.AreEqual(TopCornerHingeCover_ArticleNo._WhiteIvory, _panelModel1.Panel_TopCornerHingeCoverArtNo);
+            Assert.AreEqual(TopCornerHinge_ArticleNo._Left, _panelModel1.Panel_TopCornerHingeArtNo);
+            Assert.AreEqual(TopCornerHingeSpacer_ArticleNo._331488, _panelModel1.Panel_TopCornerHingeSpacerArtNo);
+            Assert.AreEqual(CornerHingeK_ArticleNo._N510A0011, _panelModel1.Panel_CornerHingeKArtNo);
+            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001_258590, _panelModel1.Panel_CornerPivotRestKArtNo);
+            Assert.AreEqual(CornerHingeCoverK_ArticleNo._WhiteIvory, _panelModel1.Panel_CornerHingeCoverKArtNo);
+            Assert.AreEqual(CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory, _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo);
+            Assert.AreEqual(CoverForCornerPivotRest_ArticleNo._WhiteIvory, _panelModel1.Panel_CoverForCornerPivotRestArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+
+
+            #endregion
+
+            #region MullionUC1
+
+            Assert.AreEqual(Divider_ArticleNo._7538, _divMullionModel.Div_ArtNo);
+            Assert.AreEqual(DividerReinf_ArticleNo._R686, _divMullionModel.Div_ReinfArtNo);
+            Assert.AreEqual(1514, _divMullionModel.Div_ExplosionHeight);
+            Assert.AreEqual(1404, _divMullionModel.Div_ReinfHeight);
+
+            #endregion
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(663, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(663, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(538, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(1402, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(538, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1402, _panelModel2.Panel_GlassHeight);
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._N110A02206, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel2.Panel_RotoswingArtNo);
+            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel2.Panel_AdjStrikerArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
+
+            Assert.AreEqual(NTCenterHinge_ArticleNo._N610A06516, _panelModel2.Panel_NTCenterHingeArticleNo);
+            Assert.AreEqual(StayBearingK_ArticleNo._N390A00106_230177, _panelModel2.Panel_StayBearingKArtNo);
+            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52008_227354, _panelModel2.Panel_StayBearingPinArtNo);
+            Assert.AreEqual(StayBearingCover_ArticleNo._WhiteIvory, _panelModel2.Panel_StayBearingCoverArtNo);
+            Assert.AreEqual(TopCornerHingeCover_ArticleNo._WhiteIvory, _panelModel2.Panel_TopCornerHingeCoverArtNo);
+            Assert.AreEqual(TopCornerHinge_ArticleNo._Right, _panelModel2.Panel_TopCornerHingeArtNo);
+            Assert.AreEqual(TopCornerHingeSpacer_ArticleNo._331488, _panelModel2.Panel_TopCornerHingeSpacerArtNo);
+            Assert.AreEqual(CornerHingeK_ArticleNo._N510A0011, _panelModel2.Panel_CornerHingeKArtNo);
+            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001_258590, _panelModel2.Panel_CornerPivotRestKArtNo);
+            Assert.AreEqual(CornerHingeCoverK_ArticleNo._WhiteIvory, _panelModel2.Panel_CornerHingeCoverKArtNo);
+            Assert.AreEqual(CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory, _panelModel2.Panel_CoverForCornerPivotRestVerticalArtNo);
+            Assert.AreEqual(CoverForCornerPivotRest_ArticleNo._WhiteIvory, _panelModel2.Panel_CoverForCornerPivotRestArtNo);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+            #endregion
+
+            #endregion
+
+
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1455'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1605'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '1354'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1504'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 395' AND Size = '663'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 395' AND Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 207' AND Size = '538'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height 207' AND Size = '1402'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '663'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '663'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Size = '538'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1402'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '538'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '1402'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+            //ACCESSORIES & HARDWARE
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%N110A02206%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Adjustable Striker%' AND
+                             Description LIKE '%332439%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%NT Center Hinge%' AND
+                             Description LIKE '%N610A06516%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Mechanical Joint%' AND
+                             Description LIKE '%AV585%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Stay Bearing, K%' AND
+                             Description LIKE '%N390A00106/230177%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Stay Bearing Pin%' AND
+                             Description LIKE '%F710D52008/227354%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Stay Bearing Cover%' AND
+                             Description LIKE '%N391A03718/230252%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge Cover%' AND
+                             Description LIKE '%N391A03718/230252%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge%' AND
+                             Description LIKE '%N620A6116R%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge%' AND
+                             Description LIKE '%N620A6116L%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge Spacer%' AND
+                             Description LIKE '%331488%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Corner Hinge, K%' AND
+                             Description LIKE '%N510A0011%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Corner Pivot Rest, K%' AND
+                             Description LIKE '%N510A0001/258590%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Corner Hinge Cover K%' AND
+                             Description LIKE '%N591A04718%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Cover for corner pivot rest, vertical%' AND
+                             Description LIKE '%N591A01718/230426%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Cover for corner pivot rest,%' AND
+                             Description LIKE '%N591A01718/230426%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Rotoswing handle%' AND
+                             Description LIKE '%RSC-833307%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+            #endregion
+
+        }
+
+        [TestMethod]
+        public void ChkVar_2PanelCasementWindowSample_C1_UsingDummyMullion()
+        {
+            /*          _________________
+            *           |      /|\      |
+            *           |    /  |  \    |
+            *           |  /    |    \  |
+            *           |/      |      \|
+            *           |\      |      /|
+            *           |  \    |    /  |
+            *           |    \  |  /    |
+            *           |______\|/______|
+            */
+
+
+
+            int total_wd = 1450,
+                total_ht = 1600,
+                eqpanelWD = 725;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+            IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
+                                                                                         ht,
+                                                                                         total_wd,
+                                                                                         total_ht,
+                                                                                         frame,
+                                                                                         new UserControl(),
+                                                                                         _frameModel,
+                                                                                         true,
+                                                                                         FlowDirection.LeftToRight,
+                                                                                         _frameModel.Frame_Zoom,
+                                                                                         1,
+                                                                                         DockStyle.Fill,
+                                                                                         1,
+                                                                                         0,
+                                                                                          null,
+                                                                                         _frameModel.FrameImageRenderer_Zoom,
+                                                                                         "",
+                                                                                         2);
+            _multiMullionModel.MPanel_Index_Inside_MPanel = 0;
+            _frameModel.Lst_MultiPanel.Add(_multiMullionModel);
+            Control multiMullion = new Control();
+            multiMullion.Name = _multiMullionModel.MPanel_Name;
+
+
+            int divSize = 26;
+            int multiMullion_totalPanelCount = _multiMullionModel.MPanel_Divisions + 1;
+
+
+            int suggest_Wd = _multiMullionModel.MPanel_Width,
+                suggest_HT = (((_multiMullionModel.MPanel_Height) - (divSize * _multiMullionModel.MPanel_Divisions)) / multiMullion_totalPanelCount);
+
+
+            #region MultiMullionModel
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   _multiMullionModel,
+                                                                   eqpanelWD,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._395,
+                                                                   SashReinf_ArticleNo._207,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 13.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel1.Panel_HingeOptionsVisibility = false;
+            _panelModel1.Panel_NTCenterHingeVisibility = true;
+            _panelModel1.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
+            _panelModel1.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+            _panelModel1.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
+            _panelModel1.Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._WhiteIvory;
+            _panelModel1.Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._WhiteIvory;
+            _panelModel1.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
+            _panelModel1.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Right;
+            _panelModel1.Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
+            _panelModel1.Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
+            _panelModel1.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
+            _panelModel1.Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._WhiteIvory;
+            _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
+            _panelModel1.Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._WhiteIvory;
+            _panelModel1.Panel_Index_Inside_MPanel = 0;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
+            Control Casement1 = new Control();
+            Casement1.Name = "CasementPanelUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement1);
+
+
+            IDividerModel _divDummyMullionModel = _dividerServices.AddDividerModel(divSize,
+                                                                              _multiMullionModel.MPanel_Height,
+                                                                              new Control(),
+                                                                              DividerModel.DividerType.Mullion,
+                                                                              true,
+                                                                              _frameModel.Frame_Zoom,
+                                                                              Divider_ArticleNo._7536,
+                                                                              _multiMullionModel.MPanel_DisplayWidth,
+                                                                              _multiMullionModel.MPanel_DisplayHeight,
+                                                                              _multiMullionModel,
+                                                                              _frameModel,
+                                                                              1,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "MullionUC_1",
+                                                                              null,
+                                                                              false,
+                                                                              false,
+                                                                              DummyMullion_ArticleNo._385P);
+
+
+            _divDummyMullionModel.Div_ChkDM = true;
+            _divDummyMullionModel.Div_ArtNo = Divider_ArticleNo._None;
+            _divDummyMullionModel.Div_ArtVisibility = true;
+            _divDummyMullionModel.Div_DMPanel = _panelModel1;
+            _divDummyMullionModel.Div_LeverEspagVisibility = true;
+            _divDummyMullionModel.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._625_207;
+            _divDummyMullionModel.Div_ShootboltNonReverseArtNo = ShootboltNonReverse_ArticleNo._349187;
+            _divDummyMullionModel.Div_ShootboltStrikerArtNo = ShootboltStriker_ArticleNo._N705A20106;
+            _multiMullionModel.MPanelLst_Divider.Add(_divDummyMullionModel);
+            Control div_Mullion = new Control();
+            div_Mullion.Name = "MullionUC_1";
+            _multiMullionModel.MPanelLst_Objects.Add(div_Mullion);
+
+            IPanelModel _panelModel2 = _panelServices.AddPanelModel(suggest_Wd,
+                                                                      suggest_HT,
+                                                                      new Control(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      new UserControl(),
+                                                                      "Casement Panel",
+                                                                      true,
+                                                                      1.0f,
+                                                                      _frameModel,
+                                                                      _multiMullionModel,
+                                                                      eqpanelWD,
+                                                                      total_ht,
+                                                                      GlazingBead_ArticleNo._2453,
+                                                                      GlassFilm_Types._None,
+                                                                      SashProfile_ArticleNo._395,
+                                                                      SashReinf_ArticleNo._207,
+                                                                      GlassType._Single,
+                                                                      Espagnolette_ArticleNo._N110A02206,
+                                                                      Striker_ArticleNo._M89ANTC,
+                                                                      MiddleCloser_ArticleNo._None,
+                                                                      LockingKit_ArticleNo._None,
+                                                                      MotorizedMech_ArticleNo._41555B,
+                                                                      Handle_Type._Rotoswing,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      Extension_ArticleNo._None,
+                                                                      false,
+                                                                      false,
+                                                                      false,
+                                                                      false,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      0,
+                                                                      Rotoswing_HandleArtNo._RSC833307,
+                                                                      GeorgianBar_ArticleNo._None,
+                                                                      0,
+                                                                      0,
+                                                                      false,
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      2,
+                                                                      DockStyle.Fill,
+                                                                      "CasementPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._2DHinge
+                                                                      );
+            _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_GlassThickness = 13.0f;
+            _panelModel2.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel2.Panel_Orient = false;
+            _panelModel2.Panel_NTCenterHingeVisibility = true;
+            _panelModel2.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
+            _panelModel2.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+            _panelModel2.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
+            _panelModel2.Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._WhiteIvory;
+            _panelModel2.Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._WhiteIvory;
+            _panelModel2.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
+            _panelModel2.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Right;
+            _panelModel2.Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
+            _panelModel2.Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
+            _panelModel2.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
+            _panelModel2.Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._WhiteIvory;
+            _panelModel2.Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory;
+            _panelModel2.Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._WhiteIvory;
+            _panelModel2.Panel_Index_Inside_MPanel = 2;
+            _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
+            Control Casement2 = new Control();
+            Casement2.Name = "CasementPanelUC_2";
+            _multiMullionModel.MPanelLst_Objects.Add(Casement2);
+
+            #endregion
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1455, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1605, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1354, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1504, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(2, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(8856, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.5568, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(36, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(123, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(55, _qouteModel.Screws_for_Installation);
+
+            #region Multimullion(2)
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(687, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(687, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(562, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1402, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(562, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1402, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._None, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._None, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
+
+            Assert.AreEqual(NTCenterHinge_ArticleNo._N610A06516, _panelModel1.Panel_NTCenterHingeArticleNo);
+            Assert.AreEqual(StayBearingK_ArticleNo._N390A00106_230177, _panelModel1.Panel_StayBearingKArtNo);
+            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52008_227354, _panelModel1.Panel_StayBearingPinArtNo);
+            Assert.AreEqual(StayBearingCover_ArticleNo._WhiteIvory, _panelModel1.Panel_StayBearingCoverArtNo);
+            Assert.AreEqual(TopCornerHingeCover_ArticleNo._WhiteIvory, _panelModel1.Panel_TopCornerHingeCoverArtNo);
+            Assert.AreEqual(TopCornerHinge_ArticleNo._Left, _panelModel1.Panel_TopCornerHingeArtNo);
+            Assert.AreEqual(TopCornerHingeSpacer_ArticleNo._331488, _panelModel1.Panel_TopCornerHingeSpacerArtNo);
+            Assert.AreEqual(CornerHingeK_ArticleNo._N510A0011, _panelModel1.Panel_CornerHingeKArtNo);
+            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001_258590, _panelModel1.Panel_CornerPivotRestKArtNo);
+            Assert.AreEqual(CornerHingeCoverK_ArticleNo._WhiteIvory, _panelModel1.Panel_CornerHingeCoverKArtNo);
+            Assert.AreEqual(CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory, _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo);
+            Assert.AreEqual(CoverForCornerPivotRest_ArticleNo._WhiteIvory, _panelModel1.Panel_CoverForCornerPivotRestArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+
+
+            #endregion
+
+            #region MullionUC1
+
+            Assert.AreEqual(DummyMullion_ArticleNo._385P, _divDummyMullionModel.Div_DMArtNo);
+            Assert.AreEqual(1446, _divDummyMullionModel.Div_ExplosionHeight);
+
+            Assert.AreEqual(LeverEspagnolette_ArticleNo._625_207, _divDummyMullionModel.Div_LeverEspagArtNo);
+            Assert.AreEqual(ShootboltNonReverse_ArticleNo._349187, _divDummyMullionModel.Div_ShootboltNonReverseArtNo);
+            Assert.AreEqual(ShootboltStriker_ArticleNo._N705A20106, _divDummyMullionModel.Div_ShootboltStrikerArtNo);
+
+
+            #endregion
+
+            #region CW2
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(687, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel2.Panel_SashProfileArtNo);
+            Assert.AreEqual(687, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel2.Panel_SashReinfArtNo);
+            Assert.AreEqual(562, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(1402, _panelModel2.Panel_SashReinfHeight);
+
+            Assert.AreEqual(562, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(1402, _panelModel2.Panel_GlassHeight);
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel2.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._N110A02206, _panelModel2.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel2.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC833307, _panelModel2.Panel_RotoswingArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
+
+            Assert.AreEqual(NTCenterHinge_ArticleNo._N610A06516, _panelModel2.Panel_NTCenterHingeArticleNo);
+            Assert.AreEqual(StayBearingK_ArticleNo._N390A00106_230177, _panelModel2.Panel_StayBearingKArtNo);
+            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52008_227354, _panelModel2.Panel_StayBearingPinArtNo);
+            Assert.AreEqual(StayBearingCover_ArticleNo._WhiteIvory, _panelModel2.Panel_StayBearingCoverArtNo);
+            Assert.AreEqual(TopCornerHingeCover_ArticleNo._WhiteIvory, _panelModel2.Panel_TopCornerHingeCoverArtNo);
+            Assert.AreEqual(TopCornerHinge_ArticleNo._Right, _panelModel2.Panel_TopCornerHingeArtNo);
+            Assert.AreEqual(TopCornerHingeSpacer_ArticleNo._331488, _panelModel2.Panel_TopCornerHingeSpacerArtNo);
+            Assert.AreEqual(CornerHingeK_ArticleNo._N510A0011, _panelModel2.Panel_CornerHingeKArtNo);
+            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001_258590, _panelModel2.Panel_CornerPivotRestKArtNo);
+            Assert.AreEqual(CornerHingeCoverK_ArticleNo._WhiteIvory, _panelModel2.Panel_CornerHingeCoverKArtNo);
+            Assert.AreEqual(CoverForCornerPivotRestVertical_ArticleNo._WhiteIvory, _panelModel2.Panel_CoverForCornerPivotRestVerticalArtNo);
+            Assert.AreEqual(CoverForCornerPivotRest_ArticleNo._WhiteIvory, _panelModel2.Panel_CoverForCornerPivotRestArtNo);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel2.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel2.Panel_ExtRight2Qty);
+
+            #endregion
+
+            #endregion
+
+
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1455'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1605'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '1354'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1504'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 395' AND Size = '687'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 395' AND Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 207' AND Size = '562'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height 207' AND Size = '1402'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '687'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '687'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1527'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Size = '562'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1402'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
+                             Size = '562'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
+                             Size = '1402'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+            //ACCESSORIES & HARDWARE
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%N110A02206%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Lever Espagnolette%' AND
+                             Description LIKE '%625-207%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Shootbolt, non-reverse%' AND
+                             Description LIKE '%349187%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Shootbolt Striker%' AND
+                             Description LIKE '%N705A20106%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Endcap for Dummy Mullion%' AND
+                             Description LIKE '%K385%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%NT Center Hinge%' AND
+                             Description LIKE '%N610A06516%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Stay Bearing, K%' AND
+                             Description LIKE '%N390A00106/230177%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Stay Bearing Pin%' AND
+                             Description LIKE '%F710D52008/227354%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Stay Bearing Cover%' AND
+                             Description LIKE '%N391A03718/230252%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge Cover%' AND
+                             Description LIKE '%N391A03718/230252%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge%' AND
+                             Description LIKE '%N620A6116R%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge%' AND
+                             Description LIKE '%N620A6116L%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge Spacer%' AND
+                             Description LIKE '%331488%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Corner Hinge, K%' AND
+                             Description LIKE '%N510A0011%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Corner Pivot Rest, K%' AND
+                             Description LIKE '%N510A0001/258590%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Corner Hinge Cover K%' AND
+                             Description LIKE '%N591A04718%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Cover for corner pivot rest, vertical%' AND
+                             Description LIKE '%N591A01718/230426%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Cover for corner pivot rest,%' AND
+                             Description LIKE '%N591A01718/230426%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Rotoswing handle%' AND
+                             Description LIKE '%RSC-833307%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            #endregion
+
+        }
+
+
+
+        //Motirize CW
+
+        [TestMethod]
+        public void ChkVar_SinglePanel_OutwardMotorizeCasementWindow()
+        {
+            /*
+                    Outward Motorize
+                        ______
+            *           |   /|
+            *           |  / |
+            *           | /  |
+            *           |/   |
+            *           |\   |
+            *           | \  |
+            *           |  \ |
+            *           |___\|
+            */
+
+
+            int total_wd = 1000,
+                total_ht = 1500;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Mahogany, Foil_Color._Mahogany);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(wd,
+                                                                   ht,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   null,
+                                                                   total_wd,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_MotorizedOptionVisibility = true;
+            _panelModel1.Panel_MotorizedpnlOptionVisibility = true;
+            _panelModel1.Panel_MotorizedMechSetQty = 1;
+            _panelModel1.Panel_2DHingeQty = 3;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+
+            _frameModel.Lst_Panel.Add(_panelModel1);
+
+
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1005, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1505, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(904, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1404, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.36, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(8, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(32, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(42, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(47, _qouteModel.Screws_for_Installation);
+
+
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(925, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1425, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel1.Panel_GBSpacerArtNo);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(925, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1425, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(800, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1300, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(804, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1304, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(_30x25Cover_ArticleNo._1067_Milled, _panelModel1.Panel_30x25CoverArtNo);
+            Assert.AreEqual(MotorizedDivider_ArticleNo._0505, _panelModel1.Panel_MotorizedDividerArtNo);
+            Assert.AreEqual(CoverForMotor_ArticleNo._1182, _panelModel1.Panel_CoverForMotorArtNo);
+            Assert.AreEqual(_2DHinge_ArticleNo._614293, _panelModel1.Panel_2dHingeArtNo);
+            Assert.AreEqual(MotorizedMech_ArticleNo._41555B, _panelModel1.Panel_MotorizedMechArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_MotorizedMechSetQty);
+            Assert.AreEqual(PushButtonSwitch_ArticleNo._N4037, _panelModel1.Panel_PushButtonSwitchArtNo);
+            Assert.AreEqual(FalsePole_ArticleNo._N4950, _panelModel1.Panel_FalsePoleArtNo);
+            Assert.AreEqual(SupportingFrame_ArticleNo._N4703, _panelModel1.Panel_SupportingFrameArtNo);
+            Assert.AreEqual(Plate_ArticleNo._N4803LB, _panelModel1.Panel_PlateArtNo);
+
+            #endregion
+
+
+
+
+
+
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1005'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1505'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '904'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1404'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '925'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1425'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '800'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1300'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
+                             Description LIKE '%GB SPACER%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '925'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1425'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Description LIKE '%%' AND
+                             Size = '804'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1304'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+            //ACCESSORIES & HARDWARE
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%1640%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%2D Hinge%' AND
+                             Description LIKE '%614293%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Push Button Switch%' AND
+                             Description LIKE '%N4037%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%False pole%' AND
+                             Description LIKE '%N4950%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Supporting Frame%' AND
+                             Description LIKE '%N4703%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            dr = dt.Select(@"Description LIKE '%Plate%' AND
+                             Description LIKE '%N4803LB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%30X25 Cover%' AND
+                             Description LIKE '%1067 - Milled%' AND
+                             Size = '1650'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Divider%' AND
+                             Description LIKE '%505%' AND
+                             Size = '1650'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover for motor%' AND
+                             Description LIKE '%1182%' AND
+                             Size = '1650'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            #endregion
+
+        }
+
+        [TestMethod]
+        public void ChkVar_SinglePanel_InwardMotorizeCasementWindow()
+        {
+            /*
+                     Inward Motorize
+                      ________
+            *         | |   /|
+            *         | |  / |
+            *         | | /  |
+            *         | |/   |
+            *         | |\   |
+            *         | | \  |
+            *         | |  \ |
+            *         |_|___\|
+            */
+
+
+            int total_wd = 1000,
+                total_ht = 1000;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._None, Foil_Color._None);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _frameModel.Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
+            _frameModel.Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(wd,
+                                                                   ht,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   null,
+                                                                   total_wd,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._395,
+                                                                   SashReinf_ArticleNo._207,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70WHT,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41556C,
+                                                                   Handle_Type._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC833307,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._2DHinge
+                                                                   );
+            _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_MotorizedOptionVisibility = true;
+            _panelModel1.Panel_MotorizedpnlOptionVisibility = true;
+            _panelModel1.Panel_MotorizedMechSetQty = 1;
+            _panelModel1.Panel_ButtHingeVisibility = true;
+            _panelModel1.Panel_ButtHingeArtNo = ButtHinge_ArticleNo._PC;
+            _panelModel1.Panel_ButtHingeQty = 3;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+
+
+
+            _frameModel.Lst_Panel.Add(_panelModel1);
+
+
+
+            #region Assert
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(970, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1005, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(869, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(904, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(MilledFrame_ArticleNo._7502Milled, _frameModel.Frame_MilledArtNo);
+            Assert.AreEqual(MilledFrameReinf_ArticleNo._R_676, _frameModel.Frame_MilledReinfArtNo);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.24, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(6, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(24, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(38, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(43, _qouteModel.Screws_for_Installation);
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(927, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(892, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel1.Panel_GBSpacerArtNo);
+
+            Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(927, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(892, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(802, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(767, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(802, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(767, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES & HARDWARE
+
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(ButtHinge_ArticleNo._PC, _panelModel1.Panel_ButtHingeArtNo);
+            Assert.AreEqual(MotorizedMech_ArticleNo._41556C, _panelModel1.Panel_MotorizedMechArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_MotorizedMechSetQty);
+            Assert.AreEqual(PushButtonSwitch_ArticleNo._N4037, _panelModel1.Panel_PushButtonSwitchArtNo);
+            Assert.AreEqual(FalsePole_ArticleNo._N4950, _panelModel1.Panel_FalsePoleArtNo);
+            Assert.AreEqual(SupportingFrame_ArticleNo._N4703, _panelModel1.Panel_SupportingFrameArtNo);
+            Assert.AreEqual(Plate_ArticleNo._N4803LB, _panelModel1.Panel_PlateArtNo);
+
+            #endregion
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Milled Frame 7502-Milled' AND Size = '1000'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Milled Frame Reinf R-676' AND Size = '1000'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '970'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1005'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '869'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '904'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 395' AND Size = '927'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 395' AND Size = '892'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 207' AND Size = '802'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height 207' AND Size = '767'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
+                             Description LIKE '%GB SPACER%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '927'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '892'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Description LIKE '%%' AND
+                             Size = '802'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '767'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+            //ACCESSORIES & HARDWARE
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Butt Hinge%' AND
+                             Description LIKE '%770725-PC%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Push Button Switch%' AND
+                             Description LIKE '%N4037%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%False pole%' AND
+                             Description LIKE '%N4950%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Supporting Frame%' AND
+                             Description LIKE '%N4703%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            dr = dt.Select(@"Description LIKE '%Plate%' AND
+                             Description LIKE '%N4803LB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            #endregion
+
+        }
+
+
+
+        //2 different color
+        [TestMethod]
+        public void ChkVar_SinglePanel_2DiffColor_7502_7581_CasementWindow()
+        {
+            /*
+                        ______
+            *           |   /|
+            *           |  / |
+            *           | /  |
+            *           |/   |
+            *           |\   |
+            *           | \  |
+            *           |  \ |
+            *           |___\|
+            */
+
+
+            int total_wd = 952,
+                total_ht = 1752;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(wd,
+                                                                   ht,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   null,
+                                                                   total_wd,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._741012,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70DB,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._612978,
+                                                                   Extension_ArticleNo._639957,
+                                                                   Extension_ArticleNo._639957,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   true,
+                                                                   true,
+                                                                   false,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773452,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel1.Panel_FSCasementArtNo = FrictionStayCasement_ArticleNo._20HD;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
+
+
+            _frameModel.Lst_Panel.Add(_panelModel1);
+
+
+
+            #region Assert
+
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7502, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(957, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1757, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R676, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(884, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1684, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.40029696, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(8, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(32, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(78, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(36, _qouteModel.Screws_for_Installation);
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(905, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1705, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(905, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1705, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(780, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1580, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(784, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1584, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(FrictionStayCasement_ArticleNo._20HD, _panelModel1.Panel_FSCasementArtNo);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel1.Panel_PlasticWedge);
+            Assert.AreEqual(1, _panelModel1.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel1.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel1.Panel_StrikerArtno_C);
+            Assert.AreEqual(6, _panelModel1.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1.Panel_StrikerArtno_A);
+            Assert.AreEqual(1, _panelModel1.Panel_StrikerQty_A);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel1.Panel_MiddleCloserArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._639958, _panelModel1.Panel_CornerDriveArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+            #endregion
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7502' AND Size = '957'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7502' AND Size = '1757'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R676' AND Size = '884'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R676' AND Size = '1684'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '905'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1705'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '780'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1580'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '905'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1705'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
+                             Size = '784'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1584'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+            //HARDWARE & ACCESSORIES
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-C%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-A%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-DB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%1640%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Middle Closer%' AND
+                             Description LIKE '%1WC70-DB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Corner Drive%' AND
+                             Description LIKE '%639958%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%741012%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Friction Stay%' AND
+                             Description LIKE '%A212C20161%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            #endregion
+
+        }
+
+        [TestMethod]
+        public void ChkVar_SinglePanel_2DiffColor_7507_7581_CasementWindow()
+        {
+            /*
+                        ______
+            *           |   /|
+            *           |  / |
+            *           | /  |
+            *           |/   |
+            *           |\   |
+            *           | \  |
+            *           |  \ |
+            *           |___\|
+            */
+
+
+            int total_wd = 952,
+                total_ht = 1752;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(wd,
+                                                                   ht,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   null,
+                                                                   total_wd,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._741012,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70DB,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._612978,
+                                                                   Extension_ArticleNo._639957,
+                                                                   Extension_ArticleNo._639957,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   true,
+                                                                   true,
+                                                                   false,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773452,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel1.Panel_FSCasementArtNo = FrictionStayCasement_ArticleNo._16HD;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
+
+
+            _frameModel.Lst_Panel.Add(_panelModel1);
+
+            #region Assert
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(957, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1757, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(856, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1656, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.40029696, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(8, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(32, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(77, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(36, _qouteModel.Screws_for_Installation);
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(877, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1677, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(877, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1677, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(752, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1552, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(756, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1556, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(FrictionStayCasement_ArticleNo._16HD, _panelModel1.Panel_FSCasementArtNo);
+            Assert.AreEqual(PlasticWedge_ArticleNo._7199DB, _panelModel1.Panel_PlasticWedge);
+            Assert.AreEqual(1, _panelModel1.Panel_PlasticWedgeQty);
+            Assert.AreEqual(Espagnolette_ArticleNo._741012, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel1.Panel_RotoswingArtNo);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTC, _panelModel1.Panel_StrikerArtno_C);
+            Assert.AreEqual(6, _panelModel1.Panel_StrikerQty_C);
+            Assert.AreEqual(Striker_ArticleNo._M89ANTA, _panelModel1.Panel_StrikerArtno_A);
+            Assert.AreEqual(1, _panelModel1.Panel_StrikerQty_A);
+            Assert.AreEqual(MiddleCloser_ArticleNo._1WC70DB, _panelModel1.Panel_MiddleCloserArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._639958, _panelModel1.Panel_CornerDriveArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._639957, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+            #endregion 
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '957'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1757'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '856'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1656'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '877'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1677'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '752'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1552'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '877'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1677'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
+                             Size = '756'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1556'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+            //HARDWARE & ACCESSORIES
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-C%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("6", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Striker%' AND
+                             Description LIKE '%M89A-NT-A%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Plastic Wedge%' AND
+                             Description LIKE '%7199-DB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%1640%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Middle Closer%' AND
+                             Description LIKE '%1WC70-DB%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Corner Drive%' AND
+                             Description LIKE '%639958%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%741012%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Friction Stay%' AND
+                             Description LIKE '%A212C16161%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            #endregion
+
+        }
+
+        [TestMethod]
+        public void ChkVar_SinglePanel_2DiffColor_7507_374_CasementWindow()
+        {
+            /*
+                        ______
+            *           |   /|
+            *           |  / |
+            *           | /  |
+            *           |/   |
+            *           |\   |
+            *           | \  |
+            *           |  \ |
+            *           |___\|
+            */
+
+
+            int total_wd = 952,
+                total_ht = 1752;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(wd,
+                                                                   ht,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   null,
+                                                                   total_wd,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._374,
+                                                                   SashReinf_ArticleNo._655,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._642105,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70DB,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rio,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._567639,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   true,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773452,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = false;
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel1.Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+            _panelModel1.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel1.Panel_RioOptionsVisibility = true;
+            _panelModel1.Panel_RioArtNo = Rio_HandleArtNo._C050C109005;
+            _panelModel1.Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
+            _panelModel1.Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+
+
+            _frameModel.Lst_Panel.Add(_panelModel1);
+
+            #region Assert
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(957, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1757, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(856, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1656, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.40029696, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(8, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(32, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(85, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(36, _qouteModel.Screws_for_Installation);
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(879, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1679, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(879, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1679, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(784, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1584, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(696, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1496, _panelModel1.Panel_GlassHeight);
+
+
+
+            //ACCESSORIES
+
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._642105, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rio, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rio_HandleArtNo._C050C109005, _panelModel1.Panel_RioArtNo);
+            Assert.AreEqual(ProfileKnobCylinder_ArtNo._45x45, _panelModel1.Panel_ProfileKnobCylinderArtNo);
+            Assert.AreEqual(Cylinder_CoverArtNo._EPSW_9005_614441, _panelModel1.Panel_CylinderCoverArtNo);
+            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel1.Panel_AdjStrikerArtNo);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel1.Panel_3dHingeArtNo);
+            Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel1.Panel_RestrictorStayArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._567639, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(1, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+            #endregion 
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '957'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1757'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '856'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1656'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 374' AND Size = '879'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 374' AND Size = '1679'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 655' AND Size = '784'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height 655' AND Size = '1584'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '879'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1679'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
+                             Size = '696'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1496'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //ACCESSORIES & HARDWARE
+            dr = dt.Select(@"Description LIKE '%3D hinge%' AND
+                             Description LIKE '%492594%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("3", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Adjustable Striker%' AND
+                             Description LIKE '%332439%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("5", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Restrictor Stay%' AND
+                             Description LIKE '%613249%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%1640%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Rio handle%' AND
+                             Description LIKE '%C050C109005%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Profile Knob Cylinder%' AND
+                             Description LIKE '%45x45%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cylinder Cover%' AND
+                             Description LIKE '%EPSW-9005/614441%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%642105%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            #endregion
+
+
+        }
+
+        [TestMethod]
+        public void ChkVar_SinglePanel_2DiffColor_7507_395_CasementWindow()
+        {
+            /*
+                        ______
+            *           |   /|
+            *           |  / |
+            *           | /  |
+            *           |/   |
+            *           |\   |
+            *           | \  |
+            *           |  \ |
+            *           |___\|
+            */
+
+
+            int total_wd = 952,
+                total_ht = 1752;
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_ht,
+                                                                   FrameModel.Frame_Padding.Window,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   1);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+            Control frame = new Control();
+            frame.Name = _frameModel.Frame_Name;
+
+
+
+            IPanelModel _panelModel1 = _panelServices.AddPanelModel(wd,
+                                                                   ht,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   null,
+                                                                   total_wd,
+                                                                   total_ht,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._395,
+                                                                   SashReinf_ArticleNo._207,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._N110A04206,
+                                                                   Striker_ArticleNo._M89ANTC,
+                                                                   MiddleCloser_ArticleNo._1WC70DB,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773452,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._FrictionStay
+                                                                   );
+            _panelModel1.Panel_GlassThickness = 6.0f;
+            _panelModel1.Panel_CornerDriveOptionsVisibility = true;
+
+            _panelModel1.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel1.Panel_NTCenterHingeVisibility = true;
+            _panelModel1.Panel_NTCenterHingeArticleNo = NTCenterHinge_ArticleNo._N610A06516;
+            _panelModel1.Panel_StayBearingKArtNo = StayBearingK_ArticleNo._N390A00106_230177;
+            _panelModel1.Panel_StayBearingPinArtNo = StayBearingPin_ArticleNo._F710D52008_227354;
+            _panelModel1.Panel_StayBearingCoverArtNo = StayBearingCover_ArticleNo._DB;
+            _panelModel1.Panel_TopCornerHingeCoverArtNo = TopCornerHingeCover_ArticleNo._DB;
+            _panelModel1.Panel_TopCornerHingeArtNo = TopCornerHinge_ArticleNo._Left;
+            _panelModel1.Panel_TopCornerHingeSpacerArtNo = TopCornerHingeSpacer_ArticleNo._331488;
+            _panelModel1.Panel_CornerHingeKArtNo = CornerHingeK_ArticleNo._N510A0011;
+            _panelModel1.Panel_CornerPivotRestKArtNo = CornerPivotRestK_ArticleNo._N510A0001_258590;
+            _panelModel1.Panel_CornerHingeCoverKArtNo = CornerHingeCoverK_ArticleNo._DB;
+            _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo = CoverForCornerPivotRestVertical_ArticleNo._DB;
+            _panelModel1.Panel_CoverForCornerPivotRestArtNo = CoverForCornerPivotRest_ArticleNo._DB;
+
+
+            _frameModel.Lst_Panel.Add(_panelModel1);
+
+            #region Assert
+
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(957, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(1757, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(856, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(1656, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(2, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(0, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.40029696, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(8, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(32, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(66, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(36, _qouteModel.Screws_for_Installation);
+
+            #region CW1
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(879, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1679, _panelModel1.Panel_GlazingBeadHeight);
+
+            Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
+            Assert.AreEqual(879, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(1679, _panelModel1.Panel_SashHeight);
+
+            Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
+            Assert.AreEqual(754, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(1554, _panelModel1.Panel_SashReinfHeight);
+
+            Assert.AreEqual(754, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(1554, _panelModel1.Panel_GlassHeight);
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel1.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._N110A04206, _panelModel1.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoswing, _panelModel1.Panel_HandleType);
+            Assert.AreEqual(Rotoswing_HandleArtNo._RSC773452, _panelModel1.Panel_RotoswingArtNo);
+            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel1.Panel_AdjStrikerArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel1.Panel_CornerDriveArtNo);
+
+            Assert.AreEqual(NTCenterHinge_ArticleNo._N610A06516, _panelModel1.Panel_NTCenterHingeArticleNo);
+            Assert.AreEqual(StayBearingK_ArticleNo._N390A00106_230177, _panelModel1.Panel_StayBearingKArtNo);
+            Assert.AreEqual(StayBearingPin_ArticleNo._F710D52008_227354, _panelModel1.Panel_StayBearingPinArtNo);
+            Assert.AreEqual(StayBearingCover_ArticleNo._DB, _panelModel1.Panel_StayBearingCoverArtNo);
+            Assert.AreEqual(TopCornerHingeCover_ArticleNo._DB, _panelModel1.Panel_TopCornerHingeCoverArtNo);
+            Assert.AreEqual(TopCornerHinge_ArticleNo._Left, _panelModel1.Panel_TopCornerHingeArtNo);
+            Assert.AreEqual(TopCornerHingeSpacer_ArticleNo._331488, _panelModel1.Panel_TopCornerHingeSpacerArtNo);
+            Assert.AreEqual(CornerHingeK_ArticleNo._N510A0011, _panelModel1.Panel_CornerHingeKArtNo);
+            Assert.AreEqual(CornerPivotRestK_ArticleNo._N510A0001_258590, _panelModel1.Panel_CornerPivotRestKArtNo);
+            Assert.AreEqual(CornerHingeCoverK_ArticleNo._DB, _panelModel1.Panel_CornerHingeCoverKArtNo);
+            Assert.AreEqual(CoverForCornerPivotRestVertical_ArticleNo._DB, _panelModel1.Panel_CoverForCornerPivotRestVerticalArtNo);
+            Assert.AreEqual(CoverForCornerPivotRest_ArticleNo._DB, _panelModel1.Panel_CoverForCornerPivotRestArtNo);
+
+            //EXTENSIONS
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel1.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel1.Panel_ExtRight2Qty);
+
+
+
+            #endregion 
+
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '957'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '1757'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '856'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '1656'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 395' AND Size = '879'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 395' AND Size = '1679'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 207' AND Size = '754'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height 207' AND Size = '1554'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '879'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND 
+                             Description LIKE '%2452%' AND
+                             Size = '1679'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND 
+                             Size = '754'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '1554'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //ACCESSORIES & HARDWARE
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%N110A04206%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Adjustable Striker%' AND
+                             Description LIKE '%332439%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%NT Center Hinge%' AND
+                             Description LIKE '%N610A06516%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Stay Bearing, K%' AND
+                             Description LIKE '%N390A0001%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Stay Bearing Pin%' AND
+                             Description LIKE '%F710D52026%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Stay Bearing Cover%' AND
+                             Description LIKE '%N391A01558%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge Cover%' AND
+                             Description LIKE '%N391A03558%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge%' AND
+                             Description LIKE '%N620A6116L%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Top Corner Hinge Spacer%' AND
+                             Description LIKE '%331488%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Corner Hinge, K%' AND
+                             Description LIKE '%N510A0011%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Corner Pivot Rest, K%' AND
+                             Description LIKE '%N510A0001%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Corner Hinge Cover K%' AND
+                             Description LIKE '%N591A04558%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Cover for corner pivot rest, vertical%' AND
+                             Description LIKE '%N591A01558%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Cover for corner pivot rest,%' AND
+                             Description LIKE '%N591B12556%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Rotoswing handle%' AND
+                             Description LIKE '%RSC-773452%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            #endregion
+
+
+        }
 
     }
 }

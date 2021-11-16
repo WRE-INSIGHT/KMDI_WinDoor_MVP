@@ -425,7 +425,7 @@ namespace ModelLayer.Model.Quotation.Divider
         public Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
         public CladdingProfile_ArticleNo Div_CladdingProfileArtNo { get; set; }
         public CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
-        public Dictionary<int, int> Div_CladdingSizeList { get; set; }
+        public Dictionary<int, int> Div_CladdingSizeList { get; set; } //cladding Reinf Sizes
         public int Div_CladdingCount { get; set; }
 
         private int _divPropHeight;

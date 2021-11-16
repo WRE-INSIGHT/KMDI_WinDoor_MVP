@@ -89,13 +89,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
                 _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
-                _panelModel.AdjustHandlePropertyHeight("addCornerDrive");
-                _panelModel.AdjustRotoswingPropertyHeight("addCornerDrive");
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                 _panelModel.AdjustPropertyPanelHeight("addExtension");
-                _panelModel.AdjustHandlePropertyHeight("addExtension");
-                _panelModel.AdjustRotoswingPropertyHeight("addExtension");
 
                 if (_panelModel.Panel_ParentMultiPanelModel != null)
                 {
@@ -110,13 +106,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
                 _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
-                _panelModel.AdjustHandlePropertyHeight("minusCornerDrive");
-                _panelModel.AdjustRotoswingPropertyHeight("minusCornerDrive");
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
                 _panelModel.AdjustPropertyPanelHeight("minusExtension");
-                _panelModel.AdjustHandlePropertyHeight("minusExtension");
-                _panelModel.AdjustRotoswingPropertyHeight("minusExtension");
 
                 if (_panelModel.Panel_ParentMultiPanelModel != null)
                 {
