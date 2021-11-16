@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.QuotationModel;
@@ -55,6 +56,11 @@ namespace ModelLayer.Model.Quotation.Frame
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
+        void Insert_frameInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_MilledFrameInfo_MaterialList(DataTable tbl_explosion);
+
+        int Add_framePerimeter_screws4fab();
+        int Add_MilledFrameWidth_screws4fab();
         #endregion
     }
 }

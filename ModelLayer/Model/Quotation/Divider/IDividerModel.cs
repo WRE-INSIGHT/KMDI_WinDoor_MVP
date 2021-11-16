@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 
@@ -68,6 +69,39 @@ namespace ModelLayer.Model.Quotation.Divider
 
         void SetExplosionValues_Div();
         void AdjustPropertyPanelHeight(string mode);
+
+        void Insert_DivProfile_DivReinf_Info_MaterialList(DataTable tbl_explosion);
+        void Insert_MechJoint_MaterialList(DataTable tbl_explosion);
+        void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion);
+        void Insert_CladdingBracket4Concrete_MaterialList(DataTable tbl_explosion);
+        void Insert_CladdingBracket4UPVC_MaterialList(DataTable tbl_explosion);
+        void Insert_DummyMullion_MaterialList(DataTable tbl_explosion);
+        void Insert_Endcap4DM_MaterialList(DataTable tbl_explosion);
+        void Insert_DMStriker_MaterialList(DataTable tbl_explosion);
+        void Insert_FixedCam_MaterialList(DataTable tbl_explosion);
+        void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
+        void Insert_AlumSpacer_MaterialList(DataTable tbl_explosion);
+        void Insert_LeverEspag_MaterialList(DataTable tbl_explosion);
+        void Insert_ShootboltStriker_MaterialList(DataTable tbl_explosion);
+        void Insert_ShootboltReverse_MaterialList(DataTable tbl_explosion);
+        void Insert_ShootboltNonReverse_MaterialList(DataTable tbl_explosion);
+
+
+        int Add_ExplosionLength_screws4fab();
+        int Add_MechJoint_screws4fab();
+        int Add_TotalCladdingSize_Screws4Cladding();
+        int Add_CladdingBracket4Concrete_screws4fab();
+        int Add_CladdingBracket4UPVC_screws4fab();
+        int Add_DMStriker_screws4fab();
+        int Add_EndCapDM_screws4fab();
+        int Add_SnapNKeep_screws4fab();
+        int Add_AlumSpacer_screws4fab();
+        int Add_LeverEspag_screws4fab();
+
+
+
+        int Add_CladdBracket4Concrete_expbolts();
+        int Add_CladdBracket4UPVC_expbolts();
 
         #endregion
     }
