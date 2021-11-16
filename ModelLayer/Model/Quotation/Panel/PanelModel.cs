@@ -4,8 +4,8 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Variables;
 using System;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -1729,7 +1729,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-        
+
         public StayBearingK_ArticleNo Panel_StayBearingKArtNo { get; set; }
         public StayBearingPin_ArticleNo Panel_StayBearingPinArtNo { get; set; }
         public StayBearingCover_ArticleNo Panel_StayBearingCoverArtNo { get; set; }
@@ -2084,7 +2084,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
                 }
 
-                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                     (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                      Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                      Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
@@ -2137,10 +2137,12 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
 
-                    Panel_SashWidth = Panel_DisplayWidth - inward_motorized_deduction -(sash_deduct * 2) + 5;
+
+                    Panel_SashWidth = Panel_DisplayWidth - inward_motorized_deduction - (sash_deduct * 2) + 5;
                     Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
                     Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 5;
                     Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
+                  
 
                     Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
                     Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
@@ -2602,7 +2604,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_StrikerQty_C += 1;
                     }
-                    
+
                     if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                     {
                         Panel_StrikerQty_A += 1;
@@ -2998,7 +3000,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
-                         Panel_SashProfileArtNo == SashProfile_ArticleNo._395 )
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                 {
                     Sash_deduction_forNxtPrev -= 8; //sash bite allowance
                 }
@@ -3460,7 +3462,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
                 }
 
-                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                     (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                      Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
@@ -4018,7 +4020,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_StrikerQty_C += 1;
                     }
-                    
+
                     if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
                     {
                         Panel_StrikerQty_A += 1;
@@ -4361,6 +4363,971 @@ namespace ModelLayer.Model.Quotation.Panel
 
             Panel_GlazingSpacerQty = 1;
         }
+
+        #region Material_List
+
+        public void Insert_SashInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Sash Width " + Panel_SashProfileArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashWidth.ToString(),
+                                   "Sash",
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Sash Height " + Panel_SashProfileArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashHeight.ToString(),
+                                   "Sash",
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Sash Reinf Width " + Panel_SashReinfArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashReinfWidth.ToString(),
+                                   "Sash",
+                                   @"|  |");
+
+            tbl_explosion.Rows.Add("Sash Reinf Height " + Panel_SashReinfArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashReinfHeight.ToString(),
+                                   "Sash",
+                                   @"|  |");
+        }
+
+        public void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cover Profile " + Panel_CoverProfileArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   Panel_DisplayWidth.ToString(),
+                                   "Frame",
+                                   @"|  |");
+
+            tbl_explosion.Rows.Add("Cover Profile " + Panel_CoverProfileArtNo2.DisplayName,
+                                   1, "pc(s)",
+                                   Panel_DisplayWidth.ToString(),
+                                   "Frame",
+                                   @"|  |");
+        }
+
+        public void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_Type == "Awning Panel")
+            {
+                tbl_explosion.Rows.Add("30X25 Cover " + Panel_30x25CoverArtNo.ToString(),
+                                       1, "pc(s)",
+                                       Panel_ParentFrameModel.Frame_Width + 150,
+                                       "Frame",
+                                       @"");
+
+                tbl_explosion.Rows.Add("Divider " + Panel_MotorizedDividerArtNo.ToString(),
+                                       1, "pc(s)",
+                                       Panel_ParentFrameModel.Frame_Width + 150,
+                                       "Frame",
+                                       @"");
+
+                tbl_explosion.Rows.Add("Cover for motor " + Panel_CoverForMotorArtNo.ToString(),
+                                       1, "pc(s)",
+                                       Panel_ParentFrameModel.Frame_Width + 150,
+                                       "Motorized Mechanism",
+                                       @"");
+
+            }
+            else if (Panel_Type == "Casement Panel")
+            {
+                if (Panel_SashProfileArtNo != SashProfile_ArticleNo._395 &&
+                    Panel_SashProfileArtNo != SashProfile_ArticleNo._373 &&
+                    Panel_SashProfileArtNo != SashProfile_ArticleNo._None)
+                {
+                    tbl_explosion.Rows.Add("30X25 Cover " + Panel_30x25CoverArtNo.ToString(),
+                                           1, "pc(s)",
+                                           Panel_ParentFrameModel.Frame_Height + 150,
+                                           "Frame",
+                                           @"");
+
+                    tbl_explosion.Rows.Add("Divider " + Panel_MotorizedDividerArtNo.ToString(),
+                                           1, "pc(s)",
+                                           Panel_ParentFrameModel.Frame_Height + 150,
+                                           "Frame",
+                                           @"");
+
+                    tbl_explosion.Rows.Add("Cover for motor " + Panel_CoverForMotorArtNo.ToString(),
+                                           1, "pc(s)",
+                                           Panel_ParentFrameModel.Frame_Height + 150,
+                                           "Motorized Mechanism",
+                                           @"");
+                }
+            }
+
+            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
+                Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+            {
+                tbl_explosion.Rows.Add("2D Hinge " + Panel_2dHingeArtNo.DisplayName,
+                                       Panel_2DHingeQty, "pc(s)",
+                                       "",
+                                       "Sash & Frame",
+                                       @"");
+            }
+            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+            {
+                tbl_explosion.Rows.Add("Butt Hinge " + Panel_ButtHingeArtNo.DisplayName,
+                                       Panel_ButtHingeQty, "pc(s)",
+                                       "",
+                                       "",
+                                       @"");
+            }
+
+            tbl_explosion.Rows.Add("Motorized Mechanism " + Panel_MotorizedMechArtNo.DisplayName,
+                                   Panel_MotorizedMechQty, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Push Button Switch " + Panel_PushButtonSwitchArtNo.ToString(),
+                                   Panel_MotorizedMechSetQty, "pc(s)",
+                                   "",
+                                   "Concrete",
+                                   @"");
+
+            tbl_explosion.Rows.Add("False pole " + Panel_FalsePoleArtNo.ToString(),
+                                   Panel_MotorizedMechSetQty * 2, "pc(s)",
+                                   "",
+                                   "Concrete",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Supporting Frame " + Panel_SupportingFrameArtNo.ToString(),
+                                   Panel_MotorizedMechSetQty, "pc(s)",
+                                   "",
+                                   "Concrete",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Plate " + Panel_PlateArtNo.ToString(),
+                                   Panel_MotorizedMechSetQty, "pc(s)",
+                                   "",
+                                   "Concrete",
+                                   @"");
+        }
+
+        public void Insert_FrictionStay_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_Type.Contains("Awning"))
+            {
+                tbl_explosion.Rows.Add("Friction Stay " + Panel_FrictionStayArtNo.DisplayName,
+                                       1, "pair(s)",
+                                       "",
+                                       "Sash & Frame",
+                                       @"");
+            }
+            else if (Panel_Type.Contains("Casement"))
+            {
+                tbl_explosion.Rows.Add("Friction Stay " + Panel_FSCasementArtNo.DisplayName,
+                                       1, "pair(s)",
+                                       "",
+                                       "Sash & Frame",
+                                       @"");
+
+            }
+        }
+
+        public void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Snap-in Keep " + Panel_SnapInKeepArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+
+        }
+
+        public void Insert_FixedCam_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Fixed Cam " + Panel_FixedCamArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_PlasticWedge_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Plastic Wedge " + Panel_PlasticWedge.DisplayName,
+                                   Panel_PlasticWedgeQty, "pc (s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+
+        }
+
+        public void Insert_2dHinge_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("2D hinge " + Panel_2dHingeArtNo_nonMotorized.DisplayName,
+                                   Panel_2DHingeQty_nonMotorized, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_3dHinge_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("3D hinge " + Panel_3dHingeArtNo.DisplayName,
+                                   Panel_3dHingeQty, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_RestrictorStay_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Restrictor Stay " + Panel_RestrictorStayArtNo.DisplayName,
+                                   Panel_RestrictorStayQty, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_NTCenterHinge_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("NT Center Hinge " + Panel_NTCenterHingeArticleNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_StayBearingK_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Stay Bearing, K " + Panel_StayBearingKArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_StayBearingPin_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Stay Bearing Pin " + Panel_StayBearingPinArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+
+        }
+
+        public void Insert_StayBearingCover_MaterialList(DataTable tbl_explosion, string basecol)
+        {
+            tbl_explosion.Rows.Add("Stay Bearing Cover, " + basecol + " " + Panel_StayBearingCoverArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_TopCornerHingeCover_MaterialList(DataTable tbl_explosion, string basecol)
+        {
+            tbl_explosion.Rows.Add("Top Corner Hinge Cover, " + basecol + " " + Panel_TopCornerHingeCoverArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+
+        }
+
+        public void Insert_TopCornerHinge_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_ChkText == "L")
+            {
+                tbl_explosion.Rows.Add("Top Corner Hinge, Left " + Panel_TopCornerHingeArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       "",
+                                       "Sash & Frame",
+                                       @"");
+            }
+            else if (Panel_ChkText == "R")
+            {
+                tbl_explosion.Rows.Add("Top Corner Hinge, Right " + Panel_TopCornerHingeArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       "",
+                                       "Sash & Frame",
+                                       @"");
+            }
+        }
+
+        public void Insert_TopCornerHingeSpacer_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Top Corner Hinge Spacer " + Panel_TopCornerHingeSpacerArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_CornerHingeK_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Corner Hinge, K " + Panel_CornerHingeKArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_CornerPivotRestK_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Corner Pivot Rest, K " + Panel_CornerPivotRestKArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_CornerHingeCoverK_MaterialList(DataTable tbl_explosion, string basecol)
+        {
+            tbl_explosion.Rows.Add("Corner Hinge Cover K, " + basecol + " " + Panel_CornerHingeCoverKArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_CoverForCornerPivotRestVertical_MaterialList(DataTable tbl_explosion, string basecol)
+        {
+            tbl_explosion.Rows.Add("Cover for corner pivot rest, vertical, " + basecol + " " + Panel_CoverForCornerPivotRestVerticalArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_CoverForCornerPivotRest_MaterialList(DataTable tbl_explosion, string basecol)
+        {
+            tbl_explosion.Rows.Add("Cover for corner pivot rest, " + basecol + " " + Panel_CoverForCornerPivotRestArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_AdjustableStriker_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Adjustable Striker " + Panel_AdjStrikerArtNo.DisplayName,
+                                   Panel_AdjStrikerQty, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_MiddleCloser_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Middle Closer " + Panel_MiddleCloserArtNo.DisplayName,
+                                   Panel_MiddleCloserPairQty, "pair (s)",
+                                   "",
+                                   "Sash & Frame",
+                                   @"");
+        }
+
+        public void Insert_Extension_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None && Panel_ExtTopQty > 0)
+            {
+                tbl_explosion.Rows.Add("Extension(Top) " + Panel_ExtensionTopArtNo.DisplayName,
+                                       Panel_ExtTopQty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+
+            }
+            if (Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None && Panel_ExtTop2Qty > 0 && Panel_ExtTopChk == true)
+            {
+                tbl_explosion.Rows.Add("Extension_2(Top) " + Panel_ExtensionTop2ArtNo.DisplayName,
+                                       Panel_ExtTop2Qty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+
+            }
+            if (Panel_ExtensionBotArtNo != Extension_ArticleNo._None && Panel_ExtBotQty > 0)
+            {
+                tbl_explosion.Rows.Add("Extension(Bot) " + Panel_ExtensionBotArtNo.DisplayName,
+                                       Panel_ExtBotQty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+            }
+            if (Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None && Panel_ExtBot2Qty > 0 && Panel_ExtBotChk == true)
+            {
+                tbl_explosion.Rows.Add("Extension_2(Bot) " + Panel_ExtensionBot2ArtNo.DisplayName,
+                                       Panel_ExtBot2Qty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+
+            }
+            if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None && Panel_ExtLeftQty > 0)
+            {
+                tbl_explosion.Rows.Add("Extension(Left) " + Panel_ExtensionLeftArtNo.ToString(),
+                                       Panel_ExtLeftQty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+            }
+            if (Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None && Panel_ExtLeft2Qty > 0 && Panel_ExtLeftChk == true)
+            {
+                tbl_explosion.Rows.Add("Extension_2(Left) " + Panel_ExtensionLeft2ArtNo.ToString(),
+                                       Panel_ExtLeft2Qty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+            }
+            if (Panel_ExtensionRightArtNo != Extension_ArticleNo._None && Panel_ExtRightQty > 0)
+            {
+                tbl_explosion.Rows.Add("Extension(Right) " + Panel_ExtensionRightArtNo.ToString(),
+                                       Panel_ExtRightQty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+            }
+            if (Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None && Panel_ExtRight2Qty > 0 && Panel_ExtRightChk == true)
+            {
+                tbl_explosion.Rows.Add("Extension_2(Right) " + Panel_ExtensionRight2ArtNo.ToString(),
+                                       Panel_ExtRight2Qty, "pc (s)",
+                                       "",
+                                       "Sash",
+                                       @"");
+            }
+        }
+
+        public void Insert_CornerDrive_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Corner Drive " + Panel_CornerDriveArtNo.DisplayName,
+                                   2, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_RotoswingHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Rotoswing handle " + Panel_RotoswingArtNo.DisplayName,
+                                   1, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+        }
+
+        public void Insert_StrikerA_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Striker " + Panel_StrikerArtno_A.DisplayName,
+                                   Panel_StrikerQty_A, "pc (s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_StrikerC_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Striker " + Panel_StrikerArtno_C.DisplayName,
+                                   Panel_StrikerQty_C, "pc (s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_RotaryHandle_LockingKit_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Rotary handle " + Panel_RotaryArtNo.DisplayName,
+                                   1, "set (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Locking Kit " + Panel_LockingKitArtNo.DisplayName,
+                                   1, "set (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_RioHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Rio handle " + Panel_RioArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_ProfileKnobCylinder_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Profile Knob Cylinder " + Panel_ProfileKnobCylinderArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_CylinderCover_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cylinder Cover " + Panel_CylinderCoverArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_RotolineHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Rotoline handle " + Panel_RotolineArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_MVDHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("MVD handle " + Panel_MVDArtNo.DisplayName,
+                                   1, "set",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_WeldableCornerJoint_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Weldable corner joint " + Panel_WeldableCArtNo.DisplayName,
+                                   8, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_Espagnolette_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Espagnolette " + Panel_EspagnoletteArtNo.ToString(),
+                                   1, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_GlazingBead_MaterialList(DataTable tbl_explosion, string location)
+        {
+            tbl_explosion.Rows.Add("Glazing Bead (P" + PanelGlass_ID + ") Width " + PanelGlazingBead_ArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_GlazingBeadWidth.ToString(),
+                                   location,
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Glazing Bead (P" + PanelGlass_ID + ") Height " + PanelGlazingBead_ArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_GlazingBeadHeight.ToString(),
+                                   location,
+                                   @"\  /");
+
+        }
+
+        public void Insert_GBSpacer_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("GB SPACER FOR 6mm GLASS " + Panel_GBSpacerArtNo.DisplayName,
+                                   4, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   "");
+        }
+
+        public void Insert_GlazingAdapator_MaterialList(DataTable tbl_explosion, string location)
+        {
+            tbl_explosion.Rows.Add("Glazing Adaptor (P" + PanelGlass_ID + ") Width" + Panel_GlazingAdaptorArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_GlazingBeadWidth.ToString(),
+                                   location,
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Glazing Adaptor (P" + PanelGlass_ID + ") Height " + Panel_GlazingAdaptorArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_GlazingBeadHeight.ToString(),
+                                   location,
+                                   @"\  /");
+        }
+
+        public void Insert_GlassInfo_MaterialList(DataTable tbl_explosion, string location, string glassFilm)
+        {
+            tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Width - " + Panel_GlassThicknessDesc + " " + glassFilm,
+                                   1, "pc(s)",
+                                   Panel_GlassWidth.ToString(),
+                                   location,
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Height - " + Panel_GlassThicknessDesc + " " + glassFilm,
+                                   1, "pc(s)",
+                                   Panel_GlassHeight.ToString(),
+                                   location,
+                                   @"\  /");
+        }
+
+        public void Insert_GeorgianBar_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Georgian bar P" + PanelGlass_ID + " (Horizontal) " + Panel_GeorgianBarArtNo.DisplayName,
+                                   Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
+                                   Panel_GlassWidth + 5,
+                                   "Glass",
+                                   "");
+
+            tbl_explosion.Rows.Add("Georgian bar P" + PanelGlass_ID + " (Vertical) " + Panel_GeorgianBarArtNo.DisplayName,
+                                   Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
+                                   Panel_GlassHeight + 5,
+                                   "Glass",
+                                   "");
+        }
+
+
+        public int Add_SashPerimeter_screws4fab()
+        {
+            return (Panel_SashWidth * 2) + (Panel_SashHeight * 2);
+        }
+
+        public int Add_StrikerAC_screws4fab()
+        {
+            int strikerAC_screws = 0;
+
+            if (Panel_Type.Contains("Awning"))
+            {
+                strikerAC_screws += Panel_StrikerQty_A;
+
+                if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957 ||
+                    Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957 ||
+                    Panel_ExtensionRightArtNo == Extension_ArticleNo._639957 ||
+                    Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
+                {
+                    strikerAC_screws += Panel_StrikerQty_C;
+                }
+            }
+            else if (Panel_Type.Contains("Casement"))
+            {
+                if (Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                {
+                    strikerAC_screws += Panel_StrikerQty_C;
+
+                    if (Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                    {
+                        strikerAC_screws += Panel_StrikerQty_A;
+                    }
+                }
+            }
+
+            return strikerAC_screws;
+        }
+
+        public int Add_Espagnolette_screws4fab()
+        {
+            int espag_screws = 0;
+
+            if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+            {
+                espag_screws += 8;
+            }
+            else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._630963)
+            {
+                espag_screws += 2;
+            }
+            else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807)
+            {
+                espag_screws += 4;
+            }
+            else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A01006 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
+            {
+                espag_screws += 6;
+            }
+            else if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                     Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+            {
+                espag_screws += 12;
+            }
+
+            return espag_screws;
+        }
+
+        public int Add_Extension_screws4fab()
+        {
+            int ext_screws = 0;
+
+            if (Panel_ExtensionTopArtNo != Extension_ArticleNo._None && Panel_ExtTopQty > 0)
+            {
+                if (Panel_ExtensionTopArtNo == Extension_ArticleNo._612978)
+                {
+                    ext_screws += (3 * Panel_ExtTopQty);
+                }
+                else if (Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
+                {
+                    ext_screws += (5 * Panel_ExtTopQty);
+                }
+                else if (Panel_ExtensionTopArtNo == Extension_ArticleNo._567639)
+                {
+                    ext_screws += (2 * Panel_ExtTopQty);
+                }
+                else if (Panel_ExtensionTopArtNo == Extension_ArticleNo._630956 ||
+                         Panel_ExtensionTopArtNo == Extension_ArticleNo._641798)
+                {
+                    ext_screws += (4 * Panel_ExtTopQty);
+                }
+            }
+            if (Panel_ExtensionTop2ArtNo != Extension_ArticleNo._None && Panel_ExtTop2Qty > 0 && Panel_ExtTopChk == true)
+            {
+                if (Panel_ExtensionTop2ArtNo == Extension_ArticleNo._612978)
+                {
+                    ext_screws += (3 * Panel_ExtTop2Qty);
+                }
+                else if (Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957)
+                {
+                    ext_screws += (5 * Panel_ExtTop2Qty);
+                }
+                else if (Panel_ExtensionTop2ArtNo == Extension_ArticleNo._567639)
+                {
+                    ext_screws += (2 * Panel_ExtTop2Qty);
+                }
+                else if (Panel_ExtensionTop2ArtNo == Extension_ArticleNo._630956 ||
+                         Panel_ExtensionTop2ArtNo == Extension_ArticleNo._641798)
+                {
+                    ext_screws += (4 * Panel_ExtTop2Qty);
+                }
+            }
+            if (Panel_ExtensionBotArtNo != Extension_ArticleNo._None && Panel_ExtBotQty > 0)
+            {
+                if (Panel_ExtensionBotArtNo == Extension_ArticleNo._612978)
+                {
+                    ext_screws += (3 * Panel_ExtBotQty);
+                }
+                else if (Panel_ExtensionBotArtNo == Extension_ArticleNo._639957)
+                {
+                    ext_screws += (5 * Panel_ExtBotQty);
+                }
+                else if (Panel_ExtensionBotArtNo == Extension_ArticleNo._567639)
+                {
+                    ext_screws += (2 * Panel_ExtBotQty);
+                }
+                else if (Panel_ExtensionBotArtNo == Extension_ArticleNo._630956 ||
+                         Panel_ExtensionBotArtNo == Extension_ArticleNo._641798)
+                {
+                    ext_screws += (4 * Panel_ExtBotQty);
+                }
+            }
+            if (Panel_ExtensionBot2ArtNo != Extension_ArticleNo._None && Panel_ExtBot2Qty > 0 && Panel_ExtBotChk == true)
+            {
+                if (Panel_ExtensionBot2ArtNo == Extension_ArticleNo._612978)
+                {
+                    ext_screws += (3 * Panel_ExtBot2Qty);
+                }
+                else if (Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957)
+                {
+                    ext_screws += (5 * Panel_ExtBot2Qty);
+                }
+                else if (Panel_ExtensionBot2ArtNo == Extension_ArticleNo._567639)
+                {
+                    ext_screws += (2 * Panel_ExtBot2Qty);
+                }
+                else if (Panel_ExtensionBot2ArtNo == Extension_ArticleNo._630956 ||
+                         Panel_ExtensionBot2ArtNo == Extension_ArticleNo._641798)
+                {
+                    ext_screws += (4 * Panel_ExtBot2Qty);
+                }
+            }
+            if (Panel_ExtensionLeftArtNo != Extension_ArticleNo._None && Panel_ExtLeftQty > 0)
+            {
+                if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._612978)
+                {
+                    ext_screws += (3 * Panel_ExtLeftQty);
+                }
+                else if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957)
+                {
+                    ext_screws += (5 * Panel_ExtLeftQty);
+                }
+                else if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._567639)
+                {
+                    ext_screws += (2 * Panel_ExtLeftQty);
+                }
+                else if (Panel_ExtensionLeftArtNo == Extension_ArticleNo._630956 ||
+                         Panel_ExtensionLeftArtNo == Extension_ArticleNo._641798)
+                {
+                    ext_screws += (4 * Panel_ExtLeftQty);
+                }
+            }
+            if (Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None && Panel_ExtLeft2Qty > 0 && Panel_ExtLeftChk == true)
+            {
+                if (Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._612978)
+                {
+                    ext_screws += (3 * Panel_ExtLeft2Qty);
+                }
+                else if (Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957)
+                {
+                    ext_screws += (5 * Panel_ExtLeft2Qty);
+                }
+                else if (Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._567639)
+                {
+                    ext_screws += (2 * Panel_ExtLeft2Qty);
+                }
+                else if (Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._630956 ||
+                         Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._641798)
+                {
+                    ext_screws += (4 * Panel_ExtLeft2Qty);
+                }
+            }
+            if (Panel_ExtensionRightArtNo != Extension_ArticleNo._None && Panel_ExtRightQty > 0)
+            {
+                if (Panel_ExtensionRightArtNo == Extension_ArticleNo._612978)
+                {
+                    ext_screws += (3 * Panel_ExtRightQty);
+                }
+                else if (Panel_ExtensionRightArtNo == Extension_ArticleNo._639957)
+                {
+                    ext_screws += (5 * Panel_ExtRightQty);
+                }
+                else if (Panel_ExtensionRightArtNo == Extension_ArticleNo._567639)
+                {
+                    ext_screws += (2 * Panel_ExtRightQty);
+                }
+                else if (Panel_ExtensionRightArtNo == Extension_ArticleNo._630956 ||
+                         Panel_ExtensionRightArtNo == Extension_ArticleNo._641798)
+                {
+                    ext_screws += (4 * Panel_ExtRightQty);
+                }
+            }
+            if (Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None && Panel_ExtRight2Qty > 0 && Panel_ExtRightChk == true)
+            {
+                if (Panel_ExtensionRight2ArtNo == Extension_ArticleNo._612978)
+                {
+                    ext_screws += (3 * Panel_ExtRight2Qty);
+                }
+                else if (Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
+                {
+                    ext_screws += (5 * Panel_ExtRight2Qty);
+                }
+                else if (Panel_ExtensionRight2ArtNo == Extension_ArticleNo._567639)
+                {
+                    ext_screws += (2 * Panel_ExtRight2Qty);
+                }
+                else if (Panel_ExtensionRight2ArtNo == Extension_ArticleNo._630956 ||
+                         Panel_ExtensionRight2ArtNo == Extension_ArticleNo._641798)
+                {
+                    ext_screws += (4 * Panel_ExtRight2Qty);
+                }
+            }
+
+            return ext_screws;
+        }
+
+        public int Add_FSCasement_screws4fab()
+        {
+            int fsCW_screws = 0;
+
+            if (Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD)
+            {
+                fsCW_screws += 3;
+            }
+            else if (Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                     Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD)
+            {
+                fsCW_screws += 4;
+            }
+            else if (Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+            {
+                fsCW_screws += 5;
+            }
+            else if (Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+            {
+                fsCW_screws += 6;
+            }
+
+            return fsCW_screws;
+        }
+
+        public int Add_FGAwning_screws4fab()
+        {
+            int fsAW_screws = 0;
+
+            if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+            {
+                fsAW_screws += 6; //for Storm26
+
+                fsAW_screws += (2 * 2); //snapNkeep
+
+                fsAW_screws += (2 * 2); //fixed cam
+            }
+            else if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8)
+            {
+                fsAW_screws += 3;
+            }
+            else if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                     Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD)
+            {
+                fsAW_screws += 4;
+            }
+            else if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+            {
+                fsAW_screws += 5;
+            }
+            else if (Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22)
+            {
+                fsAW_screws += 6;
+            }
+
+            return fsAW_screws;
+        }
+
+        public int Add_Hinges_screws4fab()
+        {
+            int hinge_screws = 0;
+
+            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 ||
+                Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+            {
+                hinge_screws += (Panel_2DHingeQty * 3); //qty * 3
+            }
+            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+            {
+                hinge_screws += (Panel_ButtHingeQty * 3); //qty * 3
+            }
+
+            return hinge_screws;
+        }
+
+
+
+        public int Add_RestrictorStay_screws4fab()
+        {
+            int restrictorStay_screws = 0;
+
+            restrictorStay_screws += (6 * Panel_RestrictorStayQty);
+
+            return restrictorStay_screws;
+        }
+
+
+
+
+        public int Add_MotorizedMech_screws4Inst()
+        {
+            int motor_screws = 0;
+
+            if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
+            {
+                motor_screws += (20 * Panel_MotorizedMechQty);
+            }
+            else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
+                     Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
+            {
+                motor_screws += (10 * Panel_MotorizedMechQty);
+            }
+
+            return motor_screws;
+        }
+        #endregion
 
         #endregion
 

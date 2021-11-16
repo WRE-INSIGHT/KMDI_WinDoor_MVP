@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -240,6 +241,62 @@ namespace ModelLayer.Model.Quotation.Panel
                                            string mpanel_placement = "", //1st level
                                            string mpanelparent_placement = ""); //2nd level
 
+        void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_FrictionStay_MaterialList(DataTable tbl_explosion);
+        void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
+        void Insert_FixedCam_MaterialList(DataTable tbl_explosion);
+        void Insert_PlasticWedge_MaterialList(DataTable tbl_explosion);
+        void Insert_2dHinge_MaterialList(DataTable tbl_explosion);
+        void Insert_3dHinge_MaterialList(DataTable tbl_explosion);
+        void Insert_RestrictorStay_MaterialList(DataTable tbl_explosion);
+        void Insert_NTCenterHinge_MaterialList(DataTable tbl_explosion);
+        void Insert_StayBearingK_MaterialList(DataTable tbl_explosion);
+        void Insert_StayBearingPin_MaterialList(DataTable tbl_explosion);
+        void Insert_StayBearingCover_MaterialList(DataTable tbl_explosion, string basecol);
+        void Insert_TopCornerHingeCover_MaterialList(DataTable tbl_explosion, string basecol);
+        void Insert_TopCornerHinge_MaterialList(DataTable tbl_explosion);
+        void Insert_TopCornerHingeSpacer_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerHingeK_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerPivotRestK_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerHingeCoverK_MaterialList(DataTable tbl_explosion, string basecol);
+        void Insert_CoverForCornerPivotRestVertical_MaterialList(DataTable tbl_explosion, string basecol);
+        void Insert_CoverForCornerPivotRest_MaterialList(DataTable tbl_explosion, string basecol);
+        void Insert_AdjustableStriker_MaterialList(DataTable tbl_explosion);
+        void Insert_MiddleCloser_MaterialList(DataTable tbl_explosion);
+        void Insert_Extension_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerDrive_MaterialList(DataTable tbl_explosion);
+        void Insert_RotoswingHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_StrikerA_MaterialList(DataTable tbl_explosion);
+        void Insert_StrikerC_MaterialList(DataTable tbl_explosion);
+        void Insert_RotaryHandle_LockingKit_MaterialList(DataTable tbl_explosion);
+        void Insert_RioHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_ProfileKnobCylinder_MaterialList(DataTable tbl_explosion);
+        void Insert_CylinderCover_MaterialList(DataTable tbl_explosion);
+        void Insert_RotolineHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_MVDHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_WeldableCornerJoint_MaterialList(DataTable tbl_explosion);
+        void Insert_Espagnolette_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingBead_MaterialList(DataTable tbl_explosion, string location);
+        void Insert_GBSpacer_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingAdapator_MaterialList(DataTable tbl_explosion, string location);
+        void Insert_GlassInfo_MaterialList(DataTable tbl_explosion, string location, string glassFilm);
+        void Insert_GeorgianBar_MaterialList(DataTable tbl_explosion);
+
+        int Add_SashPerimeter_screws4fab();
+        int Add_StrikerAC_screws4fab();
+        int Add_Espagnolette_screws4fab();
+        int Add_Extension_screws4fab();
+        int Add_FSCasement_screws4fab();
+        int Add_FGAwning_screws4fab();
+        int Add_Hinges_screws4fab();
+
+
+
+
+
+        int Add_MotorizedMech_screws4Inst();
         #endregion
     }
 }
