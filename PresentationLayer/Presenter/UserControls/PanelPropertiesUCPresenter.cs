@@ -32,6 +32,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_NTCenterHingePropertyUCPresenter _pp_ntCenterHingePropertyUCPresenter;
         private IPP_3dHingePropertyUCPresenter _pp_3dHingePropertyUCPresenter;
         private IPP_2dHingePropertyUCPresenter _pp_2dHingePropertyUCPresenter;
+        private IPP_MiddleCloserPropertyUCPresenter _pp_middleCloserPropertyUCP;
 
         private IUnityContainer _unityC;
 
@@ -49,7 +50,8 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_CenterHingePropertyUCPresenter pp_centerHingePropertyUCPresenter,
                                           IPP_NTCenterHingePropertyUCPresenter pp_ntCenterHingePropertyUCPresenter,
                                           IPP_3dHingePropertyUCPresenter pp_3dHingePropertyUCPresenter,
-                                          IPP_2dHingePropertyUCPresenter pp_2dHingePropertyUCPresenter)
+                                          IPP_2dHingePropertyUCPresenter pp_2dHingePropertyUCPresenter,
+                                          IPP_MiddleCloserPropertyUCPresenter pp_middleCloserPropertyUCP)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -64,6 +66,7 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_ntCenterHingePropertyUCPresenter = pp_ntCenterHingePropertyUCPresenter;
             _pp_3dHingePropertyUCPresenter = pp_3dHingePropertyUCPresenter;
             _pp_2dHingePropertyUCPresenter = pp_2dHingePropertyUCPresenter;
+            _pp_middleCloserPropertyUCP = pp_middleCloserPropertyUCP;
             _pnlPanelSpecs = _panelPropertiesUC.GetPanelSpecsPNL();
 
             SubscribeToEventsSetup();
@@ -199,27 +202,67 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
 
-            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add");
-            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+            if (_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_HingeOptions == HingeOption._FrictionStay)
+            {
+                _panelModel.Panel_MiddleCloserVisibility = true;
+
+                _panelModel.AdjustPropertyPanelHeight("addMC");
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                }
+            }
 
             if (_panelModel.Panel_ParentMultiPanelModel != null)
             {
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add");
                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
-                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
+
+                _panelModel.AdjustPropertyPanelHeight("addGlass");
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
             }
 
-            _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
-            _panelModel.AdjustPropertyPanelHeight("addSash");
-            _panelModel.AdjustPropertyPanelHeight("addGlass");
-            _panelModel.AdjustPropertyPanelHeight("addHandle");
+            if (_panelModel.Panel_Type.Contains("Fixed") == false || _panelModel.Panel_SashPropertyVisibility == true)
+            {
+                if (_panelModel.Panel_ParentFrameModel != null && _panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning"))
+                    {
+                        _panelModel.AdjustPropertyPanelHeight("addSash");
 
-            _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    }
+                }
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                }
+            }
+
+            if (_panelModel.Panel_Type.Contains("Fixed") == false)
+            {
+                if (_panelModel.Panel_ParentFrameModel != null && _panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning"))
+                    {
+                        _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
+                        _panelModel.AdjustPropertyPanelHeight("addHandle");
+                        _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+                    }
+                }
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+                }
+            }
 
 
             IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
@@ -320,6 +363,12 @@ namespace PresentationLayer.Presenter.UserControls
                 _pnlPanelSpecs.Controls.Add(handle);
                 handle.Dock = DockStyle.Top;
                 handle.BringToFront();
+
+                IPP_MiddleCloserPropertyUCPresenter mcUCP = _pp_middleCloserPropertyUCP.GetNewInstance(_panelModel, _unityC);
+                UserControl mc = (UserControl)mcUCP.GetMiddleCloserPropertyUC();
+                _pnlPanelSpecs.Controls.Add(mc);
+                mc.Dock = DockStyle.Top;
+                mc.BringToFront();
 
                 IPP_3dHingePropertyUCPresenter _3dPropUCP = _pp_3dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                 UserControl _3dprop = (UserControl)_3dPropUCP.GetPP_3dHingePropertyUC();

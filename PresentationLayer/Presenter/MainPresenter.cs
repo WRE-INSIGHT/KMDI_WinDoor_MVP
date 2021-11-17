@@ -578,7 +578,6 @@ namespace PresentationLayer.Presenter
                                 pnl.Panel_Width = pnl.Panel_OriginalWidth;
                                 pnl.Panel_Height = pnl.Panel_OriginalHeight;
                             }
-                            //mpnl.SetEqualGlassDimension(gbmode);
                         }
                     }
                 }
@@ -676,13 +675,13 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            int incompatibility_cnt = Check_Incompatibility(),
-                unbalancedGlass_cnt = Check_UnbalancedGlass();
+            string incompatibility_str = Check_Incompatibility();
+            int unbalancedGlass_cnt = Check_UnbalancedGlass();
             bool proceed = false;
 
-            if (incompatibility_cnt >= 1)
+            if (incompatibility_str != "")
             {
-                DialogResult dr =  MessageBox.Show("Incompatibility(s) detected, Do you wish to proceed?", "Incompatibility Check", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult dr =  MessageBox.Show("Incompatibility(s) detected, Do you wish to proceed?" + incompatibility_str, "Incompatibility Check", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dr == DialogResult.Yes)
                 {
                     proceed = true;
@@ -1190,9 +1189,9 @@ namespace PresentationLayer.Presenter
             _pnlPropertiesBody.PerformLayout();
         }
 
-        private int Check_Incompatibility()
+        private string Check_Incompatibility()
         {
-            int incompatibility_cnt = 0;
+            string incompatibility = "\n";
 
             foreach (IFrameModel frame in _windoorModel.lst_frame)
             {
@@ -1204,7 +1203,7 @@ namespace PresentationLayer.Presenter
                     Handle_Type handletype = pnl.Panel_HandleType;
                     Espagnolette_ArticleNo espag_art = pnl.Panel_EspagnoletteArtNo;
 
-                    if (pnl.Panel_Type.Contains("Fixed") == false)
+                    if (pnl.Panel_Type.Contains("Fixed") == false && pnl.Panel_HandleOptionsVisibility == true)
                     {
                         if (handletype == Handle_Type._Rotoswing)
                         {
@@ -1215,15 +1214,16 @@ namespace PresentationLayer.Presenter
                                 !(frame_art == FrameProfile_ArticleNo._7507 &&
                                   sash_art == SashProfile_ArticleNo._395))
                             {
-                                incompatibility_cnt++;
+                                incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }
                         }
                         else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._7507 &&
-                                  sash_art == SashProfile_ArticleNo._374))
+                                  (sash_art == SashProfile_ArticleNo._374 ||
+                                   sash_art == SashProfile_ArticleNo._373)))
                             {
-                                incompatibility_cnt++;
+                                incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }
                         }
 
@@ -1234,15 +1234,17 @@ namespace PresentationLayer.Presenter
                             if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
                                 !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
                             {
-                                incompatibility_cnt++;
+                                incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Espagnolette : " + espag_art.DisplayName;
                             }
                         }
                         else if (espag_art == Espagnolette_ArticleNo._642105 || espag_art == Espagnolette_ArticleNo._642089 ||
                                  espag_art == Espagnolette_ArticleNo._630963)
                         {
-                            if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                            if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                 (sash_art == SashProfile_ArticleNo._374 ||
+                                  sash_art == SashProfile_ArticleNo._373)))
                             {
-                                incompatibility_cnt++;
+                                incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Espagnolette : " + espag_art.DisplayName;
                             }
                         }
                         else if (espag_art == Espagnolette_ArticleNo._N110A00006 || espag_art == Espagnolette_ArticleNo._N110A01006 ||
@@ -1252,19 +1254,38 @@ namespace PresentationLayer.Presenter
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
                             {
-                                incompatibility_cnt++;
+                                incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Espagnolette : " + espag_art.DisplayName;
                             }
                         }
 
                         List<Extension_ArticleNo> lst_extArt = new List<Extension_ArticleNo>();
                         lst_extArt.Add(pnl.Panel_ExtensionTopArtNo);
-                        lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                        if (pnl.Panel_ExtTopChk)
+                        {
+                            lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                        }
+                        if (pnl.Panel_ExtTop2Chk)
+                        {
+                            lst_extArt.Add(pnl.Panel_ExtensionTop3ArtNo);
+                        }
+
                         lst_extArt.Add(pnl.Panel_ExtensionBotArtNo);
-                        lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                        if (pnl.Panel_ExtBotChk)
+                        {
+                            lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                        }
+
                         lst_extArt.Add(pnl.Panel_ExtensionLeftArtNo);
-                        lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                        if (pnl.Panel_ExtLeftChk)
+                        {
+                            lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                        }
+
                         lst_extArt.Add(pnl.Panel_ExtensionRightArtNo);
-                        lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+                        if (pnl.Panel_ExtRightChk)
+                        {
+                            lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+                        }
 
                         if (pnl.Panel_ExtensionOptionsVisibility == true)
                         {
@@ -1275,14 +1296,16 @@ namespace PresentationLayer.Presenter
                                     if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
                                         !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
                                     {
-                                        incompatibility_cnt++;
+                                        incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + " \nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Extension : " + ext.DisplayName;
                                     }
                                 }
                                 else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
                                 {
-                                    if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                                    if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                         (sash_art == SashProfile_ArticleNo._374 ||
+                                          sash_art == SashProfile_ArticleNo._373)))
                                     {
-                                        incompatibility_cnt++;
+                                        incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + " \nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Extension : " + ext.DisplayName;
                                     }
                                 }
                                 else if (ext == Extension_ArticleNo._612978)
@@ -1290,9 +1313,10 @@ namespace PresentationLayer.Presenter
                                     if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
                                         !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
                                         !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374) &&
+                                        !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._373) &&
                                         !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
                                     {
-                                        incompatibility_cnt++;
+                                        incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + " \nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Extension : " + ext.DisplayName;
                                     }
                                 }
                             }
@@ -1307,7 +1331,7 @@ namespace PresentationLayer.Presenter
                         Handle_Type handletype = pnl.Panel_HandleType;
                         Espagnolette_ArticleNo espag_art = pnl.Panel_EspagnoletteArtNo;
 
-                        if (pnl.Panel_Type.Contains("Fixed") == false)
+                        if (pnl.Panel_Type.Contains("Fixed") == false && pnl.Panel_HandleOptionsVisibility == true)
                         {
                             if (handletype == Handle_Type._Rotoswing)
                             {
@@ -1318,15 +1342,16 @@ namespace PresentationLayer.Presenter
                                     !(frame_art == FrameProfile_ArticleNo._7507 &&
                                       sash_art == SashProfile_ArticleNo._395))
                                 {
-                                    incompatibility_cnt++;
+                                    incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                                 }
                             }
                             else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
                             {
                                 if (!(frame_art == FrameProfile_ArticleNo._7507 &&
-                                      sash_art == SashProfile_ArticleNo._374))
+                                      (sash_art == SashProfile_ArticleNo._374 ||
+                                       sash_art == SashProfile_ArticleNo._373)))
                                 {
-                                    incompatibility_cnt++;
+                                    incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                                 }
                             }
 
@@ -1338,15 +1363,17 @@ namespace PresentationLayer.Presenter
                                 if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
                                     !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
                                 {
-                                    incompatibility_cnt++;
+                                    incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Espagnolette : " + espag_art.DisplayName;
                                 }
                             }
                             else if (espag_art == Espagnolette_ArticleNo._642105 || espag_art == Espagnolette_ArticleNo._642089 ||
                                      espag_art == Espagnolette_ArticleNo._630963)
                             {
-                                if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                                if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                     (sash_art == SashProfile_ArticleNo._374 ||
+                                      sash_art == SashProfile_ArticleNo._373)))
                                 {
-                                    incompatibility_cnt++;
+                                    incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Espagnolette : " + espag_art.DisplayName;
                                 }
                             }
                             else if (espag_art == Espagnolette_ArticleNo._N110A00006 || espag_art == Espagnolette_ArticleNo._N110A01006 ||
@@ -1356,20 +1383,39 @@ namespace PresentationLayer.Presenter
                             {
                                 if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
                                 {
-                                    incompatibility_cnt++;
+                                    incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Espagnolette : " + espag_art.DisplayName;
                                 }
                             }
 
 
                             List<Extension_ArticleNo> lst_extArt = new List<Extension_ArticleNo>();
                             lst_extArt.Add(pnl.Panel_ExtensionTopArtNo);
-                            lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                            if (pnl.Panel_ExtTopChk)
+                            {
+                                lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                            }
+                            if (pnl.Panel_ExtTop2Chk)
+                            {
+                                lst_extArt.Add(pnl.Panel_ExtensionTop3ArtNo);
+                            }
+
                             lst_extArt.Add(pnl.Panel_ExtensionBotArtNo);
-                            lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                            if (pnl.Panel_ExtBotChk)
+                            {
+                                lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                            }
+
                             lst_extArt.Add(pnl.Panel_ExtensionLeftArtNo);
-                            lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                            if (pnl.Panel_ExtLeftChk)
+                            {
+                                lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                            }
+
                             lst_extArt.Add(pnl.Panel_ExtensionRightArtNo);
-                            lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+                            if (pnl.Panel_ExtRightChk)
+                            {
+                                lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+                            }
 
                             if (pnl.Panel_ExtensionOptionsVisibility == true)
                             {
@@ -1380,14 +1426,16 @@ namespace PresentationLayer.Presenter
                                         if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
                                             !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581))
                                         {
-                                            incompatibility_cnt++;
+                                            incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + " \nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Extension : " + ext.DisplayName;
                                         }
                                     }
                                     else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
                                     {
-                                        if (!(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374))
+                                        if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                            (sash_art == SashProfile_ArticleNo._374 ||
+                                             sash_art == SashProfile_ArticleNo._373)))
                                         {
-                                            incompatibility_cnt++;
+                                            incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + " \nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Extension : " + ext.DisplayName;
                                         }
                                     }
                                     else if (ext == Extension_ArticleNo._612978)
@@ -1395,9 +1443,10 @@ namespace PresentationLayer.Presenter
                                         if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
                                             !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
                                             !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._374) &&
+                                            !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._373) &&
                                             !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._395))
                                         {
-                                            incompatibility_cnt++;
+                                            incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + " \nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Extension : " + ext.DisplayName;
                                         }
                                     }
                                 }
@@ -1405,9 +1454,31 @@ namespace PresentationLayer.Presenter
                         }
                     }
                 }
+                foreach (IDividerModel div in frame.Lst_Divider)
+                {
+                    if (div.Div_ChkDM == true && div.Div_DMPanel != null)
+                    {
+                        if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533 && 
+                            (div.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) == false)
+                        {
+                            incompatibility += "\n\nOn " + div.Div_Name + "\nSash Profile : " + div.Div_DMPanel.Panel_SashProfileArtNo.DisplayName + ", Dummy Mullion : " + div.Div_DMArtNo.DisplayName;
+                        }
+                        else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P &&
+                                 ((div.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                                   div.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
+                                   div.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)) == false)
+                        {
+                            incompatibility += "\n\nOn " + div.Div_Name + "\nSash Profile : " + div.Div_DMPanel.Panel_SashProfileArtNo.DisplayName + ", Dummy Mullion : " + div.Div_DMArtNo.DisplayName;
+                        }
+                    }
+                    else if(div.Div_ChkDM == true && div.Div_DMPanel == null)
+                    {
+                        incompatibility += "\n\nOn " + div.Div_Name + "\nSash Profile : no selected panel, Dummy Mullion : " + div.Div_DMArtNo.DisplayName;
+                    }
+                }
             }
 
-            return incompatibility_cnt;
+            return incompatibility.Trim();
         }
 
         private int Check_UnbalancedGlass()

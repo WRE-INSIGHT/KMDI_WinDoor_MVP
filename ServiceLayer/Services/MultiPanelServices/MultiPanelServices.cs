@@ -42,7 +42,9 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                  float mpanelZoom,
                                                  IFrameModel mpanelFrameModelParent,
                                                  int mpanelDisplayWidth,
+                                                 int mpanelDisplayWidthDecimal,
                                                  int mpanelDisplayHeight,
+                                                 int mpanelDisplayHeightDecimal,
                                                  int mpanelStackNo)
         {
             IMultiPanelModel mp = new MultiPanelModel(mid,
@@ -66,7 +68,9 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                       mpanelZoom,
                                                       mpanelFrameModelParent,
                                                       mpanelDisplayWidth,
+                                                      mpanelDisplayWidthDecimal,
                                                       mpanelDisplayHeight,
+                                                      mpanelDisplayHeightDecimal,
                                                       mpanelStackNo);
 
             return mp;
@@ -80,7 +84,9 @@ namespace ServiceLayer.Services.MultiPanelServices
         public IMultiPanelModel AddMultiPanelModel(int mwidth,
                                                    int mheight,
                                                    int mpanelDisplayWidth,
+                                                   int mpanelDisplayWidthDecimal,
                                                    int mpanelDisplayHeight,
+                                                   int mpanelDisplayHeightDecimal,
                                                    Control mpanelParent,
                                                    UserControl mpanelFrameGroup,
                                                    IFrameModel mpanelFrameModelParent,
@@ -155,7 +161,9 @@ namespace ServiceLayer.Services.MultiPanelServices
                                                                  mpanelZoom,
                                                                  mpanelFrameModelParent,
                                                                  mpanelDisplayWidth,
+                                                                 mpanelDisplayWidthDecimal,
                                                                  mpanelDisplayHeight,
+                                                                 mpanelDisplayHeightDecimal,
                                                                  mpanelStackNo);
 
             return _multipanelModel;

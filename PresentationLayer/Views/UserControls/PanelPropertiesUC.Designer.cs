@@ -172,7 +172,7 @@
             this.pnl_panelSpecsBody.Controls.Add(this.lbl_pnlSpecs);
             this.pnl_panelSpecsBody.Location = new System.Drawing.Point(2, 144);
             this.pnl_panelSpecsBody.Name = "pnl_panelSpecsBody";
-            this.pnl_panelSpecsBody.Size = new System.Drawing.Size(155, 281);
+            this.pnl_panelSpecsBody.Size = new System.Drawing.Size(155, 28);
             this.pnl_panelSpecsBody.TabIndex = 10;
             // 
             // Panel_PropertiesUC
@@ -194,7 +194,7 @@
             this.Controls.Add(this.pnl_panelSpecsBody);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Panel_PropertiesUC";
-            this.Size = new System.Drawing.Size(160, 430);
+            this.Size = new System.Drawing.Size(160, 177);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();

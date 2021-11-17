@@ -264,7 +264,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         suggest_HT = (((_multiPanelModel.MPanel_Height) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
 
                     int mpanelDisplayWidth = _multiPanelModel.MPanel_DisplayWidth,
+                        mpanelDisplayWidthDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal,
                         mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight / (_multiPanelModel.MPanel_Divisions + 1);
+
+                    string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
+                    decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
+
+                    int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
+                    int DisplayHT_singleDecimalPlace = 0;
+
+                    string[] DisplayHT_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                    if (DisplayHT_dec_split.Count() > 1)
+                    {
+                        DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
+                    }
 
                     FlowDirection flow = FlowDirection.LeftToRight;
                     if (data.Contains("Transom"))
@@ -277,7 +291,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     IMultiPanelModel mPanelModel = _multipanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           mpanelDisplayWidth,
+                                                                                          mpanelDisplayWidthDecimal,
                                                                                           mpanelDisplayHeight,
+                                                                                          DisplayHT_singleDecimalPlace,
                                                                                           fpnl,
                                                                                           (UserControl)_frameUCP.GetFrameUC(),
                                                                                           _frameModel,
@@ -494,7 +510,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int suggest_Wd = _multiPanelModel.MPanel_Width - 20,
                     suggest_HT = 0,
                     suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth,
-                    suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight / totalPanelCount;
+                    suggest_DisplayWDDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal;
+
+                string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
+                decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
+
+                int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
+                int DisplayHT_singleDecimalPlace = 0;
+
+                string[] DisplayWD_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                if (DisplayWD_dec_split.Count() > 1)
+                {
+                    DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
+                }
 
                 if (_multiPanelModel.MPanel_DividerEnabled)
                 {
@@ -592,7 +621,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                _frameModel,
                                                                _multiPanelModel,
                                                                suggest_DisplayWD,
+                                                               suggest_DisplayWDDecimal,
                                                                suggest_DisplayHT,
+                                                               DisplayHT_singleDecimalPlace,
                                                                GlazingBead_ArticleNo._2452,
                                                                GlassFilm_Types._None,
                                                                SashProfile_ArticleNo._7581,
@@ -646,14 +677,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (data == "Fixed Panel")
                 {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-
-                    _panelModel.AdjustPropertyPanelHeight("addGlass");
-
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
                                                                                _panelModel,
                                                                                _frameModel,
@@ -698,26 +721,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 else if (data == "Awning Panel")
                 {
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
-
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-
-                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
-                    _panelModel.AdjustPropertyPanelHeight("addSash");
-                    _panelModel.AdjustPropertyPanelHeight("addGlass");
-                    _panelModel.AdjustPropertyPanelHeight("addHandle");
-
-                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
-
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
                                                                                   _panelModel,
                                                                                   _frameModel,
@@ -895,6 +898,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
             {
                 _frameModel.Lst_Panel.Remove(pnl);
+                _mainPresenter.DeductPanelGlassID();
             }
             foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
             {

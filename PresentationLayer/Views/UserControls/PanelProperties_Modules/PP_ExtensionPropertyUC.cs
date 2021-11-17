@@ -103,6 +103,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             num_TopExtQty.Maximum = decimal.MaxValue;
             num_TopExtQty2.Maximum = decimal.MaxValue;
+            num_TopExtQty3.Maximum = decimal.MaxValue;
             num_BotExtQty.Maximum = decimal.MaxValue;
             num_BotExtQty2.Maximum = decimal.MaxValue;
             num_LeftExtQty.Maximum = decimal.MaxValue;
@@ -123,6 +124,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 extArtNo1.Add(item);
             }
             cmb_TopExt2.DataSource = extArtNo1;
+
+            List<Extension_ArticleNo> extArtNo8 = new List<Extension_ArticleNo>();
+            foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
+            {
+                extArtNo8.Add(item);
+            }
+            cmb_TopExt3.DataSource = extArtNo8;
 
             List<Extension_ArticleNo> extArtNo2 = new List<Extension_ArticleNo>();
             foreach (Extension_ArticleNo item in Extension_ArticleNo.GetAll())
@@ -193,6 +201,30 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             chk_ToAdd_TopExt2.BackgroundImage = Properties.Resources.ExtensionTop;
             chk_ToAdd_TopExt2.Text = "";
+        }
+
+        private void chk_ToAdd_TopExt3_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkToAddExtension2CheckedChangedEventRaised, e);
+        }
+
+        private void chk_ToAdd_TopExt3_MouseHover(object sender, EventArgs e)
+        {
+            chk_ToAdd_TopExt3.BackgroundImage = base.BackgroundImage;
+            if (chk_ToAdd_TopExt3.Checked == true)
+            {
+                chk_ToAdd_TopExt3.Text = "-";
+            }
+            else if (chk_ToAdd_TopExt3.Checked == false)
+            {
+                chk_ToAdd_TopExt3.Text = "+";
+            }
+        }
+
+        private void chk_ToAdd_TopExt3_MouseLeave(object sender, EventArgs e)
+        {
+            chk_ToAdd_TopExt3.BackgroundImage = Properties.Resources.ExtensionTop;
+            chk_ToAdd_TopExt3.Text = "";
         }
 
         private void chk_ToAdd_BotExt2_CheckedChanged(object sender, EventArgs e)
@@ -274,11 +306,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             num_LeftExtQty.DataBindings.Add(ModelBinding["Panel_ExtLeftQty"]);
             num_RightExtQty.DataBindings.Add(ModelBinding["Panel_ExtRightQty"]);
             num_TopExtQty2.DataBindings.Add(ModelBinding["Panel_ExtTop2Qty"]);
+            num_TopExtQty3.DataBindings.Add(ModelBinding["Panel_ExtTop3Qty"]);
             num_BotExtQty2.DataBindings.Add(ModelBinding["Panel_ExtBot2Qty"]);
             num_LeftExtQty2.DataBindings.Add(ModelBinding["Panel_ExtLeft2Qty"]);
             num_RightExtQty2.DataBindings.Add(ModelBinding["Panel_ExtRight2Qty"]);
             cmb_TopExt.DataBindings.Add(ModelBinding["Panel_ExtensionTopArtNo"]);
             cmb_TopExt2.DataBindings.Add(ModelBinding["Panel_ExtensionTop2ArtNo"]);
+            cmb_TopExt3.DataBindings.Add(ModelBinding["Panel_ExtensionTop3ArtNo"]);
             cmb_BotExt.DataBindings.Add(ModelBinding["Panel_ExtensionBotArtNo"]);
             cmb_BotExt2.DataBindings.Add(ModelBinding["Panel_ExtensionBot2ArtNo"]);
             cmb_LeftExt.DataBindings.Add(ModelBinding["Panel_ExtensionLeftArtNo"]);
@@ -286,10 +320,12 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_RightExt.DataBindings.Add(ModelBinding["Panel_ExtensionRightArtNo"]);
             cmb_RightExt2.DataBindings.Add(ModelBinding["Panel_ExtensionRight2ArtNo"]);
             chk_ToAdd_TopExt2.DataBindings.Add(ModelBinding["Panel_ExtTopChk"]);
+            chk_ToAdd_TopExt3.DataBindings.Add(ModelBinding["Panel_ExtTop2Chk"]);
             chk_ToAdd_BotExt2.DataBindings.Add(ModelBinding["Panel_ExtBotChk"]);
             chk_ToAdd_LeftExt2.DataBindings.Add(ModelBinding["Panel_ExtLeftChk"]);
             chk_ToAdd_RightExt2.DataBindings.Add(ModelBinding["Panel_ExtRightChk"]);
             pnl_TopExt2Option.DataBindings.Add(ModelBinding["Panel_ExtTopChk_visible"]);
+            pnl_TopExt3Option.DataBindings.Add(ModelBinding["Panel_ExtTop2Chk_visible"]);
             pnl_BotExt2Option.DataBindings.Add(ModelBinding["Panel_ExtBotChk_visible"]);
             pnl_LeftExt2Option.DataBindings.Add(ModelBinding["Panel_ExtLeftChk_visible"]);
             pnl_RightExt2Option.DataBindings.Add(ModelBinding["Panel_ExtRightChk_visible"]);
@@ -316,7 +352,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 }
                 else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
                 {
-                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                          (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                           Panel_SashProfileArtNo == SashProfile_ArticleNo._373)))
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", "Extension Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -358,7 +396,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             }
             else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
             {
-                if (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                if (Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                   (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }
@@ -390,6 +430,11 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public Panel GetTopExt2OptionPNL()
         {
             return pnl_TopExt2Option;
+        }
+
+        public Panel GetTopExt3OptionPNL()
+        {
+            return pnl_TopExt3Option;
         }
 
         public Panel GetBotExt2OptionPNL()

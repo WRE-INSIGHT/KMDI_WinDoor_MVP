@@ -13,6 +13,7 @@ using ModelLayer.Model.Quotation.Divider;
 using static EnumerationTypeLayer.EnumerationTypes;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Variables;
+using System.Data;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -640,6 +641,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_3dHingeOptionsheight;
                 }
+                else if (mode == "addMC")
+                {
+                    FrameProp_Height += constants.panel_property_MiddleCloserOptionsheight;
+                }
+                else if (mode == "minusMC")
+                {
+                    FrameProp_Height -= constants.panel_property_MiddleCloserOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {
@@ -717,6 +726,65 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             FrameProp_Height -= propertyHeight;
         }
+
+        public void Insert_frameInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNo.ToString(),
+                                   2, "pc(s)",
+                                   Frame_ExplosionWidth.ToString(),
+                                   "Frame",
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNo.ToString(),
+                                   2, "pc(s)",
+                                   Frame_ExplosionWidth.ToString(),
+                                   "Frame",
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Frame Height " + Frame_ArtNo.ToString(),
+                                   2, "pc(s)",
+                                   Frame_ExplosionHeight,
+                                   "Frame",
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfArtNo.ToString(),
+                                   2, "pc(s)",
+                                   Frame_ReinfWidth.ToString(),
+                                   "Frame",
+                                   @"|  |");
+
+            tbl_explosion.Rows.Add("Frame Reinf Height " + Frame_ReinfArtNo.ToString(),
+                                   2, "pc(s)",
+                                   Frame_ReinfHeight.ToString(),
+                                   "Frame",
+                                   @"|  |");
+        }
+
+        public void Insert_MilledFrameInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Milled Frame " + Frame_MilledArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       Frame_Width.ToString(),
+                                       "Frame",
+                                       @"|  |");
+
+            tbl_explosion.Rows.Add("Milled Frame Reinf " + Frame_MilledReinfArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   Frame_Width.ToString(),
+                                   "Frame",
+                                   @"|  |");
+        }
+
+        public int Add_framePerimeter_screws4fab()
+        {
+            return (Frame_Width * 2) + (Frame_Height * 2);
+        }
+
+        public int Add_MilledFrameWidth_screws4fab()
+        {
+            return Frame_Width;
+        }
+
         #endregion
 
         public FrameModel(int frameID,

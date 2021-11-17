@@ -103,8 +103,8 @@ namespace PresentationLayer.Presenter.UserControls
 
             if (total_panel > 1 || total_mpanel >= 1)
             {
-                int[,] actual_arr_wd_locX = new int[total_panel, 2];
-                int[,] actual_arr_ht_locY = new int[total_panel, 2];
+                decimal[,] actual_arr_wd_locX = new decimal[total_panel, 2];
+                decimal[,] actual_arr_ht_locY = new decimal[total_panel, 2];
                 int ndx = 0;
 
                 if (total_panel > 1 && total_mpanel == 0)
@@ -144,8 +144,8 @@ namespace PresentationLayer.Presenter.UserControls
                 }
 
 
-                List<int> wds = _mainPresenter.basePlatform_MainPresenter.WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
-                List<int> hts = _mainPresenter.basePlatform_MainPresenter.HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
+                List<decimal> wds = _mainPresenter.basePlatform_MainPresenter.WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
+                List<decimal> hts = _mainPresenter.basePlatform_MainPresenter.HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
 
                 int locX = 0;
                 foreach (int wd in wds)
