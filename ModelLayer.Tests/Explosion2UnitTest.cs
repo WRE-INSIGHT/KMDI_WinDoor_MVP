@@ -47,7 +47,10 @@ namespace ModelLayer.Tests
         [TestMethod]
         public void ChkVar_SinglePanelFixWindow()
         {
-            int total_wd = 1000, total_height = 2000;
+            int total_wd = 1000, total_height = 2000,
+                total_wd_decimal = 0, total_height_decimal = 0;
+
+
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -65,6 +68,7 @@ namespace ModelLayer.Tests
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
+
             IPanelModel _panelModel = _panelServices.AddPanelModel(wd,
                                                                    ht,
                                                                    new Control(),
@@ -77,7 +81,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   total_wd_decimal,
                                                                    total_height,
+                                                                   total_height_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -146,8 +152,8 @@ namespace ModelLayer.Tests
         [TestMethod]
         public void chkvar_SinglePannelFix2()
         {
-            int total_wd = 619, total_height = 925;
-
+            int total_wd = 619, total_height = 925,
+                total_wd_decimal = 0, total_height_decimal = 0;
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
@@ -176,7 +182,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   total_wd_decimal,
                                                                    total_height,
+                                                                   total_height_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -469,7 +477,9 @@ namespace ModelLayer.Tests
 
 
             int total_wd = 550, total_height = 1200,
-                eqpanelWD = 550, eqpanelHT = 600;
+                total_wd_decimal = 0, total_height_decimal = 0,
+                eqpanelWD = 550, eqpanelHT = 600,
+                eqpanelWD_decimal = 0, eqpanelHT_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -495,7 +505,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
                                                                                        total_wd,
+                                                                                       total_wd_decimal,
                                                                                        total_height,
+                                                                                       total_height_decimal,
                                                                                        frame,
                                                                                        new UserControl(),
                                                                                        _frameModel,
@@ -536,7 +548,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
+                                                                   eqpanelWD_decimal,
                                                                    eqpanelHT,
+                                                                   eqpanelHT_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -627,7 +641,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
+                                                                   eqpanelWD_decimal,
                                                                    eqpanelHT,
+                                                                   eqpanelHT_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -814,6 +830,7 @@ namespace ModelLayer.Tests
 
 
             int total_wd = 550, total_height = 1200,
+                wd_decimal = 0, height_decimal = 0,
                  uneqpanelHT1 = 700, uneqpanelHT2 = 500, eqpanelWD = 550;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -833,13 +850,16 @@ namespace ModelLayer.Tests
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
+
             Control frame = new Control();
             frame.Name = _frameModel.Frame_Name;
 
             IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
                                                                                        total_wd,
+                                                                                       wd_decimal,
                                                                                        total_height,
+                                                                                       height_decimal,
                                                                                        frame,
                                                                                        new UserControl(),
                                                                                        _frameModel,
@@ -880,7 +900,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    uneqpanelHT1,
+                                                                   height_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -970,7 +992,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    uneqpanelHT2,
+                                                                   height_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -1155,7 +1179,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 1800, total_ht = 1600,
                 PanelWD1_BG = 604, PanelHT1_BG = 800,
-                PanelWD3_BG = 592, PanelHT3_BG = 800;
+                PanelWD3_BG = 592, PanelHT3_BG = 800,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -1185,7 +1210,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
                                                                                        displayWidth,
+                                                                                       wd_decimal,
                                                                                        displayHeight,
+                                                                                       ht_decimal,
                                                                                        frame,
                                                                                        new UserControl(),
                                                                                        _frameModel,
@@ -1219,7 +1246,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                          suggest_HT,
                                                                                          PanelWD1_BG,
+                                                                                         wd_decimal,
                                                                                          displayHeight2,
+                                                                                         ht_decimal,
                                                                                          multiMullion,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -1270,7 +1299,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel2 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                         suggest_HT,
                                                                                         PanelWD3_BG,
+                                                                                        wd_decimal,
                                                                                         displayHeight2,
+                                                                                        ht_decimal,
                                                                                         multiMullion,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -1319,7 +1350,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel3 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                       suggest_HT,
                                                                                       PanelWD1_BG,
+                                                                                      wd_decimal,
                                                                                       displayHeight2,
+                                                                                      ht_decimal,
                                                                                       multiMullion,
                                                                                       new UserControl(),
                                                                                       _frameModel,
@@ -1361,7 +1394,9 @@ namespace ModelLayer.Tests
                                                                  _frameModel,
                                                                  _multiTransomModel1,
                                                                  PanelWD1_BG,
+                                                                 wd_decimal,
                                                                  PanelHT1_BG,
+                                                                 ht_decimal,
                                                                  GlazingBead_ArticleNo._2451,
                                                                  GlassFilm_Types._None,
                                                                  SashProfile_ArticleNo._None,
@@ -1458,7 +1493,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiTransomModel1,
                                                                   PanelWD1_BG,
+                                                                  wd_decimal,
                                                                   PanelHT1_BG,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2451,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -1536,7 +1573,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiTransomModel2,
                                                                    PanelWD3_BG,
+                                                                   wd_decimal,
                                                                    PanelHT3_BG,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -1630,7 +1669,9 @@ namespace ModelLayer.Tests
                                                               _frameModel,
                                                               _multiTransomModel2,
                                                               PanelWD3_BG,
+                                                              wd_decimal,
                                                               PanelHT3_BG,
+                                                              ht_decimal,
                                                               GlazingBead_ArticleNo._2451,
                                                               GlassFilm_Types._None,
                                                               SashProfile_ArticleNo._None,
@@ -1707,7 +1748,9 @@ namespace ModelLayer.Tests
                                                              _frameModel,
                                                              _multiTransomModel3,
                                                              PanelWD1_BG,
+                                                             wd_decimal,
                                                              PanelHT1_BG,
+                                                             ht_decimal,
                                                              GlazingBead_ArticleNo._2451,
                                                              GlassFilm_Types._None,
                                                              SashProfile_ArticleNo._None,
@@ -1803,7 +1846,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiTransomModel3,
                                                                   PanelWD1_BG,
+                                                                  wd_decimal,
                                                                   PanelHT1_BG,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2451,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -2196,7 +2241,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 2100, total_ht = 1700,
                PanelWD1_BG = 704, PanelHT1_BG = 1700,
-                PanelWD3_BG = 692, PanelHT3_BG = 850;
+                PanelWD3_BG = 692, PanelHT3_BG = 850,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -2226,7 +2272,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                         ht,
                                                                                         displayWidth,
+                                                                                        wd_decimal,
                                                                                         displayHeight,
+                                                                                        ht_decimal,
                                                                                         frame,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -2269,7 +2317,9 @@ namespace ModelLayer.Tests
                                                                      _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
+                                                                     wd_decimal,
                                                                      PanelHT1_BG,
+                                                                     ht_decimal,
                                                                      GlazingBead_ArticleNo._2451,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._None,
@@ -2346,7 +2396,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                         suggest_HT,
                                                                                         PanelWD3_BG,
+                                                                                        wd_decimal,
                                                                                         PanelHT1_BG,
+                                                                                        ht_decimal,
                                                                                         multiMullion,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -2405,7 +2457,9 @@ namespace ModelLayer.Tests
                                                                      _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
+                                                                     wd_decimal,
                                                                      PanelHT1_BG,
+                                                                     ht_decimal,
                                                                      GlazingBead_ArticleNo._2451,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._None,
@@ -2473,7 +2527,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiTransomModel1,
                                                                    PanelWD3_BG,
+                                                                   wd_decimal,
                                                                    PanelHT3_BG,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -2560,7 +2616,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiTransomModel1,
                                                                     PanelWD3_BG,
+                                                                    wd_decimal,
                                                                     PanelHT3_BG,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -2807,7 +2865,8 @@ namespace ModelLayer.Tests
 
                  PanelWD1_BG = 799, PanelHT1_BG = 1950,
                  PanelWD3PlusWD4 = 802,
-                PanelWD3_BG = 401, PanelHT3_BG = 975;
+                PanelWD3_BG = 401, PanelHT3_BG = 975,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -2833,7 +2892,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                         ht,
                                                                                         total_wd,
+                                                                                        wd_decimal,
                                                                                         total_ht,
+                                                                                        ht_decimal,
                                                                                         frame,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -2875,7 +2936,9 @@ namespace ModelLayer.Tests
                                                                      _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
+                                                                     wd_decimal,
                                                                      PanelHT1_BG,
+                                                                     ht_decimal,
                                                                      GlazingBead_ArticleNo._2453,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._None,
@@ -2951,7 +3014,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                         suggest_HT,
                                                                                         PanelWD3PlusWD4,
+                                                                                        wd_decimal,
                                                                                         PanelHT1_BG,
+                                                                                        ht_decimal,
                                                                                         multiMullion,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -3011,7 +3076,9 @@ namespace ModelLayer.Tests
                                                                      _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
+                                                                     wd_decimal,
                                                                      PanelHT1_BG,
+                                                                     ht_decimal,
                                                                      GlazingBead_ArticleNo._2453,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._None,
@@ -3070,7 +3137,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                         suggest_HT,
                                                                                         PanelWD3_BG,
+                                                                                        wd_decimal,
                                                                                         PanelHT3_BG,
+                                                                                        ht_decimal,
                                                                                         multiMullion,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -3125,7 +3194,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel2 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           PanelWD3_BG,
+                                                                                          wd_decimal,
                                                                                           PanelHT3_BG,
+                                                                                          ht_decimal,
                                                                                           multiMullion,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -3174,7 +3245,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiMullionModel1,
                                                                   PanelWD3_BG,
+                                                                  wd_decimal,
                                                                   PanelHT3_BG,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2451,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -3261,7 +3334,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiMullionModel1,
                                                                   PanelWD3_BG,
+                                                                  wd_decimal,
                                                                   PanelHT3_BG,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2451,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -3332,7 +3407,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel2,
                                                                       PanelWD3_BG,
+                                                                      wd_decimal,
                                                                       PanelHT3_BG,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2451,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._None,
@@ -3419,7 +3496,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiMullionModel2,
                                                                   PanelWD3_BG,
+                                                                  wd_decimal,
                                                                   PanelHT3_BG,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2451,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -3716,7 +3795,9 @@ namespace ModelLayer.Tests
             int total_wd = 2100, total_ht = 1500,
                 pnl_1_wd = 704, pnl_1_ht = 1500,
                 pnl_3_wd = 692, pnl_3_ht = 504,
-                pnl_5_wd = 346, pnl_5_ht = 492;
+                pnl_5_wd = 346, pnl_5_ht = 492,
+
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -3742,7 +3823,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -3785,7 +3868,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiMullionModel,
                                                                     pnl_1_wd,
+                                                                    wd_decimal,
                                                                     pnl_1_ht,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -3862,7 +3947,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           pnl_3_wd,
+                                                                                          wd_decimal,
                                                                                           pnl_3_ht,
+                                                                                          wd_decimal,
                                                                                           multiMullion,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -3923,7 +4010,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiMullionModel,
                                                                     pnl_1_wd,
+                                                                    wd_decimal,
                                                                     pnl_1_ht,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -3992,7 +4081,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiTransomModel1,
                                                                     pnl_3_wd,
+                                                                    wd_decimal,
                                                                     pnl_3_ht,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -4069,7 +4160,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           pnl_1_wd,
+                                                                                          wd_decimal,
                                                                                           pnl_5_ht,
+                                                                                          ht_decimal,
                                                                                           multiMullion,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -4129,7 +4222,9 @@ namespace ModelLayer.Tests
                                                                      _frameModel,
                                                                      _multiTransomModel1,
                                                                      pnl_3_wd,
+                                                                     wd_decimal,
                                                                      pnl_3_ht,
+                                                                     ht_decimal,
                                                                      GlazingBead_ArticleNo._2453,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._None,
@@ -4200,7 +4295,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiMullionModel1,
                                                                     pnl_5_wd,
+                                                                    wd_decimal,
                                                                     pnl_5_ht,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -4285,7 +4382,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiMullionModel1,
                                                                     pnl_5_wd,
+                                                                    wd_decimal,
                                                                     pnl_5_ht,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -4582,7 +4681,8 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 700, total_height = 1200;
+            int total_wd = 700, total_height = 1200,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._DarkBrown, Foil_Color._Cacao, Foil_Color._Cacao);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -4615,7 +4715,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_height,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -4812,8 +4914,8 @@ namespace ModelLayer.Tests
                        |/______________\|/______________\|    
             */
 
-            int total_wd = 1370,
-                total_ht = 1100,
+            int total_wd = 1370, total_ht = 1100,
+                wd_decimal = 0, ht_decimal = 0,
                 eqpanelWD = 685;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -4839,7 +4941,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -4883,7 +4987,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -4975,7 +5081,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -5276,7 +5384,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 1247, total_ht = 3370,
                 AwWD1 = 1247, AwHT1 = 1235,
-                AwWD2 = 1247, AwHT2 = 2135;
+                AwWD2 = 1247, AwHT2 = 2135,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._JetBlack, Foil_Color._JetBlack);
@@ -5302,7 +5411,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -5342,7 +5453,9 @@ namespace ModelLayer.Tests
                                                                                   _frameModel,
                                                                                   _multiTransomModel,
                                                                                   AwWD1,
+                                                                                  wd_decimal,
                                                                                   AwHT1,
+                                                                                  ht_decimal,
                                                                                   GlazingBead_ArticleNo._2435,
                                                                                   GlassFilm_Types._None,
                                                                                   SashProfile_ArticleNo._7581,
@@ -5434,7 +5547,9 @@ namespace ModelLayer.Tests
                                                                                   _frameModel,
                                                                                   _multiTransomModel,
                                                                                   AwWD2,
+                                                                                  wd_decimal,
                                                                                   AwHT2,
+                                                                                  ht_decimal,
                                                                                   GlazingBead_ArticleNo._2452,
                                                                                   GlassFilm_Types._None,
                                                                                   SashProfile_ArticleNo._7581,
@@ -5754,7 +5869,8 @@ namespace ModelLayer.Tests
             int total_wd = 1500, total_ht = 1800,
                 PnlWidth1_Fix = 800, PnlHeight1_Fix = 600,
                 PnlWidth2_Awning = 800, PnlHeight2_Awning = 1200,
-                PnlWidth3_Fix = 700, PnlHeight3_Fix = 1800;
+                PnlWidth3_Fix = 700, PnlHeight3_Fix = 1800,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -5780,7 +5896,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -5812,7 +5930,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           PnlWidth1_Fix,
+                                                                                          wd_decimal,
                                                                                           total_ht,
+                                                                                          ht_decimal,
                                                                                           multiMullion,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -5874,7 +5994,9 @@ namespace ModelLayer.Tests
                                                                            _frameModel,
                                                                            _multiMullionModel,
                                                                            PnlWidth3_Fix,
+                                                                           wd_decimal,
                                                                            PnlHeight3_Fix,
+                                                                           ht_decimal,
                                                                            GlazingBead_ArticleNo._2453,
                                                                            GlassFilm_Types._None,
                                                                            SashProfile_ArticleNo._None,
@@ -5942,7 +6064,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiTransomModel1,
                                                                   PnlWidth1_Fix,
+                                                                  wd_decimal,
                                                                   PnlHeight1_Fix,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2453,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -6031,7 +6155,9 @@ namespace ModelLayer.Tests
                                                                              _frameModel,
                                                                              _multiTransomModel1,
                                                                              PnlWidth2_Awning,
+                                                                             wd_decimal,
                                                                              PnlHeight2_Awning,
+                                                                             ht_decimal,
                                                                              GlazingBead_ArticleNo._2453,
                                                                              GlassFilm_Types._None,
                                                                              SashProfile_ArticleNo._7581,
@@ -6292,7 +6418,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("2", dr[0]["Qty"]);
             #endregion
 
-        } 
+        }
 
 
         [TestMethod]
@@ -6319,7 +6445,9 @@ namespace ModelLayer.Tests
             int total_wd = 1500, total_ht = 1800,
                 PnlWidth1_Fix = 800, PnlHeight1_Fix = 400,
                 PnlWidth2_Awning = 800, PnlHeight2_Awning = 1400,
-                PnlWidth3_Fix = 700, PnlHeight3_Fix = 1800;
+                PnlWidth3_Fix = 700, PnlHeight3_Fix = 1800,
+                wd_decimal = 0, ht_decimal = 0;
+
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -6345,7 +6473,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -6377,7 +6507,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           PnlWidth1_Fix,
+                                                                                          wd_decimal,
                                                                                           total_ht,
+                                                                                          ht_decimal,
                                                                                           multiMullion,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -6439,7 +6571,9 @@ namespace ModelLayer.Tests
                                                                            _frameModel,
                                                                            _multiMullionModel,
                                                                            PnlWidth3_Fix,
+                                                                           wd_decimal,
                                                                            PnlHeight3_Fix,
+                                                                           ht_decimal,
                                                                            GlazingBead_ArticleNo._2453,
                                                                            GlassFilm_Types._None,
                                                                            SashProfile_ArticleNo._None,
@@ -6514,7 +6648,9 @@ namespace ModelLayer.Tests
                                                                           _frameModel,
                                                                           _multiTransomModel1,
                                                                           PnlWidth1_Fix,
+                                                                          wd_decimal,
                                                                           PnlHeight1_Fix,
+                                                                          ht_decimal,
                                                                           GlazingBead_ArticleNo._2453,
                                                                           GlassFilm_Types._None,
                                                                           SashProfile_ArticleNo._None,
@@ -6610,7 +6746,9 @@ namespace ModelLayer.Tests
                                                                              _frameModel,
                                                                              _multiTransomModel1,
                                                                              PnlWidth2_Awning,
+                                                                             wd_decimal,
                                                                              PnlHeight2_Awning,
+                                                                             ht_decimal,
                                                                              GlazingBead_ArticleNo._2453,
                                                                              GlassFilm_Types._None,
                                                                              SashProfile_ArticleNo._7581,
@@ -6802,7 +6940,7 @@ namespace ModelLayer.Tests
                              Size = '800'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
-  
+
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '400'");
@@ -6919,7 +7057,8 @@ namespace ModelLayer.Tests
            */
             int total_wd = 800, total_ht = 2200,
                PnlWidth1_Fix = 800, PnlHeight1_Fix = 600,
-               PnlWidth2_Awning = 800, PnlHeight2_Awning = 1000;
+               PnlWidth2_Awning = 800, PnlHeight2_Awning = 1000,
+               wd_decimal = 0, ht_decimal = 0;
 
 
 
@@ -6947,7 +7086,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -6987,7 +7128,9 @@ namespace ModelLayer.Tests
                                                                              _frameModel,
                                                                              _multiTransomModel,
                                                                              PnlWidth1_Fix,
+                                                                             wd_decimal,
                                                                              PnlHeight1_Fix,
+                                                                             ht_decimal,
                                                                              GlazingBead_ArticleNo._2453,
                                                                              GlassFilm_Types._None,
                                                                              SashProfile_ArticleNo._None,
@@ -7080,7 +7223,9 @@ namespace ModelLayer.Tests
                                                                              _frameModel,
                                                                              _multiTransomModel,
                                                                              PnlWidth2_Awning,
+                                                                             wd_decimal,
                                                                              PnlHeight2_Awning,
+                                                                             ht_decimal,
                                                                              GlazingBead_ArticleNo._2453,
                                                                              GlassFilm_Types._None,
                                                                              SashProfile_ArticleNo._7581,
@@ -7174,7 +7319,9 @@ namespace ModelLayer.Tests
                                                                             _frameModel,
                                                                             _multiTransomModel,
                                                                             PnlWidth1_Fix,
+                                                                            wd_decimal,
                                                                             PnlHeight1_Fix,
+                                                                            ht_decimal,
                                                                             GlazingBead_ArticleNo._2453,
                                                                             GlassFilm_Types._None,
                                                                             SashProfile_ArticleNo._None,
@@ -7488,7 +7635,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 3000, total_ht = 1700,
              PnlWidth1_Fix = 3000, PnlHeight1_Fix = 500,
-             EqualPnlWidth = 1000, PnlEqualHeight = 1200;
+             EqualPnlWidth = 1000, PnlEqualHeight = 1200,
+             wd_decimal = 0, ht_decimal = 0;
 
 
 
@@ -7515,7 +7663,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -7555,7 +7705,9 @@ namespace ModelLayer.Tests
                                                                             _frameModel,
                                                                             _multiTransomModel,
                                                                             PnlWidth1_Fix,
+                                                                            wd_decimal,
                                                                             PnlHeight1_Fix,
+                                                                            ht_decimal,
                                                                             GlazingBead_ArticleNo._2453,
                                                                             GlassFilm_Types._None,
                                                                             SashProfile_ArticleNo._None,
@@ -7611,7 +7763,7 @@ namespace ModelLayer.Tests
             _multiTransomModel.MPanelLst_Objects.Add(Fixed1);
 
 
-            Dictionary <int,int> CladdingLst;
+            Dictionary<int, int> CladdingLst;
             CladdingLst = new Dictionary<int, int>
             {
                 { 1,3030}
@@ -7646,7 +7798,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           total_wd,
+                                                                                          wd_decimal,
                                                                                           PnlEqualHeight,
+                                                                                          ht_decimal,
                                                                                           multiTransom,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -7689,7 +7843,9 @@ namespace ModelLayer.Tests
                                                                             _frameModel,
                                                                             _multiMullionModel1,
                                                                             EqualPnlWidth,
+                                                                            wd_decimal,
                                                                             PnlEqualHeight,
+                                                                            ht_decimal,
                                                                             GlazingBead_ArticleNo._2453,
                                                                             GlassFilm_Types._None,
                                                                             SashProfile_ArticleNo._7581,
@@ -7783,7 +7939,9 @@ namespace ModelLayer.Tests
                                                                             _frameModel,
                                                                             _multiMullionModel1,
                                                                             EqualPnlWidth,
+                                                                            wd_decimal,
                                                                             PnlEqualHeight,
+                                                                            ht_decimal,
                                                                             GlazingBead_ArticleNo._2453,
                                                                             GlassFilm_Types._None,
                                                                             SashProfile_ArticleNo._None,
@@ -7880,7 +8038,9 @@ namespace ModelLayer.Tests
                                                                             _frameModel,
                                                                             _multiMullionModel1,
                                                                             EqualPnlWidth,
+                                                                            wd_decimal,
                                                                             PnlEqualHeight,
+                                                                            ht_decimal,
                                                                             GlazingBead_ArticleNo._2453,
                                                                             GlassFilm_Types._None,
                                                                             SashProfile_ArticleNo._7581,
@@ -8292,8 +8452,8 @@ namespace ModelLayer.Tests
                     |/______________\|
               */
 
-            int total_wd = 1000, total_height = 500;
-
+            int total_wd = 1000, total_height = 500,
+                wd_decimal = 0, ht_decimal = 0;
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._DarkBrown, Foil_Color._CharcoalGray, Foil_Color._CharcoalGray);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
@@ -8325,7 +8485,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_height,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -8553,7 +8715,8 @@ namespace ModelLayer.Tests
                     |/______________\|
               */
 
-            int total_wd = 1500, total_height = 1500;
+            int total_wd = 1500, total_height = 1500,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._DarkBrown, Foil_Color._CharcoalGray, Foil_Color._CharcoalGray);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -8586,7 +8749,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_height,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -8822,7 +8987,8 @@ namespace ModelLayer.Tests
          */
 
             int total_wd = 800, total_ht = 900,
-            EqualPnlWidth = 800, EqualPnlHeight = 450;
+            EqualPnlWidth = 800, EqualPnlHeight = 450,
+            wd_decimal = 0, ht_decimal = 0;
 
 
 
@@ -8849,7 +9015,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -8890,7 +9058,9 @@ namespace ModelLayer.Tests
                                                                           _frameModel,
                                                                           _multiTransomModel,
                                                                           EqualPnlWidth,
+                                                                          wd_decimal,
                                                                           EqualPnlHeight,
+                                                                          ht_decimal,
                                                                           GlazingBead_ArticleNo._2453,
                                                                           GlassFilm_Types._None,
                                                                           SashProfile_ArticleNo._None,
@@ -8985,7 +9155,9 @@ namespace ModelLayer.Tests
                                                                                    _frameModel,
                                                                                     _multiTransomModel,
                                                                                    EqualPnlWidth,
+                                                                                   wd_decimal,
                                                                                    EqualPnlHeight,
+                                                                                   ht_decimal,
                                                                                    GlazingBead_ArticleNo._2453,
                                                                                    GlassFilm_Types._None,
                                                                                    SashProfile_ArticleNo._7581,
@@ -9279,7 +9451,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 2100, total_ht = 1800,
                 AwningWD1 = 704, AwningHT1 = 1800,
-                AwningWD2 = 692, AwningHT2 = 1800;
+                AwningWD2 = 692, AwningHT2 = 1800,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -9305,7 +9478,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -9348,7 +9523,9 @@ namespace ModelLayer.Tests
                                                                                 _frameModel,
                                                                                  _multiMullionModel,
                                                                                 AwningWD1,
+                                                                                wd_decimal,
                                                                                 AwningHT1,
+                                                                                ht_decimal,
                                                                                 GlazingBead_ArticleNo._2435,
                                                                                 GlassFilm_Types._None,
                                                                                 SashProfile_ArticleNo._7581,
@@ -9444,7 +9621,9 @@ namespace ModelLayer.Tests
                                                                                 _frameModel,
                                                                                  _multiMullionModel,
                                                                                 AwningWD2,
+                                                                                wd_decimal,
                                                                                 AwningHT2,
+                                                                                ht_decimal,
                                                                                 GlazingBead_ArticleNo._2435,
                                                                                 GlassFilm_Types._None,
                                                                                 SashProfile_ArticleNo._7581,
@@ -9540,7 +9719,9 @@ namespace ModelLayer.Tests
                                                                                 _frameModel,
                                                                                  _multiMullionModel,
                                                                                 AwningWD1,
+                                                                                wd_decimal,
                                                                                 AwningHT1,
+                                                                                ht_decimal,
                                                                                 GlazingBead_ArticleNo._2435,
                                                                                 GlassFilm_Types._None,
                                                                                 SashProfile_ArticleNo._7581,
@@ -9892,7 +10073,8 @@ namespace ModelLayer.Tests
                 BalanceAwningWD1 = 508, AwningHT1 = 1100,
                 BalanceAwningWD3 = 496, AwningHT3 = 1100,
                 BalanceFixedWD2 = 496, FixedHT2 = 1100,
-                BalanceFixedWD6 = 508, FixedHT6 = 1100;
+                BalanceFixedWD6 = 508, FixedHT6 = 1100,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Graphite);
@@ -9918,7 +10100,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -9961,7 +10145,9 @@ namespace ModelLayer.Tests
                                                                                 _frameModel,
                                                                                  _multiMullionModel,
                                                                                 BalanceAwningWD1,
+                                                                                wd_decimal,
                                                                                 AwningHT1,
+                                                                                ht_decimal,
                                                                                 GlazingBead_ArticleNo._2452,
                                                                                 GlassFilm_Types._None,
                                                                                 SashProfile_ArticleNo._7581,
@@ -10057,7 +10243,9 @@ namespace ModelLayer.Tests
                                                                           _frameModel,
                                                                           _multiMullionModel,
                                                                           BalanceFixedWD2,
+                                                                          wd_decimal,
                                                                           FixedHT2,
+                                                                          ht_decimal,
                                                                           GlazingBead_ArticleNo._2452,
                                                                           GlassFilm_Types._None,
                                                                           SashProfile_ArticleNo._None,
@@ -10150,7 +10338,9 @@ namespace ModelLayer.Tests
                                                                                _frameModel,
                                                                                 _multiMullionModel,
                                                                                BalanceAwningWD3,
+                                                                               wd_decimal,
                                                                                AwningHT3,
+                                                                               ht_decimal,
                                                                                GlazingBead_ArticleNo._2452,
                                                                                GlassFilm_Types._None,
                                                                                SashProfile_ArticleNo._7581,
@@ -10244,7 +10434,9 @@ namespace ModelLayer.Tests
                                                                  _frameModel,
                                                                  _multiMullionModel,
                                                                  BalanceFixedWD2,
+                                                                 wd_decimal,
                                                                  FixedHT2,
+                                                                 ht_decimal,
                                                                  GlazingBead_ArticleNo._2452,
                                                                  GlassFilm_Types._None,
                                                                  SashProfile_ArticleNo._None,
@@ -10337,7 +10529,9 @@ namespace ModelLayer.Tests
                                                                               _frameModel,
                                                                                _multiMullionModel,
                                                                               BalanceAwningWD3,
+                                                                              wd_decimal,
                                                                               AwningHT3,
+                                                                              ht_decimal,
                                                                               GlazingBead_ArticleNo._2452,
                                                                               GlassFilm_Types._None,
                                                                               SashProfile_ArticleNo._7581,
@@ -10431,7 +10625,9 @@ namespace ModelLayer.Tests
                                                                         _frameModel,
                                                                         _multiMullionModel,
                                                                         BalanceFixedWD6,
+                                                                        wd_decimal,
                                                                         FixedHT6,
+                                                                        ht_decimal,
                                                                         GlazingBead_ArticleNo._2452,
                                                                         GlassFilm_Types._None,
                                                                         SashProfile_ArticleNo._None,
@@ -10897,9 +11093,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -10924,7 +11120,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -10968,7 +11166,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -11062,7 +11262,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -11405,7 +11607,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 1450,
                 total_ht = 1600,
-                eqpanelWD = 725;
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -11430,7 +11633,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -11474,7 +11679,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -11578,7 +11785,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -11950,9 +12159,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1900,
-                total_ht = 2147,
-                eqpanelWD = 950;
+            int total_wd = 1900, total_ht = 2147,
+                eqpanelWD = 950,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -11977,7 +12186,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -12021,7 +12232,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -12130,7 +12343,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._None,
@@ -12479,9 +12694,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -12506,7 +12721,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -12550,7 +12767,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -12645,7 +12864,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -12994,9 +13215,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -13021,7 +13242,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -13064,7 +13287,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -13165,7 +13390,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -13533,9 +13760,11 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 2440, CW_PanelWD2 = 616, CW_PanelWD3 = 604,
+            int total_wd = 2440, CW_PanelWD2 = 615, CW_PanelWD3 = 604,
                 total_ht = 2220, CW_EqualPanelHT = 1900,
-                FW_PanelHT1 = 320;
+                FW_PanelHT1 = 320,
+                FW1_wd_decimal = 0, FW1_ht_decimal = 0,
+                CW1_wd_decimal = 5, CW1_ht_decimal = 5;
 
 
 
@@ -13563,7 +13792,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                         ht,
                                                                                         total_wd,
+                                                                                        FW1_wd_decimal,
                                                                                         total_ht,
+                                                                                        FW1_ht_decimal,
                                                                                         frame,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -13603,7 +13834,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiTransomModel,
                                                                     total_wd,
+                                                                    FW1_wd_decimal,
                                                                     FW_PanelHT1,
+                                                                    FW1_ht_decimal,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -13699,7 +13932,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           total_wd,
+                                                                                          FW1_wd_decimal,
                                                                                           CW_EqualPanelHT,
+                                                                                          FW1_ht_decimal,
                                                                                           multiTransom,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -13747,7 +13982,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    CW_PanelWD2,
+                                                                   CW1_wd_decimal,
                                                                    CW_EqualPanelHT,
+                                                                   CW1_ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -13849,7 +14086,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       CW_PanelWD3,
+                                                                      CW1_wd_decimal,
                                                                       CW_EqualPanelHT,
+                                                                      CW1_ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -13952,7 +14191,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    CW_PanelWD3,
+                                                                   CW1_wd_decimal,
                                                                    CW_EqualPanelHT,
+                                                                   CW1_ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -14054,7 +14295,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       CW_PanelWD2,
+                                                                      CW1_wd_decimal,
                                                                       CW_EqualPanelHT,
+                                                                      CW1_ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -14682,9 +14925,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -14709,7 +14952,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         wd_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -14753,7 +14998,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -14854,7 +15101,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._374,
@@ -15227,9 +15476,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -15254,7 +15503,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -15297,7 +15548,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -15403,7 +15656,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._374,
@@ -15749,9 +16004,11 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 2440, CW_PanelWD2 = 616, CW_PanelWD3 = 604,
+            int total_wd = 2440, CW_PanelWD2 = 615, CW_PanelWD3 = 604,
                 total_ht = 2220, CW_EqualPanelHT = 1900,
-                FW_PanelHT1 = 320;
+                FW_PanelHT1 = 320,
+                FW1_wd_decimal = 0, FW1_ht_decimal = 0,
+                CW1_wd_decimal = 5, CW1_ht_decimal = 5; ;
 
 
 
@@ -15779,7 +16036,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                         ht,
                                                                                         total_wd,
+                                                                                        FW1_wd_decimal,
                                                                                         total_ht,
+                                                                                        FW1_ht_decimal,
                                                                                         frame,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -15819,7 +16078,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiTransomModel,
                                                                     total_wd,
+                                                                    FW1_wd_decimal,
                                                                     FW_PanelHT1,
+                                                                    FW1_ht_decimal,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -15915,7 +16176,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           total_wd,
+                                                                                          FW1_wd_decimal,
                                                                                           CW_EqualPanelHT,
+                                                                                          FW1_ht_decimal,
                                                                                           multiTransom,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -15963,7 +16226,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    CW_PanelWD2,
+                                                                   CW1_wd_decimal,
                                                                    CW_EqualPanelHT,
+                                                                   CW1_ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -16073,7 +16338,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       CW_PanelWD3,
+                                                                      CW1_wd_decimal,
                                                                       CW_EqualPanelHT,
+                                                                      CW1_ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._374,
@@ -16179,7 +16446,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    CW_PanelWD3,
+                                                                   CW1_wd_decimal,
                                                                    CW_EqualPanelHT,
+                                                                   CW1_ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -16289,7 +16558,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       CW_PanelWD2,
+                                                                      CW1_wd_decimal,
                                                                       CW_EqualPanelHT,
+                                                                      CW1_ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._374,
@@ -16882,9 +17153,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1840,
-                total_ht = 2650,
-                eqpanelWD = 920;
+            int total_wd = 1840, total_ht = 2650,
+                eqpanelWD = 920,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Mahogany, Foil_Color._Mahogany);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -16909,7 +17180,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -16952,7 +17225,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -17059,7 +17334,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._374,
@@ -17114,7 +17391,7 @@ namespace ModelLayer.Tests
             _panelModel2.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_DB;
             _panelModel2.Panel_MVDOptionsVisibility = true;
             _panelModel2.Panel_MVDArtNo = MVD_HandleArtNo._046366M;
-            _panelModel2.Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+            _panelModel2.Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
             _panelModel2.Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
             _panelModel2.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
@@ -17241,7 +17518,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Espagnolette_ArticleNo._630963, _panelModel2.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._MVD, _panelModel2.Panel_HandleType);
             Assert.AreEqual(MVD_HandleArtNo._046366M, _panelModel2.Panel_MVDArtNo);
-            Assert.AreEqual(ProfileKnobCylinder_ArtNo._50p5x50p5, _panelModel2.Panel_ProfileKnobCylinderArtNo);
+            Assert.AreEqual(ProfileKnobCylinder_ArtNo._45x45, _panelModel2.Panel_ProfileKnobCylinderArtNo);
             Assert.AreEqual(Cylinder_CoverArtNo._EPSW_8022_823332, _panelModel2.Panel_CylinderCoverArtNo);
             Assert.AreEqual(WeldableCornerJoint_ArticleNo._498N, _panelModel2.Panel_WeldableCArtNo);
             Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel2.Panel_3dHingeArtNo);
@@ -17444,7 +17721,6 @@ namespace ModelLayer.Tests
 
 
         // CW Inward
-
         //sample 7507 - 395
 
         [TestMethod]
@@ -17463,9 +17739,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -17490,7 +17766,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -17534,7 +17812,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._395,
@@ -17642,7 +17922,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._395,
@@ -18089,9 +18371,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -18116,7 +18398,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -18160,7 +18444,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._395,
@@ -18278,7 +18564,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._395,
@@ -18742,8 +19030,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 1000,
-                total_ht = 1500;
+            int total_wd = 1000, total_ht = 1500,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Mahogany, Foil_Color._Mahogany);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -18778,7 +19066,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   wd_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -19050,8 +19340,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 1000,
-                total_ht = 1000;
+            int total_wd = 1000, total_ht = 1000,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._None, Foil_Color._None);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -19089,7 +19379,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._395,
@@ -19342,8 +19634,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 952,
-                total_ht = 1752;
+            int total_wd = 952, total_ht = 1752,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -19378,7 +19670,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -19649,8 +19943,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 952,
-                total_ht = 1752;
+            int total_wd = 952, total_ht = 1752,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -19685,7 +19979,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -19954,8 +20250,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 952,
-                total_ht = 1752;
+            int total_wd = 952, total_ht = 1752,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -19990,7 +20286,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -20258,8 +20556,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 952,
-                total_ht = 1752;
+            int total_wd = 952, total_ht = 1752,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -20294,7 +20592,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._395,
