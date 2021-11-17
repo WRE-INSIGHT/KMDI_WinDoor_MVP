@@ -659,7 +659,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                 _multiPanelModel.Reload_PanelMargin();
 
-                _panelModel.SetDimensions_using_ZoomPercetage();
+                _panelModel.SetDimensions_using_ZoomPercentage();
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();

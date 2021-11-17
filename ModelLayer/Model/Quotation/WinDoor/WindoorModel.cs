@@ -182,7 +182,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _wdZoom = value;
                 WD_width_4basePlatform = (int)((WD_width * value) + 70);
                 WD_height_4basePlatform = (int)((WD_height * value) + 35);
-                SetZoom();
                 NotifyPropertyChanged();
             }
         }
@@ -483,13 +482,16 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-        private void SetZoom()
+        public void SetZoom()
         {
             if (lst_frame != null)
             {
                 foreach (IFrameModel fr in lst_frame)
                 {
                     fr.Frame_Zoom = WD_zoom;
+                    fr.Set_DimensionsToBind_using_FrameZoom();
+                    fr.Set_FramePadding();
+                    fr.SetZoom();
                 }
             }
         }

@@ -42,6 +42,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         bool WD_CmenuDeleteVisibility { get; set; }
         float GetZoom_forRendering();
         void SetImageRenderingZoom();
+        void SetZoom();
         void SetPanelGlassID();
         void SetMiddleCloser_onPanel();
     }

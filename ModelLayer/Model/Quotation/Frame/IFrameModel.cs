@@ -35,6 +35,10 @@ namespace ModelLayer.Model.Quotation.Frame
 
 
         void SetDeductFramePadding(bool mode);
+        void SetZoom();
+        void Set_DimensionsToBind_using_FrameZoom();
+        void Set_ImagerDimensions_using_ImagerZoom();
+        void Set_FramePadding();
         int Frame_Deduction { get; }
         IWindoorModel Frame_WindoorModel { get; set; }
 

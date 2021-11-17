@@ -392,14 +392,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
-        private void SetImageZoomDivider()
-        {
-            foreach (IDividerModel div in MPanelLst_Divider)
-            {
-                div.DivImageRenderer_Zoom = MPanelImageRenderer_Zoom;
-            }
-        }
-
         private int _mpanelImage_Height;
         public int MPanelImageRenderer_Height
         {
@@ -622,11 +614,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             set
             {
                 _mpanelZoom = value;
-                MPanel_WidthToBind = (int)(MPanel_Width * value);
-                MPanel_HeightToBind = (int)(MPanel_Height * value);
-                SetZoomPanels();
-                SetZoomDivider();
-                SetZoomMPanels();
             }
         }
 
@@ -644,21 +631,50 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
-        private void SetZoomDivider()
+        private int _mpnl_add;
+        public int MPanel_AddPixel
+        {
+            get
+            {
+                return _mpnl_add;
+            }
+        }
+
+
+        #region Methods
+
+        public void Set_DimensionToBind_using_MPanelZoom()
+        {
+            MPanel_WidthToBind = (int)(MPanel_Width * MPanel_Zoom);
+            MPanel_HeightToBind = (int)(MPanel_Height * MPanel_Zoom);
+        }
+
+        public void SetImageZoomDivider()
+        {
+            foreach (IDividerModel div in MPanelLst_Divider)
+            {
+                div.DivImageRenderer_Zoom = MPanelImageRenderer_Zoom;
+            }
+        }
+
+        public void SetZoomDivider()
         {
             foreach (IDividerModel div in MPanelLst_Divider)
             {
                 div.Div_Zoom = MPanel_Zoom;
             }
         }
-        private void SetZoomPanels()
+
+        public void SetZoomPanels()
         {
             foreach (IPanelModel pnl in MPanelLst_Panel)
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
+                pnl.SetDimensions_using_ZoomPercentage();
             }
         }
-        private void SetZoomMPanels()
+
+        public void SetZoomMPanels()
         {
             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
             {
@@ -892,15 +908,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 visibleDivider = MPanelLst_Divider.Count();
 
             return visiblePanelCount + visibleMPanelCount + visibleDivider;
-        }
-
-        private int _mpnl_add;
-        public int MPanel_AddPixel
-        {
-            get
-            {
-                return _mpnl_add;
-            }
         }
 
         public void Resize_MyControls(Control current_control, 
@@ -1296,6 +1303,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
             return MPanelLst_Objects.Where(obj => obj.Visible == true);
         }
+
+        #endregion
 
         #region Explosion
 

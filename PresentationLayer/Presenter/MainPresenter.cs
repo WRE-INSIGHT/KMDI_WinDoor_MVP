@@ -738,6 +738,8 @@ namespace PresentationLayer.Presenter
             {
                 ndx_zoomPercentage++;
                 _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                _windoorModel.SetZoom();
+
                 FitControls_InsideMultiPanel();
                 Fit_MyControls_byControlsLocation();
             }
@@ -753,6 +755,8 @@ namespace PresentationLayer.Presenter
             {
                 ndx_zoomPercentage--;
                 _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                _windoorModel.SetZoom();
+
                 FitControls_InsideMultiPanel();
                 Fit_MyControls_byControlsLocation();
             }
@@ -1149,6 +1153,10 @@ namespace PresentationLayer.Presenter
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
                                                                    frameID);
+                        _frameModel.Set_DimensionsToBind_using_FrameZoom();
+                        _frameModel.Set_ImagerDimensions_using_ImagerZoom();
+                        _frameModel.Set_FramePadding();
+
                         AddFrameList_WindoorModel(_frameModel);
                         IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
                         AddFrameUC(_frameModel, framePropUCP);

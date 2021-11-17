@@ -64,8 +64,6 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameWidth = value;
-                FrameImageRenderer_Width = Convert.ToInt32(value * FrameImageRenderer_Zoom);
-                Frame_WidthToBind = (int)(value * Frame_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -93,8 +91,6 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameHeight = value;
-                FrameImageRenderer_Height = Convert.ToInt32(value * FrameImageRenderer_Zoom);
-                Frame_HeightToBind = (int)(value * Frame_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -263,32 +259,53 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameZoom = value;
-                Frame_WidthToBind = (int)(Frame_Width * value);
-                Frame_HeightToBind = (int)(Frame_Height * value);
-
-                if (_deductFramePadding_bool)
-                {
-                    FramePadding_Deduct();
-                }
-                else
-                {
-                    FramePadding_Default();
-                }
-
-                SetZoom();
             }
         }
 
-        private void SetZoom()
+        public IWindoorModel Frame_WindoorModel { get; set; }
+
+
+        #region Method
+
+        public void SetZoom()
         {
             foreach (IMultiPanelModel mpnl in Lst_MultiPanel)
             {
                 mpnl.MPanel_Zoom = Frame_Zoom;
+                mpnl.Set_DimensionToBind_using_MPanelZoom();
+                mpnl.SetZoomPanels();
+                mpnl.SetZoomDivider();
+                mpnl.SetZoomMPanels();
             }
 
             foreach (IPanelModel pnl in Lst_Panel)
             {
                 pnl.Panel_Zoom = Frame_Zoom;
+                pnl.SetDimensions_using_ZoomPercentage();
+            }
+        }
+
+        public void Set_DimensionsToBind_using_FrameZoom()
+        {
+            Frame_WidthToBind = (int)(Frame_Width * Frame_Zoom);
+            Frame_HeightToBind = (int)(Frame_Height * Frame_Zoom);
+        }
+
+        public void Set_ImagerDimensions_using_ImagerZoom()
+        {
+            FrameImageRenderer_Width = Convert.ToInt32(Frame_Width * FrameImageRenderer_Zoom);
+            FrameImageRenderer_Height = Convert.ToInt32(Frame_Height * FrameImageRenderer_Zoom);
+        }
+
+        public void Set_FramePadding()
+        {
+            if (_deductFramePadding_bool)
+            {
+                FramePadding_Deduct();
+            }
+            else
+            {
+                FramePadding_Default();
             }
         }
 
@@ -343,8 +360,8 @@ namespace ModelLayer.Model.Quotation.Frame
                 FramePadding_Default();
             }
         }
-        
-        public IWindoorModel Frame_WindoorModel { get; set; }
+
+        #endregion
 
         #region Explosion
 

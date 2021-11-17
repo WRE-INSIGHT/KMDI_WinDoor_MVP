@@ -49,6 +49,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         int GetNextIndex();
         int GetCount_MPanelLst_Object();
+
+        void Set_DimensionToBind_using_MPanelZoom();
+        void SetImageZoomDivider();
+        void SetZoomDivider();
+        void SetZoomPanels();
+        void SetZoomMPanels();
         void Reload_PanelMargin();
         void Reload_MultiPanelMargin();
         void AddControl_MPanelLstObjects(Control control, 
