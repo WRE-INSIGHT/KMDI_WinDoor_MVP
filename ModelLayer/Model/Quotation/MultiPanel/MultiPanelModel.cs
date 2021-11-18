@@ -69,7 +69,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         [Description("Virtual Width that represents the definite given value and used by the program only. (not intended for user to use)")]
         private int _mpanelWidth;
-        public int MPanel_Width
+        public int MPanel_Width //Original Width of the control
         {
             get
             {
@@ -195,7 +195,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         [Description("Virtual Height that represents the definite given value and used by the program only. (not intended for user to use)")]
         private int _mpanelHeight;
-        public int MPanel_Height
+        public int MPanel_Height //Original Height of the control
         {
             get
             {
@@ -643,10 +643,58 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         #region Methods
 
+        public int Get_ControlDimension_using_MpanelZoom(string WidthOrHeight)
+        {
+            int dimension = 0;
+
+            if (MPanel_Zoom == 0.26f)
+            {
+                int reversed_wd = (int)Math.Ceiling(MPanel_DisplayWidth * 0.26f) - 20, //padding
+                    reversed_ht = (int)Math.Ceiling(MPanel_DisplayHeight * 0.26f) - 20; //padding
+
+                if (WidthOrHeight == "Width")
+                {
+                    dimension = (int)(reversed_wd / 0.26f);
+                }
+                else if(WidthOrHeight == "Height")
+                {
+                    dimension = (int)(reversed_ht / 0.26f);
+                }
+            }
+            else
+            {
+                if (WidthOrHeight == "Width")
+                {
+                    dimension = MPanel_Width;
+                }
+                else if (WidthOrHeight == "Height")
+                {
+                    dimension = MPanel_Height;
+                }
+            }
+
+            return dimension;
+        }
+
         public void Set_DimensionToBind_using_MPanelZoom()
         {
-            MPanel_WidthToBind = (int)(MPanel_Width * MPanel_Zoom);
-            MPanel_HeightToBind = (int)(MPanel_Height * MPanel_Zoom);
+            int wd = 0, ht = 0;
+            if (MPanel_Zoom == 0.26f)
+            {
+                int reversed_wd = (int)Math.Ceiling(MPanel_DisplayWidth * 0.26f) - 20, //padding
+                    reversed_ht = (int)Math.Ceiling(MPanel_DisplayHeight * 0.26f) - 20; //padding
+
+                wd = (int)(reversed_wd / 0.26f);
+                ht = (int)(reversed_ht / 0.26f);
+            }
+            else
+            {
+                wd = MPanel_Width;
+                ht = MPanel_Height;
+            }
+
+            MPanel_WidthToBind = (int)(wd * MPanel_Zoom);
+            MPanel_HeightToBind = (int)(ht * MPanel_Zoom);
         }
 
         public void SetImageZoomDivider()
@@ -662,6 +710,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             foreach (IDividerModel div in MPanelLst_Divider)
             {
                 div.Div_Zoom = MPanel_Zoom;
+                div.SetDimensionsToBind_using_DivZoom();
             }
         }
 

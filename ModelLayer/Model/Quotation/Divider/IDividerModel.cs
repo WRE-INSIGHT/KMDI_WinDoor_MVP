@@ -49,6 +49,9 @@ namespace ModelLayer.Model.Quotation.Divider
         ShootboltReverse_ArticleNo Div_ShootboltReverseArtNo { get; set; }
         DummyMullionStriker_ArticleNo Div_DMStrikerArtNo { get; set; }
 
+        void SetDimensionsToBind_using_DivZoom();
+        void SetDimensionsToBind_using_DivZoom_Imager();
+
         #region Explosion
 
         Divider_ArticleNo Div_ArtNo { get; set; }

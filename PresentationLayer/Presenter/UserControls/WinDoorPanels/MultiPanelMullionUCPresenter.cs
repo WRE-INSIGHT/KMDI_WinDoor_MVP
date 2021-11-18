@@ -515,27 +515,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (_multiPanelModel.MPanel_DividerEnabled)
                 {
-                    //if (_multiPanelModel.MPanel_Zoom == 0.26f)
-                    //{
-                    //    if (_frameModel.Frame_Type.ToString().Contains("Window"))
-                    //    {
-                    //        divSize = 13;
-                    //    }
-                    //    else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-                    //    {
-                    //        divSize = 16;
-                    //    }
-
-                    //    int reversed_wd = (((int)(Math.Ceiling(_multiPanelModel.MPanel_Width * 0.26f) - 10) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount),
-                    //        reversed_ht = ((int)Math.Ceiling(_multiPanelModel.MPanel_Height * 0.26f) - 10);
-
-                    //    suggest_Wd = (int)(reversed_wd / 0.26f);
-                    //    suggest_HT = (int)(reversed_ht / 0.26f);
-                    //}
-                    //else
-                    //{
-                        suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
-                    //}
+                    suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                 }
                 else if (!_multiPanelModel.MPanel_DividerEnabled)
                 {
@@ -789,6 +769,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                           _mainPresenter.GetDividerCount(),
                                                                           _frameModel.FrameImageRenderer_Zoom,
                                                                           _frameModel.Frame_Type.ToString());
+                    divModel.SetDimensionsToBind_using_DivZoom();
+                    divModel.SetDimensionsToBind_using_DivZoom_Imager();
+
                     _prev_divModel = divModel;
                     _frameModel.Lst_Divider.Add(divModel);
                     _multiPanelModel.MPanelLst_Divider.Add(divModel);

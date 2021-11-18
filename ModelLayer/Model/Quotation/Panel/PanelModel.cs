@@ -1772,14 +1772,29 @@ namespace ModelLayer.Model.Quotation.Panel
                 bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
                 Panel_MarginToBind = new Padding(left, top, right, bot);
 
-                if (Panel_ParentMultiPanelModel != null && Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-                {
-                    int totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1,
-                        reversed_wd = (((int)(Math.Ceiling(Panel_ParentMultiPanelModel.MPanel_Width * 0.26f) - 10) - (13 * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel);
-                    int reversed_ht = ((int)Math.Ceiling(Panel_ParentMultiPanelModel.MPanel_Height * 0.26f) - 10);
+                int MpanelWidth_based_on_MpanelZoom = Panel_ParentMultiPanelModel.Get_ControlDimension_using_MpanelZoom("Width"),
+                    MpanelHeight_based_on_MpanelZoom = Panel_ParentMultiPanelModel.Get_ControlDimension_using_MpanelZoom("Height");
 
-                    Panel_Width = (int)(reversed_wd / 0.26f);
-                    Panel_Height = (int)(reversed_ht / 0.26f);
+                if (Panel_ParentMultiPanelModel != null)
+                {
+                    if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                    {
+                        int totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1,
+                            reversed_wd = (((int)(Math.Ceiling(MpanelWidth_based_on_MpanelZoom * 0.26f) - 10) - (13 * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel);
+                        int reversed_ht = ((int)Math.Ceiling(MpanelHeight_based_on_MpanelZoom * 0.26f) - 10);
+
+                        Panel_Width = (int)(reversed_wd / 0.26f);
+                        Panel_Height = (int)(reversed_ht / 0.26f);
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
+                    {
+                        int totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1,
+                            reversed_wd = (int)(Math.Ceiling(MpanelWidth_based_on_MpanelZoom * 0.26f) - 10);
+                        int reversed_ht = (((int)(Math.Ceiling(MpanelHeight_based_on_MpanelZoom * 0.26f) - 10) - (13 * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel);
+
+                        Panel_Width = (int)(reversed_wd / 0.26f);
+                        Panel_Height = (int)(reversed_ht / 0.26f);
+                    }
                 }
             }
             else

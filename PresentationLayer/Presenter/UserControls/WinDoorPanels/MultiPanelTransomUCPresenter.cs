@@ -527,27 +527,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (_multiPanelModel.MPanel_DividerEnabled)
                 {
-                    if (_multiPanelModel.MPanel_Zoom == 0.26f)
-                    {
-                        if (_frameModel.Frame_Type.ToString().Contains("Window"))
-                        {
-                            divSize = 13;
-                        }
-                        else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-                        {
-                            divSize = 16;
-                        }
-
-                        int reversed_ht = (((int)(Math.Ceiling(_multiPanelModel.MPanel_Height * 0.26f) - 10) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount),
-                            reversed_wd = ((int)Math.Ceiling(_multiPanelModel.MPanel_Width * 0.26f) - 10);
-
-                        suggest_Wd = (int)(reversed_wd / 0.26f);
-                        suggest_HT = (int)(reversed_ht / 0.26f);
-                    }
-                    else
-                    {
-                        suggest_Wd = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
-                    }
+                    suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                 }
                 else if (!_multiPanelModel.MPanel_DividerEnabled)
                 {
@@ -610,64 +590,66 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
 
                 _panelModel = _panelServices.AddPanelModel(suggest_Wd,
-                                                               suggest_HT,
-                                                               fpnl,
-                                                               (UserControl)_frameUCP.GetFrameUC(),
-                                                               (UserControl)framePropUC,
-                                                               (UserControl)_multiPanelTransomUC,
-                                                               data,
-                                                               true,
-                                                               _frameModel.Frame_Zoom,
-                                                               _frameModel,
-                                                               _multiPanelModel,
-                                                               suggest_DisplayWD,
-                                                               suggest_DisplayWDDecimal,
-                                                               suggest_DisplayHT,
-                                                               DisplayHT_singleDecimalPlace,
-                                                               GlazingBead_ArticleNo._2452,
-                                                               GlassFilm_Types._None,
-                                                               SashProfile_ArticleNo._7581,
-                                                               SashReinf_ArticleNo._R675,
-                                                               GlassType._Single,
-                                                               Espagnolette_ArticleNo._None,
-                                                               Striker_ArticleNo._M89ANTA,
-                                                               midArtNo,
-                                                               LockingKit_ArticleNo._None,
-                                                               motor,
-                                                               Handle_Type._Rotoswing,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               false,
-                                                               false,
-                                                               false,
-                                                               false,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               handleArtNo,
-                                                               GeorgianBar_ArticleNo._None,
-                                                               0,
-                                                               0,
-                                                               false,
-                                                               _mainPresenter.GetPanelCount(),
-                                                               _mainPresenter.GetPanelGlassID(),
-                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                               _multiPanelModel.GetNextIndex(),
-                                                               DockStyle.None);
+                                                           suggest_HT,
+                                                           fpnl,
+                                                           (UserControl)_frameUCP.GetFrameUC(),
+                                                           (UserControl)framePropUC,
+                                                           (UserControl)_multiPanelTransomUC,
+                                                           data,
+                                                           true,
+                                                           _frameModel.Frame_Zoom,
+                                                           _frameModel,
+                                                           _multiPanelModel,
+                                                           suggest_DisplayWD,
+                                                           suggest_DisplayWDDecimal,
+                                                           suggest_DisplayHT,
+                                                           DisplayHT_singleDecimalPlace,
+                                                           GlazingBead_ArticleNo._2452,
+                                                           GlassFilm_Types._None,
+                                                           SashProfile_ArticleNo._7581,
+                                                           SashReinf_ArticleNo._R675,
+                                                           GlassType._Single,
+                                                           Espagnolette_ArticleNo._None,
+                                                           Striker_ArticleNo._M89ANTA,
+                                                           midArtNo,
+                                                           LockingKit_ArticleNo._None,
+                                                           motor,
+                                                           Handle_Type._Rotoswing,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           Extension_ArticleNo._None,
+                                                           false,
+                                                           false,
+                                                           false,
+                                                           false,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           0,
+                                                           handleArtNo,
+                                                           GeorgianBar_ArticleNo._None,
+                                                           0,
+                                                           0,
+                                                           false,
+                                                           _mainPresenter.GetPanelCount(),
+                                                           _mainPresenter.GetPanelGlassID(),
+                                                           _frameModel.FrameImageRenderer_Zoom,
+                                                           _multiPanelModel.GetNextIndex(),
+                                                           DockStyle.None);
                 _panelModel.Panel_CornerDriveOptionsVisibility = false;
                 _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                 _multiPanelModel.Reload_PanelMargin();
+
+                _panelModel.SetDimensions_using_ZoomPercentage();
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
@@ -795,6 +777,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                           _mainPresenter.GetDividerCount(),
                                                                           _frameModel.FrameImageRenderer_Zoom,
                                                                           _frameModel.Frame_Type.ToString());
+                    divModel.SetDimensionsToBind_using_DivZoom();
+                    divModel.SetDimensionsToBind_using_DivZoom_Imager();
 
                     _frameModel.Lst_Divider.Add(divModel);
                     _multiPanelModel.MPanelLst_Divider.Add(divModel);
