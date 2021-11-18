@@ -139,9 +139,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1000, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2000, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
             Assert.AreEqual(928, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(1928, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
 
         }
@@ -711,9 +716,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(550, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(600, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(478, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(540, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel.Div_ArtNo);
@@ -723,9 +734,16 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(550, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(600, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(478, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(540, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
+
+
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
             #region CheckQuantity
@@ -1057,13 +1075,17 @@ namespace ModelLayer.Tests
             Assert.AreEqual(482, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1132, _frameModel.Frame_ReinfHeight);
 
-
-
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(550, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(700, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(478, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(640, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel.Div_ArtNo);
@@ -1073,9 +1095,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(550, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(500, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(478, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(440, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
             #region CheckQuantity
@@ -1913,6 +1941,7 @@ namespace ModelLayer.Tests
 
 
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+            #region assert
 
             #region Frame
 
@@ -1955,9 +1984,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
 
 
@@ -1968,9 +2003,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
             #endregion
@@ -1979,9 +2020,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(592, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel3.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_Transom2.Div_ArtNo);
@@ -1991,9 +2038,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(592, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel4.Panel_GlazingSpacerQty);
 
             #endregion
@@ -2002,9 +2055,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel5.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel5.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_Transom3.Div_ArtNo);
@@ -2015,13 +2074,20 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel6.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel6.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel6.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel6.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel6.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel6.Panel_GlazingSpacerQty);
 
             #endregion
 
+            #endregion
             #region CheckQuantity
 
             DataRow[] dr;
@@ -2695,12 +2761,17 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1700, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1628, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
-            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
+
 
             Assert.AreEqual(Divider_ArticleNo._7536, mullionModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, mullionModel.Div_ReinfArtNo);
@@ -2716,9 +2787,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1700, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1628, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
             #endregion
@@ -2727,9 +2804,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(692, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(850, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(790, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel3.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_Transom.Div_ArtNo);
@@ -2739,9 +2822,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(692, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(850, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(790, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel4.Panel_GlazingSpacerQty);
 
             #endregion
@@ -3575,9 +3664,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(799, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1950, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(724, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1878, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7538, mullionModel.Div_ArtNo);
@@ -3594,9 +3689,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(799, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1950, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(724, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1878, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
 
             #endregion
@@ -3618,9 +3718,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(401, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(975, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(323, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(900, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel3.Panel_GlazingSpacerQty);
 
 
@@ -3632,9 +3738,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(401, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(975, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(323, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(900, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel4.Panel_GlazingSpacerQty);
 
             #endregion
@@ -3643,9 +3755,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
             Assert.AreEqual(401, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(975, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(323, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassWidthDecimal);
             Assert.AreEqual(900, _panelModel5.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel5.Panel_GlazingSpacerQty);
 
 
@@ -3657,9 +3775,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel6.PanelGlazingBead_ArtNo);
             Assert.AreEqual(401, _panelModel6.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(975, _panelModel6.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(323, _panelModel6.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassWidthDecimal);
             Assert.AreEqual(900, _panelModel6.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel6.Panel_GlazingSpacerQty);
 
             #endregion
@@ -4461,9 +4585,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1500, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1428, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7536, _divMullionModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, _divMullionModel.Div_ReinfArtNo);
@@ -4479,9 +4608,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1500, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1428, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             #endregion
 
@@ -4490,9 +4624,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(692, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(504, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(444, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7536, _divTransomModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, _divTransomModel.Div_ReinfArtNo);
@@ -4508,9 +4647,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(692, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(504, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(444, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
 
 
 
@@ -4521,9 +4665,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel5.PanelGlazingBead_ArtNo);
             Assert.AreEqual(346, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(492, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(298, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassWidthDecimal);
             Assert.AreEqual(444, _panelModel5.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7536, _divMullionModel3.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, _divMullionModel3.Div_ReinfArtNo);
@@ -4533,9 +4682,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel6.PanelGlazingBead_ArtNo);
             Assert.AreEqual(346, _panelModel6.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(492, _panelModel6.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(298, _panelModel6.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassWidthDecimal);
             Assert.AreEqual(444, _panelModel6.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassHeightDecimal);
 
 
             #endregion
@@ -4788,17 +4942,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(653, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1153, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel.Panel_SashProfileArtNo);
             Assert.AreEqual(1153, _panelModel.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashHeightDecimal);
             Assert.AreEqual(653, _panelModel.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashWidthDecimal);
+
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel.Panel_SashReinfArtNo);
             Assert.AreEqual(528, _panelModel.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1028, _panelModel.Panel_SashReinfHeight);
-            Assert.AreEqual(1028, _panelModel.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfHeightDecimal);
+
             Assert.AreEqual(532, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(1032, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARWARE
@@ -5166,18 +5329,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(650, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(650, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(525, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(529, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -5213,18 +5384,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(650, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(650, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(525, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(529, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -5636,17 +5815,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel1_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1200, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1200, _panelModel1_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(1200, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashHeightDecimal);
             Assert.AreEqual(1200, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashWidthDecimal);
+
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(1075, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1075, _panelModel1_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(1079, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1079, _panelModel1_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARWARE
@@ -5680,18 +5868,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1200, _panelModel2_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2100, _panelModel2_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(1200, _panelModel2_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(2100, _panelModel2_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(1075, _panelModel2_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1975, _panelModel2_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(1079, _panelModel2_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1979, _panelModel2_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2_Awning.Panel_CoverProfileArtNo);
@@ -6244,9 +6440,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1_fixed1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(700, _panelModel1_fixed1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1800, _panelModel1_fixed1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(625, _panelModel1_fixed1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1728, _panelModel1_fixed1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlassHeightDecimal);
 
             #endregion
 
@@ -6254,9 +6455,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2_fixed2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel2_fixed2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(600, _panelModel2_fixed2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(725, _panelModel2_fixed2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassWidthDecimal);
             Assert.AreEqual(540, _panelModel2_fixed2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassHeightDecimal);
 
 
 
@@ -6270,18 +6476,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel3_Awning1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(750, _panelModel3_Awning1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1165, _panelModel3_Awning1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3_Awning1.Panel_SashProfileArtNo);
             Assert.AreEqual(750, _panelModel3_Awning1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashWidthDecimal);
             Assert.AreEqual(1165, _panelModel3_Awning1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3_Awning1.Panel_SashReinfArtNo);
             Assert.AreEqual(625, _panelModel3_Awning1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1040, _panelModel3_Awning1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(629, _panelModel3_Awning1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1044, _panelModel3_Awning1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3_Awning1.Panel_CoverProfileArtNo);
@@ -6844,9 +7058,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1_fixed1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(700, _panelModel1_fixed1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1800, _panelModel1_fixed1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(625, _panelModel1_fixed1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1728, _panelModel1_fixed1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlassHeightDecimal);
 
             #endregion
 
@@ -6854,9 +7073,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2_fixed2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel2_fixed2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadWidth);
             Assert.AreEqual(400, _panelModel2_fixed2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadHeight);
+
             Assert.AreEqual(725, _panelModel2_fixed2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassWidth);
             Assert.AreEqual(340, _panelModel2_fixed2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassHeight);
 
 
 
@@ -6870,18 +7094,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel3_Awning1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(750, _panelModel3_Awning1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1365, _panelModel3_Awning1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3_Awning1.Panel_SashProfileArtNo);
             Assert.AreEqual(750, _panelModel3_Awning1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashWidthDecimal);
             Assert.AreEqual(1365, _panelModel3_Awning1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3_Awning1.Panel_SashReinfArtNo);
             Assert.AreEqual(625, _panelModel3_Awning1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1240, _panelModel3_Awning1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(629, _panelModel3_Awning1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1244, _panelModel3_Awning1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3_Awning1.Panel_CoverProfileArtNo);
@@ -7406,9 +7638,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel1_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(600, _panelModel1_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(728, _panelModel1_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(525, _panelModel1_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7538, _divTransomModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R686, _divTransomModel.Div_ReinfArtNo);
@@ -7423,18 +7660,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(753, _panelModel2_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(947, _panelModel2_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(628, _panelModel2_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(822, _panelModel2_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(753, _panelModel2_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(947, _panelModel2_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(632, _panelModel2_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(826, _panelModel2_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2_Awning.Panel_CoverProfileArtNo);
@@ -7459,9 +7704,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel3_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(600, _panelModel3_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(728, _panelModel3_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(525, _panelModel3_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlassHeightDecimal);
 
             #endregion
 
@@ -7610,8 +7860,6 @@ namespace ModelLayer.Tests
             #endregion
 
         }
-
-
 
 
         [TestMethod]
@@ -8125,9 +8373,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(3000, _panelModel1_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(500, _panelModel1_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(2928, _panelModel1_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(425, _panelModel1_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7538, _divTransomModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R686, _divTransomModel.Div_ReinfArtNo);
@@ -8186,9 +8439,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel3_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1000, _panelModel3_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1200, _panelModel3_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(952, _panelModel3_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(1125, _panelModel3_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlassHeightDecimal);
 
 
             Assert.AreEqual(Divider_ArticleNo._7536, _divMullionModel.Div_ArtNo);
@@ -8200,18 +8458,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel4_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(965, _panelModel4_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1150, _panelModel4_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel4_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(840, _panelModel4_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1025, _panelModel4_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel4_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(965, _panelModel4_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1150, _panelModel4_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(844, _panelModel4_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1029, _panelModel4_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel4_Awning.Panel_CoverProfileArtNo);
@@ -8562,17 +8828,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(925, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(425, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel.Panel_SashProfileArtNo);
             Assert.AreEqual(425, _panelModel.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashHeightDecimal);
             Assert.AreEqual(925, _panelModel.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashWidthDecimal);
+
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel.Panel_SashReinfArtNo);
             Assert.AreEqual(800, _panelModel.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(300, _panelModel.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(804, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(304, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARWARE
@@ -8826,17 +9101,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1425, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1425, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel.Panel_SashProfileArtNo);
             Assert.AreEqual(1425, _panelModel.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashHeightDecimal);
             Assert.AreEqual(1425, _panelModel.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashWidthDecimal);
+
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel.Panel_SashReinfArtNo);
             Assert.AreEqual(1300, _panelModel.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1300, _panelModel.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(1304, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(1304, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARWARE
@@ -9246,9 +9530,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel1_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(450, _panelModel1_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(728, _panelModel1_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(390, _panelModel1_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7536, _divTransomModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, _divTransomModel.Div_ReinfArtNo);
@@ -9260,17 +9549,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_MotorizeAwning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(753, _panelModel2_MotorizeAwning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(415, _panelModel2_MotorizeAwning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2_MotorizeAwning.Panel_SashProfileArtNo);
             Assert.AreEqual(415, _panelModel2_MotorizeAwning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_SashHeightDecimal);
             Assert.AreEqual(753, _panelModel2_MotorizeAwning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_SashWidthDecimal);
+
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2_MotorizeAwning.Panel_SashReinfArtNo);
             Assert.AreEqual(628, _panelModel2_MotorizeAwning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(290, _panelModel2_MotorizeAwning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(632, _panelModel2_MotorizeAwning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_GlassWidthDecimal);
             Assert.AreEqual(294, _panelModel2_MotorizeAwning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARWARE
@@ -9807,18 +10105,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(544, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1628, _panelModel1_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel1_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(548, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1632, _panelModel1_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
@@ -9843,18 +10149,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(544, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1628, _panelModel1_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel1_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(548, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1632, _panelModel1_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
@@ -9880,18 +10194,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(544, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1628, _panelModel1_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel1_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(548, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1632, _panelModel1_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
@@ -10712,18 +11034,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(473, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(348, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel1_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(473, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel1_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(352, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel1_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
@@ -10747,27 +11077,40 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(496, _panelModel2_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1100, _panelModel2_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(448, _panelModel2_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(1028, _panelModel2_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_fixed.Panel_GlassHeightDecimal);
 
 
             #region AwningUC_2
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(473, _panelModel3_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel3_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(348, _panelModel3_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel3_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(473, _panelModel3_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel3_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(352, _panelModel3_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel3_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3_Awning.Panel_CoverProfileArtNo);
@@ -10791,9 +11134,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(496, _panelModel4_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1100, _panelModel4_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(448, _panelModel4_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(1028, _panelModel4_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4_fixed.Panel_GlassHeightDecimal);
 
 
 
@@ -10801,18 +11149,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel5_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(473, _panelModel5_Awning.Panel_SashWidth);
+            Assert.AreEqual(473, _panelModel5_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel5_Awning.Panel_SashHeight);
+            Assert.AreEqual(1053, _panelModel5_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel5_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(348, _panelModel5_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(348, _panelModel5_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel5_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(928, _panelModel5_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(473, _panelModel5_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(473, _panelModel5_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel5_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(1053, _panelModel5_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(352, _panelModel5_Awning.Panel_GlassWidth);
+            Assert.AreEqual(352, _panelModel5_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel5_Awning.Panel_GlassHeight);
+            Assert.AreEqual(932, _panelModel5_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel5_Awning.Panel_CoverProfileArtNo);
@@ -10836,9 +11192,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel6_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(508, _panelModel6_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel6_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1100, _panelModel6_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel6_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(448, _panelModel6_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel6_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(1028, _panelModel6_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel6_fixed.Panel_GlassHeightDecimal);
 
             #endregion
 
@@ -11349,18 +11710,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(690, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1553, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(690, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1553, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(565, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1428, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(569, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1432, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -11417,18 +11786,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(690, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1553, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(690, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1553, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(565, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1428, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(569, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1432, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -11874,18 +12251,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(696, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1553, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(696, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1553, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(571, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1428, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(575, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1432, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
@@ -11942,18 +12327,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(696, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1553, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(696, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1553, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(571, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1428, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(575, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1432, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
 
 
@@ -12432,18 +12825,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(900, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2100, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(900, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(2100, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(775, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1975, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(779, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1979, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -12501,10 +12902,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(950, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2147, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(875, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(2075, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES 
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
@@ -12952,18 +13357,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(676, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1525, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(676, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1525, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(551, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1400, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(555, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1404, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -13021,18 +13434,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(676, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1525, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(676, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1525, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(551, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1400, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(555, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1404, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -13479,18 +13900,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(682, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1525, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(682, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1525, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(557, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1400, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(561, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1404, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
@@ -13539,23 +13968,30 @@ namespace ModelLayer.Tests
 
             #endregion
 
-
             #region CW2
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(682, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1525, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(682, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1525, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(557, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1400, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(561, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1404, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
 
 
@@ -13740,7 +14176,7 @@ namespace ModelLayer.Tests
 
         }
 
-
+        //With Glass Balancing
         [TestMethod]
         public void ChkVar_5PanelCasementWindowSample_A2_UsingDummyMullion()
         {
@@ -13764,7 +14200,7 @@ namespace ModelLayer.Tests
                 total_ht = 2220, CW_EqualPanelHT = 1900,
                 FW_PanelHT1 = 320,
                 FW1_wd_decimal = 0, FW1_ht_decimal = 0,
-                CW1_wd_decimal = 5, CW1_ht_decimal = 5;
+                CW1_wd_decimal = 5, CW1_ht_decimal = 0;
 
 
 
@@ -14386,11 +14822,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(2440, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(320, _panelModel1.Panel_GlazingBeadHeight);
-
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(2340, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(231, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
 
@@ -14412,21 +14851,29 @@ namespace ModelLayer.Tests
             #region CW2
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(573, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(572, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1836, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel2.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
-            Assert.AreEqual(573, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(572, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1836, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
-            Assert.AreEqual(448, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(447, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1711, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(452, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1715, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -14481,21 +14928,29 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(572, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1836, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel3.Panel_GBSpacerArtNo);
 
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3.Panel_SashProfileArtNo);
             Assert.AreEqual(572, _panelModel3.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_SashWidthDecimal);
             Assert.AreEqual(1836, _panelModel3.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3.Panel_SashReinfArtNo);
             Assert.AreEqual(447, _panelModel3.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1711, _panelModel3.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(451, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(1715, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
 
 
 
@@ -14554,20 +15009,28 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(572, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1836, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel4.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel4.Panel_SashProfileArtNo);
             Assert.AreEqual(572, _panelModel4.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_SashWidthDecimal);
             Assert.AreEqual(1836, _panelModel4.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel4.Panel_SashReinfArtNo);
             Assert.AreEqual(447, _panelModel4.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1711, _panelModel4.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(451, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(1715, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel4.Panel_CoverProfileArtNo);
@@ -14620,21 +15083,29 @@ namespace ModelLayer.Tests
             #region CW5
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(573, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(572, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(572, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1836, _panelModel5.Panel_GlazingBeadHeight);
             Assert.AreEqual(1836, _panelModel5.Panel_GlazingBeadHeight);
 
             Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel5.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel5.Panel_SashProfileArtNo);
-            Assert.AreEqual(573, _panelModel5.Panel_SashWidth);
+            Assert.AreEqual(572, _panelModel5.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_SashWidthDecimal);
             Assert.AreEqual(1836, _panelModel5.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel5.Panel_SashReinfArtNo);
-            Assert.AreEqual(448, _panelModel5.Panel_SashReinfWidth);
+            Assert.AreEqual(447, _panelModel5.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1711, _panelModel5.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_SashReinfHeightDecimal);
 
-            Assert.AreEqual(452, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(451, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_GlassWidthDecimal);
             Assert.AreEqual(1715, _panelModel5.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassHeightDecimal);
 
 
 
@@ -15194,18 +15665,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(663, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(663, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(568, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1432, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(480, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1344, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -15263,18 +15742,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(663, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(663, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(568, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1432, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(480, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1344, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -15751,18 +16238,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(687, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(687, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(592, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1432, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(504, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1344, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
@@ -15817,18 +16312,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(687, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(687, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(592, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1432, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(504, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1344, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
 
 
@@ -15985,6 +16488,7 @@ namespace ModelLayer.Tests
 
         }
 
+        //with Glass Balancing
         [TestMethod]
         public void ChkVar_5PanelCasementWindowSample_B2_UsingDummyMullion()
         {
@@ -16008,7 +16512,7 @@ namespace ModelLayer.Tests
                 total_ht = 2220, CW_EqualPanelHT = 1900,
                 FW_PanelHT1 = 320,
                 FW1_wd_decimal = 0, FW1_ht_decimal = 0,
-                CW1_wd_decimal = 5, CW1_ht_decimal = 5; ;
+                CW1_wd_decimal = 5, CW1_ht_decimal = 0;
 
 
 
@@ -16651,10 +17155,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(2440, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(320, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(2340, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(231, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
 
@@ -16676,19 +17184,27 @@ namespace ModelLayer.Tests
             #region CW2
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(578, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(577, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_GlazingBeadWidth);
             Assert.AreEqual(1838, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeight);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
-            Assert.AreEqual(578, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(577, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_SashWidth);
             Assert.AreEqual(1838, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeight);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
-            Assert.AreEqual(483, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(482, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_SashReinfWidth);
             Assert.AreEqual(1743, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeight);
 
-            Assert.AreEqual(395, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(394, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(1655, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeight);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -16736,18 +17252,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(577, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1838, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel3.Panel_SashProfileArtNo);
             Assert.AreEqual(577, _panelModel3.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_SashWidthDecimal);
             Assert.AreEqual(1838, _panelModel3.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel3.Panel_SashReinfArtNo);
             Assert.AreEqual(482, _panelModel3.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1743, _panelModel3.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(394, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(1655, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
 
 
 
@@ -16802,18 +17326,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(577, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1838, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel4.Panel_SashProfileArtNo);
             Assert.AreEqual(577, _panelModel4.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_SashWidthDecimal);
             Assert.AreEqual(1838, _panelModel4.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel4.Panel_SashReinfArtNo);
             Assert.AreEqual(482, _panelModel4.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1743, _panelModel4.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(394, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(1655, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel4.Panel_CoverProfileArtNo);
@@ -16858,19 +17390,27 @@ namespace ModelLayer.Tests
             #region CW5
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(578, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(577, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1838, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel5.Panel_SashProfileArtNo);
-            Assert.AreEqual(578, _panelModel5.Panel_SashWidth);
+            Assert.AreEqual(577, _panelModel5.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_SashWidthDecimal);
             Assert.AreEqual(1838, _panelModel5.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel5.Panel_SashReinfArtNo);
-            Assert.AreEqual(483, _panelModel5.Panel_SashReinfWidth);
+            Assert.AreEqual(482, _panelModel5.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1743, _panelModel5.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_SashReinfHeightDecimal);
 
-            Assert.AreEqual(395, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(394, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_GlassWidthDecimal);
             Assert.AreEqual(1655, _panelModel5.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARDWARES
@@ -17430,18 +17970,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(882, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2577, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(882, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(2577, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(787, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(2482, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(699, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(2394, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
@@ -17497,18 +18045,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(882, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2577, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(882, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(2577, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(787, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(2482, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(699, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(2394, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
 
 
@@ -18024,18 +18580,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(663, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(663, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(538, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1402, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(538, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1402, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -18102,18 +18666,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(663, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(663, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(538, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1402, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(538, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1402, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -18666,18 +19238,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(687, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(687, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(562, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1402, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(562, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1402, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -18745,18 +19325,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(687, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(687, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(562, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1402, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(562, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1402, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -19154,20 +19742,28 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(925, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(925, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1425, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(1425, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel1.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(925, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(925, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1425, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(1425, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(800, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(800, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1300, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(1300, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(804, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(804, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1304, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(1304, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -19470,20 +20066,28 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(892, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(927, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel1.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(892, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(927, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(767, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(802, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(767, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(802, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -19753,18 +20357,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(905, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1705, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(905, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1705, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(780, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1580, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(784, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1584, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -20059,18 +20671,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(877, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1677, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(877, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1677, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(752, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1552, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(756, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1556, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -20371,18 +20991,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(879, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1679, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(879, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1679, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(784, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1584, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(696, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1496, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -20685,18 +21313,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(879, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1679, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(879, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1679, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(754, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1554, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(754, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1554, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
