@@ -106,6 +106,8 @@ namespace PresentationLayer.CommonMethods
                                                                      divID,
                                                                      frameModel.FrameImageRenderer_Zoom,
                                                                      frameModel.Frame_Type.ToString());
+                divModel.SetDimensionsToBind_using_DivZoom();
+                divModel.SetDimensionsToBind_using_DivZoom_Imager();
 
                 frameModel.Lst_Divider.Add(divModel);
                 parentModel.MPanelLst_Divider.Add(divModel);

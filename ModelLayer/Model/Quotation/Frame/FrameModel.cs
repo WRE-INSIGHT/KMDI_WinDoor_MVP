@@ -282,6 +282,8 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 pnl.Panel_Zoom = Frame_Zoom;
                 pnl.SetDimensions_using_ZoomPercentage();
+                pnl.SetPanelMargin_using_ZoomPercentage();
+                pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }
         }
 

@@ -221,6 +221,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
 
+        void SetPanelMargin_using_ZoomPercentage();
+        void SetPanelMarginImager_using_ImageZoomPercentage();
         void SetDimensions_using_ZoomPercentage();
         void AdjustPropertyPanelHeight(string mode);
         void AdjustMotorizedPropertyHeight(string mode);

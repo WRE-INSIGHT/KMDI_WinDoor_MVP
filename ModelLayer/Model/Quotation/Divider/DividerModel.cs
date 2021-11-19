@@ -402,17 +402,17 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void SetDimensionsToBind_using_DivZoom_Imager()
         {
-            int wd = Div_MPanelParent.MPanel_WidthToBind,
-                 ht = Div_MPanelParent.MPanel_HeightToBind;
+            int wd = Div_Width,
+                 ht = Div_Height;
 
             if (Div_Type == DividerType.Mullion)
             {
                 DivImageRenderer_Height = (int)(ht * Div_Zoom);
-                if (_divZoom == 0.26f)
+                if (DivImageRenderer_Zoom == 0.26f)
                 {
                     DivImageRenderer_Width = 13;
                 }
-                else if (_divZoom > 0.26f)
+                else if (DivImageRenderer_Zoom > 0.26f)
                 {
                     DivImageRenderer_Width = (int)(wd * Div_Zoom);
                 }
@@ -420,11 +420,11 @@ namespace ModelLayer.Model.Quotation.Divider
             else if (Div_Type == DividerType.Transom)
             {
                 DivImageRenderer_Width = (int)(wd * Div_Zoom);
-                if (_divZoom == 0.26f)
+                if (DivImageRenderer_Zoom == 0.26f)
                 {
                     DivImageRenderer_Height = 13;
                 }
-                else if (_divZoom > 0.26f)
+                else if (DivImageRenderer_Zoom > 0.26f)
                 {
                     DivImageRenderer_Height = (int)(ht * Div_Zoom);
                 }

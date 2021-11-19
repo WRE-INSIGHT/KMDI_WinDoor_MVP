@@ -720,6 +720,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
                 pnl.SetDimensions_using_ZoomPercentage();
+                pnl.SetPanelMargin_using_ZoomPercentage();
+                pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }
         }
 
@@ -904,6 +906,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     }
                 }
                 pnl.Panel_Margin = pnl_margin;
+                pnl.SetPanelMargin_using_ZoomPercentage();
+                pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }
         }
 

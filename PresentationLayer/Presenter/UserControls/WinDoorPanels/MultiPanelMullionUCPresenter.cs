@@ -640,6 +640,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.Reload_PanelMargin();
 
                 _panelModel.SetDimensions_using_ZoomPercentage();
+                _panelModel.SetPanelMargin_using_ZoomPercentage();
+                _panelModel.SetPanelMarginImager_using_ImageZoomPercentage();
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();

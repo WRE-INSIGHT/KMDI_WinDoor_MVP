@@ -1762,7 +1762,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         #region Methods
 
-        public void SetDimensions_using_ZoomPercentage()
+        public void SetPanelMargin_using_ZoomPercentage()
         {
             if (Panel_Zoom == 0.26f)
             {
@@ -1770,8 +1770,42 @@ namespace ModelLayer.Model.Quotation.Panel
                 left = (Panel_Margin.Left != 0) ? 5 : 0,
                 top = (Panel_Margin.Top != 0) ? 5 : 0,
                 bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
-                Panel_MarginToBind = new Padding(left, top, right, bot);
 
+                Panel_MarginToBind = new Padding(left, top, right, bot);
+            }
+            else
+            {
+                Panel_MarginToBind = new Padding((int)(Panel_Margin.Left * Panel_Zoom),
+                                                 (int)(Panel_Margin.Top * Panel_Zoom),
+                                                 (int)(Panel_Margin.Right * Panel_Zoom),
+                                                 (int)(Panel_Margin.Bottom * Panel_Zoom));
+            }
+        }
+
+        public void SetPanelMarginImager_using_ImageZoomPercentage()
+        {
+            if (Panel_Zoom == 0.26f)
+            {
+                int right = (Panel_Margin.Right != 0) ? 5 : 0,
+                left = (Panel_Margin.Left != 0) ? 5 : 0,
+                top = (Panel_Margin.Top != 0) ? 5 : 0,
+                bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+
+                PanelImageRenderer_Margin = new Padding(left, top, right, bot);
+            }
+            else
+            {
+                PanelImageRenderer_Margin = new Padding((int)(Panel_Margin.Left * PanelImageRenderer_Zoom),
+                                                        (int)(Panel_Margin.Top * PanelImageRenderer_Zoom),
+                                                        (int)(Panel_Margin.Right * PanelImageRenderer_Zoom),
+                                                        (int)(Panel_Margin.Bottom * PanelImageRenderer_Zoom));
+            }
+        }
+
+        public void SetDimensions_using_ZoomPercentage()
+        {
+            if (Panel_Zoom == 0.26f)
+            {
                 int MpanelWidth_based_on_MpanelZoom = Panel_ParentMultiPanelModel.Get_ControlDimension_using_MpanelZoom("Width"),
                     MpanelHeight_based_on_MpanelZoom = Panel_ParentMultiPanelModel.Get_ControlDimension_using_MpanelZoom("Height");
 
@@ -1799,11 +1833,6 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else
             {
-                Panel_MarginToBind = new Padding((int)(Panel_Margin.Left * Panel_Zoom),
-                                                 (int)(Panel_Margin.Top * Panel_Zoom),
-                                                 (int)(Panel_Margin.Right * Panel_Zoom),
-                                                 (int)(Panel_Margin.Bottom * Panel_Zoom));
-
                 Panel_Width = Panel_OriginalWidth;
                 Panel_Height = Panel_OriginalHeight;
             }

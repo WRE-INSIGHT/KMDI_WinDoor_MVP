@@ -650,6 +650,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.Reload_PanelMargin();
 
                 _panelModel.SetDimensions_using_ZoomPercentage();
+                _panelModel.SetPanelMargin_using_ZoomPercentage();
+                _panelModel.SetPanelMarginImager_using_ImageZoomPercentage();
 
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
@@ -754,8 +756,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.Fit_MyControls_Dimensions();
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                    _multiPanelModel.Adjust_ControlDisplaySize();
+                    //_multiPanelModel.Adjust_ControlDisplaySize();
                     _mainPresenter.Fit_MyControls_byControlsLocation();
                     _mainPresenter.Fit_MyImager_byImagersLocation();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();

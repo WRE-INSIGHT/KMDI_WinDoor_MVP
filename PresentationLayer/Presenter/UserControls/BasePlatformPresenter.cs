@@ -584,7 +584,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 curr_lst_ht = lst_ht[i];
                 total_ht += curr_lst_ht;
-                if (total_ht <= flpMain_height)
+                if (total_ht <= flpMain_height || total_ht - 2 <= flpMain_height)
                 {
                     Height_List.Add(curr_lst_ht);
                 }
