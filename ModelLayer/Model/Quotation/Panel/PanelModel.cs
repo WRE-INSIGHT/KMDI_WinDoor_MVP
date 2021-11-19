@@ -2137,12 +2137,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
 
-
                     Panel_SashWidth = Panel_DisplayWidth - inward_motorized_deduction - (sash_deduct * 2) + 5;
                     Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
                     Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 5;
                     Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
-                  
 
                     Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
                     Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
