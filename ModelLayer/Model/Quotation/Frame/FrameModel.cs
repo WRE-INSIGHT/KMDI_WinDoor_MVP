@@ -752,12 +752,6 @@ namespace ModelLayer.Model.Quotation.Frame
                                    "Frame",
                                    @"\  /");
 
-            tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNo.ToString(),
-                                   2, "pc(s)",
-                                   Frame_ExplosionWidth.ToString(),
-                                   "Frame",
-                                   @"\  /");
-
             tbl_explosion.Rows.Add("Frame Height " + Frame_ArtNo.ToString(),
                                    2, "pc(s)",
                                    Frame_ExplosionHeight,
