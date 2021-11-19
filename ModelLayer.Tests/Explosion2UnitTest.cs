@@ -6825,16 +6825,15 @@ namespace ModelLayer.Tests
                                                                            0,
                                                                            false,
                                                                            1,
-                                                                           1,
-                                                                           _frameModel.FrameImageRenderer_Zoom,
-                                                                           1,
-                                                                           DockStyle.Fill,
-                                                                           "FixedPanelUC_1",
-                                                                           true,
-                                                                           HingeOption._FrictionStay
+                                                                           1
+                                                                           //_frameModel.FrameImageRenderer_Zoom,
+                                                                           //2,
+                                                                           //DockStyle.Fill,
+                                                                           //"FixedPanelUC_1",
+                                                                           //true,
+                                                                           //HingeOption._FrictionStay
                                                                            );
             _panelModel1_fixed1.Panel_Placement = "Last";
-            _panelModel1_fixed1.Panel_SashPropertyVisibility = false;
             _panelModel1_fixed1.Panel_GlassThickness = 14.0f;
             _panelModel1_fixed1.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1_fixed1);
@@ -6903,16 +6902,15 @@ namespace ModelLayer.Tests
                                                                           0,
                                                                           false,
                                                                           2,
-                                                                          2,
-                                                                          _frameModel.FrameImageRenderer_Zoom,
-                                                                          0,
-                                                                          DockStyle.Fill,
-                                                                          "FixedPanelUC_2",
-                                                                          true,
-                                                                          HingeOption._FrictionStay
+                                                                          2
+                                                                          //_frameModel.FrameImageRenderer_Zoom,
+                                                                          //0,
+                                                                          //DockStyle.Fill,
+                                                                          //"FixedPanelUC_2",
+                                                                          //true,
+                                                                          //HingeOption._FrictionStay
                                                                           );
             _panelModel2_fixed2.Panel_Placement = "First";
-            _panelModel2_fixed2.Panel_SashPropertyVisibility = false;
             _panelModel2_fixed2.Panel_GlassThickness = 14.0f;
             _panelModel2_fixed2.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel2_fixed2);
@@ -7002,13 +7000,13 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               false,
                                                                               3,
-                                                                              3,
-                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                              3,
-                                                                              DockStyle.Fill,
-                                                                              "AwningPanelUC_3",
-                                                                              true,
-                                                                              HingeOption._FrictionStay
+                                                                              3
+                                                                              //_frameModel.FrameImageRenderer_Zoom,
+                                                                              //2,
+                                                                              //DockStyle.Fill,
+                                                                              //"AwningPanelUC_3",
+                                                                              //true,
+                                                                              //HingeOption._FrictionStay
                                                                               );
             _panelModel3_Awning1.Panel_Placement = "Last";
             _panelModel3_Awning1.Panel_GlassThickness = 14.0f;
@@ -7075,14 +7073,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2_fixed2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel2_fixed2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadWidthDecimal);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadWidth);
             Assert.AreEqual(400, _panelModel2_fixed2.Panel_GlazingBeadHeight);
-            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadHeightDecimal);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadHeight);
 
             Assert.AreEqual(725, _panelModel2_fixed2.Panel_GlassWidth);
-            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassWidthDecimal);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassWidth);
             Assert.AreEqual(340, _panelModel2_fixed2.Panel_GlassHeight);
-            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassHeightDecimal);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassHeight);
 
 
 
@@ -8825,7 +8823,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(5, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(20, _qouteModel.Rebate_Qty);
             Assert.AreEqual(22, _qouteModel.Screws_for_Fabrication);
-            Assert.AreEqual(37, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(33, _qouteModel.Screws_for_Installation);
 
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
@@ -9098,7 +9096,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
             Assert.AreEqual(42, _qouteModel.Screws_for_Fabrication);
-            Assert.AreEqual(67, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(63, _qouteModel.Screws_for_Installation);
 
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
@@ -9863,13 +9861,13 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 false,
                                                                                 1,
-                                                                                1,
-                                                                                _frameModel.FrameImageRenderer_Zoom,
-                                                                                1,
-                                                                                DockStyle.Fill,
-                                                                                "AwningPanelUC_1",
-                                                                                true,
-                                                                                HingeOption._FrictionStay
+                                                                                1
+                                                                                //_frameModel.FrameImageRenderer_Zoom,
+                                                                                //0,
+                                                                                //DockStyle.Fill,
+                                                                                //"AwningPanelUC_1",
+                                                                                //true,
+                                                                                //HingeOption._FrictionStay
                                                                                 );
             _panelModel1_Awning.Panel_Placement = "First";
             _panelModel1_Awning.Panel_GlassThickness = 24.0f;
@@ -9961,13 +9959,13 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 false,
                                                                                 2,
-                                                                                2,
-                                                                                _frameModel.FrameImageRenderer_Zoom,
-                                                                                2,
-                                                                                DockStyle.Fill,
-                                                                                "AwningPanelUC_2",
-                                                                                true,
-                                                                                HingeOption._FrictionStay
+                                                                                2
+                                                                                //_frameModel.FrameImageRenderer_Zoom,
+                                                                                //2,
+                                                                                //DockStyle.Fill,
+                                                                                //"AwningPanelUC_2",
+                                                                                //true,
+                                                                                //HingeOption._FrictionStay
                                                                                 );
             _panelModel2_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel2_Awning.Panel_GlassThickness = 24.0f;
@@ -10059,13 +10057,13 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 false,
                                                                                 3,
-                                                                                3,
-                                                                                _frameModel.FrameImageRenderer_Zoom,
-                                                                                3,
-                                                                                DockStyle.Fill,
-                                                                                "AwningPanelUC_3",
-                                                                                true,
-                                                                                HingeOption._FrictionStay
+                                                                                3
+                                                                                //_frameModel.FrameImageRenderer_Zoom,
+                                                                                //4,
+                                                                                //DockStyle.Fill,
+                                                                                //"AwningPanelUC_3",
+                                                                                //true,
+                                                                                //HingeOption._FrictionStay
                                                                                 );
             _panelModel3_Awning.Panel_Placement = "Last";
             _panelModel3_Awning.Panel_GlassThickness = 24.0f;
@@ -10509,13 +10507,13 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 false,
                                                                                 1,
-                                                                                1,
-                                                                                _frameModel.FrameImageRenderer_Zoom,
-                                                                                1,
-                                                                                DockStyle.Fill,
-                                                                                "AwningPanelUC_1",
-                                                                                true,
-                                                                                HingeOption._FrictionStay
+                                                                                1
+                                                                                //_frameModel.FrameImageRenderer_Zoom,
+                                                                                //0,
+                                                                                //DockStyle.Fill,
+                                                                                //"AwningPanelUC_1",
+                                                                                //true,
+                                                                                //HingeOption._FrictionStay
                                                                                 );
             _panelModel1_Awning.Panel_Placement = "First";
             _panelModel1_Awning.Panel_GlassThickness = 6.0f;
@@ -10607,16 +10605,15 @@ namespace ModelLayer.Tests
                                                                           0,
                                                                           false,
                                                                           2,
-                                                                          2,
-                                                                          _frameModel.FrameImageRenderer_Zoom,
-                                                                          2,
-                                                                          DockStyle.Fill,
-                                                                          "FixedPanelUC_2",
-                                                                          true,
-                                                                          HingeOption._FrictionStay
+                                                                          2
+                                                                          //_frameModel.FrameImageRenderer_Zoom,
+                                                                          //2,
+                                                                          //DockStyle.Fill,
+                                                                          //"FixedPanelUC_2",
+                                                                          //true,
+                                                                          //HingeOption._FrictionStay
                                                                           );
             _panelModel2_fixed.Panel_Placement = "Somewhere in Between";
-            _panelModel2_fixed.Panel_SashPropertyVisibility = false;
             _panelModel2_fixed.Panel_GlassThickness = 6.0f;
             _panelModel2_fixed.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2_fixed);
@@ -10703,13 +10700,13 @@ namespace ModelLayer.Tests
                                                                                0,
                                                                                false,
                                                                                3,
-                                                                               3,
-                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                               3,
-                                                                               DockStyle.Fill,
-                                                                               "AwningPanelUC_3",
-                                                                               true,
-                                                                               HingeOption._FrictionStay
+                                                                               3
+                                                                               //_frameModel.FrameImageRenderer_Zoom,
+                                                                               //4,
+                                                                               //DockStyle.Fill,
+                                                                               //"AwningPanelUC_3",
+                                                                               //true,
+                                                                               //HingeOption._FrictionStay
                                                                                );
             _panelModel3_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel3_Awning.Panel_GlassThickness = 6.0f;
@@ -10799,16 +10796,15 @@ namespace ModelLayer.Tests
                                                                  0,
                                                                  false,
                                                                  4,
-                                                                 4,
-                                                                 _frameModel.FrameImageRenderer_Zoom,
-                                                                 6,
-                                                                 DockStyle.Fill,
-                                                                 "FixedPanelUC_4",
-                                                                 true,
-                                                                 HingeOption._FrictionStay
+                                                                 4
+                                                                 //_frameModel.FrameImageRenderer_Zoom,
+                                                                 //6,
+                                                                 //DockStyle.Fill,
+                                                                 //"FixedPanelUC_4",
+                                                                 //true,
+                                                                 //HingeOption._FrictionStay
                                                                  );
             _panelModel4_fixed.Panel_Placement = "Somewhere in Between";
-            _panelModel4_fixed.Panel_SashPropertyVisibility = false;
             _panelModel4_fixed.Panel_GlassThickness = 6.0f;
             _panelModel4_fixed.Panel_Index_Inside_MPanel = 6;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel4_fixed);
@@ -10895,13 +10891,13 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               false,
                                                                               5,
-                                                                              5,
-                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                              5,
-                                                                              DockStyle.Fill,
-                                                                              "AwningPanelUC_5",
-                                                                              true,
-                                                                              HingeOption._FrictionStay
+                                                                              5
+                                                                              //_frameModel.FrameImageRenderer_Zoom,
+                                                                              //8,
+                                                                              //DockStyle.Fill,
+                                                                              //"AwningPanelUC_5",
+                                                                              //true,
+                                                                              //HingeOption._FrictionStay
                                                                               );
             _panelModel5_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel5_Awning.Panel_GlassThickness = 6.0f;
@@ -10991,16 +10987,15 @@ namespace ModelLayer.Tests
                                                                         0,
                                                                         false,
                                                                         6,
-                                                                        6,
-                                                                        _frameModel.FrameImageRenderer_Zoom,
-                                                                        10,
-                                                                        DockStyle.Fill,
-                                                                        "FixedPanelUC_6",
-                                                                        true,
-                                                                        HingeOption._FrictionStay
+                                                                        6
+                                                                        //_frameModel.FrameImageRenderer_Zoom,
+                                                                        //10,
+                                                                        //DockStyle.Fill,
+                                                                        //"FixedPanelUC_6",
+                                                                        //true,
+                                                                        //HingeOption._FrictionStay
                                                                         );
             _panelModel6_fixed.Panel_Placement = "Last";
-            _panelModel6_fixed.Panel_SashPropertyVisibility = false;
             _panelModel6_fixed.Panel_GlassThickness = 6.0f;
             _panelModel6_fixed.Panel_Index_Inside_MPanel = 10;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel6_fixed);
@@ -11154,26 +11149,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel5_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(473, _panelModel5_Awning.Panel_SashWidth);
-            Assert.AreEqual(0, _panelModel5_Awning.Panel_SashWidthDecimal);
+            Assert.AreEqual(473, _panelModel5_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel5_Awning.Panel_SashHeight);
-            Assert.AreEqual(0, _panelModel5_Awning.Panel_SashHeightDecimal);
+            Assert.AreEqual(1053, _panelModel5_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel5_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(348, _panelModel5_Awning.Panel_SashReinfWidth);
-            Assert.AreEqual(0, _panelModel5_Awning.Panel_SashReinfWidthDecimal);
+            Assert.AreEqual(348, _panelModel5_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel5_Awning.Panel_SashReinfHeight);
-            Assert.AreEqual(0, _panelModel5_Awning.Panel_SashReinfHeightDecimal);
+            Assert.AreEqual(928, _panelModel5_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(473, _panelModel5_Awning.Panel_GlazingBeadWidth);
-            Assert.AreEqual(0, _panelModel5_Awning.Panel_GlazingBeadWidthDecimal);
+            Assert.AreEqual(473, _panelModel5_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel5_Awning.Panel_GlazingBeadHeight);
-            Assert.AreEqual(0, _panelModel5_Awning.Panel_GlazingBeadHeightDecimal);
+            Assert.AreEqual(1053, _panelModel5_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(352, _panelModel5_Awning.Panel_GlassWidth);
-            Assert.AreEqual(0, _panelModel5_Awning.Panel_GlassWidthDecimal);
+            Assert.AreEqual(352, _panelModel5_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel5_Awning.Panel_GlassHeight);
-            Assert.AreEqual(0, _panelModel5_Awning.Panel_GlassHeightDecimal);
+            Assert.AreEqual(932, _panelModel5_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel5_Awning.Panel_CoverProfileArtNo);
@@ -14875,7 +14870,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1711, _panelModel2.Panel_SashReinfHeight);
             Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
-            Assert.AreEqual(451, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(452, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(5, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1715, _panelModel2.Panel_GlassHeight);
             Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
@@ -17190,26 +17185,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(577, _panelModel2.Panel_GlazingBeadWidth);
-            Assert.AreEqual(5, _panelModel2.Panel_GlazingBeadWidthDecimal);
+            Assert.AreEqual(5, _panelModel2.Panel_GlazingBeadWidth);
             Assert.AreEqual(1838, _panelModel2.Panel_GlazingBeadHeight);
-            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeight);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(577, _panelModel2.Panel_SashWidth);
-            Assert.AreEqual(5, _panelModel2.Panel_SashWidthDecimal);
+            Assert.AreEqual(5, _panelModel2.Panel_SashWidth);
             Assert.AreEqual(1838, _panelModel2.Panel_SashHeight);
-            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeight);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(482, _panelModel2.Panel_SashReinfWidth);
-            Assert.AreEqual(5, _panelModel2.Panel_SashReinfWidthDecimal);
+            Assert.AreEqual(5, _panelModel2.Panel_SashReinfWidth);
             Assert.AreEqual(1743, _panelModel2.Panel_SashReinfHeight);
-            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeight);
 
             Assert.AreEqual(394, _panelModel2.Panel_GlassWidth);
-            Assert.AreEqual(5, _panelModel2.Panel_GlassWidthDecimal);
+            Assert.AreEqual(5, _panelModel2.Panel_GlassWidth);
             Assert.AreEqual(1655, _panelModel2.Panel_GlassHeight);
-            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeight);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -19739,7 +19734,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(8, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(32, _qouteModel.Rebate_Qty);
             Assert.AreEqual(42, _qouteModel.Screws_for_Fabrication);
-            Assert.AreEqual(51, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(47, _qouteModel.Screws_for_Installation);
 
 
 
@@ -19747,28 +19742,28 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(925, _panelModel1.Panel_GlazingBeadWidth);
-            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
+            Assert.AreEqual(925, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1425, _panelModel1.Panel_GlazingBeadHeight);
-            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
+            Assert.AreEqual(1425, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel1.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(925, _panelModel1.Panel_SashWidth);
-            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
+            Assert.AreEqual(925, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1425, _panelModel1.Panel_SashHeight);
-            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
+            Assert.AreEqual(1425, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(800, _panelModel1.Panel_SashReinfWidth);
-            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
+            Assert.AreEqual(800, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1300, _panelModel1.Panel_SashReinfHeight);
-            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
+            Assert.AreEqual(1300, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(804, _panelModel1.Panel_GlassWidth);
-            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
+            Assert.AreEqual(804, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1304, _panelModel1.Panel_GlassHeight);
-            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
+            Assert.AreEqual(1304, _panelModel1.Panel_GlassHeightDecimal);
 
 
 

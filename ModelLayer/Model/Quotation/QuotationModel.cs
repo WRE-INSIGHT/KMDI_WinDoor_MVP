@@ -288,7 +288,7 @@ namespace ModelLayer.Model.Quotation
                                     add_screws_fab_cladingBracket += total_cladd4concrete;
 
                                     int total_cladd4UPVC = div_nxtCtrl.Add_CladdingBracket4UPVC_screws4fab();
-                                    add_screws_fab_cladingBracket += total_cladd4UPVC;
+                                    add_screws_fab_cladingBracket += total_cladd4concrete;
 
                                     int total_cladd4concrete_xpbolts = div_nxtCtrl.Add_CladdBracket4Concrete_expbolts();
                                     exp_bolt += total_cladd4concrete_xpbolts;
@@ -611,9 +611,6 @@ namespace ModelLayer.Model.Quotation
 
                                         div_nxtCtrl.Insert_CladdingProfile_MaterialList(Material_List);
 
-                                        int total_cladd = div_nxtCtrl.Add_TotalCladdingSize_Screws4Cladding();
-                                        total_cladding_size += total_cladd;
-
                                         if (div_nxtCtrl.Div_claddingBracketVisibility == true)
                                         {
                                             if (div_nxtCtrl.Div_CladdingBracketForConcreteQTY > 0)
@@ -786,8 +783,7 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     pnl_curCtrl.Insert_FrictionStay_MaterialList(Material_List);
 
-                                                    int fsCasement_screws = pnl_curCtrl.Add_FSCasement_screws4fab();
-                                                    add_screws_fab_fs_or_rs += fsCasement_screws;
+                                                    pnl_curCtrl.Add_FSCasement_screws4fab();
                                                 }
                                                 else if (pnl_curCtrl.Panel_HingeOptions == HingeOption._2DHinge)
                                                 {
