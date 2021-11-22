@@ -2012,7 +2012,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if ((Panel_Type.Contains("Awning") || Panel_Type.Contains("Casement")) && Panel_GlassThickness == 6.0f)
                 {
-                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
                 }
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
@@ -3373,7 +3373,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if ((Panel_Type.Contains("Awning") || Panel_Type.Contains("Casement")) && Panel_GlassThickness == 6.0f)
                 {
-                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
                 }
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
