@@ -846,6 +846,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _mainPresenter.DeleteDividerPropertiesUC(div.Div_ID);
                 div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
                 _frameModel.Lst_Divider.Remove(div);
+
+                _mainPresenter.DeselectDivider();
             }
 
             #endregion
@@ -949,6 +951,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
 
             #endregion
+
+            _mainPresenter.DeselectDivider();
         }
 
         private void _multiPanelMullionUC_divCountClickedEventRaised(object sender, EventArgs e)

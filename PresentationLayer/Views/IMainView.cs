@@ -49,5 +49,7 @@ namespace PresentationLayer.Views
         ToolStripMenuItem Spacer { get; }
         ToolStripMenuItem Color { get; }
         Form GetThis();
+        void FocusOnMainForm();
+        void SetActiveControl(Control control);
     }
 }

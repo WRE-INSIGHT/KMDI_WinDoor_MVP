@@ -595,6 +595,7 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
 
             _mainPresenter.SetPanelGlassID();
+            _mainPresenter.DeselectDivider();
         }
 
         public void ViewDeleteControl(UserControl control)

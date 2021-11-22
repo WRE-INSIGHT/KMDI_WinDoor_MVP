@@ -137,6 +137,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     prev_pnl.Panel_Width++;
                                     prev_pnl.Panel_DisplayWidth++;
+
+                                    prev_pnl.SetDimensionToBind_using_BaseDimension();
                                 }
 
                                 if (nxt_ctrl is IMultiPanelUC)
@@ -148,6 +150,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     nxt_pnl.Panel_Width--;
                                     nxt_pnl.Panel_DisplayWidth--;
+
+                                    nxt_pnl.SetDimensionToBind_using_BaseDimension();
                                 }
                             }
                         }
@@ -176,6 +180,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     prev_pnl.Panel_Width--;
                                     prev_pnl.Panel_DisplayWidth--;
+
+                                    prev_pnl.SetDimensionToBind_using_BaseDimension();
                                 }
 
                                 if (nxt_ctrl is IMultiPanelUC)
@@ -187,6 +193,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     nxt_pnl.Panel_Width++;
                                     nxt_pnl.Panel_DisplayWidth++;
+
+                                    nxt_pnl.SetDimensionToBind_using_BaseDimension();
                                 }
                             }
                         }
@@ -282,7 +290,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             {
                 prevCtrl_isPanel = false;
             }
-            
 
             if (_divModel.Div_Width == (int)_frameModel.Frame_Type || _divModel.Div_Width == 13)
             {
@@ -385,6 +392,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             {
                                 prev_pnl.Panel_Width += (e.X - _point_of_origin.X);
                                 prev_pnl.Panel_DisplayWidth += (e.X - _point_of_origin.X);
+
+                                prev_pnl.SetDimensionToBind_using_BaseDimension();
                             }
 
                             if (nxt_ctrl is IMultiPanelUC)
@@ -396,6 +405,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             {
                                 nxt_pnl.Panel_Width -= (e.X - _point_of_origin.X);
                                 nxt_pnl.Panel_DisplayWidth -= (e.X - _point_of_origin.X);
+
+                                nxt_pnl.SetDimensionToBind_using_BaseDimension();
                             }
                         }
                     }

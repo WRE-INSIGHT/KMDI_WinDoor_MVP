@@ -325,5 +325,15 @@ namespace PresentationLayer.Views
         {
             //Console.WriteLine("Scroll_val: " + pnlPropertiesBody.VerticalScroll.Value);
         }
+
+        public void FocusOnMainForm()
+        {
+            this.Focus();
+        }
+
+        public void SetActiveControl(Control control)
+        {
+            this.ActiveControl = control;
+        }
     }
 }

@@ -1853,6 +1853,7 @@ namespace PresentationLayer.Presenter
         {
             _mainView.GetLblSelectedDivider().Visible = false;
             _mainView.GetLblSelectedDivider().Text = "";
+            _mainView.SetActiveControl(null);
         }
 
         public void DeleteMultiPanelPropertiesUC(int multiPanelID)

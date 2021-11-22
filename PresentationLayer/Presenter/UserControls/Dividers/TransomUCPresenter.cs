@@ -136,6 +136,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     prev_pnl.Panel_Height++;
                                     prev_pnl.Panel_DisplayHeight++;
+
+                                    prev_pnl.SetDimensionToBind_using_BaseDimension();
                                 }
 
                                 if (nxt_ctrl is IMultiPanelUC)
@@ -147,6 +149,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     nxt_pnl.Panel_Height--;
                                     nxt_pnl.Panel_DisplayHeight--;
+
+                                    nxt_pnl.SetDimensionToBind_using_BaseDimension();
                                 }
                             }
                         }
@@ -176,6 +180,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     prev_pnl.Panel_Height--;
                                     prev_pnl.Panel_DisplayHeight--;
+
+                                    prev_pnl.SetDimensionToBind_using_BaseDimension();
                                 }
 
                                 if (nxt_ctrl is IMultiPanelUC)
@@ -187,6 +193,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     nxt_pnl.Panel_Height++;
                                     nxt_pnl.Panel_DisplayHeight++;
+
+                                    nxt_pnl.SetDimensionToBind_using_BaseDimension();
                                 }
                             }
                         }
@@ -387,6 +395,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             {
                                 prev_pnl.Panel_Height += (e.Y - _point_of_origin.Y);
                                 prev_pnl.Panel_DisplayHeight += (e.Y - _point_of_origin.Y);
+
+                                prev_pnl.SetDimensionToBind_using_BaseDimension();
                             }
 
                             if (nxt_ctrl is IMultiPanelUC)
@@ -398,6 +408,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             {
                                 nxt_pnl.Panel_Height -= (e.Y - _point_of_origin.Y);
                                 nxt_pnl.Panel_DisplayHeight -= (e.Y - _point_of_origin.Y);
+
+                                nxt_pnl.SetDimensionToBind_using_BaseDimension();
                             }
                         }
                     }

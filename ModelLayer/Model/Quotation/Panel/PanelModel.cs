@@ -1844,6 +1844,15 @@ namespace ModelLayer.Model.Quotation.Panel
             PanelImageRenderer_Height = Convert.ToInt32(Panel_Height * PanelImageRenderer_Zoom);
         }
 
+        public void SetDimensionToBind_using_BaseDimension()
+        {
+            Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
+            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+
+            PanelImageRenderer_Width = Convert.ToInt32(Panel_Width * PanelImageRenderer_Zoom);
+            PanelImageRenderer_Height = Convert.ToInt32(Panel_Height * PanelImageRenderer_Zoom);
+        }
+
         public void AdjustPropertyPanelHeight(string mode)
         {
             if (mode == "addChkMotorized")

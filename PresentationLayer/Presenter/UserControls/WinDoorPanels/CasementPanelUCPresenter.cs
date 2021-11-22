@@ -216,6 +216,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.SetPanelGlassID();
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             #endregion
+
+            _mainPresenter.DeselectDivider();
         }
 
         private void OnCasementPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
