@@ -17836,7 +17836,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("8", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("16", dr[0]["Qty"]);
 
@@ -20170,7 +20170,7 @@ namespace ModelLayer.Tests
 
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
@@ -20493,7 +20493,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
