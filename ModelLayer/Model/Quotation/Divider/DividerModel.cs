@@ -909,16 +909,18 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void Insert_DivProfile_DivReinf_Info_MaterialList(DataTable tbl_explosion)
         {
-            string div_side = "", explosion_length = "";
+            string div_side = "", explosion_length = "", explosion_length2 = "";
             if (Div_Type == DividerType.Transom)
             {
                 div_side = "Width";
                 explosion_length = Div_ExplosionWidth.ToString();
+                explosion_length2 = Div_ReinfWidth.ToString();
             }
             else if (Div_Type == DividerType.Mullion)
             {
                 div_side = "Height";
                 explosion_length = Div_ExplosionHeight.ToString();
+                explosion_length2 = Div_ReinfWidth.ToString();
             }
 
             tbl_explosion.Rows.Add(Div_Type.ToString() + " " + div_side + " " + Div_ArtNo.DisplayName,
@@ -929,7 +931,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
             tbl_explosion.Rows.Add(Div_Type.ToString() + " Reinforcement " + div_side + " " + Div_ReinfArtNo.DisplayName,
                                    1, "pc(s)",
-                                   explosion_length,
+                                   explosion_length2,
                                    Div_Type.ToString(),
                                    @"|  |");
         }
@@ -950,9 +952,10 @@ namespace ModelLayer.Model.Quotation.Divider
                                        Div_Type.ToString(),
                                        @"|  |");
 
+                int claddingReinSize = cladding_size - 30;
                 tbl_explosion.Rows.Add("Cladding Reinforcement " + Div_CladdingReinfArtNo.ToString(),
                                        1, "pc(s)",
-                                       cladding_size.ToString(),
+                                       claddingReinSize.ToString(),
                                        "CPL",
                                        @"|  |");
             }
