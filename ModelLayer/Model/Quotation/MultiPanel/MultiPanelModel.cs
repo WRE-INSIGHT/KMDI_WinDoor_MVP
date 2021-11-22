@@ -180,6 +180,19 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        private int _mpanelDisplayWidthDecimal;
+        public int MPanel_DisplayWidthDecimal
+        {
+            get
+            {
+                return _mpanelDisplayWidthDecimal;
+            }
+            set
+            {
+                _mpanelDisplayWidthDecimal = value;
+            }
+        }
+
         [Description("Virtual Height that represents the definite given value and used by the program only. (not intended for user to use)")]
         private int _mpanelHeight;
         public int MPanel_Height
@@ -290,6 +303,19 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 _mpanelDisplayHeight = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        private int _mpanelDisplayHeightDecimal;
+        public int MPanel_DisplayHeightDecimal
+        {
+            get
+            {
+                return _mpanelDisplayHeightDecimal;
+            }
+            set
+            {
+                _mpanelDisplayHeightDecimal = value;
             }
         }
 
@@ -1218,9 +1244,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         #region Explosion
 
         public int MPanel_OriginalDisplayWidth { get; set; }
+        public int MPanel_OriginalDisplayWidthDecimal { get; set; }
         public int MPanel_OriginalDisplayHeight { get; set; }
+        public int MPanel_OriginalDisplayHeightDecimal { get; set; }
         public int MPanel_OriginalGlassWidth { get; set; }
+        public int MPanel_OriginalGlassWidthDecimal { get; set; }
         public int MPanel_OriginalGlassHeight { get; set; }
+        public int MPanel_OriginalGlassHeightDecimal { get; set; }
 
         private bool _mpanelCmenuDeleteVisibility;
         public bool MPanel_CmenuDeleteVisibility
@@ -1241,14 +1271,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void SetEqualGlassDimension(string mode, SashProfile_ArticleNo sash)
         {
-            int Equal_GlassSize = 0,
-                div_deduction = 0,
+            int div_deduction = 0,
                 divDM_deduction = 0,
                 TM_sashBite_deduction = 0,
                 total_frame_deduction = 0,
                 frame_thickness = 0,
                 sash_bite = 0,
                 totalPanels = MPanel_Divisions + 1;
+
+            decimal Equal_GlassSize = 0;
 
             if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
             {
@@ -1293,15 +1324,44 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        decimal disp_wd_dec = Convert.ToDecimal(MPanel_DisplayWidth + "." + MPanel_DisplayWidthDecimal);
+
+                        Equal_GlassSize = (((disp_wd_dec - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = Math.Round(Equal_GlassSize, 1, MidpointRounding.AwayFromZero);
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
-                            pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth + (Equal_GlassSize - pnl.Panel_OriginalGlassWidth);
+                            decimal orig_disp_wd_dec = Convert.ToDecimal(pnl.Panel_OriginalDisplayWidth + "." + pnl.Panel_OriginalDisplayWidthDecimal);
+                            decimal orig_glass_wd_dec = Convert.ToDecimal(pnl.Panel_OriginalGlassWidth + "." + pnl.Panel_OriginalGlassWidthDecimal);
+
+                            decimal panel_disp_wd_dec = orig_disp_wd_dec + (Equal_GlassSize - orig_glass_wd_dec);
+
+                            int panel_disp_wd = (int)Math.Truncate(panel_disp_wd_dec);
+                            pnl.Panel_DisplayWidth = panel_disp_wd;
+
+                            string[] DisplayWD_dec_split = decimal.Round(panel_disp_wd_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayWD_dec_split.Count() > 1)
+                            {
+                                pnl.Panel_DisplayWidthDecimal = Convert.ToInt32(DisplayWD_dec_split[1]);
+                            }
                         }
                         foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                         {
-                            mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth + (Equal_GlassSize - mpnl.MPanel_OriginalGlassWidth);
+                            decimal orig_disp_wd_dec = Convert.ToDecimal(mpnl.MPanel_OriginalDisplayWidth + "." + mpnl.MPanel_OriginalDisplayWidthDecimal);
+                            decimal orig_glass_wd_dec = Convert.ToDecimal(mpnl.MPanel_OriginalGlassWidth + "." + mpnl.MPanel_OriginalGlassWidthDecimal);
+
+                            decimal mpanel_disp_wd_dec = orig_disp_wd_dec + (Equal_GlassSize - orig_glass_wd_dec);
+
+                            int mpanel_disp_wd = (int)Math.Truncate(mpanel_disp_wd_dec);
+                            mpnl.MPanel_DisplayWidth = mpanel_disp_wd;
+
+                            string[] DisplayWD_dec_split = decimal.Round(mpanel_disp_wd_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayWD_dec_split.Count() > 1)
+                            {
+                                mpnl.MPanel_DisplayWidthDecimal = Convert.ToInt32(DisplayWD_dec_split[1]);
+                            }
                         }
                     }
                 }
@@ -1323,15 +1383,43 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayHeight - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        decimal disp_ht_dec = Convert.ToDecimal(MPanel_DisplayHeight + "." + MPanel_DisplayHeightDecimal);
+                        Equal_GlassSize = (((disp_ht_dec - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = Math.Round(Equal_GlassSize, 1, MidpointRounding.AwayFromZero);
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
-                            pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight + (Equal_GlassSize - pnl.Panel_OriginalGlassHeight);
+                            decimal orig_disp_ht_dec = Convert.ToDecimal(pnl.Panel_OriginalDisplayHeight + "." + pnl.Panel_OriginalDisplayHeightDecimal);
+                            decimal orig_glass_ht_dec = Convert.ToDecimal(pnl.Panel_OriginalGlassHeight + "." + pnl.Panel_OriginalGlassHeightDecimal);
+
+                            decimal panel_disp_ht_dec = orig_disp_ht_dec + (Equal_GlassSize - orig_glass_ht_dec);
+
+                            int panel_disp_ht = (int)Math.Truncate(panel_disp_ht_dec);
+                            pnl.Panel_DisplayWidth = panel_disp_ht;
+
+                            string[] DisplayHT_dec_split = decimal.Round(panel_disp_ht_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayHT_dec_split.Count() > 1)
+                            {
+                                pnl.Panel_DisplayWidthDecimal = Convert.ToInt32(DisplayHT_dec_split[1]);
+                            }
                         }
                         foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                         {
-                            mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight + (Equal_GlassSize - mpnl.MPanel_OriginalGlassHeight);
+                            decimal orig_disp_ht_dec = Convert.ToDecimal(mpnl.MPanel_OriginalDisplayHeight + "." + mpnl.MPanel_OriginalDisplayHeightDecimal);
+                            decimal orig_glass_ht_dec = Convert.ToDecimal(mpnl.MPanel_OriginalGlassHeight + "." + mpnl.MPanel_OriginalGlassHeightDecimal);
+
+                            decimal mpanel_disp_ht_dec = orig_disp_ht_dec + (Equal_GlassSize - orig_glass_ht_dec);
+
+                            int mpanel_disp_ht = (int)Math.Truncate(mpanel_disp_ht_dec);
+                            mpnl.MPanel_DisplayHeight = mpanel_disp_ht;
+
+                            string[] DisplayHT_dec_split = decimal.Round(mpanel_disp_ht_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayHT_dec_split.Count() > 1)
+                            {
+                                mpnl.MPanel_DisplayHeightDecimal = Convert.ToInt32(DisplayHT_dec_split[1]);
+                            }
                         }
                     }
                 }
@@ -1351,12 +1439,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 if (div.Div_ArtNo == Divider_ArticleNo._7536)
                                 {
                                     div_deduction += 42;
-                                    TM_sashBite_deduction += 14;
+                                    if (sash == SashProfile_ArticleNo._7581)
+                                    {
+                                        TM_sashBite_deduction += 14;
+                                    }
+                                    else if (sash == SashProfile_ArticleNo._374 ||
+                                             sash == SashProfile_ArticleNo._395 ||
+                                             sash == SashProfile_ArticleNo._373)
+                                    {
+                                        TM_sashBite_deduction += 16;
+                                    }
                                 }
                                 else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                                 {
                                     div_deduction += 72;
-                                    TM_sashBite_deduction += 16;
+                                    if (sash == SashProfile_ArticleNo._7581)
+                                    {
+                                        TM_sashBite_deduction += 14;
+                                    }
+                                    else if (sash == SashProfile_ArticleNo._374 ||
+                                             sash == SashProfile_ArticleNo._395 ||
+                                             sash == SashProfile_ArticleNo._373)
+                                    {
+                                        TM_sashBite_deduction += 16;
+                                    }
                                 }
                             }
                             else if (div.Div_ChkDM == true)
@@ -1372,15 +1478,43 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayWidth - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - TM_sashBite_deduction))) / totalPanels) + 5;
+                        decimal disp_wd_dec = Convert.ToDecimal(MPanel_DisplayWidth + "." + MPanel_DisplayWidthDecimal);
+                        Equal_GlassSize = (((disp_wd_dec - (total_frame_deduction * 2) - divDM_deduction - (div_deduction - TM_sashBite_deduction))) / totalPanels) + 5;
+                        Equal_GlassSize = Math.Round(Equal_GlassSize, 1, MidpointRounding.AwayFromZero);
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
-                            pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth + (Equal_GlassSize - pnl.Panel_OriginalSashWidth);
+                            decimal orig_disp_wd_dec = Convert.ToDecimal(pnl.Panel_OriginalDisplayWidth + "." + pnl.Panel_OriginalDisplayWidthDecimal);
+                            decimal orig_sash_wd_dec = Convert.ToDecimal(pnl.Panel_OriginalSashWidth + "." + pnl.Panel_OriginalSashWidthDecimal);
+
+                            decimal panel_disp_wd_dec = orig_disp_wd_dec + (Equal_GlassSize - orig_sash_wd_dec);
+
+                            int panel_disp_wd = (int)Math.Truncate(panel_disp_wd_dec);
+                            pnl.Panel_DisplayWidth = panel_disp_wd;
+
+                            string[] DisplayWD_dec_split = decimal.Round(panel_disp_wd_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayWD_dec_split.Count() > 1)
+                            {
+                                pnl.Panel_DisplayWidthDecimal = Convert.ToInt32(DisplayWD_dec_split[1]);
+                            }
                         }
                         foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                         {
-                            mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth + (Equal_GlassSize - mpnl.MPanel_OriginalGlassWidth);
+                            decimal orig_disp_wd_dec = Convert.ToDecimal(mpnl.MPanel_OriginalDisplayWidth + "." + mpnl.MPanel_OriginalDisplayWidthDecimal);
+                            decimal orig_glass_wd_dec = Convert.ToDecimal(mpnl.MPanel_OriginalGlassWidth + "." + mpnl.MPanel_OriginalGlassWidthDecimal);
+
+                            decimal mpanel_disp_wd_dec = orig_disp_wd_dec + (Equal_GlassSize - orig_glass_wd_dec);
+
+                            int mpanel_disp_wd = (int)Math.Truncate(mpanel_disp_wd_dec);
+                            mpnl.MPanel_DisplayWidth = mpanel_disp_wd;
+
+                            string[] DisplayWD_dec_split = decimal.Round(mpanel_disp_wd_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayWD_dec_split.Count() > 1)
+                            {
+                                mpnl.MPanel_DisplayWidthDecimal = Convert.ToInt32(DisplayWD_dec_split[1]);
+                            }
                         }
                     }
                 }
@@ -1402,15 +1536,43 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
 
-                        Equal_GlassSize = (int)Math.Ceiling((decimal)((MPanel_DisplayHeight - (total_frame_deduction * 2) - div_deduction)) / totalPanels) + 5;
+                        decimal disp_ht_dec = Convert.ToDecimal(MPanel_DisplayHeight + "." + MPanel_DisplayHeightDecimal);
+                        Equal_GlassSize = (((disp_ht_dec - (total_frame_deduction * 2) - div_deduction)) / totalPanels) - 6;
+                        Equal_GlassSize = Math.Round(Equal_GlassSize, 1, MidpointRounding.AwayFromZero);
 
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
-                            pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight + (Equal_GlassSize - pnl.Panel_OriginalSashHeight);
+                            decimal orig_disp_ht_dec = Convert.ToDecimal(pnl.Panel_OriginalDisplayHeight + "." + pnl.Panel_OriginalDisplayHeightDecimal);
+                            decimal orig_glass_ht_dec = Convert.ToDecimal(pnl.Panel_OriginalGlassHeight + "." + pnl.Panel_OriginalGlassHeightDecimal);
+
+                            decimal panel_disp_ht_dec = orig_disp_ht_dec + (Equal_GlassSize - orig_glass_ht_dec);
+
+                            int panel_disp_ht = (int)Math.Truncate(panel_disp_ht_dec);
+                            pnl.Panel_DisplayWidth = panel_disp_ht;
+
+                            string[] DisplayHT_dec_split = decimal.Round(panel_disp_ht_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayHT_dec_split.Count() > 1)
+                            {
+                                pnl.Panel_DisplayWidthDecimal = Convert.ToInt32(DisplayHT_dec_split[1]);
+                            }
                         }
                         foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                         {
-                            mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight + (Equal_GlassSize - mpnl.MPanel_OriginalGlassHeight);
+                            decimal orig_disp_ht_dec = Convert.ToDecimal(mpnl.MPanel_OriginalDisplayHeight + "." + mpnl.MPanel_OriginalDisplayHeightDecimal);
+                            decimal orig_glass_ht_dec = Convert.ToDecimal(mpnl.MPanel_OriginalGlassHeight + "." + mpnl.MPanel_OriginalGlassHeightDecimal);
+
+                            decimal mpanel_disp_ht_dec = orig_disp_ht_dec + (Equal_GlassSize - orig_glass_ht_dec);
+
+                            int mpanel_disp_ht = (int)Math.Truncate(mpanel_disp_ht_dec);
+                            mpnl.MPanel_DisplayHeight = mpanel_disp_ht;
+
+                            string[] DisplayHT_dec_split = decimal.Round(mpanel_disp_ht_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayHT_dec_split.Count() > 1)
+                            {
+                                mpnl.MPanel_DisplayHeightDecimal = Convert.ToInt32(DisplayHT_dec_split[1]);
+                            }
                         }
                     }
                 }
@@ -1865,7 +2027,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                float mpanelZoom,
                                IFrameModel mpanelFrameModelParent,
                                int mpanelDisplayWidth,
+                               int mpanelDisplayWidthDecimal,
                                int mpanelDisplayHeight,
+                               int mpanelDisplayHeightDecimal,
                                int mpanelStackNo)
         {
             MPanel_ID = mpanelID;
@@ -1890,9 +2054,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_Zoom = mpanelZoom;
             MPanel_FrameModelParent = mpanelFrameModelParent;
             MPanel_DisplayWidth = mpanelDisplayWidth;
+            MPanel_DisplayWidthDecimal = mpanelDisplayWidthDecimal;
             MPanel_DisplayHeight = mpanelDisplayHeight;
+            MPanel_DisplayHeightDecimal = mpanelDisplayHeightDecimal;
             MPanel_OriginalDisplayWidth = mpanelDisplayWidth;
+            MPanel_OriginalDisplayWidthDecimal = mpanelDisplayWidthDecimal;
             MPanel_OriginalDisplayHeight = mpanelDisplayHeight;
+            MPanel_OriginalDisplayHeightDecimal = mpanelDisplayHeightDecimal;
             MPanel_StackNo = mpanelStackNo;
             MPanel_CmenuDeleteVisibility = true;
 

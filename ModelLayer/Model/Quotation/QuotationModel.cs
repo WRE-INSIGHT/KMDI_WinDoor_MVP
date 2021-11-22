@@ -277,7 +277,6 @@ namespace ModelLayer.Model.Quotation
                                     int total_cladd = div_nxtCtrl.Add_TotalCladdingSize_Screws4Cladding();
                                     total_cladding_size += total_cladd;
 
-
                                     if (div_nxtCtrl.Div_claddingBracketVisibility == true)
                                     {
                                         div_nxtCtrl.Insert_CladdingBracket4Concrete_MaterialList(Material_List);
@@ -288,17 +287,14 @@ namespace ModelLayer.Model.Quotation
                                     int total_cladd4concrete = div_nxtCtrl.Add_CladdingBracket4Concrete_screws4fab();
                                     add_screws_fab_cladingBracket += total_cladd4concrete;
 
-
                                     int total_cladd4UPVC = div_nxtCtrl.Add_CladdingBracket4UPVC_screws4fab();
-                                    add_screws_fab_cladingBracket += total_cladd4concrete;
+                                    add_screws_fab_cladingBracket += total_cladd4UPVC;
 
                                     int total_cladd4concrete_xpbolts = div_nxtCtrl.Add_CladdBracket4Concrete_expbolts();
                                     exp_bolt += total_cladd4concrete_xpbolts;
 
-
                                     int total_cladd4UPVC_xpbolts = div_nxtCtrl.Add_CladdBracket4UPVC_expbolts();
                                     exp_bolt += total_cladd4UPVC_xpbolts;
-
                                 }
 
                                 if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added && mpnl.MPanel_Type == "Mullion")
@@ -614,6 +610,9 @@ namespace ModelLayer.Model.Quotation
 
                                         div_nxtCtrl.Insert_CladdingProfile_MaterialList(Material_List);
 
+                                        int total_cladd = div_nxtCtrl.Add_TotalCladdingSize_Screws4Cladding();
+                                        total_cladding_size += total_cladd;
+
                                         if (div_nxtCtrl.Div_claddingBracketVisibility == true)
                                         {
                                             if (div_nxtCtrl.Div_CladdingBracketForConcreteQTY > 0)
@@ -625,7 +624,6 @@ namespace ModelLayer.Model.Quotation
 
                                                 int claddingBracketForConcrete_expBolt = div_nxtCtrl.Add_CladdBracket4Concrete_expbolts();
                                                 exp_bolt += claddingBracketForConcrete_expBolt;
-
                                             }
 
                                             if (div_nxtCtrl.Div_CladdingBracketForUPVCQTY > 0)
@@ -637,7 +635,6 @@ namespace ModelLayer.Model.Quotation
 
                                                 int claddingBracketForUPVC_expBolt = div_nxtCtrl.Add_CladdBracket4UPVC_expbolts();
                                                 exp_bolt += claddingBracketForUPVC_expBolt;
-
                                             }
                                         }
                                     }
@@ -753,6 +750,14 @@ namespace ModelLayer.Model.Quotation
                                             if (pnl_curCtrl.Panel_Type == "Awning Panel")
                                             {
                                                 pnl_curCtrl.Insert_MotorizedInfo_MaterialList(Material_List);
+
+                                                int hinge_screws = pnl_curCtrl.Add_Hinges_screws4fab();
+                                                add_screws_fab_hinges += hinge_screws;
+
+                                                int motor_screws = pnl_curCtrl.Add_MotorizedMech_screws4Inst();
+                                                total_screws_installation += motor_screws;
+
+                                                total_screws_installation += (4 * pnl_curCtrl.Panel_MotorizedMechSetQty * 2);
                                             }
                                         }
                                         perFrame = false;
@@ -785,7 +790,9 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     pnl_curCtrl.Insert_FrictionStay_MaterialList(Material_List);
 
-                                                    pnl_curCtrl.Add_FSCasement_screws4fab();
+                                                    int FSCasement_screws = pnl_curCtrl.Add_FSCasement_screws4fab();
+                                                    add_screws_fab_fs_or_rs += FSCasement_screws;
+
 
                                                 }
                                                 else if (pnl_curCtrl.Panel_HingeOptions == HingeOption._2DHinge)
@@ -1047,7 +1054,6 @@ namespace ModelLayer.Model.Quotation
                         if (pnl.Panel_Type.Contains("Fixed") == false)
                         {
                             pnl.Insert_CoverProfileInfo_MaterialList(Material_List);
-
                         }
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)

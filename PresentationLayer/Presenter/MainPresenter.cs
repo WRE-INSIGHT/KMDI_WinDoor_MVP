@@ -577,7 +577,6 @@ namespace PresentationLayer.Presenter
                                 pnl.Panel_Width = pnl.Panel_OriginalWidth;
                                 pnl.Panel_Height = pnl.Panel_OriginalHeight;
                             }
-                            //mpnl.SetEqualGlassDimension(gbmode);
                         }
                     }
                 }
@@ -1259,13 +1258,32 @@ namespace PresentationLayer.Presenter
 
                         List<Extension_ArticleNo> lst_extArt = new List<Extension_ArticleNo>();
                         lst_extArt.Add(pnl.Panel_ExtensionTopArtNo);
-                        lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                        if (pnl.Panel_ExtTopChk)
+                        {
+                            lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                        }
+                        if (pnl.Panel_ExtTop2Chk)
+                        {
+                            lst_extArt.Add(pnl.Panel_ExtensionTop3ArtNo);
+                        }
+
                         lst_extArt.Add(pnl.Panel_ExtensionBotArtNo);
-                        lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                        if (pnl.Panel_ExtBotChk)
+                        {
+                            lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                        }
+
                         lst_extArt.Add(pnl.Panel_ExtensionLeftArtNo);
-                        lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                        if (pnl.Panel_ExtLeftChk)
+                        {
+                            lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                        }
+
                         lst_extArt.Add(pnl.Panel_ExtensionRightArtNo);
-                        lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+                        if (pnl.Panel_ExtRightChk)
+                        {
+                            lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+                        }
 
                         if (pnl.Panel_ExtensionOptionsVisibility == true)
                         {
@@ -1370,13 +1388,32 @@ namespace PresentationLayer.Presenter
 
                             List<Extension_ArticleNo> lst_extArt = new List<Extension_ArticleNo>();
                             lst_extArt.Add(pnl.Panel_ExtensionTopArtNo);
-                            lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                            if (pnl.Panel_ExtTopChk)
+                            {
+                                lst_extArt.Add(pnl.Panel_ExtensionTop2ArtNo);
+                            }
+                            if (pnl.Panel_ExtTop2Chk)
+                            {
+                                lst_extArt.Add(pnl.Panel_ExtensionTop3ArtNo);
+                            }
+
                             lst_extArt.Add(pnl.Panel_ExtensionBotArtNo);
-                            lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                            if (pnl.Panel_ExtBotChk)
+                            {
+                                lst_extArt.Add(pnl.Panel_ExtensionBot2ArtNo);
+                            }
+
                             lst_extArt.Add(pnl.Panel_ExtensionLeftArtNo);
-                            lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                            if (pnl.Panel_ExtLeftChk)
+                            {
+                                lst_extArt.Add(pnl.Panel_ExtensionLeft2ArtNo);
+                            }
+
                             lst_extArt.Add(pnl.Panel_ExtensionRightArtNo);
-                            lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+                            if (pnl.Panel_ExtRightChk)
+                            {
+                                lst_extArt.Add(pnl.Panel_ExtensionRight2ArtNo);
+                            }
 
                             if (pnl.Panel_ExtensionOptionsVisibility == true)
                             {

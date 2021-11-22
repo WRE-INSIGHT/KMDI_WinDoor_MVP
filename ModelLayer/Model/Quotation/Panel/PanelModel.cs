@@ -112,6 +112,21 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        private int _panelDisplayWidthDecimal;
+        public int Panel_DisplayWidthDecimal
+        {
+            get
+            {
+                return _panelDisplayWidthDecimal;
+            }
+            set
+            {
+                _panelDisplayWidthDecimal = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private int _panelDisplayWidth_orig;
         public int Panel_OriginalDisplayWidth
         {
@@ -123,6 +138,19 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelDisplayWidth_orig = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelDisplayWidth_orig_decimal;
+        public int Panel_OriginalDisplayWidthDecimal
+        {
+            get
+            {
+                return _panelDisplayWidth_orig_decimal;
+            }
+            set
+            {
+                _panelDisplayWidth_orig_decimal = value;
             }
         }
 
@@ -174,6 +202,21 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        private int _panelDisplayHeightDecimal;
+        public int Panel_DisplayHeightDecimal
+        {
+            get
+            {
+                return _panelDisplayHeightDecimal;
+            }
+            set
+            {
+                _panelDisplayHeightDecimal = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private int _panelDisplayHeight_orig;
         public int Panel_OriginalDisplayHeight
         {
@@ -185,6 +228,19 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelDisplayHeight_orig = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        private int _panelDisplayHeight_orig_decimal;
+        public int Panel_OriginalDisplayHeightDecimal
+        {
+            get
+            {
+                return _panelDisplayHeight_orig_decimal;
+            }
+            set
+            {
+                _panelDisplayHeight_orig_decimal = value;
             }
         }
 
@@ -702,11 +758,17 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
         public int Panel_GlazingBeadWidth { get; set; }
+        public int Panel_GlazingBeadWidthDecimal { get; set; }
         public int Panel_GlazingBeadHeight { get; set; }
+        public int Panel_GlazingBeadHeightDecimal { get; set; }
         public int Panel_OriginalGlassWidth { get; set; }
+        public int Panel_OriginalGlassWidthDecimal { get; set; }
         public int Panel_GlassWidth { get; set; }
+        public int Panel_GlassWidthDecimal { get; set; }
         public int Panel_GlassHeight { get; set; }
+        public int Panel_GlassHeightDecimal { get; set; }
         public int Panel_OriginalGlassHeight { get; set; }
+        public int Panel_OriginalGlassHeightDecimal { get; set; }
         public int Panel_GlazingSpacerQty { get; set; }
 
         private int _panelGlassPropertyHt;
@@ -780,13 +842,20 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         public int Panel_SashWidth { get; set; }
+        public int Panel_SashWidthDecimal { get; set; }
 
         public int Panel_SashHeight { get; set; }
+        public int Panel_SashHeightDecimal { get; set; }
+
         public int Panel_OriginalSashWidth { get; set; }
+        public int Panel_OriginalSashWidthDecimal { get; set; }
         public int Panel_OriginalSashHeight { get; set; }
+        public int Panel_OriginalSashHeightDecimal { get; set; }
 
         public int Panel_SashReinfWidth { get; set; }
+        public int Panel_SashReinfWidthDecimal { get; set; }
         public int Panel_SashReinfHeight { get; set; }
+        public int Panel_SashReinfHeightDecimal { get; set; }
 
         private bool _panelSashPropertyVisibility;
         public bool Panel_SashPropertyVisibility
@@ -2012,7 +2081,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if ((Panel_Type.Contains("Awning") || Panel_Type.Contains("Casement")) && Panel_GlassThickness == 6.0f)
                 {
-                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
                 }
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
@@ -2031,10 +2100,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
                 {
                     Panel_SashWidth = Panel_DisplayWidth - (26 * 2) + 5;
+                    Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
                     Panel_SashHeight = Panel_DisplayHeight - (26 * 2) + 5;
+                    Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
                     Panel_GlassWidth = Panel_SashWidth - 5 - (55 * 2) - 6;
+                    Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                     Panel_GlassHeight = Panel_SashHeight - 5 - (55 * 2) - 6;
+                    Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
                 }
                 else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
                 {
@@ -2064,11 +2137,15 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
 
-                    Panel_SashWidth = Panel_DisplayWidth - (sash_deduct * 2) + 5;
-                    Panel_SashHeight = Panel_DisplayHeight - inward_motorized_deduction - (sash_deduct * 2) + 5;
+                    Panel_SashWidth = Panel_DisplayWidth - inward_motorized_deduction - (sash_deduct * 2) + 5;
+                    Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
+                    Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 5;
+                    Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
                     Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
+                    Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                     Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
+                    Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
                 }
 
                 int handle_deduct = 0;
@@ -2083,10 +2160,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
 
                 Panel_SashReinfWidth = Panel_SashWidth - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfWidthDecimal = Panel_SashWidthDecimal;
                 Panel_SashReinfHeight = Panel_SashHeight - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_GlazingBeadWidth = Panel_SashWidth;
+                Panel_GlazingBeadWidthDecimal = Panel_SashWidthDecimal;
                 Panel_GlazingBeadHeight = Panel_SashHeight;
+                Panel_GlazingBeadHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
@@ -2799,7 +2880,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
-                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
 
                     if (inside_color == Foil_Color._None)
                     {
@@ -2852,10 +2933,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_SashReinfHeight = 0;
 
                 Panel_GlazingBeadWidth = Panel_DisplayWidth; //- (33 * 2);
+                Panel_GlazingBeadWidthDecimal = Panel_DisplayWidthDecimal; //- (33 * 2);
                 Panel_GlazingBeadHeight = Panel_DisplayHeight; //- (33 * 2);
+                Panel_GlazingBeadHeightDecimal = Panel_DisplayHeightDecimal; //- (33 * 2);
 
                 Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - 6;
+                Panel_GlassWidthDecimal = Panel_DisplayWidthDecimal;
                 Panel_GlassHeight = Panel_DisplayHeight - (33 * 2) - 6;
+                Panel_GlassHeightDecimal = Panel_DisplayHeightDecimal;
             }
 
             Panel_GlazingSpacerQty = 1;
@@ -3372,7 +3457,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if ((Panel_Type.Contains("Awning") || Panel_Type.Contains("Casement")) && Panel_GlassThickness == 6.0f)
                 {
-                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
                 }
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
@@ -3442,22 +3527,34 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
 
                 Panel_SashWidth = (((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) - inward_motorized_deduction) + 5;
+                Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
                 Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
+                Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
-                Panel_OriginalSashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) + 5;
-                Panel_OriginalSashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
+                Panel_OriginalSashWidth = Panel_SashWidth;
+                Panel_OriginalSashWidthDecimal = Panel_SashWidthDecimal;
+                Panel_OriginalSashHeight = Panel_SashHeight;
+                Panel_OriginalSashHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_SashReinfWidth = Panel_SashWidth - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfWidthDecimal = Panel_SashWidthDecimal;
                 Panel_SashReinfHeight = Panel_SashHeight - 5 - (handle_deduct * 2) - 10;
+                Panel_SashReinfHeightDecimal = Panel_SashHeightDecimal;
 
                 Panel_GlazingBeadWidth = Panel_SashWidth;
+                Panel_GlazingBeadWidthDecimal = Panel_SashWidthDecimal;
                 Panel_GlazingBeadHeight = Panel_SashHeight;
+                Panel_GlazingBeadHeightDecimal = Panel_SashHeightDecimal;
 
-                Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
+                Panel_GlassWidth = ((Panel_SashWidth - 5) - (glass_deduct * 2)) - 6;
+                Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                 Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
+                Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
 
-                Panel_OriginalGlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
-                Panel_OriginalGlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
+                Panel_OriginalGlassWidth = Panel_GlassWidth;
+                Panel_OriginalGlassWidthDecimal = Panel_GlassWidthDecimal;
+                Panel_OriginalGlassHeight = Panel_GlassHeight;
+                Panel_OriginalGlassHeightDecimal = Panel_GlassHeightDecimal;
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
@@ -4199,7 +4296,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
-                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+                    Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
 
                     if (inside_color == Foil_Color._None)
                     {
@@ -5251,7 +5348,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           IMultiPanelModel panelMultiPanelParent,
                           GlazingBead_ArticleNo panelGlazingBeadArtNo,
                           int panelDisplayWidth,
+                          int panelDisplayWidthDecimal,
                           int panelDisplayHeight,
+                          int panelDisplayHeightDecimal,
                           int panelGlassID,
                           GlassFilm_Types panelGlassFilm,
                           SashProfile_ArticleNo panelSash,
@@ -5309,10 +5408,14 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_ParentMultiPanelModel = panelMultiPanelParent;
             PanelGlazingBead_ArtNo = panelGlazingBeadArtNo;
             Panel_DisplayWidth = panelDisplayWidth;
+            Panel_DisplayWidthDecimal = panelDisplayWidthDecimal;
             Panel_DisplayHeight = panelDisplayHeight;
+            Panel_DisplayHeightDecimal = panelDisplayHeightDecimal;
             PanelGlass_ID = panelGlassID;
             Panel_OriginalDisplayWidth = panelDisplayWidth;
+            Panel_OriginalDisplayWidthDecimal = panelDisplayWidthDecimal;
             Panel_OriginalDisplayHeight = panelDisplayHeight;
+            Panel_OriginalDisplayHeightDecimal = panelDisplayHeightDecimal;
             Panel_GlassFilm = panelGlassFilm;
             Panel_SashProfileArtNo = panelSash;
             Panel_SashReinfArtNo = panelSashReinf;

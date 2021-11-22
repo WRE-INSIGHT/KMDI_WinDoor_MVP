@@ -1,5 +1,4 @@
 ﻿using Headspring;
-using System.ComponentModel;
 
 namespace EnumerationTypeLayer
 {
@@ -122,7 +121,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly SashProfile_ArticleNo _None = new SashProfile_ArticleNo(0, "None");
             public static readonly SashProfile_ArticleNo _7581 = new SashProfile_ArticleNo(1, "7581");
-            public static readonly SashProfile_ArticleNo _373 = new SashProfile_ArticleNo(2, "373");
+            public static readonly SashProfile_ArticleNo _373 = new SashProfile_ArticleNo(2, "373"); //inward
             public static readonly SashProfile_ArticleNo _374 = new SashProfile_ArticleNo(3, "374");
             public static readonly SashProfile_ArticleNo _395 = new SashProfile_ArticleNo(4, "395"); //inward
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
@@ -242,7 +241,7 @@ namespace EnumerationTypeLayer
         public class ProfileKnobCylinder_ArtNo : Enumeration<ProfileKnobCylinder_ArtNo, int>
         {
             public static readonly ProfileKnobCylinder_ArtNo _45x45 = new ProfileKnobCylinder_ArtNo(0, "45x45");
-            public static readonly ProfileKnobCylinder_ArtNo _50p5x50p5 = new ProfileKnobCylinder_ArtNo(0, "50.5x50.5");
+            //public static readonly ProfileKnobCylinder_ArtNo _50p5x50p5 = new ProfileKnobCylinder_ArtNo(0, "50.5x50.5");
 
             private ProfileKnobCylinder_ArtNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -647,7 +646,8 @@ namespace EnumerationTypeLayer
 
         public class GBSpacer_ArticleNo : Enumeration<GBSpacer_ArticleNo, int>
         {
-            public static readonly GBSpacer_ArticleNo _GBSpacer = new GBSpacer_ArticleNo(0, "GB SPACER");
+            //public static readonly GBSpacer_ArticleNo _GBSpacer = new GBSpacer_ArticleNo(0, "GB SPACER");
+            public static readonly GBSpacer_ArticleNo _KBC70 = new GBSpacer_ArticleNo(0, "KBC70");
 
             private GBSpacer_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

@@ -256,10 +256,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (_multiPanelModel.MPanel_StackNo < 3)
                 {
                     int suggest_Wd = (((_multiPanelModel.MPanel_Width) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount),
-                        suggest_HT = _multiPanelModel.MPanel_Height;
+                        suggest_HT = _multiPanelModel.MPanel_Height,
+                        mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight,
+                        suggest_DisplayHTDecimal = _multiPanelModel.MPanel_DisplayHeightDecimal;
 
-                    int mpanelDisplayWidth = _multiPanelModel.MPanel_DisplayWidth / (_multiPanelModel.MPanel_Divisions + 1),
-                        mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight;
+                    string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
+                    decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
+
+                    int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
+                    int DisplayWD_singleDecimalPlace = 0;
+
+                    string[] DisplayWD_dec_split = decimal.Round(DisplayWD_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                    if (DisplayWD_dec_split.Count() > 1)
+                    {
+                        DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
+                    }
 
                     FlowDirection flow = FlowDirection.LeftToRight;
                     if (data.Contains("Transom"))
@@ -271,8 +283,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     IMultiPanelModel mPanelModel = _multipanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
-                                                                                          mpanelDisplayWidth,
+                                                                                          suggest_DisplayWD,
+                                                                                          DisplayWD_singleDecimalPlace,
                                                                                           mpanelDisplayHeight,
+                                                                                          suggest_DisplayHTDecimal,
                                                                                           fpnl,
                                                                                           (UserControl)_frameUCP.GetFrameUC(),
                                                                                           _frameModel,
@@ -475,8 +489,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 int suggest_Wd = 0,
                     suggest_HT = _multiPanelModel.MPanel_Height - 20,
-                    suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth / totalPanelCount,
-                    suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight;
+                    suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight,
+                    suggest_DisplayHTDecimal = _multiPanelModel.MPanel_DisplayHeightDecimal;
+
+                string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
+                decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
+
+                int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
+                int DisplayWD_singleDecimalPlace = 0;
+
+                string[] DisplayWD_dec_split = decimal.Round(DisplayWD_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                if (DisplayWD_dec_split.Count() > 1)
+                {
+                    DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
+                }
 
                 if (_multiPanelModel.MPanel_DividerEnabled)
                 {
@@ -552,7 +579,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        _frameModel,
                                                                        _multiPanelModel,
                                                                        suggest_DisplayWD,
+                                                                       DisplayWD_singleDecimalPlace,
                                                                        suggest_DisplayHT,
+                                                                       suggest_DisplayHTDecimal,
                                                                        GlazingBead_ArticleNo._2452,
                                                                        GlassFilm_Types._None,
                                                                        SashProfile_ArticleNo._7581,
@@ -594,7 +623,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        _frameModel.FrameImageRenderer_Zoom,
                                                                        _multiPanelModel.GetNextIndex(),
                                                                        DockStyle.None);
-
                 if (_prev_divModel != null)
                 {
                     _panelModel.Panel_CornerDriveOptionsVisibility = _prev_divModel.Div_ChkDM;
@@ -702,7 +730,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _multiPanelModel.Fit_MyControls_Dimensions();
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                    _multiPanelModel.Adjust_ControlDisplaySize();
+                    //_multiPanelModel.Adjust_ControlDisplaySize();
                     _mainPresenter.Fit_MyControls_byControlsLocation();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                 }
