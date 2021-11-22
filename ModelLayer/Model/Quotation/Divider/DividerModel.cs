@@ -920,7 +920,7 @@ namespace ModelLayer.Model.Quotation.Divider
             {
                 div_side = "Height";
                 explosion_length = Div_ExplosionHeight.ToString();
-                explosion_length2 = Div_ReinfWidth.ToString();
+                explosion_length2 = Div_ReinfHeight.ToString();
             }
 
             tbl_explosion.Rows.Add(Div_Type.ToString() + " " + div_side + " " + Div_ArtNo.DisplayName,
