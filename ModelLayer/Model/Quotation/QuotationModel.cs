@@ -295,7 +295,6 @@ namespace ModelLayer.Model.Quotation
 
                                     int total_cladd4UPVC_xpbolts = div_nxtCtrl.Add_CladdBracket4UPVC_expbolts();
                                     exp_bolt += total_cladd4UPVC_xpbolts;
-
                                 }
 
                                 if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added && mpnl.MPanel_Type == "Mullion")
@@ -625,7 +624,6 @@ namespace ModelLayer.Model.Quotation
 
                                                 int claddingBracketForConcrete_expBolt = div_nxtCtrl.Add_CladdBracket4Concrete_expbolts();
                                                 exp_bolt += claddingBracketForConcrete_expBolt;
-
                                             }
 
                                             if (div_nxtCtrl.Div_CladdingBracketForUPVCQTY > 0)
@@ -637,7 +635,6 @@ namespace ModelLayer.Model.Quotation
 
                                                 int claddingBracketForUPVC_expBolt = div_nxtCtrl.Add_CladdBracket4UPVC_expbolts();
                                                 exp_bolt += claddingBracketForUPVC_expBolt;
-
                                             }
                                         }
                                     }
@@ -754,7 +751,6 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 pnl_curCtrl.Insert_MotorizedInfo_MaterialList(Material_List);
                                             }
-
                                         }
                                         perFrame = false;
                                     }
@@ -1020,7 +1016,6 @@ namespace ModelLayer.Model.Quotation
                                 if (pnl_curCtrl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
                                 {
                                     pnl_curCtrl.Insert_GeorgianBar_MaterialList(Material_List);
-
                                 }
 
                                 if (pnl_curCtrl.Panel_Type == "Fixed Panel")
@@ -1062,8 +1057,8 @@ namespace ModelLayer.Model.Quotation
 
                             int motor_screws = pnl.Add_MotorizedMech_screws4Inst();
                             total_screws_installation += motor_screws;
-                            total_screws_installation += (4 * pnl.Panel_MotorizedMechSetQty * 2);
 
+                            total_screws_installation += (4 * pnl.Panel_MotorizedMechSetQty * 2);
                         }
                         else if (pnl.Panel_MotorizedOptionVisibility == false)
                         {
