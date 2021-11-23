@@ -268,6 +268,8 @@ namespace PresentationLayer.Presenter.UserControls
                     handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                 }
 
+                _frameModel.SetDeductFramePadding(false, false);
+
                 _panelModel = _panelServices.AddPanelModel(wd,
                                                            ht,
                                                            frame,
@@ -493,7 +495,7 @@ namespace PresentationLayer.Presenter.UserControls
             int fr_pads = _frameModel.Frame_Padding_int.All;
             Rectangle pnl_inner = new Rectangle();
 
-            if (_frameModel.Frame_Zoom == 0.26f)
+            if (_frameModel.Frame_Zoom == 0.26f || _frameModel.Frame_Zoom == 0.17f)
             {
                 pnl_inner = new Rectangle(new Point(15, 15),
                                           new Size(pfr.ClientRectangle.Width - (15 * 2),

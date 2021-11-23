@@ -339,8 +339,16 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             if (Frame_Zoom == 0.26f)
             {
-                Frame_Padding_int = new Padding(10);
-                FrameImageRenderer_Padding_int = new Padding(10);
+                if (_is_MPanel) // meaning MPanel
+                {
+                    Frame_Padding_int = new Padding(10);
+                    FrameImageRenderer_Padding_int = new Padding(10);
+                }
+                else if (!_is_MPanel) // meaning Panel
+                {
+                    Frame_Padding_int = new Padding(15);
+                    FrameImageRenderer_Padding_int = new Padding(15);
+                }
             }
             else
             {
@@ -349,10 +357,11 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
-        private bool _deductFramePadding_bool;
-        public void SetDeductFramePadding(bool mode)
+        private bool _deductFramePadding_bool, _is_MPanel;
+        public void SetDeductFramePadding(bool mode, bool is_mpanel = true)
         {
             _deductFramePadding_bool = mode;
+            _is_MPanel = is_mpanel;
             if (mode == true)
             {
                 FramePadding_Deduct();

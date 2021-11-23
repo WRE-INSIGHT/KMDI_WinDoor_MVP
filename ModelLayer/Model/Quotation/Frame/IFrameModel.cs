@@ -34,7 +34,7 @@ namespace ModelLayer.Model.Quotation.Frame
         int[] Arr_padding_withmpnl { get; }
 
 
-        void SetDeductFramePadding(bool mode);
+        void SetDeductFramePadding(bool mode, bool is_mpanel = true);
         void SetZoom();
         void Set_DimensionsToBind_using_FrameZoom();
         void Set_ImagerDimensions_using_ImagerZoom();
