@@ -281,7 +281,14 @@ namespace ModelLayer.Model.Quotation.Frame
             foreach (IPanelModel pnl in Lst_Panel)
             {
                 pnl.Panel_Zoom = Frame_Zoom;
-                pnl.SetDimensions_using_ZoomPercentage();
+                if (Frame_Zoom == 0.17f || Frame_Zoom == 0.26f)
+                {
+                    pnl.SetDimensionsToBind_usingZoom_26and17_with_DividerMovement();
+                }
+                else
+                {
+                    pnl.SetDimensionToBind_using_BaseDimension();
+                }
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }
@@ -323,7 +330,7 @@ namespace ModelLayer.Model.Quotation.Frame
         private void FramePadding_Deduct()
         {
             _frameDeduction = (int)(_frame_basicDeduction * Frame_Zoom);
-            if (Frame_Zoom == 0.26f)
+            if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f)
             {
                 Frame_Padding_int = new Padding(10);
                 FrameImageRenderer_Padding_int = new Padding(10);
@@ -337,7 +344,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
         private void FramePadding_Default()
         {
-            if (Frame_Zoom == 0.26f)
+            if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f)
             {
                 if (_is_MPanel) // meaning MPanel
                 {

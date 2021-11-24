@@ -649,7 +649,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
                 _multiPanelModel.Reload_PanelMargin();
 
-                _panelModel.SetDimensions_using_ZoomPercentage();
+                _panelModel.SetDimensionsToBind_using_ZoomPercentage();
                 _panelModel.SetPanelMargin_using_ZoomPercentage();
                 _panelModel.SetPanelMarginImager_using_ImageZoomPercentage();
 

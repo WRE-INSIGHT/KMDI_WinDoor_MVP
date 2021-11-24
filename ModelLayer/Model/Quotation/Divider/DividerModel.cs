@@ -374,7 +374,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 ht = Div_MPanelParent.MPanel_HeightToBind;
             if (Div_Type == DividerType.Mullion)
             {
-                if (_divZoom == 0.26f)
+                if (_divZoom == 0.26f || _divZoom == 0.17f)
                 {
                     Div_WidthToBind = 13;
                     Div_HeightToBind = ht;
@@ -387,7 +387,7 @@ namespace ModelLayer.Model.Quotation.Divider
             }
             else if (Div_Type == DividerType.Transom)
             {
-                if (_divZoom == 0.26f)
+                if (_divZoom == 0.26f || _divZoom == 0.17f)
                 {
                     Div_WidthToBind = wd;
                     Div_HeightToBind = 13;
@@ -408,7 +408,7 @@ namespace ModelLayer.Model.Quotation.Divider
             if (Div_Type == DividerType.Mullion)
             {
                 DivImageRenderer_Height = (int)(ht * Div_Zoom);
-                if (DivImageRenderer_Zoom == 0.26f)
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f)
                 {
                     DivImageRenderer_Width = 13;
                 }
@@ -420,7 +420,7 @@ namespace ModelLayer.Model.Quotation.Divider
             else if (Div_Type == DividerType.Transom)
             {
                 DivImageRenderer_Width = (int)(wd * Div_Zoom);
-                if (DivImageRenderer_Zoom == 0.26f)
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f)
                 {
                     DivImageRenderer_Height = 13;
                 }

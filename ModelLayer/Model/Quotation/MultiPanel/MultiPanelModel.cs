@@ -661,6 +661,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     dimension = (int)(reversed_ht / 0.26f);
                 }
             }
+            else if (MPanel_Zoom == 0.17f)
+            {
+                int reversed_wd = (int)Math.Ceiling(MPanel_DisplayWidth * 0.17f) - 20, //padding
+                    reversed_ht = (int)Math.Ceiling(MPanel_DisplayHeight * 0.17f) - 20; //padding
+
+                if (WidthOrHeight == "Width")
+                {
+                    dimension = (int)(reversed_wd / 0.17f);
+                }
+                else if (WidthOrHeight == "Height")
+                {
+                    dimension = (int)(reversed_ht / 0.17f);
+                }
+            }
             else
             {
                 if (WidthOrHeight == "Width")
@@ -686,6 +700,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
                 wd = (int)(reversed_wd / 0.26f);
                 ht = (int)(reversed_ht / 0.26f);
+            }
+            else if (MPanel_Zoom == 0.17f)
+            {
+                int reversed_wd = (int)Math.Ceiling(MPanel_DisplayWidth * 0.17f) - 20, //padding
+                    reversed_ht = (int)Math.Ceiling(MPanel_DisplayHeight * 0.17f) - 20; //padding
+
+                wd = (int)(reversed_wd / 0.17f);
+                ht = (int)(reversed_ht / 0.17f);
             }
             else
             {
@@ -719,7 +741,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             foreach (IPanelModel pnl in MPanelLst_Panel)
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
-                pnl.SetDimensions_using_ZoomPercentage();
+                if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f)
+                {
+                    pnl.SetDimensionsToBind_usingZoom_26and17_with_DividerMovement();
+                }
+                else
+                {
+                    pnl.SetDimensionToBind_using_BaseDimension();
+                }
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }

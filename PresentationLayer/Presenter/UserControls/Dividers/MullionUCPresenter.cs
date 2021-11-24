@@ -138,7 +138,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     prev_pnl.Panel_Width++;
                                     prev_pnl.Panel_DisplayWidth++;
 
-                                    prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f)
+                                    {
+                                        prev_pnl.SetDimensionsToBind_usingZoom_26and17_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                    }
                                 }
 
                                 if (nxt_ctrl is IMultiPanelUC)
@@ -151,7 +158,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     nxt_pnl.Panel_Width--;
                                     nxt_pnl.Panel_DisplayWidth--;
 
-                                    nxt_pnl.SetDimensionToBind_using_BaseDimension();
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f)
+                                    {
+                                        nxt_pnl.SetDimensionsToBind_usingZoom_26and17_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        nxt_pnl.SetDimensionToBind_using_BaseDimension();
+                                    }
                                 }
                             }
                         }
@@ -181,7 +195,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     prev_pnl.Panel_Width--;
                                     prev_pnl.Panel_DisplayWidth--;
 
-                                    prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f)
+                                    {
+                                        prev_pnl.SetDimensionsToBind_usingZoom_26and17_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                    }
                                 }
 
                                 if (nxt_ctrl is IMultiPanelUC)
@@ -194,7 +215,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     nxt_pnl.Panel_Width++;
                                     nxt_pnl.Panel_DisplayWidth++;
 
-                                    nxt_pnl.SetDimensionToBind_using_BaseDimension();
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f)
+                                    {
+                                        nxt_pnl.SetDimensionsToBind_usingZoom_26and17_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        nxt_pnl.SetDimensionToBind_using_BaseDimension();
+                                    }
                                 }
                             }
                         }
@@ -393,7 +421,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 prev_pnl.Panel_Width += (e.X - _point_of_origin.X);
                                 prev_pnl.Panel_DisplayWidth += (e.X - _point_of_origin.X);
 
-                                prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f)
+                                {
+                                    prev_pnl.SetDimensionsToBind_usingZoom_26and17_with_DividerMovement();
+                                }
+                                else
+                                {
+                                    prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                }
                             }
 
                             if (nxt_ctrl is IMultiPanelUC)
@@ -406,7 +441,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 nxt_pnl.Panel_Width -= (e.X - _point_of_origin.X);
                                 nxt_pnl.Panel_DisplayWidth -= (e.X - _point_of_origin.X);
 
-                                nxt_pnl.SetDimensionToBind_using_BaseDimension();
+                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f)
+                                {
+                                    nxt_pnl.SetDimensionsToBind_usingZoom_26and17_with_DividerMovement();
+                                }
+                                else
+                                {
+                                    nxt_pnl.SetDimensionToBind_using_BaseDimension();
+                                }
                             }
                         }
                     }
