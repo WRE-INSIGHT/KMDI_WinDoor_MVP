@@ -754,9 +754,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (_panelModel.Panel_Placement == "Last")
                 {
-                    _multiPanelModel.Fit_MyControls_Dimensions();
+                    if (_multiPanelModel.MPanel_Zoom != 0.26f && _multiPanelModel.MPanel_Zoom != 0.17f)
+                    {
+                        _multiPanelModel.Fit_MyControls_Dimensions();
+                    }
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                    //_multiPanelModel.Adjust_ControlDisplaySize();
                     _mainPresenter.Fit_MyControls_byControlsLocation();
                     _mainPresenter.Fit_MyImager_byImagersLocation();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
@@ -1008,7 +1010,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 pInnerWd = fpnl.ClientRectangle.Width - (int)(20 * zoom),
                 pInnerHt = fpnl.ClientRectangle.Height - (int)(20 * zoom);
 
-            if (zoom == 0.26f)
+            if (zoom == 0.26f || zoom == 0.17f)
             {
                 pInnerX = 15;
                 pInnerY = 15;
@@ -1084,7 +1086,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int bPoints = (int)(10 * _frameModel.Frame_Zoom),
                     bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom);
 
-                if (zoom == 0.26f)
+                if (zoom == 0.26f || zoom == 0.17f)
                 {
                     bounds = new Rectangle(new Point(5, 5),
                                            new Size(fpnl.ClientRectangle.Width - 10, fpnl.ClientRectangle.Height - 10));
