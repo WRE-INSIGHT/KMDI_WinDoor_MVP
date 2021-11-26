@@ -495,7 +495,8 @@ namespace PresentationLayer.Presenter.UserControls
             int fr_pads = _frameModel.Frame_Padding_int.All;
             Rectangle pnl_inner = new Rectangle();
 
-            if (_frameModel.Frame_Zoom == 0.26f || _frameModel.Frame_Zoom == 0.17f)
+            if (_frameModel.Frame_Zoom == 0.26f || _frameModel.Frame_Zoom == 0.17f || 
+                _frameModel.Frame_Zoom == 0.13f || _frameModel.Frame_Zoom == 0.10f)
             {
                 pnl_inner = new Rectangle(new Point(15, 15),
                                           new Size(pfr.ClientRectangle.Width - (15 * 2),

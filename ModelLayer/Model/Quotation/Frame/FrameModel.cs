@@ -330,7 +330,8 @@ namespace ModelLayer.Model.Quotation.Frame
         private void FramePadding_Deduct()
         {
             _frameDeduction = (int)(_frame_basicDeduction * Frame_Zoom);
-            if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f)
+            if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f || 
+                Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
             {
                 Frame_Padding_int = new Padding(10);
                 FrameImageRenderer_Padding_int = new Padding(10);
@@ -344,7 +345,8 @@ namespace ModelLayer.Model.Quotation.Frame
 
         private void FramePadding_Default()
         {
-            if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f)
+            if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f || 
+                Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
             {
                 if (_is_MPanel) // meaning MPanel
                 {

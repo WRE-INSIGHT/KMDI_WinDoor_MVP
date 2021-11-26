@@ -108,8 +108,14 @@ namespace PresentationLayer.Presenter.UserControls
             Pen redP = new Pen(Color.Red);
             redP.Width = 3.5f;
             Font dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
-
             Font dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+
+            if (_windoorModel.WD_zoom == 0.10f)
+            {
+                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 8, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 8, FontStyle.Bold);
+            }
+
 
             int total_panel = 0, total_mpanel = 0;
             foreach (IFrameModel frame in _windoorModel.lst_frame)
@@ -193,10 +199,14 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                     else
                     {
-                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
-                        if (_windoorModel.WD_zoom == 0.26f)
+                        if (_windoorModel.WD_zoom == 0.26f || _windoorModel.WD_zoom == 0.17f || 
+                            _windoorModel.WD_zoom == 0.13f || _windoorModel.WD_zoom == 0.10f)
                         {
                             dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
                         }
                     }
 
@@ -256,14 +266,25 @@ namespace PresentationLayer.Presenter.UserControls
                     if (dmnsion_h.Contains(".0"))
                     {
                         dmnsion_h = dmnsion_h.Replace(".0", "");
-                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                        if (_windoorModel.WD_zoom == 0.10f)
+                        {
+                            dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                        }
                     }
                     else
                     {
-                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
-                        if (_windoorModel.WD_zoom == 0.26f)
+                        if (_windoorModel.WD_zoom == 0.26f || _windoorModel.WD_zoom == 0.17f || 
+                            _windoorModel.WD_zoom == 0.13f || _windoorModel.WD_zoom == 0.10f)
                         {
                             dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
                         }
                     }
 

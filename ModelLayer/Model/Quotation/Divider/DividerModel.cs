@@ -374,7 +374,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 ht = Div_MPanelParent.MPanel_HeightToBind;
             if (Div_Type == DividerType.Mullion)
             {
-                if (_divZoom == 0.26f || _divZoom == 0.17f)
+                if (_divZoom == 0.26f || _divZoom == 0.17f || _divZoom == 0.13f)
                 {
                     Div_WidthToBind = 13;
                     Div_HeightToBind = ht;
@@ -387,7 +387,7 @@ namespace ModelLayer.Model.Quotation.Divider
             }
             else if (Div_Type == DividerType.Transom)
             {
-                if (_divZoom == 0.26f || _divZoom == 0.17f)
+                if (_divZoom == 0.26f || _divZoom == 0.17f || _divZoom == 0.13f)
                 {
                     Div_WidthToBind = wd;
                     Div_HeightToBind = 13;

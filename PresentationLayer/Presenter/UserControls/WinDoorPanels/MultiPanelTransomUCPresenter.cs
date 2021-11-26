@@ -1010,7 +1010,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 pInnerWd = fpnl.ClientRectangle.Width - (int)(20 * zoom),
                 pInnerHt = fpnl.ClientRectangle.Height - (int)(20 * zoom);
 
-            if (zoom == 0.26f || zoom == 0.17f)
+            if (zoom == 0.26f || zoom == 0.17f || 
+                zoom == 0.13f || zoom == 0.10f)
             {
                 pInnerX = 15;
                 pInnerY = 15;
@@ -1086,7 +1087,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int bPoints = (int)(10 * _frameModel.Frame_Zoom),
                     bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom);
 
-                if (zoom == 0.26f || zoom == 0.17f)
+                if (zoom == 0.26f || zoom == 0.17f || 
+                    zoom == 0.13f || zoom == 0.10f)
                 {
                     bounds = new Rectangle(new Point(5, 5),
                                            new Size(fpnl.ClientRectangle.Width - 10, fpnl.ClientRectangle.Height - 10));
