@@ -740,7 +740,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
             int dimension = 0;
 
-            if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f)
+            if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
             {
                 int reversed_wd = (int)Math.Ceiling(MPanel_DisplayWidth * MPanel_Zoom) - 20, //padding
                     reversed_ht = (int)Math.Ceiling(MPanel_DisplayHeight * MPanel_Zoom) - 20; //padding
@@ -772,7 +772,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public void Set_DimensionToBind_using_MPanelZoom()
         {
             int wd = 0, ht = 0;
-            if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f)
+            if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
             {
                 int reversed_wd = (int)Math.Ceiling(MPanel_DisplayWidth * MPanel_Zoom) - 20, //padding
                     reversed_ht = (int)Math.Ceiling(MPanel_DisplayHeight * MPanel_Zoom) - 20; //padding
@@ -812,9 +812,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             foreach (IPanelModel pnl in MPanelLst_Panel)
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
-                if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f)
+                if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
+                    MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
                 {
-                    pnl.SetDimensionsToBind_usingZoom_26and17_with_DividerMovement();
+                    pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                 }
                 else
                 {

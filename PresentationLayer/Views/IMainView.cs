@@ -31,6 +31,7 @@ namespace PresentationLayer.Views
         void ShowMainView();
         void ThisBinding(Dictionary<string, Binding> binding);
         void RemoveBinding(Control ctrl);
+
         Panel GetPanelMain();
         Panel GetPanelItems();
         Panel GetPanelPropertiesBody();

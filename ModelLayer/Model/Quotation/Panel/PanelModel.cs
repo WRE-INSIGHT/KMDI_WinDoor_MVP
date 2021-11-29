@@ -1874,11 +1874,11 @@ namespace ModelLayer.Model.Quotation.Panel
             PanelImageRenderer_Height = Convert.ToInt32(Panel_Height * PanelImageRenderer_Zoom);
         }
 
-        public void SetDimensionsToBind_usingZoom_26and17_with_DividerMovement()
+        public void SetDimensionsToBind_usingZoom_below26_with_DividerMovement()
         {
             int pnl_wd = 0, pnl_ht = 0, div_movement = 0;
 
-            if (Panel_Zoom == 0.26f || Panel_Zoom == 0.17f || Panel_Zoom == 0.13f)
+            if (Panel_Zoom == 0.26f || Panel_Zoom == 0.17f || Panel_Zoom == 0.13f || Panel_Zoom == 0.10f)
             {
                 if (Panel_ParentMultiPanelModel != null)
                 {

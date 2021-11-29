@@ -753,10 +753,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (_panelModel.Panel_Placement == "Last")
                 {
-                    if (_multiPanelModel.MPanel_Zoom != 0.26f && _multiPanelModel.MPanel_Zoom != 0.17f)
+                    if (_multiPanelModel.MPanel_Zoom != 0.26f && _multiPanelModel.MPanel_Zoom != 0.17f &&
+                        _multiPanelModel.MPanel_Zoom != 0.13f && _multiPanelModel.MPanel_Zoom != 0.10f)
                     {
                         _multiPanelModel.Fit_MyControls_Dimensions();
                     }
+
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                     _mainPresenter.Fit_MyControls_byControlsLocation();
                     _mainPresenter.Fit_MyImager_byImagersLocation();
