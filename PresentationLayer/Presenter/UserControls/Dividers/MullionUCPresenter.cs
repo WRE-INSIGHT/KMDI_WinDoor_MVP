@@ -132,13 +132,24 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     prev_mpanel.MPanel_Width++;
                                     prev_mpanel.MPanel_DisplayWidth++;
+
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    {
+                                        //prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        prev_mpanel.SetDimensionsToBind_using_ZoomPercentage();
+                                    }
                                 }
                                 else if (prev_ctrl is IPanelUC)
                                 {
                                     prev_pnl.Panel_Width++;
                                     prev_pnl.Panel_DisplayWidth++;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f || _divModel.Div_Zoom == 0.13f)
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f || 
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
@@ -152,6 +163,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     nxt_mpnl.MPanel_Width--;
                                     nxt_mpnl.MPanel_DisplayWidth--;
+
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    {
+                                        //prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        nxt_mpnl.SetDimensionsToBind_using_ZoomPercentage();
+                                    }
                                 }
                                 else if (nxt_ctrl is IPanelUC)
                                 {
@@ -190,6 +211,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     prev_mpanel.MPanel_Width--;
                                     prev_mpanel.MPanel_DisplayWidth--;
+
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    {
+                                        //prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        prev_mpanel.SetDimensionsToBind_using_ZoomPercentage();
+                                    }
                                 }
                                 else if (prev_ctrl is IPanelUC)
                                 {
@@ -211,6 +242,17 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     nxt_mpnl.MPanel_Width++;
                                     nxt_mpnl.MPanel_DisplayWidth++;
+
+
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    {
+                                        //prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        nxt_mpnl.SetDimensionsToBind_using_ZoomPercentage();
+                                    }
                                 }
                                 else if (nxt_ctrl is IPanelUC)
                                 {
@@ -322,14 +364,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 prevCtrl_isPanel = false;
             }
 
-            if (_divModel.Div_Width == (int)_frameModel.Frame_Type || _divModel.Div_Width == 13)
+            if (_divModel.Div_WidthToBind == (int)_frameModel.Frame_Type || _divModel.Div_Width == 13)
             {
                 g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
                                                                        0,
                                                                        mul.ClientRectangle.Width - w,
                                                                        mul.ClientRectangle.Height - w));
             }
-            else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
+            else if (_divModel.Div_WidthToBind == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
             {
                 if (prevCtrl_isPanel == false)
                 {
@@ -346,7 +388,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                                            mul.ClientRectangle.Height - w));
                 }
             }
-            else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
+            else if (_divModel.Div_WidthToBind == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
             {
                 g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(-1,
                                                                        0,
@@ -418,6 +460,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             {
                                 prev_mpanel.MPanel_Width += (e.X - _point_of_origin.X);
                                 prev_mpanel.MPanel_DisplayWidth += (e.X - _point_of_origin.X);
+
+                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                {
+                                    //prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                }
+                                else
+                                {
+                                    prev_mpanel.SetDimensionsToBind_using_ZoomPercentage();
+                                }
                             }
                             else if (prev_ctrl is IPanelUC)
                             {
@@ -439,6 +491,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             {
                                 nxt_mpnl.MPanel_Width -= (e.X - _point_of_origin.X);
                                 nxt_mpnl.MPanel_DisplayWidth -= (e.X - _point_of_origin.X);
+
+                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                {
+                                    //prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                }
+                                else
+                                {
+                                    nxt_mpnl.SetDimensionsToBind_using_ZoomPercentage();
+                                }
                             }
                             else if (nxt_ctrl is IPanelUC)
                             {

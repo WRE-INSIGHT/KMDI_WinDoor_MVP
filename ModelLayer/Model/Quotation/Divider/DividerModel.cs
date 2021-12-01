@@ -372,6 +372,7 @@ namespace ModelLayer.Model.Quotation.Divider
         {
             int wd = Div_MPanelParent.MPanel_WidthToBind, 
                 ht = Div_MPanelParent.MPanel_HeightToBind;
+
             if (Div_Type == DividerType.Mullion)
             {
                 if (_divZoom == 0.26f || _divZoom == 0.17f || _divZoom == 0.13f || _divZoom == 0.10f)

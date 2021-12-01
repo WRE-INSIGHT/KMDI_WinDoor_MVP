@@ -162,6 +162,9 @@ namespace PresentationLayer.CommonMethods
                     parentModel.AddControl_MPanelLstObjects((UserControl)transomUC, 
                                                             frameModel.Frame_Type.ToString(),
                                                             true);
+                    parentModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC,
+                                                                          frameModel.Frame_Type.ToString(),
+                                                                          true);
 
                     transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
                                                                         divModel,
@@ -205,6 +208,9 @@ namespace PresentationLayer.CommonMethods
                     parentModel.AddControl_MPanelLstObjects((UserControl)mullionUC, 
                                                              frameModel.Frame_Type.ToString(),
                                                              true);
+                    parentModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)mullionUC,
+                                                                          frameModel.Frame_Type.ToString(),
+                                                                          true);
 
                     mullionImagerUCP = _mullionImagerUCP.GetNewInstance(_unityC,
                                                                         divModel,
