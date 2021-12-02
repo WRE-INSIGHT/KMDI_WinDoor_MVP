@@ -55,6 +55,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                                        string frameType,
                                                        bool if_auto_added = false);
         void SetDimensionsToBind_using_ZoomPercentage();
+        void SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
         void Set_DimensionToBind_using_MPanelZoom();
         void SetImageZoomDivider();
         void SetZoomDivider();

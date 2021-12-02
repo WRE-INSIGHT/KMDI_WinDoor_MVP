@@ -304,8 +304,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.Reload_MultiPanelMargin();
 
                     mPanelModel.SetDimensionsToBind_using_ZoomPercentage();
-                    //mPanelModel.SetPanelMargin_using_ZoomPercentage();
-                    //mPanelModel.SetPanelMarginImager_using_ImageZoomPercentage();
 
                     IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
                     UserControl multiProp = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();

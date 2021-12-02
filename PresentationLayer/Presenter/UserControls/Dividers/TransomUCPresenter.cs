@@ -365,14 +365,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             }
 
 
-            if (_divModel.Div_HeightToBind == (int)_frameModel.Frame_Type || _divModel.Div_HeightToBind == 13)
+            if (_divModel.Div_Height == (int)_frameModel.Frame_Type || _divModel.Div_HeightToBind == 13)
             {
                 g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
                                                                        0,
                                                                        transom.ClientRectangle.Width - w,
                                                                        transom.ClientRectangle.Height - w));
             }
-            else if (_divModel.Div_HeightToBind == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
+            else if (_divModel.Div_Height == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
             {
                 if (prevCtrl_isPanel == true)
                 {
@@ -390,7 +390,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 }
                     
             }
-            else if (_divModel.Div_HeightToBind == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
+            else if (_divModel.Div_Height == (int)_frameModel.Frame_Type - (_multiPanelModel.MPanel_AddPixel * 2))
             {
                 g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
                                                                        -1,
