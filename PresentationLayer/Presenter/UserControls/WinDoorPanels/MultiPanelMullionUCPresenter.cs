@@ -999,7 +999,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                new Rectangle(new Point(wd_ToBind - (int)(pixels_count * zoom), 0), new Size((int)(pixels_count * zoom), ht_ToBind - 1)), //right
                                                new Rectangle(new Point(-1, 0), new Size((int)(pixels_count * zoom), ht_ToBind - 1)) //left
                                              };
-            
+
+            if (zoom == 0.26f || zoom == 0.17f ||
+                zoom == 0.13f || zoom == 0.10f)
+            {
+                divs_bounds_values[0] = new Rectangle(new Point(0, ht_ToBind - (int)(pixels_count * zoom)), new Size(wd_ToBind - 1, (int)(pixels_count * zoom))); //bot
+                divs_bounds_values[1] = new Rectangle(new Point(0, -1), new Size(wd_ToBind - 1, (int)(pixels_count * zoom))); //top
+                divs_bounds_values[2] = new Rectangle(new Point(wd_ToBind - 2, 0), new Size(2, ht_ToBind - 1)); //right
+                divs_bounds_values[3] = new Rectangle(new Point(-1, 0), new Size(2, ht_ToBind - 1)); //left
+            }
+
             Rectangle divider_bounds_Bot = new Rectangle();
             Rectangle divider_bounds_Top = new Rectangle();
             Rectangle divider_bounds_Right = new Rectangle();
@@ -1078,18 +1087,42 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (parent_name.Contains("MultiTransom"))
                 #region Parent is MultiPanel Transom
                 {
-                    wd_deduction = (int)(20 * zoom);
-                    bounds_PointX = (int)(10 * zoom);
+                    if (zoom <= 0.26f)
+                    {
+                        bounds_PointX = 5;
+                        wd_deduction = 10;
+                    }
+                    else if (zoom > 0.26f)
+                    {
+                        wd_deduction = (int)(20 * zoom);
+                        bounds_PointX = (int)(10 * zoom);
+                    }
 
                     if (thisObj_placement == "First")
                     {
-                        bounds_PointY = (int)(10 * zoom);
-                        ht_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                        if (zoom <= 0.26f)
+                        {
+                            bounds_PointY = 5;
+                            ht_deduction = 8;
+                        }
+                        else if (zoom > 0.26f)
+                        {
+                            bounds_PointY = (int)(10 * zoom);
+                            ht_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                        }
                     }
                     else if (thisObj_placement == "Last")
                     {
-                        bounds_PointY = (int)(pixels_count * zoom);
-                        ht_deduction = (int)(((((pixels_count + 2) * 2)) - 1) * zoom);
+                        if (zoom <= 0.26f)
+                        {
+                            bounds_PointY = 5;
+                            ht_deduction = 8;
+                        }
+                        else if (zoom > 0.26f)
+                        {
+                            bounds_PointY = (int)(pixels_count * zoom);
+                            ht_deduction = (int)(((((pixels_count + 2) * 2)) - 1) * zoom);
+                        }
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {

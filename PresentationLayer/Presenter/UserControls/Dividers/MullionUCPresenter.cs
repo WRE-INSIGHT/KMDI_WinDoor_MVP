@@ -136,7 +136,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
-                                        //prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
                                     else
                                     {
@@ -167,7 +167,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
-                                        //prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
                                     else
                                     {
@@ -215,7 +215,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
-                                        //prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
                                     else
                                     {
@@ -247,7 +247,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
-                                        //prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
                                     else
                                     {

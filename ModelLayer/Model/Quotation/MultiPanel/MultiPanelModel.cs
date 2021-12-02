@@ -658,7 +658,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     if (MPanel_ParentModel.MPanel_Type == "Mullion")
                     {
                         int totalpanel_inside_parentMpanel = MPanel_ParentModel.MPanel_Divisions + 1,
-                            reversed_wd = (((int)Math.Ceiling(MpanelWidth_based_on_MpanelZoom * MPanel_Zoom) - (11 * MPanel_ParentModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel);
+                            reversed_wd = (((int)Math.Ceiling(MpanelWidth_based_on_MpanelZoom * MPanel_Zoom) - (9 * MPanel_ParentModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel);
                         int reversed_ht = (int)Math.Ceiling(MpanelHeight_based_on_MpanelZoom * MPanel_Zoom);
 
                         pnl_wd = (int)(reversed_wd / MPanel_Zoom);
@@ -668,7 +668,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         int totalpanel_inside_parentMpanel = MPanel_ParentModel.MPanel_Divisions + 1,
                             reversed_wd = (int)Math.Ceiling(MpanelWidth_based_on_MpanelZoom * MPanel_Zoom);
-                        int reversed_ht = (((int)(Math.Ceiling(MpanelHeight_based_on_MpanelZoom * MPanel_Zoom)) - (11 * MPanel_ParentModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel);
+                        int reversed_ht = (((int)(Math.Ceiling(MpanelHeight_based_on_MpanelZoom * MPanel_Zoom)) - (9 * MPanel_ParentModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel);
 
                         pnl_wd = (int)(reversed_wd / MPanel_Zoom);
                         pnl_ht = (int)(reversed_ht / MPanel_Zoom);
@@ -711,7 +711,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             div_movement = MPanel_OriginalDisplayWidth - MPanel_DisplayWidth;
 
                             int totalpanel_inside_parentMpanel = MPanel_ParentModel.MPanel_Divisions + 1,
-                                reversed_wd = (((int)(Math.Ceiling(MpanelWidth_based_on_MpanelZoom * MPanel_Zoom)) - (11 * MPanel_ParentModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel) - (int)(div_movement * MPanel_Zoom);
+                                reversed_wd = (((int)(Math.Ceiling(MpanelWidth_based_on_MpanelZoom * MPanel_Zoom)) - (9 * MPanel_ParentModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel) - (int)(div_movement * MPanel_Zoom);
                             int reversed_ht = ((int)Math.Ceiling(MpanelHeight_based_on_MpanelZoom * MPanel_Zoom));
 
                             pnl_wd = (int)(reversed_wd / MPanel_Zoom);
@@ -723,7 +723,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
                             int totalpanel_inside_parentMpanel = MPanel_ParentModel.MPanel_Divisions + 1,
                                 reversed_wd = (int)(Math.Ceiling(MpanelWidth_based_on_MpanelZoom * MPanel_Zoom));
-                            int reversed_ht = (((int)(Math.Ceiling(MpanelHeight_based_on_MpanelZoom * MPanel_Zoom)) - (11 * MPanel_ParentModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel) - (int)(div_movement * MPanel_Zoom);
+                            int reversed_ht = (((int)(Math.Ceiling(MpanelHeight_based_on_MpanelZoom * MPanel_Zoom)) - (9 * MPanel_ParentModel.MPanel_Divisions)) / totalpanel_inside_parentMpanel) - (int)(div_movement * MPanel_Zoom);
 
                             pnl_wd = (int)(reversed_wd / MPanel_Zoom);
                             pnl_ht = (int)(reversed_ht / MPanel_Zoom);
@@ -1091,7 +1091,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             else if (MPanel_Zoom <= 0.26f)
             {
-
+                div_mpnl_deduct_Tobind = 2; //13 - 2 = 11 - 2 = 9px default on div obj for 2-stack multipanel
             }
 
             if (current_control.Name.Contains("MultiMullion") || current_control.Name.Contains("MultiTransom")) //MultiPanel Block
