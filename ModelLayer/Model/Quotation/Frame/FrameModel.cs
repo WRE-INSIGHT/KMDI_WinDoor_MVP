@@ -272,7 +272,7 @@ namespace ModelLayer.Model.Quotation.Frame
             foreach (IMultiPanelModel mpnl in Lst_MultiPanel)
             {
                 mpnl.MPanel_Zoom = Frame_Zoom;
-                mpnl.Set_DimensionToBind_using_MPanelZoom();
+                mpnl.Set_DimensionToBind_using_FrameDimensions();
                 mpnl.SetZoomPanels();
                 mpnl.SetZoomDivider();
                 mpnl.SetZoomMPanels();
@@ -297,8 +297,8 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public void Set_DimensionsToBind_using_FrameZoom()
         {
-            Frame_WidthToBind = (int)(Frame_Width * Frame_Zoom);
-            Frame_HeightToBind = (int)(Frame_Height * Frame_Zoom);
+            Frame_WidthToBind = Convert.ToInt32(Frame_Width * Frame_Zoom);
+            Frame_HeightToBind = Convert.ToInt32(Frame_Height * Frame_Zoom);
         }
 
         public void Set_ImagerDimensions_using_ImagerZoom()

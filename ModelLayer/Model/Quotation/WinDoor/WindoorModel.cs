@@ -180,8 +180,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdZoom = value;
-                WD_width_4basePlatform = (int)((WD_width * value) + 70);
-                WD_height_4basePlatform = (int)((WD_height * value) + 35);
+                WD_width_4basePlatform = Convert.ToInt32((WD_width * value) + 70);
+                WD_height_4basePlatform = Convert.ToInt32((WD_height * value) + 35);
                 NotifyPropertyChanged();
             }
         }

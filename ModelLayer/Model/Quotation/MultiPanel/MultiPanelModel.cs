@@ -643,6 +643,37 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         #region Methods
 
+        public void SetDimensionsToBind_using_ParentMultiPanelModel()
+        {
+            int parent_wdToBind = MPanel_ParentModel.MPanel_WidthToBind,
+                parent_htToBind = MPanel_ParentModel.MPanel_HeightToBind,
+                totalpanel_inside_parentMpanel = MPanel_ParentModel.MPanel_Divisions + 1,
+                div_count = MPanel_ParentModel.MPanel_Divisions,
+                wd = 0, ht = 0 ;
+
+            if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
+                MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+            {
+                if (MPanel_ParentModel.MPanel_Type == "Mullion")
+                {
+                    wd = (parent_wdToBind - (13 * div_count)) / totalpanel_inside_parentMpanel; //13 px first, then the deduction will occur on Adapt_sizeToBind_MPanelDivMPanel_Controls() 
+                    ht = parent_htToBind;
+                }
+                else if (MPanel_ParentModel.MPanel_Type == "Transom")
+                {
+                    wd = parent_wdToBind;
+                    ht = (parent_htToBind - (13 * div_count)) / totalpanel_inside_parentMpanel;
+                }
+            }
+            else if (MPanel_Zoom > 0.26f)
+            {
+
+            }
+
+            MPanel_WidthToBind = wd;
+            MPanel_HeightToBind = ht;
+        }
+
         public void SetDimensionsToBind_using_ZoomPercentage()
         {
             int pnl_wd = 0, pnl_ht = 0;
@@ -782,16 +813,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return dimension;
         }
 
-        public void Set_DimensionToBind_using_MPanelZoom()
+        public void Set_DimensionToBind_using_FrameDimensions()
         {
             int wd = 0, ht = 0;
             if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
             {
-                int reversed_wd = (int)Math.Ceiling(MPanel_DisplayWidth * MPanel_Zoom) - 20, //padding
-                    reversed_ht = (int)Math.Ceiling(MPanel_DisplayHeight * MPanel_Zoom) - 20; //padding
-
-                wd = (int)(reversed_wd / MPanel_Zoom);
-                ht = (int)(reversed_ht / MPanel_Zoom);
+                wd = MPanel_FrameModelParent.Frame_WidthToBind - 20;
+                ht = MPanel_FrameModelParent.Frame_WidthToBind - 20;
             }
             else
             {
@@ -799,8 +827,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 ht = MPanel_Height;
             }
 
-            MPanel_WidthToBind = (int)(wd * MPanel_Zoom);
-            MPanel_HeightToBind = (int)(ht * MPanel_Zoom);
+            MPanel_WidthToBind = wd;
+            MPanel_HeightToBind = ht;
         }
 
         public void SetImageZoomDivider()

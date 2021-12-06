@@ -15,11 +15,13 @@ namespace ModelLayer.Model.Quotation.Frame
         int Frame_BasicDeduction { get; }
 
         int Frame_Height { get; set; }
+        int Frame_HeightToBind { get; set; }
         int FrameImageRenderer_Height { get; set; }
         int Frame_ID { get; set; }
         string Frame_Name { get; set; }
         FrameModel.Frame_Padding Frame_Type { get; set; }
         int Frame_Width { get; set; }
+        int Frame_WidthToBind { get; set; }
         int FrameImageRenderer_Width { get; set; }
         bool Frame_Visible { get; set; }
         int FrameProp_Height { get; set; }

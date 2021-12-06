@@ -163,7 +163,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                           0,
                                                                           null,
                                                                           _frameModel.FrameImageRenderer_Zoom);
-                _multipanelModel.Set_DimensionToBind_using_MPanelZoom();
+                _multipanelModel.Set_DimensionToBind_using_FrameDimensions();
                 _frameModel.Lst_MultiPanel.Add(_multipanelModel);
 
                 IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP.GetNewInstance(_unityC, _multipanelModel, _mainPresenter);

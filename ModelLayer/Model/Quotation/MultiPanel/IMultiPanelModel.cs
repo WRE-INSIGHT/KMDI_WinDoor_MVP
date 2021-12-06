@@ -51,12 +51,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int GetCount_MPanelLst_Object();
         int Get_ControlDimension_using_MpanelZoom(string WidthOrHeight);
 
+        void SetDimensionsToBind_using_ParentMultiPanelModel();
         void Adapt_sizeToBind_MPanelDivMPanel_Controls(Control current_control,
                                                        string frameType,
                                                        bool if_auto_added = false);
         void SetDimensionsToBind_using_ZoomPercentage();
         void SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-        void Set_DimensionToBind_using_MPanelZoom();
+        void Set_DimensionToBind_using_FrameDimensions();
         void SetImageZoomDivider();
         void SetZoomDivider();
         void SetZoomPanels();
