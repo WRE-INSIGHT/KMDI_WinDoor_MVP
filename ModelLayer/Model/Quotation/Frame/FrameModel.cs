@@ -297,8 +297,13 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public void Set_DimensionsToBind_using_FrameZoom()
         {
-            Frame_WidthToBind = Convert.ToInt32(Frame_Width * Frame_Zoom);
-            Frame_HeightToBind = Convert.ToInt32(Frame_Height * Frame_Zoom);
+            decimal wd_flt_convert_dec = Convert.ToDecimal(Frame_Width * Frame_Zoom);
+            decimal frame_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            Frame_WidthToBind = Convert.ToInt32(frame_wd_dec);
+
+            decimal ht_flt_convert_dec = Convert.ToDecimal(Frame_Height * Frame_Zoom);
+            decimal frame_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            Frame_HeightToBind = Convert.ToInt32(frame_ht_dec);
         }
 
         public void Set_ImagerDimensions_using_ImagerZoom()

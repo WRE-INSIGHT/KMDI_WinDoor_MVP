@@ -1069,6 +1069,7 @@ namespace PresentationLayer.Presenter
                                                                          Base_Color._Ivory,
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
+                        _windoorModel.SetDimensions_basePlatform();
                         AddWndrList_QuotationModel(_windoorModel);
 
                         _mainView.Zoom = _windoorModel.WD_zoom;
@@ -1109,6 +1110,7 @@ namespace PresentationLayer.Presenter
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
                         AddWndrList_QuotationModel(_windoorModel);
+                        _windoorModel.SetDimensions_basePlatform();
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -1182,6 +1184,7 @@ namespace PresentationLayer.Presenter
             {
                 _windoorModel.WD_width = frmDimension_numWd;
                 _windoorModel.WD_height = frmDimension_numHt;
+                _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();

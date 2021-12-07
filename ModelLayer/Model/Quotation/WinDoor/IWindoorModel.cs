@@ -45,5 +45,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
         void SetZoom();
         void SetPanelGlassID();
         void SetMiddleCloser_onPanel();
+        void SetDimensions_basePlatform();
     }
 }

@@ -53,7 +53,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 WD_width_4basePlatform_forImageRenderer = value + 70;
                 WD_zoom_forImageRenderer = GetZoom_forRendering();
 
-                WD_width_4basePlatform = value + 70; //(int)(value * WD_zoom) + 70;
+                WD_width_4basePlatform = value + 70;
                 WD_zoom = GetZoom_forRendering();
                 NotifyPropertyChanged();
             }
@@ -180,8 +180,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdZoom = value;
-                WD_width_4basePlatform = Convert.ToInt32((WD_width * value) + 70);
-                WD_height_4basePlatform = Convert.ToInt32((WD_height * value) + 35);
                 NotifyPropertyChanged();
             }
         }
@@ -429,6 +427,19 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        #region Methods
+
+        public void SetDimensions_basePlatform()
+        {
+            decimal wd_flt_convert_dec = Convert.ToDecimal(WD_width * WD_zoom);
+            decimal base_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            WD_width_4basePlatform = Convert.ToInt32(base_wd_dec) + 70;
+
+            decimal ht_flt_convert_dec = Convert.ToDecimal(WD_height * WD_zoom);
+            decimal base_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            WD_height_4basePlatform = Convert.ToInt32(base_ht_dec) + 35;
+        }
+
         public float GetZoom_forRendering()
         {
             int area = _wdHeight * _wdWidth;
@@ -561,6 +572,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 }
             }
         }
+
+        #endregion
 
         public WindoorModel(int wd_id,
                             string wd_name,
