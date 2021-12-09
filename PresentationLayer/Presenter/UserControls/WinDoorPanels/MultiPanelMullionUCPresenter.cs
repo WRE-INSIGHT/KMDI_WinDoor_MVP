@@ -202,8 +202,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     int thisWd = ((UserControl)sender).Width,
                         thisHt = ((UserControl)sender).Height,
-                        mpnlModelWd = _multiPanelModel.MPanel_Width,
-                        mpnlModelHt = _multiPanelModel.MPanel_Height;
+                        mpnlModelWd = _multiPanelModel.MPanel_WidthToBind,
+                        mpnlModelHt = _multiPanelModel.MPanel_HeightToBind;
 
                     if (thisWd != mpnlModelWd || prev_Width != mpnlModelWd)
                     {
@@ -216,8 +216,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _HeightChange = true;
                     }
                 }
-                prev_Width = _multiPanelModel.MPanel_Width;
-                prev_Height = _multiPanelModel.MPanel_Height;
+                prev_Width = _multiPanelModel.MPanel_WidthToBind;
+                prev_Height = _multiPanelModel.MPanel_HeightToBind;
 
                 _tmr.Start();
                 ((UserControl)sender).Invalidate();

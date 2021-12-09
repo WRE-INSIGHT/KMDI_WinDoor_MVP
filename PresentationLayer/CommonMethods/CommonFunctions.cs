@@ -236,8 +236,27 @@ namespace PresentationLayer.CommonMethods
 
             //arrow for HEIGHT
             string dmnsion_h = multiPanelModel.MPanel_DisplayHeight.ToString();
-            Point dmnsion_h_startP = new Point(multiPanelModel.MPanel_Width - 20, 10);
-            Point dmnsion_h_endP = new Point(multiPanelModel.MPanel_Width - 20, multiPanelModel.MPanel_Height - 10);
+            //Point dmnsion_h_startP = new Point(multiPanelModel.MPanel_Width - 20, 10);
+            //Point dmnsion_h_endP = new Point(multiPanelModel.MPanel_Width - 20, multiPanelModel.MPanel_Height - 10);
+
+            Point dmnsion_h_startP = new Point(),
+                  dmnsion_h_endP = new Point();
+
+            if (multiPanelModel.MPanel_Zoom > 0.26f)
+            {
+                dmnsion_h_startP = new Point(multiPanelModel.MPanel_WidthToBind - 20,
+                                             Convert.ToInt32(10 * multiPanelModel.MPanel_Zoom));
+
+                dmnsion_h_endP = new Point(multiPanelModel.MPanel_WidthToBind - 20, 
+                                           multiPanelModel.MPanel_HeightToBind - Convert.ToInt32(10 * multiPanelModel.MPanel_Zoom));
+            }
+            else if (multiPanelModel.MPanel_Zoom <= 0.26f)
+            {
+                dmnsion_h_startP = new Point(multiPanelModel.MPanel_WidthToBind - 20,
+                                             5);
+                dmnsion_h_endP = new Point(multiPanelModel.MPanel_WidthToBind - 20,
+                                           multiPanelModel.MPanel_HeightToBind - 5);
+            }
 
             Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
             double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
@@ -262,7 +281,7 @@ namespace PresentationLayer.CommonMethods
             TextRenderer.DrawText(g,
                                   dmnsion_h,
                                   dmnsion_font,
-                                  new Rectangle(new Point(((multiPanelModel.MPanel_Width - 20) - s2.Width), (int)(mid2 - (s2.Height / 2))),
+                                  new Rectangle(new Point(((multiPanelModel.MPanel_WidthToBind - 20) - s2.Width), (int)(mid2 - (s2.Height / 2))),
                                                 new Size(s2.Width, s2.Height)),
                                   Color.Black,
                                   Color.Transparent,
@@ -325,8 +344,23 @@ namespace PresentationLayer.CommonMethods
 
             //arrow for WIDTH
             string dmnsion_w = multiPanelModel.MPanel_DisplayWidth.ToString();
-            Point dmnsion_w_startP = new Point(10, multiPanelModel.MPanel_Height - 20);
-            Point dmnsion_w_endP = new Point(multiPanelModel.MPanel_Width - 10, multiPanelModel.MPanel_Height - 20);
+            Point dmnsion_w_startP = new Point(), 
+                  dmnsion_w_endP = new Point();
+
+            if (multiPanelModel.MPanel_Zoom > 0.26f)
+            {
+                dmnsion_w_startP = new Point(Convert.ToInt32(10 * multiPanelModel.MPanel_Zoom), 
+                                             multiPanelModel.MPanel_HeightToBind - 20);
+                dmnsion_w_endP = new Point(multiPanelModel.MPanel_WidthToBind - Convert.ToInt32(10 * multiPanelModel.MPanel_Zoom),
+                                           multiPanelModel.MPanel_HeightToBind - 20);
+            }
+            else if (multiPanelModel.MPanel_Zoom <= 0.26f)
+            {
+                dmnsion_w_startP = new Point(5,
+                                             multiPanelModel.MPanel_HeightToBind - 20);
+                dmnsion_w_endP = new Point(multiPanelModel.MPanel_WidthToBind - 5,
+                                           multiPanelModel.MPanel_HeightToBind - 20);
+            }
 
             Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
             double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
@@ -351,7 +385,7 @@ namespace PresentationLayer.CommonMethods
             TextRenderer.DrawText(g,
                                   dmnsion_w,
                                   dmnsion_font,
-                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), ((multiPanelModel.MPanel_Height - 20) - s.Height)),
+                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), ((multiPanelModel.MPanel_HeightToBind - 20) - s.Height)),
                                                 new Size(s.Width, s.Height)),
                                   Color.Black,
                                   Color.Transparent,

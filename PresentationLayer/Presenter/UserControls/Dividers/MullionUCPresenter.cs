@@ -105,7 +105,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 nxt_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == nxt_ctrl.Name);
             }
 
-            if (_keydown)
+            int expected_total_controls_inside_parentMpanel = (_multiPanelModel.MPanel_Divisions * 2) + 1,
+                actual_total_controls_inside_parentMpanel = _multiPanelModel.MPanelLst_Objects.Count();
+
+            if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel &&
+                _keydown)
             {
                 switch (e.KeyCode)
                 {
@@ -140,7 +144,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                     else
                                     {
-                                        prev_mpanel.SetDimensionsToBind_using_ZoomPercentage();
+                                        prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
                                     }
                                 }
                                 else if (prev_ctrl is IPanelUC)
@@ -171,7 +175,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                     else
                                     {
-                                        nxt_mpnl.SetDimensionsToBind_using_ZoomPercentage();
+                                        nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
                                     }
                                 }
                                 else if (nxt_ctrl is IPanelUC)
@@ -190,6 +194,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
                             }
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions();
                         }
                         break;
 
@@ -219,7 +224,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                     else
                                     {
-                                        prev_mpanel.SetDimensionsToBind_using_ZoomPercentage();
+                                        prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
                                     }
                                 }
                                 else if (prev_ctrl is IPanelUC)
@@ -251,7 +256,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                     else
                                     {
-                                        nxt_mpnl.SetDimensionsToBind_using_ZoomPercentage();
+                                        nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
                                     }
                                 }
                                 else if (nxt_ctrl is IPanelUC)
@@ -270,6 +275,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
                             }
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions();
                         }
                         break;
                 }
@@ -450,7 +456,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                 FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
 
-                if (e.Button == MouseButtons.Left && _mouseDown) 
+                int expected_total_controls_inside_parentMpanel = (_multiPanelModel.MPanel_Divisions * 2) + 1,
+                    actual_total_controls_inside_parentMpanel = _multiPanelModel.MPanelLst_Objects.Count();
+
+                if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel &&
+                    e.Button == MouseButtons.Left && _mouseDown) 
                 {
                     if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
                     {
@@ -468,7 +478,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 }
                                 else
                                 {
-                                    prev_mpanel.SetDimensionsToBind_using_ZoomPercentage();
+                                    prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
                                 }
                             }
                             else if (prev_ctrl is IPanelUC)
@@ -499,7 +509,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 }
                                 else
                                 {
-                                    nxt_mpnl.SetDimensionsToBind_using_ZoomPercentage();
+                                    nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
                                 }
                             }
                             else if (nxt_ctrl is IPanelUC)
@@ -519,6 +529,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             }
                         }
                     }
+                    _multiPanelModel.Fit_MyControls_ToBindDimensions();
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             }
