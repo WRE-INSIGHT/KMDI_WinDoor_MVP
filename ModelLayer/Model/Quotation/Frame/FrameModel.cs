@@ -281,15 +281,15 @@ namespace ModelLayer.Model.Quotation.Frame
             foreach (IPanelModel pnl in Lst_Panel)
             {
                 pnl.Panel_Zoom = Frame_Zoom;
-                if (Frame_Zoom == 0.17f || Frame_Zoom == 0.26f ||
-                    Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
-                {
-                    pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                }
-                else
-                {
+                //if (Frame_Zoom == 0.17f || Frame_Zoom == 0.26f ||
+                //    Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
+                //{
+                //    pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                //}
+                //else
+                //{
                     pnl.SetDimensionToBind_using_BaseDimension();
-                }
+                //}
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }

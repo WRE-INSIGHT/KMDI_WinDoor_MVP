@@ -1003,8 +1003,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (zoom == 0.26f || zoom == 0.17f ||
                 zoom == 0.13f || zoom == 0.10f)
             {
-                divs_bounds_values[0] = new Rectangle(new Point(0, ht_ToBind - (int)(pixels_count * zoom)), new Size(wd_ToBind - 1, (int)(pixels_count * zoom))); //bot
-                divs_bounds_values[1] = new Rectangle(new Point(0, -1), new Size(wd_ToBind - 1, (int)(pixels_count * zoom))); //top
+                divs_bounds_values[0] = new Rectangle(new Point(0, ht_ToBind - 2), new Size(wd_ToBind - 1, 2)); //bot
+                divs_bounds_values[1] = new Rectangle(new Point(0, -1), new Size(wd_ToBind - 1, 2)); //top
                 divs_bounds_values[2] = new Rectangle(new Point(wd_ToBind - 2, 0), new Size(2, ht_ToBind - 1)); //right
                 divs_bounds_values[3] = new Rectangle(new Point(-1, 0), new Size(2, ht_ToBind - 1)); //left
             }
@@ -1126,8 +1126,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
-                        bounds_PointY = (int)(pixels_count * zoom);
-                        ht_deduction = (int)((pixels_count * 2) * zoom);
+                        if (zoom <= 0.26f)
+                        {
+                            bounds_PointY = 2;
+                            ht_deduction = 5;
+                        }
+                        else if (zoom > 0.26f)
+                        {
+                            bounds_PointY = (int)(pixels_count * zoom);
+                            ht_deduction = (int)((pixels_count * 2) * zoom);
+                        }
                     }
                 }
                 #endregion

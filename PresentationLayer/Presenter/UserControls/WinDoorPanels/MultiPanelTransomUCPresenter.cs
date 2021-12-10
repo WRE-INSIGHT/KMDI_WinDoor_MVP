@@ -1135,8 +1135,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
-                        bounds_PointX = (int)(pixels_count * zoom);
-                        wd_deduction = (int)((pixels_count * 2) * zoom);
+                        if (zoom <= 0.26f)
+                        {
+                            bounds_PointX = 2;
+                            wd_deduction = 5;
+                        }
+                        else if (zoom > 0.26f)
+                        {
+                            bounds_PointX = (int)(pixels_count * zoom);
+                            wd_deduction = (int)((pixels_count * 2) * zoom);
+                        }
                     }
                 }
                 #endregion
