@@ -680,26 +680,42 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_HeightToBind = ht;
         }
 
-        public void SetDimensionsToBind_usingZoom_below26_with_DividerMovement(int divMovement)
+        public void SetDimensionsToBind_usingZoom_below26_with_DividerMovement()
         {
-            int pnl_wd = 0, pnl_ht = 0;
+            int pnl_wd = 0, pnl_ht = 0, divMove_int = 0, div_movement = 0;
 
             if (MPanel_ParentModel != null)
             {
                 int parent_MpanelWidth = MPanel_ParentModel.MPanel_WidthToBind,
-                    parent_MpanelHeight = MPanel_ParentModel.MPanel_HeightToBind;
+                    parent_MpanelHeight = MPanel_ParentModel.MPanel_HeightToBind,
+                    div_count = MPanel_ParentModel.MPanel_Divisions,
+                    totalpanel_inside_parentMpanel = MPanel_ParentModel.MPanel_Divisions + 1;
 
                 if (MPanel_ParentModel != null)
                 {
                     if (MPanel_ParentModel.MPanel_Type == "Mullion")
                     {
-                        pnl_wd = MPanel_WidthToBind + divMovement;
+                        div_movement = MPanel_OriginalDisplayWidth - MPanel_DisplayWidth;
+
+                        decimal divMove_convert_dec = Convert.ToDecimal(div_movement * MPanel_Zoom);
+                        decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
+                        decimal divMove_dec_times2 = divMove_dec * 2;
+                        divMove_int = Convert.ToInt32(divMove_dec_times2);
+
+                        pnl_wd = ((parent_MpanelWidth - (13 * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
                         pnl_ht = parent_MpanelHeight;
                     }
                     else if (MPanel_ParentModel.MPanel_Type == "Transom")
                     {
+                        div_movement = MPanel_OriginalDisplayHeight - MPanel_DisplayHeight;
+
+                        decimal divMove_convert_dec = Convert.ToDecimal(div_movement * MPanel_Zoom);
+                        decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
+                        decimal divMove_dec_times2 = divMove_dec * 2;
+                        divMove_int = Convert.ToInt32(divMove_dec_times2);
+
                         pnl_wd = parent_MpanelWidth;
-                        pnl_ht = MPanel_HeightToBind + divMovement;
+                        pnl_ht = ((parent_MpanelHeight - (13 * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
                     }
                 }
             }
@@ -711,39 +727,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
             MPanel_WidthToBind = pnl_wd;
             MPanel_HeightToBind = pnl_ht;
-        }
-
-        public int Get_ControlDimension_using_MpanelZoom(string WidthOrHeight)
-        {
-            int dimension = 0;
-
-            if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
-            {
-                int reversed_wd = (int)Math.Ceiling(MPanel_DisplayWidth * MPanel_Zoom) - 20, //padding
-                    reversed_ht = (int)Math.Ceiling(MPanel_DisplayHeight * MPanel_Zoom) - 20; //padding
-
-                if (WidthOrHeight == "Width")
-                {
-                    dimension = (int)(reversed_wd / MPanel_Zoom);
-                }
-                else if(WidthOrHeight == "Height")
-                {
-                    dimension = (int)(reversed_ht / MPanel_Zoom);
-                }
-            }
-            else
-            {
-                if (WidthOrHeight == "Width")
-                {
-                    dimension = MPanel_Width;
-                }
-                else if (WidthOrHeight == "Height")
-                {
-                    dimension = MPanel_Height;
-                }
-            }
-
-            return dimension;
         }
 
         public void Set_DimensionToBind_using_FrameDimensions()
@@ -791,15 +774,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             foreach (IPanelModel pnl in MPanelLst_Panel)
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
-                //if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
-                //    MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
-                //{
-                //    pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                //}
-                //else
-                //{
+                if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
+                    MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                {
+                    pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                }
+                else
+                {
                     pnl.SetDimensionToBind_using_BaseDimension();
-                //}
+                }
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }

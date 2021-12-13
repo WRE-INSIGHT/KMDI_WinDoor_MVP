@@ -235,9 +235,7 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for HEIGHT
-            string dmnsion_h = multiPanelModel.MPanel_DisplayHeight.ToString();
-            //Point dmnsion_h_startP = new Point(multiPanelModel.MPanel_Width - 20, 10);
-            //Point dmnsion_h_endP = new Point(multiPanelModel.MPanel_Width - 20, multiPanelModel.MPanel_Height - 10);
+            string dmnsion_h = multiPanelModel.MPanel_DisplayHeight.ToString() + "." + multiPanelModel.MPanel_DisplayHeightDecimal.ToString();
 
             Point dmnsion_h_startP = new Point(),
                   dmnsion_h_endP = new Point();
@@ -298,7 +296,7 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for HEIGHT
-            string dmnsion_h = panelModel.Panel_DisplayHeight.ToString();
+            string dmnsion_h = panelModel.Panel_DisplayHeight.ToString() + "." + panelModel.Panel_DisplayHeightDecimal.ToString();
             Point dmnsion_h_startP = new Point(panelModel.Panel_Width - 20, 1);
             Point dmnsion_h_endP = new Point(panelModel.Panel_Width - 20, panelModel.Panel_Height - 1);
 
@@ -343,7 +341,7 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for WIDTH
-            string dmnsion_w = multiPanelModel.MPanel_DisplayWidth.ToString();
+            string dmnsion_w = multiPanelModel.MPanel_DisplayWidth.ToString() + "." + multiPanelModel.MPanel_DisplayWidthDecimal.ToString();
             Point dmnsion_w_startP = new Point(), 
                   dmnsion_w_endP = new Point();
 
@@ -401,7 +399,7 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for WIDTH
-            string dmnsion_w = panelModel.Panel_DisplayWidth.ToString();
+            string dmnsion_w = panelModel.Panel_DisplayWidth.ToString() + "." + panelModel.Panel_DisplayWidthDecimal.ToString();
             Point dmnsion_w_startP = new Point(1, panelModel.Panel_Height - 20);
             Point dmnsion_w_endP = new Point(panelModel.Panel_Width - 1, panelModel.Panel_Height - 20);
 
