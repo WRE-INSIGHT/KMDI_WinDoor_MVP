@@ -738,6 +738,7 @@ namespace PresentationLayer.Presenter
             {
                 ndx_zoomPercentage++;
                 _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
 
                 FitControls_InsideMultiPanel();
@@ -755,6 +756,7 @@ namespace PresentationLayer.Presenter
             {
                 ndx_zoomPercentage--;
                 _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
 
                 FitControls_InsideMultiPanel();

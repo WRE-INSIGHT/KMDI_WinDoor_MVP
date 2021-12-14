@@ -2334,6 +2334,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
 
+                    //divs_bounds_values[0].Width -= 1;
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Bot = divs_bounds_values[0];
                 }
@@ -2352,6 +2354,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
 
+                    divs_bounds_values[1].Width -= 1;
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Top = divs_bounds_values[1];
                 }
@@ -2366,6 +2370,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
+
+                    divs_bounds_values[1].Width -= 1;
+
+                    divs_bounds_values[0].Width -= 1;
 
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Top = divs_bounds_values[1];
@@ -2382,7 +2390,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
+
                     divs_bounds_values[3].Width += 2;
+
+                    //divs_bounds_values[0].Width -= 1;
 
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2401,6 +2412,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     divs_bounds_values[2].Width += 2;
                     divs_bounds_values[3].Width += 2;
 
+                    divs_bounds_values[1].Width -= 1;
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
                     divider_bounds_Top = divs_bounds_values[1];
@@ -2414,9 +2427,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
+                    divs_bounds_values[1].Width -= 1;
+
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
+
                     divs_bounds_values[3].Width += 2;
+
+                    divs_bounds_values[0].Width -= 1;
 
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];

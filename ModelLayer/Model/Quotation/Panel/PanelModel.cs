@@ -1900,7 +1900,6 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         pnl_ht = (((parent_MpanelHeight - 10) - (13 * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
                         pnl_wd = parent_MpanelWidth - 10;
-
                     }
                 }
                 else if (Panel_ParentFrameModel != null)

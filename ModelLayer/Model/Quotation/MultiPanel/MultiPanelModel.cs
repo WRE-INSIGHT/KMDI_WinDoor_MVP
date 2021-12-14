@@ -77,42 +77,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             set
             {
-                int added_width_child_pnls = value - _mpanelWidth;
-                if (MPanel_Type == "Transom")
-                {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                    {
-                        mpnl.MPanel_Width += added_width_child_pnls;
-                    }
-                    foreach (IPanelModel pnl in MPanelLst_Panel)
-                    {
-                        pnl.Panel_Width += added_width_child_pnls;
-                    }
-                    foreach (IDividerModel div in MPanelLst_Divider)
-                    {
-                        div.Div_Width += added_width_child_pnls;
-                    }
-                }
-                else if (MPanel_Type == "Mullion")
-                {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                    {
-                        if (mpnl.MPanel_Placement == "Last")
-                        {
-                            mpnl.MPanel_Width += added_width_child_pnls;
-                        }
-                    }
-                    foreach (IPanelModel pnl in MPanelLst_Panel)
-                    {
-                        if (pnl.Panel_Placement == "Last")
-                        {
-                            pnl.Panel_Width += added_width_child_pnls;
-                        }
-                    }
-                }
                 _mpanelWidth = value;
-                //MPanelImageRenderer_Width = Convert.ToInt32(value * MPanelImageRenderer_Zoom);
-                //MPanel_WidthToBind = (int)(value * MPanel_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -142,39 +107,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             set
             {
-                int added_displaywidth_child_pnls = value - _mpanelDisplayWidth;
-                if (MPanel_Type == "Transom")
-                {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                    {
-                        mpnl.MPanel_DisplayWidth += added_displaywidth_child_pnls;
-                    }
-                    foreach (IPanelModel pnl in MPanelLst_Panel)
-                    {
-                        pnl.Panel_DisplayWidth += added_displaywidth_child_pnls;
-                    }
-                    foreach (IDividerModel div in MPanelLst_Divider)
-                    {
-                        div.Div_DisplayWidth += added_displaywidth_child_pnls;
-                    }
-                }
-                else if (MPanel_Type == "Mullion")
-                {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                    {
-                        if (mpnl.MPanel_Placement == "Last")
-                        {
-                            mpnl.MPanel_DisplayWidth += added_displaywidth_child_pnls;
-                        }
-                    }
-                    foreach (IPanelModel pnl in MPanelLst_Panel)
-                    {
-                        if (pnl.Panel_Placement == "Last")
-                        {
-                            pnl.Panel_DisplayWidth += added_displaywidth_child_pnls;
-                        }
-                    }
-                }
                 _mpanelDisplayWidth = value;
                 NotifyPropertyChanged();
             }
@@ -203,42 +135,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             set
             {
-                int added_height_child_pnls = value - _mpanelHeight;
-                if (MPanel_Type == "Mullion")
-                {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                    {
-                        mpnl.MPanel_Height += added_height_child_pnls;
-                    }
-                    foreach (IPanelModel pnl in MPanelLst_Panel)
-                    {
-                        pnl.Panel_Height += added_height_child_pnls;
-                    }
-                    foreach (IDividerModel div in MPanelLst_Divider)
-                    {
-                        div.Div_Height += added_height_child_pnls;
-                    }
-                }
-                else if (MPanel_Type == "Transom")
-                {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                    {
-                        if (mpnl.MPanel_Placement == "Last")
-                        {
-                            mpnl.MPanel_Height += added_height_child_pnls;
-                        }
-                    }
-                    foreach (IPanelModel pnl in MPanelLst_Panel)
-                    {
-                        if (pnl.Panel_Placement == "Last")
-                        {
-                            pnl.Panel_Height += added_height_child_pnls;
-                        }
-                    }
-                }
                 _mpanelHeight = value;
-                //MPanelImageRenderer_Height = Convert.ToInt32(value * MPanelImageRenderer_Zoom);
-                //MPanel_HeightToBind = (int)(value * MPanel_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -268,39 +165,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             set
             {
-                int added_displayheight_child_pnls = value - _mpanelDisplayHeight;
-                if (MPanel_Type == "Mullion")
-                {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                    {
-                        mpnl.MPanel_DisplayHeight += added_displayheight_child_pnls;
-                    }
-                    foreach (IPanelModel pnl in MPanelLst_Panel)
-                    {
-                        pnl.Panel_DisplayHeight += added_displayheight_child_pnls;
-                    }
-                    foreach (IDividerModel div in MPanelLst_Divider)
-                    {
-                        div.Div_DisplayHeight += added_displayheight_child_pnls;
-                    }
-                }
-                else if (MPanel_Type == "Transom")
-                {
-                    foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                    {
-                        if (mpnl.MPanel_Placement == "Last")
-                        {
-                            mpnl.MPanel_DisplayHeight += added_displayheight_child_pnls;
-                        }
-                    }
-                    foreach (IPanelModel pnl in MPanelLst_Panel)
-                    {
-                        if (pnl.Panel_Placement == "Last")
-                        {
-                            pnl.Panel_DisplayHeight += added_displayheight_child_pnls;
-                        }
-                    }
-                }
                 _mpanelDisplayHeight = value;
                 NotifyPropertyChanged();
             }

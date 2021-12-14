@@ -219,14 +219,14 @@ namespace PresentationLayer.Views
         private void pnlMain_SizeChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, PanelMainSizeChangedEventRaised, e);
-            if (pnlMain.VerticalScroll.Visible == true || pnlMain.HorizontalScroll.Visible == true)
-            {
-                btnMinusZoom.Enabled = true;
-            }
-            else if(pnlMain.VerticalScroll.Visible == false || pnlMain.HorizontalScroll.Visible == false)
-            {
-                btnMinusZoom.Enabled = false;
-            }
+            //if (pnlMain.VerticalScroll.Visible == true || pnlMain.HorizontalScroll.Visible == true)
+            //{
+            //    btnMinusZoom.Enabled = true;
+            //}
+            //else if(pnlMain.VerticalScroll.Visible == false || pnlMain.HorizontalScroll.Visible == false)
+            //{
+            //    btnMinusZoom.Enabled = false;
+            //}
         }
 
         public Panel GetPanelItems()
