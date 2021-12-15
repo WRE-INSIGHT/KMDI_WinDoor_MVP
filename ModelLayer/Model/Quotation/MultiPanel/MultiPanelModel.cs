@@ -529,8 +529,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     ht = (parent_htToBind - (13 * div_count)) / totalpanel_inside_parentMpanel;
                 }
             }
-            else if (MPanel_Zoom > 0.26f)
+            else if (MPanel_Zoom == 0.50f)
             {
+                //wd = Convert.ToInt32(MPanel_Width * MPanel_Zoom);
+                //ht = Convert.ToInt32(MPanel_Height * MPanel_Zoom);
+
                 decimal wd_flt_convert_dec = Convert.ToDecimal(MPanel_Width * MPanel_Zoom);
                 decimal wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
                 wd = Convert.ToInt32(wd_dec);
@@ -538,6 +541,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 decimal ht_flt_convert_dec = Convert.ToDecimal(MPanel_Height * MPanel_Zoom);
                 decimal ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
                 ht = Convert.ToInt32(ht_dec);
+            }
+            else if (MPanel_Zoom == 1.0f)
+            {
+                wd = MPanel_Width;
+                ht = MPanel_Height;
             }
 
             MPanel_WidthToBind = wd;

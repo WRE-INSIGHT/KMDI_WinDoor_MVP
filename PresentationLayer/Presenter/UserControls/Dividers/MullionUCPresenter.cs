@@ -156,7 +156,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                         foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
                                         {
-                                            //div.Div_Width++;
+                                            div.Div_Width++;
                                             div.Div_DisplayWidth++;
 
                                             div.SetDimensionsToBind_using_DivZoom();
@@ -203,7 +203,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                         foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
                                         {
-                                            //div.Div_Width--;
+                                            div.Div_Width--;
                                             div.Div_DisplayWidth--;
 
                                             div.SetDimensionsToBind_using_DivZoom();
@@ -268,7 +268,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                         foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
                                         {
-                                            //div.Div_Width--;
+                                            div.Div_Width--;
                                             div.Div_DisplayWidth--;
 
                                             div.SetDimensionsToBind_using_DivZoom();
@@ -316,7 +316,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                         foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
                                         {
-                                            //div.Div_Width++;
+                                            div.Div_Width++;
                                             div.Div_DisplayWidth++;
 
                                             div.SetDimensionsToBind_using_DivZoom();

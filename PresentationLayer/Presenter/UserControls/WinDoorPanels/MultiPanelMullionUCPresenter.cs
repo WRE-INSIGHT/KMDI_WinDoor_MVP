@@ -1092,10 +1092,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         bounds_PointX = 5;
                         wd_deduction = 10;
                     }
-                    else if (zoom > 0.26f)
+                    else if (zoom == 1.0f)
                     {
                         wd_deduction = (int)(20 * zoom);
                         bounds_PointX = (int)(10 * zoom);
+                    }
+                    else if (zoom == 0.50f)
+                    {
+                        wd_deduction = 11;
+                        bounds_PointX = 5;
                     }
 
                     if (thisObj_placement == "First")
@@ -2334,8 +2339,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
 
-                    //divs_bounds_values[0].Width -= 1;
-
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Bot = divs_bounds_values[0];
                 }
@@ -2354,8 +2357,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
 
-                    divs_bounds_values[1].Width -= 1;
-
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Top = divs_bounds_values[1];
                 }
@@ -2370,11 +2371,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
-
-                    divs_bounds_values[1].Width -= 1;
-
-                    divs_bounds_values[0].Width -= 1;
-
+                    
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Bot = divs_bounds_values[0];
@@ -2393,7 +2390,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     divs_bounds_values[3].Width += 2;
 
-                    //divs_bounds_values[0].Width -= 1;
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 1;
+                    }
 
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2412,7 +2412,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     divs_bounds_values[2].Width += 2;
                     divs_bounds_values[3].Width += 2;
 
-                    divs_bounds_values[1].Width -= 1;
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 1;
+                    }
 
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2427,14 +2430,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a SOMEWHERE IN BETWEEN SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    divs_bounds_values[1].Width -= 1;
-
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
 
                     divs_bounds_values[3].Width += 2;
 
-                    divs_bounds_values[0].Width -= 1;
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 1;
+                    }
 
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2455,6 +2459,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     divs_bounds_values[3].Width += 2;
 
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 1;
+                    }
+
                     divider_bounds_Left = divs_bounds_values[3];
                     divider_bounds_Bot = divs_bounds_values[0];
                 }
@@ -2472,6 +2481,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     divs_bounds_values[3].Width += 2;
 
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 1;
+                    }
+
                     divider_bounds_Left = divs_bounds_values[3];
                     divider_bounds_Top = divs_bounds_values[1];
                 }
@@ -2485,6 +2499,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 #region Somewhere in Between in a LAST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
                     divs_bounds_values[3].Width += 2;
+
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 1;
+                    }
 
                     divider_bounds_Left = divs_bounds_values[3];
                     divider_bounds_Bot = divs_bounds_values[0];

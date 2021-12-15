@@ -1101,10 +1101,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         bounds_PointY = 5;
                         ht_deduction = 10;
                     }
-                    else if(zoom > 0.26f)
+                    else if(zoom == 1.0f)
                     {
                         bounds_PointY = (int)(10 * zoom);
                         ht_deduction = (int)(20 * zoom);
+                    }
+                    else if (zoom == 0.50f)
+                    {
+                        bounds_PointY = 5;
+                        ht_deduction = 11;
                     }
 
                     if (thisObj_placement == "First")
