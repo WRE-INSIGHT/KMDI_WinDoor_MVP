@@ -507,6 +507,47 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         #region Methods
 
+        public void SetDimensions_childObjs()
+        {
+            if (MPanel_ParentModel != null)
+            {
+                if (MPanel_Type == "Mullion")
+                {
+                    foreach (IMultiPanelModel mpanels in MPanelLst_MultiPanel)
+                    {
+                        mpanels.MPanel_Height = MPanel_Height;
+                        mpanels.MPanel_DisplayHeight = MPanel_DisplayHeight;
+                        mpanels.MPanel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
+                        mpanels.MPanel_HeightToBind = MPanel_HeightToBind;
+                    }
+
+                    foreach (IDividerModel div in MPanelLst_Divider)
+                    {
+                        div.Div_Height = MPanel_Height;
+                        div.Div_DisplayHeight = MPanel_DisplayHeight;
+                        div.Div_HeightToBind = MPanel_HeightToBind;
+                    }
+                }
+                else if (MPanel_Type == "Transom")
+                {
+                    foreach (IMultiPanelModel mpanels in MPanelLst_MultiPanel)
+                    {
+                        mpanels.MPanel_Width = MPanel_Width;
+                        mpanels.MPanel_DisplayWidth = MPanel_DisplayWidth;
+                        mpanels.MPanel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
+                        mpanels.MPanel_WidthToBind = MPanel_WidthToBind;
+                    }
+
+                    foreach (IDividerModel div in MPanelLst_Divider)
+                    {
+                        div.Div_Width = MPanel_Width;
+                        div.Div_DisplayWidth = MPanel_DisplayWidth;
+                        div.Div_WidthToBind = MPanel_WidthToBind;
+                    }
+                }
+            }
+        }
+
         public void SetDimensionsToBind_using_ParentMultiPanelModel()
         {
             int parent_wdToBind = MPanel_ParentModel.MPanel_WidthToBind,

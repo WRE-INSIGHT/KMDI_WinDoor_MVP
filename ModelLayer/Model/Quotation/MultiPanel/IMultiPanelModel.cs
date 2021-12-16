@@ -50,6 +50,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int GetNextIndex();
         int GetCount_MPanelLst_Object();
 
+        void SetDimensions_childObjs();
         void SetDimensionsToBind_using_ParentMultiPanelModel();
         void Adapt_sizeToBind_MPanelDivMPanel_Controls(Control current_control,
                                                        string frameType,
