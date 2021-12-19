@@ -507,6 +507,33 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         #region Methods
 
+        public void SetDimensions_childPanelObjs(int divmovement)
+        {
+            if (MPanel_ParentModel != null)
+            {
+                if (MPanel_Type == "Mullion")
+                {
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
+                    {
+                        pnl.Panel_Height += divmovement;
+                        pnl.Panel_DisplayHeight += divmovement;
+                        pnl.Panel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
+                        pnl.Panel_HeightToBind += divmovement;
+                    }
+                }
+                else if (MPanel_Type == "Transom")
+                {
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
+                    {
+                        pnl.Panel_Width += divmovement;
+                        pnl.Panel_DisplayWidth += divmovement;
+                        pnl.Panel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
+                        pnl.Panel_WidthToBind += divmovement;
+                    }
+                }
+            }
+        }
+
         public void SetDimensions_childObjs()
         {
             if (MPanel_ParentModel != null)
@@ -527,6 +554,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         div.Div_DisplayHeight = MPanel_DisplayHeight;
                         div.Div_HeightToBind = MPanel_HeightToBind;
                     }
+
+                    //foreach (IPanelModel pnl in MPanelLst_Panel)
+                    //{
+                    //    pnl.Panel_Height = MPanel_DisplayHeight;
+                    //    pnl.Panel_DisplayHeight = MPanel_DisplayHeight;
+                    //    pnl.Panel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
+                    //    pnl.Panel_HeightToBind = MPanel_HeightToBind;
+                    //}
                 }
                 else if (MPanel_Type == "Transom")
                 {
@@ -544,6 +579,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         div.Div_DisplayWidth = MPanel_DisplayWidth;
                         div.Div_WidthToBind = MPanel_WidthToBind;
                     }
+
+                    //foreach (IPanelModel pnl in MPanelLst_Panel)
+                    //{
+                    //    pnl.Panel_Width = MPanel_Width;
+                    //    pnl.Panel_DisplayWidth = MPanel_DisplayWidth;
+                    //    pnl.Panel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
+                    //    pnl.Panel_WidthToBind = MPanel_WidthToBind;
+                    //}
                 }
             }
         }
@@ -744,18 +787,18 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         {
                             if (pnl.Panel_Index_Inside_MPanel == 0)
                             {
-                                pnl_margin = new Padding(10, 9, 0, 10);
+                                pnl_margin = new Padding(10, 8, 0, 10);
                                 pnl.Panel_Placement = "First";
                             }
                             else if ((!MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions) ||
                                      (MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2))
                             {
-                                pnl_margin = new Padding(0, 9, 10, 10);
+                                pnl_margin = new Padding(0, 8, 10, 0);
                                 pnl.Panel_Placement = "Last";
                             }
                             else
                             {
-                                pnl_margin = new Padding(0, 9, 0, 10);
+                                pnl_margin = new Padding(0, 8, 0, 10);
                                 pnl.Panel_Placement = "Somewhere in Between";
                             }
                         }
@@ -837,7 +880,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                             else
                             {
-                                pnl_margin = new Padding(10, 0, 10, 0);
+                                pnl_margin = new Padding(8, 0, 10, 0);
                                 pnl.Panel_Placement = "Somewhere in Between";
                             }
                         }

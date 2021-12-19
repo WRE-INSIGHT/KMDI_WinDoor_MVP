@@ -1145,10 +1145,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointX = 2;
                             wd_deduction = 5;
                         }
-                        else if (zoom > 0.26f)
+                        else if (zoom == 0.50f)
                         {
                             bounds_PointX = (int)(pixels_count * zoom);
                             wd_deduction = (int)((pixels_count * 2) * zoom);
+                        }
+                        else if (zoom == 1.0f)
+                        {
+                            bounds_PointX = (int)(pixels_count * zoom) + 1;
+                            wd_deduction = (int)((pixels_count * 2) * zoom) + 1;
                         }
                     }
                 }
@@ -2348,8 +2353,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between Multi-Panel in MAIN PLATFORM (MultiMullion)
                 {
+                    if (zoom == 1.0f)
+                    {
+                        divs_bounds_values[3].Width += 2;
+                    }
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
+
                 }
                 #endregion
 

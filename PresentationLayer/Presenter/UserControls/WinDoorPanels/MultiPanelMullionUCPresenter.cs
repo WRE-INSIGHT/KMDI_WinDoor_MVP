@@ -1110,10 +1110,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointY = 5;
                             ht_deduction = 8;
                         }
-                        else if (zoom > 0.26f)
+                        else if (zoom == 0.50f)
                         {
                             bounds_PointY = (int)(10 * zoom);
                             ht_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                        }
+                        else if (zoom == 1.0f)
+                        {
+                            bounds_PointY = (int)(10 * zoom);
+                            ht_deduction = (int)((10 + (pixels_count + 1)) * zoom) - 1;
                         }
                     }
                     else if (thisObj_placement == "Last")
@@ -2295,6 +2300,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     for (int i = 0; i < corner_points.Length - 5; i += 2)
                     {
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
+                    }
+
+                    if (zoom == 1.0f)
+                    {
+                        divs_bounds_values[0].Y += 1;
                     }
 
                     divider_bounds_Bot = divs_bounds_values[0];

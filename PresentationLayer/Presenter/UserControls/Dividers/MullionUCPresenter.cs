@@ -150,6 +150,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        prev_mpanel.SetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
                                         {
@@ -181,6 +182,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         prev_pnl.SetDimensionToBind_using_BaseDimension();
+
+                                        foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                        {
+                                            mpnl.SetDimensions_childObjs();
+                                        }
                                     }
                                 }
 
@@ -202,6 +208,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        nxt_mpnl.SetDimensions_childPanelObjs(-1);
+
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
                                         {
@@ -234,6 +242,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         nxt_pnl.SetDimensionToBind_using_BaseDimension();
+
+                                        foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                        {
+                                            mpnl.SetDimensions_childObjs();
+                                        }
                                     }
                                 }
                             }
@@ -273,6 +286,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        prev_mpanel.SetDimensions_childPanelObjs(-1);
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
                                         {
@@ -304,6 +318,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         prev_pnl.SetDimensionToBind_using_BaseDimension();
+
+                                        foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                        {
+                                            mpnl.SetDimensions_childObjs();
+                                        }
                                     }
                                 }
 
@@ -326,6 +345,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        nxt_mpnl.SetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
                                         {
@@ -357,6 +377,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         nxt_pnl.SetDimensionToBind_using_BaseDimension();
+
+                                        foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                        {
+                                            mpnl.SetDimensions_childObjs();
+                                        }
                                     }
                                 }
                             }
@@ -572,6 +597,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 else
                                 {
                                     prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                    prev_mpanel.SetDimensions_childPanelObjs(mullion_movement);
 
                                     foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
                                     {
@@ -604,6 +630,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 else
                                 {
                                     prev_pnl.SetDimensionToBind_using_BaseDimension();
+
+                                    foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                    {
+                                        mpnl.SetDimensions_childObjs();
+                                    }
                                 }
                             }
 
@@ -625,6 +656,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 else
                                 {
                                     nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                    nxt_mpnl.SetDimensions_childPanelObjs(-mullion_movement);
 
                                     foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
                                     {
@@ -657,6 +689,11 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 else
                                 {
                                     nxt_pnl.SetDimensionToBind_using_BaseDimension();
+
+                                    foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                    {
+                                        mpnl.SetDimensions_childObjs();
+                                    }
                                 }
                             }
                         }
