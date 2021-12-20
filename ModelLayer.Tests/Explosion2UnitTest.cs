@@ -14823,7 +14823,7 @@ namespace ModelLayer.Tests
             _panelModel2.Panel_GlassThickness = 6.0f;
             _panelModel2.Panel_CornerDriveOptionsVisibility = false;
             _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
-            _panelModel2.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel2.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel2.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
             Control Casement2 = new Control();
@@ -14927,7 +14927,7 @@ namespace ModelLayer.Tests
             _panelModel3.Panel_CornerDriveOptionsVisibility = true;
             _panelModel3.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
             _panelModel3.Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
-            _panelModel3.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel3.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel3.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel3);
             Control Casement3 = new Control();
@@ -15032,7 +15032,7 @@ namespace ModelLayer.Tests
             _panelModel4.Panel_GlassThickness = 6.0f;
             _panelModel4.Panel_CornerDriveOptionsVisibility = false;
             _panelModel4.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
-            _panelModel4.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel4.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel4.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel4);
             Control Casement4 = new Control();
@@ -15136,7 +15136,7 @@ namespace ModelLayer.Tests
             _panelModel5.Panel_CornerDriveOptionsVisibility = true;
             _panelModel5.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
             _panelModel5.Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
-            _panelModel5.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel5.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel5.Panel_Index_Inside_MPanel = 6;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel5);
             Control Casement5 = new Control();
@@ -15208,7 +15208,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1836, _panelModel2.Panel_GlazingBeadHeight);
             Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel2.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel2.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(572, _panelModel2.Panel_SashWidth);
@@ -15284,7 +15284,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1836, _panelModel3.Panel_GlazingBeadHeight);
             Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel3.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel3.Panel_GBSpacerArtNo);
 
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3.Panel_SashProfileArtNo);
@@ -15365,7 +15365,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1836, _panelModel4.Panel_GlazingBeadHeight);
             Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel4.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel4.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel4.Panel_SashProfileArtNo);
             Assert.AreEqual(572, _panelModel4.Panel_SashWidth);
@@ -15440,7 +15440,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1836, _panelModel5.Panel_GlazingBeadHeight);
             Assert.AreEqual(1836, _panelModel5.Panel_GlazingBeadHeight);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel5.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel5.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel5.Panel_SashProfileArtNo);
             Assert.AreEqual(572, _panelModel5.Panel_SashWidth);
@@ -15546,7 +15546,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("8", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("16", dr[0]["Qty"]);
 
@@ -17133,7 +17133,7 @@ namespace ModelLayer.Tests
             _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
             _panelModel2.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_BL;
             _panelModel2.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
-            _panelModel2.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel2.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel2.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
             Control Casement2 = new Control();
@@ -17245,7 +17245,7 @@ namespace ModelLayer.Tests
             _panelModel3.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
             _panelModel3.Panel_RotolineOptionsVisibility = true;
             _panelModel3.Panel_RotolineArtNo = Rotoline_HandleArtNo._K070A21725;
-            _panelModel3.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel3.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel3.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel3);
             Control Casement3 = new Control();
@@ -17352,7 +17352,7 @@ namespace ModelLayer.Tests
             _panelModel4.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
             _panelModel4.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_BL;
             _panelModel4.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
-            _panelModel4.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel4.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel4.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel4);
             Control Casement4 = new Control();
@@ -17465,7 +17465,7 @@ namespace ModelLayer.Tests
             _panelModel5.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
             _panelModel5.Panel_RotolineOptionsVisibility = true;
             _panelModel5.Panel_RotolineArtNo = Rotoline_HandleArtNo._K070A21725;
-            _panelModel5.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel5.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel5.Panel_Index_Inside_MPanel = 6;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel5);
             Control Casement5 = new Control();
@@ -17836,7 +17836,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("8", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("16", dr[0]["Qty"]);
 
@@ -20049,7 +20049,7 @@ namespace ModelLayer.Tests
             _panelModel1.Panel_MotorizedMechSetQty = 1;
             _panelModel1.Panel_2DHingeQty = 3;
             _panelModel1.Panel_CornerDriveOptionsVisibility = false;
-            _panelModel1.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel1.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
 
             _frameModel.Lst_Panel.Add(_panelModel1);
 
@@ -20086,7 +20086,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1425, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel1.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel1.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(925, _panelModel1.Panel_SashWidth);
@@ -20170,7 +20170,7 @@ namespace ModelLayer.Tests
 
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
@@ -20372,7 +20372,7 @@ namespace ModelLayer.Tests
             _panelModel1.Panel_ButtHingeArtNo = ButtHinge_ArticleNo._PC;
             _panelModel1.Panel_ButtHingeQty = 3;
             _panelModel1.Panel_CornerDriveOptionsVisibility = false;
-            _panelModel1.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel1.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
 
 
 
@@ -20410,7 +20410,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(927, _panelModel1.Panel_GlazingBeadHeight);
             Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel1.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel1.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(892, _panelModel1.Panel_SashWidth);
@@ -20493,7 +20493,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
 
