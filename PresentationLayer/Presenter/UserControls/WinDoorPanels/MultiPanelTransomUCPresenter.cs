@@ -1119,7 +1119,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointX = 5;
                             wd_deduction = 8;
                         }
-                        else if (zoom > 0.26f)
+                        else if (zoom == 0.50f)
+                        {
+                            bounds_PointX = (int)(10 * zoom);
+                            wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                        }
+                        else if (zoom == 1.0f)
                         {
                             bounds_PointX = (int)(10 * zoom);
                             wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
@@ -1132,7 +1137,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointX = 2; 
                             wd_deduction = 8; 
                         }
-                        else if (zoom > 0.26f)
+                        else if (zoom == 0.50f)
+                        {
+                            bounds_PointX = (int)(pixels_count * zoom);
+                            wd_deduction = (int)((((pixels_count + 2) * 2) - 1) * zoom) + 1;
+                        }
+                        else if (zoom == 1.0f)
                         {
                             bounds_PointX = (int)(pixels_count * zoom);
                             wd_deduction = (int)((((pixels_count + 2) * 2) - 1) * zoom);
@@ -1148,7 +1158,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         else if (zoom == 0.50f)
                         {
                             bounds_PointX = (int)(pixels_count * zoom);
-                            wd_deduction = (int)((pixels_count * 2) * zoom);
+                            wd_deduction = (int)((pixels_count * 2) * zoom) + 2;
                         }
                         else if (zoom == 1.0f)
                         {
@@ -2330,6 +2340,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX, pInnerY + pInnerHt));
 
+                    if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[2].X -= 2;
+                        divs_bounds_values[2].Width += 2;
+                    }
+
                     divider_bounds_Right = divs_bounds_values[2];
                 }
                 #endregion
@@ -2356,6 +2372,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (zoom == 1.0f)
                     {
                         divs_bounds_values[3].Width += 2;
+                    }
+                    else if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[2].X -= 2;
+                        divs_bounds_values[2].Width += 2;
                     }
 
                     divider_bounds_Right = divs_bounds_values[2];
