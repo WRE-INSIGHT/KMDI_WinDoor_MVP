@@ -2404,11 +2404,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         divs_bounds_values[3].Width += 1;
                     }
-                    else if (zoom == 0.50f)
-                    {
-                        //divs_bounds_values[0].X -= 1;
-                        divs_bounds_values[0].Width += 1;
-                    }
 
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2430,10 +2425,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
                     {
                         divs_bounds_values[3].Width += 1;
-                    }
-                    else if (zoom == 0.50f)
-                    {
-                        divs_bounds_values[1].Width += 1;
                     }
 
                     divider_bounds_Right = divs_bounds_values[2];
@@ -2457,11 +2448,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
                     {
                         divs_bounds_values[3].Width += 1;
-                    }
-                    else if (zoom == 0.50f)
-                    {
-                        divs_bounds_values[1].Width += 1;
-                        divs_bounds_values[0].Width += 1;
                     }
 
                     divider_bounds_Right = divs_bounds_values[2];

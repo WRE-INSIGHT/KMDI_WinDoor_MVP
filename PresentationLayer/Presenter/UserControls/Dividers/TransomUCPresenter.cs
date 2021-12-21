@@ -156,7 +156,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_Height++;
                                             mpanel.MPanel_DisplayHeight++;
 
-                                            mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                            mpanel.SetDimensionsToBind_TransomDivMovement();
                                         }
 
                                         foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
@@ -214,7 +214,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_Height--;
                                             mpanel.MPanel_DisplayHeight--;
 
-                                            mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                            mpanel.SetDimensionsToBind_TransomDivMovement();
                                         }
 
                                         foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
@@ -291,7 +291,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_Height--;
                                             mpanel.MPanel_DisplayHeight--;
 
-                                            mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                            mpanel.SetDimensionsToBind_TransomDivMovement();
                                         }
 
                                         foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
@@ -349,7 +349,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_Height++;
                                             mpanel.MPanel_DisplayHeight++;
 
-                                            mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                            mpanel.SetDimensionsToBind_TransomDivMovement();
                                         }
 
                                         foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
@@ -604,7 +604,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpanel.MPanel_Height += transom_movement;
                                         mpanel.MPanel_DisplayHeight += transom_movement;
 
-                                        mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        mpanel.SetDimensionsToBind_TransomDivMovement();
                                     }
 
                                     foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
@@ -662,7 +662,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpanel.MPanel_Height -= transom_movement;
                                         mpanel.MPanel_DisplayHeight -= transom_movement;
 
-                                        mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        mpanel.SetDimensionsToBind_TransomDivMovement();
                                     }
 
                                     foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)

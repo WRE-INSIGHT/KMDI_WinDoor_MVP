@@ -1122,7 +1122,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         else if (zoom == 0.50f)
                         {
                             bounds_PointX = (int)(10 * zoom);
-                            wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                            if (lvl2_parent_Type != "")
+                            {
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                            }
                         }
                         else if (zoom == 1.0f)
                         {
@@ -1158,7 +1165,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         else if (zoom == 0.50f)
                         {
                             bounds_PointX = (int)(pixels_count * zoom);
-                            wd_deduction = (int)((pixels_count * 2) * zoom) + 2;
+                            if (lvl2_parent_Type != "")
+                            {
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                            }
                         }
                         else if (zoom == 1.0f)
                         {

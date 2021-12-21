@@ -157,7 +157,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_Width++;
                                             mpanel.MPanel_DisplayWidth++;
 
-                                            mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                            mpanel.SetDimensionsToBind_MullionDivMovement();
                                         }
 
                                         foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
@@ -216,7 +216,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_Width--;
                                             mpanel.MPanel_DisplayWidth--;
 
-                                            mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                            mpanel.SetDimensionsToBind_MullionDivMovement();
                                         }
                                         
                                         foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
@@ -293,7 +293,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_Width--;
                                             mpanel.MPanel_DisplayWidth--;
 
-                                            mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                            mpanel.SetDimensionsToBind_MullionDivMovement();
                                         }
 
                                         foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
@@ -352,7 +352,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_Width++;
                                             mpanel.MPanel_DisplayWidth++;
 
-                                            mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                            mpanel.SetDimensionsToBind_MullionDivMovement();
                                         }
 
                                         foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
@@ -604,7 +604,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpanel.MPanel_Width += mullion_movement;
                                         mpanel.MPanel_DisplayWidth += mullion_movement;
 
-                                        mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        mpanel.SetDimensionsToBind_MullionDivMovement();
                                     }
 
                                     foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
@@ -663,7 +663,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpanel.MPanel_Width -= mullion_movement;
                                         mpanel.MPanel_DisplayWidth -= mullion_movement;
 
-                                        mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        mpanel.SetDimensionsToBind_MullionDivMovement();
                                     }
 
                                     foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)

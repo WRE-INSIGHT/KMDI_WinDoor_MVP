@@ -554,14 +554,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         div.Div_DisplayHeight = MPanel_DisplayHeight;
                         div.Div_HeightToBind = MPanel_HeightToBind;
                     }
-
-                    //foreach (IPanelModel pnl in MPanelLst_Panel)
-                    //{
-                    //    pnl.Panel_Height = MPanel_DisplayHeight;
-                    //    pnl.Panel_DisplayHeight = MPanel_DisplayHeight;
-                    //    pnl.Panel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
-                    //    pnl.Panel_HeightToBind = MPanel_HeightToBind;
-                    //}
                 }
                 else if (MPanel_Type == "Transom")
                 {
@@ -579,16 +571,50 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         div.Div_DisplayWidth = MPanel_DisplayWidth;
                         div.Div_WidthToBind = MPanel_WidthToBind;
                     }
-
-                    //foreach (IPanelModel pnl in MPanelLst_Panel)
-                    //{
-                    //    pnl.Panel_Width = MPanel_Width;
-                    //    pnl.Panel_DisplayWidth = MPanel_DisplayWidth;
-                    //    pnl.Panel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
-                    //    pnl.Panel_WidthToBind = MPanel_WidthToBind;
-                    //}
                 }
             }
+        }
+
+        public void SetDimensionsToBind_MullionDivMovement()
+        {
+            int parent_wdToBind = MPanel_ParentModel.MPanel_WidthToBind,
+                parent_htToBind = MPanel_ParentModel.MPanel_HeightToBind,
+                wd = 0, ht = 0;
+
+            if (MPanel_Zoom == 0.50f)
+            {
+                wd = parent_wdToBind;
+                ht = MPanel_HeightToBind;
+            }
+            else if (MPanel_Zoom == 1.0f)
+            {
+                wd = MPanel_Width;
+                ht = MPanel_Height;
+            }
+
+            MPanel_WidthToBind = wd;
+            MPanel_HeightToBind = ht;
+        }
+
+        public void SetDimensionsToBind_TransomDivMovement()
+        {
+            int parent_wdToBind = MPanel_ParentModel.MPanel_WidthToBind,
+                parent_htToBind = MPanel_ParentModel.MPanel_HeightToBind,
+                wd = 0, ht = 0;
+
+            if (MPanel_Zoom == 0.50f)
+            {
+                wd = MPanel_WidthToBind;
+                ht = parent_htToBind;
+            }
+            else if (MPanel_Zoom == 1.0f)
+            {
+                wd = MPanel_Width;
+                ht = MPanel_Height;
+            }
+
+            MPanel_WidthToBind = wd;
+            MPanel_HeightToBind = ht;
         }
 
         public void SetDimensionsToBind_using_ParentMultiPanelModel()
@@ -615,16 +641,23 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             else if (MPanel_Zoom == 0.50f)
             {
-                //wd = Convert.ToInt32(MPanel_Width * MPanel_Zoom);
-                //ht = Convert.ToInt32(MPanel_Height * MPanel_Zoom);
+                if (MPanel_ParentModel.MPanel_Type == "Mullion")
+                {
+                    decimal wd_flt_convert_dec = Convert.ToDecimal(MPanel_Width * MPanel_Zoom);
+                    decimal wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+                    wd = Convert.ToInt32(wd_dec);
 
-                decimal wd_flt_convert_dec = Convert.ToDecimal(MPanel_Width * MPanel_Zoom);
-                decimal wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
-                wd = Convert.ToInt32(wd_dec);
+                    ht = parent_htToBind;
+                }
+                else if (MPanel_ParentModel.MPanel_Type == "Transom")
+                {
+                    wd = parent_wdToBind;
 
-                decimal ht_flt_convert_dec = Convert.ToDecimal(MPanel_Height * MPanel_Zoom);
-                decimal ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
-                ht = Convert.ToInt32(ht_dec);
+                    decimal ht_flt_convert_dec = Convert.ToDecimal(MPanel_Height * MPanel_Zoom);
+                    decimal ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+                    ht = Convert.ToInt32(ht_dec);
+                }
+
             }
             else if (MPanel_Zoom == 1.0f)
             {
