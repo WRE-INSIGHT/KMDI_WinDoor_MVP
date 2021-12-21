@@ -40,6 +40,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         List<Control> MPanelLst_Imagers { get; set; }
         float MPanel_Zoom { get; set; }
         int MPanel_WidthToBind { get; set; }
+        int MPanel_WidthToBindPrev { get; set; }
         int MPanel_AddPixel { get; }
         int MPanel_DisplayWidth { get; set; }
         int MPanel_DisplayWidthDecimal { get; set; }

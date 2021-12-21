@@ -1141,7 +1141,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointY = 2;
                             ht_deduction = 5;
                         }
-                        else if (zoom > 0.26f)
+                        else if (zoom == 0.50f)
+                        {
+                            bounds_PointY = (int)(pixels_count * zoom);
+                            if (lvl2_parent_Type != "")
+                            {
+                                ht_deduction = (int)((pixels_count * 2) * zoom);
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                ht_deduction = (int)((pixels_count * 2) * zoom) + 2;
+                            }
+                        }
+                        else if (zoom == 1.0f)
                         {
                             bounds_PointY = (int)(pixels_count * zoom);
                             ht_deduction = (int)((pixels_count * 2) * zoom);
@@ -2329,6 +2341,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between Multi-Panel in a MAIN PLATFORM (MultiTransom)
                 {
+                    if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
                 }
