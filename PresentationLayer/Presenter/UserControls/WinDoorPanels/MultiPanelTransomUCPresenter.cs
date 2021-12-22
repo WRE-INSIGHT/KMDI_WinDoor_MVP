@@ -1117,7 +1117,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (zoom <= 0.26f)
                         {
                             bounds_PointX = 5;
-                            wd_deduction = 8;
+                            if (lvl2_parent_Type != "")
+                            {
+                                wd_deduction = 8;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                wd_deduction = 8 + 4;
+                            }
                         }
                         else if (zoom == 0.50f)
                         {
@@ -1141,8 +1148,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (zoom <= 0.26f)
                         {
-                            bounds_PointX = 2; 
-                            wd_deduction = 8; 
+                            if (lvl2_parent_Type != "")
+                            {
+                                bounds_PointX = 2;
+                                wd_deduction = 8;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                bounds_PointX = 6;
+                                wd_deduction = 8 + 4;
+                            }
                         }
                         else if (zoom == 0.50f)
                         {
@@ -1159,8 +1174,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (zoom <= 0.26f)
                         {
-                            bounds_PointX = 2;
-                            wd_deduction = 5;
+                            if (lvl2_parent_Type != "")
+                            {
+                                bounds_PointX = 2;
+                                wd_deduction = 5;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                bounds_PointX = 4;
+                                wd_deduction = 5 + 4;
+                            }
                         }
                         else if (zoom == 0.50f)
                         {
@@ -2359,6 +2382,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[2].X -= 2;
                         divs_bounds_values[2].Width += 2;
                     }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[2].X -= 4;
+                        divs_bounds_values[2].Width += 4;
+                    }
 
                     divider_bounds_Right = divs_bounds_values[2];
                 }
@@ -2373,6 +2401,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                            new Point(pInnerX + pInnerWd, pInnerY));
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
+
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 4;
+                    }
 
                     divider_bounds_Left = divs_bounds_values[3];
                 }
@@ -2391,6 +2424,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         divs_bounds_values[2].X -= 2;
                         divs_bounds_values[2].Width += 2;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 3;
+
+                        divs_bounds_values[2].X -= 3;
+                        divs_bounds_values[2].Width += 3;
                     }
 
                     divider_bounds_Right = divs_bounds_values[2];

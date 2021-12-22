@@ -542,6 +542,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             int pnlhtToBind = MPanel_HeightToBind - 8;
                             pnl.Panel_HeightToBind = pnlhtToBind;
                         }
+                        else if (MPanel_Zoom <= 0.26f)
+                        {
+                            int pnlhtToBind = MPanel_HeightToBind - 10;
+                            pnl.Panel_HeightToBind = pnlhtToBind;
+                        }
                     }
                 }
                 else if (MPanel_Type == "Transom")
@@ -551,11 +556,17 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         pnl.Panel_Width += divmovement;
                         pnl.Panel_DisplayWidth += divmovement;
                         pnl.Panel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
+
                         if (MPanel_Zoom == 1.0f)
                         {
                             pnl.Panel_WidthToBind += divmovement;
                         }
                         else if (MPanel_Zoom == 0.50f)
+                        {
+                            int pnlwdToBind = MPanel_WidthToBind - 10;
+                            pnl.Panel_WidthToBind = pnlwdToBind;
+                        }
+                        else if (MPanel_Zoom <= 0.26f)
                         {
                             int pnlwdToBind = MPanel_WidthToBind - 10;
                             pnl.Panel_WidthToBind = pnlwdToBind;

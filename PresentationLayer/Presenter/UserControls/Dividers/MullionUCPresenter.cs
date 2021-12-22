@@ -141,10 +141,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        prev_mpanel.SetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
                                         {
                                             mpanel.SetDimensions_childObjs();
+                                            mpanel.SetDimensions_childPanelObjs(1);
                                         }
                                     }
                                     else
@@ -199,10 +201,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        nxt_mpnl.SetDimensions_childPanelObjs(-1);
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
                                         {
                                             mpanel.SetDimensions_childObjs();
+                                            mpanel.SetDimensions_childPanelObjs(-1);
                                         }
                                     }
                                     else
@@ -277,10 +281,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        prev_mpanel.SetDimensions_childPanelObjs(-1);
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
                                         {
                                             mpanel.SetDimensions_childObjs();
+                                            mpanel.SetDimensions_childPanelObjs(-1);
                                         }
                                     }
                                     else
@@ -336,10 +342,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        prev_mpanel.SetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
                                         {
                                             mpanel.SetDimensions_childObjs();
+                                            mpanel.SetDimensions_childPanelObjs(1);
                                         }
                                     }
                                     else
@@ -588,10 +596,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                 {
                                     prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    prev_mpanel.SetDimensions_childPanelObjs(mullion_movement);
 
                                     foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
                                     {
                                         mpanel.SetDimensions_childObjs();
+                                        mpanel.SetDimensions_childPanelObjs(mullion_movement);
                                     }
                                 }
                                 else
@@ -647,10 +657,12 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                 {
                                     nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    nxt_mpnl.SetDimensions_childPanelObjs(-mullion_movement);
 
                                     foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
                                     {
                                         mpanel.SetDimensions_childObjs();
+                                        mpanel.SetDimensions_childPanelObjs(-mullion_movement);
                                     }
                                 }
                                 else
