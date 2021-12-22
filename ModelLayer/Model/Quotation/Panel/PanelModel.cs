@@ -1111,6 +1111,19 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+        private Rotoswing_HandleArtNo _panelRotoswingArtNo2;
+        public Rotoswing_HandleArtNo Panel_RotoswingArtNo2
+        {
+            get
+            {
+                return _panelRotoswingArtNo2;
+            }
+            set
+            {
+                _panelRotoswingArtNo2 = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private Rotary_HandleArtNo _panelRotaryArtNo;
         public Rotary_HandleArtNo Panel_RotaryArtNo
@@ -4790,6 +4803,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                        @"");
             }
         }
+        //
+
 
         public void Insert_CornerDrive_MaterialList(DataTable tbl_explosion)
         {
@@ -4807,6 +4822,14 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "",
                                    "Sash",
                                    @"");
+            if (Panel_RotoswingArtNo2 != null)
+            {
+                tbl_explosion.Rows.Add("Rotoswing handle " + Panel_RotoswingArtNo2.DisplayName,
+                                   1, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+            }
 
         }
 
@@ -5383,6 +5406,7 @@ namespace ModelLayer.Model.Quotation.Panel
                           int panelExtLeft2Qty,
                           int panelExtRight2Qty,
                           Rotoswing_HandleArtNo panelRotoswingArtNo,
+                          Rotoswing_HandleArtNo panelRotoswingArtNo2,
                           GeorgianBar_ArticleNo panelGeorgianBarArtNo,
                           int panelGeorgianBarVerticalQty,
                           int panelGeorgianBarHorizontalQty,
@@ -5449,15 +5473,14 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_ExtRightQty = panelExtRightQty;
             Panel_ExtRight2Qty = panelExtRight2Qty;
             Panel_RotoswingArtNo = panelRotoswingArtNo;
+            Panel_RotoswingArtNo2 = panelRotoswingArtNo2;
             Panel_GeorgianBarArtNo = panelGeorgianBarArtNo;
             Panel_GeorgianBar_VerticalQty = panelGeorgianBarVerticalQty;
             Panel_GeorgianBar_HorizontalQty = panelGeorgianBarHorizontalQty;
             Panel_GeorgianBarOptionVisibility = panelGeorgianBarOptionVisibility;
             Panel_HingeOptions = panelHingeOptions;
-
             Panel_BackColor = Color.DarkGray;
             Panel_CmenuDeleteVisibility = true;
-
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;
             Panel_RotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;

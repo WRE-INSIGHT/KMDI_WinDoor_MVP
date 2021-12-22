@@ -1,6 +1,5 @@
 ﻿using CommonComponents;
 using Microsoft.VisualBasic;
-using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
@@ -22,12 +21,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
-using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -529,7 +525,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     suggest_Wd = multiPanel_boundsWD + 2;
                 }
-                
+
                 IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
                 MiddleCloser_ArticleNo midArtNo = MiddleCloser_ArticleNo._None;
@@ -564,7 +560,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
 
                 Rotoswing_HandleArtNo handleArtNo = null;
+                Rotoswing_HandleArtNo handleArtNo2 = null;
+
                 Foil_Color inside_color = _frameModel.Frame_WindoorModel.WD_InsideColor;
+                Foil_Color outside_color = _frameModel.Frame_WindoorModel.WD_OutsideColor;
 
                 if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
                     inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
@@ -580,6 +579,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                 }
 
+
+
+                if (inside_color != outside_color)//2 diff color
+                {
+                    if (outside_color == Foil_Color._Walnut || outside_color == Foil_Color._Havana ||
+                        outside_color == Foil_Color._GoldenOak || outside_color == Foil_Color._Mahogany)
+                    {
+                        handleArtNo2 = Rotoswing_HandleArtNo._RSC833307;
+                    }
+                    else if (outside_color == Foil_Color._CharcoalGray || outside_color == Foil_Color._FossilGray ||
+                             outside_color == Foil_Color._BeechOak || outside_color == Foil_Color._DriftWood ||
+                             outside_color == Foil_Color._Graphite || outside_color == Foil_Color._JetBlack ||
+                             outside_color == Foil_Color._ChestnutOak || outside_color == Foil_Color._WashedOak ||
+                             outside_color == Foil_Color._GreyOak || outside_color == Foil_Color._Cacao)
+                    {
+                        handleArtNo2 = Rotoswing_HandleArtNo._RSC773452;
+                    }
+                }
                 _panelModel = _panelServices.AddPanelModel(suggest_Wd,
                                                                suggest_HT,
                                                                fpnl,
@@ -627,6 +644,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                0,
                                                                0,
                                                                handleArtNo,
+                                                               handleArtNo2,
                                                                GeorgianBar_ArticleNo._None,
                                                                0,
                                                                0,
@@ -841,7 +859,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
-                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelTransomUC, 
+                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelTransomUC,
                                                                                     _frameModel.Frame_Type.ToString(),
                                                                                     _multiPanelModel.MPanel_Placement);
             }
@@ -888,8 +906,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanel_ParentModel.Reload_MultiPanelMargin();
                 _multiPanelModel.MPanel_ParentModel.Reload_PanelMargin();
                 _commonFunctions.Automatic_Div_Addition(_mainPresenter,
-                                                        _frameModel, 
-                                                        _divServices, 
+                                                        _frameModel,
+                                                        _divServices,
                                                         _transomUCP,
                                                         _unityC,
                                                         _mullionUCP,
@@ -903,7 +921,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _multiMullionImagerUCP_Given,
                                                         _multiPanelTransomImagerUCP);
             }
-            
+
             if (parent_ctrl.Name.Contains("flp_Multi"))
             {
                 foreach (Control ctrl in parent_ctrl.Controls)
@@ -1036,7 +1054,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                        lvl2_parent_Type = "",
                        thisObj_placement = _multiPanelModel.MPanel_Placement;
             DockStyle parent_doxtyle = DockStyle.None;
-            
+
             if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FrameUC)) //if inside Frame
             {
                 for (int i = 0; i < corner_points.Length - 1; i += 2)
@@ -1098,7 +1116,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     wd_deduction = (int)(20 * zoom);
                     bounds_PointX = (int)(10 * zoom);
-                    
+
                     if (thisObj_placement == "First")
                     {
                         bounds_PointY = (int)(10 * zoom);
@@ -1112,7 +1130,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     else if (thisObj_placement == "Somewhere in Between")
                     {
                         bounds_PointY = (int)(pixels_count * zoom);
-                        ht_deduction = (int)((pixels_count  * 2) * zoom);
+                        ht_deduction = (int)((pixels_count * 2) * zoom);
                     }
                 }
                 #endregion
@@ -2655,8 +2673,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiMullion)
                 {
-                    divs_bounds_values[2].X -=2;
-                    divs_bounds_values[2].Width +=2;
+                    divs_bounds_values[2].X -= 2;
+                    divs_bounds_values[2].Width += 2;
 
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2980,14 +2998,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             return _multiPanelTransomUC;
         }
 
-        public IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC, 
-                                                            IMultiPanelModel multiPanelModel, 
-                                                            IFrameModel frameModel, 
-                                                            IMainPresenter mainPresenter, 
-                                                            IFrameUCPresenter frameUCP, 
-                                                            IMultiPanelPropertiesUCPresenter multiPropUCP, 
-                                                            IFrameImagerUCPresenter frameImagerUCP, 
-                                                            IBasePlatformImagerUCPresenter basePlatformImagerUCP, 
+        public IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                            IMultiPanelModel multiPanelModel,
+                                                            IFrameModel frameModel,
+                                                            IMainPresenter mainPresenter,
+                                                            IFrameUCPresenter frameUCP,
+                                                            IMultiPanelPropertiesUCPresenter multiPropUCP,
+                                                            IFrameImagerUCPresenter frameImagerUCP,
+                                                            IBasePlatformImagerUCPresenter basePlatformImagerUCP,
                                                             IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP)
         {
             unityC
@@ -3137,7 +3155,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             ((IMultiPanelUC)_multiPanelTransomUC).DeletePanel(obj);
         }
-        
+
         public void Invalidate_MultiPanelMullionUC()
         {
             ((IMultiPanelUC)_multiPanelTransomUC).InvalidateFlp();

@@ -21,12 +21,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
-using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -73,7 +70,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IDividerServices _divServices;
         private IPanelServices _panelServices;
         private IMultiPanelServices _multipanelServices;
-        
+
         bool _initialLoad;
 
         private MultiPanelCommon _mpnlCommons = new MultiPanelCommon();
@@ -551,7 +548,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
 
                 Rotoswing_HandleArtNo handleArtNo = null;
+                Rotoswing_HandleArtNo handleArtNo2 = null;
+
                 Foil_Color inside_color = _frameModel.Frame_WindoorModel.WD_InsideColor;
+                Foil_Color outside_color = _frameModel.Frame_WindoorModel.WD_OutsideColor;
 
                 if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
                     inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
@@ -566,6 +566,25 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                 }
+
+
+                if (inside_color != outside_color)//2 diff color
+                {
+                    if (outside_color == Foil_Color._Walnut || outside_color == Foil_Color._Havana ||
+                        outside_color == Foil_Color._GoldenOak || outside_color == Foil_Color._Mahogany)
+                    {
+                        handleArtNo2 = Rotoswing_HandleArtNo._RSC833307;
+                    }
+                    else if (outside_color == Foil_Color._CharcoalGray || outside_color == Foil_Color._FossilGray ||
+                             outside_color == Foil_Color._BeechOak || outside_color == Foil_Color._DriftWood ||
+                             outside_color == Foil_Color._Graphite || outside_color == Foil_Color._JetBlack ||
+                             outside_color == Foil_Color._ChestnutOak || outside_color == Foil_Color._WashedOak ||
+                             outside_color == Foil_Color._GreyOak || outside_color == Foil_Color._Cacao)
+                    {
+                        handleArtNo2 = Rotoswing_HandleArtNo._RSC773452;
+                    }
+                }
+
 
                 IPanelModel _panelModel = _panelServices.AddPanelModel(suggest_Wd,
                                                                        suggest_HT,
@@ -614,6 +633,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                        0,
                                                                        0,
                                                                        handleArtNo,
+                                                                       handleArtNo2,
                                                                        GeorgianBar_ArticleNo._None,
                                                                        0,
                                                                        0,
@@ -838,7 +858,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
-                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelMullionUC, 
+                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelMullionUC,
                                                                                    _frameModel.Frame_Type.ToString(),
                                                                                    _multiPanelModel.MPanel_Placement);
             }
@@ -847,7 +867,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameModel.SetDeductFramePadding(false);
             }
-            
+
             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
             {
                 _frameModel.Lst_Panel.Remove(pnl);
@@ -965,7 +985,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             color = Color.Blue;
             ((IMultiPanelUC)_multiPanelMullionUC).InvalidateFlp();
         }
-        
+
         Color color = Color.Black;
         bool _HeightChange = false,
              _WidthChange = false;
@@ -993,7 +1013,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Point[] botLine = new Point[2];
             Point[] leftCurve = new Point[3];
             Point[] rightCurve = new Point[3];
-            
+
             Point[] corner_points = new[]
             {
                     new Point(0,0),
@@ -2948,7 +2968,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             ((IMultiPanelUC)_multiPanelMullionUC).GetDivEnabler().Checked = _multiPanelModel.MPanel_DividerEnabled;
             return _multiPanelMullionUC;
         }
-        
+
         public IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
                                                             IMultiPanelModel multiPanelModel,
                                                             IFrameModel frameModel,
@@ -2980,14 +3000,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             return multiMullionUCP;
         }
 
-        public IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC, 
-                                                            IMultiPanelModel multiPanelModel, 
-                                                            IFrameModel frameModel, 
-                                                            IMainPresenter mainPresenter, 
-                                                            IFrameUCPresenter frameUCP, 
-                                                            IMultiPanelTransomUCPresenter multiPanelTransomUCP, 
-                                                            IMultiPanelPropertiesUCPresenter multiPropUCP, 
-                                                            IFrameImagerUCPresenter frameImagerUCP, 
+        public IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                            IMultiPanelModel multiPanelModel,
+                                                            IFrameModel frameModel,
+                                                            IMainPresenter mainPresenter,
+                                                            IFrameUCPresenter frameUCP,
+                                                            IMultiPanelTransomUCPresenter multiPanelTransomUCP,
+                                                            IMultiPanelPropertiesUCPresenter multiPropUCP,
+                                                            IFrameImagerUCPresenter frameImagerUCP,
                                                             IBasePlatformImagerUCPresenter basePlatformImagerUCP,
                                                             IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP)
         {
@@ -3051,7 +3071,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Placement", new Binding("MPanel_Placement", _multiPanelModel, "MPanel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_CmenuDeleteVisibility", new Binding("MPanel_CmenuDeleteVisibility", _multiPanelModel, "MPanel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            
+
             return multiPanelBinding;
         }
 

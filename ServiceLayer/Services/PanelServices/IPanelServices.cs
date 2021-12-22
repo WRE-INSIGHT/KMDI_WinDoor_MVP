@@ -57,6 +57,7 @@ namespace ServiceLayer.Services.PanelServices
                                   int panelExtLeft2Qty,
                                   int panelExtRight2Qty,
                                   Rotoswing_HandleArtNo panelRotoswingArtNo,
+                                  Rotoswing_HandleArtNo panelRotoswingArtNo2,
                                   GeorgianBar_ArticleNo panelGeorgianBarArtNo,
                                   int panelGeorgianBarVerticalQty,
                                   int panelGeorgianBarHorizontalQty,
