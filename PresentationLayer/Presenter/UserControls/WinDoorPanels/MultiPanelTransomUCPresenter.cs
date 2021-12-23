@@ -1199,8 +1199,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         else if (zoom == 1.0f)
                         {
-                            bounds_PointX = (int)(pixels_count * zoom) + 1;
-                            wd_deduction = (int)((pixels_count * 2) * zoom) + 1;
+                            bounds_PointX = (int)(pixels_count * zoom);
+                            wd_deduction = (int)((pixels_count * 2) * zoom);
                         }
                     }
                 }
@@ -2418,7 +2418,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     if (zoom == 1.0f)
                     {
-                        divs_bounds_values[3].Width += 2;
+                        divs_bounds_values[3].Width += 1;
                     }
                     else if (zoom == 0.50f)
                     {

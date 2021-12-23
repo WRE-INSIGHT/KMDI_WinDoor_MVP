@@ -2341,7 +2341,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         divs_bounds_values[0].Y += 1;
                     }
-                    else if (zoom == 0.26f)
+                    else if (zoom <= 0.26f)
                     {
                         divs_bounds_values[0].Y -= 4;
                         divs_bounds_values[0].Height += 4;
@@ -2361,7 +2361,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                     }
 
-                    if (zoom == 0.26f)
+                    if (zoom <= 0.26f)
                     {
                         divs_bounds_values[1].Height += 4;
                     }
@@ -2379,7 +2379,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[0].Y -= 2;
                         divs_bounds_values[0].Height += 2;
                     }
-                    else if (zoom == 0.26f)
+                    else if (zoom <= 0.26f)
                     {
                         divs_bounds_values[0].Y -= 4;
                         divs_bounds_values[0].Height += 4;

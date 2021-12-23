@@ -521,6 +521,151 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         #region Methods
 
+        public void SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt)
+        {
+            if (MPanel_ParentModel != null)
+            {
+                if (MPanel_Type == "Mullion")
+                {
+                    if (MPanel_ParentModel.MPanel_Placement == "First")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (pnl.Panel_Placement == "Last")
+                            {
+                                pnl.Panel_Width += divmovement;
+                                pnl.Panel_DisplayWidth += divmovement;
+                                pnl.Panel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
+                                if (MPanel_Zoom == 1.0f)
+                                {
+                                    pnl.Panel_WidthToBind += divmovement;
+                                }
+                            }
+                        }
+                    }
+                    else if(MPanel_ParentModel.MPanel_Placement == "Somewhere in Between")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (prevOrNxt == "nxt")
+                            {
+                                if (pnl.Panel_Placement == "First")
+                                {
+                                    pnl.Panel_Width += divmovement;
+                                    pnl.Panel_DisplayWidth += divmovement;
+                                    pnl.Panel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
+                                    if (MPanel_Zoom == 1.0f)
+                                    {
+                                        pnl.Panel_WidthToBind += divmovement;
+                                    }
+                                }
+                            }
+                            else if (prevOrNxt == "prev")
+                            {
+                                if (pnl.Panel_Placement == "Last")
+                                {
+                                    pnl.Panel_Width += divmovement;
+                                    pnl.Panel_DisplayWidth += divmovement;
+                                    pnl.Panel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
+                                    if (MPanel_Zoom == 1.0f)
+                                    {
+                                        pnl.Panel_WidthToBind += divmovement;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (MPanel_ParentModel.MPanel_Placement == "Last")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (pnl.Panel_Placement == "First")
+                            {
+                                pnl.Panel_Width += divmovement;
+                                pnl.Panel_DisplayWidth += divmovement;
+                                pnl.Panel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
+                                if (MPanel_Zoom == 1.0f)
+                                {
+                                    pnl.Panel_WidthToBind += divmovement;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (MPanel_Type == "Transom")
+                {
+                    if (MPanel_ParentModel.MPanel_Placement == "First")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (pnl.Panel_Placement == "Last")
+                            {
+                                pnl.Panel_Height += divmovement;
+                                pnl.Panel_DisplayHeight += divmovement;
+                                pnl.Panel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
+
+                                if (MPanel_Zoom == 1.0f)
+                                {
+                                    pnl.Panel_HeightToBind += divmovement;
+                                }
+                            }
+                        }
+                    }
+                    else if (MPanel_ParentModel.MPanel_Placement == "Somewhere in Between")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (prevOrNxt == "nxt")
+                            {
+                                if (pnl.Panel_Placement == "First")
+                                {
+                                    pnl.Panel_Height += divmovement;
+                                    pnl.Panel_DisplayHeight += divmovement;
+                                    pnl.Panel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
+
+                                    if (MPanel_Zoom == 1.0f)
+                                    {
+                                        pnl.Panel_HeightToBind += divmovement;
+                                    }
+                                }
+                            }
+                            else if (prevOrNxt == "prev")
+                            {
+                                if (pnl.Panel_Placement == "Last")
+                                {
+                                    pnl.Panel_Height += divmovement;
+                                    pnl.Panel_DisplayHeight += divmovement;
+                                    pnl.Panel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
+
+                                    if (MPanel_Zoom == 1.0f)
+                                    {
+                                        pnl.Panel_HeightToBind += divmovement;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (MPanel_ParentModel.MPanel_Placement == "Last")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (pnl.Panel_Placement == "First")
+                            {
+                                pnl.Panel_Height += divmovement;
+                                pnl.Panel_DisplayHeight += divmovement;
+                                pnl.Panel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
+
+                                if (MPanel_Zoom == 1.0f)
+                                {
+                                    pnl.Panel_HeightToBind += divmovement;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public void SetDimensions_childPanelObjs(int divmovement)
         {
             if (MPanel_ParentModel != null)
