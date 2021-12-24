@@ -128,7 +128,10 @@ namespace PresentationLayer.Presenter.UserControls
         private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)
         {
             UserControl frame = (UserControl)sender; //Control na babagsakan
-            string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
+            List<object> lst_data = e.Data.GetData(e.Data.GetFormats()[0]) as List<object>;
+
+            string data = lst_data[0].ToString();
+            int divCount = Convert.ToInt32(lst_data[1]);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
@@ -162,7 +165,10 @@ namespace PresentationLayer.Presenter.UserControls
                                                                           1,
                                                                           0,
                                                                           null,
-                                                                          _frameModel.FrameImageRenderer_Zoom);
+                                                                          _frameModel.FrameImageRenderer_Zoom,
+                                                                          "",
+                                                                          divCount);
+
                 _multipanelModel.Set_DimensionToBind_using_FrameDimensions();
                 _frameModel.Lst_MultiPanel.Add(_multipanelModel);
 

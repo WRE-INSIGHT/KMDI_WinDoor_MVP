@@ -19,6 +19,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanel_Height { get; set; }
         int MPanelImageRenderer_Height { get; set; }
         int MPanel_HeightToBind { get; set; }
+        int MPanel_HeightToBindPrev { get; set; }
         FlowDirection MPanel_FlowDirection { get; set; }
         bool MPanel_Visibility { get; set; }
         int MPanel_Divisions { get; set; }

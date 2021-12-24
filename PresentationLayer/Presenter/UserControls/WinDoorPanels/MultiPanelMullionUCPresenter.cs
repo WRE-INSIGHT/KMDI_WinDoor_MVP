@@ -158,7 +158,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void _multiPanelMullionUC_flpMultiDragOverEventRaised(object sender, DragEventArgs e)
         {
             int totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
-            string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
+            List<object> lst_data = e.Data.GetData(e.Data.GetFormats()[0]) as List<object>;
+
+            string data = lst_data[0].ToString();
 
             if (_multiPanelModel.MPanelLst_Objects.Count() < totalCount_objs_to_accomodate)
             {
@@ -235,9 +237,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private int divSize = 0;
         private void _multiPanelMullionUC_flpMultiDragDropEventRaised(object sender, DragEventArgs e)
         {
-
             FlowLayoutPanel fpnl = (FlowLayoutPanel)sender; //Control na babagsakan
-            string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
+            int totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
+            List<object> lst_data = e.Data.GetData(e.Data.GetFormats()[0]) as List<object>;
+
+            string data = lst_data[0].ToString();
 
             int totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
 

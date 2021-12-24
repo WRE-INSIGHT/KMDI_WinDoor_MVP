@@ -169,6 +169,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        private int _mpanelHeightToBind_prev;
+        public int MPanel_HeightToBindPrev
+        {
+            get
+            {
+                return _mpanelHeightToBind_prev;
+            }
+            set
+            {
+                _mpanelHeightToBind_prev = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         [Description("Virtual Height that is used for user's output")]
         private int _mpanelDisplayHeight;
         public int MPanel_DisplayHeight
@@ -540,6 +554,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 {
                                     pnl.Panel_WidthToBind += divmovement;
                                 }
+                                else if (MPanel_Zoom == 0.50f)
+                                {
+                                    int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
+                                    pnl.Panel_WidthToBind += pnlwdToBind;
+                                }
                             }
                         }
                     }
@@ -558,6 +577,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_WidthToBind += divmovement;
                                     }
+                                    else if (MPanel_Zoom == 0.50f)
+                                    {
+                                        int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
+                                        pnl.Panel_WidthToBind += pnlwdToBind;
+                                    }
                                 }
                             }
                             else if (prevOrNxt == "prev")
@@ -570,6 +594,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     if (MPanel_Zoom == 1.0f)
                                     {
                                         pnl.Panel_WidthToBind += divmovement;
+                                    }
+                                    else if (MPanel_Zoom == 0.50f)
+                                    {
+                                        int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
+                                        pnl.Panel_WidthToBind += pnlwdToBind;
                                     }
                                 }
                             }
@@ -587,6 +616,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 if (MPanel_Zoom == 1.0f)
                                 {
                                     pnl.Panel_WidthToBind += divmovement;
+                                }
+                                else if (MPanel_Zoom == 0.50f)
+                                {
+                                    int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
+                                    pnl.Panel_WidthToBind += pnlwdToBind;
                                 }
                             }
                         }
@@ -608,6 +642,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 {
                                     pnl.Panel_HeightToBind += divmovement;
                                 }
+                                else if (MPanel_Zoom == 0.50f)
+                                {
+                                    int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
+                                    pnl.Panel_HeightToBind += pnlhtToBind;
+                                }
                             }
                         }
                     }
@@ -627,6 +666,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_HeightToBind += divmovement;
                                     }
+                                    else if (MPanel_Zoom == 0.50f)
+                                    {
+                                        int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
+                                        pnl.Panel_HeightToBind += pnlhtToBind;
+                                    }
                                 }
                             }
                             else if (prevOrNxt == "prev")
@@ -640,6 +684,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     if (MPanel_Zoom == 1.0f)
                                     {
                                         pnl.Panel_HeightToBind += divmovement;
+                                    }
+                                    else if (MPanel_Zoom == 0.50f)
+                                    {
+                                        int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
+                                        pnl.Panel_HeightToBind += pnlhtToBind;
                                     }
                                 }
                             }
@@ -658,6 +707,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 if (MPanel_Zoom == 1.0f)
                                 {
                                     pnl.Panel_HeightToBind += divmovement;
+                                }
+                                else if (MPanel_Zoom == 0.50f)
+                                {
+                                    int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
+                                    pnl.Panel_HeightToBind += pnlhtToBind;
                                 }
                             }
                         }
@@ -779,6 +833,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 ht = MPanel_Height;
             }
 
+            MPanel_WidthToBindPrev = _mpanelWidthToBind;
+
             MPanel_WidthToBind = wd;
             MPanel_HeightToBind = ht;
         }
@@ -799,6 +855,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 wd = MPanel_Width;
                 ht = MPanel_Height;
             }
+
+            MPanel_HeightToBindPrev = _mpanelHeightToBind;
 
             MPanel_WidthToBind = wd;
             MPanel_HeightToBind = ht;

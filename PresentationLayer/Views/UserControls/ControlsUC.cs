@@ -20,21 +20,44 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
         }
 
+        private string _customText;
         [Description("Text displayed"), Category("Data")]
         public string CustomText
         {
             get
             {
-                return lblControlText.Text;
+                return _customText;
             }
             set
             {
-                lblControlText.Text = value;
+                _customText = value;
+            }
+        }
+
+        private int _divCount;
+        public int DivCount
+        {
+            get
+            {
+                return _divCount;
+            }
+            set
+            {
+                _divCount = value;
+                if (CustomText.Contains("Multi"))
+                {
+                    lblControlText.Text = CustomText + "(" + DivCount + ")";
+                }
+                else
+                {
+                    lblControlText.Text = CustomText;
+                }
             }
         }
         
         public event MouseEventHandler controlsUCMouseDownEventRaised;
         public event EventHandler controlsUCLoadEventRaised;
+        public event EventHandler divcountToolStripMenuItemClickEventRaised;
 
         private void ControlsUC_MouseDown(object sender, MouseEventArgs e)
         {
@@ -50,6 +73,19 @@ namespace PresentationLayer.Views.UserControls
         public Panel GetWinDoorPanel()
         {
             return pnl_WinDoorPanel;
+        }
+
+        private void lblControlText_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && lblControlText.Text.Contains("Multi"))
+            {
+                cmenu_ControlsUC.Show(new Point(MousePosition.X, MousePosition.Y));
+            }
+        }
+
+        private void divcountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, divcountToolStripMenuItemClickEventRaised, e);
         }
     }
 }
