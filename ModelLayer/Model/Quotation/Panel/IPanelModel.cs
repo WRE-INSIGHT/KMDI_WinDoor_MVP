@@ -113,8 +113,6 @@ namespace ModelLayer.Model.Quotation.Panel
 
         Handle_Type Panel_HandleType { get; set; }
         Rotoswing_HandleArtNo Panel_RotoswingArtNo { get; set; }
-        Rotoswing_HandleArtNo Panel_RotoswingArtNo2 { get; set; }
-
         Rotary_HandleArtNo Panel_RotaryArtNo { get; set; }
         Rio_HandleArtNo Panel_RioArtNo { get; set; }
         ProfileKnobCylinder_ArtNo Panel_ProfileKnobCylinderArtNo { get; set; }

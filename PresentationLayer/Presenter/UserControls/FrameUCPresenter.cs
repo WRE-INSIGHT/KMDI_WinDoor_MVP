@@ -249,10 +249,8 @@ namespace PresentationLayer.Presenter.UserControls
                 }
 
                 Rotoswing_HandleArtNo handleArtNo = null;
-                Rotoswing_HandleArtNo handleArtNo2 = null;
 
                 Foil_Color inside_color = _frameModel.Frame_WindoorModel.WD_InsideColor;
-                Foil_Color outside_color = _frameModel.Frame_WindoorModel.WD_OutsideColor;
 
 
 
@@ -269,24 +267,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                 }
-
-                if (inside_color != outside_color)//2 diff color
-                {
-                    if (outside_color == Foil_Color._Walnut || outside_color == Foil_Color._Havana ||
-                        outside_color == Foil_Color._GoldenOak || outside_color == Foil_Color._Mahogany)
-                    {
-                        handleArtNo2 = Rotoswing_HandleArtNo._RSC833307;
-                    }
-                    else if (outside_color == Foil_Color._CharcoalGray || outside_color == Foil_Color._FossilGray ||
-                             outside_color == Foil_Color._BeechOak || outside_color == Foil_Color._DriftWood ||
-                             outside_color == Foil_Color._Graphite || outside_color == Foil_Color._JetBlack ||
-                             outside_color == Foil_Color._ChestnutOak || outside_color == Foil_Color._WashedOak ||
-                             outside_color == Foil_Color._GreyOak || outside_color == Foil_Color._Cacao)
-                    {
-                        handleArtNo2 = Rotoswing_HandleArtNo._RSC773452;
-                    }
-                }
-
+                 
 
                 _panelModel = _panelServices.AddPanelModel(wd,
                                                            ht,
@@ -335,7 +316,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                            0,
                                                            0,
                                                            handleArtNo,
-                                                           handleArtNo2,
                                                            GeorgianBar_ArticleNo._None,
                                                            0,
                                                            0,
