@@ -38,6 +38,38 @@ namespace PresentationLayer.Presenter.UserControls
             _controlUC.controlsUCMouseDownEventRaised += new MouseEventHandler(OnControlsUCMouseDownEventRaised);
             _controlUC.controlsUCLoadEventRaised += new EventHandler(OnControlsUCLoadEventRaised);
             _controlUC.divcountToolStripMenuItemClickEventRaised += _controlUC_divcountToolStripMenuItemClickEventRaised;
+            _controlUC.iterationToolStripMenuItemClickEventRaised += _controlUC_iterationToolStripMenuItemClickEventRaised;
+        }
+
+        private void _controlUC_iterationToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            string input = Interaction.InputBox("Input no. of times the panel will be added", "WinDoor Maker", "1");
+            if (input != "" && input != "0")
+            {
+                try
+                {
+                    int int_input = Convert.ToInt32(input);
+                    if (int_input > 0)
+                    {
+                        _controlUC.Iteration = int_input;
+                    }
+                    else if (int_input < 0)
+                    {
+                        MessageBox.Show("Invalid number");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (ex.HResult == -2146233033)
+                    {
+                        MessageBox.Show("Please input a number.");
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message, ex.HResult.ToString());
+                    }
+                }
+            }
         }
 
         private void _controlUC_divcountToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -74,6 +106,7 @@ namespace PresentationLayer.Presenter.UserControls
         private void OnControlsUCLoadEventRaised(object sender, EventArgs e)
         {
             _controlUC.DivCount = 1;
+            _controlUC.Iteration = 1;
         }
 
         private void OnControlsUCMouseDownEventRaised(object sender, MouseEventArgs e)
@@ -84,6 +117,7 @@ namespace PresentationLayer.Presenter.UserControls
                 List<object> lst_obj = new List<object>();
                 lst_obj.Add(_controlUC.CustomText);
                 lst_obj.Add(_controlUC.DivCount);
+                lst_obj.Add(_controlUC.Iteration);
 
                 ctrl.DoDragDrop(lst_obj, DragDropEffects.Move);
             }
