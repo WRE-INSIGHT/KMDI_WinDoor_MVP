@@ -705,5 +705,14 @@ namespace EnumerationTypeLayer
 
             private AccessoryForSHC70_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+        public class BottomFrameTypes : Enumeration<BottomFrameTypes, int>
+        {
+            public static readonly BottomFrameTypes _7507 = new BottomFrameTypes(0, "7507");
+            public static readonly BottomFrameTypes _7502 = new BottomFrameTypes(1, "7502");
+            public static readonly BottomFrameTypes _withThreshold = new BottomFrameTypes(2, "WithThreshold");
+            public static readonly BottomFrameTypes _noBottomFrame = new BottomFrameTypes(3, "NoBottomFrame");
+
+            private BottomFrameTypes(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }
