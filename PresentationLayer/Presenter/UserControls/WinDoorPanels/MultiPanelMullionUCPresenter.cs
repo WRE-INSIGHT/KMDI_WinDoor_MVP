@@ -1121,7 +1121,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointY = 5;
                             if (lvl2_parent_Type != "")
                             {
-                                ht_deduction = 8;
+                                ht_deduction = 8 + 3;
                             }
                             else if (lvl2_parent_Type == "")
                             {
@@ -1145,8 +1145,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             if (lvl2_parent_Type != "")
                             {
-                                bounds_PointY = 2;
-                                ht_deduction = 8;
+                                bounds_PointY = 2 + 3;
+                                ht_deduction = 8 + 3;
                             }
                             else if (lvl2_parent_Type == "")
                             {
@@ -1166,8 +1166,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             if (lvl2_parent_Type != "")
                             {
-                                bounds_PointY = 2;
-                                ht_deduction = 5;
+                                bounds_PointY = 2 + 3;
+                                ht_deduction = 5 + 6;
                             }
                             else if (lvl2_parent_Type == "")
                             {
@@ -1180,7 +1180,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointY = (int)(pixels_count * zoom);
                             if (lvl2_parent_Type != "")
                             {
-                                ht_deduction = (int)((pixels_count * 2) * zoom);
+                                ht_deduction = (int)((pixels_count * 2) * zoom) + 2;
                             }
                             else if (lvl2_parent_Type == "")
                             {
@@ -2418,6 +2418,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
 
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+                    }
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Bot = divs_bounds_values[0];
                 }
@@ -2436,6 +2442,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
 
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[1].Height += 3;
+                    }
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Top = divs_bounds_values[1];
                 }
@@ -2450,7 +2461,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     divs_bounds_values[2].X -= 2;
                     divs_bounds_values[2].Width += 2;
-                    
+
+                    if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+
+                        divs_bounds_values[1].Height += 3;
+                    }
+
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Bot = divs_bounds_values[0];
@@ -2474,6 +2499,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[3].Width += 1;
                     }
 
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+                    }
+
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
                     divider_bounds_Bot = divs_bounds_values[0];
@@ -2494,6 +2526,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
                     {
                         divs_bounds_values[3].Width += 1;
+                    }
+
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[1].Height += 3;
                     }
 
                     divider_bounds_Right = divs_bounds_values[2];
@@ -2517,6 +2554,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
                     {
                         divs_bounds_values[3].Width += 1;
+                    }
+
+                    if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+
+                        divs_bounds_values[1].Height += 3;
                     }
 
                     divider_bounds_Right = divs_bounds_values[2];
@@ -2543,6 +2593,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[3].Width += 1;
                     }
 
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+                    }
+
+
                     divider_bounds_Left = divs_bounds_values[3];
                     divider_bounds_Bot = divs_bounds_values[0];
                 }
@@ -2565,6 +2622,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[3].Width += 1;
                     }
 
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[1].Height += 3;
+                    }
+
                     divider_bounds_Left = divs_bounds_values[3];
                     divider_bounds_Top = divs_bounds_values[1];
                 }
@@ -2582,6 +2644,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
                     {
                         divs_bounds_values[3].Width += 1;
+                    }
+
+                    if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+
+                        divs_bounds_values[1].Height += 3;
                     }
 
                     divider_bounds_Left = divs_bounds_values[3];

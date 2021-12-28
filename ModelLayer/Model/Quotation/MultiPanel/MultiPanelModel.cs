@@ -554,7 +554,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 {
                                     pnl.Panel_WidthToBind += divmovement;
                                 }
-                                else if (MPanel_Zoom == 0.50f)
+                                else if (MPanel_Zoom <= 0.50f)
                                 {
                                     int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
                                     pnl.Panel_WidthToBind += pnlwdToBind;
@@ -577,7 +577,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_WidthToBind += divmovement;
                                     }
-                                    else if (MPanel_Zoom == 0.50f)
+                                    else if (MPanel_Zoom <= 0.50f)
                                     {
                                         int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
                                         pnl.Panel_WidthToBind += pnlwdToBind;
@@ -595,7 +595,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_WidthToBind += divmovement;
                                     }
-                                    else if (MPanel_Zoom == 0.50f)
+                                    else if (MPanel_Zoom <= 0.50f)
                                     {
                                         int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
                                         pnl.Panel_WidthToBind += pnlwdToBind;
@@ -617,7 +617,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 {
                                     pnl.Panel_WidthToBind += divmovement;
                                 }
-                                else if (MPanel_Zoom == 0.50f)
+                                else if (MPanel_Zoom <= 0.50f)
                                 {
                                     int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
                                     pnl.Panel_WidthToBind += pnlwdToBind;
@@ -642,7 +642,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 {
                                     pnl.Panel_HeightToBind += divmovement;
                                 }
-                                else if (MPanel_Zoom == 0.50f)
+                                else if (MPanel_Zoom <= 0.50f)
                                 {
                                     int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
                                     pnl.Panel_HeightToBind += pnlhtToBind;
@@ -666,7 +666,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_HeightToBind += divmovement;
                                     }
-                                    else if (MPanel_Zoom == 0.50f)
+                                    else if (MPanel_Zoom <= 0.50f)
                                     {
                                         int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
                                         pnl.Panel_HeightToBind += pnlhtToBind;
@@ -685,7 +685,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_HeightToBind += divmovement;
                                     }
-                                    else if (MPanel_Zoom == 0.50f)
+                                    else if (MPanel_Zoom <= 0.50f)
                                     {
                                         int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
                                         pnl.Panel_HeightToBind += pnlhtToBind;
@@ -708,7 +708,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 {
                                     pnl.Panel_HeightToBind += divmovement;
                                 }
-                                else if (MPanel_Zoom == 0.50f)
+                                else if (MPanel_Zoom <= 0.50f)
                                 {
                                     int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
                                     pnl.Panel_HeightToBind += pnlhtToBind;
@@ -775,7 +775,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
-        public void SetDimensions_childObjs()
+        public void SetDimensions_childObjs(int divmovement = 0, string prevOrNxt = "")
         {
             if (MPanel_ParentModel != null)
             {
@@ -786,7 +786,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         mpanels.MPanel_Height = MPanel_Height;
                         mpanels.MPanel_DisplayHeight = MPanel_DisplayHeight;
                         mpanels.MPanel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
+                        mpanels.MPanel_HeightToBindPrev = mpanels.MPanel_HeightToBind;
                         mpanels.MPanel_HeightToBind = MPanel_HeightToBind;
+                        mpanels.SetDimensions_PanelObjs_of_3rdLevelMPanel(divmovement, prevOrNxt);
                     }
 
                     foreach (IDividerModel div in MPanelLst_Divider)
@@ -803,7 +805,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         mpanels.MPanel_Width = MPanel_Width;
                         mpanels.MPanel_DisplayWidth = MPanel_DisplayWidth;
                         mpanels.MPanel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
+                        mpanels.MPanel_WidthToBindPrev = mpanels.MPanel_WidthToBind;
                         mpanels.MPanel_WidthToBind = MPanel_WidthToBind;
+                        mpanels.SetDimensions_PanelObjs_of_3rdLevelMPanel(divmovement, prevOrNxt);
                     }
 
                     foreach (IDividerModel div in MPanelLst_Divider)
@@ -832,8 +836,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 wd = MPanel_Width;
                 ht = MPanel_Height;
             }
-
-            MPanel_WidthToBindPrev = _mpanelWidthToBind;
 
             MPanel_WidthToBind = wd;
             MPanel_HeightToBind = ht;
@@ -959,6 +961,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 pnl_ht = MPanel_Height;
             }
 
+            MPanel_WidthToBindPrev = _mpanelWidthToBind;
             MPanel_WidthToBind = pnl_wd;
             MPanel_HeightToBind = pnl_ht;
         }
@@ -969,7 +972,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
             {
                 wd = MPanel_FrameModelParent.Frame_WidthToBind - 20;
-                ht = MPanel_FrameModelParent.Frame_WidthToBind - 20;
+                ht = MPanel_FrameModelParent.Frame_HeightToBind - 20;
             }
             else
             {

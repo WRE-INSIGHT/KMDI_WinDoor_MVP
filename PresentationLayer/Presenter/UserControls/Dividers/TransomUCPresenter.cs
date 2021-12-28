@@ -144,7 +144,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
                                         {
-                                            mpanel.SetDimensions_childObjs();
+                                            mpanel.SetDimensions_childObjs(1, "prev");
                                             mpanel.SetDimensions_childPanelObjs(1);
                                         }
                                     }
@@ -205,7 +205,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
                                         {
-                                            mpanel.SetDimensions_childObjs();
+                                            mpanel.SetDimensions_childObjs(-1, "nxt");
                                             mpanel.SetDimensions_childPanelObjs(-1);
                                         }
                                     }
@@ -285,7 +285,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
                                         {
-                                            mpanel.SetDimensions_childObjs();
+                                            mpanel.SetDimensions_childObjs(-1, "prev");
                                             mpanel.SetDimensions_childPanelObjs(-1);
                                         }
                                     }
@@ -346,7 +346,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
                                         {
-                                            mpanel.SetDimensions_childObjs();
+                                            mpanel.SetDimensions_childObjs(1, "nxt");
                                             mpanel.SetDimensions_childPanelObjs(1);
                                         }
                                     }
@@ -604,7 +604,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                     foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
                                     {
-                                        mpanel.SetDimensions_childObjs();
+                                        mpanel.SetDimensions_childObjs(transom_movement, "prev");
                                         mpanel.SetDimensions_childPanelObjs(transom_movement);
                                     }
                                 }
@@ -665,7 +665,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                     foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
                                     {
-                                        mpanel.SetDimensions_childObjs();
+                                        mpanel.SetDimensions_childObjs(-transom_movement, "nxt");
                                         mpanel.SetDimensions_childPanelObjs(-transom_movement);
                                     }
                                 }

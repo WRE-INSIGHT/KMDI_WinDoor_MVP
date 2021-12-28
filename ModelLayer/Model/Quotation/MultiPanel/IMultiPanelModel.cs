@@ -54,7 +54,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         void SetDimensions_childPanelObjs(int divmovement);
         void SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt);
-        void SetDimensions_childObjs();
+        void SetDimensions_childObjs(int divmovement = 0, string prevOrNxt = "");
         void SetDimensionsToBind_MullionDivMovement();
         void SetDimensionsToBind_TransomDivMovement();
         void SetDimensionsToBind_using_ParentMultiPanelModel();
