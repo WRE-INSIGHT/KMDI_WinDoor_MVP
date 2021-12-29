@@ -1073,6 +1073,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public ProfileKnobCylinder_ArtNo Panel_ProfileKnobCylinderArtNo { get; set; }
         public Cylinder_CoverArtNo Panel_CylinderCoverArtNo { get; set; }
+        public Cylinder_CoverArtNo Panel_CylinderCoverArtNo2 { get; set; } //for outer foil color
 
         private Rotoline_HandleArtNo _panelRotolineArtNo;
         public Rotoline_HandleArtNo Panel_RotolineArtNo
@@ -2769,34 +2770,70 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
 
-                    if (inside_color == Foil_Color._None)
+                    if (inside_color != null ||
+                        outside_color != null ||
+                        inside_color != outside_color)
                     {
-                        if (base_color == Base_Color._White)
-                        {
-                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_7025_50992;
-                        }
-                        else if (base_color == Base_Color._DarkBrown)
+                        if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                                 inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
                         {
                             Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
                         }
-                        else if (base_color == Base_Color._Ivory)
+                        else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                                 inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                                 inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                                 inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                                 inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
                         {
-                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_IVORY;
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+                        }
+
+                        if (outside_color == Foil_Color._Walnut || outside_color == Foil_Color._Mahogany ||
+                                outside_color == Foil_Color._GoldenOak || outside_color == Foil_Color._Havana)
+                        {
+                            Panel_CylinderCoverArtNo2 = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        }
+                        else if (outside_color == Foil_Color._FossilGray || outside_color == Foil_Color._BeechOak ||
+                                 outside_color == Foil_Color._DriftWood || outside_color == Foil_Color._Graphite ||
+                                 outside_color == Foil_Color._JetBlack || outside_color == Foil_Color._ChestnutOak ||
+                                 outside_color == Foil_Color._WashedOak || outside_color == Foil_Color._GreyOak ||
+                                 outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray)
+                        {
+                            Panel_CylinderCoverArtNo2 = Cylinder_CoverArtNo._EPSW_9005_614441;
                         }
                     }
-                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
-                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                    else
                     {
-                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        if (inside_color == Foil_Color._None)
+                        {
+                            if (base_color == Base_Color._White)
+                            {
+                                Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_7025_50992;
+                            }
+                            else if (base_color == Base_Color._DarkBrown)
+                            {
+                                Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                            }
+                            else if (base_color == Base_Color._Ivory)
+                            {
+                                Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_IVORY;
+                            }
+                        }
+                        else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                                 inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        }
+                        else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                                 inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                                 inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                                 inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                                 inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+                        }
                     }
-                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
-                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
-                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
-                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
-                    {
-                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
-                    }
+
                 }
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
@@ -4169,34 +4206,72 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
 
-                    if (inside_color == Foil_Color._None)
+                    if (inside_color != null ||
+                       outside_color != null ||
+                       inside_color != outside_color) // 2 diff foil color
                     {
-                        if (base_color == Base_Color._White)
-                        {
-                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_7025_50992;
-                        }
-                        else if (base_color == Base_Color._DarkBrown)
+
+                        if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                                 inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
                         {
                             Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
                         }
-                        else if (base_color == Base_Color._Ivory)
+                        else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                                 inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                                 inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                                 inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                                 inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
                         {
-                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_IVORY;
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+                        }
+
+                        if (outside_color == Foil_Color._Walnut || outside_color == Foil_Color._Mahogany ||
+                                outside_color == Foil_Color._GoldenOak || outside_color == Foil_Color._Havana)
+                        {
+                            Panel_CylinderCoverArtNo2 = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        }
+                        else if (outside_color == Foil_Color._FossilGray || outside_color == Foil_Color._BeechOak ||
+                                 outside_color == Foil_Color._DriftWood || outside_color == Foil_Color._Graphite ||
+                                 outside_color == Foil_Color._JetBlack || outside_color == Foil_Color._ChestnutOak ||
+                                 outside_color == Foil_Color._WashedOak || outside_color == Foil_Color._GreyOak ||
+                                 outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray)
+                        {
+                            Panel_CylinderCoverArtNo2 = Cylinder_CoverArtNo._EPSW_9005_614441;
                         }
                     }
-                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
-                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                    else
                     {
-                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        if (inside_color == Foil_Color._None)
+                        {
+                            if (base_color == Base_Color._White)
+                            {
+                                Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_7025_50992;
+                            }
+                            else if (base_color == Base_Color._DarkBrown)
+                            {
+                                Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                            }
+                            else if (base_color == Base_Color._Ivory)
+                            {
+                                Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_IVORY;
+                            }
+                        }
+                        else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                                 inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
+                        }
+                        else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                                 inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                                 inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                                 inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                                 inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                        {
+                            Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
+                        }
                     }
-                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
-                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
-                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
-                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
-                    {
-                        Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
-                    }
+
+
                 }
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
@@ -4767,11 +4842,42 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_CylinderCover_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Cylinder Cover " + Panel_CylinderCoverArtNo.DisplayName,
-                                   1, "pc(s)",
-                                   "",
-                                   "Sash",
-                                   @"");
+            Foil_Color inside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
+            Foil_Color outside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;
+
+            if (inside_color != outside_color &&
+                Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507) // for 2 diff foil color CD
+            {
+                if (Panel_HandleType == Handle_Type._MVD)
+                {
+                    //nothing 
+                }
+                else if (Panel_HandleType == Handle_Type._Rio)
+                {
+                    tbl_explosion.Rows.Add("Cylinder Cover " + Panel_CylinderCoverArtNo.DisplayName,
+                                                       1, "pc(s)",
+                                                       "",
+                                                       "Sash",
+                                                       @"");
+
+                    if (Panel_CylinderCoverArtNo2 != null)
+                    {
+                        tbl_explosion.Rows.Add("Cylinder Cover " + Panel_CylinderCoverArtNo2.DisplayName,
+                                           1, "pc(s)",
+                                           "",
+                                           "Sash",
+                                           @"");
+                    }
+                }
+            }
+            else
+            {
+                tbl_explosion.Rows.Add("Cylinder Cover " + Panel_CylinderCoverArtNo.DisplayName,
+                                                        1, "pc(s)",
+                                                        "",
+                                                        "Sash",
+                                                        @"");
+            }
         }
 
         public void Insert_RotolineHandle_MaterialList(DataTable tbl_explosion)
