@@ -63,6 +63,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                                        bool if_auto_added = false);
         void SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
         void Set_DimensionToBind_using_FrameDimensions();
+        void Imager_Set_DimensionToBind_using_FrameDimensions();
         void SetImageZoomDivider();
         void SetZoomDivider();
         void SetZoomPanels();

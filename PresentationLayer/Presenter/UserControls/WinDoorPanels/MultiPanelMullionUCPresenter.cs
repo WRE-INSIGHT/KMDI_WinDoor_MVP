@@ -679,7 +679,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _basePlatformImagerUCP.InvalidateBasePlatform();
                     }
 
-
                     if (_panelModel.Panel_Placement == "Last")
                     {
                         if (_multiPanelModel.MPanel_Zoom != 0.26f && _multiPanelModel.MPanel_Zoom != 0.17f &&
@@ -689,6 +688,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
 
                         _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                        _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+
                         _mainPresenter.Fit_MyControls_byControlsLocation();
                         _mainPresenter.Fit_MyImager_byImagersLocation();
                         _mainPresenter.Run_GetListOfMaterials_SpecificItem();
@@ -1052,7 +1053,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     bounds = new Rectangle(new Point(bPoints, bPoints),
                                            new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
                 }
-                
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
             {

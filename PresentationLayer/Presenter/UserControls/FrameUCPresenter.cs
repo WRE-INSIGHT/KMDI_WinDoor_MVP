@@ -170,6 +170,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                           divCount);
 
                 _multipanelModel.Set_DimensionToBind_using_FrameDimensions();
+                _multipanelModel.Imager_Set_DimensionToBind_using_FrameDimensions();
                 _frameModel.Lst_MultiPanel.Add(_multipanelModel);
 
                 IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP.GetNewInstance(_unityC, _multipanelModel, _mainPresenter);

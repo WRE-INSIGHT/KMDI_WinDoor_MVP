@@ -74,8 +74,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                 pInnerWd = fpnl.ClientRectangle.Width - (int)(20 * zoom),
                 pInnerHt = fpnl.ClientRectangle.Height - (int)(20 * zoom);
 
-            int ht_ToBind = _multiPanelModel.MPanel_HeightToBind,
-                wd_ToBind = _multiPanelModel.MPanel_WidthToBind;
+            if (zoom == 0.26f || zoom == 0.17f ||
+                zoom == 0.13f || zoom == 0.10f)
+            {
+                pInnerX = 15;
+                pInnerY = 15;
+                pInnerWd = fpnl.ClientRectangle.Width - 30;
+                pInnerHt = fpnl.ClientRectangle.Height - 30;
+            }
+
+            int ht_ToBind = _multiPanelModel.MPanelImageRenderer_Height,
+                wd_ToBind = _multiPanelModel.MPanelImageRenderer_Width;
 
             Point[] corner_points = new[]
             {
@@ -115,6 +124,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                                                new Rectangle(new Point(-1, 0), new Size((int)(pixels_count * zoom), ht_ToBind - 1)) //left
                                              };
 
+            if (zoom == 0.26f || zoom == 0.17f ||
+                zoom == 0.13f || zoom == 0.10f)
+            {
+                divs_bounds_values[0] = new Rectangle(new Point(0, ht_ToBind - (int)(pixels_count * zoom)), new Size(wd_ToBind - 1, (int)(pixels_count * zoom))); //bot
+                divs_bounds_values[1] = new Rectangle(new Point(0, -1), new Size(wd_ToBind - 1, (int)(pixels_count * zoom))); //top
+                divs_bounds_values[2] = new Rectangle(new Point(wd_ToBind - 2, 0), new Size(2, ht_ToBind - 1)); //right
+                divs_bounds_values[3] = new Rectangle(new Point(-1, 0), new Size(2, ht_ToBind - 1)); //left
+            }
+
             Rectangle divider_bounds_Bot = new Rectangle();
             Rectangle divider_bounds_Top = new Rectangle();
             Rectangle divider_bounds_Right = new Rectangle();
@@ -139,9 +157,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                     g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                 }
 
-                bounds = new Rectangle(new Point(10, 10),
-                                       new Size(fpnl.ClientRectangle.Width - 20,
-                                                fpnl.ClientRectangle.Height - 20));
+                int bPoints = (int)(10 * _frameModel.FrameImageRenderer_Zoom),
+                    bSizeDeduction = (int)(20 * _frameModel.FrameImageRenderer_Zoom);
+
+                if (zoom == 0.26f || zoom == 0.17f ||
+                    zoom == 0.13f || zoom == 0.10f)
+                {
+                    bounds = new Rectangle(new Point(5, 5),
+                                           new Size(fpnl.ClientRectangle.Width - 10, fpnl.ClientRectangle.Height - 10));
+                }
+                else
+                {
+                    bounds = new Rectangle(new Point(bPoints, bPoints),
+                                           new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
+                }
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
             {
@@ -211,23 +240,129 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                 else if (parent_name.Contains("MultiMullion"))
                 #region Parent is MultiPanel Mullion
                 {
-                    bounds_PointY = (int)(10 * zoom);
-                    ht_deduction = (int)(20 * zoom);
+                    if (zoom == 0.26f)
+                    {
+                        bounds_PointY = 5;
+                        ht_deduction = 10;
+                    }
+                    else if (zoom == 1.0f)
+                    {
+                        bounds_PointY = (int)(10 * zoom);
+                        ht_deduction = (int)(20 * zoom);
+                    }
+                    else if (zoom == 0.50f)
+                    {
+                        bounds_PointY = 5;
+                        ht_deduction = 11;
+                    }
+                    else if (zoom <= 0.17f)
+                    {
+                        bounds_PointY = 5;
+                        ht_deduction = 10;
+                        if (thisObj_placement == "Last")
+                        {
+                            if (parentObj_placement == "First")
+                            {
+                                bounds_PointY += 3;
+                                ht_deduction += 3;
+                            }
+                            else if (parentObj_placement == "Last")
+                            {
+                                ht_deduction += 3;
+                            }
+                        }
+                    }
 
                     if (thisObj_placement == "First")
                     {
-                        bounds_PointX = (int)(10 * zoom);
-                        wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                        if (zoom <= 0.26f)
+                        {
+                            bounds_PointX = 5;
+                            if (lvl2_parent_Type != "")
+                            {
+                                wd_deduction = 8 + 3;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                wd_deduction = 8 + 4;
+                            }
+                        }
+                        else if (zoom == 0.50f)
+                        {
+                            bounds_PointX = (int)(10 * zoom);
+                            if (lvl2_parent_Type != "")
+                            {
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                            }
+                        }
+                        else if (zoom == 1.0f)
+                        {
+                            bounds_PointX = (int)(10 * zoom);
+                            wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                        }
                     }
                     else if (thisObj_placement == "Last")
                     {
-                        bounds_PointX = (int)(pixels_count * zoom);
-                        wd_deduction = (int)((((pixels_count + 2) * 2) - 1) * zoom);
+                        if (zoom <= 0.26f)
+                        {
+                            if (lvl2_parent_Type != "")
+                            {
+                                bounds_PointX = 2 + 3;
+                                wd_deduction = 8 + 6;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                bounds_PointX = 6;
+                                wd_deduction = 8 + 4;
+                            }
+                        }
+                        else if (zoom == 0.50f)
+                        {
+                            bounds_PointX = (int)(pixels_count * zoom);
+                            wd_deduction = (int)((((pixels_count + 2) * 2) - 1) * zoom) + 1;
+                        }
+                        else if (zoom == 1.0f)
+                        {
+                            bounds_PointX = (int)(pixels_count * zoom);
+                            wd_deduction = (int)((((pixels_count + 2) * 2) - 1) * zoom);
+                        }
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
-                        bounds_PointX = (int)(pixels_count * zoom);
-                        wd_deduction = (int)((pixels_count * 2) * zoom);
+                        if (zoom <= 0.26f)
+                        {
+                            if (lvl2_parent_Type != "")
+                            {
+                                bounds_PointX = 2 + 3;
+                                wd_deduction = 5 + 6;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                bounds_PointX = 4;
+                                wd_deduction = 5 + 4;
+                            }
+                        }
+                        else if (zoom == 0.50f)
+                        {
+                            bounds_PointX = (int)(pixels_count * zoom);
+                            if (lvl2_parent_Type != "")
+                            {
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                            }
+                        }
+                        else if (zoom == 1.0f)
+                        {
+                            bounds_PointX = (int)(pixels_count * zoom);
+                            wd_deduction = (int)((pixels_count * 2) * zoom);
+                        }
                     }
                 }
                 #endregion
@@ -1403,6 +1538,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                     g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX, pInnerY + pInnerHt));
 
+                    if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[2].X -= 2;
+                        divs_bounds_values[2].Width += 2;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[2].X -= 4;
+                        divs_bounds_values[2].Width += 4;
+                    }
+
                     divider_bounds_Right = divs_bounds_values[2];
                 }
                 #endregion
@@ -1417,6 +1563,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
 
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 4;
+                    }
+
                     divider_bounds_Left = divs_bounds_values[3];
                 }
                 #endregion
@@ -1426,6 +1577,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between Multi-Panel in MAIN PLATFORM (MultiMullion)
                 {
+                    if (zoom == 1.0f)
+                    {
+                        divs_bounds_values[3].Width += 1;
+                    }
+                    else if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[2].X -= 2;
+                        divs_bounds_values[2].Width += 2;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 3;
+
+                        divs_bounds_values[2].X -= 3;
+                        divs_bounds_values[2].Width += 3;
+                    }
+
                     divider_bounds_Right = divs_bounds_values[2];
                     divider_bounds_Left = divs_bounds_values[3];
                 }

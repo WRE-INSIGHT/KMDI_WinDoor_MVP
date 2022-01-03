@@ -403,12 +403,13 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void SetDimensionsToBind_using_DivZoom_Imager()
         {
-            int wd = Div_Width,
-                 ht = Div_Height;
+            int wd = Div_MPanelParent.MPanel_WidthToBind,
+                ht = Div_MPanelParent.MPanel_HeightToBind;
 
             if (Div_Type == DividerType.Mullion)
             {
-                DivImageRenderer_Height = (int)(ht * Div_Zoom);
+                DivImageRenderer_Height = ht;
+
                 if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
                     DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
                 {
@@ -416,12 +417,13 @@ namespace ModelLayer.Model.Quotation.Divider
                 }
                 else if (DivImageRenderer_Zoom > 0.26f)
                 {
-                    DivImageRenderer_Width = (int)(wd * Div_Zoom);
+                    DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
                 }
             }
             else if (Div_Type == DividerType.Transom)
             {
-                DivImageRenderer_Width = (int)(wd * Div_Zoom);
+                DivImageRenderer_Width = wd;
+
                 if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
                     DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
                 {
@@ -429,7 +431,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 }
                 else if (DivImageRenderer_Zoom > 0.26f)
                 {
-                    DivImageRenderer_Height = (int)(ht * Div_Zoom);
+                    DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height);
                 }
             }
         }

@@ -75,10 +75,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                 pInnerWd = fpnl.ClientRectangle.Width - (_frameModel.FrameImageRenderer_Padding_int.All * 2),
                 pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.FrameImageRenderer_Padding_int.All * 2);
 
-            int ht_ToBind = _multiPanelModel.MPanel_HeightToBind,
-                wd_ToBind = _multiPanelModel.MPanel_WidthToBind;
+            int ht_ToBind = _multiPanelModel.MPanelImageRenderer_Height,
+                wd_ToBind = _multiPanelModel.MPanelImageRenderer_Width;
 
-            float zoom = _multiPanelModel.MPanel_Zoom;
+            float zoom = _multiPanelModel.MPanelImageRenderer_Zoom;
+
+            if (zoom == 0.26f || zoom == 0.17f ||
+                zoom == 0.13f || zoom == 0.10f)
+            {
+                pInnerX = 15;
+                pInnerY = 15;
+                pInnerWd = fpnl.ClientRectangle.Width - 30;
+                pInnerHt = fpnl.ClientRectangle.Height - 30;
+            }
 
             Point[] upperLine = new Point[2];
             Point[] botLine = new Point[2];
@@ -123,6 +132,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                                                new Rectangle(new Point(-1, 0), new Size((int)(pixels_count * zoom), ht_ToBind - 1)) //left
                                              };
 
+            if (zoom == 0.26f || zoom == 0.17f ||
+                zoom == 0.13f || zoom == 0.10f)
+            {
+                divs_bounds_values[0] = new Rectangle(new Point(0, ht_ToBind - 2), new Size(wd_ToBind - 1, 2)); //bot
+                divs_bounds_values[1] = new Rectangle(new Point(0, -1), new Size(wd_ToBind - 1, 2)); //top
+                divs_bounds_values[2] = new Rectangle(new Point(wd_ToBind - 2, 0), new Size(2, ht_ToBind - 1)); //right
+                divs_bounds_values[3] = new Rectangle(new Point(-1, 0), new Size(2, ht_ToBind - 1)); //left
+            }
+
             Rectangle divider_bounds_Bot = new Rectangle();
             Rectangle divider_bounds_Top = new Rectangle();
             Rectangle divider_bounds_Right = new Rectangle();
@@ -143,8 +161,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                 int bPoints = (int)(10 * _frameModel.FrameImageRenderer_Zoom),
                     bSizeDeduction = (int)(20 * _frameModel.FrameImageRenderer_Zoom);
 
-                bounds = new Rectangle(new Point(bPoints, bPoints),
-                                       new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
+                if (zoom == 0.26f || zoom == 0.17f ||
+                    zoom == 0.13f || zoom == 0.10f)
+                {
+                    bounds = new Rectangle(new Point(5, 5),
+                                           new Size(fpnl.ClientRectangle.Width - 10, fpnl.ClientRectangle.Height - 10));
+                }
+                else
+                {
+                    bounds = new Rectangle(new Point(bPoints, bPoints),
+                                           new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
+                }
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
             {
@@ -191,23 +218,100 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                 if (parent_name.Contains("MultiTransom"))
                 #region Parent is MultiPanel Transom
                 {
-                    wd_deduction = (int)(20 * zoom);
-                    bounds_PointX = (int)(10 * zoom);
+                    if (zoom <= 0.26f)
+                    {
+                        bounds_PointX = 5;
+                        wd_deduction = 10;
+                    }
+                    else if (zoom == 1.0f)
+                    {
+                        wd_deduction = (int)(20 * zoom);
+                        bounds_PointX = (int)(10 * zoom);
+                    }
+                    else if (zoom == 0.50f)
+                    {
+                        wd_deduction = 11;
+                        bounds_PointX = 5;
+                    }
 
                     if (thisObj_placement == "First")
                     {
-                        bounds_PointY = (int)(10 * zoom);
-                        ht_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                        if (zoom <= 0.26f)
+                        {
+                            bounds_PointY = 5;
+                            if (lvl2_parent_Type != "")
+                            {
+                                ht_deduction = 8 + 3;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                ht_deduction = 8 + 4;
+                            }
+                        }
+                        else if (zoom == 0.50f)
+                        {
+                            bounds_PointY = (int)(10 * zoom);
+                            ht_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                        }
+                        else if (zoom == 1.0f)
+                        {
+                            bounds_PointY = (int)(10 * zoom);
+                            ht_deduction = (int)((10 + (pixels_count + 1)) * zoom) - 1;
+                        }
                     }
                     else if (thisObj_placement == "Last")
                     {
-                        bounds_PointY = (int)(pixels_count * zoom);
-                        ht_deduction = (int)(((((pixels_count + 2) * 2)) - 1) * zoom);
+                        if (zoom <= 0.26f)
+                        {
+                            if (lvl2_parent_Type != "")
+                            {
+                                bounds_PointY = 2 + 3;
+                                ht_deduction = 8 + 3;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                bounds_PointY = 2 + 4;
+                                ht_deduction = 8 + 4;
+                            }
+                        }
+                        else if (zoom > 0.26f)
+                        {
+                            bounds_PointY = (int)(pixels_count * zoom);
+                            ht_deduction = (int)(((((pixels_count + 2) * 2)) - 1) * zoom);
+                        }
                     }
                     else if (thisObj_placement == "Somewhere in Between")
                     {
-                        bounds_PointY = (int)(pixels_count * zoom);
-                        ht_deduction = (int)((pixels_count * 2) * zoom);
+                        if (zoom <= 0.26f)
+                        {
+                            if (lvl2_parent_Type != "")
+                            {
+                                bounds_PointY = 2 + 3;
+                                ht_deduction = 5 + 6;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                bounds_PointY = 2 + 4;
+                                ht_deduction = 5 + 7;
+                            }
+                        }
+                        else if (zoom == 0.50f)
+                        {
+                            bounds_PointY = (int)(pixels_count * zoom);
+                            if (lvl2_parent_Type != "")
+                            {
+                                ht_deduction = (int)((pixels_count * 2) * zoom) + 2;
+                            }
+                            else if (lvl2_parent_Type == "")
+                            {
+                                ht_deduction = (int)((pixels_count * 2) * zoom) + 2;
+                            }
+                        }
+                        else if (zoom == 1.0f)
+                        {
+                            bounds_PointY = (int)(pixels_count * zoom);
+                            ht_deduction = (int)((pixels_count * 2) * zoom);
+                        }
                     }
                 }
                 #endregion
@@ -1364,6 +1468,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                     }
 
+                    if (zoom == 1.0f)
+                    {
+                        divs_bounds_values[0].Y += 1;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[0].Y -= 4;
+                        divs_bounds_values[0].Height += 4;
+                    }
+
                     divider_bounds_Bot = divs_bounds_values[0];
                 }
                 #endregion
@@ -1377,6 +1491,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                     {
                         g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                     }
+
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[1].Height += 4;
+                    }
                     divider_bounds_Top = divs_bounds_values[1];
                 }
                 #endregion
@@ -1386,6 +1505,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between Multi-Panel in a MAIN PLATFORM (MultiTransom)
                 {
+                    if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[0].Y -= 4;
+                        divs_bounds_values[0].Height += 4;
+
+                        divs_bounds_values[1].Height += 4;
+                    }
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
                 }
