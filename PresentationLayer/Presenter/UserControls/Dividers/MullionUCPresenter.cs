@@ -402,6 +402,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 }
             }
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void _mullionUC_mullionUCMouseDoubleClickedEventRaised(object sender, MouseEventArgs e)
@@ -720,6 +721,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
             catch (Exception ex)
             {

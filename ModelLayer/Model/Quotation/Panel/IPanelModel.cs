@@ -224,6 +224,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void SetPanelMargin_using_ZoomPercentage();
         void SetPanelMarginImager_using_ImageZoomPercentage();
         void SetDimensionsToBind_using_ZoomPercentage();
+        void Imager_SetDimensionsToBind_using_ZoomPercentage();
         void SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
         void SetDimensionToBind_using_BaseDimension();
         void AdjustPropertyPanelHeight(string mode);

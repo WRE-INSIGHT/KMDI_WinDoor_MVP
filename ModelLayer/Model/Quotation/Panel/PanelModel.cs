@@ -1857,6 +1857,54 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_HeightToBind = pnl_ht;
         }
 
+        public void Imager_SetDimensionsToBind_using_ZoomPercentage()
+        {
+            int pnl_wd = 0, pnl_ht = 0,
+                parent_mpanelWd = 0,
+                parent_mpanelHT = 0,
+                div_count = 0,
+                totalpanel_inside_parentMpanel = 0;
+
+            if (PanelImageRenderer_Zoom == 0.26f || PanelImageRenderer_Zoom == 0.17f ||
+                PanelImageRenderer_Zoom == 0.13f || PanelImageRenderer_Zoom == 0.10f)
+            {
+                if (Panel_ParentMultiPanelModel != null)
+                {
+                    parent_mpanelWd = Panel_ParentMultiPanelModel.MPanelImageRenderer_Width;
+                    parent_mpanelHT = Panel_ParentMultiPanelModel.MPanelImageRenderer_Height;
+                    div_count = Panel_ParentMultiPanelModel.MPanel_Divisions;
+                    totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1;
+
+                    if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                    {
+                        pnl_wd = ((parent_mpanelWd - 10) - (13 * div_count)) / totalpanel_inside_parentMpanel;
+                        pnl_ht = parent_mpanelHT - 10;
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
+                    {
+                        pnl_wd = parent_mpanelWd - 10;
+                        pnl_ht = ((parent_mpanelHT - 10) - (13 * div_count)) / totalpanel_inside_parentMpanel;
+                    }
+                }
+                else if (Panel_ParentFrameModel != null)
+                {
+                    int reversed_wd = (int)Math.Ceiling(Panel_ParentFrameModel.FrameImageRenderer_Width * PanelImageRenderer_Zoom) - 20, //padding
+                        reversed_ht = (int)Math.Ceiling(Panel_ParentFrameModel.FrameImageRenderer_Height * PanelImageRenderer_Zoom) - 20; //padding
+
+                    pnl_wd = (int)(reversed_wd / PanelImageRenderer_Zoom);
+                    pnl_ht = (int)(reversed_ht / PanelImageRenderer_Zoom);
+                }
+            }
+            else
+            {
+                pnl_wd = (int)(Panel_OriginalWidth * PanelImageRenderer_Zoom);
+                pnl_ht = (int)(Panel_OriginalHeight * PanelImageRenderer_Zoom);
+            }
+
+            PanelImageRenderer_Width = pnl_wd;
+            PanelImageRenderer_Height = pnl_ht;
+        }
+
         public void SetDimensionToBind_using_BaseDimension()
         {
             Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);

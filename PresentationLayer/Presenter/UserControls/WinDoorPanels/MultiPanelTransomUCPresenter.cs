@@ -579,6 +579,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.Reload_PanelMargin();
 
                     _panelModel.SetDimensionsToBind_using_ZoomPercentage();
+                    _panelModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
                     _panelModel.SetPanelMargin_using_ZoomPercentage();
                     _panelModel.SetPanelMarginImager_using_ImageZoomPercentage();
 
@@ -1107,7 +1108,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (parent_name.Contains("MultiMullion"))
                 #region Parent is MultiPanel Mullion
                 {
-                    if (zoom <= 0.26f)
+                    if (zoom == 0.26f)
                     {
                         bounds_PointY = 5;
                         ht_deduction = 10;
@@ -1121,6 +1122,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         bounds_PointY = 5;
                         ht_deduction = 11;
+                    }
+                    else if (zoom <= 0.17f)
+                    {
+                        bounds_PointY = 5;
+                        ht_deduction = 10;
+                        if (thisObj_placement == "Last")
+                        {
+                            if (parentObj_placement == "First")
+                            {
+                                bounds_PointY += 3;
+                                ht_deduction += 3;
+                            }
+                            else if (parentObj_placement == "Last")
+                            {
+                                ht_deduction += 3;
+                            }
+                        }
                     }
 
                     if (thisObj_placement == "First")
@@ -2931,10 +2949,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[0].Height += 3;
                     }
 
-                    if (zoom == 0.26f)
+                    if (zoom <= 0.26f)
                     {
                         divs_bounds_values[3].Width += 3;
                     }
+                    //else if (zoom == 0.17f)
+                    //{
+                    //    divs_bounds_values[3].Width += 3;
+                    //}
 
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -3065,10 +3087,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[0].Height += 3;
                     }
 
-                    if (zoom == 0.26f)
+                    if (zoom <= 0.26f)
                     {
                         divs_bounds_values[3].Width += 3;
                     }
+                    //else if (zoom == 0.17f)
+                    //{
+                    //    divs_bounds_values[3].Width += 3;
+                    //}
 
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
@@ -3193,10 +3219,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[1].Height += 4;
                     }
 
-                    if (zoom == 0.26f)
+                    if (zoom <= 0.26f)
                     {
                         divs_bounds_values[3].Width += 3;
                     }
+                    //else if (zoom == 0.17f)
+                    //{
+                    //    divs_bounds_values[3].Width += 3;
+                    //}
 
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Left = divs_bounds_values[3];

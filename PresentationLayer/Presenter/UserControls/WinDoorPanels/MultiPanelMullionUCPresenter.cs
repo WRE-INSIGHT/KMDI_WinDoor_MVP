@@ -573,6 +573,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.Reload_PanelMargin();
 
                     _panelModel.SetDimensionsToBind_using_ZoomPercentage();
+                    _panelModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
                     _panelModel.SetPanelMargin_using_ZoomPercentage();
                     _panelModel.SetPanelMarginImager_using_ImageZoomPercentage();
 

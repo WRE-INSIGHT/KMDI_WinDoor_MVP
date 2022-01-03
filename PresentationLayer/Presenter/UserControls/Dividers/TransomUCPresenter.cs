@@ -399,6 +399,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         break;
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
         }
 
@@ -717,6 +718,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
             catch (Exception ex)
             {
