@@ -321,6 +321,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _multiPanelModel.Reload_MultiPanelMargin();
 
                         mPanelModel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                        mPanelModel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
 
                         IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
                         UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();

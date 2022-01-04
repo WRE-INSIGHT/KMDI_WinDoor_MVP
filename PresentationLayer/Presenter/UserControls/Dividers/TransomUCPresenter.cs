@@ -140,6 +140,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
                                         prev_mpanel.SetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
@@ -151,6 +153,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+
                                         prev_mpanel.SetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
@@ -202,6 +206,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
                                         nxt_mpnl.SetDimensions_childPanelObjs(-1);
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
@@ -213,6 +219,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+
                                         nxt_mpnl.SetDimensions_childPanelObjs(-1);
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
@@ -284,6 +292,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
                                         prev_mpanel.SetDimensions_childPanelObjs(-1);
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
@@ -295,6 +305,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+
                                         prev_mpanel.SetDimensions_childPanelObjs(-1);
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
@@ -346,6 +358,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
                                         nxt_mpnl.SetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
@@ -357,6 +371,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+
                                         nxt_mpnl.SetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
@@ -607,6 +623,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                 {
                                     prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
                                     prev_mpanel.SetDimensions_childPanelObjs(transom_movement);
 
                                     foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
@@ -618,6 +636,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 else
                                 {
                                     prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                    prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+
                                     prev_mpanel.SetDimensions_childPanelObjs(transom_movement);
 
                                     foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
@@ -669,6 +689,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                 {
                                     nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
                                     nxt_mpnl.SetDimensions_childPanelObjs(-transom_movement);
 
                                     foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
@@ -680,6 +702,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 else
                                 {
                                     nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                    nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+
                                     nxt_mpnl.SetDimensions_childPanelObjs(-transom_movement);
 
                                     foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
@@ -724,6 +748,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         }
                     }
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();

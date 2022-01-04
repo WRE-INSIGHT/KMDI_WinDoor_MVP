@@ -56,12 +56,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         void SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt);
         void SetDimensions_childObjs(int divmovement = 0, string prevOrNxt = "");
         void SetDimensionsToBind_MullionDivMovement();
+        void Imager_SetDimensionsToBind_MullionDivMovement();
         void SetDimensionsToBind_TransomDivMovement();
         void SetDimensionsToBind_using_ParentMultiPanelModel();
+        void Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
         void Adapt_sizeToBind_MPanelDivMPanel_Controls(Control current_control,
                                                        string frameType,
                                                        bool if_auto_added = false);
         void SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+        void Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
         void Set_DimensionToBind_using_FrameDimensions();
         void Imager_Set_DimensionToBind_using_FrameDimensions();
         void SetImageZoomDivider();
