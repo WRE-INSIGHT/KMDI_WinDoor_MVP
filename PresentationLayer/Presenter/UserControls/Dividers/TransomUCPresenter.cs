@@ -156,6 +156,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
 
                                         prev_mpanel.SetDimensions_childPanelObjs(1);
+                                        prev_mpanel.ImagerSetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
                                         {
@@ -172,6 +173,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             div.Div_DisplayHeight++;
 
                                             div.SetDimensionsToBind_using_DivZoom();
+                                            div.SetDimensionsToBind_using_DivZoom_Imager();
                                         }
                                     }
                                 }
@@ -222,6 +224,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
 
                                         nxt_mpnl.SetDimensions_childPanelObjs(-1);
+                                        nxt_mpnl.ImagerSetDimensions_childPanelObjs(-1);
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
                                         {
@@ -238,6 +241,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             div.Div_DisplayHeight--;
 
                                             div.SetDimensionsToBind_using_DivZoom();
+                                            div.SetDimensionsToBind_using_DivZoom_Imager();
                                         }
                                     }
                                 }
@@ -308,6 +312,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
 
                                         prev_mpanel.SetDimensions_childPanelObjs(-1);
+                                        prev_mpanel.ImagerSetDimensions_childPanelObjs(-1);
 
                                         foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
                                         {
@@ -324,6 +329,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             div.Div_DisplayHeight--;
 
                                             div.SetDimensionsToBind_using_DivZoom();
+                                            div.SetDimensionsToBind_using_DivZoom_Imager();
                                         }
                                     }
                                 }
@@ -374,6 +380,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
 
                                         nxt_mpnl.SetDimensions_childPanelObjs(1);
+                                        nxt_mpnl.ImagerSetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
                                         {
@@ -390,6 +397,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             div.Div_DisplayHeight++;
 
                                             div.SetDimensionsToBind_using_DivZoom();
+                                            div.SetDimensionsToBind_using_DivZoom_Imager();
                                         }
                                     }
                                 }
@@ -626,6 +634,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
                                     prev_mpanel.SetDimensions_childPanelObjs(transom_movement);
+                                    prev_mpanel.ImagerSetDimensions_childPanelObjs(transom_movement);
 
                                     foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
                                     {
@@ -639,6 +648,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
 
                                     prev_mpanel.SetDimensions_childPanelObjs(transom_movement);
+                                    prev_mpanel.ImagerSetDimensions_childPanelObjs(transom_movement);
 
                                     foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
                                     {
@@ -646,6 +656,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpanel.MPanel_DisplayHeight += transom_movement;
 
                                         mpanel.SetDimensionsToBind_TransomDivMovement();
+                                        mpanel.Imager_SetDimensionsToBind_TransomDivMovement();
+
                                         mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(transom_movement, "prev");
                                     }
 
@@ -655,6 +667,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         div.Div_DisplayHeight += transom_movement;
 
                                         div.SetDimensionsToBind_using_DivZoom();
+                                        div.SetDimensionsToBind_using_DivZoom_Imager();
                                     }
                                 }
                             }
@@ -692,6 +705,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
                                     nxt_mpnl.SetDimensions_childPanelObjs(-transom_movement);
+                                    nxt_mpnl.ImagerSetDimensions_childPanelObjs(-transom_movement);
 
                                     foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
                                     {
@@ -705,6 +719,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
 
                                     nxt_mpnl.SetDimensions_childPanelObjs(-transom_movement);
+                                    nxt_mpnl.ImagerSetDimensions_childPanelObjs(-transom_movement);
 
                                     foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
                                     {
@@ -712,6 +727,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpanel.MPanel_DisplayHeight -= transom_movement;
 
                                         mpanel.SetDimensionsToBind_TransomDivMovement();
+                                        mpanel.Imager_SetDimensionsToBind_TransomDivMovement();
+
                                         mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-transom_movement, "nxt");
                                     }
 
@@ -721,6 +738,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         div.Div_DisplayHeight -= transom_movement;
 
                                         div.SetDimensionsToBind_using_DivZoom();
+                                        div.SetDimensionsToBind_using_DivZoom_Imager();
                                     }
                                 }
                             }

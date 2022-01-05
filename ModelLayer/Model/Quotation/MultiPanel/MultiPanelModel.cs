@@ -775,6 +775,53 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        public void ImagerSetDimensions_childPanelObjs(int divmovement)
+        {
+            if (MPanel_ParentModel != null)
+            {
+                if (MPanel_Type == "Mullion")
+                {
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
+                    {
+                        if (MPanelImageRenderer_Zoom == 1.0f)
+                        {
+                            pnl.PanelImageRenderer_Height += divmovement;
+                        }
+                        else if (MPanelImageRenderer_Zoom == 0.50f)
+                        {
+                            int pnlhtToBind = MPanelImageRenderer_Height - 8;
+                            pnl.PanelImageRenderer_Height = pnlhtToBind;
+                        }
+                        else if (MPanelImageRenderer_Zoom <= 0.26f)
+                        {
+                            int pnlhtToBind = MPanelImageRenderer_Height - 10;
+                            pnl.PanelImageRenderer_Height = pnlhtToBind;
+                        }
+                    }
+                }
+                else if (MPanel_Type == "Transom")
+                {
+                    foreach (IPanelModel pnl in MPanelLst_Panel)
+                    {
+                        if (MPanelImageRenderer_Zoom == 1.0f)
+                        {
+                            pnl.PanelImageRenderer_Width += divmovement;
+                        }
+                        else if (MPanelImageRenderer_Zoom == 0.50f)
+                        {
+                            int pnlwdToBind = MPanelImageRenderer_Width - 10;
+                            pnl.PanelImageRenderer_Width = pnlwdToBind;
+                        }
+                        else if (MPanelImageRenderer_Zoom <= 0.26f)
+                        {
+                            int pnlwdToBind = MPanelImageRenderer_Width - 10;
+                            pnl.PanelImageRenderer_Width = pnlwdToBind;
+                        }
+                    }
+                }
+            }
+        }
+
         public void SetDimensions_childObjs(int divmovement = 0, string prevOrNxt = "")
         {
             if (MPanel_ParentModel != null)
@@ -788,6 +835,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         mpanels.MPanel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
                         mpanels.MPanel_HeightToBindPrev = mpanels.MPanel_HeightToBind;
                         mpanels.MPanel_HeightToBind = MPanel_HeightToBind;
+                        mpanels.MPanelImageRenderer_Height = MPanelImageRenderer_Height;
                         mpanels.SetDimensions_PanelObjs_of_3rdLevelMPanel(divmovement, prevOrNxt);
                     }
 
@@ -796,6 +844,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         div.Div_Height = MPanel_Height;
                         div.Div_DisplayHeight = MPanel_DisplayHeight;
                         div.Div_HeightToBind = MPanel_HeightToBind;
+                        div.DivImageRenderer_Height = MPanelImageRenderer_Height;
                     }
                 }
                 else if (MPanel_Type == "Transom")
@@ -807,6 +856,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         mpanels.MPanel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
                         mpanels.MPanel_WidthToBindPrev = mpanels.MPanel_WidthToBind;
                         mpanels.MPanel_WidthToBind = MPanel_WidthToBind;
+                        mpanels.MPanelImageRenderer_Width = MPanelImageRenderer_Width;
                         mpanels.SetDimensions_PanelObjs_of_3rdLevelMPanel(divmovement, prevOrNxt);
                     }
 
@@ -815,6 +865,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         div.Div_Width = MPanel_Width;
                         div.Div_DisplayWidth = MPanel_DisplayWidth;
                         div.Div_WidthToBind = MPanel_WidthToBind;
+                        div.DivImageRenderer_Width = MPanelImageRenderer_Width;
                     }
                 }
             }
@@ -883,6 +934,27 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
             MPanel_WidthToBind = wd;
             MPanel_HeightToBind = ht;
+        }
+
+        public void Imager_SetDimensionsToBind_TransomDivMovement()
+        {
+            int parent_wdToBind = MPanel_ParentModel.MPanelImageRenderer_Width,
+                parent_htToBind = MPanel_ParentModel.MPanelImageRenderer_Height,
+                wd = 0, ht = 0;
+
+            if (MPanelImageRenderer_Zoom == 0.50f)
+            {
+                wd = MPanelImageRenderer_Width;
+                ht = parent_htToBind;
+            }
+            else if (MPanelImageRenderer_Zoom == 1.0f)
+            {
+                wd = MPanel_Width;
+                ht = MPanel_Height;
+            }
+
+            MPanelImageRenderer_Width = wd;
+            MPanelImageRenderer_Height = ht;
         }
 
         public void SetDimensionsToBind_using_ParentMultiPanelModel()

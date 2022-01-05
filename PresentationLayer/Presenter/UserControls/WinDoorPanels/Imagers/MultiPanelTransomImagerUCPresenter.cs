@@ -2029,6 +2029,29 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                                            new Point(pInnerX, pInnerY));
                     divs_bounds_values[0].Y -= 2;
                     divs_bounds_values[0].Height += 2;
+
+                    if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+                    }
+
+                    if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[2].X -= 2;
+                        divs_bounds_values[2].Width += 2;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[2].X -= 3;
+                        divs_bounds_values[2].Width += 3;
+                    }
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Right = divs_bounds_values[2];
                 }
@@ -2045,6 +2068,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                                            new Point(pInnerX + pInnerWd, pInnerY));
                     divs_bounds_values[0].Y -= 2;
                     divs_bounds_values[0].Height += 2;
+
+                    if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+                    }
+
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 3;
+                    }
+                    //else if (zoom == 0.17f)
+                    //{
+                    //    divs_bounds_values[3].Width += 3;
+                    //}
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Left = divs_bounds_values[3];
                 }
@@ -2061,6 +2105,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                                            new Point(pInnerX + pInnerWd, pInnerY));
                     divs_bounds_values[0].Y -= 2;
                     divs_bounds_values[0].Height += 2;
+
+                    if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+                    }
+
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[2].X -= 3;
+                        divs_bounds_values[2].Width += 3;
+
+                        divs_bounds_values[3].Width += 3;
+                    }
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Left = divs_bounds_values[3];
                     divider_bounds_Right = divs_bounds_values[2];
@@ -2077,6 +2141,41 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                     divs_bounds_values[0].Y -= 2;
                     divs_bounds_values[0].Height += 2;
                     divs_bounds_values[1].Height += 2;
+
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[1].Height += 1;
+                    }
+                    else if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[1].Height += 3;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[1].Height += 4;
+                    }
+
+                    if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+                    }
+
+                    if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[2].X -= 2;
+                        divs_bounds_values[2].Width += 2;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[2].X -= 3;
+                        divs_bounds_values[2].Width += 3;
+                    }
 
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
@@ -2095,6 +2194,39 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                     divs_bounds_values[0].Height += 2;
                     divs_bounds_values[1].Height += 2;
 
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[1].Height += 1;
+                    }
+                    else if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[1].Height += 3;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[1].Height += 4;
+                    }
+
+                    if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+                    }
+
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 3;
+                    }
+                    //else if (zoom == 0.17f)
+                    //{
+                    //    divs_bounds_values[3].Width += 3;
+                    //}
+
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Left = divs_bounds_values[3];
@@ -2111,6 +2243,39 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                     divs_bounds_values[0].Y -= 2;
                     divs_bounds_values[0].Height += 2;
                     divs_bounds_values[1].Height += 2;
+
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[1].Height += 1;
+                    }
+                    else if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[1].Height += 3;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[1].Height += 4;
+                    }
+
+                    if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[0].Y -= 2;
+                        divs_bounds_values[0].Height += 2;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[0].Y -= 3;
+                        divs_bounds_values[0].Height += 3;
+                    }
+
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[2].X -= 3;
+                        divs_bounds_values[2].Width += 3;
+
+                        divs_bounds_values[3].Width += 3;
+                    }
+
 
                     divider_bounds_Bot = divs_bounds_values[0];
                     divider_bounds_Top = divs_bounds_values[1];
@@ -2131,6 +2296,30 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
                     divs_bounds_values[1].Height += 2;
 
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[1].Height += 1;
+                    }
+                    else if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[1].Height += 3;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[1].Height += 4;
+                    }
+
+                    if (zoom == 0.50f)
+                    {
+                        divs_bounds_values[2].X -= 2;
+                        divs_bounds_values[2].Width += 2;
+                    }
+                    else if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[2].X -= 3;
+                        divs_bounds_values[2].Width += 3;
+                    }
+
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Right = divs_bounds_values[2];
                 }
@@ -2148,6 +2337,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
 
                     divs_bounds_values[1].Height += 2;
 
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[1].Height += 1;
+                    }
+                    else if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[1].Height += 3;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[1].Height += 4;
+                    }
+
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[3].Width += 3;
+                    }
+                    //else if (zoom == 0.17f)
+                    //{
+                    //    divs_bounds_values[3].Width += 3;
+                    //}
+
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Left = divs_bounds_values[3];
                 }
@@ -2161,6 +2372,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers
                 #region Somewhere in Between in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
                 {
                     divs_bounds_values[1].Height += 2;
+
+                    if (zoom == 0.26f)
+                    {
+                        divs_bounds_values[1].Height += 1;
+                    }
+                    else if (zoom == 0.17f || zoom == 0.13f)
+                    {
+                        divs_bounds_values[1].Height += 3;
+                    }
+                    else if (zoom == 0.10f)
+                    {
+                        divs_bounds_values[1].Height += 4;
+                    }
+
+                    if (zoom <= 0.26f)
+                    {
+                        divs_bounds_values[2].X -= 3;
+                        divs_bounds_values[2].Width += 3;
+
+                        divs_bounds_values[3].Width += 3;
+                    }
 
                     divider_bounds_Top = divs_bounds_values[1];
                     divider_bounds_Right = divs_bounds_values[2];

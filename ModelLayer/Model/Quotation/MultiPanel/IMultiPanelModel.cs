@@ -53,11 +53,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int GetCount_MPanelLst_Object();
 
         void SetDimensions_childPanelObjs(int divmovement);
+        void ImagerSetDimensions_childPanelObjs(int divmovement);
         void SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt);
         void SetDimensions_childObjs(int divmovement = 0, string prevOrNxt = "");
         void SetDimensionsToBind_MullionDivMovement();
         void Imager_SetDimensionsToBind_MullionDivMovement();
         void SetDimensionsToBind_TransomDivMovement();
+        void Imager_SetDimensionsToBind_TransomDivMovement();
         void SetDimensionsToBind_using_ParentMultiPanelModel();
         void Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
         void Adapt_sizeToBind_MPanelDivMPanel_Controls(Control current_control,
