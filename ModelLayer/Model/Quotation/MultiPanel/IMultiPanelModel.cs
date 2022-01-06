@@ -20,6 +20,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanelImageRenderer_Height { get; set; }
         int MPanel_HeightToBind { get; set; }
         int MPanel_HeightToBindPrev { get; set; }
+        int MPanelImager_HeightToBindPrev { get; set; }
         FlowDirection MPanel_FlowDirection { get; set; }
         bool MPanel_Visibility { get; set; }
         int MPanel_Divisions { get; set; }
@@ -42,6 +43,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         float MPanel_Zoom { get; set; }
         int MPanel_WidthToBind { get; set; }
         int MPanel_WidthToBindPrev { get; set; }
+        int MPanelImager_WidthToBindPrev { get; set; }
         int MPanel_AddPixel { get; }
         int MPanel_DisplayWidth { get; set; }
         int MPanel_DisplayWidthDecimal { get; set; }
@@ -55,6 +57,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         void SetDimensions_childPanelObjs(int divmovement);
         void ImagerSetDimensions_childPanelObjs(int divmovement);
         void SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt);
+        void Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt);
         void SetDimensions_childObjs(int divmovement = 0, string prevOrNxt = "");
         void SetDimensionsToBind_MullionDivMovement();
         void Imager_SetDimensionsToBind_MullionDivMovement();

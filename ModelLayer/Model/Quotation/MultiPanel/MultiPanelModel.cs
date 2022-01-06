@@ -111,6 +111,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        private int _mpanelWidthToBind_prev_imager;
+        public int MPanelImager_WidthToBindPrev
+        {
+            get
+            {
+                return _mpanelWidthToBind_prev_imager;
+            }
+            set
+            {
+                _mpanelWidthToBind_prev_imager = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         [Description("Virtual Width that is used for user's output")]
         private int _mpanelDisplayWidth;
         public int MPanel_DisplayWidth
@@ -179,6 +193,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             set
             {
                 _mpanelHeightToBind_prev = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _mpanelHeightToBind_prev_imager;
+        public int MPanelImager_HeightToBindPrev
+        {
+            get
+            {
+                return _mpanelHeightToBind_prev_imager;
+            }
+            set
+            {
+                _mpanelHeightToBind_prev_imager = value;
                 NotifyPropertyChanged();
             }
         }
@@ -720,6 +748,163 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
         }
 
+        public void Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt)
+        {
+            if (MPanel_ParentModel != null)
+            {
+                if (MPanel_Type == "Mullion")
+                {
+                    if (MPanel_ParentModel.MPanel_Placement == "First")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (pnl.Panel_Placement == "Last")
+                            {
+                                if (MPanelImageRenderer_Zoom == 1.0f)
+                                {
+                                    pnl.PanelImageRenderer_Width += divmovement;
+                                }
+                                else if (MPanelImageRenderer_Zoom <= 0.50f)
+                                {
+                                    int pnlwdToBind = MPanelImageRenderer_Width - MPanelImager_WidthToBindPrev;
+                                    pnl.PanelImageRenderer_Width += pnlwdToBind;
+                                }
+                            }
+                        }
+                    }
+                    else if (MPanel_ParentModel.MPanel_Placement == "Somewhere in Between")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (prevOrNxt == "nxt")
+                            {
+                                if (pnl.Panel_Placement == "First")
+                                {
+                                    if (MPanel_Zoom == 1.0f)
+                                    {
+                                        pnl.PanelImageRenderer_Width += divmovement;
+                                    }
+                                    else if (MPanel_Zoom <= 0.50f)
+                                    {
+                                        int pnlwdToBind = MPanelImageRenderer_Width - MPanelImager_WidthToBindPrev;
+                                        pnl.PanelImageRenderer_Width += pnlwdToBind;
+                                    }
+                                }
+                            }
+                            else if (prevOrNxt == "prev")
+                            {
+                                if (pnl.Panel_Placement == "Last")
+                                {
+                                    if (MPanel_Zoom == 1.0f)
+                                    {
+                                        pnl.PanelImageRenderer_Width += divmovement;
+                                    }
+                                    else if (MPanel_Zoom <= 0.50f)
+                                    {
+                                        int pnlwdToBind = MPanelImageRenderer_Width - MPanelImager_WidthToBindPrev;
+                                        pnl.PanelImageRenderer_Width += pnlwdToBind;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (MPanel_ParentModel.MPanel_Placement == "Last")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (pnl.Panel_Placement == "First")
+                            {
+                                if (MPanel_Zoom == 1.0f)
+                                {
+                                    pnl.PanelImageRenderer_Width += divmovement;
+                                }
+                                else if (MPanel_Zoom <= 0.50f)
+                                {
+                                    int pnlwdToBind = MPanelImageRenderer_Width - MPanelImager_WidthToBindPrev;
+                                    pnl.PanelImageRenderer_Width += pnlwdToBind;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (MPanel_Type == "Transom")
+                {
+                    if (MPanel_ParentModel.MPanel_Placement == "First")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (pnl.Panel_Placement == "Last")
+                            {
+                                if (MPanel_Zoom == 1.0f)
+                                {
+                                    pnl.PanelImageRenderer_Height += divmovement;
+                                }
+                                else if (MPanel_Zoom <= 0.50f)
+                                {
+                                    int pnlhtToBind = MPanelImageRenderer_Height - MPanelImager_HeightToBindPrev;
+                                    pnl.PanelImageRenderer_Height += pnlhtToBind;
+                                }
+                            }
+                        }
+                    }
+                    else if (MPanel_ParentModel.MPanel_Placement == "Somewhere in Between")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (prevOrNxt == "nxt")
+                            {
+                                if (pnl.Panel_Placement == "First")
+                                {
+                                    if (MPanel_Zoom == 1.0f)
+                                    {
+                                        pnl.PanelImageRenderer_Height += divmovement;
+                                    }
+                                    else if (MPanel_Zoom <= 0.50f)
+                                    {
+                                        int pnlhtToBind = MPanelImageRenderer_Height - MPanelImager_HeightToBindPrev;
+                                        pnl.PanelImageRenderer_Height += pnlhtToBind;
+                                    }
+                                }
+                            }
+                            else if (prevOrNxt == "prev")
+                            {
+                                if (pnl.Panel_Placement == "Last")
+                                {
+                                    if (MPanel_Zoom == 1.0f)
+                                    {
+                                        pnl.PanelImageRenderer_Height += divmovement;
+                                    }
+                                    else if (MPanel_Zoom <= 0.50f)
+                                    {
+                                        int pnlhtToBind = MPanelImageRenderer_Height - MPanelImager_HeightToBindPrev;
+                                        pnl.PanelImageRenderer_Height += pnlhtToBind;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (MPanel_ParentModel.MPanel_Placement == "Last")
+                    {
+                        foreach (IPanelModel pnl in MPanelLst_Panel)
+                        {
+                            if (pnl.Panel_Placement == "First")
+                            {
+                                if (MPanel_Zoom == 1.0f)
+                                {
+                                    pnl.PanelImageRenderer_Height += divmovement;
+                                }
+                                else if (MPanel_Zoom <= 0.50f)
+                                {
+                                    int pnlhtToBind = MPanelImageRenderer_Height - MPanelImager_HeightToBindPrev;
+                                    pnl.PanelImageRenderer_Height += pnlhtToBind;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public void SetDimensions_childPanelObjs(int divmovement)
         {
             if (MPanel_ParentModel != null)
@@ -833,10 +1018,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         mpanels.MPanel_Height = MPanel_Height;
                         mpanels.MPanel_DisplayHeight = MPanel_DisplayHeight;
                         mpanels.MPanel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
+
                         mpanels.MPanel_HeightToBindPrev = mpanels.MPanel_HeightToBind;
                         mpanels.MPanel_HeightToBind = MPanel_HeightToBind;
+
+                        mpanels.MPanelImager_HeightToBindPrev = MPanelImager_HeightToBindPrev;
                         mpanels.MPanelImageRenderer_Height = MPanelImageRenderer_Height;
+
                         mpanels.SetDimensions_PanelObjs_of_3rdLevelMPanel(divmovement, prevOrNxt);
+                        mpanels.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(divmovement, prevOrNxt);
                     }
 
                     foreach (IDividerModel div in MPanelLst_Divider)
@@ -854,10 +1044,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         mpanels.MPanel_Width = MPanel_Width;
                         mpanels.MPanel_DisplayWidth = MPanel_DisplayWidth;
                         mpanels.MPanel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
+
                         mpanels.MPanel_WidthToBindPrev = mpanels.MPanel_WidthToBind;
                         mpanels.MPanel_WidthToBind = MPanel_WidthToBind;
+
+                        mpanels.MPanelImager_WidthToBindPrev = mpanels.MPanelImager_WidthToBindPrev;
                         mpanels.MPanelImageRenderer_Width = MPanelImageRenderer_Width;
+
                         mpanels.SetDimensions_PanelObjs_of_3rdLevelMPanel(divmovement, prevOrNxt);
+                        mpanels.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(divmovement, prevOrNxt);
                     }
 
                     foreach (IDividerModel div in MPanelLst_Divider)
@@ -952,6 +1147,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 wd = MPanel_Width;
                 ht = MPanel_Height;
             }
+
+            MPanelImager_HeightToBindPrev = _mpanelImage_Height;
 
             MPanelImageRenderer_Width = wd;
             MPanelImageRenderer_Height = ht;
@@ -1056,6 +1253,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 ht = MPanel_Height;
             }
 
+            MPanelImager_WidthToBindPrev = _mpanelImage_Width;
             MPanelImageRenderer_Width = wd;
             MPanelImageRenderer_Height = ht;
         }

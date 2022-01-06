@@ -1762,6 +1762,16 @@ namespace ModelLayer.Model.Quotation.Panel
 
         #region Methods
 
+        public void Imager_SetDimensionsToBind_FrameParent()
+        {
+            if (PanelImageRenderer_Zoom == 1.0f || PanelImageRenderer_Zoom == 0.50f)
+            {
+                int padding = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.All;
+                PanelImageRenderer_Width = Panel_ParentFrameModel.FrameImageRenderer_Width - (padding * 2);
+                PanelImageRenderer_Height = Panel_ParentFrameModel.FrameImageRenderer_Height - (padding * 2);
+            }
+        }
+
         public void SetPanelMargin_using_ZoomPercentage()
         {
             if ((Panel_Zoom == 0.26f || Panel_Zoom == 0.17f || 

@@ -1754,7 +1754,7 @@ namespace PresentationLayer.Presenter
             _frameUC = frameUCP.GetFrameUC();
             _basePlatformPresenter.AddFrame(_frameUC);
 
-            _basePlatformImagerUCPresenter.AddFrame(frameImagerUCP.GetFrameImagerUC());
+            //_basePlatformImagerUCPresenter.AddFrame(frameImagerUCP.GetFrameImagerUC());
         }
 
         public IFramePropertiesUCPresenter AddFramePropertiesUC(IFrameModel frameModel)

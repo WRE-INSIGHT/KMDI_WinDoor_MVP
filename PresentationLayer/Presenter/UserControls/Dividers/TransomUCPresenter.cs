@@ -165,6 +165,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                             mpanel.SetDimensionsToBind_TransomDivMovement();
                                             mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(1, "prev");
+                                            mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(1, "prev");
                                         }
 
                                         foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
@@ -233,6 +234,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                             mpanel.SetDimensionsToBind_TransomDivMovement();
                                             mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-1, "nxt");
+                                            mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-1, "nxt");
                                         }
 
                                         foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
@@ -321,6 +323,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                             mpanel.SetDimensionsToBind_TransomDivMovement();
                                             mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-1, "prev");
+                                            mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-1, "prev");
                                         }
 
                                         foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
@@ -389,6 +392,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                             mpanel.SetDimensionsToBind_TransomDivMovement();
                                             mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(1, "nxt");
+                                            mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(1, "nxt");
                                         }
 
                                         foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
@@ -659,6 +663,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpanel.Imager_SetDimensionsToBind_TransomDivMovement();
 
                                         mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(transom_movement, "prev");
+                                        mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(transom_movement, "prev");
                                     }
 
                                     foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
@@ -730,6 +735,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpanel.Imager_SetDimensionsToBind_TransomDivMovement();
 
                                         mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-transom_movement, "nxt");
+                                        mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-transom_movement, "nxt");
                                     }
 
                                     foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)

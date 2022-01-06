@@ -53,6 +53,26 @@ namespace PresentationLayer.Presenter.UserControls
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
+            foreach (IFrameModel frame in _windoorModel.lst_frame)
+            {
+                int flocX = 0, flocY = 0;
+
+                Draw_Frame(sender, e, frame, new Point(flocX, flocY));
+
+                flocX += frame.Frame_Width;
+                flocY += frame.Frame_Height;
+
+                foreach (IPanelModel panel in frame.Lst_Panel)
+                {
+                    int plocX = 0, plocY = 0;
+
+                    if (panel.Panel_Parent.Name.Contains("Frame"))
+                    {
+                        Draw_Panel(sender, e, panel, new Point(plocX + frame.Frame_Padding_int.All, plocY + frame.Frame_Padding_int.All));
+                    }
+                }
+            }
+
             Color col = Color.Black;
 
             int w = 1;
@@ -77,7 +97,7 @@ namespace PresentationLayer.Presenter.UserControls
             return frame;
         }
 
-        private void _basePlatformImagerUC_basePlatformPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
+        private void _basePlatformImagerUC_basePlatformPaintEventRaised(object sender, PaintEventArgs e)
         {
             UserControl basePL = (UserControl)sender;
             FlowLayoutPanel _flpMain = (FlowLayoutPanel)basePL.Controls[0];
@@ -384,6 +404,243 @@ namespace PresentationLayer.Presenter.UserControls
 
             _windoorModel.WD_image = bm;
             //bm.Save(@"C:\Users\KMDI\Pictures\Saved Pictures\2.png");
+        }
+
+        private void Draw_Frame(object sender, PaintEventArgs e, IFrameModel frameModel, Point fPoint)
+        {
+            Pen blkPen = new Pen(Color.Black);
+
+            Graphics g = e.Graphics;
+
+            //UserControl pfr = (UserControl)sender;
+
+            int fr_pads = frameModel.FrameImageRenderer_Padding_int.All;
+
+            Rectangle pnl_inner = new Rectangle(new Point(fr_pads, fr_pads),
+                                                new Size(frameModel.Frame_Width - (fr_pads * 2),
+                                                         frameModel.Frame_Height - (fr_pads * 2)));
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+
+            int pInnerX = pnl_inner.Location.X,
+            pInnerY = pnl_inner.Location.Y,
+            pInnerWd = pnl_inner.Width,
+            pInnerHt = pnl_inner.Height;
+
+            Point[] corner_points = new[]
+            {
+                new Point(fPoint.X, fPoint.Y),
+                new Point(pInnerX, pInnerY),
+                new Point(frameModel.Frame_Width, fPoint.Y),
+                new Point(pInnerX + pInnerWd, pInnerY),
+                new Point(fPoint.X, frameModel.Frame_Height),
+                new Point(pInnerX, pInnerY + pInnerHt),
+                new Point(frameModel.Frame_Width, frameModel.Frame_Height),
+                new Point(pInnerX + pInnerWd,pInnerY + pInnerHt)
+            };
+
+            for (int i = 0; i < corner_points.Length - 1; i += 2)
+            {
+                g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);
+            }
+
+            //if (pfr.Controls.Count == 0)
+            //{
+                g.DrawRectangle(blkPen, pnl_inner);
+            //}
+
+            int w = 1;
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(fPoint.X,
+                                                                   fPoint.Y,
+                                                                   frameModel.Frame_Width - w,
+                                                                   frameModel.Frame_Height - w));
+        }
+
+        private void Draw_Panel(object sender, PaintEventArgs e, IPanelModel panelModel, Point Ppoint)
+        {
+            Graphics g = e.Graphics;
+            int w = 1;
+            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
+
+            int client_wd = 0, client_ht = 0;
+
+            if (panelModel.PanelImageRenderer_Zoom == 1.0f)
+            {
+                client_wd = panelModel.PanelImageRenderer_Width;
+                client_ht = panelModel.PanelImageRenderer_Height;
+            }
+
+            Rectangle panel_bounds = new Rectangle(Ppoint, new Size(client_wd, client_ht));
+
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            int font_size = 30,
+                outer_line = 10,
+                inner_line = 15;
+
+            if (panelModel.PanelImageRenderer_Zoom == 0.28f)
+            {
+                font_size = 25;
+            }
+            else if (panelModel.PanelImageRenderer_Zoom == 0.19f)
+            {
+                font_size = 15;
+                outer_line = 5;
+                inner_line = 8;
+            }
+            else if (panelModel.PanelImageRenderer_Zoom == 0.14f)
+            {
+                font_size = 13;
+                outer_line = 3;
+                inner_line = 7;
+            }
+            else if (panelModel.PanelImageRenderer_Zoom == 0.10f)
+            {
+                font_size = 8;
+                outer_line = 3;
+                inner_line = 7;
+            }
+
+            Rectangle outer_bounds = new Rectangle(Ppoint.X,
+                                            Ppoint.Y,
+                                            client_wd - w,
+                                            client_ht - w);
+
+            g.DrawRectangle(new Pen(Color.Black, w), outer_bounds);
+            g.FillRectangle(Brushes.DarkGray, outer_bounds);
+
+            g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(Ppoint.X + outer_line,
+                                                                   Ppoint.Y + outer_line,
+                                                                   (client_wd - (outer_line * 2)) - w,
+                                                                   (client_ht - (outer_line * 2)) - w));
+
+            
+
+            if (panelModel.Panel_Type == "Fixed Panel")
+            {
+                if (panelModel.Panel_Orient == true)
+                {
+                    g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
+                                                                           Ppoint.Y + inner_line,
+                                                                           (client_wd - (inner_line * 2)) - w,
+                                                                           (client_ht - (inner_line * 2)) - w));
+
+                }
+
+                Font drawFont = new Font("Times New Roman", font_size);// * zoom);
+                StringFormat drawFormat = new StringFormat();
+                drawFormat.Alignment = StringAlignment.Center;
+                drawFormat.LineAlignment = StringAlignment.Center;
+                g.DrawString("F", drawFont, new SolidBrush(Color.Black), panel_bounds, drawFormat);
+            }
+            else if (panelModel.Panel_Type == "Casement Panel")
+            {
+                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
+                                                                       Ppoint.Y + inner_line,
+                                                                       (client_wd - (inner_line * 2)) - w,
+                                                                       (client_ht - (inner_line * 2)) - w));
+
+                Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
+
+                Pen dgrayPen = new Pen(Color.DimGray);
+                dgrayPen.DashStyle = DashStyle.Dash;
+                dgrayPen.Width = 3;
+
+                int sashW = client_wd,
+                    sashH = client_ht;
+
+                if (panelModel.Panel_Orient == true)//Left
+                {
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, sashPoint.Y),
+                                             new Point(sashPoint.X, (sashPoint.Y + (sashH / 2))));
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X, (sashPoint.Y + (sashH / 2))),
+                                         new Point(sashPoint.X + sashW, sashPoint.Y + sashH));
+                }
+                else if (panelModel.Panel_Orient == false)//Right
+                {
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
+                                         new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))));
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))),
+                                         new Point(sashPoint.X, sashH + sashPoint.Y));
+                }
+            }
+            else if (panelModel.Panel_Type == "Awning Panel")
+            {
+                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
+                                                                       Ppoint.Y + inner_line,
+                                                                       (client_wd - (inner_line * 2)) - w,
+                                                                       (client_ht - (inner_line * 2)) - w));
+
+                Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
+
+                Pen dgrayPen = new Pen(Color.DimGray);
+                dgrayPen.DashStyle = DashStyle.Dash;
+                dgrayPen.Width = 3;
+
+                int sashW = client_wd,
+                    sashH = client_ht;
+
+                if (panelModel.Panel_Orient == true)
+                {
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
+                                         new Point(sashPoint.X + (sashW / 2), sashPoint.Y + sashH));
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW / 2), sashPoint.Y + sashH),
+                                         new Point(sashPoint.X + sashW, sashPoint.Y));
+                }
+                else if (panelModel.Panel_Orient == false)
+                {
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y + sashH),
+                                     new Point(sashPoint.X + (sashW / 2), sashPoint.Y));
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW / 2), sashPoint.Y),
+                                         new Point(sashPoint.X + sashW, sashH + sashPoint.Y));
+                }
+            }
+            else if (panelModel.Panel_Type == "Sliding Panel")
+            {
+                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
+                                                                       Ppoint.Y + inner_line,
+                                                                       (client_wd - (inner_line * 2)) - w,
+                                                                       (client_ht - (inner_line * 2)) - w));
+                Point sashPoint = new Point(Ppoint.X + 25, Ppoint.Y);
+
+                int sashW = client_wd,
+                    sashH = client_ht;
+
+                float arwStart_x1 = sashPoint.X + (sashW / 20),
+                      center_y1 = sashPoint.Y + (sashH / 2),
+                      arwEnd_x2 = ((sashPoint.X + sashW) - arwStart_x1) + (sashW / 20),
+                      arwHeadUp_x3,
+                      arwHeadUp_y3 = center_y1 - (center_y1 / 4),
+                      arwHeadUp_x4,
+                      arwHeadUp_y4 = center_y1 + (center_y1 / 4);
+
+
+                if (panelModel.Panel_Orient == true)
+                {
+                    arwHeadUp_x3 = sashPoint.X + arwStart_x1 + (sashW / 10);
+                    arwHeadUp_x4 = sashPoint.X + arwStart_x1 + (sashW / 10);
+
+                    g.DrawLine(new Pen(Color.Black), new PointF(arwHeadUp_x3, arwHeadUp_y3),
+                                                     new PointF(arwStart_x1, center_y1));
+                    g.DrawLine(new Pen(Color.Black), new PointF(arwHeadUp_x4, arwHeadUp_y4),
+                                                     new PointF(arwStart_x1, center_y1));
+                }
+                else if (panelModel.Panel_Orient == false)
+                {
+                    arwHeadUp_x3 = ((sashPoint.X + sashW) - arwStart_x1) - (sashW / 10);
+                    arwHeadUp_x4 = ((sashPoint.X + sashW) - arwStart_x1) - (sashW / 10);
+
+                    g.DrawLine(new Pen(Color.Black), new PointF(arwHeadUp_x3, arwHeadUp_y3),
+                                                     new PointF(arwEnd_x2, center_y1));
+                    g.DrawLine(new Pen(Color.Black), new PointF(arwHeadUp_x4, arwHeadUp_y4),
+                                                     new PointF(arwEnd_x2, center_y1));
+                }
+
+                g.DrawLine(new Pen(Color.Black), new PointF(arwStart_x1, center_y1),
+                                                 new PointF(arwEnd_x2, center_y1));
+            }
         }
 
         public IBasePlatformImagerUC GetBasePlatformImagerUC()
