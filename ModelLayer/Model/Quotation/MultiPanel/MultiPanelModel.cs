@@ -1386,22 +1386,24 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public void Imager_Set_DimensionToBind_using_FrameDimensions()
         {
             int wd = 0, ht = 0;
-            if (MPanelImageRenderer_Zoom == 0.26f || MPanelImageRenderer_Zoom == 0.17f ||
-                MPanelImageRenderer_Zoom == 0.13f || MPanelImageRenderer_Zoom == 0.10f)
-            {
-                wd = MPanel_FrameModelParent.FrameImageRenderer_Width - 20;
-                ht = MPanel_FrameModelParent.FrameImageRenderer_Height - 20;
-            }
-            else
-            {
-                decimal wd_flt_convert_dec = Convert.ToDecimal(MPanel_Width * MPanel_Zoom);
-                decimal wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
-                wd = Convert.ToInt32(wd_dec);
+            //if (MPanelImageRenderer_Zoom == 0.26f || MPanelImageRenderer_Zoom == 0.17f ||
+            //    MPanelImageRenderer_Zoom == 0.13f || MPanelImageRenderer_Zoom == 0.10f)
+            //{
+            //    wd = MPanel_FrameModelParent.FrameImageRenderer_Width - 20;
+            //    ht = MPanel_FrameModelParent.FrameImageRenderer_Height - 20;
+            //}
+            //else
+            //{
+                wd = MPanel_FrameModelParent.FrameImageRenderer_Width - (MPanel_FrameModelParent.FrameImageRenderer_Padding_int.All * 2);
+                ht = MPanel_FrameModelParent.FrameImageRenderer_Height - (MPanel_FrameModelParent.FrameImageRenderer_Padding_int.All * 2);
+                //decimal wd_flt_convert_dec = Convert.ToDecimal(MPanel_Width * MPanel_Zoom);
+                //decimal wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+                //wd = Convert.ToInt32(wd_dec);
 
-                decimal ht_flt_convert_dec = Convert.ToDecimal(MPanel_Height * MPanel_Zoom);
-                decimal ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
-                ht = Convert.ToInt32(ht_dec);
-            }
+                //decimal ht_flt_convert_dec = Convert.ToDecimal(MPanel_Height * MPanel_Zoom);
+                //decimal ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+                //ht = Convert.ToInt32(ht_dec);
+            //}
 
             MPanelImageRenderer_Width = wd;
             MPanelImageRenderer_Height = ht;

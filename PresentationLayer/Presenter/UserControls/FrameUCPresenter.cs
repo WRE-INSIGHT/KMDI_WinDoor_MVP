@@ -186,7 +186,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                                                       _frameModel,
                                                                                                                       _frameImagerUCP);
                     IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
-                    _frameImagerUCP.AddControl((UserControl)multiMullionImagerUC);
+                    //_frameImagerUCP.AddControl((UserControl)multiMullionImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
 
                     IMultiPanelMullionUCPresenter multiUCP = _multiUCP.GetNewInstance(_unityC, 
@@ -209,7 +209,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                                                       _frameModel,
                                                                                                                       _frameImagerUCP);
                     IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
-                    _frameImagerUCP.AddControl((UserControl)multiTransomImagerUC);
+                    //_frameImagerUCP.AddControl((UserControl)multiTransomImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
 
                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,

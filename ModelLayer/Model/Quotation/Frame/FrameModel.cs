@@ -188,7 +188,7 @@ namespace ModelLayer.Model.Quotation.Frame
             set { _framePropHeight = value; NotifyPropertyChanged(); }
         }
 
-        public List<IPanelModel> Lst_Panel { get; set; }
+        public List<IPanelModel> Lst_Panel { get; set; } // count will always be 1 or 0 (if child is panel or not)
         public List<IMultiPanelModel> Lst_MultiPanel { get; set; }
         public List<IDividerModel> Lst_Divider { get; set; }
 
@@ -235,15 +235,6 @@ namespace ModelLayer.Model.Quotation.Frame
                 _frameImage_Zoom = value;
                 FrameImageRenderer_Width = Convert.ToInt32(Frame_Width * value);
                 FrameImageRenderer_Height = Convert.ToInt32(Frame_Height * value);
-
-                if (_deductFramePadding_bool)
-                {
-                    FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
-                }
-                else
-                {
-                    FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type) * FrameImageRenderer_Zoom));
-                }
                 NotifyPropertyChanged();
             }
         }
@@ -340,12 +331,12 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
             {
                 Frame_Padding_int = new Padding(10);
-                FrameImageRenderer_Padding_int = new Padding(10);
+                //FrameImageRenderer_Padding_int = new Padding(15);
             }
             else
             {
                 Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom) - _frameDeduction);
-                FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
+                //FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
             }
         }
 
@@ -357,7 +348,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 if (_is_MPanel) // meaning MPanel
                 {
                     Frame_Padding_int = new Padding(10);
-                    FrameImageRenderer_Padding_int = new Padding(10);
+                    FrameImageRenderer_Padding_int = new Padding(15);
                 }
                 else if (!_is_MPanel) // meaning Panel
                 {
