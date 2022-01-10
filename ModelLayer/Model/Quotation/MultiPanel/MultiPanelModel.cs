@@ -1087,7 +1087,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_HeightToBind = ht;
         }
 
-        public void Imager_SetDimensionsToBind_MullionDivMovement()
+        public void Imager_SetDimensionsToBind_MullionDivMovement(int divMovement)
         {
             int parent_wdToBind = MPanel_ParentModel.MPanelImageRenderer_Width,
                 parent_htToBind = MPanel_ParentModel.MPanelImageRenderer_Height,
@@ -1100,8 +1100,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             else if (MPanelImageRenderer_Zoom == 1.0f)
             {
-                wd = MPanel_Width;
-                ht = MPanel_Height;
+                wd = MPanelImageRenderer_Width + divMovement;
+                ht = MPanelImageRenderer_Height;
             }
 
             MPanelImageRenderer_Width = wd;
@@ -1131,7 +1131,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_HeightToBind = ht;
         }
 
-        public void Imager_SetDimensionsToBind_TransomDivMovement()
+        public void Imager_SetDimensionsToBind_TransomDivMovement(int divMovement)
         {
             int parent_wdToBind = MPanel_ParentModel.MPanelImageRenderer_Width,
                 parent_htToBind = MPanel_ParentModel.MPanelImageRenderer_Height,
@@ -1144,8 +1144,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             else if (MPanelImageRenderer_Zoom == 1.0f)
             {
-                wd = MPanel_Width;
-                ht = MPanel_Height;
+                wd = MPanelImageRenderer_Width;
+                ht = MPanelImageRenderer_Height + divMovement;
             }
 
             MPanelImager_HeightToBindPrev = _mpanelImage_Height;
@@ -1205,7 +1205,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_WidthToBind = wd;
             MPanel_HeightToBind = ht;
         }
-
+        
         public void Imager_SetDimensionsToBind_using_ParentMultiPanelModel()
         {
             int parent_wdToBind = MPanel_ParentModel.MPanelImageRenderer_Width,
@@ -1249,8 +1249,16 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
             else if (MPanelImageRenderer_Zoom == 1.0f)
             {
-                wd = MPanel_Width;
-                ht = MPanel_Height;
+                if (MPanel_ParentModel.MPanel_Type == "Mullion")
+                {
+                    wd = MPanel_Width;
+                    ht = parent_htToBind;
+                }
+                else if (MPanel_ParentModel.MPanel_Type == "Transom")
+                {
+                    wd = parent_wdToBind;
+                    ht = MPanel_Height;
+                }
             }
 
             MPanelImager_WidthToBindPrev = _mpanelImage_Width;
@@ -1723,24 +1731,24 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         {
                             divModel.Div_Height -= div_mpnl_deduct;
                             divModel.Div_HeightToBind -= div_mpnl_deduct_Tobind;
-                            divModel.DivImageRenderer_Height -= div_mpnl_deduct_Tobind;
+                            //divModel.DivImageRenderer_Height -= div_mpnl_deduct_Tobind;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                             {
                                 multiModel.MPanel_Height += div_mpnl_deduct;
                                 multiModel.MPanel_HeightToBind += div_mpnl_deduct_Tobind;
-                                multiModel.MPanelImageRenderer_Height += div_mpnl_deduct_Tobind;
+                                //multiModel.MPanelImageRenderer_Height += div_mpnl_deduct_Tobind;
                             }
                         }
                         else if (prev_ctrl.Name.Contains("MullionUC"))
                         {
                             divModel.Div_Width -= div_mpnl_deduct;
                             divModel.Div_WidthToBind -= div_mpnl_deduct_Tobind;
-                            divModel.DivImageRenderer_Width -= div_mpnl_deduct_Tobind;
+                            //divModel.DivImageRenderer_Width -= div_mpnl_deduct_Tobind;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                             {
                                 multiModel.MPanel_Width += div_mpnl_deduct;
                                 multiModel.MPanel_WidthToBind += div_mpnl_deduct_Tobind;
-                                multiModel.MPanelImageRenderer_Width += div_mpnl_deduct_Tobind;
+                                //multiModel.MPanelImageRenderer_Width += div_mpnl_deduct_Tobind;
                             }
                         }
                     }
@@ -1762,11 +1770,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             {
                                 multiModel.MPanel_Height += div_mpnl_deduct;
                                 multiModel.MPanel_HeightToBind += div_mpnl_deduct_Tobind;
-                                multiModel.MPanelImageRenderer_Height += div_mpnl_deduct_Tobind;
+                                //multiModel.MPanelImageRenderer_Height += div_mpnl_deduct_Tobind;
                             }
                             divModel.Div_Height -= div_mpnl_deduct;
                             divModel.Div_HeightToBind -= div_mpnl_deduct_Tobind;
-                            divModel.DivImageRenderer_Height -= div_mpnl_deduct_Tobind;
+                            //divModel.DivImageRenderer_Height -= div_mpnl_deduct_Tobind;
                         }
                         else if (current_control.Name.Contains("MullionUC"))
                         {
@@ -1774,11 +1782,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             {
                                 multiModel.MPanel_Width += div_mpnl_deduct;
                                 multiModel.MPanel_WidthToBind += div_mpnl_deduct_Tobind;
-                                multiModel.MPanelImageRenderer_Width += div_mpnl_deduct_Tobind;
+                                //multiModel.MPanelImageRenderer_Width += div_mpnl_deduct_Tobind;
                             }
                             divModel.Div_Width -= div_mpnl_deduct;
                             divModel.Div_WidthToBind -= div_mpnl_deduct_Tobind;
-                            divModel.DivImageRenderer_Width -= div_mpnl_deduct_Tobind;
+                            //divModel.DivImageRenderer_Width -= div_mpnl_deduct_Tobind;
                         }
                     }
                 }

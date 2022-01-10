@@ -60,9 +60,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         void Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt);
         void SetDimensions_childObjs(int divmovement = 0, string prevOrNxt = "");
         void SetDimensionsToBind_MullionDivMovement();
-        void Imager_SetDimensionsToBind_MullionDivMovement();
+        void Imager_SetDimensionsToBind_MullionDivMovement(int divMovement);
         void SetDimensionsToBind_TransomDivMovement();
-        void Imager_SetDimensionsToBind_TransomDivMovement();
+        void Imager_SetDimensionsToBind_TransomDivMovement(int divMovement);
         void SetDimensionsToBind_using_ParentMultiPanelModel();
         void Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
         void Adapt_sizeToBind_MPanelDivMPanel_Controls(Control current_control,

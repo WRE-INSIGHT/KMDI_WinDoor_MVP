@@ -1887,13 +1887,13 @@ namespace ModelLayer.Model.Quotation.Panel
 
                     if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                     {
-                        pnl_wd = ((parent_mpanelWd - 10) - (13 * div_count)) / totalpanel_inside_parentMpanel;
-                        pnl_ht = parent_mpanelHT - 10;
+                        pnl_wd = (parent_mpanelWd - (13 * div_count)) / totalpanel_inside_parentMpanel;
+                        pnl_ht = parent_mpanelHT;
                     }
                     else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                     {
-                        pnl_wd = parent_mpanelWd - 10;
-                        pnl_ht = ((parent_mpanelHT - 10) - (13 * div_count)) / totalpanel_inside_parentMpanel;
+                        pnl_wd = parent_mpanelWd;
+                        pnl_ht = (parent_mpanelHT - (13 * div_count)) / totalpanel_inside_parentMpanel;
                     }
                 }
                 else if (Panel_ParentFrameModel != null)
@@ -1993,8 +1993,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     decimal divMove_dec_times2 = divMove_dec * 2;
                     divMove_int = Convert.ToInt32(divMove_dec_times2);
 
-                    pnl_wd = (((parent_MpanelWidth - 10) - (13 * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
-                    pnl_ht = parent_MpanelHeight - 10;
+                    pnl_wd = (((parent_MpanelWidth) - (13 * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
+                    pnl_ht = parent_MpanelHeight;
                 }
                 else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                 {
@@ -2005,8 +2005,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     decimal divMove_dec_times2 = divMove_dec * 2;
                     divMove_int = Convert.ToInt32(divMove_dec_times2);
 
-                    pnl_ht = (((parent_MpanelHeight - 10) - (13 * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
-                    pnl_wd = parent_MpanelWidth - 10;
+                    pnl_ht = (((parent_MpanelHeight) - (13 * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
+                    pnl_wd = parent_MpanelWidth;
                 }
             }
             else if (Panel_ParentFrameModel != null)

@@ -93,8 +93,23 @@ namespace PresentationLayer.Presenter.UserControls
                                     if (ctrl.Name.Contains("PanelUC_"))
                                     {
                                         IPanelModel panelModel = mpnl.MPanelLst_Panel.Find(panel => panel.Panel_Name == ctrl.Name);
-                                        objLocX += mlocX; //addition of frame_pads and div wd
                                         objLocY = mlocY;
+
+                                        if (panelModel.Panel_Placement == "First")
+                                        {
+                                            objLocX += mlocX; //addition of frame_pads and div wd
+                                        }
+                                        else if (panelModel.Panel_Placement != "First")
+                                        {
+                                            if (zoom == 1.0f || zoom == 0.50f)
+                                            {
+                                                objLocX += mlocX; //addition of frame_pads and div wd
+                                            }
+                                            else if (zoom <= 0.26f)
+                                            {
+                                                objLocX += 13;
+                                            }
+                                        }
 
                                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
 
@@ -109,12 +124,37 @@ namespace PresentationLayer.Presenter.UserControls
                                         {
                                             locY_deduct = 10;
                                         }
-                                        else if (zoom == 0.50f)
+                                        else if (zoom <= 0.50f)
                                         {
                                             locY_deduct = 5;
                                         }
 
                                         Draw_Divider(e, divModel, new Point(objLocX, objLocY - locY_deduct));
+                                    }
+                                    else if (ctrl.Name.Contains("MultiTransom_"))
+                                    {
+                                        IMultiPanelModel mpnlModel = mpnl.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == ctrl.Name);
+                                        objLocY = mlocY;
+
+                                        if (mpnlModel.MPanel_Placement == "First")
+                                        {
+                                            objLocX += mlocX; //addition of frame_pads and div wd
+                                        }
+                                        else if (mpnlModel.MPanel_Placement != "First")
+                                        {
+                                            if (zoom == 1.0f || zoom == 0.50f)
+                                            {
+                                                objLocX += mlocX; //addition of frame_pads and div wd
+                                            }
+                                            else if (zoom <= 0.26f)
+                                            {
+                                                objLocX += 13;
+                                            }
+                                        }
+
+                                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY));
+
+                                        objLocX += mpnlModel.MPanelImageRenderer_Width;
                                     }
                                 }
                             }
@@ -125,8 +165,23 @@ namespace PresentationLayer.Presenter.UserControls
                                     if (ctrl.Name.Contains("PanelUC_"))
                                     {
                                         IPanelModel panelModel = mpnl.MPanelLst_Panel.Find(panel => panel.Panel_Name == ctrl.Name);
-                                        objLocX = mlocX; //addition of frame_pads and div wd
-                                        objLocY += mlocY;
+                                        objLocX = mlocX; 
+
+                                        if (panelModel.Panel_Placement == "First")
+                                        {
+                                            objLocY += mlocY; //addition of frame_pads and div wd
+                                        }
+                                        else if (panelModel.Panel_Placement != "First")
+                                        {
+                                            if (zoom == 1.0f || zoom == 0.50f)
+                                            {
+                                                objLocY += mlocY; //addition of frame_pads and div wd
+                                            }
+                                            else if (zoom <= 0.26f)
+                                            {
+                                                objLocY += 13;
+                                            }
+                                        }
 
                                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
 
@@ -141,19 +196,50 @@ namespace PresentationLayer.Presenter.UserControls
                                         {
                                             locX_deduct = 10;
                                         }
-                                        else if (zoom == 0.50f)
+                                        else if (zoom <= 0.50f)
                                         {
                                             locX_deduct = 5;
                                         }
 
                                         Draw_Divider(e, divModel, new Point(objLocX - locX_deduct, objLocY));
                                     }
+                                    else if (ctrl.Name.Contains("MultiMullion_"))
+                                    {
+                                        IMultiPanelModel mpnlModel = mpnl.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == ctrl.Name);
+                                        objLocX = mlocX;
+
+                                        if (mpnlModel.MPanel_Placement == "First")
+                                        {
+                                            objLocY += mlocY; //addition of frame_pads and div wd
+                                        }
+                                        else if (mpnlModel.MPanel_Placement != "First")
+                                        {
+                                            if (zoom == 1.0f || zoom == 0.50f)
+                                            {
+                                                objLocY += mlocY; //addition of frame_pads and div wd
+                                            }
+                                            else if (zoom <= 0.26f)
+                                            {
+                                                objLocY += 13;
+                                            }
+                                        }
+                                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY));
+
+                                        objLocY += mpnlModel.MPanelImageRenderer_Height;
+                                    }
                                 }
                             }
                         }
                         else if (mpnl.MPanel_Parent.Name.Contains("Multi"))
                         {
+                            if (mpnl.MPanel_Type == "Mullion")
+                            {
 
+                            }
+                            else if (mpnl.MPanel_Type == "Transom")
+                            {
+
+                            }
                         }
                     }
                 }
