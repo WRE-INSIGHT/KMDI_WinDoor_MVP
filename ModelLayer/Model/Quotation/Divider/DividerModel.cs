@@ -403,34 +403,67 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void SetDimensionsToBind_using_DivZoom_Imager()
         {
-            int wd = Div_MPanelParent.MPanel_WidthToBind,
-                ht = Div_MPanelParent.MPanel_HeightToBind;
+            int wd = Div_MPanelParent.MPanelImageRenderer_Width,
+                ht = Div_MPanelParent.MPanelImageRenderer_Height,
+                div_overlap = Div_FrameParent.Frame_Deduction;
 
             if (Div_Type == DividerType.Mullion)
             {
-                DivImageRenderer_Height = ht;
-
                 if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
                     DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
                 {
-                    DivImageRenderer_Width = 13;
+                    DivImageRenderer_Height = ht + 10;
                 }
                 else if (DivImageRenderer_Zoom > 0.26f)
                 {
-                    DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
+                    DivImageRenderer_Height = ht + (div_overlap * 2);
                 }
             }
             else if (Div_Type == DividerType.Transom)
             {
-                DivImageRenderer_Width = wd;
-
                 if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
                     DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
                 {
+                    DivImageRenderer_Width = wd + 10;
+                }
+                else if (DivImageRenderer_Zoom > 0.26f)
+                {
+                    DivImageRenderer_Width = wd + (div_overlap * 2);
+                }
+            }
+        }
+
+        public void SetDimensionsToBind_using_DivZoom_Imager_Initial()
+        {
+            int wd = Div_MPanelParent.MPanelImageRenderer_Width,
+                ht = Div_MPanelParent.MPanelImageRenderer_Height,
+                div_overlap = Div_FrameParent.Frame_Deduction;
+
+            if (Div_Type == DividerType.Mullion)
+            {
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                {
+                    DivImageRenderer_Width = 13;
+                    DivImageRenderer_Height = ht + 10;
+                }
+                else if (DivImageRenderer_Zoom > 0.26f)
+                {
+                    DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
+                    DivImageRenderer_Height = ht + div_overlap + Convert.ToInt32(6 * DivImageRenderer_Zoom);
+                }
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                {
+                    DivImageRenderer_Width = wd + 10;
                     DivImageRenderer_Height = 13;
                 }
                 else if (DivImageRenderer_Zoom > 0.26f)
                 {
+                    DivImageRenderer_Width = wd + div_overlap + Convert.ToInt32(6 * DivImageRenderer_Zoom);
                     DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height);
                 }
             }

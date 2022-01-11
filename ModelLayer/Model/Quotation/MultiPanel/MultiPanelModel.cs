@@ -974,12 +974,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                         else if (MPanelImageRenderer_Zoom == 0.50f)
                         {
-                            int pnlhtToBind = MPanelImageRenderer_Height - 8;
+                            int pnlhtToBind = MPanelImageRenderer_Height;
                             pnl.PanelImageRenderer_Height = pnlhtToBind;
                         }
                         else if (MPanelImageRenderer_Zoom <= 0.26f)
                         {
-                            int pnlhtToBind = MPanelImageRenderer_Height - 10;
+                            int pnlhtToBind = MPanelImageRenderer_Height;
                             pnl.PanelImageRenderer_Height = pnlhtToBind;
                         }
                     }
@@ -994,12 +994,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                         else if (MPanelImageRenderer_Zoom == 0.50f)
                         {
-                            int pnlwdToBind = MPanelImageRenderer_Width - 10;
+                            int pnlwdToBind = MPanelImageRenderer_Width;
                             pnl.PanelImageRenderer_Width = pnlwdToBind;
                         }
                         else if (MPanelImageRenderer_Zoom <= 0.26f)
                         {
-                            int pnlwdToBind = MPanelImageRenderer_Width - 10;
+                            int pnlwdToBind = MPanelImageRenderer_Width;
                             pnl.PanelImageRenderer_Width = pnlwdToBind;
                         }
                     }
@@ -1034,7 +1034,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         div.Div_Height = MPanel_Height;
                         div.Div_DisplayHeight = MPanel_DisplayHeight;
                         div.Div_HeightToBind = MPanel_HeightToBind;
-                        div.DivImageRenderer_Height = MPanelImageRenderer_Height;
+                        div.SetDimensionsToBind_using_DivZoom_Imager();
+                        //div.DivImageRenderer_Height = MPanelImageRenderer_Height;
                     }
                 }
                 else if (MPanel_Type == "Transom")
@@ -1060,7 +1061,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         div.Div_Width = MPanel_Width;
                         div.Div_DisplayWidth = MPanel_DisplayWidth;
                         div.Div_WidthToBind = MPanel_WidthToBind;
-                        div.DivImageRenderer_Width = MPanelImageRenderer_Width;
+                        div.SetDimensionsToBind_using_DivZoom_Imager();
+                        //div.DivImageRenderer_Width = MPanelImageRenderer_Width;
                     }
                 }
             }
@@ -1089,13 +1091,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void Imager_SetDimensionsToBind_MullionDivMovement(int divMovement)
         {
-            int parent_wdToBind = MPanel_ParentModel.MPanelImageRenderer_Width,
-                parent_htToBind = MPanel_ParentModel.MPanelImageRenderer_Height,
-                wd = 0, ht = 0;
+            int wd = 0, ht = 0;
 
             if (MPanelImageRenderer_Zoom == 0.50f)
             {
-                wd = parent_wdToBind;
+                decimal wd_flt_convert_dec = Convert.ToDecimal((MPanel_Width - 20) * MPanelImageRenderer_Zoom);
+                decimal wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+                wd = Convert.ToInt32(wd_dec);
+
                 ht = MPanelImageRenderer_Height;
             }
             else if (MPanelImageRenderer_Zoom == 1.0f)
@@ -1140,7 +1143,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             if (MPanelImageRenderer_Zoom == 0.50f)
             {
                 wd = MPanelImageRenderer_Width;
-                ht = parent_htToBind;
+
+                decimal ht_flt_convert_dec = Convert.ToDecimal((MPanel_Height - 20) * MPanel_Zoom);
+                decimal ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+                ht = Convert.ToInt32(ht_dec);
             }
             else if (MPanelImageRenderer_Zoom == 1.0f)
             {

@@ -51,6 +51,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         void SetDimensionsToBind_using_DivZoom();
         void SetDimensionsToBind_using_DivZoom_Imager();
+        void SetDimensionsToBind_using_DivZoom_Imager_Initial();
 
         #region Explosion
 

@@ -59,7 +59,8 @@ namespace PresentationLayer.Presenter.UserControls
             foreach (IFrameModel frame in _windoorModel.lst_frame)
             {
                 int flocX = 0, flocY = 0,
-                    frame_pads_all = frame.FrameImageRenderer_Padding_int.All;
+                    frame_pads_all = frame.FrameImageRenderer_Padding_int.All,
+                    added_loc_based_on_ParentMpnl_ndx = 0;
 
                 Draw_Frame(e, frame, new Point(flocX, flocY));
 
@@ -232,13 +233,180 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         else if (mpnl.MPanel_Parent.Name.Contains("Multi"))
                         {
+                            int mpnl_ndx = mpnl.MPanel_Index_Inside_MPanel;
+
+                            mlocX += frame_pads_all;
+                            mlocY += frame_pads_all;
+
+                            if (mpnl_ndx == 0)
+                            {
+                                if (zoom == 1.0f || zoom == 0.50f)
+                                {
+                                    added_loc_based_on_ParentMpnl_ndx += frame_pads_all;
+                                }
+                                else if (zoom <= 0.26f)
+                                {
+                                    added_loc_based_on_ParentMpnl_ndx += 15;
+                                }
+                            }
+
                             if (mpnl.MPanel_Type == "Mullion")
                             {
+                                foreach (Control ctrl in mpnl.MPanelLst_Objects)
+                                {
+                                    if (ctrl.Name.Contains("PanelUC_"))
+                                    {
+                                        IPanelModel panelModel = mpnl.MPanelLst_Panel.Find(panel => panel.Panel_Name == ctrl.Name);
 
+                                        objLocY = added_loc_based_on_ParentMpnl_ndx;
+
+                                        if (panelModel.Panel_Placement == "First")
+                                        {
+                                            objLocX += mlocX; //addition of frame_pads and div wd
+                                        }
+                                        else if (panelModel.Panel_Placement != "First")
+                                        {
+                                            if (zoom == 1.0f || zoom == 0.50f)
+                                            {
+                                                objLocX += mlocX; //addition of frame_pads and div wd
+                                            }
+                                            else if (zoom <= 0.26f)
+                                            {
+                                                objLocX += 13;
+                                            }
+                                        }
+
+                                        Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
+
+                                        objLocX += panelModel.PanelImageRenderer_Width;
+                                    }
+                                    else if (ctrl.Name.Contains("MullionUC_"))
+                                    {
+                                        IDividerModel divModel = mpnl.MPanelLst_Divider.Find(div => div.Div_Name == ctrl.Name);
+                                        int locY_deduct = 0;
+
+                                        if (zoom == 1.0f)
+                                        {
+                                            locY_deduct = 10;
+                                        }
+                                        else if (zoom <= 0.50f)
+                                        {
+                                            locY_deduct = 5;
+                                        }
+
+                                        Draw_Divider(e, divModel, new Point(objLocX, objLocY - locY_deduct));
+                                    }
+                                    else if (ctrl.Name.Contains("MultiTransom_"))
+                                    {
+                                        IMultiPanelModel mpnlModel = mpnl.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == ctrl.Name);
+                                        objLocY = added_loc_based_on_ParentMpnl_ndx;
+
+                                        if (mpnlModel.MPanel_Placement == "First")
+                                        {
+                                            objLocX += mlocX; //addition of frame_pads and div wd
+                                        }
+                                        else if (mpnlModel.MPanel_Placement != "First")
+                                        {
+                                            if (zoom == 1.0f || zoom == 0.50f)
+                                            {
+                                                objLocX += mlocX; //addition of frame_pads and div wd
+                                            }
+                                            else if (zoom <= 0.26f)
+                                            {
+                                                objLocX += 13;
+                                            }
+                                        }
+
+                                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY));
+
+                                        objLocX += mpnlModel.MPanelImageRenderer_Width;
+                                    }
+                                }
+                                added_loc_based_on_ParentMpnl_ndx += mpnl.MPanelImageRenderer_Height;
                             }
                             else if (mpnl.MPanel_Type == "Transom")
                             {
+                                foreach (Control ctrl in mpnl.MPanelLst_Objects)
+                                {
+                                    if (ctrl.Name.Contains("PanelUC_"))
+                                    {
+                                        IPanelModel panelModel = mpnl.MPanelLst_Panel.Find(panel => panel.Panel_Name == ctrl.Name);
 
+                                        objLocX = added_loc_based_on_ParentMpnl_ndx;
+
+                                        if (panelModel.Panel_Placement == "First")
+                                        {
+                                            objLocY += mlocY; //addition of frame_pads and div wd
+                                        }
+                                        else if (panelModel.Panel_Placement != "First")
+                                        {
+                                            if (zoom == 1.0f || zoom == 0.50f)
+                                            {
+                                                objLocY += mlocY; //addition of frame_pads and div wd
+                                            }
+                                            else if (zoom <= 0.26f)
+                                            {
+                                                objLocY += 13;
+                                            }
+                                        }
+
+                                        Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
+
+                                        objLocY += panelModel.PanelImageRenderer_Height;
+                                    }
+                                    else if (ctrl.Name.Contains("TransomUC_"))
+                                    {
+                                        IDividerModel divModel = mpnl.MPanelLst_Divider.Find(div => div.Div_Name == ctrl.Name);
+                                        int locX_deduct = 0;
+
+                                        if (zoom == 1.0f)
+                                        {
+                                            locX_deduct = 10;
+                                        }
+                                        else if (zoom <= 0.50f)
+                                        {
+                                            locX_deduct = 5;
+                                        }
+
+                                        Draw_Divider(e, divModel, new Point(objLocX - locX_deduct, objLocY));
+                                    }
+                                    else if (ctrl.Name.Contains("MultiMullion_"))
+                                    {
+                                        IMultiPanelModel mpnlModel = mpnl.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == ctrl.Name);
+                                        objLocX = added_loc_based_on_ParentMpnl_ndx;
+
+                                        if (mpnlModel.MPanel_Placement == "First")
+                                        {
+                                            objLocY += mlocY; //addition of frame_pads and div wd
+                                        }
+                                        else if (mpnlModel.MPanel_Placement != "First")
+                                        {
+                                            if (zoom == 1.0f || zoom == 0.50f)
+                                            {
+                                                objLocY += mlocY; //addition of frame_pads and div wd
+                                            }
+                                            else if (zoom <= 0.26f)
+                                            {
+                                                objLocY += 13;
+                                            }
+                                        }
+
+                                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY));
+
+                                        objLocY += mpnlModel.MPanelImageRenderer_Height;
+                                    }
+                                }
+
+                                added_loc_based_on_ParentMpnl_ndx += mpnl.MPanelImageRenderer_Width;
+                            }
+
+                            if (zoom == 1.0f || zoom == 0.50f)
+                            {
+                                added_loc_based_on_ParentMpnl_ndx += frame_pads_all;
+                            }
+                            else if (zoom <= 0.26f)
+                            {
+                                added_loc_based_on_ParentMpnl_ndx += 13;
                             }
                         }
                     }

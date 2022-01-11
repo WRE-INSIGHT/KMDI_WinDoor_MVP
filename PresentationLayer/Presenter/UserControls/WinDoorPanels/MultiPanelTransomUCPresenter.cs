@@ -390,7 +390,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                       _frameModel.FrameImageRenderer_Zoom,
                                                                                       _frameModel.Frame_Type.ToString());
                                 divModel.SetDimensionsToBind_using_DivZoom();
-                                divModel.SetDimensionsToBind_using_DivZoom_Imager();
+                                divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
 
                                 _frameModel.Lst_Divider.Add(divModel);
                                 _multiPanelModel.MPanelLst_Divider.Add(divModel);
