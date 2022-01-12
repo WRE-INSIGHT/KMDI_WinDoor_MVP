@@ -767,6 +767,13 @@ namespace PresentationLayer.CommonMethods
                                       .Where(c => c.Name.Contains(name));
         }
 
+        public IEnumerable<IMultiPanelModel> GetAll_MPanel(IMultiPanelModel mpanel)
+        {
+            IEnumerable<IMultiPanelModel> lst_mpnl = mpanel.MPanelLst_MultiPanel;
+
+            return lst_mpnl.SelectMany(ctrl => GetAll_MPanel(ctrl)).Concat(lst_mpnl);
+        }
+
         public void rowpostpaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             DataGridView grid = (DataGridView)sender;

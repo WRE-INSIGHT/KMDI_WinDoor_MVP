@@ -1272,6 +1272,47 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanelImageRenderer_Height = ht;
         }
 
+        public void Imager_SetDimensionsToBind_using_ParentMultiPanelModel_Initial()
+        {
+            int parent_wdToBind = MPanel_ParentModel.MPanelImageRenderer_Width,
+                parent_htToBind = MPanel_ParentModel.MPanelImageRenderer_Height,
+                totalpanel_inside_parentMpanel = MPanel_ParentModel.MPanel_Divisions + 1,
+                div_count = MPanel_ParentModel.MPanel_Divisions,
+                divSize = (int)MPanel_FrameModelParent.Frame_Type,
+                wd = 0, ht = 0;
+
+            if (MPanelImageRenderer_Zoom == 1.0f || MPanelImageRenderer_Zoom == 0.50f)
+            {
+                if (MPanel_ParentModel.MPanel_Type == "Mullion")
+                {
+                    wd = (((parent_wdToBind) - (Convert.ToInt32(divSize * MPanelImageRenderer_Zoom) * div_count)) / totalpanel_inside_parentMpanel);
+                    ht = parent_htToBind;
+                }
+                else if (MPanel_ParentModel.MPanel_Type == "Transom")
+                {
+                    wd = parent_wdToBind;
+                    ht = (((parent_htToBind) - (Convert.ToInt32(divSize * MPanelImageRenderer_Zoom) * div_count)) / totalpanel_inside_parentMpanel);
+                }
+            }
+            else if (MPanelImageRenderer_Zoom <= 0.26f)
+            {
+                if (MPanel_ParentModel.MPanel_Type == "Mullion")
+                {
+                    wd = (((parent_wdToBind) - (13 * div_count)) / totalpanel_inside_parentMpanel);
+                    ht = parent_htToBind;
+                }
+                else if (MPanel_ParentModel.MPanel_Type == "Transom")
+                {
+                    wd = parent_wdToBind;
+                    ht = (((parent_htToBind) - (13 * div_count)) / totalpanel_inside_parentMpanel);
+                }
+            }
+
+            MPanelImager_WidthToBindPrev = _mpanelImage_Width;
+            MPanelImageRenderer_Width = wd;
+            MPanelImageRenderer_Height = ht;
+        }
+
         public void SetDimensionsToBind_usingZoom_below26_with_DividerMovement()
         {
             int pnl_wd = 0, pnl_ht = 0, divMove_int = 0, div_movement = 0;

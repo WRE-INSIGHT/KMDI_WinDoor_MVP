@@ -154,7 +154,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
-                                        prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        //prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        prev_mpanel.Imager_SetDimensionsToBind_MullionDivMovement(1);
 
                                         prev_mpanel.SetDimensions_childPanelObjs(1);
                                         prev_mpanel.ImagerSetDimensions_childPanelObjs(1);
@@ -165,6 +166,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_DisplayWidth++;
 
                                             mpanel.SetDimensionsToBind_MullionDivMovement();
+                                            mpanel.Imager_SetDimensionsToBind_MullionDivMovement(1);
+
                                             mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(1, "prev");
                                             mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(1, "prev");
                                         }
@@ -223,7 +226,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
-                                        nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        //nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        nxt_mpnl.Imager_SetDimensionsToBind_MullionDivMovement(-1);
 
                                         nxt_mpnl.SetDimensions_childPanelObjs(-1);
                                         nxt_mpnl.ImagerSetDimensions_childPanelObjs(-1);
@@ -234,6 +238,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_DisplayWidth--;
 
                                             mpanel.SetDimensionsToBind_MullionDivMovement();
+                                            mpanel.Imager_SetDimensionsToBind_MullionDivMovement(-1);
+
                                             mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-1, "nxt");
                                             mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-1, "nxt");
                                         }
@@ -312,7 +318,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
-                                        prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        //prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        prev_mpanel.Imager_SetDimensionsToBind_MullionDivMovement(-1);
 
                                         prev_mpanel.SetDimensions_childPanelObjs(-1);
                                         prev_mpanel.ImagerSetDimensions_childPanelObjs(-1);
@@ -323,6 +330,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_DisplayWidth--;
 
                                             mpanel.SetDimensionsToBind_MullionDivMovement();
+                                            mpanel.Imager_SetDimensionsToBind_MullionDivMovement(-1);
+
                                             mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-1, "prev");
                                             mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-1, "prev");
                                         }
@@ -382,7 +391,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     else
                                     {
                                         nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
-                                        nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        //nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        nxt_mpnl.Imager_SetDimensionsToBind_MullionDivMovement(1);
 
                                         nxt_mpnl.SetDimensions_childPanelObjs(1);
                                         nxt_mpnl.ImagerSetDimensions_childPanelObjs(1);
@@ -393,6 +403,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpanel.MPanel_DisplayWidth++;
 
                                             mpanel.SetDimensionsToBind_MullionDivMovement();
+                                            mpanel.Imager_SetDimensionsToBind_MullionDivMovement(1);
+
                                             mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(1, "nxt");
                                             mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(1, "nxt");
                                         }

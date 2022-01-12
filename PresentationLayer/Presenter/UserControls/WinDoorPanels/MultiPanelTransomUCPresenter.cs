@@ -321,7 +321,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _multiPanelModel.Reload_MultiPanelMargin();
 
                         mPanelModel.SetDimensionsToBind_using_ParentMultiPanelModel();
-                        mPanelModel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                        mPanelModel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel_Initial();
 
                         IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
                         UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
@@ -715,7 +715,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                               _frameModel.FrameImageRenderer_Zoom,
                                                                               _frameModel.Frame_Type.ToString());
                         divModel.SetDimensionsToBind_using_DivZoom();
-                        divModel.SetDimensionsToBind_using_DivZoom_Imager();
+                        divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
 
                         _frameModel.Lst_Divider.Add(divModel);
                         _multiPanelModel.MPanelLst_Divider.Add(divModel);
@@ -817,16 +817,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.SetDeductFramePadding(false);
             }
 
-            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-            {
-                _frameModel.Lst_Panel.Remove(pnl);
-                _mainPresenter.DeductPanelGlassID();
-            }
-            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
-            {
-                _frameModel.Lst_Divider.Remove(div);
-            }
-            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+            //foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+            //{
+            //    _frameModel.Lst_Panel.Remove(pnl);
+            //    _mainPresenter.DeductPanelGlassID();
+            //}
+            //foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
+            //{
+            //    _frameModel.Lst_Divider.Remove(div);
+            //}
+            //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+            //{
+            //    _frameModel.Lst_MultiPanel.Remove(mpnl);
+            //}
+
+            var child_mpanels = _commonFunctions.GetAll_MPanel(_multiPanelModel);
+
+            foreach (IMultiPanelModel mpnl in child_mpanels)
             {
                 _frameModel.Lst_MultiPanel.Remove(mpnl);
             }

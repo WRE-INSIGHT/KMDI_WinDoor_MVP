@@ -314,7 +314,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _multiPanelModel.Reload_MultiPanelMargin();
 
                         mPanelModel.SetDimensionsToBind_using_ParentMultiPanelModel();
-                        mPanelModel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                        mPanelModel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel_Initial();
 
                         IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
                         UserControl multiProp = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
@@ -361,7 +361,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     _multiPanelModel.Fit_MyControls_Dimensions();
                                 }
                                 _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                                _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                                //_multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                                 _multiPanelModel.Adjust_ControlDisplaySize();
                                 _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                             }
@@ -713,7 +713,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                               _frameModel.FrameImageRenderer_Zoom,
                                                                               _frameModel.Frame_Type.ToString());
                         divModel.SetDimensionsToBind_using_DivZoom();
-                        divModel.SetDimensionsToBind_using_DivZoom_Imager();
+                        divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
 
                         _prev_divModel = divModel;
                         _frameModel.Lst_Divider.Add(divModel);
@@ -820,17 +820,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameModel.SetDeductFramePadding(false);
             }
-            
-            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-            {
-                _frameModel.Lst_Panel.Remove(pnl);
-                _mainPresenter.DeductPanelGlassID();
-            }
-            foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
-            {
-                _frameModel.Lst_Divider.Remove(div);
-            }
-            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+
+            //foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+            //{
+            //    _frameModel.Lst_Panel.Remove(pnl);
+            //    _mainPresenter.DeductPanelGlassID();
+            //}
+
+            //foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
+            //{
+            //    _frameModel.Lst_Divider.Remove(div);
+            //}
+
+            var child_mpanels = _commonFunctions.GetAll_MPanel(_multiPanelModel);
+
+            foreach (IMultiPanelModel mpnl in child_mpanels)
             {
                 _frameModel.Lst_MultiPanel.Remove(mpnl);
             }
