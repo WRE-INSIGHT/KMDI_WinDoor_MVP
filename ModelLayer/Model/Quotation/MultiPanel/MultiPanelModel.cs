@@ -1022,7 +1022,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         mpanels.MPanel_HeightToBindPrev = mpanels.MPanel_HeightToBind;
                         mpanels.MPanel_HeightToBind = MPanel_HeightToBind;
 
-                        mpanels.MPanelImager_HeightToBindPrev = MPanelImager_HeightToBindPrev;
+                        mpanels.MPanelImager_HeightToBindPrev = mpanels.MPanelImageRenderer_Height;
                         mpanels.MPanelImageRenderer_Height = MPanelImageRenderer_Height;
 
                         mpanels.SetDimensions_PanelObjs_of_3rdLevelMPanel(divmovement, prevOrNxt);
@@ -1049,7 +1049,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         mpanels.MPanel_WidthToBindPrev = mpanels.MPanel_WidthToBind;
                         mpanels.MPanel_WidthToBind = MPanel_WidthToBind;
 
-                        mpanels.MPanelImager_WidthToBindPrev = mpanels.MPanelImager_WidthToBindPrev;
+                        mpanels.MPanelImager_WidthToBindPrev = mpanels.MPanelImageRenderer_Width;
                         mpanels.MPanelImageRenderer_Width = MPanelImageRenderer_Width;
 
                         mpanels.SetDimensions_PanelObjs_of_3rdLevelMPanel(divmovement, prevOrNxt);
@@ -1085,6 +1085,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 ht = MPanel_Height;
             }
 
+            MPanel_WidthToBindPrev = _mpanelWidthToBind;
             MPanel_WidthToBind = wd;
             MPanel_HeightToBind = ht;
         }
@@ -1107,6 +1108,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 ht = MPanelImageRenderer_Height;
             }
 
+            MPanelImager_WidthToBindPrev = _mpanelImage_Width;
             MPanelImageRenderer_Width = wd;
             MPanelImageRenderer_Height = ht;
         }
@@ -1408,6 +1410,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 pnl_ht = MPanel_Height;
             }
 
+            MPanelImager_WidthToBindPrev = _mpanelImage_Width;
             MPanelImageRenderer_Width = pnl_wd;
             MPanelImageRenderer_Height = pnl_ht;
         }
