@@ -13,7 +13,9 @@ namespace ServiceLayer.Services.MultiPanelServices
         IMultiPanelModel AddMultiPanelModel(int mwidth,
                                             int mheight,
                                             int mpanelDisplayWidth,
+                                            int mpanelDisplayWidthDecimal,
                                             int mpanelDisplayHeight,
+                                            int mpanelDisplayHeightDecimal,
                                             Control mpanelParent,
                                             UserControl mpanelFrameGroup,
                                             IFrameModel mpanelFrameModelParent,
@@ -30,6 +32,8 @@ namespace ServiceLayer.Services.MultiPanelServices
                                             int mpanelDivisions = 1,
                                             List<IPanelModel> mpanelLstPanel = null,
                                             List<IDividerModel> mpanelLstDivider = null,
-                                            List<IMultiPanelModel> mpanelLstMultiPanel = null);
+                                            List<IMultiPanelModel> mpanelLstMultiPanel = null,
+                                            List<Control> mpanelLstObjects = null,
+                                            List<Control> mpanelLstImagers = null);
     }
 }

@@ -60,6 +60,9 @@ namespace PresentationLayer.Presenter.UserControls
         {
             NumericUpDown numW = (NumericUpDown)sender;
             _frameModel.Frame_Width = Convert.ToInt32(numW.Value);
+            _frameModel.Set_DimensionsToBind_using_FrameZoom();
+            _frameModel.Set_ImagerDimensions_using_ImagerZoom();
+
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
         }
@@ -68,6 +71,9 @@ namespace PresentationLayer.Presenter.UserControls
         {
             NumericUpDown numH = (NumericUpDown)sender;
             _frameModel.Frame_Height = Convert.ToInt32(numH.Value);
+            _frameModel.Set_DimensionsToBind_using_FrameZoom();
+            _frameModel.Set_ImagerDimensions_using_ImagerZoom();
+
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
         }

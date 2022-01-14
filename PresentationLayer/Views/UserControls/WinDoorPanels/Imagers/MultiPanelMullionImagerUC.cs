@@ -11,7 +11,7 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 {
-    public partial class MultiPanelMullionImagerUC : UserControl, IMultiPanelMullionImagerUC
+    public partial class MultiPanelMullionImagerUC : UserControl, IMultiPanelMullionImagerUC, IMultiPanelImagerUC
     {
         public MultiPanelMullionImagerUC()
         {
@@ -30,6 +30,21 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
                 _mpanelID = value;
             }
         }
+
+        private string _mpanelPlacement;
+        public string MPanel_Placement
+        {
+            get
+            {
+                return _mpanelPlacement;
+            }
+
+            set
+            {
+                _mpanelPlacement = value;
+            }
+        }
+
         public event PaintEventHandler flpMulltiPaintEventRaised;
         public event EventHandler flpMulltiVisibleChangedEventRaised;
 
@@ -41,7 +56,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["MPanel_ID"]);
-            //this.DataBindings.Add(ModelBinding["MPanel_Name"]);
+            this.DataBindings.Add(ModelBinding["MPanel_Placement"]);
             this.DataBindings.Add(ModelBinding["MPanel_Dock"]);
             this.DataBindings.Add(ModelBinding["MPanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["MPanelImageRenderer_Height"]);

@@ -8,10 +8,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
     {
         event PaintEventHandler awningPanelImagerUCPaintEventRaised;
         event EventHandler awningPanelImagerUCVisibleChangedEventRaised;
-
-        int Panel_ID { get; set; }
-        //bool pnl_Orientation { get; set; }
-
+        
         void InvalidateThis();
     }
 }

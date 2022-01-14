@@ -13,6 +13,7 @@ using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
+using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Thumbs;
 using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.PanelServices;
@@ -577,7 +578,6 @@ namespace PresentationLayer.Presenter
                                 pnl.Panel_Width = pnl.Panel_OriginalWidth;
                                 pnl.Panel_Height = pnl.Panel_OriginalHeight;
                             }
-                            //mpnl.SetEqualGlassDimension(gbmode);
                         }
                     }
                 }
@@ -600,6 +600,7 @@ namespace PresentationLayer.Presenter
 
                             mpnl.Fit_MyControls_Dimensions();
                             mpnl.Fit_MyControls_ToBindDimensions();
+                            mpnl.Fit_MyControls_ImagersToBindDimensions();
                             mpnl.Adjust_ControlDisplaySize();
                         }
                     }
@@ -737,6 +738,9 @@ namespace PresentationLayer.Presenter
             {
                 ndx_zoomPercentage++;
                 _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                _windoorModel.SetDimensions_basePlatform();
+                _windoorModel.SetZoom();
+
                 FitControls_InsideMultiPanel();
                 Fit_MyControls_byControlsLocation();
             }
@@ -752,6 +756,9 @@ namespace PresentationLayer.Presenter
             {
                 ndx_zoomPercentage--;
                 _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                _windoorModel.SetDimensions_basePlatform();
+                _windoorModel.SetZoom();
+
                 FitControls_InsideMultiPanel();
                 Fit_MyControls_byControlsLocation();
             }
@@ -1064,6 +1071,7 @@ namespace PresentationLayer.Presenter
                                                                          Base_Color._Ivory,
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
+                        _windoorModel.SetDimensions_basePlatform();
                         AddWndrList_QuotationModel(_windoorModel);
 
                         _mainView.Zoom = _windoorModel.WD_zoom;
@@ -1104,6 +1112,7 @@ namespace PresentationLayer.Presenter
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
                         AddWndrList_QuotationModel(_windoorModel);
+                        _windoorModel.SetDimensions_basePlatform();
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -1148,6 +1157,10 @@ namespace PresentationLayer.Presenter
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
                                                                    frameID);
+                        _frameModel.Set_DimensionsToBind_using_FrameZoom();
+                        _frameModel.Set_ImagerDimensions_using_ImagerZoom();
+                        _frameModel.Set_FramePadding();
+
                         AddFrameList_WindoorModel(_frameModel);
                         IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
                         AddFrameUC(_frameModel, framePropUCP);
@@ -1173,6 +1186,8 @@ namespace PresentationLayer.Presenter
             {
                 _windoorModel.WD_width = frmDimension_numWd;
                 _windoorModel.WD_height = frmDimension_numHt;
+                _windoorModel.SetDimensions_basePlatform();
+                _windoorModel.SetZoom();
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
                 _basePlatformPresenter.Invalidate_flpMainControls();
@@ -1611,6 +1626,79 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public void Fit_MyImager_byImagersLocation()
+        {
+            foreach (IFrameModel frames in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpnl in frames.Lst_MultiPanel)
+                {
+                    foreach (Control imager in mpnl.MPanelLst_Imagers)
+                    {
+                        if (imager is IPanelImagerUC)
+                        {
+                            IPanelImagerUC imgr = (IPanelImagerUC)imager;
+                            if (imgr.Panel_Placement == "Last")
+                            {
+                                IPanelModel pnlModel = mpnl.MPanelLst_Panel.Find(pnl => pnl.Panel_ID == imgr.Panel_ID);
+                                if (mpnl.MPanel_Type == "Mullion")
+                                {
+                                    while (imager.Location.Y > imager.Margin.Top)
+                                    {
+                                        pnlModel.PanelImageRenderer_Width--;
+                                        if (imager.Location.Y == imager.Margin.Top)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (mpnl.MPanel_Type == "Transom")
+                                {
+                                    while (imager.Location.X > imager.Margin.Left)
+                                    {
+                                        pnlModel.PanelImageRenderer_Height--;
+                                        if (imager.Location.X == imager.Margin.Left)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else if (imager is IMultiPanelImagerUC)
+                        {
+                            IMultiPanelImagerUC multi = (IMultiPanelImagerUC)imager;
+                            if (multi.MPanel_Placement == "Last")
+                            {
+                                IMultiPanelModel mpnlModel = mpnl.MPanelLst_MultiPanel.Find(mpanl => mpanl.MPanel_ID == multi.MPanel_ID);
+                                if (mpnl.MPanel_Type == "Mullion")
+                                {
+                                    while (imager.Location.Y > imager.Margin.Top)
+                                    {
+                                        mpnlModel.MPanelImageRenderer_Width--;
+                                        if (imager.Location.Y == imager.Margin.Top)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (mpnl.MPanel_Type == "Transom")
+                                {
+                                    while (imager.Location.X > imager.Margin.Left)
+                                    {
+                                        mpnlModel.MPanelImageRenderer_Height--;
+                                        if (imager.Location.X == imager.Margin.Left)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void FitControls_InsideMultiPanel()
         {
             foreach (IFrameModel frames in _windoorModel.lst_frame)
@@ -1620,6 +1708,7 @@ namespace PresentationLayer.Presenter
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {
                         mpanel.Fit_MyControls_ToBindDimensions();
+                        mpanel.Fit_MyControls_ImagersToBindDimensions();
                     }
                 }
             }
@@ -1665,7 +1754,7 @@ namespace PresentationLayer.Presenter
             _frameUC = frameUCP.GetFrameUC();
             _basePlatformPresenter.AddFrame(_frameUC);
 
-            _basePlatformImagerUCPresenter.AddFrame(frameImagerUCP.GetFrameImagerUC());
+            //_basePlatformImagerUCPresenter.AddFrame(frameImagerUCP.GetFrameImagerUC());
         }
 
         public IFramePropertiesUCPresenter AddFramePropertiesUC(IFrameModel frameModel)
@@ -1770,6 +1859,7 @@ namespace PresentationLayer.Presenter
         {
             _mainView.GetLblSelectedDivider().Visible = false;
             _mainView.GetLblSelectedDivider().Text = "";
+            _mainView.SetActiveControl(null);
         }
 
         public void DeleteMultiPanelPropertiesUC(int multiPanelID)
