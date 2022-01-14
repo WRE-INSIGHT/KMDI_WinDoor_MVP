@@ -84,8 +84,8 @@ namespace PresentationLayer.Views.UserControls.Dividers
             this.DataBindings.Add(ModelBinding["Div_ID"]);
             this.DataBindings.Add(ModelBinding["Div_Name"]);
             this.DataBindings.Add(ModelBinding["Div_Visible"]);
-            this.DataBindings.Add(ModelBinding["Div_Width"]);
-            this.DataBindings.Add(ModelBinding["Div_Height"]);
+            this.DataBindings.Add(ModelBinding["Div_WidthToBind"]);
+            this.DataBindings.Add(ModelBinding["Div_HeightToBind"]);
         }
 
         private void TransomUC_MouseClick(object sender, MouseEventArgs e)

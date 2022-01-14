@@ -128,7 +128,9 @@ namespace PresentationLayer.Presenter.UserControls
                         else if (tsmGB.Checked == true)
                         {
                             _multiPanelModel.MPanel_DisplayWidth = _multiPanelModel.MPanel_OriginalDisplayWidth;
+                            _multiPanelModel.MPanel_DisplayWidthDecimal = _multiPanelModel.MPanel_OriginalDisplayWidthDecimal;
                             _multiPanelModel.MPanel_DisplayHeight = _multiPanelModel.MPanel_OriginalDisplayHeight;
+                            _multiPanelModel.MPanel_DisplayHeightDecimal = _multiPanelModel.MPanel_OriginalDisplayHeightDecimal;
 
                             foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                             {
@@ -136,11 +138,13 @@ namespace PresentationLayer.Presenter.UserControls
                                 {
                                     pnl.Panel_Width = pnl.Panel_OriginalWidth;
                                     pnl.Panel_DisplayWidth = pnl.Panel_OriginalDisplayWidth;
+                                    pnl.Panel_DisplayWidthDecimal = pnl.Panel_OriginalDisplayWidthDecimal;
                                 }
                                 else if (_multiPanelModel.MPanel_Type == "Transom")
                                 {
                                     pnl.Panel_Height = pnl.Panel_OriginalHeight;
                                     pnl.Panel_DisplayHeight = pnl.Panel_OriginalDisplayHeight;
+                                    pnl.Panel_DisplayHeightDecimal = pnl.Panel_OriginalDisplayHeightDecimal;
                                 }
                             }
 
@@ -149,14 +153,17 @@ namespace PresentationLayer.Presenter.UserControls
                                 if (_multiPanelModel.MPanel_Type == "Mullion")
                                 {
                                     mpnl.MPanel_DisplayWidth = mpnl.MPanel_OriginalDisplayWidth;
+                                    mpnl.MPanel_DisplayWidthDecimal = mpnl.MPanel_OriginalDisplayWidthDecimal;
                                 }
                                 else if (_multiPanelModel.MPanel_Type == "Transom")
                                 {
                                     mpnl.MPanel_DisplayHeight = mpnl.MPanel_OriginalDisplayHeight;
+                                    mpnl.MPanel_DisplayHeightDecimal = mpnl.MPanel_OriginalDisplayHeightDecimal;
                                 }
 
                                 mpnl.Fit_MyControls_Dimensions();
                                 mpnl.Fit_MyControls_ToBindDimensions();
+                                mpnl.Fit_MyControls_ImagersToBindDimensions();
                                 mpnl.Adjust_ControlDisplaySize();
                             }
 
@@ -167,6 +174,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                         _multiPanelModel.Fit_MyControls_Dimensions();
                         _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                        _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                         _multiPanelModel.Adjust_ControlDisplaySize();
 
                         _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();

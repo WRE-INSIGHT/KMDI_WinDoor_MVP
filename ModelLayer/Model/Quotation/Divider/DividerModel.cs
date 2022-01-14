@@ -5,6 +5,7 @@ using ModelLayer.Variables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -78,8 +79,6 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divWd = value;
-                Div_WidthToBind = (int)(value * Div_Zoom);
-                DivImageRenderer_Width = (int)(value * DivImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -109,8 +108,6 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divHt = value;
-                Div_HeightToBind = (int)(value * Div_Zoom);
-                DivImageRenderer_Height = (int)(value * DivImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -183,9 +180,6 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divImageRenderedZoom = value;
-                DivImageRenderer_Width = (int)(Div_Width * value);
-                DivImageRenderer_Height = (int)(Div_Height * value);
-
                 NotifyPropertyChanged();
             }
         }
@@ -220,8 +214,6 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
-        private int[] _arr_divSizes = { 26, 33, 20 }; //even index - Window ; odd index - Door
-
         private float _divZoom;
         public float Div_Zoom
         {
@@ -233,8 +225,6 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divZoom = value;
-                Div_HeightToBind = (int)(value * Div_Height);
-                Div_WidthToBind = (int)(value * Div_Width);
             }
         }
 
@@ -376,6 +366,111 @@ namespace ModelLayer.Model.Quotation.Divider
         public IFrameModel Div_FrameParent { get; set; }
         public IPanelModel Div_DMPanel { get; set; }
 
+        #region Methods
+
+        public void SetDimensionsToBind_using_DivZoom()
+        {
+            int wd = Div_MPanelParent.MPanel_WidthToBind, 
+                ht = Div_MPanelParent.MPanel_HeightToBind;
+
+            if (Div_Type == DividerType.Mullion)
+            {
+                if (_divZoom == 0.26f || _divZoom == 0.17f || _divZoom == 0.13f || _divZoom == 0.10f)
+                {
+                    Div_WidthToBind = 13;
+                    Div_HeightToBind = ht;
+                }
+                else if (_divZoom > 0.26f)
+                {
+                    Div_WidthToBind = (int)(Div_Zoom * Div_Width);
+                    Div_HeightToBind = ht;
+                }
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                if (_divZoom == 0.26f || _divZoom == 0.17f || _divZoom == 0.13f || _divZoom == 0.10f)
+                {
+                    Div_WidthToBind = wd;
+                    Div_HeightToBind = 13;
+                }
+                else if (_divZoom > 0.26f)
+                {
+                    Div_WidthToBind = wd;
+                    Div_HeightToBind = (int)(Div_Zoom * Div_Height);
+                }
+            }
+        }
+
+        public void SetDimensionsToBind_using_DivZoom_Imager()
+        {
+            int wd = Div_MPanelParent.MPanelImageRenderer_Width,
+                ht = Div_MPanelParent.MPanelImageRenderer_Height,
+                div_overlap = Div_FrameParent.Frame_Deduction;
+
+            if (Div_Type == DividerType.Mullion)
+            {
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                {
+                    DivImageRenderer_Height = ht + 10;
+                }
+                else if (DivImageRenderer_Zoom > 0.26f)
+                {
+                    DivImageRenderer_Height = ht + (div_overlap * 2);
+                }
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                {
+                    DivImageRenderer_Width = wd + 10;
+                }
+                else if (DivImageRenderer_Zoom > 0.26f)
+                {
+                    DivImageRenderer_Width = wd + (div_overlap * 2);
+                }
+            }
+        }
+
+        public void SetDimensionsToBind_using_DivZoom_Imager_Initial()
+        {
+            int wd = Div_MPanelParent.MPanelImageRenderer_Width,
+                ht = Div_MPanelParent.MPanelImageRenderer_Height,
+                div_overlap = Div_FrameParent.Frame_Deduction;
+
+            if (Div_Type == DividerType.Mullion)
+            {
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                {
+                    DivImageRenderer_Width = 13;
+                    DivImageRenderer_Height = ht + 10;
+                }
+                else if (DivImageRenderer_Zoom > 0.26f)
+                {
+                    DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
+                    DivImageRenderer_Height = ht + div_overlap + Convert.ToInt32(6 * DivImageRenderer_Zoom);
+                }
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                {
+                    DivImageRenderer_Width = wd + 10;
+                    DivImageRenderer_Height = 13;
+                }
+                else if (DivImageRenderer_Zoom > 0.26f)
+                {
+                    DivImageRenderer_Width = wd + div_overlap + Convert.ToInt32(6 * DivImageRenderer_Zoom);
+                    DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height);
+                }
+            }
+        }
+
+        #endregion
+
         #region Explosion
 
         private Divider_ArticleNo _divArtNo;
@@ -510,7 +605,7 @@ namespace ModelLayer.Model.Quotation.Divider
                     #region Algo for dummy mullion striker
 
                     int indx = Div_MPanelParent.MPanelLst_Objects.FindIndex(div => div.Name == Div_Name);
-                    int prev_div_indx = 0, nxt_div_indx = 0, 
+                    int prev_div_indx = 0, nxt_div_indx = 0,
                         obj_count = Div_MPanelParent.GetCount_MPanelLst_Object();
                     bool allow_dmStriker = true;
 
@@ -903,6 +998,350 @@ namespace ModelLayer.Model.Quotation.Divider
                 Div_PropHeight -= constants.div_property_claddingBracketOptionsHeight;
             }
         }
+
+        #region MaterialList
+
+        public void Insert_DivProfile_DivReinf_Info_MaterialList(DataTable tbl_explosion)
+        {
+            string div_side = "", explosion_length = "";
+            if (Div_Type == DividerType.Transom)
+            {
+                div_side = "Width";
+                explosion_length = Div_ExplosionWidth.ToString();
+            }
+            else if (Div_Type == DividerType.Mullion)
+            {
+                div_side = "Height";
+                explosion_length = Div_ExplosionHeight.ToString();
+            }
+
+            tbl_explosion.Rows.Add(Div_Type.ToString() + " " + div_side + " " + Div_ArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   explosion_length,
+                                   Div_Bounded,
+                                   @"[  ]");
+
+            tbl_explosion.Rows.Add(Div_Type.ToString() + " Reinforcement " + div_side + " " + Div_ReinfArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   explosion_length,
+                                   Div_Type.ToString(),
+                                   @"|  |");
+        }
+
+        public void Insert_MechJoint_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add(Div_Type.ToString() + " Mechanical Joint " + Div_MechJoinArtNo.DisplayName,
+                                   2, "pc(s)", "");
+        }
+
+        public void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion)
+        {
+            foreach (int cladding_size in Div_CladdingSizeList.Values)
+            {
+                tbl_explosion.Rows.Add("Cladding Profile " + Div_CladdingProfileArtNo.ToString(),
+                                       1, "pc(s)",
+                                       cladding_size.ToString(),
+                                       Div_Type.ToString(),
+                                       @"|  |");
+
+                tbl_explosion.Rows.Add("Cladding Reinforcement " + Div_CladdingReinfArtNo.ToString(),
+                                       1, "pc(s)",
+                                       cladding_size.ToString(),
+                                       "CPL",
+                                       @"|  |");
+            }
+        }
+
+        public void Insert_CladdingBracket4Concrete_MaterialList(DataTable tbl_explosion)
+        {
+            if (Div_CladdingBracketForConcreteQTY > 0)
+            {
+                tbl_explosion.Rows.Add("Bracket for concrete (10mm)",
+                                       Div_CladdingBracketForConcreteQTY, "pc(s)",
+                                       "",
+                                       "CPL",
+                                       @"|  |");
+            }
+        }
+
+        public void Insert_CladdingBracket4UPVC_MaterialList(DataTable tbl_explosion)
+        {
+            if (Div_CladdingBracketForUPVCQTY > 0)
+            {
+                tbl_explosion.Rows.Add("Bracket for upvc(5mm)",
+                                       Div_CladdingBracketForUPVCQTY, "pc(s)",
+                                       "",
+                                       "CPL",
+                                       @"|  |");
+            }
+        }
+
+        public void Insert_DummyMullion_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Dummy Mullion Height " + Div_DMArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   Div_ExplosionHeight.ToString(),
+                                   Div_Bounded,
+                                   @"[  ]");
+        }
+
+        public void Insert_Endcap4DM_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Endcap for Dummy Mullion " + Div_EndcapDM.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Dummy Mullion");
+        }
+
+        public void Insert_DMStriker_MaterialList(DataTable tbl_explosion)
+        {
+            if (Div_DMStrikerArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Dummy Mullion Striker " + Div_DMStrikerArtNo.DisplayName,
+                                       4, "pc(s)",
+                                       "",
+                                       "Frame",
+                                       " ");
+            }
+        }
+
+        public void Insert_FixedCam_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Fixed cam " + Div_FixedCamDM.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash");
+        }
+
+        public void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Snap-in Keep " + Div_SnapNKeepDM.ToString(),
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame");
+        }
+
+        public void Insert_AlumSpacer_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (80mm)",
+                                   2, "pc(s)",
+                                   "",
+                                   "Dummy Mullion");
+            tbl_explosion.Rows.Add("Aluminum spacer for Dummy Mullion FC770 (50mm)",
+                                   Div_AlumSpacer50Qty, "pc(s)",
+                                   "",
+                                   "Dummy Mullion");
+        }
+
+        public void Insert_LeverEspag_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Lever Espagnolette " + Div_LeverEspagArtNo.DisplayName,
+                                    1, "pc(s)",
+                                    "",
+                                    "Dummy Mullion");
+        }
+
+
+
+        public void Insert_ShootboltStriker_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Shootbolt striker " + Div_ShootboltStrikerArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash");
+        }
+
+        public void Insert_ShootboltReverse_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Shootbolt, Reverse " + Div_ShootboltReverseArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash");
+        }
+
+        public void Insert_ShootboltNonReverse_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Shootbolt, non-reverse " + Div_ShootboltNonReverseArtNo.DisplayName,
+                                   3, "pc(s)",
+                                   "",
+                                   "Sash & DM");
+        }
+
+
+        public int Add_ExplosionLength_screws4fab()
+        {
+            int explosionLength_screws = 0;
+
+            if (Div_Type == DividerType.Transom)
+            {
+                explosionLength_screws += Div_ExplosionWidth;
+            }
+            else if (Div_Type == DividerType.Mullion)
+            {
+                explosionLength_screws += Div_ExplosionHeight;
+            }
+
+            return explosionLength_screws;
+        }
+
+        public int Add_MechJoint_screws4fab()
+        {
+            int mj_screws = 0;
+
+            if (Div_MechJoinArtNo == Divider_MechJointArticleNo._AV585)
+            {
+                mj_screws += (2 * 2); //qty * 2
+            }
+
+            return mj_screws;
+        }
+
+        public int Add_TotalCladdingSize_Screws4Cladding()
+        {
+            int total_clad = 0;
+            foreach (int cladding_size in Div_CladdingSizeList.Values)
+            {
+                total_clad += cladding_size;
+            }
+
+            return total_clad;
+        }
+
+        public int Add_CladdingBracket4Concrete_screws4fab()
+        {
+            int cladConcrete_screws = 0;
+
+            if (Div_claddingBracketVisibility == true)
+            {
+                if (Div_CladdingBracketForConcreteQTY > 0)
+                {
+                    cladConcrete_screws += (Div_CladdingBracketForConcreteQTY * 3);
+                }
+            }
+
+            return cladConcrete_screws;
+        }
+
+        public int Add_CladdingBracket4UPVC_screws4fab()
+        {
+            int cladUPVC_screws = 0;
+
+            if (Div_claddingBracketVisibility == true)
+            {
+                if (Div_CladdingBracketForUPVCQTY > 0)
+                {
+                    cladUPVC_screws += (Div_CladdingBracketForUPVCQTY * 3);
+                }
+            }
+
+            return cladUPVC_screws;
+        }
+
+        public int Add_DMStriker_screws4fab()
+        {
+            int dmStriker_screws = 0;
+            if (Div_DMArtNo == DummyMullion_ArticleNo._385P)
+            {
+                if (Div_DMStrikerArtNo != null)
+                {
+                    dmStriker_screws += 8;
+                }
+            }
+
+            return dmStriker_screws;
+        }
+
+        public int Add_EndCapDM_screws4fab()
+        {
+            int endcap_screws = 0;
+
+            if (Div_EndcapDM == EndcapDM_ArticleNo._K385 ||
+                Div_EndcapDM == EndcapDM_ArticleNo._K7533)
+            {
+                endcap_screws += 2;
+            }
+
+            return endcap_screws;
+        }
+
+        public int Add_SnapNKeep_screws4fab()
+        {
+            int snap_screws = 0;
+
+            if (Div_SnapNKeepDM == SnapInKeep_ArticleNo._0400205 ||
+                Div_SnapNKeepDM == SnapInKeep_ArticleNo._0400215)
+            {
+                snap_screws += (2 * 2); //2 * 2pcs
+            }
+
+            return snap_screws;
+        }
+
+
+        public int Add_AlumSpacer_screws4fab()
+        {
+            int alumSpacer_screws = 0;
+
+            alumSpacer_screws += (3 * 2); //3 * 2pcs (80mm)
+            alumSpacer_screws += (3 * Div_AlumSpacer50Qty); //3 (50mm)
+
+            return alumSpacer_screws;
+        }
+
+        public int Add_LeverEspag_screws4fab()
+        {
+            int leverEspag_screws = 0;
+
+            if (Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._631153)
+            {
+                leverEspag_screws += 3; //Lever Espagnolette
+            }
+            else if (Div_LeverEspagArtNo == LeverEspagnolette_ArticleNo._476518)
+            {
+                leverEspag_screws += 3; //Lever Espagnolette
+            }
+            else
+            {
+                leverEspag_screws += 8; //Lever Espagnolette
+            }
+
+            return leverEspag_screws;
+        }
+
+        public int Add_CladdBracket4Concrete_expbolts()
+        {
+            int cladConcrete_xpbolts = 0;
+
+            if (Div_claddingBracketVisibility == true)
+            {
+                if (Div_CladdingBracketForConcreteQTY > 0)
+                {
+                    cladConcrete_xpbolts += Div_CladdingBracketForConcreteQTY;
+                }
+            }
+
+            return cladConcrete_xpbolts;
+        }
+
+        public int Add_CladdBracket4UPVC_expbolts()
+        {
+            int cladUPVC_xpbolts = 0;
+
+            if (Div_claddingBracketVisibility == true)
+            {
+                if (Div_CladdingBracketForUPVCQTY > 0)
+                {
+                    cladUPVC_xpbolts += Div_CladdingBracketForUPVCQTY;
+                }
+            }
+
+            return cladUPVC_xpbolts;
+        }
+
+
+
+
+        #endregion
 
         #endregion
 

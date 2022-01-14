@@ -107,7 +107,34 @@ namespace PresentationLayer.Presenter.UserControls
             int ctrl_Y = 35;
             Pen redP = new Pen(Color.Red);
             redP.Width = 3.5f;
-            Font dmnsion_font = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+            Font dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+            Font dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+
+            if (_windoorModel.WD_zoom == 0.26f)
+            {
+                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+            }
+            else if (_windoorModel.WD_zoom == 0.17f)
+            {
+                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
+            }
+            else if (_windoorModel.WD_zoom == 0.13f)
+            {
+                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
+            }
+            else if (_windoorModel.WD_zoom == 0.10f)
+            {
+                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
+            }
+            else
+            {
+                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+            }
 
             int total_panel = 0, total_mpanel = 0;
             foreach (IFrameModel frame in _windoorModel.lst_frame)
@@ -122,8 +149,8 @@ namespace PresentationLayer.Presenter.UserControls
 
             if (total_panel > 1 || total_mpanel >= 1)
             {
-                int[,] actual_arr_wd_locX = new int[total_panel, 2];
-                int[,] actual_arr_ht_locY = new int[total_panel, 2];
+                decimal[,] actual_arr_wd_locX = new decimal[total_panel, 2];
+                decimal[,] actual_arr_ht_locY = new decimal[total_panel, 2];
                 int ndx = 0;
 
                 if (total_panel > 1 && total_mpanel == 0)
@@ -133,8 +160,14 @@ namespace PresentationLayer.Presenter.UserControls
                         foreach (IPanelModel pnl in frame.Lst_Panel)
                         {
                             Control ctrl = FindFrameControl(frame.Frame_Name, frame.Frame_ID);
-                            actual_arr_wd_locX[ndx, 0] = pnl.Panel_DisplayWidth;
-                            actual_arr_ht_locY[ndx, 0] = pnl.Panel_DisplayHeight;
+                            string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
+                            string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
+
+                            decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
+                            decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
+
+                            actual_arr_wd_locX[ndx, 0] = DispWd_dec;
+                            actual_arr_ht_locY[ndx, 0] = DispHt_dec;
 
                             actual_arr_wd_locX[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
                             actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
@@ -152,8 +185,15 @@ namespace PresentationLayer.Presenter.UserControls
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
                                 Control ctrl = mpnl.MPanelLst_Objects.Find(obj => obj.Name == pnl.Panel_Name);
-                                actual_arr_wd_locX[ndx, 0] = pnl.Panel_DisplayWidth;
-                                actual_arr_ht_locY[ndx, 0] = pnl.Panel_DisplayHeight;
+                                string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
+
+                                string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
+
+                                decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
+                                decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
+
+                                actual_arr_wd_locX[ndx, 0] = DispWd_dec;
+                                actual_arr_ht_locY[ndx, 0] = DispHt_dec;
 
                                 actual_arr_wd_locX[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
                                 actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
@@ -163,19 +203,48 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
 
-                List<int> wds = WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
-                List<int> hts = HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
+                List<decimal> wds = WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
+                List<decimal> hts = HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
 
-                int locX = 0;
-                foreach (int wd in wds)
+                float locX = 0;
+                foreach (decimal wd in wds)
                 {
                     string dmnsion_w = wd.ToString();
+
+                    if (dmnsion_w.Contains(".0"))
+                    {
+                        dmnsion_w = dmnsion_w.Replace(".0", "");
+                    }
+
+                    if (_windoorModel.WD_zoom == 0.26f)
+                    {
+                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                    }
+                    else if (_windoorModel.WD_zoom == 0.17f)
+                    {
+                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
+                    }
+                    else if (_windoorModel.WD_zoom == 0.13f)
+                    {
+                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
+                    }
+                    else if (_windoorModel.WD_zoom == 0.10f)
+                    {
+                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
+                    }
+                    else
+                    {
+                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                    }
+
+                    float DispWd_float = float.Parse(dmnsion_w);
+
                     PointF dmnsion_w_startP = new PointF(_flpMain.Location.X + (locX * _windoorModel.WD_zoom),
                                                          (ctrl_Y - 17));// * _windoorModel.WD_zoom);
-                    PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + wd) * _windoorModel.WD_zoom),
+                    PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + DispWd_float) * _windoorModel.WD_zoom),
                                                        (ctrl_Y - 17)); // * _windoorModel.WD_zoom);
 
-                    Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
+                    Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
                     double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
 
                     //arrow for WIDTH
@@ -184,7 +253,7 @@ namespace PresentationLayer.Presenter.UserControls
                             new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
                             dmnsion_w_startP,
                             new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
-                        };
+                    };
 
                     PointF[] arrwhd_pnts_W2 =
                     {
@@ -200,7 +269,7 @@ namespace PresentationLayer.Presenter.UserControls
                         g.DrawLines(redP, arrwhd_pnts_W2);
                         TextRenderer.DrawText(g,
                                               dmnsion_w,
-                                              dmnsion_font,
+                                              dmnsion_font_wd,
                                               new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
                                                             new Size(s.Width, s.Height)),
                                               Color.Black,
@@ -208,18 +277,47 @@ namespace PresentationLayer.Presenter.UserControls
                                               TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                     }
                     //arrow for WIDTH
-                    locX += wd;
+                    locX += DispWd_float;
                 }
 
-                int locY = 0;
-                foreach (int ht in hts)
+                float locY = 0;
+                foreach (decimal ht in hts)
                 {
                     //arrow for HEIGHT
                     string dmnsion_h = ht.ToString();
-                    PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.WD_zoom));
-                    PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + ht) * _windoorModel.WD_zoom));
+                    float DispHt_float = float.Parse(dmnsion_h);
 
-                    Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
+                    PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.WD_zoom));
+                    PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.WD_zoom));
+
+                    if (dmnsion_h.Contains(".0"))
+                    {
+                        dmnsion_h = dmnsion_h.Replace(".0", "");
+                    }
+
+                    if (_windoorModel.WD_zoom == 0.26f)
+                    {
+                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                    }
+                    else if (_windoorModel.WD_zoom == 0.17f)
+                    {
+                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
+                    }
+                    else if (_windoorModel.WD_zoom == 0.13f)
+                    {
+                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
+                    }
+                    else if (_windoorModel.WD_zoom == 0.10f)
+                    {
+                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
+                    }
+                    else
+                    {
+                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                    }
+
+                    Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);
+
                     double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
 
                     PointF[] arrwhd_pnts_H1 =
@@ -243,7 +341,7 @@ namespace PresentationLayer.Presenter.UserControls
                         g.DrawLines(redP, arrwhd_pnts_H2);
                         TextRenderer.DrawText(g,
                                               dmnsion_h,
-                                              dmnsion_font,
+                                              dmnsion_font_ht,
                                               new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
                                                             new Size(s2.Width, s2.Height)),
                                               Color.Black,
@@ -251,7 +349,7 @@ namespace PresentationLayer.Presenter.UserControls
                                               TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                     }
                     //arrow for HEIGHT
-                    locY += ht;
+                    locY += DispHt_float;
                 }
             }
             else if (total_panel == 1 && total_mpanel == 0)
@@ -260,7 +358,7 @@ namespace PresentationLayer.Presenter.UserControls
                 Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
                 Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
 
-                Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
+                Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
                 double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
 
                 //arrow for WIDTH
@@ -285,7 +383,7 @@ namespace PresentationLayer.Presenter.UserControls
                     g.DrawLines(redP, arrwhd_pnts_W2);
                     TextRenderer.DrawText(g,
                                           dmnsion_w,
-                                          dmnsion_font,
+                                          dmnsion_font_wd,
                                           new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
                                                         new Size(s.Width, s.Height)),
                                           Color.Black,
@@ -300,7 +398,7 @@ namespace PresentationLayer.Presenter.UserControls
                 Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
                 Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
 
-                Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
+                Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);
                 double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
 
                 Point[] arrwhd_pnts_H1 =
@@ -324,7 +422,7 @@ namespace PresentationLayer.Presenter.UserControls
                     g.DrawLines(redP, arrwhd_pnts_H2);
                     TextRenderer.DrawText(g,
                                           dmnsion_h,
-                                          dmnsion_font,
+                                          dmnsion_font_ht,
                                           new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
                                                         new Size(s2.Width, s2.Height)),
                                           Color.Black,
@@ -419,12 +517,12 @@ namespace PresentationLayer.Presenter.UserControls
         }
 
 
-        public List<int> WidthList_ToPaint(int flpMain_width, int[,] arr_wd_locX)
+        public List<decimal> WidthList_ToPaint(int flpMain_width, decimal[,] arr_wd_locX)
         {
-            List<int> Width_List = new List<int>();
+            List<decimal> Width_List = new List<decimal>();
 
-            int[] arr_wd = new int[arr_wd_locX.GetLength(0)];
-            int[] arr_locX = new int[arr_wd_locX.GetLength(0)];
+            decimal[] arr_wd = new decimal[arr_wd_locX.GetLength(0)];
+            decimal[] arr_locX = new decimal[arr_wd_locX.GetLength(0)];
 
             for (int i = 0; i < arr_wd_locX.GetLength(0); i++)
             {
@@ -438,14 +536,14 @@ namespace PresentationLayer.Presenter.UserControls
 
             Array.Sort(arr_locX, arr_wd);
 
-            List<int> lst_wd = new List<int>();
-            List<int> lst_of_inserted_locX = new List<int>();
+            List<decimal> lst_wd = new List<decimal>();
+            List<decimal> lst_of_inserted_locX = new List<decimal>();
             List<int> lst_of_inserted_locX_indices = new List<int>();
 
             for (int i = 0; i < arr_locX.Length; i++)
             {
-                int curr_locX = arr_locX[i],
-                    curr_wd = arr_wd[i];
+                decimal curr_locX = arr_locX[i],
+                        curr_wd = arr_wd[i];
                 if (lst_of_inserted_locX.Contains(curr_locX) == false)
                 {
                     lst_wd.Add(curr_wd);
@@ -455,8 +553,8 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (lst_of_inserted_locX.Contains(curr_locX) == true)
                 {
                     int indx_of_locX = lst_of_inserted_locX.IndexOf(curr_locX),
-                        indx_of_locXIndex = lst_of_inserted_locX_indices[indx_of_locX],
-                        wd_to_compare = arr_wd[indx_of_locXIndex];
+                        indx_of_locXIndex = lst_of_inserted_locX_indices[indx_of_locX];
+                    decimal wd_to_compare = arr_wd[indx_of_locXIndex];
                     if (curr_wd < wd_to_compare)
                     {
                         lst_wd[indx_of_locX] = curr_wd;
@@ -464,8 +562,8 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
 
-            int total_wd = 0,
-                curr_lst_wd = 0;
+            decimal total_wd = 0,
+                    curr_lst_wd = 0;
             for (int i = 0; i < lst_wd.Count; i++)
             {
                 curr_lst_wd = lst_wd[i];
@@ -483,12 +581,12 @@ namespace PresentationLayer.Presenter.UserControls
             return Width_List;
         }
 
-        public List<int> HeightList_ToPaint(int flpMain_height, int[,] arr_ht_locY)
+        public List<decimal> HeightList_ToPaint(int flpMain_height, decimal[,] arr_ht_locY)
         {
-            List<int> Height_List = new List<int>();
+            List<decimal> Height_List = new List<decimal>();
 
-            int[] arr_ht = new int[arr_ht_locY.GetLength(0)];
-            int[] arr_locY = new int[arr_ht_locY.GetLength(0)];
+            decimal[] arr_ht = new decimal[arr_ht_locY.GetLength(0)];
+            decimal[] arr_locY = new decimal[arr_ht_locY.GetLength(0)];
 
             for (int i = 0; i < arr_ht_locY.GetLength(0); i++)
             {
@@ -502,14 +600,14 @@ namespace PresentationLayer.Presenter.UserControls
 
             Array.Sort(arr_locY, arr_ht);
 
-            List<int> lst_ht = new List<int>();
-            List<int> lst_of_inserted_locY = new List<int>();
+            List<decimal> lst_ht = new List<decimal>();
+            List<decimal> lst_of_inserted_locY = new List<decimal>();
             List<int> lst_of_inserted_locY_indices = new List<int>();
 
             for (int i = 0; i < arr_locY.Length; i++)
             {
-                int curr_locY = arr_locY[i],
-                    curr_ht = arr_ht[i];
+                decimal curr_locY = arr_locY[i],
+                        curr_ht = arr_ht[i];
                 if (lst_of_inserted_locY.Contains(curr_locY) == false)
                 {
                     lst_ht.Add(curr_ht);
@@ -519,8 +617,9 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (lst_of_inserted_locY.Contains(curr_locY) == true)
                 {
                     int indx_of_locY = lst_of_inserted_locY.IndexOf(curr_locY),
-                        indx_of_locYIndex = lst_of_inserted_locY_indices[indx_of_locY],
-                        ht_to_compare = arr_ht[indx_of_locYIndex];
+                        indx_of_locYIndex = lst_of_inserted_locY_indices[indx_of_locY];
+
+                    decimal ht_to_compare = arr_ht[indx_of_locYIndex];
                     if (curr_ht < ht_to_compare)
                     {
                         lst_ht[indx_of_locY] = curr_ht;
@@ -528,13 +627,13 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
 
-            int total_ht = 0,
-                curr_lst_ht = 0;
+            decimal total_ht = 0,
+                    curr_lst_ht = 0;
             for (int i = 0; i < lst_ht.Count; i++)
             {
                 curr_lst_ht = lst_ht[i];
                 total_ht += curr_lst_ht;
-                if (total_ht <= flpMain_height)
+                if (total_ht <= flpMain_height || total_ht - 2 <= flpMain_height)
                 {
                     Height_List.Add(curr_lst_ht);
                 }

@@ -12,7 +12,7 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 {
-    public partial class FixedPanelImagerUC : UserControl, IFixedPanelImagerUC
+    public partial class FixedPanelImagerUC : UserControl, IFixedPanelImagerUC, IPanelImagerUC
     {
         public FixedPanelImagerUC()
         {
@@ -47,6 +47,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+            set
+            {
+                _panelPlacement = value;
+            }
+        }
+
         Color color = Color.Black;
 
         public event PaintEventHandler fixedPanelImagerUCPaintEventRaised;
@@ -64,8 +77,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
-            this.DataBindings.Add(ModelBinding["Panel_Margin"]);
+            this.DataBindings.Add(ModelBinding["PanelImageRenderer_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
+            this.DataBindings.Add(ModelBinding["Panel_Placement"]);
         }
 
         private void FixedPanelImagerUC_VisibleChanged(object sender, EventArgs e)
