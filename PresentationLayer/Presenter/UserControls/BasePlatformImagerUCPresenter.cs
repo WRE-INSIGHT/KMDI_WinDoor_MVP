@@ -430,15 +430,8 @@ namespace PresentationLayer.Presenter.UserControls
                                     wd_previous_objs = Find_LocX_Inside_MpanelParent(mpnlParent_ndx, mpnl);
                                     ht_of_previous_objs = Find_LocY_Inside_MpanelParent(mpnl_ndx, mpnl);
 
-                                    //if (zoom == 1.0f || zoom == 0.50f)
-                                    //{
-                                        mlocX = frame_pads_all + wd_previous_objs;
-                                        mlocY = frame_pads_all + ht_of_previous_objs;
-                                    //}
-                                    //else if (zoom <= 0.26f)
-                                    //{
-
-                                    //}
+                                    mlocX = frame_pads_all + wd_previous_objs;
+                                    mlocY = frame_pads_all + ht_of_previous_objs;
 
                                     foreach (Control ctrl in mpnl.MPanelLst_Objects)
                                     {
@@ -449,14 +442,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                                             if (panelModel.Panel_Placement == "First")
                                             {
-                                                //if (zoom == 1.0f || zoom == 0.50f)
-                                                //{
-                                                    objLocX = mlocX;
-                                                //}
-                                                //else if (zoom <= 0.26f)
-                                                //{
-                                                //    objLocX = 15;
-                                                //}
+                                                objLocX = mlocX;
                                             }
 
                                             Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
@@ -488,11 +474,8 @@ namespace PresentationLayer.Presenter.UserControls
                                     wd_previous_objs = Find_LocX_Inside_MpanelParent(mpnl_ndx, mpnl);
                                     ht_of_previous_objs = Find_LocY_Inside_MpanelParent(mpnlParent_ndx, mpnl);
 
-                                    //if (zoom == 1.0f || zoom == 0.50f)
-                                    //{
-                                        mlocX = frame_pads_all + wd_previous_objs;
-                                        mlocY = frame_pads_all + ht_of_previous_objs;
-                                    //}
+                                    mlocX = frame_pads_all + wd_previous_objs;
+                                    mlocY = frame_pads_all + ht_of_previous_objs;
 
                                     foreach (Control ctrl in mpnl.MPanelLst_Objects)
                                     {
@@ -503,14 +486,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                                             if (panelModel.Panel_Placement == "First")
                                             {
-                                                //if (zoom == 1.0f || zoom == 0.50f)
-                                                //{
-                                                    objLocY = mlocY;
-                                                //}
-                                                //else if (zoom <= 0.26f)
-                                                //{
-                                                //    objLocY = 15;
-                                                //}
+                                                objLocY = mlocY;
                                             }
 
                                             Draw_Panel(e, panelModel, new Point(objLocX, objLocY));

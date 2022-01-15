@@ -598,6 +598,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                    _multiMullionImagerUCP);
                         IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                         fpnl.Controls.Add((UserControl)fixedUC);
+                        fixedUCP.SetInitialLoadFalse();
                         _multiPanelModel.AddControl_MPanelLstObjects((UserControl)fixedUC, _frameModel.Frame_Type.ToString());
 
                         IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC,

@@ -297,8 +297,24 @@ namespace PresentationLayer.CommonMethods
 
             //arrow for HEIGHT
             string dmnsion_h = panelModel.Panel_DisplayHeight.ToString() + "." + panelModel.Panel_DisplayHeightDecimal.ToString();
-            Point dmnsion_h_startP = new Point(panelModel.Panel_Width - 20, 1);
-            Point dmnsion_h_endP = new Point(panelModel.Panel_Width - 20, panelModel.Panel_Height - 1);
+            Point dmnsion_h_startP = new Point();
+            Point dmnsion_h_endP = new Point();
+
+            if (panelModel.Panel_Zoom > 0.26f)
+            {
+                dmnsion_h_startP = new Point(panelModel.Panel_WidthToBind - 20,
+                                             Convert.ToInt32(10 * panelModel.Panel_Zoom));
+
+                dmnsion_h_endP = new Point(panelModel.Panel_WidthToBind - 20,
+                                           panelModel.Panel_HeightToBind - Convert.ToInt32(10 * panelModel.Panel_Zoom));
+            }
+            else if (panelModel.Panel_Zoom <= 0.26f)
+            {
+                dmnsion_h_startP = new Point(panelModel.Panel_WidthToBind - 20,
+                                             5);
+                dmnsion_h_endP = new Point(panelModel.Panel_WidthToBind - 20,
+                                           panelModel.Panel_HeightToBind - 5);
+            }
 
             Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
             double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
@@ -323,7 +339,7 @@ namespace PresentationLayer.CommonMethods
             TextRenderer.DrawText(g,
                                   dmnsion_h,
                                   dmnsion_font,
-                                  new Rectangle(new Point(((panelModel.Panel_Width - 20) - s2.Width), (int)(mid2 - (s2.Height / 2))),
+                                  new Rectangle(new Point(((panelModel.Panel_WidthToBind - 20) - s2.Width), (int)(mid2 - (s2.Height / 2))),
                                                 new Size(s2.Width, s2.Height)),
                                   Color.Black,
                                   Color.Transparent,
@@ -376,7 +392,7 @@ namespace PresentationLayer.CommonMethods
                 dmnsion_w_endP,
                 new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
             };
-            ;
+
             g.DrawLines(redP, arrwhd_pnts_W1);
             g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
             g.DrawLines(redP, arrwhd_pnts_W2);
@@ -400,8 +416,25 @@ namespace PresentationLayer.CommonMethods
 
             //arrow for WIDTH
             string dmnsion_w = panelModel.Panel_DisplayWidth.ToString() + "." + panelModel.Panel_DisplayWidthDecimal.ToString();
-            Point dmnsion_w_startP = new Point(1, panelModel.Panel_Height - 20);
-            Point dmnsion_w_endP = new Point(panelModel.Panel_Width - 1, panelModel.Panel_Height - 20);
+            Point dmnsion_w_startP = new Point();
+            Point dmnsion_w_endP = new Point();
+            //Point dmnsion_w_startP = new Point(1, panelModel.Panel_Height - 20);
+            //Point dmnsion_w_endP = new Point(panelModel.Panel_Width - 1, panelModel.Panel_Height - 20);
+
+            if (panelModel.Panel_Zoom > 0.26f)
+            {
+                dmnsion_w_startP = new Point(Convert.ToInt32(10 * panelModel.Panel_Zoom),
+                                             panelModel.Panel_HeightToBind - 20);
+                dmnsion_w_endP = new Point(panelModel.Panel_WidthToBind - Convert.ToInt32(10 * panelModel.Panel_Zoom),
+                                           panelModel.Panel_HeightToBind - 20);
+            }
+            else if (panelModel.Panel_Zoom <= 0.26f)
+            {
+                dmnsion_w_startP = new Point(5,
+                                             panelModel.Panel_HeightToBind - 20);
+                dmnsion_w_endP = new Point(panelModel.Panel_WidthToBind - 5,
+                                           panelModel.Panel_HeightToBind - 20);
+            }
 
             Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
             double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
@@ -419,14 +452,14 @@ namespace PresentationLayer.CommonMethods
                 dmnsion_w_endP,
                 new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
             };
-            ;
+
             g.DrawLines(redP, arrwhd_pnts_W1);
             g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
             g.DrawLines(redP, arrwhd_pnts_W2);
             TextRenderer.DrawText(g,
                                   dmnsion_w,
                                   dmnsion_font,
-                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), ((panelModel.Panel_Height - 20) - s.Height)),
+                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), ((panelModel.Panel_HeightToBind - 20) - s.Height)),
                                                 new Size(s.Width, s.Height)),
                                   Color.Black,
                                   Color.Transparent,

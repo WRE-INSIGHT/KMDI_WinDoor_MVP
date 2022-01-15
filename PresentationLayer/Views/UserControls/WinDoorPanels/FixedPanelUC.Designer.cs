@@ -36,27 +36,30 @@
             // 
             // cmenu_fxd
             // 
+            this.cmenu_fxd.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmenu_fxd.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.cmenu_fxd.Name = "cmenu_fxd";
-            this.cmenu_fxd.Size = new System.Drawing.Size(108, 26);
+            this.cmenu_fxd.Size = new System.Drawing.Size(123, 28);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // FixedPanelUC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "FixedPanelUC";
-            this.Padding = new System.Windows.Forms.Padding(10);
+            this.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.Size = new System.Drawing.Size(200, 185);
+            this.SizeChanged += new System.EventHandler(this.FixedPanelUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FixedPanelUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseClick);
             this.MouseEnter += new System.EventHandler(this.FixedPanelUC_MouseEnter);
