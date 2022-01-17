@@ -49,6 +49,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private CommonFunctions _commonFunctions = new CommonFunctions();
         Timer _tmr = new Timer();
 
+        bool _initialLoad;
+
         public CasementPanelUCPresenter(ICasementPanelUC casementUC,
                                         IDividerServices divServices,
                                         ITransomUCPresenter transomUCP,
@@ -76,7 +78,44 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _casementUC.casementPanelUCMouseLeaveEventRaised += new EventHandler(OnCasementPanelUCMouseLeaveEventRaised);
             _casementUC.deleteToolStripClickedEventRaised += new EventHandler(OnDeleteToolStripClickedEventRaised);
             _casementUC.casementPanelUCMouseClickEventRaised += _casementUC_casementPanelUCMouseClickEventRaised;
+            _casementUC.casementPanelUCSizeChangedEventRaised += _casementUC_casementPanelUCSizeChangedEventRaised;
             _tmr.Tick += _tmr_Tick;
+        }
+
+        int prev_Width = 0,
+            prev_Height = 0;
+        private void _casementUC_casementPanelUCSizeChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!_initialLoad)
+                {
+                    int thisWd = ((UserControl)sender).Width,
+                        thisHt = ((UserControl)sender).Height,
+                        pnlModelWd = _panelModel.Panel_WidthToBind,
+                        pnlModelHt = _panelModel.Panel_HeightToBind;
+
+                    if (thisWd != pnlModelWd || prev_Width != pnlModelWd)
+                    {
+                        //_multiPanelModel.MPanel_Width = thisWd;
+                        _WidthChange = true;
+                    }
+                    if (thisHt != pnlModelHt || prev_Height != pnlModelHt)
+                    {
+                        //_multiPanelModel.MPanel_Height = thisHt;
+                        _HeightChange = true;
+                    }
+                }
+                prev_Width = _panelModel.Panel_WidthToBind;
+                prev_Height = _panelModel.Panel_HeightToBind;
+
+                _tmr.Start();
+                ((UserControl)sender).Invalidate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void _casementUC_casementPanelUCMouseClickEventRaised(object sender, MouseEventArgs e)
@@ -435,6 +474,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public ICasementPanelUC GetCasementPanelUC()
         {
+            _initialLoad = true;
             _casementUC.ThisBinding(CreateBindingDictionary());
             return _casementUC;
         }
@@ -520,6 +560,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_CmenuDeleteVisibility", new Binding("Panel_CmenuDeleteVisibility", _panelModel, "Panel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
+        }
+
+        public void SetInitialLoadFalse()
+        {
+            _initialLoad = false;
         }
     }
 }

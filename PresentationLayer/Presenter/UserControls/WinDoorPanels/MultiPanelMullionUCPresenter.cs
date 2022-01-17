@@ -621,6 +621,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                             _multiMullionImagerUCP);
                         ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                         fpnl.Controls.Add((UserControl)casementUC);
+                        casementUCP.SetInitialLoadFalse();
                         _multiPanelModel.AddControl_MPanelLstObjects((UserControl)casementUC, _frameModel.Frame_Type.ToString());
 
                         ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC,
@@ -643,6 +644,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                       _multiMullionImagerUCP);
                         IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
                         fpnl.Controls.Add((UserControl)awningUC);
+                        awningUCP.SetInitialLoadFalse();
                         _multiPanelModel.AddControl_MPanelLstObjects((UserControl)awningUC, _frameModel.Frame_Type.ToString());
 
                         IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC,
@@ -656,8 +658,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else if (data == "Sliding Panel")
                     {
-                        _multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
-                        _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                        //_multiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
+                        //_frameModel.AdjustPropertyPanelHeight("Panel", "add");
 
                         ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC,
                                                                                          _panelModel,
