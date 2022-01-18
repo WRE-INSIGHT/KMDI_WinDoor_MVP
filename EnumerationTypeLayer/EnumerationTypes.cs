@@ -1,5 +1,4 @@
 ﻿using Headspring;
-using System.ComponentModel;
 
 namespace EnumerationTypeLayer
 {
@@ -109,14 +108,22 @@ namespace EnumerationTypeLayer
         public class CladdingProfile_ArticleNo : Enumeration<CladdingProfile_ArticleNo, int>
         {
             public static readonly CladdingProfile_ArticleNo _1338 = new CladdingProfile_ArticleNo(0, "1338");
+            public static readonly CladdingProfile_ArticleNo _WK50 = new CladdingProfile_ArticleNo(1, "WK50");
 
             private CladdingProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
         public class CladdingReinf_ArticleNo : Enumeration<CladdingReinf_ArticleNo, int>
         {
             public static readonly CladdingReinf_ArticleNo _9120 = new CladdingReinf_ArticleNo(0, "9120");
+            public static readonly CladdingReinf_ArticleNo _NA50 = new CladdingReinf_ArticleNo(1, "NA50");
 
             private CladdingReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class CoverForCladdingProfile_ArticleNo : Enumeration<CoverForCladdingProfile_ArticleNo, int>
+        {
+            public static readonly CoverForCladdingProfile_ArticleNo _NK5 = new CoverForCladdingProfile_ArticleNo(0, "NK5");
+
+            private CoverForCladdingProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
         public class SashProfile_ArticleNo : Enumeration<SashProfile_ArticleNo, int>
         {
@@ -647,7 +654,8 @@ namespace EnumerationTypeLayer
 
         public class GBSpacer_ArticleNo : Enumeration<GBSpacer_ArticleNo, int>
         {
-            public static readonly GBSpacer_ArticleNo _GBSpacer = new GBSpacer_ArticleNo(0, "GB SPACER");
+            //public static readonly GBSpacer_ArticleNo _GBSpacer = new GBSpacer_ArticleNo(0, "GB SPACER");
+            public static readonly GBSpacer_ArticleNo _KBC70 = new GBSpacer_ArticleNo(0, "KBC70");
 
             private GBSpacer_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -657,6 +665,52 @@ namespace EnumerationTypeLayer
             public static readonly DummyMullionStriker_ArticleNo _339395 = new DummyMullionStriker_ArticleNo(0, "339395");
 
             private DummyMullionStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class AluminumThreshold_ArticleNo : Enumeration<AluminumThreshold_ArticleNo, int>
+        {
+            public static readonly AluminumThreshold_ArticleNo _7789 = new AluminumThreshold_ArticleNo(0, "7789");
+
+            private AluminumThreshold_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class FillerProfile_ArticleNo : Enumeration<FillerProfile_ArticleNo, int>
+        {
+            public static readonly FillerProfile_ArticleNo _0914_milled = new FillerProfile_ArticleNo(0, "0914-milled");
+            public static readonly FillerProfile_ArticleNo _0505_milled = new FillerProfile_ArticleNo(1, "0505-milled");
+            public static readonly FillerProfile_ArticleNo _6052_milled = new FillerProfile_ArticleNo(2, "6052-milled");
+            private FillerProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class Brush_ArticleNo : Enumeration<Brush_ArticleNo, int>
+        {
+            public static readonly Brush_ArticleNo _SP02 = new Brush_ArticleNo(0, "SP02");
+
+            private Brush_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class DoorSashGasket_ArticleNo : Enumeration<DoorSashGasket_ArticleNo, int>
+        {
+            public static readonly DoorSashGasket_ArticleNo _782 = new DoorSashGasket_ArticleNo(0, "782");
+
+            private DoorSashGasket_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class ThresholdMetalPiece_ArticleNo : Enumeration<ThresholdMetalPiece_ArticleNo, int>
+        {
+            public static readonly ThresholdMetalPiece_ArticleNo _SHC70 = new ThresholdMetalPiece_ArticleNo(0, "SHC70");
+
+            private ThresholdMetalPiece_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class AccessoryForSHC70_ArticleNo : Enumeration<AccessoryForSHC70_ArticleNo, int>
+        {
+            public static readonly AccessoryForSHC70_ArticleNo _DK7507 = new AccessoryForSHC70_ArticleNo(0, "DK7507");
+
+            private AccessoryForSHC70_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class BottomFrameTypes : Enumeration<BottomFrameTypes, int>
+        {
+            public static readonly BottomFrameTypes _7507 = new BottomFrameTypes(0, "7507");
+            public static readonly BottomFrameTypes _7502 = new BottomFrameTypes(1, "7502");
+            public static readonly BottomFrameTypes _withThreshold = new BottomFrameTypes(2, "WithThreshold");
+            public static readonly BottomFrameTypes _noBottomFrame = new BottomFrameTypes(3, "NoBottomFrame");
+
+            private BottomFrameTypes(int value, string displayName) : base(value, displayName) { }
         }
     }
 }
