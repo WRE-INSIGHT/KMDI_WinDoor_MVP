@@ -12,6 +12,7 @@ using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
+using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using ServiceLayer.Services.DividerServices;
 using System;
 using System.Collections.Generic;
@@ -105,6 +106,8 @@ namespace PresentationLayer.CommonMethods
                                                                      divID,
                                                                      frameModel.FrameImageRenderer_Zoom,
                                                                      frameModel.Frame_Type.ToString());
+                divModel.SetDimensionsToBind_using_DivZoom();
+                divModel.SetDimensionsToBind_using_DivZoom_Imager();
 
                 frameModel.Lst_Divider.Add(divModel);
                 parentModel.MPanelLst_Divider.Add(divModel);
@@ -159,6 +162,9 @@ namespace PresentationLayer.CommonMethods
                     parentModel.AddControl_MPanelLstObjects((UserControl)transomUC, 
                                                             frameModel.Frame_Type.ToString(),
                                                             true);
+                    parentModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC,
+                                                                          frameModel.Frame_Type.ToString(),
+                                                                          true);
 
                     transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
                                                                         divModel,
@@ -168,6 +174,8 @@ namespace PresentationLayer.CommonMethods
                                                                         transomUC);
                     ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
                     multiTransomImagerUCP.AddControl((UserControl)transomImagerUC);
+                    parentModel.MPanelLst_Imagers.Add((UserControl)transomImagerUC);
+
                 }
                 else if (parentModel.MPanel_Type == "Mullion")
                 {
@@ -200,6 +208,9 @@ namespace PresentationLayer.CommonMethods
                     parentModel.AddControl_MPanelLstObjects((UserControl)mullionUC, 
                                                              frameModel.Frame_Type.ToString(),
                                                              true);
+                    parentModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)mullionUC,
+                                                                          frameModel.Frame_Type.ToString(),
+                                                                          true);
 
                     mullionImagerUCP = _mullionImagerUCP.GetNewInstance(_unityC,
                                                                         divModel,
@@ -210,6 +221,8 @@ namespace PresentationLayer.CommonMethods
 
                     IMullionImagerUC mullionImagerUC = mullionImagerUCP.GetMullionImager();
                     multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
+                    parentModel.MPanelLst_Imagers.Add((UserControl)mullionImagerUC);
+
                 }
             }
         }
@@ -222,9 +235,26 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for HEIGHT
-            string dmnsion_h = multiPanelModel.MPanel_DisplayHeight.ToString();
-            Point dmnsion_h_startP = new Point(multiPanelModel.MPanel_Width - 20, 10);
-            Point dmnsion_h_endP = new Point(multiPanelModel.MPanel_Width - 20, multiPanelModel.MPanel_Height - 10);
+            string dmnsion_h = multiPanelModel.MPanel_DisplayHeight.ToString() + "." + multiPanelModel.MPanel_DisplayHeightDecimal.ToString();
+
+            Point dmnsion_h_startP = new Point(),
+                  dmnsion_h_endP = new Point();
+
+            if (multiPanelModel.MPanel_Zoom > 0.26f)
+            {
+                dmnsion_h_startP = new Point(multiPanelModel.MPanel_WidthToBind - 20,
+                                             Convert.ToInt32(10 * multiPanelModel.MPanel_Zoom));
+
+                dmnsion_h_endP = new Point(multiPanelModel.MPanel_WidthToBind - 20, 
+                                           multiPanelModel.MPanel_HeightToBind - Convert.ToInt32(10 * multiPanelModel.MPanel_Zoom));
+            }
+            else if (multiPanelModel.MPanel_Zoom <= 0.26f)
+            {
+                dmnsion_h_startP = new Point(multiPanelModel.MPanel_WidthToBind - 20,
+                                             5);
+                dmnsion_h_endP = new Point(multiPanelModel.MPanel_WidthToBind - 20,
+                                           multiPanelModel.MPanel_HeightToBind - 5);
+            }
 
             Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
             double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
@@ -249,7 +279,7 @@ namespace PresentationLayer.CommonMethods
             TextRenderer.DrawText(g,
                                   dmnsion_h,
                                   dmnsion_font,
-                                  new Rectangle(new Point(((multiPanelModel.MPanel_Width - 20) - s2.Width), (int)(mid2 - (s2.Height / 2))),
+                                  new Rectangle(new Point(((multiPanelModel.MPanel_WidthToBind - 20) - s2.Width), (int)(mid2 - (s2.Height / 2))),
                                                 new Size(s2.Width, s2.Height)),
                                   Color.Black,
                                   Color.Transparent,
@@ -266,9 +296,25 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for HEIGHT
-            string dmnsion_h = panelModel.Panel_DisplayHeight.ToString();
-            Point dmnsion_h_startP = new Point(panelModel.Panel_Width - 20, 1);
-            Point dmnsion_h_endP = new Point(panelModel.Panel_Width - 20, panelModel.Panel_Height - 1);
+            string dmnsion_h = panelModel.Panel_DisplayHeight.ToString() + "." + panelModel.Panel_DisplayHeightDecimal.ToString();
+            Point dmnsion_h_startP = new Point();
+            Point dmnsion_h_endP = new Point();
+
+            if (panelModel.Panel_Zoom > 0.26f)
+            {
+                dmnsion_h_startP = new Point(panelModel.Panel_WidthToBind - 20,
+                                             Convert.ToInt32(10 * panelModel.Panel_Zoom));
+
+                dmnsion_h_endP = new Point(panelModel.Panel_WidthToBind - 20,
+                                           panelModel.Panel_HeightToBind - Convert.ToInt32(10 * panelModel.Panel_Zoom));
+            }
+            else if (panelModel.Panel_Zoom <= 0.26f)
+            {
+                dmnsion_h_startP = new Point(panelModel.Panel_WidthToBind - 20,
+                                             5);
+                dmnsion_h_endP = new Point(panelModel.Panel_WidthToBind - 20,
+                                           panelModel.Panel_HeightToBind - 5);
+            }
 
             Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font);
             double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
@@ -293,7 +339,7 @@ namespace PresentationLayer.CommonMethods
             TextRenderer.DrawText(g,
                                   dmnsion_h,
                                   dmnsion_font,
-                                  new Rectangle(new Point(((panelModel.Panel_Width - 20) - s2.Width), (int)(mid2 - (s2.Height / 2))),
+                                  new Rectangle(new Point(((panelModel.Panel_WidthToBind - 20) - s2.Width), (int)(mid2 - (s2.Height / 2))),
                                                 new Size(s2.Width, s2.Height)),
                                   Color.Black,
                                   Color.Transparent,
@@ -311,9 +357,24 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for WIDTH
-            string dmnsion_w = multiPanelModel.MPanel_DisplayWidth.ToString();
-            Point dmnsion_w_startP = new Point(10, multiPanelModel.MPanel_Height - 20);
-            Point dmnsion_w_endP = new Point(multiPanelModel.MPanel_Width - 10, multiPanelModel.MPanel_Height - 20);
+            string dmnsion_w = multiPanelModel.MPanel_DisplayWidth.ToString() + "." + multiPanelModel.MPanel_DisplayWidthDecimal.ToString();
+            Point dmnsion_w_startP = new Point(), 
+                  dmnsion_w_endP = new Point();
+
+            if (multiPanelModel.MPanel_Zoom > 0.26f)
+            {
+                dmnsion_w_startP = new Point(Convert.ToInt32(10 * multiPanelModel.MPanel_Zoom), 
+                                             multiPanelModel.MPanel_HeightToBind - 20);
+                dmnsion_w_endP = new Point(multiPanelModel.MPanel_WidthToBind - Convert.ToInt32(10 * multiPanelModel.MPanel_Zoom),
+                                           multiPanelModel.MPanel_HeightToBind - 20);
+            }
+            else if (multiPanelModel.MPanel_Zoom <= 0.26f)
+            {
+                dmnsion_w_startP = new Point(5,
+                                             multiPanelModel.MPanel_HeightToBind - 20);
+                dmnsion_w_endP = new Point(multiPanelModel.MPanel_WidthToBind - 5,
+                                           multiPanelModel.MPanel_HeightToBind - 20);
+            }
 
             Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
             double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
@@ -331,14 +392,14 @@ namespace PresentationLayer.CommonMethods
                 dmnsion_w_endP,
                 new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
             };
-            ;
+
             g.DrawLines(redP, arrwhd_pnts_W1);
             g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
             g.DrawLines(redP, arrwhd_pnts_W2);
             TextRenderer.DrawText(g,
                                   dmnsion_w,
                                   dmnsion_font,
-                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), ((multiPanelModel.MPanel_Height - 20) - s.Height)),
+                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), ((multiPanelModel.MPanel_HeightToBind - 20) - s.Height)),
                                                 new Size(s.Width, s.Height)),
                                   Color.Black,
                                   Color.Transparent,
@@ -354,9 +415,26 @@ namespace PresentationLayer.CommonMethods
             Font dmnsion_font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             //arrow for WIDTH
-            string dmnsion_w = panelModel.Panel_DisplayWidth.ToString();
-            Point dmnsion_w_startP = new Point(1, panelModel.Panel_Height - 20);
-            Point dmnsion_w_endP = new Point(panelModel.Panel_Width - 1, panelModel.Panel_Height - 20);
+            string dmnsion_w = panelModel.Panel_DisplayWidth.ToString() + "." + panelModel.Panel_DisplayWidthDecimal.ToString();
+            Point dmnsion_w_startP = new Point();
+            Point dmnsion_w_endP = new Point();
+            //Point dmnsion_w_startP = new Point(1, panelModel.Panel_Height - 20);
+            //Point dmnsion_w_endP = new Point(panelModel.Panel_Width - 1, panelModel.Panel_Height - 20);
+
+            if (panelModel.Panel_Zoom > 0.26f)
+            {
+                dmnsion_w_startP = new Point(Convert.ToInt32(10 * panelModel.Panel_Zoom),
+                                             panelModel.Panel_HeightToBind - 20);
+                dmnsion_w_endP = new Point(panelModel.Panel_WidthToBind - Convert.ToInt32(10 * panelModel.Panel_Zoom),
+                                           panelModel.Panel_HeightToBind - 20);
+            }
+            else if (panelModel.Panel_Zoom <= 0.26f)
+            {
+                dmnsion_w_startP = new Point(5,
+                                             panelModel.Panel_HeightToBind - 20);
+                dmnsion_w_endP = new Point(panelModel.Panel_WidthToBind - 5,
+                                           panelModel.Panel_HeightToBind - 20);
+            }
 
             Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font);
             double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
@@ -374,14 +452,14 @@ namespace PresentationLayer.CommonMethods
                 dmnsion_w_endP,
                 new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
             };
-            ;
+
             g.DrawLines(redP, arrwhd_pnts_W1);
             g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
             g.DrawLines(redP, arrwhd_pnts_W2);
             TextRenderer.DrawText(g,
                                   dmnsion_w,
                                   dmnsion_font,
-                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), ((panelModel.Panel_Height - 20) - s.Height)),
+                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), ((panelModel.Panel_HeightToBind - 20) - s.Height)),
                                                 new Size(s.Width, s.Height)),
                                   Color.Black,
                                   Color.Transparent,
@@ -722,6 +800,13 @@ namespace PresentationLayer.CommonMethods
                                       .Where(c => c.Name.Contains(name));
         }
 
+        public IEnumerable<IMultiPanelModel> GetAll_MPanel(IMultiPanelModel mpanel)
+        {
+            IEnumerable<IMultiPanelModel> lst_mpnl = mpanel.MPanelLst_MultiPanel;
+
+            return lst_mpnl.SelectMany(ctrl => GetAll_MPanel(ctrl)).Concat(lst_mpnl);
+        }
+
         public void rowpostpaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             DataGridView grid = (DataGridView)sender;
@@ -736,6 +821,51 @@ namespace PresentationLayer.CommonMethods
 
             Rectangle headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString(rowIdx, rowFont, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+
+        public Control FindImagerControl(int id, string type, IMultiPanelModel mpanelParent)
+        {
+            Control imgr = new Control();
+
+            foreach (Control item in mpanelParent.MPanelLst_Imagers)
+            {
+                int imgr_id = 0;
+
+                if (type == "Panel" && item is IPanelImagerUC)
+                {
+                    imgr_id = ((IPanelImagerUC)item).Panel_ID;
+                    if (id == imgr_id)
+                    {
+                        imgr = item;
+                    }
+                }
+                else if (type == "MPanel" && item is IMultiPanelImagerUC)
+                {
+                    imgr_id = ((IMultiPanelImagerUC)item).MPanel_ID;
+                    if (id == imgr_id)
+                    {
+                        imgr = item;
+                    }
+                }
+                else if (type == "MullionImager" && item is IMullionImagerUC)
+                {
+                    imgr_id = ((IMullionImagerUC)item).Div_ID;
+                    if (id == imgr_id)
+                    {
+                        imgr = item;
+                    }
+                }
+                else if (type == "TransomImager" && item is ITransomImagerUC)
+                {
+                    imgr_id = ((ITransomImagerUC)item).Div_ID;
+                    if (id == imgr_id)
+                    {
+                        imgr = item;
+                    }
+                }
+            }
+
+            return imgr;
         }
     }
 }

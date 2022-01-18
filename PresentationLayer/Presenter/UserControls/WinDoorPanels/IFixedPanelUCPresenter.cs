@@ -31,5 +31,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                               IMultiPanelTransomUCPresenter multiPanelTransomUCP,
                                               IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP);
         IFixedPanelUC GetFixedPanelUC();
+        void SetInitialLoadFalse();
     }
 }

@@ -34,7 +34,7 @@
             // flp_MultiTransomImager
             // 
             this.flp_MultiTransomImager.AllowDrop = true;
-            this.flp_MultiTransomImager.BackColor = System.Drawing.SystemColors.Control;
+            this.flp_MultiTransomImager.BackColor = System.Drawing.Color.White;
             this.flp_MultiTransomImager.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_MultiTransomImager.Location = new System.Drawing.Point(0, 0);
             this.flp_MultiTransomImager.Margin = new System.Windows.Forms.Padding(0);
@@ -47,6 +47,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.flp_MultiTransomImager);
             this.Name = "MultiPanelTransomImagerUC";
             this.Size = new System.Drawing.Size(300, 300);

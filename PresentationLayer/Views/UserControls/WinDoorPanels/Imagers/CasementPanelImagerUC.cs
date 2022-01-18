@@ -11,7 +11,7 @@ using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 {
-    public partial class CasementPanelImagerUC : UserControl, ICasementPanelImagerUC
+    public partial class CasementPanelImagerUC : UserControl, ICasementPanelImagerUC, IPanelImagerUC
     {
         public CasementPanelImagerUC()
         {
@@ -46,6 +46,19 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             }
         }
 
+        private string _panelPlacement;
+        public string Panel_Placement
+        {
+            get
+            {
+                return _panelPlacement;
+            }
+            set
+            {
+                _panelPlacement = value;
+            }
+        }
+
         public event PaintEventHandler casementPanelImagerUCPaintEventRaised;
         public event EventHandler casementPanelImagerUCVisibleChangedEventRaised;
 
@@ -61,8 +74,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Width"]);
             this.DataBindings.Add(ModelBinding["PanelImageRenderer_Height"]);
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
-            this.DataBindings.Add(ModelBinding["Panel_Margin"]);
+            this.DataBindings.Add(ModelBinding["PanelImageRenderer_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
+            this.DataBindings.Add(ModelBinding["Panel_Placement"]);
         }
 
         private void CasementPanelImagerUC_Paint(object sender, PaintEventArgs e)
