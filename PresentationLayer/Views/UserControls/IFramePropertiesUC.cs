@@ -20,6 +20,8 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler cmbFrameReinfSelectedValueChangedEventRaised;
         void BringToFrontThis();
         Panel GetFramePropertiesPNL();
+        Panel GetBodyPropertiesPNL();
         void SetFrameTypeRadioBtnEnabled(bool frameTypeEnabled);
+        void AddHT_PanelBody(int addht);
     }
 }

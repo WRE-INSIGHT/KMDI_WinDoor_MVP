@@ -118,6 +118,8 @@
     <Compile Include="Presenter\UserControls\Dividers\TransomUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_BottomFramePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_BottomFramePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
@@ -358,6 +360,13 @@
     <Compile Include="Views\UserControls\FramePropertiesUC.Designer.cs">
       <DependentUpon>FramePropertiesUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_BottomFramePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_BottomFramePropertyUC.Designer.cs">
+      <DependentUpon>FP_BottomFramePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_BottomFramePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -742,6 +751,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FramePropertiesUC.resx">
       <DependentUpon>FramePropertiesUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_BottomFramePropertyUC.resx">
+      <DependentUpon>FP_BottomFramePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameUC.resx">
       <DependentUpon>FrameUC.cs</DependentUpon>

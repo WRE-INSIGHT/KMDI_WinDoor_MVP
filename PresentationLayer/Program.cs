@@ -9,6 +9,7 @@ using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
+using PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Modules;
 using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
@@ -17,6 +18,7 @@ using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.DividerProperties_Modules;
 using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
+using PresentationLayer.Views.UserControls.FrameProperties_Modules;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
@@ -82,6 +84,9 @@ namespace PresentationLayer
 
                 .RegisterType<IFrameUC, FrameUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFrameUCPresenter, FrameUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IFP_BottomFramePropertyUC, FP_BottomFramePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFP_BottomFramePropertyUCPresenter, FP_BottomFramePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IFrameImagerUC, FrameImagerUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFrameImagerUCPresenter, FrameImagerUCPresenter>(new ContainerControlledLifetimeManager())

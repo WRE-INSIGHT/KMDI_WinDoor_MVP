@@ -10,6 +10,9 @@ using Unity;
 using System.Windows.Forms;
 using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
+using PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Modules;
+using ModelLayer.Variables;
+using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -17,16 +20,23 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IFramePropertiesUC _framePropertiesUC;
 
+        IFP_BottomFramePropertyUCPresenter _fp_botFramePropertyUCP;
+
         private IMainPresenter _mainPresenter;
         private IFrameModel _frameModel;
         //private IFrameUC _frameUC;
         private IFrameServices _frameServices;
+        IUnityContainer _unityC;
+
+        ConstantVariables constants = new ConstantVariables();
 
         public FramePropertiesUCPresenter(IFramePropertiesUC framePropertiesUC,
-                                          IFrameServices frameServices)
+                                          IFrameServices frameServices,
+                                          IFP_BottomFramePropertyUCPresenter fp_botFramePropertyUCP)
         {
             _framePropertiesUC = framePropertiesUC;
             _frameServices = frameServices;
+            _fp_botFramePropertyUCP = fp_botFramePropertyUCP;
             SubscribeToEventsSetup();
         }
 
@@ -50,8 +60,33 @@ namespace PresentationLayer.Presenter.UserControls
             _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
+        string curr_rbtnText = "";
         private void OnRdBtnCheckedChangedEventRaised(object sender, EventArgs e)
         {
+            RadioButton rbtn = (RadioButton)sender;
+
+            _frameModel.Frame_Type = (Frame_Padding)Enum.Parse(typeof(Frame_Padding), rbtn.Text, true);
+
+            if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
+            {
+                if (rbtn.Text == "Door" && rbtn.Checked == true)
+                {
+                    _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
+                    _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
+                }
+            }
+            else if (curr_rbtnText == "Door")
+            {
+                if ((rbtn.Text == "Window" || rbtn.Text == "Concrete") && 
+                    rbtn.Checked == true)
+                {
+                    _frameModel.FrameProp_Height -= constants.frame_botframeproperty_PanelHeight;
+                    _framePropertiesUC.AddHT_PanelBody(-constants.frame_botframeproperty_PanelHeight);
+                }
+            }
+
+            curr_rbtnText = rbtn.Text;
+
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
         }
@@ -106,6 +141,15 @@ namespace PresentationLayer.Presenter.UserControls
         private void OnFramePropertiesLoadEventRaised(object sender, EventArgs e)
         {
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
+
+            curr_rbtnText = _frameModel.Frame_Type.ToString();
+
+            IFP_BottomFramePropertyUCPresenter botFramePropUCP = _fp_botFramePropertyUCP.GetNewInstance(_frameModel, _unityC);
+            UserControl botFramePropUC = (UserControl)botFramePropUCP.GetFP_BottomFramePropertiesUC();
+            _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(botFramePropUC);
+            botFramePropUC.Dock = DockStyle.Top;
+            botFramePropUC.BringToFront();
+
             _framePropertiesUC.BringToFrontThis();
         }
 
@@ -126,6 +170,7 @@ namespace PresentationLayer.Presenter.UserControls
             framePropertiesUCP._frameModel = frameModel;
             //framePropertiesUCP._frameUC = frameUC;
             framePropertiesUCP._mainPresenter = mainPresenter;
+            framePropertiesUCP._unityC = unityC;
 
             return framePropertiesUCP;
         }

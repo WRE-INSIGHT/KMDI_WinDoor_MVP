@@ -11,6 +11,7 @@ using CommonComponents;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer;
 using static EnumerationTypeLayer.EnumerationTypes;
+using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -121,6 +122,16 @@ namespace PresentationLayer.Views.UserControls
         public Panel GetFramePropertiesPNL()
         {
             return pnl_frameProperties;
+        }
+
+        public Panel GetBodyPropertiesPNL()
+        {
+            return pnl_Body;
+        }
+
+        public void AddHT_PanelBody(int addht)
+        {
+            pnl_Body.Height += addht;
         }
     }
 }

@@ -6,6 +6,7 @@
 
         public int frame_propertyHeight_default = 291;
         public int frame_property_concretePanelHeight = 26;
+        public int frame_botframeproperty_PanelHeight = 58;
 
         #endregion
 

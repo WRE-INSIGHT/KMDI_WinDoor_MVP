@@ -48,6 +48,7 @@
             this.pnl_rdBtnDoor = new System.Windows.Forms.Panel();
             this.pnl_rdBtnConcrete = new System.Windows.Forms.Panel();
             this.pnl_Body = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.pnl_frameProperties = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.num_fWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_fHeight)).BeginInit();
@@ -57,6 +58,7 @@
             this.pnl_rdBtnDoor.SuspendLayout();
             this.pnl_rdBtnConcrete.SuspendLayout();
             this.pnl_Body.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_frameName
@@ -97,7 +99,7 @@
             // lbl_Width
             // 
             this.lbl_Width.AutoSize = true;
-            this.lbl_Width.Location = new System.Drawing.Point(2, 4);
+            this.lbl_Width.Location = new System.Drawing.Point(7, 2);
             this.lbl_Width.Name = "lbl_Width";
             this.lbl_Width.Size = new System.Drawing.Size(35, 13);
             this.lbl_Width.TabIndex = 4;
@@ -105,7 +107,7 @@
             // 
             // num_fWidth
             // 
-            this.num_fWidth.Location = new System.Drawing.Point(2, 20);
+            this.num_fWidth.Location = new System.Drawing.Point(7, 18);
             this.num_fWidth.Maximum = new decimal(new int[] {
             400,
             0,
@@ -129,7 +131,7 @@
             // lbl_Height
             // 
             this.lbl_Height.AutoSize = true;
-            this.lbl_Height.Location = new System.Drawing.Point(2, 45);
+            this.lbl_Height.Location = new System.Drawing.Point(7, 42);
             this.lbl_Height.Name = "lbl_Height";
             this.lbl_Height.Size = new System.Drawing.Size(38, 13);
             this.lbl_Height.TabIndex = 6;
@@ -137,7 +139,7 @@
             // 
             // num_fHeight
             // 
-            this.num_fHeight.Location = new System.Drawing.Point(2, 61);
+            this.num_fHeight.Location = new System.Drawing.Point(7, 58);
             this.num_fHeight.Maximum = new decimal(new int[] {
             400,
             0,
@@ -167,9 +169,10 @@
             this.pbl_specs.Controls.Add(this.lbl_FrameProfile);
             this.pbl_specs.Controls.Add(this.lbl_FrameReinf);
             this.pbl_specs.Controls.Add(this.cmb_FrameProfile);
-            this.pbl_specs.Location = new System.Drawing.Point(2, 84);
+            this.pbl_specs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pbl_specs.Location = new System.Drawing.Point(0, 81);
             this.pbl_specs.Name = "pbl_specs";
-            this.pbl_specs.Size = new System.Drawing.Size(147, 102);
+            this.pbl_specs.Size = new System.Drawing.Size(154, 102);
             this.pbl_specs.TabIndex = 12;
             // 
             // cmb_FrameReinf
@@ -287,17 +290,27 @@
             // 
             // pnl_Body
             // 
-            this.pnl_Body.Controls.Add(this.lbl_Width);
-            this.pnl_Body.Controls.Add(this.num_fWidth);
-            this.pnl_Body.Controls.Add(this.lbl_Height);
             this.pnl_Body.Controls.Add(this.pbl_specs);
-            this.pnl_Body.Controls.Add(this.num_fHeight);
+            this.pnl_Body.Controls.Add(this.panel1);
             this.pnl_Body.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Body.Location = new System.Drawing.Point(0, 99);
             this.pnl_Body.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_Body.Name = "pnl_Body";
             this.pnl_Body.Size = new System.Drawing.Size(154, 186);
             this.pnl_Body.TabIndex = 17;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lbl_Width);
+            this.panel1.Controls.Add(this.num_fHeight);
+            this.panel1.Controls.Add(this.num_fWidth);
+            this.panel1.Controls.Add(this.lbl_Height);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(154, 81);
+            this.panel1.TabIndex = 13;
             // 
             // pnl_frameProperties
             // 
@@ -332,7 +345,8 @@
             this.pnl_rdBtnDoor.ResumeLayout(false);
             this.pnl_rdBtnConcrete.ResumeLayout(false);
             this.pnl_Body.ResumeLayout(false);
-            this.pnl_Body.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -359,5 +373,6 @@
         private System.Windows.Forms.Panel pnl_rdBtnConcrete;
         private System.Windows.Forms.Panel pnl_Body;
         private System.Windows.Forms.Panel pnl_frameProperties;
+        private System.Windows.Forms.Panel panel1;
     }
 }
