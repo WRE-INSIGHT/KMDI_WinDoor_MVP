@@ -110,14 +110,12 @@ namespace EnumerationTypeLayer
             public static readonly CladdingProfile_ArticleNo _1338 = new CladdingProfile_ArticleNo(0, "1338");
             public static readonly CladdingProfile_ArticleNo _WK50 = new CladdingProfile_ArticleNo(1, "WK50");
 
-
             private CladdingProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
         public class CladdingReinf_ArticleNo : Enumeration<CladdingReinf_ArticleNo, int>
         {
             public static readonly CladdingReinf_ArticleNo _9120 = new CladdingReinf_ArticleNo(0, "9120");
             public static readonly CladdingReinf_ArticleNo _NA50 = new CladdingReinf_ArticleNo(1, "NA50");
-
 
             private CladdingReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

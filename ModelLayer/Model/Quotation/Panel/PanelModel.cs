@@ -1143,7 +1143,6 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public ProfileKnobCylinder_ArtNo Panel_ProfileKnobCylinderArtNo { get; set; }
         public Cylinder_CoverArtNo Panel_CylinderCoverArtNo { get; set; }
-
         public Cylinder_CoverArtNo Panel_CylinderCoverArtNo2 { get; set; } //for outer foil color
 
         private Rotoline_HandleArtNo _panelRotolineArtNo;
@@ -2851,6 +2850,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_HandleType == Handle_Type._Rio)
                 {
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
+
                     if (inside_color != null ||
                         outside_color != null ||
                         inside_color != outside_color)
@@ -4304,8 +4304,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
 
                     if (inside_color != null ||
-                        outside_color != null ||
-                        inside_color != outside_color) // 2 diff foil color
+                       outside_color != null ||
+                       inside_color != outside_color) // 2 diff foil color
                     {
 
                         if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
@@ -4367,7 +4367,6 @@ namespace ModelLayer.Model.Quotation.Panel
                             Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
                         }
                     }
-
                 }
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
