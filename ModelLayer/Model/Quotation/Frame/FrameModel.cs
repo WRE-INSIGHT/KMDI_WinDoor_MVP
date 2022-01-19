@@ -255,6 +255,19 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public IWindoorModel Frame_WindoorModel { get; set; }
 
+        private BottomFrameTypes _frameBotFrameArticleNo;
+        public BottomFrameTypes Frame_BotFrameArtNo
+        {
+            get
+            {
+                return _frameBotFrameArticleNo;
+            }
+            set
+            {
+                _frameBotFrameArticleNo = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         #region Method
 

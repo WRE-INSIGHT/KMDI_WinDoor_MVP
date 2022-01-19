@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommonComponents;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
 {
@@ -18,16 +19,29 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
             InitializeComponent();
         }
 
-        public event EventHandler chkbotFrameCheckedChangedEventRaised;
+        public event EventHandler bottomFramePropertyLoadEventRaised;
+        public event EventHandler cmbbotFrameProfileSelectedValueChangedRaised;
 
-        private void chk_botFrame_CheckedChanged(object sender, EventArgs e)
+        private void FP_BottomFramePropertyUC_Load(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, chkbotFrameCheckedChangedEventRaised, e);
+            List<BottomFrameTypes> fbotArtNo = new List<BottomFrameTypes>();
+            foreach (BottomFrameTypes item in BottomFrameTypes.GetAll())
+            {
+                fbotArtNo.Add(item);
+            }
+            cmb_botFrameProfile.DataSource = fbotArtNo;
+
+            EventHelpers.RaiseEvent(this, bottomFramePropertyLoadEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
-            throw new NotImplementedException();
+            cmb_botFrameProfile.DataBindings.Add(ModelBinding["Frame_BotFrameArtNo"]);
+        }
+
+        private void cmb_botFrameProfile_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbbotFrameProfileSelectedValueChangedRaised, e);
         }
     }
 }

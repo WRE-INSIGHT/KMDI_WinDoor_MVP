@@ -144,7 +144,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             curr_rbtnText = _frameModel.Frame_Type.ToString();
 
-            IFP_BottomFramePropertyUCPresenter botFramePropUCP = _fp_botFramePropertyUCP.GetNewInstance(_frameModel, _unityC);
+            IFP_BottomFramePropertyUCPresenter botFramePropUCP = _fp_botFramePropertyUCP.GetNewInstance(_frameModel, _unityC, _mainPresenter);
             UserControl botFramePropUC = (UserControl)botFramePropUCP.GetFP_BottomFramePropertiesUC();
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(botFramePropUC);
             botFramePropUC.Dock = DockStyle.Top;

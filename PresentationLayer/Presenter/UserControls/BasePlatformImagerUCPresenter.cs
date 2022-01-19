@@ -971,14 +971,18 @@ namespace PresentationLayer.Presenter.UserControls
             Pen blkPen = new Pen(Color.Black);
             Graphics g = e.Graphics;
 
-            int fr_pads = frameModel.FrameImageRenderer_Padding_int.All;
+            //int fr_pads = frameModel.FrameImageRenderer_Padding_int.All;
 
-            Rectangle pnl_inner = new Rectangle(new Point(fr_pads, fr_pads),
-                                                new Size(frameModel.FrameImageRenderer_Width - (fr_pads * 2),
-                                                         frameModel.FrameImageRenderer_Height - (fr_pads * 2)));
+            int top_pads = frameModel.Frame_Padding_int.Top,
+                right_pads = frameModel.Frame_Padding_int.Right,
+                left_pads = frameModel.Frame_Padding_int.Left,
+                bot_pads = frameModel.Frame_Padding_int.Bottom;
+
+            Rectangle pnl_inner = new Rectangle(new Point(top_pads, left_pads),
+                                                new Size(frameModel.FrameImageRenderer_Width - (right_pads + left_pads),
+                                                         frameModel.FrameImageRenderer_Height - (top_pads + bot_pads)));
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
-
 
             int pInnerX = pnl_inner.Location.X,
             pInnerY = pnl_inner.Location.Y,

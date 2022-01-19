@@ -5,6 +5,7 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
 {
     public interface IFP_BottomFramePropertyUC: IViewCommon
     {
-        event EventHandler chkbotFrameCheckedChangedEventRaised;
+        event EventHandler bottomFramePropertyLoadEventRaised;
+        event EventHandler cmbbotFrameProfileSelectedValueChangedRaised;
     }
 }

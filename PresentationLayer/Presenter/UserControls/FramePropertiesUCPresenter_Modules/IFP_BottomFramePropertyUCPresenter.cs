@@ -7,6 +7,6 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
     public interface IFP_BottomFramePropertyUCPresenter
     {
         IFP_BottomFramePropertyUC GetFP_BottomFramePropertiesUC();
-        IFP_BottomFramePropertyUCPresenter GetNewInstance(IFrameModel frameModel, IUnityContainer unityC);
+        IFP_BottomFramePropertyUCPresenter GetNewInstance(IFrameModel frameModel, IUnityContainer unityC, IMainPresenter mainPresenter);
     }
 }

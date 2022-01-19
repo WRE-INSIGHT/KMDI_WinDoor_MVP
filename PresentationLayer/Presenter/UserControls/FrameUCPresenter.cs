@@ -500,8 +500,11 @@ namespace PresentationLayer.Presenter.UserControls
 
             UserControl pfr = (UserControl)sender;
 
+            int top_pads = _frameModel.Frame_Padding_int.Top,
+                right_pads = _frameModel.Frame_Padding_int.Right,
+                left_pads = _frameModel.Frame_Padding_int.Left,
+                bot_pads = _frameModel.Frame_Padding_int.Bottom;
 
-            int fr_pads = _frameModel.Frame_Padding_int.All;
             Rectangle pnl_inner = new Rectangle();
 
             if (_frameModel.Frame_Zoom == 0.26f || _frameModel.Frame_Zoom == 0.17f || 
@@ -513,13 +516,12 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else
             {
-                pnl_inner = new Rectangle(new Point(fr_pads, fr_pads),
-                                                new Size(pfr.ClientRectangle.Width - (fr_pads * 2),
-                                                         pfr.ClientRectangle.Height - (fr_pads * 2)));
+                pnl_inner = new Rectangle(new Point(top_pads, left_pads),
+                                                new Size(pfr.ClientRectangle.Width - (right_pads + left_pads),
+                                                         pfr.ClientRectangle.Height - (top_pads + bot_pads)));
             }
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
-
 
             int pInnerX = pnl_inner.Location.X,
             pInnerY = pnl_inner.Location.Y,
