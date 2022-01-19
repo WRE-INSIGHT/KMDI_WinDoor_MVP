@@ -707,8 +707,8 @@ namespace EnumerationTypeLayer
         {
             public static readonly BottomFrameTypes _7507 = new BottomFrameTypes(0, "7507");
             public static readonly BottomFrameTypes _7502 = new BottomFrameTypes(1, "7502");
-            public static readonly BottomFrameTypes _withThreshold = new BottomFrameTypes(2, "WithThreshold");
-            public static readonly BottomFrameTypes _noBottomFrame = new BottomFrameTypes(3, "NoBottomFrame");
+            public static readonly BottomFrameTypes _withThreshold = new BottomFrameTypes(2, "7789");
+            public static readonly BottomFrameTypes _noBottomFrame = new BottomFrameTypes(3, "");
 
             private BottomFrameTypes(int value, string displayName) : base(value, displayName) { }
         }
