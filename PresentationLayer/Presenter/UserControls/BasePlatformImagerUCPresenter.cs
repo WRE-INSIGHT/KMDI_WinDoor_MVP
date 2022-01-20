@@ -60,6 +60,8 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 int flocX = 0, flocY = 0,
                     frame_pads_all = frame.FrameImageRenderer_Padding_int.All,
+                    frame_pads_top = frame.FrameImageRenderer_Padding_int.Top,
+                    frame_pads_left = frame.FrameImageRenderer_Padding_int.Left,
                     added_loc_based_on_ParentMpnl_ndx = 0;
 
                 Draw_Frame(e, frame, new Point(flocX, flocY));
@@ -71,7 +73,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     int plocX = 0, plocY = 0;
 
-                    Draw_Panel(e, frame.Lst_Panel[0], new Point(plocX + frame_pads_all, plocY + frame_pads_all));
+                    Draw_Panel(e, frame.Lst_Panel[0], new Point(plocX + frame_pads_left, plocY + frame_pads_top));
                 }
                 else if (frame.Lst_MultiPanel.Count >= 1)
                 {

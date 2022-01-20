@@ -18,6 +18,7 @@ namespace ServiceLayer.Services.FrameServices
                                   float frameZoom,
                                   FrameProfile_ArticleNo frameArtNo,
                                   IWindoorModel frameWindoorModel,
+                                  BottomFrameTypes frameBotFrameType = null,
                                   int frame_id = 0,
                                   string frame_name = "",
                                   bool frame_visible = true,

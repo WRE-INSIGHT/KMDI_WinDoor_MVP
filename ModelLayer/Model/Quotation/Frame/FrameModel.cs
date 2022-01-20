@@ -340,15 +340,40 @@ namespace ModelLayer.Model.Quotation.Frame
         private void FramePadding_Deduct()
         {
             _frameDeduction = (int)(_frame_basicDeduction * Frame_Zoom);
-            if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f || 
-                Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
+            if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f ||
+                    Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
             {
                 Frame_Padding_int = new Padding(10);
                 //FrameImageRenderer_Padding_int = new Padding(15);
             }
             else
             {
-                Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom) - _frameDeduction);
+                int default_pads = (int)((int)Frame_Type * Frame_Zoom) - _frameDeduction;
+                if (Frame_Type == Frame_Padding.Window)
+                {
+                    Frame_Padding_int = new Padding(default_pads);
+                }
+                else if (Frame_Type == Frame_Padding.Door)
+                {
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    {
+                        Frame_Padding_int = new Padding(default_pads);
+                    }
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    {
+                        Frame_Padding_int = new Padding(default_pads, 
+                                                        default_pads, 
+                                                        default_pads, 
+                                                        (int)((int)26 * Frame_Zoom) - _frameDeduction);
+                    }
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    {
+                        Frame_Padding_int = new Padding(default_pads,
+                                                        default_pads,
+                                                        default_pads,
+                                                        0);
+                    }
+                }
                 //FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
             }
         }
@@ -840,7 +865,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           List<IDividerModel> lst_divider,
                           float frameZoom,
                           FrameProfile_ArticleNo frameArtNo,
-                          IWindoorModel frameWindoorModel)
+                          IWindoorModel frameWindoorModel,
+                          BottomFrameTypes frameBotFrameType)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -856,6 +882,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_ArtNo = frameArtNo;
             Frame_WindoorModel = frameWindoorModel;
             Frame_CmenuDeleteVisibility = true;
+            Frame_BotFrameArtNo = frameBotFrameType;
 
             FrameProp_Height = constants.frame_propertyHeight_default - constants.frame_property_concretePanelHeight;
         }

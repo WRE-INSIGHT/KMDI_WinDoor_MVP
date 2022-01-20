@@ -133,8 +133,22 @@ namespace PresentationLayer.Presenter.UserControls
             string data = lst_data[0].ToString();
             int divCount = Convert.ToInt32(lst_data[1]);
 
+            int bot_deduct = (int)(_frameModel.Frame_Type - 10);
+            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+            {
+                bot_deduct = (int)(_frameModel.Frame_Type - 10);
+            }
+            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            {
+                bot_deduct = 26 - 10;
+            }
+            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            {
+                bot_deduct = 0;
+            }
+
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
-                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+                ht = _frameModel.Frame_Height - ((int)(_frameModel.Frame_Type - 10) + bot_deduct);
 
             IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
@@ -274,6 +288,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                 }
+
 
                 _frameModel.SetDeductFramePadding(false, false);
 

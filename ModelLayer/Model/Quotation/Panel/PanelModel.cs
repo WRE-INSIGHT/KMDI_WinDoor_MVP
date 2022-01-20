@@ -1767,9 +1767,13 @@ namespace ModelLayer.Model.Quotation.Panel
         {
             if (PanelImageRenderer_Zoom == 1.0f || PanelImageRenderer_Zoom == 0.50f)
             {
-                int padding = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.All;
-                PanelImageRenderer_Width = Panel_ParentFrameModel.FrameImageRenderer_Width - (padding * 2);
-                PanelImageRenderer_Height = Panel_ParentFrameModel.FrameImageRenderer_Height - (padding * 2);
+                int padding_top = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Top,
+                    padding_bot = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Bottom,
+                    padding_left = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Left,
+                    padding_right = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Right;
+
+                PanelImageRenderer_Width = Panel_ParentFrameModel.FrameImageRenderer_Width - (padding_left + padding_right);
+                PanelImageRenderer_Height = Panel_ParentFrameModel.FrameImageRenderer_Height - (padding_top + padding_bot);
             }
         }
 

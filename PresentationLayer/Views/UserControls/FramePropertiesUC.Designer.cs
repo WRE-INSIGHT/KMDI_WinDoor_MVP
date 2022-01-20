@@ -74,12 +74,10 @@
             // 
             // rdBtn_Window
             // 
-            this.rdBtn_Window.Checked = true;
             this.rdBtn_Window.Location = new System.Drawing.Point(4, 0);
             this.rdBtn_Window.Name = "rdBtn_Window";
             this.rdBtn_Window.Size = new System.Drawing.Size(140, 23);
             this.rdBtn_Window.TabIndex = 1;
-            this.rdBtn_Window.TabStop = true;
             this.rdBtn_Window.Text = "Window";
             this.rdBtn_Window.UseVisualStyleBackColor = true;
             this.rdBtn_Window.CheckedChanged += new System.EventHandler(this.rdBtn_CheckedChanged);
@@ -307,7 +305,7 @@
             this.panel1.Controls.Add(this.lbl_Height);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(154, 81);
             this.panel1.TabIndex = 13;

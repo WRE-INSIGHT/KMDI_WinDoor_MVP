@@ -36,7 +36,8 @@ namespace ServiceLayer.Services.FrameServices
                                        List<IDividerModel> lst_divider,
                                        float frameZoom,
                                        FrameProfile_ArticleNo frameArtNo,
-                                       IWindoorModel frameWindoorModel)
+                                       IWindoorModel frameWindoorModel,
+                                       BottomFrameTypes frameBotFrameType)
         {
             IFrameModel fr = new FrameModel(frame_id,
                                            frame_name,
@@ -50,7 +51,8 @@ namespace ServiceLayer.Services.FrameServices
                                            lst_divider,
                                            frameZoom,
                                            frameArtNo,
-                                           frameWindoorModel);
+                                           frameWindoorModel,
+                                           frameBotFrameType);
             ValidateModel(fr);
 
             return fr;
@@ -68,6 +70,7 @@ namespace ServiceLayer.Services.FrameServices
                                          float frameZoom,
                                          FrameProfile_ArticleNo frameArtNo,
                                          IWindoorModel frameWindoorModel,
+                                         BottomFrameTypes frameBotFrameType = null,
                                          int frame_id = 0,
                                          string frame_name = "",
                                          bool frame_visible = true,
@@ -92,6 +95,11 @@ namespace ServiceLayer.Services.FrameServices
                 lst_Divider = new List<IDividerModel>();
             }
 
+            if (frameBotFrameType == null)
+            {
+                frameBotFrameType = BottomFrameTypes._7507;
+            }
+
             IFrameModel _frameModel = CreateFrame(frame_id,
                                                      frame_name,
                                                      frame_width,
@@ -104,7 +112,8 @@ namespace ServiceLayer.Services.FrameServices
                                                      lst_Divider,
                                                      frameZoom,
                                                      frameArtNo,
-                                                     frameWindoorModel);
+                                                     frameWindoorModel,
+                                                     frameBotFrameType);
 
             return _frameModel;
         }

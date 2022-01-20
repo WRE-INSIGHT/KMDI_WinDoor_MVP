@@ -1156,6 +1156,7 @@ namespace PresentationLayer.Presenter
                                                                    _windoorModel.WD_zoom,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
+                                                                   null,
                                                                    frameID);
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();

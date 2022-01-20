@@ -150,6 +150,12 @@ namespace PresentationLayer.Presenter.UserControls
             botFramePropUC.Dock = DockStyle.Top;
             botFramePropUC.BringToFront();
 
+            if (_frameModel.Frame_Type == Frame_Padding.Door)
+            {
+                _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
+                _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
+            }
+
             _framePropertiesUC.BringToFrontThis();
         }
 

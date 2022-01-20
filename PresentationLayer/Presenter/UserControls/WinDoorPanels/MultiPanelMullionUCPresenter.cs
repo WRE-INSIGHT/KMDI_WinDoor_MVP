@@ -967,6 +967,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 pInnerWd = fpnl.ClientRectangle.Width - (_frameModel.Frame_Deduction * 2),
                 pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction * 2);
 
+            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+            {
+                pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction + _frameModel.Frame_Padding_int.Bottom);
+            }
+
             if (zoom == 0.26f || zoom == 0.17f || 
                 zoom == 0.13f || zoom == 0.10f)
             {
@@ -995,6 +1000,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
                     new Point(pInnerX + pInnerWd, pInnerY + pInnerHt)
             };
+
+            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
+                (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None))
+            {
+                corner_points[4] = new Point(0, fpnl.ClientRectangle.Height - 1);
+                corner_points[5] = new Point(pInnerX, fpnl.ClientRectangle.Height - 1);
+
+                corner_points[6] = new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height - 1);
+                corner_points[7] = new Point(pInnerX + pInnerWd, fpnl.ClientRectangle.Height - 1);
+            }
 
             GraphicsPath gpath = new GraphicsPath();
             GraphicsPath gpath2 = new GraphicsPath();
@@ -1049,7 +1065,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
 
                 int bPoints = (int)(10 * _frameModel.Frame_Zoom),
-                    bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom);
+                    bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom),
+                    botFrameDeduct = 0;
+
+                if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
+                    {
+                        botFrameDeduct = (int)(9 * _frameModel.Frame_Zoom);
+                    }
+                    else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    {
+
+                    }
+                }
 
                 if (zoom == 0.26f || zoom == 0.17f || 
                     zoom == 0.13f || zoom == 0.10f)
@@ -1060,7 +1090,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else
                 {
                     bounds = new Rectangle(new Point(bPoints, bPoints),
-                                           new Size(fpnl.ClientRectangle.Width - bSizeDeduction, fpnl.ClientRectangle.Height - bSizeDeduction));
+                                           new Size(fpnl.ClientRectangle.Width - bSizeDeduction, 
+                                                    fpnl.ClientRectangle.Height - (bSizeDeduction - botFrameDeduct)));
                 }
             }
             else if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FlowLayoutPanel)) //If MultiPanel
