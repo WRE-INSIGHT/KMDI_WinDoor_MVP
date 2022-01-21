@@ -1,20 +1,17 @@
 ﻿using CommonComponents;
 using ModelLayer.Model.Quotation.Divider;
-using PresentationLayer.Views.UserControls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity;
-using System.Windows.Forms;
-using static EnumerationTypeLayer.EnumerationTypes;
-using ModelLayer.Model.Quotation.MultiPanel;
-using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
-using PresentationLayer.Views.UserControls.DividerProperties_Modules;
-using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Variables;
+using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
+using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.DividerProperties_Modules;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -93,7 +90,9 @@ namespace PresentationLayer.Presenter.UserControls
             _divProperties.cmbDMArtNoSelectedValueChangedEventRaised += _divProperties_cmbDMArtNoSelectedValueChangedEventRaised;
             _divProperties.btnSelectDMPanelClickedEventRaised += _divProperties_btnSelectDMPanelClickedEventRaised;
             _divProperties.SashProfileChangedEventRaised += _divProperties_SashProfileChangedEventRaised;
+            _divProperties.cmbCladdingArtNoSelectedValueChangeEventRiased += _divProperties_cmbCladdingArtNoSelectedValueChangeEventRiased;
         }
+
 
         SashProfile_ArticleNo curr_sashProfileArtNo;
         private void _divProperties_SashProfileChangedEventRaised(object sender, EventArgs e)
@@ -101,7 +100,7 @@ namespace PresentationLayer.Presenter.UserControls
             SashProfile_ArticleNo sel_sashProfileArtNo = (SashProfile_ArticleNo)sender;
             if (!_initialLoad && curr_sashProfileArtNo != sel_sashProfileArtNo)
             {
-                if (sel_sashProfileArtNo == SashProfile_ArticleNo._395 || 
+                if (sel_sashProfileArtNo == SashProfile_ArticleNo._395 ||
                     sel_sashProfileArtNo == SashProfile_ArticleNo._374 ||
                     sel_sashProfileArtNo == SashProfile_ArticleNo._373)
                 {
@@ -139,7 +138,7 @@ namespace PresentationLayer.Presenter.UserControls
         {
             List<Control> lst_obj = _divModel.Div_MPanelParent.MPanelLst_Objects;
             Control div = lst_obj.Find(obj => obj.Name == _divModel.Div_Name);
-            IPanelModel prev_pnl = null, nxt_pnl =  null;
+            IPanelModel prev_pnl = null, nxt_pnl = null;
             int ndx = lst_obj.IndexOf(div);
             string prev_pnl_str = lst_obj[ndx - 1].Name;
 
@@ -160,7 +159,7 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else
             {
-                MessageBox.Show("Not applicable on fixed panels","", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Not applicable on fixed panels", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -349,7 +348,7 @@ namespace PresentationLayer.Presenter.UserControls
                 if (cladding.Name.Contains("DP_CladdingPropertyUC"))
                 {
                     ((IDP_CladdingPropertyUC)cladding).Cladding_ID = cladding_ID;
-                    cladding_sizes_list.Add(cladding_ID,((IDP_CladdingPropertyUC)cladding).Cladding_Size);
+                    cladding_sizes_list.Add(cladding_ID, ((IDP_CladdingPropertyUC)cladding).Cladding_Size);
                     cladding_ID++;
                 }
             }
@@ -399,6 +398,14 @@ namespace PresentationLayer.Presenter.UserControls
             }
         }
 
+        private void _divProperties_cmbCladdingArtNoSelectedValueChangeEventRiased(object sender, EventArgs e)
+        {
+            if (!_initialLoad)
+            {
+                _divModel.Div_CladdingProfileArtNo = (CladdingProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
+        }
+
         private void _divProperties_PanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
             IDP_LeverEspagnolettePropertyUCPresenter leverUCP = _dp_leverEspagPropertyUCP.GetNewInstance(_unityC, _divModel);
@@ -423,9 +430,16 @@ namespace PresentationLayer.Presenter.UserControls
             bracketProp.BringToFront();
 
             _divProperties.ThisBinding(CreateBindingDictionary());
+
+            _divModel.Div_CladdingProfileArtNoVisibility = true;
+            _divModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._WK50;
+            _divModel.AdjustPropertyPanelHeight("addCladdingArtNo");
+            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
+            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
+
             _initialLoad = false;
         }
-        
+
         public IDividerPropertiesUC GetDivProperties()
         {
             return _divProperties;
@@ -461,6 +475,8 @@ namespace PresentationLayer.Presenter.UserControls
             divBinding.Add("Div_ChkDM2", new Binding("Visible", _divModel, "Div_ChkDM", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_ArtVisibility", new Binding("Visible", _divModel, "Div_ArtVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_DMArtNo", new Binding("Text", _divModel, "Div_DMArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_CladdingProfileArtNo", new Binding("Text", _divModel, "Div_CladdingProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_CladdingProfileArtNoVisibility", new Binding("Visible", _divModel, "Div_CladdingProfileArtNoVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return divBinding;
         }

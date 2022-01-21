@@ -41,6 +41,7 @@
 
         public int div_propertyheight_default = 72; //68(base) + 4(allowance) 
         public int div_property_claddingOptionsHeight = 28;
+        public int div_property_claddingArtNoOptionsHeight = 36;
         public int div_property_claddingBracketOptionsHeight = 72;
         public int div_property_pnlAddcladdingOptionsHeight = 56;
         public int div_property_divArtOptionsHeight = 90;

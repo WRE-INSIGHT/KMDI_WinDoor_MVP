@@ -424,7 +424,34 @@ namespace ModelLayer.Model.Quotation.Divider
         public string Div_Bounded { get; set; }
 
         public Divider_MechJointArticleNo Div_MechJoinArtNo { get; set; }
-        public CladdingProfile_ArticleNo Div_CladdingProfileArtNo { get; set; }
+
+        private bool _div_CladdingProfileArtNoVisibility;
+        public bool Div_CladdingProfileArtNoVisibility
+        {
+            get
+            {
+                return _div_CladdingProfileArtNoVisibility;
+            }
+            set
+            {
+                _div_CladdingProfileArtNoVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private CladdingProfile_ArticleNo _div_claddingProfileArtNo;
+        public CladdingProfile_ArticleNo Div_CladdingProfileArtNo
+        {
+            get
+            {
+                return _div_claddingProfileArtNo;
+            }
+            set
+            {
+                _div_claddingProfileArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
         public CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
         public Dictionary<int, int> Div_CladdingSizeList { get; set; } //cladding Reinf Sizes
         public int Div_CladdingCount { get; set; }
@@ -870,6 +897,14 @@ namespace ModelLayer.Model.Quotation.Divider
             else if (mode == "minusPanelAddCladding")
             {
                 Div_PropHeight -= constants.div_property_pnlAddcladdingOptionsHeight;
+            }
+            else if (mode == "addCladdingArtNo")
+            {
+                Div_PropHeight += constants.div_property_claddingArtNoOptionsHeight;
+            }
+            else if (mode == "minusCladdingArtNo")
+            {
+                Div_PropHeight -= constants.div_property_claddingArtNoOptionsHeight;
             }
             else if (mode == "addDivArt")
             {

@@ -40,6 +40,9 @@
             this.lbl_divArtNo = new System.Windows.Forms.Label();
             this.lbl_divSpecs = new System.Windows.Forms.Label();
             this.pnl_dividerBody = new System.Windows.Forms.Panel();
+            this.pnl_divCladdingArtNo = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmb_CladdingArtNo = new System.Windows.Forms.ComboBox();
             this.pnl_AddCladding = new System.Windows.Forms.Panel();
             this.lbl_totalCladdingLength = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -58,6 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).BeginInit();
             this.pnl_divArtNo.SuspendLayout();
             this.pnl_dividerBody.SuspendLayout();
+            this.pnl_divCladdingArtNo.SuspendLayout();
             this.pnl_AddCladding.SuspendLayout();
             this.pnl_DMArtNo.SuspendLayout();
             this.pnl_divName.SuspendLayout();
@@ -182,14 +186,47 @@
             // pnl_dividerBody
             // 
             this.pnl_dividerBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_dividerBody.Controls.Add(this.pnl_divCladdingArtNo);
             this.pnl_dividerBody.Controls.Add(this.pnl_AddCladding);
             this.pnl_dividerBody.Controls.Add(this.pnl_DMArtNo);
             this.pnl_dividerBody.Controls.Add(this.pnl_divArtNo);
             this.pnl_dividerBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_dividerBody.Location = new System.Drawing.Point(0, 108);
             this.pnl_dividerBody.Name = "pnl_dividerBody";
-            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 204);
+            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 241);
             this.pnl_dividerBody.TabIndex = 13;
+            // 
+            // pnl_divCladdingArtNo
+            // 
+            this.pnl_divCladdingArtNo.Controls.Add(this.label4);
+            this.pnl_divCladdingArtNo.Controls.Add(this.cmb_CladdingArtNo);
+            this.pnl_divCladdingArtNo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_divCladdingArtNo.Location = new System.Drawing.Point(0, 202);
+            this.pnl_divCladdingArtNo.Name = "pnl_divCladdingArtNo";
+            this.pnl_divCladdingArtNo.Size = new System.Drawing.Size(158, 36);
+            this.pnl_divCladdingArtNo.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 4);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 28);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Cladding Art No";
+            // 
+            // cmb_CladdingArtNo
+            // 
+            this.cmb_CladdingArtNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb_CladdingArtNo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmb_CladdingArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_CladdingArtNo.FormattingEnabled = true;
+            this.cmb_CladdingArtNo.Location = new System.Drawing.Point(69, 7);
+            this.cmb_CladdingArtNo.Name = "cmb_CladdingArtNo";
+            this.cmb_CladdingArtNo.Size = new System.Drawing.Size(87, 21);
+            this.cmb_CladdingArtNo.TabIndex = 13;
+            this.cmb_CladdingArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_CladdingArtNo_SelectedValueChanged);
             // 
             // pnl_AddCladding
             // 
@@ -375,13 +412,14 @@
             this.Controls.Add(this.pnl_divName);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "DividerPropertiesUC";
-            this.Size = new System.Drawing.Size(160, 312);
+            this.Size = new System.Drawing.Size(160, 349);
             this.Load += new System.EventHandler(this.DividerPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).EndInit();
             this.pnl_divArtNo.ResumeLayout(false);
             this.pnl_divArtNo.PerformLayout();
             this.pnl_dividerBody.ResumeLayout(false);
+            this.pnl_divCladdingArtNo.ResumeLayout(false);
             this.pnl_AddCladding.ResumeLayout(false);
             this.pnl_AddCladding.PerformLayout();
             this.pnl_DMArtNo.ResumeLayout(false);
@@ -422,5 +460,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbl_totalCladdingLength;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel pnl_divCladdingArtNo;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmb_CladdingArtNo;
     }
 }
