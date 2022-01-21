@@ -19,6 +19,7 @@ using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using static EnumerationTypeLayer.EnumerationTypes;
+using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -48,6 +49,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private CommonFunctions _commonFunctions = new CommonFunctions();
         Timer _tmr = new Timer();
+        bool _initialLoad;
 
         public AwningPanelUCPresenter(IAwningPanelUC awningPanelUC,
                                       IDividerServices divServices,
@@ -76,7 +78,44 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _awningPanelUC.awningPanelUCMouseLeaveEventRaised += _awningPanelUC_awningPanelUCMouseLeaveEventRaised;
             _awningPanelUC.deleteToolStripClickedEventRaised += _awningPanelUC_deleteToolStripClickedEventRaised;
             _awningPanelUC.extensionToolStripMenuItemClickedEventRaised += _awningPanelUC_extensionToolStripMenuItemClickedEventRaised;
+            _awningPanelUC.awningPanelUCSizeChangedEventRaised += _awningPanelUC_awningPanelUCSizeChangedEventRaised;
             _tmr.Tick += _tmr_Tick;
+        }
+
+        int prev_Width = 0,
+            prev_Height = 0;
+        private void _awningPanelUC_awningPanelUCSizeChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!_initialLoad)
+                {
+                    int thisWd = ((UserControl)sender).Width,
+                        thisHt = ((UserControl)sender).Height,
+                        pnlModelWd = _panelModel.Panel_WidthToBind,
+                        pnlModelHt = _panelModel.Panel_HeightToBind;
+
+                    if (thisWd != pnlModelWd || prev_Width != pnlModelWd)
+                    {
+                        //_multiPanelModel.MPanel_Width = thisWd;
+                        _WidthChange = true;
+                    }
+                    if (thisHt != pnlModelHt || prev_Height != pnlModelHt)
+                    {
+                        //_multiPanelModel.MPanel_Height = thisHt;
+                        _HeightChange = true;
+                    }
+                }
+                prev_Width = _panelModel.Panel_WidthToBind;
+                prev_Height = _panelModel.Panel_HeightToBind;
+
+                _tmr.Start();
+                ((UserControl)sender).Invalidate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void _awningPanelUC_extensionToolStripMenuItemClickedEventRaised(object sender, EventArgs e)
@@ -139,13 +178,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 Control divUC = _multiPanelModel.MPanelLst_Objects[this_indx + 1];
                 _multiPanelModel.MPanelLst_Objects.Remove((UserControl)divUC);
+
+                string imgr_type = "";
+
                 if (_multiPanelMullionUCP != null)
                 {
                     _multiPanelMullionUCP.DeletePanel((UserControl)divUC);
+                    imgr_type = "MullionImager";
                 }
                 if (_multiPanelTransomUCP != null)
                 {
                     _multiPanelTransomUCP.DeletePanel((UserControl)divUC);
+                    imgr_type = "TransomImager";
                 }
 
                 IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
@@ -164,6 +208,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (_multiPanelModel != null)
             {
                 _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_awningPanelUC, _frameModel.Frame_Type.ToString());
+                Control imager = _commonFunctions.FindImagerControl(_panelModel.Panel_ID, "Panel", _multiPanelModel);
+                _multiPanelModel.MPanelLst_Imagers.Remove(imager);
+
                 _multiPanelModel.Reload_PanelMargin();
 
                 _multiPanelModel.DeductPropertyPanelHeight(_panelModel.Panel_PropertyHeight);
@@ -221,6 +268,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.SetPanelGlassID();
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             #endregion
+
+            _mainPresenter.DeselectDivider();
         }
 
         private void _awningPanelUC_awningPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
@@ -419,6 +468,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         public IAwningPanelUC GetAwningPanelUC()
         {
+            _initialLoad = true;
             _awningPanelUC.ThisBinding(CreateBindingDictionary());
             return _awningPanelUC;
         }
@@ -506,6 +556,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_CmenuDeleteVisibility", new Binding("Panel_CmenuDeleteVisibility", _panelModel, "Panel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
+        }
+
+        public void SetInitialLoadFalse()
+        {
+            _initialLoad = false;
         }
     }
 }

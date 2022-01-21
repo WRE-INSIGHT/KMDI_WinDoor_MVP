@@ -15,8 +15,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         string MPanel_Type { get; set; }
         DockStyle MPanel_Dock { get; set; }
         int MPanel_Width { get; set; }
+        int MPanelImageRenderer_Width { get; set; }
         int MPanel_Height { get; set; }
+        int MPanelImageRenderer_Height { get; set; }
         int MPanel_HeightToBind { get; set; }
+        int MPanel_HeightToBindPrev { get; set; }
+        int MPanelImager_HeightToBindPrev { get; set; }
         FlowDirection MPanel_FlowDirection { get; set; }
         bool MPanel_Visibility { get; set; }
         int MPanel_Divisions { get; set; }
@@ -35,8 +39,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         List<IDividerModel> MPanelLst_Divider { get; set; }
         List<IMultiPanelModel> MPanelLst_MultiPanel { get; set; }
         List<Control> MPanelLst_Objects { get; set; }
+        List<Control> MPanelLst_Imagers { get; set; }
         float MPanel_Zoom { get; set; }
         int MPanel_WidthToBind { get; set; }
+        int MPanel_WidthToBindPrev { get; set; }
+        int MPanelImager_WidthToBindPrev { get; set; }
         int MPanel_AddPixel { get; }
         int MPanel_DisplayWidth { get; set; }
         int MPanel_DisplayWidthDecimal { get; set; }
@@ -46,6 +53,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         int GetNextIndex();
         int GetCount_MPanelLst_Object();
+
+        void SetDimensions_childPanelObjs(int divmovement);
+        void ImagerSetDimensions_childPanelObjs(int divmovement);
+        void SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt);
+        void Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt);
+        void SetDimensions_childObjs(int divmovement = 0, string prevOrNxt = "");
+        void SetDimensionsToBind_MullionDivMovement();
+        void Imager_SetDimensionsToBind_MullionDivMovement(int divMovement);
+        void SetDimensionsToBind_TransomDivMovement();
+        void Imager_SetDimensionsToBind_TransomDivMovement(int divMovement);
+        void SetDimensionsToBind_using_ParentMultiPanelModel();
+        void Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+        void Imager_SetDimensionsToBind_using_ParentMultiPanelModel_Initial();
+        void Adapt_sizeToBind_MPanelDivMPanel_Controls(Control current_control,
+                                                       string frameType,
+                                                       bool if_auto_added = false);
+        void SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+        void Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+        void Set_DimensionToBind_using_FrameDimensions();
+        void Imager_Set_DimensionToBind_using_FrameDimensions();
+        void SetImageZoomDivider();
+        void SetZoomDivider();
+        void SetZoomPanels();
+        void SetZoomMPanels();
         void Reload_PanelMargin();
         void Reload_MultiPanelMargin();
         void AddControl_MPanelLstObjects(Control control, 
@@ -53,6 +84,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                          bool if_auto_added = false);
         void DeleteControl_MPanelLstObjects(Control control, string frameType, string placement = "");
         void Fit_MyControls_ToBindDimensions();
+        void Fit_MyControls_ImagersToBindDimensions();
         void Fit_MyControls_Dimensions();
         void Object_Indexer();
         void Adjust_ControlDisplaySize();

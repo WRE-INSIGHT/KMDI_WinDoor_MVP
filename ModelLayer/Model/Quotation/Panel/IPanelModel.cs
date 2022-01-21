@@ -43,6 +43,7 @@ namespace ModelLayer.Model.Quotation.Panel
         string Panel_Placement { get; set; }
         Padding Panel_Margin { get; set; }
         Padding Panel_MarginToBind { get; set; }
+        Padding PanelImageRenderer_Margin { get; set; }
         float Panel_Zoom { get; set; }
         IFrameModel Panel_ParentFrameModel { get; set; }
         IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
@@ -219,6 +220,15 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_MiddleCloserVisibility { get; set; }
 
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
+
+        void Imager_SetDimensionsToBind_FrameParent();
+        void SetPanelMargin_using_ZoomPercentage();
+        void SetPanelMarginImager_using_ImageZoomPercentage();
+        void SetDimensionsToBind_using_ZoomPercentage();
+        void Imager_SetDimensionsToBind_using_ZoomPercentage();
+        void SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+        void Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+        void SetDimensionToBind_using_BaseDimension();
         void AdjustPropertyPanelHeight(string mode);
         void AdjustMotorizedPropertyHeight(string mode);
         void AdjustHandlePropertyHeight(string mode);

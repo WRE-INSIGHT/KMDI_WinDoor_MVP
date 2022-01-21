@@ -13,5 +13,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event PaintEventHandler awningPanelUCPaintEventRaised;
         event EventHandler deleteToolStripClickedEventRaised;
         event EventHandler extensionToolStripMenuItemClickedEventRaised;
+        event EventHandler awningPanelUCSizeChangedEventRaised;
     }
 }

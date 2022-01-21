@@ -15,11 +15,13 @@ namespace ModelLayer.Model.Quotation.Frame
         int Frame_BasicDeduction { get; }
 
         int Frame_Height { get; set; }
+        int Frame_HeightToBind { get; set; }
         int FrameImageRenderer_Height { get; set; }
         int Frame_ID { get; set; }
         string Frame_Name { get; set; }
         FrameModel.Frame_Padding Frame_Type { get; set; }
         int Frame_Width { get; set; }
+        int Frame_WidthToBind { get; set; }
         int FrameImageRenderer_Width { get; set; }
         bool Frame_Visible { get; set; }
         int FrameProp_Height { get; set; }
@@ -34,7 +36,11 @@ namespace ModelLayer.Model.Quotation.Frame
         int[] Arr_padding_withmpnl { get; }
 
 
-        void SetDeductFramePadding(bool mode);
+        void SetDeductFramePadding(bool mode, bool is_mpanel = true);
+        void SetZoom();
+        void Set_DimensionsToBind_using_FrameZoom();
+        void Set_ImagerDimensions_using_ImagerZoom();
+        void Set_FramePadding();
         int Frame_Deduction { get; }
         IWindoorModel Frame_WindoorModel { get; set; }
 
