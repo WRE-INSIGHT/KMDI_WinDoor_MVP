@@ -88,8 +88,8 @@ namespace PresentationLayer.Presenter.UserControls
                         if (mpnl.MPanel_Parent.Name.Contains("Frame")) //drawing of 1st and 2nd level multipanel objs
                         {
                             #region Frame_Parent
-                            mlocX += frame_pads_all;
-                            mlocY += frame_pads_all;
+                            mlocX += frame_pads_left;
+                            mlocY += frame_pads_top;
 
                             Draw_MultiPanel(e, mpnl, new Point(mlocX, mlocY)); //drawing of 1st level MPanel
 
@@ -244,14 +244,14 @@ namespace PresentationLayer.Presenter.UserControls
 
                             int mpnl_ndx = mpnl.MPanel_Index_Inside_MPanel;
 
-                            mlocX += frame_pads_all;
-                            mlocY += frame_pads_all;
+                            mlocX += frame_pads_left;
+                            mlocY += frame_pads_top;
 
                             if (mpnl_ndx == 0)
                             {
                                 if (zoom == 1.0f || zoom == 0.50f)
                                 {
-                                    added_loc_based_on_ParentMpnl_ndx += frame_pads_all;
+                                    added_loc_based_on_ParentMpnl_ndx += frame_pads_top;
                                 }
                                 else if (zoom <= 0.26f)
                                 {
@@ -411,7 +411,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                             if (zoom == 1.0f || zoom == 0.50f)
                             {
-                                added_loc_based_on_ParentMpnl_ndx += frame_pads_all;
+                                added_loc_based_on_ParentMpnl_ndx += frame_pads_top;
                             }
                             else if (zoom <= 0.26f)
                             {
@@ -432,8 +432,8 @@ namespace PresentationLayer.Presenter.UserControls
                                     wd_previous_objs = Find_LocX_Inside_MpanelParent(mpnlParent_ndx, mpnl);
                                     ht_of_previous_objs = Find_LocY_Inside_MpanelParent(mpnl_ndx, mpnl);
 
-                                    mlocX = frame_pads_all + wd_previous_objs;
-                                    mlocY = frame_pads_all + ht_of_previous_objs;
+                                    mlocX = frame_pads_left + wd_previous_objs;
+                                    mlocY = frame_pads_top + ht_of_previous_objs;
 
                                     foreach (Control ctrl in mpnl.MPanelLst_Objects)
                                     {
@@ -476,8 +476,8 @@ namespace PresentationLayer.Presenter.UserControls
                                     wd_previous_objs = Find_LocX_Inside_MpanelParent(mpnl_ndx, mpnl);
                                     ht_of_previous_objs = Find_LocY_Inside_MpanelParent(mpnlParent_ndx, mpnl);
 
-                                    mlocX = frame_pads_all + wd_previous_objs;
-                                    mlocY = frame_pads_all + ht_of_previous_objs;
+                                    mlocX = frame_pads_left + wd_previous_objs;
+                                    mlocY = frame_pads_top + ht_of_previous_objs;
 
                                     foreach (Control ctrl in mpnl.MPanelLst_Objects)
                                     {
@@ -975,10 +975,10 @@ namespace PresentationLayer.Presenter.UserControls
 
             //int fr_pads = frameModel.FrameImageRenderer_Padding_int.All;
 
-            int top_pads = frameModel.Frame_Padding_int.Top,
-                right_pads = frameModel.Frame_Padding_int.Right,
-                left_pads = frameModel.Frame_Padding_int.Left,
-                bot_pads = frameModel.Frame_Padding_int.Bottom;
+            int top_pads = frameModel.FrameImageRenderer_Padding_int.Top,
+                right_pads = frameModel.FrameImageRenderer_Padding_int.Right,
+                left_pads = frameModel.FrameImageRenderer_Padding_int.Left,
+                bot_pads = frameModel.FrameImageRenderer_Padding_int.Bottom;
 
             Rectangle pnl_inner = new Rectangle(new Point(top_pads, left_pads),
                                                 new Size(frameModel.FrameImageRenderer_Width - (right_pads + left_pads),

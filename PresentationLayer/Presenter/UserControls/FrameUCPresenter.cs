@@ -522,19 +522,19 @@ namespace PresentationLayer.Presenter.UserControls
 
             Rectangle pnl_inner = new Rectangle();
 
-            if (_frameModel.Frame_Zoom == 0.26f || _frameModel.Frame_Zoom == 0.17f || 
-                _frameModel.Frame_Zoom == 0.13f || _frameModel.Frame_Zoom == 0.10f)
-            {
-                pnl_inner = new Rectangle(new Point(15, 15),
-                                          new Size(pfr.ClientRectangle.Width - (15 * 2),
-                                                   pfr.ClientRectangle.Height - (15 * 2)));
-            }
-            else
-            {
+            //if (_frameModel.Frame_Zoom == 0.26f || _frameModel.Frame_Zoom == 0.17f || 
+            //    _frameModel.Frame_Zoom == 0.13f || _frameModel.Frame_Zoom == 0.10f)
+            //{
+            //    pnl_inner = new Rectangle(new Point(15, 15),
+            //                              new Size(pfr.ClientRectangle.Width - (15 * 2),
+            //                                       pfr.ClientRectangle.Height - (15 * 2)));
+            //}
+            //else
+            //{
                 pnl_inner = new Rectangle(new Point(top_pads, left_pads),
                                                 new Size(pfr.ClientRectangle.Width - (right_pads + left_pads),
                                                          pfr.ClientRectangle.Height - (top_pads + bot_pads)));
-            }
+            //}
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 

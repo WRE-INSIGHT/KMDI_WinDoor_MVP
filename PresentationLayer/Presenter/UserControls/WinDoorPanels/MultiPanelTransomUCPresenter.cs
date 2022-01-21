@@ -457,7 +457,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_multiPanelModel.MPanel_DividerEnabled)
                     {
-                        suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                        if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            {
+                                suggest_HT = (((_multiPanelModel.MPanel_Height - 10) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                            }
+                            else
+                            {
+                                suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                            }
+                        }
+                        else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                        {
+                            suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                        }
                     }
                     else if (!_multiPanelModel.MPanel_DividerEnabled)
                     {
@@ -817,20 +832,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameModel.SetDeductFramePadding(false);
             }
 
-            //foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-            //{
-            //    _frameModel.Lst_Panel.Remove(pnl);
-            //    _mainPresenter.DeductPanelGlassID();
-            //}
-            //foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
-            //{
-            //    _frameModel.Lst_Divider.Remove(div);
-            //}
-            //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-            //{
-            //    _frameModel.Lst_MultiPanel.Remove(mpnl);
-            //}
-
             var child_mpanels = _commonFunctions.GetAll_MPanel(_multiPanelModel);
 
             foreach (IMultiPanelModel mpnl in child_mpanels)
@@ -954,7 +955,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
             {
-                pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction + _frameModel.Frame_Padding_int.Bottom);
+                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                {
+                    pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction + _frameModel.Frame_Padding_int.Bottom);
+                }
             }
 
             if (zoom == 0.26f || zoom == 0.17f || 
@@ -1061,10 +1066,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
                     {
                         botFrameDeduct = (int)(9 * _frameModel.Frame_Zoom);
-                    }
-                    else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
-                    {
-
                     }
                 }
 

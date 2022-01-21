@@ -969,7 +969,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
             {
-                pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction + _frameModel.Frame_Padding_int.Bottom);
+                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                {
+                    pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction + _frameModel.Frame_Padding_int.Bottom);
+                }
             }
 
             if (zoom == 0.26f || zoom == 0.17f || 
@@ -1001,15 +1005,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     new Point(pInnerX + pInnerWd, pInnerY + pInnerHt)
             };
 
-            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
-                (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None))
+            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
             {
-                corner_points[4] = new Point(0, fpnl.ClientRectangle.Height - 1);
-                corner_points[5] = new Point(pInnerX, fpnl.ClientRectangle.Height - 1);
+                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                {
+                    corner_points[4] = new Point(0, fpnl.ClientRectangle.Height - 1);
+                    corner_points[5] = new Point(pInnerX, fpnl.ClientRectangle.Height - 1);
 
-                corner_points[6] = new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height - 1);
-                corner_points[7] = new Point(pInnerX + pInnerWd, fpnl.ClientRectangle.Height - 1);
+                    corner_points[6] = new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height - 1);
+                    corner_points[7] = new Point(pInnerX + pInnerWd, fpnl.ClientRectangle.Height - 1);
+                }
             }
 
             GraphicsPath gpath = new GraphicsPath();
@@ -1074,10 +1080,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
                     {
                         botFrameDeduct = (int)(9 * _frameModel.Frame_Zoom);
-                    }
-                    else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
-                    {
-
                     }
                 }
 

@@ -352,6 +352,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 if (Frame_Type == Frame_Padding.Window)
                 {
                     Frame_Padding_int = new Padding(default_pads);
+                    //FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type) * FrameImageRenderer_Zoom));
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
@@ -374,7 +375,6 @@ namespace ModelLayer.Model.Quotation.Frame
                                                         0);
                     }
                 }
-                //FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type - _frame_basicDeduction) * FrameImageRenderer_Zoom));
             }
         }
 
@@ -390,14 +390,72 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
                 else if (!_is_MPanel) // meaning Panel
                 {
-                    Frame_Padding_int = new Padding(15);
-                    FrameImageRenderer_Padding_int = new Padding(15);
+                    if (Frame_Type == Frame_Padding.Window)
+                    {
+                        Frame_Padding_int = new Padding(15);
+                        FrameImageRenderer_Padding_int = new Padding(15);
+                    }
+                    else if (Frame_Type == Frame_Padding.Door)
+                    {
+                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                        {
+                            Frame_Padding_int = new Padding(20);
+                            FrameImageRenderer_Padding_int = new Padding(20);
+                        }
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        {
+                            Frame_Padding_int = new Padding(20, 20, 20, 15);
+                            FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 15);
+                        }
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            Frame_Padding_int = new Padding(20, 20, 20, 0);
+                            FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 0);
+                        }
+                    }
                 }
             }
             else
             {
-                Frame_Padding_int = new Padding((int)((int)Frame_Type * Frame_Zoom));
-                FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type) * FrameImageRenderer_Zoom));
+                int default_pads = (int)((int)Frame_Type * Frame_Zoom),
+                    default_pads_imgr = (int)(((int)Frame_Type) * FrameImageRenderer_Zoom);
+                if (Frame_Type == Frame_Padding.Window)
+                {
+                    Frame_Padding_int = new Padding(default_pads);
+                    FrameImageRenderer_Padding_int = new Padding(default_pads_imgr);
+                }
+                else if (Frame_Type == Frame_Padding.Door)
+                {
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    {
+                        Frame_Padding_int = new Padding(default_pads);
+                        FrameImageRenderer_Padding_int = new Padding(default_pads_imgr);
+                    }
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    {
+                        Frame_Padding_int = new Padding(default_pads,
+                                                        default_pads,
+                                                        default_pads,
+                                                        (int)(26 * Frame_Zoom));
+
+                        FrameImageRenderer_Padding_int = new Padding(default_pads_imgr,
+                                                                     default_pads_imgr,
+                                                                     default_pads_imgr,
+                                                                     (int)(26 * FrameImageRenderer_Zoom));
+                    }
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    {
+                        Frame_Padding_int = new Padding(default_pads,
+                                                        default_pads,
+                                                        default_pads,
+                                                        0);
+
+                        FrameImageRenderer_Padding_int = new Padding(default_pads_imgr,
+                                                                     default_pads_imgr,
+                                                                     default_pads_imgr,
+                                                                     0);
+                    }
+                }
             }
         }
 
