@@ -31,6 +31,16 @@ namespace PresentationLayer.Views
             set
             {
                 this.Text = value;
+                if (this.Text.Contains(">>"))
+                {
+                    listOfMaterialsToolStripMenuItem.Enabled = true;
+                    changeItemColorToolStripMenuItem.Enabled = true;
+                }
+                else
+                {
+                    listOfMaterialsToolStripMenuItem.Enabled = false;
+                    changeItemColorToolStripMenuItem.Enabled = false;
+                }
             }
         }
 
@@ -209,6 +219,14 @@ namespace PresentationLayer.Views
         private void pnlMain_SizeChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, PanelMainSizeChangedEventRaised, e);
+            //if (pnlMain.VerticalScroll.Visible == true || pnlMain.HorizontalScroll.Visible == true)
+            //{
+            //    btnMinusZoom.Enabled = true;
+            //}
+            //else if(pnlMain.VerticalScroll.Visible == false || pnlMain.HorizontalScroll.Visible == false)
+            //{
+            //    btnMinusZoom.Enabled = false;
+            //}
         }
 
         public Panel GetPanelItems()
@@ -314,6 +332,16 @@ namespace PresentationLayer.Views
         private void pnlPropertiesBody_Scroll(object sender, ScrollEventArgs e)
         {
             //Console.WriteLine("Scroll_val: " + pnlPropertiesBody.VerticalScroll.Value);
+        }
+
+        public void FocusOnMainForm()
+        {
+            this.Focus();
+        }
+
+        public void SetActiveControl(Control control)
+        {
+            this.ActiveControl = control;
         }
     }
 }

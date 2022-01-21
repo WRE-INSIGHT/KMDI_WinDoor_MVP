@@ -79,8 +79,6 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divWd = value;
-                Div_WidthToBind = (int)(value * Div_Zoom);
-                DivImageRenderer_Width = (int)(value * DivImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -110,8 +108,6 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divHt = value;
-                Div_HeightToBind = (int)(value * Div_Zoom);
-                DivImageRenderer_Height = (int)(value * DivImageRenderer_Zoom);
                 NotifyPropertyChanged();
             }
         }
@@ -184,9 +180,6 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divImageRenderedZoom = value;
-                DivImageRenderer_Width = (int)(Div_Width * value);
-                DivImageRenderer_Height = (int)(Div_Height * value);
-
                 NotifyPropertyChanged();
             }
         }
@@ -221,8 +214,6 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
-        private int[] _arr_divSizes = { 26, 33, 20 }; //even index - Window ; odd index - Door
-
         private float _divZoom;
         public float Div_Zoom
         {
@@ -234,8 +225,6 @@ namespace ModelLayer.Model.Quotation.Divider
             set
             {
                 _divZoom = value;
-                Div_HeightToBind = (int)(value * Div_Height);
-                Div_WidthToBind = (int)(value * Div_Width);
             }
         }
 
@@ -376,6 +365,111 @@ namespace ModelLayer.Model.Quotation.Divider
         public IMultiPanelModel Div_MPanelParent { get; set; }
         public IFrameModel Div_FrameParent { get; set; }
         public IPanelModel Div_DMPanel { get; set; }
+
+        #region Methods
+
+        public void SetDimensionsToBind_using_DivZoom()
+        {
+            int wd = Div_MPanelParent.MPanel_WidthToBind, 
+                ht = Div_MPanelParent.MPanel_HeightToBind;
+
+            if (Div_Type == DividerType.Mullion)
+            {
+                if (_divZoom == 0.26f || _divZoom == 0.17f || _divZoom == 0.13f || _divZoom == 0.10f)
+                {
+                    Div_WidthToBind = 13;
+                    Div_HeightToBind = ht;
+                }
+                else if (_divZoom > 0.26f)
+                {
+                    Div_WidthToBind = (int)(Div_Zoom * Div_Width);
+                    Div_HeightToBind = ht;
+                }
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                if (_divZoom == 0.26f || _divZoom == 0.17f || _divZoom == 0.13f || _divZoom == 0.10f)
+                {
+                    Div_WidthToBind = wd;
+                    Div_HeightToBind = 13;
+                }
+                else if (_divZoom > 0.26f)
+                {
+                    Div_WidthToBind = wd;
+                    Div_HeightToBind = (int)(Div_Zoom * Div_Height);
+                }
+            }
+        }
+
+        public void SetDimensionsToBind_using_DivZoom_Imager()
+        {
+            int wd = Div_MPanelParent.MPanelImageRenderer_Width,
+                ht = Div_MPanelParent.MPanelImageRenderer_Height,
+                div_overlap = Div_FrameParent.Frame_Deduction;
+
+            if (Div_Type == DividerType.Mullion)
+            {
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                {
+                    DivImageRenderer_Height = ht + 10;
+                }
+                else if (DivImageRenderer_Zoom > 0.26f)
+                {
+                    DivImageRenderer_Height = ht + (div_overlap * 2);
+                }
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                {
+                    DivImageRenderer_Width = wd + 10;
+                }
+                else if (DivImageRenderer_Zoom > 0.26f)
+                {
+                    DivImageRenderer_Width = wd + (div_overlap * 2);
+                }
+            }
+        }
+
+        public void SetDimensionsToBind_using_DivZoom_Imager_Initial()
+        {
+            int wd = Div_MPanelParent.MPanelImageRenderer_Width,
+                ht = Div_MPanelParent.MPanelImageRenderer_Height,
+                div_overlap = Div_FrameParent.Frame_Deduction;
+
+            if (Div_Type == DividerType.Mullion)
+            {
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                {
+                    DivImageRenderer_Width = 13;
+                    DivImageRenderer_Height = ht + 10;
+                }
+                else if (DivImageRenderer_Zoom > 0.26f)
+                {
+                    DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
+                    DivImageRenderer_Height = ht + div_overlap + Convert.ToInt32(6 * DivImageRenderer_Zoom);
+                }
+            }
+            else if (Div_Type == DividerType.Transom)
+            {
+                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                {
+                    DivImageRenderer_Width = wd + 10;
+                    DivImageRenderer_Height = 13;
+                }
+                else if (DivImageRenderer_Zoom > 0.26f)
+                {
+                    DivImageRenderer_Width = wd + div_overlap + Convert.ToInt32(6 * DivImageRenderer_Zoom);
+                    DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height);
+                }
+            }
+        }
+
+        #endregion
 
         #region Explosion
 

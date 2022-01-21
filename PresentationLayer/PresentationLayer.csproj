@@ -48,9 +48,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bunifu_UI_v1.5.3">
-      <HintPath>..\..\..\..\Pictures\icon\Bunifu_UI_v1.5.3\Bunifu_UI_v1.5.3.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -570,8 +567,10 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\ICasementPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IFixedPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\IFixedPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IMultiPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IMultiPanelMullionImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IMultiPanelTransomImagerUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\Imagers\IPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\ISlidingPanelImagerUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\MultiPanelMullionImagerUC.cs">
       <SubType>UserControl</SubType>

@@ -53,7 +53,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 WD_width_4basePlatform_forImageRenderer = value + 70;
                 WD_zoom_forImageRenderer = GetZoom_forRendering();
 
-                WD_width_4basePlatform = value + 70; //(int)(value * WD_zoom) + 70;
+                WD_width_4basePlatform = value + 70;
                 WD_zoom = GetZoom_forRendering();
                 NotifyPropertyChanged();
             }
@@ -170,7 +170,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         private float _wdZoom;
         [Required(ErrorMessage = "Zoom value is Required")]
-        [Range(0.1, 200.0, ErrorMessage = "Please enter a zoom value bigger than or equal to {1}")]
+        [Range(0.1, 100.0, ErrorMessage = "Please enter a zoom value bigger than or equal to {1}")]
         public float WD_zoom
         {
             get
@@ -180,9 +180,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdZoom = value;
-                WD_width_4basePlatform = (int)((WD_width * value) + 70);
-                WD_height_4basePlatform = (int)((WD_height * value) + 35);
-                SetZoom();
                 NotifyPropertyChanged();
             }
         }
@@ -430,45 +427,45 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        #region Methods
+
+        public void SetDimensions_basePlatform()
+        {
+            decimal wd_flt_convert_dec = Convert.ToDecimal(WD_width * WD_zoom);
+            decimal base_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            WD_width_4basePlatform = Convert.ToInt32(base_wd_dec) + 70;
+
+            decimal ht_flt_convert_dec = Convert.ToDecimal(WD_height * WD_zoom);
+            decimal base_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            WD_height_4basePlatform = Convert.ToInt32(base_ht_dec) + 35;
+        }
+
         public float GetZoom_forRendering()
         {
             int area = _wdHeight * _wdWidth;
             float zm = 1.0f;
-
-            //if (area <= 1500000)
-            //{
-            //    zm = 1.00f;
-            //}
-            //else if (area > 1500000 && area <= 2500000)
-            //{
-            //    zm = 0.50f;
-            //}
-            //else if (area > 2500000)
-            //{
-            //    zm = 0.28f;
-            //}
-
-            if (area <= 360000)
+            
+            if (area <= 360000) //400w x 400h to 600w x 600h
             {
                 zm = _arr_zoomPercentage[5];
             }
-            else if (area > 360000 && area <= 1000000)
+            else if (area > 360000 && area <= 1000000) //(600w x 601h / 601w x 600h) to 1000w x 1000h
             {
                 zm = _arr_zoomPercentage[4];
             }
-            else if (area > 1000000 && area <= 4000000)
+            else if (area > 1000000 && area <= 4000000) // (1000w x 1001h / 1001w x 1000h) to 2000w x 2000h
             {
                 zm = _arr_zoomPercentage[3];
             }
-            else if (area > 4000000 && area <= 9000000)
+            else if (area > 4000000 && area <= 9000000) // (2000w x 2001h / 2001w x 2000h) to 3000w x 3000h
             {
                 zm = _arr_zoomPercentage[2];
             }
-            else if (area > 9000000 && area <= 16000000)
+            else if (area > 9000000 && area <= 16000000) // (3000w x 3001h / 3001w x 3000h) to 4000w x 4000h
             {
                 zm = _arr_zoomPercentage[1];
             }
-            else if (area > 16000000)
+            else if (area > 16000000) // more than (4000w x 4001h / 4001w x 4000h)
             {
                 zm = _arr_zoomPercentage[0];
             }
@@ -496,13 +493,16 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-        private void SetZoom()
+        public void SetZoom()
         {
             if (lst_frame != null)
             {
                 foreach (IFrameModel fr in lst_frame)
                 {
                     fr.Frame_Zoom = WD_zoom;
+                    fr.Set_DimensionsToBind_using_FrameZoom();
+                    fr.Set_FramePadding();
+                    fr.SetZoom();
                 }
             }
         }
@@ -572,6 +572,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 }
             }
         }
+
+        #endregion
 
         public WindoorModel(int wd_id,
                             string wd_name,

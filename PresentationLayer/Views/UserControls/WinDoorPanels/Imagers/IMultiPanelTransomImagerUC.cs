@@ -6,8 +6,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels.Imagers
 {
     public interface IMultiPanelTransomImagerUC : IViewCommon
     {
-        int MPanel_ID { get; set; }
-
         event PaintEventHandler flpMulltiPaintEventRaised;
         event EventHandler flpMultiVisibleChangedEventRaised;
 

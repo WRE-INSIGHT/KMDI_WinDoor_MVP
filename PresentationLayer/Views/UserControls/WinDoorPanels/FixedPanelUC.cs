@@ -99,6 +99,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event PaintEventHandler fixedPanelUCPaintEventRaised;
         public event EventHandler fixedPanelMouseEnterEventRaised;
         public event EventHandler fixedPanelMouseLeaveEventRaised;
+        public event EventHandler fixedPanelSizeChangedEventRaised;
 
         private void FixedPanelUC_Paint(object sender, PaintEventArgs e)
         {
@@ -146,6 +147,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public void InvalidateThis()
         {
             this.Invalidate();
+        }
+
+        private void FixedPanelUC_SizeChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(this, fixedPanelSizeChangedEventRaised, e);
         }
     }
 }

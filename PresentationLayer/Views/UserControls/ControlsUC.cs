@@ -20,21 +20,67 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
         }
 
+        private string _customText;
         [Description("Text displayed"), Category("Data")]
         public string CustomText
         {
             get
             {
-                return lblControlText.Text;
+                return _customText;
             }
             set
             {
-                lblControlText.Text = value;
+                _customText = value;
             }
         }
-        
+
+        private int _divCount;
+        public int DivCount
+        {
+            get
+            {
+                return _divCount;
+            }
+            set
+            {
+                _divCount = value;
+                if (CustomText.Contains("Multi"))
+                {
+                    lblControlText.Text = CustomText + "(" + DivCount + ")" + " I(" + Iteration + ")";
+                }
+                else
+                {
+                    lblControlText.Text = CustomText + " I(" + Iteration + ")";
+                }
+            }
+        }
+
+        private int _iteration;
+        public int Iteration
+        {
+            get
+            {
+                return _iteration;
+            }
+
+            set
+            {
+                _iteration = value;
+                if (CustomText.Contains("Multi"))
+                {
+                    lblControlText.Text = CustomText + "(" + DivCount + ")" + " I(" + Iteration + ")";
+                }
+                else
+                {
+                    lblControlText.Text = CustomText + " I(" + Iteration + ")";
+                }
+            }
+        }
+
         public event MouseEventHandler controlsUCMouseDownEventRaised;
         public event EventHandler controlsUCLoadEventRaised;
+        public event EventHandler divcountToolStripMenuItemClickEventRaised;
+        public event EventHandler iterationToolStripMenuItemClickEventRaised;
 
         private void ControlsUC_MouseDown(object sender, MouseEventArgs e)
         {
@@ -50,6 +96,33 @@ namespace PresentationLayer.Views.UserControls
         public Panel GetWinDoorPanel()
         {
             return pnl_WinDoorPanel;
+        }
+
+        private void lblControlText_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (lblControlText.Text.Contains("Multi"))
+                {
+                    divcountToolStripMenuItem.Visible = true;
+                    iterationToolStripMenuItem.Visible = true;
+                }
+                else if (lblControlText.Text.Contains("Panel"))
+                {
+                    divcountToolStripMenuItem.Visible = false;
+                }
+                cmenu_ControlsUC.Show(new Point(MousePosition.X, MousePosition.Y));
+            }
+        }
+
+        private void divcountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, divcountToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void iterationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, iterationToolStripMenuItemClickEventRaised, e);
         }
     }
 }

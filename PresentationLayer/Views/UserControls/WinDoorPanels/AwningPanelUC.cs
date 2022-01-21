@@ -120,6 +120,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler awningPanelUCMouseLeaveEventRaised;
         public event PaintEventHandler awningPanelUCPaintEventRaised;
         public event EventHandler extensionToolStripMenuItemClickedEventRaised;
+        public event EventHandler awningPanelUCSizeChangedEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -173,6 +174,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         private void extensionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, extensionToolStripMenuItemClickedEventRaised, e);
+        }
+
+        private void AwningPanelUC_SizeChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, awningPanelUCSizeChangedEventRaised, e);
         }
     }
 }

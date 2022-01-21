@@ -254,7 +254,7 @@ namespace ModelLayer.Model.Quotation
 
                             if (i + 1 < obj_count)
                             {
-                                if (mpnl.MPanel_Type == "Transom")
+                                if (mpnl.MPanel_Type == "Transom" && div_nxtCtrl != null)
                                 {
                                     div_nxtCtrl.SetExplosionValues_Div();
 

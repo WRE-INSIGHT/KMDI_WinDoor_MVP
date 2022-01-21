@@ -126,7 +126,10 @@ namespace PresentationLayer.Presenter.UserControls
         private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)
         {
             UserControl frame = (UserControl)sender; //Control na babagsakan
-            string data = e.Data.GetData(e.Data.GetFormats()[0]) as string;
+            List<object> lst_data = e.Data.GetData(e.Data.GetFormats()[0]) as List<object>;
+
+            string data = lst_data[0].ToString();
+            int divCount = Convert.ToInt32(lst_data[1]);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
@@ -160,7 +163,12 @@ namespace PresentationLayer.Presenter.UserControls
                                                                           1,
                                                                           0,
                                                                           null,
-                                                                          _frameModel.FrameImageRenderer_Zoom);
+                                                                          _frameModel.FrameImageRenderer_Zoom,
+                                                                          "",
+                                                                          divCount);
+
+                _multipanelModel.Set_DimensionToBind_using_FrameDimensions();
+                _multipanelModel.Imager_Set_DimensionToBind_using_FrameDimensions();
                 _frameModel.Lst_MultiPanel.Add(_multipanelModel);
 
                 IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP.GetNewInstance(_unityC, _multipanelModel, _mainPresenter);
@@ -176,7 +184,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                                                       _frameModel,
                                                                                                                       _frameImagerUCP);
                     IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
-                    _frameImagerUCP.AddControl((UserControl)multiMullionImagerUC);
+                    //_frameImagerUCP.AddControl((UserControl)multiMullionImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
 
                     IMultiPanelMullionUCPresenter multiUCP = _multiUCP.GetNewInstance(_unityC,
@@ -199,7 +207,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                                                       _frameModel,
                                                                                                                       _frameImagerUCP);
                     IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
-                    _frameImagerUCP.AddControl((UserControl)multiTransomImagerUC);
+                    //_frameImagerUCP.AddControl((UserControl)multiTransomImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
 
                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
@@ -267,7 +275,9 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                 }
-                 
+
+
+                _frameModel.SetDeductFramePadding(false, false);
 
                 _panelModel = _panelServices.AddPanelModel(wd,
                                                            ht,
@@ -324,6 +334,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                            _mainPresenter.GetPanelGlassID());
                 _frameModel.Lst_Panel.Add(_panelModel);
 
+                _panelModel.Imager_SetDimensionsToBind_FrameParent();
+
                 IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
                 panelPropUC.Dock = DockStyle.Top;
@@ -344,11 +356,11 @@ namespace PresentationLayer.Presenter.UserControls
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     frame.Controls.Add((UserControl)fixedUC);
 
-                    IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC,
-                                                                                                 _panelModel,
-                                                                                                 _frameImagerUCP);
-                    IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
-                    _frameImagerUCP.AddControl((UserControl)fixedImagerUC);
+                    //IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, 
+                    //                                                                             _panelModel, 
+                    //                                                                             _frameImagerUCP);
+                    //IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
+                    //_frameImagerUCP.AddControl((UserControl)fixedImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
                 else if (data == "Casement Panel")
@@ -374,9 +386,9 @@ namespace PresentationLayer.Presenter.UserControls
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                     frame.Controls.Add((UserControl)casementUC);
 
-                    ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
-                    ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
-                    _frameImagerUCP.AddControl((UserControl)casementImagerUC);
+                    //ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
+                    //ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
+                    //_frameImagerUCP.AddControl((UserControl)casementImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
                 else if (data == "Awning Panel")
@@ -402,9 +414,9 @@ namespace PresentationLayer.Presenter.UserControls
                     IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
                     frame.Controls.Add((UserControl)awningUC);
 
-                    IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
-                    IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
-                    _frameImagerUCP.AddControl((UserControl)awningImagerUC);
+                    //IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
+                    //IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
+                    //_frameImagerUCP.AddControl((UserControl)awningImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
                 else if (data == "Sliding Panel")
@@ -418,9 +430,9 @@ namespace PresentationLayer.Presenter.UserControls
                     ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
                     frame.Controls.Add((UserControl)slidingUC);
 
-                    ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
-                    ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
-                    _frameImagerUCP.AddControl((UserControl)slidingImagerUC);
+                    //ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
+                    //ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
+                    //_frameImagerUCP.AddControl((UserControl)slidingImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
             }
@@ -493,9 +505,22 @@ namespace PresentationLayer.Presenter.UserControls
 
             int fr_pads = _frameModel.Frame_Padding_int.All;
 
-            Rectangle pnl_inner = new Rectangle(new Point(fr_pads, fr_pads),
+            Rectangle pnl_inner = new Rectangle();
+
+            if (_frameModel.Frame_Zoom == 0.26f || _frameModel.Frame_Zoom == 0.17f ||
+                _frameModel.Frame_Zoom == 0.13f || _frameModel.Frame_Zoom == 0.10f)
+            {
+                pnl_inner = new Rectangle(new Point(15, 15),
+                                          new Size(pfr.ClientRectangle.Width - (15 * 2),
+                                                   pfr.ClientRectangle.Height - (15 * 2)));
+            }
+            else
+            {
+                pnl_inner = new Rectangle(new Point(fr_pads, fr_pads),
+
                                                 new Size(pfr.ClientRectangle.Width - (fr_pads * 2),
                                                          pfr.ClientRectangle.Height - (fr_pads * 2)));
+            }
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -586,6 +611,7 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
 
             _mainPresenter.SetPanelGlassID();
+            _mainPresenter.DeselectDivider();
         }
 
         public void ViewDeleteControl(UserControl control)
