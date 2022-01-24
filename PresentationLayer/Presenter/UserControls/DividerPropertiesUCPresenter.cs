@@ -367,6 +367,12 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _divProperties_btnAddCladdingClickedEventRaised(object sender, EventArgs e)
         {
+            _divModel.Div_CladdingProfileArtNoVisibility = true;
+            _divModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._WK50;
+            _divModel.AdjustPropertyPanelHeight("addCladdingArtNo");
+            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
+            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
+
             IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, this);
             _lst_claddUCP.Add(claddingUCP);
             UserControl claddingUC = (UserControl)claddingUCP.GetCladdingPropertyUC();
@@ -430,13 +436,6 @@ namespace PresentationLayer.Presenter.UserControls
             bracketProp.BringToFront();
 
             _divProperties.ThisBinding(CreateBindingDictionary());
-
-            _divModel.Div_CladdingProfileArtNoVisibility = true;
-            _divModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._WK50;
-            _divModel.AdjustPropertyPanelHeight("addCladdingArtNo");
-            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
-            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
-
             _initialLoad = false;
         }
 

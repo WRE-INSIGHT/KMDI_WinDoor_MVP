@@ -193,7 +193,7 @@
             this.pnl_dividerBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_dividerBody.Location = new System.Drawing.Point(0, 108);
             this.pnl_dividerBody.Name = "pnl_dividerBody";
-            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 241);
+            this.pnl_dividerBody.Size = new System.Drawing.Size(160, 234);
             this.pnl_dividerBody.TabIndex = 13;
             // 
             // pnl_divCladdingArtNo
@@ -203,13 +203,13 @@
             this.pnl_divCladdingArtNo.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_divCladdingArtNo.Location = new System.Drawing.Point(0, 202);
             this.pnl_divCladdingArtNo.Name = "pnl_divCladdingArtNo";
-            this.pnl_divCladdingArtNo.Size = new System.Drawing.Size(158, 36);
+            this.pnl_divCladdingArtNo.Size = new System.Drawing.Size(158, 34);
             this.pnl_divCladdingArtNo.TabIndex = 15;
             // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 4);
+            this.label4.Location = new System.Drawing.Point(6, 1);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 28);
             this.label4.TabIndex = 14;
@@ -221,7 +221,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_CladdingArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_CladdingArtNo.FormattingEnabled = true;
-            this.cmb_CladdingArtNo.Location = new System.Drawing.Point(69, 7);
+            this.cmb_CladdingArtNo.Location = new System.Drawing.Point(68, 5);
             this.cmb_CladdingArtNo.Name = "cmb_CladdingArtNo";
             this.cmb_CladdingArtNo.Size = new System.Drawing.Size(87, 21);
             this.cmb_CladdingArtNo.TabIndex = 13;
@@ -411,7 +411,7 @@
             this.Controls.Add(this.pnl_divName);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "DividerPropertiesUC";
-            this.Size = new System.Drawing.Size(160, 349);
+            this.Size = new System.Drawing.Size(160, 342);
             this.Load += new System.EventHandler(this.DividerPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_divHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_divWidth)).EndInit();
