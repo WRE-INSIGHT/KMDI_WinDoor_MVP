@@ -219,7 +219,6 @@
             // 
             this.cmb_CladdingArtNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb_CladdingArtNo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_CladdingArtNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_CladdingArtNo.FormattingEnabled = true;
             this.cmb_CladdingArtNo.Location = new System.Drawing.Point(69, 7);
