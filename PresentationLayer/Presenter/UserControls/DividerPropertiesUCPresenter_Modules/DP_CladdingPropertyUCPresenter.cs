@@ -42,6 +42,11 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
             _dividerModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladding");
             _dividerModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
 
+            _dividerModel.Div_CladdingProfileArtNoVisibility = false;
+            _dividerModel.AdjustPropertyPanelHeight("minusCladdingArtNo");
+            _dividerModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladdingArtNo");
+            _dividerModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladdingArtNo");
+
             _divPropUCP.Cladding_Count--;
             _divPropUCP.SetSaveBtnColor(Color.White);
             _divPropUCP.Remove_CladdingUCP(this);

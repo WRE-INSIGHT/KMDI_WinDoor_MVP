@@ -241,7 +241,6 @@ namespace PresentationLayer.Presenter.UserControls
                         _divModel.AdjustPropertyPanelHeight("minusCladding");
                         _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladding");
                         _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
-
                     }
 
                     if (prev_pnlModel != null)
