@@ -269,6 +269,20 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private bool _frameBotFrameEnable;
+        public bool Frame_BotFrameEnable
+        {
+            get
+            {
+                return _frameBotFrameEnable;
+            }
+            set
+            {
+                _frameBotFrameEnable = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #region Method
 
         public void SetZoom()
@@ -341,10 +355,27 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             _frameDeduction = (int)(_frame_basicDeduction * Frame_Zoom);
             if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f ||
-                    Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
+                Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
             {
-                Frame_Padding_int = new Padding(10);
-                //FrameImageRenderer_Padding_int = new Padding(15);
+                if (Frame_Type == Frame_Padding.Window)
+                {
+                    Frame_Padding_int = new Padding(10);
+                }
+                else if (Frame_Type == Frame_Padding.Door)
+                {
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    {
+                        Frame_Padding_int = new Padding(10);
+                    }
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    {
+                        Frame_Padding_int = new Padding(10, 10, 10, 5);
+                    }
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    {
+                        Frame_Padding_int = new Padding(10, 10, 10, 0);
+                    }
+                }
             }
             else
             {
@@ -352,7 +383,6 @@ namespace ModelLayer.Model.Quotation.Frame
                 if (Frame_Type == Frame_Padding.Window)
                 {
                     Frame_Padding_int = new Padding(default_pads);
-                    //FrameImageRenderer_Padding_int = new Padding((int)(((int)Frame_Type) * FrameImageRenderer_Zoom));
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
@@ -385,8 +415,29 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 if (_is_MPanel) // meaning MPanel
                 {
-                    Frame_Padding_int = new Padding(10);
-                    FrameImageRenderer_Padding_int = new Padding(15);
+                    if (Frame_Type == Frame_Padding.Window)
+                    {
+                        Frame_Padding_int = new Padding(15);
+                        FrameImageRenderer_Padding_int = new Padding(15);
+                    }
+                    else if (Frame_Type == Frame_Padding.Door)
+                    {
+                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                        {
+                            Frame_Padding_int = new Padding(20);
+                            FrameImageRenderer_Padding_int = new Padding(20);
+                        }
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        {
+                            Frame_Padding_int = new Padding(20, 20, 20, 15);
+                            FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 15);
+                        }
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            Frame_Padding_int = new Padding(20, 20, 20, 0);
+                            FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 0);
+                        }
+                    }
                 }
                 else if (!_is_MPanel) // meaning Panel
                 {
@@ -924,7 +975,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           float frameZoom,
                           FrameProfile_ArticleNo frameArtNo,
                           IWindoorModel frameWindoorModel,
-                          BottomFrameTypes frameBotFrameType)
+                          BottomFrameTypes frameBotFrameType,
+                          bool frameBotFrameEnable)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -941,6 +993,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_WindoorModel = frameWindoorModel;
             Frame_CmenuDeleteVisibility = true;
             Frame_BotFrameArtNo = frameBotFrameType;
+            Frame_BotFrameEnable = frameBotFrameEnable;
 
             FrameProp_Height = constants.frame_propertyHeight_default - constants.frame_property_concretePanelHeight;
         }

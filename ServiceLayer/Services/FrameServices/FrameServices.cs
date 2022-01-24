@@ -37,7 +37,8 @@ namespace ServiceLayer.Services.FrameServices
                                        float frameZoom,
                                        FrameProfile_ArticleNo frameArtNo,
                                        IWindoorModel frameWindoorModel,
-                                       BottomFrameTypes frameBotFrameType)
+                                       BottomFrameTypes frameBotFrameType,
+                                       bool frameBotFrameEnable)
         {
             IFrameModel fr = new FrameModel(frame_id,
                                            frame_name,
@@ -52,7 +53,8 @@ namespace ServiceLayer.Services.FrameServices
                                            frameZoom,
                                            frameArtNo,
                                            frameWindoorModel,
-                                           frameBotFrameType);
+                                           frameBotFrameType,
+                                           frameBotFrameEnable);
             ValidateModel(fr);
 
             return fr;
@@ -74,6 +76,7 @@ namespace ServiceLayer.Services.FrameServices
                                          int frame_id = 0,
                                          string frame_name = "",
                                          bool frame_visible = true,
+                                         bool frameBotFrameEnable = true,
                                          List<IPanelModel> lst_Panel = null,
                                          List<IMultiPanelModel> lst_MPanel = null,
                                          List<IDividerModel> lst_Divider = null)
@@ -113,7 +116,8 @@ namespace ServiceLayer.Services.FrameServices
                                                      frameZoom,
                                                      frameArtNo,
                                                      frameWindoorModel,
-                                                     frameBotFrameType);
+                                                     frameBotFrameType,
+                                                     frameBotFrameEnable);
 
             return _frameModel;
         }

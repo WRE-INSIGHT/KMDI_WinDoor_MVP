@@ -109,20 +109,24 @@ namespace PresentationLayer.Presenter.UserControls
         private void _frameUC_frameControlRemovedEventRaised(object sender, ControlEventArgs e)
         {
             _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
+            _frameModel.Frame_BotFrameEnable = true;
         }
 
         private void _frameUC_frameControlAddedEventRaised(object sender, ControlEventArgs e)
         {
-            UserControl pfr = (UserControl)sender;
+            //UserControl pfr = (UserControl)sender;
 
-            if (pfr.Controls[0] is IMultiPanelUC)
-            {
-                _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(false);
-            }
-            else if (pfr.Controls[0] is IPanelUC)
-            {
-                _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
-            }
+            //if (pfr.Controls[0] is IMultiPanelUC)
+            //{
+
+            _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(false);
+            _frameModel.Frame_BotFrameEnable = false;
+
+            //}
+            //else if (pfr.Controls[0] is IPanelUC)
+            //{
+            //    _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
+            //}
         }
 
         private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)

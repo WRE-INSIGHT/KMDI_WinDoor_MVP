@@ -37,6 +37,7 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             cmb_botFrameProfile.DataBindings.Add(ModelBinding["Frame_BotFrameArtNo"]);
+            this.DataBindings.Add(ModelBinding["Frame_BotFrameEnable"]);
         }
 
         private void cmb_botFrameProfile_SelectedValueChanged(object sender, EventArgs e)

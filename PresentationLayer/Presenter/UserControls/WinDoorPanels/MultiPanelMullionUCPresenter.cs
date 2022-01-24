@@ -823,18 +823,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameModel.SetDeductFramePadding(false);
             }
-
-            //foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-            //{
-            //    _frameModel.Lst_Panel.Remove(pnl);
-            //    _mainPresenter.DeductPanelGlassID();
-            //}
-
-            //foreach (IDividerModel div in _multiPanelModel.MPanelLst_Divider)
-            //{
-            //    _frameModel.Lst_Divider.Remove(div);
-            //}
-
+            
             var child_mpanels = _commonFunctions.GetAll_MPanel(_multiPanelModel);
 
             foreach (IMultiPanelModel mpnl in child_mpanels)
@@ -967,23 +956,43 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 pInnerWd = fpnl.ClientRectangle.Width - (_frameModel.Frame_Deduction * 2),
                 pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction * 2);
 
-            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+
+            if (zoom == 0.26f || zoom == 0.17f ||
+                zoom == 0.13f || zoom == 0.10f)
             {
-                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                 {
-                    pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction + _frameModel.Frame_Padding_int.Bottom);
+                    pInnerX = 15;
+                    pInnerY = 15;
+                    pInnerWd = fpnl.ClientRectangle.Width - 30;
+                    pInnerHt = fpnl.ClientRectangle.Height - 30;
+                }
+                else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    pInnerX = 20;
+                    pInnerY = 20;
+                    pInnerWd = fpnl.ClientRectangle.Width - 40;
+                    pInnerHt = fpnl.ClientRectangle.Height - 40;
+
+                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    {
+                        pInnerHt = fpnl.ClientRectangle.Height;
+                    }
+                }
+            }
+            else if(zoom >= 0.50f)
+            {
+                if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    {
+                        pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction + _frameModel.Frame_Padding_int.Bottom);
+                    }
                 }
             }
 
-            if (zoom == 0.26f || zoom == 0.17f || 
-                zoom == 0.13f || zoom == 0.10f)
-            {
-                pInnerX = 15;
-                pInnerY = 15;
-                pInnerWd = fpnl.ClientRectangle.Width - 30;
-                pInnerHt = fpnl.ClientRectangle.Height - 30;
-            }
 
             int ht_ToBind = _multiPanelModel.MPanel_HeightToBind,
                 wd_ToBind = _multiPanelModel.MPanel_WidthToBind;
@@ -1086,8 +1095,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (zoom == 0.26f || zoom == 0.17f || 
                     zoom == 0.13f || zoom == 0.10f)
                 {
-                    bounds = new Rectangle(new Point(5, 5),
-                                           new Size(fpnl.ClientRectangle.Width - 10, fpnl.ClientRectangle.Height - 10));
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    {
+                        bounds = new Rectangle(new Point(5, 5),
+                                               new Size(fpnl.ClientRectangle.Width - 10, fpnl.ClientRectangle.Height - 10));
+                    }
+                    else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            botFrameDeduct = 11;
+                        }
+                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        {
+                            botFrameDeduct = 20;
+                        }
+
+                        bounds = new Rectangle(new Point(10, 10),
+                                               new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - botFrameDeduct));
+                    }
                 }
                 else
                 {

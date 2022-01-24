@@ -22,6 +22,7 @@ namespace ServiceLayer.Services.FrameServices
                                   int frame_id = 0,
                                   string frame_name = "",
                                   bool frame_visible = true,
+                                  bool frameBotFrameEnable = true,
                                   List<IPanelModel> lst_Panel = null,
                                   List<IMultiPanelModel> lst_MPanel = null,
                                   List<IDividerModel> lst_Divider = null);
