@@ -1417,15 +1417,26 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void Set_DimensionToBind_using_FrameDimensions()
         {
-            int wd = 0, ht = 0;
+            int wd = 0, ht = 0, wd_deduct = 0, ht_deduct = 0;
             if (MPanel_ParentModel == null)
             {
                 if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
                 {
-                    wd = MPanel_FrameModelParent.Frame_WidthToBind - 20;
-                    ht = MPanel_FrameModelParent.Frame_HeightToBind - 20;
+                    wd_deduct = 20;
+                    ht_deduct = 20;
+                    if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            ht_deduct = 10;
+                        }
+                    }
+
+                    wd = MPanel_FrameModelParent.Frame_WidthToBind - wd_deduct;
+                    ht = MPanel_FrameModelParent.Frame_HeightToBind - ht_deduct;
                 }
-                else
+                else if (MPanel_Zoom == 0.50f)
                 {
                     decimal wd_flt_convert_dec = Convert.ToDecimal(MPanel_Width * MPanel_Zoom);
                     decimal wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
@@ -1434,6 +1445,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     decimal ht_flt_convert_dec = Convert.ToDecimal(MPanel_Height * MPanel_Zoom);
                     decimal ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
                     ht = Convert.ToInt32(ht_dec);
+                }
+                else if (MPanel_Zoom == 1.0f)
+                {
+                    wd = Convert.ToInt32(MPanel_Width * MPanel_Zoom);
+                    ht = Convert.ToInt32(MPanel_Height * MPanel_Zoom);
                 }
 
                 MPanel_WidthToBind = wd;

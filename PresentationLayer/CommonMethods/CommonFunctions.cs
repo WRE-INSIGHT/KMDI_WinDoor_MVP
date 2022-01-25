@@ -59,6 +59,7 @@ namespace PresentationLayer.CommonMethods
             }
 
             int divSize = 0;
+            bool divchkdm = false;
 
             if (frameModel.Frame_Type.ToString().Contains("Window"))
             {
@@ -67,6 +68,12 @@ namespace PresentationLayer.CommonMethods
             else if (frameModel.Frame_Type.ToString().Contains("Door"))
             {
                 divSize = 33;
+
+                if (frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                    frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                {
+                    divchkdm = true;
+                }
             }
 
             Control last_ctrl = null;
@@ -105,7 +112,10 @@ namespace PresentationLayer.CommonMethods
                                                                      frameModel,
                                                                      divID,
                                                                      frameModel.FrameImageRenderer_Zoom,
-                                                                     frameModel.Frame_Type.ToString());
+                                                                     frameModel.Frame_Type.ToString(),
+                                                                     "",
+                                                                     null,
+                                                                     divchkdm);
                 divModel.SetDimensionsToBind_using_DivZoom();
                 divModel.SetDimensionsToBind_using_DivZoom_Imager();
 

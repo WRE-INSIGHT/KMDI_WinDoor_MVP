@@ -433,7 +433,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         suggest_HT = _multiPanelModel.MPanel_Height - 20,
                         suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight,
                         suggest_DisplayHTDecimal = _multiPanelModel.MPanel_DisplayHeightDecimal;
-
+                    
                     string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
                     decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
 
@@ -701,6 +701,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
                     {
+                        bool divchkdm = false;
+
+                        if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            {
+                                divchkdm = true;
+                            }
+                        }
+
                         IDividerModel divModel = _divServices.AddDividerModel(divSize,
                                                                               _multiPanelModel.MPanel_Height,
                                                                               fpnl,
@@ -714,7 +725,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                               _frameModel,
                                                                               _mainPresenter.GetDividerCount(),
                                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
+                                                                              _frameModel.Frame_Type.ToString(),
+                                                                              "",
+                                                                              null,
+                                                                              divchkdm);
                         divModel.SetDimensionsToBind_using_DivZoom();
                         divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
 

@@ -442,6 +442,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth,
                         suggest_DisplayWDDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal;
 
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            suggest_HT = _multiPanelModel.MPanel_Height - 10;
+                        }
+                    }
+
                     string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
                     decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
 

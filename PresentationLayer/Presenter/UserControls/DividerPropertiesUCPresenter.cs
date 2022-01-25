@@ -415,6 +415,14 @@ namespace PresentationLayer.Presenter.UserControls
                 _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
             }
 
+            if (_divModel.Div_ChkDM == true)
+            {
+                _divModel.Div_ArtVisibility = false;
+
+                _divModel.Div_ArtNo = Divider_ArticleNo._None;
+                _divModel.Div_ReinfArtNo = DividerReinf_ArticleNo._None;
+            }
+
             IDP_CladdingBracketPropertyUCPresenter bracketUCP = _dp_claddingBracketPropertyUCP.GetNewInstance(_unityC, _divModel);
             _dp_claddingBracketPropertyUCP = bracketUCP;
             UserControl bracketProp = (UserControl)bracketUCP.GetCladdingBracketPropertyUC();
