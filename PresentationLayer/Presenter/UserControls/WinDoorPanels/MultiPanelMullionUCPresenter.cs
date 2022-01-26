@@ -433,7 +433,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         suggest_HT = _multiPanelModel.MPanel_Height - 20,
                         suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight,
                         suggest_DisplayHTDecimal = _multiPanelModel.MPanel_DisplayHeightDecimal;
-                    
+
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            if (_multiPanelModel.MPanel_Placement == "Last")
+                            {
+                                suggest_HT = _multiPanelModel.MPanel_Height - 10;
+                            }
+                        }
+                    }
+
                     string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
                     decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
 
@@ -458,7 +470,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_multiPanelModel.MPanel_ParentModel != null)
                     {
-                        suggest_HT = (_multiPanelModel.MPanel_Height - 20) + 4;
+                        if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                        {
+                            suggest_HT += 4;
+                        }
                     }
 
                     MiddleCloser_ArticleNo midArtNo = MiddleCloser_ArticleNo._None;
@@ -1238,11 +1253,31 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 bounds_PointY = 2 + 4;
                                 ht_deduction = 8 + 4;
                             }
+
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            {
+                                ht_deduction = 11;
+                            }
+                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                            {
+                                ht_deduction = 20;
+                            }
                         }
                         else if (zoom > 0.26f)
                         {
                             bounds_PointY = (int)(pixels_count * zoom);
                             ht_deduction = (int)(((((pixels_count + 2) * 2)) - 1) * zoom);
+
+                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            {
+                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                {
+                                    ht_deduction = (int)(11 * _frameModel.Frame_Zoom);
+                                }
+                            }
                         }
                     }
                     else if (thisObj_placement == "Somewhere in Between")
@@ -1277,30 +1312,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointY = (int)(pixels_count * zoom);
                             ht_deduction = (int)((pixels_count * 2) * zoom);
                         }
-                    }
-                }
-                #endregion
-
-                else if (parent_name.Contains("MultiMullion"))
-                #region Parent is MultiPanel Mullion
-                {
-                    bounds_PointY = (int)(10 * zoom);
-                    ht_deduction = (int)(20 * zoom);
-                    if (thisObj_placement == "First")
-                    {
-                        bounds_PointX = (int)(10 * zoom);
-                        wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
-                    }
-                    else if (thisObj_placement == "Last")
-                    {
-                        bounds_PointX = (int)(pixels_count * zoom);
-                        wd_deduction = (int)((((pixels_count + 2) * 2) - 1) * zoom);
-
-                    }
-                    else if (thisObj_placement == "Somewhere in Between")
-                    {
-                        bounds_PointX = (int)(pixels_count * zoom);
-                        wd_deduction = (int)((pixels_count * 2) * zoom);
                     }
                 }
                 #endregion

@@ -1820,10 +1820,25 @@ namespace ModelLayer.Model.Quotation.Panel
                  PanelImageRenderer_Zoom == 0.13f || PanelImageRenderer_Zoom == 0.13f) && 
                 Panel_ParentMultiPanelModel != null)
             {
-                int right = (Panel_Margin.Right != 0) ? 5 : 0,
-                left = (Panel_Margin.Left != 0) ? 5 : 0,
-                top = (Panel_Margin.Top != 0) ? 5 : 0,
-                bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+                int right = 0,
+                left = 0,
+                top = 0,
+                bot = 0;
+
+                if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                {
+                    right = (Panel_Margin.Right != 0) ? 5 : 0;
+                    left = (Panel_Margin.Left != 0) ? 5 : 0;
+                    top = (Panel_Margin.Top != 0) ? 5 : 0;
+                    bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+                }
+                else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    right = (Panel_Margin.Right != 0) ? 10 : 0;
+                    left = (Panel_Margin.Left != 0) ? 10 : 0;
+                    top = (Panel_Margin.Top != 0) ? 10 : 0;
+                    bot = (Panel_Margin.Bottom != 0) ? 10 : 0;
+                }
 
                 PanelImageRenderer_Margin = new Padding(left, top, right, bot);
             }
@@ -1925,13 +1940,23 @@ namespace ModelLayer.Model.Quotation.Panel
                 parent_mpanelWd = 0,
                 parent_mpanelHT = 0,
                 div_count = 0,
-                totalpanel_inside_parentMpanel = 0;
+                totalpanel_inside_parentMpanel = 0,
+                divSize = 0;
 
             if (PanelImageRenderer_Zoom == 0.26f || PanelImageRenderer_Zoom == 0.17f ||
                 PanelImageRenderer_Zoom == 0.13f || PanelImageRenderer_Zoom == 0.10f)
             {
                 if (Panel_ParentMultiPanelModel != null)
                 {
+                    if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    {
+                        divSize = 13;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        divSize = 16;
+                    }
+
                     parent_mpanelWd = Panel_ParentMultiPanelModel.MPanelImageRenderer_Width;
                     parent_mpanelHT = Panel_ParentMultiPanelModel.MPanelImageRenderer_Height;
                     div_count = Panel_ParentMultiPanelModel.MPanel_Divisions;
@@ -1939,13 +1964,13 @@ namespace ModelLayer.Model.Quotation.Panel
 
                     if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                     {
-                        pnl_wd = (parent_mpanelWd - (13 * div_count)) / totalpanel_inside_parentMpanel;
+                        pnl_wd = (parent_mpanelWd - (divSize * div_count)) / totalpanel_inside_parentMpanel;
                         pnl_ht = parent_mpanelHT;
                     }
                     else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                     {
                         pnl_wd = parent_mpanelWd;
-                        pnl_ht = (parent_mpanelHT - (13 * div_count)) / totalpanel_inside_parentMpanel;
+                        pnl_ht = (parent_mpanelHT - (divSize * div_count)) / totalpanel_inside_parentMpanel;
                     }
                 }
                 else if (Panel_ParentFrameModel != null)
@@ -1959,8 +1984,23 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else
             {
-                pnl_wd = (int)(Panel_OriginalWidth * PanelImageRenderer_Zoom);
-                pnl_ht = (int)(Panel_OriginalHeight * PanelImageRenderer_Zoom);
+                int deduct = 0;
+                if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    deduct = 3;
+                }
+
+                if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                {
+                    pnl_wd = (int)(Panel_OriginalWidth * PanelImageRenderer_Zoom);
+                    pnl_ht = (int)(Panel_OriginalHeight * PanelImageRenderer_Zoom) - deduct;
+                }
+                else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
+                {
+                    pnl_wd = (int)(Panel_OriginalWidth * PanelImageRenderer_Zoom) - deduct;
+                    pnl_ht = (int)(Panel_OriginalHeight * PanelImageRenderer_Zoom);
+                }
+
             }
 
             PanelImageRenderer_Width = pnl_wd;

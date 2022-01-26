@@ -447,14 +447,24 @@ namespace ModelLayer.Model.Quotation.Divider
         {
             int wd = Div_MPanelParent.MPanelImageRenderer_Width,
                 ht = Div_MPanelParent.MPanelImageRenderer_Height,
-                div_overlap = Div_FrameParent.Frame_Deduction;
+                div_overlap = Div_FrameParent.Frame_Deduction,
+                divsize = 0;
+
+            if (Div_FrameParent.Frame_Type == FrameModel.Frame_Padding.Window)
+            {
+                divsize = 13;
+            }
+            else if (Div_FrameParent.Frame_Type == FrameModel.Frame_Padding.Door)
+            {
+                divsize = 16;
+            }
 
             if (Div_Type == DividerType.Mullion)
             {
                 if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
                     DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
                 {
-                    DivImageRenderer_Width = 13;
+                    DivImageRenderer_Width = divsize;
                     DivImageRenderer_Height = ht + 10;
                 }
                 else if (DivImageRenderer_Zoom > 0.26f)
@@ -469,7 +479,7 @@ namespace ModelLayer.Model.Quotation.Divider
                     DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
                 {
                     DivImageRenderer_Width = wd + 10;
-                    DivImageRenderer_Height = 13;
+                    DivImageRenderer_Height = divsize;
                 }
                 else if (DivImageRenderer_Zoom > 0.26f)
                 {
@@ -825,7 +835,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
                     if (Div_Type == DividerType.Mullion)
                     {
-                        if (Div_ChkDM == true)
+                        if (Div_ChkDM == true && Div_DMPanel != null)
                         {
                             Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (38 * 2)) - 5;
                             Div_AlumSpacer50Qty = (int)(Math.Ceiling(((decimal)Div_ExplosionHeight / 300)) - 2);

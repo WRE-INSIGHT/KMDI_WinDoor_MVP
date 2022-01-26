@@ -538,7 +538,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 prevCtrl_isPanel = false;
             }
 
-            if (_divModel.Div_Width == (int)_frameModel.Frame_Type || _divModel.Div_Width == 13)
+            if ((_divModel.Div_Width == (int)_frameModel.Frame_Type || _divModel.Div_Width == 13) &&
+                _frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+            {
+                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
+                                                                       0,
+                                                                       mul.ClientRectangle.Width - w,
+                                                                       mul.ClientRectangle.Height - w));
+            }
+            else if ((_divModel.Div_Width == (int)_frameModel.Frame_Type || _divModel.Div_Width == 16) &&
+                     _frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
             {
                 g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
                                                                        0,
