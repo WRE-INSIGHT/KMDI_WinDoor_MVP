@@ -417,11 +417,18 @@ namespace PresentationLayer.Presenter.UserControls
             glassProp.Dock = DockStyle.Top;
             glassProp.BringToFront();
 
-            IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel);
-            UserControl gbarProp = (UserControl)gbarPropUCP.GetPPGeorgianBarPropertyUC();
-            _pnlPanelSpecs.Controls.Add(gbarProp);
-            gbarProp.Dock = DockStyle.Top;
-            gbarProp.BringToFront();
+            try
+            {
+                IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel);
+                UserControl gbarProp = (UserControl)gbarPropUCP.GetPPGeorgianBarPropertyUC();
+                _pnlPanelSpecs.Controls.Add(gbarProp);
+                gbarProp.Dock = DockStyle.Top;
+                gbarProp.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             chkOrient_state = _panelModel.Panel_Orient;
         }

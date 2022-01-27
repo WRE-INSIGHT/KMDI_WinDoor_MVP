@@ -1098,16 +1098,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                    thisObj_placement = _multiPanelModel.MPanel_Placement;
             DockStyle parent_doxtyle = DockStyle.None;
 
+            int bPoints = (int)(10 * _frameModel.Frame_Zoom),
+                bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom),
+                botFrameDeduct = 0;
+
             if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FrameUC))
             {
                 for (int i = 0; i < corner_points.Length - 1; i += 2)
                 {
                     g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                 }
-
-                int bPoints = (int)(10 * _frameModel.Frame_Zoom),
-                    bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom),
-                    botFrameDeduct = 0;
 
                 if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
@@ -1274,6 +1274,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 {
                                     ht_deduction = (int)(11 * _frameModel.Frame_Zoom);
                                 }
+                            }
+                        }
+
+                        if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            if (zoom == 0.50f)
+                            {
+                                ht_deduction = bSizeDeduction - botFrameDeduct - 2;
+                            }
+                            else if (zoom <= 0.26f)
+                            {
+
                             }
                         }
                     }
@@ -2393,45 +2405,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 #region MAIN GRAPHICS ALGORITHM without curve
 
-                if (parent_name.Contains("MultiMullion") &&
-                    parent_doxtyle == DockStyle.Fill &&
-                    thisObj_placement == "First")
-                #region First Multi-Panel in a MAIN PLATFORM (MultiMullion)
-                {
-                    g.DrawLine(Pens.Black, new Point(0, 0),
-                                           new Point(pInnerX, pInnerY));
-                    g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
-                                           new Point(pInnerX, pInnerY + pInnerHt));
-
-                    divider_bounds_Right = divs_bounds_values[2];
-                }
-                #endregion
-
-                else if (parent_name.Contains("MultiMullion") &&
-                         parent_doxtyle == DockStyle.Fill &&
-                         thisObj_placement == "Last")
-                #region Last Multi-Panel in a MAIN PLATFORM (MultiMullion)
-                {
-                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
-                                           new Point(pInnerX + pInnerWd, pInnerY));
-                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
-                                           new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
-
-                    divider_bounds_Left = divs_bounds_values[3];
-                }
-                #endregion
-
-                else if (parent_name.Contains("MultiMullion") &&
-                         parent_doxtyle == DockStyle.Fill &&
-                         thisObj_placement == "Somewhere in Between")
-                #region Somewhere in Between Multi-Panel in a MAIN PLATFORM (MultiMullion)
-                {
-                    divider_bounds_Right = divs_bounds_values[2];
-                    divider_bounds_Left = divs_bounds_values[3];
-                }
-                #endregion
-
-                else if (parent_name.Contains("MultiTransom") &&
+                if (parent_name.Contains("MultiTransom") &&
                          parent_doxtyle == DockStyle.Fill &&
                          thisObj_placement == "First")
                 #region First Multi-Panel in a MAIN PLATFORM (MultiTransom)
@@ -2495,7 +2469,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     divider_bounds_Top = divs_bounds_values[1];
                 }
                 #endregion
-
 
                 #region Pattern (M-T-M)
 

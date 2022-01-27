@@ -1081,16 +1081,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                        thisObj_placement = _multiPanelModel.MPanel_Placement;
             DockStyle parent_doxtyle = DockStyle.None;
 
+            int bPoints = (int)(10 * _frameModel.Frame_Zoom),
+                bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom),
+                botFrameDeduct = 0;
+
             if (_multiPanelModel.MPanel_Parent.GetType() == typeof(FrameUC)) //if inside Frame
             {
                 for (int i = 0; i < corner_points.Length - 1; i += 2)
                 {
                     g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
                 }
-
-                int bPoints = (int)(10 * _frameModel.Frame_Zoom),
-                    bSizeDeduction = (int)(20 * _frameModel.Frame_Zoom),
-                    botFrameDeduct = 0;
 
                 if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
@@ -1100,7 +1100,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         botFrameDeduct = (int)(9 * _frameModel.Frame_Zoom);
                     }
                 }
-
 
                 if (zoom == 0.26f || zoom == 0.17f ||
                     zoom == 0.13f || zoom == 0.10f)
@@ -1175,37 +1174,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     bounds_PointX = 0,
                     bounds_PointY = 0;
 
-                if (parent_name.Contains("MultiTransom"))
-                #region Parent is MultiPanel Transom
-                {
-                    wd_deduction = (int)(20 * zoom);
-                    bounds_PointX = (int)(10 * zoom);
-
-                    if (thisObj_placement == "First")
-                    {
-                        bounds_PointY = (int)(10 * zoom);
-                        ht_deduction = (int)((10 + (pixels_count + 1)) * zoom);
-                    }
-                    else if (thisObj_placement == "Last")
-                    {
-                        bounds_PointY = (int)(pixels_count * zoom);
-                        ht_deduction = (int)(((((pixels_count + 2) * 2)) - 1) * zoom);
-                    }
-                    else if (thisObj_placement == "Somewhere in Between")
-                    {
-                        bounds_PointY = (int)(pixels_count * zoom);
-                        ht_deduction = (int)((pixels_count * 2) * zoom);
-                    }
-                }
-                #endregion
-
-                else if (parent_name.Contains("MultiMullion"))
+                if (parent_name.Contains("MultiMullion"))
                 #region Parent is MultiPanel Mullion
                 {
                     if (zoom == 0.26f)
                     {
                         bounds_PointY = 5;
                         ht_deduction = 10;
+
+                        if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            bounds_PointY = 10;
+                        }
                     }
                     else if (zoom == 1.0f)
                     {
@@ -1240,6 +1220,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (zoom <= 0.26f)
                         {
                             bounds_PointX = 5;
+                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            {
+                                bounds_PointX = 10;
+                            }
+
                             if (lvl2_parent_Type != "")
                             {
                                 wd_deduction = 8 + 3;
@@ -1324,6 +1309,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             bounds_PointX = (int)(pixels_count * zoom);
                             wd_deduction = (int)((pixels_count * 2) * zoom);
+                        }
+                    }
+
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (zoom == 0.50f)
+                        {
+                            ht_deduction = bSizeDeduction - botFrameDeduct;
+                        }
+                        else if (zoom <= 0.26f)
+                        {
+                            bounds_PointY = 10;
+
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                            {
+                                if (thisObj_placement != "Somewhere in Between")
+                                {
+                                    wd_deduction = 17;
+                                }
+                                ht_deduction = 20;
+                            }
                         }
                     }
                 }
@@ -2451,53 +2458,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 #region MAIN GRAPHICS ALGORITHM (without curve)
 
-                if (parent_name.Contains("MultiTransom") &&
-                    parent_doxtyle == DockStyle.Fill &&
-                    thisObj_placement == "First")
-                #region First Multi-Panel in a MAIN PLATFORM (MultiTransom)
-                {
-                    for (int i = 0; i < corner_points.Length - 5; i += 2)
-                    {
-                        g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
-                    }
-
-                    divider_bounds_Bot = divs_bounds_values[0];
-
-                }
-                #endregion
-
-                else if (parent_name.Contains("MultiTransom") &&
-                         parent_doxtyle == DockStyle.Fill &&
-                         thisObj_placement == "Last")
-                #region Last Multi-Panel in a MAIN PLATFORM (MultiTransom)
-                {
-                    for (int i = 4; i < corner_points.Length - 1; i += 2)
-                    {
-                        g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
-                    }
-
-                    divider_bounds_Top = divs_bounds_values[1];
-                }
-                #endregion
-
-                else if (parent_name.Contains("MultiTransom") &&
-                         parent_doxtyle == DockStyle.Fill &&
-                         thisObj_placement == "Somewhere in Between")
-                #region Somewhere in Between in a MAIN PLATFORM (MultiTransom)
-                {
-                    divider_bounds_Bot = divs_bounds_values[0];
-                    divider_bounds_Top = divs_bounds_values[1];
-                }
-                #endregion
-
-                else if (parent_name.Contains("MultiMullion") &&
+                if (parent_name.Contains("MultiMullion") &&
                          parent_doxtyle == DockStyle.Fill &&
                          thisObj_placement == "First")
                 #region First Multi-Panel in a MAIN PLATFORM (MultiMullion)
                 {
                     g.DrawLine(Pens.Black, new Point(0, 0),
                                            new Point(pInnerX, pInnerY));
-                    g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
+
+                    int loc_X = 0;
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        {
+                            loc_X = 1;
+                        }
+                    }
+
+                    g.DrawLine(Pens.Black, new Point(loc_X, fpnl.ClientRectangle.Height),
                                            new Point(pInnerX, pInnerY + pInnerHt));
 
                     if (zoom == 0.50f)
@@ -2520,10 +2498,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last Multi-Panel in MAIN PLATFORM (MultiMullion)
                 {
+                    
+                    int upLine_loc_X2 = pInnerX + pInnerWd,
+                        botLine_locY = fpnl.ClientRectangle.Height,
+                        botLine_locX2 = pInnerX + pInnerWd;
+
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        {
+                            upLine_loc_X2 = pInnerX + pInnerWd - 1;
+                            botLine_locY = fpnl.ClientRectangle.Height + 1;
+                            botLine_locX2 = pInnerX + pInnerWd - 1;
+                        }
+                    }
+
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
-                                           new Point(pInnerX + pInnerWd, pInnerY));
-                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
-                                           new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
+                                           new Point(upLine_loc_X2, pInnerY));
+
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, botLine_locY),
+                                           new Point(botLine_locX2, pInnerY + pInnerHt));
 
                     if (zoom <= 0.26f)
                     {

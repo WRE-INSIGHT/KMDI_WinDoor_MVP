@@ -1922,11 +1922,21 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 if (MPanelLst_Objects[previous_indx].Name.Contains("MullionUC"))
                 {
                     MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_Width += pixel_count;
+
+                    if (MPanel_Zoom >= 0.50f)
+                    {
+                        pixel_count = (int)(pixel_count * MPanel_Zoom);
+                    }
                     MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_WidthToBind += pixel_count;
                 }
                 else if (MPanelLst_Objects[previous_indx].Name.Contains("TransomUC"))
                 {
                     MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_Height += pixel_count;
+
+                    if (MPanel_Zoom >= 0.50f)
+                    {
+                        pixel_count = (int)(pixel_count * MPanel_Zoom);
+                    }
                     MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_HeightToBind += pixel_count;
                 }
             }
