@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ServiceLayer.CommonServices;
-using ModelLayer.Model.Quotation.Panel;
-using System.Windows.Forms;
-using ModelLayer.Model.Quotation.Frame;
+﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
-using static ModelLayer.Model.Quotation.QuotationModel;
+using ModelLayer.Model.Quotation.Panel;
+using ServiceLayer.CommonServices;
+using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
-using System.Drawing;
 
 namespace ServiceLayer.Services.PanelServices
 {

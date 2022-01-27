@@ -277,7 +277,6 @@ namespace ModelLayer.Model.Quotation
                                     int total_cladd = div_nxtCtrl.Add_TotalCladdingSize_Screws4Cladding();
                                     total_cladding_size += total_cladd;
 
-
                                     if (div_nxtCtrl.Div_claddingBracketVisibility == true)
                                     {
                                         div_nxtCtrl.Insert_CladdingBracket4Concrete_MaterialList(Material_List);
@@ -794,6 +793,7 @@ namespace ModelLayer.Model.Quotation
                                                     int FSCasement_screws = pnl_curCtrl.Add_FSCasement_screws4fab();
                                                     add_screws_fab_fs_or_rs += FSCasement_screws;
 
+
                                                 }
                                                 else if (pnl_curCtrl.Panel_HingeOptions == HingeOption._2DHinge)
                                                 {
@@ -1054,7 +1054,6 @@ namespace ModelLayer.Model.Quotation
                         if (pnl.Panel_Type.Contains("Fixed") == false)
                         {
                             pnl.Insert_CoverProfileInfo_MaterialList(Material_List);
-
                         }
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)

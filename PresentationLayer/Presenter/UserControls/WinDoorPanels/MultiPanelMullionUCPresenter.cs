@@ -21,12 +21,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
-using static ModelLayer.Model.Quotation.QuotationModel;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -73,7 +70,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IDividerServices _divServices;
         private IPanelServices _panelServices;
         private IMultiPanelServices _multipanelServices;
-        
+
         bool _initialLoad;
 
         private MultiPanelCommon _mpnlCommons = new MultiPanelCommon();
@@ -669,6 +666,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _multiMullionImagerUCP.AddControl((UserControl)awningImagerUC);
                         _multiPanelModel.MPanelLst_Imagers.Add((UserControl)awningImagerUC);
 
+
                         _basePlatformImagerUCP.InvalidateBasePlatform();
                     }
                     else if (data == "Sliding Panel")
@@ -840,7 +838,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_multiPanelModel.MPanel_ParentModel != null)
             {
-                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelMullionUC, 
+                _multiPanelModel.MPanel_ParentModel.DeleteControl_MPanelLstObjects((UserControl)_multiPanelMullionUC,
                                                                                    _frameModel.Frame_Type.ToString(),
                                                                                    _multiPanelModel.MPanel_Placement);
 
@@ -965,7 +963,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             color = Color.Blue;
             ((IMultiPanelUC)_multiPanelMullionUC).InvalidateFlp();
         }
-        
+
         Color color = Color.Black;
         bool _HeightChange = false,
              _WidthChange = false;
@@ -984,7 +982,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 pInnerY = _frameModel.Frame_Deduction,
                 pInnerWd = fpnl.ClientRectangle.Width - (_frameModel.Frame_Deduction * 2),
                 pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction * 2);
-
 
             if (zoom == 0.26f || zoom == 0.17f ||
                 zoom == 0.13f || zoom == 0.10f)
@@ -1030,7 +1027,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Point[] botLine = new Point[2];
             Point[] leftCurve = new Point[3];
             Point[] rightCurve = new Point[3];
-            
+
             Point[] corner_points = new[]
             {
                     new Point(0,0),
@@ -1121,7 +1118,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                 }
 
-                if (zoom == 0.26f || zoom == 0.17f || 
+                if (zoom == 0.26f || zoom == 0.17f ||
                     zoom == 0.13f || zoom == 0.10f)
                 {
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
@@ -3254,7 +3251,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             ((IMultiPanelUC)_multiPanelMullionUC).GetDivEnabler().Checked = _multiPanelModel.MPanel_DividerEnabled;
             return _multiPanelMullionUC;
         }
-        
+
         public IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
                                                             IMultiPanelModel multiPanelModel,
                                                             IFrameModel frameModel,
@@ -3286,14 +3283,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             return multiMullionUCP;
         }
 
-        public IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC, 
-                                                            IMultiPanelModel multiPanelModel, 
-                                                            IFrameModel frameModel, 
-                                                            IMainPresenter mainPresenter, 
-                                                            IFrameUCPresenter frameUCP, 
-                                                            IMultiPanelTransomUCPresenter multiPanelTransomUCP, 
-                                                            IMultiPanelPropertiesUCPresenter multiPropUCP, 
-                                                            IFrameImagerUCPresenter frameImagerUCP, 
+        public IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                            IMultiPanelModel multiPanelModel,
+                                                            IFrameModel frameModel,
+                                                            IMainPresenter mainPresenter,
+                                                            IFrameUCPresenter frameUCP,
+                                                            IMultiPanelTransomUCPresenter multiPanelTransomUCP,
+                                                            IMultiPanelPropertiesUCPresenter multiPropUCP,
+                                                            IFrameImagerUCPresenter frameImagerUCP,
                                                             IBasePlatformImagerUCPresenter basePlatformImagerUCP,
                                                             IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP)
         {
@@ -3357,7 +3354,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Placement", new Binding("MPanel_Placement", _multiPanelModel, "MPanel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_CmenuDeleteVisibility", new Binding("MPanel_CmenuDeleteVisibility", _multiPanelModel, "MPanel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            
+
             return multiPanelBinding;
         }
 

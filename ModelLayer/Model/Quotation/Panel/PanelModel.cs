@@ -6,7 +6,6 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -1094,6 +1093,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
 
         private Rotary_HandleArtNo _panelRotaryArtNo;
         public Rotary_HandleArtNo Panel_RotaryArtNo
@@ -2506,7 +2506,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
 
-                    Panel_SashWidth = Panel_DisplayWidth - inward_motorized_deduction -(sash_deduct * 2) + 5;
+                    Panel_SashWidth = Panel_DisplayWidth - inward_motorized_deduction - (sash_deduct * 2) + 5;
                     Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
                     Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 5;
                     Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
@@ -4734,8 +4734,6 @@ namespace ModelLayer.Model.Quotation.Panel
                             Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
                         }
                     }
-
-
                 }
                 else if (Panel_HandleType == Handle_Type._MVD)
                 {
@@ -5233,6 +5231,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                        @"");
             }
         }
+        //
+
 
         public void Insert_CornerDrive_MaterialList(DataTable tbl_explosion)
         {
@@ -5250,7 +5250,6 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "",
                                    "Sash",
                                    @"");
-
         }
 
         public void Insert_StrikerA_MaterialList(DataTable tbl_explosion)
@@ -5930,10 +5929,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GeorgianBar_HorizontalQty = panelGeorgianBarHorizontalQty;
             Panel_GeorgianBarOptionVisibility = panelGeorgianBarOptionVisibility;
             Panel_HingeOptions = panelHingeOptions;
-
             Panel_BackColor = Color.DarkGray;
             Panel_CmenuDeleteVisibility = true;
-
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;
             Panel_RotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;

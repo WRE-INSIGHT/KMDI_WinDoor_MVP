@@ -47,7 +47,10 @@ namespace ModelLayer.Tests
         [TestMethod]
         public void ChkVar_SinglePanelFixWindow()
         {
-            int total_wd = 1000, total_height = 2000;
+            int total_wd = 1000, total_height = 2000,
+                total_wd_decimal = 0, total_height_decimal = 0;
+
+
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -65,6 +68,7 @@ namespace ModelLayer.Tests
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
+
             IPanelModel _panelModel = _panelServices.AddPanelModel(wd,
                                                                    ht,
                                                                    new Control(),
@@ -77,7 +81,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   total_wd_decimal,
                                                                    total_height,
+                                                                   total_height_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -133,9 +139,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1000, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2000, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
             Assert.AreEqual(928, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(1928, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
 
         }
@@ -146,8 +157,8 @@ namespace ModelLayer.Tests
         [TestMethod]
         public void chkvar_SinglePannelFix2()
         {
-            int total_wd = 619, total_height = 925;
-
+            int total_wd = 619, total_height = 925,
+                total_wd_decimal = 0, total_height_decimal = 0;
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
@@ -176,7 +187,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   total_wd_decimal,
                                                                    total_height,
+                                                                   total_height_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -469,7 +482,9 @@ namespace ModelLayer.Tests
 
 
             int total_wd = 550, total_height = 1200,
-                eqpanelWD = 550, eqpanelHT = 600;
+                total_wd_decimal = 0, total_height_decimal = 0,
+                eqpanelWD = 550, eqpanelHT = 600,
+                eqpanelWD_decimal = 0, eqpanelHT_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -495,7 +510,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
                                                                                        total_wd,
+                                                                                       total_wd_decimal,
                                                                                        total_height,
+                                                                                       total_height_decimal,
                                                                                        frame,
                                                                                        new UserControl(),
                                                                                        _frameModel,
@@ -536,7 +553,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
+                                                                   eqpanelWD_decimal,
                                                                    eqpanelHT,
+                                                                   eqpanelHT_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -627,7 +646,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
+                                                                   eqpanelWD_decimal,
                                                                    eqpanelHT,
+                                                                   eqpanelHT_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -695,9 +716,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(550, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(600, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(478, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(540, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel.Div_ArtNo);
@@ -707,9 +734,16 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(550, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(600, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(478, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(540, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
+
+
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
             #region CheckQuantity
@@ -814,6 +848,7 @@ namespace ModelLayer.Tests
 
 
             int total_wd = 550, total_height = 1200,
+                wd_decimal = 0, height_decimal = 0,
                  uneqpanelHT1 = 700, uneqpanelHT2 = 500, eqpanelWD = 550;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -833,13 +868,16 @@ namespace ModelLayer.Tests
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
 
+
             Control frame = new Control();
             frame.Name = _frameModel.Frame_Name;
 
             IMultiPanelModel _multipanelModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
                                                                                        total_wd,
+                                                                                       wd_decimal,
                                                                                        total_height,
+                                                                                       height_decimal,
                                                                                        frame,
                                                                                        new UserControl(),
                                                                                        _frameModel,
@@ -880,7 +918,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    uneqpanelHT1,
+                                                                   height_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -970,7 +1010,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multipanelModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    uneqpanelHT2,
+                                                                   height_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -1033,13 +1075,17 @@ namespace ModelLayer.Tests
             Assert.AreEqual(482, _frameModel.Frame_ReinfWidth);
             Assert.AreEqual(1132, _frameModel.Frame_ReinfHeight);
 
-
-
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(550, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(700, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(478, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(640, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel.Div_ArtNo);
@@ -1049,9 +1095,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(550, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(500, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(478, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(440, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
             #region CheckQuantity
@@ -1155,7 +1207,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 1800, total_ht = 1600,
                 PanelWD1_BG = 604, PanelHT1_BG = 800,
-                PanelWD3_BG = 592, PanelHT3_BG = 800;
+                PanelWD3_BG = 592, PanelHT3_BG = 800,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -1185,7 +1238,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                        ht,
                                                                                        displayWidth,
+                                                                                       wd_decimal,
                                                                                        displayHeight,
+                                                                                       ht_decimal,
                                                                                        frame,
                                                                                        new UserControl(),
                                                                                        _frameModel,
@@ -1219,7 +1274,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                          suggest_HT,
                                                                                          PanelWD1_BG,
+                                                                                         wd_decimal,
                                                                                          displayHeight2,
+                                                                                         ht_decimal,
                                                                                          multiMullion,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -1270,7 +1327,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel2 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                         suggest_HT,
                                                                                         PanelWD3_BG,
+                                                                                        wd_decimal,
                                                                                         displayHeight2,
+                                                                                        ht_decimal,
                                                                                         multiMullion,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -1319,7 +1378,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel3 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                       suggest_HT,
                                                                                       PanelWD1_BG,
+                                                                                      wd_decimal,
                                                                                       displayHeight2,
+                                                                                      ht_decimal,
                                                                                       multiMullion,
                                                                                       new UserControl(),
                                                                                       _frameModel,
@@ -1361,7 +1422,9 @@ namespace ModelLayer.Tests
                                                                  _frameModel,
                                                                  _multiTransomModel1,
                                                                  PanelWD1_BG,
+                                                                 wd_decimal,
                                                                  PanelHT1_BG,
+                                                                 ht_decimal,
                                                                  GlazingBead_ArticleNo._2451,
                                                                  GlassFilm_Types._None,
                                                                  SashProfile_ArticleNo._None,
@@ -1458,7 +1521,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiTransomModel1,
                                                                   PanelWD1_BG,
+                                                                  wd_decimal,
                                                                   PanelHT1_BG,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2451,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -1536,7 +1601,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiTransomModel2,
                                                                    PanelWD3_BG,
+                                                                   wd_decimal,
                                                                    PanelHT3_BG,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -1630,7 +1697,9 @@ namespace ModelLayer.Tests
                                                               _frameModel,
                                                               _multiTransomModel2,
                                                               PanelWD3_BG,
+                                                              wd_decimal,
                                                               PanelHT3_BG,
+                                                              ht_decimal,
                                                               GlazingBead_ArticleNo._2451,
                                                               GlassFilm_Types._None,
                                                               SashProfile_ArticleNo._None,
@@ -1707,7 +1776,9 @@ namespace ModelLayer.Tests
                                                              _frameModel,
                                                              _multiTransomModel3,
                                                              PanelWD1_BG,
+                                                             wd_decimal,
                                                              PanelHT1_BG,
+                                                             ht_decimal,
                                                              GlazingBead_ArticleNo._2451,
                                                              GlassFilm_Types._None,
                                                              SashProfile_ArticleNo._None,
@@ -1803,7 +1874,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiTransomModel3,
                                                                   PanelWD1_BG,
+                                                                  wd_decimal,
                                                                   PanelHT1_BG,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2451,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -1868,6 +1941,7 @@ namespace ModelLayer.Tests
 
 
             DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+            #region assert
 
             #region Frame
 
@@ -1910,9 +1984,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
 
 
@@ -1923,9 +2003,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
             #endregion
@@ -1934,9 +2020,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(592, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel3.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_Transom2.Div_ArtNo);
@@ -1946,9 +2038,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(592, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel4.Panel_GlazingSpacerQty);
 
             #endregion
@@ -1957,9 +2055,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel5.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel5.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_Transom3.Div_ArtNo);
@@ -1970,13 +2074,20 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel6.PanelGlazingBead_ArtNo);
             Assert.AreEqual(604, _panelModel6.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(800, _panelModel6.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(544, _panelModel6.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassWidthDecimal);
             Assert.AreEqual(740, _panelModel6.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel6.Panel_GlazingSpacerQty);
 
             #endregion
 
+            #endregion
             #region CheckQuantity
 
             DataRow[] dr;
@@ -2196,7 +2307,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 2100, total_ht = 1700,
                PanelWD1_BG = 704, PanelHT1_BG = 1700,
-                PanelWD3_BG = 692, PanelHT3_BG = 850;
+                PanelWD3_BG = 692, PanelHT3_BG = 850,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -2226,7 +2338,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                         ht,
                                                                                         displayWidth,
+                                                                                        wd_decimal,
                                                                                         displayHeight,
+                                                                                        ht_decimal,
                                                                                         frame,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -2269,7 +2383,9 @@ namespace ModelLayer.Tests
                                                                      _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
+                                                                     wd_decimal,
                                                                      PanelHT1_BG,
+                                                                     ht_decimal,
                                                                      GlazingBead_ArticleNo._2451,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._None,
@@ -2306,8 +2422,17 @@ namespace ModelLayer.Tests
                                                                      0,
                                                                      0,
                                                                      false,
-                                                                     1);
+                                                                     1,
+                                                                     1,
+                                                                     _frameModel.FrameImageRenderer_Zoom,
+                                                                     0,
+                                                                     DockStyle.Fill,
+                                                                     "FixedPanelUC_1",
+                                                                     true,
+                                                                     HingeOption._FrictionStay
+                                                                     );
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_SashPropertyVisibility = false;
             _panelModel1.Panel_GlassThickness = 6.0f;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
@@ -2346,7 +2471,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                         suggest_HT,
                                                                                         PanelWD3_BG,
+                                                                                        wd_decimal,
                                                                                         PanelHT1_BG,
+                                                                                        ht_decimal,
                                                                                         multiMullion,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -2405,7 +2532,9 @@ namespace ModelLayer.Tests
                                                                      _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
+                                                                     wd_decimal,
                                                                      PanelHT1_BG,
+                                                                     ht_decimal,
                                                                      GlazingBead_ArticleNo._2451,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._None,
@@ -2442,8 +2571,16 @@ namespace ModelLayer.Tests
                                                                       0,
                                                                       0,
                                                                       false,
-                                                                      2);
+                                                                      2,
+                                                                      2,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      0,
+                                                                      DockStyle.Fill,
+                                                                      "FixedPanelUC_2",
+                                                                      true,
+                                                                      HingeOption._FrictionStay);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_SashPropertyVisibility = false;
             _panelModel2.Panel_GlassThickness = 6.0f;
             _panelModel2.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
@@ -2473,7 +2610,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiTransomModel1,
                                                                    PanelWD3_BG,
+                                                                   wd_decimal,
                                                                    PanelHT3_BG,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2451,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._None,
@@ -2510,8 +2649,16 @@ namespace ModelLayer.Tests
                                                                    0,
                                                                    0,
                                                                    false,
-                                                                   3);
+                                                                   3,
+                                                                   3,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   0,
+                                                                   DockStyle.Fill,
+                                                                   "FixedPanelUC_3",
+                                                                   true,
+                                                                   HingeOption._FrictionStay);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_SashPropertyVisibility = false;
             _panelModel3.Panel_GlassThickness = 6.0f;
             _panelModel3.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel3);
@@ -2560,7 +2707,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiTransomModel1,
                                                                     PanelWD3_BG,
+                                                                    wd_decimal,
                                                                     PanelHT3_BG,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -2597,8 +2746,16 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     false,
-                                                                    4);
+                                                                    4,
+                                                                    4,
+                                                                    _frameModel.FrameImageRenderer_Zoom,
+                                                                    0,
+                                                                    DockStyle.Fill,
+                                                                    "FixedPanelUC_4",
+                                                                    true,
+                                                                    HingeOption._FrictionStay);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_SashPropertyVisibility = false;
             _panelModel4.Panel_GlassThickness = 6.0f;
             _panelModel4.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel4);
@@ -2637,12 +2794,17 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1700, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1628, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
-            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
-            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
+
 
             Assert.AreEqual(Divider_ArticleNo._7536, mullionModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, mullionModel.Div_ReinfArtNo);
@@ -2658,9 +2820,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1700, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1628, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
 
             #endregion
@@ -2669,9 +2837,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(692, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(850, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(790, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel3.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7536, divModel_Transom.Div_ArtNo);
@@ -2681,9 +2855,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(692, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(850, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(790, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel4.Panel_GlazingSpacerQty);
 
             #endregion
@@ -2740,49 +2920,102 @@ namespace ModelLayer.Tests
             Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            //P1 & P2
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //P1
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '704'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '1700'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%%' AND
                              Size = '644'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) height%%' AND
                              Size = '1628'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //p2
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '704'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            //P3 & P4
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1700'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%%' AND
+                             Size = '644'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) height%%' AND
+                             Size = '1628'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            //P3
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '692'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '850'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) height%%' AND
                              Size = '790'");
             Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%%' AND
+                             Size = '644'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+            //p4
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '692'");
+            Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '850'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) height%%' AND
+                             Size = '790'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Width%%' AND
+                             Size = '644'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             #endregion
 
@@ -2807,7 +3040,8 @@ namespace ModelLayer.Tests
 
                  PanelWD1_BG = 799, PanelHT1_BG = 1950,
                  PanelWD3PlusWD4 = 802,
-                PanelWD3_BG = 401, PanelHT3_BG = 975;
+                PanelWD3_BG = 401, PanelHT3_BG = 975,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -2833,7 +3067,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                         ht,
                                                                                         total_wd,
+                                                                                        wd_decimal,
                                                                                         total_ht,
+                                                                                        ht_decimal,
                                                                                         frame,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -2875,7 +3111,9 @@ namespace ModelLayer.Tests
                                                                      _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
+                                                                     wd_decimal,
                                                                      PanelHT1_BG,
+                                                                     ht_decimal,
                                                                      GlazingBead_ArticleNo._2453,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._None,
@@ -2912,8 +3150,16 @@ namespace ModelLayer.Tests
                                                                      0,
                                                                      0,
                                                                      false,
-                                                                     1);
+                                                                     1,
+                                                                     1,
+                                                                     _frameModel.FrameImageRenderer_Zoom,
+                                                                     0,
+                                                                     DockStyle.Fill,
+                                                                     "FixedPanelUC_1",
+                                                                     true,
+                                                                     HingeOption._FrictionStay);
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_SashPropertyVisibility = false;
             _panelModel1.Panel_GlassThickness = 14.0f;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
@@ -2951,7 +3197,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                         suggest_HT,
                                                                                         PanelWD3PlusWD4,
+                                                                                        wd_decimal,
                                                                                         PanelHT1_BG,
+                                                                                        ht_decimal,
                                                                                         multiMullion,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -3011,7 +3259,9 @@ namespace ModelLayer.Tests
                                                                      _frameModel,
                                                                      _multiMullionModel,
                                                                      PanelWD1_BG,
+                                                                     wd_decimal,
                                                                      PanelHT1_BG,
+                                                                     ht_decimal,
                                                                      GlazingBead_ArticleNo._2453,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._None,
@@ -3048,8 +3298,16 @@ namespace ModelLayer.Tests
                                                                      0,
                                                                      0,
                                                                      false,
-                                                                     2);
+                                                                     2,
+                                                                     2,
+                                                                     _frameModel.FrameImageRenderer_Zoom,
+                                                                     4,
+                                                                     DockStyle.Fill,
+                                                                     "FixedPanelUC_2",
+                                                                     true,
+                                                                     HingeOption._FrictionStay);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_SashPropertyVisibility = false;
             _panelModel2.Panel_GlassThickness = 14.0f;
             _panelModel2.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
@@ -3070,7 +3328,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                         suggest_HT,
                                                                                         PanelWD3_BG,
+                                                                                        wd_decimal,
                                                                                         PanelHT3_BG,
+                                                                                        ht_decimal,
                                                                                         multiMullion,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -3125,7 +3385,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel2 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           PanelWD3_BG,
+                                                                                          wd_decimal,
                                                                                           PanelHT3_BG,
+                                                                                          ht_decimal,
                                                                                           multiMullion,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -3174,7 +3436,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiMullionModel1,
                                                                   PanelWD3_BG,
+                                                                  wd_decimal,
                                                                   PanelHT3_BG,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2451,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -3211,8 +3475,16 @@ namespace ModelLayer.Tests
                                                                   0,
                                                                   0,
                                                                   false,
-                                                                  3);
+                                                                  3,
+                                                                  3,
+                                                                  _frameModel.FrameImageRenderer_Zoom,
+                                                                  0,
+                                                                  DockStyle.Fill,
+                                                                  "FixedPanelUC_3",
+                                                                  true,
+                                                                  HingeOption._FrictionStay);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_SashPropertyVisibility = false;
             _panelModel3.Panel_GlassThickness = 6.0f;
             _panelModel3.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel3);
@@ -3261,7 +3533,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiMullionModel1,
                                                                   PanelWD3_BG,
+                                                                  wd_decimal,
                                                                   PanelHT3_BG,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2451,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -3298,8 +3572,16 @@ namespace ModelLayer.Tests
                                                                   0,
                                                                   0,
                                                                   false,
-                                                                  4);
+                                                                  4,
+                                                                  4,
+                                                                  _frameModel.FrameImageRenderer_Zoom,
+                                                                  2,
+                                                                  DockStyle.Fill,
+                                                                  "FixedPanelUC_4",
+                                                                  true,
+                                                                  HingeOption._FrictionStay);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_SashPropertyVisibility = false;
             _panelModel4.Panel_GlassThickness = 6.0f;
             _panelModel4.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel4);
@@ -3332,7 +3614,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel2,
                                                                       PanelWD3_BG,
+                                                                      wd_decimal,
                                                                       PanelHT3_BG,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2451,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._None,
@@ -3369,8 +3653,16 @@ namespace ModelLayer.Tests
                                                                       0,
                                                                       0,
                                                                       false,
-                                                                      5);
+                                                                      5,
+                                                                      5,
+                                                                      _frameModel.FrameImageRenderer_Zoom,
+                                                                      0,
+                                                                      DockStyle.Fill,
+                                                                      "FixedPanelUC_5",
+                                                                      true,
+                                                                      HingeOption._FrictionStay);
             _panelModel5.Panel_Placement = "First";
+            _panelModel5.Panel_SashPropertyVisibility = false;
             _panelModel5.Panel_GlassThickness = 6.0f;
             _panelModel5.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel5);
@@ -3419,7 +3711,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiMullionModel2,
                                                                   PanelWD3_BG,
+                                                                  wd_decimal,
                                                                   PanelHT3_BG,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2451,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -3456,8 +3750,16 @@ namespace ModelLayer.Tests
                                                                   0,
                                                                   0,
                                                                   false,
-                                                                  6);
+                                                                  6,
+                                                                  6,
+                                                                  _frameModel.FrameImageRenderer_Zoom,
+                                                                  2,
+                                                                  DockStyle.Fill,
+                                                                  "FixedPanelUC_6",
+                                                                  true,
+                                                                  HingeOption._FrictionStay);
             _panelModel6.Panel_Placement = "Last";
+            _panelModel6.Panel_SashPropertyVisibility = false;
             _panelModel6.Panel_GlassThickness = 6.0f;
             _panelModel6.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel2.MPanelLst_Panel.Add(_panelModel6);
@@ -3496,9 +3798,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(799, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1950, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(724, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1878, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
 
             Assert.AreEqual(Divider_ArticleNo._7538, mullionModel.Div_ArtNo);
@@ -3515,9 +3823,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(799, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1950, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(724, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1878, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
 
             #endregion
@@ -3539,9 +3852,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(401, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(975, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(323, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(900, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel3.Panel_GlazingSpacerQty);
 
 
@@ -3553,9 +3872,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(401, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(975, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(323, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(900, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel4.Panel_GlazingSpacerQty);
 
             #endregion
@@ -3564,9 +3889,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
             Assert.AreEqual(401, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(975, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(323, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassWidthDecimal);
             Assert.AreEqual(900, _panelModel5.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel5.Panel_GlazingSpacerQty);
 
 
@@ -3578,9 +3909,15 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel6.PanelGlazingBead_ArtNo);
             Assert.AreEqual(401, _panelModel6.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(975, _panelModel6.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(323, _panelModel6.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassWidthDecimal);
             Assert.AreEqual(900, _panelModel6.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassHeightDecimal);
+
             Assert.AreEqual(1, _panelModel6.Panel_GlazingSpacerQty);
 
             #endregion
@@ -3635,59 +3972,150 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            //P1 & P2        
+            //P1        
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '799'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1950'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%%' AND
                              Size = '724'");
             Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) height%%' AND
+                             Size = '1878'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //p2
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '799'");
+            Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
-                             Size = '1878'");
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1950'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            //P3 - P6
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%%' AND
+                             Size = '724'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) height%%' AND
+                             Size = '1878'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            //P3  
 
 
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '401'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("8", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '975'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("8", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%%' AND
                              Size = '323'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) height%%' AND
                              Size = '900'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
+            //p4
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '401'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '975'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Width%%' AND
+                             Size = '323'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) height%%' AND
+                             Size = '900'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            //P5
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '401'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '975'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) Width%%' AND
+                             Size = '323'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) height%%' AND
+                             Size = '900'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            //p6
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P6) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '401'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P6) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '975'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P6) Width%%' AND
+                             Size = '323'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P6) height%%' AND
+                             Size = '900'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
             #endregion
 
 
@@ -3716,7 +4144,9 @@ namespace ModelLayer.Tests
             int total_wd = 2100, total_ht = 1500,
                 pnl_1_wd = 704, pnl_1_ht = 1500,
                 pnl_3_wd = 692, pnl_3_ht = 504,
-                pnl_5_wd = 346, pnl_5_ht = 492;
+                pnl_5_wd = 346, pnl_5_ht = 492,
+
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -3742,7 +4172,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -3785,7 +4217,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiMullionModel,
                                                                     pnl_1_wd,
+                                                                    wd_decimal,
                                                                     pnl_1_ht,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -3822,8 +4256,16 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     false,
-                                                                    1);
+                                                                    1,
+                                                                    1,
+                                                                    _frameModel.FrameImageRenderer_Zoom,
+                                                                    0,
+                                                                    DockStyle.Fill,
+                                                                    "FixedPanelUC_1",
+                                                                    true,
+                                                                    HingeOption._FrictionStay);
             _panelModel1.Panel_Placement = "First";
+            _panelModel1.Panel_SashPropertyVisibility = false;
             _panelModel1.Panel_GlassThickness = 6.0f;
             _panelModel1.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1);
@@ -3862,7 +4304,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           pnl_3_wd,
+                                                                                          wd_decimal,
                                                                                           pnl_3_ht,
+                                                                                          wd_decimal,
                                                                                           multiMullion,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -3923,7 +4367,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiMullionModel,
                                                                     pnl_1_wd,
+                                                                    wd_decimal,
                                                                     pnl_1_ht,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2451,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -3960,8 +4406,16 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     false,
-                                                                    2);
+                                                                    2,
+                                                                    2,
+                                                                    _frameModel.FrameImageRenderer_Zoom,
+                                                                    4,
+                                                                    DockStyle.Fill,
+                                                                    "FixedPanelUC_2",
+                                                                    true,
+                                                                    HingeOption._FrictionStay);
             _panelModel2.Panel_Placement = "Last";
+            _panelModel2.Panel_SashPropertyVisibility = false;
             _panelModel2.Panel_GlassThickness = 6.0f;
             _panelModel2.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
@@ -3992,7 +4446,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiTransomModel1,
                                                                     pnl_3_wd,
+                                                                    wd_decimal,
                                                                     pnl_3_ht,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -4029,8 +4485,16 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     false,
-                                                                    3);
+                                                                    3,
+                                                                    3,
+                                                                    _frameModel.FrameImageRenderer_Zoom,
+                                                                    0,
+                                                                    DockStyle.Fill,
+                                                                    "FixedPanelUC_3",
+                                                                    true,
+                                                                    HingeOption._FrictionStay);
             _panelModel3.Panel_Placement = "First";
+            _panelModel3.Panel_SashPropertyVisibility = false;
             _panelModel3.Panel_GlassThickness = 13.0f;
             _panelModel3.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel3);
@@ -4069,7 +4533,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           pnl_1_wd,
+                                                                                          wd_decimal,
                                                                                           pnl_5_ht,
+                                                                                          ht_decimal,
                                                                                           multiMullion,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -4129,7 +4595,9 @@ namespace ModelLayer.Tests
                                                                      _frameModel,
                                                                      _multiTransomModel1,
                                                                      pnl_3_wd,
+                                                                     wd_decimal,
                                                                      pnl_3_ht,
+                                                                     ht_decimal,
                                                                      GlazingBead_ArticleNo._2453,
                                                                      GlassFilm_Types._None,
                                                                      SashProfile_ArticleNo._None,
@@ -4166,8 +4634,16 @@ namespace ModelLayer.Tests
                                                                      0,
                                                                      0,
                                                                      false,
-                                                                     4);
+                                                                     4,
+                                                                     4,
+                                                                     _frameModel.FrameImageRenderer_Zoom,
+                                                                     4,
+                                                                     DockStyle.Fill,
+                                                                     "FixedPanelUC_4",
+                                                                     true,
+                                                                     HingeOption._FrictionStay);
             _panelModel4.Panel_Placement = "Last";
+            _panelModel4.Panel_SashPropertyVisibility = false;
             _panelModel4.Panel_GlassThickness = 13.0f;
             _panelModel4.Panel_Index_Inside_MPanel = 4;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel4);
@@ -4200,7 +4676,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiMullionModel1,
                                                                     pnl_5_wd,
+                                                                    wd_decimal,
                                                                     pnl_5_ht,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -4237,8 +4715,16 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     false,
-                                                                    5);
+                                                                    5,
+                                                                    5,
+                                                                    _frameModel.FrameImageRenderer_Zoom,
+                                                                    0,
+                                                                    DockStyle.Fill,
+                                                                    "FixedPanelUC_5",
+                                                                    true,
+                                                                    HingeOption._FrictionStay);
             _panelModel5.Panel_Placement = "First";
+            _panelModel5.Panel_SashPropertyVisibility = false;
             _panelModel5.Panel_GlassThickness = 13.0f;
             _panelModel5.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel5);
@@ -4285,7 +4771,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiMullionModel1,
                                                                     pnl_5_wd,
+                                                                    wd_decimal,
                                                                     pnl_5_ht,
+                                                                    ht_decimal,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -4322,8 +4810,16 @@ namespace ModelLayer.Tests
                                                                     0,
                                                                     0,
                                                                     false,
-                                                                    6);
+                                                                    6,
+                                                                    6,
+                                                                    _frameModel.FrameImageRenderer_Zoom,
+                                                                    2,
+                                                                    DockStyle.Fill,
+                                                                    "FixedPanelUC_6",
+                                                                    true,
+                                                                    HingeOption._FrictionStay);
             _panelModel6.Panel_Placement = "Last";
+            _panelModel6.Panel_SashPropertyVisibility = false;
             _panelModel6.Panel_GlassThickness = 13.0f;
             _panelModel6.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel6);
@@ -4362,9 +4858,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1500, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1428, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7536, _divMullionModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, _divMullionModel.Div_ReinfArtNo);
@@ -4380,9 +4881,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(704, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1500, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1428, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             #endregion
 
@@ -4391,9 +4897,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(692, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(504, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(444, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7536, _divTransomModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, _divTransomModel.Div_ReinfArtNo);
@@ -4409,9 +4920,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(692, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(504, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(644, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(444, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
 
 
 
@@ -4422,9 +4938,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel5.PanelGlazingBead_ArtNo);
             Assert.AreEqual(346, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(492, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(298, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassWidthDecimal);
             Assert.AreEqual(444, _panelModel5.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7536, _divMullionModel3.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, _divMullionModel3.Div_ReinfArtNo);
@@ -4434,9 +4955,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel6.PanelGlazingBead_ArtNo);
             Assert.AreEqual(346, _panelModel6.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(492, _panelModel6.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(298, _panelModel6.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassWidthDecimal);
             Assert.AreEqual(444, _panelModel6.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel6.Panel_GlassHeightDecimal);
 
 
             #endregion
@@ -4487,77 +5013,151 @@ namespace ModelLayer.Tests
             Assert.AreEqual("4", dr[0]["Qty"]);
 
 
-            //P1 & P2
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //P1
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
                              Size = '704'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2452%' AND
                              Size = '1500'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%%' AND
                              Size = '644'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) height%%' AND
                              Size = '1428'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //P2
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '704'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            //P3 & P4
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
+                             Description LIKE '%2452%' AND
+                             Size = '1500'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%%' AND
+                             Size = '644'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P2) height%%' AND
+                             Size = '1428'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //P3
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '692'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '504'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("2", dr[0]["Qty"]);
 
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%%' AND
                              Size = '644'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) height%%' AND
                              Size = '444'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            //P5 & P6
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //p4
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Width%' AND
                              Description LIKE '%2453%' AND
-                             Size = '346'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
-
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
-                             Description LIKE '%2453%' AND
-                             Size = '492'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
-
-
-            dr = dt.Select(@"Description LIKE '%Glass Width%%' AND
-                             Size = '298'");
+                             Size = '692'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass height%%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P4) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '504'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) Width%%' AND
+                             Size = '644'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P4) height%%' AND
                              Size = '444'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
+
+            //P5
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '346'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '492'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) Width%%' AND
+                             Size = '298'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P5) height%%' AND
+                             Size = '444'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            //p6
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P6) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '346'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P6) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '492'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glass (P6) Width%%' AND
+                             Size = '298'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P6) height%%' AND
+                             Size = '444'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
             #endregion
 
@@ -4582,7 +5182,8 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 700, total_height = 1200;
+            int total_wd = 700, total_height = 1200,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._DarkBrown, Foil_Color._Cacao, Foil_Color._Cacao);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -4615,7 +5216,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_height,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -4686,17 +5289,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(653, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1153, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel.Panel_SashProfileArtNo);
             Assert.AreEqual(1153, _panelModel.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashHeightDecimal);
             Assert.AreEqual(653, _panelModel.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashWidthDecimal);
+
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel.Panel_SashReinfArtNo);
             Assert.AreEqual(528, _panelModel.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1028, _panelModel.Panel_SashReinfHeight);
-            Assert.AreEqual(1028, _panelModel.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfHeightDecimal);
+
             Assert.AreEqual(532, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(1032, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARWARE
@@ -4812,8 +5424,8 @@ namespace ModelLayer.Tests
                        |/______________\|/______________\|    
             */
 
-            int total_wd = 1370,
-                total_ht = 1100,
+            int total_wd = 1370, total_ht = 1100,
+                wd_decimal = 0, ht_decimal = 0,
                 eqpanelWD = 685;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -4839,7 +5451,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -4883,7 +5497,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -4975,7 +5591,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -5058,18 +5676,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(650, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(650, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(525, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(529, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -5105,18 +5731,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(650, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(650, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(525, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(529, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -5276,7 +5910,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 1247, total_ht = 3370,
                 AwWD1 = 1247, AwHT1 = 1235,
-                AwWD2 = 1247, AwHT2 = 2135;
+                AwWD2 = 1247, AwHT2 = 2135,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._JetBlack, Foil_Color._JetBlack);
@@ -5302,7 +5937,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -5342,7 +5979,9 @@ namespace ModelLayer.Tests
                                                                                   _frameModel,
                                                                                   _multiTransomModel,
                                                                                   AwWD1,
+                                                                                  wd_decimal,
                                                                                   AwHT1,
+                                                                                  ht_decimal,
                                                                                   GlazingBead_ArticleNo._2435,
                                                                                   GlassFilm_Types._None,
                                                                                   SashProfile_ArticleNo._7581,
@@ -5434,7 +6073,9 @@ namespace ModelLayer.Tests
                                                                                   _frameModel,
                                                                                   _multiTransomModel,
                                                                                   AwWD2,
+                                                                                  wd_decimal,
                                                                                   AwHT2,
+                                                                                  ht_decimal,
                                                                                   GlazingBead_ArticleNo._2452,
                                                                                   GlassFilm_Types._None,
                                                                                   SashProfile_ArticleNo._7581,
@@ -5521,17 +6162,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel1_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1200, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1200, _panelModel1_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(1200, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashHeightDecimal);
             Assert.AreEqual(1200, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashWidthDecimal);
+
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(1075, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1075, _panelModel1_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(1079, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1079, _panelModel1_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARWARE
@@ -5565,18 +6215,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1200, _panelModel2_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2100, _panelModel2_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(1200, _panelModel2_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(2100, _panelModel2_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(1075, _panelModel2_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1975, _panelModel2_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(1079, _panelModel2_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1979, _panelModel2_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2_Awning.Panel_CoverProfileArtNo);
@@ -5754,7 +6412,8 @@ namespace ModelLayer.Tests
             int total_wd = 1500, total_ht = 1800,
                 PnlWidth1_Fix = 800, PnlHeight1_Fix = 600,
                 PnlWidth2_Awning = 800, PnlHeight2_Awning = 1200,
-                PnlWidth3_Fix = 700, PnlHeight3_Fix = 1800;
+                PnlWidth3_Fix = 700, PnlHeight3_Fix = 1800,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -5780,7 +6439,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -5812,7 +6473,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           PnlWidth1_Fix,
+                                                                                          wd_decimal,
                                                                                           total_ht,
+                                                                                          ht_decimal,
                                                                                           multiMullion,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -5874,7 +6537,9 @@ namespace ModelLayer.Tests
                                                                            _frameModel,
                                                                            _multiMullionModel,
                                                                            PnlWidth3_Fix,
+                                                                           wd_decimal,
                                                                            PnlHeight3_Fix,
+                                                                           ht_decimal,
                                                                            GlazingBead_ArticleNo._2453,
                                                                            GlassFilm_Types._None,
                                                                            SashProfile_ArticleNo._None,
@@ -5942,7 +6607,9 @@ namespace ModelLayer.Tests
                                                                   _frameModel,
                                                                   _multiTransomModel1,
                                                                   PnlWidth1_Fix,
+                                                                  wd_decimal,
                                                                   PnlHeight1_Fix,
+                                                                  ht_decimal,
                                                                   GlazingBead_ArticleNo._2453,
                                                                   GlassFilm_Types._None,
                                                                   SashProfile_ArticleNo._None,
@@ -6031,7 +6698,9 @@ namespace ModelLayer.Tests
                                                                              _frameModel,
                                                                              _multiTransomModel1,
                                                                              PnlWidth2_Awning,
+                                                                             wd_decimal,
                                                                              PnlHeight2_Awning,
+                                                                             ht_decimal,
                                                                              GlazingBead_ArticleNo._2453,
                                                                              GlassFilm_Types._None,
                                                                              SashProfile_ArticleNo._7581,
@@ -6118,9 +6787,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1_fixed1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(700, _panelModel1_fixed1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1800, _panelModel1_fixed1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(625, _panelModel1_fixed1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1728, _panelModel1_fixed1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlassHeightDecimal);
 
             #endregion
 
@@ -6128,9 +6802,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2_fixed2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel2_fixed2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(600, _panelModel2_fixed2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(725, _panelModel2_fixed2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassWidthDecimal);
             Assert.AreEqual(540, _panelModel2_fixed2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassHeightDecimal);
 
 
 
@@ -6144,18 +6823,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel3_Awning1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(750, _panelModel3_Awning1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1165, _panelModel3_Awning1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3_Awning1.Panel_SashProfileArtNo);
             Assert.AreEqual(750, _panelModel3_Awning1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashWidthDecimal);
             Assert.AreEqual(1165, _panelModel3_Awning1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3_Awning1.Panel_SashReinfArtNo);
             Assert.AreEqual(625, _panelModel3_Awning1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1040, _panelModel3_Awning1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(629, _panelModel3_Awning1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1044, _panelModel3_Awning1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3_Awning1.Panel_CoverProfileArtNo);
@@ -6292,7 +6979,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("2", dr[0]["Qty"]);
             #endregion
 
-        } // no mullion in dt
+        }
 
 
         [TestMethod]
@@ -6319,7 +7006,9 @@ namespace ModelLayer.Tests
             int total_wd = 1500, total_ht = 1800,
                 PnlWidth1_Fix = 800, PnlHeight1_Fix = 400,
                 PnlWidth2_Awning = 800, PnlHeight2_Awning = 1400,
-                PnlWidth3_Fix = 700, PnlHeight3_Fix = 1800;
+                PnlWidth3_Fix = 700, PnlHeight3_Fix = 1800,
+                wd_decimal = 0, ht_decimal = 0;
+
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -6345,7 +7034,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -6377,7 +7068,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           PnlWidth1_Fix,
+                                                                                          wd_decimal,
                                                                                           total_ht,
+                                                                                          ht_decimal,
                                                                                           multiMullion,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -6439,7 +7132,9 @@ namespace ModelLayer.Tests
                                                                            _frameModel,
                                                                            _multiMullionModel,
                                                                            PnlWidth3_Fix,
+                                                                           wd_decimal,
                                                                            PnlHeight3_Fix,
+                                                                           ht_decimal,
                                                                            GlazingBead_ArticleNo._2453,
                                                                            GlassFilm_Types._None,
                                                                            SashProfile_ArticleNo._None,
@@ -6477,15 +7172,16 @@ namespace ModelLayer.Tests
                                                                            0,
                                                                            false,
                                                                            1,
-                                                                           1
-                                                                           //_frameModel.FrameImageRenderer_Zoom,
-                                                                           //2,
-                                                                           //DockStyle.Fill,
-                                                                           //"FixedPanelUC_1",
-                                                                           //true,
-                                                                           //HingeOption._FrictionStay
+                                                                           1,
+                                                                           _frameModel.FrameImageRenderer_Zoom,
+                                                                           1,
+                                                                           DockStyle.Fill,
+                                                                           "FixedPanelUC_1",
+                                                                           true,
+                                                                           HingeOption._FrictionStay
                                                                            );
             _panelModel1_fixed1.Panel_Placement = "Last";
+            _panelModel1_fixed1.Panel_SashPropertyVisibility = false;
             _panelModel1_fixed1.Panel_GlassThickness = 14.0f;
             _panelModel1_fixed1.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel1_fixed1);
@@ -6514,7 +7210,9 @@ namespace ModelLayer.Tests
                                                                           _frameModel,
                                                                           _multiTransomModel1,
                                                                           PnlWidth1_Fix,
+                                                                          wd_decimal,
                                                                           PnlHeight1_Fix,
+                                                                          ht_decimal,
                                                                           GlazingBead_ArticleNo._2453,
                                                                           GlassFilm_Types._None,
                                                                           SashProfile_ArticleNo._None,
@@ -6552,15 +7250,16 @@ namespace ModelLayer.Tests
                                                                           0,
                                                                           false,
                                                                           2,
-                                                                          2
-                                                                          //_frameModel.FrameImageRenderer_Zoom,
-                                                                          //0,
-                                                                          //DockStyle.Fill,
-                                                                          //"FixedPanelUC_2",
-                                                                          //true,
-                                                                          //HingeOption._FrictionStay
+                                                                          2,
+                                                                          _frameModel.FrameImageRenderer_Zoom,
+                                                                          2,
+                                                                          DockStyle.Fill,
+                                                                          "FixedPanelUC_2",
+                                                                          true,
+                                                                          HingeOption._FrictionStay
                                                                           );
             _panelModel2_fixed2.Panel_Placement = "First";
+            _panelModel2_fixed2.Panel_SashPropertyVisibility = false;
             _panelModel2_fixed2.Panel_GlassThickness = 14.0f;
             _panelModel2_fixed2.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel1.MPanelLst_Panel.Add(_panelModel2_fixed2);
@@ -6610,7 +7309,9 @@ namespace ModelLayer.Tests
                                                                              _frameModel,
                                                                              _multiTransomModel1,
                                                                              PnlWidth2_Awning,
+                                                                             wd_decimal,
                                                                              PnlHeight2_Awning,
+                                                                             ht_decimal,
                                                                              GlazingBead_ArticleNo._2453,
                                                                              GlassFilm_Types._None,
                                                                              SashProfile_ArticleNo._7581,
@@ -6648,13 +7349,13 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               false,
                                                                               3,
-                                                                              3
-                                                                              //_frameModel.FrameImageRenderer_Zoom,
-                                                                              //2,
-                                                                              //DockStyle.Fill,
-                                                                              //"AwningPanelUC_3",
-                                                                              //true,
-                                                                              //HingeOption._FrictionStay
+                                                                              3,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              3,
+                                                                              DockStyle.Fill,
+                                                                              "AwningPanelUC_3",
+                                                                              true,
+                                                                              HingeOption._FrictionStay
                                                                               );
             _panelModel3_Awning1.Panel_Placement = "Last";
             _panelModel3_Awning1.Panel_GlassThickness = 14.0f;
@@ -6706,9 +7407,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1_fixed1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(700, _panelModel1_fixed1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1800, _panelModel1_fixed1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(625, _panelModel1_fixed1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1728, _panelModel1_fixed1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_fixed1.Panel_GlassHeightDecimal);
 
             #endregion
 
@@ -6716,9 +7422,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2_fixed2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel2_fixed2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(400, _panelModel2_fixed2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(725, _panelModel2_fixed2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassWidthDecimal);
             Assert.AreEqual(340, _panelModel2_fixed2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_fixed2.Panel_GlassHeightDecimal);
 
 
 
@@ -6732,18 +7443,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel3_Awning1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(750, _panelModel3_Awning1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1365, _panelModel3_Awning1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3_Awning1.Panel_SashProfileArtNo);
             Assert.AreEqual(750, _panelModel3_Awning1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashWidthDecimal);
             Assert.AreEqual(1365, _panelModel3_Awning1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3_Awning1.Panel_SashReinfArtNo);
             Assert.AreEqual(625, _panelModel3_Awning1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1240, _panelModel3_Awning1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(629, _panelModel3_Awning1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1244, _panelModel3_Awning1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3_Awning1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3_Awning1.Panel_CoverProfileArtNo);
@@ -6796,69 +7515,69 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            //p1
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //p2
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '800'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '400'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND
                              Size = '725'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P2) Height%' AND
                              Size = '340'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
-            //p2
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //p3
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '750'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P3) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1365'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Width%' AND
                              Size = '629'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P3) Height%' AND
                              Size = '1244'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
-            //p3
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Width%' AND
+            //p1
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2453%' AND
                              Size = '700'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glazing Bead Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2453%' AND
                              Size = '1800'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Width%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Size = '625'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%Glass Height%' AND
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
                              Size = '1728'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
@@ -6919,7 +7638,8 @@ namespace ModelLayer.Tests
            */
             int total_wd = 800, total_ht = 2200,
                PnlWidth1_Fix = 800, PnlHeight1_Fix = 600,
-               PnlWidth2_Awning = 800, PnlHeight2_Awning = 1000;
+               PnlWidth2_Awning = 800, PnlHeight2_Awning = 1000,
+               wd_decimal = 0, ht_decimal = 0;
 
 
 
@@ -6947,7 +7667,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -6987,7 +7709,9 @@ namespace ModelLayer.Tests
                                                                              _frameModel,
                                                                              _multiTransomModel,
                                                                              PnlWidth1_Fix,
+                                                                             wd_decimal,
                                                                              PnlHeight1_Fix,
+                                                                             ht_decimal,
                                                                              GlazingBead_ArticleNo._2453,
                                                                              GlassFilm_Types._None,
                                                                              SashProfile_ArticleNo._None,
@@ -7080,7 +7804,9 @@ namespace ModelLayer.Tests
                                                                              _frameModel,
                                                                              _multiTransomModel,
                                                                              PnlWidth2_Awning,
+                                                                             wd_decimal,
                                                                              PnlHeight2_Awning,
+                                                                             ht_decimal,
                                                                              GlazingBead_ArticleNo._2453,
                                                                              GlassFilm_Types._None,
                                                                              SashProfile_ArticleNo._7581,
@@ -7127,7 +7853,8 @@ namespace ModelLayer.Tests
                                                                               HingeOption._FrictionStay
                                                                               );
             _panelModel2_Awning.Panel_Placement = "Somewhere in Between";
-            _panelModel2_Awning.Panel_HingeOptionsVisibility = false;
+            _panelModel2_Awning.Panel_HingeOptionsVisibility = true;
+            _panelModel2_Awning.Panel_EspagnoletteOptionsVisibility = true;
             _panelModel2_Awning.Panel_GlassThickness = 6.0f;
             _panelModel2_Awning.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel2_Awning);
@@ -7173,7 +7900,9 @@ namespace ModelLayer.Tests
                                                                             _frameModel,
                                                                             _multiTransomModel,
                                                                             PnlWidth1_Fix,
+                                                                            wd_decimal,
                                                                             PnlHeight1_Fix,
+                                                                            ht_decimal,
                                                                             GlazingBead_ArticleNo._2453,
                                                                             GlassFilm_Types._None,
                                                                             SashProfile_ArticleNo._None,
@@ -7251,16 +7980,21 @@ namespace ModelLayer.Tests
             Assert.AreEqual((decimal)0.4224, _windoorModel.WD_PlasticCover);
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
-            //Assert.AreEqual(56, _qouteModel.Screws_for_Fabrication);
-            //Assert.AreEqual(37, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(60, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(37, _qouteModel.Screws_for_Installation);
 
             #region MultiTransom (3)
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel1_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(600, _panelModel1_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(728, _panelModel1_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(525, _panelModel1_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7538, _divTransomModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R686, _divTransomModel.Div_ReinfArtNo);
@@ -7275,18 +8009,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(753, _panelModel2_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(947, _panelModel2_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(628, _panelModel2_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(822, _panelModel2_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(753, _panelModel2_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(947, _panelModel2_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(632, _panelModel2_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(826, _panelModel2_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2_Awning.Panel_CoverProfileArtNo);
@@ -7311,9 +8053,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel3_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(600, _panelModel3_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(728, _panelModel3_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(525, _panelModel3_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlassHeightDecimal);
 
             #endregion
 
@@ -7464,8 +8211,6 @@ namespace ModelLayer.Tests
         }
 
 
-
-
         [TestMethod]
         public void ChkVar_4Panel_2FixWindow_2Awning()
         {
@@ -7487,7 +8232,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 3000, total_ht = 1700,
              PnlWidth1_Fix = 3000, PnlHeight1_Fix = 500,
-             EqualPnlWidth = 1000, PnlEqualHeight = 1200;
+             EqualPnlWidth = 1000, PnlEqualHeight = 1200,
+             wd_decimal = 0, ht_decimal = 0;
 
 
 
@@ -7514,7 +8260,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -7554,7 +8302,9 @@ namespace ModelLayer.Tests
                                                                             _frameModel,
                                                                             _multiTransomModel,
                                                                             PnlWidth1_Fix,
+                                                                            wd_decimal,
                                                                             PnlHeight1_Fix,
+                                                                            ht_decimal,
                                                                             GlazingBead_ArticleNo._2453,
                                                                             GlassFilm_Types._None,
                                                                             SashProfile_ArticleNo._None,
@@ -7592,15 +8342,16 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             false,
                                                                             1,
-                                                                            1
-                                                                            //_frameModel.FrameImageRenderer_Zoom,
-                                                                            //0,
-                                                                            //DockStyle.Fill,
-                                                                            //"FixedPanelUC_1",
-                                                                            //true,
-                                                                            //HingeOption._FrictionStay
+                                                                            1,
+                                                                            _frameModel.FrameImageRenderer_Zoom,
+                                                                            0,
+                                                                            DockStyle.Fill,
+                                                                            "FixedPanelUC_1",
+                                                                            true,
+                                                                            HingeOption._FrictionStay
                                                                             );
             _panelModel1_fixed.Panel_Placement = "First";
+            _panelModel1_fixed.Panel_SashPropertyVisibility = false;
             _panelModel1_fixed.Panel_GlassThickness = 14.0f;
             _panelModel1_fixed.Panel_Index_Inside_MPanel = 0;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel1_fixed);
@@ -7609,6 +8360,11 @@ namespace ModelLayer.Tests
             _multiTransomModel.MPanelLst_Objects.Add(Fixed1);
 
 
+            Dictionary<int, int> CladdingLst;
+            CladdingLst = new Dictionary<int, int>
+            {
+                { 1,3030}
+            };
             IDividerModel _divTransomModel = _dividerServices.AddDividerModel(_multiTransomModel.MPanel_Width,
                                                                            divSize,
                                                                            new Control(),
@@ -7624,7 +8380,7 @@ namespace ModelLayer.Tests
                                                                            _frameModel.FrameImageRenderer_Zoom,
                                                                            _frameModel.Frame_Type.ToString(),
                                                                            "TransomUC_1",
-                                                                           null,
+                                                                           CladdingLst,
                                                                            false,
                                                                            true,
                                                                            null);
@@ -7639,7 +8395,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel1 = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           total_wd,
+                                                                                          wd_decimal,
                                                                                           PnlEqualHeight,
+                                                                                          ht_decimal,
                                                                                           multiTransom,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -7682,7 +8440,9 @@ namespace ModelLayer.Tests
                                                                             _frameModel,
                                                                             _multiMullionModel1,
                                                                             EqualPnlWidth,
+                                                                            wd_decimal,
                                                                             PnlEqualHeight,
+                                                                            ht_decimal,
                                                                             GlazingBead_ArticleNo._2453,
                                                                             GlassFilm_Types._None,
                                                                             SashProfile_ArticleNo._7581,
@@ -7720,13 +8480,13 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             false,
                                                                             2,
-                                                                            2
-                                                                            //_frameModel.FrameImageRenderer_Zoom,
-                                                                            //0,
-                                                                            //DockStyle.Fill,
-                                                                            //"AwningPanelUC_2",
-                                                                            //true,
-                                                                            //HingeOption._FrictionStay
+                                                                            2,
+                                                                            _frameModel.FrameImageRenderer_Zoom,
+                                                                            0,
+                                                                            DockStyle.Fill,
+                                                                            "AwningPanelUC_2",
+                                                                            true,
+                                                                            HingeOption._FrictionStay
                                                                             );
             _panelModel2_Awning.Panel_Placement = "First";
             _panelModel2_Awning.Panel_GlassThickness = 14.0f;
@@ -7776,7 +8536,9 @@ namespace ModelLayer.Tests
                                                                             _frameModel,
                                                                             _multiMullionModel1,
                                                                             EqualPnlWidth,
+                                                                            wd_decimal,
                                                                             PnlEqualHeight,
+                                                                            ht_decimal,
                                                                             GlazingBead_ArticleNo._2453,
                                                                             GlassFilm_Types._None,
                                                                             SashProfile_ArticleNo._None,
@@ -7814,15 +8576,16 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             false,
                                                                             3,
-                                                                            3
-                                                                            //_frameModel.FrameImageRenderer_Zoom,
-                                                                            //2,
-                                                                            //DockStyle.Fill,
-                                                                            //"FixedPanelUC_3",
-                                                                            //true,
-                                                                            //HingeOption._FrictionStay
+                                                                            3,
+                                                                            _frameModel.FrameImageRenderer_Zoom,
+                                                                            2,
+                                                                            DockStyle.Fill,
+                                                                            "FixedPanelUC_3",
+                                                                            true,
+                                                                            HingeOption._FrictionStay
                                                                             );
             _panelModel3_fixed.Panel_Placement = "Somewhere in Between";
+            _panelModel3_fixed.Panel_SashPropertyVisibility = false;
             _panelModel3_fixed.Panel_GlassThickness = 14.0f;
             _panelModel3_fixed.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel1.MPanelLst_Panel.Add(_panelModel3_fixed);
@@ -7872,7 +8635,9 @@ namespace ModelLayer.Tests
                                                                             _frameModel,
                                                                             _multiMullionModel1,
                                                                             EqualPnlWidth,
+                                                                            wd_decimal,
                                                                             PnlEqualHeight,
+                                                                            ht_decimal,
                                                                             GlazingBead_ArticleNo._2453,
                                                                             GlassFilm_Types._None,
                                                                             SashProfile_ArticleNo._7581,
@@ -7910,13 +8675,13 @@ namespace ModelLayer.Tests
                                                                             0,
                                                                             false,
                                                                             4,
-                                                                            4
-                                                                            //_frameModel.FrameImageRenderer_Zoom,
-                                                                            //4,
-                                                                            //DockStyle.Fill,
-                                                                            //"AwningPanelUC_4",
-                                                                            //true,
-                                                                            //HingeOption._FrictionStay
+                                                                            4,
+                                                                            _frameModel.FrameImageRenderer_Zoom,
+                                                                            4,
+                                                                            DockStyle.Fill,
+                                                                            "AwningPanelUC_4",
+                                                                            true,
+                                                                            HingeOption._FrictionStay
                                                                             );
             _panelModel4_Awning.Panel_Placement = "Last";
             _panelModel4_Awning.Panel_GlassThickness = 14.0f;
@@ -7957,14 +8722,25 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(3000, _panelModel1_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(500, _panelModel1_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(2928, _panelModel1_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(425, _panelModel1_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7538, _divTransomModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R686, _divTransomModel.Div_ReinfArtNo);
             Assert.AreEqual(2942, _divTransomModel.Div_ExplosionWidth);
             Assert.AreEqual(2832, _divTransomModel.Div_ReinfWidth);
+            Assert.AreEqual(CladdingProfile_ArticleNo._1338, _divTransomModel.Div_CladdingProfileArtNo);
+            Assert.AreEqual(CladdingReinf_ArticleNo._9120, _divTransomModel.Div_CladdingReinfArtNo);
+            Assert.AreEqual(CladdingLst, _divTransomModel.Div_CladdingSizeList);
+
+
+
 
             //multiMullion(3)
 
@@ -8012,9 +8788,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel3_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1000, _panelModel3_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1200, _panelModel3_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(952, _panelModel3_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(1125, _panelModel3_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3_fixed.Panel_GlassHeightDecimal);
 
 
             Assert.AreEqual(Divider_ArticleNo._7536, _divMullionModel.Div_ArtNo);
@@ -8026,18 +8807,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel4_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(965, _panelModel4_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1150, _panelModel4_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel4_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(840, _panelModel4_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1025, _panelModel4_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel4_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(965, _panelModel4_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1150, _panelModel4_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(844, _panelModel4_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1029, _panelModel4_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel4_Awning.Panel_CoverProfileArtNo);
@@ -8091,6 +8880,20 @@ namespace ModelLayer.Tests
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1025'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cladding Profile%' AND
+                             Description LIKE '%1338%' AND
+                             Size = '3030'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cladding Reinforcement%' AND
+                             Description LIKE '%9120%' AND
+                             Size = '3000'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+
 
             //p1
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
@@ -8264,8 +9067,8 @@ namespace ModelLayer.Tests
                     |/______________\|
               */
 
-            int total_wd = 1000, total_height = 500;
-
+            int total_wd = 1000, total_height = 500,
+                wd_decimal = 0, ht_decimal = 0;
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._DarkBrown, Foil_Color._CharcoalGray, Foil_Color._CharcoalGray);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
 
@@ -8297,7 +9100,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_height,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -8367,22 +9172,31 @@ namespace ModelLayer.Tests
             Assert.AreEqual(5, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(20, _qouteModel.Rebate_Qty);
             Assert.AreEqual(22, _qouteModel.Screws_for_Fabrication);
-            Assert.AreEqual(33, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(37, _qouteModel.Screws_for_Installation);
 
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(925, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(425, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel.Panel_SashProfileArtNo);
             Assert.AreEqual(425, _panelModel.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashHeightDecimal);
             Assert.AreEqual(925, _panelModel.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashWidthDecimal);
+
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel.Panel_SashReinfArtNo);
             Assert.AreEqual(800, _panelModel.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(300, _panelModel.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(804, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(304, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARWARE
@@ -8525,7 +9339,8 @@ namespace ModelLayer.Tests
                     |/______________\|
               */
 
-            int total_wd = 1500, total_height = 1500;
+            int total_wd = 1500, total_height = 1500,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._DarkBrown, Foil_Color._CharcoalGray, Foil_Color._CharcoalGray);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -8558,7 +9373,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_height,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -8628,22 +9445,31 @@ namespace ModelLayer.Tests
             Assert.AreEqual(9, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(36, _qouteModel.Rebate_Qty);
             Assert.AreEqual(42, _qouteModel.Screws_for_Fabrication);
-            Assert.AreEqual(63, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(67, _qouteModel.Screws_for_Installation);
 
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel.PanelGlazingBead_ArtNo);
             Assert.AreEqual(1425, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1425, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel.Panel_SashProfileArtNo);
             Assert.AreEqual(1425, _panelModel.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashHeightDecimal);
             Assert.AreEqual(1425, _panelModel.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashWidthDecimal);
+
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel.Panel_SashReinfArtNo);
             Assert.AreEqual(1300, _panelModel.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1300, _panelModel.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(1304, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
             Assert.AreEqual(1304, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARWARE
@@ -8794,7 +9620,8 @@ namespace ModelLayer.Tests
          */
 
             int total_wd = 800, total_ht = 900,
-            EqualPnlWidth = 800, EqualPnlHeight = 450;
+            EqualPnlWidth = 800, EqualPnlHeight = 450,
+            wd_decimal = 0, ht_decimal = 0;
 
 
 
@@ -8821,7 +9648,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -8862,7 +9691,9 @@ namespace ModelLayer.Tests
                                                                           _frameModel,
                                                                           _multiTransomModel,
                                                                           EqualPnlWidth,
+                                                                          wd_decimal,
                                                                           EqualPnlHeight,
+                                                                          ht_decimal,
                                                                           GlazingBead_ArticleNo._2453,
                                                                           GlassFilm_Types._None,
                                                                           SashProfile_ArticleNo._None,
@@ -8957,7 +9788,9 @@ namespace ModelLayer.Tests
                                                                                    _frameModel,
                                                                                     _multiTransomModel,
                                                                                    EqualPnlWidth,
+                                                                                   wd_decimal,
                                                                                    EqualPnlHeight,
+                                                                                   ht_decimal,
                                                                                    GlazingBead_ArticleNo._2453,
                                                                                    GlassFilm_Types._None,
                                                                                    SashProfile_ArticleNo._7581,
@@ -9009,7 +9842,7 @@ namespace ModelLayer.Tests
             _panelModel2_MotorizeAwning.Panel_MotorizedOptionVisibility = true;
             _panelModel2_MotorizeAwning.Panel_MotorizedpnlOptionVisibility = true;
             _panelModel2_MotorizeAwning.Panel_MotorizedMechSetQty = 1;
-            _panelModel2_MotorizeAwning.Panel_2DHingeQty = 1;
+            _panelModel2_MotorizeAwning.Panel_2DHingeQty = 3;
             _panelModel2_MotorizeAwning.Panel_CornerDriveOptionsVisibility = false;
             _panelModel2_MotorizeAwning.Panel_Index_Inside_MPanel = 2;
             _multiTransomModel.MPanelLst_Panel.Add(_panelModel2_MotorizeAwning);
@@ -9036,8 +9869,8 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1440000, _qouteModel.Plastic_CoverQty_Total);
             Assert.AreEqual(5, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(20, _qouteModel.Rebate_Qty);
-            Assert.AreEqual(25, _qouteModel.Screws_for_Fabrication);
-            Assert.AreEqual(36, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(31, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(40, _qouteModel.Screws_for_Installation);
 
 
 
@@ -9046,9 +9879,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(800, _panelModel1_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(450, _panelModel1_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(728, _panelModel1_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(390, _panelModel1_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_fixed.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(Divider_ArticleNo._7536, _divTransomModel.Div_ArtNo);
             Assert.AreEqual(DividerReinf_ArticleNo._R677, _divTransomModel.Div_ReinfArtNo);
@@ -9060,17 +9898,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_MotorizeAwning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(753, _panelModel2_MotorizeAwning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(415, _panelModel2_MotorizeAwning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2_MotorizeAwning.Panel_SashProfileArtNo);
             Assert.AreEqual(415, _panelModel2_MotorizeAwning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_SashHeightDecimal);
             Assert.AreEqual(753, _panelModel2_MotorizeAwning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_SashWidthDecimal);
+
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2_MotorizeAwning.Panel_SashReinfArtNo);
             Assert.AreEqual(628, _panelModel2_MotorizeAwning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(290, _panelModel2_MotorizeAwning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(632, _panelModel2_MotorizeAwning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_GlassWidthDecimal);
             Assert.AreEqual(294, _panelModel2_MotorizeAwning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_MotorizeAwning.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARWARE
@@ -9196,7 +10043,7 @@ namespace ModelLayer.Tests
             dr = dt.Select(@"Description LIKE '%2D Hinge%' AND
                             Description LIKE '%614293%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("1", dr[0]["Qty"]);
+            Assert.AreEqual("3", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Push Button Switch%' AND
@@ -9251,7 +10098,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 2100, total_ht = 1800,
                 AwningWD1 = 704, AwningHT1 = 1800,
-                AwningWD2 = 692, AwningHT2 = 1800;
+                AwningWD2 = 692, AwningHT2 = 1800,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._Walnut, Foil_Color._Walnut);
@@ -9277,7 +10125,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -9320,7 +10170,9 @@ namespace ModelLayer.Tests
                                                                                 _frameModel,
                                                                                  _multiMullionModel,
                                                                                 AwningWD1,
+                                                                                wd_decimal,
                                                                                 AwningHT1,
+                                                                                ht_decimal,
                                                                                 GlazingBead_ArticleNo._2435,
                                                                                 GlassFilm_Types._None,
                                                                                 SashProfile_ArticleNo._7581,
@@ -9358,13 +10210,13 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 false,
                                                                                 1,
-                                                                                1
-                                                                                //_frameModel.FrameImageRenderer_Zoom,
-                                                                                //0,
-                                                                                //DockStyle.Fill,
-                                                                                //"AwningPanelUC_1",
-                                                                                //true,
-                                                                                //HingeOption._FrictionStay
+                                                                                1,
+                                                                                _frameModel.FrameImageRenderer_Zoom,
+                                                                                1,
+                                                                                DockStyle.Fill,
+                                                                                "AwningPanelUC_1",
+                                                                                true,
+                                                                                HingeOption._FrictionStay
                                                                                 );
             _panelModel1_Awning.Panel_Placement = "First";
             _panelModel1_Awning.Panel_GlassThickness = 24.0f;
@@ -9416,7 +10268,9 @@ namespace ModelLayer.Tests
                                                                                 _frameModel,
                                                                                  _multiMullionModel,
                                                                                 AwningWD2,
+                                                                                wd_decimal,
                                                                                 AwningHT2,
+                                                                                ht_decimal,
                                                                                 GlazingBead_ArticleNo._2435,
                                                                                 GlassFilm_Types._None,
                                                                                 SashProfile_ArticleNo._7581,
@@ -9454,13 +10308,13 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 false,
                                                                                 2,
-                                                                                2
-                                                                                //_frameModel.FrameImageRenderer_Zoom,
-                                                                                //2,
-                                                                                //DockStyle.Fill,
-                                                                                //"AwningPanelUC_2",
-                                                                                //true,
-                                                                                //HingeOption._FrictionStay
+                                                                                2,
+                                                                                _frameModel.FrameImageRenderer_Zoom,
+                                                                                2,
+                                                                                DockStyle.Fill,
+                                                                                "AwningPanelUC_2",
+                                                                                true,
+                                                                                HingeOption._FrictionStay
                                                                                 );
             _panelModel2_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel2_Awning.Panel_GlassThickness = 24.0f;
@@ -9512,7 +10366,9 @@ namespace ModelLayer.Tests
                                                                                 _frameModel,
                                                                                  _multiMullionModel,
                                                                                 AwningWD1,
+                                                                                wd_decimal,
                                                                                 AwningHT1,
+                                                                                ht_decimal,
                                                                                 GlazingBead_ArticleNo._2435,
                                                                                 GlassFilm_Types._None,
                                                                                 SashProfile_ArticleNo._7581,
@@ -9550,13 +10406,13 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 false,
                                                                                 3,
-                                                                                3
-                                                                                //_frameModel.FrameImageRenderer_Zoom,
-                                                                                //4,
-                                                                                //DockStyle.Fill,
-                                                                                //"AwningPanelUC_3",
-                                                                                //true,
-                                                                                //HingeOption._FrictionStay
+                                                                                3,
+                                                                                _frameModel.FrameImageRenderer_Zoom,
+                                                                                3,
+                                                                                DockStyle.Fill,
+                                                                                "AwningPanelUC_3",
+                                                                                true,
+                                                                                HingeOption._FrictionStay
                                                                                 );
             _panelModel3_Awning.Panel_Placement = "Last";
             _panelModel3_Awning.Panel_GlassThickness = 24.0f;
@@ -9598,18 +10454,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(544, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1628, _panelModel1_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel1_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(548, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1632, _panelModel1_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
@@ -9634,18 +10498,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(544, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1628, _panelModel1_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel1_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(548, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1632, _panelModel1_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
@@ -9671,18 +10543,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(544, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1628, _panelModel1_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2435, _panelModel1_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(669, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1753, _panelModel1_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(548, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(1632, _panelModel1_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
@@ -9864,7 +10744,8 @@ namespace ModelLayer.Tests
                 BalanceAwningWD1 = 508, AwningHT1 = 1100,
                 BalanceAwningWD3 = 496, AwningHT3 = 1100,
                 BalanceFixedWD2 = 496, FixedHT2 = 1100,
-                BalanceFixedWD6 = 508, FixedHT6 = 1100;
+                BalanceFixedWD6 = 508, FixedHT6 = 1100,
+                wd_decimal = 0, ht_decimal = 0;
 
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Graphite);
@@ -9890,7 +10771,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -9933,7 +10816,9 @@ namespace ModelLayer.Tests
                                                                                 _frameModel,
                                                                                  _multiMullionModel,
                                                                                 BalanceAwningWD1,
+                                                                                wd_decimal,
                                                                                 AwningHT1,
+                                                                                ht_decimal,
                                                                                 GlazingBead_ArticleNo._2452,
                                                                                 GlassFilm_Types._None,
                                                                                 SashProfile_ArticleNo._7581,
@@ -9971,13 +10856,13 @@ namespace ModelLayer.Tests
                                                                                 0,
                                                                                 false,
                                                                                 1,
-                                                                                1
-                                                                                //_frameModel.FrameImageRenderer_Zoom,
-                                                                                //0,
-                                                                                //DockStyle.Fill,
-                                                                                //"AwningPanelUC_1",
-                                                                                //true,
-                                                                                //HingeOption._FrictionStay
+                                                                                1,
+                                                                                _frameModel.FrameImageRenderer_Zoom,
+                                                                                1,
+                                                                                DockStyle.Fill,
+                                                                                "AwningPanelUC_1",
+                                                                                true,
+                                                                                HingeOption._FrictionStay
                                                                                 );
             _panelModel1_Awning.Panel_Placement = "First";
             _panelModel1_Awning.Panel_GlassThickness = 6.0f;
@@ -10029,7 +10914,9 @@ namespace ModelLayer.Tests
                                                                           _frameModel,
                                                                           _multiMullionModel,
                                                                           BalanceFixedWD2,
+                                                                          wd_decimal,
                                                                           FixedHT2,
+                                                                          ht_decimal,
                                                                           GlazingBead_ArticleNo._2452,
                                                                           GlassFilm_Types._None,
                                                                           SashProfile_ArticleNo._None,
@@ -10067,15 +10954,16 @@ namespace ModelLayer.Tests
                                                                           0,
                                                                           false,
                                                                           2,
-                                                                          2
-                                                                          //_frameModel.FrameImageRenderer_Zoom,
-                                                                          //2,
-                                                                          //DockStyle.Fill,
-                                                                          //"FixedPanelUC_2",
-                                                                          //true,
-                                                                          //HingeOption._FrictionStay
+                                                                          2,
+                                                                          _frameModel.FrameImageRenderer_Zoom,
+                                                                          2,
+                                                                          DockStyle.Fill,
+                                                                          "FixedPanelUC_2",
+                                                                          true,
+                                                                          HingeOption._FrictionStay
                                                                           );
             _panelModel2_fixed.Panel_Placement = "Somewhere in Between";
+            _panelModel2_fixed.Panel_SashPropertyVisibility = false;
             _panelModel2_fixed.Panel_GlassThickness = 6.0f;
             _panelModel2_fixed.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2_fixed);
@@ -10122,7 +11010,9 @@ namespace ModelLayer.Tests
                                                                                _frameModel,
                                                                                 _multiMullionModel,
                                                                                BalanceAwningWD3,
+                                                                               wd_decimal,
                                                                                AwningHT3,
+                                                                               ht_decimal,
                                                                                GlazingBead_ArticleNo._2452,
                                                                                GlassFilm_Types._None,
                                                                                SashProfile_ArticleNo._7581,
@@ -10160,13 +11050,13 @@ namespace ModelLayer.Tests
                                                                                0,
                                                                                false,
                                                                                3,
-                                                                               3
-                                                                               //_frameModel.FrameImageRenderer_Zoom,
-                                                                               //4,
-                                                                               //DockStyle.Fill,
-                                                                               //"AwningPanelUC_3",
-                                                                               //true,
-                                                                               //HingeOption._FrictionStay
+                                                                               3,
+                                                                               _frameModel.FrameImageRenderer_Zoom,
+                                                                               3,
+                                                                               DockStyle.Fill,
+                                                                               "AwningPanelUC_3",
+                                                                               true,
+                                                                               HingeOption._FrictionStay
                                                                                );
             _panelModel3_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel3_Awning.Panel_GlassThickness = 6.0f;
@@ -10216,7 +11106,9 @@ namespace ModelLayer.Tests
                                                                  _frameModel,
                                                                  _multiMullionModel,
                                                                  BalanceFixedWD2,
+                                                                 wd_decimal,
                                                                  FixedHT2,
+                                                                 ht_decimal,
                                                                  GlazingBead_ArticleNo._2452,
                                                                  GlassFilm_Types._None,
                                                                  SashProfile_ArticleNo._None,
@@ -10254,15 +11146,16 @@ namespace ModelLayer.Tests
                                                                  0,
                                                                  false,
                                                                  4,
-                                                                 4
-                                                                 //_frameModel.FrameImageRenderer_Zoom,
-                                                                 //6,
-                                                                 //DockStyle.Fill,
-                                                                 //"FixedPanelUC_4",
-                                                                 //true,
-                                                                 //HingeOption._FrictionStay
+                                                                 4,
+                                                                 _frameModel.FrameImageRenderer_Zoom,
+                                                                 4,
+                                                                 DockStyle.Fill,
+                                                                 "FixedPanelUC_4",
+                                                                 true,
+                                                                 HingeOption._FrictionStay
                                                                  );
             _panelModel4_fixed.Panel_Placement = "Somewhere in Between";
+            _panelModel4_fixed.Panel_SashPropertyVisibility = false;
             _panelModel4_fixed.Panel_GlassThickness = 6.0f;
             _panelModel4_fixed.Panel_Index_Inside_MPanel = 6;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel4_fixed);
@@ -10309,7 +11202,9 @@ namespace ModelLayer.Tests
                                                                               _frameModel,
                                                                                _multiMullionModel,
                                                                               BalanceAwningWD3,
+                                                                              wd_decimal,
                                                                               AwningHT3,
+                                                                              ht_decimal,
                                                                               GlazingBead_ArticleNo._2452,
                                                                               GlassFilm_Types._None,
                                                                               SashProfile_ArticleNo._7581,
@@ -10347,13 +11242,13 @@ namespace ModelLayer.Tests
                                                                               0,
                                                                               false,
                                                                               5,
-                                                                              5
-                                                                              //_frameModel.FrameImageRenderer_Zoom,
-                                                                              //8,
-                                                                              //DockStyle.Fill,
-                                                                              //"AwningPanelUC_5",
-                                                                              //true,
-                                                                              //HingeOption._FrictionStay
+                                                                              5,
+                                                                              _frameModel.FrameImageRenderer_Zoom,
+                                                                              5,
+                                                                              DockStyle.Fill,
+                                                                              "AwningPanelUC_5",
+                                                                              true,
+                                                                              HingeOption._FrictionStay
                                                                               );
             _panelModel5_Awning.Panel_Placement = "Somewhere in Between";
             _panelModel5_Awning.Panel_GlassThickness = 6.0f;
@@ -10403,7 +11298,9 @@ namespace ModelLayer.Tests
                                                                         _frameModel,
                                                                         _multiMullionModel,
                                                                         BalanceFixedWD6,
+                                                                        wd_decimal,
                                                                         FixedHT6,
+                                                                        ht_decimal,
                                                                         GlazingBead_ArticleNo._2452,
                                                                         GlassFilm_Types._None,
                                                                         SashProfile_ArticleNo._None,
@@ -10441,15 +11338,16 @@ namespace ModelLayer.Tests
                                                                         0,
                                                                         false,
                                                                         6,
-                                                                        6
-                                                                        //_frameModel.FrameImageRenderer_Zoom,
-                                                                        //10,
-                                                                        //DockStyle.Fill,
-                                                                        //"FixedPanelUC_6",
-                                                                        //true,
-                                                                        //HingeOption._FrictionStay
+                                                                        6,
+                                                                        _frameModel.FrameImageRenderer_Zoom,
+                                                                        6,
+                                                                        DockStyle.Fill,
+                                                                        "FixedPanelUC_6",
+                                                                        true,
+                                                                        HingeOption._FrictionStay
                                                                         );
             _panelModel6_fixed.Panel_Placement = "Last";
+            _panelModel6_fixed.Panel_SashPropertyVisibility = false;
             _panelModel6_fixed.Panel_GlassThickness = 6.0f;
             _panelModel6_fixed.Panel_Index_Inside_MPanel = 10;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel6_fixed);
@@ -10488,18 +11386,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(473, _panelModel1_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel1_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(348, _panelModel1_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel1_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(473, _panelModel1_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel1_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(352, _panelModel1_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel1_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1_Awning.Panel_CoverProfileArtNo);
@@ -10523,27 +11429,40 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(496, _panelModel2_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1100, _panelModel2_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(448, _panelModel2_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(1028, _panelModel2_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2_fixed.Panel_GlassHeightDecimal);
 
 
             #region AwningUC_2
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(473, _panelModel3_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel3_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(348, _panelModel3_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel3_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(473, _panelModel3_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel3_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(352, _panelModel3_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel3_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel3_Awning.Panel_CoverProfileArtNo);
@@ -10567,9 +11486,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(496, _panelModel4_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel4_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1100, _panelModel4_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(448, _panelModel4_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel4_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(1028, _panelModel4_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4_fixed.Panel_GlassHeightDecimal);
 
 
 
@@ -10577,18 +11501,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel5_Awning.Panel_SashProfileArtNo);
             Assert.AreEqual(473, _panelModel5_Awning.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel5_Awning.Panel_SashWidthDecimal);
             Assert.AreEqual(1053, _panelModel5_Awning.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel5_Awning.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel5_Awning.Panel_SashReinfArtNo);
             Assert.AreEqual(348, _panelModel5_Awning.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel5_Awning.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(928, _panelModel5_Awning.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel5_Awning.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5_Awning.PanelGlazingBead_ArtNo);
             Assert.AreEqual(473, _panelModel5_Awning.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel5_Awning.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1053, _panelModel5_Awning.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel5_Awning.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(352, _panelModel5_Awning.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel5_Awning.Panel_GlassWidthDecimal);
             Assert.AreEqual(932, _panelModel5_Awning.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5_Awning.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARE
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel5_Awning.Panel_CoverProfileArtNo);
@@ -10612,9 +11544,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel6_fixed.PanelGlazingBead_ArtNo);
             Assert.AreEqual(508, _panelModel6_fixed.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel6_fixed.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1100, _panelModel6_fixed.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel6_fixed.Panel_GlazingBeadHeightDecimal);
+
             Assert.AreEqual(448, _panelModel6_fixed.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel6_fixed.Panel_GlassWidthDecimal);
             Assert.AreEqual(1028, _panelModel6_fixed.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel6_fixed.Panel_GlassHeightDecimal);
 
             #endregion
 
@@ -10869,9 +11806,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -10896,7 +11833,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -10940,7 +11879,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -11034,7 +11975,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -11119,18 +12062,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(690, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1553, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(690, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1553, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(565, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1428, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(569, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1432, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -11187,18 +12138,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(690, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1553, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(690, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1553, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(565, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1428, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(569, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1432, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -11377,7 +12336,8 @@ namespace ModelLayer.Tests
 
             int total_wd = 1450,
                 total_ht = 1600,
-                eqpanelWD = 725;
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -11402,7 +12362,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -11446,7 +12408,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -11550,7 +12514,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -11637,18 +12603,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(696, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1553, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(696, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1553, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(571, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1428, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(575, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1432, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
@@ -11705,18 +12679,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(696, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1553, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(696, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1553, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(571, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1428, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(575, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1432, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
 
 
@@ -11922,9 +12904,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1900,
-                total_ht = 2147,
-                eqpanelWD = 950;
+            int total_wd = 1900, total_ht = 2147,
+                eqpanelWD = 950,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -11949,7 +12931,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -11993,7 +12977,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -12102,7 +13088,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._None,
@@ -12189,18 +13177,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(900, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2100, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(900, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(2100, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(775, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1975, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(779, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1979, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -12258,10 +13254,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(950, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2147, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(875, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(2075, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES 
             Assert.AreEqual(1, _panelModel2.Panel_GlazingSpacerQty);
@@ -12451,9 +13451,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -12478,7 +13478,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -12522,7 +13524,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -12617,7 +13621,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -12703,18 +13709,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(676, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1525, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(676, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1525, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(551, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1400, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(555, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1404, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -12772,18 +13786,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(676, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1525, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(676, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1525, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(551, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1400, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(555, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1404, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -12966,9 +13988,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -12993,7 +14015,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -13036,7 +14060,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -13137,7 +14163,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -13224,18 +14252,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(682, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1525, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(682, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1525, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(557, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1400, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(561, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1404, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
@@ -13284,23 +14320,30 @@ namespace ModelLayer.Tests
 
             #endregion
 
-
             #region CW2
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(682, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1525, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(682, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1525, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(557, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1400, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(561, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1404, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
 
 
@@ -13485,7 +14528,7 @@ namespace ModelLayer.Tests
 
         }
 
-
+        //With Glass Balancing
         [TestMethod]
         public void ChkVar_5PanelCasementWindowSample_A2_UsingDummyMullion()
         {
@@ -13505,9 +14548,11 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 2440, CW_PanelWD2 = 616, CW_PanelWD3 = 604,
+            int total_wd = 2440, CW_PanelWD2 = 615, CW_PanelWD3 = 604,
                 total_ht = 2220, CW_EqualPanelHT = 1900,
-                FW_PanelHT1 = 320;
+                FW_PanelHT1 = 320,
+                FW1_wd_decimal = 0, FW1_ht_decimal = 0,
+                CW1_wd_decimal = 5, CW1_ht_decimal = 0;
 
 
 
@@ -13535,7 +14580,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                         ht,
                                                                                         total_wd,
+                                                                                        FW1_wd_decimal,
                                                                                         total_ht,
+                                                                                        FW1_ht_decimal,
                                                                                         frame,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -13575,7 +14622,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiTransomModel,
                                                                     total_wd,
+                                                                    FW1_wd_decimal,
                                                                     FW_PanelHT1,
+                                                                    FW1_ht_decimal,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -13671,7 +14720,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           total_wd,
+                                                                                          FW1_wd_decimal,
                                                                                           CW_EqualPanelHT,
+                                                                                          FW1_ht_decimal,
                                                                                           multiTransom,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -13719,7 +14770,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    CW_PanelWD2,
+                                                                   CW1_wd_decimal,
                                                                    CW_EqualPanelHT,
+                                                                   CW1_ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -13770,7 +14823,7 @@ namespace ModelLayer.Tests
             _panelModel2.Panel_GlassThickness = 6.0f;
             _panelModel2.Panel_CornerDriveOptionsVisibility = false;
             _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
-            _panelModel2.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel2.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel2.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
             Control Casement2 = new Control();
@@ -13821,7 +14874,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       CW_PanelWD3,
+                                                                      CW1_wd_decimal,
                                                                       CW_EqualPanelHT,
+                                                                      CW1_ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -13872,7 +14927,7 @@ namespace ModelLayer.Tests
             _panelModel3.Panel_CornerDriveOptionsVisibility = true;
             _panelModel3.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
             _panelModel3.Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
-            _panelModel3.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel3.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel3.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel3);
             Control Casement3 = new Control();
@@ -13924,7 +14979,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    CW_PanelWD3,
+                                                                   CW1_wd_decimal,
                                                                    CW_EqualPanelHT,
+                                                                   CW1_ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -13975,7 +15032,7 @@ namespace ModelLayer.Tests
             _panelModel4.Panel_GlassThickness = 6.0f;
             _panelModel4.Panel_CornerDriveOptionsVisibility = false;
             _panelModel4.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
-            _panelModel4.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel4.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel4.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel4);
             Control Casement4 = new Control();
@@ -14026,7 +15083,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       CW_PanelWD2,
+                                                                      CW1_wd_decimal,
                                                                       CW_EqualPanelHT,
+                                                                      CW1_ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._7581,
@@ -14077,7 +15136,7 @@ namespace ModelLayer.Tests
             _panelModel5.Panel_CornerDriveOptionsVisibility = true;
             _panelModel5.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._639958;
             _panelModel5.Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
-            _panelModel5.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel5.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel5.Panel_Index_Inside_MPanel = 6;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel5);
             Control Casement5 = new Control();
@@ -14115,11 +15174,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(2440, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(320, _panelModel1.Panel_GlazingBeadHeight);
-
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(2340, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(231, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
 
@@ -14141,21 +15203,29 @@ namespace ModelLayer.Tests
             #region CW2
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(573, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(572, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1836, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel2.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel2.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel2.Panel_SashProfileArtNo);
-            Assert.AreEqual(573, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(572, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1836, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel2.Panel_SashReinfArtNo);
-            Assert.AreEqual(448, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(447, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1711, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
-            Assert.AreEqual(452, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(451, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1715, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -14210,21 +15280,29 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(572, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1836, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel3.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel3.Panel_GBSpacerArtNo);
 
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel3.Panel_SashProfileArtNo);
             Assert.AreEqual(572, _panelModel3.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_SashWidthDecimal);
             Assert.AreEqual(1836, _panelModel3.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel3.Panel_SashReinfArtNo);
             Assert.AreEqual(447, _panelModel3.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1711, _panelModel3.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(451, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(1715, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
 
 
 
@@ -14283,20 +15361,28 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(572, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1836, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel4.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel4.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel4.Panel_SashProfileArtNo);
             Assert.AreEqual(572, _panelModel4.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_SashWidthDecimal);
             Assert.AreEqual(1836, _panelModel4.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel4.Panel_SashReinfArtNo);
             Assert.AreEqual(447, _panelModel4.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1711, _panelModel4.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(451, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(1715, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel4.Panel_CoverProfileArtNo);
@@ -14349,21 +15435,29 @@ namespace ModelLayer.Tests
             #region CW5
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(573, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(572, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(572, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(1836, _panelModel5.Panel_GlazingBeadHeight);
             Assert.AreEqual(1836, _panelModel5.Panel_GlazingBeadHeight);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel5.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel5.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel5.Panel_SashProfileArtNo);
-            Assert.AreEqual(573, _panelModel5.Panel_SashWidth);
+            Assert.AreEqual(572, _panelModel5.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_SashWidthDecimal);
             Assert.AreEqual(1836, _panelModel5.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel5.Panel_SashReinfArtNo);
-            Assert.AreEqual(448, _panelModel5.Panel_SashReinfWidth);
+            Assert.AreEqual(447, _panelModel5.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1711, _panelModel5.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_SashReinfHeightDecimal);
 
-            Assert.AreEqual(452, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(451, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_GlassWidthDecimal);
             Assert.AreEqual(1715, _panelModel5.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassHeightDecimal);
 
 
 
@@ -14433,11 +15527,9 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Sash Width 7581' AND Size = '572'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("8", dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Sash Width 7581' AND Size = '573'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+
 
             dr = dt.Select("Description = 'Sash Height 7581' AND Size = '1836'");
             Assert.AreEqual(1, dr.Length);
@@ -14445,20 +15537,18 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '447'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("8", dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Sash Reinf Width R675' AND Size = '448'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+
 
             dr = dt.Select("Description = 'Sash Reinf Height R675' AND Size = '1711'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("8", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("32", dr[0]["Qty"]);
+            Assert.AreEqual("16", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
@@ -14474,7 +15564,7 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2452%' AND
-                             Size = '573'");
+                             Size = '572'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -14511,7 +15601,7 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Width%' AND
                              Description LIKE '%2452%' AND
-                             Size = '573'");
+                             Size = '572'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -14533,7 +15623,7 @@ namespace ModelLayer.Tests
 
 
             dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND 
-                             Size = '452'");
+                             Size = '451'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
@@ -14563,7 +15653,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass (P5) Width%' AND 
-                             Size = '452'");
+                             Size = '451'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
@@ -14654,9 +15744,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -14681,7 +15771,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         wd_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -14725,7 +15817,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -14826,7 +15920,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._374,
@@ -14917,18 +16013,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(663, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(663, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(568, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1432, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(480, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1344, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -14986,18 +16090,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(663, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(663, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(568, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1432, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(480, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1344, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -15199,9 +16311,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -15226,7 +16338,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -15269,7 +16383,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -15375,7 +16491,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._374,
@@ -15468,18 +16586,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(687, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(687, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(592, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1432, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(504, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1344, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
@@ -15534,18 +16660,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(687, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(687, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(592, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1432, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(504, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1344, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
 
 
@@ -15557,7 +16691,6 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Rio_HandleArtNo._C050C108019, _panelModel2.Panel_RioArtNo);
             Assert.AreEqual(ProfileKnobCylinder_ArtNo._45x45, _panelModel2.Panel_ProfileKnobCylinderArtNo);
             Assert.AreEqual(Cylinder_CoverArtNo._EPSW_8022_823332, _panelModel2.Panel_CylinderCoverArtNo);
-            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel2.Panel_AdjStrikerArtNo);
             Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel2.Panel_3dHingeArtNo);
             Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel2.Panel_RestrictorStayArtNo);
             Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel2.Panel_CornerDriveArtNo);
@@ -15703,6 +16836,7 @@ namespace ModelLayer.Tests
 
         }
 
+        //with Glass Balancing
         [TestMethod]
         public void ChkVar_5PanelCasementWindowSample_B2_UsingDummyMullion()
         {
@@ -15722,9 +16856,11 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 2440, CW_PanelWD2 = 616, CW_PanelWD3 = 604,
+            int total_wd = 2440, CW_PanelWD2 = 615, CW_PanelWD3 = 604,
                 total_ht = 2220, CW_EqualPanelHT = 1900,
-                FW_PanelHT1 = 320;
+                FW_PanelHT1 = 320,
+                FW1_wd_decimal = 0, FW1_ht_decimal = 0,
+                CW1_wd_decimal = 5, CW1_ht_decimal = 0;
 
 
 
@@ -15752,7 +16888,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiTransomModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                         ht,
                                                                                         total_wd,
+                                                                                        FW1_wd_decimal,
                                                                                         total_ht,
+                                                                                        FW1_ht_decimal,
                                                                                         frame,
                                                                                         new UserControl(),
                                                                                         _frameModel,
@@ -15792,7 +16930,9 @@ namespace ModelLayer.Tests
                                                                     _frameModel,
                                                                     _multiTransomModel,
                                                                     total_wd,
+                                                                    FW1_wd_decimal,
                                                                     FW_PanelHT1,
+                                                                    FW1_ht_decimal,
                                                                     GlazingBead_ArticleNo._2453,
                                                                     GlassFilm_Types._None,
                                                                     SashProfile_ArticleNo._None,
@@ -15888,7 +17028,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(suggest_Wd,
                                                                                           suggest_HT,
                                                                                           total_wd,
+                                                                                          FW1_wd_decimal,
                                                                                           CW_EqualPanelHT,
+                                                                                          FW1_ht_decimal,
                                                                                           multiTransom,
                                                                                           new UserControl(),
                                                                                           _frameModel,
@@ -15936,7 +17078,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    CW_PanelWD2,
+                                                                   CW1_wd_decimal,
                                                                    CW_EqualPanelHT,
+                                                                   CW1_ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -15989,7 +17133,7 @@ namespace ModelLayer.Tests
             _panelModel2.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
             _panelModel2.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_BL;
             _panelModel2.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
-            _panelModel2.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel2.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel2.Panel_Index_Inside_MPanel = 0;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
             Control Casement2 = new Control();
@@ -16046,7 +17190,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       CW_PanelWD3,
+                                                                      CW1_wd_decimal,
                                                                       CW_EqualPanelHT,
+                                                                      CW1_ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._374,
@@ -16099,7 +17245,7 @@ namespace ModelLayer.Tests
             _panelModel3.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
             _panelModel3.Panel_RotolineOptionsVisibility = true;
             _panelModel3.Panel_RotolineArtNo = Rotoline_HandleArtNo._K070A21725;
-            _panelModel3.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel3.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel3.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel3);
             Control Casement3 = new Control();
@@ -16132,6 +17278,7 @@ namespace ModelLayer.Tests
                                                                            _panelModel1);
 
             _divMullionModel3.Div_ChkDM = false;
+            _divMullionModel3.Div_LeverEspagArtNo = LeverEspagnolette_ArticleNo._None;
             _multiMullionModel.MPanelLst_Divider.Add(_divMullionModel3);
             Control div_Mullion3 = new Control();
             div_Mullion3.Name = "MullionUC_3";
@@ -16151,7 +17298,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    CW_PanelWD3,
+                                                                   CW1_wd_decimal,
                                                                    CW_EqualPanelHT,
+                                                                   CW1_ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -16203,7 +17352,7 @@ namespace ModelLayer.Tests
             _panelModel4.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
             _panelModel4.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_BL;
             _panelModel4.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
-            _panelModel4.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel4.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel4.Panel_Index_Inside_MPanel = 4;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel4);
             Control Casement4 = new Control();
@@ -16261,7 +17410,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       CW_PanelWD2,
+                                                                      CW1_wd_decimal,
                                                                       CW_EqualPanelHT,
+                                                                      CW1_ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._374,
@@ -16314,7 +17465,7 @@ namespace ModelLayer.Tests
             _panelModel5.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
             _panelModel5.Panel_RotolineOptionsVisibility = true;
             _panelModel5.Panel_RotolineArtNo = Rotoline_HandleArtNo._K070A21725;
-            _panelModel5.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel5.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
             _panelModel5.Panel_Index_Inside_MPanel = 6;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel5);
             Control Casement5 = new Control();
@@ -16352,10 +17503,14 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(2440, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(320, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(2340, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(231, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             Assert.AreEqual(1, _panelModel1.Panel_GlazingSpacerQty);
 
@@ -16377,19 +17532,27 @@ namespace ModelLayer.Tests
             #region CW2
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(578, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(577, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1838, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
-            Assert.AreEqual(578, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(577, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1838, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
-            Assert.AreEqual(483, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(482, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1743, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
-            Assert.AreEqual(395, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(394, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1655, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -16437,18 +17600,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel3.PanelGlazingBead_ArtNo);
             Assert.AreEqual(577, _panelModel3.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1838, _panelModel3.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel3.Panel_SashProfileArtNo);
             Assert.AreEqual(577, _panelModel3.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_SashWidthDecimal);
             Assert.AreEqual(1838, _panelModel3.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel3.Panel_SashReinfArtNo);
             Assert.AreEqual(482, _panelModel3.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1743, _panelModel3.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(394, _panelModel3.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel3.Panel_GlassWidthDecimal);
             Assert.AreEqual(1655, _panelModel3.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel3.Panel_GlassHeightDecimal);
 
 
 
@@ -16503,18 +17674,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel4.PanelGlazingBead_ArtNo);
             Assert.AreEqual(577, _panelModel4.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1838, _panelModel4.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel4.Panel_SashProfileArtNo);
             Assert.AreEqual(577, _panelModel4.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_SashWidthDecimal);
             Assert.AreEqual(1838, _panelModel4.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel4.Panel_SashReinfArtNo);
             Assert.AreEqual(482, _panelModel4.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1743, _panelModel4.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(394, _panelModel4.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel4.Panel_GlassWidthDecimal);
             Assert.AreEqual(1655, _panelModel4.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel4.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel4.Panel_CoverProfileArtNo);
@@ -16559,19 +17738,27 @@ namespace ModelLayer.Tests
             #region CW5
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel5.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(578, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(577, _panelModel5.Panel_GlazingBeadWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1838, _panelModel5.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel5.Panel_SashProfileArtNo);
-            Assert.AreEqual(578, _panelModel5.Panel_SashWidth);
+            Assert.AreEqual(577, _panelModel5.Panel_SashWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_SashWidthDecimal);
             Assert.AreEqual(1838, _panelModel5.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel5.Panel_SashReinfArtNo);
-            Assert.AreEqual(483, _panelModel5.Panel_SashReinfWidth);
+            Assert.AreEqual(482, _panelModel5.Panel_SashReinfWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1743, _panelModel5.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_SashReinfHeightDecimal);
 
-            Assert.AreEqual(395, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(394, _panelModel5.Panel_GlassWidth);
+            Assert.AreEqual(5, _panelModel5.Panel_GlassWidthDecimal);
             Assert.AreEqual(1655, _panelModel5.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel5.Panel_GlassHeightDecimal);
 
 
             //ACCESSORIES & HARDWARES
@@ -16634,11 +17821,7 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Sash Width 374' AND Size = '577'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
-
-            dr = dt.Select("Description = 'Sash Width 374' AND Size = '578'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("8", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Height 374' AND Size = '1838'");
             Assert.AreEqual(1, dr.Length);
@@ -16646,20 +17829,16 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Sash Reinf Width 655' AND Size = '482'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
-
-            dr = dt.Select("Description = 'Sash Reinf Width 655' AND Size = '483'");
-            Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("4", dr[0]["Qty"]);
+            Assert.AreEqual("8", dr[0]["Qty"]);
 
             dr = dt.Select("Description = 'Sash Reinf Height 655' AND Size = '1743'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("8", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("32", dr[0]["Qty"]);
+            Assert.AreEqual("16", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
@@ -16675,7 +17854,7 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P2) Width%' AND
                              Description LIKE '%2452%' AND
-                             Size = '578'");
+                             Size = '577'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -16712,7 +17891,7 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P5) Width%' AND
                              Description LIKE '%2452%' AND
-                             Size = '578'");
+                             Size = '577'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -16734,7 +17913,7 @@ namespace ModelLayer.Tests
 
 
             dr = dt.Select(@"Description LIKE '%Glass (P2) Width%' AND 
-                             Size = '395'");
+                             Size = '394'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
@@ -16764,7 +17943,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass (P5) Width%' AND 
-                             Size = '395'");
+                             Size = '394'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
@@ -16854,9 +18033,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1840,
-                total_ht = 2650,
-                eqpanelWD = 920;
+            int total_wd = 1840, total_ht = 2650,
+                eqpanelWD = 920,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Mahogany, Foil_Color._Mahogany);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -16881,7 +18060,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -16924,7 +18105,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -17031,7 +18214,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2452,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._374,
@@ -17086,7 +18271,7 @@ namespace ModelLayer.Tests
             _panelModel2.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_DB;
             _panelModel2.Panel_MVDOptionsVisibility = true;
             _panelModel2.Panel_MVDArtNo = MVD_HandleArtNo._046366M;
-            _panelModel2.Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._50p5x50p5;
+            _panelModel2.Panel_ProfileKnobCylinderArtNo = ProfileKnobCylinder_ArtNo._45x45;
             _panelModel2.Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_8022_823332;
             _panelModel2.Panel_Index_Inside_MPanel = 2;
             _multiMullionModel.MPanelLst_Panel.Add(_panelModel2);
@@ -17125,18 +18310,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(882, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2577, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(882, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(2577, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(787, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(2482, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(699, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(2394, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES & HARDWARES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
@@ -17192,18 +18385,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(882, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(2577, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(882, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(2577, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(787, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(2482, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(699, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(2394, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
 
 
@@ -17213,7 +18414,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(Espagnolette_ArticleNo._630963, _panelModel2.Panel_EspagnoletteArtNo);
             Assert.AreEqual(Handle_Type._MVD, _panelModel2.Panel_HandleType);
             Assert.AreEqual(MVD_HandleArtNo._046366M, _panelModel2.Panel_MVDArtNo);
-            Assert.AreEqual(ProfileKnobCylinder_ArtNo._50p5x50p5, _panelModel2.Panel_ProfileKnobCylinderArtNo);
+            Assert.AreEqual(ProfileKnobCylinder_ArtNo._45x45, _panelModel2.Panel_ProfileKnobCylinderArtNo);
             Assert.AreEqual(Cylinder_CoverArtNo._EPSW_8022_823332, _panelModel2.Panel_CylinderCoverArtNo);
             Assert.AreEqual(WeldableCornerJoint_ArticleNo._498N, _panelModel2.Panel_WeldableCArtNo);
             Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel2.Panel_3dHingeArtNo);
@@ -17369,7 +18570,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Profile Knob Cylinder%' AND
-                             Description LIKE '%50.5x50.5%'");
+                             Description LIKE '%45x45%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
@@ -17416,7 +18617,6 @@ namespace ModelLayer.Tests
 
 
         // CW Inward
-
         //sample 7507 - 395
 
         [TestMethod]
@@ -17435,9 +18635,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -17462,7 +18662,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -17506,7 +18708,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._395,
@@ -17614,7 +18818,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._395,
@@ -17714,18 +18920,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(663, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(663, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(538, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1402, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(538, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1402, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -17792,18 +19006,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(663, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(663, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(538, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1402, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(538, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1402, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -18061,9 +19283,9 @@ namespace ModelLayer.Tests
 
 
 
-            int total_wd = 1450,
-                total_ht = 1600,
-                eqpanelWD = 725;
+            int total_wd = 1450, total_ht = 1600,
+                eqpanelWD = 725,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -18088,7 +19310,9 @@ namespace ModelLayer.Tests
             IMultiPanelModel _multiMullionModel = _multiPanelServices.AddMultiPanelModel(wd,
                                                                                          ht,
                                                                                          total_wd,
+                                                                                         wd_decimal,
                                                                                          total_ht,
+                                                                                         ht_decimal,
                                                                                          frame,
                                                                                          new UserControl(),
                                                                                          _frameModel,
@@ -18132,7 +19356,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    _multiMullionModel,
                                                                    eqpanelWD,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2453,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._395,
@@ -18250,7 +19476,9 @@ namespace ModelLayer.Tests
                                                                       _frameModel,
                                                                       _multiMullionModel,
                                                                       eqpanelWD,
+                                                                      wd_decimal,
                                                                       total_ht,
+                                                                      ht_decimal,
                                                                       GlazingBead_ArticleNo._2453,
                                                                       GlassFilm_Types._None,
                                                                       SashProfile_ArticleNo._395,
@@ -18350,18 +19578,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(687, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(687, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(562, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1402, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(562, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1402, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -18429,18 +19665,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel2.PanelGlazingBead_ArtNo);
             Assert.AreEqual(687, _panelModel2.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel2.Panel_SashProfileArtNo);
             Assert.AreEqual(687, _panelModel2.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashWidthDecimal);
             Assert.AreEqual(1527, _panelModel2.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel2.Panel_SashReinfArtNo);
             Assert.AreEqual(562, _panelModel2.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1402, _panelModel2.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(562, _panelModel2.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassWidthDecimal);
             Assert.AreEqual(1402, _panelModel2.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel2.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel2.Panel_CoverProfileArtNo);
@@ -18714,8 +19958,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 1000,
-                total_ht = 1500;
+            int total_wd = 1000, total_ht = 1500,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Mahogany, Foil_Color._Mahogany);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -18750,7 +19994,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   wd_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -18803,7 +20049,7 @@ namespace ModelLayer.Tests
             _panelModel1.Panel_MotorizedMechSetQty = 1;
             _panelModel1.Panel_2DHingeQty = 3;
             _panelModel1.Panel_CornerDriveOptionsVisibility = false;
-            _panelModel1.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel1.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
 
             _frameModel.Lst_Panel.Add(_panelModel1);
 
@@ -18828,7 +20074,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(8, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(32, _qouteModel.Rebate_Qty);
             Assert.AreEqual(42, _qouteModel.Screws_for_Fabrication);
-            Assert.AreEqual(47, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(51, _qouteModel.Screws_for_Installation);
 
 
 
@@ -18836,20 +20082,28 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(925, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1425, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel1.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel1.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(925, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1425, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(800, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1300, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(804, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1304, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -18916,9 +20170,9 @@ namespace ModelLayer.Tests
 
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("8", dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
@@ -19022,8 +20276,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 1000,
-                total_ht = 1000;
+            int total_wd = 1000, total_ht = 1000,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._Ivory, Foil_Color._None, Foil_Color._None);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -19061,7 +20315,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._395,
@@ -19116,7 +20372,7 @@ namespace ModelLayer.Tests
             _panelModel1.Panel_ButtHingeArtNo = ButtHinge_ArticleNo._PC;
             _panelModel1.Panel_ButtHingeQty = 3;
             _panelModel1.Panel_CornerDriveOptionsVisibility = false;
-            _panelModel1.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._GBSpacer;
+            _panelModel1.Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
 
 
 
@@ -19144,26 +20400,34 @@ namespace ModelLayer.Tests
             Assert.AreEqual(6, _qouteModel.Expansion_BoltQty_Total);
             Assert.AreEqual(24, _qouteModel.Rebate_Qty);
             Assert.AreEqual(38, _qouteModel.Screws_for_Fabrication);
-            Assert.AreEqual(43, _qouteModel.Screws_for_Installation);
+            Assert.AreEqual(47, _qouteModel.Screws_for_Installation);
 
             #region CW1
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
-            Assert.AreEqual(927, _panelModel1.Panel_GlazingBeadWidth);
-            Assert.AreEqual(892, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(892, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
+            Assert.AreEqual(927, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
-            Assert.AreEqual(GBSpacer_ArticleNo._GBSpacer, _panelModel1.Panel_GBSpacerArtNo);
+            Assert.AreEqual(GBSpacer_ArticleNo._KBC70, _panelModel1.Panel_GBSpacerArtNo);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
-            Assert.AreEqual(927, _panelModel1.Panel_SashWidth);
-            Assert.AreEqual(892, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(892, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
+            Assert.AreEqual(927, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
-            Assert.AreEqual(802, _panelModel1.Panel_SashReinfWidth);
-            Assert.AreEqual(767, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(767, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
+            Assert.AreEqual(802, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
-            Assert.AreEqual(802, _panelModel1.Panel_GlassWidth);
-            Assert.AreEqual(767, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(767, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
+            Assert.AreEqual(802, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -19212,36 +20476,36 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Sash Width 395' AND Size = '927'");
+            dr = dt.Select("Description = 'Sash Width 395' AND Size = '892'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Sash Height 395' AND Size = '892'");
+            dr = dt.Select("Description = 'Sash Height 395' AND Size = '927'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Sash Reinf Width 207' AND Size = '802'");
+            dr = dt.Select("Description = 'Sash Reinf Width 207' AND Size = '767'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Sash Reinf Height 207' AND Size = '767'");
+            dr = dt.Select("Description = 'Sash Reinf Height 207' AND Size = '802'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Gb spacer for 6mm glass%' AND
-                             Description LIKE '%GB SPACER%'");
+                             Description LIKE '%KBC70%'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("8", dr[0]["Qty"]);
+            Assert.AreEqual("4", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
                              Description LIKE '%2452%' AND
-                             Size = '927'");
+                             Size = '892'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
                              Description LIKE '%2452%' AND
-                             Size = '892'");
+                             Size = '927'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -19249,12 +20513,12 @@ namespace ModelLayer.Tests
 
             dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
                              Description LIKE '%%' AND
-                             Size = '802'");
+                             Size = '767'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
-                             Size = '767'");
+                             Size = '802'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
@@ -19314,8 +20578,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 952,
-                total_ht = 1752;
+            int total_wd = 952, total_ht = 1752,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -19350,7 +20614,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -19431,18 +20697,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(905, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1705, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(905, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1705, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(780, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1580, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(784, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1584, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -19621,8 +20895,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 952,
-                total_ht = 1752;
+            int total_wd = 952, total_ht = 1752,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -19657,7 +20931,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._7581,
@@ -19735,18 +21011,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(877, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1677, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._7581, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(877, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1677, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._R675, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(752, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1552, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(756, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1556, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -19926,8 +21210,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 952,
-                total_ht = 1752;
+            int total_wd = 952, total_ht = 1752,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -19962,7 +21246,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._374,
@@ -20045,18 +21331,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(879, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1679, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(879, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1679, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(784, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1584, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(696, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1496, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
 
 
@@ -20230,8 +21524,8 @@ namespace ModelLayer.Tests
             */
 
 
-            int total_wd = 952,
-                total_ht = 1752;
+            int total_wd = 952, total_ht = 1752,
+                wd_decimal = 0, ht_decimal = 0;
 
             IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_ht, "C70", 1, Base_Color._DarkBrown, Foil_Color._Graphite, Foil_Color._Walnut);
             _qouteModel.Lst_Windoor.Add(_windoorModel);
@@ -20266,7 +21560,9 @@ namespace ModelLayer.Tests
                                                                    _frameModel,
                                                                    null,
                                                                    total_wd,
+                                                                   wd_decimal,
                                                                    total_ht,
+                                                                   ht_decimal,
                                                                    GlazingBead_ArticleNo._2452,
                                                                    GlassFilm_Types._None,
                                                                    SashProfile_ArticleNo._395,
@@ -20357,18 +21653,26 @@ namespace ModelLayer.Tests
 
             Assert.AreEqual(GlazingBead_ArticleNo._2452, _panelModel1.PanelGlazingBead_ArtNo);
             Assert.AreEqual(879, _panelModel1.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadWidthDecimal);
             Assert.AreEqual(1679, _panelModel1.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlazingBeadHeightDecimal);
 
             Assert.AreEqual(SashProfile_ArticleNo._395, _panelModel1.Panel_SashProfileArtNo);
             Assert.AreEqual(879, _panelModel1.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashWidthDecimal);
             Assert.AreEqual(1679, _panelModel1.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashHeightDecimal);
 
             Assert.AreEqual(SashReinf_ArticleNo._207, _panelModel1.Panel_SashReinfArtNo);
             Assert.AreEqual(754, _panelModel1.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfWidthDecimal);
             Assert.AreEqual(1554, _panelModel1.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_SashReinfHeightDecimal);
 
             Assert.AreEqual(754, _panelModel1.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassWidthDecimal);
             Assert.AreEqual(1554, _panelModel1.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel1.Panel_GlassHeightDecimal);
 
             //ACCESSORIES
             Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel1.Panel_CoverProfileArtNo);
@@ -20504,24 +21808,24 @@ namespace ModelLayer.Tests
             Assert.AreEqual("1", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Stay Bearing, K%' AND
-                             Description LIKE '%N390A0001%'");
+                             Description LIKE '%N390A00106/230177%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Stay Bearing Pin%' AND
-                             Description LIKE '%F710D52026%'");
+                             Description LIKE '%F710D52008/227354%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
 
             dr = dt.Select(@"Description LIKE '%Stay Bearing Cover%' AND
-                             Description LIKE '%N391A01558%'");
+                             Description LIKE '%N391A015580/230204%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
             dr = dt.Select(@"Description LIKE '%Top Corner Hinge Cover%' AND
-                             Description LIKE '%N391A03558%'");
+                             Description LIKE '%N391A03558/230251%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 

@@ -1,17 +1,10 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ModelLayer.Model.Quotation.Divider.DividerModel;
-using static ModelLayer.Model.Quotation.QuotationModel;
-using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
-using EnumerationTypeLayer;
+using static ModelLayer.Model.Quotation.Divider.DividerModel;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -80,6 +73,7 @@ namespace PresentationLayer.Views.UserControls
 
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
+        public event EventHandler cmbCladdingArtNoSelectedValueChangeEventRiased;
         public event EventHandler btnAddCladdingClickedEventRaised;
         public event EventHandler btnSaveCladdingClickedEventRaised;
         public event EventHandler chkDMCheckedChangedEventRaised;
@@ -114,6 +108,13 @@ namespace PresentationLayer.Views.UserControls
                 dMArtNo.Add(item);
             }
             cmb_DMArtNo.DataSource = dMArtNo;
+
+            List<CladdingProfile_ArticleNo> claddingProfileArtNo = new List<CladdingProfile_ArticleNo>();
+            foreach (CladdingProfile_ArticleNo item in CladdingProfile_ArticleNo.GetAll())
+            {
+                claddingProfileArtNo.Add(item);
+            }
+            cmb_CladdingArtNo.DataSource = claddingProfileArtNo;
 
             EventHelpers.RaiseEvent(this, PanelPropertiesLoadEventRaised, e);
 
@@ -176,6 +177,8 @@ namespace PresentationLayer.Views.UserControls
             pnl_DMArtNo.DataBindings.Add(ModelBinding["Div_ChkDM2"]);
             pnl_divArtNo.DataBindings.Add(ModelBinding["Div_ArtVisibility"]);
             cmb_DMArtNo.DataBindings.Add(ModelBinding["Div_DMArtNo"]);
+            cmb_CladdingArtNo.DataBindings.Add(ModelBinding["Div_CladdingProfileArtNo"]);
+            pnl_divCladdingArtNo.DataBindings.Add(ModelBinding["Div_CladdingProfileArtNoVisibility"]);
         }
 
         public void SetBtnSaveBackColor(Color color)
@@ -304,6 +307,11 @@ namespace PresentationLayer.Views.UserControls
         private void SashProfileChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, SashProfileChangedEventRaised, e);
+        }
+
+        private void cmb_CladdingArtNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbCladdingArtNoSelectedValueChangeEventRiased, e);
         }
     }
 }
