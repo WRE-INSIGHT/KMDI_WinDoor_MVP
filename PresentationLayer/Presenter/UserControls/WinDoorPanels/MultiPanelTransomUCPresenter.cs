@@ -1322,14 +1322,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             bounds_PointY = 10;
 
-                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                            if (thisObj_placement != "Somewhere in Between")
                             {
-                                if (thisObj_placement != "Somewhere in Between")
-                                {
-                                    wd_deduction = 17;
-                                }
+                                wd_deduction = 17;
+                            }
+
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                            {
+                                
                                 ht_deduction = 20;
+                            }
+                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                            {
+                                ht_deduction = 15;
                             }
                         }
                     }
@@ -2466,17 +2471,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawLine(Pens.Black, new Point(0, 0),
                                            new Point(pInnerX, pInnerY));
 
-                    int loc_X = 0;
+                    int loc_X = 0, 
+                        loc_Y = fpnl.ClientRectangle.Height,
+                        loc2_Y = pInnerY + pInnerHt;
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
                         {
-                            loc_X = 1;
+                            if (zoom >= 0.50f)
+                            {
+                                loc_X = 1;
+                            }
+                            else if (zoom <= 0.26f)
+                            {
+                                loc_Y = fpnl.ClientRectangle.Height + 5;
+                                loc2_Y = pInnerY + pInnerHt + 5;
+                            }
                         }
                     }
 
-                    g.DrawLine(Pens.Black, new Point(loc_X, fpnl.ClientRectangle.Height),
-                                           new Point(pInnerX, pInnerY + pInnerHt));
+                    g.DrawLine(Pens.Black, new Point(loc_X, loc_Y),
+                                           new Point(pInnerX, loc2_Y));
 
                     if (zoom == 0.50f)
                     {
@@ -2501,15 +2516,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     
                     int upLine_loc_X2 = pInnerX + pInnerWd,
                         botLine_locY = fpnl.ClientRectangle.Height,
-                        botLine_locX2 = pInnerX + pInnerWd;
+                        botLine_locX2 = pInnerX + pInnerWd,
+                        botLine_locY2 = pInnerY + pInnerHt;
 
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
                         {
-                            upLine_loc_X2 = pInnerX + pInnerWd - 1;
-                            botLine_locY = fpnl.ClientRectangle.Height + 1;
-                            botLine_locX2 = pInnerX + pInnerWd - 1;
+                            if (zoom >= 0.50f)
+                            {
+                                upLine_loc_X2 = pInnerX + pInnerWd - 1;
+                                botLine_locY = fpnl.ClientRectangle.Height + 1;
+                                botLine_locX2 = pInnerX + pInnerWd - 1;
+                            }
+                            else if (zoom <= 0.26f)
+                            {
+                                botLine_locY = fpnl.ClientRectangle.Height + 5;
+                                botLine_locY2 = pInnerY + pInnerHt + 5;
+                            }
                         }
                     }
 
@@ -2517,7 +2541,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                            new Point(upLine_loc_X2, pInnerY));
 
                     g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, botLine_locY),
-                                           new Point(botLine_locX2, pInnerY + pInnerHt));
+                                           new Point(botLine_locX2, botLine_locY2));
 
                     if (zoom <= 0.26f)
                     {

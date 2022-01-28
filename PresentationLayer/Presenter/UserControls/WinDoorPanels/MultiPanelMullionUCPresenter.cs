@@ -1199,6 +1199,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         bounds_PointX = 5;
                         wd_deduction = 10;
+
+                        if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            bounds_PointX = 10;
+                        }
                     }
                     else if (zoom == 1.0f)
                     {
@@ -1216,6 +1221,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (zoom <= 0.26f)
                         {
                             bounds_PointY = 5;
+                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            {
+                                bounds_PointY = 10;
+                            }
+
                             if (lvl2_parent_Type != "")
                             {
                                 ht_deduction = 8 + 3;
@@ -1320,6 +1330,36 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             bounds_PointY = (int)(pixels_count * zoom);
                             ht_deduction = (int)((pixels_count * 2) * zoom);
+                        }
+                    }
+
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (zoom <= 0.26f)
+                        {
+                            wd_deduction = 20;
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                            {
+                                if (thisObj_placement != "Somewhere in Between")
+                                {
+                                    ht_deduction = 17;
+                                }
+                            }
+                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                            {
+                                if (thisObj_placement == "Last")
+                                {
+                                    ht_deduction = 10;
+                                }
+                                else if(thisObj_placement == "First")
+                                {
+                                    ht_deduction = 17;
+                                }
+                                else if (thisObj_placement == "Somewhere in Between")
+                                {
+                                    ht_deduction = 13;
+                                }
+                            }
                         }
                     }
                 }
@@ -2434,10 +2474,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last Multi-Panel in a MAIN PLATFORM (MultiTransom)
                 {
-                    for (int i = 4; i < corner_points.Length - 1; i += 2)
+                    int locY = fpnl.ClientRectangle.Height,
+                        locY2 = pInnerY + pInnerHt;
+
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
-                        g.DrawLine(Pens.Black, corner_points[i], corner_points[i + 1]);
+                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        {
+                            if (zoom <= 0.26f)
+                            {
+                                locY = fpnl.ClientRectangle.Height + 5;
+                                locY2 = pInnerY + pInnerHt + 5;
+                            }
+                        }
                     }
+
+                    g.DrawLine(Pens.Black, new Point(0, locY),
+                                           new Point(pInnerX, locY2));
+
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, locY),
+                                           new Point(pInnerX + pInnerWd, locY2));
 
                     if (zoom <= 0.26f)
                     {

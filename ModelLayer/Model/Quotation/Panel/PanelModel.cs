@@ -1801,6 +1801,12 @@ namespace ModelLayer.Model.Quotation.Panel
                     left = (Panel_Margin.Left != 0) ? 10 : 0;
                     top = (Panel_Margin.Top != 0) ? 10 : 0;
                     bot = (Panel_Margin.Bottom != 0) ? 10 : 0;
+
+                    if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between" ||
+                        Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                    {
+                        left = (Panel_Margin.Left != 0) ? 5 : 0;
+                    }
                 }
 
                 Panel_MarginToBind = new Padding(left, top, right, bot);
@@ -1882,22 +1888,55 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         divSize = 16;
+                    }
 
-                        if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    if (Panel_ParentMultiPanelModel.MPanel_ParentModel == null)
+                    {
+                        if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
-                            mpnlWd_deduct = 20;
-                            mpnlHt_deduct = 20;
+                            if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                            {
+                                mpnlWd_deduct = 20;
+                                mpnlHt_deduct = 20;
+                            }
+                            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                            {
+                                mpnlWd_deduct = 20;
+                                mpnlHt_deduct = 15;
+                            }
+                            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                     Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            {
+                                mpnlWd_deduct = 20;
+                                mpnlHt_deduct = 10;
+                            }
                         }
-                        else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel != null)
+                    {
+                        if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
-                            mpnlWd_deduct = 20;
-                            mpnlHt_deduct = 15;
-                        }
-                        else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                 Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
-                        {
-                            mpnlWd_deduct = 20;
-                            mpnlHt_deduct = 10;
+                            if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                            {
+                                mpnlWd_deduct = 15;
+                                mpnlHt_deduct = 20;
+
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                                {
+                                    mpnlWd_deduct = 10;
+                                }
+                            }
+                            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                            {
+                                mpnlWd_deduct = 15;
+                                mpnlHt_deduct = 15;
+                            }
+                            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                     Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            {
+                                mpnlWd_deduct = 15;
+                                mpnlHt_deduct = 10;
+                            }
                         }
                     }
 

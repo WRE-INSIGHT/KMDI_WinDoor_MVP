@@ -909,6 +909,40 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
             if (MPanel_ParentModel != null)
             {
+                int mpnlWd_deduct = 0,
+                    mpnlHt_deduct = 0;
+
+                if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
+                {
+                    mpnlWd_deduct = 10;
+                    mpnlHt_deduct = 10;
+                }
+
+                if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    {
+                        mpnlWd_deduct = 16;
+                        mpnlHt_deduct = 20;
+
+                        if (MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnlWd_deduct = 10;
+                        }
+                    }
+                    else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    {
+                        mpnlWd_deduct = 15;
+                        mpnlHt_deduct = 15;
+                    }
+                    else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    {
+                        mpnlWd_deduct = 15;
+                        mpnlHt_deduct = 10;
+                    }
+                }
+
                 if (MPanel_Type == "Mullion")
                 {
                     foreach (IPanelModel pnl in MPanelLst_Panel)
@@ -928,7 +962,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                         else if (MPanel_Zoom <= 0.26f)
                         {
-                            int pnlhtToBind = MPanel_HeightToBind - 10;
+                            int pnlhtToBind = MPanel_HeightToBind - mpnlHt_deduct;
                             pnl.Panel_HeightToBind = pnlhtToBind;
                         }
                     }
@@ -952,7 +986,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                         else if (MPanel_Zoom <= 0.26f)
                         {
-                            int pnlwdToBind = MPanel_WidthToBind - 10;
+                            int pnlwdToBind = MPanel_WidthToBind - mpnlWd_deduct;
                             pnl.Panel_WidthToBind = pnlwdToBind;
                         }
                     }
@@ -1919,25 +1953,25 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
             if (control.Name.Contains("MultiMullion") || control.Name.Contains("MultiTransom"))
             {
+                int divToBind_add = 0;
+                if (MPanel_Zoom >= 0.50f)
+                {
+                    divToBind_add = (int)(pixel_count * MPanel_Zoom);
+                }
+                else if (MPanel_Zoom <= 0.26f)
+                {
+                    divToBind_add = 2;
+                }
+
                 if (MPanelLst_Objects[previous_indx].Name.Contains("MullionUC"))
                 {
                     MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_Width += pixel_count;
-
-                    if (MPanel_Zoom >= 0.50f)
-                    {
-                        pixel_count = (int)(pixel_count * MPanel_Zoom);
-                    }
-                    MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_WidthToBind += pixel_count;
+                    MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_WidthToBind += divToBind_add;
                 }
                 else if (MPanelLst_Objects[previous_indx].Name.Contains("TransomUC"))
                 {
                     MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_Height += pixel_count;
-
-                    if (MPanel_Zoom >= 0.50f)
-                    {
-                        pixel_count = (int)(pixel_count * MPanel_Zoom);
-                    }
-                    MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_HeightToBind += pixel_count;
+                    MPanelLst_Divider.Find(div => div.Div_Name == MPanelLst_Objects[previous_indx].Name).Div_HeightToBind += divToBind_add;
                 }
             }
         }
