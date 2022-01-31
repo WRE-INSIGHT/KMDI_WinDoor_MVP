@@ -105,6 +105,10 @@ namespace ModelLayer.Model.Quotation
                 }
 
                 frame.Insert_frameInfo_MaterialList(Material_List);
+                if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507)
+                {
+                    frame.Insert_BottomFrame_MaterialList(Material_List);
+                }
 
                 if (frame.Frame_If_InwardMotorizedCasement)
                 {
