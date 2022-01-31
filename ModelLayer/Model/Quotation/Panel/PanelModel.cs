@@ -4935,7 +4935,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Insert_GBSpacer_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("GB SPACER FOR 6mm GLASS " + Panel_GBSpacerArtNo.DisplayName,
-                                   4, "pc(s)",
+                                   5, "pc(s)",
                                    "",
                                    "Sash",
                                    "");
