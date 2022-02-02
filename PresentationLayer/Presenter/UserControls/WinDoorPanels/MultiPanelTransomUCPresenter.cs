@@ -1316,7 +1316,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (zoom == 0.50f)
                         {
-                            ht_deduction = bSizeDeduction - botFrameDeduct;
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            {
+                                ht_deduction = bSizeDeduction - 5;
+                            }
+                            else
+                            {
+                                ht_deduction = bSizeDeduction - botFrameDeduct;
+                            }
                         }
                         else if (zoom <= 0.26f)
                         {
@@ -1329,12 +1336,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
                             {
-                                
                                 ht_deduction = 20;
                             }
                             else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
                             {
                                 ht_deduction = 15;
+                            }
+                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            {
+                                ht_deduction = 11;
+                            }
+                        }
+                        else if (zoom == 1.0f)
+                        {
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            {
+                                ht_deduction = bSizeDeduction - 9;
                             }
                         }
                     }
@@ -2468,9 +2486,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First Multi-Panel in a MAIN PLATFORM (MultiMullion)
                 {
-                    g.DrawLine(Pens.Black, new Point(0, 0),
-                                           new Point(pInnerX, pInnerY));
-
                     int loc_X = 0, 
                         loc_Y = fpnl.ClientRectangle.Height,
                         loc2_Y = pInnerY + pInnerHt;
@@ -2488,7 +2503,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 loc2_Y = pInnerY + pInnerHt + 5;
                             }
                         }
+                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            if (zoom == 1.0f || zoom <= 0.26f)
+                            {
+                                loc_Y = fpnl.ClientRectangle.Height - 1;
+                                loc2_Y = fpnl.ClientRectangle.Height - 1;
+                            }
+                        }
                     }
+
+                    g.DrawLine(Pens.Black, new Point(0, 0),
+                                           new Point(pInnerX, pInnerY));
 
                     g.DrawLine(Pens.Black, new Point(loc_X, loc_Y),
                                            new Point(pInnerX, loc2_Y));
@@ -2533,6 +2560,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 botLine_locY = fpnl.ClientRectangle.Height + 5;
                                 botLine_locY2 = pInnerY + pInnerHt + 5;
+                            }
+                        }
+                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            if (zoom == 1.0f || zoom <= 0.26f)
+                            {
+                                botLine_locY = fpnl.ClientRectangle.Height - 1;
+                                botLine_locY2 = fpnl.ClientRectangle.Height - 1;
                             }
                         }
                     }

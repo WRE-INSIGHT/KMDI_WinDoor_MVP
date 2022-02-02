@@ -364,6 +364,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                             else if (mPanelModel.MPanel_Placement != "Last")
                             {
+                                bool divchkdm = false;
+
+                                if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                                {
+                                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    {
+                                        divchkdm = true;
+                                    }
+                                }
+
                                 IDividerModel divModel = _divServices.AddDividerModel(divSize,
                                                                                      _multiPanelModel.MPanel_Height,
                                                                                      fpnl,
@@ -376,7 +387,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                       _multiPanelModel,
                                                                                       _frameModel,
                                                                                      _mainPresenter.GetDividerCount(),
-                                                                                     _frameModel.FrameImageRenderer_Zoom);
+                                                                                     _frameModel.FrameImageRenderer_Zoom,
+                                                                                     "",
+                                                                                     "",
+                                                                                     null,
+                                                                                     divchkdm);
+
                                 divModel.SetDimensionsToBind_using_DivZoom();
                                 divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
 
@@ -721,7 +737,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
-                                divchkdm = true;
+                                if (_multiPanelModel.MPanel_ParentModel == null)
+                                {
+                                    divchkdm = true;
+                                }
+                                else if (_multiPanelModel.MPanel_ParentModel != null)
+                                {
+                                    if (_multiPanelModel.MPanel_Placement == "Last")
+                                    {
+                                        divchkdm = true;
+                                    }
+                                }
                             }
                         }
 
@@ -1287,14 +1313,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 {
                                     ht_deduction = (int)(11 * _frameModel.Frame_Zoom);
                                 }
-                            }
-                        }
-
-                        if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                        {
-                            if (zoom == 0.50f)
-                            {
-                                ht_deduction = bSizeDeduction - botFrameDeduct - 1;
+                                else
+                                {
+                                    ht_deduction = bSizeDeduction - botFrameDeduct - 1;
+                                }
                             }
                         }
                     }
@@ -1357,6 +1379,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 else if (thisObj_placement == "Somewhere in Between")
                                 {
                                     ht_deduction = 13;
+                                }
+                            }
+                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None ||
+                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
+                            {
+                                if (thisObj_placement == "First")
+                                {
+                                    ht_deduction = 17;
+                                }
+                                else if (thisObj_placement == "Last")
+                                {
+                                    ht_deduction = 7;
                                 }
                             }
                         }
@@ -2489,6 +2523,25 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 locY = fpnl.ClientRectangle.Height + 1;
                                 locY2 = pInnerY + pInnerHt + 1;
+                            }
+                        }
+                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            if (zoom == 1.0f)
+                            {
+                                locY = fpnl.ClientRectangle.Height - 1;
+                                locY2 = fpnl.ClientRectangle.Height - 1;
+                            }
+                            else if (zoom == 0.50f)
+                            {
+                                locY = fpnl.ClientRectangle.Height;
+                                locY2 = fpnl.ClientRectangle.Height;
+                            }
+                            else if (zoom <= 0.26f)
+                            {
+                                locY = fpnl.ClientRectangle.Height - 1;
+                                locY2 = fpnl.ClientRectangle.Height - 1;
                             }
                         }
                     }

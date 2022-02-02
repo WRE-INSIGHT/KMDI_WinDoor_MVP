@@ -1668,7 +1668,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             else if ((!MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions) ||
                                      (MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2))
                             {
-                                pnl_margin = new Padding(10, 0, 10, 10);
+                                if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+                                {
+                                    if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                        MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    {
+                                        pnl_margin = new Padding(10, 0, 10, 0);
+                                    }
+                                    else
+                                    {
+                                        pnl_margin = new Padding(10, 0, 10, 10);
+                                    }
+                                }
+                                else
+                                {
+                                    pnl_margin = new Padding(10, 0, 10, 10);
+                                }
                                 pnl.Panel_Placement = "Last";
                             }
                             else
@@ -1721,7 +1736,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             else if ((!MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions) ||
                                      (MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2))
                             {
-                                pnl_margin = new Padding(10, 0, 0, 10);
+                                if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+                                {
+                                    if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                        MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    {
+                                        pnl_margin = new Padding(10, 0, 0, 0);
+                                    }
+                                    else
+                                    {
+                                        pnl_margin = new Padding(10, 0, 0, 10);
+                                    }
+                                }
+                                else
+                                {
+                                    pnl_margin = new Padding(10, 0, 0, 10);
+                                }
                                 pnl.Panel_Placement = "Last";
                             }
                             else

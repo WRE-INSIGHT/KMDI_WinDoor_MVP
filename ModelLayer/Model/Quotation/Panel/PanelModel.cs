@@ -1995,6 +1995,14 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 mpnlWd_deduct = 15;
                                 mpnlHt_deduct = 10;
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "First")
+                                {
+                                    mpnlHt_deduct = 15;
+                                }
+                                else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                                {
+                                    mpnlHt_deduct = 6;
+                                }
                             }
                         }
                     }
