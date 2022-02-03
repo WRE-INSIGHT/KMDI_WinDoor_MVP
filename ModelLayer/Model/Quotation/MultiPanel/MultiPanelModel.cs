@@ -928,12 +928,27 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         if (MPanel_Placement == "Somewhere in Between")
                         {
                             mpnlWd_deduct = 10;
+                            mpnlHt_deduct = 10;
+                        }
+                        else if (MPanel_Placement == "First" || MPanel_Placement == "Last")
+                        {
+                            mpnlHt_deduct = 16;
                         }
                     }
                     else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502)
                     {
                         mpnlWd_deduct = 15;
                         mpnlHt_deduct = 15;
+
+                        if (MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnlWd_deduct = 10;
+                            mpnlHt_deduct = 10;
+                        }
+                        else if (MPanel_Placement == "First" || MPanel_Placement == "Last")
+                        {
+                            mpnlHt_deduct = 16;
+                        }
                     }
                     else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
@@ -1470,9 +1485,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                 MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             ht_deduct = 10;
+                        }
+                        else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        {
+                            ht_deduct = 15;
                         }
                     }
 
@@ -2021,21 +2040,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_Type == "Transom")
                 {
-                    int totalHeight_Controls = MPanelLst_Panel.Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
-                                               MPanelLst_Divider.Sum(div => div.Div_HeightToBind) +
-                                               MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
-                    int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
+                    int totalHt_panelModel = MPanelLst_Panel.Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom),
+                        totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
+                        totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
 
-                    if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
-                    {
-                        if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502)
-                        {
-                            if (diff_MPanelHt_VS_MyCtrlsHeight < 0)
-                            {
-                                diff_MPanelHt_VS_MyCtrlsHeight *= -1;
-                            }
-                        }
-                    }
+                    int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
+                    int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
 
                     if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                     {

@@ -1832,7 +1832,6 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
                 }
-
                 Panel_MarginToBind = new Padding(left, top, right, bot);
             }
             else
@@ -1986,7 +1985,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                     }
                                     else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
                                     {
-                                        mpnlHt_deduct = 8;
+                                        mpnlHt_deduct = 16;
                                     }
                                 }
                             }
@@ -2142,11 +2141,39 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     mpnlWd_deduct = 20;
                     mpnlHt_deduct = 20;
+
+                    if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Type == "Transom" &&
+                        Panel_ParentMultiPanelModel.MPanel_Type == "Mullion") // T-M stack
+                    {
+                        if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnlWd_deduct = 10;
+                            mpnlHt_deduct = 10;
+                        }
+                        else if (Panel_ParentMultiPanelModel.MPanel_Placement == "First" ||
+                                 Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                        {
+                            mpnlHt_deduct = 16;
+                        }
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Type == "Mullion" &&
+                             Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
+                    {
+                        if (Panel_ParentMultiPanelModel.MPanel_Placement == "First" ||
+                            Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                        {
+                            mpnlWd_deduct = 16;
+                        }
+                        else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnlWd_deduct = 10;
+                        }
+                    }
                 }
                 else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
                 {
                     mpnlWd_deduct = 20;
-                    mpnlHt_deduct = 15;
+                    mpnlHt_deduct = 16;
                 }
                 else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                          Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)

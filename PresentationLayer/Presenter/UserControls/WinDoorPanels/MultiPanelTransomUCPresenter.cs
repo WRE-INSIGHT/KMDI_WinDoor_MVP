@@ -711,10 +711,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _multiPanelModel.Fit_MyControls_Dimensions();
                         }
                         _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                        //_multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
 
                         _mainPresenter.Fit_MyControls_byControlsLocation();
-                        //_mainPresenter.Fit_MyImager_byImagersLocation();
                         _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                     }
                     else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
@@ -994,15 +992,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
             }
 
-            if (zoom == 0.26f || zoom == 0.17f ||
-                zoom == 0.13f || zoom == 0.10f)
-            {
-                pInnerX = 15;
-                pInnerY = 15;
-                pInnerWd = fpnl.ClientRectangle.Width - 30;
-                pInnerHt = fpnl.ClientRectangle.Height - 30;
-            }
-
             int ht_ToBind = _multiPanelModel.MPanel_HeightToBind,
                 wd_ToBind = _multiPanelModel.MPanel_WidthToBind;
 
@@ -1018,15 +1007,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 new Point(pInnerX + pInnerWd, pInnerY + pInnerHt)
             };
 
-            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
-                (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None))
+            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
             {
-                corner_points[4] = new Point(0, fpnl.ClientRectangle.Height - 1);
-                corner_points[5] = new Point(pInnerX, fpnl.ClientRectangle.Height - 1);
+                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                {
+                    corner_points[4] = new Point(0, fpnl.ClientRectangle.Height - 1);
+                    corner_points[5] = new Point(pInnerX, fpnl.ClientRectangle.Height - 1);
 
-                corner_points[6] = new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height - 1);
-                corner_points[7] = new Point(pInnerX + pInnerWd, fpnl.ClientRectangle.Height - 1);
+                    corner_points[6] = new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height - 1);
+                    corner_points[7] = new Point(pInnerX + pInnerWd, fpnl.ClientRectangle.Height - 1);
+                }
             }
 
             GraphicsPath gpath = new GraphicsPath();
@@ -1223,6 +1214,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                             {
                                 bounds_PointX = 10;
+                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                                {
+                                    wd_deduction = 17;
+                                    ht_deduction = 20;
+                                }
                             }
 
                             if (lvl2_parent_Type != "")
@@ -1312,50 +1308,50 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                     }
 
-                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                    {
-                        if (zoom == 0.50f)
-                        {
-                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
-                            {
-                                ht_deduction = bSizeDeduction - 5;
-                            }
-                            else
-                            {
-                                ht_deduction = bSizeDeduction - botFrameDeduct;
-                            }
-                        }
-                        else if (zoom <= 0.26f)
-                        {
-                            bounds_PointY = 10;
+                    //if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    //{
+                    //    if (zoom == 0.50f)
+                    //    {
+                    //        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    //        {
+                    //            ht_deduction = bSizeDeduction - 5;
+                    //        }
+                    //        else
+                    //        {
+                    //            ht_deduction = bSizeDeduction - botFrameDeduct;
+                    //        }
+                    //    }
+                    //    else if (zoom <= 0.26f)
+                    //    {
+                    //        bounds_PointY = 10;
 
-                            if (thisObj_placement != "Somewhere in Between")
-                            {
-                                wd_deduction = 17;
-                            }
+                    //        if (thisObj_placement != "Somewhere in Between")
+                    //        {
+                    //            wd_deduction = 17;
+                    //        }
 
-                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
-                            {
-                                ht_deduction = 20;
-                            }
-                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
-                            {
-                                ht_deduction = 15;
-                            }
-                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
-                            {
-                                ht_deduction = 11;
-                            }
-                        }
-                        else if (zoom == 1.0f)
-                        {
-                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
-                            {
-                                ht_deduction = bSizeDeduction - 9;
-                            }
-                        }
-                    }
+                    //        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    //        {
+                    //            ht_deduction = 20;
+                    //        }
+                    //        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    //        {
+                    //            ht_deduction = 15;
+                    //        }
+                    //        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                    //                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    //        {
+                    //            ht_deduction = 11;
+                    //        }
+                    //    }
+                    //    else if (zoom == 1.0f)
+                    //    {
+                    //        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    //        {
+                    //            ht_deduction = bSizeDeduction - 9;
+                    //        }
+                    //    }
+                    //}
                 }
                 #endregion
 
