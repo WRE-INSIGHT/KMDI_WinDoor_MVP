@@ -1779,8 +1779,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void SetPanelMargin_using_ZoomPercentage()
         {
-            if ((Panel_Zoom == 0.26f || Panel_Zoom == 0.17f || 
-                 Panel_Zoom == 0.13f || Panel_Zoom == 0.10f) && 
+            if ((Panel_Zoom == 0.26f || Panel_Zoom == 0.17f ||
+                 Panel_Zoom == 0.13f || Panel_Zoom == 0.10f) &&
                 Panel_ParentMultiPanelModel != null)
             {
                 int right = 0,
@@ -1823,7 +1823,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void SetPanelMarginImager_using_ImageZoomPercentage()
         {
             if ((PanelImageRenderer_Zoom == 0.26f || PanelImageRenderer_Zoom == 0.17f ||
-                 PanelImageRenderer_Zoom == 0.13f || PanelImageRenderer_Zoom == 0.13f) && 
+                 PanelImageRenderer_Zoom == 0.13f || PanelImageRenderer_Zoom == 0.13f) &&
                 Panel_ParentMultiPanelModel != null)
             {
                 int right = 0,
@@ -1860,7 +1860,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void SetDimensionsToBind_using_ZoomPercentage()
         {
             int pnl_wd = 0, pnl_ht = 0,
-                parent_mpanelWd = 0, 
+                parent_mpanelWd = 0,
                 parent_mpanelHT = 0,
                 div_count = 0,
                 totalpanel_inside_parentMpanel = 0,
@@ -1868,7 +1868,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 mpnlHt_deduct = 0,
                 divSize = 0;
 
-            if (Panel_Zoom == 0.26f || Panel_Zoom == 0.17f || 
+            if (Panel_Zoom == 0.26f || Panel_Zoom == 0.17f ||
                 Panel_Zoom == 0.13f || Panel_Zoom == 0.10f)
             {
                 if (Panel_ParentMultiPanelModel != null)
@@ -2090,45 +2090,45 @@ namespace ModelLayer.Model.Quotation.Panel
             }
 
             if (Panel_ParentMultiPanelModel != null)
+            {
+                int parent_MpanelWidth = Panel_ParentMultiPanelModel.MPanel_WidthToBind,
+                    parent_MpanelHeight = Panel_ParentMultiPanelModel.MPanel_HeightToBind,
+                    div_count = Panel_ParentMultiPanelModel.MPanel_Divisions,
+                    totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1;
+
+                if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                 {
-                    int parent_MpanelWidth = Panel_ParentMultiPanelModel.MPanel_WidthToBind,
-                        parent_MpanelHeight = Panel_ParentMultiPanelModel.MPanel_HeightToBind,
-                        div_count = Panel_ParentMultiPanelModel.MPanel_Divisions,
-                        totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1;
+                    div_movement = Panel_OriginalDisplayWidth - Panel_DisplayWidth;
 
-                    if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-                    {
-                        div_movement = Panel_OriginalDisplayWidth - Panel_DisplayWidth;
+                    decimal divMove_convert_dec = Convert.ToDecimal(div_movement * Panel_Zoom);
+                    decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
+                    decimal divMove_dec_times2 = divMove_dec * 2;
+                    divMove_int = Convert.ToInt32(divMove_dec_times2);
 
-                        decimal divMove_convert_dec = Convert.ToDecimal(div_movement * Panel_Zoom);
-                        decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
-                        decimal divMove_dec_times2 = divMove_dec * 2;
-                        divMove_int = Convert.ToInt32(divMove_dec_times2);
-
-                        pnl_wd = (((parent_MpanelWidth - mpnlWd_deduct) - (divSize * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
-                        pnl_ht = parent_MpanelHeight - mpnlHt_deduct;
-                    }
-                    else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
-                    {
-                        div_movement = Panel_OriginalDisplayHeight - Panel_DisplayHeight;
-
-                        decimal divMove_convert_dec = Convert.ToDecimal(div_movement * Panel_Zoom);
-                        decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
-                        decimal divMove_dec_times2 = divMove_dec * 2;
-                        divMove_int = Convert.ToInt32(divMove_dec_times2);
-
-                        pnl_ht = (((parent_MpanelHeight - mpnlHt_deduct) - (divSize * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
-                        pnl_wd = parent_MpanelWidth - mpnlWd_deduct;
-                    }
+                    pnl_wd = (((parent_MpanelWidth - mpnlWd_deduct) - (divSize * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
+                    pnl_ht = parent_MpanelHeight - mpnlHt_deduct;
                 }
-                else if (Panel_ParentFrameModel != null)
+                else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                 {
-                    int reversed_wd = (int)Math.Ceiling(Panel_ParentFrameModel.Frame_Width * Panel_Zoom) - 20, //20px padding
-                        reversed_ht = (int)Math.Ceiling(Panel_ParentFrameModel.Frame_Height * Panel_Zoom) - 20; //20px padding
+                    div_movement = Panel_OriginalDisplayHeight - Panel_DisplayHeight;
 
-                    pnl_wd = (int)(reversed_wd / Panel_Zoom);
-                    pnl_ht = (int)(reversed_ht / Panel_Zoom);
+                    decimal divMove_convert_dec = Convert.ToDecimal(div_movement * Panel_Zoom);
+                    decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
+                    decimal divMove_dec_times2 = divMove_dec * 2;
+                    divMove_int = Convert.ToInt32(divMove_dec_times2);
+
+                    pnl_ht = (((parent_MpanelHeight - mpnlHt_deduct) - (divSize * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
+                    pnl_wd = parent_MpanelWidth - mpnlWd_deduct;
                 }
+            }
+            else if (Panel_ParentFrameModel != null)
+            {
+                int reversed_wd = (int)Math.Ceiling(Panel_ParentFrameModel.Frame_Width * Panel_Zoom) - 20, //20px padding
+                    reversed_ht = (int)Math.Ceiling(Panel_ParentFrameModel.Frame_Height * Panel_Zoom) - 20; //20px padding
+
+                pnl_wd = (int)(reversed_wd / Panel_Zoom);
+                pnl_ht = (int)(reversed_ht / Panel_Zoom);
+            }
 
             Panel_WidthToBind = pnl_wd;
             Panel_HeightToBind = pnl_ht;
@@ -3241,6 +3241,20 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
 
                     Panel_PlasticWedgeQty = 1;
+
+                    if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
+                        {
+                            Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
+                        }
+
+                        Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
+                    }
                 }
 
                 if (base_color == Base_Color._Ivory ||
@@ -4693,6 +4707,20 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
 
                     Panel_PlasticWedgeQty = 1;
+
+                    if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (base_color == Base_Color._Ivory || base_color == Base_Color._White)
+                        {
+                            Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400215;
+                        }
+
+                        Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
+                    }
                 }
 
                 if (base_color == Base_Color._Ivory ||
@@ -5007,8 +5035,12 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion)
         {
+            int SnapInKeepQty = (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
+                                 Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2;
+
             tbl_explosion.Rows.Add("Snap-in Keep " + Panel_SnapInKeepArtNo.DisplayName,
-                                   2, "pc(s)",
+                                   SnapInKeepQty, "pc(s)",
                                    "",
                                    "Frame",
                                    @"");
@@ -5017,8 +5049,12 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_FixedCam_MaterialList(DataTable tbl_explosion)
         {
+            int FixedCamQty = (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
+                                 Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2; 
+
             tbl_explosion.Rows.Add("Fixed Cam " + Panel_FixedCamArtNo.DisplayName,
-                                   2, "pc(s)",
+                                   FixedCamQty, "pc(s)",
                                    "",
                                    "Frame",
                                    @"");

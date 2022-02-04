@@ -961,7 +961,7 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
                                    1, "pc(s)",
-                                   Frame_ExplosionWidth - 28,//14 * 2 = 28, 14 = difference of 7507 & 7502 thicknes 
+                                   Frame_ExplosionWidth - 28,//14 * 2 = 28, 14 = difference of 7507 & 7502 thickness 
                                    "Frame",
                                    @"\  /");
             }
