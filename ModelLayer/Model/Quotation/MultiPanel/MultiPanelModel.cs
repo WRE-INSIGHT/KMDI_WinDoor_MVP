@@ -955,6 +955,19 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         mpnlWd_deduct = 15;
                         mpnlHt_deduct = 10;
+
+                        if (MPanel_Placement == "Last")
+                        {
+                            mpnlHt_deduct = 5;
+                        }
+                        else if (MPanel_Placement == "First")
+                        {
+                            mpnlHt_deduct = 15;
+                        }
+                        else if (MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnlWd_deduct = 9;
+                        }
                     }
                 }
 
