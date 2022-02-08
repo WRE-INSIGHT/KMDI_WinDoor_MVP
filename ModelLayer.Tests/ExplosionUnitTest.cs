@@ -162,7 +162,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -302,7 +306,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -444,7 +452,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -755,7 +767,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -1065,7 +1081,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -1645,7 +1665,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,

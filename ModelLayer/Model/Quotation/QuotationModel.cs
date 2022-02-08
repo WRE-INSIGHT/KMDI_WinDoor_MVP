@@ -105,6 +105,10 @@ namespace ModelLayer.Model.Quotation
                 }
 
                 frame.Insert_frameInfo_MaterialList(Material_List);
+                if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507)
+                {
+                    frame.Insert_BottomFrame_MaterialList(Material_List);
+                }
 
                 if (frame.Frame_If_InwardMotorizedCasement)
                 {
@@ -1117,6 +1121,7 @@ namespace ModelLayer.Model.Quotation
                                         pnl.Insert_RestrictorStay_MaterialList(Material_List);
 
                                         add_screws_fab_fs_or_rs += (6 * pnl.Panel_RestrictorStayQty);
+
                                     }
                                     else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                                     {
@@ -1173,6 +1178,26 @@ namespace ModelLayer.Model.Quotation
 
                                     pnl.Insert_AdjustableStriker_MaterialList(Material_List);
                                     add_screws_fab_striker += (1 * pnl.Panel_AdjStrikerQty); //Adjustable Striker
+
+                                    if (frame.Frame_Height > 2499)
+                                    {
+                                        pnl.Insert_WeldableCornerJoint_MaterialList(Material_List);
+
+                                        add_screws_fab_weldableCJ += (8 * 2); //WeldableCornerJoint
+                                    }
+
+                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Door)
+                                    {
+                                        pnl.Insert_SnapNKeep_MaterialList(Material_List);
+
+                                        pnl.Insert_FixedCam_MaterialList(Material_List);
+
+
+                                        int FixedCamAndSnapInKeepQty = (frame.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                                         frame.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2;
+                                        add_screws_fab_snapInKeep += FixedCamAndSnapInKeepQty * 2;
+                                        add_screws_fab_fxdcam += FixedCamAndSnapInKeepQty * 2;
+                                    }
                                 }
                             }
 

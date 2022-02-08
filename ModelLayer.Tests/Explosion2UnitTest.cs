@@ -42,7 +42,10 @@ namespace ModelLayer.Tests
         }
 
 
+
+        #region Fixed Window
         //FIXED WINDOW
+
 
         [TestMethod]
         public void ChkVar_SinglePanelFixWindow()
@@ -62,7 +65,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -169,7 +176,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -497,7 +508,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -862,7 +877,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -1221,7 +1240,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -2320,7 +2343,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -3054,7 +3081,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -4159,7 +4190,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -5164,6 +5199,9 @@ namespace ModelLayer.Tests
 
         }
 
+        #endregion
+
+        #region Awning Windows
         //Awning Window Samples
 
         [TestMethod]
@@ -5195,7 +5233,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -5438,7 +5480,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -5924,7 +5970,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -6426,7 +6476,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -7021,7 +7075,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -7654,7 +7712,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -8247,7 +8309,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -8384,6 +8450,8 @@ namespace ModelLayer.Tests
                                                                            false,
                                                                            true,
                                                                            null);
+
+            _divTransomModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
             _multiTransomModel.MPanelLst_Divider.Add(_divTransomModel);
             Control div_Transom = new Control();
             div_Transom.Name = "TransomUC_1";
@@ -9079,7 +9147,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -9352,7 +9424,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -9635,7 +9711,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -10112,7 +10192,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -10758,7 +10842,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -11777,18 +11865,12 @@ namespace ModelLayer.Tests
 
         }
 
+        #endregion
 
-
-
-
-
-
-
-
+        #region Casement Windows
         //casement Window
 
         // CW Outward
-
         //Sample 7502 - 7581
         [TestMethod]
         public void ChkVar_2PanelCasementWindowSample_A1_UsingMullion()
@@ -11820,7 +11902,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -12349,7 +12435,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -12918,7 +13008,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -13465,7 +13559,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -14002,7 +14100,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -14566,7 +14668,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -15758,7 +15864,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -16325,7 +16435,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -16874,7 +16988,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -18047,7 +18165,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -18649,7 +18771,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -19297,7 +19423,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -19938,7 +20068,6 @@ namespace ModelLayer.Tests
         }
 
 
-
         //Motirize CW
 
         [TestMethod]
@@ -19971,7 +20100,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -20289,7 +20422,12 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
+
             _frameModel.Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
             _frameModel.Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
             _windoorModel.lst_frame.Add(_frameModel);
@@ -20591,7 +20729,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -20908,7 +21050,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -21223,7 +21369,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -21537,7 +21687,11 @@ namespace ModelLayer.Tests
                                                                    1.0f,
                                                                    FrameProfile_ArticleNo._7507,
                                                                    _windoorModel,
-                                                                   1);
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
             _windoorModel.lst_frame.Add(_frameModel);
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
@@ -21877,5 +22031,313 @@ namespace ModelLayer.Tests
 
         }
 
+        #endregion
+
+        #region Casement Doors
+
+        [TestMethod]
+        public void ChkVar_SinglePanelCasementDoor()
+        {
+            int total_wd = 1200, total_height = 2700,
+                total_wd_decimal = 0, total_height_decimal = 0;
+
+
+
+            IWindoorModel _windoorModel = _windoorServices.AddWindoorModel(total_wd, total_height, "C70", 1, Base_Color._White, Foil_Color._Walnut, Foil_Color._Walnut);
+            _qouteModel.Lst_Windoor.Add(_windoorModel);
+
+            IFrameModel _frameModel = _frameServices.AddFrameModel(total_wd,
+                                                                   total_height,
+                                                                   FrameModel.Frame_Padding.Door,
+                                                                   1.0f,
+                                                                   1.0f,
+                                                                   FrameProfile_ArticleNo._7507,
+                                                                   _windoorModel,
+                                                                   null,
+                                                                   1,
+                                                                   "Frame 1",
+                                                                   true,
+                                                                   false);
+            _windoorModel.lst_frame.Add(_frameModel);
+
+            int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
+                ht = _frameModel.Frame_Height - (int)(_frameModel.Frame_Type - 10) * 2;
+
+
+            IPanelModel _panelModel = _panelServices.AddPanelModel(wd,
+                                                                   ht,
+                                                                   new Control(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   new UserControl(),
+                                                                   "Casement Panel",
+                                                                   true,
+                                                                   1.0f,
+                                                                   _frameModel,
+                                                                   null,
+                                                                   total_wd,
+                                                                   total_wd_decimal,
+                                                                   total_height,
+                                                                   total_height_decimal,
+                                                                   GlazingBead_ArticleNo._2453,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._374,
+                                                                   SashReinf_ArticleNo._655,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._642089,
+                                                                   Striker_ArticleNo._M89ANTA,
+                                                                   MiddleCloser_ArticleNo._None,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   MotorizedMech_ArticleNo._41555B,
+                                                                   Handle_Type._Rotoline,
+                                                                   Extension_ArticleNo._612978,
+                                                                   Extension_ArticleNo._567639,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   true,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   1,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   Rotoswing_HandleArtNo._RSC773451,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   1,
+                                                                   1,
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   1,
+                                                                   DockStyle.Fill,
+                                                                   "CasementPanelUC_1",
+                                                                   true,
+                                                                   HingeOption._2DHinge);
+
+            _panelModel.Panel_GlassThickness = 13.0f;
+            _panelModel.Panel_CornerDriveOptionsVisibility = true;
+            _panelModel.Panel_CornerDriveArtNo = CornerDrive_ArticleNo._None;
+            _panelModel.Panel_FixedCamArtNo = FixedCam_ArticleNo._1481413;
+            _panelModel.Panel_WeldableCArtNo = WeldableCornerJoint_ArticleNo._498N;
+            _panelModel.Panel_SnapInKeepArtNo = SnapInKeep_ArticleNo._0400205;
+            _panelModel.Panel_AdjStrikerArtNo = AdjustableStriker_ArticleNo._332439;
+            _panelModel.Panel_3dHingePropertyVisibility = true;
+            _panelModel.Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_DB;
+            _panelModel.Panel_RestrictorStayArtNo = RestrictorStay_ArticleNo._613249;
+            _panelModel.Panel_3dHingeQty = 4;
+            _panelModel.Panel_RotolineOptionsVisibility = true;
+            _panelModel.Panel_RotolineArtNo = Rotoline_HandleArtNo._K070A21725;
+            
+
+
+            _frameModel.Lst_Panel.Add(_panelModel);
+            DataTable dt = _qouteModel.GetListOfMaterials(_windoorModel);
+
+            #region Assert
+          
+            Assert.AreEqual(FrameProfile_ArticleNo._7507, _frameModel.Frame_ArtNo);
+            Assert.AreEqual(1205, _frameModel.Frame_ExplosionWidth);
+            Assert.AreEqual(2705, _frameModel.Frame_ExplosionHeight);
+            Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
+            Assert.AreEqual(1104, _frameModel.Frame_ReinfWidth);
+            Assert.AreEqual(2604, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
+            Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
+            Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
+            Assert.AreEqual(7508, _qouteModel.GlazingSeal_TotalQty);
+            Assert.AreEqual((decimal)0.7776, _windoorModel.WD_PlasticCover);
+            Assert.AreEqual(12, _qouteModel.Expansion_BoltQty_Total);
+            Assert.AreEqual(48, _qouteModel.Rebate_Qty);
+            Assert.AreEqual(134, _qouteModel.Screws_for_Fabrication);
+            Assert.AreEqual(52, _qouteModel.Screws_for_Installation);
+
+
+            Assert.AreEqual(GlazingBead_ArticleNo._2453, _panelModel.PanelGlazingBead_ArtNo);
+            Assert.AreEqual(1127, _panelModel.Panel_GlazingBeadWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadWidthDecimal);
+            Assert.AreEqual(2627, _panelModel.Panel_GlazingBeadHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlazingBeadHeightDecimal);
+
+            Assert.AreEqual(SashProfile_ArticleNo._374, _panelModel.Panel_SashProfileArtNo);
+            Assert.AreEqual(1127, _panelModel.Panel_SashWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashWidthDecimal);
+            Assert.AreEqual(2627, _panelModel.Panel_SashHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashHeightDecimal);
+
+            Assert.AreEqual(SashReinf_ArticleNo._655, _panelModel.Panel_SashReinfArtNo);
+            Assert.AreEqual(1032, _panelModel.Panel_SashReinfWidth);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfWidthDecimal);
+            Assert.AreEqual(2532, _panelModel.Panel_SashReinfHeight);
+            Assert.AreEqual(0, _panelModel.Panel_SashReinfHeightDecimal);
+
+            Assert.AreEqual(944, _panelModel.Panel_GlassWidth);
+            Assert.AreEqual(0, _panelModel.Panel_GlassWidthDecimal);
+            Assert.AreEqual(2444, _panelModel.Panel_GlassHeight);
+            Assert.AreEqual(0, _panelModel.Panel_GlassHeightDecimal);
+
+
+
+            //ACCESSORIES
+            Assert.AreEqual(CoverProfile_ArticleNo._0914, _panelModel.Panel_CoverProfileArtNo);
+            Assert.AreEqual(CoverProfile_ArticleNo._1640, _panelModel.Panel_CoverProfileArtNo2);
+            Assert.AreEqual(Espagnolette_ArticleNo._642089, _panelModel.Panel_EspagnoletteArtNo);
+            Assert.AreEqual(Handle_Type._Rotoline, _panelModel.Panel_HandleType);
+            Assert.AreEqual(Rotoline_HandleArtNo._K070A21725, _panelModel.Panel_RotolineArtNo);
+            Assert.AreEqual(FixedCam_ArticleNo._1481413, _panelModel.Panel_FixedCamArtNo);
+            Assert.AreEqual(WeldableCornerJoint_ArticleNo._498N, _panelModel.Panel_WeldableCArtNo);
+            Assert.AreEqual(SnapInKeep_ArticleNo._0400205, _panelModel.Panel_SnapInKeepArtNo);
+            Assert.AreEqual(AdjustableStriker_ArticleNo._332439, _panelModel.Panel_AdjStrikerArtNo);
+            Assert.AreEqual(_3dHinge_ArticleNo._3DHinge_DB, _panelModel.Panel_3dHingeArtNo);
+            Assert.AreEqual(RestrictorStay_ArticleNo._613249, _panelModel.Panel_RestrictorStayArtNo);
+            Assert.AreEqual(CornerDrive_ArticleNo._None, _panelModel.Panel_CornerDriveArtNo);
+
+
+            //EXTENSION
+
+            Assert.AreEqual(Extension_ArticleNo._612978, _panelModel.Panel_ExtensionTopArtNo);
+            Assert.AreEqual(1, _panelModel.Panel_ExtTopQty);
+            Assert.AreEqual(Extension_ArticleNo._567639, _panelModel.Panel_ExtensionTop2ArtNo);
+            Assert.AreEqual(1, _panelModel.Panel_ExtTop2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel.Panel_ExtensionBotArtNo);
+            Assert.AreEqual(0, _panelModel.Panel_ExtBotQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel.Panel_ExtensionBot2ArtNo);
+            Assert.AreEqual(0, _panelModel.Panel_ExtBot2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel.Panel_ExtensionLeftArtNo);
+            Assert.AreEqual(0, _panelModel.Panel_ExtLeftQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel.Panel_ExtensionLeft2ArtNo);
+            Assert.AreEqual(0, _panelModel.Panel_ExtLeft2Qty);
+
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel.Panel_ExtensionRightArtNo);
+            Assert.AreEqual(0, _panelModel.Panel_ExtRightQty);
+            Assert.AreEqual(Extension_ArticleNo._None, _panelModel.Panel_ExtensionRight2ArtNo);
+            Assert.AreEqual(0, _panelModel.Panel_ExtRight2Qty);
+            #endregion
+
+            #region Check Quantity
+
+            DataRow[] dr;
+
+            dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1205'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '2705'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Width R677' AND Size = '1104'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '2604'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Width 374' AND Size = '1127'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Height 374' AND Size = '2627'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Width 655' AND Size = '1032'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Sash Reinf Height 655' AND Size = '2532'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Width%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '1127'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glazing Bead (P1) Height%' AND
+                             Description LIKE '%2453%' AND
+                             Size = '2627'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Width%' AND
+                             Size = '944'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Glass (P1) Height%' AND
+                             Size = '2444'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+           
+
+            //ACCESSORIES & HARDWARE
+            dr = dt.Select(@"Description LIKE '%Fixed Cam%' AND
+                             Description LIKE '%1481413%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Snap-in Keep%' AND
+                             Description LIKE '%400205%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Weldable corner joint%' AND
+                             Description LIKE '%498N%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("8", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%3D hinge%' AND
+                             Description LIKE '%492594%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("4", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Adjustable Striker%' AND
+                             Description LIKE '%332439%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("5", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Restrictor Stay%' AND
+                             Description LIKE '%613249%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%0914%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Cover Profile%' AND
+                             Description LIKE '%1640%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Rotoline handle%' AND
+                             Description LIKE '%K070A21725%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%Espagnolette%' AND
+                             Description LIKE '%642089%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+            #endregion
+        }
+
+        #endregion
     }
 }

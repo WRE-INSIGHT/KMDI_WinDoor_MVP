@@ -1,19 +1,16 @@
-﻿using System;
+﻿using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Variables;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ModelLayer.Model.Quotation.Panel;
-using ModelLayer.Model.Quotation.MultiPanel;
-using ModelLayer.Model.Quotation.Divider;
-using static EnumerationTypeLayer.EnumerationTypes;
-using ModelLayer.Model.Quotation.WinDoor;
-using ModelLayer.Variables;
 using System.Data;
+using System.Runtime.CompilerServices;
+using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.Frame
 {
@@ -392,9 +389,9 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
                     {
-                        Frame_Padding_int = new Padding(default_pads, 
-                                                        default_pads, 
-                                                        default_pads, 
+                        Frame_Padding_int = new Padding(default_pads,
+                                                        default_pads,
+                                                        default_pads,
                                                         (int)((int)26 * Frame_Zoom) - _frameDeduction);
                     }
                     else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
@@ -410,7 +407,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
         private void FramePadding_Default()
         {
-            if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f || 
+            if (Frame_Zoom == 0.26f || Frame_Zoom == 0.17f ||
                 Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
             {
                 if (_is_MPanel) // meaning MPanel
@@ -618,7 +615,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
             if (Frame_If_InwardMotorizedCasement)
             {
-                Frame_ExplosionWidth= _frameWidth - 35 + 5;
+                Frame_ExplosionWidth = _frameWidth - 35 + 5;
                 Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
                 Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
             }
@@ -637,7 +634,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 reinf_size = 43;
             }
 
-            Frame_ReinfHeight = _frameHeight- (reinf_size * 2) - 10;
+            Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
             if (Frame_If_InwardMotorizedCasement)
             {
                 Frame_ReinfWidth = _frameWidth - 35 - (reinf_size * 2) - 10;
@@ -910,8 +907,17 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public void Insert_frameInfo_MaterialList(DataTable tbl_explosion)
         {
+            int FrameQty;
+            if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+            {
+                FrameQty = 2;
+            }
+            else
+            {
+                FrameQty = 1;
+            }
             tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNo.ToString(),
-                                   2, "pc(s)",
+                                   FrameQty, "pc(s)",
                                    Frame_ExplosionWidth.ToString(),
                                    "Frame",
                                    @"\  /");
@@ -949,7 +955,25 @@ namespace ModelLayer.Model.Quotation.Frame
                                    "Frame",
                                    @"|  |");
         }
-
+        public void Insert_BottomFrame_MaterialList(DataTable tbl_explosion)
+        {
+            if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            {
+                tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
+                                   1, "pc(s)",
+                                   Frame_ExplosionWidth - 28,//14 * 2 = 28, 14 = difference of 7507 & 7502 thickness 
+                                   "Frame",
+                                   @"\  /");
+            }
+            else if (Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            {
+                tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
+                                 1, "pc(s)",
+                                 Frame_ExplosionWidth.ToString(),
+                                 "Frame",
+                                 @"|  |");
+            }
+        }
         public int Add_framePerimeter_screws4fab()
         {
             return (Frame_Width * 2) + (Frame_Height * 2);
