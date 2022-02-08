@@ -5384,11 +5384,11 @@ namespace ModelLayer.Model.Quotation.Panel
             Foil_Color outside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;
 
             if (inside_color != outside_color &&
-                Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507) // for 2 diff foil color CD
+                Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door) // for 2 diff foil color CD
             {
                 if (Panel_HandleType == Handle_Type._MVD)
                 {
-                    //nothing 
+                    //No Cylinder Cover Needed 
                 }
                 else if (Panel_HandleType == Handle_Type._Rio)
                 {
@@ -5427,13 +5427,69 @@ namespace ModelLayer.Model.Quotation.Panel
                                    @"");
         }
 
+        string MVDFoilColorInside, MVDFoilColorOutside;
         public void Insert_MVDHandle_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("MVD handle " + Panel_MVDArtNo.DisplayName,
-                                   1, "set",
-                                   "",
-                                   "Sash",
-                                   @"");
+            Foil_Color inside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
+            Foil_Color outside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;
+
+
+            if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                        inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                        inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                        inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                        inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+            {
+                MVDFoilColorInside = "BL ";
+            }
+            else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._GoldenOak ||
+                     inside_color == Foil_Color._Mahogany || inside_color == Foil_Color._Havana)
+            {
+                MVDFoilColorInside = "DB ";
+            }
+
+
+
+            if (outside_color == Foil_Color._FossilGray || outside_color == Foil_Color._BeechOak ||
+                        outside_color == Foil_Color._DriftWood || outside_color == Foil_Color._Graphite ||
+                        outside_color == Foil_Color._JetBlack || outside_color == Foil_Color._ChestnutOak ||
+                        outside_color == Foil_Color._WashedOak || outside_color == Foil_Color._GreyOak ||
+                        outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray)
+            {
+                MVDFoilColorOutside = "BL ";
+            }
+            else if (outside_color == Foil_Color._Walnut || outside_color == Foil_Color._GoldenOak ||
+                     outside_color == Foil_Color._Mahogany || outside_color == Foil_Color._Havana)
+            {
+                MVDFoilColorOutside = "DB ";
+            }
+
+
+
+            if (MVDFoilColorInside != MVDFoilColorOutside &&
+                Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door) // for 2 diff foil color CD
+            {
+                tbl_explosion.Rows.Add("MVD handle " + MVDFoilColorInside + Panel_MVDArtNo.DisplayName,
+                                  1, "set",
+                                  "",
+                                  "Sash",
+                                  @"");
+
+                tbl_explosion.Rows.Add("MVD handle " + MVDFoilColorOutside + Panel_MVDArtNo.DisplayName,
+                                  1, "set",
+                                  "",
+                                  "Sash",
+                                  @"");
+            }
+            else
+            {
+                tbl_explosion.Rows.Add("MVD handle " + Panel_MVDArtNo.DisplayName,
+                                  1, "set",
+                                  "",
+                                  "Sash",
+                                  @"");
+            }
+                
         }
 
         public void Insert_WeldableCornerJoint_MaterialList(DataTable tbl_explosion)

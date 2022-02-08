@@ -23082,7 +23082,7 @@ namespace ModelLayer.Tests
             Assert.AreEqual(2719, _frameModel.Frame_ExplosionHeight);
             Assert.AreEqual(FrameReinf_ArticleNo._R677, _frameModel.Frame_ReinfArtNo);
             Assert.AreEqual(1104, _frameModel.Frame_ReinfWidth);
-            Assert.AreEqual(2604, _frameModel.Frame_ReinfHeight);
+            Assert.AreEqual(2618, _frameModel.Frame_ReinfHeight);
             Assert.AreEqual(1, _qouteModel.Frame_PUFoamingQty_Total);
             Assert.AreEqual(3, _qouteModel.Frame_SealantWHQty_Total);
             Assert.AreEqual(1, _qouteModel.Glass_SealantWHQty_Total);
@@ -23164,9 +23164,9 @@ namespace ModelLayer.Tests
 
             dr = dt.Select("Description = 'Frame Width 7507' AND Size = '1205'");
             Assert.AreEqual(1, dr.Length);
-            Assert.AreEqual("2", dr[0]["Qty"]);
+            Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '2705'");
+            dr = dt.Select("Description = 'Frame Height 7507' AND Size = '2719'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
@@ -23174,9 +23174,18 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
 
-            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '2604'");
+            dr = dt.Select("Description = 'Frame Reinf Height R677' AND Size = '2618'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("2", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Bottom Frame Width 7502' AND Size = '1177'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select("Description = 'Bottom Frame Reinf Width R676' AND Size = '1104'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
 
             dr = dt.Select("Description = 'Sash Width 374' AND Size = '1127'");
             Assert.AreEqual(1, dr.Length);
@@ -23259,7 +23268,12 @@ namespace ModelLayer.Tests
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
 
-            dr = dt.Select(@"Description LIKE '%MVD handle%' AND
+            dr = dt.Select(@"Description LIKE '%MVD handle BL%' AND
+                             Description LIKE '%046-366M%'");
+            Assert.AreEqual(1, dr.Length);
+            Assert.AreEqual("1", dr[0]["Qty"]);
+
+            dr = dt.Select(@"Description LIKE '%MVD handle DB%' AND
                              Description LIKE '%046-366M%'");
             Assert.AreEqual(1, dr.Length);
             Assert.AreEqual("1", dr[0]["Qty"]);
