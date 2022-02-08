@@ -5051,7 +5051,7 @@ namespace ModelLayer.Model.Quotation.Panel
         {
             int FixedCamQty = (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
                                  Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                 Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2; 
+                                 Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2;
 
             tbl_explosion.Rows.Add("Fixed Cam " + Panel_FixedCamArtNo.DisplayName,
                                    FixedCamQty, "pc(s)",
@@ -5523,7 +5523,24 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "Glass",
                                    "");
         }
+        public void Insert_LatchAndDeadboltStriker_MaterialList(DataTable tbl_explosion)
+        {
+            string orient = "";
+            if (Panel_ChkText == "L")
+            {
+                orient = "Left";
+            }
+            else if (Panel_ChkText == "R")
+            {
+                orient = "Right";
+            }
 
+            tbl_explosion.Rows.Add("Latch and deadbolt striker, " + orient + " " + Panel_LatchDeadboltStrikerArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
 
         public int Add_SashPerimeter_screws4fab()
         {

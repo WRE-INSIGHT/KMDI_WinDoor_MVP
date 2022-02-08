@@ -1277,9 +1277,12 @@ namespace ModelLayer.Model.Quotation
                             {
                                 pnl.Insert_MVDHandle_MaterialList(Material_List);
                                 pnl.Insert_ProfileKnobCylinder_MaterialList(Material_List);
-                                pnl.Insert_WeldableCornerJoint_MaterialList(Material_List);
+                                //pnl.Insert_WeldableCornerJoint_MaterialList(Material_List);
 
-                                add_screws_fab_weldableCJ += (8 * 2); //Weldable corner joint 
+                                //add_screws_fab_weldableCJ += (8 * 2); //Weldable corner joint 
+
+                                pnl.Insert_LatchAndDeadboltStriker_MaterialList(Material_List);
+                                add_screws_fab_striker += 2;
                             }
 
                             if (pnl.Panel_HandleType != Handle_Type._Rotary)
